@@ -113,6 +113,8 @@ public class Weather extends Feature {
             return;
         if (wsd.thunderIntensityData.targetIntensity == -1)
             wsd.thunderIntensityData.targetIntensity = getNewTargetIntensity(level.random);
+        if (wsd.thunderIntensityData.intensity == 0)
+            wsd.thunderIntensityData.intensity = thunderstormIntensityMin;
 
         if (--wsd.thunderIntensityData.timer <= 0) {
             wsd.thunderIntensityData.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / wsd.thunderIntensityData.intensity;
