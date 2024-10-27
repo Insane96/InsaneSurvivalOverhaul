@@ -3,8 +3,12 @@
 ## Upcoming
 * Added a way to raise the hotbar position
   * Since the Raised mod is not compatible I've done it myself
+* Added "Deep Ocean Guardians"
+  * Guardians can now spawn naturally in deep oceans, with half health compared to monument guardians
 * Unfair One-shot effects are now configurable
 * Possible fix for thunderstorm intensity crash
+* Removed "Phantoms spawn in the end"
+  * Didn't work and was just setting the insomnia game rule
 
 ## 3.21.1
 * Changed animal caps in different seasons
