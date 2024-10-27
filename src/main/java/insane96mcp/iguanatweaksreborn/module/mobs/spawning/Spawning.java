@@ -49,9 +49,6 @@ public class Spawning extends Feature {
     @Label(name = "Allow world spawn spawn", description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
     @Config
-    @Label(name = "Phantoms in the End", description = "Disables insomnia and makes Phantoms spawn naturally in the End")
-    public static Boolean phantomsInTheEnd = true;
-    @Config
     @Label(name = "Remove skeletons from Fortresses", description = "Disables normal skeletons from spawning in Fortresses. Requires a minecraft restart")
     public static Boolean removeSkeletonsFromFortresses = true;
 
