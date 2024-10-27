@@ -7,6 +7,7 @@
   * Guardians can now spawn naturally in deep oceans, with half health compared to monument guardians
 * Unfair One-shot effects are now configurable
 * Possible fix for thunderstorm intensity crash
+* Wither effect damage no longer stops the player when damaged
 * Removed "Phantoms spawn in the end"
   * Didn't work and was just setting the insomnia game rule
 
