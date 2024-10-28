@@ -121,8 +121,8 @@ public class Tweaks extends Feature {
     @Label(name = "Splash potions throw strength", description = "The strength used to throw splash potions. Vanilla is 0.5")
     public static Double splashPotionThrowStrength = 1d;
 
-    @Config
-    @Label(name = "Collide with walls damage", description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage")
+    @Config(min = 0)
+    @Label(name = "Collide with walls damage", description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable")
     public static Double collideWithWallsDamage = 2.5d;
 
     @Config(min = -1, max = 0)
@@ -343,6 +343,9 @@ public class Tweaks extends Feature {
     }
 
     public static Vec3 onCollideWithWall(LivingEntity instance, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {
+        if (!Feature.isEnabled(Tweaks.class)
+                || collideWithWallsDamage == 0)
+            return originalOperation.call(instance, pTravelVector, pFriction);
         Vec3 oldDeltaMovement = instance.getDeltaMovement();
         double horizontalDistance = oldDeltaMovement.horizontalDistance();
         Vec3 originalResult = originalOperation.call(instance, pTravelVector, pFriction);

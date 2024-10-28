@@ -10,6 +10,7 @@
 * Wither effect damage no longer stops the player when damaged
 * Removed "Phantoms spawn in the end"
   * Didn't work and was just setting the insomnia game rule
+* Fixed unable to disable "Collide with walls damage"
 
 ## 3.21.1
 * Changed animal caps in different seasons
