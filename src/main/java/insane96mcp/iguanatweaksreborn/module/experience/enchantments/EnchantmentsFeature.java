@@ -125,6 +125,9 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Config
 	@Label(name = "Replace looting, fortune and LotS enchantments", description = "If true, vanilla looting, fortune and Luck of the Sea enchantments are replaced with a single one: Luck. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceLuckEnchantments = true;
+	@Config
+	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
+	public static Boolean replaceOtherEnchantments = true;
 
 	@Config
 	@Label(name = "Enchantments info", description = "If true and shift it pressed, items will show enchantment info below the enchantments")

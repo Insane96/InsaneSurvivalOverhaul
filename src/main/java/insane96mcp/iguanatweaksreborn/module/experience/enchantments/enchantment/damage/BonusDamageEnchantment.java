@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantmen
 
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
+import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -63,7 +64,7 @@ public abstract class BonusDamageEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return (super.canApplyAtEnchantingTable(stack) || stack.is(ACCEPTS_ENCHANTMENT)) && EnchantmentsFeature.replaceDamagingEnchantments;
+        return (super.canApplyAtEnchantingTable(stack) || stack.is(ACCEPTS_ENCHANTMENT)) && EnchantmentsFeature.replaceDamagingEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
 
     public static float getDamageBonusRatio(ItemStack stack) {

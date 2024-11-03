@@ -11,6 +11,8 @@
 * Removed "Phantoms spawn in the end"
   * Didn't work and was just setting the insomnia game rule
 * Fixed unable to disable "Collide with walls damage"
+* Fixed disabling the Enchanting feature not disabling the mod's enchantments
+  * Also added a config option to disable ITR's Fire Aspect and Knockback
 
 ## 3.21.1
 * Changed animal caps in different seasons
