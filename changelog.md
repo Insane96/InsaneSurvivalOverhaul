@@ -14,6 +14,7 @@
 * Fixed disabling the Enchanting feature not disabling the mod's enchantments
   * Also added a config option to disable ITR's Fire Aspect and Knockback
 * Fixed disabling peaceful hunger preventing players from consuming hunger
+* Possibly fixed crash at startup with JCraft
 
 ## 3.21.1
 * Changed animal caps in different seasons

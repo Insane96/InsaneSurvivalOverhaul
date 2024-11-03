@@ -7,7 +7,7 @@ import net.minecraft.world.item.ThrowablePotionItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ThrowablePotionItem.class)
+@Mixin(value = ThrowablePotionItem.class, priority = 1001)
 public class ThrowablePotionItemMixin {
 	@ModifyExpressionValue(method = "use", at = @At(value = "CONSTANT", args = "floatValue=0.5F"))
 	public float getUseDuration(float original) {
