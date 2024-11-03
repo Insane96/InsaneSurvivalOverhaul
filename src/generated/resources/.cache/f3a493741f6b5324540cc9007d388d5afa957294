@@ -1,8 +1,8 @@
-// 1.20.1	2024-09-15T17:36:12.6424707	Tags for minecraft:damage_type mod id iguanatweaksreborn
+// 1.20.1	2024-11-03T10:40:22.5413475	Tags for minecraft:damage_type mod id iguanatweaksreborn
 d1ee7bd9dc6ab495ba73da1f280cf19c3e54586f data/iguanatweaksreborn/tags/damage_type/doesnt_spawn_grave.json
 2e7be3525b7948af66c725247a77dace022992a2 data/iguanatweaksreborn/tags/damage_type/doesnt_trigger_piercing.json
 ee1e81c42e4434e63b3e7191c56344c58a6eb938 data/iguanatweaksreborn/tags/damage_type/piercing_damage_type.json
 bc1892b9b041e7c5572b35d6214da7404455ffa1 data/minecraft/tags/damage_type/bypasses_armor.json
 bc1892b9b041e7c5572b35d6214da7404455ffa1 data/minecraft/tags/damage_type/bypasses_cooldown.json
 bc1892b9b041e7c5572b35d6214da7404455ffa1 data/minecraft/tags/damage_type/bypasses_shield.json
-bc1892b9b041e7c5572b35d6214da7404455ffa1 data/minecraft/tags/damage_type/no_impact.json
+22e647b8c2ec2309a243893b9a2c2e2e1ad93794 data/minecraft/tags/damage_type/no_impact.json

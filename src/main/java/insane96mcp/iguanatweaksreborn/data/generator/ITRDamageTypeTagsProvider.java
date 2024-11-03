@@ -29,7 +29,7 @@ public class ITRDamageTypeTagsProvider extends DamageTypeTagsProvider {
         tag(DamageTypeTags.BYPASSES_ARMOR).add(Tweaks.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE);
         tag(DamageTypeTags.BYPASSES_COOLDOWN).add(Tweaks.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE);
         tag(DamageTypeTags.BYPASSES_SHIELD).add(Tweaks.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE);
-        tag(DamageTypeTags.NO_IMPACT).add(Tweaks.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE);
+        tag(DamageTypeTags.NO_IMPACT).add(Tweaks.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(DamageTypes.WITHER);
 
         tag(Death.DOESNT_SPAWN_GRAVE).add(DamageTypes.FELL_OUT_OF_WORLD);
 
