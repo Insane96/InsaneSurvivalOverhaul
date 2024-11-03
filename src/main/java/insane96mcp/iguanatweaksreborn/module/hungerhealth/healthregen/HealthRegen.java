@@ -103,7 +103,7 @@ public class HealthRegen extends Feature {
 			if (foodStats.saturationLevel > 0.0F) {
 				foodStats.saturationLevel = Math.max(foodStats.saturationLevel - 1.0F, 0.0F);
 			}
-			else if (peacefulHunger && difficulty != Difficulty.PEACEFUL) {
+			else if (peacefulHunger || difficulty != Difficulty.PEACEFUL) {
 				foodStats.foodLevel = Math.max(foodStats.foodLevel - 1, 0);
 			}
 		}
