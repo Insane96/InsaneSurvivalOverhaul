@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 3.21.2
 * Added a way to raise the hotbar position
   * Since the Raised mod is not compatible I've done it myself
 * Added "Deep Ocean Guardians"
