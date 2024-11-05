@@ -1,14 +1,12 @@
 package insane96mcp.iguanatweaksreborn.utils;
 
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -81,21 +79,6 @@ public class MCUtils {
     /** Disables the anti knockback modifier */
     private static void enableKnockback(AttributeInstance instance) {
         instance.removeModifier(ANTI_KNOCKBACK_MODIFIER);
-    }
-
-    /**
-     * Returns the Tag in the player persistent data that is kept on death / dimension change
-     */
-    public static CompoundTag getOrCreatePersistedData(Player player) {
-        CompoundTag tag;
-        if (!player.getPersistentData().contains(Player.PERSISTED_NBT_TAG)) {
-            tag = new CompoundTag();
-            player.getPersistentData().put(Player.PERSISTED_NBT_TAG, tag);
-        }
-        else {
-            tag = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        }
-        return tag;
     }
 
     public static int getDurabilityLeft(ItemStack stack) {
