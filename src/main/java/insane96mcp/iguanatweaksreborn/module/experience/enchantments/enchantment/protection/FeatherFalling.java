@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection;
 
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
+import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,7 +31,7 @@ public class FeatherFalling extends Enchantment implements IProtectionEnchantmen
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceProtectionEnchantments;
+        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceProtectionEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
 
     @Override

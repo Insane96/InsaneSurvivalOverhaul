@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantmen
 
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
+import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
@@ -18,6 +19,6 @@ public class Luck extends LootBonusEnchantment {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceLuckEnchantments;
+        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceLuckEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
 }

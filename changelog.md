@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Requires InsaneLib 1.15.1
+* Fixed Luck ITR's Feather Falling not being disabled even when "Enable enchantments" is disabled
 
 ## 3.21.2
 * Added a way to raise the hotbar position
