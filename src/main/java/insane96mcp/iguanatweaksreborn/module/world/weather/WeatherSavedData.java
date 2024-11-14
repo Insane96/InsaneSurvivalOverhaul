@@ -89,6 +89,8 @@ public class WeatherSavedData extends SavedData {
             compoundTag.putInt("timer", this.timer);
             compoundTag.putInt("targetIntensity", this.targetIntensity);
             compoundTag.putInt("intensity", this.intensity);
+            if (this.intensity <= 0)
+                this.intensity = 1;
         }
 
         public void load(CompoundTag compoundTag) {

@@ -59,22 +59,23 @@ public class Weather extends Feature {
     public static void tickFoggyWeather(ServerLevel level, WeatherSavedData wsd) {
         if (!level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
             return;
-        if (wsd.foggyData.targetTime == -1)
-            wsd.foggyData.targetTime = getNewFoggyTargetTime(level.random);
+        WeatherSavedData.FoggyData foggyData = wsd.foggyData;
+        if (foggyData.targetTime == -1)
+            foggyData.targetTime = getNewFoggyTargetTime(level.random);
 
-        if (++wsd.foggyData.timer >= wsd.foggyData.targetTime) {
-            if (wsd.foggyData.current == wsd.foggyData.target) {
-                wsd.foggyData.target = Foggy.values()[level.random.nextInt(Foggy.values().length)];
-                wsd.foggyData.timer = 0;
-                wsd.foggyData.targetTime = getNewFoggyTargetTime(level.random);
+        if (++foggyData.timer >= foggyData.targetTime) {
+            if (foggyData.current == foggyData.target) {
+                foggyData.target = Foggy.values()[level.random.nextInt(Foggy.values().length)];
+                foggyData.timer = 0;
+                foggyData.targetTime = getNewFoggyTargetTime(level.random);
                 level.players().forEach(player ->
-                        FoggySync.sync(player, wsd.foggyData));
+                        FoggySync.sync(player, foggyData));
             }
             else {
-                wsd.foggyData.current = wsd.foggyData.target;
-                wsd.foggyData.timer = 0;
-                wsd.foggyData.targetTime = getNewFoggyTargetTime(level.random);
-                wsd.foggyData.targetTime = (int) (wsd.foggyData.targetTime * wsd.foggyData.current.timerMultiplier);
+                foggyData.current = foggyData.target;
+                foggyData.timer = 0;
+                foggyData.targetTime = getNewFoggyTargetTime(level.random);
+                foggyData.targetTime = (int) (foggyData.targetTime * foggyData.current.timerMultiplier);
             }
         }
         wsd.setDirty();
@@ -96,12 +97,13 @@ public class Weather extends Feature {
 
     public static void clearFoggyWeather(ServerLevel level) {
         WeatherSavedData wsd = WeatherSavedData.get(level);
-        wsd.foggyData.current = Foggy.NONE;
-        wsd.foggyData.target = Foggy.NONE;
-        wsd.foggyData.timer = 0;
-        wsd.foggyData.targetTime = -1;
+        WeatherSavedData.FoggyData foggyData = wsd.foggyData;
+        foggyData.current = Foggy.NONE;
+        foggyData.target = Foggy.NONE;
+        foggyData.timer = 0;
+        foggyData.targetTime = -1;
         wsd.setDirty();
-        level.players().forEach(player -> FoggySync.sync(player, wsd.foggyData));
+        level.players().forEach(player -> FoggySync.sync(player, foggyData));
     }
 
     public static WeatherSavedData.FoggyData getCurrentFoggyData(ServerLevel level) {
@@ -111,17 +113,16 @@ public class Weather extends Feature {
     public static void tickVariableThunderstorm(ServerLevel level, WeatherSavedData wsd) {
         if (!level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
             return;
-        if (wsd.thunderIntensityData.targetIntensity == -1)
-            wsd.thunderIntensityData.targetIntensity = getNewTargetIntensity(level.random);
-        if (wsd.thunderIntensityData.intensity == 0)
-            wsd.thunderIntensityData.intensity = thunderstormIntensityMin;
+        WeatherSavedData.ThunderIntensityData tid = wsd.thunderIntensityData;
+        if (tid.targetIntensity == -1)
+            tid.targetIntensity = getNewTargetIntensity(level.random);
 
-        if (--wsd.thunderIntensityData.timer <= 0) {
-            wsd.thunderIntensityData.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / wsd.thunderIntensityData.intensity;
-            int delta = wsd.thunderIntensityData.targetIntensity > wsd.thunderIntensityData.intensity ? 1 : -1;
-            wsd.thunderIntensityData.intensity += delta;
-            if (wsd.thunderIntensityData.intensity == wsd.thunderIntensityData.targetIntensity)
-                wsd.thunderIntensityData.targetIntensity = getNewTargetIntensity(level.random);
+        if (--tid.timer <= 0) {
+            tid.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.intensity;
+            int delta = tid.targetIntensity > tid.intensity ? 1 : -1;
+            tid.intensity += delta;
+            if (tid.intensity == tid.targetIntensity)
+                tid.targetIntensity = getNewTargetIntensity(level.random);
         }
         wsd.setDirty();
     }
