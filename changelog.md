@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 3.21.3
 * Requires InsaneLib 1.15.1
 * Hopefully fixed (again) crash with thunderstorms
 * Fixed ITR's Luck and Feather Falling not being disabled even when "Enable enchantments" is disabled
