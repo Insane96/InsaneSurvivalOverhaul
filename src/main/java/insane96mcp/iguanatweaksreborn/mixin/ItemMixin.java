@@ -25,6 +25,9 @@ public class ItemMixin {
 
 	@Inject(at = @At("RETURN"), method = "getUseAnimation", cancellable = true)
 	public void getUseAnimation(ItemStack stack, CallbackInfoReturnable<UseAnim> callbackInfo) {
+		//Fix for SOL Valheim that calls getUseAnimation too early
+		if (Feature.get(ItemStats.class) == null)
+			return;
 		if (!Feature.isEnabled(FoodDrinks.class))
 			return;
 

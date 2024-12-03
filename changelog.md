@@ -4,6 +4,7 @@
 * Requires InsaneLib 1.15.1
 * Hopefully fixed (again) crash with thunderstorms
 * Fixed ITR's Luck and Feather Falling not being disabled even when "Enable enchantments" is disabled
+* Possibly fixed a crash with SOL Valheim
 
 ## 3.21.2
 * Added a way to raise the hotbar position
