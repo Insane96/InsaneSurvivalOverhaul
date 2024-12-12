@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Removed vanilla beacon
+
 ## 3.21.3
 * Requires InsaneLib 1.15.1
 * Hopefully fixed (again) crash with thunderstorms

@@ -10,6 +10,7 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.world.item.*;
@@ -25,7 +26,10 @@ public class ClientSetup {
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            addAfter(event, Items.BEACON, BeaconConduit.BEACON.item());
+            if (Feature.isEnabled(BeaconConduit.class)) {
+                addAfter(event, Items.BEACON, BeaconConduit.BEACON.item());
+                event.getEntries().remove(new ItemStack(Items.BEACON));
+            }
             addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
