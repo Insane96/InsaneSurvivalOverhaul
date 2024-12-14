@@ -1,7 +1,8 @@
 # Changelog
 
 ## Upcoming
-* Removed vanilla beacon
+* Removed vanilla beacon from creative menu
+* Fixed yet another crash with Thunderstorm Intensity
 
 ## 3.21.3
 * Requires InsaneLib 1.15.1

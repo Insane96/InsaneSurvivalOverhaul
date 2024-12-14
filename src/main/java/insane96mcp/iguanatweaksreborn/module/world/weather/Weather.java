@@ -118,10 +118,10 @@ public class Weather extends Feature {
             tid.targetIntensity = getNewTargetIntensity(level.random);
 
         if (--tid.timer <= 0) {
-            tid.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.intensity;
-            int delta = tid.targetIntensity > tid.intensity ? 1 : -1;
-            tid.intensity += delta;
-            if (tid.intensity == tid.targetIntensity)
+            tid.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.getIntensity();
+            int delta = tid.targetIntensity > tid.getIntensity() ? 1 : -1;
+            tid.addIntensity(delta);
+            if (tid.getIntensity() == tid.targetIntensity)
                 tid.targetIntensity = getNewTargetIntensity(level.random);
         }
         wsd.setDirty();
@@ -135,7 +135,7 @@ public class Weather extends Feature {
         if (!Feature.isEnabled(Weather.class)
                 || !level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
             return original;
-        return original / WeatherSavedData.get(level).thunderIntensityData.intensity;
+        return original / WeatherSavedData.get(level).thunderIntensityData.getIntensity();
     }
 
     public static WeatherSavedData.ThunderIntensityData getCurrentThunderIntensityData(ServerLevel level) {

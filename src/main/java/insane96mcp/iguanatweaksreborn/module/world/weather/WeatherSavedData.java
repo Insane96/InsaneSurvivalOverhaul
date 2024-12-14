@@ -77,7 +77,7 @@ public class WeatherSavedData extends SavedData {
     public static final class ThunderIntensityData {
         public int timer;
         public int targetIntensity;
-        public int intensity;
+        private int intensity;
 
         public ThunderIntensityData(int timer, int targetIntensity, int intensity) {
             this.timer = timer;
@@ -99,6 +99,14 @@ public class WeatherSavedData extends SavedData {
             this.timer = compoundTag.getInt("timer");
             this.targetIntensity = compoundTag.getInt("targetIntensity");
             this.intensity = compoundTag.getInt("intensity");
+        }
+
+        public int getIntensity() {
+            return intensity <= 0 ? 1 : intensity;
+        }
+
+        public void addIntensity(int amount) {
+            this.intensity += amount;
         }
 
         @Override
