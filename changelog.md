@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 3.21.4
 * Removed vanilla beacon from creative menu
 * Fixed yet another crash with Thunderstorm Intensity
 
