@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -67,11 +68,16 @@ public class Spawning extends Feature {
     @SubscribeEvent
     public void onPotentialSpawns(LevelEvent.PotentialSpawns event) {
         if (!this.isEnabled()
-                || removeSkeletonsFromFortresses)
+                || !removeSkeletonsFromFortresses
+                || event.getMobCategory() != MobCategory.MONSTER)
             return;
 
-        Structure structure = ((ServerLevel)event.getLevel()).structureManager().registryAccess().registryOrThrow(Registries.STRUCTURE).get(BuiltinStructures.FORTRESS);
-        if (structure != null)
+        Structure fortress = ((ServerLevel)event.getLevel()).structureManager().registryAccess().registryOrThrow(Registries.STRUCTURE).get(BuiltinStructures.FORTRESS);
+        if (fortress == null)
+            return;
+
+        StructureStart structureStart = ((ServerLevel)event.getLevel()).structureManager().getStructureAt(event.getPos(), fortress);
+        if (structureStart.isValid())
             event.getSpawnerDataList().stream().filter(data -> data.type == EntityType.SKELETON).findFirst().ifPresent(event::removeSpawnerData);
     }
 

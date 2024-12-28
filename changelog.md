@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+* Fixed 'Remove skeletons from Fortresses' 
+  * Config working the other way around
+  * When "enabled" skeletons would no longer spawn anywhere
+
 ## 3.21.4
 * Removed vanilla beacon from creative menu
 * Fixed yet another crash with Thunderstorm Intensity
