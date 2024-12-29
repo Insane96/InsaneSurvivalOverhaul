@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 3.21.5
 * Replaced enchantments no longer appear in the creative menu
 * Fixed 'Remove skeletons from Fortresses' 
   * Config was working the other way around
