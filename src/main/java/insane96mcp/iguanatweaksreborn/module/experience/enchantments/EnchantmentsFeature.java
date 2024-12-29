@@ -391,7 +391,7 @@ public class EnchantmentsFeature extends JsonFeature {
 				|| (!event.getItemStack().isEnchanted() && !event.getItemStack().is(Items.ENCHANTED_BOOK))
 				|| !Screen.hasShiftDown())
 			return;
-		HashMap<Integer, Component> tooltipsToAdd = new HashMap<>();
+		LinkedHashMap<Integer, Component> tooltipsToAdd = new LinkedHashMap<>();
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(event.getItemStack());
 		AtomicInteger added = new AtomicInteger();
 		for (Component line : event.getToolTip()) {

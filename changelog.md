@@ -2,8 +2,9 @@
 
 ## Upcoming
 * Fixed 'Remove skeletons from Fortresses' 
-  * Config working the other way around
+  * Config was working the other way around
   * When "enabled" skeletons would no longer spawn anywhere
+* Fixed crash with 8 or more enchantments on an item
 
 ## 3.21.4
 * Removed vanilla beacon from creative menu
