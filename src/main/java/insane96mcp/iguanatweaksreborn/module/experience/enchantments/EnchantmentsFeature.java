@@ -137,7 +137,6 @@ public class EnchantmentsFeature extends JsonFeature {
 			IdTagMatcher.newId("minecraft:sharpness"),
 			IdTagMatcher.newId("minecraft:smite"),
 			IdTagMatcher.newId("minecraft:bane_of_arthropods"),
-			IdTagMatcher.newId("minecraft:sharpness"),
 			IdTagMatcher.newId("minecraft:fire_aspect"),
 			IdTagMatcher.newId("minecraft:knockback"),
 			IdTagMatcher.newId("minecraft:protection"),

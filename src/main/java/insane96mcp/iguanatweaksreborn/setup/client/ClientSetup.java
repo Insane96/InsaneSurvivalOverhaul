@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.setup.client;
 
+import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
@@ -14,6 +15,9 @@ import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -49,6 +53,31 @@ public class ClientSetup {
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
         }
+        else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            if (Feature.isEnabled(EnchantmentsFeature.class)) {
+                if (EnchantmentsFeature.replaceProtectionEnchantments) {
+                    removeBookWithEnchantment(event, Enchantments.ALL_DAMAGE_PROTECTION);
+                    removeBookWithEnchantment(event, Enchantments.FIRE_PROTECTION);
+                    removeBookWithEnchantment(event, Enchantments.FALL_PROTECTION);
+                    removeBookWithEnchantment(event, Enchantments.PROJECTILE_PROTECTION);
+                    removeBookWithEnchantment(event, Enchantments.BLAST_PROTECTION);
+                }
+                if (EnchantmentsFeature.replaceDamagingEnchantments) {
+                    removeBookWithEnchantment(event, Enchantments.SHARPNESS);
+                    removeBookWithEnchantment(event, Enchantments.SMITE);
+                    removeBookWithEnchantment(event, Enchantments.BANE_OF_ARTHROPODS);
+                }
+                if (EnchantmentsFeature.replaceLuckEnchantments) {
+                    removeBookWithEnchantment(event, Enchantments.FISHING_LUCK);
+                    removeBookWithEnchantment(event, Enchantments.BLOCK_FORTUNE);
+                    removeBookWithEnchantment(event, Enchantments.MOB_LOOTING);
+                }
+                if (EnchantmentsFeature.replaceOtherEnchantments) {
+                    removeBookWithEnchantment(event, Enchantments.FIRE_ASPECT);
+                    removeBookWithEnchantment(event, Enchantments.KNOCKBACK);
+                }
+            }
+        }
     }
 
     public static void addBefore(BuildCreativeModeTabContentsEvent event, Item before, ItemLike itemToAdd) {
@@ -65,6 +94,16 @@ public class ClientSetup {
 
     public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, Supplier<? extends ItemLike> itemToAdd) {
         addAfter(event, after, itemToAdd.get());
+    }
+
+    public static void removeBookWithEnchantment(BuildCreativeModeTabContentsEvent event, Enchantment enchantment) {
+        ItemStack stack = new ItemStack(Items.ENCHANTED_BOOK);
+        EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(enchantment, enchantment.getMaxLevel()));
+        event.getEntries().remove(stack);
+    }
+
+    public static void remove(BuildCreativeModeTabContentsEvent event, ItemStack itemToRemove) {
+        event.getEntries().remove(itemToRemove);
     }
 
     public static void init(FMLClientSetupEvent event) {

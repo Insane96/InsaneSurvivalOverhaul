@@ -1,6 +1,7 @@
 # Changelog
 
 ## Upcoming
+* Replaced enchantments no longer appear in the creative menu
 * Fixed 'Remove skeletons from Fortresses' 
   * Config was working the other way around
   * When "enabled" skeletons would no longer spawn anywhere
