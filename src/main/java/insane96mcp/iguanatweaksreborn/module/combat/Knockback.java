@@ -3,13 +3,14 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatistics;
 import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatsReloadListener;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.data.IdTagValue;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -21,9 +22,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Label(name = "Knockback", description = "Players will deal reduced knockback if attacking with a non-weapon or spamming.")
 @LoadFeature(module = Modules.Ids.COMBAT)
@@ -39,19 +37,8 @@ public class Knockback extends JsonFeature {
 	@Label(name = "Spam Penalty", description = "Percentage knockback dealt if the player is attacking when the attack is not fully charged.")
 	public static Double spamPenalty = 0.35d;
 
-	//Knockback multipliers for items
-	public static final ArrayList<IdTagValue> KNOCKBACK_MULTIPLIERS_DEFAULT = new ArrayList<>(List.of(
-			IdTagValue.newTag("minecraft:pickaxes", 0.85d),
-			IdTagValue.newTag("minecraft:axes", 0.9d),
-			IdTagValue.newTag("minecraft:swords", 0.85d),
-			IdTagValue.newTag("minecraft:hoes", 0.35d),
-			IdTagValue.newTag("iguanatweaksexpanded:forge_hammers", 1d)
-	));
-	public static final ArrayList<IdTagValue> knockbackMultipliers = new ArrayList<>();
-
 	public Knockback(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		JSON_CONFIGS.add(new JsonConfig<>("knockback_multipliers.json", knockbackMultipliers, KNOCKBACK_MULTIPLIERS_DEFAULT, IdTagValue.LIST_TYPE));
 	}
 
 	@Override
@@ -120,11 +107,15 @@ public class Knockback extends JsonFeature {
 	public void itemKnockbackReduction(LivingKnockBackEvent event) {
 		if (event.getEntity().getLastHurtByMob() == null)
 			return;
+		event.setStrength(event.getStrength() * getKnockbackMultiplier(event.getEntity().getLastHurtByMob().getMainHandItem()));
+	}
+
+	public static float getKnockbackMultiplier(ItemStack stack) {
 		float multiplier = 1f;
-		for (IdTagValue idTagValue : knockbackMultipliers) {
-			if (idTagValue.id.matchesItem(event.getEntity().getLastHurtByMob().getMainHandItem()))
-				multiplier = (float) idTagValue.value;
+		for (ItemStatistics itemStatistics : ItemStatsReloadListener.Stats) {
+			if (itemStatistics.knockbackMultiplier() != null && itemStatistics.item().matchesItem(stack))
+				multiplier = itemStatistics.knockbackMultiplier().floatValue();
 		}
-		event.setStrength(event.getStrength() * multiplier);
+		return multiplier;
 	}
 }

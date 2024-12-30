@@ -1,6 +1,7 @@
 {
 	"item": "#minecraft:swords",
 	"attack_damage": 1,
+	"knockback_multiplier": 0.85,
 	"modifiers": [
 		{
 			"uuid": "de87cf5d-0f15-4b4e-88c5-9b3c971146d0",

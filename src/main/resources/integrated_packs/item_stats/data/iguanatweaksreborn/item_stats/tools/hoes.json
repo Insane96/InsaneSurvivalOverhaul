@@ -3,6 +3,7 @@
 	"attack_damage": 1.5,
 	"attack_speed": 2.2,
 	"durability_multiplier": 1.3,
+	"knockback_multiplier": 0.35,
 	"modifiers": [
 		{
 			"uuid": "de87cf5d-0f15-4b4e-88c5-9b3c971146d0",

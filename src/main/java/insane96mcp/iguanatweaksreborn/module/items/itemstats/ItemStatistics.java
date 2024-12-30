@@ -6,10 +6,13 @@ import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
-import insane96mcp.iguanatweaksreborn.utils.ITRGsonHelper;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.data.SerializableAttributeModifier;
+import insane96mcp.insanelib.util.json.ILGsonHelper;
+import insane96mcp.insanelib.util.json.validator.DoubleMinMaxValidator;
+import insane96mcp.insanelib.util.json.validator.FloatMinMaxValidator;
+import insane96mcp.insanelib.util.json.validator.IntMinMaxValidator;
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,7 +30,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.UUID;
 
-//TODO 1.21: rename to Item Data
+//TODO rename to Item Definitions
 @JsonAdapter(ItemStatistics.Serializer.class)
 public final class ItemStatistics {
 	private final IdTagMatcher item;
@@ -38,6 +41,8 @@ public final class ItemStatistics {
 	private final Double efficiency;
 	@Nullable
 	private final Integer enchantability;
+    @Nullable
+    private final Double knockbackMultiplier;
 	@Nullable
 	private final Double baseAttackDamage;
 	@Nullable
@@ -56,12 +61,13 @@ public final class ItemStatistics {
 	private final Double movementSpeedPenalty;
 	@Nullable
 	private final List<SerializableAttributeModifier> modifiers;
-    public ItemStatistics(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
+    public ItemStatistics(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
         this.item = item;
         this.maxStackSize = maxStackSize;
-        this.durability = new Durability(durability, null, durabilityMultiplier);
+        this.durability = new Durability(durability, durabilityBonus, durabilityMultiplier);
         this.efficiency = efficiency;
         this.enchantability = enchantability;
+        this.knockbackMultiplier = knockbackMultiplier;
         this.baseAttackDamage = baseAttackDamage;
         this.baseAttackSpeed = baseAttackSpeed;
         this.baseArmor = baseArmor;
@@ -196,61 +202,47 @@ public final class ItemStatistics {
         public ItemStatistics deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jObject = json.getAsJsonObject();
             IdTagMatcher item = context.deserialize(jObject.get("item"), IdTagMatcher.class);
-            Integer maxStackSize = ITRGsonHelper.getAsNullableInt(jObject, "max_stack");
-            Integer durability = ITRGsonHelper.getAsNullableInt(jObject, "durability");
-            Float durabilityBonus = ITRGsonHelper.getAsNullableFloat(jObject, "durability_bonus");
-            Float durabilityMultiplier = ITRGsonHelper.getAsNullableFloat(jObject, "durability_multiplier");
-            Double efficiency = ITRGsonHelper.getAsNullableDouble(jObject, "efficiency");
-            Integer enchantability = ITRGsonHelper.getAsNullableInt(jObject, "enchantability");
-            Double baseAttackDamage = ITRGsonHelper.getAsNullableDouble(jObject, "attack_damage");
-            Double baseAttackSpeed = ITRGsonHelper.getAsNullableDouble(jObject, "attack_speed");
-            Double baseArmor = ITRGsonHelper.getAsNullableDouble(jObject, "armor");
-            Double baseToughness = ITRGsonHelper.getAsNullableDouble(jObject, "armor_toughness");
-            Double regeneratingAbsorption = ITRGsonHelper.getAsNullableDouble(jObject, "regenerating_absorption");
-            Double regeneratingAbsorptionSpeed = ITRGsonHelper.getAsNullableDouble(jObject, "regenerating_absorption_speed");
-            Double baseKnockbackResistance = ITRGsonHelper.getAsNullableDouble(jObject, "knockback_resistance");
-            Double movementSpeedPenalty = ITRGsonHelper.getAsNullableDouble(jObject, "movement_speed_penalty");
+            Integer maxStackSize = ILGsonHelper.getAsNullableInt(jObject, "max_stack", IntMinMaxValidator.between(1, 64));
+            Integer durability = ILGsonHelper.getAsNullableInt(jObject, "durability", IntMinMaxValidator.atLeast(1));
+            Integer durabilityBonus = ILGsonHelper.getAsNullableInt(jObject, "durability_bonus", IntMinMaxValidator.atLeast(1));
+            Float durabilityMultiplier = ILGsonHelper.getAsNullableFloat(jObject, "durability_multiplier",  FloatMinMaxValidator.atLeast(0));
+            Double efficiency = ILGsonHelper.getAsNullableDouble(jObject, "efficiency", DoubleMinMaxValidator.atLeast(0));
+            Integer enchantability = ILGsonHelper.getAsNullableInt(jObject, "enchantability", IntMinMaxValidator.atLeast(0));
+            Double knockbackMultiplier = ILGsonHelper.getAsNullableDouble(jObject, "knockback_multiplier", DoubleMinMaxValidator.between(0, 1));
+            Double baseAttackDamage = ILGsonHelper.getAsNullableDouble(jObject, "attack_damage");
+            Double baseAttackSpeed = ILGsonHelper.getAsNullableDouble(jObject, "attack_speed");
+            Double baseArmor = ILGsonHelper.getAsNullableDouble(jObject, "armor");
+            Double baseToughness = ILGsonHelper.getAsNullableDouble(jObject, "armor_toughness");
+            Double regeneratingAbsorption = ILGsonHelper.getAsNullableDouble(jObject, "regenerating_absorption");
+            Double regeneratingAbsorptionSpeed = ILGsonHelper.getAsNullableDouble(jObject, "regenerating_absorption_speed");
+            Double baseKnockbackResistance = ILGsonHelper.getAsNullableDouble(jObject, "knockback_resistance");
+            Double movementSpeedPenalty = ILGsonHelper.getAsNullableDouble(jObject, "movement_speed_penalty");
             List<SerializableAttributeModifier> modifiers = null;
             if (jObject.has("modifiers"))
                 modifiers = context.deserialize(jObject.get("modifiers"), SerializableAttributeModifier.LIST_TYPE);
-            return new ItemStatistics(item, maxStackSize, durability, durabilityMultiplier, efficiency, enchantability, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+            return new ItemStatistics(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
         }
 
         @Override
         public JsonElement serialize(ItemStatistics src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jObject = new JsonObject();
-            JsonElement item = context.serialize(src.item);
-            jObject.add("item", item);
-            if (src.maxStackSize != null)
-                jObject.addProperty("max_stack", src.maxStackSize);
-            if (src.durability.durability != null)
-                jObject.addProperty("durability", src.durability.durability);
-            if (src.durability.durabilityBonus != null)
-                jObject.addProperty("durability_bonus", src.durability.durabilityBonus);
-            if (src.durability.durabilityMultiplier != null)
-                jObject.addProperty("durability_multiplier", src.durability.durabilityMultiplier);
-            if (src.efficiency != null)
-                jObject.addProperty("efficiency", src.efficiency);
-            if (src.enchantability != null)
-                jObject.addProperty("enchantability", src.enchantability);
-            if (src.baseAttackDamage != null)
-                jObject.addProperty("attack_damage", src.baseAttackDamage);
-            if (src.baseAttackSpeed != null)
-                jObject.addProperty("attack_speed", src.baseAttackSpeed);
-            if (src.baseArmor != null)
-                jObject.addProperty("armor", src.baseArmor);
-            if (src.baseArmorToughness != null)
-                jObject.addProperty("armor_toughness", src.baseArmorToughness);
-            if (src.baseKnockbackResistance != null)
-                jObject.addProperty("knockback_resistance", src.baseKnockbackResistance);
-            if (src.baseRegeneratingAbsorption != null)
-                jObject.addProperty("regenerating_absorption", src.baseRegeneratingAbsorption);
-            if (src.baseRegenAbsorptionSpeed != null)
-                jObject.addProperty("regenerating_absorption_speed", src.baseRegenAbsorptionSpeed);
-            if (src.movementSpeedPenalty != null)
-                jObject.addProperty("movement_speed_penalty", src.movementSpeedPenalty);
-            if (src.modifiers != null)
-                jObject.add("modifiers", context.serialize(src.modifiers, SerializableAttributeModifier.LIST_TYPE));
+            ILGsonHelper.add(jObject, context, "item", src.item);
+            ILGsonHelper.addProperty(jObject, "max_stack", src.maxStackSize);
+            ILGsonHelper.addProperty(jObject, "durability", src.durability.durability);
+            ILGsonHelper.addProperty(jObject, "durability_bonus", src.durability.durabilityBonus);
+            ILGsonHelper.addProperty(jObject, "durability_multiplier", src.durability.durabilityMultiplier);
+            ILGsonHelper.addProperty(jObject, "efficiency", src.efficiency);
+            ILGsonHelper.addProperty(jObject, "enchantability", src.enchantability);
+            ILGsonHelper.addProperty(jObject, "knockback_multiplier", src.knockbackMultiplier);
+            ILGsonHelper.addProperty(jObject, "attack_damage", src.baseAttackDamage);
+            ILGsonHelper.addProperty(jObject, "attack_speed", src.baseAttackSpeed);
+            ILGsonHelper.addProperty(jObject, "armor", src.baseArmor);
+            ILGsonHelper.addProperty(jObject, "armor_toughness", src.baseArmorToughness);
+            ILGsonHelper.addProperty(jObject, "knockback_resistance", src.baseKnockbackResistance);
+            ILGsonHelper.addProperty(jObject, "regenerating_absorption", src.baseRegeneratingAbsorption);
+            ILGsonHelper.addProperty(jObject, "regenerating_absorption_speed", src.baseRegenAbsorptionSpeed);
+            ILGsonHelper.addProperty(jObject, "movement_speed_penalty", src.movementSpeedPenalty);
+            ILGsonHelper.add(jObject, context, "modifiers", src.modifiers, SerializableAttributeModifier.LIST_TYPE);
             return jObject;
         }
     }
@@ -266,6 +258,7 @@ public final class ItemStatistics {
         Float durabilityMultiplier = byteBuf.readNullable(FriendlyByteBuf::readFloat);
         Double efficiency = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Integer enchantability = byteBuf.readNullable(FriendlyByteBuf::readInt);
+        Double knockbackMultiplier = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Double baseAttackDamage = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Double baseAttackSpeed = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Double baseArmor = byteBuf.readNullable(FriendlyByteBuf::readDouble);
@@ -283,7 +276,7 @@ public final class ItemStatistics {
                 modifiers.add(SerializableAttributeModifier.fromNetwork(byteBuf));
             }
         }
-        return new ItemStatistics(item, maxStackSize, durability, durabilityMultiplier, efficiency, enchantability, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+        return new ItemStatistics(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
     }
 
     public void toNetwork(FriendlyByteBuf byteBuf) {
@@ -294,6 +287,7 @@ public final class ItemStatistics {
         byteBuf.writeNullable(this.durability.durabilityMultiplier, FriendlyByteBuf::writeFloat);
         byteBuf.writeNullable(this.efficiency, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.enchantability, FriendlyByteBuf::writeInt);
+        byteBuf.writeNullable(this.knockbackMultiplier, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.baseAttackDamage, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.baseAttackSpeed, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.baseArmor, FriendlyByteBuf::writeDouble);
@@ -335,6 +329,11 @@ public final class ItemStatistics {
     @Nullable
     public Integer enchantability() {
         return enchantability;
+    }
+
+    @Nullable
+    public Double knockbackMultiplier() {
+        return knockbackMultiplier;
     }
 
     @Nullable
@@ -408,7 +407,6 @@ public final class ItemStatistics {
             if (this.durabilityMultiplier != null)
                 item.maxDamage *= this.durabilityMultiplier;
         }
-
 
     }
 }

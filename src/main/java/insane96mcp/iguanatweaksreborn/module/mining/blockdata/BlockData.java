@@ -3,8 +3,8 @@ package insane96mcp.iguanatweaksreborn.module.mining.blockdata;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
-import insane96mcp.iguanatweaksreborn.utils.ITRGsonHelper;
 import insane96mcp.insanelib.base.config.MinMax;
+import insane96mcp.insanelib.util.json.ILGsonHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -192,8 +192,8 @@ public class BlockData {
 		@Override
 		public BlockData deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
-			Float hardness = ITRGsonHelper.getAsNullableFloat(jObject, "state_hardness");
-			Boolean requiresCorrectToolForDrops = ITRGsonHelper.getAsNullableBoolean(jObject, "state_requires_correct_tool_for_drops");
+			Float hardness = ILGsonHelper.getAsNullableFloat(jObject, "state_hardness");
+			Boolean requiresCorrectToolForDrops = ILGsonHelper.getAsNullableBoolean(jObject, "state_requires_correct_tool_for_drops");
 			NoteBlockInstrument instrument = null;
 			if (jObject.has("state_instrument")) {
 				String stringInstrument = GsonHelper.getAsString(jObject, "state_instrument");
@@ -203,11 +203,11 @@ public class BlockData {
 						.orElseThrow();
 			}
 			MinMax experienceDropped = context.deserialize(jObject.get("state_experience_dropped"), MinMax.class);
-			Float explosionResistance = ITRGsonHelper.getAsNullableFloat(jObject, "explosion_resistance");
-			Float friction = ITRGsonHelper.getAsNullableFloat(jObject, "friction");
-			Float speedFactor = ITRGsonHelper.getAsNullableFloat(jObject, "speed_factor");
-			Float jumpFactor = ITRGsonHelper.getAsNullableFloat(jObject, "jump_factor");
-			Float boneMealFailChance = ITRGsonHelper.getAsNullableFloat(jObject, "bone_meal_fail_chance");
+			Float explosionResistance = ILGsonHelper.getAsNullableFloat(jObject, "explosion_resistance");
+			Float friction = ILGsonHelper.getAsNullableFloat(jObject, "friction");
+			Float speedFactor = ILGsonHelper.getAsNullableFloat(jObject, "speed_factor");
+			Float jumpFactor = ILGsonHelper.getAsNullableFloat(jObject, "jump_factor");
+			Float boneMealFailChance = ILGsonHelper.getAsNullableFloat(jObject, "bone_meal_fail_chance");
 
 			if (jObject.has("block_tag") && jObject.has("states"))
 				throw new JsonParseException("`block_tag` and `states` cannot be used together");

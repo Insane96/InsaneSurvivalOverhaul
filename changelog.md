@@ -6,6 +6,7 @@
 * Changed red outline on wrong tool to no outline on wrong tool
 * Combat Knockback feature has been cleaned up
   * No weapon penalty and spam penalty are now two separate config options
+  * Knockback multiplier has been moved Item Definitions
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Changed, moved and renamed many config options

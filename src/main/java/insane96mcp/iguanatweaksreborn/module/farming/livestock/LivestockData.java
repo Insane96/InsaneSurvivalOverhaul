@@ -5,8 +5,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
-import insane96mcp.iguanatweaksreborn.utils.ITRGsonHelper;
 import insane96mcp.insanelib.data.IdTagMatcher;
+import insane96mcp.insanelib.util.json.ILGsonHelper;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -60,7 +60,7 @@ public class LivestockData {
 		public LivestockData deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
 			IdTagMatcher entity = context.deserialize(jObject.get("entity"), IdTagMatcher.class);
-			Float livingDays = ITRGsonHelper.getAsNullableFloat(jObject, "living_days");
+			Float livingDays = ILGsonHelper.getAsNullableFloat(jObject, "living_days");
 			float livingDaysFluctuation = GsonHelper.getAsFloat(jObject, "living_days_fluctuation", 0);
 			List<Modifier> growthSpeed = Modifier.deserializeList(jObject, "growth_speed_modifiers", context);
 			List<Modifier> breedingCooldown = Modifier.deserializeList(jObject, "breeding_cooldown_modifiers", context);
