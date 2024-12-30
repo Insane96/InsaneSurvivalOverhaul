@@ -48,7 +48,7 @@ public class Misc extends Feature {
     public static Boolean removeScore = true;
 
     @Config(min = 0)
-    @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition)")
+    @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flowlessly if using the correct Forge GUI fields")
     public static Integer floatyHotbar = 2;
 
     public Misc(Module module, boolean enabledByDefault, boolean canBeDisabled) {

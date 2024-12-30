@@ -54,7 +54,7 @@ public class Anvils extends Feature {
     @Label(name = "Remove rename cost", description = "Removes cost of renaming items in Anvil")
     public static Boolean freeRenaming = true;
     @Config
-    @Label(name = "Merging cost is based off result")
+    @Label(name = "Merging cost is based off result", description = "The cost when merging two items is calculated from the final item, no longer from a strange calculations between the two items merging.")
     public static Boolean mergingCostBasedOffResult = true;
     @Config
     @Label(name = "Allow Merging Items", description = "If true you can merge items in the anvil and get a repair bonus")

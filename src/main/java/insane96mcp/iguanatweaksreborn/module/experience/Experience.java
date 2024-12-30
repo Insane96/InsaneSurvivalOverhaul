@@ -55,7 +55,7 @@ public class Experience extends JsonFeature {
 	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "no_xp_multiplier"));
 
 	@Config(min = 1d, max = 128d)
-	@Label(name = "Global Experience Multiplier", description = "Experience dropped will be multiplied by this value.\nUse the iguanatweaks:disableExperience game rule to disable experience drops.")
+	@Label(name = "Global Experience Multiplier", description = "ALL Experience dropped will be multiplied by this value, regardless if affected by another multiplier.\nUse the iguanatweaks:disableExperience game rule to disable experience completely.")
 	public static Double globalMultiplier = 1d;
 
 	@Config(min = 0d, max = 128d)

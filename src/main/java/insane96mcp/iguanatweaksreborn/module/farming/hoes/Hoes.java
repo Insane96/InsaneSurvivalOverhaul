@@ -67,7 +67,7 @@ public class Hoes extends JsonFeature {
 	@Label(name = "Durability used on till")
 	public static Integer durabilityOnTill = 4;
 	@Config
-	@Label(name = "Trigger only for farmland")
+	@Label(name = "Trigger only for farmland", description = "'Durability used on till' is only applied for farmland, and not e.g. when using hoes on rooted dirt")
 	public static Boolean triggerOnlyForFarmland = true;
 
 	public Hoes(Module module, boolean enabledByDefault, boolean canBeDisabled) {

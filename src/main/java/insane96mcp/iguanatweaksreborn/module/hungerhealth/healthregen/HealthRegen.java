@@ -44,7 +44,7 @@ public class HealthRegen extends Feature {
 	@Label(name = "Starve at Hunger", description = "The player will start starving at this hunger (Vanilla is 0)")
 	public static Integer starveAtHunger = 4;
 	@Config
-	@Label(name = "Faster Starving when really hungry", description = "If below 'Starve at Hunger' player will starve faster.")
+	@Label(name = "Faster Starving when really hungry", description = "If below 'Starve at Hunger' player will starve 2x faster for each hunger point below 'Starve at Hunger'.")
 	public static Boolean fasterStarvingWhenReallyHungry = true;
 	@Config
 	@Label(name = "Disable Saturation Regen Boost", description = "Set to true to disable the health regen boost given when max hunger and saturation (false in Vanilla).")

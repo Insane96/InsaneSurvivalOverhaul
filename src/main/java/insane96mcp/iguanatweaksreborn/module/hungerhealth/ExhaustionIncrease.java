@@ -42,7 +42,7 @@ public class ExhaustionIncrease extends Feature {
 	@Label(name = "Rowing Exhaustion", description = "Every tick of the player's rowing will get this exhaustion.")
 	public static Double rowingExhaustion = 0.005d;
 	@Config
-	@Label(name = "Effective Hunger Effect", description = "When affected by the hunger effect ANY action will give you 100% more exhaustion per level.")
+	@Label(name = "Effective Hunger Effect", description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
 
 	public ExhaustionIncrease(Module module, boolean enabledByDefault, boolean canBeDisabled) {
