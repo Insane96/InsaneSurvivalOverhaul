@@ -6,6 +6,8 @@
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Changed, moved and renamed many config options
+  * Client
+    * World border has it's own feature now
   * Cleaned up some config descriptions
 
 ## 3.21.5

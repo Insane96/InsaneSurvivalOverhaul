@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
+import insane96mcp.iguanatweaksreborn.module.client.WorldBorder;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -18,14 +19,14 @@ public abstract class LevelRendererMixin {
 
 	@ModifyVariable(at = @At(value = "STORE"), method = "renderWorldBorder", ordinal = 4)
 	private double onWorldBorderHeight(double value) {
-		if (Misc.shouldShortenWorldBorder())
-			return Math.min(Misc.capWorldBorderHeight, value / 4d);
+		if (WorldBorder.shouldShorten())
+			return Math.min(WorldBorder.capHeight, value / 4d);
 		return value;
 	}
 
 	@ModifyVariable(at = @At(value = "STORE", ordinal = 2), method = "renderWorldBorder", ordinal = 1)
 	private double onWorldBorderAlpha(double value) {
-		return value * Misc.getWorldBorderTransparencyMultiplier();
+		return value * WorldBorder.getTransparencyMultiplier();
 	}
 
 	@ModifyExpressionValue(method = "renderHitOutline", at = @At(value = "CONSTANT", args = "floatValue=0.0", ordinal = 0))
