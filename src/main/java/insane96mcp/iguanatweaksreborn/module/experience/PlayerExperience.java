@@ -14,7 +14,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Player Experience", description = "Changes the experience lost on death and xp per level required.")
+@Label(name = "PlayerStats Experience", description = "Changes the experience lost on death and xp per level required.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
 public class PlayerExperience extends Feature {
 

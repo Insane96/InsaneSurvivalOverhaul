@@ -39,7 +39,7 @@ public class SetITRBeaconEffects {
             AbstractContainerMenu abstractcontainermenu = player.containerMenu;
             if (abstractcontainermenu instanceof ITRBeaconMenu srBeaconMenu) {
                 if (!player.containerMenu.stillValid(player)) {
-                    ITRLogHelper.debug("Player {} interacted with invalid menu {}", player, player.containerMenu);
+                    ITRLogHelper.debug("PlayerStats {} interacted with invalid menu {}", player, player.containerMenu);
                     return;
                 }
 

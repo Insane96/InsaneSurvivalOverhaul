@@ -67,7 +67,7 @@ public class Death extends Feature {
 	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "killer_blacklist"));
 
 	@Config
-	@Label(name = "Player's killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
+	@Label(name = "PlayerStats's killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
 	public static Boolean vindicationVsKiller = true;
 	@Config
 	@Label(name = "Grave keeps experience", description = "If true, the player's experience is stored in the grave.")

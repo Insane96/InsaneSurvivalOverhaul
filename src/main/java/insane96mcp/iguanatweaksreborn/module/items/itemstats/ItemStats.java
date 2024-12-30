@@ -35,7 +35,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Item Stats", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
+@Label(name = "Item MiscStats", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class ItemStats extends Feature {
 

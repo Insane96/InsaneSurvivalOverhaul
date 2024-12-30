@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import insane96mcp.iguanatweaksreborn.module.combat.stats.Stats;
+import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.insanelib.base.Feature;
@@ -43,14 +43,14 @@ public abstract class AbstractArrowMixin extends Projectile {
 
     @Redirect(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;isCritArrow()Z", ordinal = 0))
     private boolean onCritArrowCheck(AbstractArrow arrow) {
-        if (Feature.isEnabled(Stats.class) && Stats.disableCritArrowsBonusDamage)
+        if (Feature.isEnabled(MiscStats.class) && MiscStats.disableCritArrowsBonusDamage)
             return false;
         return this.isCritArrow();
     }
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;isCritArrow()Z", ordinal = 0))
     private boolean onCritArrowCheckParticles(boolean original) {
-        if (!Feature.isEnabled(Stats.class) || !Stats.disableCritArrowsBonusDamage)
+        if (!Feature.isEnabled(MiscStats.class) || !MiscStats.disableCritArrowsBonusDamage)
             return original;
         return false;
     }
@@ -65,19 +65,19 @@ public abstract class AbstractArrowMixin extends Projectile {
     private double onSetArrowDamage(AbstractArrow instance, Operation<Double> original) {
         if (instance.getOwner() instanceof Mob)
             return original.call(instance);
-        return original.call(instance) * Stats.arrowsDamageMultiplier;
+        return original.call(instance) * MiscStats.arrowsDamageMultiplier;
     }
 
     @ModifyArg(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     private float onHurtDamage(float damage) {
-        if (!Stats.decimalArrowsDamage)
+        if (!MiscStats.decimalArrowsDamage)
             return damage;
         double l = this.getDeltaMovement().length();
-        double damageMultiplier = Stats.arrowsDamageMultiplier;
+        double damageMultiplier = MiscStats.arrowsDamageMultiplier;
         if (this.getOwner() instanceof Mob)
             damageMultiplier = 1f;
         float newDamage = (float) Mth.clamp(l * this.baseDamage * damageMultiplier, 0.0D, Integer.MAX_VALUE);
-        if (this.isCritArrow() && !Stats.disableCritArrowsBonusDamage) {
+        if (this.isCritArrow() && !MiscStats.disableCritArrowsBonusDamage) {
             newDamage += this.random.nextFloat() * (newDamage / 2 + 2);
         }
         return newDamage;

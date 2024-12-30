@@ -28,7 +28,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Knockback", description = "Player will deal reduced knockback if attacking with a non-weapon or spamming.")
+@Label(name = "Knockback", description = "PlayerStats will deal reduced knockback if attacking with a non-weapon or spamming.")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class Knockback extends JsonFeature {
 

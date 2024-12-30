@@ -40,7 +40,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Unfair one-shots", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
+@Label(name = "Unfair one-shot", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class UnfairOneShot extends Feature {
 	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ITRRegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));

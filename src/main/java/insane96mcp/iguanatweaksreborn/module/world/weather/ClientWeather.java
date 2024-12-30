@@ -44,7 +44,7 @@ public class ClientWeather extends Feature {
         if (!level.isClientSide)
             return;
 
-        //for (Player player : level.players())
+        //for (PlayerStats player : level.players())
         //    player.displayClientMessage(Component.literal("foggyTimer: %d, foggyTargetTime: %d, currentFoggy: %s, targetFoggy: %s".formatted(foggyTimer, foggyTargetTime, currentFoggy, targetFoggy)), true);
 
         if (currentFoggy != targetFoggy && ++foggyTimer >= foggyTargetTime)

@@ -5,7 +5,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import insane96mcp.iguanatweaksreborn.event.ITREventFactory;
-import insane96mcp.iguanatweaksreborn.module.combat.stats.Stats;
+import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
+import insane96mcp.iguanatweaksreborn.module.combat.PlayerStats;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
@@ -94,26 +95,26 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.2f, ordinal = 0))
 	public float attackStrengthAtMaxCooldown(float value) {
-        return Stats.noDamageWhenSpamming() ? 0f : value;
+        return PlayerStats.noDamageWhenSpamming() ? 0f : value;
     }
 
 	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.8f, ordinal = 0))
 	public float attackStrengthAtFullSwing(float value) {
-		return Stats.noDamageWhenSpamming() ? 1f : value;
+		return PlayerStats.noDamageWhenSpamming() ? 1f : value;
 	}
 
 	@ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
 	public float changeSweepingDamage(float original, @Local(ordinal = 0) float f) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		return f;
 	}
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getSweepHitBox(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;"))
 	public AABB changeSweepingHitbox(AABB original) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
 		return original.inflate(lvl * 0.25f, lvl * 0.1f, lvl * 0.25f);
@@ -121,8 +122,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getEntityReach()D"))
 	public double increaseSweepingReach(double original) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
 		return original + lvl * 0.25f;
@@ -137,15 +138,15 @@ public abstract class PlayerMixin extends LivingEntity {
 		return original;
 	}
 
-	/*@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;onGround()Z", ordinal = 1))
+	/*@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/PlayerStats;onGround()Z", ordinal = 1))
 	public boolean allowSweepingOffGround(boolean original) {
 		return true;
 	}*/
 
 	@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getFireAspect(Lnet/minecraft/world/entity/LivingEntity;)I"))
 	public void storeNewFlag3(Entity pTarget, CallbackInfo ci, @Local(ordinal = 0) boolean flag, @Share("flag3") LocalBooleanRef flag3) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return;
 		if (flag) {
 			ItemStack itemstack = this.getItemInHand(InteractionHand.MAIN_HAND);
@@ -155,8 +156,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyVariable(method = "attack", ordinal = 3, at = @At("LOAD"))
 	public boolean onFlag3Check(boolean original, @Share("flag3") LocalBooleanRef flag3) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		return flag3.get();
 	}
@@ -168,8 +169,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyExpressionValue(method = "attack",at = @At(value = "CONSTANT", args = "doubleValue=0.4000000059604645"))
 	public double onSweepKnockbackStrength(double original, @Local(name = "i") float i) {
-		if (!Stats.sweepingOverhaul
-				|| !Feature.isEnabled(Stats.class))
+		if (!MiscStats.sweepingOverhaul
+				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		return i * 0.5F;
 	}
@@ -188,7 +189,7 @@ public abstract class PlayerMixin extends LivingEntity {
 		return Nether.portalWaitTime;
 	}
 
-	/*@ModifyExpressionValue(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSwimming()Z"))
+	/*@ModifyExpressionValue(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/PlayerStats;isSwimming()Z"))
 	public boolean onTravelSwimCheck(boolean original) {
 		if (this.isSwimming() && !this.isPassenger()) {
 			this.setDeltaMovement(Vec3.ZERO);

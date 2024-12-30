@@ -150,7 +150,7 @@ public class RegeneratingAbsorption extends Feature {
         if (currentAbsorption <= 0)
             return;
         //if (currentAbsorption < event.getAmount())
-            //event.getEntity().level().playSound(null, event.getEntity(), SoundEvents.GENERIC_EXPLODE, event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 0.5f, 2f);
+            //event.getEntity().level().playSound(null, event.getEntity(), SoundEvents.GENERIC_EXPLODE, event.getEntity() instanceof PlayerStats ? SoundSource.PLAYERS : SoundSource.HOSTILE, 0.5f, 2f);
         //else
             //event.getEntity().getPersistentData().putBoolean(NO_HURT_SOUND_TAG, true);
         float toRemove = Math.min(currentAbsorption, event.getAmount());

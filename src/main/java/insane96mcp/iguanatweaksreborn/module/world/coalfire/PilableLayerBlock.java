@@ -106,7 +106,7 @@ public class PilableLayerBlock extends SnowLayerBlock implements Fallable {
 
     @Override
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable BlockEntity blockEntity, ItemStack stack) {
-        /*player.awardStat(Stats.BLOCK_MINED.get(this));
+        /*player.awardStat(MiscStats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
         if (stack.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0 && this.asItem() != Items.AIR) {
             popResource(level, pos, new ItemStack(this.asItem()));

@@ -33,7 +33,7 @@ public class Nerfs extends Feature {
 	static final String LAST_FISHING_POS_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "last_fishing_pos";
 	static final String LAST_FISHING_COUNT_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "last_fishing_count";
 	@Config
-	@Label(name = "Iron from Golems only when killed by Player", description = "If true, Iron golems will only drop Iron when killed by the player.")
+	@Label(name = "Iron from Golems only when killed by PlayerStats", description = "If true, Iron golems will only drop Iron when killed by the player.")
 	public static Boolean ironRequiresPlayer = true;
 	@Config
 	@Label(name = "No Coordinates", description = "If true, renderDebugInfo is enabled by default. Requires a world restart")

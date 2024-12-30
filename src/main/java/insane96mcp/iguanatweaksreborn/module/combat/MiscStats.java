@@ -1,8 +1,7 @@
-package insane96mcp.iguanatweaksreborn.module.combat.stats;
+package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
@@ -11,7 +10,6 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -25,34 +23,24 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-@Label(name = "Misc Stats", description = "Various changes from weapons damage to bows, arrows and effects")
+@Label(name = "Misc Stats")
 @LoadFeature(module = Modules.Ids.COMBAT)
-public class Stats extends Feature {
-	public static final UUID ATTACK_RANGE_REDUCTION_UUID = UUID.fromString("0dd017a7-274c-4101-85b4-78af20a24c54");
-	public static final UUID MOVEMENT_SPEED_REDUCTION_UUID = UUID.fromString("a88ac0d1-e2b3-4cf1-bb0e-9577486c874a");
-	@Config(min = -4d, max = 4d)
-	@Label(name = "Player attack range modifier", description = "Adds this to players' attack range")
-	public static Double playerAttackRangeModifier = 0d;
-	@Config
-	@Label(name = "Player no damage when spamming", description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%.")
-	public static Boolean playerNoDamageWhenSpamming = true;
-	@Config
-	@Label(name = "Players movement speed reduction", description = "Reduces movement speed for players by this percentage.")
-	public static Double playersMovementSpeedReduction = 0.05d;
+public class MiscStats extends Feature {
 	@Config
 	@Label(name = "Disable Critical Arrows bonus damage", description = "If true, Arrows from Bows and Crossbows will no longer deal more damage when fully charged.")
 	public static Boolean disableCritArrowsBonusDamage = true;
@@ -87,12 +75,12 @@ public class Stats extends Feature {
 	@Label(name = "Sweeping overhaul", description = "Rework Swords sweeping attack. The sweeping attack deals full damage and the Sweeping Edge enchantment increases the range.")
 	public static Boolean sweepingOverhaul = true;
 	@Config
-	@Label(name = "Item Stats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
+	@Label(name = "Item MiscStats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
 	public static Boolean itemStatsDataPack = true;
 
-	public Stats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "item_stats", Component.literal("IguanaTweaks Reborn Item Stats"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && itemStatsDataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "item_stats", Component.literal("IguanaTweaks Reborn Item MiscStats"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && itemStatsDataPack));
 	}
 
 	@Override
@@ -112,22 +100,6 @@ public class Stats extends Feature {
 			MobEffects.DIG_SPEED.attributeModifiers.remove(Attributes.ATTACK_SPEED);
 			MobEffects.DIG_SLOWDOWN.attributeModifiers.remove(Attributes.ATTACK_SPEED);
 		}
-	}
-
-	public static boolean noDamageWhenSpamming() {
-		return isEnabled(Stats.class) && playerNoDamageWhenSpamming;
-	}
-
-	@SubscribeEvent
-	public void onPlayerJoinLevel(EntityJoinLevelEvent event) {
-		if (!this.isEnabled()
-				|| !(event.getEntity() instanceof Player player))
-			return;
-
-		if (playerAttackRangeModifier != 0f)
-			MCUtils.applyModifier(player, ForgeMod.ENTITY_REACH.get(), ATTACK_RANGE_REDUCTION_UUID, "Entity Reach reduction", playerAttackRangeModifier, AttributeModifier.Operation.ADDITION, false);
-		if (playersMovementSpeedReduction != 0d)
-			MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED_REDUCTION_UUID, "Movement Speed reduction", -playersMovementSpeedReduction, AttributeModifier.Operation.MULTIPLY_BASE, false);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

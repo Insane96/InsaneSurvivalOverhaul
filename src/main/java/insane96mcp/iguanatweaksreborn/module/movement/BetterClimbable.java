@@ -18,7 +18,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@Label(name = "Better Climbable", description = "Player's slides down climbable blocks faster and stands still when opening an interface. This is disabled if quark is enabled")
+@Label(name = "Better Climbable", description = "PlayerStats's slides down climbable blocks faster and stands still when opening an interface. This is disabled if quark is enabled")
 @LoadFeature(module = Modules.Ids.MOVEMENT)
 public class BetterClimbable extends Feature {
 

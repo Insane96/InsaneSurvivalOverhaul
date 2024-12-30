@@ -98,10 +98,10 @@ public class Tweaks extends Feature {
     public static Boolean betterHardcoreDeath = true;
 
     @Config(min = 0, max = 100)
-    @Label(name = "Player air ticks consumed", description = "The amount of ticks the player consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
+    @Label(name = "PlayerStats air ticks consumed", description = "The amount of ticks the player consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
     public static Double playerConsumeAirAmount = 1.5d;
     @Config
-    @Label(name = "Player air ticks refilled", description = "The amount of air ticks the player regains each tick when out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4. Min is the amount as soon as you exit water, Max is a few seconds out of water.")
+    @Label(name = "PlayerStats air ticks refilled", description = "The amount of air ticks the player regains each tick when out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4. Min is the amount as soon as you exit water, Max is a few seconds out of water.")
     public static MinMax playerRefillAirAmount = new MinMax(1, 2.5);
     @Config
     @Label(name = "Increase drown damage the more drowning")
