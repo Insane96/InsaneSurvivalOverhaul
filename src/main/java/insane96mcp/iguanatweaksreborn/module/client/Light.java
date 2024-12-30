@@ -14,9 +14,12 @@ public class Light extends Feature {
     @Config(min = -1)
     @Label(name = "Night Vision Fade out time", description = "How many ticks before expiring Night Vision will slowly fade out? Set to -1 to disable")
     public static Integer nightVisionFadeOutTime = 50;
+    @Config(min = -1, max = 1)
+    @Label(name = "Force brightness", description = "If enabled, the brightness will be set to this value, ignoring the brightness in video settings.")
+    public static Double forceBrightness = 0.15d;
     @Config
-    @Label(name = "Force darkness", description = "If enabled, the brightness will be set to at most 15% regardless of the current brightness in video settings.")
-    public static Boolean forceDarkness = true;
+    @Label(name = "Force only higher brightness", description = "If true, 'Force brightness' will only apply if the current brightness is higher than 'Force brightness'")
+    public static Boolean forceOnlyLowerBrightness = true;
 
     public Light(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);

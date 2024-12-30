@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LightTextureMixin {
     @ModifyExpressionValue(method = "updateLightTexture", at = @At(value = "INVOKE", target = "Ljava/lang/Double;floatValue()F", ordinal = 1))
     public float onGamma(float value) {
-        if (Feature.isEnabled(Light.class) && Light.forceDarkness)
-            return Math.min(0.15f, value);
+        if (Feature.isEnabled(Light.class) && Light.forceBrightness >= 0)
+            return (float) (Light.forceOnlyLowerBrightness ? Math.min(Light.forceBrightness, value) : Light.forceBrightness);
         return value;
     }
 }

@@ -2,6 +2,7 @@
 
 ## Upcoming
 * Night Vision Fade out time is now configurable
+* Brightness forcing is now more configurable
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Cleaned up some config descriptions
