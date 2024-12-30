@@ -12,6 +12,7 @@
     * Death has its own feature now
   * Combat
     * Player stats has its own feature now
+    * Arrow stats has its own feature now
   * Cleaned up some config descriptions
 
 ## 3.21.5

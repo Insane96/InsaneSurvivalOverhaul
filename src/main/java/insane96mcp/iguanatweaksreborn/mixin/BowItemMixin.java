@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import insane96mcp.iguanatweaksreborn.module.combat.ArrowStats;
 import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
@@ -37,6 +38,6 @@ public class BowItemMixin {
     public float shootInaccuracy(float original) {
         if (!Feature.isEnabled(MiscStats.class))
             return original;
-        return MiscStats.bowInaccuracy.floatValue();
+        return ArrowStats.bowInaccuracy.floatValue();
     }
 }
