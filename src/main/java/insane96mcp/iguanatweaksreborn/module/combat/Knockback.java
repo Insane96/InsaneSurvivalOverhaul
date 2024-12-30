@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -11,14 +10,12 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagValue;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
@@ -32,17 +29,15 @@ import java.util.List;
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class Knockback extends JsonFeature {
 
-	public static final TagKey<Item> REDUCED_KNOCKBACK = ITRItemTagsProvider.create("reduced_knockback");
 	public static final String TIME_SINCE_LAST_SWING = IguanaTweaksReborn.RESOURCE_PREFIX + "ticks_since_last_swing";
 	public static final String SHOULD_APPLY_NO_KNOCKBACK = IguanaTweaksReborn.RESOURCE_PREFIX + "should_apply_no_knockback";
 
-	@Config
-	@Label(name = "No Weapon Penalty", description = "If true the player will deal reduced knockback when not using an item that doesn't have the attack damage attribute.")
-	public static Boolean noItemNoKnockback = true;
-
 	@Config(min = 0d, max = 1d)
-	@Label(name = "No Weapon Penalty Knockback reduction", description = "Percentage knockback dealt when conditions are met.")
-	public static Double knockbackReduction = 0.35d;
+	@Label(name = "No Weapon Penalty", description = "Percentage knockback dealt if the player is using an item that doesn't have the attack damage attribute. Broken items from the Items module count as No Weapon")
+	public static Double noWeaponPenalty = 0.35d;
+	@Config(min = 0d, max = 1d)
+	@Label(name = "Spam Penalty", description = "Percentage knockback dealt if the player is attacking when the attack is not fully charged.")
+	public static Double spamPenalty = 0.35d;
 
 	//Knockback multipliers for items
 	public static final ArrayList<IdTagValue> KNOCKBACK_MULTIPLIERS_DEFAULT = new ArrayList<>(List.of(
@@ -103,19 +98,21 @@ public class Knockback extends JsonFeature {
 
 		ItemStack itemStack = player.getMainHandItem();
 
-		boolean reducedKnockback = false;
+		float reducedKnockback = 1f;
 		Multimap<Attribute, AttributeModifier> attributeModifiers = itemStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
-		if ((!attributeModifiers.containsKey(Attributes.ATTACK_DAMAGE) && noItemNoKnockback) || itemStack.is(REDUCED_KNOCKBACK) || (isEnabled(ItemStats.class) && ItemStats.unbreakableItems && ItemStats.isBroken(itemStack)))
-			reducedKnockback = true;
+		if ((!attributeModifiers.containsKey(Attributes.ATTACK_DAMAGE)
+				|| (isEnabled(ItemStats.class) && ItemStats.unbreakableItems && ItemStats.isBroken(itemStack)))
+				&& noWeaponPenalty < 1d)
+			reducedKnockback = Math.min(reducedKnockback, noWeaponPenalty.floatValue());
 
 		int ticksSinceLastSwing = player.getPersistentData().getInt(TIME_SINCE_LAST_SWING);
 		float cooldown = Mth.clamp((ticksSinceLastSwing + 0.5f) / player.getCurrentItemAttackStrengthDelay(), 0.0F, 1.0F);
 		if (cooldown <= 0.9f)
-			reducedKnockback = true;
-		if (reducedKnockback) {
+			reducedKnockback = Math.min(reducedKnockback, spamPenalty.floatValue());
+		if (reducedKnockback < 1f) {
 			if (player.isSprinting())
 				event.setStrength(event.getStrength() - 0.5f);
-			event.setStrength(event.getStrength() * knockbackReduction.floatValue());
+			event.setStrength(event.getStrength() * reducedKnockback);
 		}
 		player.getPersistentData().putBoolean(SHOULD_APPLY_NO_KNOCKBACK, false);
 	}
