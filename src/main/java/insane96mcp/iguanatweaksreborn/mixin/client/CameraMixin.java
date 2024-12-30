@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin.client;
 
+import insane96mcp.iguanatweaksreborn.module.client.Death;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.Camera;
@@ -23,7 +24,7 @@ public abstract class CameraMixin {
 		if (!(pEntity instanceof Player player)
 				|| !player.isDeadOrDying()
 				|| !Feature.isEnabled(Misc.class)
-				|| !Misc.thirdPersonOnDeath)
+				|| !Death.thirdPerson)
 			return;
 
 		this.move(-this.getMaxZoom(4d), -player.getBbHeight() / 2d, 0.0d);

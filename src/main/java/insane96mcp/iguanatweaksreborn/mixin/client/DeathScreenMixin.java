@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import insane96mcp.iguanatweaksreborn.module.client.Death;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.gui.Font;
@@ -28,7 +29,7 @@ public abstract class DeathScreenMixin {
 	@ModifyExpressionValue(method = "tick", at = @At(value = "CONSTANT", args = "intValue=20"))
 	public int onTick(int original) {
 		if (!Feature.isEnabled(Misc.class)
-				|| !Misc.thirdPersonOnDeath)
+				|| !Death.thirdPerson)
 			return original;
 		return 40;
 	}
@@ -36,7 +37,7 @@ public abstract class DeathScreenMixin {
 	@WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawCenteredString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V", ordinal = 2))
 	public void onFinishInit(GuiGraphics instance, Font pFont, Component pText, int pX, int pY, int pColor, Operation<Void> original) {
 		if (!Feature.isEnabled(Misc.class)
-				|| !Misc.removeScore)
+				|| !Death.removeScore)
 			original.call(instance, pFont, pText, pX, pY, pColor);
 	}
 }

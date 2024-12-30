@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import insane96mcp.iguanatweaksreborn.module.client.Death;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.server.level.ChunkMap;
@@ -14,7 +15,7 @@ public abstract class ChunkMap$TrackedEntityMixin {
     @Inject(method = "removePlayer", at = @At(value = "HEAD"), cancellable = true)
     public void onRemoveTrackedEntity(ServerPlayer pPlayer, CallbackInfo ci) {
         if (!Feature.isEnabled(Misc.class)
-                || !Misc.thirdPersonOnDeath)
+                || !Death.thirdPerson)
             return;
         ci.cancel();
     }

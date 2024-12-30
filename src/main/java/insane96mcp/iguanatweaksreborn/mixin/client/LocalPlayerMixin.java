@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin.client;
 
 import com.mojang.authlib.GameProfile;
-import insane96mcp.iguanatweaksreborn.module.client.Misc;
+import insane96mcp.iguanatweaksreborn.module.client.Death;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -30,8 +30,8 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @Inject(method = "respawn", at = @At("TAIL"))
     public void onRequestRespawn(CallbackInfo ci) {
-        if (Misc.dead) {
-            Misc.dead = false;
+        if (Death.dead) {
+            Death.dead = false;
             Minecraft.getInstance().options.setCameraType(CameraType.FIRST_PERSON);
         }
     }

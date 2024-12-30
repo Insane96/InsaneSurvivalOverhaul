@@ -6,7 +6,6 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -27,13 +26,6 @@ public class Misc extends Feature {
     @Label(name = "No block outline with wrong tool", description = "If true, the outline around blocks will not be visible if the tool in hand is not the correct one for the block (and the block requires a tool).")
     public static Boolean noBlockOutlineWithWrongTool = true;
 
-    @Config
-    @Label(name = "Third person on death", description = "If true, when you die, you switch to third person camera.")
-    public static Boolean thirdPersonOnDeath = true;
-    @Config
-    @Label(name = "Remove score", description = "Why is that still a thing?.")
-    public static Boolean removeScore = true;
-
     @Config(min = 0)
     @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flowlessly if using the correct Forge GUI fields")
     public static Integer floatyHotbar = 2;
@@ -49,19 +41,6 @@ public class Misc extends Feature {
     public static boolean shouldHideBlockBreakOutline() {
 		return isEnabled(Misc.class) && noBlockOutlineWithWrongTool;
 	}
-
-    public static boolean dead = false;
-    public static void onDeath() {
-        if (!Feature.isEnabled(Misc.class)
-                || !thirdPersonOnDeath)
-            return;
-
-        CameraType cameratype = Minecraft.getInstance().options.getCameraType();
-        if (cameratype != CameraType.FIRST_PERSON)
-            return;
-        Minecraft.getInstance().options.setCameraType(CameraType.THIRD_PERSON_BACK);
-        dead = true;
-    }
 
     //Render before Regenerating absorption
     @OnlyIn(Dist.CLIENT)

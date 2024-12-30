@@ -8,7 +8,8 @@
 * Smokers now require soul sand/soil to craft
 * Changed, moved and renamed many config options
   * Client
-    * World border has it's own feature now
+    * World border has its own feature now
+    * Death has its own feature now
   * Cleaned up some config descriptions
 
 ## 3.21.5
