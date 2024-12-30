@@ -33,15 +33,15 @@ public class Misc extends Feature {
     public static Double capWorldBorderHeight = 128d;
 
     @Config
-    @Label(name = "No tilting with some damage types", description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
-    public static Boolean noTiltingWithSomeDamageTypes = true;
+    @Label(name = "No tilting with non-directional damage types", description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
+    public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
 
     @Config
     @Label(name = "Red block outline with wrong tool", description = "If true, the outline around blocks will be red if the tool in hand will make drops not ... drop.")
     public static Boolean redBlockOutlineWithWrongTool = true;
 
     @Config
-    @Label(name = "Thrid person on death", description = "If true, when you die, you switch to third person camera.")
+    @Label(name = "Third person on death", description = "If true, when you die, you switch to third person camera.")
     public static Boolean thirdPersonOnDeath = true;
     @Config
     @Label(name = "Remove score", description = "Why is that still a thing?.")
@@ -65,8 +65,8 @@ public class Misc extends Feature {
         return isEnabled(Misc.class) && shorterWorldBorder;
     }
 
-    public static boolean shouldDisableTiltingWithSomeDamageTypes() {
-        return isEnabled(Misc.class) && noTiltingWithSomeDamageTypes;
+    public static boolean shouldDisableTiltingWithNonDirectionalDamageTypes() {
+        return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
     }
 
     public static float getRedOutlineAmount(float original) {

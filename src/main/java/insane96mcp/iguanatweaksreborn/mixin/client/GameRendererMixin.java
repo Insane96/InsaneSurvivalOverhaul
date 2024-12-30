@@ -30,7 +30,7 @@ public abstract class GameRendererMixin {
 
 	@ModifyVariable(method = "bobHurt", at = @At(value = "STORE"), ordinal = 3)
 	public float onTiltStrength(float tilt) {
-		if (!Misc.shouldDisableTiltingWithSomeDamageTypes())
+		if (!Misc.shouldDisableTiltingWithNonDirectionalDamageTypes())
 			return tilt;
 		LivingEntity livingEntity = (LivingEntity) Minecraft.getInstance().cameraEntity;
 		DamageSource lastDamageSource = livingEntity.getLastDamageSource();
