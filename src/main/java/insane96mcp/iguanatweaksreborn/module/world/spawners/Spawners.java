@@ -72,7 +72,7 @@ public class Spawners extends JsonFeature {
 	@Label(name = "Override Spawn Delay", description = "If true, the spawner delay is set to 'delay' instead of using MinSpawnDelay and MaxSpawnDelay")
 	public static Boolean overrideSpawnDelay = true;
 	@Config(min = 0)
-	@Label(name = "Required PlayerStats Range", description = "Range in which a player must be present for a spawner to work. Vanilla is 16.")
+	@Label(name = "Required Players Range", description = "Range in which a player must be present for a spawner to work. Vanilla is 16.")
 	public static int requiredPlayerRange = 24;
 	@Config
 	@Label(name = "Ignore Light", description = "If true, monsters from spawners will spawn no matter the light level.")

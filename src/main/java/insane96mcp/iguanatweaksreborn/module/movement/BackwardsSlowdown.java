@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
 
-@Label(name = "Backwards slowdown", description = "PlayerStats's slowed down when walking backwards.")
+@Label(name = "Backwards slowdown", description = "Players's slowed down when walking backwards.")
 @LoadFeature(module = Modules.Ids.MOVEMENT)
 public class BackwardsSlowdown extends Feature {
 

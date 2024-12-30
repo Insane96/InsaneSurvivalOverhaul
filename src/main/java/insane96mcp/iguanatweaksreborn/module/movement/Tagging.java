@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Tagging", description = "PlayerStats's slowed down for a brief moment when hit.")
+@Label(name = "Tagging", description = "Players's slowed down for a brief moment when hit.")
 @LoadFeature(module = Modules.Ids.MOVEMENT)
 public class Tagging extends Feature {
 
