@@ -24,8 +24,8 @@ public class Misc extends Feature {
     public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
 
     @Config
-    @Label(name = "Red block outline with wrong tool", description = "If true, the outline around blocks will be red if the tool in hand will make drops not ... drop.")
-    public static Boolean redBlockOutlineWithWrongTool = true;
+    @Label(name = "No block outline with wrong tool", description = "If true, the outline around blocks will not be visible if the tool in hand is not the correct one for the block (and the block requires a tool).")
+    public static Boolean noBlockOutlineWithWrongTool = true;
 
     @Config
     @Label(name = "Third person on death", description = "If true, when you die, you switch to third person camera.")
@@ -46,11 +46,9 @@ public class Misc extends Feature {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
     }
 
-    public static float getRedOutlineAmount(float original) {
-        if (!isEnabled(Misc.class) || !redBlockOutlineWithWrongTool)
-            return original;
-        return 0.42f;
-    }
+    public static boolean shouldHideBlockBreakOutline() {
+		return isEnabled(Misc.class) && noBlockOutlineWithWrongTool;
+	}
 
     public static boolean dead = false;
     public static void onDeath() {
