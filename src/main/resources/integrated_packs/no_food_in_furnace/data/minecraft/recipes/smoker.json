@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " I ",
+    " # ",
     "#X#",
-    " # "
+    " S "
   ],
   "key": {
     "#": {
@@ -12,8 +12,8 @@
     "X": {
       "item": "minecraft:furnace"
     },
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "S": {
+      "tag": "minecraft:soul_fire_base_blocks"
     }
   },
   "result": {
