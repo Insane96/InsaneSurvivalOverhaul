@@ -1,8 +1,10 @@
 # Changelog
 
 ## Upcoming
+* Night Vision Fade out time is now configurable
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
+* Cleaned up some config descriptions
 
 ## 3.21.5
 * Replaced enchantments no longer appear in the creative menu

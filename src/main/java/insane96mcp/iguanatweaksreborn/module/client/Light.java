@@ -11,11 +11,9 @@ import insane96mcp.insanelib.base.config.Config;
 @LoadFeature(module = ClientModules.Ids.CLIENT)
 public class Light extends Feature {
 
-    public static final int NIGHT_VISION_FADE_OUT_AT = 50;
-
-    @Config
-    @Label(name = "No Night Vision Flashing", description = "If true night vision will no longer flash 10 seconds before expiring, instead will slowly fade out 2 seconds before expiring.")
-    public static Boolean noNightVisionFlashing = true;
+    @Config(min = -1)
+    @Label(name = "Night Vision Fade out time", description = "How many ticks before expiring Night Vision will slowly fade out? Set to -1 to disable")
+    public static Integer nightVisionFadeOutTime = 50;
     @Config
     @Label(name = "Force darkness", description = "If enabled, the brightness will be set to at most 15% regardless of the current brightness in video settings.")
     public static Boolean forceDarkness = true;
@@ -25,6 +23,6 @@ public class Light extends Feature {
     }
 
     public static boolean shouldDisableNightVisionFlashing() {
-        return isEnabled(Light.class) && noNightVisionFlashing;
+        return isEnabled(Light.class) && nightVisionFadeOutTime > -1;
     }
 }

@@ -23,9 +23,9 @@ public abstract class GameRendererMixin {
 		if (!Light.shouldDisableNightVisionFlashing())
 			return;
 		int duration = livingEntity.getEffect(MobEffects.NIGHT_VISION).getDuration();
-		callback.setReturnValue(duration > Light.NIGHT_VISION_FADE_OUT_AT || duration == -1 ?
+		callback.setReturnValue(duration > Light.nightVisionFadeOutTime || duration == -1 ?
 				1.0f :
-				((float)duration - partialTicks) * (1f / Light.NIGHT_VISION_FADE_OUT_AT));
+				((float)duration - partialTicks) * (1f / Light.nightVisionFadeOutTime));
 	}
 
 	@ModifyVariable(method = "bobHurt", at = @At(value = "STORE"), ordinal = 3)
