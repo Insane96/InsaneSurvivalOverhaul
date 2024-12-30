@@ -68,15 +68,11 @@ public class Livestock extends Feature {
 	public static Integer fasterEggTime = 900;
 
 	@Config
-	@Label(name = "Data Pack", description = "Enables a data pack that changes food drops and slows down growing, breeding, egging etc")
-	public static Boolean dataPack = true;
-
-	@Config
 	@Label(name = "Milk Cooldown", description = "Seconds until you can milk cows (or stew mooshrooms)")
 	public static Integer milkingCooldown = 1200;
 
 	@Config(min = 0, max = 1)
-	@Label(name = "Twins chance", description = "Chance for animals breeding to get twins. This chance is applied for every baby spawned so you have have triplets if lucky enough.")
+	@Label(name = "Twins chance", description = "Chance for animals breeding to get twins. This chance is applied for every baby spawned so you can have triplets if lucky enough.")
 	public static Double twinsChance = 0.5d;
 
 	@Config(min = 0, max = 1)
@@ -86,6 +82,10 @@ public class Livestock extends Feature {
 	@Config(min = 0)
 	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if the fluid cooldown is enabled.")
 	public static MinMax milkXp = new MinMax(2, 5);
+
+	@Config
+	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
+	public static Boolean dataPack = true;
 
 	@Config(min = 0)
 	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")

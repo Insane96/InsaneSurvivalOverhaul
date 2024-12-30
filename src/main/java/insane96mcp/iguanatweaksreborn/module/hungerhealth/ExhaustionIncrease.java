@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Label(name = "Exhaustion Increase", description = "Make the player consume more hunger with different actions. If hunger is disabled, still works for Tiredness.")
+@Label(name = "Exhaustion Increase", description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class ExhaustionIncrease extends Feature {
 	@Config(min = 0d, max = 128d)

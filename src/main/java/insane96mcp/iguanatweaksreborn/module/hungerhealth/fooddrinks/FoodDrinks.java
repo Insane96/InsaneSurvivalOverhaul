@@ -79,7 +79,7 @@ public class FoodDrinks extends JsonFeature {
 	public static Boolean eatingSpeedBasedOffFood = true;
 	@Config
 	@Label(name = "Eating Speed Formula", description = "The formula to calculate the ticks required to eat a food. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. The default formula increases the time to eat exponentially when higher effectiveness.")
-	public static String eatingSpeedFormula = "MIN(MAX((IF(fast_food, 16, 32) * effectiveness) * 0.075, IF(fast_food, 15, 20)), 75)";
+	public static String eatingSpeedFormula = "MIN(MAX((IF(fast_food, 16, 32) * effectiveness) * 0.075, IF(fast_food, 12, 20)), 75)";
 	@Config
 	@Label(name = "Stop consuming on hit", description = "If true, eating/drinking stops when the player's hit.")
 	public static Boolean stopConsumingOnHit = true;

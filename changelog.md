@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
+
 ## 3.21.5
 * Replaced enchantments no longer appear in the creative menu
 * Fixed 'Remove skeletons from Fortresses' 
