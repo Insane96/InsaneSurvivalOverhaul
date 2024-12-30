@@ -81,9 +81,6 @@ public class Crops extends Feature {
 	@Config(min = 1)
 	@Label(name = "Water Hydration Radius", description = "Radius where water hydrates farmland, vanilla is 4.")
 	public static Integer waterHydrationRadius = 2;
-	@Config
-	@Label(name = "Only fully grown", description = "If the hardness should be applied to mature crops only.")
-	public static Boolean onlyFullyGrown = true;
 
 	@Config
 	@Label(name = "Crops data pack", description = """
@@ -92,8 +89,7 @@ public class Crops extends Feature {
 		* Makes melon seeds and pumpkin seeds harder to obtain
 		* Removes carrots and potato drops from zombies
 		* Removes wheat seeds from tall grass
-		* Makes wild crops generate in the world
-	""")
+		* Makes wild crops generate in the world""")
 	public static Boolean dataPack = true;
 
 	public Crops(Module module, boolean enabledByDefault, boolean canBeDisabled) {
