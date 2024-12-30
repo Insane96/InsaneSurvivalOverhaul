@@ -37,11 +37,11 @@ public class Knockback extends JsonFeature {
 	public static final String SHOULD_APPLY_NO_KNOCKBACK = IguanaTweaksReborn.RESOURCE_PREFIX + "should_apply_no_knockback";
 
 	@Config
-	@Label(name = "No Weapon Penalty.Enabled", description = "If true the player will deal reduced knockback when not using an item that doesn't have the attack damage attribute.")
+	@Label(name = "No Weapon Penalty", description = "If true the player will deal reduced knockback when not using an item that doesn't have the attack damage attribute.")
 	public static Boolean noItemNoKnockback = true;
 
 	@Config(min = 0d, max = 1d)
-	@Label(name = "No Weapon Penalty.Knockback reduction", description = "Percentage knockback dealt when conditions are met.")
+	@Label(name = "No Weapon Penalty Knockback reduction", description = "Percentage knockback dealt when conditions are met.")
 	public static Double knockbackReduction = 0.35d;
 
 	//Knockback multipliers for items
