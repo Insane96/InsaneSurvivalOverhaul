@@ -19,6 +19,6 @@ public class Luck extends LootBonusEnchantment {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceLuckEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+        return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceBonusLootEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
 }

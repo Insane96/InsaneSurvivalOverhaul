@@ -18,7 +18,7 @@
     * Arrow stats has its own feature now
   * Experience.Dropped Experience
     * Renamed from Experience.Experience
-    * Milk and shear xp have been moved here
+    * Milk and shear xp have been moved here from Livestock
 * Cleaned up some config descriptions
 * Fixed milking cows dropping no experience if cooldown was disabled
 

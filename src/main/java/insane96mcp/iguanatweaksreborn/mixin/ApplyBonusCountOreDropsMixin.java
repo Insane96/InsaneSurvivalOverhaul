@@ -14,7 +14,7 @@ public class ApplyBonusCountOreDropsMixin {
     @Inject(method = "calculateNewCount", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
     public void onCalculateNewCount(RandomSource random, int originalCount, int enchantmentLvl, CallbackInfoReturnable<Integer> cir) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || !EnchantmentsFeature.nerfFortune)
+                || !EnchantmentsFeature.nerfForune)
             return;
         //I  : 80%   1x, 20%   2x. Avg: +20%
         //II : 66.7% 1x, 16.7% 2x, 16.7% 3x. Avg: +50%

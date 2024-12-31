@@ -26,9 +26,9 @@ public class BowItemMixin {
 
     @ModifyArg(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;setBaseDamage(D)V"))
     public double setBaseDamage(double pBaseDamage, @Local AbstractArrow abstractArrow, @Local(ordinal = 2) int powerLvl) {
-        if (!EnchantmentsFeature.powerEnchantmentMultiplier && EnchantmentsFeature.powerEnchantmentDamage == 0.5d)
+        if (!EnchantmentsFeature.powerAffectsBaseArrowDamage && EnchantmentsFeature.powerEnchantmentDamage == 0.5d)
             return pBaseDamage;
-        if (EnchantmentsFeature.powerEnchantmentMultiplier)
+        if (EnchantmentsFeature.powerAffectsBaseArrowDamage)
             return abstractArrow.getBaseDamage() + (abstractArrow.getBaseDamage() * EnchantmentsFeature.powerEnchantmentDamage * powerLvl);
         else
             return abstractArrow.getBaseDamage() + EnchantmentsFeature.powerEnchantmentDamage + EnchantmentsFeature.powerEnchantmentDamage * powerLvl;

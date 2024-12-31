@@ -141,7 +141,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Inject(method = "decreaseAirSupply", at = @At("RETURN"), cancellable = true)
     public void onDecreaseAirSupply(int pCurrentAir, CallbackInfoReturnable<Integer> cir) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || !EnchantmentsFeature.respirationNerf)
+                || !EnchantmentsFeature.nerfRespiration)
             return;
         int respirationLvl = EnchantmentHelper.getRespiration((LivingEntity) (Object) this);
         if (respirationLvl > 0

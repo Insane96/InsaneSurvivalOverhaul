@@ -82,28 +82,28 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Config
 	@Label(name = "Small Thorns Overhaul", description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
 	public static Boolean thornsOverhaul = true;
-	@Config
-	@Label(name = "Mending Nerf", description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
-	public static Boolean mendingNerf = true;
-	@Config
-	@Label(name = "Respiration Nerf", description = "Respiration decreases air consumption by 50% per level instead of 100%.")
-	public static Boolean respirationNerf = true;
 
 	@Config
-	@Label(name = "Better Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_efficiency * (0.5*lvl)`")
+	@Label(name = "Tool Efficiency Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_efficiency * (0.5*lvl)`")
 	public static Boolean changeEfficiencyFormula = true;
+	@Config
+	@Label(name = "Nerf Mending", description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
+	public static Boolean nerfMending = true;
+	@Config
+	@Label(name = "Nerf Respiration", description = "Respiration decreases air consumption by 50% per level instead of 100%.")
+	public static Boolean nerfRespiration = true;
 
 	@Config
-	@Label(name = "Nerf fortune", description = "The ore_drops formula is changed to 20%/50%/85%/125% drop increase from 33%/75%/120%/166%")
-	public static Boolean nerfFortune = true;
+	@Label(name = "Nerf Fortune", description = "The ore_drops formula is changed to 20%/50%/85%/125% drop increase from 33%/75%/120%/166%")
+	public static Boolean nerfForune = true;
 
 	@Config(min = 0d, max = 2d)
 	@Label(name = "Power Enchantment Damage", description = "Set arrow's damage increase with the Power enchantment (vanilla is 0.5). If set to a value != 0.5 the flat 0.5 bonus is also removed. Set to 0.5 to disable.")
 	public static Double powerEnchantmentDamage = 0.2d;
 
 	@Config
-	@Label(name = "Power Enchantment Multiplier", description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
-	public static Boolean powerEnchantmentMultiplier = true;
+	@Label(name = "Power affects base arrow damage", description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
+	public static Boolean powerAffectsBaseArrowDamage = true;
 
 	@Config
 	@Label(name = "Prevent farmland trampling with Feather Falling")
@@ -122,8 +122,8 @@ public class EnchantmentsFeature extends JsonFeature {
             Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
 	public static Boolean replaceDamagingEnchantments = true;
 	@Config
-	@Label(name = "Replace looting, fortune and LotS enchantments", description = "If true, vanilla looting, fortune and Luck of the Sea enchantments are replaced with a single one: Luck. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
-	public static Boolean replaceLuckEnchantments = true;
+	@Label(name = "Replace bonus loot enchantments", description = "If true, vanilla looting, fortune and Luck of the Sea enchantments are replaced with a single one: Luck. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
+	public static Boolean replaceBonusLootEnchantments = true;
 	@Config
 	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceOtherEnchantments = true;
@@ -179,7 +179,7 @@ public class EnchantmentsFeature extends JsonFeature {
 			Enchantments.THORNS.rarity = Enchantment.Rarity.VERY_RARE;
 
 		//Can this make something blow up?
-		if (replaceLuckEnchantments)
+		if (replaceBonusLootEnchantments)
 			Enchantments.BLOCK_FORTUNE = LUCK.get();
 	}
 
@@ -296,7 +296,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onExperiencePickUp(PlayerXpEvent.PickupXp event) {
 		if (!this.isEnabled()
-				|| !mendingNerf)
+				|| !nerfMending)
 			return;
 
 		event.setCanceled(true);
@@ -416,7 +416,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static boolean shouldReplaceWithLuck(Enchantment enchantment) {
 		return (enchantment == Enchantments.BLOCK_FORTUNE || enchantment == Enchantments.MOB_LOOTING || enchantment == Enchantments.FISHING_LUCK)
 				&& Feature.isEnabled(EnchantmentsFeature.class)
-				&& EnchantmentsFeature.replaceLuckEnchantments;
+				&& EnchantmentsFeature.replaceBonusLootEnchantments;
 	}
 
 	public static int getEnchantmentValue(ItemStack stack) {
