@@ -33,6 +33,8 @@ This is a breaking version: configs and data packs have got a huge update
     * Removed 'Reduced repair with other item if enchanted'
   * Exhaustion
     * Renamed from 'Exhaustion increase'
+  * Health Regen
+    * Renamed from 'Hunger Health Regen'
 * Cleaned up some config descriptions
 * Fixed milking cows dropping no experience if cooldown was disabled
 
