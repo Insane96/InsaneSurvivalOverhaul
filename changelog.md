@@ -17,6 +17,8 @@ This is a breaking version: configs and data packs have got a huge update
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
   * Moved hoes scythe radius to Item Definition
   * Removed hoes cooldown
+* Stack Sizes
+  * Removed stackable soups. Just use item definitions
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now
@@ -29,6 +31,8 @@ This is a breaking version: configs and data packs have got a huge update
     * Milk and shear xp have been moved here from Livestock
   * Anvils
     * Removed 'Reduced repair with other item if enchanted'
+  * Exhaustion
+    * Renamed from 'Exhaustion increase'
 * Cleaned up some config descriptions
 * Fixed milking cows dropping no experience if cooldown was disabled
 

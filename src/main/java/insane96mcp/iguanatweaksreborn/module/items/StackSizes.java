@@ -11,7 +11,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -52,7 +55,6 @@ public class StackSizes extends Feature {
             resetStackSizes();
             processItemStackSizes(isClientSide);
             processBlockStackSizes(isClientSide);
-            processStewStackSizes(isClientSide);
             processFoodStackSizes(isClientSide);
         }
     }
@@ -110,22 +112,6 @@ public class StackSizes extends Feature {
 
     }
 
-    //Stews
-    public static void processStewStackSizes(boolean isClientSide) {
-        if (stackableSoups == 1)
-            return;
-
-        for (Map.Entry<Item, Integer> entry : originalStackSizes.entrySet()) {
-            Item item = entry.getKey();
-            if (!(item instanceof BowlFoodItem) && !(item instanceof SuspiciousStewItem)
-                    || JsonFeature.isItemInTag(item, NO_STACK_SIZE_CHANGES, isClientSide))
-                continue;
-
-            item.maxStackSize = stackableSoups;
-        }
-
-    }
-
     //Food
     @SuppressWarnings("deprecation")
     public static void processFoodStackSizes(boolean isClientSide) {
@@ -151,9 +137,9 @@ public class StackSizes extends Feature {
             return;
 
         if (event.getPlayer() == null)
-            event.getPlayerList().getPlayers().forEach(player -> StackSizesSync.sync(foodStackReduction, foodStackReductionFormula, stackableSoups, itemStackMultiplier, blockStackMultiplier, player));
+            event.getPlayerList().getPlayers().forEach(player -> StackSizesSync.sync(foodStackReduction, foodStackReductionFormula, itemStackMultiplier, blockStackMultiplier, player));
         else
-            StackSizesSync.sync(foodStackReduction, foodStackReductionFormula, stackableSoups, itemStackMultiplier, blockStackMultiplier, event.getPlayer());
+            StackSizesSync.sync(foodStackReduction, foodStackReductionFormula, itemStackMultiplier, blockStackMultiplier, event.getPlayer());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)

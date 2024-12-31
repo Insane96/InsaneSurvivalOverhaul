@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Label(name = "Exhaustion Increase", description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
+@Label(name = "Exhaustion", description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
-public class ExhaustionIncrease extends Feature {
+public class Exhaustion extends Feature {
 	@Config(min = 0d, max = 128d)
 	@Label(name = "Block Break Exhaustion Multiplier", description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
 	public static Double blockBreakExhaustionMultiplier = 0d;
@@ -45,7 +45,7 @@ public class ExhaustionIncrease extends Feature {
 	@Label(name = "Effective Hunger Effect", description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
 
-	public ExhaustionIncrease(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public Exhaustion(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 	}
 
