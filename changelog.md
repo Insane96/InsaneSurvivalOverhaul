@@ -1,7 +1,7 @@
 # Changelog
 
 ## Upcoming
-This is a breaking version: configs and data packs have gotten heavily changed
+This is a breaking version: configs and data packs have got a huge update
 * Night Vision Fade out time is now configurable
 * Brightness forcing is now more configurable
 * Changed red outline on wrong tool to no outline on wrong tool
@@ -12,9 +12,11 @@ This is a breaking version: configs and data packs have gotten heavily changed
 * Smokers now require soul sand/soil to craft
 * Twins chance has been moved to data packs (livestock_data)
 * Item stats has been renamed to Item Definitions 
-* Hoes Definitions
-  * Renamed from Hoes Stats
-  * Removed hoes cooldown from Hoes Definition
+* Hoes
+  * Can now scythe flowers
+  * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
+  * Moved hoes scythe radius to Item Definition
+  * Removed hoes cooldown
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

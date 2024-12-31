@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Knockback", description = "Players will deal reduced knockback if attacking with a non-weapon or spamming.")
+@Label(name = "Knockback", description = "Players will deal reduced knockback if attacking with a non-weapon or spamming. Knockback reductions are defined via Data Packs with Item Definitions (the item_stats integrated data pack already does this)")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class Knockback extends JsonFeature {
 

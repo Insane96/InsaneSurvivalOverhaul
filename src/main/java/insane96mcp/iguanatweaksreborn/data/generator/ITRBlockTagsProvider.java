@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.data.generator;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
+import insane96mcp.iguanatweaksreborn.module.farming.hoes.Hoes;
 import insane96mcp.iguanatweaksreborn.module.mining.blockhardness.BlockHardness;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
@@ -73,6 +74,8 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
 
         tag(TALL_GRASS)
                 .add(Blocks.GRASS).add(Blocks.TALL_GRASS).add(Blocks.FERN).add(Blocks.LARGE_FERN).add(Blocks.DEAD_BUSH);
+        tag(Hoes.CAN_SCYTHE)
+                .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS);
 
         tag(GRASS_BLOCKS)
                 .add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM);

@@ -1,0 +1,22 @@
+{
+	"values": [
+		"minecraft:wooden_hoe",
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:copper_hoe"
+		},
+		"minecraft:iron_hoe",
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:solarium_hoe"
+		},
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:coated_copper_hoe"
+		},
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:quaron_hoe"
+		}
+	]
+}

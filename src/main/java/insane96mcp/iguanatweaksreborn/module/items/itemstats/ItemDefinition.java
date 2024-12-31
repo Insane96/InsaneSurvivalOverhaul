@@ -42,6 +42,8 @@ public final class ItemDefinition {
 	private final Integer enchantability;
     @Nullable
     private final Double knockbackMultiplier;
+    @Nullable
+    private final Integer scytheRadius;
 	@Nullable
 	private final Double baseAttackDamage;
 	@Nullable
@@ -60,13 +62,14 @@ public final class ItemDefinition {
 	private final Double movementSpeedPenalty;
 	@Nullable
 	private final List<SerializableAttributeModifier> modifiers;
-    public ItemDefinition(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
+    public ItemDefinition(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Integer scytheRadius, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
         this.item = item;
         this.maxStackSize = maxStackSize;
         this.durability = new Durability(durability, durabilityBonus, durabilityMultiplier);
         this.efficiency = efficiency;
         this.enchantability = enchantability;
         this.knockbackMultiplier = knockbackMultiplier;
+        this.scytheRadius = scytheRadius;
         this.baseAttackDamage = baseAttackDamage;
         this.baseAttackSpeed = baseAttackSpeed;
         this.baseArmor = baseArmor;
@@ -185,6 +188,14 @@ public final class ItemDefinition {
         toAdd.forEach(event::addModifier);
     }
 
+    public boolean matches(ItemStack stack) {
+        return this.item.matchesItem(stack);
+    }
+
+    public boolean matches(Item stack) {
+        return this.item.matchesItem(stack);
+    }
+
     private static double getSpeedReductionPerArmor(double totalReduction, ArmorItem item) {
         return switch (item.getEquipmentSlot()) {
             case HEAD -> totalReduction * 0.2d;
@@ -208,6 +219,7 @@ public final class ItemDefinition {
             Double efficiency = ILGsonHelper.getAsNullableDouble(jObject, "efficiency", DoubleMinMaxValidator.atLeast(0));
             Integer enchantability = ILGsonHelper.getAsNullableInt(jObject, "enchantability", IntMinMaxValidator.atLeast(0));
             Double knockbackMultiplier = ILGsonHelper.getAsNullableDouble(jObject, "knockback_multiplier", DoubleMinMaxValidator.between(0, 1));
+            Integer scytheRadius = ILGsonHelper.getAsNullableInt(jObject, "scythe_radius", IntMinMaxValidator.atLeast(0));
             Double baseAttackDamage = ILGsonHelper.getAsNullableDouble(jObject, "attack_damage");
             Double baseAttackSpeed = ILGsonHelper.getAsNullableDouble(jObject, "attack_speed");
             Double baseArmor = ILGsonHelper.getAsNullableDouble(jObject, "armor");
@@ -219,7 +231,7 @@ public final class ItemDefinition {
             List<SerializableAttributeModifier> modifiers = null;
             if (jObject.has("modifiers"))
                 modifiers = context.deserialize(jObject.get("modifiers"), SerializableAttributeModifier.LIST_TYPE);
-            return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+            return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
         }
 
         @Override
@@ -233,6 +245,7 @@ public final class ItemDefinition {
             ILGsonHelper.addProperty(jObject, "efficiency", src.efficiency);
             ILGsonHelper.addProperty(jObject, "enchantability", src.enchantability);
             ILGsonHelper.addProperty(jObject, "knockback_multiplier", src.knockbackMultiplier);
+            ILGsonHelper.addProperty(jObject, "scythe_radius", src.scytheRadius);
             ILGsonHelper.addProperty(jObject, "attack_damage", src.baseAttackDamage);
             ILGsonHelper.addProperty(jObject, "attack_speed", src.baseAttackSpeed);
             ILGsonHelper.addProperty(jObject, "armor", src.baseArmor);
@@ -258,6 +271,7 @@ public final class ItemDefinition {
         Double efficiency = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Integer enchantability = byteBuf.readNullable(FriendlyByteBuf::readInt);
         Double knockbackMultiplier = byteBuf.readNullable(FriendlyByteBuf::readDouble);
+        Integer scytheRadius = byteBuf.readNullable(FriendlyByteBuf::readInt);
         Double baseAttackDamage = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Double baseAttackSpeed = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Double baseArmor = byteBuf.readNullable(FriendlyByteBuf::readDouble);
@@ -275,7 +289,7 @@ public final class ItemDefinition {
                 modifiers.add(SerializableAttributeModifier.fromNetwork(byteBuf));
             }
         }
-        return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+        return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
     }
 
     public void toNetwork(FriendlyByteBuf byteBuf) {
@@ -287,6 +301,7 @@ public final class ItemDefinition {
         byteBuf.writeNullable(this.efficiency, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.enchantability, FriendlyByteBuf::writeInt);
         byteBuf.writeNullable(this.knockbackMultiplier, FriendlyByteBuf::writeDouble);
+        byteBuf.writeNullable(this.scytheRadius, FriendlyByteBuf::writeInt);
         byteBuf.writeNullable(this.baseAttackDamage, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.baseAttackSpeed, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.baseArmor, FriendlyByteBuf::writeDouble);
@@ -333,6 +348,11 @@ public final class ItemDefinition {
     @Nullable
     public Double knockbackMultiplier() {
         return knockbackMultiplier;
+    }
+
+    @Nullable
+    public Integer scytheRadius() {
+        return scytheRadius;
     }
 
     @Nullable

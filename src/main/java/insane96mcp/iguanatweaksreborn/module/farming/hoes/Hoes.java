@@ -4,22 +4,22 @@ import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.network.message.BreakWithNoSound;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.data.IdTagMatcher;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,36 +29,14 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Label(name = "Hoes", description = "Slower Hoes and more fragile. Hoes Properties are controlled via json in this feature's folder")
+@Label(name = "Hoes", description = "Hoes can now scythe grass and flowers. Also makes them break faster when tilling farmland")
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Hoes extends JsonFeature {
 
 	public static final String TOO_WEAK = IguanaTweaksReborn.MOD_ID + ".weak_hoe";
-	public static final String TILL_COOLDOWN = IguanaTweaksReborn.MOD_ID + ".till_cooldown";
 	public static final String SCYTHE_RADIUS = IguanaTweaksReborn.MOD_ID + ".scythe_radius";
+	public static final TagKey<Block> CAN_SCYTHE = ITRBlockTagsProvider.create("can_scythe");
 	public static final TagKey<Item> DISABLED_HOES = ITRItemTagsProvider.create("disabled_hoes");
-
-	public static final ArrayList<HoeDefinition> HOES_DEFINITION_DEFAULT = new ArrayList<>(List.of(
-			new HoeDefinition(IdTagMatcher.newId("minecraft:wooden_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("minecraft:stone_hoe"), 0),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:flint_hoe"), 0),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:copper_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("minecraft:golden_hoe"), 2),
-			new HoeDefinition(IdTagMatcher.newId("minecraft:iron_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:solarium_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:durium_hoe"), 0),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:coated_copper_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:quaron_hoe"), 1),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:keego_hoe"), 2),
-			new HoeDefinition(IdTagMatcher.newId("minecraft:diamond_hoe"), 2),
-			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:soul_steel_hoe"), 2),
-			new HoeDefinition(IdTagMatcher.newId("minecraft:netherite_hoe"), 2)
-	));
-
-	public static final ArrayList<HoeDefinition> hoeDefinitions = new ArrayList<>();
 
 	@Config(min = 1)
 	@Label(name = "Durability used on right-click")
@@ -69,8 +47,6 @@ public class Hoes extends JsonFeature {
 
 	public Hoes(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_definitions"), new SyncType(json -> loadAndReadJson(json, hoeDefinitions, HOES_DEFINITION_DEFAULT, HoeDefinition.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("hoes_definitions.json", hoeDefinitions, HOES_DEFINITION_DEFAULT, HoeDefinition.LIST_TYPE, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_definitions")));
 	}
 
 	@Override
@@ -118,24 +94,30 @@ public class Hoes extends JsonFeature {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onBlockBreak(BlockEvent.BreakEvent event) {
 		if (!this.isEnabled()
-				|| !event.getState().canBeReplaced()
 				|| event.getState().destroySpeed > 0f)
 			return;
-		for (HoeDefinition hoeDefinition : hoeDefinitions) {
-			if (hoeDefinition.hoe.matchesItem(event.getPlayer().getMainHandItem().getItem(), null) && hoeDefinition.scytheRadius > 0) {
-				BlockPos.betweenClosedStream(event.getPos().offset(-hoeDefinition.scytheRadius, -(hoeDefinition.scytheRadius - 1), -hoeDefinition.scytheRadius), event.getPos().offset(hoeDefinition.scytheRadius, hoeDefinition.scytheRadius - 1, hoeDefinition.scytheRadius))
-						.forEach(pos -> {
-							BlockState state = event.getPlayer().level().getBlockState(pos);
-							if (!state.is(ITRBlockTagsProvider.TALL_GRASS)
-									|| state.destroySpeed > 0f
-									|| pos.equals(event.getPos()))
-								return;
-							//event.getPlayer().level().addDestroyBlockEffect(pos, state);
-							event.getPlayer().level().removeBlock(pos, false);
-							BreakWithNoSound.send((ServerPlayer) event.getPlayer(), pos, state);
-						});
-				break;
-			}
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			if (!itemDefinition.matches(event.getPlayer().getMainHandItem())
+					|| itemDefinition.scytheRadius() == null)
+				continue;
+			int radius = itemDefinition.scytheRadius();
+			if (radius == 0)
+				continue;
+			BlockPos.betweenClosedStream(event.getPos().offset(-radius, -(radius - 1), -radius), event.getPos().offset(radius, radius - 1, radius))
+					.forEach(pos -> {
+						BlockState state = event.getPlayer().level().getBlockState(pos);
+						state.getBlock().playerWillDestroy(event.getPlayer().level(), pos, state, event.getPlayer());
+						if (!state.is(CAN_SCYTHE)
+								|| state.destroySpeed > 0f
+								|| pos.equals(event.getPos()))
+							return;
+						//event.getPlayer().level().removeBlock(pos, false);
+						if (state.getBlock().canHarvestBlock(state, event.getPlayer().level(), pos, event.getPlayer()))
+							state.getBlock().playerDestroy(event.getPlayer().level(), event.getPlayer(), pos, state, null, event.getPlayer().getMainHandItem());
+						event.getLevel().destroyBlock(pos, false);
+						event.getLevel().levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
+						//BreakWithNoSound.send((ServerPlayer) event.getPlayer(), pos, state);
+					});
 		}
 	}
 
@@ -149,12 +131,12 @@ public class Hoes extends JsonFeature {
 			event.getToolTip().add(Component.translatable(TOO_WEAK).withStyle(ChatFormatting.RED));
 		}
 		else {
-			for (HoeDefinition hoeDefinition : hoeDefinitions) {
-				if (!hoeDefinition.hoe.matchesItem(event.getItemStack().getItem(), null))
+			for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+				if (!itemDefinition.matches(event.getItemStack().getItem()))
 					continue;
 
-				if (hoeDefinition.scytheRadius > 0)
-					event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, hoeDefinition.scytheRadius).withStyle(ChatFormatting.DARK_GREEN)));
+				int radius = itemDefinition.scytheRadius() == null ? 0 : itemDefinition.scytheRadius();
+				event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, radius).withStyle(ChatFormatting.DARK_GREEN)));
 				break;
 			}
 		}

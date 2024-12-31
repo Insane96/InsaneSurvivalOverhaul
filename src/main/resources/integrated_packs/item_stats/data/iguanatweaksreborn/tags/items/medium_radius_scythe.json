@@ -1,0 +1,15 @@
+{
+	"values": [
+		"minecraft:golden_hoe",
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:keego_hoe"
+		},
+		"minecraft:diamond_hoe",
+		{
+			"required": false,
+			"id": "iguanatweaksexpanded:soul_steel_hoe"
+		},
+		"minecraft:netherite_hoe"
+	]
+}
