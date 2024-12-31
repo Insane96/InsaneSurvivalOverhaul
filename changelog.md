@@ -9,6 +9,7 @@
   * Knockback multiplier has been moved Item Definitions
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
+* Twins chance has been moved to data packs (livestock_data)
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

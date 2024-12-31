@@ -75,10 +75,6 @@ public class Livestock extends Feature {
 	public static Integer milkingCooldown = 1200;
 
 	@Config(min = 0, max = 1)
-	@Label(name = "Twins chance", description = "Chance for animals breeding to get twins. This chance is applied for every baby spawned so you can have triplets if lucky enough.")
-	public static Double twinsChance = 0.5d;
-
-	@Config(min = 0, max = 1)
 	@Label(name = "Auto-breed chance", description = "Chance every 10 seconds for animals to fall in love without food (breeding cooldown still applies).")
 	public static Double autoBreedChance = 0.02d;
 
@@ -376,13 +372,20 @@ public class Livestock extends Feature {
 				.filter(data -> data.matches(parentA))
 				.forEach(data -> modifiersToApply.addAll(data.breedingFailChanceModifiers));
 		float failChance = Modifier.applyModifiers(0f, modifiersToApply, parentA.level(), parentA.blockPosition(), parentA);
-		if (failChance <= 0) {
+		if (failChance <= 0)
+			return;
+		if (failChance >= 1f || parentA.getRandom().nextFloat() < failChance) {
+			event.setCanceled(true);
 			return;
 		}
 
-		if (failChance >= 1f || parentA.getRandom().nextFloat() < failChance)
-			event.setCanceled(true);
-		else if (parentA.getRandom().nextFloat() < twinsChance && event.getParentB() instanceof Animal)
+		List<Modifier> modifiersToApplyTwins = new ArrayList<>();
+		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
+				.filter(data -> data.matches(parentA))
+				.forEach(data -> modifiersToApplyTwins.addAll(data.twinsChanceModifiers));
+		float twinsChance = Modifier.applyModifiers(0f, modifiersToApplyTwins, parentA.level(), parentA.blockPosition(), parentA);
+
+		if (parentA.getRandom().nextFloat() < twinsChance && event.getParentB() instanceof Animal)
 			parentA.spawnChildFromBreeding((ServerLevel) parentA.level(), (Animal) event.getParentB());
 	}
 

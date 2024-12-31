@@ -7,6 +7,13 @@
             "operation": "add"
         }
     ],
+    "twins_chance_modifiers": [
+        {
+            "id": "iguanatweaksreborn:true",
+            "modifier": 0.3,
+            "operation": "add"
+        }
+    ],
     "breeding_cooldown_modifiers": [
         {
             "id": "iguanatweaksreborn:true",

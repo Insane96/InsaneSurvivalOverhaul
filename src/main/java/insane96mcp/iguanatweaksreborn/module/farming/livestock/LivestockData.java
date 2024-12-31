@@ -28,8 +28,9 @@ public class LivestockData {
 	final List<Modifier> breedingFailChanceModifiers;
 	final List<Modifier> cowFluidCooldownModifiers;
 	final List<Modifier> sheepWoolGrowthChanceModifiers;
+	final List<Modifier> twinsChanceModifiers;
 
-    public LivestockData(IdTagMatcher entity, @Nullable Float livingDays, float livingDaysFluctuation, List<Modifier> growthSpeedModifiers, List<Modifier> breedingCooldownModifiers, List<Modifier> eggLayCooldownModifiers, List<Modifier> breedingFailChanceModifiers, List<Modifier> cowFluidCooldownModifiers, List<Modifier> sheepWoolGrowthChanceModifiers) {
+    public LivestockData(IdTagMatcher entity, @Nullable Float livingDays, float livingDaysFluctuation, List<Modifier> growthSpeedModifiers, List<Modifier> breedingCooldownModifiers, List<Modifier> eggLayCooldownModifiers, List<Modifier> breedingFailChanceModifiers, List<Modifier> cowFluidCooldownModifiers, List<Modifier> sheepWoolGrowthChanceModifiers, List<Modifier> twinsChanceModifiers) {
         this.entity = entity;
 		this.livingDays = livingDays;
 		this.livingDaysFluctuation = livingDaysFluctuation;
@@ -39,6 +40,7 @@ public class LivestockData {
         this.breedingFailChanceModifiers = breedingFailChanceModifiers;
         this.cowFluidCooldownModifiers = cowFluidCooldownModifiers;
         this.sheepWoolGrowthChanceModifiers = sheepWoolGrowthChanceModifiers;
+        this.twinsChanceModifiers = twinsChanceModifiers;
     }
 
 	public boolean matches(Entity entity) {
@@ -68,7 +70,8 @@ public class LivestockData {
 			List<Modifier> breedingFailChanceModifiers = Modifier.deserializeList(jObject, "breeding_fail_chance_modifiers", context);
 			List<Modifier> cowFluidCooldownModifiers = Modifier.deserializeList(jObject, "cow_fluid_cooldown_modifiers", context);
 			List<Modifier> sheepWoolGrowthChanceModifiers = Modifier.deserializeList(jObject, "sheep_wool_growth_chance_modifiers", context);
-			return new LivestockData(entity, livingDays, livingDaysFluctuation, growthSpeed, breedingCooldown, eggLayCooldown, breedingFailChanceModifiers, cowFluidCooldownModifiers, sheepWoolGrowthChanceModifiers);
+			List<Modifier> twinsChanceModifiers = Modifier.deserializeList(jObject, "twins_chance_modifiers", context);
+			return new LivestockData(entity, livingDays, livingDaysFluctuation, growthSpeed, breedingCooldown, eggLayCooldown, breedingFailChanceModifiers, cowFluidCooldownModifiers, sheepWoolGrowthChanceModifiers, twinsChanceModifiers);
 		}
 	}
 }
