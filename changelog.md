@@ -12,7 +12,7 @@ This is a breaking version: configs and data packs have got a huge update
 * Smokers now require soul sand/soil to craft
 * Twins chance has been moved to data packs (livestock_data)
 * Items 
-  * Item stats have been renamed to Item Definitions (item_definitions) 
+  * Item stats have been renamed to Item Definitions (item_definitions)
 * Hoes
   * Can now scythe flowers
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
@@ -38,6 +38,11 @@ This is a breaking version: configs and data packs have got a huge update
     * Renamed from 'Exhaustion increase'
   * Health Regen
     * Renamed from 'Hunger Health Regen'
+  * Items
+    * Disabled Items has its own feature now
+    * Unbreakable Items has its own feature now
+    * Item definitions has its own feature now
+    * Ecologic wood has some new config options
 * Cleaned up some config descriptions
 * Fixed milking cows dropping no experience if cooldown was disabled
 
