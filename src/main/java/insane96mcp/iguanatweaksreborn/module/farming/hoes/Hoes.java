@@ -44,36 +44,36 @@ public class Hoes extends JsonFeature {
 	public static final String SCYTHE_RADIUS = IguanaTweaksReborn.MOD_ID + ".scythe_radius";
 	public static final TagKey<Item> DISABLED_HOES = ITRItemTagsProvider.create("disabled_hoes");
 
-	public static final ArrayList<HoeStat> HOES_STATS_DEFAULT = new ArrayList<>(List.of(
-			new HoeStat(IdTagMatcher.newId("minecraft:wooden_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("minecraft:stone_hoe"), 0, 0),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:flint_hoe"), 0, 0),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:copper_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("minecraft:golden_hoe"), 0, 2),
-			new HoeStat(IdTagMatcher.newId("minecraft:iron_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:solarium_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:durium_hoe"), 0, 0),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:coated_copper_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:quaron_hoe"), 0, 1),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:keego_hoe"), 0, 2),
-			new HoeStat(IdTagMatcher.newId("minecraft:diamond_hoe"), 0, 2),
-			new HoeStat(IdTagMatcher.newId("iguanatweaksexpanded:soul_steel_hoe"), 0, 2),
-			new HoeStat(IdTagMatcher.newId("minecraft:netherite_hoe"), 0, 4)
+	public static final ArrayList<HoeDefinition> HOES_DEFINITION_DEFAULT = new ArrayList<>(List.of(
+			new HoeDefinition(IdTagMatcher.newId("minecraft:wooden_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("minecraft:stone_hoe"), 0),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:flint_hoe"), 0),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:copper_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("minecraft:golden_hoe"), 2),
+			new HoeDefinition(IdTagMatcher.newId("minecraft:iron_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:solarium_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:durium_hoe"), 0),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:coated_copper_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:quaron_hoe"), 1),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:keego_hoe"), 2),
+			new HoeDefinition(IdTagMatcher.newId("minecraft:diamond_hoe"), 2),
+			new HoeDefinition(IdTagMatcher.newId("iguanatweaksexpanded:soul_steel_hoe"), 2),
+			new HoeDefinition(IdTagMatcher.newId("minecraft:netherite_hoe"), 2)
 	));
 
-	public static final ArrayList<HoeStat> hoesStats = new ArrayList<>();
+	public static final ArrayList<HoeDefinition> hoeDefinitions = new ArrayList<>();
 
 	@Config(min = 1)
-	@Label(name = "Durability used on till")
-	public static Integer durabilityOnTill = 4;
+	@Label(name = "Durability used on right-click")
+	public static Integer durabilityOnRightClick = 4;
 	@Config
-	@Label(name = "Trigger only for farmland", description = "'Durability used on till' is only applied for farmland, and not e.g. when using hoes on rooted dirt")
-	public static Boolean triggerOnlyForFarmland = true;
+	@Label(name = "Extra durability only for tilling", description = "'Durability used on right-click' is only applied for farmland, and not e.g. when using hoes on rooted dirt")
+	public static Boolean extraDurabilityOnlyForTilling = true;
 
 	public Hoes(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_stats"), new SyncType(json -> loadAndReadJson(json, hoesStats, HOES_STATS_DEFAULT, HoeStat.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("hoes_stats.json", hoesStats, HOES_STATS_DEFAULT, HoeStat.LIST_TYPE, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_stats")));
+		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_definitions"), new SyncType(json -> loadAndReadJson(json, hoeDefinitions, HOES_DEFINITION_DEFAULT, HoeDefinition.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("hoes_definitions.json", hoeDefinitions, HOES_DEFINITION_DEFAULT, HoeDefinition.LIST_TYPE, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "hoes_definitions")));
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class Hoes extends JsonFeature {
 		if (event.getPlayer() != null && event.getPlayer().level().isClientSide)
 			return;
 		BlockState finalState = event.getState().getBlock().getToolModifiedState(event.getState(), event.getContext(), event.getToolAction(), true);
-		if (finalState == null || (!finalState.is(Blocks.FARMLAND) && triggerOnlyForFarmland))
+		if (finalState == null || (!finalState.is(Blocks.FARMLAND) && extraDurabilityOnlyForTilling))
 			return;
 		if (!isHoeDisabled)
 			hoesCooldown(event);
@@ -123,18 +123,18 @@ public class Hoes extends JsonFeature {
         if (player == null
 				|| player.getCooldowns().isOnCooldown(hoeStack.getItem()))
 			return;
-        for (HoeStat hoeStat : hoesStats) {
-			if (hoeStat.hoe.matchesItem(hoeStack.getItem(), null)) {
-				if (hoeStat.cooldown > 0) {
+        for (HoeDefinition hoeDefinition : hoeDefinitions) {
+			if (hoeDefinition.hoe.matchesItem(hoeStack.getItem(), null)) {
+				if (hoeDefinition.cooldown > 0) {
 					//int efficiency = hoeStack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-					int cooldown = hoeStat.cooldown /*- (efficiency * efficiencyCooldownReduction)*/;
+					int cooldown = hoeDefinition.cooldown /*- (efficiency * efficiencyCooldownReduction)*/;
 					if (hoeStack.getItem() instanceof IHoeCooldownModifier cooldownModifier)
 						cooldown = cooldownModifier.getCooldownOnUse(cooldown, player, player.level());
 					if (cooldown > 0)
 						player.getCooldowns().addCooldown(hoeStack.getItem(), cooldown);
 				}
-				if (durabilityOnTill > 1) {
-					hoeStack.hurtAndBreak(durabilityOnTill - 1, player, (livingEntity) -> livingEntity.broadcastBreakEvent(livingEntity.getUsedItemHand()));
+				if (durabilityOnRightClick > 1) {
+					hoeStack.hurtAndBreak(durabilityOnRightClick - 1, player, (livingEntity) -> livingEntity.broadcastBreakEvent(livingEntity.getUsedItemHand()));
 				}
 				break;
 			}
@@ -147,9 +147,9 @@ public class Hoes extends JsonFeature {
 				|| !event.getState().canBeReplaced()
 				|| event.getState().destroySpeed > 0f)
 			return;
-		for (HoeStat hoeStat : hoesStats) {
-			if (hoeStat.hoe.matchesItem(event.getPlayer().getMainHandItem().getItem(), null) && hoeStat.scytheRadius > 0) {
-				BlockPos.betweenClosedStream(event.getPos().offset(-hoeStat.scytheRadius, -(hoeStat.scytheRadius - 1), -hoeStat.scytheRadius), event.getPos().offset(hoeStat.scytheRadius, hoeStat.scytheRadius - 1, hoeStat.scytheRadius))
+		for (HoeDefinition hoeDefinition : hoeDefinitions) {
+			if (hoeDefinition.hoe.matchesItem(event.getPlayer().getMainHandItem().getItem(), null) && hoeDefinition.scytheRadius > 0) {
+				BlockPos.betweenClosedStream(event.getPos().offset(-hoeDefinition.scytheRadius, -(hoeDefinition.scytheRadius - 1), -hoeDefinition.scytheRadius), event.getPos().offset(hoeDefinition.scytheRadius, hoeDefinition.scytheRadius - 1, hoeDefinition.scytheRadius))
 						.forEach(pos -> {
 							BlockState state = event.getPlayer().level().getBlockState(pos);
 							if (!state.is(ITRBlockTagsProvider.TALL_GRASS)
@@ -175,14 +175,14 @@ public class Hoes extends JsonFeature {
 			event.getToolTip().add(Component.translatable(TOO_WEAK).withStyle(ChatFormatting.RED));
 		}
 		else {
-			for (HoeStat hoeStat : hoesStats) {
-				if (!hoeStat.hoe.matchesItem(event.getItemStack().getItem(), null))
+			for (HoeDefinition hoeDefinition : hoeDefinitions) {
+				if (!hoeDefinition.hoe.matchesItem(event.getItemStack().getItem(), null))
 					continue;
 
-				if (hoeStat.cooldown > 0)
-					event.getToolTip().add(CommonComponents.space().append(Component.translatable(TILL_COOLDOWN, InsaneLib.ONE_DECIMAL_FORMATTER.format(hoeStat.cooldown / 20f)).withStyle(ChatFormatting.DARK_GREEN)));
-				if (hoeStat.scytheRadius > 0)
-					event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, hoeStat.scytheRadius).withStyle(ChatFormatting.DARK_GREEN)));
+				if (hoeDefinition.cooldown > 0)
+					event.getToolTip().add(CommonComponents.space().append(Component.translatable(TILL_COOLDOWN, InsaneLib.ONE_DECIMAL_FORMATTER.format(hoeDefinition.cooldown / 20f)).withStyle(ChatFormatting.DARK_GREEN)));
+				if (hoeDefinition.scytheRadius > 0)
+					event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, hoeDefinition.scytheRadius).withStyle(ChatFormatting.DARK_GREEN)));
 				break;
 			}
 		}

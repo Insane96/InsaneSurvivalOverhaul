@@ -10,7 +10,7 @@
     "twins_chance_modifiers": [
         {
             "id": "iguanatweaksreborn:true",
-            "modifier": 0.3,
+            "modifier": 0.4,
             "operation": "add"
         }
     ],
