@@ -127,7 +127,7 @@
 
 	"iguanatweaksreborn:items_module": "Items",
 
-	"iguanatweaksreborn.no_damage_item": "This item blade is not sharp, hits like a fist",
+	"iguanatweaksreborn.no_damage_item": "This item is not sharp, hits like a fist",
 	"iguanatweaksreborn.no_efficiency_item": "This item is old and rusty, can't mine anything",
 	"iguanatweaksreborn.broken_item": "This item is broken, must be repaired",
 	"iguanatweaksreborn.tool_efficiency": "%.1f Tool Efficiency",

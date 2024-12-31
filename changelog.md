@@ -11,16 +11,17 @@ This is a breaking version: configs and data packs have got a huge update
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Twins chance has been moved to data packs (livestock_data)
-* Item stats has been renamed to Item Definitions 
+* Items 
+  * Item stats have been renamed to Item Definitions (item_definitions) 
 * Hoes
   * Can now scythe flowers
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
   * Moved hoes scythe radius to Item Definition
   * Removed hoes cooldown
-* Stack Sizes
-  * Removed stackable soups. Just use item definitions
 * Health Regen
   * Passive regen has been moved here from No Hunger
+* Stack Sizes
+  * Removed stackable soups. Just use item definitions
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

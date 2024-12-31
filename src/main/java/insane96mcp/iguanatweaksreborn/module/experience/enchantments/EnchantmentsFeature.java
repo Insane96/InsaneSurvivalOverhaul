@@ -14,8 +14,8 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.Smite;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.*;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration.Allurement;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;

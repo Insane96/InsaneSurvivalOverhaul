@@ -1,9 +1,7 @@
-package insane96mcp.iguanatweaksreborn.module.items.itemstats;
+package insane96mcp.iguanatweaksreborn.module.items;
 
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
-import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -11,7 +9,6 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.event.HurtItemStackEvent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,14 +16,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -35,43 +29,25 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Item Stats", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
+@Label(name = "Unbreakable Items", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
 @LoadFeature(module = Modules.Ids.ITEMS)
-public class ItemStats extends Feature {
+public class UnbreakableItems extends Feature {
 
-	public static final String TOOL_EFFICIENCY_LANG = "iguanatweaksreborn.tool_efficiency";
 	public static final String TOOL_DURABILITY_LANG = "iguanatweaksreborn.tool_durability";
 	public static final String BROKEN_DURABILITY_LANG = "iguanatweaksreborn.broken_durability";
-	public static final String NO_EFFICIENCY_ITEM_LANG = "iguanatweaksreborn.no_efficiency_item";
 	public static final String BROKEN_ITEM_LANG = "iguanatweaksreborn.broken_item";
-	public static final String NO_DAMAGE_ITEM_LANG = "iguanatweaksreborn.no_damage_item";
-	public static final TagKey<Item> NO_DAMAGE = ITRItemTagsProvider.create("no_damage");
-	public static final TagKey<Item> NO_EFFICIENCY = ITRItemTagsProvider.create("no_efficiency");
 	public static final TagKey<Item> NOT_UNBREAKABLE = ITRItemTagsProvider.create("not_unbreakable");
 	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ITRItemTagsProvider.create("remove_original_modifiers");
 
 	@Config
-	@Label(name = "More Items Tooltips", description = "If set to true items in the 'no_damage_items' and 'no_efficiency_items' will get a tooltip. Items with durability get a durability tooltip. Tools get an efficiency tooltip.")
-	public static Boolean moreItemsTooltips = true;
+	@Label(name = "Durability Tooltip", description = "Items with durability get a durability tooltip.")
+	public static Boolean durabilityTooltip = true;
 	@Config
-	@Label(name = "Unbreakable Items", description = "If set to true items will no longer break, will be left with 1 durability. Items in the iguanatweaksreborn:not_unbreakable tag will break instead.")
-	public static Boolean unbreakableItems = true;
-	@Config
-	@Label(name = "Unbreakable Enchanted Items", description = "If set to true items will no longer break if enchanted. Ignores the iguanatweaksreborn:not_unbreakable item tag.")
+	@Label(name = "Any enchanted item", description = "If set to true items will no longer break if enchanted. Ignores the iguanatweaksreborn:not_unbreakable item tag.")
 	public static Boolean unbreakableEnchantedItems = true;
 
-	public ItemStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public UnbreakableItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-	}
-
-	@SubscribeEvent(priority = EventPriority.HIGH)
-	public void onAttributeEvent(ItemAttributeModifierEvent event) {
-		if (!this.isEnabled())
-			return;
-
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
-			itemDefinition.applyAttributes(event, event.getItemStack(), event.getModifiers());
-		}
 	}
 
 	public static boolean isUnbreakable(ItemStack stack) {
@@ -89,15 +65,11 @@ public class ItemStats extends Feature {
 			return;
 
 		ItemStack stack = player.getMainHandItem();
-		if (stack.is(NO_DAMAGE)) {
-			event.setCanceled(true);
-			player.displayClientMessage(Component.translatable(NO_DAMAGE_ITEM_LANG), true);
-		}
 
 		if (stack.getMaxDamage() == 0)
 			return;
-		if (unbreakableItems && isBroken(stack)) {
-			event.setCanceled(true);
+		if (isBroken(stack) && event.getAmount() > 1f) {
+			event.setAmount(1);
 			player.displayClientMessage(Component.translatable(BROKEN_ITEM_LANG), true);
 		}
 	}
@@ -105,7 +77,6 @@ public class ItemStats extends Feature {
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (!this.isEnabled()
-				|| !unbreakableItems
 				|| event.player.level().isClientSide
 				|| event.phase == TickEvent.Phase.START
 				|| event.player.tickCount % 20 != event.player.getId() % 20)
@@ -133,11 +104,7 @@ public class ItemStats extends Feature {
 		ItemStack stack = player.getMainHandItem();
 		if (stack.getMaxDamage() == 0)
 			return;
-		if (stack.is(NO_EFFICIENCY)) {
-			event.setCanceled(true);
-			event.getEntity().displayClientMessage(Component.translatable(NO_EFFICIENCY_ITEM_LANG), true);
-		}
-		else if (unbreakableItems && isBroken(stack)){
+		if (isBroken(stack)){
 			event.setCanceled(true);
 			event.getEntity().displayClientMessage(Component.translatable(BROKEN_ITEM_LANG), true);
 		}
@@ -145,8 +112,7 @@ public class ItemStats extends Feature {
 
 	@SubscribeEvent
 	public void onBlockRightClick(PlayerInteractEvent.RightClickEmpty event) {
-		if (!this.isEnabled()
-				|| !unbreakableItems)
+		if (!this.isEnabled())
 			return;
 
 		ItemStack stack = event.getItemStack();
@@ -160,8 +126,7 @@ public class ItemStats extends Feature {
 
 	@SubscribeEvent
 	public void onBlockRightClick(PlayerInteractEvent.RightClickItem event) {
-		if (!this.isEnabled()
-				|| !unbreakableItems)
+		if (!this.isEnabled())
 			return;
 
 		ItemStack stack = event.getItemStack();
@@ -175,8 +140,7 @@ public class ItemStats extends Feature {
 
 	@SubscribeEvent
 	public void onBlockRightClick(PlayerInteractEvent.RightClickBlock event) {
-		if (!this.isEnabled()
-				|| !unbreakableItems)
+		if (!this.isEnabled())
 			return;
 
 		ItemStack stack = event.getItemStack();
@@ -190,8 +154,7 @@ public class ItemStats extends Feature {
 
 	@SubscribeEvent
 	public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-		if (!this.isEnabled()
-				|| !unbreakableItems)
+		if (!this.isEnabled())
 			return;
 
 		ItemStack stack = event.getItemStack();
@@ -206,13 +169,16 @@ public class ItemStats extends Feature {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void processItemDamaging(HurtItemStackEvent event) {
 		if (!this.isEnabled()
-				|| !unbreakableItems
 				|| event.getPlayer() == null)
 			return;
 
 		ItemStack stack = event.getStack();
 		if (!isUnbreakable(stack))
 			return;
+		if (isBroken(stack)) {
+			event.setAmount(0);
+			return;
+		}
 		if (event.getAmount() >= stack.getMaxDamage() - stack.getDamageValue() - 1) {
 			event.getStack().setDamageValue(event.getStack().getMaxDamage() - 1);
 			event.setAmount(0);
@@ -229,45 +195,23 @@ public class ItemStats extends Feature {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !moreItemsTooltips)
+		if (!this.isEnabled())
 			return;
 
 		ItemStack stack = event.getItemStack();
-		if (stack.is(NO_DAMAGE)) {
-			event.getToolTip().add(Component.translatable(NO_DAMAGE_ITEM_LANG).withStyle(ChatFormatting.RED));
-		}
-		if (stack.is(NO_EFFICIENCY)) {
-			event.getToolTip().add(Component.translatable(NO_EFFICIENCY_ITEM_LANG).withStyle(ChatFormatting.RED));
-		}
-		else if (stack.getItem() instanceof DiggerItem diggerItem){
-			int lvl = stack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-			float toolEfficiency = diggerItem.speed;
-			float bonusToolEfficiency = EnchantmentsFeature.getEfficiencyBonus(toolEfficiency, lvl);
-			if (lvl > 0)
-				toolEfficiency += bonusToolEfficiency;
-			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, InsaneLib.ONE_DECIMAL_FORMATTER.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
-		}
 
 		if (stack.isDamageableItem()) {
 			int durability = stack.getMaxDamage();
-			if (unbreakableItems && isUnbreakable(stack))
+			if (isUnbreakable(stack))
 				durability--;
 			int durabilityLeft = durability - stack.getDamageValue();
-			MutableComponent component;
+			MutableComponent component = null;
             if (isBroken(stack))
                 component = Component.translatable(BROKEN_DURABILITY_LANG).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
-            else
+            else if (durabilityTooltip)
                 component = Component.translatable(TOOL_DURABILITY_LANG, durabilityLeft, durability).withStyle(ChatFormatting.GRAY);
-            /*if (durabilityLeft > 1 && stack.getAllEnchantments().containsKey(Enchantments.UNBREAKING) && Screen.hasShiftDown()) {
-				int lvl = stack.getAllEnchantments().get(Enchantments.UNBREAKING);
-				component.append(Component.literal(" (+%.0f%%)".formatted(getUnbreakingPercentageBonus(lvl) * 100f)).withStyle(ChatFormatting.DARK_PURPLE));
-			}*/
-			event.getToolTip().add(component);
+			if (component != null)
+				event.getToolTip().add(component);
 		}
-	}
-
-	private static float getUnbreakingPercentageBonus(int lvl) {
-		return 1f / (1f - EnchantmentsFeature.unbreakingBonus(lvl)) - 1f;
 	}
 }

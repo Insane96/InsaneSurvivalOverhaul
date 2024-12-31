@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.network.message;
 
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

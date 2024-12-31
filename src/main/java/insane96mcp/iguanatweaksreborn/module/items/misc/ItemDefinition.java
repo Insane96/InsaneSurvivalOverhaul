@@ -1,4 +1,4 @@
-package insane96mcp.iguanatweaksreborn.module.items.itemstats;
+package insane96mcp.iguanatweaksreborn.module.items.misc;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -6,6 +6,7 @@ import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
+import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.data.SerializableAttributeModifier;
@@ -171,7 +172,7 @@ public final class ItemDefinition {
         }
 
         //Try to remove original modifiers first
-        if (event.getItemStack().is(ItemStats.REMOVE_ORIGINAL_MODIFIERS_TAG)) {
+        if (event.getItemStack().is(UnbreakableItems.REMOVE_ORIGINAL_MODIFIERS_TAG)) {
             Multimap<Attribute, AttributeModifier> originalModifiers = event.getOriginalModifiers();
             toRemove.putAll(originalModifiers);
         }

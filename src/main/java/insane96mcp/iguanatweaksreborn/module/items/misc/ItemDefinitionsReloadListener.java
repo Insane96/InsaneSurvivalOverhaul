@@ -1,4 +1,4 @@
-package insane96mcp.iguanatweaksreborn.module.items.itemstats;
+package insane96mcp.iguanatweaksreborn.module.items.misc;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
+import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;
@@ -26,7 +26,7 @@ public class ItemMixin {
 	@Inject(at = @At("RETURN"), method = "getUseAnimation", cancellable = true)
 	public void getUseAnimation(ItemStack stack, CallbackInfoReturnable<UseAnim> callbackInfo) {
 		//Fix for SOL Valheim that calls getUseAnimation too early
-		if (Feature.get(ItemStats.class) == null)
+		if (Feature.get(UnbreakableItems.class) == null)
 			return;
 		if (!Feature.isEnabled(FoodDrinks.class))
 			return;
@@ -38,8 +38,8 @@ public class ItemMixin {
 
 	@Inject(method = "getBarWidth", at = @At("RETURN"), cancellable = true)
 	public void onGetBarWidth(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-		if (!Feature.isEnabled(ItemStats.class)
-				|| !ItemStats.isBroken(stack))
+		if (!Feature.isEnabled(UnbreakableItems.class)
+				|| !UnbreakableItems.isBroken(stack))
 			return;
 
 		cir.setReturnValue(13);
@@ -47,8 +47,8 @@ public class ItemMixin {
 
 	@Inject(method = "getBarColor", at = @At("RETURN"), cancellable = true)
 	public void onGetBarColor(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-		if (!Feature.isEnabled(ItemStats.class)
-				|| !ItemStats.isBroken(stack))
+		if (!Feature.isEnabled(UnbreakableItems.class)
+				|| !UnbreakableItems.isBroken(stack))
 			return;
 
 		cir.setReturnValue(16711680);

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
+import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,7 +19,7 @@ public abstract class ItemEntityMixin {
 
 	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
 	public void onGetBarColor(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-		if (!Feature.isEnabled(ItemStats.class)
+		if (!Feature.isEnabled(UnbreakableItems.class)
 				|| !this.getItem().is(Tweaks.WORLD_IMMUNE))
 			return;
 

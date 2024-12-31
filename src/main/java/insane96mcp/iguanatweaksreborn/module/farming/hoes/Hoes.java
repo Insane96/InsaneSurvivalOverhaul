@@ -4,8 +4,8 @@ import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -136,6 +136,8 @@ public class Hoes extends JsonFeature {
 					continue;
 
 				int radius = itemDefinition.scytheRadius() == null ? 0 : itemDefinition.scytheRadius();
+				if (radius == 0)
+					continue;
 				event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, radius).withStyle(ChatFormatting.DARK_GREEN)));
 				break;
 			}

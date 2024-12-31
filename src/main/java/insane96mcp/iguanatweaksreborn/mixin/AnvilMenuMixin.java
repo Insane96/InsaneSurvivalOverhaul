@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
+import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -195,7 +195,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 				if ((!isEnchantedBook && (!resultStack.is(right.getItem())
 						|| !resultStack.isDamageableItem()))
 						//If unbreakable items is enabled then I cannot use broken items to repair
-						|| Feature.isEnabled(ItemStats.class) && ItemStats.unbreakableItems && ItemStats.isBroken(right)) {
+						|| Feature.isEnabled(UnbreakableItems.class) && Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(right)) {
 					this.resultSlots.setItem(0, ItemStack.EMPTY);
 					this.cost.set(0);
 					return;

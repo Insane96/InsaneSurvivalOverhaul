@@ -3,13 +3,11 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
-import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
-import insane96mcp.insanelib.base.LoadFeature;
+import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.insanelib.base.Module;
+import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -88,7 +86,7 @@ public class Knockback extends JsonFeature {
 		float reducedKnockback = 1f;
 		Multimap<Attribute, AttributeModifier> attributeModifiers = itemStack.getAttributeModifiers(EquipmentSlot.MAINHAND);
 		if ((!attributeModifiers.containsKey(Attributes.ATTACK_DAMAGE)
-				|| (isEnabled(ItemStats.class) && ItemStats.unbreakableItems && ItemStats.isBroken(itemStack)))
+				|| (isEnabled(UnbreakableItems.class) && Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(itemStack)))
 				&& noWeaponPenalty < 1d)
 			reducedKnockback = Math.min(reducedKnockback, noWeaponPenalty.floatValue());
 
