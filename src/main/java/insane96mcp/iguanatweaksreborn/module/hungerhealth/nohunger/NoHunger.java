@@ -16,7 +16,6 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.event.CakeEatEvent;
 import insane96mcp.insanelib.event.PlayerExhaustionEvent;
 import insane96mcp.insanelib.util.ClientUtils;
@@ -29,7 +28,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -59,20 +57,14 @@ import org.jetbrains.annotations.Nullable;
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class NoHunger extends Feature {
 
-    private static final String PASSIVE_REGEN_TICK = IguanaTweaksReborn.RESOURCE_PREFIX + "passive_regen_ticks";
     private static final String FOOD_REGEN_LEFT = IguanaTweaksReborn.RESOURCE_PREFIX + "food_regen_left";
     private static final String FOOD_REGEN_STRENGTH = IguanaTweaksReborn.RESOURCE_PREFIX + "food_regen_strength";
+    private static final int FOOD_REGEN_TICK_RATE = 10;
 
     private static final String HEALTH_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.health";
     private static final String MISSING_HEALTH_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.missing_health";
     private static final String SEC_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.sec";
 
-    @Config
-    @Label(name = "Passive Health Regen.Enable", description = "If true, Passive Regeneration is enabled")
-    public static Boolean enablePassiveRegen = false;
-    @Config
-    @Label(name = "Passive Health Regen.Regen Speed", description = "Min represents how many ticks the regeneration of 1 HP takes when health is 100%, Max how many ticks when health is 0%")
-    public static MinMax passiveRegenerationTime = new MinMax(120, 3600);
     @Config(min = 0d)
     @Label(name = "Food Heal.Over Time", description = "The formula to calculate the health regenerated overtime when eating food. Leave empty to disable. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
     public static String healOverTime = "(hunger^1.37) * 0.5";
@@ -116,9 +108,6 @@ public class NoHunger extends Feature {
         super(module, enabledByDefault, canBeDisabled);
     }
 
-    private static final int PASSIVE_REGEN_TICK_RATE = 10;
-    private static final int FOOD_REGEN_TICK_RATE = 10;
-
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (!this.isEnabled()
@@ -130,17 +119,6 @@ public class NoHunger extends Feature {
             event.player.getFoodData().foodLevel = 15;
         else
             event.player.getFoodData().foodLevel = 20;
-
-        if (event.player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && enablePassiveRegen && event.player.isHurt()) {
-            incrementPassiveRegenTick(event.player);
-            int passiveRegen = getPassiveRegenSpeed(event.player);
-
-            if (getPassiveRegenTick(event.player) > passiveRegen) {
-                float heal = 1.0f;
-                event.player.heal(heal);
-                resetPassiveRegenTick(event.player);
-            }
-        }
 
         if (event.player.hasEffect(MobEffects.HUNGER) && convertHungerToWeakness) {
             MobEffectInstance effect = event.player.getEffect(MobEffects.HUNGER);
@@ -255,31 +233,6 @@ public class NoHunger extends Feature {
 
     public static boolean doesHealInstantly() {
         return !StringUtils.isBlank(instantHeal);
-    }
-
-    private static int getPassiveRegenSpeed(Player player) {
-        float healthPerc = 1f - (player.getHealth() / player.getMaxHealth());
-        float secs = (float) ((passiveRegenerationTime.max - passiveRegenerationTime.min) * healthPerc + passiveRegenerationTime.min);
-        if (player.level().getDifficulty().equals(Difficulty.HARD))
-            secs *= 1.5f;
-        /*if (player.hasEffect(HealthRegen.VIGOUR.get())) {
-            MobEffectInstance vigour = player.getEffect(HealthRegen.VIGOUR.get());
-            //noinspection ConstantConditions
-            secs *= 1 - (((vigour.getAmplifier() + 1) * 0.4f));
-        }*/
-        return (int) (secs * 20);
-    }
-
-    private static int getPassiveRegenTick(Player player) {
-        return player.getPersistentData().getInt(PASSIVE_REGEN_TICK);
-    }
-
-    private static void incrementPassiveRegenTick(Player player) {
-        player.getPersistentData().putInt(PASSIVE_REGEN_TICK, getPassiveRegenTick(player) + FOOD_REGEN_TICK_RATE);
-    }
-
-    private static void resetPassiveRegenTick(Player player) {
-        player.getPersistentData().putInt(PASSIVE_REGEN_TICK, 0);
     }
 
     private static float getFoodRegenLeft(Player player) {

@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen;
 
+import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.utils.Utils;
@@ -8,6 +9,7 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.base.config.MinMax;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -27,6 +30,17 @@ import java.text.DecimalFormat;
 @Label(name = "Health Regen", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class HealthRegen extends Feature {
+
+	public static final String PASSIVE_REGEN_TICK = IguanaTweaksReborn.RESOURCE_PREFIX + "passive_regen_ticks";
+	private static final int PASSIVE_REGEN_TICK_RATE = 10;
+	private static final int FOOD_REGEN_TICK_RATE = 10;
+
+	@Config
+	@Label(name = "Passive Health Regen.Enable", description = "If true, Passive Regeneration is enabled")
+	public static Boolean enablePassiveRegen = false;
+	@Config
+	@Label(name = "Passive Health Regen.Regen Speed", description = "Min represents how many ticks the regeneration of 1 HP takes when health is 100%, Max how many ticks when health is 0%")
+	public static MinMax passiveRegenerationTime = new MinMax(120, 3600);
 
 	@Config(min = 0)
 	@Label(name = "Health Regen Speed", description = "Sets how many ticks between the health regeneration happens (vanilla is 80).")
@@ -68,6 +82,51 @@ public class HealthRegen extends Feature {
 
 	public HealthRegen(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+	}
+
+
+	@SubscribeEvent
+	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+		if (!this.isEnabled()
+				|| event.player.level().isClientSide
+				|| event.phase.equals(TickEvent.Phase.START))
+			return;
+
+		if (event.player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && HealthRegen.enablePassiveRegen && event.player.isHurt()) {
+			incrementPassiveRegenTick(event.player);
+			int passiveRegen = getPassiveRegenSpeed(event.player);
+
+			if (getPassiveRegenTick(event.player) > passiveRegen) {
+				float heal = 1.0f;
+				event.player.heal(heal);
+				resetPassiveRegenTick(event.player);
+			}
+		}
+	}
+
+	private static int getPassiveRegenSpeed(Player player) {
+		float healthPerc = 1f - (player.getHealth() / player.getMaxHealth());
+		float ticks = (float) ((HealthRegen.passiveRegenerationTime.max - HealthRegen.passiveRegenerationTime.min) * healthPerc + HealthRegen.passiveRegenerationTime.min);
+		if (player.level().getDifficulty().equals(Difficulty.HARD))
+			ticks *= 1.5f;
+        /*if (player.hasEffect(HealthRegen.VIGOUR.get())) {
+            MobEffectInstance vigour = player.getEffect(HealthRegen.VIGOUR.get());
+            //noinspection ConstantConditions
+            ticks *= 1 - (((vigour.getAmplifier() + 1) * 0.4f));
+        }*/
+		return (int) ticks;
+	}
+
+	private static int getPassiveRegenTick(Player player) {
+		return player.getPersistentData().getInt(HealthRegen.PASSIVE_REGEN_TICK);
+	}
+
+	private static void incrementPassiveRegenTick(Player player) {
+		player.getPersistentData().putInt(HealthRegen.PASSIVE_REGEN_TICK, getPassiveRegenTick(player) + FOOD_REGEN_TICK_RATE);
+	}
+
+	private static void resetPassiveRegenTick(Player player) {
+		player.getPersistentData().putInt(HealthRegen.PASSIVE_REGEN_TICK, 0);
 	}
 
 	@SubscribeEvent
