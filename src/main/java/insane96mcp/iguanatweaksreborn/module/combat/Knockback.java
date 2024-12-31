@@ -3,9 +3,9 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatistics;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStats;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatsReloadListener;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -112,9 +112,9 @@ public class Knockback extends JsonFeature {
 
 	public static float getKnockbackMultiplier(ItemStack stack) {
 		float multiplier = 1f;
-		for (ItemStatistics itemStatistics : ItemStatsReloadListener.Stats) {
-			if (itemStatistics.knockbackMultiplier() != null && itemStatistics.item().matchesItem(stack))
-				multiplier = itemStatistics.knockbackMultiplier().floatValue();
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			if (itemDefinition.knockbackMultiplier() != null && itemDefinition.item().matchesItem(stack))
+				multiplier = itemDefinition.knockbackMultiplier().floatValue();
 		}
 		return multiplier;
 	}

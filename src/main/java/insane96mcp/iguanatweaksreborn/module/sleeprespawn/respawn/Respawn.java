@@ -60,19 +60,19 @@ public class Respawn extends Feature {
 	public static Integer despawnMobsOnBedRespawn = 32;
 
 	@Config(min = 0, max = 20)
-	@Label(name = "MiscStats Penalty.Health.Minimum", description = "Min Health of respawning players")
+	@Label(name = "Stats Penalty.Health.Minimum", description = "Min Health of respawning players")
 	public static Difficulty minHealthOnRespawn = new Difficulty(10, 10, 6);
 	@Config(min = 0, max = 20)
-	@Label(name = "MiscStats Penalty.Health.Per Death", description = "How much health respawning players loose on respawn (not max health)")
+	@Label(name = "Stats Penalty.Health.Per Death", description = "How much health respawning players loose on respawn (not max health)")
 	public static Difficulty perDeathHealthOnRespawn = new Difficulty(1, 2, 2);
 	@Config(min = 0, max = 20)
-	@Label(name = "MiscStats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players")
+	@Label(name = "Stats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players")
 	public static Difficulty hungerOnRespawn = new Difficulty(14, 14, 10);
 	@Config(min = 0, max = 20)
-	@Label(name = "MiscStats Penalty.Saturation.Minimum", description = "Min Saturation of respawning players")
+	@Label(name = "Stats Penalty.Saturation.Minimum", description = "Min Saturation of respawning players")
 	public static Difficulty saturationOnRespawn = new Difficulty(10, 10, 6);
 	@Config
-	@Label(name = "MiscStats Penalty.Only if below", description = "If hunger or saturation were above the values on death, they will not be reduced.")
+	@Label(name = "Stats Penalty.Only if below", description = "If hunger or saturation were above the values on death, they will not be reduced.")
 	public static Boolean respawnFoodOnlyIfBelow = true;
 
 	public Respawn(Module module, boolean enabledByDefault, boolean canBeDisabled) {

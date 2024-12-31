@@ -14,8 +14,8 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.Smite;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.*;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration.Allurement;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatistics;
-import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemStatsReloadListener;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinition;
+import insane96mcp.iguanatweaksreborn.module.items.itemstats.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
@@ -420,9 +420,9 @@ public class EnchantmentsFeature extends JsonFeature {
 	}
 
 	public static int getEnchantmentValue(ItemStack stack) {
-		for (ItemStatistics itemStatistics : ItemStatsReloadListener.Stats) {
-			if (itemStatistics.enchantability() != null && itemStatistics.item().matchesItem(stack))
-				return itemStatistics.enchantability();
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			if (itemDefinition.enchantability() != null && itemDefinition.item().matchesItem(stack))
+				return itemDefinition.enchantability();
 		}
 		return stack.getEnchantmentValue();
 	}

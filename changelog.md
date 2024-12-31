@@ -1,6 +1,7 @@
 # Changelog
 
 ## Upcoming
+This is a breaking version: configs and data packs have gotten heavily changed
 * Night Vision Fade out time is now configurable
 * Brightness forcing is now more configurable
 * Changed red outline on wrong tool to no outline on wrong tool
@@ -10,6 +11,7 @@
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Twins chance has been moved to data packs (livestock_data)
+* Item stats has been renamed to Item Definitions 
 * Hoes Definitions
   * Renamed from Hoes Stats
   * Removed hoes cooldown from Hoes Definition

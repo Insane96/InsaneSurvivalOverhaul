@@ -30,9 +30,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.UUID;
 
-//TODO rename to Item Definitions
-@JsonAdapter(ItemStatistics.Serializer.class)
-public final class ItemStatistics {
+@JsonAdapter(ItemDefinition.Serializer.class)
+public final class ItemDefinition {
 	private final IdTagMatcher item;
 	@Nullable
 	private final Integer maxStackSize;
@@ -61,7 +60,7 @@ public final class ItemStatistics {
 	private final Double movementSpeedPenalty;
 	@Nullable
 	private final List<SerializableAttributeModifier> modifiers;
-    public ItemStatistics(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
+    public ItemDefinition(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
         this.item = item;
         this.maxStackSize = maxStackSize;
         this.durability = new Durability(durability, durabilityBonus, durabilityMultiplier);
@@ -83,10 +82,10 @@ public final class ItemStatistics {
         List<Item> items = JsonFeature.getAllItems(this.item, isClientSide);
         for (Item item : items) {
             Durability durability = new Durability(null, null, null);
-            if (!ItemStatsReloadListener.Durability.containsKey(item))
-                ItemStatsReloadListener.Durability.put(item, durability);
+            if (!ItemDefinitionsReloadListener.DURABILITY_MAP.containsKey(item))
+                ItemDefinitionsReloadListener.DURABILITY_MAP.put(item, durability);
             else
-                durability = ItemStatsReloadListener.Durability.get(item);
+                durability = ItemDefinitionsReloadListener.DURABILITY_MAP.get(item);
             if (this.durability.durability != null)
                 durability.durability = this.durability.durability;
             if (this.durability.durabilityBonus != null)
@@ -195,11 +194,11 @@ public final class ItemStatistics {
         };
     }
 
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<ItemStatistics>>() {}.getType();
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<ItemDefinition>>() {}.getType();
 
-    public static class Serializer implements JsonDeserializer<ItemStatistics>, JsonSerializer<ItemStatistics> {
+    public static class Serializer implements JsonDeserializer<ItemDefinition>, JsonSerializer<ItemDefinition> {
         @Override
-        public ItemStatistics deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public ItemDefinition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jObject = json.getAsJsonObject();
             IdTagMatcher item = context.deserialize(jObject.get("item"), IdTagMatcher.class);
             Integer maxStackSize = ILGsonHelper.getAsNullableInt(jObject, "max_stack", IntMinMaxValidator.between(1, 64));
@@ -220,11 +219,11 @@ public final class ItemStatistics {
             List<SerializableAttributeModifier> modifiers = null;
             if (jObject.has("modifiers"))
                 modifiers = context.deserialize(jObject.get("modifiers"), SerializableAttributeModifier.LIST_TYPE);
-            return new ItemStatistics(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+            return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
         }
 
         @Override
-        public JsonElement serialize(ItemStatistics src, Type typeOfSrc, JsonSerializationContext context) {
+        public JsonElement serialize(ItemDefinition src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jObject = new JsonObject();
             ILGsonHelper.add(jObject, context, "item", src.item);
             ILGsonHelper.addProperty(jObject, "max_stack", src.maxStackSize);
@@ -247,7 +246,7 @@ public final class ItemStatistics {
         }
     }
 
-    public static ItemStatistics fromNetwork(FriendlyByteBuf byteBuf) {
+    public static ItemDefinition fromNetwork(FriendlyByteBuf byteBuf) {
         String utf = byteBuf.readUtf();
         IdTagMatcher item = IdTagMatcher.parseLine(utf);
         if (item == null)
@@ -276,7 +275,7 @@ public final class ItemStatistics {
                 modifiers.add(SerializableAttributeModifier.fromNetwork(byteBuf));
             }
         }
-        return new ItemStatistics(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+        return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
     }
 
     public void toNetwork(FriendlyByteBuf byteBuf) {
@@ -396,10 +395,10 @@ public final class ItemStatistics {
         }
 
         public void apply(Item item) {
-            if (ItemStatsReloadListener.OriginalDurability.containsKey(item))
-                item.maxDamage = ItemStatsReloadListener.OriginalDurability.get(item);
+            if (ItemDefinitionsReloadListener.ORIGINAL_DURABILITY.containsKey(item))
+                item.maxDamage = ItemDefinitionsReloadListener.ORIGINAL_DURABILITY.get(item);
             else
-                ItemStatsReloadListener.OriginalDurability.put(item, item.maxDamage);
+                ItemDefinitionsReloadListener.ORIGINAL_DURABILITY.put(item, item.maxDamage);
             if (this.durability != null)
                 item.maxDamage = this.durability;
             if (this.durabilityBonus != null)

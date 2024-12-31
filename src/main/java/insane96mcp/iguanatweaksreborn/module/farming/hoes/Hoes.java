@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.BreakWithNoSound;
-import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -19,9 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -102,8 +99,10 @@ public class Hoes extends JsonFeature {
 		BlockState finalState = event.getState().getBlock().getToolModifiedState(event.getState(), event.getContext(), event.getToolAction(), true);
 		if (finalState == null || (!finalState.is(Blocks.FARMLAND) && extraDurabilityOnlyForTilling))
 			return;
-		if (!isHoeDisabled)
-			hoesCooldown(event);
+		if (!isHoeDisabled && durabilityOnRightClick > 1) {
+			//noinspection DataFlowIssue
+			event.getHeldItemStack().hurtAndBreak(durabilityOnRightClick - 1, event.getPlayer(), (livingEntity) -> livingEntity.broadcastBreakEvent(livingEntity.getUsedItemHand()));
+		}
 	}
 
 	public boolean disabledHoes(BlockEvent.BlockToolModificationEvent event) {
@@ -114,31 +113,6 @@ public class Hoes extends JsonFeature {
 		event.getPlayer().displayClientMessage(Component.translatable(TOO_WEAK), true);
 		event.setCanceled(true);
 		return true;
-	}
-
-	public void hoesCooldown(BlockEvent.BlockToolModificationEvent event) {
-		ItemStack hoeStack = event.getHeldItemStack();
-		//noinspection ConstantConditions getPlayer can't be null as it's called from onHoeUse that checks if player's null
-		Player player = event.getPlayer();
-        if (player == null
-				|| player.getCooldowns().isOnCooldown(hoeStack.getItem()))
-			return;
-        for (HoeDefinition hoeDefinition : hoeDefinitions) {
-			if (hoeDefinition.hoe.matchesItem(hoeStack.getItem(), null)) {
-				if (hoeDefinition.cooldown > 0) {
-					//int efficiency = hoeStack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-					int cooldown = hoeDefinition.cooldown /*- (efficiency * efficiencyCooldownReduction)*/;
-					if (hoeStack.getItem() instanceof IHoeCooldownModifier cooldownModifier)
-						cooldown = cooldownModifier.getCooldownOnUse(cooldown, player, player.level());
-					if (cooldown > 0)
-						player.getCooldowns().addCooldown(hoeStack.getItem(), cooldown);
-				}
-				if (durabilityOnRightClick > 1) {
-					hoeStack.hurtAndBreak(durabilityOnRightClick - 1, player, (livingEntity) -> livingEntity.broadcastBreakEvent(livingEntity.getUsedItemHand()));
-				}
-				break;
-			}
-		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
@@ -179,8 +153,6 @@ public class Hoes extends JsonFeature {
 				if (!hoeDefinition.hoe.matchesItem(event.getItemStack().getItem(), null))
 					continue;
 
-				if (hoeDefinition.cooldown > 0)
-					event.getToolTip().add(CommonComponents.space().append(Component.translatable(TILL_COOLDOWN, InsaneLib.ONE_DECIMAL_FORMATTER.format(hoeDefinition.cooldown / 20f)).withStyle(ChatFormatting.DARK_GREEN)));
 				if (hoeDefinition.scytheRadius > 0)
 					event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, hoeDefinition.scytheRadius).withStyle(ChatFormatting.DARK_GREEN)));
 				break;

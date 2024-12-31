@@ -60,12 +60,12 @@ public class MiscStats extends Feature {
 	@Label(name = "Sweeping overhaul", description = "Rework Swords sweeping attack. The sweeping attack deals full damage and the Sweeping Edge enchantment increases the range.")
 	public static Boolean sweepingOverhaul = true;
 	@Config
-	@Label(name = "Item MiscStats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
+	@Label(name = "Item Stats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
 	public static Boolean itemStatsDataPack = true;
 
 	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "item_stats", Component.literal("IguanaTweaks Reborn Item MiscStats"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && itemStatsDataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "item_stats", Component.literal("IguanaTweaks Reborn Item Stats"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && itemStatsDataPack));
 	}
 
 	@Override

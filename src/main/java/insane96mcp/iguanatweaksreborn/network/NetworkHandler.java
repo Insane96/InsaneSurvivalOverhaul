@@ -23,7 +23,7 @@ public class NetworkHandler {
 	public static void init() {
 		CHANNEL.registerMessage(++index, InvulnerableTimeMessageSync.class, InvulnerableTimeMessageSync::encode, InvulnerableTimeMessageSync::decode, InvulnerableTimeMessageSync::handle);
 		CHANNEL.registerMessage(++index, AnvilRepairSync.class, AnvilRepairSync::encode, AnvilRepairSync::decode, AnvilRepairSync::handle);
-		CHANNEL.registerMessage(++index, ItemStatisticsSync.class, ItemStatisticsSync::encode, ItemStatisticsSync::decode, ItemStatisticsSync::handle);
+		CHANNEL.registerMessage(++index, ItemDefinitionsSync.class, ItemDefinitionsSync::encode, ItemDefinitionsSync::decode, ItemDefinitionsSync::handle);
 		CHANNEL.registerMessage(++index, StackSizesSync.class, StackSizesSync::encode, StackSizesSync::decode, StackSizesSync::handle);
 		CHANNEL.registerMessage(++index, BackwardsSlowdownUpdate.class, BackwardsSlowdownUpdate::encode, BackwardsSlowdownUpdate::decode, BackwardsSlowdownUpdate::handle);
 		CHANNEL.registerMessage(++index, FoodRegenSync.class, FoodRegenSync::encode, FoodRegenSync::decode, FoodRegenSync::handle);

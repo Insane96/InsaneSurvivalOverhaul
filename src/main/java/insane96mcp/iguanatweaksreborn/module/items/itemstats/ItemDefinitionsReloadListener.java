@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
-import insane96mcp.iguanatweaksreborn.network.message.ItemStatisticsSync;
+import insane96mcp.iguanatweaksreborn.network.message.ItemDefinitionsSync;
 import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,24 +23,24 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = IguanaTweaksReborn.MOD_ID)
-public class ItemStatsReloadListener extends SimpleJsonResourceReloadListener {
-	public static List<ItemStatistics> Stats = new ArrayList<>();
-	public static Map<Item, ItemStatistics.Durability> Durability = new HashMap<>();
-	public static Map<Item, Integer> OriginalDurability = new HashMap<>();
-	public static final ItemStatsReloadListener INSTANCE;
+public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListener {
+	public static final List<ItemDefinition> DEFINITIONS = new ArrayList<>();
+	public static final Map<Item, ItemDefinition.Durability> DURABILITY_MAP = new HashMap<>();
+	public static final Map<Item, Integer> ORIGINAL_DURABILITY = new HashMap<>();
+	public static final ItemDefinitionsReloadListener INSTANCE;
 	private static final Gson GSON = new GsonBuilder().create();
-	public ItemStatsReloadListener() {
-		super(GSON, "item_stats");
+	public ItemDefinitionsReloadListener() {
+		super(GSON, "item_definitions");
 	}
 
 	static {
-		INSTANCE = new ItemStatsReloadListener();
+		INSTANCE = new ItemDefinitionsReloadListener();
 	}
 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-		Stats.clear();
-		Durability.clear();
+		DEFINITIONS.clear();
+		DURABILITY_MAP.clear();
 		for (var entry : map.entrySet()) {
 			try {
 				ResourceLocation name = entry.getKey();
@@ -48,19 +48,19 @@ public class ItemStatsReloadListener extends SimpleJsonResourceReloadListener {
 				if (split[split.length - 1].startsWith("_"))
 					continue;
 
-				ItemStatistics itemStatistics = GSON.fromJson(entry.getValue(), ItemStatistics.class);
+				ItemDefinition itemDefinition = GSON.fromJson(entry.getValue(), ItemDefinition.class);
 				//itemStatistics.applyStats(false);
-				Stats.add(itemStatistics);
+				DEFINITIONS.add(itemDefinition);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Item Statistics %s: %s", entry.getKey(), e.getMessage());
+				ITRLogHelper.error("Parsing error loading Item Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Item Statistics %s: %s", entry.getKey(), e.getMessage());
+				ITRLogHelper.error("Failed loading Item Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Item Statistics", Stats.size());
+		ITRLogHelper.info("Loaded %s Item Definition", DEFINITIONS.size());
 
 		/*for (var entry : Durability.entrySet()) {
 			entry.getValue().apply(entry.getKey());
@@ -70,27 +70,27 @@ public class ItemStatsReloadListener extends SimpleJsonResourceReloadListener {
 	@SubscribeEvent
 	public static void onDataPackSync(OnDatapackSyncEvent event) {
 		if (event.getPlayer() == null) {
-			event.getPlayerList().getPlayers().forEach(player -> ItemStatisticsSync.sync(Stats, player));
+			event.getPlayerList().getPlayers().forEach(player -> ItemDefinitionsSync.sync(DEFINITIONS, player));
 		}
 		else {
-			ItemStatisticsSync.sync(Stats, event.getPlayer());
+			ItemDefinitionsSync.sync(DEFINITIONS, event.getPlayer());
 		}
 	}
 
 
 	@SubscribeEvent
 	public static void onTagsUpdatedEvent(TagsUpdatedEvent event) {
-		for (ItemStatistics itemStatistics : ItemStatsReloadListener.Stats) {
-			itemStatistics.applyStats(event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			itemDefinition.applyStats(event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
 		}
-		ITRLogHelper.info("Applied %s Item Statistics (Client side: %s)", Stats.size(), event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
-		for (var entry : Durability.entrySet()) {
+		ITRLogHelper.info("Applied %s Item Definitions (Client side: %s)", DEFINITIONS.size(), event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
+		for (var entry : DURABILITY_MAP.entrySet()) {
 			entry.getValue().apply(entry.getKey());
 		}
 	}
 
 	@Override
 	public String getName() {
-		return "Item Statistics Reload Listener";
+		return "Item Definitions Reload Listener";
 	}
 }
