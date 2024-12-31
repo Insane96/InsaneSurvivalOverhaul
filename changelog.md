@@ -19,6 +19,8 @@
   * Experience.Dropped Experience
     * Renamed from Experience.Experience
     * Milk and shear xp have been moved here from Livestock
+  * Anvils
+    * Removed 'Reduced repair with other item if enchanted'
 * Cleaned up some config descriptions
 * Fixed milking cows dropping no experience if cooldown was disabled
 

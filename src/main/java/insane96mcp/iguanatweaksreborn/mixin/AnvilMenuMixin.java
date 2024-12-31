@@ -204,12 +204,16 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 				if (resultStack.isDamageableItem() && !isEnchantedBook && Anvils.allowMergingItems) {
 					int leftDurabilityLeft = left.getMaxDamage() - left.getDamageValue();
 					int rightDurabilityLeft = right.getMaxDamage() - right.getDamageValue();
-					int rightDurabilityLeftPlusBonus = rightDurabilityLeft + resultStack.getMaxDamage() * Anvils.getMergingRepairBonus() / 100;
-					if (Anvils.reducedRepairWithOtherItemIfEnchanted > 0f && left.isEnchanted()) {
+					int rightDurabilityLeftPlusBonus = rightDurabilityLeft + resultStack.getMaxDamage() * Anvils.mergingRepairBonus / 100;
+					/*if (Anvils.reducedRepairWithOtherItemIfEnchanted > 0f && left.isEnchanted()) {
 						rightDurabilityLeftPlusBonus = (int) (rightDurabilityLeft * Anvils.reducedRepairWithOtherItemIfEnchanted);
+					}*/
+					if (left.isEnchanted()) {
+						//TODO reduce repair amount if left item is enchanted
 					}
-					int leftDurabilityLeftPlusRight = leftDurabilityLeft + rightDurabilityLeftPlusBonus;
-					int damageValue = resultStack.getMaxDamage() - leftDurabilityLeftPlusRight;
+
+					int resultDurabilityLeft = leftDurabilityLeft + rightDurabilityLeftPlusBonus;
+					int damageValue = resultStack.getMaxDamage() - resultDurabilityLeft;
 					if (damageValue < 0)
 						damageValue = 0;
 
@@ -299,10 +303,10 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 			resultStack = ItemStack.EMPTY;
 
 		this.cost.set((int) Math.round((baseCost + mergeCost) * Anvils.repairCostMultiplier));
-		if (isRenaming && !Anvils.freeRenaming)
+		if (isRenaming && !Anvils.renamingNoCost)
 			this.cost.set(this.cost.get() + COST_RENAME);
 
-		if (isRenaming && Anvils.freeRenaming && mergeCost <= 0)
+		if (isRenaming && Anvils.renamingNoCost && mergeCost <= 0)
 			this.cost.set(0);
 		if (!isRenaming && right.isEmpty())
 			resultStack = ItemStack.EMPTY;
