@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.experience.Experience;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +21,6 @@ public class BeehiveBlockMixin {
 	@Inject(method = "use", at = @At(value = "INVOKE",
 			target = "Lnet/minecraft/world/level/block/BeehiveBlock;resetHoneyLevel(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V"))
 	public void onResetHoneyLevel(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-		level.addFreshEntity(new ExperienceOrb(level, pos.getX(), pos.getY(), pos.getZ(), Experience.honeyHarvestExperience.getIntRandBetween(level.random)));
+		level.addFreshEntity(new ExperienceOrb(level, pos.getX(), pos.getY(), pos.getZ(), DroppedExperience.honeyHarvestExperience.getIntRandBetween(level.random)));
 	}
 }

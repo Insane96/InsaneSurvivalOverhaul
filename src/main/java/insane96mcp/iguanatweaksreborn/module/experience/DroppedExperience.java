@@ -40,11 +40,11 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Experience", description = "Various changes to experience. You can also use the iguanatweaks:disableExperience game rule to disable experience drops and experience bar.")
+@Label(name = "Dropped Experience", description = "Various changes to experience. You can also use the iguanatweaks:disableExperience game rule to make experience disappear altogether.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
-public class Experience extends JsonFeature {
+public class DroppedExperience extends JsonFeature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DISABLEEXPERIENCE = GameRules.register("iguanatweaks:disableExperience", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false, (server, booleanValue) -> {
-		Experience.disableExperience = booleanValue.get();
+		DroppedExperience.disableExperience = booleanValue.get();
 		for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
 			SyncExperienceFeature.sync(booleanValue.get(), serverPlayer);
 		}
@@ -54,7 +54,7 @@ public class Experience extends JsonFeature {
 	public static final TagKey<Block> NO_BLOCK_XP_MULTIPLIER = ITRBlockTagsProvider.create("no_xp_multiplier");
 	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "no_xp_multiplier"));
 
-	@Config(min = 1d, max = 128d)
+	@Config(min = 0d, max = 128d)
 	@Label(name = "Global Experience Multiplier", description = "ALL Experience dropped will be multiplied by this value, regardless if affected by another multiplier.\nUse the iguanatweaks:disableExperience game rule to disable experience completely.")
 	public static Double globalMultiplier = 1d;
 
@@ -62,24 +62,24 @@ public class Experience extends JsonFeature {
 	@Label(name = "Experience from Blocks Multiplier", description = "Experience dropped by blocks (Ores and Spawners) will be multiplied by this multiplier. Experience dropped by blocks are still affected by 'Global Experience Multiplier'\nCan be set to 0 to make blocks drop no experience")
 	public static Double blockMultiplier = 1d;
 	@Config(min = 0, max = 128d)
-	@Label(name = "Mobs from Spawners Multiplier", description = """
+	@Label(name = "Mobs.Multiplier: Spawners", description = """
 						Experience dropped from mobs that come from spawners will be multiplied by this multiplier.
 						Experience dropped by mobs from spawners are still affected by 'Global Experience Multiplier'
 						Can be set to 0 to disable experience drop from mob that come from spawners.""")
-	public static Double mobsFromSpawnersMultiplier = 0.5d;
+	public static Double mobsMultiplierSpawner = 0.5d;
 
 	@Config(min = 0, max = 128d)
-	@Label(name = "Natural Mobs Multiplier", description = """
+	@Label(name = "Mobs.Multiplier: Natural", description = """
 						Experience dropped from mobs that DON'T come from spawners will be multiplied by this multiplier.
 						Experience dropped from mobs that DON'T come from spawners is still affected by 'Global Experience Multiplier'
 						Can be set to 0 to disable experience drop from mob that DON'T come from spawners.""")
-	public static Double naturalMobsMultiplier = 1d;
+	public static Double mobsMultiplierNatural = 1d;
 
 	@Config(min = 0)
-	@Label(name = "Bonus experience per equipment", description = "Vanilla mobs drop 1~4 xp per equipment they have.")
+	@Label(name = "Mobs.Bonus experience per equipment", description = "Vanilla mobs drop 1~4 xp per equipment they have.")
 	public static Integer bonusExperiencePerEquipment = 2;
 	@Config(min = 0)
-	@Label(name = "Bonus experience per enchanted equipment", description = "This is added to 'Bonus experience per equipment'.")
+	@Label(name = "Mobs.Bonus experience per equipment if enchanted", description = "This is added to 'Bonus experience per equipment'.")
 	public static Integer bonusExperiencePerEnchantedEquipment = 2;
 
 	@Config(min = 0, max = 512)
@@ -89,23 +89,22 @@ public class Experience extends JsonFeature {
 	@Config(min = 0)
 	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
 	public static MinMax honeyHarvestExperience = new MinMax(5, 10);
-
-	/*public static final ArrayList<IdTagRange> CUSTOM_BLOCKS_EXPERIENCE_DEFAULT = new ArrayList<>(List.of(
-			IdTagRange.newTag("minecraft:copper_ores", 0, 2),
-			IdTagRange.newTag("minecraft:iron_ores", 1, 2),
-			IdTagRange.newTag("minecraft:gold_ores", 2, 3),
-
-			IdTagRange.newId("minecraft:sculk_catalyst", 35, 35),
-			IdTagRange.newId("minecraft:spawner", 70, 70)
-	));
-
-	public static final ArrayList<IdTagRange> customBlocksExperience = new ArrayList<>();*/
+	@Config(min = 0)
+	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if the fluid cooldown is enabled.")
+	public static MinMax milkXp = new MinMax(2, 5);
+	@Config(min = 0)
+	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")
+	public static MinMax shearXp = new MinMax(1, 3);
 
 	public static Boolean disableExperience = false;
 
-	public Experience(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public DroppedExperience(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		//JSON_CONFIGS.add(new JsonConfig<>("blocks_experience.json", customBlocksExperience, CUSTOM_BLOCKS_EXPERIENCE_DEFAULT, IdTagRange.LIST_TYPE));
+	}
+
+	public static void tryGenerateMilkXp(Entity entity) {
+		if (milkXp.min > 0 || milkXp.max > 0)
+			entity.level().addFreshEntity(new ExperienceOrb(entity.level(), entity.getX(), entity.getY(), entity.getZ(), milkXp.getIntRandBetween(entity.level().random)));
 	}
 
 	@Override
@@ -128,7 +127,7 @@ public class Experience extends JsonFeature {
 	}
 
 	private static void handleGlobalExperience(ExperienceOrb xpOrb) {
-		if (globalMultiplier == 1.0d
+		if (globalMultiplier == 1d
 				|| xpOrb.getPersistentData().getBoolean(XP_PROCESSED)
 				|| xpOrb.level().isClientSide)
 			return;
@@ -144,15 +143,15 @@ public class Experience extends JsonFeature {
 	}
 
 	public static void handleMobsMultiplier(EntityJoinLevelEvent event) {
-		if ((mobsFromSpawnersMultiplier == 1d && naturalMobsMultiplier == 1d)
+		if ((mobsMultiplierSpawner == 1d && mobsMultiplierNatural == 1d)
 				|| !(event.getEntity() instanceof Mob mob)
 				|| mob.getType().is(NO_ENTITY_XP_MULTIPLIER))
 			return;
 
 		if (mob.getPersistentData().getBoolean(ILStrings.Tags.SPAWNED_FROM_SPAWNER))
-			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, mobsFromSpawnersMultiplier);
+			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, mobsMultiplierSpawner);
 		else
-			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, naturalMobsMultiplier);
+			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, mobsMultiplierNatural);
 	}
 
 	//Run before smartness
@@ -212,7 +211,7 @@ public class Experience extends JsonFeature {
 	}
 
 	public static void onXpBottleHit(ThrownExperienceBottle xpBottle) {
-		if (!isEnabled(Experience.class)
+		if (!isEnabled(DroppedExperience.class)
 				|| xpBottleBonus == 0)
 			return;
 

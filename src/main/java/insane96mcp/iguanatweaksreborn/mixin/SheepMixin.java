@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.core.BlockPos;
@@ -29,6 +30,6 @@ public abstract class SheepMixin extends Animal {
 		if (!Feature.isEnabled(Livestock.class))
 			return;
 
-		level.addFreshEntity(new ExperienceOrb(level, this.getX(), this.getY(), this.getZ(), Livestock.shearXp.getIntRandBetween(level.random)));
+		level.addFreshEntity(new ExperienceOrb(level, this.getX(), this.getY(), this.getZ(), DroppedExperience.shearXp.getIntRandBetween(level.random)));
 	}
 }

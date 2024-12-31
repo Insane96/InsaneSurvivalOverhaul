@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.network.message;
 
-import insane96mcp.iguanatweaksreborn.module.experience.Experience;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +25,7 @@ public class SyncExperienceFeature {
 	}
 
 	public static void handle(final SyncExperienceFeature message, Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> Experience.disableExperience = message.disableExperience);
+		ctx.get().enqueueWork(() -> DroppedExperience.disableExperience = message.disableExperience);
 		ctx.get().setPacketHandled(true);
 	}
 

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.network.message.ForgeDataIntSync;
@@ -13,7 +14,6 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +25,10 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -79,17 +82,9 @@ public class Livestock extends Feature {
 	@Label(name = "Auto-breed chance", description = "Chance every 10 seconds for animals to fall in love without food (breeding cooldown still applies).")
 	public static Double autoBreedChance = 0.02d;
 
-	@Config(min = 0)
-	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if the fluid cooldown is enabled.")
-	public static MinMax milkXp = new MinMax(2, 5);
-
 	@Config
 	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
 	public static Boolean dataPack = true;
-
-	@Config(min = 0)
-	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")
-	public static MinMax shearXp = new MinMax(1, 3);
 
 	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -336,20 +331,15 @@ public class Livestock extends Feature {
 					.filter(data -> data.matches(animal))
 					.forEach(data -> modifiersToApply.addAll(data.cowFluidCooldownModifiers));
 			float cooldown = Modifier.applyModifiers(milkingCooldown, modifiersToApply, animal.level(), animal.blockPosition(), animal);
+			DroppedExperience.tryGenerateMilkXp(animal);
 			if (cooldown <= 0)
 				return;
 
 			milkCooldown = (int) (cooldown * 20);
 			cowNBT.putInt(MILK_COOLDOWN, milkCooldown);
 			ForgeDataIntSync.sync(animal, MILK_COOLDOWN, milkCooldown);
-			if (milkXp.min > 0 || milkXp.max > 0)
-				tryGenerateMilkXp(animal);
 			//player.swing(event.getHand());
 		}
-	}
-
-	private void tryGenerateMilkXp(Entity entity) {
-		entity.level().addFreshEntity(new ExperienceOrb(entity.level(), entity.getX(), entity.getY(), entity.getZ(), milkXp.getIntRandBetween(entity.level().random)));
 	}
 
 	@SubscribeEvent

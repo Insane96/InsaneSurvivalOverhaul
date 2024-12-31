@@ -79,8 +79,8 @@ public class PlayerExperience extends Feature {
 		}
 		totalExp += (int) (player.getXpNeededForNextLevel() * player.experienceProgress);
 		//Take into account global experience to prevent XP duping
-		if (!ignoreGlobalXPMultiplier && Feature.isEnabled(Experience.class) && Experience.globalMultiplier != 1d)
-			totalExp *= (int) (1d / Experience.globalMultiplier);
+		if (!ignoreGlobalXPMultiplier && Feature.isEnabled(DroppedExperience.class) && DroppedExperience.globalMultiplier != 1d)
+			totalExp *= (int) (1d / DroppedExperience.globalMultiplier);
 		//Cap to 250k XP
 		if (totalExp > 250000)
 			totalExp = 250000;
@@ -107,7 +107,7 @@ public class PlayerExperience extends Feature {
 	 */
 	public static int getExperienceOnDeath(Player player, boolean ignoreGlobalXPMultiplier) {
 		if (!isEnabled(PlayerExperience.class)
-				|| (droppedExperienceOnDeath < 0 && !Experience.isEnabled(Experience.class))
+				|| (droppedExperienceOnDeath < 0 && !DroppedExperience.isEnabled(DroppedExperience.class))
 				|| player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)
 				|| player.isSpectator())
 			return -1;

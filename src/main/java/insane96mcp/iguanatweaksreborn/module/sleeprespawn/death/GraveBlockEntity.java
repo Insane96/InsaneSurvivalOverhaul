@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
-import insane96mcp.iguanatweaksreborn.module.experience.Experience;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -144,7 +144,7 @@ public class GraveBlockEntity extends BlockEntity {
             if (player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)) != graveBlockEntity.deathNumber) {
                 if (graveBlockEntity.getXpStored() > 0) {
                     ExperienceOrb xpOrb = new ExperienceOrb(level, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, graveBlockEntity.getXpStored());
-                    xpOrb.getPersistentData().putBoolean(Experience.XP_PROCESSED, true);
+                    xpOrb.getPersistentData().putBoolean(DroppedExperience.XP_PROCESSED, true);
                     level.addFreshEntity(xpOrb);
                     graveBlockEntity.setXpStored(0);
                 }

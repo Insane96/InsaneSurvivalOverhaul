@@ -16,7 +16,11 @@
   * Combat
     * Player stats has its own feature now
     * Arrow stats has its own feature now
-  * Cleaned up some config descriptions
+  * Experience.Dropped Experience
+    * Renamed from Experience.Experience
+    * Milk and shear xp have been moved here
+* Cleaned up some config descriptions
+* Fixed milking cows dropping no experience if cooldown was disabled
 
 ## 3.21.5
 * Replaced enchantments no longer appear in the creative menu
