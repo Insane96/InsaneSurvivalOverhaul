@@ -3,8 +3,8 @@ package insane96mcp.iguanatweaksreborn.module.experience;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.mining.blockdata.BlockData;
-import insane96mcp.iguanatweaksreborn.module.mining.blockdata.BlockDataReloadListener;
+import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
+import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.network.message.SyncExperienceFeature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -169,9 +169,9 @@ public class DroppedExperience extends JsonFeature {
 		int silkTouchLevel = event.getPlayer().getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH);
 		if (silkTouchLevel > 0)
 			return;
-		for (BlockData blockData : BlockDataReloadListener.DATA) {
-			if (blockData.matches(event.getState())) {
-				int expDropped = blockData.getStateExperienceDropped(event.getLevel().getRandom());
+		for (BlockDefinition blockDefinition : BlockDefinitionReloadListener.DEFINITIONS) {
+			if (blockDefinition.matches(event.getState())) {
+				int expDropped = blockDefinition.getStateExperienceDropped(event.getLevel().getRandom());
 				if (expDropped > -1)
 					event.setExpToDrop(expDropped);
 			}

@@ -5,8 +5,8 @@ import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.mining.blockdata.BlockData;
-import insane96mcp.iguanatweaksreborn.module.mining.blockdata.BlockDataReloadListener;
+import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
+import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -137,17 +137,17 @@ public class BoneMeal extends Feature {
     }
 
     private void tryConsumeWithFail(BonemealEvent event) {
-        failFromBlockData(event);
+        failFromBlockDefinitions(event);
         if (event.getResult() != Event.Result.ALLOW)
             failFromSeason(event);
     }
 
-    private void failFromBlockData(BonemealEvent event) {
-        for (BlockData blockData : BlockDataReloadListener.DATA) {
-            if (!blockData.matches(event.getBlock())
-                    || blockData.boneMealFailChance == null)
+    private void failFromBlockDefinitions(BonemealEvent event) {
+        for (BlockDefinition blockDefinition : BlockDefinitionReloadListener.DEFINITIONS) {
+            if (!blockDefinition.matches(event.getBlock())
+                    || blockDefinition.boneMealFailChance == null)
                 continue;
-            if (event.getLevel().random.nextFloat() < blockData.boneMealFailChance) {
+            if (event.getLevel().random.nextFloat() < blockDefinition.boneMealFailChance) {
                 event.setResult(Event.Result.ALLOW);
                 return;
             }

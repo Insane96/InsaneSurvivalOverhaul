@@ -1,11 +1,11 @@
-package insane96mcp.iguanatweaksreborn.module.mining.blockdata;
+package insane96mcp.iguanatweaksreborn.module.mining.blockdefinition;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
-import insane96mcp.iguanatweaksreborn.network.message.BlockDataSync;
+import insane96mcp.iguanatweaksreborn.network.message.BlockDefinitionSync;
 import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -21,25 +21,25 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = IguanaTweaksReborn.MOD_ID)
-public class BlockDataReloadListener extends SimpleJsonResourceReloadListener {
-	public static List<BlockData> DATA = new ArrayList<>();
-	public static List<BlockData> ORIGINAL_DATA = new ArrayList<>();
-	public static final BlockDataReloadListener INSTANCE;
+public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListener {
+	public static final List<BlockDefinition> DEFINITIONS = new ArrayList<>();
+	public static final List<BlockDefinition> ORIGINAL_DEFINITIONS = new ArrayList<>();
+	public static final BlockDefinitionReloadListener INSTANCE;
 	private static final Gson GSON = new GsonBuilder().create();
-	public BlockDataReloadListener() {
-		super(GSON, "block_data");
+	public BlockDefinitionReloadListener() {
+		super(GSON, "block_definitions");
 	}
 
 	static {
-		INSTANCE = new BlockDataReloadListener();
+		INSTANCE = new BlockDefinitionReloadListener();
 	}
 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
 		//Restore original data
-		restoreOriginalDataAndClear();
+		restoreOriginalDefinitionsAndClear();
 		//Load new data
-		DATA.clear();
+		DEFINITIONS.clear();
 		for (var entry : map.entrySet()) {
 			try {
 				ResourceLocation name = entry.getKey();
@@ -47,50 +47,50 @@ public class BlockDataReloadListener extends SimpleJsonResourceReloadListener {
 				if (split[split.length - 1].startsWith("_"))
 					continue;
 
-				BlockData blockData = GSON.fromJson(entry.getValue(), BlockData.class);
+				BlockDefinition blockDefinition = GSON.fromJson(entry.getValue(), BlockDefinition.class);
 				//Serializer can return null in case the block doesn't exist (e.g. from other optional mods)
-				if (blockData == null)
+				if (blockDefinition == null)
 					return;
 				//blockData.apply(false);
-				DATA.add(blockData);
+				DEFINITIONS.add(blockDefinition);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Block Data %s: %s", entry.getKey(), e.getMessage());
+				ITRLogHelper.error("Parsing error loading Block Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Block Data %s: %s", entry.getKey(), e.getMessage());
+				ITRLogHelper.error("Failed loading Block Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Block Data", DATA.size());
+		ITRLogHelper.info("Loaded %s Block Data", DEFINITIONS.size());
 	}
 
-	public static void restoreOriginalDataAndClear() {
-		for (BlockData data : ORIGINAL_DATA)
-			data.apply(true);
-		ITRLogHelper.info("Restored %s Block Data", ORIGINAL_DATA.size());
-		ORIGINAL_DATA.clear();
+	public static void restoreOriginalDefinitionsAndClear() {
+		for (BlockDefinition definition : ORIGINAL_DEFINITIONS)
+			definition.apply(true);
+		ITRLogHelper.info("Restored %s Block Definitions", ORIGINAL_DEFINITIONS.size());
+		ORIGINAL_DEFINITIONS.clear();
 	}
 
 	@SubscribeEvent
 	public static void onDataPackSync(OnDatapackSyncEvent event) {
 		if (event.getPlayer() == null) {
-			event.getPlayerList().getPlayers().forEach(player -> BlockDataSync.sync(DATA, player));
+			event.getPlayerList().getPlayers().forEach(player -> BlockDefinitionSync.sync(DEFINITIONS, player));
 		}
 		else {
-			BlockDataSync.sync(DATA, event.getPlayer());
+			BlockDefinitionSync.sync(DEFINITIONS, event.getPlayer());
 		}
 	}
 
 	@SubscribeEvent
 	public static void onTagsUpdatedEvent(TagsUpdatedEvent event) {
-		for (BlockData data : BlockDataReloadListener.DATA) {
-			data.apply(false);
+		for (BlockDefinition definition : BlockDefinitionReloadListener.DEFINITIONS) {
+			definition.apply(false);
 		}
 	}
 
 	@Override
 	public String getName() {
-		return "Block Data Reload Listener";
+		return "Block Definitions Reload Listener";
 	}
 }

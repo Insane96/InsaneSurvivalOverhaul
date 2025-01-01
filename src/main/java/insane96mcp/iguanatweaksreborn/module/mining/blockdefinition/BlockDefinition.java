@@ -1,4 +1,4 @@
-package insane96mcp.iguanatweaksreborn.module.mining.blockdata;
+package insane96mcp.iguanatweaksreborn.module.mining.blockdefinition;
 
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@JsonAdapter(BlockData.Serializer.class)
-public class BlockData {
+@JsonAdapter(BlockDefinition.Serializer.class)
+public class BlockDefinition {
 
 	public Block block;
 	public TagKey<Block> blockTag;
@@ -54,7 +54,7 @@ public class BlockData {
 	@Nullable
 	public Float boneMealFailChance;
 
-	public BlockData(Block block, List<BlockState> blockStates, @Nullable Float stateHardness, @Nullable Boolean stateRequiresCorrectToolForDrops, @Nullable NoteBlockInstrument stateNoteBlockInstrument, @Nullable MinMax stateExperienceDropped, @Nullable Float explosionResistance, @Nullable Float friction, @Nullable Float speedFactor, @Nullable Float jumpFactor, @Nullable Float boneMealFailChance) {
+	public BlockDefinition(Block block, List<BlockState> blockStates, @Nullable Float stateHardness, @Nullable Boolean stateRequiresCorrectToolForDrops, @Nullable NoteBlockInstrument stateNoteBlockInstrument, @Nullable MinMax stateExperienceDropped, @Nullable Float explosionResistance, @Nullable Float friction, @Nullable Float speedFactor, @Nullable Float jumpFactor, @Nullable Float boneMealFailChance) {
 		this.block = block;
 		this.blockStates = blockStates;
 		this.stateHardness = stateHardness;
@@ -68,7 +68,7 @@ public class BlockData {
 		this.boneMealFailChance = boneMealFailChance;
 	}
 
-	public BlockData(TagKey<Block> blockTag, @Nullable Float stateHardness, @Nullable Boolean stateRequiresCorrectToolForDrops, @Nullable NoteBlockInstrument stateNoteBlockInstrument, @Nullable MinMax stateExperienceDropped, @Nullable Float explosionResistance, @Nullable Float friction, @Nullable Float speedFactor, @Nullable Float jumpFactor, @Nullable Float boneMealFailChance) {
+	public BlockDefinition(TagKey<Block> blockTag, @Nullable Float stateHardness, @Nullable Boolean stateRequiresCorrectToolForDrops, @Nullable NoteBlockInstrument stateNoteBlockInstrument, @Nullable MinMax stateExperienceDropped, @Nullable Float explosionResistance, @Nullable Float friction, @Nullable Float speedFactor, @Nullable Float jumpFactor, @Nullable Float boneMealFailChance) {
 		this.blockTag = blockTag;
 		this.stateHardness = stateHardness;
 		this.stateRequiresCorrectToolForDrops = stateRequiresCorrectToolForDrops;
@@ -81,11 +81,11 @@ public class BlockData {
 		this.boneMealFailChance = boneMealFailChance;
 	}
 
-	public BlockData(Block block) {
+	public BlockDefinition(Block block) {
 		this.block = block;
 	}
 
-	public BlockData(TagKey<Block> blockTag) {
+	public BlockDefinition(TagKey<Block> blockTag) {
 		this.blockTag = blockTag;
 	}
 
@@ -109,88 +109,88 @@ public class BlockData {
 	}
 
 	public void apply(boolean applyingOriginal) {
-        BlockData originalData;
+        BlockDefinition originalDefinition;
         if (this.block != null) {
-            originalData = new BlockData(block);
+            originalDefinition = new BlockDefinition(block);
 			this.block.getStateDefinition().getPossibleStates().forEach(blockState -> {
 				if (this.blockStates.isEmpty() || this.blockStates.contains(blockState)) {
-					originalData.blockStates.add(blockState);
+					originalDefinition.blockStates.add(blockState);
 					if (this.stateHardness != null) {
-						originalData.stateHardness = blockState.destroySpeed;
+						originalDefinition.stateHardness = blockState.destroySpeed;
 						blockState.destroySpeed = this.stateHardness;
 					}
 					if (this.stateRequiresCorrectToolForDrops != null) {
-						originalData.stateRequiresCorrectToolForDrops = blockState.requiresCorrectToolForDrops;
+						originalDefinition.stateRequiresCorrectToolForDrops = blockState.requiresCorrectToolForDrops;
 						blockState.requiresCorrectToolForDrops = this.stateRequiresCorrectToolForDrops;
 					}
 					if (this.stateNoteBlockInstrument != null) {
-						originalData.stateNoteBlockInstrument = blockState.instrument;
+						originalDefinition.stateNoteBlockInstrument = blockState.instrument;
 						blockState.instrument = this.stateNoteBlockInstrument;
 					}
 				}
 			});
 			if (this.explosionResistance != null) {
-				originalData.explosionResistance = this.block.explosionResistance;
+				originalDefinition.explosionResistance = this.block.explosionResistance;
 				this.block.explosionResistance = this.explosionResistance;
 			}
 			if (this.friction != null) {
-				originalData.friction = this.block.friction;
+				originalDefinition.friction = this.block.friction;
 				this.block.friction = this.friction;
 			}
 			if (this.speedFactor != null) {
-				originalData.speedFactor = this.block.speedFactor;
+				originalDefinition.speedFactor = this.block.speedFactor;
 				this.block.speedFactor = this.speedFactor;
 			}
 			if (this.jumpFactor != null) {
-				originalData.jumpFactor = this.block.jumpFactor;
+				originalDefinition.jumpFactor = this.block.jumpFactor;
 				this.block.jumpFactor = this.jumpFactor;
 			}
         }
 		else {
-            originalData = new BlockData(this.blockTag);
+            originalDefinition = new BlockDefinition(this.blockTag);
 			ITag<Block> blockTag = ForgeRegistries.BLOCKS.tags().getTag(this.blockTag);
 			blockTag.stream().forEach(block -> {
 				block.getStateDefinition().getPossibleStates().forEach(blockState -> {
 					if (this.stateHardness != null) {
-						originalData.stateHardness = blockState.destroySpeed;
+						originalDefinition.stateHardness = blockState.destroySpeed;
 						blockState.destroySpeed = this.stateHardness;
 					}
 					if (this.stateRequiresCorrectToolForDrops != null) {
-						originalData.stateRequiresCorrectToolForDrops = blockState.requiresCorrectToolForDrops;
+						originalDefinition.stateRequiresCorrectToolForDrops = blockState.requiresCorrectToolForDrops;
 						blockState.requiresCorrectToolForDrops = this.stateRequiresCorrectToolForDrops;
 					}
 					if (this.stateNoteBlockInstrument != null) {
-						originalData.stateNoteBlockInstrument = blockState.instrument;
+						originalDefinition.stateNoteBlockInstrument = blockState.instrument;
 						blockState.instrument = this.stateNoteBlockInstrument;
 					}
 				});
 				if (this.explosionResistance != null) {
-					originalData.explosionResistance = block.explosionResistance;
+					originalDefinition.explosionResistance = block.explosionResistance;
 					block.explosionResistance = this.explosionResistance;
 				}
 				if (this.friction != null) {
-					originalData.friction = block.friction;
+					originalDefinition.friction = block.friction;
 					block.friction = this.friction;
 				}
 				if (this.speedFactor != null) {
-					originalData.speedFactor = block.speedFactor;
+					originalDefinition.speedFactor = block.speedFactor;
 					block.speedFactor = this.speedFactor;
 				}
 				if (this.jumpFactor != null) {
-					originalData.jumpFactor = block.jumpFactor;
+					originalDefinition.jumpFactor = block.jumpFactor;
 					block.jumpFactor = this.jumpFactor;
 				}
 			});
         }
         if (!applyingOriginal)
-            BlockDataReloadListener.ORIGINAL_DATA.add(originalData);
+            BlockDefinitionReloadListener.ORIGINAL_DEFINITIONS.add(originalDefinition);
     }
 
-	public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<BlockData>>(){}.getType();
+	public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<BlockDefinition>>(){}.getType();
 
-	public static class Serializer implements JsonDeserializer<BlockData>, JsonSerializer<BlockData> {
+	public static class Serializer implements JsonDeserializer<BlockDefinition>, JsonSerializer<BlockDefinition> {
 		@Override
-		public BlockData deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		public BlockDefinition deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
 			Float hardness = ILGsonHelper.getAsNullableFloat(jObject, "state_hardness");
 			Boolean requiresCorrectToolForDrops = ILGsonHelper.getAsNullableBoolean(jObject, "state_requires_correct_tool_for_drops");
@@ -237,19 +237,19 @@ public class BlockData {
 						});
 					}
 				}
-				return new BlockData(block, blockStates, hardness, requiresCorrectToolForDrops, instrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
+				return new BlockDefinition(block, blockStates, hardness, requiresCorrectToolForDrops, instrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
 			}
 			else {
 				ResourceLocation blockTagId = ResourceLocation.tryParse(jObject.get("block_tag").getAsString());
 				if (blockTagId == null)
 					throw new JsonParseException("Failed to parse block tag id for %s".formatted(jObject.get("block_tag").getAsString()));
 				TagKey<Block> blockTag = TagKey.create(Registries.BLOCK, blockTagId);
-				return new BlockData(blockTag, hardness, requiresCorrectToolForDrops, instrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
+				return new BlockDefinition(blockTag, hardness, requiresCorrectToolForDrops, instrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
 			}
 		}
 
 		@Override
-		public JsonElement serialize(BlockData src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+		public JsonElement serialize(BlockDefinition src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
 			throw new NotImplementedException();
 			/*JsonObject jObject = new JsonObject();
 			if (!src.blockStates.isEmpty()) {
@@ -266,7 +266,7 @@ public class BlockData {
 		}
 	}
 
-	public static BlockData fromNetwork(FriendlyByteBuf byteBuf) {
+	public static BlockDefinition fromNetwork(FriendlyByteBuf byteBuf) {
 		Block block = byteBuf.readNullable(b -> b.readById(BuiltInRegistries.BLOCK));
 		ResourceLocation blockTagId = byteBuf.readNullable(FriendlyByteBuf::readResourceLocation);
 		List<BlockState> blockStates = new ArrayList<>();
@@ -294,9 +294,9 @@ public class BlockData {
 		Float jumpFactor = byteBuf.readNullable(FriendlyByteBuf::readFloat);
 		Float boneMealFailChance = byteBuf.readNullable(FriendlyByteBuf::readFloat);
 		if (block != null)
-			return new BlockData(block, blockStates, hardness, requiresCorrectToolForDrops, noteBlockInstrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
+			return new BlockDefinition(block, blockStates, hardness, requiresCorrectToolForDrops, noteBlockInstrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
 		else
-			return new BlockData(blockTag, hardness, requiresCorrectToolForDrops, noteBlockInstrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
+			return new BlockDefinition(blockTag, hardness, requiresCorrectToolForDrops, noteBlockInstrument, experienceDropped, explosionResistance, friction, speedFactor, jumpFactor, boneMealFailChance);
 	}
 
 	public void toNetwork(FriendlyByteBuf byteBuf) {

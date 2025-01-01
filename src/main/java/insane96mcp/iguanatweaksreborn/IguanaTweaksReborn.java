@@ -22,7 +22,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataRelo
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
-import insane96mcp.iguanatweaksreborn.module.mining.blockdata.BlockDataReloadListener;
+import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
@@ -117,7 +117,7 @@ public class IguanaTweaksReborn
     public void onAddReloadListener(AddReloadListenerEvent event) {
         event.addListener(AnvilRepairReloadListener.INSTANCE);
         event.addListener(ItemDefinitionsReloadListener.INSTANCE);
-        event.addListener(BlockDataReloadListener.INSTANCE);
+        event.addListener(BlockDefinitionReloadListener.INSTANCE);
         event.addListener(PlantsGrowthReloadListener.INSTANCE);
         event.addListener(LivestockDataReloadListener.INSTANCE);
     }
