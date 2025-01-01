@@ -82,13 +82,13 @@ public class Tweaks extends Feature {
     public static Integer poisonDamageSpeed = 60;
 
     @Config
-    @Label(name = "Maximum Sponge Soak Blocks", description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
+    @Label(name = "Sponge.Maximum Soak Blocks", description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
     public static Integer maxSpongeSoakBlocks = 256;
     @Config
-    @Label(name = "Maximum Sponge Soak Range", description = "The maximum range at which sponges will check for soakable blocks. (Vanilla is 5, disabled if quark is installed)")
+    @Label(name = "Sponge.Maximum Soak Range", description = "The maximum range at which sponges will check for soakable blocks. (Vanilla is 5, disabled if quark is installed)")
     public static Integer maxSpongeSoakRange = 10;
     @Config
-    @Label(name = "Sponges dry in the sun and wet in rain", description = "If exposed to the sun sponges may dry and if exposed to rain sponges might get wet. Requires a Minecraft restart if disabled")
+    @Label(name = "Sponge.Dry in the sun and wet in rain", description = "If exposed to the sun sponges may dry and if exposed to rain sponges might get wet. Requires a Minecraft restart if disabled")
     public static Boolean spongesDryInTheSun = true;
 
     @Config
@@ -96,13 +96,13 @@ public class Tweaks extends Feature {
     public static Boolean betterHardcoreDeath = true;
 
     @Config(min = 0, max = 100)
-    @Label(name = "Players air ticks consumed", description = "The amount of ticks the player consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
+    @Label(name = "Breathe.Air ticks consumed", description = "The amount of ticks the player consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
     public static Double playerConsumeAirAmount = 1.5d;
     @Config
-    @Label(name = "Players air ticks refilled", description = "The amount of air ticks the player regains each tick when out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4. Min is the amount as soon as you exit water, Max is a few seconds out of water.")
+    @Label(name = "Breathe.Air ticks refilled", description = "The amount of air ticks the player regains each tick when out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4. Min is the amount as soon as you exit water, Max is a few seconds out of water.")
     public static MinMax playerRefillAirAmount = new MinMax(1, 2.5);
     @Config
-    @Label(name = "Increase drown damage the more drowning")
+    @Label(name = "Breathe.Increase drown damage the more drowning")
     public static Boolean increaseDrownDamageTheMoreDrowning = true;
     @Config
     @Label(name = "Totem resistance", description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
@@ -308,13 +308,15 @@ public class Tweaks extends Feature {
         int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerConsumeAirAmount);
         int respiration = EnchantmentHelper.getRespiration(event.getEntity());
         airConsumed = respiration > 0 && event.getEntity().getRandom().nextInt(respiration + 1) > 0 ? 0 : airConsumed;
+        if (event.getEntity().getAirSupply() <= 0)
+            airConsumed = 1;
         event.setConsumeAirAmount(airConsumed);
 
         int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerRefillAirAmount.min);
         if (ticksSinceOutOfWater > 75) {
             refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerRefillAirAmount.max);
             if (event.canBreathe())
-                event.getEntity().getPersistentData().remove(IguanaTweaksReborn.RESOURCE_PREFIX + "times_drowned");
+                setTimesDrowned(event.getEntity(), 0);
         }
         event.setRefillAirAmount(refillAmount);
         event.getEntity().getPersistentData().putBoolean(IguanaTweaksReborn.RESOURCE_PREFIX + "was_breathing", event.canBreathe());
@@ -323,17 +325,25 @@ public class Tweaks extends Feature {
     @SubscribeEvent
     public void onDrown(LivingDrownEvent event) {
         if (!this.isEnabled()
-                || !increaseDrownDamageTheMoreDrowning)
+                || !increaseDrownDamageTheMoreDrowning
+                || !event.getEntity().canDrownInFluidType(event.getEntity().getEyeInFluidType()))
             return;
 
         if (event.isDrowning()) {
-            int timesDrowned = event.getEntity().getPersistentData().getInt(IguanaTweaksReborn.RESOURCE_PREFIX + "times_drowned");
-            timesDrowned++;
-            event.getEntity().getPersistentData().putInt(IguanaTweaksReborn.RESOURCE_PREFIX + "times_drowned", timesDrowned);
+            int timesDrowned = getTimesDrowned(event.getEntity());
+            setTimesDrowned(event.getEntity(), ++timesDrowned);
 
             event.setDamageAmount(event.getDamageAmount() * timesDrowned * 0.5f);
             event.setBubbleCount((int) (event.getBubbleCount() * timesDrowned * 0.5f));
         }
+    }
+
+    public static void setTimesDrowned(LivingEntity entity, int timesDrowned) {
+        entity.getPersistentData().putInt(IguanaTweaksReborn.RESOURCE_PREFIX + "times_drowned", timesDrowned);
+    }
+
+    public static int getTimesDrowned(LivingEntity entity) {
+        return entity.getPersistentData().getInt(IguanaTweaksReborn.RESOURCE_PREFIX + "times_drowned");
     }
 
     public static Vec3 onCollideWithWall(LivingEntity instance, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {

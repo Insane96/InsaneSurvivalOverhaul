@@ -24,6 +24,7 @@ This is a breaking version: configs and data packs have got a huge update
   * Removed stackable soups. Just use item definitions
 * Block Data has been renamed to Block definitions (folder from block_data to block_definitions)
 * Mobs can no longer fall from mount
+* Fixed drowning too fast
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now
