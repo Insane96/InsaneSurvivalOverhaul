@@ -79,8 +79,7 @@ repositories {
         dir 'libs'
     }
     maven {
-        name = "CurseMaven"
-        url = "https://www.cursemaven.com/"
+        url 'https://cursemaven.com'
         content {
             includeGroup "curse.maven"
         }
@@ -123,6 +122,11 @@ dependencies {
     implementation fg.deobf("com.github.glitchfiend:SereneSeasons:${mc_version}-${sereneseasons_version}")
     implementation fg.deobf("curse.maven:time-control-303570:5095704")
 
+    implementation fg.deobf("curse.maven:tool-belt-260262:5929061")
+    //Needed for data gen
+    //Hardcoded MC version as there is no 1.20.1 version
+    runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-${mc_version}:1.8.0")
+
     implementation fg.deobf("curse.maven:global-gamerules-227657:4587490")
 
     compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
@@ -130,11 +134,6 @@ dependencies {
     implementation fg.deobf("curse.maven:jei-238222:5101366")
 
     implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-${mc_version}-forge")
-    //implementation fg.deobf("curse.maven:kiwi-303657:5603816")
-    //implementation fg.deobf("curse.maven:passable-foliage-379887:4869702")
-    implementation fg.deobf("curse.maven:tool-belt-260262:4581167")
-    //Needed for data gen, Hardcoded MC version as there is no 1.20.1 version
-    runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-1.20:1.8.0")
 
     runtimeOnly fg.deobf("net.darkhax.maxhealthfix:MaxHealthFix-Forge-${mc_version}:${max_health_fix_version}")
 
