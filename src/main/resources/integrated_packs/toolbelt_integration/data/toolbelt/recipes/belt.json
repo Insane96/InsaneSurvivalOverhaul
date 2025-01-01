@@ -1,0 +1,29 @@
+{
+    "neoforge:conditions": [
+      {
+        "type": "toolbelt:enable_normal_crafting"
+      }
+    ],
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "i": {
+        "item": "minecraft:iron_ingot"
+      },
+      "l": {
+        "item": "minecraft:leather"
+      },
+      "s": {
+        "item": "minecraft:string"
+      }
+    },
+    "pattern": [
+      "sls",
+      "l l",
+      "lil"
+    ],
+    "result": {
+      "item": "toolbelt:belt",
+      "nbt": "{Size:4}"
+    }
+  }

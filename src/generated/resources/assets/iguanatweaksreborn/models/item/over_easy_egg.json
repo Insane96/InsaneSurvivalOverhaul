@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "iguanatweaksreborn:item/over_easy_egg"
+  }
+}
