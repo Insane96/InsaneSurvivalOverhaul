@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
+import insane96mcp.iguanatweaksreborn.module.mining.MiningMisc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
@@ -37,10 +37,11 @@ public abstract class MultiplayerGameModeMixin {
     private int changeDestroyDelay(int destroyDelay, BlockPos pos, Direction facingDirection) {
         if (!(this.minecraft.player.getMainHandItem().getItem() instanceof DiggerItem diggerItem))
             return destroyDelay;
-        return Tweaks.destroyDelay(this.minecraft.player.getMainHandItem(), diggerItem, this.minecraft.level.getBlockState(pos));
+        return MiningMisc.destroyDelay(this.minecraft.player.getMainHandItem(), diggerItem, this.minecraft.level.getBlockState(pos));
     }
 
     //Fixes https://github.com/neoforged/NeoForge/issues/143
+    // TODO Remove in 1.20.2+
     @Inject(method = "sameDestroyTarget", at = @At("HEAD"), cancellable = true)
     private void fixHealingItemsResettingBreaking(BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
         ItemStack itemstack = this.minecraft.player.getMainHandItem();

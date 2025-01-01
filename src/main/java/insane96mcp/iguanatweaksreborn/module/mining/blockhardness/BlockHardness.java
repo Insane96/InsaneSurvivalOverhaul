@@ -38,22 +38,6 @@ public class BlockHardness extends JsonFeature {
 	));
 	public static final ArrayList<DepthHardnessDimension> depthMultiplierDimension = new ArrayList<>();
 
-	/*public static final ArrayList<IdTagValue> CUSTOM_HARDNESSES_DEFAULT = new ArrayList<>(List.of(
-			IdTagValue.newId("iguanatweaksexpanded:poor_copper_ore", 1.667d),
-			IdTagValue.newId("iguanatweaksexpanded:poor_iron_ore", 2d),
-			IdTagValue.newId("iguanatweaksexpanded:poor_gold_ore", 2.333d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_copper_ore", 3.333d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_iron_ore", 4d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_gold_ore", 4.6666d),
-
-			IdTagValue.newId("iguanatweaksexpanded:poor_deepslate_copper_ore", 2.667d),
-			IdTagValue.newId("iguanatweaksexpanded:poor_deepslate_iron_ore", 3d),
-			IdTagValue.newId("iguanatweaksexpanded:poor_deepslate_gold_ore", 3.333d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_deepslate_copper_ore", 5.333d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_deepslate_iron_ore", 6d),
-			IdTagValue.newId("iguanatweaksexpanded:rich_deepslate_gold_ore", 6.666d)
-	));*/
-
 	@Config(min = 0d, max = 128d)
 	@Label(name = "Hardness Multiplier", description = "Multiplier applied to the hardness of blocks. E.g. with this set to 2.0 blocks will take 2 times longer to break.")
 	public static Double hardnessMultiplier = 1d;

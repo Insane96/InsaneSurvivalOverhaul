@@ -29,6 +29,7 @@ This is a breaking version: configs and data packs have got a huge update
     * Death has its own feature now
   * Combat
     * Player stats has its own feature now
+      * Mining range reduction moved from Mining Misc
     * Arrow stats has its own feature now
   * Experience.Dropped Experience
     * Renamed from Experience.Experience

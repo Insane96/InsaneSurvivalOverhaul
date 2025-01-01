@@ -15,7 +15,7 @@ import net.minecraft.server.packs.PackType;
 @LoadFeature(module = Modules.Ids.MINING)
 public class MaterialsAndOres extends Feature {
 	@Config
-	@Label(name = "Ore generation Overhaul")
+	@Label(name = "Ore generation Overhaul", description = "Enables a data pack that changes ore generation to be biome based. Less material generate in all the biomes, more in specific biomes.")
 	public static Boolean oreGenerationOverhaul = true;
 	@Config
 	@Label(name = "Disable Ore Veins", description = "https://minecraft.wiki/w/Ore_vein")

@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.mining.MiningMisc;
 import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -34,7 +33,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -196,11 +194,7 @@ public class Tweaks extends Feature {
 		return isEnabled(Tweaks.class) ? poisonDamageSpeed : original;
 	}
 
-    public static int destroyDelay(ItemStack stack, DiggerItem item, BlockState state) {
-        return isEnabled(MiningMisc.class) && MiningMisc.efficiencyBasedDestroyDelay ? Math.max(5 - (int) (item.speed / 2f), 1) : 5;
-    }
-
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerDeath(LivingDeathEvent event) {
         if (!this.isEnabled()
                 || !betterHardcoreDeath
