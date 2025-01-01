@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.setup.client;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconRenderer;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconScreen;
@@ -77,6 +78,13 @@ public class ClientSetup {
                     removeBookWithEnchantment(event, Enchantments.KNOCKBACK);
                 }
             }
+        }
+        else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.NETHERIZED_STEW.get());
+            addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.BROWN_MUSHROOM_STEW.get());
+            addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
+            addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());
+            addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP.get());
         }
     }
 

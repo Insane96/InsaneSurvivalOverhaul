@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.utils.Utils;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -24,6 +25,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -31,6 +33,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,24 @@ import java.util.List;
 @Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder. Removing entries from the json requires a minecraft restart.")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class FoodDrinks extends JsonFeature {
+
+	public static final RegistryObject<Item> BROWN_MUSHROOM_STEW = ITRRegistries.ITEMS.register("brown_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(3).saturationMod(0.6F).build())
+	));
+	public static final RegistryObject<Item> RED_MUSHROOM_STEW = ITRRegistries.ITEMS.register("red_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(3).saturationMod(0.6F).build())
+	));
+	public static final RegistryObject<Item> NETHERIZED_STEW = ITRRegistries.ITEMS.register("netherized_stew", () -> new BowlFoodItem(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(12).saturationMod(1.4F).effect(() -> new MobEffectInstance(MobEffects.POISON, 30 * 20, 0), 0.8f).build())
+	));
+
+	public static final RegistryObject<Item> OVER_EASY_EGG = ITRRegistries.ITEMS.register("over_easy_egg", () -> new Item(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6F).build())
+	));
+
+	public static final RegistryObject<Item> PUMPKIN_PULP = ITRRegistries.ITEMS.register("pumpkin_pulp", () -> new Item(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).build())
+	));
 
 	public static final TagKey<Item> RAW_FOOD = ITRItemTagsProvider.create("raw_food");
 	public static final TagKey<Item> FOOD_BLACKLIST = ITRItemTagsProvider.create("food_drinks_no_hunger_changes");
@@ -118,7 +139,6 @@ public class FoodDrinks extends JsonFeature {
 				|| !(event.getEntity() instanceof Player player)
 				|| event.getEntity().level().isClientSide)
 			return;
-
 		Item item = event.getItem().getItem();
 		if (player.getRandom().nextDouble() < rawFoodPoisonChance && isRawFood(item)) {
 			//noinspection DataFlowIssue
@@ -129,6 +149,7 @@ public class FoodDrinks extends JsonFeature {
 	private static CustomFoodProperties customFoodPropertiesCache;
 	private static FoodProperties lastFoodEatenCache;
 	private static int lastFoodEatenTime;
+
 	public static int getFoodConsumingTime(ItemStack stack) {
 		//If in cache, get it
 		if (customFoodPropertiesCache != null && customFoodPropertiesCache.food.matchesItem(stack.getItem())) {
@@ -142,11 +163,9 @@ public class FoodDrinks extends JsonFeature {
 				}
 			}
 		}
-
 		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
 		if (food == lastFoodEatenCache)
 			return lastFoodEatenTime;
-
 		int ticks = (int) Utils.computeFoodFormula(food, eatingSpeedFormula);
 		lastFoodEatenCache = food;
 		//noinspection DataFlowIssue
@@ -162,7 +181,6 @@ public class FoodDrinks extends JsonFeature {
 				|| !(event.getEntity() instanceof Player player)
 				|| (!player.getUseItem().getUseAnimation().equals(UseAnim.EAT) && !player.getUseItem().getUseAnimation().equals(UseAnim.DRINK)))
 			return;
-
 		player.stopUsingItem();
 	}
 
@@ -171,7 +189,6 @@ public class FoodDrinks extends JsonFeature {
 		for (CustomFoodProperties foodValue : customFoodProperties) {
 			if (foodValue.effects == null || !foodValue.food.matchesItem(event.getStack().getItem()))
 				continue;
-
 			foodValue.getEffects().forEach(pair -> {
 				if (!event.getLevel().isClientSide && pair.getFirst() != null && event.getLevel().random.nextFloat() < pair.getSecond()) {
 					event.getEntity().addEffect(new MobEffectInstance(pair.getFirst().getMobEffectInstance()));
@@ -189,12 +206,10 @@ public class FoodDrinks extends JsonFeature {
 		if (processedFoodMultipliers)
 			return;
 		processedFoodMultipliers = true;
-
 		for (Item item : ForgeRegistries.ITEMS.getValues()) {
 			if (item.getFoodProperties() == null
 					|| isItemInTag(item, FOOD_BLACKLIST, isClientSide))
 				continue;
-
 			FoodProperties food = item.getFoodProperties();
 			if (foodHungerMultiplier != 1d)
 				food.nutrition = (int) Math.ceil(item.getFoodProperties().getNutrition() * foodHungerMultiplier);
@@ -207,11 +222,9 @@ public class FoodDrinks extends JsonFeature {
 	public static void processCustomFoodValues(List<CustomFoodProperties> list, boolean isClientSide) {
 		if (list.isEmpty())
 			return;
-
 		for (CustomFoodProperties foodValue : list) {
 			foodValue.apply();
 		}
-
 		//reset cache when reloading
 		customFoodPropertiesCache = null;
 	}

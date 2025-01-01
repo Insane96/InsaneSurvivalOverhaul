@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "incubation"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smoking",
+        "category": "food",
+        "cookingtime": 600,
+        "experience": 0.35,
+        "ingredient": {
+          "item": "minecraft:egg"
+        },
+        "result": "iguanatweaksexpanded:over_easy_egg"
+      }
+    }
+  ]
+}

@@ -18,6 +18,7 @@ This is a breaking version: configs and data packs have got a huge update
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
   * Moved hoes scythe radius to Item Definition
   * Removed hoes cooldown
+* Moved new foods back here from Expanded
 * Health Regen
   * Passive regen has been moved here from No Hunger
 * Stack Sizes

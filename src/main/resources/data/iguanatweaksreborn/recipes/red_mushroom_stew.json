@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    }
+  ],
+  "result": {
+    "item": "iguanatweaksexpanded:red_mushroom_stew"
+  }
+}
