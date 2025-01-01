@@ -37,8 +37,8 @@ public class MaterialsAndOres extends Feature {
 
 	public MaterialsAndOres(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmable_iron", Component.literal("IguanaTweaks Reborn Farmable Iron"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmableIronDataPack));
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ore_smelting", Component.literal("IguanaTweaks Reborn Ore Smelting"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreSmelting));
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ore_generation", Component.literal("IguanaTweaks Reborn Ore Generation Overhaul"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreGenerationOverhaul));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmable_iron", Component.literal("Insane's Survival Tweaks Farmable Iron"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmableIronDataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ore_smelting", Component.literal("Insane's Survival Tweaks Ore Smelting"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreSmelting));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ore_generation", Component.literal("Insane's Survival Tweaks Ore Generation Overhaul"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreGenerationOverhaul));
 	}
 }

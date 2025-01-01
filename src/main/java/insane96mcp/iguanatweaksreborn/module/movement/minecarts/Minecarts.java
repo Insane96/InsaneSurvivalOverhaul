@@ -28,6 +28,6 @@ public class Minecarts extends Feature {
 
 	public Minecarts(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("IguanaTweaks Reborn Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("Insane's Survival Tweaks Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
 	}
 }

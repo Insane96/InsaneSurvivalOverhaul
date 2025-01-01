@@ -19,7 +19,7 @@ public class StatsBuffs extends Feature {
 
     public StatsBuffs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mobs_buffs", Component.literal("IguanaTweaks Reborn Mobs Stats Buffs"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mobs_buffs", Component.literal("Insane's Survival Tweaks Mobs Stats Buffs"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
     }
 
     @Override

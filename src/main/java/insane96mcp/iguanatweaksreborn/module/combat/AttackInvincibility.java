@@ -31,7 +31,7 @@ public class AttackInvincibility extends Feature {
 
 	public AttackInvincibility(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "attack_invincibility", Component.literal("IguanaTweaks Reborn Attack Invincibility"), () -> super.isEnabled() && !DataPacks.disableAllDataPacks && arrowsMagicNoInvincFrames));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "attack_invincibility", Component.literal("Insane's Survival Tweaks Attack Invincibility"), () -> super.isEnabled() && !DataPacks.disableAllDataPacks && arrowsMagicNoInvincFrames));
 	}
 
 	@SubscribeEvent

@@ -6,7 +6,7 @@ import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
-import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -31,7 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Label(name = "Hoes", description = "Hoes can now scythe grass and flowers. Also makes them break faster when tilling farmland")
 @LoadFeature(module = Modules.Ids.FARMING)
-public class Hoes extends JsonFeature {
+public class Hoes extends Feature {
 
 	public static final String TOO_WEAK = IguanaTweaksReborn.MOD_ID + ".weak_hoe";
 	public static final String SCYTHE_RADIUS = IguanaTweaksReborn.MOD_ID + ".scythe_radius";
@@ -47,18 +47,6 @@ public class Hoes extends JsonFeature {
 
 	public Hoes(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-	}
-
-	@Override
-	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
-	}
-
-	@Override
-	public void loadJsonConfigs() {
-		if (!this.isEnabled())
-			return;
-		super.loadJsonConfigs();
 	}
 
 	@SubscribeEvent

@@ -73,17 +73,20 @@ import java.util.stream.Collectors;
 @Mod("iguanatweaksreborn")
 public class IguanaTweaksReborn
 {
-	public static final String MOD_ID = "iguanatweaksreborn";
+    public static final String MOD_ID = "iguanatweaksreborn";
+    public static final String NEW_MOD_ID = "insanesurvivaltweaks";
 	public static final String RESOURCE_PREFIX = MOD_ID + ":";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final String CONFIG_FOLDER = "config/" + MOD_ID;
+    //TODO
+    public static final String CONFIG_FOLDER = "config/insanesurvivaltweaks";
 
     public static final ResourceLocation GUI_ICONS = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "textures/gui/icons.png");
 
     public IguanaTweaksReborn() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, MOD_ID + "/client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, MOD_ID + "/common.toml");
+        //TODO
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaltweaks/client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaltweaks/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpawnerDataAttacher.class);
         if (ModList.get().isLoaded("sereneseasons"))

@@ -15,6 +15,6 @@ import net.minecraft.server.packs.PackType;
 public class BlockDefinitionFeature extends Feature {
     public BlockDefinitionFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "block_data", Component.literal("IguanaTweaks Reborn Block Definitions"), () -> !DataPacks.disableAllDataPacks && this.isEnabled()));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "block_data", Component.literal("Insane's Survival Tweaks Block Definitions"), () -> !DataPacks.disableAllDataPacks && this.isEnabled()));
     }
 }

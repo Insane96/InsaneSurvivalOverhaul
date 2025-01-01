@@ -99,8 +99,8 @@ public class Seasons extends Feature {
 
 	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "serene_seasons_changes", Component.literal("IguanaTweaks Reborn Serene Seasons Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass));
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_saplings_in_winter", Component.literal("IguanaTweaks Reborn No Saplings in Winter"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "serene_seasons_changes", Component.literal("Insane's Survival Tweaks Serene Seasons Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_saplings_in_winter", Component.literal("Insane's Survival Tweaks No Saplings in Winter"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter));
 	}
 
 	@Override

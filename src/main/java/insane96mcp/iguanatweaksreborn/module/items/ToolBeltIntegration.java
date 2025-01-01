@@ -31,7 +31,7 @@ public class ToolBeltIntegration extends Feature {
 
 	public ToolBeltIntegration(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "toolbelt_integration", Component.literal("IguanaTweaks Reborn Tool Belt"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "toolbelt_integration", Component.literal("Insane's Survival Tweaks Tool Belt Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.network.message.SyncExperienceFeature;
-import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -42,7 +42,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Label(name = "Dropped Experience", description = "Various changes to experience. You can also use the iguanatweaks:disableExperience game rule to make experience disappear altogether.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
-public class DroppedExperience extends JsonFeature {
+public class DroppedExperience extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DISABLEEXPERIENCE = GameRules.register("iguanatweaks:disableExperience", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false, (server, booleanValue) -> {
 		DroppedExperience.disableExperience = booleanValue.get();
 		for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
@@ -105,11 +105,6 @@ public class DroppedExperience extends JsonFeature {
 	public static void tryGenerateMilkXp(Entity entity) {
 		if (milkXp.min > 0 || milkXp.max > 0)
 			entity.level().addFreshEntity(new ExperienceOrb(entity.level(), entity.getX(), entity.getY(), entity.getZ(), milkXp.getIntRandBetween(entity.level().random)));
-	}
-
-	@Override
-	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

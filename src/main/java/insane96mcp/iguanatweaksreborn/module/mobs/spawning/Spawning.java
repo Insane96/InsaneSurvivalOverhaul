@@ -61,8 +61,8 @@ public class Spawning extends Feature {
 
     public Spawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "yung_better_fortresses", Component.literal("IguanaTweaks Reborn Yung Better Fortresses"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ocean_guardians", Component.literal("IguanaTweaks Reborn Ocean Guardians"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && guardiansInDeepOceans));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "yung_better_fortresses", Component.literal("Insane's Survival Tweaks Yung Better Fortresses"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ocean_guardians", Component.literal("Insane's Survival Tweaks Ocean Guardians"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && guardiansInDeepOceans));
     }
 
     @SubscribeEvent

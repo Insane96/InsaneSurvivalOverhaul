@@ -50,7 +50,7 @@ public class Nether extends Feature {
 
     public Nether(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "nether_tweaks", Component.literal("IguanaTweaks Reborn Nether Tweaks"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "nether_tweaks", Component.literal("Insane's Survival Tweaks Nether Tweaks"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks));
     }
 
     public static boolean shouldDisableLavaPockets(SpringConfiguration configuration) {

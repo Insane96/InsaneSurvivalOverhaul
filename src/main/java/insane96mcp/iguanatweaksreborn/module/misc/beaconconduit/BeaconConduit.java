@@ -127,7 +127,7 @@ public class BeaconConduit extends JsonFeature {
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));
         addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "beacon_effects")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_beacon", Component.literal("IguanaTweaks Reborn Better Beacon"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_beacon", Component.literal("Insane's Survival Tweaks Better Beacon"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
     }
 
     @Override
