@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Label(name = "Beacon & Conduit", description = "Beacon Range varying based of blocks of the pyramid and better conduit killing mobs. Blocks list and ranges are controlled via json in this feature's folder")
+@Label(name = "Beacon & Conduit", description = "Beacon has been redesigned to have more effects and range based off blocks used for pyramid. Effects and blocks ranges are controlled via json config in this feature's folder.")
 @LoadFeature(module = Modules.Ids.MISC)
 public class BeaconConduit extends JsonFeature {
 
@@ -59,9 +59,11 @@ public class BeaconConduit extends JsonFeature {
     public static final RegistryObject<MenuType<ITRBeaconMenu>> BEACON_MENU_TYPE = ITRRegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ITRBeaconMenu::new, FeatureFlags.VANILLA_SET));
 
 
-    public static final RegistryObject<MobEffect> BLOCK_REACH = ITRRegistries.MOB_EFFECTS.register("block_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+    @SuppressWarnings("unused")
+	public static final RegistryObject<MobEffect> BLOCK_REACH = ITRRegistries.MOB_EFFECTS.register("block_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ForgeMod.BLOCK_REACH.get(), "bd0c6709-4b67-43d5-ae51-c6180d848978", 0.5f, AttributeModifier.Operation.ADDITION));
-    public static final RegistryObject<MobEffect> ENTITY_REACH = ITRRegistries.MOB_EFFECTS.register("entity_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+    @SuppressWarnings("unused")
+	public static final RegistryObject<MobEffect> ENTITY_REACH = ITRRegistries.MOB_EFFECTS.register("entity_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ForgeMod.ENTITY_REACH.get(), "fb23063a-c676-4da0-8d75-574ab8f3ee30", 0.075f, AttributeModifier.Operation.MULTIPLY_BASE));
 
     public static final ArrayList<IdTagValue> BLOCKS_LIST_DEFAULT = new ArrayList<>(List.of(
@@ -112,7 +114,7 @@ public class BeaconConduit extends JsonFeature {
     @Label(name = "Conduit.Better Protection", description = "Greatly increases the range and damage of the conduit")
     public static Boolean betterConduitProtection = true;
     @Config(min = 0d, max = 64d)
-    @Label(name = "Conduit.Protection Distance Multiplier", description = "Distance multiplier (formula is blocks_around / 7 * this_multiplier) from the conduit at which it will deal damage to enemies.")
+    @Label(name = "Conduit.Protection Distance Multiplier", description = "Distance multiplier (formula is `blocks_around / 7 * this_multiplier`) from the conduit at which it will deal damage to enemies.")
     public static Double conduitProtectionDistanceMultiplier = 8d;
     @Config(min = 0d, max = 96d)
     @Label(name = "Conduit.Protection Max Damage Distance", description = "If a mob is within this radius from the conduit, it will be dealt the maximum amount of damage.")

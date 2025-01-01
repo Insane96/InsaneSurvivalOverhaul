@@ -59,12 +59,15 @@ public class Nerfs extends Feature {
 	@Label(name = "Fishing has a chance to fish a guardian")
 	public static Double fishingCreatureChance = 0d;
 	@Config
-	@Label(name = "No fish if fishing in the same spot")
+	@Label(name = "No fish if fishing in the same spot", description = "If enabled after fishing for a few times in the same spot you won't be able to fish again unless you move in another spot")
 	public static Boolean antiFishingFarms = true;
 
 	@Config(min = 0, max = 1)
 	@Label(name = "Fall from mount chance", description = "When an entity is hit and on a mount they have this chance to fall")
 	public static Double fallFromMountChance = 0.2d;
+	@Config
+	@Label(name = "Fall from mount player only", description = "If true, only players are affected by 'Fall from mount chance'")
+	public static Boolean fallFromMountPlayerOnly = true;
 
 	@Config(min = 0)
 	@Label(name = "Prone mining speed multiplier", description = "When prone your mining speed is multiplied by this")
@@ -108,6 +111,9 @@ public class Nerfs extends Feature {
 				|| !(event.getSource().getEntity() instanceof LivingEntity
 				|| event.getEntity().level().isClientSide)
 				|| fallFromMountChance == 0)
+			return;
+
+		if (fallFromMountPlayerOnly && !(event.getSource().getEntity() instanceof Player))
 			return;
 
 		if (event.getEntity().getRandom().nextFloat() < fallFromMountChance) {
