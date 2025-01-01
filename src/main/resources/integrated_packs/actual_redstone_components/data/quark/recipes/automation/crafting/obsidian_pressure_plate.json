@@ -13,7 +13,8 @@
         }
     },
     "result": {
-        "item": "quark:obsidian_pressure_plate"
+        "item": "quark:obsidian_pressure_plate",
+        "count": 2
     },
     "conditions": [
         {

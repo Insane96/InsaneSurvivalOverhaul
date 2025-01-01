@@ -15,7 +15,8 @@
         "##"
     ],
     "result": {
-        "item": "autumnity:maple_pressure_plate"
+        "item": "autumnity:maple_pressure_plate",
+        "count": 2
     },
     "show_notification": true
 }

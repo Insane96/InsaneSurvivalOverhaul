@@ -11,6 +11,7 @@
 	],
 	"result":
 	{
-		"item": "minecraft:jungle_button"
+		"item": "minecraft:jungle_button",
+		"count": 2
 	}
 }

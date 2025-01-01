@@ -11,6 +11,7 @@
 	],
 	"result":
 	{
-		"item": "minecraft:dark_oak_button"
+		"item": "minecraft:dark_oak_button",
+		"count": 2
 	}
 }

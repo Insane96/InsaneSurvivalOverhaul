@@ -16,6 +16,7 @@
     }
   },
   "result": {
-    "item": "minecraft:lever"
+    "item": "minecraft:lever",
+    "count": 2
   }
 }

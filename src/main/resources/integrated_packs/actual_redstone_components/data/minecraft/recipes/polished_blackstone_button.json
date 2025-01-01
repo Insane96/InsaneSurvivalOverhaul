@@ -11,6 +11,7 @@
 	],
 	"result":
 	{
-		"item": "minecraft:polished_blackstone_button"
+		"item": "minecraft:polished_blackstone_button",
+		"count": 2
 	}
 }

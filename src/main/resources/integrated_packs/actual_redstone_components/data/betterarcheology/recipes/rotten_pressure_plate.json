@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "redstone",
+	"group": "wooden_pressure_plate",
+	"key": {
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"W": {
+			"item": "betterarcheology:rotten_planks"
+		}
+	},
+	"pattern": [
+		" r",
+		"WW"
+	],
+	"result": {
+		"item": "betterarcheology:rotten_pressure_plate",
+		"count": 2
+	},
+	"show_notification": true
+}

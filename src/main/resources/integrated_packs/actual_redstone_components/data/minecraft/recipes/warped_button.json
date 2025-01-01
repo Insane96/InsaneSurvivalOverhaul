@@ -10,6 +10,7 @@
         }
     ],
     "result": {
-        "item": "minecraft:warped_button"
+        "item": "minecraft:warped_button",
+        "count": 2
     }
 }

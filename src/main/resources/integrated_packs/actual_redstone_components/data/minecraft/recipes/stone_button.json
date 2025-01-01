@@ -11,6 +11,7 @@
 	],
 	"result":
 	{
-		"item": "minecraft:stone_button"
+		"item": "minecraft:stone_button",
+		"count": 2
 	}
 }

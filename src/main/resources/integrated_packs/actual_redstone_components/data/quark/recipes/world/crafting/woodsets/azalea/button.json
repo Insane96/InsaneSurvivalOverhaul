@@ -10,7 +10,8 @@
         }
     ],
     "result": {
-        "item": "quark:azalea_button"
+        "item": "quark:azalea_button",
+        "count": 2
     },
     "conditions": [
         {

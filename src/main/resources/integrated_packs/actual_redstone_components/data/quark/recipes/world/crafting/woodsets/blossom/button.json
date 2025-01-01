@@ -10,7 +10,8 @@
         }
     ],
     "result": {
-        "item": "quark:blossom_button"
+        "item": "quark:blossom_button",
+        "count": 2
     },
     "conditions": [
         {

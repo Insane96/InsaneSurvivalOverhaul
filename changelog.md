@@ -25,6 +25,7 @@ This is a breaking version: configs and data packs have got a huge update
 * Block Data has been renamed to Block definitions (folder from block_data to block_definitions)
 * Mobs can no longer fall from mount
 * Fixed drowning too fast
+* Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support for Actual Redstone Component data pack
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

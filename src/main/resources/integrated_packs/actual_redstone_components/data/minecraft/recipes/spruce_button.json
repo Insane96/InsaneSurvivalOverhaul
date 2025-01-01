@@ -11,6 +11,7 @@
 	],
 	"result":
 	{
-		"item": "minecraft:spruce_button"
+		"item": "minecraft:spruce_button",
+		"count": 2
 	}
 }

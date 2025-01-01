@@ -10,6 +10,7 @@
         }
     ],
     "result": {
-        "item": "minecraft:cherry_button"
+        "item": "minecraft:cherry_button",
+        "count": 2
     }
 }

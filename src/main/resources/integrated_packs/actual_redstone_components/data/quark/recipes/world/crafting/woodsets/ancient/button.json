@@ -10,7 +10,8 @@
         }
     ],
     "result": {
-        "item": "quark:ancient_button"
+        "item": "quark:ancient_button",
+        "count": 2
     },
     "conditions": [
         {

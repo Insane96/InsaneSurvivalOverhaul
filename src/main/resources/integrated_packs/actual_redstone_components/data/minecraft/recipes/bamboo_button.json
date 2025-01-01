@@ -10,6 +10,7 @@
         }
     ],
     "result": {
-        "item": "minecraft:bamboo_button"
+        "item": "minecraft:bamboo_button",
+        "count": 2
     }
 }

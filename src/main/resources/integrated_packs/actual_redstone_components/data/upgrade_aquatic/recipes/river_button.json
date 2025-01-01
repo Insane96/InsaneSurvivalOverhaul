@@ -1,17 +1,17 @@
 {
 	"type": "minecraft:crafting_shapeless",
+	"category": "redstone",
 	"group": "wooden_button",
 	"ingredients": [
 		{
-			"item": "minecraft:birch_planks"
+			"item": "upgrade_aquatic:river_planks"
 		},
 		{
 			"item": "minecraft:redstone"
 		}
 	],
-	"result":
-	{
-		"item": "minecraft:birch_button",
+	"result": {
+		"item": "upgrade_aquatic:river_button",
 		"count": 2
 	}
 }

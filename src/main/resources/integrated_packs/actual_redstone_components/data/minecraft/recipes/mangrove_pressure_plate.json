@@ -14,6 +14,7 @@
     }
   },
   "result": {
-    "item": "minecraft:mangrove_pressure_plate"
+    "item": "minecraft:mangrove_pressure_plate",
+	  "count": 2
   }
 }
