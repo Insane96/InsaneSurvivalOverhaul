@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:block/powered_rail_on_raised_ne",
+  "render_type": "cutout"
+}
