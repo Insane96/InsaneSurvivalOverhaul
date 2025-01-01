@@ -12,6 +12,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import net.minecraft.network.chat.Component;
@@ -55,6 +56,11 @@ public class ITREmiPlugin implements EmiPlugin {
 		}
 		if (Feature.isEnabled(Crops.class)) {
 			registry.addRecipe(createSimpleInfo(emiIngredientOf(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Crops.CARROT_SEEDS.get(), Crops.ROOTED_POTATO.get()), "crops", Component.translatable("emi.info.iguanatweaksreborn.crops.seeds")));
+		}
+		if (Feature.isEnabled(Minecarts.class)) {
+			registry.addRecipe(createSimpleInfo(Minecarts.COPPER_POWERED_RAIL.item().get(), "info_copper_powered_rail", Component.translatable("emi.info.iguanatweaksreborn.copper_powered_rail")));
+			registry.addRecipe(createSimpleInfo(Minecarts.GOLDEN_POWERED_RAIL.item().get(), "info_golden_powered_rail", Component.translatable("emi.info.iguanatweaksreborn.golden_powered_rail")));
+			registry.removeEmiStacks(emiStack -> emiStack.getItemStack().is(Items.POWERED_RAIL));
 		}
 		if (Feature.isEnabled(NoHunger.class) && NoHunger.buffCakes)
 			registry.addRecipe(createSimpleInfo(emiIngredientOf(Items.CAKE), "cake", Component.translatable("emi.info.iguanatweaksreborn.no_hunger.cake")));

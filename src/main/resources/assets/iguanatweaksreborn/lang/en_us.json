@@ -170,6 +170,9 @@
 
 	"iguanatweaksreborn.armor_slowdown": "-%s%% Speed",
 
+	"block.iguanatweaksreborn.copper_powered_rail": "Copper Powered Rail",
+	"block.iguanatweaksreborn.golden_powered_rail": "Golden Powered Rail",
+
 	"iguanatweaksreborn:sleep_respawn_module": "Sleep & Respawn",
 
 	"block.iguanatweaksreborn.grave": "Grave",
@@ -208,6 +211,8 @@
 
 	"emi.info.iguanatweaksreborn.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Can be found in the wild",
+	"emi.info.iguanatweaksreborn.copper_powered_rail": "Medium speed powered rail",
+	"emi.info.iguanatweaksreborn.golden_powered_rail": "Fastest speed powered rail, should not be used for slopes due to Minecarts being wonky",
 	"emi.info.iguanatweaksreborn.no_hunger.cake": "Restores a percentage of missing health",
 
 	"gamerule.iguanatweaks:deathGrave": "Spawn grave on death",

@@ -31,6 +31,7 @@ This is a breaking version: configs and data packs have got a huge update
   * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
 * Stats Buffs has been moved here from Expanded
 * Enhanced AI has been moved here from Expanded
+* Minecarts has been moved here from Expanded
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

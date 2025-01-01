@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:rail"
+        },
+        {
+            "item": "minecraft:rail"
+        },
+        {
+            "item": "minecraft:rail"
+        },
+        {
+            "item": "minecraft:redstone"
+        },
+        {
+            "item": "minecraft:copper_ingot"
+        }
+    ],
+    "result": {
+        "item": "iguanatweaksreborn:copper_powered_rail",
+        "count": 3
+    }
+}

@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconRenderer;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconScreen;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.Spawning;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
@@ -53,6 +54,13 @@ public class ClientSetup {
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
+
+            addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
+            addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+        }
+        else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
+            addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             if (Feature.isEnabled(EnchantmentsFeature.class)) {

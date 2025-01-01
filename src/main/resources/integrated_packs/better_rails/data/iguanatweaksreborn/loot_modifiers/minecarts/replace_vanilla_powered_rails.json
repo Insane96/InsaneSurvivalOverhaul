@@ -1,0 +1,8 @@
+{
+  "type": "iguanatweaksreborn:replace_drop",
+  "chests_only": true,
+  "conditions": [],
+  "item_to_replace": "minecraft:powered_rail",
+  "keep_durability": true,
+  "new_item": "iguanatweaksreborn:golden_powered_rail"
+}

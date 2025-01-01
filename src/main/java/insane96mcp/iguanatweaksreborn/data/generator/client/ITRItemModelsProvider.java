@@ -4,6 +4,7 @@ import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.world.Berries;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
@@ -43,6 +44,9 @@ public class ITRItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.RED_MUSHROOM_STEW.get());
         basicItem(FoodDrinks.NETHERIZED_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
+
+        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/copper_powered_rail"));
+        withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
     }
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)
     {

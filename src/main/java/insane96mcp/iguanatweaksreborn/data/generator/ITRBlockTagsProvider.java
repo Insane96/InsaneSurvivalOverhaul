@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.mining.blockhardness.BlockHardness;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.Spawning;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
@@ -51,6 +52,8 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
                 .add(Spawning.ECHO_LANTERN.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(BoneMeal.RICH_FARMLAND.block().get());
+        tag(BlockTags.RAILS)
+                .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
 
         //Mod's tags
         tag(RESPAWN_OBELISK_BLOCKS_TO_ROT)
