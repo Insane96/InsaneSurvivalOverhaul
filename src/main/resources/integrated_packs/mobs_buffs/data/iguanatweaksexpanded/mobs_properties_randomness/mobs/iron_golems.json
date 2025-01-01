@@ -1,0 +1,11 @@
+{
+    "target": "minecraft:iron_golem",
+    "attributes": [
+        {
+            "id": "minecraft:generic.follow_range",
+            "modifier_name": "More Sight for Iron Golems",
+            "amount": 2,
+            "operation": "multiply_base"
+        }
+    ]
+}

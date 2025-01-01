@@ -1,0 +1,91 @@
+{
+    "values": [
+        "minecraft:pig",
+        "minecraft:chicken",
+        "minecraft:sheep",
+        "#iguanatweaksreborn:cows",
+        "minecraft:fox",
+        "minecraft:cod",
+        "minecraft:salmon",
+        "minecraft:pufferfish",
+        "minecraft:tropical_fish",
+        "minecraft:axolotl",
+        "minecraft:bat",
+        "minecraft:bee",
+        "minecraft:cat",
+        "minecraft:camel",
+        "minecraft:dolphin",
+        "minecraft:frog",
+        "minecraft:frog",
+        "minecraft:goat",
+        "minecraft:mooshroom",
+        "minecraft:ocelot",
+        "minecraft:panda",
+        "minecraft:parrot",
+        "minecraft:rabbit",
+        "minecraft:squid",
+        "minecraft:turtle",
+        "minecraft:villager",
+        "minecraft:wolf",
+        "minecraft:allay",
+        "minecraft:glow_squid",
+        "minecraft:zombie_horse",
+        "minecraft:strider",
+        "minecraft:snow_golem",
+        "minecraft:iron_golem",
+        {
+            "id": "quark:crab",
+            "required": false
+        },
+        {
+            "id": "quark:shiba",
+            "required": false
+        },
+        {
+            "id": "autumnity:turkey",
+            "required": false
+        },
+        {
+            "id": "autumnity:snail",
+            "required": false
+        },
+        "minecraft:skeleton",
+        "minecraft:spider",
+        "minecraft:cave_spider",
+        "minecraft:piglin",
+        "minecraft:creeper",
+        "minecraft:enderman",
+        "minecraft:endermite",
+        "minecraft:evoker",
+        "minecraft:ghast",
+        "minecraft:guardian",
+        "minecraft:illusioner",
+        "minecraft:hoglin",
+        "minecraft:magma_cube",
+        "minecraft:phantom",
+        "minecraft:piglin_brute",
+        "minecraft:pillager",
+        "minecraft:ravager",
+        "minecraft:shulker",
+        "minecraft:silverfish",
+        "minecraft:slime",
+        "minecraft:stray",
+        "minecraft:vindicator",
+        "minecraft:warden",
+        "minecraft:witch",
+        "#iguanatweaksexpanded:skeletons",
+        "minecraft:zoglin",
+        {
+            "id": "quark:foxhound",
+            "required": false
+        },
+        {
+            "id": "quark:forgotten",
+            "required": false
+        },
+        {
+            "id": "quark:wraith",
+            "required": false
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "target": "minecraft:spider",
+    "attributes": [
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "Slowdown spiders",
+            "amount": -0.09,
+            "operation": "multiply_base"
+        }
+    ]
+}

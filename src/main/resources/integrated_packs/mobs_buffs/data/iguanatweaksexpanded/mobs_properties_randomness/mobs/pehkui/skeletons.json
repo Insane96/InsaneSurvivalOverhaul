@@ -1,0 +1,16 @@
+{
+    "target": "#iguanatweaksexpanded:skeletons",
+    "scale_pehkui": [
+        {
+            "scale": {
+                "min": 0.8,
+                "max": 1
+            },
+            "scale_types": [
+                "pehkui:width",
+                "pehkui:height"
+            ],
+            "operation": "set"
+        }
+    ]
+}

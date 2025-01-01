@@ -1,0 +1,11 @@
+{
+    "target": "#iguanatweaksexpanded:speed_nerf",
+    "attributes": [
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "Speed nerf",
+            "amount": -0.15,
+            "operation": "multiply_base"
+        }
+    ]
+}

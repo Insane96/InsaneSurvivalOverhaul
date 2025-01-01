@@ -28,6 +28,7 @@ This is a breaking version: configs and data packs have got a huge update
 * Actual Redstone Component data pack
   * Doubled amount of buttons, pressure plates and levers from crafting
   * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
+* Stats Buffs has been moved here from Expanded
 * Changed, moved and renamed many config options
   * Client
     * World border has its own feature now

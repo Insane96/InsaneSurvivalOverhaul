@@ -1,0 +1,70 @@
+{
+    "target": "#iguanatweaksexpanded:zombies",
+    "attributes": [
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "More Speed for Zombies",
+            "amount": {
+                "value": 0.02,
+                "condition_modifier": {
+                    "operation": "multiply",
+                    "condition": {
+                        "spawner_behaviour": "spawner_only"
+                    },
+                    "amount": 0.5
+                },
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.03
+                }
+            },
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.follow_range",
+            "modifier_name": "More Follow Range for Zombies",
+            "amount": {
+                "value": 12,
+                "condition_modifier": {
+                    "operation": "multiply",
+                    "condition": {
+                        "spawner_behaviour": "spawner_only"
+                    },
+                    "amount": 0.5
+                },
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 4
+                }
+            },
+            "operation": "addition"
+        }
+    ],
+    "set_nbt": [
+        {
+            "nbt_tag": "enhancedai:miner",
+            "type": "boolean",
+            "value": {
+                "value": 0.10,
+                "depth_modifier": {
+                    "operation": "add",
+                    "amount_per_step": 0.01,
+                    "step": 8,
+                    "starting_y": 80
+                },
+                "condition_modifier": {
+                    "operation": "multiply",
+                    "condition": {
+                        "spawner_behaviour": "spawner_only"
+                    },
+                    "amount": 0.35
+                },
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.05
+                }
+            },
+            "persistent_data": true
+        }
+    ]
+}

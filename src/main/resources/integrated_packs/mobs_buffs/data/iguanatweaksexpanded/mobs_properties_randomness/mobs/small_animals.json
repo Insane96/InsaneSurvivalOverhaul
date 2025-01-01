@@ -1,0 +1,11 @@
+{
+    "target": "#iguanatweaksexpanded:small_animals",
+    "attributes": [
+        {
+            "id": "minecraft:generic.attack_damage",
+            "modifier_name": "Nerf small animals",
+            "amount": -0.3,
+            "operation": "multiply_base"
+        }
+    ]
+}

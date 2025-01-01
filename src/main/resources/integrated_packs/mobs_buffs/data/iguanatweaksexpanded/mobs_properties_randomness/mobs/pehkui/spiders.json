@@ -1,0 +1,22 @@
+{
+    "target": "minecraft:spider",
+    "scale_pehkui": [
+        {
+            "scale": 0.55,
+            "scale_types": [
+                "pehkui:hitbox_width",
+                "pehkui:hitbox_height",
+                "pehkui:eye_height"
+            ],
+            "operation": "set"
+        },
+        {
+            "scale": 0.65,
+            "scale_types": [
+                "pehkui:model_width",
+                "pehkui:model_height"
+            ],
+            "operation": "set"
+        }
+    ]
+}

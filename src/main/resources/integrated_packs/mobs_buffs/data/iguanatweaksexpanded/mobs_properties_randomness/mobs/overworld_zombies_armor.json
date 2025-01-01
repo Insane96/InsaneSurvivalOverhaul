@@ -1,0 +1,363 @@
+{
+    "target": "#iguanatweaksexpanded:overworld_zombies",
+    "equipment": {
+        "main_hand": {
+            "chance": {
+                "value": 0.15,
+                "condition_modifier": {
+                    "operation": "multiply",
+                    "amount": 1.5,
+                    "condition": {
+                        "world": {
+                            "moon_phases": "full_moon"
+                        }
+                    }
+                },
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.05
+                }
+            },
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.3,
+                        "condition_modifier": {
+                            "operation": "multiply",
+                            "amount": 1.5,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 5,
+                        "max": 15,
+                        "modifier_behavior": "max_only",
+                        "difficulty_modifier": {
+                            "operation": "add",
+                            "hard": 7
+                        }
+                    }
+                }
+            ],
+            "items": [
+                {
+                    "id": "minecraft:wooden_sword",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksexpanded:flint_sword",
+                    "weight": 50
+                },
+                {
+                    "id": "minecraft:stone_sword",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_sword",
+                    "weight": 90
+                },
+                {
+                    "id": "minecraft:iron_sword",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_sword",
+                    "weight": 10
+                },
+                {
+                    "id": "minecraft:golden_sword",
+                    "weight": 30
+                },
+                {
+                    "id": "minecraft:diamond_sword",
+                    "weight": 1
+                },
+                {
+                    "id": "minecraft:wooden_axe",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksexpanded:flint_axe",
+                    "weight": 50
+                },
+                {
+                    "id": "minecraft:stone_axe",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_axe",
+                    "weight": 90
+                },
+                {
+                    "id": "minecraft:iron_axe",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_axe",
+                    "weight": 10
+                },
+                {
+                    "id": "minecraft:golden_axe",
+                    "weight": 30
+                },
+                {
+                    "id": "minecraft:diamond_axe",
+                    "weight": 1
+                },
+                {
+                    "id": "minecraft:wooden_pickaxe",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksexpanded:flint_pickaxe",
+                    "weight": 50
+                },
+                {
+                    "id": "minecraft:stone_pickaxe",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_pickaxe",
+                    "weight": 90
+                },
+                {
+                    "id": "minecraft:iron_pickaxe",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_pickaxe",
+                    "weight": 10
+                },
+                {
+                    "id": "minecraft:golden_pickaxe",
+                    "weight": 30
+                },
+                {
+                    "id": "minecraft:diamond_pickaxe",
+                    "weight": 1
+                },
+                {
+                    "id": "minecraft:wooden_shovel",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksexpanded:flint_shovel",
+                    "weight": 50
+                },
+                {
+                    "id": "minecraft:stone_shovel",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_shovel",
+                    "weight": 90
+                },
+                {
+                    "id": "minecraft:iron_shovel",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_shovel",
+                    "weight": 10
+                },
+                {
+                    "id": "minecraft:golden_shovel",
+                    "weight": 30
+                },
+                {
+                    "id": "minecraft:diamond_shovel",
+                    "weight": 1
+                },
+                {
+                    "id": "minecraft:wooden_hoe",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksexpanded:flint_hoe",
+                    "weight": 50
+                },
+                {
+                    "id": "minecraft:stone_hoe",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_hoe",
+                    "weight": 90
+                },
+                {
+                    "id": "minecraft:iron_hoe",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_hoe",
+                    "weight": 10
+                },
+                {
+                    "id": "minecraft:golden_hoe",
+                    "weight": 30
+                },
+                {
+                    "id": "minecraft:diamond_hoe",
+                    "weight": 1
+                }
+            ]
+        },
+        "head": {
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.3,
+                        "condition_modifier": {
+                            "operation": "multiply",
+                            "amount": 1.5,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 5,
+                        "max": 15,
+                        "modifier_behavior": "max_only",
+                        "difficulty_modifier": {
+                            "operation": "add",
+                            "hard": 7
+                        }
+                    }
+                }
+            ]
+        },
+        "chest": {
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.3,
+                        "condition_modifier": {
+                            "operation": "multiply",
+                            "amount": 1.5,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 5,
+                        "max": 15,
+                        "modifier_behavior": "max_only",
+                        "difficulty_modifier": {
+                            "operation": "add",
+                            "hard": 7
+                        }
+                    }
+                }
+            ]
+        },
+        "legs": {
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.3,
+                        "condition_modifier": {
+                            "operation": "multiply",
+                            "amount": 1.5,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 5,
+                        "max": 15,
+                        "modifier_behavior": "max_only",
+                        "difficulty_modifier": {
+                            "operation": "add",
+                            "hard": 7
+                        }
+                    }
+                }
+            ]
+        },
+        "feet": {
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.3,
+                        "condition_modifier": {
+                            "operation": "multiply",
+                            "amount": 1.5,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 5,
+                        "max": 15,
+                        "modifier_behavior": "max_only",
+                        "difficulty_modifier": {
+                            "operation": "add",
+                            "hard": 7
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "presets": {
+        "mode": "before",
+        "chance": {
+            "value": 0.15,
+            "condition_modifier": {
+                "operation": "multiply",
+                "amount": 1.5,
+                "condition": {
+                    "world": {
+                        "moon_phases": "full_moon"
+                    }
+                }
+            }
+        },
+        "list": [
+            {
+                "id": "iguanatweaksexpanded:leather_armor",
+                "weight": 180
+            },
+            {
+                "id": "iguanatweaksexpanded:chained_copper_armor",
+                "weight": 120
+            },
+            {
+                "id": "iguanatweaksexpanded:chainmail_armor",
+                "weight": 40
+            },
+            {
+                "id": "iguanatweaksexpanded:golden_armor",
+                "weight": 220
+            },
+            {
+                "id": "iguanatweaksexpanded:iron_armor",
+                "weight": 8
+            },
+            {
+                "id": "iguanatweaksexpanded:durium_armor",
+                "weight": 8
+            },
+            {
+                "id": "iguanatweaksexpanded:diamond_armor",
+                "weight": 1
+            }
+        ]
+    }
+}

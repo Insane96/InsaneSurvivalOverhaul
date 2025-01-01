@@ -1,0 +1,45 @@
+{
+    "target": "#iguanatweaksexpanded:mobs_no_bosses",
+    "attributes": [
+        {
+            "id": "enhancedai:generic.xray_follow_range",
+            "chance": {
+                "value": 0.4,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.2
+                }
+            },
+            "modifier_name": "More XRay Range for Mobs",
+            "amount": {
+                "value": 16,
+                "condition_modifier": {
+                    "operation": "multiply",
+                    "condition": {
+                        "spawner_behaviour": "spawner_only"
+                    },
+                    "amount": 0.75
+                },
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 8
+                },
+                "world_spawn_distance_modifier": {
+                    "operation": "add",
+                    "amount_per_step": 1,
+                    "step": 1000,
+                    "shift": 1000,
+                    "distance_cap": 17000
+                }
+            },
+            "operation": "addition"
+        },
+        {
+            "id": "forge:swim_speed",
+            "modifier_name": "More Swim Speed for Mobs",
+            "amount": 2,
+            "operation": "multiply_base"
+        }
+    ],
+    "priority": 1
+}

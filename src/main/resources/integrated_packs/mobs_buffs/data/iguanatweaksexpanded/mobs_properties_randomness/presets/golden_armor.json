@@ -1,0 +1,60 @@
+{
+    "equipment": {
+        "head": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "minecraft:golden_helmet"
+                }
+            ]
+        },
+        "chest": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "minecraft:golden_chestplate"
+                }
+            ]
+        },
+        "legs": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "minecraft:golden_leggings"
+                }
+            ]
+        },
+        "feet": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "minecraft:golden_boots"
+                }
+            ]
+        }
+    }
+}

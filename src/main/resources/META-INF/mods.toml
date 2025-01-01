@@ -40,6 +40,20 @@ license="All rights reserved"
     side="BOTH"
 
 [[dependencies.iguanatweaksreborn]]
+    modId="mobspropertiesrandomness"
+    mandatory=false
+    versionRange="[4.10.13,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.iguanatweaksreborn]]
+    modId="enhancedai"
+    mandatory=false
+    versionRange="[2.5.2,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.iguanatweaksreborn]]
     modId="maxhealthfix"
     mandatory=true
     versionRange="[12.0.2,)"

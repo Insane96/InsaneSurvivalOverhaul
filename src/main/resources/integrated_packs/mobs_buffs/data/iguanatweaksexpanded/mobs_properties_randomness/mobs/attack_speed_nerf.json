@@ -1,0 +1,11 @@
+{
+    "target": "#iguanatweaksexpanded:attack_speed_nerf",
+    "attributes": [
+        {
+            "id": "minecraft:generic.attack_speed",
+            "modifier_name": "ITE attack speed nerf",
+            "amount": -0.75,
+            "operation": "multiply_base"
+        }
+    ]
+}

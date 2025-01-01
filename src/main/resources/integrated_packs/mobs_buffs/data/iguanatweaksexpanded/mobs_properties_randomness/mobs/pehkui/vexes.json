@@ -1,0 +1,13 @@
+{
+    "target": "minecraft:vex",
+    "scale_pehkui": [
+        {
+            "scale": 1.2,
+            "scale_types": [
+                "pehkui:width",
+                "pehkui:height"
+            ],
+            "operation": "set"
+        }
+    ]
+}

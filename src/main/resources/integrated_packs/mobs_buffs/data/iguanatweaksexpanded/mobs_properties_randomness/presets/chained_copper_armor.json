@@ -1,0 +1,60 @@
+{
+    "equipment": {
+        "head": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "iguanatweaksexpanded:chained_copper_helmet"
+                }
+            ]
+        },
+        "chest": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "iguanatweaksexpanded:chained_copper_chestplate"
+                }
+            ]
+        },
+        "legs": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "iguanatweaksexpanded:chained_copper_leggings"
+                }
+            ]
+        },
+        "feet": {
+            "chance": {
+                "value": 0.5,
+                "difficulty_modifier": {
+                    "operation": "add",
+                    "hard": 0.25
+                }
+            },
+            "items": [
+                {
+                    "id": "iguanatweaksexpanded:chained_copper_boots"
+                }
+            ]
+        }
+    }
+}
