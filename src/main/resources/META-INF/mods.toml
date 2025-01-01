@@ -42,7 +42,7 @@ license="All rights reserved"
 [[dependencies.iguanatweaksreborn]]
     modId="mobspropertiesrandomness"
     mandatory=false
-    versionRange="[4.10.13,)"
+    versionRange="[4.10.14,)"
     ordering="NONE"
     side="BOTH"
 

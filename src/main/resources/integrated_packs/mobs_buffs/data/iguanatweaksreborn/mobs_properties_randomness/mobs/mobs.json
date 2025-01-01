@@ -1,5 +1,5 @@
 {
-    "target": "#iguanatweaksexpanded:mobs_no_bosses",
+    "target": "#iguanatweaksreborn:mobs_no_bosses",
     "attributes": [
         {
             "id": "enhancedai:generic.xray_follow_range",

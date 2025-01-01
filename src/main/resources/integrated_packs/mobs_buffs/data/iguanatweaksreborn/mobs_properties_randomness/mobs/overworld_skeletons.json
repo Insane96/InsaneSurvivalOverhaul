@@ -1,5 +1,5 @@
 {
-    "target": "#iguanatweaksexpanded:overworld_skeletons",
+    "target": "#iguanatweaksreborn:overworld_skeletons",
     "set_nbt": [
         {
             "nbt_tag": "enhancedai:inaccuracy",
@@ -154,31 +154,31 @@
         },
         "list": [
             {
-                "id": "iguanatweaksexpanded:leather_armor",
+                "id": "iguanatweaksreborn:leather_armor",
                 "weight": 180
             },
             {
-                "id": "iguanatweaksexpanded:chained_copper_armor",
+                "id": "iguanatweaksreborn:chained_copper_armor",
                 "weight": 120
             },
             {
-                "id": "iguanatweaksexpanded:chainmail_armor",
+                "id": "iguanatweaksreborn:chainmail_armor",
                 "weight": 40
             },
             {
-                "id": "iguanatweaksexpanded:golden_armor",
+                "id": "iguanatweaksreborn:golden_armor",
                 "weight": 220
             },
             {
-                "id": "iguanatweaksexpanded:iron_armor",
+                "id": "iguanatweaksreborn:iron_armor",
                 "weight": 8
             },
             {
-                "id": "iguanatweaksexpanded:durium_armor",
+                "id": "iguanatweaksreborn:durium_armor",
                 "weight": 8
             },
             {
-                "id": "iguanatweaksexpanded:diamond_armor",
+                "id": "iguanatweaksreborn:diamond_armor",
                 "weight": 1
             }
         ]

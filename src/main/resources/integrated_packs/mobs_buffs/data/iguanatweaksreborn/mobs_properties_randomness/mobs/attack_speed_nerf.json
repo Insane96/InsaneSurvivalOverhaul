@@ -1,5 +1,5 @@
 {
-    "target": "#iguanatweaksexpanded:attack_speed_nerf",
+    "target": "#iguanatweaksreborn:attack_speed_nerf",
     "attributes": [
         {
             "id": "minecraft:generic.attack_speed",

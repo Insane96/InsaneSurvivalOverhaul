@@ -54,6 +54,7 @@
         "minecraft:cave_spider",
         "minecraft:piglin",
         "minecraft:creeper",
+        "minecraft:blaze",
         "minecraft:enderman",
         "minecraft:endermite",
         "minecraft:evoker",
@@ -72,9 +73,11 @@
         "minecraft:stray",
         "minecraft:vindicator",
         "minecraft:warden",
+        "#iguanatweaksreborn:skeletons",
         "minecraft:witch",
-        "#iguanatweaksexpanded:skeletons",
         "minecraft:zoglin",
+        "#iguanatweaksreborn:overworld_zombies",
+        "minecraft:zombified_piglin",
         {
             "id": "quark:foxhound",
             "required": false
@@ -85,6 +88,10 @@
         },
         {
             "id": "quark:wraith",
+            "required": false
+        },
+        {
+            "id": "conjurer_illager:conjurer",
             "required": false
         }
     ]

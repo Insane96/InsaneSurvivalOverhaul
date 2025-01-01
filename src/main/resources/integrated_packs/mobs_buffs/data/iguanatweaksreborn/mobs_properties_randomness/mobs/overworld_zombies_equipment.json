@@ -1,5 +1,5 @@
 {
-    "target": "#iguanatweaksexpanded:overworld_zombies",
+    "target": "#iguanatweaksreborn:overworld_zombies",
     "equipment": {
         "main_hand": {
             "chance": {
@@ -49,7 +49,7 @@
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksexpanded:flint_sword",
+                    "id": "iguanatweaksreborn:flint_sword",
                     "weight": 50
                 },
                 {
@@ -57,7 +57,7 @@
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_sword",
+                    "id": "iguanatweaksreborn:copper_sword",
                     "weight": 90
                 },
                 {
@@ -65,7 +65,7 @@
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_sword",
+                    "id": "iguanatweaksreborn:durium_sword",
                     "weight": 10
                 },
                 {
@@ -81,7 +81,7 @@
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksexpanded:flint_axe",
+                    "id": "iguanatweaksreborn:flint_axe",
                     "weight": 50
                 },
                 {
@@ -89,7 +89,7 @@
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_axe",
+                    "id": "iguanatweaksreborn:copper_axe",
                     "weight": 90
                 },
                 {
@@ -97,7 +97,7 @@
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_axe",
+                    "id": "iguanatweaksreborn:durium_axe",
                     "weight": 10
                 },
                 {
@@ -113,7 +113,7 @@
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksexpanded:flint_pickaxe",
+                    "id": "iguanatweaksreborn:flint_pickaxe",
                     "weight": 50
                 },
                 {
@@ -121,7 +121,7 @@
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_pickaxe",
+                    "id": "iguanatweaksreborn:copper_pickaxe",
                     "weight": 90
                 },
                 {
@@ -129,7 +129,7 @@
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_pickaxe",
+                    "id": "iguanatweaksreborn:durium_pickaxe",
                     "weight": 10
                 },
                 {
@@ -145,7 +145,7 @@
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksexpanded:flint_shovel",
+                    "id": "iguanatweaksreborn:flint_shovel",
                     "weight": 50
                 },
                 {
@@ -153,7 +153,7 @@
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_shovel",
+                    "id": "iguanatweaksreborn:copper_shovel",
                     "weight": 90
                 },
                 {
@@ -161,7 +161,7 @@
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_shovel",
+                    "id": "iguanatweaksreborn:durium_shovel",
                     "weight": 10
                 },
                 {
@@ -177,7 +177,7 @@
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksexpanded:flint_hoe",
+                    "id": "iguanatweaksreborn:flint_hoe",
                     "weight": 50
                 },
                 {
@@ -185,7 +185,7 @@
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_hoe",
+                    "id": "iguanatweaksreborn:copper_hoe",
                     "weight": 90
                 },
                 {
@@ -193,7 +193,7 @@
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_hoe",
+                    "id": "iguanatweaksreborn:durium_hoe",
                     "weight": 10
                 },
                 {
@@ -331,31 +331,31 @@
         },
         "list": [
             {
-                "id": "iguanatweaksexpanded:leather_armor",
+                "id": "iguanatweaksreborn:leather_armor",
                 "weight": 180
             },
             {
-                "id": "iguanatweaksexpanded:chained_copper_armor",
+                "id": "iguanatweaksreborn:chained_copper_armor",
                 "weight": 120
             },
             {
-                "id": "iguanatweaksexpanded:chainmail_armor",
+                "id": "iguanatweaksreborn:chainmail_armor",
                 "weight": 40
             },
             {
-                "id": "iguanatweaksexpanded:golden_armor",
+                "id": "iguanatweaksreborn:golden_armor",
                 "weight": 220
             },
             {
-                "id": "iguanatweaksexpanded:iron_armor",
+                "id": "iguanatweaksreborn:iron_armor",
                 "weight": 8
             },
             {
-                "id": "iguanatweaksexpanded:durium_armor",
+                "id": "iguanatweaksreborn:durium_armor",
                 "weight": 8
             },
             {
-                "id": "iguanatweaksexpanded:diamond_armor",
+                "id": "iguanatweaksreborn:diamond_armor",
                 "weight": 1
             }
         ]

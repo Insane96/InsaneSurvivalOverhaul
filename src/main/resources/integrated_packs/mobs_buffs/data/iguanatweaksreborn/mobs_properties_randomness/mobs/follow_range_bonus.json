@@ -1,11 +1,11 @@
 {
-    "target": "#iguanatweaksexpanded:movement_speed_bonus",
+    "target": "#iguanatweaksreborn:follow_range_bonus",
     "attributes": [
         {
-            "id": "minecraft:generic.movement_speed",
-            "modifier_name": "More Speed for non-zombie mobs",
+            "id": "minecraft:generic.follow_range",
+            "modifier_name": "More Follow Range for non-zombie mobs",
             "amount": {
-                "value": 0.09,
+                "value": 16,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
@@ -15,17 +15,17 @@
                 },
                 "difficulty_modifier": {
                     "operation": "add",
-                    "hard": 0.03
+                    "hard": 8
                 },
                 "world_spawn_distance_modifier": {
                     "operation": "add",
-                    "amount_per_step": 0.01,
+                    "amount_per_step": 1,
                     "step": 1000,
                     "shift": 1000,
-                    "distance_cap": 11000
+                    "distance_cap": 25000
                 }
             },
-            "operation": "multiply_base"
+            "operation": "addition"
         }
     ]
 }
