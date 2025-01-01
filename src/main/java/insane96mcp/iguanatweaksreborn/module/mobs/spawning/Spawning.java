@@ -53,7 +53,7 @@ public class Spawning extends Feature {
     @Label(name = "Allow world spawn spawn", description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
     @Config
-    @Label(name = "Remove skeletons from Fortresses", description = "Disables normal skeletons from spawning in Fortresses. Requires a minecraft restart")
+    @Label(name = "Remove skeletons from Fortresses", description = "Disables normal skeletons from spawning in Fortresses.")
     public static Boolean removeSkeletonsFromFortresses = true;
     @Config
     @Label(name = "Guardians in Deep Oceans", description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")

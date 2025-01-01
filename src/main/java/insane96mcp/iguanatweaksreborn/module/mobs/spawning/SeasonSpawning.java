@@ -57,8 +57,8 @@ public class SeasonSpawning extends Feature {
     public static Integer animalsCapAutumn = 5;
 
     @Config
-    @Label(name = "Sea creature in cold seasons", description = "Sea Creatures can no longer naturally spawn in Winter and will spawn less in autumn.")
-    public static Boolean seaCreatureInColdSeasons = false;
+    @Label(name = "No Sea creature in cold seasons", description = "Sea Creatures can no longer naturally spawn in Winter and will spawn less in autumn.")
+    public static Boolean noSeaCreatureInColdSeasons = true;
 
     public SeasonSpawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -96,17 +96,15 @@ public class SeasonSpawning extends Feature {
                 MobCategory.MONSTER.despawnDistance = despawnDistanceAutumn;
                 MobCategory.MONSTER.max = hostileCapAutumn;
                 MobCategory.CREATURE.max = animalsCapAutumn;
-                if (!seaCreatureInColdSeasons) {
+                if (noSeaCreatureInColdSeasons)
                     MobCategory.WATER_AMBIENT.max = 10;
-                }
             }
             case WINTER -> {
                 MobCategory.MONSTER.despawnDistance = despawnDistanceWinter;
                 MobCategory.MONSTER.max = hostileCapWinter;
                 MobCategory.CREATURE.max = animalsCapWinter;
-                if (!seaCreatureInColdSeasons) {
+                if (noSeaCreatureInColdSeasons)
                     MobCategory.WATER_AMBIENT.max = 0;
-                }
             }
         }
     }
