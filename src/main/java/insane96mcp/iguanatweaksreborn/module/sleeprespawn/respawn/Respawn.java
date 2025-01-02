@@ -63,7 +63,7 @@ public class Respawn extends Feature {
 	@Label(name = "Stats Penalty.Health.Minimum", description = "Min Health of respawning players")
 	public static Difficulty minHealthOnRespawn = new Difficulty(10, 10, 6);
 	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Health.Per Death", description = "How much health respawning players loose on respawn (not max health)")
+	@Label(name = "Stats Penalty.Health.Per Death", description = "How much health respawning players lose on respawn (not max health)")
 	public static Difficulty perDeathHealthOnRespawn = new Difficulty(1, 2, 2);
 	@Config(min = 0, max = 20)
 	@Label(name = "Stats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players")

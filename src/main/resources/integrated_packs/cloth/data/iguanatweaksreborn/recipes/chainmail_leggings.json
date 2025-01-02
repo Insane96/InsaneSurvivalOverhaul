@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "iguanatweaksexpanded:cloth"
+    },
+    "c": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "c c",
+    "c c"
+  ],
+  "result": {
+    "item": "minecraft:chainmail_leggings"
+  },
+  "show_notification": true
+}

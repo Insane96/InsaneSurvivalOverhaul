@@ -185,6 +185,8 @@
 	"iguanatweaksreborn.no_spawn_point": "You cannot set a respawn point. Better leave a trace from the world's spawn.",
 	"iguanatweaksreborn.enjoy_the_night": "Your respawn point has been set. Enjoy the night!",
 
+	"item.iguanatweaksexpanded.cloth": "Cloth",
+
 	"effect.iguanatweaksreborn.tired": "Tired",
 	"effect.iguanatweaksreborn.tired.description": "Obtained when haven't slept in a while. Reduces movement speed and sight.",
 	"effect.iguanatweaksreborn.energy_boost": "Energy Boost",
@@ -230,5 +232,12 @@
 	"gamerule.iguanatweaks:thunderstormIntensity": "Thunderstorm Variable Intensity",
 	"gamerule.iguanatweaks:thunderstormIntensity.description": "Should Thunderstorm have variable intensity?",
 	"gamerule.iguanatweaks:foggyWeather": "Foggy Weather",
-	"gamerule.iguanatweaks:foggyWeather.description": "Should foggy weather be active?"
+	"gamerule.iguanatweaks:foggyWeather.description": "Should foggy weather be active?",
+
+	"advancements.ist.cloth.title": "Give me your dress",
+	"advancements.ist.cloth.description": "Obtain Cloth from Zombies",
+	"advancements.ist.bundle.title": "That one item",
+	"advancements.ist.bundle.description": "Make a bundle with Cloth",
+	"advancements.ist.chainmail.title": "Forged from fire",
+	"advancements.ist.chainmail.description": "Obtain a Chainmail piece of armor"
 }

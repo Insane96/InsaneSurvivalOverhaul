@@ -1,0 +1,40 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:chainmail_chestplate"
+		},
+		"title": {
+			"translate": "advancements.ist.chainmail.title"
+		},
+		"description": {
+			"translate": "advancements.ist.chainmail.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/cloth",
+	"criteria": {
+		"chainmail": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:chainmail_helmet",
+							"minecraft:chainmail_chestplate",
+							"minecraft:chainmail_leggings",
+							"minecraft:chainmail_boots"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"chainmail"
+		]
+	]
+}

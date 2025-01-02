@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:bundle"
+		},
+		"title": {
+			"translate": "advancements.ist.bundle.title"
+		},
+		"description": {
+			"translate": "advancements.ist.bundle.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/cloth",
+	"criteria": {
+		"bundle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:bundle"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"bundle"
+		]
+	]
+}

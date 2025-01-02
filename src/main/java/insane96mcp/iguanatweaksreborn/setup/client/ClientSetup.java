@@ -9,6 +9,7 @@ import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconRendere
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconScreen;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.Spawning;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
@@ -86,6 +87,7 @@ public class ClientSetup {
                     removeBookWithEnchantment(event, Enchantments.KNOCKBACK);
                 }
             }
+            addBefore(event, Items.LEATHER, Cloth.CLOTH.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.NETHERIZED_STEW.get());

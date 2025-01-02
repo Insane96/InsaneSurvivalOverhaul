@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "#": [
+            {
+                "item": "iguanatweaksreborn:cloth"
+            },
+            {
+                "item": "minecraft:rabbit_hide"
+            }
+        ],
+        "-": {
+            "item": "minecraft:string"
+        }
+    },
+    "pattern": [
+        "-#-",
+        "# #",
+        "###"
+    ],
+    "result": {
+        "item": "minecraft:bundle"
+    },
+    "show_notification": true
+}

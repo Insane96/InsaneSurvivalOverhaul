@@ -12,6 +12,7 @@ This is a breaking version: configs and data packs have got a huge update
 * Stats Buffs has been moved here from Expanded
 * Enhanced AI has been moved here from Expanded
 * Minecarts has been moved here from Expanded
+* Cloth has been moved here from Expanded
 * Tool Belt Integration has been moved here from Expanded
 
 ### Changes

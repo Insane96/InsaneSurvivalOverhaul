@@ -25,7 +25,7 @@ public class Sleeping extends Feature {
 	public static final String ENJOY_THE_NIGHT = "iguanatweaksreborn.enjoy_the_night";
 	@Config
 	@Label(name = "Disable Sleeping", description = "If set to true the player will not be able to sleep.")
-	public static Boolean disableSleeping = false;
+	public static Boolean disableSleeping = true;
 	@Config
 	@Label(name = "Disable Spawn Point", description = "If set to true the player spawn point cannot be changed with beds.")
 	public static Boolean disableSpawnPoint = false;

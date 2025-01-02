@@ -11,7 +11,7 @@ version = "${mod_version}-mc${mc_version}"
 group = 'insane96mcp.iguanatweaksreborn'
 
 base {
-    archivesName = 'IguanaTweaksReborn'
+    archivesName = 'InsaneSurvivalTweaks'
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.

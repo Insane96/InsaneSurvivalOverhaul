@@ -5,6 +5,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.world.Berries;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
@@ -47,6 +48,8 @@ public class ITRItemModelsProvider extends ItemModelProvider {
 
         basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
+
+        basicItem(Cloth.CLOTH.get());
     }
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)
     {

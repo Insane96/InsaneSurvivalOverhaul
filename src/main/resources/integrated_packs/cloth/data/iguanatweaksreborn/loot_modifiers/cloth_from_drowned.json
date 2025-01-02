@@ -1,0 +1,10 @@
+{
+    "type": "insanelib:inject_loot_table",
+    "conditions": [
+        {
+            "condition": "forge:loot_table_id",
+            "loot_table_id": "minecraft:entities/drowned"
+        }
+    ],
+    "loot_table": "iguanatweaksexpanded:entities/cloth_from_zombies"
+}
