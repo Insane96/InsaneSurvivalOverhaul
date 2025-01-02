@@ -18,7 +18,7 @@
         "items": [
           {
             "items": [
-              "iguanatweaksexpanded:cloth"
+              "iguanatweaksreborn:cloth"
             ]
           }
         ]
@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "iguanatweaksexpanded:chainmail_helmet"
+        "recipe": "iguanatweaksreborn:chainmail_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "iguanatweaksexpanded:chainmail_helmet"
+      "iguanatweaksreborn:chainmail_helmet"
     ]
   },
   "sends_telemetry_event": false

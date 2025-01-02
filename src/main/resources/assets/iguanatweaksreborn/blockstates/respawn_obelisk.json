@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "enabled=false": {
+      "model": "iguanatweaksreborn:block/respawn_obelisk_disabled"
+    },
+    "enabled=true": {
+      "model": "iguanatweaksreborn:block/respawn_obelisk_enabled"
+    }
+  }
+}

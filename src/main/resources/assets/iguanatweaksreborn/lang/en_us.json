@@ -180,12 +180,17 @@
 	"iguanatweaksreborn.player_killer": "%s's Killer (%s)",
 
 	"iguanatweaksreborn.loose_bed_respawn_point_set": "Your respawn point is loose, you'll respawn in a radius from your bed.",
+	"iguanatweaksreborn.requires_catalyst": "Can't activate. The Obelisk requires at least one catalyst block",
+	"iguanatweaksreborn.obelisk_disabled": "Respawn Obelisk disabled. Your respawn point has been set to your last bed, or reset if you didn't have one",
+	"iguanatweaksreborn.fail_respawn_obelisk": "You couldn't respawn at the obelisk because it was disabled.",
+	"iguanatweaksreborn.set_old_respawn": "Your old respawn point has been set.",
+	"block.iguanatweaksreborn.respawn_obelisk": "Respawn Obelisk",
 
 	"iguanatweaksreborn.decorative_beds": "Beds are just a nice decoration. No sleep allowed",
 	"iguanatweaksreborn.no_spawn_point": "You cannot set a respawn point. Better leave a trace from the world's spawn.",
 	"iguanatweaksreborn.enjoy_the_night": "Your respawn point has been set. Enjoy the night!",
 
-	"item.iguanatweaksexpanded.cloth": "Cloth",
+	"item.iguanatweaksreborn.cloth": "Cloth",
 
 	"effect.iguanatweaksreborn.tired": "Tired",
 	"effect.iguanatweaksreborn.tired.description": "Obtained when haven't slept in a while. Reduces movement speed and sight.",
@@ -239,5 +244,9 @@
 	"advancements.ist.bundle.title": "That one item",
 	"advancements.ist.bundle.description": "Make a bundle with Cloth",
 	"advancements.ist.chainmail.title": "Forged from fire",
-	"advancements.ist.chainmail.description": "Obtain a Chainmail piece of armor"
+	"advancements.ist.chainmail.description": "Obtain a Chainmail piece of armor",
+	"advancements.ist.respawn_obelisk.title": "The ancients respawned here",
+	"advancements.ist.respawn_obelisk.description": "Find a Respawn Obelisk.",
+	"advancements.ist.activate_respawn_obelisk.title": "A precise respawn",
+	"advancements.ist.activate_respawn_obelisk.description": "Activate a Respawn Obelisk with right-click by placing at least a precious block at the same height and set the respawn point. Respawning here will give some buffs, other than a precise respawn."
 }

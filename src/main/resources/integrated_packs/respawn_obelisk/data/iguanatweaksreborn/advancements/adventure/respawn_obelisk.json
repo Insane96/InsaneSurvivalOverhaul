@@ -1,0 +1,309 @@
+{
+	"advancements": [
+		{
+			"conditions": [
+				{
+					"type": "forge:mod_loaded",
+					"modid": "iguanatweaksexpanded"
+				}
+			],
+			"advancement": {
+				"display": {
+					"icon": {
+						"item": "iguanatweaksreborn:respawn_obelisk"
+					},
+					"title": {
+						"translate": "advancements.ist.respawn_obelisk.title"
+					},
+					"description": {
+						"translate": "advancements.ist.respawn_obelisk.description"
+					},
+					"frame": "task",
+					"show_toast": true,
+					"announce_to_chat": true,
+					"hidden": false
+				},
+				"parent": "iguanatweaksexpanded:story/blast_furnace",
+				"criteria": {
+					"respawn_obelisk_stonebrick": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_stonebrick"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_birch": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_birch"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_deepslate": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_deepslate"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_desert": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_desert"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_jungle": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_jungle"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_ocean": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_ocean"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_snow": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_snow"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"requirements": [
+					[
+						"respawn_obelisk_stonebrick",
+						"respawn_obelisk_birch",
+						"respawn_obelisk_deepslate",
+						"respawn_obelisk_desert",
+						"respawn_obelisk_jungle",
+						"respawn_obelisk_ocean",
+						"respawn_obelisk_snow"
+					]
+				]
+			}
+		},
+		{
+			"conditions": [
+				{
+					"type": "forge:not",
+					"value": {
+						"type": "forge:mod_loaded",
+						"modid": "iguanatweaksexpanded"
+					}
+				}
+			],
+			"advancement": {
+				"display": {
+					"icon": {
+						"item": "iguanatweaksreborn:respawn_obelisk"
+					},
+					"title": {
+						"translate": "advancements.ist.respawn_obelisk.title"
+					},
+					"description": {
+						"translate": "advancements.ist.respawn_obelisk.description"
+					},
+					"frame": "task",
+					"show_toast": true,
+					"announce_to_chat": true,
+					"hidden": false
+				},
+				"parent": "minecraft:adventure/root",
+				"criteria": {
+					"respawn_obelisk_stonebrick": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_stonebrick"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_birch": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_birch"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_deepslate": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_deepslate"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_desert": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_desert"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_jungle": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_jungle"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_ocean": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_ocean"
+										}
+									}
+								}
+							]
+						}
+					},
+					"respawn_obelisk_snow": {
+						"trigger": "minecraft:location",
+						"conditions": {
+							"player": [
+								{
+									"condition": "minecraft:entity_properties",
+									"entity": "this",
+									"predicate": {
+										"location": {
+											"structure": "iguanatweaksreborn:respawn_obelisk_snow"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				"requirements": [
+					[
+						"respawn_obelisk_stonebrick",
+						"respawn_obelisk_birch",
+						"respawn_obelisk_deepslate",
+						"respawn_obelisk_desert",
+						"respawn_obelisk_jungle",
+						"respawn_obelisk_ocean",
+						"respawn_obelisk_snow"
+					]
+				]
+			}
+		}
+	]
+}

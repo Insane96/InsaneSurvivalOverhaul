@@ -12,7 +12,12 @@ import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import net.minecraftforge.registries.RegistryObject;
+
+import static insane96mcp.iguanatweaksreborn.IguanaTweaksReborn.MOD_ID;
 
 @Label(name = "Cloth", description = "Zombies drop cloth instead of Rotten Flesh. Cloth is used to make beds and various other stuff.")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
@@ -33,5 +38,12 @@ public class Cloth extends Feature {
 	public Cloth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cloth", Component.literal("Insane's Survival Tweaks Cloth"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+	}
+
+	@SubscribeEvent
+	public void remapFromITE(MissingMappingsEvent event) {
+		event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:cloth"))
+				.forEach(mapping -> mapping.remap(CLOTH.get()));
 	}
 }

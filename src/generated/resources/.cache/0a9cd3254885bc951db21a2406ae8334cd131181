@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-02T11:06:51.2599959	Item Models: iguanatweaksreborn
+// 1.20.1	2025-01-02T11:57:54.7331782	Item Models: iguanatweaksreborn
 dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/biome_compass.json
 90f9959998f8ebf6d0d03c09571143d1213ae86f assets/iguanatweaksreborn/models/item/brown_mushroom_stew.json
 7f0f6732f238cf58a1bedffdbdc95b861a4a4cc9 assets/iguanatweaksreborn/models/item/carrot_seeds.json
@@ -11,6 +11,7 @@ dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/b
 97c34e29cf65940cee3899c377612701482fa9d3 assets/iguanatweaksreborn/models/item/over_easy_egg.json
 a5ff01560ec18ecc2c7eb1c2b658c3d1c1ecf26b assets/iguanatweaksreborn/models/item/pumpkin_pulp.json
 8d9ea6f098c4ee62b2d0afbba77950bab6fe37c4 assets/iguanatweaksreborn/models/item/red_mushroom_stew.json
+844bfb19bc259f918d1eff934fe29f73b6969911 assets/iguanatweaksreborn/models/item/respawn_obelisk.json
 4619757499f4af509e94562a78b0422446895240 assets/iguanatweaksreborn/models/item/rice_seeds.json
 d57fc67746c2fceb90df862d280422d4caec169e assets/iguanatweaksreborn/models/item/rooted_onion.json
 4996dbe983a142a00e91e2e1c4b9b89a50ebd80a assets/iguanatweaksreborn/models/item/rooted_potato.json

@@ -6,5 +6,5 @@
             "loot_table_id": "minecraft:entities/drowned"
         }
     ],
-    "loot_table": "iguanatweaksexpanded:entities/cloth_from_zombies"
+    "loot_table": "iguanatweaksreborn:entities/cloth_from_zombies"
 }

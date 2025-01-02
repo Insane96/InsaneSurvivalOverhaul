@@ -50,6 +50,8 @@ public class ITRItemModelsProvider extends ItemModelProvider {
         withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
 
         basicItem(Cloth.CLOTH.get());
+
+        withExistingParent("respawn_obelisk", new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/respawn_obelisk_disabled"));
     }
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)
     {

@@ -11,6 +11,7 @@ import insane96mcp.iguanatweaksreborn.module.mobs.spawning.Spawning;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
@@ -38,6 +39,7 @@ public class ClientSetup {
                 event.getEntries().remove(new ItemStack(Items.BEACON));
             }
             addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
+            addBefore(event, Items.RESPAWN_ANCHOR, Respawn.RESPAWN_OBELISK.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             addAfter(event, Items.CHAIN, Death.GRAVE.item());

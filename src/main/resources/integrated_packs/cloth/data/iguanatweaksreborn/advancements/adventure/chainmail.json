@@ -14,7 +14,7 @@
 		"announce_to_chat": true,
 		"hidden": false
 	},
-	"parent": "iguanatweaksreborn:story/cloth",
+	"parent": "iguanatweaksreborn:adventure/cloth",
 	"criteria": {
 		"chainmail": {
 			"trigger": "minecraft:inventory_changed",

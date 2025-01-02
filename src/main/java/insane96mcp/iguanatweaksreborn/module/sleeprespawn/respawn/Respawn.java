@@ -1,42 +1,62 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 
 import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
+import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
-import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.Difficulty;
 import insane96mcp.insanelib.base.config.MinMax;
+import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+
+import static insane96mcp.iguanatweaksreborn.IguanaTweaksReborn.MOD_ID;
 
 @Label(name = "Respawn", description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
-public class Respawn extends Feature {
+public class Respawn extends JsonFeature {
+	public static final TagKey<Block> RESPAWN_OBELISK_BLOCKS_TO_ROT = ITRBlockTagsProvider.create("structures/respawn_obelisk/blocks_to_rot");
+
+	public static final String FAIL_RESPAWN_OBELISK_LANG = IguanaTweaksReborn.MOD_ID + ".fail_respawn_obelisk";
 
 	public static final String LOOSE_RESPAWN_POINT_SET = IguanaTweaksReborn.MOD_ID + ".loose_bed_respawn_point_set";
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
@@ -44,6 +64,8 @@ public class Respawn extends Feature {
 	public static final String DEATHS = IguanaTweaksReborn.RESOURCE_PREFIX + "deaths";
 	public static final String HUNGER_ON_DEATH_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "hunger_on_death";
 	public static final String SATURATION_ON_DEATH_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "saturation_on_death";
+
+	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
 	@Config(min = 0)
 	@Label(name = "Loose World Spawn Range", description = "The range from world spawn where players will respawn.")
@@ -75,9 +97,47 @@ public class Respawn extends Feature {
 	@Label(name = "Stats Penalty.Only if below", description = "If hunger or saturation were above the values on death, they will not be reduced.")
 	public static Boolean respawnFoodOnlyIfBelow = true;
 
+	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
+			IdTagValue.newId("minecraft:iron_block", 0.75d),
+			IdTagValue.newId("minecraft:gold_block", 0.3d),
+			IdTagValue.newId("iguanatweaksexpanded:durium_block", 0.075d),
+			IdTagValue.newId("minecraft:diamond_block", 0.05d),
+			IdTagValue.newId("iguanatweaksexpanded:keego_block", 0.05d),
+			IdTagValue.newId("iguanatweaksexpanded:quaron_block", 0.25d),
+			IdTagValue.newId("iguanatweaksexpanded:soul_steel_block", 0.05d),
+			IdTagValue.newId("minecraft:emerald_block", 0.35d),
+			IdTagValue.newId("minecraft:netherite_block", 0d)
+	);
+
+	public static final ArrayList<IdTagValue> respawnObeliskCatalysts = new ArrayList<>();
+
+	public static final List<ITRMobEffectInstance> RESPAWN_OBELISK_EFFECTS_DEFAULT = List.of(
+			new ITRMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
+					.ambientParticles()
+					.build(),
+			new ITRMobEffectInstance.Builder(MobEffects.ABSORPTION, 60 * 20)
+					.setAmplifier(1)
+					.ambientParticles()
+					.build(),
+			new ITRMobEffectInstance.Builder(MobEffects.MOVEMENT_SPEED, 60 * 20)
+					.ambientParticles()
+					.build()
+	);
+
+	public static final ArrayList<ITRMobEffectInstance> respawnObeliskEffects = new ArrayList<>();
+
 	public Respawn(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
+		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ITRMobEffectInstance.LIST_TYPE));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "respawn_obelisk", Component.literal("Insane's Survival Tweaks Respawn Obelisk"), this::isEnabled));
 	}
+
+	@Override
+	public String getModConfigFolder() {
+		return IguanaTweaksReborn.CONFIG_FOLDER;
+	}
+
 
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event) {
@@ -114,8 +174,7 @@ public class Respawn extends Feature {
 		player.setHealth((float) Math.max(healthOnRespawn, minHealth));
 	}
 
-	//Run before ITE Respawn Obelisk
-	@SubscribeEvent(priority = EventPriority.HIGH)
+	@SubscribeEvent
 	public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
 		if (!this.isEnabled()
 				|| event.isEndConquered()
@@ -125,6 +184,7 @@ public class Respawn extends Feature {
 		boolean hasRespawned = looseWorldSpawn(event);
 		if (!hasRespawned)
 			looseBedSpawn(event);
+		tryRespawnObelisk(event);
 	}
 
 	private boolean looseWorldSpawn(PlayerEvent.PlayerRespawnEvent event) {
@@ -219,5 +279,57 @@ public class Respawn extends Feature {
 		if (event.getNewSpawn().equals(player.getRespawnPosition()))
 			return;
 		player.displayClientMessage(Component.translatable(LOOSE_RESPAWN_POINT_SET), false);
+	}
+
+
+	@Override
+	public void loadJsonConfigs() {
+		if (!this.isEnabled())
+			return;
+		super.loadJsonConfigs();
+	}
+
+	private void tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
+		ServerPlayer player = (ServerPlayer) event.getEntity();
+		BlockPos pos = player.getRespawnPosition();
+		if (pos == null
+				|| !player.level().getBlockState(pos).is(RESPAWN_OBELISK.block().get()))
+			return;
+
+		if (!player.level().getBlockState(pos).getValue(RespawnObeliskBlock.ENABLED)) {
+			player.sendSystemMessage(Component.translatable(FAIL_RESPAWN_OBELISK_LANG));
+			RespawnObeliskBlock.trySetOldSpawn(player);
+			return;
+		}
+		RespawnObeliskBlock.onObeliskRespawn(player, player.level(), pos);
+	}
+
+	@SubscribeEvent
+	public void onSetSpawnPreventObeliskOverwrite(PlayerSetSpawnEvent event) {
+		if (!this.isEnabled()
+				|| event.isForced()
+				|| !(event.getEntity() instanceof ServerPlayer player))
+			return;
+
+		if (player.getRespawnPosition() != null
+				&& player.level().dimension().equals(player.getRespawnDimension())
+				&& player.level().getBlockState(player.getRespawnPosition()).is(RESPAWN_OBELISK.block().get())
+				&& player.level().getBlockState(player.getRespawnPosition()).getValue(RespawnObeliskBlock.ENABLED)
+				&& event.getNewSpawn() != null
+				&& !player.level().getBlockState(event.getNewSpawn()).is(RESPAWN_OBELISK.block().get())) {
+			if (RespawnObeliskBlock.saveOldSpawn(player, event.getNewSpawn(), event.isForced(), 0f, event.getSpawnLevel()))
+				player.sendSystemMessage(Component.translatable("iguanatweaksreborn.set_old_respawn"));
+			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public void remapFromITE(MissingMappingsEvent event) {
+		event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
+				.forEach(mapping -> mapping.remap(RESPAWN_OBELISK.item().get()));
+		event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
+				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
+				.forEach(mapping -> mapping.remap(RESPAWN_OBELISK.block().get()));
 	}
 }
