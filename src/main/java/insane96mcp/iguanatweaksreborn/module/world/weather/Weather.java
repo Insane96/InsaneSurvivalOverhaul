@@ -22,6 +22,9 @@ public class Weather extends Feature {
     public static final GameRules.Key<GameRules.BooleanValue> RULE_THUNDERSTORMINTENSITY = GameRules.register("iguanatweaks:thunderstormIntensity", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
     public static final GameRules.Key<GameRules.BooleanValue> RULE_FOGGYWEATHER = GameRules.register("iguanatweaks:foggyWeather", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 
+    @Config
+    @Label(name = "Thunderstorm Intensity", description = "Enable thunderstorm intensity.")
+    public static Boolean thunderstormIntensity = true;
     @Config(min = 1)
     @Label(name = "Thunderstorm Intensity.Min Intensity", description = "Minimum thunderstorm intensity.")
     public static Integer thunderstormIntensityMin = 1;
@@ -32,6 +35,9 @@ public class Weather extends Feature {
     @Label(name = "Thunderstorm Intensity.Base Duration", description = "Base duration of each intensity (in minutes). Lasts less and less the higher the intensity")
     public static Integer thunderstormIntensityBaseDuration = 4;
 
+    @Config
+    @Label(name = "Foggy Weather", description = "Enable Foggy weather.")
+    public static Boolean foggyWeather = true;
     @Config(min = 1)
     @Label(name = "Foggy Weather.Min Time", description = "Minimum time (in minutes) a foggy weather can last.")
     public static Integer foggyWeatherMinTime = 5;
@@ -57,7 +63,8 @@ public class Weather extends Feature {
     }
 
     public static void tickFoggyWeather(ServerLevel level, WeatherSavedData wsd) {
-        if (!level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
+        if (!foggyWeather
+                || !level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
             return;
         WeatherSavedData.FoggyData foggyData = wsd.foggyData;
         if (foggyData.targetTime == -1)
@@ -88,6 +95,7 @@ public class Weather extends Feature {
     @SubscribeEvent
     public void onPlayerJoinLevel(EntityJoinLevelEvent event) {
         if (!this.isEnabled()
+                || !foggyWeather
                 || event.getLevel().dimension() != Level.OVERWORLD
                 || !(event.getEntity() instanceof ServerPlayer player))
             return;
@@ -111,7 +119,8 @@ public class Weather extends Feature {
     }
 
     public static void tickVariableThunderstorm(ServerLevel level, WeatherSavedData wsd) {
-        if (!level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
+        if (!thunderstormIntensity
+                || !level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
             return;
         WeatherSavedData.ThunderIntensityData tid = wsd.thunderIntensityData;
         if (tid.targetIntensity == -1)
