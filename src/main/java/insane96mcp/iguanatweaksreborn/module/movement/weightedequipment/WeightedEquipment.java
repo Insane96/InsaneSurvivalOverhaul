@@ -35,7 +35,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Label(name = "Weighted Equipment", description = "Armor slows down the player. Material Weights and Enchantment Weights are controlled via json in this feature's folder")
+@Label(name = "Weighted Equipment", description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. Armor weights are controlled via Item Definitions.")
 @LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false)
 public class WeightedEquipment extends JsonFeature {
 	public static final String ARMOR_SLOWDOWN = IguanaTweaksReborn.MOD_ID + ".armor_slowdown";

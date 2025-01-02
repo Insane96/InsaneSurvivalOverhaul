@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.IProtectionEnchantment;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
+import insane96mcp.iguanatweaksreborn.module.movement.BetterClimbable;
 import insane96mcp.iguanatweaksreborn.module.movement.ElytraNerf;
 import insane96mcp.iguanatweaksreborn.module.movement.Swimming;
 import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
@@ -64,7 +65,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
             cir.setReturnValue(ret + 1);
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isSprinting()Z"), method = "jumpFromGround")
+    @Redirect(method = "jumpFromGround", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isSprinting()Z"))
     public boolean onSprintJumpCheck(LivingEntity instance) {
         if (instance.isSprinting() && Feature.isEnabled(TerrainSlowdown.class)) {
             float yRot = instance.getYRot() * ((float)Math.PI / 180F);
@@ -104,6 +105,22 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if (instance.fallDistance > 0f)
             instance.causeFallDamage(instance.fallDistance, 1f, instance.damageSources().fall());
         instance.resetFallDistance();
+    }
+
+    @Inject(method = "onClimbable", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
+    public void onCheckIfOnClimbable(CallbackInfoReturnable<Boolean> cir) {
+        if (!Feature.isEnabled(BetterClimbable.class)
+                || !BetterClimbable.notOnClimbableWhenOnGround)
+            return;
+        cir.setReturnValue(cir.getReturnValue() && !this.onGround());
+    }
+
+    @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;horizontalCollision:Z"))
+    public boolean onCheckIfOnClimbable(boolean original) {
+        if (!Feature.isEnabled(BetterClimbable.class)
+                || !BetterClimbable.onlyClimbWithJump)
+            return original;
+        return false;
     }
 
     @WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"))

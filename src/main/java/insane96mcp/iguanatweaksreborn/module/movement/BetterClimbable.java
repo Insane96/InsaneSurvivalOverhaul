@@ -26,19 +26,23 @@ public class BetterClimbable extends Feature {
 	@Label(name = "Speed", description = "How much faster the players moves down climbable blocks")
 	public static Double speed = 0.2d;
 
+	@Config
+	@Label(name = "Not on climbable when on ground", description = "Entities will not count as on climbable when on the ground, preventing slowdown when passing through climbable blocks.")
+	public static Boolean notOnClimbableWhenOnGround = true;
+
+	@Config
+	@Label(name = "Only climb with jump", description = "If enabled you'll only be able to climb when pressing jump and not when against a wall and moving.")
+	public static Boolean onlyClimbWithJump = true;
+
 	public BetterClimbable(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return super.isEnabled() && !ModList.get().isLoaded("quark");
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (!this.isEnabled()
+				|| ModList.get().isLoaded("quark")
 				|| event.phase == TickEvent.Phase.END
 				|| !(event.player instanceof LocalPlayer localPlayer))
 			return;
@@ -58,7 +62,8 @@ public class BetterClimbable extends Feature {
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public void onInput(MovementInputUpdateEvent event) {
-		if(!this.isEnabled())
+		if(!this.isEnabled()
+				|| ModList.get().isLoaded("quark"))
 			return;
 
 		Player player = event.getEntity();

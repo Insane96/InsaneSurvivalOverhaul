@@ -2,59 +2,72 @@
 
 ## Upcoming
 This is a breaking version: configs and data packs have got a huge update
-* Night Vision Fade out time is now configurable
-* Brightness forcing is now more configurable
-* Changed red outline on wrong tool to no outline on wrong tool
-* Combat Knockback feature has been cleaned up
-  * No weapon penalty and spam penalty are now two separate config options
-  * Knockback multiplier has been moved Item Definitions
-* Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
-* Smokers now require soul sand/soil to craft
-* Twins chance has been moved to data packs (livestock_data)
-* Items 
-  * Item stats have been renamed to Item Definitions (item_definitions)
-* Hoes
-  * Can now scythe flowers
-  * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
-  * Moved hoes scythe radius to Item Definition
-  * Removed hoes cooldown
+### Additions
+* Better Climbamble
+  * Added 'Not on climbable when on ground'
+    * Prevents slowdown when walking near ladders
+  * Added 'Only climb with jump'
+    * Lets you climb ladders only with space instead of when walking near it
 * Moved new foods back here from Expanded
-* Health Regen
-  * Passive regen has been moved here from No Hunger
-* Stack Sizes
-  * Removed stackable soups. Just use item definitions
-* Block Data has been renamed to Block definitions (folder from block_data to block_definitions)
-* Mobs can no longer fall from mount
-* Fixed drowning too fast
-* Actual Redstone Component data pack
-  * Doubled amount of buttons, pressure plates and levers from crafting
-  * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
 * Stats Buffs has been moved here from Expanded
 * Enhanced AI has been moved here from Expanded
 * Minecarts has been moved here from Expanded
-* Changed, moved and renamed many config options
-  * Client
-    * World border has its own feature now
-    * Death has its own feature now
-  * Combat
-    * Player stats has its own feature now
-      * Mining range reduction moved from Mining Misc
-    * Arrow stats has its own feature now
-  * Experience.Dropped Experience
-    * Renamed from Experience.Experience
-    * Milk and shear xp have been moved here from Livestock
-  * Anvils
-    * Removed 'Reduced repair with other item if enchanted'
-  * Exhaustion
-    * Renamed from 'Exhaustion increase'
-  * Health Regen
-    * Renamed from 'Hunger Health Regen'
-  * Items
-    * Disabled Items has its own feature now
-    * Unbreakable Items has its own feature now
-    * Item definitions has its own feature now
-    * Ecologic wood has some new config options
+* Tool Belt Integration has been moved here from Expanded
+
+### Changes
+* Changed red outline on wrong tool to no outline on wrong tool
+* Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
+* Smokers now require soul sand/soil to craft
+* Hoes
+  * Can now scythe flowers
+* Mobs can no longer fall from mount (configurable)
+* Actual Redstone Component data pack
+  * Doubled amount of buttons, pressure plates and levers from crafting
+  * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
+
+### Config
+* Items
+  * Item stats have been renamed to Item Definitions (item_definitions)
+  * Disabled Items has its own feature now
+  * Unbreakable Items has its own feature now
+  * Item definitions has its own feature now
+  * Ecologic wood has some new config options
+* Block Data has been renamed to Block definitions (folder from block_data to block_definitions)
+* Hoes
+  * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
+  * Moved hoes scythe radius to Item Definition
+* Knockback
+  * No weapon penalty and spam penalty are now two separate config options
+  * Knockback multiplier has been moved Item Definitions
+* Twins chance has been moved to data packs (livestock_data)
+* Health Regen
+  * Passive regen has been moved here from No Hunger
+* Night Vision Fade out time is now configurable
+* Brightness forcing is now more configurable
+* Client
+  * World border has its own feature now
+  * Death has its own feature now
+* Combat
+  * Player stats has its own feature now
+    * Mining range reduction moved from Mining Misc
+  * Arrow stats has its own feature now
+* Experience.Dropped Experience
+  * Renamed from Experience.Experience
+  * Milk and shear xp have been moved here from Livestock
+* Anvils
+  * Removed 'Reduced repair with other item if enchanted'
+* Exhaustion
+  * Renamed from 'Exhaustion increase'
+* Health Regen
+  * Renamed from 'Hunger Health Regen'
 * Cleaned up some config descriptions
+
+### Removed
+* Removed stackable soups. Just use item definitions
+* Removed hoes cooldown
+
+### Fixes
+* Fixed drowning too fast
 * Fixed milking cows dropping no experience if cooldown was disabled
 
 ## 3.21.5
