@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.timber;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.entity.ITRFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -70,7 +70,7 @@ public class TimberTrees extends JsonFeature {
 
     @Override
     public String getModConfigFolder() {
-        return IguanaTweaksReborn.CONFIG_FOLDER;
+        return InsaneSurvivalTweaks.CONFIG_FOLDER;
     }
 
     @SubscribeEvent

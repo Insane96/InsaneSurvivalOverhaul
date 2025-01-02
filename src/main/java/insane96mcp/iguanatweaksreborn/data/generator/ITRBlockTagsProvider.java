@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.hoes.Hoes;
@@ -12,6 +12,7 @@ import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -51,7 +52,11 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
                 .add(BeaconConduit.BEACON.block().get())
                 .add(Spawning.ECHO_LANTERN.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(BoneMeal.RICH_FARMLAND.block().get());
+                .add(BoneMeal.RICH_FARMLAND.block().get())
+                .add(CoalFire.CHARCOAL_LAYER.block().get())
+                .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.block().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.block().get());
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.block().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.block().get());
         tag(BlockTags.RAILS)
                 .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
 
@@ -116,6 +121,6 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
     }
 
     public static TagKey<Block> create(String tagName) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(IguanaTweaksReborn.MOD_ID, tagName));
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, tagName));
     }
 }

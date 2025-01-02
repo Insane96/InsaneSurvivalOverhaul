@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.misc;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -30,8 +30,8 @@ import net.minecraftforge.fml.loading.FMLLoader;
 @Label(name = "Nerfs", description = "Various Nerfs")
 @LoadFeature(module = Modules.Ids.MISC)
 public class Nerfs extends Feature {
-	static final String LAST_FISHING_POS_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "last_fishing_pos";
-	static final String LAST_FISHING_COUNT_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "last_fishing_count";
+	static final String LAST_FISHING_POS_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "last_fishing_pos";
+	static final String LAST_FISHING_COUNT_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "last_fishing_count";
 	@Config
 	@Label(name = "Iron from Golems only when killed by Players", description = "If true, Iron golems will only drop Iron when killed by the player.")
 	public static Boolean ironRequiresPlayer = true;
@@ -167,7 +167,7 @@ public class Nerfs extends Feature {
 				lastFishingCount++;
 				if (lastFishingCount >= 10) {
 					event.setCanceled(true);
-					event.getHookEntity().getPlayerOwner().displayClientMessage(Component.translatable(IguanaTweaksReborn.MOD_ID + ".too_much_fishing_in_this_spot"), true);
+					event.getHookEntity().getPlayerOwner().displayClientMessage(Component.translatable(InsaneSurvivalTweaks.MOD_ID + ".too_much_fishing_in_this_spot"), true);
 				}
 				persistentData.putInt(LAST_FISHING_COUNT_TAG, lastFishingCount);
 			}

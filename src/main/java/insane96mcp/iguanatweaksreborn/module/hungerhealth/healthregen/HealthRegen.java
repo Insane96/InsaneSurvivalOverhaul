@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.utils.Utils;
@@ -31,7 +31,7 @@ import java.text.DecimalFormat;
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class HealthRegen extends Feature {
 
-	public static final String PASSIVE_REGEN_TICK = IguanaTweaksReborn.RESOURCE_PREFIX + "passive_regen_ticks";
+	public static final String PASSIVE_REGEN_TICK = InsaneSurvivalTweaks.RESOURCE_PREFIX + "passive_regen_ticks";
 	private static final int PASSIVE_REGEN_TICK_RATE = 10;
 	private static final int FOOD_REGEN_TICK_RATE = 10;
 

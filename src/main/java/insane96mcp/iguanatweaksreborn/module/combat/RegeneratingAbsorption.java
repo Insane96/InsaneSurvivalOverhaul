@@ -1,11 +1,11 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.network.message.RegenAbsorptionSync;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -47,16 +47,16 @@ import net.minecraftforge.registries.RegistryObject;
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class RegeneratingAbsorption extends Feature {
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "textures/gui/absorption.png");
-    public static final String REGEN_ABSORPTION_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "regen_absorption";
-    public static final String HURT_COOLDOWN_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
-    public static final String NO_HURT_SOUND_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "no_hurt_sound";
+    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/gui/absorption.png");
+    public static final String REGEN_ABSORPTION_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "regen_absorption";
+    public static final String HURT_COOLDOWN_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
+    public static final String NO_HURT_SOUND_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "no_hurt_sound";
 
-    public static final RegistryObject<Attribute> ATTRIBUTE = ITRRegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
+    public static final RegistryObject<Attribute> ATTRIBUTE = ISTRegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
 
-    public static final RegistryObject<Attribute> SPEED_ATTRIBUTE = ITRRegistries.ATTRIBUTES.register("regenerating_absorption_speed", () -> new RangedAttribute("attribute.name.regenerating_absorption_speed", 0.250d, 0d, 20d));
+    public static final RegistryObject<Attribute> SPEED_ATTRIBUTE = ISTRegistries.ATTRIBUTES.register("regenerating_absorption_speed", () -> new RangedAttribute("attribute.name.regenerating_absorption_speed", 0.250d, 0d, 20d));
 
-    public static final RegistryObject<MobEffect> EFFECT = ITRRegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+    public static final RegistryObject<MobEffect> EFFECT = ISTRegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ATTRIBUTE.get(), "704d7291-63ba-4346-8aa8-a08e90a13fdf", 4, AttributeModifier.Operation.ADDITION));
 
     @Config(min = 0)
@@ -158,7 +158,7 @@ public class RegeneratingAbsorption extends Feature {
         event.setAmount(event.getAmount() - toRemove);
         event.getEntity().getPersistentData().putFloat(REGEN_ABSORPTION_TAG, currentAbsorption);
         if (soundOnAbsorptionHurt)
-            event.getEntity().level().playSound(null, event.getEntity(), ITRRegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
+            event.getEntity().level().playSound(null, event.getEntity(), ISTRegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
             RegenAbsorptionSync.sync(player, currentAbsorption);
     }
@@ -177,7 +177,7 @@ public class RegeneratingAbsorption extends Feature {
             aboveOverlay = new ResourceLocation("stamina:stamina_overlay");
         if (renderOnRight) {
             if (Feature.isEnabled(NoHunger.class) && NoHunger.renderArmorAtHunger)
-                aboveOverlay = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "armor");
+                aboveOverlay = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "armor");
             else
                 aboveOverlay = VanillaGuiOverlay.FOOD_LEVEL.id();
         }

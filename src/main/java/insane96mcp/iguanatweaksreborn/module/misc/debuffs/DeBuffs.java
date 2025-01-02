@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.misc.debuffs;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -32,7 +32,7 @@ public class DeBuffs extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 	@SubscribeEvent

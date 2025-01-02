@@ -1,13 +1,13 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -65,15 +65,15 @@ import java.util.stream.Collectors;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Tiredness extends JsonFeature {
 
-	public static final RegistryObject<MobEffect> TIRED = ITRRegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
+	public static final RegistryObject<MobEffect> TIRED = ISTRegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
 			.addAttributeModifier(Attributes.MOVEMENT_SPEED, "697c48dd-6bbd-4082-8501-040bb9812c09", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL)
 			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL));
-	public static final RegistryObject<MobEffect> ENERGY_BOOST = ITRRegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
+	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISTRegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
-	public static final String NOT_TIRED = IguanaTweaksReborn.MOD_ID + ".not_tired";
-	public static final String TIRED_ENOUGH = IguanaTweaksReborn.MOD_ID + ".tired_enough";
-	public static final String TOO_TIRED = IguanaTweaksReborn.MOD_ID + ".too_tired";
-	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ITRItemTagsProvider.create("energy_boost");
+	public static final String NOT_TIRED = InsaneSurvivalTweaks.MOD_ID + ".not_tired";
+	public static final String TIRED_ENOUGH = InsaneSurvivalTweaks.MOD_ID + ".tired_enough";
+	public static final String TOO_TIRED = InsaneSurvivalTweaks.MOD_ID + ".too_tired";
+	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISTItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
 			new EnergyBoostItem(IdTagMatcher.newTag("iguanatweaksreborn:energy_boost"), 0, 0),
@@ -131,7 +131,7 @@ public class Tiredness extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 	public enum OnDeath {
@@ -408,7 +408,7 @@ public class Tiredness extends JsonFeature {
 		TirednessHandler.set(event.getEntity(), tiredness);
 	}
 
-	protected static final ResourceLocation OVERLAY_LOCATION = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "textures/misc/tiredness_overlay.png");
+	protected static final ResourceLocation OVERLAY_LOCATION = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/misc/tiredness_overlay.png");
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

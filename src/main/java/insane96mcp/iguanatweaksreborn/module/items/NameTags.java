@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -34,12 +34,12 @@ public class NameTags extends Feature {
                 || target.isDeadOrDying())
             return;
 
-        if (target.getPersistentData().contains(IguanaTweaksReborn.RESOURCE_PREFIX + "has_name_tag"))
+        if (target.getPersistentData().contains(InsaneSurvivalTweaks.RESOURCE_PREFIX + "has_name_tag"))
             dropNameTag(target.level(), target);
         if (event.getItemStack().hasCustomHoverName())
-            target.getPersistentData().putBoolean(IguanaTweaksReborn.RESOURCE_PREFIX + "has_name_tag", true);
+            target.getPersistentData().putBoolean(InsaneSurvivalTweaks.RESOURCE_PREFIX + "has_name_tag", true);
         else {
-            target.getPersistentData().remove(IguanaTweaksReborn.RESOURCE_PREFIX + "has_name_tag");
+            target.getPersistentData().remove(InsaneSurvivalTweaks.RESOURCE_PREFIX + "has_name_tag");
             target.setCustomName(null);
         }
 
@@ -49,7 +49,7 @@ public class NameTags extends Feature {
     public void onEntityDeath(LivingDeathEvent event) {
         if (!this.isEnabled()
                 || event.getEntity().level().isClientSide
-                || !event.getEntity().getPersistentData().contains(IguanaTweaksReborn.RESOURCE_PREFIX + "has_name_tag"))
+                || !event.getEntity().getPersistentData().contains(InsaneSurvivalTweaks.RESOURCE_PREFIX + "has_name_tag"))
             return;
 
         dropNameTag(event.getEntity().level(), event.getEntity());

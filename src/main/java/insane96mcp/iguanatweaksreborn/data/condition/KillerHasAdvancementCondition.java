@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,7 +27,7 @@ public class KillerHasAdvancementCondition implements LootItemCondition {
     }
 
     public LootItemConditionType getType() {
-        return ITRRegistries.KILLER_HAS_ADVANCEMENT.get();
+        return ISTRegistries.KILLER_HAS_ADVANCEMENT.get();
     }
 
     public Set<LootContextParam<?>> getReferencedContextParams() {

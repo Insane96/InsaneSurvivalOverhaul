@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.data.criterion;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonChangedTrigger extends SimpleCriterionTrigger<SeasonChangedTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "season_changed");
+	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "season_changed");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

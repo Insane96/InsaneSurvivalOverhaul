@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @Mixin(PumpkinBlock.class)
 public abstract class PumpkinBlockMixin {
-    private static final ResourceLocation PUMPKIN_SHEAR_LOOT_TABLE = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "pumpkin_shear");
+    private static final ResourceLocation PUMPKIN_SHEAR_LOOT_TABLE = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "pumpkin_shear");
 
     @Redirect(method = "use", at = @At(value = "NEW", target = "(Lnet/minecraft/world/level/ItemLike;I)Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack onShearsDrops(ItemLike item, int count, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {

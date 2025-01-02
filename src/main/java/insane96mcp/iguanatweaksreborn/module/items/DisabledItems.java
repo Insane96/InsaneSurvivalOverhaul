@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -25,9 +25,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class DisabledItems extends Feature {
 
-	public static final TagKey<Item> NO_DAMAGE = ITRItemTagsProvider.create("no_damage");
+	public static final TagKey<Item> NO_DAMAGE = ISTItemTagsProvider.create("no_damage");
 	public static final String NO_DAMAGE_ITEM_LANG = "iguanatweaksreborn.no_damage_item";
-	public static final TagKey<Item> NO_EFFICIENCY = ITRItemTagsProvider.create("no_efficiency");
+	public static final TagKey<Item> NO_EFFICIENCY = ISTItemTagsProvider.create("no_efficiency");
 	public static final String NO_EFFICIENCY_ITEM_LANG = "iguanatweaksreborn.no_efficiency_item";
 
 	@Config

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.setup.client.ITRClientConfig;
 import insane96mcp.insanelib.base.Module;
 import net.minecraftforge.fml.config.ModConfig;
@@ -13,6 +13,6 @@ public class ClientModules {
     }
 
     public static class Ids {
-        public static final String CLIENT = IguanaTweaksReborn.RESOURCE_PREFIX + "client";
+        public static final String CLIENT = InsaneSurvivalTweaks.RESOURCE_PREFIX + "client";
     }
 }

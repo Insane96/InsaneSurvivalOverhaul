@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Knockback;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Luck;
@@ -12,6 +12,7 @@ import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -28,13 +29,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ITRItemTagsProvider extends ItemTagsProvider {
+public class ISTItemTagsProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ITRItemTagsProvider.create("equipment/hand/wooden");
-    public static final TagKey<Item> STONE_HAND_EQUIPMENT = ITRItemTagsProvider.create("equipment/hand/stone");
-    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ITRItemTagsProvider.create("equipment/armor/leather");
+    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/wooden");
+    public static final TagKey<Item> STONE_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/stone");
+    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ISTItemTagsProvider.create("equipment/armor/leather");
 
-    public ITRItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+    public ISTItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
     }
 
@@ -59,6 +60,7 @@ public class ITRItemTagsProvider extends ItemTagsProvider {
 
         tag(UnbreakableItems.NOT_UNBREAKABLE)
                 .addTags(WOODEN_HAND_EQUIPMENT, STONE_HAND_EQUIPMENT, LEATHER_ARMOR_EQUIPMENT)
+                .add(CoalFire.FIRESTARTER.get())
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/hand/flint")).addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/hand/copper"))
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/armor/chained_copper"))
                 .addOptional(new ResourceLocation("shieldsplus:wooden_shield")).addOptional(new ResourceLocation("shieldsplus:stone_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:copper_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:flint_shield"));
@@ -79,10 +81,13 @@ public class ITRItemTagsProvider extends ItemTagsProvider {
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
-                .addOptionalTag(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "equipment/netherite"));
+                .addOptionalTag(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "equipment/netherite"));
+
+        tag(CoalFire.ITEM_ORES)
+                .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
     }
 
     public static TagKey<Item> create(String tagName) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(IguanaTweaksReborn.MOD_ID, tagName));
+        return TagKey.create(Registries.ITEM, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, tagName));
     }
 }

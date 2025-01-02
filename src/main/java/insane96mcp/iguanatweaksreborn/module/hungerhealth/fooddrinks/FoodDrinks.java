@@ -1,12 +1,12 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.utils.Utils;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -42,26 +42,26 @@ import java.util.List;
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class FoodDrinks extends JsonFeature {
 
-	public static final RegistryObject<Item> BROWN_MUSHROOM_STEW = ITRRegistries.ITEMS.register("brown_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
+	public static final RegistryObject<Item> BROWN_MUSHROOM_STEW = ISTRegistries.ITEMS.register("brown_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(3).saturationMod(0.6F).build())
 	));
-	public static final RegistryObject<Item> RED_MUSHROOM_STEW = ITRRegistries.ITEMS.register("red_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
+	public static final RegistryObject<Item> RED_MUSHROOM_STEW = ISTRegistries.ITEMS.register("red_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(3).saturationMod(0.6F).build())
 	));
-	public static final RegistryObject<Item> NETHERIZED_STEW = ITRRegistries.ITEMS.register("netherized_stew", () -> new BowlFoodItem(new Item.Properties()
+	public static final RegistryObject<Item> NETHERIZED_STEW = ISTRegistries.ITEMS.register("netherized_stew", () -> new BowlFoodItem(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(12).saturationMod(1.4F).effect(() -> new MobEffectInstance(MobEffects.POISON, 30 * 20, 0), 0.8f).build())
 	));
 
-	public static final RegistryObject<Item> OVER_EASY_EGG = ITRRegistries.ITEMS.register("over_easy_egg", () -> new Item(new Item.Properties()
+	public static final RegistryObject<Item> OVER_EASY_EGG = ISTRegistries.ITEMS.register("over_easy_egg", () -> new Item(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6F).build())
 	));
 
-	public static final RegistryObject<Item> PUMPKIN_PULP = ITRRegistries.ITEMS.register("pumpkin_pulp", () -> new Item(new Item.Properties()
+	public static final RegistryObject<Item> PUMPKIN_PULP = ISTRegistries.ITEMS.register("pumpkin_pulp", () -> new Item(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).build())
 	));
 
-	public static final TagKey<Item> RAW_FOOD = ITRItemTagsProvider.create("raw_food");
-	public static final TagKey<Item> FOOD_BLACKLIST = ITRItemTagsProvider.create("food_drinks_no_hunger_changes");
+	public static final TagKey<Item> RAW_FOOD = ISTItemTagsProvider.create("raw_food");
+	public static final TagKey<Item> FOOD_BLACKLIST = ISTItemTagsProvider.create("food_drinks_no_hunger_changes");
 
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).setNutrition(2).setEatingTime(55).build(),
@@ -115,13 +115,13 @@ public class FoodDrinks extends JsonFeature {
 	public FoodDrinks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_food_in_furnace", Component.literal("Insane's Survival Tweaks No Food in Furnace"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe));
-		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "food_properties")));
+		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "food_properties")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 	@Override

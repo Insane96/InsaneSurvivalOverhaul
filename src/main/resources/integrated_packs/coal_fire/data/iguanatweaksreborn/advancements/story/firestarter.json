@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "iguanatweaksreborn:firestarter"
+		},
+		"title": {
+			"translate": "advancements.ist.firestarter.title"
+		},
+		"description": {
+			"translate": "advancements.ist.firestarter.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/charcoal",
+	"criteria": {
+		"firestarter": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"iguanatweaksreborn:firestarter"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"firestarter"
+		]
+	]
+}

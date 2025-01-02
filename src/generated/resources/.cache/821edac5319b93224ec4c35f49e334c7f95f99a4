@@ -1,11 +1,12 @@
-// 1.20.1	2024-09-25T17:53:52.3102757	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-01-02T17:07:24.4535549	Tags for minecraft:item mod id iguanatweaksreborn
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/iguanatweaksreborn/tags/items/chicken_food_items.json
 b4aedda3407e53b9160ab96c45a4af8ecba1e11d data/iguanatweaksreborn/tags/items/enchanting/accepts_damage_enchantments.json
 c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/enchanting/accepts_fire_aspect.json
 c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/enchanting/accepts_knockback.json
 c3841f8356b6571df7678be625b6ebfd2617dacb data/iguanatweaksreborn/tags/items/enchanting/accepts_luck.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/iguanatweaksreborn/tags/items/energy_boost.json
-7893762cd3bdaa9d30a4bae30b4205b71a884662 data/iguanatweaksreborn/tags/items/not_unbreakable.json
+26f2befbc6ee3f5363c35bfdab94b999985b30ad data/iguanatweaksreborn/tags/items/hellish_coal_ores.json
+ab0330cb0b0f54660eb229e43d6b824ae349b0b0 data/iguanatweaksreborn/tags/items/not_unbreakable.json
 7886b306d2eafd075ee18ae7a6e005a68b2fb112 data/iguanatweaksreborn/tags/items/no_stack_size_changes.json
 5d22b50be152b15357d975bf0a780d8372bfd97b data/iguanatweaksreborn/tags/items/raw_food.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/iguanatweaksreborn/tags/items/spawner_reactivator.json

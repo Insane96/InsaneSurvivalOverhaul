@@ -1,11 +1,11 @@
 package insane96mcp.iguanatweaksreborn.module.farming.crops;
 
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -53,21 +53,21 @@ import net.minecraftforge.registries.RegistryObject;
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Crops extends Feature {
 
-	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ITRItemTagsProvider.create("chicken_food_items");
+	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ISTItemTagsProvider.create("chicken_food_items");
 
 	public static final TagKey<Block> HARDER_CROPS_TAG = ITRBlockTagsProvider.create("harder_crops");
 
-	public static final RegistryObject<BlockItem> ROOTED_POTATO = ITRRegistries.ITEMS.register("rooted_potato", () -> new SeedsBlockItem(Blocks.POTATOES, new Item.Properties()));
-	public static final RegistryObject<BlockItem> CARROT_SEEDS = ITRRegistries.ITEMS.register("carrot_seeds", () -> new SeedsBlockItem(Blocks.CARROTS, new Item.Properties()));
-	public static final RegistryObject<BlockItem> ROOTED_ONION = ITRRegistries.ITEMS.register("rooted_onion", () -> new SeedsBlockItem(ModList.get().isLoaded("farmersdelight") ? FarmersDelightIntegration.getOnion() : Blocks.POTATOES, new Item.Properties()));
-	public static final RegistryObject<BlockItem> RICE_SEEDS = ITRRegistries.ITEMS.register("rice_seeds", () -> new SeedsBlockItem(ModList.get().isLoaded("farmersdelight") ? FarmersDelightIntegration.getRice() : Blocks.POTATOES, new Item.Properties()));
-	public static final RegistryObject<WildCropBlock> WILD_WHEAT = ITRRegistries.BLOCKS.register("wild_wheat", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
-	public static final RegistryObject<WildCropBlock> WILD_CARROTS = ITRRegistries.BLOCKS.register("wild_carrots", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
-	public static final RegistryObject<WildCropBlock> WILD_POTATOES = ITRRegistries.BLOCKS.register("wild_potatoes", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
-	public static final RegistryObject<WildCropBlock> WILD_BEETROOTS = ITRRegistries.BLOCKS.register("wild_beetroots", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
+	public static final RegistryObject<BlockItem> ROOTED_POTATO = ISTRegistries.ITEMS.register("rooted_potato", () -> new SeedsBlockItem(Blocks.POTATOES, new Item.Properties()));
+	public static final RegistryObject<BlockItem> CARROT_SEEDS = ISTRegistries.ITEMS.register("carrot_seeds", () -> new SeedsBlockItem(Blocks.CARROTS, new Item.Properties()));
+	public static final RegistryObject<BlockItem> ROOTED_ONION = ISTRegistries.ITEMS.register("rooted_onion", () -> new SeedsBlockItem(ModList.get().isLoaded("farmersdelight") ? FarmersDelightIntegration.getOnion() : Blocks.POTATOES, new Item.Properties()));
+	public static final RegistryObject<BlockItem> RICE_SEEDS = ISTRegistries.ITEMS.register("rice_seeds", () -> new SeedsBlockItem(ModList.get().isLoaded("farmersdelight") ? FarmersDelightIntegration.getRice() : Blocks.POTATOES, new Item.Properties()));
+	public static final RegistryObject<WildCropBlock> WILD_WHEAT = ISTRegistries.BLOCKS.register("wild_wheat", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
+	public static final RegistryObject<WildCropBlock> WILD_CARROTS = ISTRegistries.BLOCKS.register("wild_carrots", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
+	public static final RegistryObject<WildCropBlock> WILD_POTATOES = ISTRegistries.BLOCKS.register("wild_potatoes", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
+	public static final RegistryObject<WildCropBlock> WILD_BEETROOTS = ISTRegistries.BLOCKS.register("wild_beetroots", () -> new WildCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).strength(0.8f, 0f)));
 
 	public static final SimpleBlockWithItem SOLANUM_NEOROSSII = SimpleBlockWithItem.register("solanum_neorossii", () -> new FlowerBlock(() -> MobEffects.MOVEMENT_SPEED, 10, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ)));
-	public static final RegistryObject<Block> POTTED_SOLANUM_NEOROSSII = ITRRegistries.BLOCKS.register("potted_solanum_neorossii", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SOLANUM_NEOROSSII.block().get(), BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM)));
+	public static final RegistryObject<Block> POTTED_SOLANUM_NEOROSSII = ISTRegistries.BLOCKS.register("potted_solanum_neorossii", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SOLANUM_NEOROSSII.block().get(), BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM)));
 
 	@Config
 	@Label(name = "Crops Require Water", description = """

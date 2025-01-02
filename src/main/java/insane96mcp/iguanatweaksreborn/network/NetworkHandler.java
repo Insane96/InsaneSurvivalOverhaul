@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.network;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.FoodRegenSync;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHungerSync;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.SpawnerStatusSync;
@@ -12,7 +12,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 public class NetworkHandler {
 	private static final String PROTOCOL_VERSION = Integer.toString(4);
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "network_channel"))
+			.named(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "network_channel"))
 			.clientAcceptedVersions(s -> true)
 			.serverAcceptedVersions(s -> true)
 			.networkProtocolVersion(() -> PROTOCOL_VERSION)

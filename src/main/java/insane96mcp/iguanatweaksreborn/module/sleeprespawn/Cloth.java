@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -17,13 +17,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-import static insane96mcp.iguanatweaksreborn.IguanaTweaksReborn.MOD_ID;
+import static insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks.MOD_ID;
 
 @Label(name = "Cloth", description = "Zombies drop cloth instead of Rotten Flesh. Cloth is used to make beds and various other stuff.")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Cloth extends Feature {
 
-	public static final RegistryObject<Item> CLOTH = ITRRegistries.ITEMS.register("cloth", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> CLOTH = ISTRegistries.ITEMS.register("cloth", () -> new Item(new Item.Properties()));
 
 	@Config
 	@Label(name = "Data Pack", description = """

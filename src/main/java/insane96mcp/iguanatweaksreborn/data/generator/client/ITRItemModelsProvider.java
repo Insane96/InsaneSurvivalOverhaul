@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator.client;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -9,6 +9,7 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.world.Berries;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -34,8 +35,8 @@ public class ITRItemModelsProvider extends ItemModelProvider {
 
         basicItem(Berries.SWEET_BERRY_SEEDS.get());
 
-        basicItemWithTexture(CyanFlower.FLOWER.item().get(), new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/cyan_flower"));
-        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/solanum_neorossii"));
+        basicItemWithTexture(CyanFlower.FLOWER.item().get(), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/cyan_flower"));
+        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/solanum_neorossii"));
 
         basicItem(BiomeCompass.COMPASS.get());
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
@@ -46,13 +47,19 @@ public class ITRItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.NETHERIZED_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
 
-        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/copper_powered_rail"));
+        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
 
         basicItem(Cloth.CLOTH.get());
 
-        withExistingParent("respawn_obelisk", new ResourceLocation(IguanaTweaksReborn.MOD_ID, "block/respawn_obelisk_disabled"));
+        withExistingParent("respawn_obelisk", new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/respawn_obelisk_disabled"));
+
+        withExistingParent("soul_sand_hellish_coal_ore", new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/soul_sand_hellish_coal_ore"));
+        withExistingParent("soul_soil_hellish_coal_ore", new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "block/soul_soil_hellish_coal_ore"));
+        basicItem(CoalFire.FIRESTARTER.get());
+        basicItem(CoalFire.HELLISH_COAL.get());
     }
+
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)
     {
         return basicItemWithTexture(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)), texture);

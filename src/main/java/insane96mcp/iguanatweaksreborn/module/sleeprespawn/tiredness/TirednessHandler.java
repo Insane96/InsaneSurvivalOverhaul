@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.message.TirednessSync;
 import net.minecraft.commands.CommandSourceStack;
@@ -11,7 +11,7 @@ import net.minecraftforge.network.NetworkDirection;
 import java.util.Collection;
 
 public class TirednessHandler {
-    public static final String TIREDNESS_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "tiredness";
+    public static final String TIREDNESS_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "tiredness";
 
     public static float get(LivingEntity entity) {
         return entity.getPersistentData().getFloat(TIREDNESS_TAG);

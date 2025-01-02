@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import org.jetbrains.annotations.NotNull;
 
 public class FireAspect extends Enchantment {
-    public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ITRItemTagsProvider.create("enchanting/accepts_fire_aspect");
+    public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISTItemTagsProvider.create("enchanting/accepts_fire_aspect");
     static final EnchantmentCategory CATEGORY = EnchantmentCategory.create("fire_aspect", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
     public FireAspect() {
         super(Rarity.RARE, CATEGORY, new EquipmentSlot[] { EquipmentSlot.MAINHAND });

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = IguanaTweaksReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = InsaneSurvivalTweaks.MOD_ID)
 public class LivestockDataReloadListener extends SimpleJsonResourceReloadListener {
 	public static List<LivestockData> LIVESTOCK_DATA;
 	public static final LivestockDataReloadListener INSTANCE;

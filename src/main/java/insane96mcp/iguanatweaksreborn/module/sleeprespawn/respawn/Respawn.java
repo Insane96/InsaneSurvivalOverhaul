@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -49,21 +49,21 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static insane96mcp.iguanatweaksreborn.IguanaTweaksReborn.MOD_ID;
+import static insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks.MOD_ID;
 
 @Label(name = "Respawn", description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Respawn extends JsonFeature {
 	public static final TagKey<Block> RESPAWN_OBELISK_BLOCKS_TO_ROT = ITRBlockTagsProvider.create("structures/respawn_obelisk/blocks_to_rot");
 
-	public static final String FAIL_RESPAWN_OBELISK_LANG = IguanaTweaksReborn.MOD_ID + ".fail_respawn_obelisk";
+	public static final String FAIL_RESPAWN_OBELISK_LANG = InsaneSurvivalTweaks.MOD_ID + ".fail_respawn_obelisk";
 
-	public static final String LOOSE_RESPAWN_POINT_SET = IguanaTweaksReborn.MOD_ID + ".loose_bed_respawn_point_set";
+	public static final String LOOSE_RESPAWN_POINT_SET = InsaneSurvivalTweaks.MOD_ID + ".loose_bed_respawn_point_set";
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 
-	public static final String DEATHS = IguanaTweaksReborn.RESOURCE_PREFIX + "deaths";
-	public static final String HUNGER_ON_DEATH_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "hunger_on_death";
-	public static final String SATURATION_ON_DEATH_TAG = IguanaTweaksReborn.RESOURCE_PREFIX + "saturation_on_death";
+	public static final String DEATHS = InsaneSurvivalTweaks.RESOURCE_PREFIX + "deaths";
+	public static final String HUNGER_ON_DEATH_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "hunger_on_death";
+	public static final String SATURATION_ON_DEATH_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "saturation_on_death";
 
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
@@ -135,7 +135,7 @@ public class Respawn extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 

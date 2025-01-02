@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import insane96mcp.iguanatweaksreborn.command.ITRCommand;
 import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
 import insane96mcp.iguanatweaksreborn.data.criterion.SeasonChangedTrigger;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITREntityTypeTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockModelsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockStatesProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ITRItemModelsProvider;
@@ -28,9 +28,9 @@ import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.iguanatweaksreborn.setup.ITRCommonConfig;
 import insane96mcp.iguanatweaksreborn.setup.ITRPackSource;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
 import insane96mcp.iguanatweaksreborn.setup.client.ITRClientConfig;
@@ -71,7 +71,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Mod("iguanatweaksreborn")
-public class IguanaTweaksReborn
+public class InsaneSurvivalTweaks
 {
     public static final String MOD_ID = "iguanatweaksreborn";
     public static final String NEW_MOD_ID = "insanesurvivaltweaks";
@@ -81,9 +81,9 @@ public class IguanaTweaksReborn
     //TODO
     public static final String CONFIG_FOLDER = "config/insanesurvivaltweaks";
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "textures/gui/icons.png");
+    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/gui/icons.png");
 
-    public IguanaTweaksReborn() {
+    public InsaneSurvivalTweaks() {
         //TODO
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaltweaks/client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaltweaks/common.toml");
@@ -104,7 +104,7 @@ public class IguanaTweaksReborn
         modEventBus.register(NoHunger.class);
         modEventBus.register(UnfairOneShot.class);
         modEventBus.register(RegeneratingAbsorption.class);
-        ITRRegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
+        ISTRegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
 
         ITRTriggers.init();
 
@@ -135,8 +135,8 @@ public class IguanaTweaksReborn
         Modifiers.init();
 
         event.enqueueWork(() -> {
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "cyan_flower"), CyanFlower.POTTED_FLOWER);
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
         });
     }
 
@@ -150,14 +150,14 @@ public class IguanaTweaksReborn
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         /*generator.addProvider(event.includeServer(), new SRRecipeProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new SRGlobalLootModifierProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID));*/
-        ITRBlockTagsProvider blockTags = new ITRBlockTagsProvider(generator.getPackOutput(), lookupProvider, IguanaTweaksReborn.MOD_ID, existingFileHelper);
+        ITRBlockTagsProvider blockTags = new ITRBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ITRItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), IguanaTweaksReborn.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITRDamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, IguanaTweaksReborn.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITREntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, IguanaTweaksReborn.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockStatesProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockModelsProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRItemModelsProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISTItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ITRDamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ITREntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ITRBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ITRBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ITRItemModelsProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
     }
 
     public void addPackFinders(AddPackFindersEvent event)
@@ -167,7 +167,7 @@ public class IguanaTweaksReborn
                 continue;
 
             Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + dataPack.getPath());
-            var pack = Pack.readMetaAndCreate(IguanaTweaksReborn.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
+            var pack = Pack.readMetaAndCreate(InsaneSurvivalTweaks.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
                     (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, dataPack.shouldBeEnabled() ? PackSource.DEFAULT : ITRPackSource.DISABLED);
             event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
         }
@@ -181,7 +181,7 @@ public class IguanaTweaksReborn
         PackRepository packRepository = event.getServer().getPackRepository();
         List<Pack> list = Lists.newArrayList(packRepository.getSelectedPacks());
         for (IntegratedPack dataPack : IntegratedPack.INTEGRATED_PACKS) {
-            String dataPackId = IguanaTweaksReborn.RESOURCE_PREFIX + dataPack.getPath();
+            String dataPackId = InsaneSurvivalTweaks.RESOURCE_PREFIX + dataPack.getPath();
             Pack pack = packRepository.getPack(dataPackId);
             if (pack != null && !dataPack.shouldBeEnabled()) {
                 list.remove(pack);

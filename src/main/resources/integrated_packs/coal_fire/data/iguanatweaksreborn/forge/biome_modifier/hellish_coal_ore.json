@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "biomes": "#minecraft:is_nether",
+    "features": "iguanatweaksreborn:hellish_coal",
+    "step": "underground_ores"
+}

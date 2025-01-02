@@ -1,9 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.farming.bonemeal;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -47,7 +47,7 @@ public class BoneMeal extends Feature {
 
     public static final SimpleBlockWithItem RICH_FARMLAND = SimpleBlockWithItem.register("rich_farmland", () -> new RichFarmlandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).randomTicks().strength(0.6F).sound(SoundType.GRAVEL).isViewBlocking((state, blockGetter, pos) -> true).isSuffocating((state, blockGetter, pos) -> true)));
 
-    public static final TagKey<Item> ITEM_BLACKLIST = ITRItemTagsProvider.create("bone_meal_blacklist");
+    public static final TagKey<Item> ITEM_BLACKLIST = ISTItemTagsProvider.create("bone_meal_blacklist");
     public static final TagKey<Block> BLOCK_BLACKLIST = ITRBlockTagsProvider.create("bone_meal_blacklist");
 
     @Config
@@ -179,7 +179,7 @@ public class BoneMeal extends Feature {
         if (state.getBlock() instanceof BushBlock bushBlock) {
             Optional<IntegerProperty> oAgeProperty = getAgeProperty(state);
             if (oAgeProperty.isEmpty()) {
-                IguanaTweaksReborn.LOGGER.debug("No vanilla age property found for state %s".formatted(state));
+                InsaneSurvivalTweaks.LOGGER.debug("No vanilla age property found for state %s".formatted(state));
                 return;
             }
             int age = state.getValue(oAgeProperty.get());

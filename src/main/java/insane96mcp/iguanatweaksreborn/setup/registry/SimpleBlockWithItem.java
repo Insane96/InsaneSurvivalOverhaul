@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.setup.registry;
 
 
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -15,8 +15,8 @@ public record SimpleBlockWithItem(RegistryObject<Block> block, RegistryObject<Bl
     }
 
     public static SimpleBlockWithItem register(String id, Supplier<Block> blockSupplier, Item.Properties itemProperties) {
-        RegistryObject<Block> block = ITRRegistries.BLOCKS.register(id, blockSupplier);
-        RegistryObject<BlockItem> item = ITRRegistries.ITEMS.register(id, () -> new BlockItem(block.get(), itemProperties));
+        RegistryObject<Block> block = ISTRegistries.BLOCKS.register(id, blockSupplier);
+        RegistryObject<BlockItem> item = ISTRegistries.ITEMS.register(id, () -> new BlockItem(block.get(), itemProperties));
         return new SimpleBlockWithItem(block, item);
     }
 }

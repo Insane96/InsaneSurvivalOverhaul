@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -29,7 +29,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 @Label(name = "Nether")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Nether extends Feature {
-    public static final String REQUIRES_CORNERS_LANG = IguanaTweaksReborn.MOD_ID + ".requires_corners";
+    public static final String REQUIRES_CORNERS_LANG = InsaneSurvivalTweaks.MOD_ID + ".requires_corners";
     public static final TagKey<Block> PORTAL_CORNERS = ITRBlockTagsProvider.create("portal_corners");
 
     @Config

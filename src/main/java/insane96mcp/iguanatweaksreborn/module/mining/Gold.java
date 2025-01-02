@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mining;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 @LoadFeature(module = Modules.Ids.MINING)
 public class Gold extends Feature {
 
-	public static final String LUCKY_GOLD_TOOLTIP = IguanaTweaksReborn.MOD_ID + ".innate_luck";
+	public static final String LUCKY_GOLD_TOOLTIP = InsaneSurvivalTweaks.MOD_ID + ".innate_luck";
 
 	@Config
 	@Label(name = "Harvest Level", description = "Set the harvest level of gold tools. Vanilla is minecraft:gold (same as minecraft:wood), the there's stone, iron, diamond, netherite. Please note that an invalid resource location or harvest level here might crash the game.")

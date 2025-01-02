@@ -14,7 +14,8 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
@@ -43,6 +44,7 @@ public class ClientSetup {
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             addAfter(event, Items.CHAIN, Death.GRAVE.item());
+            addAfter(event, Items.COAL_BLOCK, CoalFire.CHARCOAL_LAYER.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             addAfter(event, Items.POPPY, CyanFlower.FLOWER.item());
@@ -54,9 +56,12 @@ public class ClientSetup {
                 addAfter(event, Crops.ROOTED_POTATO.get(), Crops.ROOTED_ONION);
             }
             addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
+            addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
+            addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
+            addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());
 
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
             addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
@@ -90,6 +95,7 @@ public class ClientSetup {
                 }
             }
             addBefore(event, Items.LEATHER, Cloth.CLOTH.get());
+            addAfter(event, Items.CHARCOAL, CoalFire.HELLISH_COAL.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.NETHERIZED_STEW.get());
@@ -131,7 +137,7 @@ public class ClientSetup {
     }
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ITRRegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
+        event.registerEntityRenderer(ISTRegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
         event.registerBlockEntityRenderer(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ITRBeaconRenderer::new);
     }
 }

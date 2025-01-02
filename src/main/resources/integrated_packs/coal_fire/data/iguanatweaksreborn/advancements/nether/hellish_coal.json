@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "iguanatweaksreborn:hellish_coal"
+		},
+		"title": {
+			"translate": "advancements.ist.hellish_coal.title"
+		},
+		"description": {
+			"translate": "advancements.ist.hellish_coal.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:nether/root",
+	"criteria": {
+		"hellish_coal": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"iguanatweaksreborn:hellish_coal"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"hellish_coal"
+		]
+	]
+}

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mobs;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -33,7 +33,7 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.MOBS)
 public class Villagers extends Feature {
 
-	private static final String CURE_DISCOUNT_REMOVED = IguanaTweaksReborn.RESOURCE_PREFIX + "cure_discount_removed";
+	private static final String CURE_DISCOUNT_REMOVED = InsaneSurvivalTweaks.RESOURCE_PREFIX + "cure_discount_removed";
 
 	@Config
 	@Label(name = "Lock Trades", description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")

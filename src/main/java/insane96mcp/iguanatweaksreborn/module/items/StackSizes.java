@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.StackSizesSync;
 import insane96mcp.iguanatweaksreborn.utils.Utils;
@@ -28,7 +28,7 @@ import java.util.Map;
 @Label(name = "Stack Sizes", description = "Make food, items and blocks less stackable. Items and Blocks are disabled by default. Changing stuff might require a Minecraft restart.")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class StackSizes extends Feature {
-    public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ITRItemTagsProvider.create("no_stack_size_changes");
+    public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ISTItemTagsProvider.create("no_stack_size_changes");
 
     @Config
     @Label(name = "Food Stack Reduction", description = "Food stack sizes will be reduced based off their hunger restored and saturation multiplier. See 'Food Stack Reduction Formula' for the formula")

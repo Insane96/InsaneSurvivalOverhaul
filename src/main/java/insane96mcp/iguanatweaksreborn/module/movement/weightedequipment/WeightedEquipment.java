@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.movement.weightedequipment;
 
 import com.google.common.collect.Multimap;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -38,7 +38,7 @@ import java.util.UUID;
 @Label(name = "Weighted Equipment", description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. Armor weights are controlled via Item Definitions.")
 @LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false)
 public class WeightedEquipment extends JsonFeature {
-	public static final String ARMOR_SLOWDOWN = IguanaTweaksReborn.MOD_ID + ".armor_slowdown";
+	public static final String ARMOR_SLOWDOWN = InsaneSurvivalTweaks.MOD_ID + ".armor_slowdown";
 	public static final UUID ARMOR_SLOWDOWN_UUID = UUID.fromString("8588420e-ce50-4e4e-a3e4-974dfc8a98ec");
 
 	//TODO Change formula to use attribute modifier
@@ -59,13 +59,13 @@ public class WeightedEquipment extends JsonFeature {
 
 	public WeightedEquipment(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "enchantments_weights")));
+		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "enchantments_weights")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package insane96mcp.iguanatweaksreborn.module.farming.hoes;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
@@ -33,10 +33,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Hoes extends Feature {
 
-	public static final String TOO_WEAK = IguanaTweaksReborn.MOD_ID + ".weak_hoe";
-	public static final String SCYTHE_RADIUS = IguanaTweaksReborn.MOD_ID + ".scythe_radius";
+	public static final String TOO_WEAK = InsaneSurvivalTweaks.MOD_ID + ".weak_hoe";
+	public static final String SCYTHE_RADIUS = InsaneSurvivalTweaks.MOD_ID + ".scythe_radius";
 	public static final TagKey<Block> CAN_SCYTHE = ITRBlockTagsProvider.create("can_scythe");
-	public static final TagKey<Item> DISABLED_HOES = ITRItemTagsProvider.create("disabled_hoes");
+	public static final TagKey<Item> DISABLED_HOES = ISTItemTagsProvider.create("disabled_hoes");
 
 	@Config(min = 1)
 	@Label(name = "Durability used on right-click")

@@ -1,14 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.world.spawners.capability;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SpawnerDataImpl implements ISpawnerData {
 
-    public static final String SPAWNED_MOBS = IguanaTweaksReborn.RESOURCE_PREFIX + "spawned_mobs";
-	public static final String SPAWNER_DISABLED = IguanaTweaksReborn.RESOURCE_PREFIX + "spawner_disabled";
-	public static final String SPAWNER_EMPOWERED = IguanaTweaksReborn.RESOURCE_PREFIX + "spawner_empowered";
+    public static final String SPAWNED_MOBS = InsaneSurvivalTweaks.RESOURCE_PREFIX + "spawned_mobs";
+	public static final String SPAWNER_DISABLED = InsaneSurvivalTweaks.RESOURCE_PREFIX + "spawner_disabled";
+	public static final String SPAWNER_EMPOWERED = InsaneSurvivalTweaks.RESOURCE_PREFIX + "spawner_empowered";
     private int spawnedMobs;
 	private boolean disabled;
 	private boolean empowered = true;

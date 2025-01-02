@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.coalfire;
 
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
@@ -30,7 +30,7 @@ public class PilableFallingLayerEntity extends FallingBlockEntity {
     }
 
     public PilableFallingLayerEntity(Level level, double x, double y, double z, BlockState blockState) {
-        this(ITRRegistries.PILABLE_FALLING_LAYER.get(), level);
+        this(ISTRegistries.PILABLE_FALLING_LAYER.get(), level);
         this.blockState = blockState;
         this.blocksBuilding = true;
         this.setPos(x, y, z);

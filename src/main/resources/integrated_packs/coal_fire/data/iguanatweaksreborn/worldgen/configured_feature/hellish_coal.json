@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:ore",
+    "config": {
+        "size": 28,
+        "discard_chance_on_air_exposure": 0.8,
+        "targets": [
+            {
+                "target": {
+                    "predicate_type": "minecraft:block_match",
+                    "block": "minecraft:soul_sand"
+                },
+                "state": {
+                    "Name": "iguanatweaksreborn:soul_sand_hellish_coal_ore"
+                }
+            },
+            {
+                "target": {
+                    "predicate_type": "minecraft:block_match",
+                    "block": "minecraft:soul_soil"
+                },
+                "state": {
+                    "Name": "iguanatweaksreborn:soul_soil_hellish_coal_ore"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "iguanatweaksreborn:replace_drop",
+  "chests_only": true,
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "dimension": "minecraft:overworld"
+      }
+    }
+  ],
+  "item_to_replace": "minecraft:flint_and_steel",
+  "keep_durability": true,
+  "new_item": "iguanatweaksreborn:firestarter"
+}

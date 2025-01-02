@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.ExplodeParticles;
 import insane96mcp.insanelib.base.Feature;
@@ -24,8 +24,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Explosion Overhaul", description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class ExplosionOverhaul extends Feature {
-	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "explosion_knockback_blacklist"));
-	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "explosion_entity_blacklist"));
+	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "explosion_knockback_blacklist"));
+	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "explosion_entity_blacklist"));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_MOBGRIEFING = GameRules.register("iguanatweaks:explosionMobGriefing", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 
 	@Config

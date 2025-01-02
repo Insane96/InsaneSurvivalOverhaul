@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ITRItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Ecologic Wood", description = "Wooden items have a lower chance to break in sunlight.")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class EcologicWood extends Feature {
-    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ITRItemTagsProvider.create("equipment/hand/wooden");
+    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/wooden");
 
     @Config(min = 0, max = 1)
     @Label(name = "Chance at 'Max sunlight'", description = "Chance for the wooden item to not consume durability at 'Max sunlight'.")

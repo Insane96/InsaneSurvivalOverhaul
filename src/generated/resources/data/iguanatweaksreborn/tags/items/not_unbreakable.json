@@ -3,6 +3,7 @@
     "#iguanatweaksreborn:equipment/hand/wooden",
     "#iguanatweaksreborn:equipment/hand/stone",
     "#iguanatweaksreborn:equipment/armor/leather",
+    "iguanatweaksreborn:firestarter",
     {
       "id": "#iguanatweaksexpanded:equipment/hand/flint",
       "required": false

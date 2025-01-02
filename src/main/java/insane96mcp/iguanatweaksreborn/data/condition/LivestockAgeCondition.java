@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
@@ -31,7 +31,7 @@ public class LivestockAgeCondition implements LootItemCondition {
     }
 
     public @NotNull LootItemConditionType getType() {
-        return ITRRegistries.LIVESTOCK_AGE_CONDITION.get();
+        return ISTRegistries.LIVESTOCK_AGE_CONDITION.get();
     }
 
     public @NotNull Set<LootContextParam<?>> getReferencedContextParams() {

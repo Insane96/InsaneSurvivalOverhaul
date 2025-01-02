@@ -1,13 +1,13 @@
 package insane96mcp.iguanatweaksreborn.data.criterion;
 
 import com.google.gson.JsonObject;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class MakeRichFarmlandTrigger extends SimpleCriterionTrigger<MakeRichFarmlandTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "make_rich_farmland");
+	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "make_rich_farmland");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.allurement.core.AllurementConfig;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.IAttributeEnchantment;
@@ -16,7 +16,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration.Allurement;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -62,17 +62,17 @@ import java.util.function.Predicate;
 @Label(name = "Enchantments", description = "Changes to some enchantments related stuff.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
 public class EnchantmentsFeature extends JsonFeature {
-	public static final RegistryObject<Enchantment> SHARPNESS = ITRRegistries.ENCHANTMENTS.register("sharpness", Sharpness::new);
-	public static final RegistryObject<Enchantment> SMITE = ITRRegistries.ENCHANTMENTS.register("smite", Smite::new);
-	public static final RegistryObject<Enchantment> BANE_OF_SSSSS = ITRRegistries.ENCHANTMENTS.register("bane_of_sssss", BaneOfSSSS::new);
-	public static final RegistryObject<Enchantment> FIRE_ASPECT = ITRRegistries.ENCHANTMENTS.register("fire_aspect", FireAspect::new);
-	public static final RegistryObject<Enchantment> KNOCKBACK = ITRRegistries.ENCHANTMENTS.register("knockback", Knockback::new);
-	public static final RegistryObject<Enchantment> LUCK = ITRRegistries.ENCHANTMENTS.register("luck", Luck::new);
-	public static final RegistryObject<Enchantment> PROTECTION = ITRRegistries.ENCHANTMENTS.register("protection", OverallProtection::new);
-	public static final RegistryObject<Enchantment> BLAST_PROTECTION = ITRRegistries.ENCHANTMENTS.register("blast_protection", BlastProtection::new);
-	public static final RegistryObject<Enchantment> FIRE_PROTECTION = ITRRegistries.ENCHANTMENTS.register("fire_protection", FireProtection::new);
-	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ITRRegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
-	public static final RegistryObject<Enchantment> FEATHER_FALLING = ITRRegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
+	public static final RegistryObject<Enchantment> SHARPNESS = ISTRegistries.ENCHANTMENTS.register("sharpness", Sharpness::new);
+	public static final RegistryObject<Enchantment> SMITE = ISTRegistries.ENCHANTMENTS.register("smite", Smite::new);
+	public static final RegistryObject<Enchantment> BANE_OF_SSSSS = ISTRegistries.ENCHANTMENTS.register("bane_of_sssss", BaneOfSSSS::new);
+	public static final RegistryObject<Enchantment> FIRE_ASPECT = ISTRegistries.ENCHANTMENTS.register("fire_aspect", FireAspect::new);
+	public static final RegistryObject<Enchantment> KNOCKBACK = ISTRegistries.ENCHANTMENTS.register("knockback", Knockback::new);
+	public static final RegistryObject<Enchantment> LUCK = ISTRegistries.ENCHANTMENTS.register("luck", Luck::new);
+	public static final RegistryObject<Enchantment> PROTECTION = ISTRegistries.ENCHANTMENTS.register("protection", OverallProtection::new);
+	public static final RegistryObject<Enchantment> BLAST_PROTECTION = ISTRegistries.ENCHANTMENTS.register("blast_protection", BlastProtection::new);
+	public static final RegistryObject<Enchantment> FIRE_PROTECTION = ISTRegistries.ENCHANTMENTS.register("fire_protection", FireProtection::new);
+	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ISTRegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
+	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISTRegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
 	@Config
 	@Label(name = "Infinity overhaul", description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;
@@ -153,13 +153,13 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public EnchantmentsFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(IguanaTweaksReborn.MOD_ID, "disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, new ResourceLocation(IguanaTweaksReborn.MOD_ID, "disabled_enchantments")));
+		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "disabled_enchantments")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return IguanaTweaksReborn.CONFIG_FOLDER;
+		return InsaneSurvivalTweaks.CONFIG_FOLDER;
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ITRRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -30,7 +30,7 @@ import net.minecraftforge.registries.RegistryObject;
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Berries extends Feature {
 
-    public static final RegistryObject<BlockItem> SWEET_BERRY_SEEDS = ITRRegistries.ITEMS.register("sweet_berry_seeds", () -> new ItemNameBlockItem(Blocks.SWEET_BERRY_BUSH, new Item.Properties()));
+    public static final RegistryObject<BlockItem> SWEET_BERRY_SEEDS = ISTRegistries.ITEMS.register("sweet_berry_seeds", () -> new ItemNameBlockItem(Blocks.SWEET_BERRY_BUSH, new Item.Properties()));
 
     @Config
     @Label(name = "No damage if dressed", description = "Berry bushes no longer deal damage when walking in them with leggings and boots")

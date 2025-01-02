@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
-import static insane96mcp.iguanatweaksreborn.IguanaTweaksReborn.MOD_ID;
+import static insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks.MOD_ID;
 
 @Label(name = "Minecarts")
 @LoadFeature(module = Modules.Ids.MOVEMENT, canBeDisabled = false)

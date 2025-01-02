@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.mixin.client.GuiAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
@@ -57,13 +57,13 @@ import org.jetbrains.annotations.Nullable;
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class NoHunger extends Feature {
 
-    private static final String FOOD_REGEN_LEFT = IguanaTweaksReborn.RESOURCE_PREFIX + "food_regen_left";
-    private static final String FOOD_REGEN_STRENGTH = IguanaTweaksReborn.RESOURCE_PREFIX + "food_regen_strength";
+    private static final String FOOD_REGEN_LEFT = InsaneSurvivalTweaks.RESOURCE_PREFIX + "food_regen_left";
+    private static final String FOOD_REGEN_STRENGTH = InsaneSurvivalTweaks.RESOURCE_PREFIX + "food_regen_strength";
     private static final int FOOD_REGEN_TICK_RATE = 10;
 
-    private static final String HEALTH_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.health";
-    private static final String MISSING_HEALTH_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.missing_health";
-    private static final String SEC_LANG = IguanaTweaksReborn.MOD_ID + ".tooltip.sec";
+    private static final String HEALTH_LANG = InsaneSurvivalTweaks.MOD_ID + ".tooltip.health";
+    private static final String MISSING_HEALTH_LANG = InsaneSurvivalTweaks.MOD_ID + ".tooltip.missing_health";
+    private static final String SEC_LANG = InsaneSurvivalTweaks.MOD_ID + ".tooltip.sec";
 
     @Config(min = 0d)
     @Label(name = "Food Heal.Over Time", description = "The formula to calculate the health regenerated overtime when eating food. Leave empty to disable. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
@@ -314,7 +314,7 @@ public class NoHunger extends Feature {
     protected static void renderArmor(GuiGraphics guiGraphics, int width, int height) {
         Minecraft mc = Minecraft.getInstance();
         ForgeGui gui = (ForgeGui) mc.gui;
-        mc.getProfiler().push(IguanaTweaksReborn.RESOURCE_PREFIX + "armor");
+        mc.getProfiler().push(InsaneSurvivalTweaks.RESOURCE_PREFIX + "armor");
 
         RenderSystem.enableBlend();
         int left = width / 2 + 82;
@@ -338,7 +338,7 @@ public class NoHunger extends Feature {
         mc.getProfiler().pop();
     }
 
-    protected static final ResourceLocation OT_REGEN_LOCATION = new ResourceLocation(IguanaTweaksReborn.MOD_ID, "textures/gui/ot_regen.png");
+    protected static final ResourceLocation OT_REGEN_LOCATION = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/gui/ot_regen.png");
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent

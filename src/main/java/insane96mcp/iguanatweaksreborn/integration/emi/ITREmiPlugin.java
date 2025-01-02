@@ -4,8 +4,10 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
+import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
-import insane96mcp.iguanatweaksreborn.IguanaTweaksReborn;
+import dev.emi.emi.api.stack.EmiStack;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
@@ -13,10 +15,13 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.data.IdTagMatcher;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -62,16 +67,29 @@ public class ITREmiPlugin implements EmiPlugin {
 			registry.addRecipe(createSimpleInfo(Minecarts.GOLDEN_POWERED_RAIL.item().get(), "info_golden_powered_rail", Component.translatable("emi.info.iguanatweaksreborn.golden_powered_rail")));
 			registry.removeEmiStacks(emiStack -> emiStack.getItemStack().is(Items.POWERED_RAIL));
 		}
+		if (Feature.isEnabled(CoalFire.class) && CoalFire.charcoalFromBurntLogsChance > 0) {
+			Ingredient fire = Ingredient.of(CoalFire.FIRESTARTER.get(), Items.FLINT_AND_STEEL);
+			registry.addRecipe(EmiWorldInteractionRecipe.builder()
+					.id(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "charcoal_from_burning_logs"))
+					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
+					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
+					.output(EmiStack.of(Items.CHARCOAL)).build());
+			registry.addRecipe(EmiWorldInteractionRecipe.builder()
+					.id(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "charcoal_layer_from_burning_logs"))
+					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
+					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
+					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
+		}
 		if (Feature.isEnabled(NoHunger.class) && NoHunger.buffCakes)
 			registry.addRecipe(createSimpleInfo(emiIngredientOf(Items.CAKE), "cake", Component.translatable("emi.info.iguanatweaksreborn.no_hunger.cake")));
 	}
 
 	public EmiInfoRecipe createSimpleInfo(Item item, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), new ResourceLocation(IguanaTweaksReborn.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, id));
 	}
 
 	public EmiInfoRecipe createSimpleInfo(EmiIngredient emiIngredient, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), new ResourceLocation(IguanaTweaksReborn.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, id));
 	}
 
 	public static EmiIngredient emiIngredientOf(Item... item) {
