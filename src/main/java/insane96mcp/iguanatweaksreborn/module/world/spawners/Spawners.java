@@ -66,17 +66,20 @@ public class Spawners extends JsonFeature {
 	public static final String SPAWNER_REACTIVATOR = IguanaTweaksReborn.MOD_ID + ".spawner_reactivator";
 
 	@Config(min = 1)
-	@Label(name = "Delay", description = "Spawning Delay (in ticks) of the spawner. Vanilla is 200~800.")
-	public static MinMax delay = new MinMax(400, 1600);
-	@Config(min = 1)
-	@Label(name = "Override Spawn Delay", description = "If true, the spawner delay is set to 'delay' instead of using MinSpawnDelay and MaxSpawnDelay")
+	@Label(name = "Override Spawn Delay", description = "If true, the spawner delay is set to 'Delay' instead of using MinSpawnDelay and MaxSpawnDelay")
 	public static Boolean overrideSpawnDelay = true;
+	@Config(min = 1)
+	@Label(name = "Delay", description = "Spawning Delay (in ticks) of the spawner. Vanilla is 200~800. Requires 'Override Spawn Delay' to be enabled.")
+	public static MinMax delay = new MinMax(400, 1600);
 	@Config(min = 0)
 	@Label(name = "Required Players Range", description = "Range in which a player must be present for a spawner to work. Vanilla is 16.")
 	public static int requiredPlayerRange = 24;
 	@Config
 	@Label(name = "Ignore Light", description = "If true, monsters from spawners will spawn no matter the light level.")
 	public static Boolean ignoreLight = true;
+	@Config
+	@Label(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `iguanatweaksreborn:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
+	public static Boolean reEnableWithSpawnerReactivator = true;
 
 	@Config
 	@Label(name = "Disable spawners.Enabled")
@@ -196,7 +199,8 @@ public class Spawners extends JsonFeature {
 
 	@SubscribeEvent
 	public void onItemUse(PlayerInteractEvent.RightClickBlock event) {
-		if (!event.getItemStack().is(SPAWNER_REACTIVATOR_TAG)
+		if (!reEnableWithSpawnerReactivator
+				|| !event.getItemStack().is(SPAWNER_REACTIVATOR_TAG)
 				|| event.getLevel().getBlockState(event.getHitVec().getBlockPos()).getBlock() != Blocks.SPAWNER)
 			return;
 
@@ -356,7 +360,7 @@ public class Spawners extends JsonFeature {
 	@OnlyIn(Dist.CLIENT)
 	public void onTooltip(ItemTooltipEvent event) {
 		if (!this.isEnabled()
-				|| !Spawners.disableSpawnersEnabled
+				|| !reEnableWithSpawnerReactivator
 				|| !event.getItemStack().is(SPAWNER_REACTIVATOR_TAG))
 			return;
 
