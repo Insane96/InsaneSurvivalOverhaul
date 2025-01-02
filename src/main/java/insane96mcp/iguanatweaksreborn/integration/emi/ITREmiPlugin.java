@@ -7,7 +7,7 @@ import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
@@ -70,12 +70,12 @@ public class ITREmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(CoalFire.class) && CoalFire.charcoalFromBurntLogsChance > 0) {
 			Ingredient fire = Ingredient.of(CoalFire.FIRESTARTER.get(), Items.FLINT_AND_STEEL);
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "charcoal_from_burning_logs"))
+					.id(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "charcoal_from_burning_logs"))
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(Items.CHARCOAL)).build());
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "charcoal_layer_from_burning_logs"))
+					.id(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "charcoal_layer_from_burning_logs"))
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
@@ -85,11 +85,11 @@ public class ITREmiPlugin implements EmiPlugin {
 	}
 
 	public EmiInfoRecipe createSimpleInfo(Item item, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, id));
 	}
 
 	public EmiInfoRecipe createSimpleInfo(EmiIngredient emiIngredient, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, id));
 	}
 
 	public static EmiIngredient emiIngredientOf(Item... item) {

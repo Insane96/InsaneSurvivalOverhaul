@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
@@ -70,9 +70,9 @@ public class Tiredness extends JsonFeature {
 			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISTRegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
-	public static final String NOT_TIRED = InsaneSurvivalTweaks.MOD_ID + ".not_tired";
-	public static final String TIRED_ENOUGH = InsaneSurvivalTweaks.MOD_ID + ".tired_enough";
-	public static final String TOO_TIRED = InsaneSurvivalTweaks.MOD_ID + ".too_tired";
+	public static final String NOT_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".not_tired";
+	public static final String TIRED_ENOUGH = InsaneSurvivalOverhaul.MOD_ID + ".tired_enough";
+	public static final String TOO_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".too_tired";
 	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISTItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
@@ -131,7 +131,7 @@ public class Tiredness extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalTweaks.CONFIG_FOLDER;
+		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
 	public enum OnDeath {
@@ -408,7 +408,7 @@ public class Tiredness extends JsonFeature {
 		TirednessHandler.set(event.getEntity(), tiredness);
 	}
 
-	protected static final ResourceLocation OVERLAY_LOCATION = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/misc/tiredness_overlay.png");
+	protected static final ResourceLocation OVERLAY_LOCATION = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/misc/tiredness_overlay.png");
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.data.criterion;
 
 import com.google.gson.JsonObject;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,9 +10,9 @@ import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = InsaneSurvivalTweaks.MOD_ID)
+@Mod.EventBusSubscriber(modid = InsaneSurvivalOverhaul.MOD_ID)
 public class AnvilRepairTrigger extends SimpleCriterionTrigger<AnvilRepairTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "anvil_repair");
+	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "anvil_repair");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

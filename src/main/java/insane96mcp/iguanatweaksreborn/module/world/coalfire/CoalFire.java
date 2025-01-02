@@ -87,7 +87,7 @@ public class CoalFire extends Feature {
 
     public CoalFire(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "coal_fire", Component.literal("Insane's Survival Tweaks No Charcoal Smelting and Iron Coal"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noCharcoalSmeltingAndIronCoal));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "coal_fire", Component.literal("Insane's Survival Overhaul No Charcoal Smelting and Iron Coal"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noCharcoalSmeltingAndIronCoal));
     }
 
     public static boolean areCampfiresUnlit() {

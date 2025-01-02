@@ -51,6 +51,6 @@ public class BackwardsSlowdown extends Feature {
 	public static void applyModifier(Player player, float zza) {
 		player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(BACKWARD_WALK_SLOWDOWN_UUID);
 		if (zza < 0f)
-			MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BACKWARD_WALK_SLOWDOWN_UUID, "Insane's Survival Tweaks backward slowdown", -slowdown, AttributeModifier.Operation.MULTIPLY_BASE, false);
+			MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, BACKWARD_WALK_SLOWDOWN_UUID, "Insane's Survival Overhaul backward slowdown", -slowdown, AttributeModifier.Operation.MULTIPLY_BASE, false);
 	}
 }

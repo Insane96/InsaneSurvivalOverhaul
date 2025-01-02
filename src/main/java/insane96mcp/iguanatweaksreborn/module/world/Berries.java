@@ -53,8 +53,8 @@ public class Berries extends Feature {
 
     public Berries(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries", Component.literal("Insane's Survival Tweaks Berries"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries_berry_good", Component.literal("Insane's Survival Tweaks Berries (Berry Good compat)"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries", Component.literal("Insane's Survival Overhaul Berries"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries_berry_good", Component.literal("Insane's Survival Overhaul Berries (Berry Good compat)"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good")));
     }
 
     @SubscribeEvent

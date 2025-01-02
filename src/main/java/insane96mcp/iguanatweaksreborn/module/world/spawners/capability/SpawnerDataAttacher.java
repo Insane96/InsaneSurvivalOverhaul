@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.spawners.capability;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SpawnerDataAttacher {
-    public static final String SPAWNER_DATA = InsaneSurvivalTweaks.RESOURCE_PREFIX + "spawner_data";
+    public static final String SPAWNER_DATA = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "spawner_data";
 
     public static class SpawnerDataProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 

@@ -1,0 +1,6 @@
+{
+    "type": "iguanatweaksreborn:replace_drop",
+    "conditions": [],
+    "item_to_replace": "iguanatweaksexpanded:stone_hammer",
+    "new_item": "iguanatweaksexpanded:flint_hammer"
+}

@@ -4,10 +4,10 @@
 			"item": "iguanatweaksreborn:firestarter"
 		},
 		"title": {
-			"translate": "advancements.ist.firestarter.title"
+			"translate": "advancements.iso.firestarter.title"
 		},
 		"description": {
-			"translate": "advancements.ist.firestarter.description"
+			"translate": "advancements.iso.firestarter.description"
 		},
 		"frame": "task",
 		"show_toast": true,

@@ -1,0 +1,7 @@
+{
+    "replace": false,
+    "values": [
+        "#iguanatweaksreborn:equipment/hand/tools/flint",
+        "iguanatweaksreborn:flint_sword"
+    ]
+}

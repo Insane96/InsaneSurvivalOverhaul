@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.network.message.RegenAbsorptionSync;
@@ -47,10 +47,10 @@ import net.minecraftforge.registries.RegistryObject;
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class RegeneratingAbsorption extends Feature {
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/gui/absorption.png");
-    public static final String REGEN_ABSORPTION_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "regen_absorption";
-    public static final String HURT_COOLDOWN_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
-    public static final String NO_HURT_SOUND_TAG = InsaneSurvivalTweaks.RESOURCE_PREFIX + "no_hurt_sound";
+    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/absorption.png");
+    public static final String REGEN_ABSORPTION_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "regen_absorption";
+    public static final String HURT_COOLDOWN_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
+    public static final String NO_HURT_SOUND_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "no_hurt_sound";
 
     public static final RegistryObject<Attribute> ATTRIBUTE = ISTRegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
 
@@ -177,7 +177,7 @@ public class RegeneratingAbsorption extends Feature {
             aboveOverlay = new ResourceLocation("stamina:stamina_overlay");
         if (renderOnRight) {
             if (Feature.isEnabled(NoHunger.class) && NoHunger.renderArmorAtHunger)
-                aboveOverlay = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "armor");
+                aboveOverlay = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "armor");
             else
                 aboveOverlay = VanillaGuiOverlay.FOOD_LEVEL.id();
         }

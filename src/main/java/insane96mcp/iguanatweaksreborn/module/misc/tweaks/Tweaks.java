@@ -1,9 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.misc.tweaks;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
 import insane96mcp.insanelib.base.Feature;
@@ -65,10 +65,10 @@ public class Tweaks extends Feature {
 
     public static final RegistryObject<Block> SCUTE = ISTRegistries.BLOCKS.register("scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
 
-    public static final TagKey<Block> BREAK_ON_FALL = ITRBlockTagsProvider.create("break_on_fall");
+    public static final TagKey<Block> BREAK_ON_FALL = ISOBlockTagsProvider.create("break_on_fall");
     public static final TagKey<Item> WORLD_IMMUNE = ISTItemTagsProvider.create("world_immune");
 
-    public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "collide_with_wall"));
+    public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "collide_with_wall"));
 
     @Config
     @Label(name = "Prevent fire with resistance", description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
@@ -299,11 +299,11 @@ public class Tweaks extends Feature {
                 || event.getEntity().level().isClientSide)
             return;
 
-        boolean wasBreathing = event.getEntity().getPersistentData().getBoolean(InsaneSurvivalTweaks.RESOURCE_PREFIX + "was_breathing");
-        long ticksSinceOutOfWater = event.getEntity().level().getGameTime() - event.getEntity().getPersistentData().getLong(InsaneSurvivalTweaks.RESOURCE_PREFIX + "tick_since_out_of_water");
+        boolean wasBreathing = event.getEntity().getPersistentData().getBoolean(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "was_breathing");
+        long ticksSinceOutOfWater = event.getEntity().level().getGameTime() - event.getEntity().getPersistentData().getLong(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "tick_since_out_of_water");
         if (!wasBreathing && event.canBreathe()) {
             ticksSinceOutOfWater = 0;
-            event.getEntity().getPersistentData().putLong(InsaneSurvivalTweaks.RESOURCE_PREFIX + "tick_since_out_of_water", event.getEntity().level().getGameTime());
+            event.getEntity().getPersistentData().putLong(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "tick_since_out_of_water", event.getEntity().level().getGameTime());
         }
         int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerConsumeAirAmount);
         int respiration = EnchantmentHelper.getRespiration(event.getEntity());
@@ -319,7 +319,7 @@ public class Tweaks extends Feature {
                 setTimesDrowned(event.getEntity(), 0);
         }
         event.setRefillAirAmount(refillAmount);
-        event.getEntity().getPersistentData().putBoolean(InsaneSurvivalTweaks.RESOURCE_PREFIX + "was_breathing", event.canBreathe());
+        event.getEntity().getPersistentData().putBoolean(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "was_breathing", event.canBreathe());
     }
 
     @SubscribeEvent
@@ -339,11 +339,11 @@ public class Tweaks extends Feature {
     }
 
     public static void setTimesDrowned(LivingEntity entity, int timesDrowned) {
-        entity.getPersistentData().putInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "times_drowned", timesDrowned);
+        entity.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "times_drowned", timesDrowned);
     }
 
     public static int getTimesDrowned(LivingEntity entity) {
-        return entity.getPersistentData().getInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "times_drowned");
+        return entity.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "times_drowned");
     }
 
     public static Vec3 onCollideWithWall(LivingEntity instance, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {

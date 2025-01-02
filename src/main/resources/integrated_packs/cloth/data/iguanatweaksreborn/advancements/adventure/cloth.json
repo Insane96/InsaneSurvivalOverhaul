@@ -4,10 +4,10 @@
 			"item": "iguanatweaksreborn:cloth"
 		},
 		"title": {
-			"translate": "advancements.ist.cloth.title"
+			"translate": "advancements.iso.cloth.title"
 		},
 		"description": {
-			"translate": "advancements.ist.cloth.description"
+			"translate": "advancements.iso.cloth.description"
 		},
 		"frame": "task",
 		"show_toast": true,

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -114,14 +114,14 @@ public class FoodDrinks extends JsonFeature {
 
 	public FoodDrinks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_food_in_furnace", Component.literal("Insane's Survival Tweaks No Food in Furnace"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe));
-		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "food_properties")));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_food_in_furnace", Component.literal("Insane's Survival Overhaul No Food in Furnace"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe));
+		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "food_properties")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalTweaks.CONFIG_FOLDER;
+		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
 	@Override

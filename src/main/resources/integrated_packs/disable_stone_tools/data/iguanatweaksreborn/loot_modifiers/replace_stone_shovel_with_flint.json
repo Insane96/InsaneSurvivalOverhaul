@@ -1,0 +1,6 @@
+{
+    "type": "iguanatweaksreborn:replace_drop",
+    "conditions": [],
+    "item_to_replace": "minecraft:stone_shovel",
+    "new_item": "iguanatweaksreborn:flint_shovel"
+}

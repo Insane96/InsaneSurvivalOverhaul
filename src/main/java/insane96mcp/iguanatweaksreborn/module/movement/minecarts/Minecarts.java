@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
-import static insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks.MOD_ID;
+import static insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul.MOD_ID;
 
 @Label(name = "Minecarts")
 @LoadFeature(module = Modules.Ids.MOVEMENT, canBeDisabled = false)
@@ -33,7 +33,7 @@ public class Minecarts extends Feature {
 
 	public Minecarts(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("Insane's Survival Tweaks Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("Insane's Survival Overhaul Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
 	}
 
 	@SubscribeEvent

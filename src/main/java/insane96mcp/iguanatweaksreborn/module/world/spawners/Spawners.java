@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.spawners;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.ISpawnerData;
@@ -61,9 +61,9 @@ import java.util.Optional;
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Spawners extends JsonFeature {
 
-	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "blacklisted_spawners"));
+	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "blacklisted_spawners"));
 	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISTItemTagsProvider.create("spawner_reactivator");
-	public static final String SPAWNER_REACTIVATOR = InsaneSurvivalTweaks.MOD_ID + ".spawner_reactivator";
+	public static final String SPAWNER_REACTIVATOR = InsaneSurvivalOverhaul.MOD_ID + ".spawner_reactivator";
 
 	@Config(min = 1)
 	@Label(name = "Override Spawn Delay", description = "If true, the spawner delay is set to 'Delay' instead of using MinSpawnDelay and MaxSpawnDelay")
@@ -125,7 +125,7 @@ public class Spawners extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalTweaks.CONFIG_FOLDER;
+		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
 	@SubscribeEvent
@@ -186,7 +186,7 @@ public class Spawners extends JsonFeature {
 			if (empoweredLootReward) {
 				LootParams.Builder lootParamsBuilder = (new LootParams.Builder(level)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(spawnerPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_STATE, level.getBlockState(spawnerPos)).withOptionalParameter(LootContextParams.BLOCK_ENTITY, spawnerBlockEntity);
 				LootParams lootParams = lootParamsBuilder.create(LootContextParamSets.EMPTY);
-				LootTable loottable = level.getServer().getLootData().getLootTable(new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "empowered_spawner"));
+				LootTable loottable = level.getServer().getLootData().getLootTable(new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "empowered_spawner"));
 				loottable.getRandomItems(lootParams).forEach(stack ->
 						level.addFreshEntity(new ItemEntity(level, spawnerPos.getX() + 0.5f, spawnerPos.getY() + 1.1f, spawnerPos.getZ() + 0.5f, stack)));
 			}

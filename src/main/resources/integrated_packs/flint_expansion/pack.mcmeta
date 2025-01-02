@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Adds flint tools recipes and generates ground flint",
+        "pack_format": 15
+    }
+}

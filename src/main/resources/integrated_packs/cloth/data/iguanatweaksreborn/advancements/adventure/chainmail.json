@@ -4,10 +4,10 @@
 			"item": "minecraft:chainmail_chestplate"
 		},
 		"title": {
-			"translate": "advancements.ist.chainmail.title"
+			"translate": "advancements.iso.chainmail.title"
 		},
 		"description": {
-			"translate": "advancements.ist.chainmail.description"
+			"translate": "advancements.iso.chainmail.description"
 		},
 		"frame": "task",
 		"show_toast": true,

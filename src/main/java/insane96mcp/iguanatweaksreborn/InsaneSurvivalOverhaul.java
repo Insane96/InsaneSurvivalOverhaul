@@ -4,13 +4,13 @@ import com.google.common.collect.Lists;
 import insane96mcp.iguanatweaksreborn.command.ITRCommand;
 import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
 import insane96mcp.iguanatweaksreborn.data.criterion.SeasonChangedTrigger;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ITREntityTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockModelsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockStatesProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.client.ITRItemModelsProvider;
 import insane96mcp.iguanatweaksreborn.modifier.Modifiers;
 import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
@@ -71,7 +71,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Mod("iguanatweaksreborn")
-public class InsaneSurvivalTweaks
+public class InsaneSurvivalOverhaul
 {
     public static final String MOD_ID = "iguanatweaksreborn";
     public static final String NEW_MOD_ID = "insanesurvivaltweaks";
@@ -81,9 +81,9 @@ public class InsaneSurvivalTweaks
     //TODO
     public static final String CONFIG_FOLDER = "config/insanesurvivaltweaks";
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "textures/gui/icons.png");
+    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
 
-    public InsaneSurvivalTweaks() {
+    public InsaneSurvivalOverhaul() {
         //TODO
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaltweaks/client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaltweaks/common.toml");
@@ -135,8 +135,8 @@ public class InsaneSurvivalTweaks
         Modifiers.init();
 
         event.enqueueWork(() -> {
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "cyan_flower"), CyanFlower.POTTED_FLOWER);
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
         });
     }
 
@@ -150,14 +150,14 @@ public class InsaneSurvivalTweaks
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         /*generator.addProvider(event.includeServer(), new SRRecipeProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new SRGlobalLootModifierProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID));*/
-        ITRBlockTagsProvider blockTags = new ITRBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper);
+        ISOBlockTagsProvider blockTags = new ISOBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ISTItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITRDamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITREntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRItemModelsProvider(generator.getPackOutput(), InsaneSurvivalTweaks.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISTItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ITRDamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ITREntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ITRBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ITRBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOItemModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
     }
 
     public void addPackFinders(AddPackFindersEvent event)
@@ -167,7 +167,7 @@ public class InsaneSurvivalTweaks
                 continue;
 
             Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + dataPack.getPath());
-            var pack = Pack.readMetaAndCreate(InsaneSurvivalTweaks.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
+            var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
                     (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, dataPack.shouldBeEnabled() ? PackSource.DEFAULT : ITRPackSource.DISABLED);
             event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
         }
@@ -181,7 +181,7 @@ public class InsaneSurvivalTweaks
         PackRepository packRepository = event.getServer().getPackRepository();
         List<Pack> list = Lists.newArrayList(packRepository.getSelectedPacks());
         for (IntegratedPack dataPack : IntegratedPack.INTEGRATED_PACKS) {
-            String dataPackId = InsaneSurvivalTweaks.RESOURCE_PREFIX + dataPack.getPath();
+            String dataPackId = InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath();
             Pack pack = packRepository.getPack(dataPackId);
             if (pack != null && !dataPack.shouldBeEnabled()) {
                 list.remove(pack);

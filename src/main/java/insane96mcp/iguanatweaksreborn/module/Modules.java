@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.setup.ITRCommonConfig;
 import insane96mcp.insanelib.base.Module;
 import net.minecraftforge.fml.config.ModConfig;
@@ -34,16 +34,16 @@ public class Modules {
 	}
 
 	public static class Ids {
-		public static final String COMBAT = InsaneSurvivalTweaks.RESOURCE_PREFIX + "combat";
-		public static final String EXPERIENCE = InsaneSurvivalTweaks.RESOURCE_PREFIX + "experience";
-		public static final String FARMING = InsaneSurvivalTweaks.RESOURCE_PREFIX + "farming";
-		public static final String HUNGER_HEALTH = InsaneSurvivalTweaks.RESOURCE_PREFIX + "hunger_health";
-		public static final String ITEMS = InsaneSurvivalTweaks.RESOURCE_PREFIX + "items";
-		public static final String MINING = InsaneSurvivalTweaks.RESOURCE_PREFIX + "mining";
-		public static final String MISC = InsaneSurvivalTweaks.RESOURCE_PREFIX + "misc";
-		public static final String MOBS = InsaneSurvivalTweaks.RESOURCE_PREFIX + "mobs";
-		public static final String MOVEMENT = InsaneSurvivalTweaks.RESOURCE_PREFIX + "movement";
-		public static final String SLEEP_RESPAWN = InsaneSurvivalTweaks.RESOURCE_PREFIX + "sleep_respawn";
-		public static final String WORLD = InsaneSurvivalTweaks.RESOURCE_PREFIX + "world";
+		public static final String COMBAT = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "combat";
+		public static final String EXPERIENCE = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "experience";
+		public static final String FARMING = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "farming";
+		public static final String HUNGER_HEALTH = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "hunger_health";
+		public static final String ITEMS = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "items";
+		public static final String MINING = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "mining";
+		public static final String MISC = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "misc";
+		public static final String MOBS = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "mobs";
+		public static final String MOVEMENT = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "movement";
+		public static final String SLEEP_RESPAWN = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "sleep_respawn";
+		public static final String WORLD = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "world";
 	}
 }

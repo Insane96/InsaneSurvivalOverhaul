@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.farming.crops;
 
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -55,7 +55,7 @@ public class Crops extends Feature {
 
 	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ISTItemTagsProvider.create("chicken_food_items");
 
-	public static final TagKey<Block> HARDER_CROPS_TAG = ITRBlockTagsProvider.create("harder_crops");
+	public static final TagKey<Block> HARDER_CROPS_TAG = ISOBlockTagsProvider.create("harder_crops");
 
 	public static final RegistryObject<BlockItem> ROOTED_POTATO = ISTRegistries.ITEMS.register("rooted_potato", () -> new SeedsBlockItem(Blocks.POTATOES, new Item.Properties()));
 	public static final RegistryObject<BlockItem> CARROT_SEEDS = ISTRegistries.ITEMS.register("carrot_seeds", () -> new SeedsBlockItem(Blocks.CARROTS, new Item.Properties()));
@@ -94,7 +94,7 @@ public class Crops extends Feature {
 
 	public Crops(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "crops", Component.literal("Insane's Survival Tweaks Crops"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "crops", Component.literal("Insane's Survival Overhaul Crops"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
 	}
 
 	@SubscribeEvent

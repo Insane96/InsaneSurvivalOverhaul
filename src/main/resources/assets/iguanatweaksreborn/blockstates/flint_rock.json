@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+            {
+                "model": "iguanatweaksreborn:block/flint_rock"
+            },
+            {
+                "model": "iguanatweaksreborn:block/flint_rock",
+                "y": 90
+            },
+            {
+                "model": "iguanatweaksreborn:block/flint_rock",
+                "y": 180
+            },
+            {
+                "model": "iguanatweaksreborn:block/flint_rock",
+                "y": 270
+            }
+        ]
+    }
+}

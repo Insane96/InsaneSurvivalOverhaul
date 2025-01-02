@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.mining.blockhardness;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.GlobalHardnessSync;
 import insane96mcp.insanelib.base.Module;
@@ -25,8 +25,8 @@ import java.util.List;
 @Label(name = "Block Hardness", description = "Change blocks hardness. Dimension Hardness, Depth Hardness and Custom Hardness are controlled via json in this feature's folder")
 @LoadFeature(module = Modules.Ids.MINING)
 public class BlockHardness extends JsonFeature {
-	public static final TagKey<Block> HARDNESS_BLACKLIST = ITRBlockTagsProvider.create("hardness_blacklist");
-	public static final TagKey<Block> DEPTH_MULTIPLIER_BLACKLIST = ITRBlockTagsProvider.create("depth_multiplier_blacklist");
+	public static final TagKey<Block> HARDNESS_BLACKLIST = ISOBlockTagsProvider.create("hardness_blacklist");
+	public static final TagKey<Block> DEPTH_MULTIPLIER_BLACKLIST = ISOBlockTagsProvider.create("depth_multiplier_blacklist");
 
 	public static final ArrayList<DimensionHardnessMultiplier> DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT = new ArrayList<>(List.of(
 			new DimensionHardnessMultiplier("minecraft:the_nether", 1.5d)
@@ -44,15 +44,15 @@ public class BlockHardness extends JsonFeature {
 
 	public BlockHardness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "dimension_hardness"), new SyncType(json -> loadAndReadJson(json, dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("dimension_hardness.json", dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "dimension_hardness")));
-		addSyncType(new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "depth_multipliers"), new SyncType(json -> loadAndReadJson(json, depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("depth_multipliers.json", depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "depth_multipliers")));
+		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "dimension_hardness"), new SyncType(json -> loadAndReadJson(json, dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("dimension_hardness.json", dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "dimension_hardness")));
+		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "depth_multipliers"), new SyncType(json -> loadAndReadJson(json, depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("depth_multipliers.json", depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "depth_multipliers")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalTweaks.CONFIG_FOLDER;
+		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
 	@Override

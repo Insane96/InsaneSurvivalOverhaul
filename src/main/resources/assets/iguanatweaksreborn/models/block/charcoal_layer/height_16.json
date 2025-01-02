@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "iguanatweaksreborn:block/charcoal_layer"
+  }
+}

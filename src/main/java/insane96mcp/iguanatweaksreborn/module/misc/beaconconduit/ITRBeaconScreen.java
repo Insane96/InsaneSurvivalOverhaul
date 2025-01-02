@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.misc.beaconconduit;
 
 import com.google.common.collect.Lists;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.network.message.SetITRBeaconEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
-    static final ResourceLocation BEACON_LOCATION = new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "textures/gui/container/beacon.png");
+    static final ResourceLocation BEACON_LOCATION = new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "textures/gui/container/beacon.png");
     public final List<BeaconButton> beaconButtons = Lists.newArrayList();
     @Nullable
     MobEffect effect;

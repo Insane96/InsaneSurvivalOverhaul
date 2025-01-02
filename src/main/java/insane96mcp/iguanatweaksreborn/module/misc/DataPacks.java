@@ -97,21 +97,21 @@ public class DataPacks extends Feature {
 
     public DataPacks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "hardcore_torches", Component.literal("Insane's Survival Tweaks Hardcore Torches"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && hardcoreTorches));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cheaper_chains", Component.literal("Insane's Survival Tweaks Cheaper Chains"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cheaperChains));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "misc_tweaks", Component.literal("Insane's Survival Tweaks Misc Tweaks"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && miscTweaks));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "actual_redstone_components", Component.literal("Insane's Survival Tweaks Actual Redstone components"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && actualRedstoneComponents));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "copper_furnace", Component.literal("Insane's Survival Tweaks Copper Furnace"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && copperFurnace));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "disable_long_noses", Component.literal("Insane's Survival Tweaks Disable Long Noses"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableLongNoses));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "fishing_loot_changes", Component.literal("Insane's Survival Tweaks Fishing Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && fishingLootChanges));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "increased_end_cities", Component.literal("Insane's Survival Tweaks Increased End Cities"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && increaseEndCities));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_loot", Component.literal("Insane's Survival Tweaks Better Loot"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "hardcore_loot", Component.literal("Insane's Survival Tweaks Less Loot Closer to Spawn"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && lessLootCloserToSpawn));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mob_loot_changes", Component.literal("Insane's Survival Tweaks Mob Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && mobLootChanges));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "supplementaries_integration", Component.literal("Insane's Survival Tweaks Supplementaries Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Tweaks Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "hardcore_torches", Component.literal("Insane's Survival Overhaul Hardcore Torches"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && hardcoreTorches));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cheaper_chains", Component.literal("Insane's Survival Overhaul Cheaper Chains"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cheaperChains));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "misc_tweaks", Component.literal("Insane's Survival Overhaul Misc Tweaks"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && miscTweaks));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "actual_redstone_components", Component.literal("Insane's Survival Overhaul Actual Redstone components"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && actualRedstoneComponents));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "copper_furnace", Component.literal("Insane's Survival Overhaul Copper Furnace"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && copperFurnace));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "disable_long_noses", Component.literal("Insane's Survival Overhaul Disable Long Noses"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableLongNoses));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "fishing_loot_changes", Component.literal("Insane's Survival Overhaul Fishing Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && fishingLootChanges));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "increased_end_cities", Component.literal("Insane's Survival Overhaul Increased End Cities"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && increaseEndCities));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_loot", Component.literal("Insane's Survival Overhaul Better Loot"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "hardcore_loot", Component.literal("Insane's Survival Overhaul Less Loot Closer to Spawn"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && lessLootCloserToSpawn));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mob_loot_changes", Component.literal("Insane's Survival Overhaul Mob Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && mobLootChanges));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "supplementaries_integration", Component.literal("Insane's Survival Overhaul Supplementaries Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
 
-        IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Tweaks Assets Override"), () -> assetsOverride));
+        IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> assetsOverride));
     }
 
     @Override

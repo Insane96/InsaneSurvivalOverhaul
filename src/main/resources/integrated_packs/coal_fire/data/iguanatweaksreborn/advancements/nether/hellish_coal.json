@@ -4,10 +4,10 @@
 			"item": "iguanatweaksreborn:hellish_coal"
 		},
 		"title": {
-			"translate": "advancements.ist.hellish_coal.title"
+			"translate": "advancements.iso.hellish_coal.title"
 		},
 		"description": {
-			"translate": "advancements.ist.hellish_coal.description"
+			"translate": "advancements.iso.hellish_coal.description"
 		},
 		"frame": "task",
 		"show_toast": true,

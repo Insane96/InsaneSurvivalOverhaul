@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.network.message.ItemDefinitionsSync;
 import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = InsaneSurvivalTweaks.MOD_ID)
+@Mod.EventBusSubscriber(modid = InsaneSurvivalOverhaul.MOD_ID)
 public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListener {
 	public static final List<ItemDefinition> DEFINITIONS = new ArrayList<>();
 	public static final Map<Item, ItemDefinition.Durability> DURABILITY_MAP = new HashMap<>();

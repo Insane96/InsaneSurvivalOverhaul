@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.world.timber;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRBlockTagsProvider;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.entity.ITRFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -42,7 +42,7 @@ import java.util.Queue;
 @LoadFeature(module = Modules.Ids.WORLD)
 public class TimberTrees extends JsonFeature {
 
-    public static final TagKey<Block> TIMBER_TRUNKS = ITRBlockTagsProvider.create("timber_trunks");
+    public static final TagKey<Block> TIMBER_TRUNKS = ISOBlockTagsProvider.create("timber_trunks");
 
     public static final ArrayList<TreeInfo> TREE_INFOS_DEFAULT = new ArrayList<>(List.of(
             new TreeInfo.Builder().log(IdTagMatcher.newId("minecraft:oak_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:oak_log_leaves")).build(),
@@ -70,7 +70,7 @@ public class TimberTrees extends JsonFeature {
 
     @Override
     public String getModConfigFolder() {
-        return InsaneSurvivalTweaks.CONFIG_FOLDER;
+        return InsaneSurvivalOverhaul.CONFIG_FOLDER;
     }
 
     @SubscribeEvent

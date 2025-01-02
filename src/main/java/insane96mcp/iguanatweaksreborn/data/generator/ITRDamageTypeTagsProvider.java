@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
@@ -38,6 +38,6 @@ public class ITRDamageTypeTagsProvider extends DamageTypeTagsProvider {
     }
 
     public static TagKey<DamageType> create(String tagName) {
-        return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, tagName));
+        return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, tagName));
     }
 }

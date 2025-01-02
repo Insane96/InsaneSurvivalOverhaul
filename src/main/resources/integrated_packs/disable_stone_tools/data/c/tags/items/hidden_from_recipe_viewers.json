@@ -1,0 +1,13 @@
+{
+    "values": [
+        "minecraft:stone_pickaxe",
+        "minecraft:stone_axe",
+        "minecraft:stone_shovel",
+        "minecraft:stone_sword",
+        "minecraft:stone_hoe",
+        {
+            "required": false,
+            "id": "iguanatweaksexpanded:stone_hammer"
+        }
+    ]
+}

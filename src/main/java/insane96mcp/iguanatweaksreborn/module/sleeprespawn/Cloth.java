@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-import static insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks.MOD_ID;
+import static insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul.MOD_ID;
 
 @Label(name = "Cloth", description = "Zombies drop cloth instead of Rotten Flesh. Cloth is used to make beds and various other stuff.")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
@@ -37,7 +37,7 @@ public class Cloth extends Feature {
 
 	public Cloth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cloth", Component.literal("Insane's Survival Tweaks Cloth"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cloth", Component.literal("Insane's Survival Overhaul Cloth"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
 	}
 
 	@SubscribeEvent

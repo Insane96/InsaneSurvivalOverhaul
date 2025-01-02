@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:flint"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "f",
+    "f",
+    "s"
+  ],
+  "result": {
+    "item": "iguanatweaksreborn:flint_sword"
+  },
+  "show_notification": true
+}

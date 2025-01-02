@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:flint"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "fff",
+    " s ",
+    " s "
+  ],
+  "result": {
+    "item": "iguanatweaksreborn:flint_pickaxe"
+  },
+  "show_notification": true
+}

@@ -141,6 +141,16 @@
 	"iguanatweaksreborn.tool_durability": "Durability: %d/%d",
 	"iguanatweaksreborn.broken_durability": "Broken",
 
+	"item.iguanatweaksreborn.flint_axe": "Flint Axe",
+	"item.iguanatweaksreborn.flint_pickaxe": "Flint Pickaxe",
+	"item.iguanatweaksreborn.flint_sword": "Flint Sword",
+	"item.iguanatweaksreborn.flint_shovel": "Flint Shovel",
+	"item.iguanatweaksreborn.flint_hoe": "Flint Hoe",
+	"item.iguanatweaksreborn.flint_shield": "Flint Shield",
+	"block.iguanatweaksreborn.flint_block": "Block of Flint",
+	"block.iguanatweaksreborn.polished_flint_block": "Polished Block of Flint",
+	"block.iguanatweaksreborn.flint_rock": "Flint Rock",
+
 
 	"iguanatweaksreborn:mining_module": "Mining",
 
@@ -246,20 +256,20 @@
 	"gamerule.iguanatweaks:foggyWeather": "Foggy Weather",
 	"gamerule.iguanatweaks:foggyWeather.description": "Should foggy weather be active?",
 
-	"advancements.ist.cloth.title": "Give me your dress",
-	"advancements.ist.cloth.description": "Obtain Cloth from Zombies",
-	"advancements.ist.bundle.title": "That one item",
-	"advancements.ist.bundle.description": "Make a bundle with Cloth",
-	"advancements.ist.chainmail.title": "Forged from fire",
-	"advancements.ist.chainmail.description": "Obtain a Chainmail piece of armor",
-	"advancements.ist.respawn_obelisk.title": "The ancients respawned here",
-	"advancements.ist.respawn_obelisk.description": "Find a Respawn Obelisk.",
-	"advancements.ist.activate_respawn_obelisk.title": "A precise respawn",
-	"advancements.ist.activate_respawn_obelisk.description": "Activate a Respawn Obelisk with right-click by placing at least a precious block at the same height and set the respawn point. Respawning here will give some buffs, other than a precise respawn.",
-	"advancements.ist.firestarter.title": "Starting Fires",
-	"advancements.ist.firestarter.description": "Craft a Firestarter to create fire more consistently.",
-	"advancements.ist.charcoal.title": "Improvise and Ignite",
-	"advancements.ist.charcoal.description": "Coal can only be obtained with an Iron pickaxe or higher. Obtain Charcoal by burning logs. A flint in both hands seems to do the job.",
-	"advancements.ist.hellish_coal.title": "Hot Coal",
-	"advancements.ist.hellish_coal.description": "Obtain Hellish Coal"
+	"advancements.iso.cloth.title": "Give me your dress",
+	"advancements.iso.cloth.description": "Obtain Cloth from Zombies",
+	"advancements.iso.bundle.title": "That one item",
+	"advancements.iso.bundle.description": "Make a bundle with Cloth",
+	"advancements.iso.chainmail.title": "Forged from fire",
+	"advancements.iso.chainmail.description": "Obtain a Chainmail piece of armor",
+	"advancements.iso.respawn_obelisk.title": "The ancients respawned here",
+	"advancements.iso.respawn_obelisk.description": "Find a Respawn Obelisk.",
+	"advancements.iso.activate_respawn_obelisk.title": "A precise respawn",
+	"advancements.iso.activate_respawn_obelisk.description": "Activate a Respawn Obelisk with right-click by placing at least a precious block at the same height and set the respawn point. Respawning here will give some buffs, other than a precise respawn.",
+	"advancements.iso.firestarter.title": "Starting Fires",
+	"advancements.iso.firestarter.description": "Craft a Firestarter to create fire more consistently.",
+	"advancements.iso.charcoal.title": "Improvise and Ignite",
+	"advancements.iso.charcoal.description": "Coal can only be obtained with an Iron pickaxe or higher. Obtain Charcoal by burning logs. A flint in both hands seems to do the job.",
+	"advancements.iso.hellish_coal.title": "Hot Coal",
+	"advancements.iso.hellish_coal.description": "Obtain Hellish Coal"
 }

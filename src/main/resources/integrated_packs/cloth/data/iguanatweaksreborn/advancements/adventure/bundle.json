@@ -4,10 +4,10 @@
 			"item": "minecraft:bundle"
 		},
 		"title": {
-			"translate": "advancements.ist.bundle.title"
+			"translate": "advancements.iso.bundle.title"
 		},
 		"description": {
-			"translate": "advancements.ist.bundle.description"
+			"translate": "advancements.iso.bundle.description"
 		},
 		"frame": "task",
 		"show_toast": true,

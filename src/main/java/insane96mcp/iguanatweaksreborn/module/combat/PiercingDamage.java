@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
@@ -31,8 +31,8 @@ import net.minecraftforge.registries.RegistryObject;
 @Label(name = "Piercing damage", description = "Adds a new attribute that deals bonus damage that bypasses armor")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class PiercingDamage extends Feature {
-	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "piercing_mob_attack"));
-	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "piercing_player_attack"));
+	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "piercing_mob_attack"));
+	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "piercing_player_attack"));
 
 	public static final RegistryObject<Attribute> PIERCING_DAMAGE = ISTRegistries.ATTRIBUTES.register("piercing_damage", () -> new RangedAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
 

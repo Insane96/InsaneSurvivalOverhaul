@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.wanderingtrader;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -35,10 +35,10 @@ import java.util.function.Supplier;
 @Label(name = "Wandering Trades", description = "Change wandering trader offers. Trades can be customized via json in this feature's folder")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class WanderingTrades extends JsonFeature {
-    public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "desert_pyramid"));
-    public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "trail_ruins"));
-    public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "jungle_pyramid"));
-    public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalTweaks.RESOURCE_PREFIX + "igloo"));
+    public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "desert_pyramid"));
+    public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "trail_ruins"));
+    public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "jungle_pyramid"));
+    public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "igloo"));
 
     public static final Supplier<ArrayList<SerializableTrade>> WANDERING_TRADER_GENERIC_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
             new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.WHEAT_SEEDS), 4),
@@ -123,7 +123,7 @@ public class WanderingTrades extends JsonFeature {
 
     @Override
     public String getModConfigFolder() {
-        return InsaneSurvivalTweaks.CONFIG_FOLDER;
+        return InsaneSurvivalOverhaul.CONFIG_FOLDER;
     }
 
     @Override

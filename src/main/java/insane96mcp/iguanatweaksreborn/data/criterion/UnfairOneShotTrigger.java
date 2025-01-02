@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.data.criterion;
 
 import com.google.gson.JsonObject;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;
@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class UnfairOneShotTrigger extends SimpleCriterionTrigger<UnfairOneShotTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, "unfair_oneshot");
+	static final ResourceLocation ID = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "unfair_oneshot");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

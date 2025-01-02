@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.utils;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,7 +35,7 @@ public class MCUtils {
         return r;
     }
 
-    private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(InsaneSurvivalTweaks.RESOURCE_PREFIX + "anti_knockback", 1f, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "anti_knockback", 1f, AttributeModifier.Operation.ADDITION);
 
     //Stolen from Tinkers Construct ToolAttackUtil
     public static void attackEntityIgnoreInvFrames(DamageSource source, float damage, Entity target, @Nullable LivingEntity living, boolean noKnockback) {

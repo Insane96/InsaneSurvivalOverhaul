@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "biomes": "#minecraft:is_overworld",
+    "features": "iguanatweaksreborn:flint_rock",
+    "step": "vegetal_decoration"
+}

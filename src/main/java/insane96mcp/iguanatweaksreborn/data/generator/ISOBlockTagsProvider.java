@@ -1,9 +1,10 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.hoes.Hoes;
+import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.mining.blockhardness.BlockHardness;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ITRBlockTagsProvider extends BlockTagsProvider {
+public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> OBSIDIANS = create("obsidians");
     public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
     public static final TagKey<Block> TALL_GRASS = create("tall_grass");
@@ -38,7 +39,7 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> MAPLE_LEAVES = create("maple_leaves");
     public static final TagKey<Block> TRUMPET_LEAVES = create("trumpet_leaves");
 
-    public ITRBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
+    public ISOBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
         super(output, lookupProvider, modId, existingFileHelper);
     }
 
@@ -50,7 +51,8 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Death.GRAVE.block().get())
                 .add(BeaconConduit.BEACON.block().get())
-                .add(Spawning.ECHO_LANTERN.block().get());
+                .add(Spawning.ECHO_LANTERN.block().get())
+                .add(FlintExpansion.FLINT_ROCK.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(BoneMeal.RICH_FARMLAND.block().get())
                 .add(CoalFire.CHARCOAL_LAYER.block().get())
@@ -59,6 +61,8 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.block().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.block().get());
         tag(BlockTags.RAILS)
                 .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
+        tag(BlockTags.REPLACEABLE_BY_TREES)
+                .add(FlintExpansion.FLINT_ROCK.block().get());
 
         //Mod's tags
         tag(Respawn.RESPAWN_OBELISK_BLOCKS_TO_ROT)
@@ -121,6 +125,6 @@ public class ITRBlockTagsProvider extends BlockTagsProvider {
     }
 
     public static TagKey<Block> create(String tagName) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSurvivalTweaks.MOD_ID, tagName));
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, tagName));
     }
 }

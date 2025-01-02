@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.experience.anvils;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
 public class Anvils extends Feature {
 
-    public static final String CAN_BE_REPAIRED_WITH_LANG = InsaneSurvivalTweaks.MOD_ID + ".can_be_repaired_with";
+    public static final String CAN_BE_REPAIRED_WITH_LANG = InsaneSurvivalOverhaul.MOD_ID + ".can_be_repaired_with";
 
     @Config
     @Label(name = "Renaming.No cost", description = "Removes the cost for renaming items in Anvil")

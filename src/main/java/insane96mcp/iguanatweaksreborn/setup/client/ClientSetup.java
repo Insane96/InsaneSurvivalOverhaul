@@ -4,6 +4,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.Enchantment
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconRenderer;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconScreen;
@@ -34,6 +35,17 @@ import java.util.function.Supplier;
 public class ClientSetup {
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event)
     {
+        if (FlintExpansion.areStoneToolsDisabled())
+        {
+            event.getEntries().remove(new ItemStack(Items.STONE_SWORD));
+            event.getEntries().remove(new ItemStack(Items.STONE_AXE));
+            event.getEntries().remove(new ItemStack(Items.STONE_SHOVEL));
+            event.getEntries().remove(new ItemStack(Items.STONE_PICKAXE));
+            event.getEntries().remove(new ItemStack(Items.STONE_HOE));
+
+            //if (ModList.get().isLoaded("shieldsplus"))
+                //event.getEntries().remove(new ItemStack(SPItems.STONE_SHIELD.get()));
+        }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             if (Feature.isEnabled(BeaconConduit.class)) {
                 addAfter(event, Items.BEACON, BeaconConduit.BEACON.item());
@@ -58,13 +70,26 @@ public class ClientSetup {
             addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
             addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
             addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get());
+            addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
+            addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
+            addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
+            addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
+
             addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
             addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());
 
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
             addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+        }
+        else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
+            addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
+
+            //if (ModList.get().isLoaded("shieldsplus"))
+            //    addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.SHIELD.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());

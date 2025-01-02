@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.farming.livestock;
 
 import com.google.gson.annotations.SerializedName;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
@@ -57,10 +57,10 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Livestock extends Feature {
 
-	public static final String MILK_COOLDOWN_LANG = InsaneSurvivalTweaks.MOD_ID + ".milk_cooldown";
-	public static final String MILK_COOLDOWN = InsaneSurvivalTweaks.RESOURCE_PREFIX + "milk_cooldown";
+	public static final String MILK_COOLDOWN_LANG = InsaneSurvivalOverhaul.MOD_ID + ".milk_cooldown";
+	public static final String MILK_COOLDOWN = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "milk_cooldown";
 
-	public static final String FED_TIME = InsaneSurvivalTweaks.RESOURCE_PREFIX + "fed_time";
+	public static final String FED_TIME = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "fed_time";
 
 	@Config
 	@Label(name = "Chicken from egg chance", description = "Changes the chance for a chicken to come out from an egg (1 in this value). Vanilla is 8")
@@ -84,7 +84,7 @@ public class Livestock extends Feature {
 
 	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "livestock_changes", Component.literal("Insane's Survival Tweaks Livestock Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "livestock_changes", Component.literal("Insane's Survival Overhaul Livestock Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
 	}
 
 	@SubscribeEvent
@@ -156,13 +156,13 @@ public class Livestock extends Feature {
 			return;
 
 		boolean forceUpdateScale = false;
-		int age = ageableMob.getPersistentData().getInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "age");
-		int maxAge = ageableMob.getPersistentData().getInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "max_age");
+		int age = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age");
+		int maxAge = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age");
 		if (maxAge == 0) {
 			for (LivestockData data : LivestockDataReloadListener.LIVESTOCK_DATA) {
                 if (data.matches(ageableMob) && data.livingDays != null) {
 					maxAge = (int) (data.getLivingDays(ageableMob) * 20 * 60);
-					ageableMob.getPersistentData().putInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "max_age", maxAge);
+					ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age", maxAge);
                     break;
                 }
 			}
@@ -179,11 +179,11 @@ public class Livestock extends Feature {
 			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.3d, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
 			PehkuiIntegration.setSize(ageableMob, (float) age / (float) maxAge);
-		ageableMob.getPersistentData().putInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "age", age);
+		ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age", age);
     }
 
 	public static float getAgeRatio(AgeableMob mob) {
-		return (float) mob.getPersistentData().getInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "age") / (float) mob.getPersistentData().getInt(InsaneSurvivalTweaks.RESOURCE_PREFIX + "max_age");
+		return (float) mob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age") / (float) mob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age");
 	}
 
 	public static Age getAge(AgeableMob mob) {

@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "iguanatweaksexpanded:firestarter"
+        "recipe": "iguanatweaksreborn:firestarter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "iguanatweaksexpanded:firestarter"
+      "iguanatweaksreborn:firestarter"
     ]
   },
   "sends_telemetry_event": false

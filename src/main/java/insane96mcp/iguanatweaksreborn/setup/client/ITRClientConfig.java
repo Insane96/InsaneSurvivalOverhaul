@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.setup.client;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Module;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -23,7 +23,7 @@ public class ITRClientConfig {
 	public static class ClientConfig {
 		public ClientConfig(final ForgeConfigSpec.Builder builder) {
 			ClientModules.init();
-			Module.loadFeatures(ModConfig.Type.CLIENT, InsaneSurvivalTweaks.MOD_ID, this.getClass().getClassLoader());
+			Module.loadFeatures(ModConfig.Type.CLIENT, InsaneSurvivalOverhaul.MOD_ID, this.getClass().getClassLoader());
 		}
 	}
 }

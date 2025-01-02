@@ -15,6 +15,8 @@ This is a breaking version: configs and data packs have got a huge update
 * Cloth has been moved here from Expanded
 * Tool Belt Integration has been moved here from Expanded
 * Respawn Obelisk has been moved here from Expanded
+* Coal & Charcoal has been moved here from Expanded in Coal & Fire
+* Flint Expansion has been moved here from Expanded
 
 ### Changes
 * Changed red outline on wrong tool to no outline on wrong tool

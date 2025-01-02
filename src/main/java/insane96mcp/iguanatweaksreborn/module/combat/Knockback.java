@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.google.common.collect.Multimap;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalTweaks;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
@@ -27,8 +27,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class Knockback extends Feature {
 
-	public static final String TIME_SINCE_LAST_SWING = InsaneSurvivalTweaks.RESOURCE_PREFIX + "ticks_since_last_swing";
-	public static final String SHOULD_APPLY_NO_KNOCKBACK = InsaneSurvivalTweaks.RESOURCE_PREFIX + "should_apply_no_knockback";
+	public static final String TIME_SINCE_LAST_SWING = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "ticks_since_last_swing";
+	public static final String SHOULD_APPLY_NO_KNOCKBACK = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "should_apply_no_knockback";
 
 	@Config(min = 0d, max = 1d)
 	@Label(name = "No Weapon Penalty", description = "Percentage knockback dealt if the player is using an item that doesn't have the attack damage attribute. Broken items from the Items module count as No Weapon")
