@@ -179,6 +179,8 @@ public class Seasons extends Feature {
 		float chance = CHANCE_TO_GROW_OR_DECAY.get(subSeason);
 		if (chance == 0f)
 			return;
+		if (chance > 0f && event.level.isNight())
+			return;
 
         ServerLevel level = (ServerLevel)event.level;
 		level.getProfiler().push("tallGrassRandomTick");

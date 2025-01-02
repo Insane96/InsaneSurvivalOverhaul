@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Leaves", description = "Makes leaves decay faster")
+@Label(name = "Faster Decay Leaves")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Leaves extends Feature {
 

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-@Label(name = "Wandering Trades", description = "Change wandering trader offers.")
+@Label(name = "Wandering Trades", description = "Change wandering trader offers. Trades can be customized via json in this feature's folder")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class WanderingTrades extends JsonFeature {
     public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(IguanaTweaksReborn.RESOURCE_PREFIX + "desert_pyramid"));
@@ -106,7 +106,7 @@ public class WanderingTrades extends JsonFeature {
     public static final ArrayList<SerializableTrade> wanderingTraderBuyingTrades = new ArrayList<>();
 
     @Config
-    @Label(name = "Amount of Buying trades", description = "Vanilla is 0 pre 23w31a, 2 otherwise")
+    @Label(name = "Amount of Buying trades", description = "Vanilla is 0 pre-23w31a experimental feature, 2 otherwise")
     public static Integer buyingTrades = 2;
 
     @Config

@@ -15,9 +15,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -60,7 +60,7 @@ public class TimberTrees extends JsonFeature {
     public static final ArrayList<TreeInfo> treeInfos = new ArrayList<>();
 
     @Config
-    @Label(name = "Requires axe")
+    @Label(name = "Requires #minecraft:axes", description = "Trees will timber only if an item in the minecraft:axes item tag is used")
     public static Boolean requiresAxe = false;
 
     public TimberTrees(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -79,7 +79,7 @@ public class TimberTrees extends JsonFeature {
             || !event.getState().is(TIMBER_TRUNKS)
             || !(event.getState().getBlock() instanceof RotatedPillarBlock)
             || event.getState().getValue(RotatedPillarBlock.AXIS) != Direction.Axis.Y
-            || (requiresAxe && !(event.getPlayer().getMainHandItem().getItem() instanceof AxeItem)))
+            || (requiresAxe && !(event.getPlayer().getMainHandItem().is(ItemTags.AXES))))
             return;
 
         BlockPos brokenPos = event.getPos();

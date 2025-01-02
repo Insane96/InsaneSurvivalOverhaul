@@ -33,7 +33,7 @@ public class Nether extends Feature {
     public static final TagKey<Block> PORTAL_CORNERS = ITRBlockTagsProvider.create("portal_corners");
 
     @Config
-    @Label(name = "Disable Nether Roof and reduce block ratio", description = "Makes the nether 128 blocks high instead of 256, effectively disabling the \"Nether Roof\" and reduces the 8 block ratio between nether and other dimensions to 4.")
+    @Label(name = "Disable Nether Roof and reduce block ratio", description = "Enables a data pack that makes the nether 128 blocks high instead of 256, effectively disabling the \"Nether Roof\" and reduces the 8 block ratio between nether and other dimensions to 4.")
     public static Boolean netherTweaks = true;
     @Config
     @Label(name = "Remove Lava Pockets", description = "If true, lava pockets in the nether are removed. If quark is installed, this is disabled")

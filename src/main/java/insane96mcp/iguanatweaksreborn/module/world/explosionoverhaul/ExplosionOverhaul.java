@@ -57,7 +57,7 @@ public class ExplosionOverhaul extends Feature {
 	@Label(name = "Explosion Damage calculation multiplier", description = "Number in the explosion damage calculation. Vanilla is 7. Higher = More damage")
 	public static Double explosionDamageCalculationMultiplier = 6.5d;
 	@Config
-	@Label(name = "Limit explosion size", description = "Disabled if set to -1.")
+	@Label(name = "Limit explosion size", description = "Disabled if set to 0.")
 	public static Integer limitExplosionSize = 12;
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {

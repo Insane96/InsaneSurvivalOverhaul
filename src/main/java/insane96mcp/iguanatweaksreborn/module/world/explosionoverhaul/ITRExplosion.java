@@ -71,7 +71,7 @@ public class ITRExplosion extends Explosion {
 			if (source.getPersistentData().contains(RAY_STRENGTH_MULTIPLIER_TAG))
 				this.rayStrengthMultiplier = source.getPersistentData().getFloat(RAY_STRENGTH_MULTIPLIER_TAG);
 		}
-		if (ExplosionOverhaul.limitExplosionSize != -1)
+		if (ExplosionOverhaul.limitExplosionSize != 0)
 			this.radius = Math.min(ExplosionOverhaul.limitExplosionSize, this.radius);
 	}
 

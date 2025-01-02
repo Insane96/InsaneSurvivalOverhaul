@@ -18,6 +18,7 @@ This is a breaking version: configs and data packs have got a huge update
 
 ### Changes
 * Changed red outline on wrong tool to no outline on wrong tool
+* Tall Grass no longer grows in hot seasons during night time
 * Fast foods min speed to eat has been reduced (0.75s -> 0.6s)
 * Smokers now require soul sand/soil to craft
 * Hoes
