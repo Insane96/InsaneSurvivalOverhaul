@@ -61,8 +61,7 @@ public class Seasons extends Feature {
 	@Label(name = "Serene Seasons changes", description = """
 			Makes the following changes to Serene Seasons config:
 			* seasonal_crops is set to false, as it's controlled by Plants Growth
-			* Sets the starting season to the one in 'Starting season'
-			""")
+			* Sets the starting season to the one in 'Starting season'""")
 	public static Boolean changeSereneSeasonsConfig = true;
 
 	@Config
@@ -82,11 +81,11 @@ public class Seasons extends Feature {
 	public static Season.SubSeason startingSeason = Season.SubSeason.EARLY_SUMMER;
 
 	@Config(min = 0)
-	@Label(name = "Time Control day night duration", description = "How many minutes will day and night duration be (with this set to 10 the day will last 10 minutes and the night 10 minutes for a grand total of 20 minutes). This also adjusts the day_duration config option in Serene Seasons. Vanilla is 10.")
+	@Label(name = "Time Control day night duration", description = "How many minutes will day and night duration be (with this set to 10 the day will last 10 minutes and the night 10 minutes for a grand total of 20 minutes). This also adjusts the day_duration config option in Serene Seasons. Vanilla is 10. Requires Time Control mod")
 	public static Double timeControlDayNightDuration = 15d;
 
 	@Config(min = 0)
-	@Label(name = "Time Control day night shift", description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable")
+	@Label(name = "Time Control day night shift", description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable. Requires Time Control mod")
 	public static Double timeControlDayNightShift = 1.5d;
 
 	/*@Config
