@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.items.flintexpansion;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -11,6 +11,8 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.item.ILItemTier;
+import insane96mcp.shieldsplus.world.item.SPShieldItem;
+import insane96mcp.shieldsplus.world.item.SPShieldMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.*;
@@ -28,14 +30,11 @@ public class FlintExpansion extends Feature {
 
 	public static final ILItemTier ITEM_TIER = new ILItemTier(1, 99, 6f, 1.5f, 7, () -> Ingredient.of(Items.FLINT));
 
-	public static final RegistryObject<Item> SWORD = ISTRegistries.ITEMS.register("flint_sword", () -> new SwordItem(ITEM_TIER, 3, -2.4F, new Item.Properties()));
-	public static final RegistryObject<Item> SHOVEL = ISTRegistries.ITEMS.register("flint_shovel", () -> new ShovelItem(ITEM_TIER, 1.5F, -3.0F, new Item.Properties()));
-	public static final RegistryObject<Item> PICKAXE = ISTRegistries.ITEMS.register("flint_pickaxe", () -> new PickaxeItem(ITEM_TIER, 1, -2.8F, new Item.Properties()));
-	public static final RegistryObject<Item> AXE = ISTRegistries.ITEMS.register("flint_axe", () -> new AxeItem(ITEM_TIER, 7.0F, -3.1F, new Item.Properties()));
-	public static final RegistryObject<Item> HOE = ISTRegistries.ITEMS.register("flint_hoe", () -> new HoeItem(ITEM_TIER, -1, -2.0F, new Item.Properties()));
-
-	//public static final SPShieldMaterial SHIELD_MATERIAL = new SPShieldMaterial("flint", 33, () -> Items.FLINT, 9, Rarity.COMMON);
-	//public static final RegistryObject<SPShieldItem> SHIELD = ISTRegistries.registerShield("flint_shield", SHIELD_MATERIAL);
+	public static final RegistryObject<Item> SWORD = ISORegistries.ITEMS.register("flint_sword", () -> new SwordItem(ITEM_TIER, 3, -2.4F, new Item.Properties()));
+	public static final RegistryObject<Item> SHOVEL = ISORegistries.ITEMS.register("flint_shovel", () -> new ShovelItem(ITEM_TIER, 1.5F, -3.0F, new Item.Properties()));
+	public static final RegistryObject<Item> PICKAXE = ISORegistries.ITEMS.register("flint_pickaxe", () -> new PickaxeItem(ITEM_TIER, 1, -2.8F, new Item.Properties()));
+	public static final RegistryObject<Item> AXE = ISORegistries.ITEMS.register("flint_axe", () -> new AxeItem(ITEM_TIER, 7.0F, -3.1F, new Item.Properties()));
+	public static final RegistryObject<Item> HOE = ISORegistries.ITEMS.register("flint_hoe", () -> new HoeItem(ITEM_TIER, -1, -2.0F, new Item.Properties()));
 
 	@Config
 	@Label(name = "Disable Stone Tools", description = "If true, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with flint ones")
@@ -49,5 +48,14 @@ public class FlintExpansion extends Feature {
 
 	public static boolean areStoneToolsDisabled() {
 		return Feature.isEnabled(FlintExpansion.class) && disableStoneTools;
+	}
+
+	public static class ShieldsPlusIntegration {
+		public static final SPShieldMaterial SHIELD_MATERIAL = new SPShieldMaterial("flint", 33, () -> Items.FLINT, 9, Rarity.COMMON);
+		public static final RegistryObject<SPShieldItem> SHIELD = ISORegistries.registerShield("flint_shield", SHIELD_MATERIAL);
+
+		public static void init() {
+			//Here just to load the class if the mod is present
+		}
 	}
 }

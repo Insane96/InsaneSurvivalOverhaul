@@ -7,7 +7,7 @@ import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -65,10 +65,10 @@ import java.util.stream.Collectors;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Tiredness extends JsonFeature {
 
-	public static final RegistryObject<MobEffect> TIRED = ISTRegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
+	public static final RegistryObject<MobEffect> TIRED = ISORegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
 			.addAttributeModifier(Attributes.MOVEMENT_SPEED, "697c48dd-6bbd-4082-8501-040bb9812c09", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL)
 			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL));
-	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISTRegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
+	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISORegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	public static final String NOT_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".not_tired";
 	public static final String TIRED_ENOUGH = InsaneSurvivalOverhaul.MOD_ID + ".tired_enough";

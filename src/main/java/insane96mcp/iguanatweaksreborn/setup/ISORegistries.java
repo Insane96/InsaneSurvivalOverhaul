@@ -9,6 +9,9 @@ import insane96mcp.iguanatweaksreborn.data.lootmodifier.LootPurgerModifier;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.ReplaceLootModifier;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.PilableFallingLayerEntity;
 import insane96mcp.iguanatweaksreborn.world.level.levelgen.structure.templatesystem.RandomBlockTagMatchTest;
+import insane96mcp.shieldsplus.setup.SPItems;
+import insane96mcp.shieldsplus.world.item.SPShieldItem;
+import insane96mcp.shieldsplus.world.item.SPShieldMaterial;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -35,7 +38,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ISTRegistries {
+public class ISORegistries {
 	public static final List<DeferredRegister<?>> REGISTRIES = new ArrayList<>();
 
 	public static final DeferredRegister<Block> BLOCKS = createRegistry(ForgeRegistries.BLOCKS);
@@ -91,5 +94,12 @@ public class ISTRegistries {
 		DeferredRegister<R> register = DeferredRegister.create(registryName, InsaneSurvivalOverhaul.MOD_ID);
 		REGISTRIES.add(register);
 		return register;
+	}
+
+	public static RegistryObject<SPShieldItem> registerShield(String id, SPShieldMaterial material) {
+		Item.Properties properties = new Item.Properties().durability(material.durability).rarity(material.rarity);
+		RegistryObject<SPShieldItem> shield = ITEMS.register(id, () -> new SPShieldItem(material, properties));
+		SPItems.SHIELDS.add(shield);
+		return shield;
 	}
 }

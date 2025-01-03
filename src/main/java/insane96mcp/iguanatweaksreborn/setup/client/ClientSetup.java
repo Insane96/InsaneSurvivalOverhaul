@@ -16,8 +16,9 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
+import insane96mcp.shieldsplus.setup.SPItems;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.world.item.*;
@@ -88,8 +89,8 @@ public class ClientSetup {
             addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
             addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
 
-            //if (ModList.get().isLoaded("shieldsplus"))
-            //    addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.SHIELD.get());
+            if (ModList.get().isLoaded("shieldsplus"))
+                addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
@@ -162,7 +163,7 @@ public class ClientSetup {
     }
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ISTRegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
+        event.registerEntityRenderer(ISORegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
         event.registerBlockEntityRenderer(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ITRBeaconRenderer::new);
     }
 }

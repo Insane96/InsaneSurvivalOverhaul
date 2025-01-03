@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.world.level.levelgen.structure.templatesy
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
@@ -29,7 +29,7 @@ public class RandomBlockTagMatchTest extends RuleTest {
     }
 
     protected RuleTestType<?> getType() {
-        return ISTRegistries.RANDOM_BLOCK_TAG_MATCH.get();
+        return ISORegistries.RANDOM_BLOCK_TAG_MATCH.get();
     }
 
     public static class Type implements RuleTestType<RandomBlockTagMatchTest> {

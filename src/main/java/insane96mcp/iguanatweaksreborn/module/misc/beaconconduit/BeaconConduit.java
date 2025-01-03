@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -55,15 +55,15 @@ import java.util.Objects;
 public class BeaconConduit extends JsonFeature {
 
     public static final SimpleBlockWithItem BEACON = SimpleBlockWithItem.register("beacon", () -> new ITRBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)));
-    public static final RegistryObject<BlockEntityType<ITRBeaconBlockEntity>> BEACON_BLOCK_ENTITY_TYPE = ISTRegistries.BLOCK_ENTITY_TYPES.register("beacon", () -> BlockEntityType.Builder.of(ITRBeaconBlockEntity::new, BEACON.block().get()).build(null));
-    public static final RegistryObject<MenuType<ITRBeaconMenu>> BEACON_MENU_TYPE = ISTRegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ITRBeaconMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<BlockEntityType<ITRBeaconBlockEntity>> BEACON_BLOCK_ENTITY_TYPE = ISORegistries.BLOCK_ENTITY_TYPES.register("beacon", () -> BlockEntityType.Builder.of(ITRBeaconBlockEntity::new, BEACON.block().get()).build(null));
+    public static final RegistryObject<MenuType<ITRBeaconMenu>> BEACON_MENU_TYPE = ISORegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ITRBeaconMenu::new, FeatureFlags.VANILLA_SET));
 
 
     @SuppressWarnings("unused")
-	public static final RegistryObject<MobEffect> BLOCK_REACH = ISTRegistries.MOB_EFFECTS.register("block_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+	public static final RegistryObject<MobEffect> BLOCK_REACH = ISORegistries.MOB_EFFECTS.register("block_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ForgeMod.BLOCK_REACH.get(), "bd0c6709-4b67-43d5-ae51-c6180d848978", 0.5f, AttributeModifier.Operation.ADDITION));
     @SuppressWarnings("unused")
-	public static final RegistryObject<MobEffect> ENTITY_REACH = ISTRegistries.MOB_EFFECTS.register("entity_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+	public static final RegistryObject<MobEffect> ENTITY_REACH = ISORegistries.MOB_EFFECTS.register("entity_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ForgeMod.ENTITY_REACH.get(), "fb23063a-c676-4da0-8d75-574ab8f3ee30", 0.075f, AttributeModifier.Operation.MULTIPLY_BASE));
 
     public static final ArrayList<IdTagValue> BLOCKS_LIST_DEFAULT = new ArrayList<>(List.of(

@@ -4,7 +4,7 @@ license="All rights reserved"
 [[mods]]
     modId="iguanatweaksreborn"
     version="${file.jarVersion}"
-    displayName="Insane's Survival Tweaks"
+    displayName="Insane's Survival Overhaul"
     displayURL="https://www.curseforge.com/minecraft/mc-mods/iguanatweaks-reborn"
     #logoFile="examplemod.png"
     credits = "IguanaMan for the original Mod. Effect Icons by hamzaa#1200. Unfair one shot sound by thecheeseman from freesound.org. Stamina overlay code from AppleSkin exhaustion code. Tinkers' Construct 3 for many \"borrowed\" ideas. Carboniglio for Alpha testing and many ideas, SonicTakoDrake for playtesting and letting me nerf hoes, Kurimu for playtesting and letting me nerf fishing. Dylan M. M. for brainstorming ideas. kioraSperlusenta for bearing with me in livestream. e___kho for some durium textures."

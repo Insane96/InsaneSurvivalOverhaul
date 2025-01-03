@@ -21,6 +21,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
+import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
@@ -28,7 +29,7 @@ import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.ITRCommonConfig;
 import insane96mcp.iguanatweaksreborn.setup.ITRPackSource;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
@@ -74,19 +75,19 @@ import java.util.stream.Collectors;
 public class InsaneSurvivalOverhaul
 {
     public static final String MOD_ID = "iguanatweaksreborn";
-    public static final String NEW_MOD_ID = "insanesurvivaltweaks";
+    public static final String NEW_MOD_ID = "insanesurvivaloverhaul";
 	public static final String RESOURCE_PREFIX = MOD_ID + ":";
     public static final Logger LOGGER = LogManager.getLogger();
 
     //TODO
-    public static final String CONFIG_FOLDER = "config/insanesurvivaltweaks";
+    public static final String CONFIG_FOLDER = "config/insanesurvivaloverhaul";
 
     public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
 
     public InsaneSurvivalOverhaul() {
         //TODO
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaltweaks/client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaltweaks/common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaloverhaul/client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaloverhaul/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpawnerDataAttacher.class);
         if (ModList.get().isLoaded("sereneseasons"))
@@ -104,9 +105,12 @@ public class InsaneSurvivalOverhaul
         modEventBus.register(NoHunger.class);
         modEventBus.register(UnfairOneShot.class);
         modEventBus.register(RegeneratingAbsorption.class);
-        ISTRegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
+        ISORegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
 
         ITRTriggers.init();
+
+        if (ModList.get().isLoaded("shieldsplus"))
+            FlintExpansion.ShieldsPlusIntegration.init();
 
         if (FMLLoader.getDist().isClient()) {
             modEventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);

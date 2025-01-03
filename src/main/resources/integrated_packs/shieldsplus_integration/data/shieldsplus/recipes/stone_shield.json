@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " M ",
+        "MBM",
+        " M "
+    ],
+    "key": {
+        "M": {
+            "item": "minecraft:cobblestone"
+        },
+        "B": {
+            "tag": "minecraft:logs"
+        }
+    },
+    "result": {
+        "item": "shieldsplus:stone_shield"
+    }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-02T18:49:01.2345153	Item Models: iguanatweaksreborn
+// 1.20.1	2025-01-03T17:55:24.0424892	Item Models: iguanatweaksreborn
 dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/biome_compass.json
 90f9959998f8ebf6d0d03c09571143d1213ae86f assets/iguanatweaksreborn/models/item/brown_mushroom_stew.json
 7f0f6732f238cf58a1bedffdbdc95b861a4a4cc9 assets/iguanatweaksreborn/models/item/carrot_seeds.json
@@ -10,6 +10,7 @@ b4a43a65b9f2de7c576584fd400f66c1551fa8fd assets/iguanatweaksreborn/models/item/c
 885b964572f382610aefa153bc6dabeefeceedb7 assets/iguanatweaksreborn/models/item/flint_axe.json
 25edac173823f0f91d2a55a3886494108766cdbb assets/iguanatweaksreborn/models/item/flint_hoe.json
 1ed031f3f896edcee033728ca05c9fd13d0264d9 assets/iguanatweaksreborn/models/item/flint_pickaxe.json
+313300a16ea7cc01a54c0ec8099ea9bf05edd0ac assets/iguanatweaksreborn/models/item/flint_shield.json
 1ee9cde8581b88ef1108b88d1ffb235c75af104f assets/iguanatweaksreborn/models/item/flint_shovel.json
 1f952dd6d082cd8486701150eb07a4755de4bd23 assets/iguanatweaksreborn/models/item/flint_sword.json
 8f8e524dd9d1a92041b0b63398c2acf3a2a9c503 assets/iguanatweaksreborn/models/item/golden_powered_rail.json

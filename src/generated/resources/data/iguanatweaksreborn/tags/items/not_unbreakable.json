@@ -6,10 +6,6 @@
     "iguanatweaksreborn:firestarter",
     "#iguanatweaksreborn:equipment/hand/flint",
     {
-      "id": "#iguanatweaksreborn:equipment/hand/flint",
-      "required": false
-    },
-    {
       "id": "#iguanatweaksexpanded:equipment/hand/copper",
       "required": false
     },

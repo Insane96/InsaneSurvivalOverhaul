@@ -5,7 +5,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.network.message.RegenAbsorptionSync;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -52,11 +52,11 @@ public class RegeneratingAbsorption extends Feature {
     public static final String HURT_COOLDOWN_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
     public static final String NO_HURT_SOUND_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "no_hurt_sound";
 
-    public static final RegistryObject<Attribute> ATTRIBUTE = ISTRegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
+    public static final RegistryObject<Attribute> ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
 
-    public static final RegistryObject<Attribute> SPEED_ATTRIBUTE = ISTRegistries.ATTRIBUTES.register("regenerating_absorption_speed", () -> new RangedAttribute("attribute.name.regenerating_absorption_speed", 0.250d, 0d, 20d));
+    public static final RegistryObject<Attribute> SPEED_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption_speed", () -> new RangedAttribute("attribute.name.regenerating_absorption_speed", 0.250d, 0d, 20d));
 
-    public static final RegistryObject<MobEffect> EFFECT = ISTRegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
+    public static final RegistryObject<MobEffect> EFFECT = ISORegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ATTRIBUTE.get(), "704d7291-63ba-4346-8aa8-a08e90a13fdf", 4, AttributeModifier.Operation.ADDITION));
 
     @Config(min = 0)
@@ -158,7 +158,7 @@ public class RegeneratingAbsorption extends Feature {
         event.setAmount(event.getAmount() - toRemove);
         event.getEntity().getPersistentData().putFloat(REGEN_ABSORPTION_TAG, currentAbsorption);
         if (soundOnAbsorptionHurt)
-            event.getEntity().level().playSound(null, event.getEntity(), ISTRegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
+            event.getEntity().level().playSound(null, event.getEntity(), ISORegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
             RegenAbsorptionSync.sync(player, currentAbsorption);
     }

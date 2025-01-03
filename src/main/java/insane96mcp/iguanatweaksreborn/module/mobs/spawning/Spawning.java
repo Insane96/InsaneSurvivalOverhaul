@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.mobs.spawning;
 import com.google.common.collect.ImmutableSet;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -44,7 +44,7 @@ public class Spawning extends Feature {
     public static final UUID GUARDIAN_MODIFIER_UUID = UUID.fromString("93e7f541-3fee-4e79-8b9f-1e75fa71082e");
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(state -> 7)));
-    public static final RegistryObject<PoiType> ECHO_LANTERN_POI = ISTRegistries.POI_TYPES.register("echo_lantern", () -> new PoiType(ImmutableSet.copyOf(ECHO_LANTERN.block().get().getStateDefinition().getPossibleStates()), 1, 64));
+    public static final RegistryObject<PoiType> ECHO_LANTERN_POI = ISORegistries.POI_TYPES.register("echo_lantern", () -> new PoiType(ImmutableSet.copyOf(ECHO_LANTERN.block().get().getStateDefinition().getPossibleStates()), 1, 64));
 
     @Config
     @Label(name = "No Zombie Villagers", description = "Disables Zombie Villagers")

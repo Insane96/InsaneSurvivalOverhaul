@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -23,7 +23,7 @@ import static insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul.MOD_ID;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Cloth extends Feature {
 
-	public static final RegistryObject<Item> CLOTH = ISTRegistries.ITEMS.register("cloth", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> CLOTH = ISORegistries.ITEMS.register("cloth", () -> new Item(new Item.Properties()));
 
 	@Config
 	@Label(name = "Data Pack", description = """

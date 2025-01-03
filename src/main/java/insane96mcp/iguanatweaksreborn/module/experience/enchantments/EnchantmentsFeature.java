@@ -16,7 +16,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration.Allurement;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -62,17 +62,17 @@ import java.util.function.Predicate;
 @Label(name = "Enchantments", description = "Changes to some enchantments related stuff.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
 public class EnchantmentsFeature extends JsonFeature {
-	public static final RegistryObject<Enchantment> SHARPNESS = ISTRegistries.ENCHANTMENTS.register("sharpness", Sharpness::new);
-	public static final RegistryObject<Enchantment> SMITE = ISTRegistries.ENCHANTMENTS.register("smite", Smite::new);
-	public static final RegistryObject<Enchantment> BANE_OF_SSSSS = ISTRegistries.ENCHANTMENTS.register("bane_of_sssss", BaneOfSSSS::new);
-	public static final RegistryObject<Enchantment> FIRE_ASPECT = ISTRegistries.ENCHANTMENTS.register("fire_aspect", FireAspect::new);
-	public static final RegistryObject<Enchantment> KNOCKBACK = ISTRegistries.ENCHANTMENTS.register("knockback", Knockback::new);
-	public static final RegistryObject<Enchantment> LUCK = ISTRegistries.ENCHANTMENTS.register("luck", Luck::new);
-	public static final RegistryObject<Enchantment> PROTECTION = ISTRegistries.ENCHANTMENTS.register("protection", OverallProtection::new);
-	public static final RegistryObject<Enchantment> BLAST_PROTECTION = ISTRegistries.ENCHANTMENTS.register("blast_protection", BlastProtection::new);
-	public static final RegistryObject<Enchantment> FIRE_PROTECTION = ISTRegistries.ENCHANTMENTS.register("fire_protection", FireProtection::new);
-	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ISTRegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
-	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISTRegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
+	public static final RegistryObject<Enchantment> SHARPNESS = ISORegistries.ENCHANTMENTS.register("sharpness", Sharpness::new);
+	public static final RegistryObject<Enchantment> SMITE = ISORegistries.ENCHANTMENTS.register("smite", Smite::new);
+	public static final RegistryObject<Enchantment> BANE_OF_SSSSS = ISORegistries.ENCHANTMENTS.register("bane_of_sssss", BaneOfSSSS::new);
+	public static final RegistryObject<Enchantment> FIRE_ASPECT = ISORegistries.ENCHANTMENTS.register("fire_aspect", FireAspect::new);
+	public static final RegistryObject<Enchantment> KNOCKBACK = ISORegistries.ENCHANTMENTS.register("knockback", Knockback::new);
+	public static final RegistryObject<Enchantment> LUCK = ISORegistries.ENCHANTMENTS.register("luck", Luck::new);
+	public static final RegistryObject<Enchantment> PROTECTION = ISORegistries.ENCHANTMENTS.register("protection", OverallProtection::new);
+	public static final RegistryObject<Enchantment> BLAST_PROTECTION = ISORegistries.ENCHANTMENTS.register("blast_protection", BlastProtection::new);
+	public static final RegistryObject<Enchantment> FIRE_PROTECTION = ISORegistries.ENCHANTMENTS.register("fire_protection", FireProtection::new);
+	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ISORegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
+	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISORegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
 	@Config
 	@Label(name = "Infinity overhaul", description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;

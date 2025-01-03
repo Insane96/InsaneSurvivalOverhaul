@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
@@ -25,7 +25,7 @@ public class LootItemCurrentSeasonCondition implements LootItemCondition {
     }
 
     public LootItemConditionType getType() {
-        return ISTRegistries.CURRENT_SEASON.get();
+        return ISORegistries.CURRENT_SEASON.get();
     }
 
     public Set<LootContextParam<?>> getReferencedContextParams() {

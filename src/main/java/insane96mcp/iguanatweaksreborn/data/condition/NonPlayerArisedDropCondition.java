@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -23,7 +23,7 @@ public class NonPlayerArisedDropCondition implements LootItemCondition {
     }
 
     public LootItemConditionType getType() {
-        return ISTRegistries.NON_PLAYER_ARISED_DROP.get();
+        return ISORegistries.NON_PLAYER_ARISED_DROP.get();
     }
 
     public Set<LootContextParam<?>> getReferencedContextParams() {

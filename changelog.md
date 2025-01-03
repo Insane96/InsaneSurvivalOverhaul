@@ -17,6 +17,8 @@ This is a breaking version: configs and data packs have got a huge update
 * Respawn Obelisk has been moved here from Expanded
 * Coal & Charcoal has been moved here from Expanded in Coal & Fire
 * Flint Expansion has been moved here from Expanded
+  * Also Shields+ support if insalled (not mandatory!)
+* Shields+ Integration has been split here from Expanded
 
 ### Changes
 * Changed red outline on wrong tool to no outline on wrong tool
@@ -30,7 +32,7 @@ This is a breaking version: configs and data packs have got a huge update
   * Doubled amount of buttons, pressure plates and levers from crafting
   * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
 
-### Config
+### Config & Data Pack changes
 * Items
   * Item stats have been renamed to Item Definitions (item_definitions)
   * Disabled Items has its own feature now

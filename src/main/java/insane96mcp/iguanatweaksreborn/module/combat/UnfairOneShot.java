@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -43,7 +43,7 @@ import java.util.List;
 @Label(name = "Unfair one-shot", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class UnfairOneShot extends Feature {
-	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ISTRegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ISORegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
 
 	@Config
 	@Label(name = "Effects", description = "A list of effects to give when Unfair One Shot triggers, separated by semi-colons")

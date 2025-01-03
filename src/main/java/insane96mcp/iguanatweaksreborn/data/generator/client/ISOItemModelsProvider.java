@@ -58,7 +58,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(FlintExpansion.SHOVEL.get());
         handHeld(FlintExpansion.HOE.get());
         handHeld(FlintExpansion.SWORD.get());
-        //shield(FlintExpansion.SHIELD.get());
+        shield(FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
 
         withExistingParent("respawn_obelisk", new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/respawn_obelisk_disabled"));
 

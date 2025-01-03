@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.world;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -19,7 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 @Label(name = "Biome Compass")
 @LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
 public class BiomeCompass extends Feature {
-    public static final RegistryObject<Item> COMPASS = ISTRegistries.ITEMS.register("biome_compass", () -> new BiomeCompassItem(new Item.Properties()));
+    public static final RegistryObject<Item> COMPASS = ISORegistries.ITEMS.register("biome_compass", () -> new BiomeCompassItem(new Item.Properties()));
 
     public BiomeCompass(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);

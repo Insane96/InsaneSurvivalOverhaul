@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
-import insane96mcp.iguanatweaksreborn.setup.ISTRegistries;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.Entity;
@@ -28,7 +28,7 @@ public class KilledByKilledPlayerCondition implements LootItemCondition {
     }
 
     public LootItemConditionType getType() {
-        return ISTRegistries.KILLED_BY_KILLED_PLAYER.get();
+        return ISORegistries.KILLED_BY_KILLED_PLAYER.get();
     }
 
     public Set<LootContextParam<?>> getReferencedContextParams() {
