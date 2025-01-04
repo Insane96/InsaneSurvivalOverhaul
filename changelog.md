@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.0.0
 This is a breaking version: configs and data packs have got a huge update
 ### Additions
 * Better Climbamble
