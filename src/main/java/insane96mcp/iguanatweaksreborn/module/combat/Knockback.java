@@ -107,7 +107,7 @@ public class Knockback extends Feature {
 
 	public static float getKnockbackMultiplier(ItemStack stack) {
 		float multiplier = 1f;
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			if (itemDefinition.knockbackMultiplier() != null && itemDefinition.item().matchesItem(stack))
 				multiplier = itemDefinition.knockbackMultiplier().floatValue();
 		}

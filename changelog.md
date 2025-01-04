@@ -1,7 +1,7 @@
 # Changelog
 
 ## 4.0.0
-This is a breaking version: configs and data packs have got a huge update
+This is a breaking version: configs and data packs have got a huge update.
 ### Additions
 * Better Climbamble
   * Added 'Not on climbable when on ground'
@@ -32,15 +32,16 @@ This is a breaking version: configs and data packs have got a huge update
 * Actual Redstone Component data pack
   * Doubled amount of buttons, pressure plates and levers from crafting
   * Added Cinch's Better Deepslate, Better Archeology and Upgrade Aquatic support
+* Cows now drop more leather
 
 ### Config & Data Pack changes
 * Items
-  * Item stats have been renamed to Item Definitions (item_definitions)
+  * Item stats have been renamed to Item Definitions (folder from `item_stats` to `item_definitions`)
   * Disabled Items has its own feature now
   * Unbreakable Items has its own feature now
   * Item definitions has its own feature now
   * Ecologic wood has some new config options
-* Block Data has been renamed to Block definitions (folder from block_data to block_definitions)
+* Block Data has been renamed to Block definitions (folder from `block_data` to `block_definitions`)
 * Hoes
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
   * Moved hoes scythe radius to Item Definition

@@ -420,7 +420,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	}
 
 	public static int getEnchantmentValue(ItemStack stack) {
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			if (itemDefinition.enchantability() != null && itemDefinition.item().matchesItem(stack))
 				return itemDefinition.enchantability();
 		}

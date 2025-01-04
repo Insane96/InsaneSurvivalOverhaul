@@ -47,7 +47,7 @@ public class MiscItem extends Feature {
 		if (!this.isEnabled())
 			return;
 
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			itemDefinition.applyAttributes(event, event.getItemStack(), event.getModifiers());
 		}
 	}

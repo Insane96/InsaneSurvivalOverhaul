@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = InsaneSurvivalOverhaul.MOD_ID)
 public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListener {
-	public static final List<ItemDefinition> DEFINITIONS = new ArrayList<>();
+	private static final List<ItemDefinition> DEFINITIONS = new ArrayList<>();
 	public static final Map<Item, ItemDefinition.Durability> DURABILITY_MAP = new HashMap<>();
 	public static final Map<Item, Integer> ORIGINAL_DURABILITY = new HashMap<>();
 	public static final ItemDefinitionsReloadListener INSTANCE;
@@ -39,7 +39,7 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-		DEFINITIONS.clear();
+		getDefinitions().clear();
 		DURABILITY_MAP.clear();
 		for (var entry : map.entrySet()) {
 			try {
@@ -50,7 +50,7 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 
 				ItemDefinition itemDefinition = GSON.fromJson(entry.getValue(), ItemDefinition.class);
 				//itemStatistics.applyStats(false);
-				DEFINITIONS.add(itemDefinition);
+				getDefinitions().add(itemDefinition);
 			}
 			catch (JsonSyntaxException e) {
 				ISOLogHelper.error("Parsing error loading Item Definition %s: %s", entry.getKey(), e.getMessage());
@@ -60,7 +60,7 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 			}
 		}
 
-		ISOLogHelper.info("Loaded %s Item Definition", DEFINITIONS.size());
+		ISOLogHelper.info("Loaded %s Item Definition", getDefinitions().size());
 
 		/*for (var entry : Durability.entrySet()) {
 			entry.getValue().apply(entry.getKey());
@@ -87,6 +87,10 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 		for (var entry : DURABILITY_MAP.entrySet()) {
 			entry.getValue().apply(entry.getKey());
 		}
+	}
+
+	public synchronized static List<ItemDefinition> getDefinitions() {
+		return DEFINITIONS;
 	}
 
 	@Override

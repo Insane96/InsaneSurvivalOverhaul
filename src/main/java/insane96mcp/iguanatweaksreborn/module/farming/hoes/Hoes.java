@@ -84,7 +84,7 @@ public class Hoes extends Feature {
 		if (!this.isEnabled()
 				|| event.getState().destroySpeed > 0f)
 			return;
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			if (!itemDefinition.matches(event.getPlayer().getMainHandItem())
 					|| itemDefinition.scytheRadius() == null)
 				continue;
@@ -119,7 +119,7 @@ public class Hoes extends Feature {
 			event.getToolTip().add(Component.translatable(TOO_WEAK).withStyle(ChatFormatting.RED));
 		}
 		else {
-			for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 				if (!itemDefinition.matches(event.getItemStack().getItem()))
 					continue;
 
