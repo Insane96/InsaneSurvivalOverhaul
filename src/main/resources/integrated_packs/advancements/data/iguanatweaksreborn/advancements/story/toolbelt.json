@@ -24,7 +24,7 @@
 					"announce_to_chat": true,
 					"hidden": false
 				},
-				"parent": "iguanatweaksexpanded:story/campfire",
+				"parent": "iguanatweaksreborn:story/campfire",
 				"criteria": {
 					"toolbelt": {
 						"trigger": "minecraft:inventory_changed",
