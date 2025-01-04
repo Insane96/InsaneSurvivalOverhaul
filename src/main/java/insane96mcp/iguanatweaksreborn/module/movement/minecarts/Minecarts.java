@@ -14,11 +14,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.MissingMappingsEvent;
-
-import static insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul.MOD_ID;
 
 @Label(name = "Minecarts")
 @LoadFeature(module = Modules.Ids.MOVEMENT, canBeDisabled = false)
@@ -34,21 +29,5 @@ public class Minecarts extends Feature {
 	public Minecarts(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("Insane's Survival Overhaul Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
-	}
-
-	@SubscribeEvent
-	public void remapFromITE(MissingMappingsEvent event) {
-		event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
-				.forEach(mapping -> mapping.remap(GOLDEN_POWERED_RAIL.item().get()));
-		event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
-				.forEach(mapping -> mapping.remap(GOLDEN_POWERED_RAIL.block().get()));
-		event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
-				.forEach(mapping -> mapping.remap(COPPER_POWERED_RAIL.item().get()));
-		event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
-				.forEach(mapping -> mapping.remap(COPPER_POWERED_RAIL.block().get()));
 	}
 }

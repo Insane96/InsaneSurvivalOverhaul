@@ -120,7 +120,7 @@ public class ClientSetup {
                     removeBookWithEnchantment(event, Enchantments.KNOCKBACK);
                 }
             }
-            addBefore(event, Items.LEATHER, Cloth.CLOTH.get());
+            addBefore(event, Items.LEATHER, Cloth.ITEM.get());
             addAfter(event, Items.CHARCOAL, CoalFire.HELLISH_COAL.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {

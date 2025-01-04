@@ -51,7 +51,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
 
-        basicItem(Cloth.CLOTH.get());
+        basicItem(Cloth.ITEM.get());
 
         handHeld(FlintExpansion.AXE.get());
         handHeld(FlintExpansion.PICKAXE.get());

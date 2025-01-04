@@ -14,7 +14,7 @@
         "announce_to_chat": true,
         "hidden": false
     },
-    "parent": "iguanatweaksreborn:story/biome_compass",
+    "parent": "iguanatweaksreborn:story/biometer",
     "criteria": {
         "emerald": {
             "trigger": "minecraft:inventory_changed",

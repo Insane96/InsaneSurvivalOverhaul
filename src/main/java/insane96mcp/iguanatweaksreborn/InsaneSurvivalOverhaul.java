@@ -5,12 +5,12 @@ import insane96mcp.iguanatweaksreborn.command.ISOCommand;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.data.criterion.SeasonChangedTrigger;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOEntityTypeTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.client.ISOItemModelsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ISOBlockModelsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ISOBlockStatesProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.iguanatweaksreborn.modifier.Modifiers;
 import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
@@ -24,14 +24,17 @@ import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
-import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.ISOCommonConfig;
 import insane96mcp.iguanatweaksreborn.setup.ISOPackSource;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
 import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
@@ -63,6 +66,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -127,6 +132,33 @@ public class InsaneSurvivalOverhaul
         event.addListener(BlockDefinitionReloadListener.INSTANCE);
         event.addListener(PlantsGrowthReloadListener.INSTANCE);
         event.addListener(LivestockDataReloadListener.INSTANCE);
+    }
+
+    @SubscribeEvent
+    public void remapFromITE(MissingMappingsEvent event) {
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
+                .forEach(mapping -> mapping.remap(Respawn.RESPAWN_OBELISK.item().get()));
+        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
+                .forEach(mapping -> mapping.remap(Respawn.RESPAWN_OBELISK.block().get()));
+
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
+                .forEach(mapping -> mapping.remap(Minecarts.GOLDEN_POWERED_RAIL.item().get()));
+        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
+                .forEach(mapping -> mapping.remap(Minecarts.GOLDEN_POWERED_RAIL.block().get()));
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
+                .forEach(mapping -> mapping.remap(Minecarts.COPPER_POWERED_RAIL.item().get()));
+        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
+                .forEach(mapping -> mapping.remap(Minecarts.COPPER_POWERED_RAIL.block().get()));
+
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:cloth"))
+                .forEach(mapping -> mapping.remap(Cloth.ITEM.get()));
     }
 
     @SubscribeEvent

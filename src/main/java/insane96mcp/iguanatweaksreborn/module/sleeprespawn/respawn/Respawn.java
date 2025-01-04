@@ -42,14 +42,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.MissingMappingsEvent;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-
-import static insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul.MOD_ID;
 
 @Label(name = "Respawn", description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
@@ -321,15 +317,5 @@ public class Respawn extends JsonFeature {
 				player.sendSystemMessage(Component.translatable("iguanatweaksreborn.set_old_respawn"));
 			event.setCanceled(true);
 		}
-	}
-
-	@SubscribeEvent
-	public void remapFromITE(MissingMappingsEvent event) {
-		event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
-				.forEach(mapping -> mapping.remap(RESPAWN_OBELISK.item().get()));
-		event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-				.filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
-				.forEach(mapping -> mapping.remap(RESPAWN_OBELISK.block().get()));
 	}
 }

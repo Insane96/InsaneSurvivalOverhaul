@@ -1,0 +1,13 @@
+{
+	"item_to_repair": {
+		"id": "iguanatweaksreborn:flint_sword"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:flint"
+			},
+			"amount": 2
+		}
+	]
+}
