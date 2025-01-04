@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.network.message.AnvilRepairSync;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -40,14 +40,14 @@ public class AnvilRepairReloadListener extends SimpleJsonResourceReloadListener 
 				REPAIRS.put(entry.getKey(), anvilRepair);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Anvil Recipe %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Parsing error loading Anvil Recipe %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Anvil Recipe %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Failed loading Anvil Recipe %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Anvil Recipes", REPAIRS.size());
+		ISOLogHelper.info("Loaded %s Anvil Recipes", REPAIRS.size());
 	}
 
 	@SubscribeEvent

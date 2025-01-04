@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.misc.tweaks;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
@@ -66,7 +66,7 @@ public class Tweaks extends Feature {
     public static final RegistryObject<Block> SCUTE = ISORegistries.BLOCKS.register("scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
 
     public static final TagKey<Block> BREAK_ON_FALL = ISOBlockTagsProvider.create("break_on_fall");
-    public static final TagKey<Item> WORLD_IMMUNE = ISTItemTagsProvider.create("world_immune");
+    public static final TagKey<Item> WORLD_IMMUNE = ISOItemTagsProvider.create("world_immune");
 
     public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "collide_with_wall"));
 

@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ITRBeaconMenu extends AbstractContainerMenu {
+public class ISOBeaconMenu extends AbstractContainerMenu {
     private static final int PAYMENT_SLOT = 0;
     private static final int SLOT_COUNT = 1;
     private static final int INV_SLOT_START = 1;
@@ -25,14 +25,14 @@ public class ITRBeaconMenu extends AbstractContainerMenu {
     private final ContainerData beaconData;
     private final ContainerLevelAccess access;
 
-    public ITRBeaconMenu(int pContainerId, Inventory pPlayerInventory) {
-        this(pContainerId, pPlayerInventory, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(ITRBeaconBlockEntity.DATA_COUNT), ContainerLevelAccess.NULL);
+    public ISOBeaconMenu(int pContainerId, Inventory pPlayerInventory) {
+        this(pContainerId, pPlayerInventory, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(ISOBeaconBlockEntity.DATA_COUNT), ContainerLevelAccess.NULL);
     }
 
-    public ITRBeaconMenu(int pContainerId, Inventory pPlayerInventory, Container pContainer, ContainerData containerData, ContainerLevelAccess pAccess) {
+    public ISOBeaconMenu(int pContainerId, Inventory pPlayerInventory, Container pContainer, ContainerData containerData, ContainerLevelAccess pAccess) {
         super(BeaconConduit.BEACON_MENU_TYPE.get(), pContainerId);
-        checkContainerDataCount(containerData, ITRBeaconBlockEntity.DATA_COUNT);
-        checkContainerSize(pContainer, ITRBeaconBlockEntity.SLOT_COUNT);
+        checkContainerDataCount(containerData, ISOBeaconBlockEntity.DATA_COUNT);
+        checkContainerSize(pContainer, ISOBeaconBlockEntity.SLOT_COUNT);
         this.container = pContainer;
         this.beaconData = containerData;
         this.access = pAccess;
@@ -133,24 +133,24 @@ public class ITRBeaconMenu extends AbstractContainerMenu {
 
     @Nullable
     public MobEffect getEffect() {
-        return MobEffect.byId(this.beaconData.get(ITRBeaconBlockEntity.DATA_EFFECT));
+        return MobEffect.byId(this.beaconData.get(ISOBeaconBlockEntity.DATA_EFFECT));
     }
 
     public int getAmplifier() {
-        return this.beaconData.get(ITRBeaconBlockEntity.DATA_AMPLIFIER);
+        return this.beaconData.get(ISOBeaconBlockEntity.DATA_AMPLIFIER);
     }
 
     public int getTimeLeft() {
-        return this.beaconData.get(ITRBeaconBlockEntity.DATA_TIME_LEFT);
+        return this.beaconData.get(ISOBeaconBlockEntity.DATA_TIME_LEFT);
     }
 
     public int getLayers() {
-        return this.beaconData.get(ITRBeaconBlockEntity.DATA_LAYERS);
+        return this.beaconData.get(ISOBeaconBlockEntity.DATA_LAYERS);
     }
 
     public void updateEffect(Optional<MobEffect> mobEffect, int amplifier) {
-        this.beaconData.set(ITRBeaconBlockEntity.DATA_EFFECT, mobEffect.map(MobEffect::getId).orElse(-1));
-        this.beaconData.set(ITRBeaconBlockEntity.DATA_AMPLIFIER, amplifier);
+        this.beaconData.set(ISOBeaconBlockEntity.DATA_EFFECT, mobEffect.map(MobEffect::getId).orElse(-1));
+        this.beaconData.set(ISOBeaconBlockEntity.DATA_AMPLIFIER, amplifier);
         this.access.execute(Level::blockEntityChanged);
     }
 
@@ -179,7 +179,7 @@ public class ITRBeaconMenu extends AbstractContainerMenu {
         @Override
         public void setChanged() {
             super.setChanged();
-            ITRBeaconMenu.this.slotsChanged(this.container);
+            ISOBeaconMenu.this.slotsChanged(this.container);
         }
     }
 }

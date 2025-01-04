@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import insane96mcp.iguanatweaksreborn.module.movement.minecarts.ITEPoweredRail;
+import insane96mcp.iguanatweaksreborn.module.movement.minecarts.ISOPoweredRail;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,8 +35,8 @@ public abstract class AbstractMinecartMixin extends Entity implements IForgeAbst
         float railMaxSpeed = baserailblock.getRailMaxSpeed(state, this.level(), pos, (AbstractMinecart) (Object) this);
         if (this.getDeltaMovement().horizontalDistance() >= railMaxSpeed)
             return 0f;
-        else if (baserailblock instanceof ITEPoweredRail itePoweredRail)
-            return itePoweredRail.getRailAcceleration(state, this.level(), pos, (AbstractMinecart) (Object) this);
+        else if (baserailblock instanceof ISOPoweredRail ISOPoweredRail)
+            return ISOPoweredRail.getRailAcceleration(state, this.level(), pos, (AbstractMinecart) (Object) this);
         return acceleration;
     }
 

@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.network.message.BlockDefinitionSync;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -55,20 +55,20 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 				DEFINITIONS.add(blockDefinition);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Block Definition %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Parsing error loading Block Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Block Definition %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Failed loading Block Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Block Data", DEFINITIONS.size());
+		ISOLogHelper.info("Loaded %s Block Data", DEFINITIONS.size());
 	}
 
 	public static void restoreOriginalDefinitionsAndClear() {
 		for (BlockDefinition definition : ORIGINAL_DEFINITIONS)
 			definition.apply(true);
-		ITRLogHelper.info("Restored %s Block Definitions", ORIGINAL_DEFINITIONS.size());
+		ISOLogHelper.info("Restored %s Block Definitions", ORIGINAL_DEFINITIONS.size());
 		ORIGINAL_DEFINITIONS.clear();
 	}
 

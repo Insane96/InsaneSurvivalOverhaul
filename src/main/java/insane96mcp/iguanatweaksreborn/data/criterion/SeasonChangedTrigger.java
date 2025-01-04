@@ -48,7 +48,7 @@ public class SeasonChangedTrigger extends SimpleCriterionTrigger<SeasonChangedTr
 		if (!(event.getLevel() instanceof ServerLevel serverLevel))
 			return;
 
-		serverLevel.players().forEach(serverPlayer -> ITRTriggers.SEASON_CHANGED.trigger(serverPlayer, event.getNewSeason()));
+		serverLevel.players().forEach(serverPlayer -> ISOTriggers.SEASON_CHANGED.trigger(serverPlayer, event.getNewSeason()));
 	}
 
 	public static class TriggerInstance extends AbstractCriterionTriggerInstance {

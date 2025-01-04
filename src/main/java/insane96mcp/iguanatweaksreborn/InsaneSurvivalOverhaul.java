@@ -1,16 +1,16 @@
 package insane96mcp.iguanatweaksreborn;
 
 import com.google.common.collect.Lists;
-import insane96mcp.iguanatweaksreborn.command.ITRCommand;
-import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
+import insane96mcp.iguanatweaksreborn.command.ISOCommand;
+import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.data.criterion.SeasonChangedTrigger;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ITREntityTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOEntityTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.client.ISOItemModelsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockModelsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.client.ITRBlockStatesProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.client.ISOBlockModelsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.client.ISOBlockStatesProvider;
 import insane96mcp.iguanatweaksreborn.modifier.Modifiers;
 import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
@@ -30,11 +30,11 @@ import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDa
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.ITRCommonConfig;
-import insane96mcp.iguanatweaksreborn.setup.ITRPackSource;
+import insane96mcp.iguanatweaksreborn.setup.ISOCommonConfig;
+import insane96mcp.iguanatweaksreborn.setup.ISOPackSource;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
-import insane96mcp.iguanatweaksreborn.setup.client.ITRClientConfig;
+import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -86,8 +86,8 @@ public class InsaneSurvivalOverhaul
 
     public InsaneSurvivalOverhaul() {
         //TODO
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ITRClientConfig.CONFIG_SPEC, "insanesurvivaloverhaul/client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ITRCommonConfig.CONFIG_SPEC, "insanesurvivaloverhaul/common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC, "insanesurvivaloverhaul/client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC, "insanesurvivaloverhaul/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpawnerDataAttacher.class);
         if (ModList.get().isLoaded("sereneseasons"))
@@ -107,7 +107,7 @@ public class InsaneSurvivalOverhaul
         modEventBus.register(RegeneratingAbsorption.class);
         ISORegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
 
-        ITRTriggers.init();
+        ISOTriggers.init();
 
         if (ModList.get().isLoaded("shieldsplus"))
             FlintExpansion.ShieldsPlusIntegration.init();
@@ -131,7 +131,7 @@ public class InsaneSurvivalOverhaul
 
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
-        ITRCommand.register(event.getDispatcher());
+        ISOCommand.register(event.getDispatcher());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -156,11 +156,11 @@ public class InsaneSurvivalOverhaul
         generator.addProvider(event.includeServer(), new SRGlobalLootModifierProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID));*/
         ISOBlockTagsProvider blockTags = new ISOBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ISTItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITRDamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ITREntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ITRBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISOItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISODamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISOEntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
         generator.addProvider(event.includeClient(), new ISOItemModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
     }
 
@@ -172,7 +172,7 @@ public class InsaneSurvivalOverhaul
 
             Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + dataPack.getPath());
             var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
-                    (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, dataPack.shouldBeEnabled() ? PackSource.DEFAULT : ITRPackSource.DISABLED);
+                    (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, dataPack.shouldBeEnabled() ? PackSource.DEFAULT : ISOPackSource.DISABLED);
             event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
         }
     }

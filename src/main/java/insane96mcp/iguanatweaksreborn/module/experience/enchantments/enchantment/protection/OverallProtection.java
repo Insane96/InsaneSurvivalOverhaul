@@ -4,7 +4,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 
-public class OverallProtection extends ITRProtectionEnchantment {
+public class OverallProtection extends ISOProtectionEnchantment {
     public OverallProtection() {
         super(Rarity.VERY_RARE);
     }

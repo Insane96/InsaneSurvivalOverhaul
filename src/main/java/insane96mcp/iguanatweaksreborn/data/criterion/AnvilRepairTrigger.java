@@ -35,7 +35,7 @@ public class AnvilRepairTrigger extends SimpleCriterionTrigger<AnvilRepairTrigge
 	public static void onAnvilRepair(AnvilRepairEvent event) {
 		if (!(event.getEntity() instanceof ServerPlayer player))
 			return;
-		ITRTriggers.ANVIL_REPAIR.trigger(player, event.getLeft(), event.getRight(), event.getOutput());
+		ISOTriggers.ANVIL_REPAIR.trigger(player, event.getLeft(), event.getRight(), event.getOutput());
 	}
 
 	public static class TriggerInstance extends AbstractCriterionTriggerInstance {

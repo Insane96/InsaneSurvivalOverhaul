@@ -3,8 +3,8 @@ package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.entity.ITRFallingBlockEntity;
-import insane96mcp.iguanatweaksreborn.event.ITREventFactory;
+import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
+import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class ITRExplosion extends Explosion {
+public class ISOExplosion extends Explosion {
 	public static final String KNOCKBACK_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_knockback_multiplier";
 	public static final String BASE_RESISTANCE_ADD_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_base_resistance_add";
 	public static final String RAY_STRENGTH_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_ray_strength_multiplier";
@@ -57,11 +57,11 @@ public class ITRExplosion extends Explosion {
 	private float baseResistanceAdd = 0.3f;
 	private float rayStrengthMultiplier = 0.3f;
 
-	public ITRExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean creeperCollateral) {
+	public ISOExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean creeperCollateral) {
 		this(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, creeperCollateral, true);
 	}
 
-	public ITRExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean creeperCollateral, boolean poofParticles) {
+	public ISOExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean creeperCollateral, boolean poofParticles) {
 		super(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction);
 		this.creeperCollateral = creeperCollateral;
 		this.poofParticles = poofParticles;
@@ -75,12 +75,12 @@ public class ITRExplosion extends Explosion {
 			this.radius = Math.min(ExplosionOverhaul.limitExplosionSize, this.radius);
 	}
 
-	public ITRExplosion setBaseResistanceAdd(float baseResistanceAdd) {
+	public ISOExplosion setBaseResistanceAdd(float baseResistanceAdd) {
 		this.baseResistanceAdd = baseResistanceAdd;
 		return this;
 	}
 
-	public ITRExplosion rayStrengthMultiplier(float rayStrengthMultiplier) {
+	public ISOExplosion rayStrengthMultiplier(float rayStrengthMultiplier) {
 		this.rayStrengthMultiplier = rayStrengthMultiplier;
 		return this;
 	}
@@ -150,7 +150,7 @@ public class ITRExplosion extends Explosion {
 			block.wasExploded(this.level, BlockPos.containing(this.getPosition()), this);
 			BlockPos blockpos1 = blockpos.immutable();
 			this.level.setBlockAndUpdate(blockpos1, Blocks.AIR.defaultBlockState());
-			ITRFallingBlockEntity fallingBlockEntity = new ITRFallingBlockEntity(this.level, blockpos1.getX() + 0.5f, blockpos1.getY() + 2.0625f, blockpos1.getZ() + 0.5f, blockstate);
+			ISOFallingBlockEntity fallingBlockEntity = new ISOFallingBlockEntity(this.level, blockpos1.getX() + 0.5f, blockpos1.getY() + 2.0625f, blockpos1.getZ() + 0.5f, blockstate);
 			fallingBlockEntity.time = 1;
 			fallingBlockEntity.source = this.source;
 			this.level.addFreshEntity(fallingBlockEntity);
@@ -163,7 +163,7 @@ public class ITRExplosion extends Explosion {
 		List<Entity> list = gatherAffectedEntities(affectedEntitiesRadius);
 		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.level, this, list, affectedEntitiesRadius);
 		for (Entity entity : list) {
-			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ITRFallingBlockEntity)  && !ExplosionOverhaul.affectJustSpawnedEntities)
+			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ISOFallingBlockEntity)  && !ExplosionOverhaul.affectJustSpawnedEntities)
 				continue;
 			if (entity.ignoreExplosion())
 				continue;
@@ -177,7 +177,7 @@ public class ITRExplosion extends Explosion {
 			if (d13 == 0.00)
 				continue;
 			//xDistance = xDistance / d13;
-			if (!(entity instanceof ITRFallingBlockEntity))
+			if (!(entity instanceof ISOFallingBlockEntity))
 				yDistance = yDistance / d13;
 			//zDistance = zDistance / d13;
 			double blockDensity = getSeenPercent(this.getPosition(), entity);
@@ -198,11 +198,11 @@ public class ITRExplosion extends Explosion {
 					if (knockbackScaleWithSize)
 						d11 *= this.radius;
 					d11 = Math.max(d11, this.radius * 0.05d);
- 					if (entity instanceof ITRFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
+ 					if (entity instanceof ISOFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
 						d11 *= 0.2d;
 					d11 *= getKnockbackMultiplier(this.source);
 					d11 = Math.min(d11, 10f);
-					if (entity instanceof ITRFallingBlockEntity) {
+					if (entity instanceof ISOFallingBlockEntity) {
 						d11 = Math.min(d11, 1f);
 						xDistance += this.level.getRandom().nextFloat() - 0.5f;
 						zDistance += this.level.getRandom().nextFloat() - 0.5f;
@@ -292,7 +292,7 @@ public class ITRExplosion extends Explosion {
 	}
 
 	@Nullable
-	public static ITRExplosion explode(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, Level.ExplosionInteraction explosionInteraction, boolean poofParticles) {
+	public static ISOExplosion explode(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, Level.ExplosionInteraction explosionInteraction, boolean poofParticles) {
 		if (!(level instanceof ServerLevel serverLevel))
 			return null;
 		BlockInteraction blockInteraction = switch (explosionInteraction) {
@@ -307,9 +307,9 @@ public class ITRExplosion extends Explosion {
 		return explode(serverLevel, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, poofParticles);
 	}
 
-	public static ITRExplosion explode(ServerLevel level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean poofParticles) {
-		ITRExplosion explosion = new ITRExplosion(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, ExplosionOverhaul.creeperCollateral, poofParticles);
-		if (ITREventFactory.onITRExplosionCreated(explosion)) return explosion;
+	public static ISOExplosion explode(ServerLevel level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean poofParticles) {
+		ISOExplosion explosion = new ISOExplosion(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, ExplosionOverhaul.creeperCollateral, poofParticles);
+		if (ISOEventFactory.onITRExplosionCreated(explosion)) return explosion;
 		if (level.getGameRules().getBoolean(ExplosionOverhaul.RULE_MOBGRIEFING))
 			explosion.gatherAffectedBlocks(!ExplosionOverhaul.disableExplosionRandomness);
 		if (ExplosionOverhaul.enableFlyingBlocks)

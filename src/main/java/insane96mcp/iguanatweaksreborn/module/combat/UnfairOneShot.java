@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
+import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -86,7 +86,7 @@ public class UnfairOneShot extends Feature {
 		if (player.getHealth() >= 15 && player.getHealth() - event.getAmount() <= 0) {
 			event.setAmount(player.getHealth() - 1f);
 			player.level().playSound(null, player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 2f, 0.5f);
-			ITRTriggers.UNFAIR_ONESHOT.trigger(player);
+			ISOTriggers.UNFAIR_ONESHOT.trigger(player);
 			for (MobEffectInstance effect : effects) {
 				player.addEffect(new MobEffectInstance(effect));
 			}

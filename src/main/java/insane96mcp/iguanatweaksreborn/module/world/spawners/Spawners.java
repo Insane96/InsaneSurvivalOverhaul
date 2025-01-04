@@ -1,13 +1,13 @@
 package insane96mcp.iguanatweaksreborn.module.world.spawners;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.ISpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataImpl;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -62,7 +62,7 @@ import java.util.Optional;
 public class Spawners extends JsonFeature {
 
 	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "blacklisted_spawners"));
-	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISTItemTagsProvider.create("spawner_reactivator");
+	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISOItemTagsProvider.create("spawner_reactivator");
 	public static final String SPAWNER_REACTIVATOR = InsaneSurvivalOverhaul.MOD_ID + ".spawner_reactivator";
 
 	@Config(min = 1)
@@ -141,7 +141,7 @@ public class Spawners extends JsonFeature {
 		BlockPos spawnerPos = event.getSpawner().getSpawnerBlockEntity().getBlockPos();
 		ServerLevel level = (ServerLevel) event.getLevel();
 		if (!(event.getSpawner().getSpawnerBlockEntity() instanceof SpawnerBlockEntity mobSpawner)) {
-			ITRLogHelper.warn("SpawnerBlockEntity is null at %s. Some mod is giving a spawner a non SpawnerBlockEntity.".formatted(spawnerPos));
+			ISOLogHelper.warn("SpawnerBlockEntity is null at %s. Some mod is giving a spawner a non SpawnerBlockEntity.".formatted(spawnerPos));
 			return;
 		}
 		mobSpawner.getCapability(SpawnerData.INSTANCE).ifPresent(spawnerCap -> {

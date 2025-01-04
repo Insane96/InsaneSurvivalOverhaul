@@ -1,8 +1,8 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -60,8 +60,8 @@ public class FoodDrinks extends JsonFeature {
 			.food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).build())
 	));
 
-	public static final TagKey<Item> RAW_FOOD = ISTItemTagsProvider.create("raw_food");
-	public static final TagKey<Item> FOOD_BLACKLIST = ISTItemTagsProvider.create("food_drinks_no_hunger_changes");
+	public static final TagKey<Item> RAW_FOOD = ISOItemTagsProvider.create("raw_food");
+	public static final TagKey<Item> FOOD_BLACKLIST = ISOItemTagsProvider.create("food_drinks_no_hunger_changes");
 
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).setNutrition(2).setEatingTime(55).build(),
@@ -69,13 +69,13 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).setNutrition(2).alwaysEat(false).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).setNutrition(6).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
-					.addEffect(new ITRMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
-					.addEffect(new ITRMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
+					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
+					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:enchanted_golden_apple"))
-					.addEffect(new ITRMobEffectInstance.Builder(MobEffects.REGENERATION, 400).setAmplifier(1).build())
-					.addEffect(new ITRMobEffectInstance.Builder(MobEffects.DAMAGE_RESISTANCE, 6000).build())
-					.addEffect(new ITRMobEffectInstance.Builder(MobEffects.FIRE_RESISTANCE, 6000).build())
-					.addEffect(new ITRMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build(),
+					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 400).setAmplifier(1).build())
+					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.DAMAGE_RESISTANCE, 6000).build())
+					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.FIRE_RESISTANCE, 6000).build())
+					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:sweet_berry_meatballs")).setNutrition(9).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:glowgurt")).setNutrition(8).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:bone_broth")).setNutrition(6).build(),

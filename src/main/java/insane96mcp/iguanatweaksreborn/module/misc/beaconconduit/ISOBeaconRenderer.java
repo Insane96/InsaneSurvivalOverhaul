@@ -17,20 +17,20 @@ import org.joml.Matrix4f;
 
 import java.util.List;
 
-public class ITRBeaconRenderer implements BlockEntityRenderer<ITRBeaconBlockEntity> {
+public class ISOBeaconRenderer implements BlockEntityRenderer<ISOBeaconBlockEntity> {
     public static final ResourceLocation BEAM_LOCATION = new ResourceLocation("textures/entity/beacon_beam.png");
     public static final int MAX_RENDER_Y = 1024;
 
-    public ITRBeaconRenderer(BlockEntityRendererProvider.Context pContext) {
+    public ISOBeaconRenderer(BlockEntityRendererProvider.Context pContext) {
     }
 
-    public void render(ITRBeaconBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(ISOBeaconBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         long i = pBlockEntity.getLevel().getGameTime();
-        List<ITRBeaconBlockEntity.BeaconBeamSection> list = pBlockEntity.getBeamSections();
+        List<ISOBeaconBlockEntity.BeaconBeamSection> list = pBlockEntity.getBeamSections();
         int j = 0;
 
         for(int k = 0; k < list.size(); ++k) {
-            ITRBeaconBlockEntity.BeaconBeamSection beaconblockentity$beaconbeamsection = list.get(k);
+            ISOBeaconBlockEntity.BeaconBeamSection beaconblockentity$beaconbeamsection = list.get(k);
             renderBeaconBeam(pPoseStack, pBuffer, pPartialTick, i, j, k == list.size() - 1 ? 1024 : beaconblockentity$beaconbeamsection.getHeight(), beaconblockentity$beaconbeamsection.getColor());
             j += beaconblockentity$beaconbeamsection.getHeight();
         }
@@ -98,7 +98,7 @@ public class ITRBeaconRenderer implements BlockEntityRenderer<ITRBeaconBlockEnti
         pConsumer.vertex(pPose, pX, (float)pY, pZ).color(pRed, pGreen, pBlue, pAlpha).uv(pU, pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(pNormal, 0.0F, 1.0F, 0.0F).endVertex();
     }
 
-    public boolean shouldRenderOffScreen(ITRBeaconBlockEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(ISOBeaconBlockEntity pBlockEntity) {
         return true;
     }
 

@@ -4,12 +4,12 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
-public class ITRLivingAttackEvent extends LivingEvent
+public class ISOLivingAttackEvent extends LivingEvent
 {
     private final DamageSource source;
     private float amount;
     private final float originalAmount;
-    public ITRLivingAttackEvent(LivingEntity entity, DamageSource source, float amount)
+    public ISOLivingAttackEvent(LivingEntity entity, DamageSource source, float amount)
     {
         super(entity);
         this.source = source;

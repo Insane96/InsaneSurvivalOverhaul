@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
-import insane96mcp.iguanatweaksreborn.event.ITREventFactory;
+import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
 import insane96mcp.iguanatweaksreborn.module.combat.PlayerStats;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
@@ -66,7 +66,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyVariable(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/common/ForgeHooks;onPlayerAttack(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)Z", shift = At.Shift.BEFORE), argsOnly = true)
 	public float onAttackAmount(float amount, DamageSource source) {
-		return ITREventFactory.onPlayerAttack(this, source, amount);
+		return ISOEventFactory.onPlayerAttack(this, source, amount);
 	}
 
 	//Changes efficiency formula
@@ -90,7 +90,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 2), argsOnly = true, ordinal = 0)
 	public float onPreAbsorptionCalculation(float amount, DamageSource damageSource) {
-		return ITREventFactory.onLivingHurtPreAbsorption(this, damageSource, amount);
+		return ISOEventFactory.onLivingHurtPreAbsorption(this, damageSource, amount);
 	}
 
 	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.2f, ordinal = 0))

@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ITRBlockModelsProvider extends BlockModelProvider {
-    public ITRBlockModelsProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper) {
+public class ISOBlockModelsProvider extends BlockModelProvider {
+    public ISOBlockModelsProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper) {
         super(output, modId, existingFileHelper);
     }
 

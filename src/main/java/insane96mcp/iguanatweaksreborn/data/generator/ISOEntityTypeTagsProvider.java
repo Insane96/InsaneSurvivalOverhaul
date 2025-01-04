@@ -12,9 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ITREntityTypeTagsProvider extends EntityTypeTagsProvider {
+public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
-    public ITREntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+    public ISOEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, modId, existingFileHelper);
     }
 

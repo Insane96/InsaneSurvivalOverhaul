@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.world.wanderingtrader;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -248,7 +248,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 					try {
 						mapdecoration$type = MapDecoration.Type.valueOf(s.toUpperCase(Locale.ROOT));
 					} catch (IllegalArgumentException illegalargumentexception) {
-						ITRLogHelper.error("Error while parsing loot table decoration entry. Found {}. Defaulting to {}", s, ExplorationMapFunction.DEFAULT_DECORATION);
+						ISOLogHelper.error("Error while parsing loot table decoration entry. Found {}. Defaulting to {}", s, ExplorationMapFunction.DEFAULT_DECORATION);
 					}
 
 					byte b0 = GsonHelper.getAsByte(json.getAsJsonObject(), "zoom", ExplorationMapFunction.DEFAULT_ZOOM);

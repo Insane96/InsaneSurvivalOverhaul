@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.event.ITREventFactory;
+import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -18,6 +18,6 @@ public abstract class FishingHookMixin extends Projectile {
 
     @ModifyVariable(at = @At(value = "STORE", ordinal = 0), method = "catchingFish", ordinal = 0)
     private int onTickToHookLure(int i) {
-        return ITREventFactory.onHookTickToHookLure((FishingHook) (Object) this, i);
+        return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, i);
     }
 }

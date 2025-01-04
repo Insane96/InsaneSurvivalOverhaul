@@ -94,7 +94,7 @@ public class Livestock extends Feature {
 			return;
 
 		sheep.goalSelector.removeGoal(sheep.eatBlockGoal);
-		sheep.eatBlockGoal = new SREatBlock(sheep);
+		sheep.eatBlockGoal = new ISOEatBlock(sheep);
 		sheep.goalSelector.addGoal(5, sheep.eatBlockGoal);
 	}
 

@@ -7,8 +7,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ITRBlockStatesProvider extends BlockStateProvider {
-    public ITRBlockStatesProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper) {
+public class ISOBlockStatesProvider extends BlockStateProvider {
+    public ISOBlockStatesProvider(PackOutput output, String modId, ExistingFileHelper existingFileHelper) {
         super(output, modId, existingFileHelper);
     }
 

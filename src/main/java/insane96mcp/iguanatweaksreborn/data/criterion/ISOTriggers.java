@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.data.criterion;
 
 import net.minecraft.advancements.CriteriaTriggers;
 
-public class ITRTriggers {
+public class ISOTriggers {
 
     public static AnvilRepairTrigger ANVIL_REPAIR = CriteriaTriggers.register(new AnvilRepairTrigger());
     public static MakeRichFarmlandTrigger MAKE_RICH_FARMLAND = CriteriaTriggers.register(new MakeRichFarmlandTrigger());

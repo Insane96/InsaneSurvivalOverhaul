@@ -8,15 +8,15 @@ import net.minecraftforge.eventbus.api.Event;
  * Not cancellable and doesn't have a result
  */
 @Cancelable
-public class ITRExplosionCreatedEvent extends Event {
-    private final ITRExplosion explosion;
+public class ISOExplosionCreatedEvent extends Event {
+    private final ISOExplosion explosion;
 
-    public ITRExplosionCreatedEvent(ITRExplosion explosion) {
+    public ISOExplosionCreatedEvent(ISOExplosion explosion) {
         super();
         this.explosion = explosion;
     }
 
-    public ITRExplosion getExplosion() {
+    public ISOExplosion getExplosion() {
         return this.explosion;
     }
 }

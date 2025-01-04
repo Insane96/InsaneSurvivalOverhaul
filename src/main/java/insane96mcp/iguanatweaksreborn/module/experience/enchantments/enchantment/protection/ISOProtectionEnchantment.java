@@ -11,10 +11,10 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ITRProtectionEnchantment extends Enchantment implements IProtectionEnchantment {
+public abstract class ISOProtectionEnchantment extends Enchantment implements IProtectionEnchantment {
     public static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
-    public ITRProtectionEnchantment(Rarity rarity) {
+    public ISOProtectionEnchantment(Rarity rarity) {
         super(rarity, EnchantmentCategory.ARMOR, ARMOR_SLOTS);
     }
 
@@ -38,7 +38,7 @@ public abstract class ITRProtectionEnchantment extends Enchantment implements IP
     protected boolean checkCompatibility(@NotNull Enchantment other) {
         if (!super.checkCompatibility(other)
                 || (other instanceof ProtectionEnchantment && other != Enchantments.FALL_PROTECTION)
-                || (other instanceof ITRProtectionEnchantment && other != EnchantmentsFeature.FEATHER_FALLING.get()))
+                || (other instanceof ISOProtectionEnchantment && other != EnchantmentsFeature.FEATHER_FALLING.get()))
             return false;
         return true;
     }

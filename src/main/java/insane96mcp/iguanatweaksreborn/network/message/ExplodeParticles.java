@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.network.message;
 
-import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ITRExplosion;
+import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosion;
 import insane96mcp.iguanatweaksreborn.network.ClientNetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import net.minecraft.network.FriendlyByteBuf;
@@ -48,7 +48,7 @@ public class ExplodeParticles {
 		ctx.get().setPacketHandled(true);
 	}
 
-	public static void sync(ServerLevel level, ITRExplosion explosion) {
+	public static void sync(ServerLevel level, ISOExplosion explosion) {
 		Object msg = new ExplodeParticles(explosion.getPosition().x, explosion.getPosition().y, explosion.getPosition().z, explosion.radius, !explosion.getToBlow().isEmpty(), explosion.blockInteraction);
 		level.players().forEach(player -> NetworkHandler.CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT));
 	}

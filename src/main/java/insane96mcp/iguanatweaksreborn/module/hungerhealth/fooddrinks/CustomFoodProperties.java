@@ -4,7 +4,7 @@ import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.datafixers.util.Pair;
-import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.util.LogHelper;
 import net.minecraft.util.GsonHelper;
@@ -24,13 +24,13 @@ public class CustomFoodProperties {
 	public Boolean fastEating = null;
 	public Boolean canAlwaysEat = null;
 	//If null, don't modify existing effects
-	public List<Pair<Supplier<ITRMobEffectInstance>, Float>> effects = null;
+	public List<Pair<Supplier<ISOMobEffectInstance>, Float>> effects = null;
 
 	public CustomFoodProperties(IdTagMatcher food) {
 		this.food = food;
 	}
 
-	public List<Pair<ITRMobEffectInstance, Float>> getEffects() {
+	public List<Pair<ISOMobEffectInstance, Float>> getEffects() {
 		return this.effects.stream().map(pair -> Pair.of(pair.getFirst() != null ? pair.getFirst().get() : null, pair.getSecond())).collect(java.util.stream.Collectors.toList());
 	}
 
@@ -96,11 +96,11 @@ public class CustomFoodProperties {
 			return this;
 		}
 
-		public Builder addEffect(ITRMobEffectInstance mobEffectInstance) {
+		public Builder addEffect(ISOMobEffectInstance mobEffectInstance) {
 			return this.addEffect(mobEffectInstance, 1f);
 		}
 
-		public Builder addEffect(ITRMobEffectInstance mobEffectInstance, float chance) {
+		public Builder addEffect(ISOMobEffectInstance mobEffectInstance, float chance) {
 			if (this.customFoodProperties.effects == null)
 				this.customFoodProperties.effects = new ArrayList<>();
 			this.customFoodProperties.effects.add(Pair.of(() -> mobEffectInstance, chance));
@@ -138,7 +138,7 @@ public class CustomFoodProperties {
 						float chance = 1f;
 						if (element.getAsJsonObject().has("chance"))
 							chance = GsonHelper.getAsFloat(element.getAsJsonObject(), "chance");
-                        builder.addEffect(context.deserialize(element, ITRMobEffectInstance.class), chance);
+                        builder.addEffect(context.deserialize(element, ISOMobEffectInstance.class), chance);
                     });
 			}
 

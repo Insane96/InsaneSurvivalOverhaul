@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class Knockback extends Enchantment {
-    public static TagKey<Item> ACCEPTS_ENCHANTMENT = ISTItemTagsProvider.create("enchanting/accepts_knockback");
+    public static TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_knockback");
     public static EnchantmentCategory CATEGORY = EnchantmentCategory.create("accepts_knockback", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
     public Knockback() {
         super(Rarity.UNCOMMON, CATEGORY, new EquipmentSlot[] { EquipmentSlot.MAINHAND });

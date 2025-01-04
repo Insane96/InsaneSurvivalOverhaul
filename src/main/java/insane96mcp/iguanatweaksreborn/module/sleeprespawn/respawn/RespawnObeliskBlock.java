@@ -2,9 +2,9 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 
 import com.google.common.collect.ImmutableList;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
-import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
@@ -88,7 +88,7 @@ public class RespawnObeliskBlock extends Block {
                 trySaveOldSpawn(serverPlayer);
                 serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
                 level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                ITRTriggers.ACTIVATE_RESPAWN_OBELISK.trigger(serverPlayer);
+                ISOTriggers.ACTIVATE_RESPAWN_OBELISK.trigger(serverPlayer);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -141,8 +141,8 @@ public class RespawnObeliskBlock extends Block {
             //Try to break only one block
             break;
         }
-        for (ITRMobEffectInstance itrMobEffectInstance : Respawn.respawnObeliskEffects) {
-            player.addEffect(itrMobEffectInstance.getMobEffectInstance());
+        for (ISOMobEffectInstance ISOMobEffectInstance : Respawn.respawnObeliskEffects) {
+            player.addEffect(ISOMobEffectInstance.getMobEffectInstance());
         }
         if (!hasCatalysts(level, respawnPos))
             disable(player, level, respawnPos, level.getBlockState(respawnPos), true);
@@ -178,7 +178,7 @@ public class RespawnObeliskBlock extends Block {
                 && tag.getInt("OldSpawnZ") == pos.getZ()
                 && tag.getBoolean("OldSpawnForced") == isForced
                 && tag.getFloat("OldSpawnAngle") == angle
-                && Level.RESOURCE_KEY_CODEC.parse(NbtOps.INSTANCE, tag.get("OldSpawnDimension")).resultOrPartial(ITRLogHelper::error).orElse(Level.OVERWORLD) == dimension)
+                && Level.RESOURCE_KEY_CODEC.parse(NbtOps.INSTANCE, tag.get("OldSpawnDimension")).resultOrPartial(ISOLogHelper::error).orElse(Level.OVERWORLD) == dimension)
             return false;
         tag.putInt("OldSpawnX", pos.getX());
         tag.putInt("OldSpawnY", pos.getY());
@@ -186,7 +186,7 @@ public class RespawnObeliskBlock extends Block {
         tag.putBoolean("OldSpawnForced", isForced);
         tag.putFloat("OldSpawnAngle", angle);
         ResourceLocation.CODEC.encodeStart(NbtOps.INSTANCE, dimension.location())
-                .resultOrPartial(ITRLogHelper::error)
+                .resultOrPartial(ISOLogHelper::error)
                 .ifPresent((t) -> tag.put("OldSpawnDimension", t));
         return true;
     }
@@ -195,7 +195,7 @@ public class RespawnObeliskBlock extends Block {
         CompoundTag tag = MCUtils.getOrCreatePersistedData(player);
         if (!tag.contains("OldSpawnX"))
             return false;
-        player.setRespawnPosition(Level.RESOURCE_KEY_CODEC.parse(NbtOps.INSTANCE, tag.get("OldSpawnDimension")).resultOrPartial(ITRLogHelper::error).orElse(Level.OVERWORLD), new BlockPos(tag.getInt("OldSpawnX"), tag.getInt("OldSpawnY"), tag.getInt("OldSpawnZ")), tag.getFloat("OldSpawnAngle"), tag.getBoolean("OldSpawnForced"), false);
+        player.setRespawnPosition(Level.RESOURCE_KEY_CODEC.parse(NbtOps.INSTANCE, tag.get("OldSpawnDimension")).resultOrPartial(ISOLogHelper::error).orElse(Level.OVERWORLD), new BlockPos(tag.getInt("OldSpawnX"), tag.getInt("OldSpawnY"), tag.getInt("OldSpawnZ")), tag.getFloat("OldSpawnAngle"), tag.getBoolean("OldSpawnForced"), false);
         tag.remove("OldSpawnX");
         tag.remove("OldSpawnY");
         tag.remove("OldSpawnZ");

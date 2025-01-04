@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.coalfire;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -42,7 +42,7 @@ import net.minecraftforge.registries.RegistryObject;
 @Label(name = "Coal & Fire")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class CoalFire extends Feature {
-    public static final TagKey<Item> ITEM_ORES = ISTItemTagsProvider.create("hellish_coal_ores");
+    public static final TagKey<Item> ITEM_ORES = ISOItemTagsProvider.create("hellish_coal_ores");
 
     public static final SimpleBlockWithItem CHARCOAL_LAYER = SimpleBlockWithItem.register("charcoal_layer", () -> new PilableLayerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).strength(0.4F).sound(SoundType.MOSS_CARPET).isViewBlocking((state, blockGetter, pos) -> state.getValue(PilableLayerBlock.LAYERS) >= 8), Items.CHARCOAL));
 

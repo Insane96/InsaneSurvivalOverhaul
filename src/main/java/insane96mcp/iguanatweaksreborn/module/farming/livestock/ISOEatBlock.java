@@ -12,14 +12,14 @@ import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-public class SREatBlock extends EatBlockGoal {
+public class ISOEatBlock extends EatBlockGoal {
     private static final int EAT_ANIMATION_TICKS = 40;
     private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.GRASS);
     private final Mob mob;
     private final Level level;
     private int eatAnimationTick;
 
-    public SREatBlock(Mob mob) {
+    public ISOEatBlock(Mob mob) {
         super(mob);
         this.mob = mob;
         this.level = mob.level();

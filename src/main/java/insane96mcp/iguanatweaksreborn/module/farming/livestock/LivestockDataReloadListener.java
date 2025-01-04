@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -43,14 +43,14 @@ public class LivestockDataReloadListener extends SimpleJsonResourceReloadListene
 				LivestockData livestockData = GSON.fromJson(entry.getValue(), LivestockData.class);
 				list.add(livestockData);
 			} catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Livestock Data %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Parsing error loading Livestock Data %s: %s", entry.getKey(), e.getMessage());
 			} catch (Exception e) {
-				ITRLogHelper.error("Failed loading Livestock Data %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Failed loading Livestock Data %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 		LIVESTOCK_DATA = list;
 
-		ITRLogHelper.info("Loaded %s Livestock Data", LIVESTOCK_DATA.size());
+		ISOLogHelper.info("Loaded %s Livestock Data", LIVESTOCK_DATA.size());
 	}
 
 	/*@SubscribeEvent

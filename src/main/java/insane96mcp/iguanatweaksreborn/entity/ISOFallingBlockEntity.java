@@ -32,17 +32,17 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class ITRFallingBlockEntity extends FallingBlockEntity {
+public class ISOFallingBlockEntity extends FallingBlockEntity {
 	public Entity source;
 	public Direction directionFalling;
 	public Direction movedFrom;
 
-	public ITRFallingBlockEntity(Level level, BlockPos pos, BlockState fallingBlockState, Direction directionFalling) {
+	public ISOFallingBlockEntity(Level level, BlockPos pos, BlockState fallingBlockState, Direction directionFalling) {
 		this(level, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, fallingBlockState);
 		this.directionFalling = directionFalling;
 	}
 
-	public ITRFallingBlockEntity(Level level, double x, double y, double z, BlockState fallingBlockState) {
+	public ISOFallingBlockEntity(Level level, double x, double y, double z, BlockState fallingBlockState) {
 		super(EntityType.FALLING_BLOCK, level);
 		this.blockState = fallingBlockState;
 		this.blocksBuilding = true;

@@ -1,12 +1,12 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -111,25 +111,25 @@ public class Respawn extends JsonFeature {
 
 	public static final ArrayList<IdTagValue> respawnObeliskCatalysts = new ArrayList<>();
 
-	public static final List<ITRMobEffectInstance> RESPAWN_OBELISK_EFFECTS_DEFAULT = List.of(
-			new ITRMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
+	public static final List<ISOMobEffectInstance> RESPAWN_OBELISK_EFFECTS_DEFAULT = List.of(
+			new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
 					.ambientParticles()
 					.build(),
-			new ITRMobEffectInstance.Builder(MobEffects.ABSORPTION, 60 * 20)
+			new ISOMobEffectInstance.Builder(MobEffects.ABSORPTION, 60 * 20)
 					.setAmplifier(1)
 					.ambientParticles()
 					.build(),
-			new ITRMobEffectInstance.Builder(MobEffects.MOVEMENT_SPEED, 60 * 20)
+			new ISOMobEffectInstance.Builder(MobEffects.MOVEMENT_SPEED, 60 * 20)
 					.ambientParticles()
 					.build()
 	);
 
-	public static final ArrayList<ITRMobEffectInstance> respawnObeliskEffects = new ArrayList<>();
+	public static final ArrayList<ISOMobEffectInstance> respawnObeliskEffects = new ArrayList<>();
 
 	public Respawn(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
-		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ITRMobEffectInstance.LIST_TYPE));
+		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "respawn_obelisk", Component.literal("Insane's Survival Overhaul Respawn Obelisk"), this::isEnabled));
 	}
 
@@ -202,7 +202,7 @@ public class Respawn extends JsonFeature {
 
 		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
 		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnWorldRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ITRLogHelper.debug("Despawning %d entities", entities.size());
+		ISOLogHelper.debug("Despawning %d entities", entities.size());
 		entities.forEach(Entity::discard);
 		return true;
 	}
@@ -223,7 +223,7 @@ public class Respawn extends JsonFeature {
 
 		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
 		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnBedRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ITRLogHelper.debug("Despawning %d entities", entities.size());
+		ISOLogHelper.debug("Despawning %d entities", entities.size());
 		entities.forEach(Entity::discard);
 		return true;
 	}

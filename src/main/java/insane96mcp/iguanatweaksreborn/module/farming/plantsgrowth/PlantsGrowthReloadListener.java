@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -44,14 +44,14 @@ public class PlantsGrowthReloadListener extends SimpleJsonResourceReloadListener
 				GROWTH_MULTIPLIERS.add(plantGrowthMultiplier);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Plant Growth Multipliers %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Parsing error loading Plant Growth Multipliers %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Plant Growth Multipliers %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Failed loading Plant Growth Multipliers %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Plant Growth Multipliers", GROWTH_MULTIPLIERS.size());
+		ISOLogHelper.info("Loaded %s Plant Growth Multipliers", GROWTH_MULTIPLIERS.size());
 	}
 
 	/*@SubscribeEvent

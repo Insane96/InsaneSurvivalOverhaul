@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -36,8 +36,8 @@ public class UnbreakableItems extends Feature {
 	public static final String TOOL_DURABILITY_LANG = "iguanatweaksreborn.tool_durability";
 	public static final String BROKEN_DURABILITY_LANG = "iguanatweaksreborn.broken_durability";
 	public static final String BROKEN_ITEM_LANG = "iguanatweaksreborn.broken_item";
-	public static final TagKey<Item> NOT_UNBREAKABLE = ISTItemTagsProvider.create("not_unbreakable");
-	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISTItemTagsProvider.create("remove_original_modifiers");
+	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
+	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
 
 	@Config
 	@Label(name = "Durability Tooltip", description = "Items with durability get a durability tooltip.")

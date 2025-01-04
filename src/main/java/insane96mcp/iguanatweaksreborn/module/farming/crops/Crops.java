@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.farming.crops;
 
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -53,7 +53,7 @@ import net.minecraftforge.registries.RegistryObject;
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Crops extends Feature {
 
-	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ISTItemTagsProvider.create("chicken_food_items");
+	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ISOItemTagsProvider.create("chicken_food_items");
 
 	public static final TagKey<Block> HARDER_CROPS_TAG = ISOBlockTagsProvider.create("harder_crops");
 

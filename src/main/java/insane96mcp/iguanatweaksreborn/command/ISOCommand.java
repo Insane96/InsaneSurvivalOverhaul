@@ -20,9 +20,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ITRCommand {
+public class ISOCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("iguanatweaks").requires(source -> source.hasPermission(2))
+        dispatcher.register(Commands.literal("insanesurvivaloverhaul").requires(source -> source.hasPermission(2))
                 .then(Commands.literal("tiredness")
                         .then(Commands.argument("players", EntityArgument.players())
                                 .then(Commands.literal("set")

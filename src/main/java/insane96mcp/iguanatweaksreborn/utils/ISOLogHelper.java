@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.utils;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 
-public class ITRLogHelper {
+public class ISOLogHelper {
 	public static void error(String format, Object... args) {
 		InsaneSurvivalOverhaul.LOGGER.error(String.format(format, args));
 	}

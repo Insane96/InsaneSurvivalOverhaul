@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
@@ -73,7 +73,7 @@ public class Tiredness extends JsonFeature {
 	public static final String NOT_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".not_tired";
 	public static final String TIRED_ENOUGH = InsaneSurvivalOverhaul.MOD_ID + ".tired_enough";
 	public static final String TOO_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".too_tired";
-	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISTItemTagsProvider.create("energy_boost");
+	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISOItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
 			new EnergyBoostItem(IdTagMatcher.newTag("iguanatweaksreborn:energy_boost"), 0, 0),

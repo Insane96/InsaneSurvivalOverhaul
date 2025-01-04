@@ -40,7 +40,7 @@ import net.minecraft.world.phys.AABB;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class ITRBeaconBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, MenuProvider, Nameable, StackedContentsCompatible {
+public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, MenuProvider, Nameable, StackedContentsCompatible {
     private static final int MAX_LEVELS = 8;
     public static final int DATA_EFFECT = 0;
     public static final int DATA_AMPLIFIER = 1;
@@ -85,16 +85,16 @@ public class ITRBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         public int get(int id) {
             switch (id) {
                 case DATA_EFFECT -> {
-                    return MobEffect.getIdFromNullable(ITRBeaconBlockEntity.this.effect);
+                    return MobEffect.getIdFromNullable(ISOBeaconBlockEntity.this.effect);
                 }
                 case DATA_AMPLIFIER -> {
-                    return ITRBeaconBlockEntity.this.amplifier;
+                    return ISOBeaconBlockEntity.this.amplifier;
                 }
                 case DATA_TIME_LEFT -> {
-                    return ITRBeaconBlockEntity.this.timeLeft;
+                    return ISOBeaconBlockEntity.this.timeLeft;
                 }
                 case DATA_LAYERS -> {
-                    return ITRBeaconBlockEntity.this.layers;
+                    return ISOBeaconBlockEntity.this.layers;
                 }
             }
 
@@ -104,20 +104,20 @@ public class ITRBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         public void set(int id, int value) {
             switch (id) {
                 case DATA_EFFECT:
-                    if (!ITRBeaconBlockEntity.this.level.isClientSide && !ITRBeaconBlockEntity.this.beamSections.isEmpty()) {
-                        ITRBeaconBlockEntity.playSound(ITRBeaconBlockEntity.this.level, ITRBeaconBlockEntity.this.worldPosition, SoundEvents.BEACON_POWER_SELECT);
+                    if (!ISOBeaconBlockEntity.this.level.isClientSide && !ISOBeaconBlockEntity.this.beamSections.isEmpty()) {
+                        ISOBeaconBlockEntity.playSound(ISOBeaconBlockEntity.this.level, ISOBeaconBlockEntity.this.worldPosition, SoundEvents.BEACON_POWER_SELECT);
                     }
 
-                    ITRBeaconBlockEntity.this.effect = MobEffect.byId(value);
+                    ISOBeaconBlockEntity.this.effect = MobEffect.byId(value);
                     break;
                 case DATA_AMPLIFIER:
-                    ITRBeaconBlockEntity.this.amplifier = value;
+                    ISOBeaconBlockEntity.this.amplifier = value;
                     break;
                 case DATA_TIME_LEFT:
-                    ITRBeaconBlockEntity.this.timeLeft = value;
+                    ISOBeaconBlockEntity.this.timeLeft = value;
                     break;
                 case DATA_LAYERS:
-                    ITRBeaconBlockEntity.this.layers = value;
+                    ISOBeaconBlockEntity.this.layers = value;
                     break;
             }
 
@@ -128,11 +128,11 @@ public class ITRBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         }
     };
 
-    public ITRBeaconBlockEntity(BlockPos pPos, BlockState pBlockState) {
+    public ISOBeaconBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), pPos, pBlockState);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ITRBeaconBlockEntity beacon) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ISOBeaconBlockEntity beacon) {
         int x = pPos.getX();
         int y = pPos.getY();
         int z = pPos.getZ();
@@ -357,7 +357,7 @@ public class ITRBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new ITRBeaconMenu(pContainerId, pInventory, this, this.dataAccess, ContainerLevelAccess.create(this.level, this.getBlockPos()));
+        return new ISOBeaconMenu(pContainerId, pInventory, this, this.dataAccess, ContainerLevelAccess.create(this.level, this.getBlockPos()));
     }
 
     public Component getDisplayName() {

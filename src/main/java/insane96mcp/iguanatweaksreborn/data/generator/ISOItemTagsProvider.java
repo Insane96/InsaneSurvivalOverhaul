@@ -30,14 +30,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ISTItemTagsProvider extends ItemTagsProvider {
+public class ISOItemTagsProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/wooden");
-    public static final TagKey<Item> STONE_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/stone");
-    public static final TagKey<Item> FLINT_HAND_EQUIPMENT = ISTItemTagsProvider.create("equipment/hand/flint");
-    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ISTItemTagsProvider.create("equipment/armor/leather");
+    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
+    public static final TagKey<Item> STONE_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/stone");
+    public static final TagKey<Item> FLINT_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/flint");
+    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ISOItemTagsProvider.create("equipment/armor/leather");
 
-    public ISTItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+    public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
     }
 

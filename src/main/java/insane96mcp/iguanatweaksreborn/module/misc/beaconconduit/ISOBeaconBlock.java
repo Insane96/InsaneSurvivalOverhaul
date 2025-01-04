@@ -21,8 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class ITRBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
-    public ITRBeaconBlock(Properties pProperties) {
+public class ISOBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
+    public ISOBeaconBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -31,12 +31,12 @@ public class ITRBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
     }
 
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ITRBeaconBlockEntity(pPos, pState);
+        return new ISOBeaconBlockEntity(pPos, pState);
     }
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ITRBeaconBlockEntity::tick);
+        return createTickerHelper(pBlockEntityType, BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ISOBeaconBlockEntity::tick);
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -44,8 +44,8 @@ public class ITRBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
             return InteractionResult.SUCCESS;
 
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        if (blockentity instanceof ITRBeaconBlockEntity itrBeaconBlockEntity) {
-            pPlayer.openMenu(itrBeaconBlockEntity);
+        if (blockentity instanceof ISOBeaconBlockEntity ISOBeaconBlockEntity) {
+            pPlayer.openMenu(ISOBeaconBlockEntity);
             pPlayer.awardStat(Stats.INTERACT_WITH_BEACON);
         }
 
@@ -71,8 +71,8 @@ public class ITRBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
             return;
 
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        if (blockentity instanceof ITRBeaconBlockEntity itrBeaconBlockEntity) {
-            itrBeaconBlockEntity.setCustomName(pStack.getHoverName());
+        if (blockentity instanceof ISOBeaconBlockEntity ISOBeaconBlockEntity) {
+            ISOBeaconBlockEntity.setCustomName(pStack.getHoverName());
         }
     }
 

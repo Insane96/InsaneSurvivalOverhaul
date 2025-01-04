@@ -6,8 +6,8 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
-import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconRenderer;
-import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconScreen;
+import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ISOBeaconRenderer;
+import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ISOBeaconScreen;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.Spawning;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
@@ -159,11 +159,11 @@ public class ClientSetup {
     }
 
     public static void init(FMLClientSetupEvent event) {
-        MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE.get(), ITRBeaconScreen::new);
+        MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
     }
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ISORegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
-        event.registerBlockEntityRenderer(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ITRBeaconRenderer::new);
+        event.registerBlockEntityRenderer(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ISOBeaconRenderer::new);
     }
 }

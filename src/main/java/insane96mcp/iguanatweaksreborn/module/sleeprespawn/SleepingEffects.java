@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.ITRMobEffectInstance;
+import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.TirednessHandler;
@@ -25,13 +25,13 @@ import java.util.List;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, enabledByDefault = false)
 public class SleepingEffects extends JsonFeature {
 
-	public static final List<ITRMobEffectInstance> EFFECTS_ON_WAKE_UP_DEFAULT = List.of(
-			new ITRMobEffectInstance.Builder(MobEffects.MOVEMENT_SLOWDOWN, 400).build(),
-			new ITRMobEffectInstance.Builder(MobEffects.WEAKNESS, 300).setAmplifier(1).build(),
-			new ITRMobEffectInstance.Builder(MobEffects.DIG_SLOWDOWN, 300).setAmplifier(1).build(),
-			new ITRMobEffectInstance.Builder(MobEffects.REGENERATION, 900).build()
+	public static final List<ISOMobEffectInstance> EFFECTS_ON_WAKE_UP_DEFAULT = List.of(
+			new ISOMobEffectInstance.Builder(MobEffects.MOVEMENT_SLOWDOWN, 400).build(),
+			new ISOMobEffectInstance.Builder(MobEffects.WEAKNESS, 300).setAmplifier(1).build(),
+			new ISOMobEffectInstance.Builder(MobEffects.DIG_SLOWDOWN, 300).setAmplifier(1).build(),
+			new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 900).build()
 	);
-	public static final ArrayList<ITRMobEffectInstance> effectsOnWakeUp = new ArrayList<>();
+	public static final ArrayList<ISOMobEffectInstance> effectsOnWakeUp = new ArrayList<>();
 	public static final String NO_FOOD_FOR_SLEEP = "iguanatweaksreborn.no_food_for_sleep";
 
 	@Config(min = 0, max = 20)
@@ -49,7 +49,7 @@ public class SleepingEffects extends JsonFeature {
 
 	public SleepingEffects(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		JSON_CONFIGS.add(new JsonConfig<>("effects_on_wake_up.json", effectsOnWakeUp, EFFECTS_ON_WAKE_UP_DEFAULT, ITRMobEffectInstance.LIST_TYPE));
+		JSON_CONFIGS.add(new JsonConfig<>("effects_on_wake_up.json", effectsOnWakeUp, EFFECTS_ON_WAKE_UP_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class SleepingEffects extends JsonFeature {
 			if (hungerToDeplete > 0)
 				foodData.setFoodLevel(foodData.foodLevel - Math.min(hungerToDeplete, foodData.foodLevel));
 
-			for (ITRMobEffectInstance mobEffectInstance : effectsOnWakeUp) {
+			for (ISOMobEffectInstance mobEffectInstance : effectsOnWakeUp) {
 				if (noBeneficialEffectWhenHungry && mobEffectInstance.effect.get().isBeneficial() && player.getFoodData().getFoodLevel() <= 0)
 					continue;
 				if (dizzyWhenToTired && Feature.isEnabled(Tiredness.class) && tirednessOnWakeUp == 0f && !mobEffectInstance.effect.get().isBeneficial())

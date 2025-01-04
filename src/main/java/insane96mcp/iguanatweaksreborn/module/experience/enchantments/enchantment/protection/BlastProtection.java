@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantmen
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 
-public class BlastProtection extends ITRProtectionEnchantment {
+public class BlastProtection extends ISOProtectionEnchantment {
     public BlastProtection() {
         super(Rarity.UNCOMMON);
     }

@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.integration.ToolBelt;
@@ -60,7 +60,7 @@ public class Death extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHGRAVE = GameRules.register("iguanatweaks:deathGrave", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHLOSEITEMSPERCENTAGE = GameRules.register("iguanatweaks:deathLoseItemsPercentage", GameRules.Category.PLAYER, GameRules.IntegerValue.create(0));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHLOSEITEMSENCHANTED = GameRules.register("iguanatweaks:deathLoseItemsEnchanted", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
-	public static final TagKey<DamageType> DOESNT_SPAWN_GRAVE = ITRDamageTypeTagsProvider.create("doesnt_spawn_grave");
+	public static final TagKey<DamageType> DOESNT_SPAWN_GRAVE = ISODamageTypeTagsProvider.create("doesnt_spawn_grave");
 
 	public static final String KILLED_PLAYER = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "killed_player";
 	public static final String PLAYER_KILLER_LANG = InsaneSurvivalOverhaul.MOD_ID + ".player_killer";

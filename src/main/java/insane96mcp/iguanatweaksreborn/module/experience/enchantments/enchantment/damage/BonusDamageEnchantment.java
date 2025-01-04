@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage;
 
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class BonusDamageEnchantment extends Enchantment {
 
-    public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISTItemTagsProvider.create("enchanting/accepts_damage_enchantments");
+    public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_damage_enchantments");
     static final EnchantmentCategory CATEGORY = EnchantmentCategory.create("damage_enchantment", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
     protected BonusDamageEnchantment(Rarity pRarity, EquipmentSlot[] pApplicableSlots) {
         super(pRarity, CATEGORY, pApplicableSlots);

@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import insane96mcp.iguanatweaksreborn.event.ITREventFactory;
+import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.IProtectionEnchantment;
@@ -79,7 +79,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     @ModifyVariable(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/common/ForgeHooks;onLivingAttack(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)Z", shift = At.Shift.BEFORE), argsOnly = true)
     public float onAttackAmount(float amount, DamageSource source) {
-        return ITREventFactory.onLivingAttack((LivingEntity) (Object) this, source, amount);
+        return ISOEventFactory.onLivingAttack((LivingEntity) (Object) this, source, amount);
     }
 
     /*@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
@@ -97,7 +97,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     @ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 2), argsOnly = true, ordinal = 0)
     public float onPreAbsorptionCalculation(float amount, DamageSource damageSource) {
-        return ITREventFactory.onLivingHurtPreAbsorption((LivingEntity) (Object) this, damageSource, amount);
+        return ISOEventFactory.onLivingHurtPreAbsorption((LivingEntity) (Object) this, damageSource, amount);
     }
 
     @Redirect(method = "handleOnClimbable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;resetFallDistance()V"))

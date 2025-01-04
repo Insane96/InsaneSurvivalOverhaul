@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.network.message.ItemDefinitionsSync;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -53,14 +53,14 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 				DEFINITIONS.add(itemDefinition);
 			}
 			catch (JsonSyntaxException e) {
-				ITRLogHelper.error("Parsing error loading Item Definition %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Parsing error loading Item Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 			catch (Exception e) {
-				ITRLogHelper.error("Failed loading Item Definition %s: %s", entry.getKey(), e.getMessage());
+				ISOLogHelper.error("Failed loading Item Definition %s: %s", entry.getKey(), e.getMessage());
 			}
 		}
 
-		ITRLogHelper.info("Loaded %s Item Definition", DEFINITIONS.size());
+		ISOLogHelper.info("Loaded %s Item Definition", DEFINITIONS.size());
 
 		/*for (var entry : Durability.entrySet()) {
 			entry.getValue().apply(entry.getKey());
@@ -83,7 +83,7 @@ public class ItemDefinitionsReloadListener extends SimpleJsonResourceReloadListe
 		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
 			itemDefinition.applyStats(event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
 		}
-		ITRLogHelper.info("Applied %s Item Definitions (Client side: %s)", DEFINITIONS.size(), event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
+		ISOLogHelper.info("Applied %s Item Definitions (Client side: %s)", DEFINITIONS.size(), event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED);
 		for (var entry : DURABILITY_MAP.entrySet()) {
 			entry.getValue().apply(entry.getKey());
 		}

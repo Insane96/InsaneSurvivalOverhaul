@@ -7,7 +7,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class ITRClientConfig {
+public class ISOClientConfig {
 	public static final ForgeConfigSpec CONFIG_SPEC;
 	public static final ClientConfig CLIENT;
 

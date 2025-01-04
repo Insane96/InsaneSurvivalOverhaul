@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
+public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
     static final ResourceLocation BEACON_LOCATION = new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "textures/gui/container/beacon.png");
     public final List<BeaconButton> beaconButtons = Lists.newArrayList();
     @Nullable
@@ -34,7 +34,7 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
     int maxAmplifier;
     int amplifier;
 
-    public ITRBeaconScreen(final ITRBeaconMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public ISOBeaconScreen(final ISOBeaconMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.imageWidth = 230;
         this.imageHeight = 219;
@@ -47,9 +47,9 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
             }
 
             public void dataChanged(AbstractContainerMenu abstractContainerMenu, int id, int value) {
-                ITRBeaconScreen.this.effect = pMenu.getEffect();
-                ITRBeaconScreen.this.updateMaxAmplifier();
-                ITRBeaconScreen.this.amplifier = pMenu.getAmplifier();
+                ISOBeaconScreen.this.effect = pMenu.getEffect();
+                ISOBeaconScreen.this.updateMaxAmplifier();
+                ISOBeaconScreen.this.amplifier = pMenu.getAmplifier();
             }
         });
     }
@@ -145,11 +145,11 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
 
         public void onPress() {
             if (!this.isSelected()) {
-                ITRBeaconScreen.this.effect = this.effect;
-                ITRBeaconScreen.this.amplifier = 0;
-                ITRBeaconScreen.this.updateMaxAmplifier();
-                SetITRBeaconEffects.updateServer(minecraft.player, ITRBeaconScreen.this.effect, amplifier);
-                ITRBeaconScreen.this.updateButtons();
+                ISOBeaconScreen.this.effect = this.effect;
+                ISOBeaconScreen.this.amplifier = 0;
+                ISOBeaconScreen.this.updateMaxAmplifier();
+                SetITRBeaconEffects.updateServer(minecraft.player, ISOBeaconScreen.this.effect, amplifier);
+                ISOBeaconScreen.this.updateButtons();
             }
         }
 
@@ -158,12 +158,12 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
         }
 
         public void updateStatus() {
-            this.active = this.heightRequired <= ITRBeaconScreen.this.menu.getLayers();
+            this.active = this.heightRequired <= ISOBeaconScreen.this.menu.getLayers();
             if (this.active)
                 this.setTooltip(Tooltip.create(this.createEffectDescription(this.effect), null));
             else
                 this.setTooltip(Tooltip.create(Component.translatable("iguanatweaksreborn.beacon_conduit.requires_higher_pyramid"), null));
-            this.setSelected(this.effect == ITRBeaconScreen.this.effect);
+            this.setSelected(this.effect == ISOBeaconScreen.this.effect);
         }
 
         protected MutableComponent createNarrationMessage() {
@@ -185,7 +185,7 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
 
         protected MutableComponent createEffectDescription(MobEffect effect) {
             MutableComponent component = Component.translatable(effect.getDescriptionId()).append(" ");
-            return component.append(getEffectAmplifier()).append(Component.literal(" (Time cost: %s)".formatted(BeaconConduit.getEffectTimeScale(ITRBeaconScreen.this.effect, this.amplifier))));
+            return component.append(getEffectAmplifier()).append(Component.literal(" (Time cost: %s)".formatted(BeaconConduit.getEffectTimeScale(ISOBeaconScreen.this.effect, this.amplifier))));
         }
 
         private Component getEffectAmplifier() {
@@ -196,18 +196,18 @@ public class ITRBeaconScreen extends AbstractContainerScreen<ITRBeaconMenu> {
 
         public void onPress() {
             if (!this.isSelected()) {
-                ITRBeaconScreen.this.amplifier = this.amplifier;
-                SetITRBeaconEffects.updateServer(minecraft.player, ITRBeaconScreen.this.effect, this.amplifier);
-                ITRBeaconScreen.this.updateButtons();
+                ISOBeaconScreen.this.amplifier = this.amplifier;
+                SetITRBeaconEffects.updateServer(minecraft.player, ISOBeaconScreen.this.effect, this.amplifier);
+                ISOBeaconScreen.this.updateButtons();
             }
         }
 
         public void updateStatus() {
-            this.visible = this.amplifier <= ITRBeaconScreen.this.maxAmplifier && ITRBeaconScreen.this.effect != null;
-            this.active = this.amplifier + 1 <= ITRBeaconScreen.this.menu.getLayers();
-            this.setSelected(this.amplifier == ITRBeaconScreen.this.amplifier);
-            if (ITRBeaconScreen.this.effect != null)
-                this.setTooltip(Tooltip.create(this.createEffectDescription(ITRBeaconScreen.this.effect), null));
+            this.visible = this.amplifier <= ISOBeaconScreen.this.maxAmplifier && ISOBeaconScreen.this.effect != null;
+            this.active = this.amplifier + 1 <= ISOBeaconScreen.this.menu.getLayers();
+            this.setSelected(this.amplifier == ISOBeaconScreen.this.amplifier);
+            if (ISOBeaconScreen.this.effect != null)
+                this.setTooltip(Tooltip.create(this.createEffectDescription(ISOBeaconScreen.this.effect), null));
         }
 
         @Override

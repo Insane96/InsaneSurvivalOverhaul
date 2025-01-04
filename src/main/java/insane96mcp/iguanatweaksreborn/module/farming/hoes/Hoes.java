@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.farming.hoes;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
@@ -36,7 +36,7 @@ public class Hoes extends Feature {
 	public static final String TOO_WEAK = InsaneSurvivalOverhaul.MOD_ID + ".weak_hoe";
 	public static final String SCYTHE_RADIUS = InsaneSurvivalOverhaul.MOD_ID + ".scythe_radius";
 	public static final TagKey<Block> CAN_SCYTHE = ISOBlockTagsProvider.create("can_scythe");
-	public static final TagKey<Item> DISABLED_HOES = ISTItemTagsProvider.create("disabled_hoes");
+	public static final TagKey<Item> DISABLED_HOES = ISOItemTagsProvider.create("disabled_hoes");
 
 	@Config(min = 1)
 	@Label(name = "Durability used on right-click")

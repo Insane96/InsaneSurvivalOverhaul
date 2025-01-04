@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 @EmiEntrypoint
-public class ITREmiPlugin implements EmiPlugin {
+public class ISOEmiPlugin implements EmiPlugin {
 
 	@Override
 	public void register(EmiRegistry registry) {

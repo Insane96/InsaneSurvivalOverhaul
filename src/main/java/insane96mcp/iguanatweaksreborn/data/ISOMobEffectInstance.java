@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 /**
  * Serializable version of MobEffectInstance with Supplier for effect so can be used at runtime
  */
-@JsonAdapter(ITRMobEffectInstance.Serializer.class)
-public class ITRMobEffectInstance {
+@JsonAdapter(ISOMobEffectInstance.Serializer.class)
+public class ISOMobEffectInstance {
 	public final Supplier<MobEffect> effect;
 	public int duration;
 	public int amplifier = 0;
@@ -24,25 +24,25 @@ public class ITRMobEffectInstance {
 	public boolean visible = true;
 	public boolean showIcon = true;
 
-	public ITRMobEffectInstance(MobEffect effect, int duration) {
+	public ISOMobEffectInstance(MobEffect effect, int duration) {
 		this.effect = () -> effect;
 		this.duration = duration;
 	}
 
-	public ITRMobEffectInstance(Supplier<MobEffect> effect, int duration) {
+	public ISOMobEffectInstance(Supplier<MobEffect> effect, int duration) {
 		this.effect = effect;
 		this.duration = duration;
 	}
 
 	public static class Builder {
-		public ITRMobEffectInstance mobEffectInstance;
+		public ISOMobEffectInstance mobEffectInstance;
 
 		public Builder(MobEffect effect, int duration) {
-			this.mobEffectInstance = new ITRMobEffectInstance(effect, duration);
+			this.mobEffectInstance = new ISOMobEffectInstance(effect, duration);
 		}
 
 		public Builder(Supplier<MobEffect> effectSupplier, int duration) {
-			this.mobEffectInstance = new ITRMobEffectInstance(effectSupplier, duration);
+			this.mobEffectInstance = new ISOMobEffectInstance(effectSupplier, duration);
 		}
 
 		public Builder setAmplifier(int amplifier) {
@@ -65,7 +65,7 @@ public class ITRMobEffectInstance {
 			return this;
 		}
 
-		public ITRMobEffectInstance build() {
+		public ISOMobEffectInstance build() {
 			return this.mobEffectInstance;
 		}
 	}
@@ -74,10 +74,10 @@ public class ITRMobEffectInstance {
 		return new MobEffectInstance(this.effect.get(), this.duration, this.amplifier, this.ambient, this.visible, this.showIcon);
 	}
 
-	public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<ITRMobEffectInstance>>(){}.getType();
-	public static class Serializer implements JsonDeserializer<ITRMobEffectInstance>, JsonSerializer<ITRMobEffectInstance> {
+	public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<ISOMobEffectInstance>>(){}.getType();
+	public static class Serializer implements JsonDeserializer<ISOMobEffectInstance>, JsonSerializer<ISOMobEffectInstance> {
 		@Override
-		public ITRMobEffectInstance deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		public ISOMobEffectInstance deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
 			String id = GsonHelper.getAsString(jObject, "id", "");
 
@@ -105,7 +105,7 @@ public class ITRMobEffectInstance {
 		}
 
 		@Override
-		public JsonElement serialize(ITRMobEffectInstance src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+		public JsonElement serialize(ISOMobEffectInstance src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("id", ForgeRegistries.MOB_EFFECTS.getKey(src.effect.get()).toString());
 			jsonObject.addProperty("duration", src.duration);

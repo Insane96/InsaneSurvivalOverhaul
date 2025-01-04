@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world.timber;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.entity.ITRFallingBlockEntity;
+import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -119,7 +119,7 @@ public class TimberTrees extends JsonFeature {
             if (state.getBlock() instanceof RotatedPillarBlock) {
                 state = rotatePillar(state, direction.getAxis());
             }
-            ITRFallingBlockEntity fallingBlock = new ITRFallingBlockEntity(level, fallingBlockPos, state, direction);
+            ISOFallingBlockEntity fallingBlock = new ISOFallingBlockEntity(level, fallingBlockPos, state, direction);
             fallingBlock.move(MoverType.SELF, new Vec3(0, 0.1d * horizontalDistance, 0));
             if (state.is(TIMBER_TRUNKS))
                 fallingBlock.setHurtsEntities(0.5f, 20);

@@ -72,10 +72,10 @@ public class ExplosionOverhaul extends Feature {
 
 		Explosion e = event.getExplosion();
 		if (e.level instanceof ServerLevel level) {
-			if (e instanceof ITRExplosion itrExplosion) {
-				if (!itrExplosion.poofParticles)
+			if (e instanceof ISOExplosion ISOExplosion) {
+				if (!ISOExplosion.poofParticles)
 					return;
-				ExplodeParticles.sync(level, itrExplosion);
+				ExplodeParticles.sync(level, ISOExplosion);
 			}
 		}
 	}
@@ -93,7 +93,7 @@ public class ExplosionOverhaul extends Feature {
 		double y = e.getPosition().y;
 		if (e.source != null && explosionAtHalfEntity)
 			y += e.source.getBbHeight() / 2d;
-		ITRExplosion.explode(level, e.source, e.getDamageSource(), e.damageCalculator, e.getPosition().x, y, e.getPosition().z, e.radius, e.fire, e.blockInteraction, true);
+		ISOExplosion.explode(level, e.source, e.getDamageSource(), e.damageCalculator, e.getPosition().x, y, e.getPosition().z, e.radius, e.fire, e.blockInteraction, true);
 	}
 
 	public static boolean shouldTakeReducedKnockback(Entity entity) {

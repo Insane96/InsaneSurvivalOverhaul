@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.experience;
 import com.ezylang.evalex.Expression;
 import com.ezylang.evalex.data.EvaluationValue;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -66,7 +66,7 @@ public class PlayerExperience extends Feature {
 			return result.getNumberValue().intValue();
 		}
 		catch (Exception ex) {
-			ITRLogHelper.error("Failed to evaluate or parse eating speed formula: %s", expression);
+			ISOLogHelper.error("Failed to evaluate or parse eating speed formula: %s", expression);
 			return vanillaXpNeededForNextLevel(currentLevel);
 		}
 	}

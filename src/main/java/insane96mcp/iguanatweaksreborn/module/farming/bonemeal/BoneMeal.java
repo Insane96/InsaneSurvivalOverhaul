@@ -1,9 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.farming.bonemeal;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.criterion.ITRTriggers;
+import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
-import insane96mcp.iguanatweaksreborn.data.generator.ISTItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -47,7 +47,7 @@ public class BoneMeal extends Feature {
 
     public static final SimpleBlockWithItem RICH_FARMLAND = SimpleBlockWithItem.register("rich_farmland", () -> new RichFarmlandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).randomTicks().strength(0.6F).sound(SoundType.GRAVEL).isViewBlocking((state, blockGetter, pos) -> true).isSuffocating((state, blockGetter, pos) -> true)));
 
-    public static final TagKey<Item> ITEM_BLACKLIST = ISTItemTagsProvider.create("bone_meal_blacklist");
+    public static final TagKey<Item> ITEM_BLACKLIST = ISOItemTagsProvider.create("bone_meal_blacklist");
     public static final TagKey<Block> BLOCK_BLACKLIST = ISOBlockTagsProvider.create("bone_meal_blacklist");
 
     @Config
@@ -132,7 +132,7 @@ public class BoneMeal extends Feature {
             event.getLevel().setBlockAndUpdate(farmlandPos, RICH_FARMLAND.block().get().defaultBlockState().setValue(FarmBlock.MOISTURE, event.getLevel().getBlockState(farmlandPos).getValue(FarmBlock.MOISTURE)));
             event.getEntity().swing(event.getEntity().getMainHandItem().getItem() == event.getStack().getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
             event.setResult(Event.Result.ALLOW);
-            ITRTriggers.MAKE_RICH_FARMLAND.trigger((ServerPlayer) event.getEntity());
+            ISOTriggers.MAKE_RICH_FARMLAND.trigger((ServerPlayer) event.getEntity());
         }
     }
 

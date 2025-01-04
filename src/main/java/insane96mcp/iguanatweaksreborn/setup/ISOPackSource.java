@@ -5,7 +5,7 @@ import net.minecraft.server.packs.repository.PackSource;
 
 import java.util.function.UnaryOperator;
 
-public interface ITRPackSource {
+public interface ISOPackSource {
     UnaryOperator<Component> NO_DECORATION = UnaryOperator.identity();
     PackSource DISABLED = create(NO_DECORATION, false);
 

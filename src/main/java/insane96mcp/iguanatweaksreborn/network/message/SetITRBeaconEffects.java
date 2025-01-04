@@ -1,8 +1,8 @@
 package insane96mcp.iguanatweaksreborn.network.message;
 
-import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ITRBeaconMenu;
+import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ISOBeaconMenu;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
-import insane96mcp.iguanatweaksreborn.utils.ITRLogHelper;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -37,9 +37,9 @@ public class SetITRBeaconEffects {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             AbstractContainerMenu abstractcontainermenu = player.containerMenu;
-            if (abstractcontainermenu instanceof ITRBeaconMenu srBeaconMenu) {
+            if (abstractcontainermenu instanceof ISOBeaconMenu srBeaconMenu) {
                 if (!player.containerMenu.stillValid(player)) {
-                    ITRLogHelper.debug("Player {} interacted with invalid menu {}", player, player.containerMenu);
+                    ISOLogHelper.debug("Player {} interacted with invalid menu {}", player, player.containerMenu);
                     return;
                 }
 

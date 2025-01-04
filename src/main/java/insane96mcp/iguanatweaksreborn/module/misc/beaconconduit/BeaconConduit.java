@@ -54,9 +54,9 @@ import java.util.Objects;
 @LoadFeature(module = Modules.Ids.MISC)
 public class BeaconConduit extends JsonFeature {
 
-    public static final SimpleBlockWithItem BEACON = SimpleBlockWithItem.register("beacon", () -> new ITRBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)));
-    public static final RegistryObject<BlockEntityType<ITRBeaconBlockEntity>> BEACON_BLOCK_ENTITY_TYPE = ISORegistries.BLOCK_ENTITY_TYPES.register("beacon", () -> BlockEntityType.Builder.of(ITRBeaconBlockEntity::new, BEACON.block().get()).build(null));
-    public static final RegistryObject<MenuType<ITRBeaconMenu>> BEACON_MENU_TYPE = ISORegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ITRBeaconMenu::new, FeatureFlags.VANILLA_SET));
+    public static final SimpleBlockWithItem BEACON = SimpleBlockWithItem.register("beacon", () -> new ISOBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)));
+    public static final RegistryObject<BlockEntityType<ISOBeaconBlockEntity>> BEACON_BLOCK_ENTITY_TYPE = ISORegistries.BLOCK_ENTITY_TYPES.register("beacon", () -> BlockEntityType.Builder.of(ISOBeaconBlockEntity::new, BEACON.block().get()).build(null));
+    public static final RegistryObject<MenuType<ISOBeaconMenu>> BEACON_MENU_TYPE = ISORegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ISOBeaconMenu::new, FeatureFlags.VANILLA_SET));
 
 
     @SuppressWarnings("unused")

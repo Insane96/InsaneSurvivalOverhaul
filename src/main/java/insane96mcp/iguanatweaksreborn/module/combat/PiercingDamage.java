@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.data.generator.ITRDamageTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -36,8 +36,8 @@ public class PiercingDamage extends Feature {
 
 	public static final RegistryObject<Attribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new RangedAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
 
-	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ITRDamageTypeTagsProvider.create("piercing_damage_type");
-	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ITRDamageTypeTagsProvider.create("doesnt_trigger_piercing");
+	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ISODamageTypeTagsProvider.create("piercing_damage_type");
+	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ISODamageTypeTagsProvider.create("doesnt_trigger_piercing");
 
 	public PiercingDamage(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);

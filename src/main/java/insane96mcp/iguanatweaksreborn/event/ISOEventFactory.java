@@ -1,20 +1,20 @@
 package insane96mcp.iguanatweaksreborn.event;
 
-import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ITRExplosion;
-import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ITRExplosionCreatedEvent;
+import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosion;
+import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosionCreatedEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ITREventFactory {
+public class ISOEventFactory {
     /**
      * Returns true if the event is canceled
      */
-    public static boolean onITRExplosionCreated(ITRExplosion explosion)
+    public static boolean onITRExplosionCreated(ISOExplosion explosion)
     {
-        ITRExplosionCreatedEvent event = new ITRExplosionCreatedEvent(explosion);
+        ISOExplosionCreatedEvent event = new ISOExplosionCreatedEvent(explosion);
         MinecraftForge.EVENT_BUS.post(event);
         return event.isCanceled();
     }
@@ -43,14 +43,14 @@ public class ITREventFactory {
     {
         if (entity instanceof Player)
             return amount;
-        ITRLivingAttackEvent event = new ITRLivingAttackEvent(entity, src, amount);
+        ISOLivingAttackEvent event = new ISOLivingAttackEvent(entity, src, amount);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getAmount();
     }
 
     public static float onPlayerAttack(LivingEntity entity, DamageSource src, float amount)
     {
-        ITRLivingAttackEvent event = new ITRLivingAttackEvent(entity, src, amount);
+        ISOLivingAttackEvent event = new ISOLivingAttackEvent(entity, src, amount);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getAmount();
     }
