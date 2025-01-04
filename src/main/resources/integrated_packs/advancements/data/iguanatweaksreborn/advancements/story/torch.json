@@ -1,0 +1,52 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:torch"
+		},
+		"title": {
+			"translate": "advancements.iso.torch.title"
+		},
+		"description": {
+			"translate": "advancements.iso.torch.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/campfire",
+	"criteria": {
+		"torch": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"player": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"equipment": {
+								"mainhand": {
+									"items": [
+										"minecraft:stick"
+									]
+								}
+							}
+						}
+					}
+				],
+				"location": [
+					{
+						"condition": "minecraft:block_state_property",
+						"block": "minecraft:campfire",
+						"properties": {}
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"torch"
+		]
+	]
+}

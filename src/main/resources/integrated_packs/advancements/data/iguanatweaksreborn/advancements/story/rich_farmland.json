@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"item": "iguanatweaksreborn:rich_farmland"
+		},
+		"title": {
+			"translate": "advancements.iso.rich_farmland.title"
+		},
+		"description": {
+			"translate": "advancements.iso.rich_farmland.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/furnace",
+	"criteria": {
+		"rich_farmland": {
+			"trigger": "iguanatweaksreborn:make_rich_farmland"
+		}
+	},
+	"requirements": [
+		[
+			"rich_farmland"
+		]
+	]
+}

@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:flint_and_steel",
+            "nbt": "{Damage:0}"
+        },
+        "title": {
+            "translate": "advancements.story.enter_the_nether.title"
+        },
+        "description": {
+            "translate": "advancements.story.enter_the_nether.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:nether/obtain_crying_obsidian",
+    "criteria": {
+        "entered_nether": {
+            "trigger": "minecraft:changed_dimension",
+            "conditions": {
+                "to": "minecraft:the_nether"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "entered_nether"
+        ]
+    ],
+    "sends_telemetry_event": true
+}

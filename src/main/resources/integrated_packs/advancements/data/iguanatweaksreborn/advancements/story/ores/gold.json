@@ -1,0 +1,38 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:gold_ore"
+        },
+        "title": {
+            "translate": "advancements.iso.ores.gold.title"
+        },
+        "description": {
+            "translate": "advancements.iso.ores.gold.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "iguanatweaksreborn:story/furnace",
+    "criteria": {
+        "gold": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:raw_gold"
+                        ],
+                        "count": 64
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "gold"
+        ]
+    ]
+}

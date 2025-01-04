@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:golden_pickaxe"
+		},
+		"title": {
+			"translate": "advancements.iso.golden_pickaxe.title"
+		},
+		"description": {
+			"translate": "advancements.iso.golden_pickaxe.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:story/iron_tools",
+	"criteria": {
+		"golden_pickaxe": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:golden_pickaxe"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"golden_pickaxe"
+		]
+	]
+}

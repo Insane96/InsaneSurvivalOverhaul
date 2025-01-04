@@ -1,0 +1,37 @@
+{
+    "display": {
+        "icon": {
+            "item": "iguanatweaksreborn:biome_compass"
+        },
+        "title": {
+            "translate": "advancements.iso.biometer.title"
+        },
+        "description": {
+            "translate": "advancements.iso.biometer.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/mine_diamond",
+    "criteria": {
+        "biome_compass": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "iguanatweaksreborn:biome_compass"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "biome_compass"
+        ]
+    ]
+}

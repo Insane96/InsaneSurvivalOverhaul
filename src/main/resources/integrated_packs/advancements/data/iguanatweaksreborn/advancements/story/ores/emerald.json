@@ -1,0 +1,38 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:emerald_ore"
+        },
+        "title": {
+            "translate": "advancements.iso.ores.emerald.title"
+        },
+        "description": {
+            "translate": "advancements.iso.ores.emerald.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "iguanatweaksreborn:story/biome_compass",
+    "criteria": {
+        "emerald": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:emerald"
+                        ],
+                        "count": 64
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "emerald"
+        ]
+    ]
+}

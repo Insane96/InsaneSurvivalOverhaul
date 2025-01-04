@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:red_nether_bricks"
+    },
+    "title": {
+      "translate": "advancements.nether.root.title"
+    },
+    "description": {
+      "translate": "advancements.nether.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/nether.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "parent": "minecraft:story/enter_the_nether",
+  "criteria": {
+    "entered_nether": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "minecraft:the_nether"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "entered_nether"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

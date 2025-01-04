@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "tconstruct"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "minecraft:gravel"
+          },
+          {
+            "item": "minecraft:gravel"
+          },
+          {
+            "item": "minecraft:gravel"
+          }
+        ],
+        "result": {
+          "item": "minecraft:flint"
+        }
+      }
+    }
+  ]
+}

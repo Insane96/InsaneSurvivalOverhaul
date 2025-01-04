@@ -81,6 +81,13 @@ public class DataPacks extends Feature {
     @Label(name = "Mob loot changes", description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean mobLootChanges = true;
     @Config
+    @Label(name = "Advancements overhaul", description = """
+            Overhauls vanilla advancements:
+            * Merges them in a big giant advancement tree
+            * Heavily increases experience reward
+            * Removes some advancements (like villagers ones)""")
+    public static Boolean advancements = true;
+    @Config
     @Label(name = "Supplementaries integration", description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
     public static Boolean supplementaries = true;
     @Config
@@ -108,6 +115,7 @@ public class DataPacks extends Feature {
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_loot", Component.literal("Insane's Survival Overhaul Better Loot"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "hardcore_loot", Component.literal("Insane's Survival Overhaul Less Loot Closer to Spawn"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && lessLootCloserToSpawn));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mob_loot_changes", Component.literal("Insane's Survival Overhaul Mob Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && mobLootChanges));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "advancements", Component.literal("Insane's Survival Overhaul Advancements"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && advancements));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "supplementaries_integration", Component.literal("Insane's Survival Overhaul Supplementaries Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
 

@@ -1,0 +1,49 @@
+{
+	"type": "forge:conditional",
+
+	"advancements": [
+		{
+			"conditions": [
+				{
+					"type": "forge:mod_loaded",
+					"modid": "sereneseasons"
+				}
+			],
+			"advancement": {
+				"display": {
+					"icon": {
+						"item": "sereneseasons:ss_icon"
+					},
+					"title": {
+						"translate": "advancements.iso.winter_is_coming.title"
+					},
+					"description": {
+						"translate": "advancements.iso.winter_is_coming.description"
+					},
+					"frame": "task",
+					"show_toast": true,
+					"announce_to_chat": true,
+					"hidden": true
+				},
+				"parent": "iguanatweaksreborn:story/seeds",
+				"criteria": {
+					"autumn": {
+						"trigger": "iguanatweaksreborn:season_changed",
+						"conditions": {
+							"seasons": [
+								"EARLY_AUTUMN",
+								"MID_AUTUMN",
+								"LATE_AUTUMN"
+							]
+						}
+					}
+				},
+				"requirements": [
+					[
+						"autumn"
+					]
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,38 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:deepslate_redstone_ore"
+        },
+        "title": {
+            "translate": "advancements.iso.ores.redstone.title"
+        },
+        "description": {
+            "translate": "advancements.iso.ores.redstone.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/iron_tools",
+    "criteria": {
+        "redstone": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:redstone"
+                        ],
+                        "count": 64
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "redstone"
+        ]
+    ]
+}
