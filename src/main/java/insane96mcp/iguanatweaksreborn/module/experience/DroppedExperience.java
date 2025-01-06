@@ -88,9 +88,9 @@ public class DroppedExperience extends Feature {
 
 	@Config(min = 0)
 	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
-	public static MinMax honeyHarvestExperience = new MinMax(5, 10);
+	public static MinMax honeyHarvestExperience = new MinMax(2, 5);
 	@Config(min = 0)
-	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if the fluid cooldown is enabled.")
+	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if Fluid Cooldown is enabled.")
 	public static MinMax milkXp = new MinMax(2, 5);
 	@Config(min = 0)
 	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")

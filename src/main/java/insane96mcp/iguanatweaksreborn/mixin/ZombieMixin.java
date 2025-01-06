@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.mobs.Villagers;
+import insane96mcp.iguanatweaksreborn.module.mobs.VillagersNerfs;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ZombieMixin {
 	@Inject(at = @At("TAIL"), method = "killedEntity")
 	private void wasKilled(ServerLevel level, LivingEntity killedEntity, CallbackInfoReturnable<Boolean> callbackInfo) {
-		Villagers.onZombieKillEntity((Zombie) (Object) this, level, killedEntity);
+		VillagersNerfs.onZombieKillEntity((Zombie) (Object) this, level, killedEntity);
 	}
 }

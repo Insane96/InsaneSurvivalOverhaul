@@ -29,9 +29,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.Map;
 import java.util.UUID;
 
-@Label(name = "Villagers", description = "Small changes to villagers to make them less OP")
+@Label(name = "Villagers Nerfs", description = "Small changes to villagers to make them less OP")
 @LoadFeature(module = Modules.Ids.MOBS)
-public class Villagers extends Feature {
+public class VillagersNerfs extends Feature {
 
 	private static final String CURE_DISCOUNT_REMOVED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "cure_discount_removed";
 
@@ -54,7 +54,7 @@ public class Villagers extends Feature {
 	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = true;
 
-	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public VillagersNerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 	}
 
@@ -85,7 +85,7 @@ public class Villagers extends Feature {
 	}
 
 	public static int clampSpecialPrice(int specialPriceDiff, final ItemStack baseCostA) {
-		if (!isEnabled(Villagers.class)
+		if (!isEnabled(VillagersNerfs.class)
 				|| maxDiscount == 1d)
 			return specialPriceDiff;
 
@@ -96,7 +96,7 @@ public class Villagers extends Feature {
 	}
 
 	public static int clampDemand(int demand, int maxUses) {
-		if (!isEnabled(Villagers.class)
+		if (!isEnabled(VillagersNerfs.class)
 				|| !clampNegativeDemand)
 			return demand;
 
@@ -104,7 +104,7 @@ public class Villagers extends Feature {
 	}
 
 	public static void lockTrades(Villager villager) {
-		if (!isEnabled(Villagers.class)
+		if (!isEnabled(VillagersNerfs.class)
 				|| !lockTrades)
 			return;
 
@@ -113,7 +113,7 @@ public class Villagers extends Feature {
 	}
 
 	public static void onZombieKillEntity(Zombie zombie, ServerLevel level, LivingEntity killedEntity) {
-		if (!isEnabled(Villagers.class)
+		if (!isEnabled(VillagersNerfs.class)
 				|| !alwaysConvertZombie
 				//If removed should mean that the Zombie Villager has already been converted
 				|| killedEntity.isRemoved())

@@ -77,7 +77,7 @@ public class HealthRegen extends Feature {
 	public static Boolean peacefulHunger = true;
 
 	@Config(min = 0d, max = 1f)
-	@Label(name = "Food Heal Multiplier", description = "When eating you'll get healed by this percentage of (hunger + saturation) restored.")
+	@Label(name = "Food Heal Multiplier", description = "When eating you'll get healed by this percentage of 'hunger + saturation' restored.")
 	public static Double foodHealMultiplier = 0d;
 
 	public HealthRegen(Module module, boolean enabledByDefault, boolean canBeDisabled) {

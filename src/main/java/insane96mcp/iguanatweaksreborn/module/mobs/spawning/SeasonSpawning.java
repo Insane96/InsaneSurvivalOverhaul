@@ -18,16 +18,16 @@ import sereneseasons.config.ServerConfig;
 public class SeasonSpawning extends Feature {
 
     @Config
-    @Label(name = "Despawning.Winter", description = "Despawn Distance on winter, note that lower values increase the mobs around the player.")
+    @Label(name = "Despawning.Winter", description = "Despawn Distance on winter, note that lower values increase the mobs around the player. Vanilla is 128")
     public static Integer despawnDistanceWinter = 96;
     @Config
-    @Label(name = "Despawning.Spring", description = "Despawn Distance on spring, note that lower values increase the mobs around the player.")
+    @Label(name = "Despawning.Spring", description = "Despawn Distance on spring, note that lower values increase the mobs around the player. Vanilla is 128")
     public static Integer despawnDistanceSpring = 128;
     @Config
-    @Label(name = "Despawning.Summer", description = "Despawn Distance on summer, note that lower values increase the mobs around the player.")
+    @Label(name = "Despawning.Summer", description = "Despawn Distance on summer, note that lower values increase the mobs around the player. Vanilla is 128")
     public static Integer despawnDistanceSummer = 128;
     @Config
-    @Label(name = "Despawning.Autumn", description = "Despawn Distance on autumn, note that lower values increase the mobs around the player.")
+    @Label(name = "Despawning.Autumn", description = "Despawn Distance on autumn, note that lower values increase the mobs around the player. Vanilla is 128")
     public static Integer despawnDistanceAutumn = 128;
 
     @Config

@@ -10,7 +10,7 @@ import insane96mcp.insanelib.base.Module;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 
-@Label(name = "Block Definitions", description = "Change, through data packs, the properties of blocks, from hardness to explosion resistance to speed and jump factors. If enabled, a data pack is enabled that changes various blocks hardness, like ores and crops, and some blocks slowdown.")
+@Label(name = "Block Definitions", description = "Change, through data packs, some blocks properties, from hardness to explosion resistance to speed and jump factors to bone meal chance to fail.")
 @LoadFeature(module = Modules.Ids.MINING)
 public class BlockDefinitionFeature extends Feature {
     public BlockDefinitionFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
