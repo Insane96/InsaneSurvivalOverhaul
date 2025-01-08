@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
-import insane96mcp.iguanatweaksreborn.utils.Utils;
+import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArrowItem;
@@ -21,7 +21,7 @@ public class ArrowItemMixin {
         if (!cir.getReturnValue() || !EnchantmentsFeature.isInfinityOverhaulEnabled())
             return;
         int enchant = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.INFINITY_ARROWS, bow);
-        RandomSource random = Utils.syncedRandom(player);
+        RandomSource random = MCUtils.syncedRandom(player);
         if (random.nextInt(enchant + 1) == 0)
             cir.setReturnValue(false);
     }

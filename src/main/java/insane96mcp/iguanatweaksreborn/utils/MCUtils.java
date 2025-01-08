@@ -1,12 +1,16 @@
 package insane96mcp.iguanatweaksreborn.utils;
 
+import com.ezylang.evalex.Expression;
+import com.ezylang.evalex.data.EvaluationValue;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.insanelib.util.LogHelper;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -91,5 +95,26 @@ public class MCUtils {
             return 0f;
 
         return ((float) getDurabilityLeft(itemStack)) / itemStack.getMaxDamage();
+    }
+
+    /**
+     * Returns the hp regenerated each second
+     */
+    public static float computeFoodFormula(FoodProperties food, String formula) {
+        Expression expression = new Expression(formula);
+        try {
+            //noinspection ConstantConditions
+            EvaluationValue result = expression
+                    .with("hunger", food.getNutrition())
+                    .and("saturation_modifier", food.getSaturationModifier())
+                    .and("effectiveness", insane96mcp.insanelib.util.MCUtils.getFoodEffectiveness(food))
+                    .and("fast_food", food.isFastFood())
+                    .evaluate();
+            return result.getNumberValue().floatValue();
+        }
+        catch (Exception ex) {
+            LogHelper.error("Failed to evaluate food formula: %s", expression);
+            return -1f;
+        }
     }
 }

@@ -20,7 +20,6 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReload
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -107,7 +106,6 @@ public class InsaneSurvivalOverhaul
         modEventBus.addListener(CriticalRework::addAttribute);
 		modEventBus.register(SpawnerData.class);
         modEventBus.register(Tiredness.class);
-        modEventBus.register(NoHunger.class);
         modEventBus.register(UnfairOneShot.class);
         modEventBus.register(RegeneratingAbsorption.class);
         ISORegistries.REGISTRIES.forEach(register -> register.register(modEventBus));

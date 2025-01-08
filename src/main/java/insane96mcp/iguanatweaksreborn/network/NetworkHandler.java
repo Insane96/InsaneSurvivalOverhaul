@@ -1,8 +1,6 @@
 package insane96mcp.iguanatweaksreborn.network;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.FoodRegenSync;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHungerSync;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.SpawnerStatusSync;
 import insane96mcp.iguanatweaksreborn.network.message.*;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +24,6 @@ public class NetworkHandler {
 		CHANNEL.registerMessage(++index, ItemDefinitionsSync.class, ItemDefinitionsSync::encode, ItemDefinitionsSync::decode, ItemDefinitionsSync::handle);
 		CHANNEL.registerMessage(++index, StackSizesSync.class, StackSizesSync::encode, StackSizesSync::decode, StackSizesSync::handle);
 		CHANNEL.registerMessage(++index, BackwardsSlowdownUpdate.class, BackwardsSlowdownUpdate::encode, BackwardsSlowdownUpdate::decode, BackwardsSlowdownUpdate::handle);
-		CHANNEL.registerMessage(++index, FoodRegenSync.class, FoodRegenSync::encode, FoodRegenSync::decode, FoodRegenSync::handle);
 		CHANNEL.registerMessage(++index, ExhaustionSync.class, ExhaustionSync::encode, ExhaustionSync::decode, ExhaustionSync::handle);
 		CHANNEL.registerMessage(++index, SaturationSync.class, SaturationSync::encode, SaturationSync::decode, SaturationSync::handle);
 		CHANNEL.registerMessage(++index, GlobalHardnessSync.class, GlobalHardnessSync::encode, GlobalHardnessSync::decode, GlobalHardnessSync::handle);
@@ -36,7 +33,6 @@ public class NetworkHandler {
 		CHANNEL.registerMessage(++index, RegenAbsorptionSync.class, RegenAbsorptionSync::encode, RegenAbsorptionSync::decode, RegenAbsorptionSync::handle);
 		CHANNEL.registerMessage(++index, PlantGrowthMultiplierSync.class, PlantGrowthMultiplierSync::encode, PlantGrowthMultiplierSync::decode, PlantGrowthMultiplierSync::handle);
 		CHANNEL.registerMessage(++index, ForgeDataIntSync.class, ForgeDataIntSync::encode, ForgeDataIntSync::decode, ForgeDataIntSync::handle);
-		CHANNEL.registerMessage(++index, NoHungerSync.class, NoHungerSync::encode, NoHungerSync::decode, NoHungerSync::handle);
 		CHANNEL.registerMessage(++index, BlockDefinitionSync.class, BlockDefinitionSync::encode, BlockDefinitionSync::decode, BlockDefinitionSync::handle);
 		CHANNEL.registerMessage(++index, SyncExperienceFeature.class, SyncExperienceFeature::encode, SyncExperienceFeature::decode, SyncExperienceFeature::handle);
 		CHANNEL.registerMessage(++index, BreakWithNoSound.class, BreakWithNoSound::encode, BreakWithNoSound::decode, BreakWithNoSound::handle);

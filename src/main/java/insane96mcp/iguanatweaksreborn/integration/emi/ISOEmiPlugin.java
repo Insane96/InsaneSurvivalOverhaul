@@ -12,7 +12,6 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
@@ -80,8 +79,6 @@ public class ISOEmiPlugin implements EmiPlugin {
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
 		}
-		if (Feature.isEnabled(NoHunger.class) && NoHunger.buffCakes)
-			registry.addRecipe(createSimpleInfo(emiIngredientOf(Items.CAKE), "cake", Component.translatable("emi.info.iguanatweaksreborn.no_hunger.cake")));
 	}
 
 	public EmiInfoRecipe createSimpleInfo(Item item, String id, Component component) {

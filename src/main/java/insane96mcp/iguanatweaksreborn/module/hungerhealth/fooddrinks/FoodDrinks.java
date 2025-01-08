@@ -8,7 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
-import insane96mcp.iguanatweaksreborn.utils.Utils;
+import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -166,7 +166,7 @@ public class FoodDrinks extends JsonFeature {
 		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
 		if (food == lastFoodEatenCache)
 			return lastFoodEatenTime;
-		int ticks = (int) Utils.computeFoodFormula(food, eatingSpeedFormula);
+		int ticks = (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
 		lastFoodEatenCache = food;
 		//noinspection DataFlowIssue
 		lastFoodEatenTime = ticks >= 0 ? ticks : (food.isFastFood() ? 16 : 32);

@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
-import insane96mcp.iguanatweaksreborn.utils.Utils;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.util.GsonHelper;
@@ -41,7 +40,7 @@ public class EnergyBoostItem {
         if (this.duration == 0) {
             FoodProperties food = stack.getFoodProperties(player);
             //noinspection ConstantConditions .getFoodProperties() == null is checked
-            duration += (int) (Utils.getFoodEffectiveness(food) * 20 * Tiredness.defaultEnergyBoostDurationMultiplier);
+            duration += (int) (MCUtils.getFoodEffectiveness(food) * 20 * Tiredness.defaultEnergyBoostDurationMultiplier);
         }
         else {
             duration += this.duration;

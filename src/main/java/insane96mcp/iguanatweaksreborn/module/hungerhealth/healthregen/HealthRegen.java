@@ -2,14 +2,13 @@ package insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
-import insane96mcp.iguanatweaksreborn.utils.Utils;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
+import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
@@ -24,6 +23,7 @@ import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 import java.text.DecimalFormat;
 
@@ -145,7 +145,7 @@ public class HealthRegen extends Feature {
 			return;
 		FoodProperties food = event.getItem().getItem().getFoodProperties(event.getItem(), event.getEntity());
 		//noinspection ConstantConditions
-		double heal = Utils.getFoodEffectiveness(food) * foodHealMultiplier;
+		double heal = MCUtils.getFoodEffectiveness(food) * foodHealMultiplier;
 		event.getEntity().heal((float) heal);
 	}
 
@@ -179,7 +179,7 @@ public class HealthRegen extends Feature {
 	}
 
 	private static void tick(FoodData foodStats, Player player, Difficulty difficulty) {
-		boolean naturalRegen = player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION) && !Feature.isEnabled(NoHunger.class);
+		boolean naturalRegen = player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION) && !ModList.get().isLoaded("nohunger");
 		if (naturalRegen && foodStats.saturationLevel > 0.0F && isPlayerHurt(player) && foodStats.foodLevel >= 20 && !disableSaturationRegenBoost) {
 			++foodStats.tickTimer;
 			if (foodStats.tickTimer >= 10) {
@@ -216,7 +216,7 @@ public class HealthRegen extends Feature {
 				foodStats.tickTimer = 0;
 			}
 		}
-		else if (!Feature.isEnabled(NoHunger.class)){
+		else if (!ModList.get().isLoaded("nohunger")){
 			foodStats.tickTimer = 0;
 		}
 	}
@@ -233,7 +233,7 @@ public class HealthRegen extends Feature {
 	@SubscribeEvent
 	public void debugScreen(CustomizeGuiOverlayEvent.DebugText event) {
 		if (!this.isEnabled()
-			|| Feature.isEnabled(NoHunger.class))
+			|| ModList.get().isLoaded("nohunger"))
 			return;
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer playerEntity = mc.player;

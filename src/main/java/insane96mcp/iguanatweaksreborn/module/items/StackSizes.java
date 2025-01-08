@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.items;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.StackSizesSync;
-import insane96mcp.iguanatweaksreborn.utils.Utils;
+import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
@@ -125,7 +125,7 @@ public class StackSizes extends Feature {
                 continue;
 
             FoodProperties food = item.getFoodProperties();
-            int stackSize = (int) Utils.computeFoodFormula(food, foodStackReductionFormula);
+            int stackSize = (int) MCUtils.computeFoodFormula(food, foodStackReductionFormula);
             item.maxStackSize = Mth.clamp(stackSize, 1, 64);
         }
     }

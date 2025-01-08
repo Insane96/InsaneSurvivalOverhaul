@@ -2,8 +2,8 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.integration.NoHungerIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.network.message.RegenAbsorptionSync;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
@@ -176,7 +176,7 @@ public class RegeneratingAbsorption extends Feature {
         if (ModList.get().isLoaded("stamina"))
             aboveOverlay = new ResourceLocation("stamina:stamina_overlay");
         if (renderOnRight) {
-            if (Feature.isEnabled(NoHunger.class) && NoHunger.renderArmorAtHunger)
+            if (ModList.get().isLoaded("nohunger") && NoHungerIntegration.doesRenderArmorAtHunger())
                 aboveOverlay = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "armor");
             else
                 aboveOverlay = VanillaGuiOverlay.FOOD_LEVEL.id();

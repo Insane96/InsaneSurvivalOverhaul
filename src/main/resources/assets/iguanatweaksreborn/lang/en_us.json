@@ -122,6 +122,7 @@
 	"iguanatweaksreborn.tooltip.nosh": "Nosh",
 	"iguanatweaksreborn.tooltip.meal": "Meal",
 	"iguanatweaksreborn.tooltip.feast": "Feast",
+
 	"iguanatweaksreborn.subtitle.unfair_one_shot": "Player triggers Relentless Endurance",
 
 	"item.iguanatweaksreborn.brown_mushroom_stew": "Brown Mushroom Stew",
@@ -237,7 +238,6 @@
 	"emi.info.iguanatweaksreborn.crops.seeds": "Can be found in the wild",
 	"emi.info.iguanatweaksreborn.copper_powered_rail": "Medium speed powered rail",
 	"emi.info.iguanatweaksreborn.golden_powered_rail": "Fastest speed powered rail, should not be used for slopes due to Minecarts being wonky",
-	"emi.info.iguanatweaksreborn.no_hunger.cake": "Restores a percentage of missing health",
 
 	"gamerule.iguanatweaks:deathGrave": "Spawn grave on death",
 	"gamerule.iguanatweaks:deathLoseItemsPercentage": "Percentage items lost on death",

@@ -1,7 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.nohunger.NoHunger;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.message.ExhaustionSync;
 import insane96mcp.iguanatweaksreborn.network.message.SaturationSync;
@@ -107,14 +106,14 @@ public class Exhaustion extends Feature {
 	public void onLivingTickEvent(LivingEvent.LivingTickEvent event) {
 		if (!(event.getEntity() instanceof ServerPlayer player))
 			return;
-		if (!Feature.isEnabled(NoHunger.class)) {
-			Float lastSaturationLevel = lastSaturationLevels.get(player.getUUID());
-			if (lastSaturationLevel == null || lastSaturationLevel != player.getFoodData().getSaturationLevel()) {
-				Object msg = new SaturationSync(player.getFoodData().getSaturationLevel());
-				NetworkHandler.CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
-				lastSaturationLevels.put(player.getUUID(), player.getFoodData().getSaturationLevel());
-			}
+
+		Float lastSaturationLevel = lastSaturationLevels.get(player.getUUID());
+		if (lastSaturationLevel == null || lastSaturationLevel != player.getFoodData().getSaturationLevel()) {
+			Object msg = new SaturationSync(player.getFoodData().getSaturationLevel());
+			NetworkHandler.CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+			lastSaturationLevels.put(player.getUUID(), player.getFoodData().getSaturationLevel());
 		}
+
 		Float lastExhaustionLevel = lastExhaustionLevels.get(player.getUUID());
 		float exhaustionLevel = player.getFoodData().exhaustionLevel;
 		if (lastExhaustionLevel == null || Math.abs(lastExhaustionLevel - exhaustionLevel) >= 0.01f) {

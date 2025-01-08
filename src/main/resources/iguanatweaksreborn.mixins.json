@@ -74,10 +74,6 @@
         "WanderingTraderMixin",
         "WolfMixin",
         "ZombieMixin",
-        "integration.autumnity.CookedTurkeyBlockMixin",
-        "integration.autumnity.PancakeBlockMixin",
-        "integration.autumnity.TurkeyBlockMixin",
-        "integration.farmersdelight.PieBlockMixin",
         "integration.globalgamerules.WorldEventsMixin",
         "integration.sereneseasons.RandomUpdateHandlerMixin"
     ],
@@ -90,7 +86,6 @@
         "client.ClientPacketListenerMixin",
         "client.DeathScreenMixin",
         "client.GameRendererMixin",
-        "client.GuiAccessor",
         "client.GuiMixin",
         "client.LevelRendererMixin",
         "client.LightTextureMixin",
