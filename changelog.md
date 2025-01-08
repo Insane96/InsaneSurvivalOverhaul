@@ -4,6 +4,8 @@
 ### Additions
 * Knockback.Projectile Knockback
   * Reduces projectiles knockback
+* Player Attribute modifiers
+  * Via Json Config you can now add attribute modifiers to players (the existing configs have been moved to the json)
 
 ### Fixes
 * Enchantments replaced by the mod's ones still show up somewhere when disabled

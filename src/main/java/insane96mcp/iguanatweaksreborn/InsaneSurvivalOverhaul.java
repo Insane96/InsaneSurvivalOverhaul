@@ -85,14 +85,14 @@ public class InsaneSurvivalOverhaul
     public static final Logger LOGGER = LogManager.getLogger();
 
     //TODO
-    public static final String CONFIG_FOLDER = "config/insanesurvivaloverhaul";
+    public static final String CONFIG_FOLDER = "config/" + NEW_MOD_ID;
 
     public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
 
     public InsaneSurvivalOverhaul() {
         //TODO
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC, "insanesurvivaloverhaul/client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC, "insanesurvivaloverhaul/common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC,NEW_MOD_ID + "/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpawnerDataAttacher.class);
         if (ModList.get().isLoaded("sereneseasons"))
@@ -159,6 +159,26 @@ public class InsaneSurvivalOverhaul
         event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
                 .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:cloth"))
                 .forEach(mapping -> mapping.remap(Cloth.ITEM.get()));
+
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_axe"))
+                .forEach(mapping -> mapping.remap(FlintExpansion.AXE.get()));
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_pickaxe"))
+                .forEach(mapping -> mapping.remap(FlintExpansion.PICKAXE.get()));
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_shovel"))
+                .forEach(mapping -> mapping.remap(FlintExpansion.SHOVEL.get()));
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_sword"))
+                .forEach(mapping -> mapping.remap(FlintExpansion.SWORD.get()));
+        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_hoe"))
+                .forEach(mapping -> mapping.remap(FlintExpansion.HOE.get()));
+        if (ModList.get().isLoaded("shieldsplus"))
+            event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
+                    .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_shield"))
+                    .forEach(mapping -> mapping.remap(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()));
     }
 
     @SubscribeEvent
