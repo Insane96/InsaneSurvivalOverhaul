@@ -33,4 +33,9 @@ public class Knockback extends Enchantment {
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
+
+    @Override
+    public boolean isDiscoverable() {
+        return super.isDiscoverable() && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
 }

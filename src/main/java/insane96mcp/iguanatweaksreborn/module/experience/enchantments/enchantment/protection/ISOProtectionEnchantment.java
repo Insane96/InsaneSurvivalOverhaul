@@ -49,6 +49,11 @@ public abstract class ISOProtectionEnchantment extends Enchantment implements IP
     }
 
     @Override
+    public boolean isDiscoverable() {
+        return super.isDiscoverable() && EnchantmentsFeature.replaceProtectionEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
     public float getDamageReduction(int lvl) {
         return this.getDamageReductionPerLevel() * lvl;
     }

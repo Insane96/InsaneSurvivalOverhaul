@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Enchantments replaced by the mod's ones still show up somewhere when disabled
+
 ## 4.0.0
 This is a breaking version: configs and data packs have got a huge update.
 ### Additions
@@ -18,7 +22,7 @@ This is a breaking version: configs and data packs have got a huge update.
 * Coal & Charcoal has been moved here from Expanded in Coal & Fire
 * Flint Expansion has been moved here from Expanded
   * Also Shields+ support if installed (not mandatory!)
-* Shields+ Integration has been split here from Expanded
+* Shields+ Integration has been split h ****ere from Expanded
 * Ported advancements from ITE
 
 ### Changes

@@ -67,6 +67,11 @@ public abstract class BonusDamageEnchantment extends Enchantment {
         return (super.canApplyAtEnchantingTable(stack) || stack.is(ACCEPTS_ENCHANTMENT)) && EnchantmentsFeature.replaceDamagingEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
     }
 
+    @Override
+    public boolean isDiscoverable() {
+        return super.isDiscoverable() && EnchantmentsFeature.replaceDamagingEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
     public static float getDamageBonusRatio(ItemStack stack) {
         if (!(stack.getItem() instanceof TieredItem))
             return 0f;

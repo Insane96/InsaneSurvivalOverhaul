@@ -39,6 +39,11 @@ public class FireAspect extends Enchantment {
     }
 
     @Override
+    public boolean isDiscoverable() {
+        return super.isDiscoverable() && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
     public void doPostAttack(@NotNull LivingEntity attacker, @NotNull Entity target, int lvl) {
         int ticks = this.secondsOnFirePerLevel() * lvl * 20 + 10;
         if (target instanceof LivingEntity)
