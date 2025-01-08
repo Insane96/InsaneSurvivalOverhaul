@@ -14,6 +14,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+
 public class FireAspect extends Enchantment {
     public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_fire_aspect");
     static final EnchantmentCategory CATEGORY = EnchantmentCategory.create("fire_aspect", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
@@ -41,6 +43,11 @@ public class FireAspect extends Enchantment {
     @Override
     public boolean isDiscoverable() {
         return super.isDiscoverable() && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
+    public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories) {
+        return this.isDiscoverable();
     }
 
     @Override

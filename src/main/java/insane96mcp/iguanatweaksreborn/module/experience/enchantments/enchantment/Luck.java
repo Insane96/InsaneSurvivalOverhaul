@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.LootBonusEnchantment;
 
+import java.util.Set;
+
 public class Luck extends LootBonusEnchantment {
     public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_luck");
     static final EnchantmentCategory CATEGORY = EnchantmentCategory.create("luck", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
@@ -25,5 +27,10 @@ public class Luck extends LootBonusEnchantment {
     @Override
     public boolean isDiscoverable() {
         return super.isDiscoverable() && EnchantmentsFeature.replaceBonusLootEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
+    public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories) {
+        return this.isDiscoverable();
     }
 }

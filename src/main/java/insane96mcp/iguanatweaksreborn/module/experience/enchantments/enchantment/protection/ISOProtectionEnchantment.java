@@ -4,12 +4,15 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.Enchantment
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public abstract class ISOProtectionEnchantment extends Enchantment implements IProtectionEnchantment {
     public static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
@@ -51,6 +54,11 @@ public abstract class ISOProtectionEnchantment extends Enchantment implements IP
     @Override
     public boolean isDiscoverable() {
         return super.isDiscoverable() && EnchantmentsFeature.replaceProtectionEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
+    public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories) {
+        return this.isDiscoverable();
     }
 
     @Override

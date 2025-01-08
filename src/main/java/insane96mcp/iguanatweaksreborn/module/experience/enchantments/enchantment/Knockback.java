@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
+import java.util.Set;
+
 public class Knockback extends Enchantment {
     public static TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_knockback");
     public static EnchantmentCategory CATEGORY = EnchantmentCategory.create("accepts_knockback", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
@@ -32,6 +34,11 @@ public class Knockback extends Enchantment {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
         return super.canApplyAtEnchantingTable(stack) && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    @Override
+    public boolean allowedInCreativeTab(Item book, Set<EnchantmentCategory> allowedCategories) {
+        return this.isDiscoverable();
     }
 
     @Override
