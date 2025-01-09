@@ -13,6 +13,7 @@
 
 ### Fixes
 * Enchantments replaced by the mod's ones still show up somewhere when disabled
+* Missing tooltip on Firestarter
 
 ## 4.0.0
 This is a breaking version: configs and data packs have got a huge update.

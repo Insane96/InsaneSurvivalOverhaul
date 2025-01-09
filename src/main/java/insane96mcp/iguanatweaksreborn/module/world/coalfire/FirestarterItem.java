@@ -115,6 +115,6 @@ public class FirestarterItem extends FlintAndSteelItem implements Vanishable {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        pTooltipComponents.add(Component.translatable("item.iguanatweaksexpanded.firestarter.tooltip").withStyle(ChatFormatting.GRAY));
+        pTooltipComponents.add(Component.translatable("item.iguanatweaksreborn.firestarter.tooltip").withStyle(ChatFormatting.GRAY));
     }
 }
