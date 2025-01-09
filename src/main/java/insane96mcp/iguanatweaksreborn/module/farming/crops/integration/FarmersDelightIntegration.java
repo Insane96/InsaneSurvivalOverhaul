@@ -59,12 +59,6 @@ public class FarmersDelightIntegration {
         event.setResult(Event.Result.DENY);
     }
 
-    public static float tryApplyComfort(Player player, float amount) {
-        if (player.hasEffect(ModEffects.COMFORT.get()))
-            amount = amount * 1.2f;
-        return amount;
-    }
-
     @Nullable
     public static ItemStack tryPickBlock(Block block) {
         if (block == ModBlocks.RICE_CROP.get() || block == ModBlocks.RICE_CROP_PANICLES.get())
