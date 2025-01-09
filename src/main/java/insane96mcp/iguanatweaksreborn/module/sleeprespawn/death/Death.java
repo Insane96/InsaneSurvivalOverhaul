@@ -157,19 +157,6 @@ public class Death extends Feature {
 	public static void summonGrave(ServerPlayer player, DamageSource source) {
 		if (source.is(DOESNT_SPAWN_GRAVE))
 			return;
-		BlockPos pos = player.blockPosition();
-		if (pos.getY() < player.level().getMinBuildHeight())
-			pos = pos.atY(player.level().getMinBuildHeight() + 1);
-		if (player.level().getBlockState(pos.below()).canBeReplaced())
-			player.level().setBlock(pos.below(), Blocks.COARSE_DIRT.defaultBlockState(), 3);
-		BlockState grave = GRAVE.block().get().defaultBlockState();
-		if (player.level().getFluidState(pos).getType() == Fluids.WATER)
-			grave = grave.setValue(GraveBlock.WATERLOGGED, true);
-		player.level().destroyBlock(pos, true, player);
-		player.level().setBlock(pos, grave, 3);
-		GraveBlockEntity graveBlockEntity = (GraveBlockEntity) player.level().getBlockEntity(pos);
-		if (graveBlockEntity == null)
-			return;
 		List<ItemStack> items = new ArrayList<>();
 		player.getInventory().items.forEach(itemStack -> {
 			if (!itemStack.isEmpty() && itemStack.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
@@ -186,6 +173,19 @@ public class Death extends Feature {
 		if (ModList.get().isLoaded("toolbelt"))
 			ToolBelt.onDeath(items, player);
 		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveExperience))
+			return;
+		BlockPos pos = player.blockPosition();
+		if (pos.getY() < player.level().getMinBuildHeight())
+			pos = pos.atY(player.level().getMinBuildHeight() + 1);
+		if (player.level().getBlockState(pos.below()).canBeReplaced())
+			player.level().setBlock(pos.below(), Blocks.COARSE_DIRT.defaultBlockState(), 3);
+		BlockState grave = GRAVE.block().get().defaultBlockState();
+		if (player.level().getFluidState(pos).getType() == Fluids.WATER)
+			grave = grave.setValue(GraveBlock.WATERLOGGED, true);
+		player.level().destroyBlock(pos, true, player);
+		player.level().setBlock(pos, grave, 3);
+		GraveBlockEntity graveBlockEntity = (GraveBlockEntity) player.level().getBlockEntity(pos);
+		if (graveBlockEntity == null)
 			return;
 		graveBlockEntity.setItems(items);
 		if (graveExperience && player.experienceLevel > 0) {

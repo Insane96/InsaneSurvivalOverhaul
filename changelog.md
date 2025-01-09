@@ -17,6 +17,7 @@
 
 ### Fixes
 * Enchantments replaced by the mod's ones still show up somewhere when disabled
+* Grave spawning even when no items in inventory
 * Missing tooltip on Firestarter
 
 ## 4.0.0
