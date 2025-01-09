@@ -30,7 +30,7 @@ public class PlayerStats extends JsonFeature {
 
 	public static final ArrayList<SerializableAttributeModifier> ATTRIBUTE_MODIFIERS_DEFAULT = new ArrayList<>(List.of(
 			new SerializableAttributeModifier(MOVEMENT_SPEED_REDUCTION_UUID, "Player Stats' Movement Speed modifier", List.of(), () -> Attributes.MOVEMENT_SPEED, -0.05d, AttributeModifier.Operation.MULTIPLY_BASE),
-			new SerializableAttributeModifier(BLOCK_REACH_REDUCTION_UUID, "Player Stats' Block reach modifier", List.of(), ForgeMod.BLOCK_REACH, -1d, AttributeModifier.Operation.MULTIPLY_BASE)
+			new SerializableAttributeModifier(BLOCK_REACH_REDUCTION_UUID, "Player Stats' Block reach modifier", List.of(), ForgeMod.BLOCK_REACH, -1d, AttributeModifier.Operation.ADDITION)
 	));
 	public static final ArrayList<SerializableAttributeModifier> attributeModifiers = new ArrayList<>();
 
