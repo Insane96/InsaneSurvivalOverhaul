@@ -113,7 +113,7 @@ dependencies {
     runtimeOnly fg.deobf("blank:MobsPropertiesRandomness:${mpr_version}-mc${mc_version}")
     implementation fg.deobf("blank:EnhancedAI:${enhancedai_version}-mc${mc_version}")
     implementation fg.deobf("blank:Shields+:${shieldsplus_version}-mc${mc_version}")
-    compileOnly fg.deobf("blank:nohunger:1.0.1")
+    implementation fg.deobf("blank:nohunger:1.0.1:slim")
 
     implementation fg.deobf("curse.maven:selene-499980:5254462")
     runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5051316")
@@ -158,9 +158,7 @@ dependencies {
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     minecraftLibrary 'com.ezylang:EvalEx:3.4.0'
-    jarJar("com.ezylang:EvalEx:3.4.0") {
-        jarJar.ranged(it, "[3.4.0,)")
-    }
+    jarJar(group: 'com.ezylang', name: 'EvalEx', version: '[3.0,4.0)')
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5")) {
@@ -184,7 +182,7 @@ tasks.named('jar', Jar).configure {
 
     // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
-    archiveClassifier = 'no-jar-jar'
+    archiveClassifier = 'slim'
 }
 
 tasks.named('jarJar') {
