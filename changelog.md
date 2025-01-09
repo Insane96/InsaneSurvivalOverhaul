@@ -10,6 +10,8 @@
   * Drops will no longer stack if enabled
 * Livestock changes support for environmental
 * No Food In Furnace support for Environmental, Atmospheric and Upgrade Aquatic
+* Misc Tweaks Data Pack
+  * Lodestone are now crafted with Iron Ingots instead of Netherite
 
 ### Changes
 * Wolves, Horses and Llamas can now die of old age
