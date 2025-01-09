@@ -11,6 +11,7 @@
 * Livestock changes support for environmental
 
 ### Changes
+* Wolves, Horses and Llamas can now die of old age
 * Changed how loose respawn finds a valid y level
   * Should increase respawn performance
 
