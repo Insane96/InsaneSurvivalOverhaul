@@ -1,0 +1,14 @@
+{
+    "values": [
+        "#iguanatweaksreborn:chickens",
+        "minecraft:rabbit",
+        {
+            "id": "quark:crab",
+            "required": false
+        },
+        {
+            "id": "environmental:duck",
+            "required": false
+        }
+    ]
+}

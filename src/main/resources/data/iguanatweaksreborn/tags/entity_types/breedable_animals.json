@@ -32,6 +32,26 @@
         {
             "id": "autumnity:turkey",
             "required": false
+        },
+        {
+            "id": "environmental:duck",
+            "required": false
+        },
+        {
+            "id": "environmental:deer",
+            "required": false
+        },
+        {
+            "id": "environmental:reindeer",
+            "required": false
+        },
+        {
+            "id": "environmental:slabfish",
+            "required": false
+        },
+        {
+            "id": "environmental:yak",
+            "required": false
         }
     ]
 }

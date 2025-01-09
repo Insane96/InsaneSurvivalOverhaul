@@ -6,6 +6,10 @@
         {
             "id": "buzzier_bees:moobloom",
             "required": false
+        },
+        {
+            "id": "environmental:yak",
+            "required": false
         }
     ]
 }

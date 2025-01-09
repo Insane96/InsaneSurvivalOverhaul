@@ -1,0 +1,10 @@
+{
+    "values": [
+        "#iguanatweaksreborn:cows",
+        "#iguanatweaksreborn:sheep",
+        {
+            "id": "environmental:reindeer",
+            "required": false
+        }
+    ]
+}

@@ -1,6 +1,10 @@
 {
     "replace": false,
     "values": [
-        "minecraft:chicken"
+        "minecraft:chicken",
+        {
+            "required": false,
+            "id": "environmental:duck"
+        }
     ]
 }
