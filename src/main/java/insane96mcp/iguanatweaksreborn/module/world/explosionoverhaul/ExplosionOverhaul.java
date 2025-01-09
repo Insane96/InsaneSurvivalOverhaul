@@ -59,6 +59,9 @@ public class ExplosionOverhaul extends Feature {
 	@Config
 	@Label(name = "Limit explosion size", description = "Disabled if set to 0.")
 	public static Integer limitExplosionSize = 12;
+	@Config
+	@Label(name = "Don't stack drops")
+	public static Boolean dontStackDrops = true;
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -72,10 +75,10 @@ public class ExplosionOverhaul extends Feature {
 
 		Explosion e = event.getExplosion();
 		if (e.level instanceof ServerLevel level) {
-			if (e instanceof ISOExplosion ISOExplosion) {
-				if (!ISOExplosion.poofParticles)
+			if (e instanceof ISOExplosion isoExplosion) {
+				if (!isoExplosion.poofParticles)
 					return;
-				ExplodeParticles.sync(level, ISOExplosion);
+				ExplodeParticles.sync(level, isoExplosion);
 			}
 		}
 	}

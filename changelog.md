@@ -6,6 +6,8 @@
   * Reduces projectiles knockback
 * Player Attribute modifiers
   * Via Json Config you can now add attribute modifiers to players (the existing configs have been moved to the json)
+* Explosion Overhaul.Don't Stack drops
+  * Drops will no longer stack if enabled
 
 ### Changes
 * Changed how loose respawn finds a valid y level

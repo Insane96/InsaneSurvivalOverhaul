@@ -17,6 +17,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -243,6 +244,25 @@ public class ISOExplosion extends Explosion {
 				this.level.getProfiler().pop();
 			}
 		}
+	}
+
+	public static void addBlockDrops(ObjectArrayList<Pair<ItemStack, BlockPos>> pDropPositionArray, ItemStack stack, BlockPos pos) {
+		int pairCount = pDropPositionArray.size();
+
+		if (!ExplosionOverhaul.dontStackDrops) {
+			for (int i = 0; i < pairCount; ++i) {
+				Pair<ItemStack, BlockPos> pair = pDropPositionArray.get(i);
+				ItemStack pairStack = pair.getFirst();
+				if (ItemEntity.areMergable(pairStack, stack)) {
+					ItemStack mergedStack = ItemEntity.merge(pairStack, stack, 16);
+					pDropPositionArray.set(i, Pair.of(mergedStack, pair.getSecond()));
+					if (stack.isEmpty())
+						return;
+				}
+			}
+		}
+
+		pDropPositionArray.add(Pair.of(stack, pos));
 	}
 
 	public boolean doesCreeperCollateralApply() {
