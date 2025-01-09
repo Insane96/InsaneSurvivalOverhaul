@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -65,7 +66,7 @@ public class Respawn extends JsonFeature {
 
 	@Config(min = 0)
 	@Label(name = "Loose World Spawn Range", description = "The range from world spawn where players will respawn.")
-	public static MinMax looseWorldSpawnRange = new MinMax(128d, 192d);
+	public static MinMax looseWorldSpawnRange = new MinMax(96d, 192d);
 	@Config(min = 0)
 	@Label(name = "Despawn mobs on world respawn", description = "Mobs in this range from the player will be despawned when respawning at world spawn.")
 	public static Integer despawnMobsOnWorldRespawn = 64;
@@ -238,7 +239,9 @@ public class Respawn extends JsonFeature {
 				x = random.nextInt((int) -minMax.max, (int) minMax.max);
 				z = random.nextInt((int) -minMax.max, (int) minMax.max);
 			} while (x * x + z * z > maxSqr || x * x + z * z < minSqr);
-			y = level.getMaxBuildHeight();
+			y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center.getX() + x, center.getZ() + z);
+			if (y < level.getSeaLevel() + 2)
+				y = level.getSeaLevel() + 2;
 			do {
 				respawn.set(x + center.getX(), y, z + center.getZ());
 				stateBelow = level.getBlockState(respawn.below());

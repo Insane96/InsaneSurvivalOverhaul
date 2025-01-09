@@ -7,6 +7,10 @@
 * Player Attribute modifiers
   * Via Json Config you can now add attribute modifiers to players (the existing configs have been moved to the json)
 
+### Changes
+* Changed how loose respawn finds a valid y level
+  * Should increase respawn performance
+
 ### Removed
 * No Hunger
   * Moved to standalone mod
