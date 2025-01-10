@@ -1,7 +1,5 @@
 # Changelog
 
-* Allow resetting your respawn point with beds when with a respawn obelisk respawn
-
 ## 4.1.0
 ### Additions
 * Knockback.Projectile Knockback
