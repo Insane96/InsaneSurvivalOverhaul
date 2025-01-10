@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Swing Through Grass no longer prevents the block from breaking
+
 ## 4.1.0
 ### Additions
 * Knockback.Projectile Knockback
