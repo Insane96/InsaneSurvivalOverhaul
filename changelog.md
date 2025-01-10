@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.0.1
 ### Additions
 * Knockback.Projectile Knockback
   * Reduces projectiles knockback
