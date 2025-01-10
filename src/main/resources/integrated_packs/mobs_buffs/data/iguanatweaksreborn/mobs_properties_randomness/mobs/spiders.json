@@ -4,7 +4,7 @@
         {
             "id": "minecraft:generic.movement_speed",
             "modifier_name": "Slowdown spiders",
-            "amount": -0.09,
+            "amount": -0.08,
             "operation": "multiply_base"
         }
     ]

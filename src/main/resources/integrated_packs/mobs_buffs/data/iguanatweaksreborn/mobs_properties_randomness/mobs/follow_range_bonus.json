@@ -5,17 +5,13 @@
             "id": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for non-zombie mobs",
             "amount": {
-                "value": 16,
+                "value": 24,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
                         "spawner_behaviour": "spawner_only"
                     },
                     "amount": 0.5
-                },
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 8
                 },
                 "world_spawn_distance_modifier": {
                     "operation": "add",

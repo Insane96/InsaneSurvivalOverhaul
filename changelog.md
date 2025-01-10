@@ -4,6 +4,7 @@
 ### Changes
 * Swing Through Grass no longer prevents the block from breaking
 * Shiba now also die of old age
+* Minor rebalancements for the mobs buffs data pack
 
 ## 4.1.0
 ### Additions

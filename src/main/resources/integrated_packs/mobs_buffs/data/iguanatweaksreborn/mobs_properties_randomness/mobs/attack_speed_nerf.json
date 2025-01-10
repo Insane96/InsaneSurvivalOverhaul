@@ -4,7 +4,7 @@
         {
             "id": "minecraft:generic.attack_speed",
             "modifier_name": "ITE attack speed nerf",
-            "amount": -0.75,
+            "amount": -0.7,
             "operation": "multiply_base"
         }
     ]
