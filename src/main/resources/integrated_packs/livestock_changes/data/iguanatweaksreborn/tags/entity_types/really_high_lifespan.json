@@ -3,6 +3,10 @@
         "minecraft:wolf",
         "minecraft:horse",
         "minecraft:llama",
-        "minecraft:trader_llama"
+        "minecraft:trader_llama",
+        {
+            "required": false,
+            "id": "quark:shiba"
+        }
     ]
 }

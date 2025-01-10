@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Swing Through Grass no longer prevents the block from breaking
+* Shiba now also die of old age
 
 ## 4.1.0
 ### Additions
