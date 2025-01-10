@@ -5,17 +5,17 @@
             "id": "minecraft:generic.movement_speed",
             "modifier_name": "More Speed for non-zombie mobs",
             "amount": {
-                "value": 0.09,
+                "value": 0.08,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
                         "spawner_behaviour": "spawner_only"
                     },
-                    "amount": 0.5
+                    "amount": 0.75
                 },
                 "difficulty_modifier": {
                     "operation": "add",
-                    "hard": 0.03
+                    "hard": 0.02
                 },
                 "world_spawn_distance_modifier": {
                     "operation": "add",
