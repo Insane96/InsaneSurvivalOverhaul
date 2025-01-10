@@ -51,7 +51,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Death", description = "Add graves on death, and lose items on death. Controlled via game rules. Also adds a bounty system for the mob that killed the player")
+@Label(name = "Death", description = "Add graves on death, and lose items on death. Controlled via game rules. Also adds a bounty system for the mob that killed the player. Graves can be disabled with the iguanatweaks:deathGrave game rule. Items percentage lost can be configured with the iguanatweaks:deathLoseItemsPercentage and iguanatweaks:deathLoseItemsEnchanted game rules.")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
 public class Death extends Feature {
 

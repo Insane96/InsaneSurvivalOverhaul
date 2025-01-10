@@ -41,7 +41,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
@@ -94,6 +93,10 @@ public class Respawn extends JsonFeature {
 	@Label(name = "Stats Penalty.Only if below", description = "If hunger or saturation were above the values on death, they will not be reduced.")
 	public static Boolean respawnFoodOnlyIfBelow = true;
 
+	@Config
+	@Label(name = "Allow obelisk spawn point overwrite with beds", description = "If disabled, beds spawn point will not overwrite obelisk spawn point")
+	public static Boolean allowObeliskSpawnPointOverwriteWithBeds = true;
+
 	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
 			IdTagValue.newId("minecraft:iron_block", 0.75d),
 			IdTagValue.newId("minecraft:gold_block", 0.3d),
@@ -135,6 +138,12 @@ public class Respawn extends JsonFeature {
 		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
+	@Override
+	public void loadJsonConfigs() {
+		if (!this.isEnabled())
+			return;
+		super.loadJsonConfigs();
+	}
 
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event) {
@@ -153,7 +162,11 @@ public class Respawn extends JsonFeature {
 				|| event.isEndConquered())
 			return;
 
-		Player player = event.getEntity();
+		applyStatsPenalty(event.getEntity());
+		tryLooseRespawnAndObelisk(event);
+	}
+
+	public void applyStatsPenalty(Player player) {
 		int hunger = MCUtils.getOrCreatePersistedData(player).getInt(HUNGER_ON_DEATH_TAG);
 		int hOnRespawn = (int) hungerOnRespawn.getByDifficulty(player.level());
 		if (!respawnFoodOnlyIfBelow || hunger < hOnRespawn)
@@ -171,11 +184,8 @@ public class Respawn extends JsonFeature {
 		player.setHealth((float) Math.max(healthOnRespawn, minHealth));
 	}
 
-	@SubscribeEvent
-	public void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
-		if (!this.isEnabled()
-				|| event.isEndConquered()
-				|| !event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN))
+	public void tryLooseRespawnAndObelisk(PlayerEvent.PlayerRespawnEvent event) {
+		if (!event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN))
 			return;
 
 		boolean hasRespawned = looseWorldSpawn(event);
@@ -199,7 +209,7 @@ public class Respawn extends JsonFeature {
 
 		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
 		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnWorldRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ISOLogHelper.debug("Despawning %d entities", entities.size());
+		ISOLogHelper.info("Despawning %d entities", entities.size());
 		entities.forEach(Entity::discard);
 		return true;
 	}
@@ -220,7 +230,7 @@ public class Respawn extends JsonFeature {
 
 		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
 		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnBedRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ISOLogHelper.debug("Despawning %d entities", entities.size());
+		ISOLogHelper.info("Despawning %d entities", entities.size());
 		entities.forEach(Entity::discard);
 		return true;
 	}
@@ -264,30 +274,6 @@ public class Respawn extends JsonFeature {
 		return respawn.immutable();
 	}
 
-	@SubscribeEvent(priority = EventPriority.LOW)
-	public void onSetSpawnLooseMessage(PlayerSetSpawnEvent event) {
-		if (!this.isEnabled()
-				|| event.isForced()
-				|| !event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN)
-				|| looseBedSpawnRange.min == 0d
-				|| event.getNewSpawn() == null
-				|| !event.getEntity().level().getBlockState(event.getNewSpawn()).is(BlockTags.BEDS))
-			return;
-
-		ServerPlayer player = (ServerPlayer) event.getEntity();
-		if (event.getNewSpawn().equals(player.getRespawnPosition()))
-			return;
-		player.displayClientMessage(Component.translatable(LOOSE_RESPAWN_POINT_SET), false);
-	}
-
-
-	@Override
-	public void loadJsonConfigs() {
-		if (!this.isEnabled())
-			return;
-		super.loadJsonConfigs();
-	}
-
 	private void tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
 		ServerPlayer player = (ServerPlayer) event.getEntity();
 		BlockPos pos = player.getRespawnPosition();
@@ -304,12 +290,32 @@ public class Respawn extends JsonFeature {
 	}
 
 	@SubscribeEvent
-	public void onSetSpawnPreventObeliskOverwrite(PlayerSetSpawnEvent event) {
+	public void onSetRespawn(PlayerSetSpawnEvent event) {
 		if (!this.isEnabled()
-				|| event.isForced()
-				|| !(event.getEntity() instanceof ServerPlayer player))
+				|| event.isForced())
 			return;
 
+		onSetSpawnLooseMessage(event);
+		onSetSpawnPreventObeliskOverwrite(event);
+	}
+
+	public void onSetSpawnLooseMessage(PlayerSetSpawnEvent event) {
+		if (!event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN)
+				|| looseBedSpawnRange.min == 0d
+				|| event.getNewSpawn() == null
+				|| !event.getEntity().level().getBlockState(event.getNewSpawn()).is(BlockTags.BEDS))
+			return;
+
+		ServerPlayer player = (ServerPlayer) event.getEntity();
+		if (event.getNewSpawn().equals(player.getRespawnPosition()))
+			return;
+		player.displayClientMessage(Component.translatable(LOOSE_RESPAWN_POINT_SET), false);
+	}
+
+	public void onSetSpawnPreventObeliskOverwrite(PlayerSetSpawnEvent event) {
+		if (allowObeliskSpawnPointOverwriteWithBeds)
+			return;
+		ServerPlayer player = (ServerPlayer) event.getEntity();
 		if (player.getRespawnPosition() != null
 				&& player.level().dimension().equals(player.getRespawnDimension())
 				&& player.level().getBlockState(player.getRespawnPosition()).is(RESPAWN_OBELISK.block().get())

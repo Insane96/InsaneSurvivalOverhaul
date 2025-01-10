@@ -1,6 +1,5 @@
 # Changelog
 
-* Nerf Hard difficulty
 * Allow resetting your respawn point with beds when with a respawn obelisk respawn
 
 ## 4.0.1
@@ -17,6 +16,8 @@
 ### Changes
 * Wolves, Horses and Llamas can now die of old age
 * Reduced movement speed bonus of mobs with Mobs Buffs data pack
+* Respawn obelisk spawn point can now be overwritten by beds
+  * A config option has been added to enable back the old behaviour
 * Changed how loose respawn finds a valid y level
   * Should increase respawn performance
 * Misc Tweaks Data Pack
