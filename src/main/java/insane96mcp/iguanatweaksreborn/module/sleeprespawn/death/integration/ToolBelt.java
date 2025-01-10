@@ -18,7 +18,8 @@ public class ToolBelt {
         LazyOptional<BeltExtensionSlot> oBeltExtensionSlot = BeltExtensionSlot.get(player);
         oBeltExtensionSlot.ifPresent(beltExtensionSlot -> {
             beltExtensionSlot.getSlots().forEach(extensionSlot -> {
-                items.add(extensionSlot.getContents());
+                if (!extensionSlot.getContents().isEmpty())
+                    items.add(extensionSlot.getContents());
                 extensionSlot.setContents(ItemStack.EMPTY);
             });
         });
