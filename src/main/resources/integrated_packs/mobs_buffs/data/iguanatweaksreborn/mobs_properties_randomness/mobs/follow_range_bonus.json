@@ -5,7 +5,7 @@
             "id": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for non-zombie mobs",
             "amount": {
-                "value": 20,
+                "value": 24,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
