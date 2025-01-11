@@ -90,6 +90,10 @@ public class Anvils extends Feature {
     public static Double moreMaterialIfEnchantedFlat = 0.5d;
 
     @Config
+    @Label(name = "Merge Repair.Decrease repair amount with enchantments", description = "Merging items in an anvil will reduce the repair amount if the left is enchanted. This is the multiplicative percentage decrease for each level of enchantment on the item. This is applied to the right item durability before the bonus repair.")
+    public static Double mergeRepairIfEnchanted = 0.05d;
+
+    @Config
     @Label(name = "Allow Merging Items", description = "If true you can merge items in the anvil and get a repair bonus")
     public static Boolean allowMergingItems = true;
     @Config(min = 0, max = 100)

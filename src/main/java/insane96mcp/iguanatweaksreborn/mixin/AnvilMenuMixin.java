@@ -163,8 +163,6 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 						float increase = 0f;
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
 							increase += Anvils.moreMaterialIfEnchantedFlat.floatValue() * lvl;
-							if (Anvils.differentXpRepairCost)
-								xpCost += lvl;
 						}
 						amountRequired += increase;
 					}
@@ -203,17 +201,17 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 
 				if (resultStack.isDamageableItem() && !isEnchantedBook && Anvils.allowMergingItems) {
 					int leftDurabilityLeft = left.getMaxDamage() - left.getDamageValue();
-					int rightDurabilityLeft = right.getMaxDamage() - right.getDamageValue();
-					int rightDurabilityLeftPlusBonus = rightDurabilityLeft + resultStack.getMaxDamage() * Anvils.mergingRepairBonus / 100;
-					/*if (Anvils.reducedRepairWithOtherItemIfEnchanted > 0f && left.isEnchanted()) {
-						rightDurabilityLeftPlusBonus = (int) (rightDurabilityLeft * Anvils.reducedRepairWithOtherItemIfEnchanted);
-					}*/
-					if (left.isEnchanted()) {
-						//TODO reduce repair amount if left item is enchanted
-					}
-
-					int resultDurabilityLeft = leftDurabilityLeft + rightDurabilityLeftPlusBonus;
-					int damageValue = resultStack.getMaxDamage() - resultDurabilityLeft;
+					float rightDurabilityLeft = right.getMaxDamage() - right.getDamageValue();
+                    if (left.isEnchanted() && Anvils.mergeRepairIfEnchanted > 0f) {
+						float multiplier = 1f - Anvils.mergeRepairIfEnchanted.floatValue();
+						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
+							rightDurabilityLeft *= (float) Math.pow(multiplier, lvl);
+						}
+                    }
+					float resultDurabilityLeft = leftDurabilityLeft + (int) rightDurabilityLeft;
+					float bonusRepair = (int) (resultDurabilityLeft * (Anvils.mergingRepairBonus / 100f));
+					resultDurabilityLeft += bonusRepair;
+					int damageValue = resultStack.getMaxDamage() - (int) resultDurabilityLeft;
 					if (damageValue < 0)
 						damageValue = 0;
 
