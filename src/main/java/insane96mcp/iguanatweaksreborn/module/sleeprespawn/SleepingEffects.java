@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -39,6 +40,9 @@ public class SleepingEffects extends JsonFeature {
 	@Config
 	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
 	public static Boolean noSleepIfHungry = true;
+	@Config
+	@Label(name = "No Sleep with Hunger effect", description = "If the player's has the hunger effect he can't sleep.")
+	public static Boolean noSleepWithHungerEffect = true;
 	@Config
 	@Label(name = "No beneficial effect when hungry", description = "If the player has no hunger on wake up, beneficial effects are not applied.")
 	public static Boolean noBeneficialEffectWhenHungry = true;
@@ -95,11 +99,12 @@ public class SleepingEffects extends JsonFeature {
 	public void tooHungryToSleep(PlayerSleepInBedEvent event) {
 		if (!this.isEnabled()
 				|| event.getResultStatus() != null
-				|| !noSleepIfHungry
-				|| hungerDepletedOnWakeUp == 0
-				|| event.getEntity().getFoodData().getFoodLevel() >= hungerDepletedOnWakeUp)
+				|| !noSleepIfHungry)
 			return;
-		event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
-		event.getEntity().displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP), true);
+		if ((hungerDepletedOnWakeUp > 0 && event.getEntity().getFoodData().getFoodLevel() < hungerDepletedOnWakeUp)
+				|| (noSleepWithHungerEffect && event.getEntity().hasEffect(MobEffects.HUNGER))) {
+			event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
+			event.getEntity().displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP), true);
+		}
 	}
 }
