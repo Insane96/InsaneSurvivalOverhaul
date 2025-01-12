@@ -68,13 +68,6 @@ public class WeightedEquipment extends JsonFeature {
 		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
-	@Override
-	public void loadJsonConfigs() {
-		if (!this.isEnabled())
-			return;
-		super.loadJsonConfigs();
-	}
-
 	//Can't use ItemAttributeModifierEvent as I need all the modifiers of the item (ItemStack#getAttributeModifiers) and that causes a loop
 	@SubscribeEvent
 	public void playerTick(TickEvent.PlayerTickEvent event) {

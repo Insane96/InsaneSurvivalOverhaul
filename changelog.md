@@ -7,6 +7,9 @@
   * Effects have been removed (can be added back via json), you cannot sleep if you're hungry (15 or less hunger)
   * Saturation is no longer taken into account when depleting hunger
   * You can no longer sleep if you have the Hunger effect (configurable)
+* Respawn Hunger and Saturation have been expanded
+  * Added a Min and Max hunger and saturation when respawning.  
+    If on death the player's hunger and saturation were below or above these values they will be set to them
 * Durability repaired when merging items in an is now reduced if the item is enchanted
 * Bonus durability when merging items in an anvil is now applied to the final durability, not the item's max durability
 * Swing Through Grass no longer prevents the block from breaking

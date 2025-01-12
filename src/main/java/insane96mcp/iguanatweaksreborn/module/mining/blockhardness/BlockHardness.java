@@ -55,13 +55,6 @@ public class BlockHardness extends JsonFeature {
 		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
-	@Override
-	public void loadJsonConfigs() {
-		if (!this.isEnabled())
-			return;
-		super.loadJsonConfigs();
-	}
-
 	private static final Object mutex = new Object();
 
 	public static void processBlockHardness(List<IdTagValue> list, boolean isClientSide) {

@@ -24,6 +24,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -84,14 +85,17 @@ public class Respawn extends JsonFeature {
 	@Label(name = "Stats Penalty.Health.Per Death", description = "How much health respawning players lose on respawn (not max health)")
 	public static Difficulty perDeathHealthOnRespawn = new Difficulty(1, 2, 2);
 	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players")
-	public static Difficulty hungerOnRespawn = new Difficulty(14, 14, 10);
+	@Label(name = "Stats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players. If below this value on death will be set to this value")
+	public static Difficulty hungerOnRespawnMin = new Difficulty(6, 6, 6);
 	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Saturation.Minimum", description = "Min Saturation of respawning players")
-	public static Difficulty saturationOnRespawn = new Difficulty(10, 10, 6);
-	@Config
-	@Label(name = "Stats Penalty.Only if below", description = "If hunger or saturation were above the values on death, they will not be reduced.")
-	public static Boolean respawnFoodOnlyIfBelow = true;
+	@Label(name = "Stats Penalty.Hunger.Maximum", description = "Max Hunger of respawning players. If above this value on death will be set to this value")
+	public static Difficulty hungerOnRespawnMax = new Difficulty(14, 14, 10);
+	@Config(min = 0, max = 20)
+	@Label(name = "Stats Penalty.Saturation.Minimum", description = "Min Saturation of respawning players. If below this value on death will be set to this value")
+	public static Difficulty saturationOnRespawnMin = new Difficulty(6, 6, 6);
+	@Config(min = 0, max = 20)
+	@Label(name = "Stats Penalty.Saturation.Maximum", description = "Max Saturation of respawning players. If above this value on death will be set to this value")
+	public static Difficulty saturationOnRespawnMax = new Difficulty(10, 10, 6);
 
 	@Config
 	@Label(name = "Allow obelisk spawn point overwrite with beds", description = "If disabled, beds spawn point will not overwrite obelisk spawn point")
@@ -138,13 +142,6 @@ public class Respawn extends JsonFeature {
 		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
 	}
 
-	@Override
-	public void loadJsonConfigs() {
-		if (!this.isEnabled())
-			return;
-		super.loadJsonConfigs();
-	}
-
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event) {
 		if (!this.isEnabled()
@@ -168,17 +165,17 @@ public class Respawn extends JsonFeature {
 
 	public void applyStatsPenalty(Player player) {
 		int hunger = MCUtils.getOrCreatePersistedData(player).getInt(HUNGER_ON_DEATH_TAG);
-		int hOnRespawn = (int) hungerOnRespawn.getByDifficulty(player.level());
-		if (!respawnFoodOnlyIfBelow || hunger < hOnRespawn)
-			player.getFoodData().foodLevel = hOnRespawn;
-		else
-			player.getFoodData().foodLevel = hunger;
+		int maxHunger = (int) hungerOnRespawnMax.getByDifficulty(player.level());
+		int minHunger = (int) hungerOnRespawnMin.getByDifficulty(player.level());
+		hunger = Mth.clamp(hunger, minHunger, maxHunger);
+		player.getFoodData().foodLevel = hunger;
+
 		float saturation = MCUtils.getOrCreatePersistedData(player).getFloat(SATURATION_ON_DEATH_TAG);
-		float sOnRespawn = (float) saturationOnRespawn.getByDifficulty(player.level());
-		if (!respawnFoodOnlyIfBelow || saturation < sOnRespawn)
-			player.getFoodData().saturationLevel = sOnRespawn;
-		else
-			player.getFoodData().saturationLevel = saturation;
+		float maxSaturation = (float) saturationOnRespawnMax.getByDifficulty(player.level());
+		float minSaturation = (float) saturationOnRespawnMin.getByDifficulty(player.level());
+		saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
+		player.getFoodData().saturationLevel = saturation;
+
 		double healthOnRespawn = player.getMaxHealth() - (perDeathHealthOnRespawn.getByDifficulty(player.level()) * MCUtils.getOrCreatePersistedData(player).getInt(DEATHS));
 		double minHealth = minHealthOnRespawn.getByDifficulty(player.level());
 		player.setHealth((float) Math.max(healthOnRespawn, minHealth));

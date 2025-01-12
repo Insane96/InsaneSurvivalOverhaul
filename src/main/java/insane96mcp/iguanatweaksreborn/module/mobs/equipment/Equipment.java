@@ -60,13 +60,6 @@ public class Equipment extends JsonFeature {
         return InsaneSurvivalOverhaul.CONFIG_FOLDER;
     }
 
-    @Override
-    public void loadJsonConfigs() {
-        if (!this.isEnabled())
-            return;
-        super.loadJsonConfigs();
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onMobSpawn(EntityJoinLevelEvent event) {
         if (!this.isEnabled()
