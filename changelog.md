@@ -11,6 +11,7 @@
 * Bonus durability when merging items in an anvil is now applied to the final durability, not the item's max durability
 * Swing Through Grass no longer prevents the block from breaking
 * Shiba now also die of old age
+* Reduced explosion damage
 * Minor rebalancements for the mobs buffs data pack
 
 ## 4.1.0

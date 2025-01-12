@@ -55,7 +55,7 @@ public class ExplosionOverhaul extends Feature {
 	public static Boolean creeperCollateral = false;
 	@Config
 	@Label(name = "Explosion Damage calculation multiplier", description = "Number in the explosion damage calculation. Vanilla is 7. Higher = More damage")
-	public static Double explosionDamageCalculationMultiplier = 6.5d;
+	public static Double explosionDamageCalculationMultiplier = 6d;
 	@Config
 	@Label(name = "Limit explosion size", description = "Disabled if set to 0.")
 	public static Integer limitExplosionSize = 12;
