@@ -23,6 +23,9 @@
 * Reduced explosion damage
 * Minor rebalancements for the mobs buffs data pack
 
+### Fixes
+* Buzzier Bees' Moobloom loot table being wrong in the Livestock Changes data pack
+
 ## 4.1.0
 ### Additions
 * Knockback.Projectile Knockback
