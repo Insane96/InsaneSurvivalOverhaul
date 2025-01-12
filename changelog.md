@@ -2,6 +2,10 @@
 
 ## Upcoming
 ### Changes
+* Enabled back Sleeping Effects
+  * Since no hunger is no longer in the mod, this is now enabled by default
+  * Effects have been removed, you cannot sleep if you're hungry (15 or less hunger)
+  * Saturation is no longer taken into account when depleting hunger
 * Durability repaired when merging items in an is now reduced if the item is enchanted
 * Bonus durability when merging items in an anvil is now applied to the final durability, not the item's max durability
 * Swing Through Grass no longer prevents the block from breaking
