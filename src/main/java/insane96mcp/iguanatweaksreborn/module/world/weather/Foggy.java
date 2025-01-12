@@ -1,11 +1,12 @@
 package insane96mcp.iguanatweaksreborn.module.world.weather;
 
 public enum Foggy {
-    NONE(0.6f, 1.0f, false,1f),
-    LIGHT(0.45f, 0.8f, false, 1f),
-    MEDIUM(64, 192, true, 0.9f),
-    HEAVY(16, 96, true, 0.8f),
-    SILENT_HILL(0, 32, true, 0.6f);
+    NONE(0.5f, 1.0f, false,1f),
+    LIGHT(0.4f, 0.8f, false, 1f),
+    MEDIUM(64, 192, true, 0.8f),
+    HEAVY(16, 96, true, 0.65f),
+    VERY_HEAVY(0, 48, true, 0.4f),
+    SILENT_HILL(-16, 32, true, 0.1f);
 
     final float nearDistance;
     final float farDistance;

@@ -66,14 +66,20 @@ public class ClientWeather extends Feature {
                 || event.getCamera().getFluidInCamera() != FogType.NONE
                 || !(event.getCamera().getEntity() instanceof LivingEntity livingEntity)
                 || livingEntity.hasEffect(MobEffects.BLINDNESS)
-                || event.getMode() != FogRenderer.FogMode.FOG_TERRAIN)
+                || livingEntity.hasEffect(MobEffects.DARKNESS))
             return;
 
         float changingRatio = 1f;
         if (currentFoggy != targetFoggy)
             changingRatio = ((float) foggyTimer / foggyTargetTime);
-        event.setNearPlaneDistance(currentFoggy.getNearDistance(event.getFarPlaneDistance(), targetFoggy, changingRatio));
-        event.setFarPlaneDistance(currentFoggy.getFarDistance(event.getFarPlaneDistance(), targetFoggy, changingRatio));
+        float nearDistance = currentFoggy.getNearDistance(event.getNearPlaneDistance(), targetFoggy, changingRatio);
+        float farDistance = currentFoggy.getFarDistance(event.getFarPlaneDistance(), targetFoggy, changingRatio);
+        if (event.getMode() == FogRenderer.FogMode.FOG_SKY) {
+            nearDistance *= 0.5f;
+            farDistance *= 0.5f;
+        }
+        event.setNearPlaneDistance(Math.min(nearDistance, event.getNearPlaneDistance()));
+        event.setFarPlaneDistance(Math.min(farDistance, event.getFarPlaneDistance()));
         event.setCanceled(true);
     }
 

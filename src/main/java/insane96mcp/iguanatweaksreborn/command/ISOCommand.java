@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.TirednessHandler;
+import insane96mcp.iguanatweaksreborn.module.world.weather.Foggy;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
 import net.minecraft.commands.CommandSourceStack;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.server.command.EnumArgument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,18 +48,22 @@ public class ISOCommand {
                             return 1;
                         }))
                 .then(Commands.literal("foggy_weather")
-                        .then(Commands.literal("clear")
-                                .executes(context -> {
-                                    Weather.clearFoggyWeather(context.getSource().getServer().getLevel(Level.OVERWORLD));
-                                    return 1;
-                                }))
                         .then(Commands.literal("get")
                                 .executes(context -> {
                                     if (!(context.getSource().getEntity() instanceof ServerPlayer player))
                                         return 0;
                                     player.sendSystemMessage(Component.literal(Weather.getCurrentFoggyData(context.getSource().getServer().getLevel(Level.OVERWORLD)).toString()));
                                     return 1;
-                                }))
+                                })
+                        )
+                        .then(Commands.literal("set")
+                                .then(Commands.argument("foggy", EnumArgument.enumArgument(Foggy.class))
+                                    .executes(context -> {
+                                        Weather.setFoggyWeather(context.getSource().getServer().getLevel(Level.OVERWORLD), context.getArgument("foggy", Foggy.class));
+                                        return 1;
+                                    })
+                                )
+                        )
                 )
                 .then(Commands.literal("thunderstorm_intensity")
                         .then(Commands.literal("get")

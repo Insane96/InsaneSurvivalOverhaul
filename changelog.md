@@ -13,6 +13,12 @@
 * Durability repaired when merging items in an is now reduced if the item is enchanted
 * Bonus durability when merging items in an anvil is now applied to the final durability, not the item's max durability
 * Swing Through Grass no longer prevents the block from breaking
+* Enhanced Foggy weather
+  * Heavy fogs will now last much less time
+  * Lighter fogs now start slightly closer to the player
+  * Silent hill fog is now thicker
+  * Chunks should no longer be much visible when looking at them thought the sky
+  * `/insanesurvivaloverhaul foggy_weather clear` is now `set` so you can set the fog you want
 * Shiba now also die of old age
 * Reduced explosion damage
 * Minor rebalancements for the mobs buffs data pack

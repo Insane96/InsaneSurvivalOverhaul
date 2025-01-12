@@ -106,6 +106,18 @@ public class Weather extends Feature {
         level.players().forEach(player -> FoggySync.sync(player, foggyData));
     }
 
+    public static void setFoggyWeather(ServerLevel level, Foggy foggy) {
+        WeatherSavedData wsd = WeatherSavedData.get(level);
+        WeatherSavedData.FoggyData foggyData = wsd.foggyData;
+        foggyData.current = foggy;
+        foggyData.target = foggy;
+        foggyData.timer = 0;
+        foggyData.targetTime = getNewFoggyTargetTime(level.random);
+        foggyData.targetTime = (int) (foggyData.targetTime * foggy.timerMultiplier);
+        wsd.setDirty();
+        level.players().forEach(player -> FoggySync.sync(player, foggyData));
+    }
+
     public static WeatherSavedData.FoggyData getCurrentFoggyData(ServerLevel level) {
         return WeatherSavedData.get(level).foggyData;
     }
