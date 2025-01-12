@@ -83,14 +83,12 @@ public class FoodDrinks extends JsonFeature {
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
-	//TODO Change this to formula
-	@Config(min = 0d, max = 20d)
-	@Label(name = "Food Hunger Multiplier", description = "Food's hunger restored will be multiplied by this value (rounded up). E.g. With this set to 0.5 a Cooked Pork-chop would restore 4 hunger instead of 8. Setting to 1 will disable this feature.")
-	public static Double foodHungerMultiplier = 1d;
-	//TODO Change this to formula
-	@Config(min = 0d, max = 64d)
-	@Label(name = "Food Saturation Multiplier", description = "Food's saturation restored will be multiplied by this value. Be aware that saturation is a multiplier and not a flat value, it is used to calculate the effective saturation restored when a player eats, and this calculation includes hunger, so by reducing hunger you automatically reduce saturation too. Setting to 1 will disable this feature.\nThis requires a Minecraft Restart.")
-	public static Double foodSaturationMultiplier = 1d;
+	@Config
+	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
+	public static String foodHungerFormula = "ROUND(hunger * 0.8, 0)";
+	@Config
+	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
+	public static String foodSaturationModifierFormula = "saturation_modifier * 1.25";
 
 	@Config
 	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
@@ -211,9 +209,10 @@ public class FoodDrinks extends JsonFeature {
 					|| isItemInTag(item, FOOD_BLACKLIST, isClientSide))
 				continue;
 			FoodProperties food = item.getFoodProperties();
-			if (foodHungerMultiplier != 1d)
-				food.nutrition = (int) Math.ceil(item.getFoodProperties().getNutrition() * foodHungerMultiplier);
-			food.saturationModifier = (float) (item.getFoodProperties().getSaturationModifier() * foodSaturationMultiplier);
+			if (!foodHungerFormula.isEmpty())
+				food.nutrition = (int) MCUtils.computeFoodFormula(food, foodHungerFormula);
+			if (!foodSaturationModifierFormula.isEmpty())
+				food.saturationModifier = MCUtils.computeFoodFormula(food, foodSaturationModifierFormula);
 		}
 
 	}

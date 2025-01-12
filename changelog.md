@@ -21,6 +21,7 @@
   * `/insanesurvivaloverhaul foggy_weather clear` is now `set` so you can set the fog you want
 * Shiba now also die of old age
 * Reduced explosion damage
+* Food Hunger and Saturation modifier can now be changed with a formula instead of being a simple multiplier
 * Minor rebalancements for the mobs buffs data pack
 
 ### Fixes
