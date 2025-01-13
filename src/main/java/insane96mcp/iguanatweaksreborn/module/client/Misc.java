@@ -23,8 +23,8 @@ public class Misc extends Feature {
     public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
 
     @Config
-    @Label(name = "No block outline with wrong tool", description = "If true, the outline around blocks will not be visible if the tool in hand is not the correct one for the block (and the block requires a tool).")
-    public static Boolean noBlockOutlineWithWrongTool = true;
+    @Label(name = "Red block outline with wrong tool", description = "If true, the outline around blocks will be red if the tool in hand will make drops not ... drop.")
+    public static Boolean redBlockOutlineWithWrongTool = true;
 
     @Config(min = 0)
     @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flowlessly if using the correct Forge GUI fields")
@@ -38,9 +38,11 @@ public class Misc extends Feature {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
     }
 
-    public static boolean shouldHideBlockBreakOutline() {
-		return isEnabled(Misc.class) && noBlockOutlineWithWrongTool;
-	}
+    public static float getRedOutlineAmount(float original) {
+        if (!isEnabled(Misc.class) || !redBlockOutlineWithWrongTool)
+            return original;
+        return 0.3f;
+    }
 
     //Render before Regenerating absorption
     @OnlyIn(Dist.CLIENT)

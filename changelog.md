@@ -27,6 +27,7 @@
 * Reduced explosion damage
 * Food Hunger and Saturation modifier can now be changed with a formula instead of being a simple multiplier
 * Minor rebalancements for the mobs buffs data pack
+* Nostalgic Tweaks has fixed the block outline override so "No outline" has been reverted back to "Red outline with wrong tool"
 
 ### Fixes
 * Buzzier Bees' Moobloom loot table being wrong in the Livestock Changes data pack
