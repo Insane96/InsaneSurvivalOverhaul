@@ -27,7 +27,7 @@ import net.minecraftforge.fml.ModList;
 
 import java.text.DecimalFormat;
 
-@Label(name = "Health Regen", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
+@Label(name = "Health Regen & Hunger", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class HealthRegen extends Feature {
 
@@ -72,6 +72,9 @@ public class HealthRegen extends Feature {
 	@Config(min = 0d, max = 1d)
 	@Label(name = "Hunger Consumption Chance", description = "If 'Consume Hunger Only' is true then this is the chance to consume an hunger whenever the player is healed (vanilla ignores this; Combat Test has this set to 0.5).")
 	public static Double hungerConsumptionChance = 0.5d;
+	@Config(min = 0, max = 20)
+	@Label(name = "Min hunger for sprint", description = "Player can only sprint when have at least this much hunger. Vanilla is 7")
+	public static Integer noSprintBelowHunger = 4;
 	@Config
 	@Label(name = "Peaceful Hunger & Health", description = "If enabled, peaceful difficulty no longer heals and fulfills the player")
 	public static Boolean peacefulHunger = true;

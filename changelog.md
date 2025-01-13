@@ -1,11 +1,11 @@
 # Changelog
 
-* Config option for hunger to deny sprint
-
 ## Upcoming
 ### Additions
-  * Tiredness.Tired Overlay
-    * Enables/Disables the overlay with the tired effect
+* Health Regen & Hunger.Min hunger for sprint
+  * Minimum hunger for players to sprint, has been reduced to 4 from vanilla 7
+* Tiredness.Tired Overlay
+  * Enables/Disables the overlay with the tired effect
 
 ### Removed
 * Shields+ shield definitions in Shields+ Compat Data pack
