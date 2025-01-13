@@ -3,9 +3,16 @@
 * Config option for hunger to deny sprint
 
 ## Upcoming
-* Additions
+### Additions
   * Tiredness.Tired Overlay
     * Enables/Disables the overlay with the tired effect
+
+### Removed
+* Shields+ shield definitions in Shields+ Compat Data pack
+  * Shields+ has now the same stats as here
+
+### Fixes
+* Fixed missing flint shield definition
 
 ## 4.1.1
 ### Additions
