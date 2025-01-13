@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Food & Drinks.Combat Snapshot eating saturation
+  * When eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current)
+
 ### Changes
 * Enabled back Sleeping Effects
   * Since no hunger is no longer in the mod, this is now enabled by default

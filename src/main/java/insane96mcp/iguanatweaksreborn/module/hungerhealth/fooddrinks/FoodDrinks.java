@@ -105,6 +105,9 @@ public class FoodDrinks extends JsonFeature {
 	@Config(min = 0d, max = 1f)
 	@Label(name = "Raw food Poison Chance", description = "Raw food has this chance to poison the player. Raw food is defined in the iguanatweaksreborn:raw_food tag")
 	public static Double rawFoodPoisonChance = 0.7d;
+	@Config
+	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current)")
+	public static Boolean combatSnapshotEatingSaturation = true;
 
 	@Config
 	@Label(name = "No Furnace food and smoker recipe", description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
