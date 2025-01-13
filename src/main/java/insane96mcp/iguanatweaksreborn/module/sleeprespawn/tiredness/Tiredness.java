@@ -114,9 +114,9 @@ public class Tiredness extends JsonFeature {
 	@Config(min = 0)
 	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown. 'Maximum' is multiplied by the Tired effect level")
 	public static MinMax fakeSoundTimes = new MinMax(1, 3);
-	/*@Config
-	@Label(name = "Tired Sound Chance", description = "The chance is 0% of this value as soon as a sound is played, 100% as 10 minutes have passed and 200% at 30 minutes")
-	public static Double tiredSoundChance = 0.025d;*/
+	@Config
+	@Label(name = "Tired overlay")
+	public static Boolean tiredOverlay = true;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -414,6 +414,8 @@ public class Tiredness extends JsonFeature {
 	@SubscribeEvent
 	public static void registerGui(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.VIGNETTE.id(), "tired_overlay", (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+			if (!tiredOverlay)
+				return;
 			LocalPlayer player = Minecraft.getInstance().player;
 			if (!player.hasEffect(TIRED.get()))
 				return;

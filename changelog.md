@@ -1,5 +1,12 @@
 # Changelog
 
+* Config option for hunger to deny sprint
+
+## Upcoming
+* Additions
+  * Tiredness.Tired Overlay
+    * Enables/Disables the overlay with the tired effect
+
 ## 4.1.1
 ### Additions
 * Food & Drinks.Combat Snapshot eating saturation
