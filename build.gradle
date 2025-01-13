@@ -34,8 +34,6 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '-mixin.config=iguanatweaksreborn.mixins.json'
-
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -71,7 +69,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
-    add sourceSets.main, "iguanatweaksreborn.refmap.json"
+    config "mixins.iguanatweaksreborn.json"
+    add sourceSets.main, "mixins.iguanatweaksreborn.refmap.json"
 }
 
 repositories {

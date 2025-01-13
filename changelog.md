@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.1.1
 ### Additions
 * Food & Drinks.Combat Snapshot eating saturation
   * When eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current)

@@ -2,7 +2,7 @@
     "required": true,
     "package": "insane96mcp.iguanatweaksreborn.mixin",
     "compatibilityLevel": "JAVA_17",
-    "refmap": "iguanatweaksreborn.refmap.json",
+    "refmap": "mixins.iguanatweaksreborn.refmap.json",
     "plugin": "insane96mcp.iguanatweaksreborn.mixin.plugin.ModLoadedPlugin",
     "mixins": [
         "AbstractArrowMixin",
