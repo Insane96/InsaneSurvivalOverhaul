@@ -18,6 +18,10 @@
     {
       "id": "berry_good:sweet_berry_mince",
       "required": false
+    },
+    {
+      "id": "environmental:venison",
+      "required": false
     }
   ]
 }

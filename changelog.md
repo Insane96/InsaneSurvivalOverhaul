@@ -8,11 +8,13 @@
   * Enables/Disables the overlay with the tired effect
 * Config options for raw food poison amplifier and duration
 * Timber Trees support for Environmental and Atmospheric
+* Message when you can't pillar up
 
 ### Changes
 * Sandstone recipe now gives 2 instead of 1
 * Bundle recipe is now vanilla one but with cloth (1 string + 1 cloth)
 * Increased raw food poison effectiveness
+* Added venison to raw foods
 
 ### Removed
 * Shields+ shield definitions in Shields+ Compat Data pack

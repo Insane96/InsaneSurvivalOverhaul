@@ -76,7 +76,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(FoodDrinks.RAW_FOOD)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
                 .addOptional(new ResourceLocation("autumnity:turkey_piece"))
-                .addOptional(new ResourceLocation("berry_good:sweet_berry_mince"));
+                .addOptional(new ResourceLocation("berry_good:sweet_berry_mince"))
+                .addOptional(new ResourceLocation("environmental:venison"));
 		tag(Spawners.SPAWNER_REACTIVATOR_TAG)
 				.add(Items.ECHO_SHARD);
         tag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)

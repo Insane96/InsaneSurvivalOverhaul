@@ -7,6 +7,7 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "No Pillaring", description = "Prevents the player from placing blocks below him when in mid air.")
 @LoadFeature(module = Modules.Ids.MOVEMENT)
 public class NoPillaring extends Feature {
+
+	public static final String NO_PILLARING_LANG = "iguanatweaksreborn.no_pillaring";
 
 	@Config
 	@Label(name = "Monsters Only", description = "If true, pillaring will be negated only if there are monsters nearby")
@@ -62,6 +65,7 @@ public class NoPillaring extends Feature {
 		if (isSolidBlock && playerEntity.getViewXRot(1.0f) > 40f && !playerEntity.onGround() && event.getItemStack().getItem() instanceof BlockItem && distance <= allowedDistance && playerEntity.getY() > placedPos.getY()) {
 			event.setCanceled(true);
 			event.setResult(Event.Result.DENY);
+			event.getEntity().displayClientMessage(Component.translatable(NO_PILLARING_LANG), true);
 		}
 	}
 }

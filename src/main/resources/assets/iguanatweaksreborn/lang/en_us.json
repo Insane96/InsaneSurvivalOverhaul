@@ -179,6 +179,8 @@
 
 	"iguanatweaksreborn:movement_module": "Movement",
 
+	"iguanatweaksreborn.no_pillaring": "There are monsters nearby, you're too scared to pillar up",
+
 	"iguanatweaksreborn.armor_slowdown": "-%s%% Speed",
 
 	"block.iguanatweaksreborn.copper_powered_rail": "Copper Powered Rail",
