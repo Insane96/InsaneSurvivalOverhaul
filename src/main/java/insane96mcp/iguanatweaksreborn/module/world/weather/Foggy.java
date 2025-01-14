@@ -4,8 +4,8 @@ public enum Foggy {
     NONE(0.5f, 1.0f, false,1f),
     LIGHT(0.4f, 0.8f, false, 1f),
     MEDIUM(64, 192, true, 0.8f),
-    HEAVY(16, 96, true, 0.65f),
-    VERY_HEAVY(0, 48, true, 0.4f),
+    HEAVY(16, 96, true, 0.5f),
+    VERY_HEAVY(0, 48, true, 0.3f),
     SILENT_HILL(-16, 32, true, 0.1f);
 
     final float nearDistance;

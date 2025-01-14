@@ -1,7 +1,5 @@
 # Changelog
 
-* Add other mods trees and leaves
-
 ## Upcoming
 ### Additions
 * Health Regen & Hunger.Min hunger for sprint
