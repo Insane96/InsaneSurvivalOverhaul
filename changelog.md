@@ -11,6 +11,7 @@
   * Enables/Disables the overlay with the tired effect
 
 ### Changes
+* Sandstone recipe now gives 2 instead of 1
 * Bundle recipe is now vanilla one but with cloth (1 string + 1 cloth)
 
 ### Removed
