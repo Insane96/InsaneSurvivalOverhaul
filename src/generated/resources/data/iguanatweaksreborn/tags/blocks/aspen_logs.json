@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "atmospheric:aspen_log",
+      "required": false
+    },
+    {
+      "id": "atmospheric:watchful_aspen_log",
+      "required": false
+    }
+  ]
+}

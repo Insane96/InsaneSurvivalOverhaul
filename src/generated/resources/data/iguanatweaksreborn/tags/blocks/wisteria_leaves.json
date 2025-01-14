@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "environmental:wisteria_leaves",
+      "required": false
+    },
+    {
+      "id": "environmental:pink_wisteria_leaves",
+      "required": false
+    },
+    {
+      "id": "environmental:purple_wisteria_leaves",
+      "required": false
+    },
+    {
+      "id": "environmental:blue_wisteria_leaves",
+      "required": false
+    },
+    {
+      "id": "environmental:white_wisteria_leaves",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "atmospheric:morado_leaves",
+      "required": false
+    },
+    {
+      "id": "atmospheric:flowering_morado_leaves",
+      "required": false
+    }
+  ]
+}

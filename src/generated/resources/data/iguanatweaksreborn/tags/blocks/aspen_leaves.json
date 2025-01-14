@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "atmospheric:aspen_leaves",
+      "required": false
+    },
+    {
+      "id": "atmospheric:green_aspen_leaves",
+      "required": false
+    }
+  ]
+}

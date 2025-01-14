@@ -38,6 +38,11 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> OAK_LOG_LEAVES = create("oak_log_leaves");
     public static final TagKey<Block> MAPLE_LEAVES = create("maple_leaves");
     public static final TagKey<Block> TRUMPET_LEAVES = create("trumpet_leaves");
+    public static final TagKey<Block> LAUREL_LEAVES = create("laurel_leaves");
+    public static final TagKey<Block> MORADO_LEAVES = create("morado_leaves");
+    public static final TagKey<Block> WISTERIA_LEAVES = create("wisteria_leaves");
+    public static final TagKey<Block> ASPEN_LOGS = create("aspen_logs");
+    public static final TagKey<Block> ASPEN_LEAVES = create("aspen_leaves");
 
     public ISOBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
         super(output, lookupProvider, modId, existingFileHelper);
@@ -110,6 +115,28 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addOptional(new ResourceLocation("autumnity:yellow_maple_leaves"))
                 .addOptional(new ResourceLocation("autumnity:orange_maple_leaves"))
                 .addOptional(new ResourceLocation("autumnity:red_maple_leaves"));
+
+        tag(LAUREL_LEAVES)
+                .addOptional(new ResourceLocation("atmospheric:laurel_leaves"))
+                .addOptional(new ResourceLocation("atmospheric:dry_laurel_leaves"));
+
+        tag(MORADO_LEAVES)
+                .addOptional(new ResourceLocation("atmospheric:morado_leaves"))
+                .addOptional(new ResourceLocation("atmospheric:flowering_morado_leaves"));
+
+        tag(WISTERIA_LEAVES)
+                .addOptional(new ResourceLocation("environmental:wisteria_leaves"))
+                .addOptional(new ResourceLocation("environmental:pink_wisteria_leaves"))
+                .addOptional(new ResourceLocation("environmental:purple_wisteria_leaves"))
+                .addOptional(new ResourceLocation("environmental:blue_wisteria_leaves"))
+                .addOptional(new ResourceLocation("environmental:white_wisteria_leaves"));
+
+        tag(ASPEN_LOGS)
+                .addOptional(new ResourceLocation("atmospheric:aspen_log"))
+                .addOptional(new ResourceLocation("atmospheric:watchful_aspen_log"));
+        tag(ASPEN_LEAVES)
+                .addOptional(new ResourceLocation("atmospheric:aspen_leaves"))
+                .addOptional(new ResourceLocation("atmospheric:green_aspen_leaves"));
 
 		//noinspection unchecked
 		tag(Tweaks.BREAK_ON_FALL)

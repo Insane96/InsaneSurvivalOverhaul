@@ -8,6 +8,7 @@
   * Minimum hunger for players to sprint, has been reduced to 4 from vanilla 7
 * Tiredness.Tired Overlay
   * Enables/Disables the overlay with the tired effect
+* Timber Trees support for Environmental and Atmospheric
 
 ### Changes
 * Sandstone recipe now gives 2 instead of 1

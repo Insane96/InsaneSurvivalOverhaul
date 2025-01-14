@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "atmospheric:laurel_leaves",
+      "required": false
+    },
+    {
+      "id": "atmospheric:dry_laurel_leaves",
+      "required": false
+    }
+  ]
+}
