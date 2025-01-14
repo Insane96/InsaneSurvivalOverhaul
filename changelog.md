@@ -1,7 +1,7 @@
 # Changelog
 
-* 3 high trees don't fall
 * Add other mods trees and leaves
+* Sandstone recipe gives 2
 
 ## Upcoming
 ### Additions
@@ -9,6 +9,9 @@
   * Minimum hunger for players to sprint, has been reduced to 4 from vanilla 7
 * Tiredness.Tired Overlay
   * Enables/Disables the overlay with the tired effect
+
+### Changes
+* Bundle recipe is now vanilla one but with cloth (1 string + 1 cloth)
 
 ### Removed
 * Shields+ shield definitions in Shields+ Compat Data pack

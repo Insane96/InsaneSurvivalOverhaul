@@ -5,9 +5,6 @@
         "#": [
             {
                 "item": "iguanatweaksreborn:cloth"
-            },
-            {
-                "item": "minecraft:rabbit_hide"
             }
         ],
         "-": {
@@ -15,9 +12,8 @@
         }
     },
     "pattern": [
-        "-#-",
-        "# #",
-        "###"
+        "-",
+        "#"
     ],
     "result": {
         "item": "minecraft:bundle"
