@@ -226,7 +226,7 @@ public class TimberTrees extends JsonFeature {
                 break;
             }
         }
-        if (maxY < pos.getY() + 3)
+        if (maxY < pos.getY() + 2)
             blocks.clear();
         return blocks;
     }

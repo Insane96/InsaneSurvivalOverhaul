@@ -1,5 +1,8 @@
 # Changelog
 
+* 3 high trees don't fall
+* Add other mods trees and leaves
+
 ## Upcoming
 ### Additions
 * Health Regen & Hunger.Min hunger for sprint
@@ -12,7 +15,8 @@
   * Shields+ has now the same stats as here
 
 ### Fixes
-* Fixed missing flint shield definition
+* Missing flint shield definition
+* 3 blocks high trees not falling
 
 ## 4.1.1
 ### Additions
