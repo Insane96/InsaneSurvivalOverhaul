@@ -105,6 +105,12 @@ public class FoodDrinks extends JsonFeature {
 	@Config(min = 0d, max = 1f)
 	@Label(name = "Raw food Poison Chance", description = "Raw food has this chance to poison the player. Raw food is defined in the iguanatweaksreborn:raw_food tag")
 	public static Double rawFoodPoisonChance = 0.7d;
+	@Config(min = 0d, max = 255)
+	@Label(name = "Raw food Poison Amplifier", description = "Raw food will give this level of poison to the player.")
+	public static Integer rawFoodPoisonAmplifier = 1;
+	@Config(min = 0d)
+	@Label(name = "Raw food Poison Duration Multiplier", description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
+	public static Double rawFoodPoisonDurationMultiplier = 5d;
 	@Config
 	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current)")
 	public static Boolean combatSnapshotEatingSaturation = true;
@@ -143,7 +149,7 @@ public class FoodDrinks extends JsonFeature {
 		Item item = event.getItem().getItem();
 		if (player.getRandom().nextDouble() < rawFoodPoisonChance && isRawFood(item)) {
 			//noinspection DataFlowIssue
-			player.addEffect(new MobEffectInstance(MobEffects.POISON, item.getFoodProperties(event.getItem(), player).getNutrition() * 20 * 3));
+			player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (insane96mcp.insanelib.util.MCUtils.getFoodEffectiveness(item.getFoodProperties(event.getItem(), player)) * 20 * rawFoodPoisonDurationMultiplier), rawFoodPoisonAmplifier));
 		}
 	}
 
