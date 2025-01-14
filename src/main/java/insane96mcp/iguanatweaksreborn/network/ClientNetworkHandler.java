@@ -38,7 +38,7 @@ public class ClientNetworkHandler {
         if (hasBrokenBlocks && radius >= 2 && blockInteraction != Explosion.BlockInteraction.KEEP) {
             int particleCount = (int) (radius * 100);
             for (int i = 0; i < particleCount; i++) {
-                double r = radius * 0.75;
+                double r = radius;
                 double v = r / 2f;
                 double x1 = x + level.random.nextFloat() * r - v;
                 double y1 = y + level.random.nextFloat() * r - v;
