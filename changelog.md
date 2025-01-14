@@ -1,7 +1,6 @@
 # Changelog
 
 * Add other mods trees and leaves
-* Sandstone recipe gives 2
 
 ## Upcoming
 ### Additions

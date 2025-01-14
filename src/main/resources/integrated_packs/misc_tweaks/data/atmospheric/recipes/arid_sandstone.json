@@ -1,0 +1,32 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:not",
+                    "value": {
+                        "type": "forge:mod_loaded",
+                        "modid": "atmospheric"
+                    }
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "pattern": [
+                    "##",
+                    "##"
+                ],
+                "key": {
+                    "#": {
+                        "item": "atmospheric:arid_sand"
+                    }
+                },
+                "result": {
+                    "item": "atmospheric:arid_sandstone",
+                    "count": 2
+                }
+            }
+        }
+    ]
+}
