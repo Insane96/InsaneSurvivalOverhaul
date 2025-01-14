@@ -185,10 +185,11 @@ public class Respawn extends JsonFeature {
 		if (!event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN))
 			return;
 
-		boolean hasRespawned = looseWorldSpawn(event);
+		boolean hasRespawned = tryRespawnObelisk(event);
 		if (!hasRespawned)
-			looseBedSpawn(event);
-		tryRespawnObelisk(event);
+			hasRespawned = looseWorldSpawn(event);
+		if (!hasRespawned)
+			hasRespawned = looseBedSpawn(event);
 	}
 
 	private boolean looseWorldSpawn(PlayerEvent.PlayerRespawnEvent event) {
@@ -271,19 +272,20 @@ public class Respawn extends JsonFeature {
 		return respawn.immutable();
 	}
 
-	private void tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
+	private boolean tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
 		ServerPlayer player = (ServerPlayer) event.getEntity();
 		BlockPos pos = player.getRespawnPosition();
 		if (pos == null
 				|| !player.level().getBlockState(pos).is(RESPAWN_OBELISK.block().get()))
-			return;
+			return false;
 
 		if (!player.level().getBlockState(pos).getValue(RespawnObeliskBlock.ENABLED)) {
 			player.sendSystemMessage(Component.translatable(FAIL_RESPAWN_OBELISK_LANG));
 			RespawnObeliskBlock.trySetOldSpawn(player);
-			return;
+			return false;
 		}
 		RespawnObeliskBlock.onObeliskRespawn(player, player.level(), pos);
+		return true;
 	}
 
 	@SubscribeEvent
