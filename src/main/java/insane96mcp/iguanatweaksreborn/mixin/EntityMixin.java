@@ -47,17 +47,15 @@ public abstract class EntityMixin {
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;resetFallDistance()V"))
     private void onResetFallDistanceInMove(Entity instance) {
-        if (Fluids.shouldOverrideWaterFallDamageModifier()) {
+        if (Fluids.shouldOverrideWaterFallDamageModifier())
             return;
-        }
         this.resetFallDistance();
     }
 
     @Redirect(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;resetFallDistance()V"))
     private void onResetFallDistanceInUpdateInWaterState(Entity instance) {
-        if (Fluids.shouldOverrideWaterFallDamageModifier()) {
+        if (Fluids.shouldOverrideWaterFallDamageModifier())
             return;
-        }
         this.resetFallDistance();
     }
 }

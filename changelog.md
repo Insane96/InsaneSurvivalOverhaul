@@ -1,6 +1,7 @@
 # Changelog
 
 * Rarer fogs
+* Loot in archaeology sites is too good
 
 ## 4.2.2
 * Startup crash fix with Allurement
