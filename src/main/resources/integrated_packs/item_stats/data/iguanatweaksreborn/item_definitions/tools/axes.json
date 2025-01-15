@@ -26,7 +26,7 @@
 			"name": "Tool modifier",
 			"slot": "mainhand",
 			"attribute": "minecraft:generic.attack_damage",
-			"amount": 0.5,
+			"amount": 0.6,
 			"operation": "multiply_base"
 		}
 	]

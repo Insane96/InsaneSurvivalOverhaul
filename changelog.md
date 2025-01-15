@@ -1,6 +1,7 @@
 # Changelog
 
 * Sweeping edge enchantment
+* Reduce sprint speed the hungrier
 
 ## Upcoming
 ### Changes
@@ -10,7 +11,21 @@
   * Swords % damage (~~-40%~~ -> REMOVED) and knockback (~~85%~~ -> 95%) have been increased
   * Hoes base attack speed (~~2.2~~ -> 2) and % damage (~~-60%~~ -> -70%) have been reduced, increased knockback (~~35%~~ -> 50%)
   * Shovels % damage increased (~~+20%~~ -> +30%)
-  * Axes base damage increased (~~2~~ -> 2.5)
+  * Axes base damage (~~2~~ -> 2.5) and % damage (~~+50%~~ -> +60%) have been increased
+* Rebalanced material stats
+  * Golden Tools efficiency has been increased (9 -> 10)
+  * Iron Tools efficiency has been decreased (4.5 -> 4)
+  * Diamond Tools 
+    * Efficiency has been increased (4 -> 5.5)
+    * Base damage has been increased (2.5 -> 3)
+    * % damage has been reduced (**[NEW]** -5%)
+  * Netherite tools 
+    * Efficiency has been increased (5 -> 7)
+    * Enchantability has been fixed (5 -> 4)
+    * Durability has been reduced (2031 -> 1731)
+    * Base damage has been increased (2.5 -> 4)
+    * % attack speed has been reduced (**[NEW]** -5%)
+    * % damage has been reduced (**[NEW]** -5%)
 * Reduced efficiency bonus (~~+25%~~ -> +20% per level)
 
 ## 4.1.2
