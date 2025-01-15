@@ -2,11 +2,9 @@
     "type": "minecraft:crafting_shaped",
     "category": "equipment",
     "key": {
-        "#": [
-            {
-                "item": "iguanatweaksreborn:cloth"
-            }
-        ],
+        "#": {
+            "item": "iguanatweaksreborn:cloth"
+        },
         "-": {
             "item": "minecraft:string"
         }

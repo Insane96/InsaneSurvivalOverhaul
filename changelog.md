@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.1.2
 ### Additions
 * Health Regen & Hunger.Min hunger for sprint
   * Minimum hunger for players to sprint, has been reduced to 4 from vanilla 7
