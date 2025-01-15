@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -54,7 +55,7 @@ public class MiscStats extends Feature {
 	@Label(name = "1 damage for tools attacking", description = "If enabled, tools will not take 2 damage when used to hurt entities")
 	public static Boolean oneDamageForToolAttacking = true;
 	@Config
-	@Label(name = "Sweeping overhaul", description = "Rework Swords sweeping attack. The sweeping attack deals full damage and the Sweeping Edge enchantment increases the range.")
+	@Label(name = "Sweeping overhaul", description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the Sweeping Edge enchantment increases the range.")
 	public static Boolean sweepingOverhaul = true;
 
 	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -77,6 +78,15 @@ public class MiscStats extends Feature {
 		if (betterHasteMiningFatigue) {
 			MobEffects.DIG_SPEED.attributeModifiers.remove(Attributes.ATTACK_SPEED);
 			MobEffects.DIG_SLOWDOWN.attributeModifiers.remove(Attributes.ATTACK_SPEED);
+		}
+
+		if (sweepingOverhaul) {
+			ToolActions.DEFAULT_SWORD_ACTIONS.remove(ToolActions.SWORD_SWEEP);
+			ToolActions.DEFAULT_HOE_ACTIONS.add(ToolActions.SWORD_SWEEP);
+		}
+		else {
+            ToolActions.DEFAULT_SWORD_ACTIONS.add(ToolActions.SWORD_SWEEP);
+			ToolActions.DEFAULT_HOE_ACTIONS.remove(ToolActions.SWORD_SWEEP);
 		}
 	}
 

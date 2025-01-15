@@ -1,7 +1,7 @@
 {
 	"item": "#minecraft:swords",
 	"attack_damage": 1,
-	"knockback_multiplier": 0.85,
+	"knockback_multiplier": 0.95,
 	"modifiers": [
 		{
 			"uuid": "de87cf5d-0f15-4b4e-88c5-9b3c971146d0",
@@ -10,14 +10,6 @@
 			"attribute": "forge:entity_reach",
 			"amount": -0.25,
 			"operation": "addition"
-		},
-		{
-			"uuid": "de87cf5d-0f15-4b4e-88c5-9b3c971146d0",
-			"name": "Tool modifier",
-			"slot": "mainhand",
-			"attribute": "minecraft:generic.attack_damage",
-			"amount": -0.4,
-			"operation": "multiply_base"
 		}
 	]
 }

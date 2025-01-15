@@ -1,6 +1,6 @@
 {
 	"item": "#minecraft:axes",
-	"attack_damage": 2,
+	"attack_damage": 2.5,
 	"attack_speed": 0.8,
 	"durability_multiplier": 0.7,
 	"knockback_multiplier": 0.9,
