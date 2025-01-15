@@ -1,7 +1,7 @@
 {
 	"item": "minecraft:iron_helmet",
 	"durability": 91,
-	"armor": 1.5,
+	"armor": 2,
 	"regenerating_absorption": 0.75,
 	"modifiers": [
 

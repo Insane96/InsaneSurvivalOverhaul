@@ -27,6 +27,7 @@
     * % attack speed has been reduced (**[NEW]** -5%)
     * % damage has been reduced (**[NEW]** -5%)
 * Reduced efficiency bonus (~~+25%~~ -> +20% per level)
+* Increased overall armor by ~20%
 
 ## 4.1.2
 ### Additions
