@@ -2,6 +2,7 @@
 
 * Rarer fogs
 * Loot in archaeology sites is too good
+* Weapons too strong?
 
 ## 4.2.2
 * Startup crash fix with Allurement
