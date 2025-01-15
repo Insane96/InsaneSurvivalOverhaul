@@ -26,10 +26,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
 import java.text.DecimalFormat;
+import java.util.UUID;
 
 @Label(name = "Health Regen & Hunger", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class HealthRegen extends Feature {
+	public static final UUID SPRINT_PENALTY_UUID = UUID.fromString("a6d61c15-b60f-4503-b206-247c4690c436");
 
 	public static final String PASSIVE_REGEN_TICK = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "passive_regen_ticks";
 	private static final int PASSIVE_REGEN_TICK_RATE = 10;
@@ -48,18 +50,6 @@ public class HealthRegen extends Feature {
 	@Config(min = 0)
 	@Label(name = "Regen when Hunger Above", description = "Sets how much hunger the player must have to regen health (vanilla is >17).")
 	public static Integer regenWhenFoodAbove = 6;
-	@Config(min = 0)
-	@Label(name = "Starve Speed", description = "Sets how many ticks between starve damage happens (vanilla is 80).")
-	public static Integer starveSpeed = 640;
-	@Config(min = 0)
-	@Label(name = "Starve Damage", description = "Set how much damage is dealt when starving (vanilla is 1).")
-	public static Integer starveDamage = 1;
-	@Config(min = 0, max = 20)
-	@Label(name = "Starve at Hunger", description = "The player will start starving at this hunger (Vanilla is 0)")
-	public static Integer starveAtHunger = 4;
-	@Config
-	@Label(name = "Faster Starving when really hungry", description = "If below 'Starve at Hunger' player will starve 2x faster for each hunger point below 'Starve at Hunger'.")
-	public static Boolean fasterStarvingWhenReallyHungry = true;
 	@Config
 	@Label(name = "Disable Saturation Regen Boost", description = "Set to true to disable the health regen boost given when max hunger and saturation (false in Vanilla).")
 	public static Boolean disableSaturationRegenBoost = true;
@@ -72,9 +62,27 @@ public class HealthRegen extends Feature {
 	@Config(min = 0d, max = 1d)
 	@Label(name = "Hunger Consumption Chance", description = "If 'Consume Hunger Only' is true then this is the chance to consume an hunger whenever the player is healed (vanilla ignores this; Combat Test has this set to 0.5).")
 	public static Double hungerConsumptionChance = 0.5d;
+	@Config(min = 0)
+	@Label(name = "Starve.Speed", description = "Sets how many ticks between starve damage happens (vanilla is 80).")
+	public static Integer starveSpeed = 80;
+	@Config(min = 0)
+	@Label(name = "Starve.Damage", description = "Set how much damage is dealt when starving (vanilla is 1).")
+	public static Integer starveDamage = 1;
 	@Config(min = 0, max = 20)
-	@Label(name = "Min hunger for sprint", description = "Player can only sprint when have at least this much hunger. Vanilla is 7")
-	public static Integer noSprintBelowHunger = 4;
+	@Label(name = "Starve.at Hunger", description = "The player will start starving at this hunger (Vanilla is 0)")
+	public static Integer starveAtHunger = 1;
+	@Config
+	@Label(name = "Starve.Faster when really hungry", description = "If below 'Starve at Hunger' player will starve 2x faster for each hunger point below 'Starve at Hunger'.")
+	public static Boolean fasterStarvingWhenReallyHungry = true;
+	@Config(min = 0, max = 20)
+	@Label(name = "Sprint.Min hunger", description = "Player can only sprint when have at least this much hunger. Vanilla is 7")
+	public static Integer sprintMinHunger = 1;
+	@Config(min = 0)
+	@Label(name = "Sprint.Speed reduction each hunger", description = "How much less movement speed per hunger below 'Speed Penalty below hunger' sprinting players have")
+	public static Double sprintSpeedReductionEachHunger = 0.025;
+	@Config(min = 0, max = 20)
+	@Label(name = "Sprint.Speed Penalty below hunger", description = "How much less movement speed per hunger below 'Speed Penalty below hunger' sprinting players have")
+	public static Integer sprintSpeedPenaltyBelowHunger = 7;
 	@Config
 	@Label(name = "Peaceful Hunger & Health", description = "If enabled, peaceful difficulty no longer heals and fulfills the player")
 	public static Boolean peacefulHunger = true;

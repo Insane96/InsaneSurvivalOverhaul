@@ -1,8 +1,10 @@
 # Changelog
 
-* Reduce sprint speed the hungrier
-
 ## Upcoming
+### Additions
+* Sprint reduction when hungry
+  * Instead of not being able to sprint, when you're hungry the sprint speed will be reduced
+
 ### Changes
 * Changed sweeping and rebalanced weapons
   * Sweep attack is no longer on swords, instead is now on hoes

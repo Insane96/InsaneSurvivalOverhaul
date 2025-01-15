@@ -44,6 +44,6 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         if (!Feature.isEnabled(HealthRegen.class))
             return original;
 
-        return HealthRegen.noSprintBelowHunger - 1;
+        return HealthRegen.sprintMinHunger - 1;
     }
 }

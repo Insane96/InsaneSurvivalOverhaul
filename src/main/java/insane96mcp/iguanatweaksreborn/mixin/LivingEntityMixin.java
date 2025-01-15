@@ -3,10 +3,12 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.IProtectionEnchantment;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.movement.BetterClimbable;
 import insane96mcp.iguanatweaksreborn.module.movement.ElytraNerf;
@@ -26,6 +28,9 @@ import net.minecraft.world.entity.Attackable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -34,6 +39,7 @@ import org.apache.commons.lang3.mutable.MutableFloat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
@@ -52,6 +58,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Shadow public abstract Vec3 handleRelativeFrictionAndCalculateMovement(Vec3 pDeltaMovement, float pFriction);
 
     @Shadow @Nullable protected abstract SoundEvent getDeathSound();
+
+    @Shadow public abstract void remove(RemovalReason pReason);
 
     public LivingEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -171,6 +179,27 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if (!Swimming.shouldPreventFastSwimUpWithJump())
             return original;
         return original && !this.isSwimming();
+    }
+
+    @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;removeModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
+    public void onRemoveSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
+        if (!Feature.isEnabled(EnchantmentsFeature.class)
+                || HealthRegen.sprintSpeedPenaltyBelowHunger == 0f)
+            return;
+        attributeInstance.removeModifier(HealthRegen.SPRINT_PENALTY_UUID);
+    }
+
+    @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
+    public void onAddSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
+        if (!Feature.isEnabled(EnchantmentsFeature.class)
+                || HealthRegen.sprintSpeedPenaltyBelowHunger == 0f)
+            return;
+        if (!((LivingEntity)(Object)this instanceof Player player))
+            return;
+        float penalty = (HealthRegen.sprintSpeedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * HealthRegen.sprintSpeedReductionEachHunger.floatValue();
+        if (penalty <= 0f)
+            return;
+        attributeInstance.addTransientModifier(new AttributeModifier(HealthRegen.SPRINT_PENALTY_UUID, "Hungry Speed Penalty", -penalty, AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 
     @WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;handleRelativeFrictionAndCalculateMovement(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;"))
