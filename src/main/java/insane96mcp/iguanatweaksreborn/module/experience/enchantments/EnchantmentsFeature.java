@@ -225,7 +225,7 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public static float getEfficiencyBonus(float toolEfficiency, int lvl) {
 		if (isBetterEfficiencyFormula()) {
-			return toolEfficiency * lvl * 0.25f;
+			return toolEfficiency * lvl * 0.2f;
 		}
 		else {
 			return lvl * lvl + 1;

@@ -1,14 +1,17 @@
 # Changelog
 
+* Sweeping edge enchantment
+
 ## Upcoming
 ### Changes
 * Changed sweeping and rebalanced weapons
   * Sweep attack is no longer on swords, instead is now on hoes
-  * Sweep area has been increased by 0.25
-  * Swords % damage (-40% -> REMOVED) and knockback (85% -> 95%) have been increased
-  * Hoes base attack speed (2.2 -> 2) and % damage (-60% -> -70%) have been reduced, increased knockback (35% -> 50%)
-  * Shovels % damage increased (+20% -> +30%)
-  * Axes base damage increased (2 -> 2.5)
+  * Sweep area has been increased by 0.5
+  * Swords % damage (~~-40%~~ -> REMOVED) and knockback (~~85%~~ -> 95%) have been increased
+  * Hoes base attack speed (~~2.2~~ -> 2) and % damage (~~-60%~~ -> -70%) have been reduced, increased knockback (~~35%~~ -> 50%)
+  * Shovels % damage increased (~~+20%~~ -> +30%)
+  * Axes base damage increased (~~2~~ -> 2.5)
+* Reduced efficiency bonus (~~+25%~~ -> +20% per level)
 
 ## 4.1.2
 ### Additions

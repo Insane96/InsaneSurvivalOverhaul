@@ -117,7 +117,7 @@ public abstract class PlayerMixin extends LivingEntity {
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
-		return original.inflate(0.25f + lvl * 0.25f, 0.05f + lvl * 0.05f, 0.25f + lvl * 0.25f);
+		return original.inflate(0.5f + lvl * 0.5f, 0.05f + lvl * 0.05f, 0.5f + lvl * 0.25f);
 	}
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getEntityReach()D"))
