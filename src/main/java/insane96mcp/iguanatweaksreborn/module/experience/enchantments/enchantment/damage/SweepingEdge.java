@@ -11,8 +11,8 @@ public class SweepingEdge extends Enchantment {
 
     public static final TagKey<Item> ACCEPTS_ENCHANTMENT = ISOItemTagsProvider.create("enchanting/accepts_sweeping_edge");
     static final EnchantmentCategory CATEGORY = EnchantmentCategory.create("sweeping_edge", item -> item.builtInRegistryHolder().is(ACCEPTS_ENCHANTMENT));
-    public SweepingEdge(Rarity pRarity) {
-        super(pRarity, CATEGORY, new EquipmentSlot[]{ EquipmentSlot.MAINHAND });
+    public SweepingEdge() {
+        super(Rarity.RARE, CATEGORY, new EquipmentSlot[]{ EquipmentSlot.MAINHAND });
     }
 
     /**
