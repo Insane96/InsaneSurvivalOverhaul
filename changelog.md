@@ -1,6 +1,5 @@
 # Changelog
 
-* Sweeping edge enchantment
 * Reduce sprint speed the hungrier
 
 ## Upcoming

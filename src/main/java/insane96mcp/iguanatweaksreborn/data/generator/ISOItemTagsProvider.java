@@ -5,6 +5,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Knockback;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Luck;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.BonusDamageEnchantment;
+import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.SweepingEdge;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
@@ -80,6 +81,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addOptional(new ResourceLocation("environmental:venison"));
 		tag(Spawners.SPAWNER_REACTIVATOR_TAG)
 				.add(Items.ECHO_SHARD);
+
+        tag(SweepingEdge.ACCEPTS_ENCHANTMENT)
+                .addTags(ItemTags.HOES);
         tag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
                 .addTags(ItemTags.AXES, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS);
         tag(Luck.ACCEPTS_ENCHANTMENT)
