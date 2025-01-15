@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.2.0
 ### Additions
 * Sprint reduction when hungry
   * Instead of not being able to sprint, when you're hungry the sprint speed will be reduced
