@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.2
+* Startup crash fix with Allurement
+
 ## 4.2.1
 * Startup crash fix
 

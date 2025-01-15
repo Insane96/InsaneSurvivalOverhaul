@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //Shamelessly stolen from Charm
 
-@Mixin(AnvilScreen.class)
+@Mixin(value = AnvilScreen.class, priority = 1001)
 public class AnvilScreenMixin extends ItemCombinerScreen<AnvilMenu> {
 
 	@Final
