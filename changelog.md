@@ -23,6 +23,7 @@
 ### Fixes
 * Missing flint shield definition
 * 3 blocks high trees not falling
+* Respawning inside blocks
 
 ## 4.1.1
 ### Additions

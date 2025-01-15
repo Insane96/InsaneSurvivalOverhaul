@@ -250,6 +250,9 @@ public class Respawn extends JsonFeature {
 			y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, center.getX() + x, center.getZ() + z);
 			if (y < level.getSeaLevel() + 2)
 				y = level.getSeaLevel() + 2;
+			while (level.getBlockState(respawn.set(x + center.getX(), y, z + center.getZ())).blocksMotion()) {
+				y++;
+			}
 			do {
 				respawn.set(x + center.getX(), y, z + center.getZ());
 				stateBelow = level.getBlockState(respawn.below());
