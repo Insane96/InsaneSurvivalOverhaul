@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.1
+* Startup crash fix
+
 ## 4.2.0
 ### Additions
 * Sprint reduction when hungry

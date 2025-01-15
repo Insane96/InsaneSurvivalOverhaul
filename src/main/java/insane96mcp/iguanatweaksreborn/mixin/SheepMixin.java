@@ -25,7 +25,7 @@ public abstract class SheepMixin extends Animal {
 		super(pEntityType, pLevel);
 	}
 
-	@Inject(method = "onSheared", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Sheep;setSheared(Z)V"), remap = false)
+	@Inject(method = "onSheared", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Sheep;setSheared(Z)V"))
 	private void onShear(Player player, @NotNull ItemStack item, Level level, BlockPos pos, int fortune, CallbackInfoReturnable<List<ItemStack>> cir) {
 		if (!Feature.isEnabled(Livestock.class))
 			return;
