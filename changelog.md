@@ -1,5 +1,7 @@
 # Changelog
 
+* Rarer fogs
+
 ## 4.2.2
 * Startup crash fix with Allurement
 
