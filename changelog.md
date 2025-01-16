@@ -8,6 +8,8 @@
 * Reduced mobs speed in hard but increased in easy/normal
 * Increased zombies follow range in easy/normal
 * Reduced zombies overall damage by 25% and attack speed by 50%
+* Armor protection increased
+  * Damage reduction at 20 armor (~~60%~~ -> 75%)
 
 ## 4.2.2
 * Startup crash fix with Allurement
