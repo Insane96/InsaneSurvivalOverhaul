@@ -4,6 +4,9 @@
 * Loot in archaeology sites is too good
 * Weapons too strong?
 
+## Upcoming
+* Reduced zombies speed in hard
+
 ## 4.2.2
 * Startup crash fix with Allurement
 
