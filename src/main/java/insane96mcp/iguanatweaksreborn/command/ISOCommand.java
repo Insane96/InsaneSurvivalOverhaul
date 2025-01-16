@@ -58,11 +58,17 @@ public class ISOCommand {
                         )
                         .then(Commands.literal("set")
                                 .then(Commands.argument("foggy", EnumArgument.enumArgument(Foggy.class))
-                                    .executes(context -> {
-                                        Weather.setFoggyWeather(context.getSource().getServer().getLevel(Level.OVERWORLD), context.getArgument("foggy", Foggy.class));
-                                        return 1;
-                                    })
+                                        .executes(context -> {
+                                            Weather.setFoggyWeather(context.getSource().getServer().getLevel(Level.OVERWORLD), context.getArgument("foggy", Foggy.class));
+                                            return 1;
+                                        })
                                 )
+                        )
+                        .then(Commands.literal("next")
+                                .executes(context -> {
+                                        Weather.nextFoggyWeather(context.getSource().getServer().getLevel(Level.OVERWORLD));
+                                        return 1;
+                                })
                         )
                 )
                 .then(Commands.literal("thunderstorm_intensity")

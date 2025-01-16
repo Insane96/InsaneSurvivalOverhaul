@@ -5,6 +5,7 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -83,6 +85,17 @@ public class ClientWeather extends Feature {
         event.setCanceled(true);
     }
 
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void debugScreen(CustomizeGuiOverlayEvent.DebugText event) {
+        if (!this.isEnabled())
+            return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.options.renderDebug && !mc.showOnlyReducedInfo()) {
+            event.getLeft().add(String.format("fT: %s, fTT: %s, cF: %s, tF: %s", foggyTimer, foggyTargetTime, currentFoggy, targetFoggy));
+        }
+    }
     /*public static int getRenderDistance(int original) {
         if (!currentFoggy.flat)
             return original;

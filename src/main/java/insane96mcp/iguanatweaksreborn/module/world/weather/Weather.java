@@ -65,7 +65,7 @@ public class Weather extends Feature {
 
         if (++foggyData.timer >= foggyData.targetTime) {
             if (foggyData.current == foggyData.target) {
-                foggyData.target = Foggy.values()[level.random.nextInt(Foggy.values().length)];
+                foggyData.target = Foggy.getRandom(level.random);
                 foggyData.timer = 0;
                 foggyData.targetTime = getNewFoggyTargetTime(level.random);
                 level.players().forEach(player ->
@@ -95,17 +95,6 @@ public class Weather extends Feature {
         FoggySync.sync(player, WeatherSavedData.get(player.serverLevel()).foggyData);
     }
 
-    public static void clearFoggyWeather(ServerLevel level) {
-        WeatherSavedData wsd = WeatherSavedData.get(level);
-        WeatherSavedData.FoggyData foggyData = wsd.foggyData;
-        foggyData.current = Foggy.NONE;
-        foggyData.target = Foggy.NONE;
-        foggyData.timer = 0;
-        foggyData.targetTime = -1;
-        wsd.setDirty();
-        level.players().forEach(player -> FoggySync.sync(player, foggyData));
-    }
-
     public static void setFoggyWeather(ServerLevel level, Foggy foggy) {
         WeatherSavedData wsd = WeatherSavedData.get(level);
         WeatherSavedData.FoggyData foggyData = wsd.foggyData;
@@ -114,6 +103,26 @@ public class Weather extends Feature {
         foggyData.timer = 0;
         foggyData.targetTime = getNewFoggyTargetTime(level.random);
         foggyData.targetTime = (int) (foggyData.targetTime * foggy.timerMultiplier);
+        wsd.setDirty();
+        level.players().forEach(player -> FoggySync.sync(player, foggyData));
+    }
+
+    public static void nextFoggyWeather(ServerLevel level) {
+        WeatherSavedData wsd = WeatherSavedData.get(level);
+        WeatherSavedData.FoggyData foggyData = wsd.foggyData;
+        if (foggyData.current == foggyData.target) {
+            foggyData.target = Foggy.getRandom(level.random);
+            foggyData.timer = 0;
+            foggyData.targetTime = getNewFoggyTargetTime(level.random);
+            level.players().forEach(player ->
+                    FoggySync.sync(player, foggyData));
+        }
+        else {
+            foggyData.current = foggyData.target;
+            foggyData.timer = 0;
+            foggyData.targetTime = getNewFoggyTargetTime(level.random);
+            foggyData.targetTime = (int) (foggyData.targetTime * foggyData.current.timerMultiplier);
+        }
         wsd.setDirty();
         level.players().forEach(player -> FoggySync.sync(player, foggyData));
     }

@@ -1,10 +1,8 @@
 # Changelog
 
-* Rarer fogs
-* Loot in archaeology sites is too good
-
 ## Upcoming
 ### Changes
+* Heavy Fog weathers are now rarer
 * Reduced mobs speed in hard but increased in easy/normal
 * Increased zombies follow range in easy/normal
 * Reduced zombies overall damage by 25% and attack speed by 50%
