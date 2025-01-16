@@ -20,20 +20,22 @@
             "id": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for Zombies",
             "amount": {
-                "value": 12,
+                "value": 16,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
                         "spawner_behaviour": "spawner_only"
                     },
                     "amount": 0.5
-                },
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 4
                 }
             },
             "operation": "addition"
+        },
+        {
+            "id": "minecraft:generic.attack_damage",
+            "modifier_name": "Attack damage nerf for zombies",
+            "amount": -0.25,
+            "operation": "multiply_total"
         }
     ],
     "set_nbt": [

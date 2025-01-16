@@ -5,7 +5,9 @@
 * Weapons too strong?
 
 ## Upcoming
-* Reduced zombies speed in hard
+* Reduced mobs speed in hard but increased in easy/normal
+* Increased zombies follow range in easy/normal
+* Reduced zombies overall damage by 25%
 
 ## 4.2.2
 * Startup crash fix with Allurement
