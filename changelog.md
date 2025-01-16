@@ -9,6 +9,10 @@
 * Armor protection increased
   * Damage reduction at 20 armor (~~60%~~ -> 75%)
 
+### Removed
+* Swing Through Grass
+  * Use Cut Through by Fuzs, works much better
+
 ## 4.2.2
 * Startup crash fix with Allurement
 
