@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.2.3
 ### Additions
 * Added Discrete Name Tag gamerule
   * Enabled by default, name tags will no longer show behind walls
