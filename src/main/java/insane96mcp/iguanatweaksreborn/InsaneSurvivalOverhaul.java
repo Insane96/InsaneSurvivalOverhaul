@@ -112,9 +112,11 @@ public class InsaneSurvivalOverhaul
         modEventBus.register(UnfairOneShot.class);
         modEventBus.register(RegeneratingAbsorption.class);
 
-        EventManager.addListener(SeasonSpawning::onSeasonChanged);
-        EventManager.addListener(Seasons::onSeasonChanged);
-        EventManager.addListener(SeasonChangedTrigger::onSeasonChanged);
+        if (ModList.get().isLoaded("sereneseasons")) {
+            EventManager.addListener(SeasonSpawning::onSeasonChanged);
+            EventManager.addListener(Seasons::onSeasonChanged);
+            EventManager.addListener(SeasonChangedTrigger::onSeasonChanged);
+        }
         ISORegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
 
         ISOTriggers.init();

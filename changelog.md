@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.4
+* Fixed mod requiring Serene Seasons
+
 ## 4.2.3
 ### Additions
 * Added Discrete Name Tag gamerule
