@@ -40,9 +40,8 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonChangedEvent;
 import sereneseasons.api.season.SeasonHelper;
-import sereneseasons.config.FertilityConfig;
-import sereneseasons.config.ServerConfig;
-import sereneseasons.handler.season.SeasonHandler;
+import sereneseasons.init.ModConfig;
+import sereneseasons.season.SeasonHandler;
 import sereneseasons.season.SeasonSavedData;
 import sereneseasons.season.SeasonTime;
 
@@ -107,7 +106,7 @@ public class Seasons extends Feature {
 		super.readConfig(event);
 
 		if (this.isEnabled() && changeSereneSeasonsConfig)
-			FertilityConfig.seasonalCrops.set(false);
+			ModConfig.fertility.set("general.seasonal_crops", false);
 	}
 
 	@Override
@@ -115,11 +114,10 @@ public class Seasons extends Feature {
 		return super.isEnabled() && ModList.get().isLoaded("sereneseasons");
 	}
 
-	@SubscribeEvent
-	public void onSeasonChanged(SeasonChangedEvent.Standard event) {
-		if (!this.isEnabled()
+	public static void onSeasonChanged(SeasonChangedEvent.Standard event) {
+		if (!Feature.isEnabled(Seasons.class)
 				|| timeControlDayNightShift == 0
-				|| !ServerConfig.isDimensionWhitelisted(event.getLevel().dimension()))
+				|| !ModConfig.seasons.isDimensionWhitelisted(event.getLevel().dimension()))
 			return;
 
 		if (ModList.get().isLoaded("timecontrol"))
@@ -130,10 +128,13 @@ public class Seasons extends Feature {
 	public void onServerStart(ServerStartedEvent event) {
 		if (changeSereneSeasonsConfig) {
 			//ServerConfig.startingSubSeason.set(startingSeason.ordinal() + 1);
-			ServerConfig.progressSeasonWhileOffline.set(false);
+			ModConfig.seasons.set("time_settings.progress_season_while_offline", false);
 		}
-		if (ModList.get().isLoaded("timecontrol") && timeControlDayNightDuration != 10)
-			ServerConfig.dayDuration.set((int) (timeControlDayNightDuration * 60 * 20 * 2d));
+		if (ModList.get().isLoaded("timecontrol") && timeControlDayNightDuration != 10) {
+			ModConfig.seasons.set("time_settings.day_duration", (int) (timeControlDayNightDuration * 60 * 20 * 2d));
+			//I must set it on the field too otherwise when setting the starting seasons still uses the default 24000 duration
+			ModConfig.seasons.dayDuration = (int) (timeControlDayNightDuration * 60 * 20 * 2d);
+		}
 	}
 
 	@SubscribeEvent

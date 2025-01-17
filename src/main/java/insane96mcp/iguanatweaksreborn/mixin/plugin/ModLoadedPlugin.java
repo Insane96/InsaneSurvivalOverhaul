@@ -25,7 +25,6 @@ public class ModLoadedPlugin implements IMixinConfigPlugin {
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.autumnity.TurkeyBlockMixin", () -> LoadingModList.get().getModFileById("autumnity") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.autumnity.PancakeBlockMixin", () -> LoadingModList.get().getModFileById("autumnity") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.farmersdelight.PieBlockMixin", () -> LoadingModList.get().getModFileById("farmersdelight") != null)
-            .put("insane96mcp.iguanatweaksreborn.mixin.integration.sereneseasons.RandomUpdateHandlerMixin", () -> LoadingModList.get().getModFileById("sereneseasons") != null)
             .build();
     @Override
     public void onLoad(String mixinPackage) {

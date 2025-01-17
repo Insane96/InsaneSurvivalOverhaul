@@ -7,11 +7,10 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonChangedEvent;
-import sereneseasons.config.ServerConfig;
+import sereneseasons.init.ModConfig;
 
 @Label(name = "Season Spawning", description = "Changes to mob spawn with Serene Seasons installed")
 @LoadFeature(module = Modules.Ids.MOBS, requiresMods = {"sereneseasons"})
@@ -69,16 +68,15 @@ public class SeasonSpawning extends Feature {
         return super.isEnabled() && ModList.get().isLoaded("sereneseasons");
     }
 
-    @SubscribeEvent
-    public void onSeasonChanged(SeasonChangedEvent.Standard event) {
-        if (!this.isEnabled()
-                || !ServerConfig.isDimensionWhitelisted(event.getLevel().dimension()))
+    public static void onSeasonChanged(SeasonChangedEvent.Standard event) {
+        if (!Feature.isEnabled(SeasonSpawning.class)
+                || !ModConfig.seasons.isDimensionWhitelisted(event.getLevel().dimension()))
             return;
 
         update(event.getNewSeason().getSeason());
     }
 
-    private void update(Season season) {
+    private static void update(Season season) {
         switch (season) {
             case SPRING -> {
                 MobCategory.MONSTER.despawnDistance = despawnDistanceSpring;

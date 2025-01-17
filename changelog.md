@@ -22,6 +22,7 @@
 ### Fixes
 * Data pack errors (recipes and loot tables) when other mods were not present
 * Flint shield durabilty wrong
+* Compatibility with latest Serene Seasons
 
 ## 4.2.2
 * Startup crash fix with Allurement

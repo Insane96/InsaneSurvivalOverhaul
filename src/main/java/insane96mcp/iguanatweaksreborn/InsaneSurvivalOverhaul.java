@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn;
 
 import com.google.common.collect.Lists;
+import glitchcore.event.EventManager;
 import insane96mcp.iguanatweaksreborn.command.ISOCommand;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.data.criterion.SeasonChangedTrigger;
@@ -23,11 +24,13 @@ import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthRe
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.iguanatweaksreborn.module.mobs.spawning.SeasonSpawning;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
@@ -108,6 +111,10 @@ public class InsaneSurvivalOverhaul
         modEventBus.register(Tiredness.class);
         modEventBus.register(UnfairOneShot.class);
         modEventBus.register(RegeneratingAbsorption.class);
+
+        EventManager.addListener(SeasonSpawning::onSeasonChanged);
+        EventManager.addListener(Seasons::onSeasonChanged);
+        EventManager.addListener(SeasonChangedTrigger::onSeasonChanged);
         ISORegistries.REGISTRIES.forEach(register -> register.register(modEventBus));
 
         ISOTriggers.init();

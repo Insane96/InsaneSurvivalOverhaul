@@ -77,8 +77,7 @@
         "WanderingTraderMixin",
         "WolfMixin",
         "ZombieMixin",
-        "integration.globalgamerules.WorldEventsMixin",
-        "integration.sereneseasons.RandomUpdateHandlerMixin"
+        "integration.globalgamerules.WorldEventsMixin"
     ],
     "minVersion": "0.8",
     "client": [

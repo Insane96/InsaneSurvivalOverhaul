@@ -70,7 +70,7 @@ license="All rights reserved"
 [[dependencies.iguanatweaksreborn]]
     modId="sereneseasons"
     mandatory=false
-    versionRange="9.0.0.46"
+    versionRange="9.1.0.0"
     ordering="NONE"
     side="BOTH"
 

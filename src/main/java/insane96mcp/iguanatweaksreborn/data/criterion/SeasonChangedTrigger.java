@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonChangedEvent;
 
@@ -43,7 +42,6 @@ public class SeasonChangedTrigger extends SimpleCriterionTrigger<SeasonChangedTr
 		this.trigger(player, triggerInstance -> triggerInstance.matches(season));
 	}
 
-	@SubscribeEvent
 	public static void onSeasonChanged(SeasonChangedEvent.Standard event) {
 		if (!(event.getLevel() instanceof ServerLevel serverLevel))
 			return;
