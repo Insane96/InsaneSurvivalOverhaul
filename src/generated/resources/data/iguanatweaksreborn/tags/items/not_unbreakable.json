@@ -5,7 +5,10 @@
     "#iguanatweaksreborn:equipment/armor/leather",
     "iguanatweaksreborn:firestarter",
     "#iguanatweaksreborn:equipment/hand/flint",
-    "iguanatweaksreborn:flint_shield",
+    {
+      "id": "iguanatweaksreborn:flint_shield",
+      "required": false
+    },
     {
       "id": "#iguanatweaksexpanded:equipment/hand/copper",
       "required": false

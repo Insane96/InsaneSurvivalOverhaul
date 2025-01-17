@@ -1,16 +1,29 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"category": "misc",
-	"ingredients": [
-		{
-			"item": "minecraft:polished_deepslate"
-		},
-		{
-			"item": "minecraft:redstone"
-		}
-	],
-	"result": {
-		"item": "cinchsbetterdeepslate:polished_deepslate_button",
-		"count": 2
-	}
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "cinchsbetterdeepslate"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shapeless",
+                "category": "misc",
+                "ingredients": [
+                    {
+                        "item": "minecraft:polished_deepslate"
+                    },
+                    {
+                        "item": "minecraft:redstone"
+                    }
+                ],
+                "result": {
+                    "item": "cinchsbetterdeepslate:polished_deepslate_button",
+                    "count": 2
+                }
+            }
+        }
+    ]
 }

@@ -219,6 +219,8 @@ public class InsaneSurvivalOverhaul
         for (IntegratedPack dataPack : IntegratedPack.INTEGRATED_PACKS) {
             if (event.getPackType() != dataPack.getPackType())
                 continue;
+            if (!dataPack.shouldBeEnabled())
+                continue;
 
             Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + dataPack.getPath());
             var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),

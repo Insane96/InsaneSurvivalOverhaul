@@ -1,20 +1,33 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"category": "building",
-	"key": {
-		"r": {
-			"item": "minecraft:redstone"
-		},
-		"A": {
-			"item": "minecraft:polished_deepslate"
-		}
-	},
-	"pattern": [
-		" r",
-		"AA"
-	],
-	"result": {
-		"item": "cinchsbetterdeepslate:polished_deepslate_pressure_plate",
-		"count": 2
-	}
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "cinchsbetterdeepslate"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "category": "building",
+                "key": {
+                    "r": {
+                        "item": "minecraft:redstone"
+                    },
+                    "A": {
+                        "item": "minecraft:polished_deepslate"
+                    }
+                },
+                "pattern": [
+                    " r",
+                    "AA"
+                ],
+                "result": {
+                    "item": "cinchsbetterdeepslate:polished_deepslate_pressure_plate",
+                    "count": 2
+                }
+            }
+        }
+    ]
 }

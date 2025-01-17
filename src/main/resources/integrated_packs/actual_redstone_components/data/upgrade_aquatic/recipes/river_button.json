@@ -1,17 +1,30 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"category": "redstone",
-	"group": "wooden_button",
-	"ingredients": [
-		{
-			"item": "upgrade_aquatic:river_planks"
-		},
-		{
-			"item": "minecraft:redstone"
-		}
-	],
-	"result": {
-		"item": "upgrade_aquatic:river_button",
-		"count": 2
-	}
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "upgrade_aquatic"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shapeless",
+                "category": "redstone",
+                "group": "wooden_button",
+                "ingredients": [
+                    {
+                        "item": "upgrade_aquatic:river_planks"
+                    },
+                    {
+                        "item": "minecraft:redstone"
+                    }
+                ],
+                "result": {
+                    "item": "upgrade_aquatic:river_button",
+                    "count": 2
+                }
+            }
+        }
+    ]
 }

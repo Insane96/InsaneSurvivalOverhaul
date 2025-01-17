@@ -1,26 +1,39 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "group": "wooden_pressure_plate",
-    "pattern": [
-        " r",
-        "##"
-    ],
-    "key": {
-        "r": {
-            "item": "minecraft:redstone"
-        },
-        "#": {
-            "item": "quark:blossom_planks"
-        }
-    },
-    "result": {
-        "item": "quark:blossom_pressure_plate",
-        "count": 2
-    },
-    "conditions": [
+    "type": "forge:conditional",
+    "recipes": [
         {
-            "type": "quark:flag",
-            "flag": "blossom_trees"
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "quark"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "group": "wooden_pressure_plate",
+                "pattern": [
+                    " r",
+                    "##"
+                ],
+                "key": {
+                    "r": {
+                        "item": "minecraft:redstone"
+                    },
+                    "#": {
+                        "item": "quark:blossom_planks"
+                    }
+                },
+                "result": {
+                    "item": "quark:blossom_pressure_plate",
+                    "count": 2
+                },
+                "conditions": [
+                    {
+                        "type": "quark:flag",
+                        "flag": "blossom_trees"
+                    }
+                ]
+            }
         }
     ]
 }

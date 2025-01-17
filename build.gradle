@@ -107,7 +107,7 @@ dependencies {
     implementation fg.deobf("blank:Stamina:1.1.1")
     runtimeOnly fg.deobf("blank:MobsPropertiesRandomness:${mpr_version}-mc${mc_version}")
     implementation fg.deobf("blank:EnhancedAI:${enhancedai_version}-mc${mc_version}")
-    compileOnly fg.deobf("blank:Shields+:${shieldsplus_version}-mc${mc_version}")
+    implementation fg.deobf("blank:Shields+:${shieldsplus_version}-mc${mc_version}")
     compileOnly fg.deobf("blank:nohunger:1.0.1:slim")
 
     implementation fg.deobf("curse.maven:selene-499980:5254462")

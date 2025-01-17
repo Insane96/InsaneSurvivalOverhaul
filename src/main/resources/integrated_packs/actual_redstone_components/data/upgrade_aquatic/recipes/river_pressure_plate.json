@@ -1,22 +1,35 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"category": "redstone",
-	"group": "wooden_pressure_plate",
-	"key": {
-		"r": {
-			"item": "minecraft:redstone"
-		},
-		"#": {
-			"item": "upgrade_aquatic:river_planks"
-		}
-	},
-	"pattern": [
-		" r",
-		"##"
-	],
-	"result": {
-		"item": "upgrade_aquatic:river_pressure_plate",
-		"count": 2
-	},
-	"show_notification": true
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "upgrade_aquatic"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "category": "redstone",
+                "group": "wooden_pressure_plate",
+                "key": {
+                    "r": {
+                        "item": "minecraft:redstone"
+                    },
+                    "#": {
+                        "item": "upgrade_aquatic:river_planks"
+                    }
+                },
+                "pattern": [
+                    " r",
+                    "##"
+                ],
+                "result": {
+                    "item": "upgrade_aquatic:river_pressure_plate",
+                    "count": 2
+                },
+                "show_notification": true
+            }
+        }
+    ]
 }

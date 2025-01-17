@@ -1,17 +1,30 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "category": "redstone",
-    "group": "wooden_button",
-    "ingredients": [
+    "type": "forge:conditional",
+    "recipes": [
         {
-            "item": "autumnity:maple_planks"
-        },
-        {
-            "item": "minecraft:redstone"
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "autumnity"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shapeless",
+                "category": "redstone",
+                "group": "wooden_button",
+                "ingredients": [
+                    {
+                        "item": "autumnity:maple_planks"
+                    },
+                    {
+                        "item": "minecraft:redstone"
+                    }
+                ],
+                "result": {
+                    "item": "autumnity:maple_button",
+                    "count": 2
+                }
+            }
         }
-    ],
-    "result": {
-        "item": "autumnity:maple_button",
-        "count": 2
-    }
+    ]
 }

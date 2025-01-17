@@ -4,11 +4,8 @@
         {
             "conditions": [
                 {
-                    "type": "forge:not",
-                    "value": {
-                        "type": "forge:mod_loaded",
-                        "modid": "atmospheric"
-                    }
+                    "type": "forge:mod_loaded",
+                    "modid": "atmospheric"
                 }
             ],
             "recipe": {

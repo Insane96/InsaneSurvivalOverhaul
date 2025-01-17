@@ -1,26 +1,39 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "group": "wooden_pressure_plate",
-    "pattern": [
-        " r",
-        "##"
-    ],
-    "key": {
-        "r": {
-            "item": "minecraft:redstone"
-        },
-        "#": {
-            "item": "quark:azalea_planks"
-        }
-    },
-    "result": {
-        "item": "quark:azalea_pressure_plate",
-        "count": 2
-    },
-    "conditions": [
+    "type": "forge:conditional",
+    "recipes": [
         {
-            "type": "quark:flag",
-            "flag": "azalea_wood"
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "quark"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "group": "wooden_pressure_plate",
+                "pattern": [
+                    " r",
+                    "##"
+                ],
+                "key": {
+                    "r": {
+                        "item": "minecraft:redstone"
+                    },
+                    "#": {
+                        "item": "quark:azalea_planks"
+                    }
+                },
+                "result": {
+                    "item": "quark:azalea_pressure_plate",
+                    "count": 2
+                },
+                "conditions": [
+                    {
+                        "type": "quark:flag",
+                        "flag": "azalea_wood"
+                    }
+                ]
+            }
         }
     ]
 }

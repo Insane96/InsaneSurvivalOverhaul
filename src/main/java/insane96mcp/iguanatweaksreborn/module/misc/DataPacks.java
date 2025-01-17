@@ -93,6 +93,15 @@ public class DataPacks extends Feature {
     @Config
     @Label(name = "Farmer's Delight integration", description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
     public static Boolean farmersDelight = true;
+    @Config
+    @Label(name = "Environmental integration", description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
+    public static Boolean environmental = true;
+    @Config
+    @Label(name = "Quark integration", description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
+    public static Boolean quark = true;
+    @Config
+    @Label(name = "Autumnity integration", description = "Integrates the mod with Autumnity. Changes animals loot to match the livestock changes.")
+    public static Boolean autumnity = true;
 
     @Config
     @Label(name = "Assets override", description = "Change some vanilla textures such as arrows to flint, spawners to echo and also some lang entries")
@@ -117,6 +126,9 @@ public class DataPacks extends Feature {
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "mob_loot_changes", Component.literal("Insane's Survival Overhaul Mob Loot Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && mobLootChanges));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "advancements", Component.literal("Insane's Survival Overhaul Advancements"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && advancements));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "supplementaries_integration", Component.literal("Insane's Survival Overhaul Supplementaries Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "environmental_integration", Component.literal("Insane's Survival Overhaul Environmental Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && environmental && ModList.get().isLoaded("environmental")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "quark_integration", Component.literal("Insane's Survival Overhaul Quark Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && quark && ModList.get().isLoaded("quark")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "autumnity_integration", Component.literal("Insane's Survival Overhaul Autumnity Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
 
         IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> assetsOverride));

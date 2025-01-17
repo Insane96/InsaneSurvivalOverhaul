@@ -19,6 +19,9 @@
 * Swing Through Grass
   * Use Cut Through by Fuzs, works much better
 
+### Fixes
+* Data pack errors (recipes and loot tables) when other mods were not present
+
 ## 4.2.2
 * Startup crash fix with Allurement
 

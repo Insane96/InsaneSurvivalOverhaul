@@ -1,22 +1,35 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "group": "wooden_button",
-    "ingredients": [
+    "type": "forge:conditional",
+    "recipes": [
         {
-            "item": "quark:ancient_planks"
-        },
-        {
-            "item": "minecraft:redstone"
-        }
-    ],
-    "result": {
-        "item": "quark:ancient_button",
-        "count": 2
-    },
-    "conditions": [
-        {
-            "type": "quark:flag",
-            "flag": "ancient_wood"
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "quark"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shapeless",
+                "group": "wooden_button",
+                "ingredients": [
+                    {
+                        "item": "quark:ancient_planks"
+                    },
+                    {
+                        "item": "minecraft:redstone"
+                    }
+                ],
+                "result": {
+                    "item": "quark:ancient_button",
+                    "count": 2
+                },
+                "conditions": [
+                    {
+                        "type": "quark:flag",
+                        "flag": "ancient_wood"
+                    }
+                ]
+            }
         }
     ]
 }
