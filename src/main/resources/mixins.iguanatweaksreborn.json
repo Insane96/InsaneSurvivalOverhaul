@@ -4,7 +4,9 @@
     "compatibilityLevel": "JAVA_17",
     "refmap": "mixins.iguanatweaksreborn.refmap.json",
     "plugin": "insane96mcp.iguanatweaksreborn.mixin.plugin.ModLoadedPlugin",
-    "injectors": { "defaultRequire": 1 },
+    "injectors": {
+        "defaultRequire": 1
+    },
     "mixins": [
         "AbstractArrowMixin",
         "AbstractMinecartMixin",
@@ -86,6 +88,7 @@
         "client.ClientLevelMixin",
         "client.ClientPacketListenerMixin",
         "client.DeathScreenMixin",
+        "client.EntityRendererMixin",
         "client.GameRendererMixin",
         "client.GuiMixin",
         "client.LevelRendererMixin",

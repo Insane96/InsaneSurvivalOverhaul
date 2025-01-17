@@ -1,6 +1,12 @@
 # Changelog
 
+* Time control should work without Serene seasons
+
 ## Upcoming
+### Additions
+* Added Discrete Name Tag gamerule
+  * Enabled by default, name tags will no longer show behind walls
+
 ### Changes
 * Heavy Fog weathers are now rarer
 * Reduced mobs speed in hard but increased in easy/normal

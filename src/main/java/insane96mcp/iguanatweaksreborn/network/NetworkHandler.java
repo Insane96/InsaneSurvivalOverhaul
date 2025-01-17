@@ -39,5 +39,6 @@ public class NetworkHandler {
 		CHANNEL.registerMessage(++index, ExplodeParticles.class, ExplodeParticles::encode, ExplodeParticles::decode, ExplodeParticles::handle);
 		CHANNEL.registerMessage(++index, FoggySync.class, FoggySync::encode, FoggySync::decode, FoggySync::handle);
 		CHANNEL.registerMessage(++index, UnfairOneShotActivation.class, UnfairOneShotActivation::encode, UnfairOneShotActivation::decode, UnfairOneShotActivation::handle);
+		CHANNEL.registerMessage(++index, SyncDiscreteNameTags.class, SyncDiscreteNameTags::encode, SyncDiscreteNameTags::decode, SyncDiscreteNameTags::handle);
 	}
 }

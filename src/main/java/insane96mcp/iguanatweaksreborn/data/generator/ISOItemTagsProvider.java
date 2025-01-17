@@ -27,6 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -70,7 +71,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTags(WOODEN_HAND_EQUIPMENT, STONE_HAND_EQUIPMENT, LEATHER_ARMOR_EQUIPMENT)
                 .add(CoalFire.FIRESTARTER.get())
                 .addTag(FLINT_HAND_EQUIPMENT)
-                .add(FlintExpansion.ShieldsPlusIntegration.SHIELD.get())
+                .addOptional(ForgeRegistries.ITEMS.getKey(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()))
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/hand/copper"))
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/armor/chained_copper"))
                 .addOptional(new ResourceLocation("shieldsplus:wooden_shield")).addOptional(new ResourceLocation("shieldsplus:stone_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:copper_shield"));
