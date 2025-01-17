@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Fixed compatibility with Quality Foods
+
 ## 4.2.4
 * Fixed mod requiring Serene Seasons
 
