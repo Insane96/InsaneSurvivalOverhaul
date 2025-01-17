@@ -1,7 +1,5 @@
 # Changelog
 
-* Time control should work without Serene seasons
-
 ## Upcoming
 ### Additions
 * Added Discrete Name Tag gamerule
@@ -21,7 +19,7 @@
 
 ### Fixes
 * Data pack errors (recipes and loot tables) when other mods were not present
-* Flint shield durabilty wrong
+* Flint shield durability wrong
 * Compatibility with latest Serene Seasons
 
 ## 4.2.2
