@@ -1,7 +1,13 @@
 # Changelog
 
 ## Upcoming
-* Fixed compatibility with Quality Foods
+### Changes
+* Auto breed chance is now in livestock data
+  * So you can change chance per animal via data pack
+
+### Fixes
+* Compatibility with Quality Foods
+* Auto breed not working on most mobs
 
 ## 4.2.4
 * Fixed mod requiring Serene Seasons

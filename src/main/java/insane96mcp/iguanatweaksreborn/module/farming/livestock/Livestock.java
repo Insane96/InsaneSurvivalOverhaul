@@ -74,10 +74,6 @@ public class Livestock extends Feature {
 	@Label(name = "Milk Cooldown", description = "Seconds until you can milk cows (or stew mooshrooms)")
 	public static Integer milkingCooldown = 1200;
 
-	@Config(min = 0, max = 1)
-	@Label(name = "Auto-breed chance", description = "Chance every 10 seconds for animals to fall in love without food (breeding cooldown still applies).")
-	public static Double autoBreedChance = 0.02d;
-
 	@Config
 	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
 	public static Boolean dataPack = true;
@@ -109,16 +105,28 @@ public class Livestock extends Feature {
 			liveDeath(event);
 			eggLay(event);
 			tickFedTime(event);
-			if (event.getEntity().tickCount % 200 == event.getEntity().getId()
-					&& event.getEntity() instanceof Animal animal
-					&& animal.canFallInLove()
-					&& animal.getAge() == 0
-					&& animal.getRandom().nextFloat() < autoBreedChance) {
-				animal.setInLove(null);
-			}
+			tryAutoBreed(event);
 		}
 		cowMilkTick(event);
 	}
+
+	public static void tryAutoBreed(LivingEvent.LivingTickEvent event) {
+		if (!(event.getEntity() instanceof Animal animal)
+				|| !animal.canFallInLove()
+				|| animal.getAge() != 0)
+			return;
+		int tickCount = event.getEntity().tickCount + event.getEntity().getId();
+		if (tickCount % 200 != 0)
+			return;
+		List<Modifier> modifiersToApply = new ArrayList<>();
+		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
+				.filter(data -> data.matches(animal))
+				.forEach(data -> modifiersToApply.addAll(data.autoBreedChanceModifiers));
+		float chance = Modifier.applyModifiers(1f, modifiersToApply, animal.level(), animal.blockPosition(), animal);
+		if (chance <= 0d || animal.getRandom().nextFloat() >= chance)
+			return;
+        animal.setInLove(null);
+    }
 
 	@SubscribeEvent
 	public void onTryToSeedChickens(PlayerInteractEvent.EntityInteract event) {

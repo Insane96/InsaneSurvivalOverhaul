@@ -81,5 +81,18 @@
             "modifier": -0.2,
             "operation": "add"
         }
+    ],
+    "auto_breed_chance_modifiers": [
+        {
+            "id": "iguanatweaksreborn:true",
+            "modifier": 0.02,
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:age",
+            "modifier": 0.01,
+            "age": "old",
+            "operation": "add"
+        }
     ]
 }
