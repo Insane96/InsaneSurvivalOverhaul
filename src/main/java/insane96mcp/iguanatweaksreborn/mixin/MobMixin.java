@@ -2,17 +2,18 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.mobs.equipment.Equipment;
+import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
+import insane96mcp.iguanatweaksreborn.module.world.weather.WeatherSavedData;
 import insane96mcp.insanelib.base.Feature;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Mob.class)
 public abstract class MobMixin extends LivingEntity {
@@ -31,5 +32,16 @@ public abstract class MobMixin extends LivingEntity {
 		if (!Feature.isEnabled(Equipment.class))
 			return Math.min(damageValue, stack.getMaxDamage());
 		return stack.getMaxDamage() - this.random.nextInt((int) (stack.getMaxDamage() * Equipment.maxDurability));
+	}
+
+	@Inject(method = "isSunBurnTick", at = @At(value = "HEAD"), cancellable = true)
+	public void damageValue(CallbackInfoReturnable<Boolean> cir) {
+		if (!(level() instanceof ServerLevel serverLevel)
+				|| !serverLevel.getGameRules().getBoolean(Weather.RULE_FOGGYWEATHER))
+			return;
+
+		WeatherSavedData.FoggyData foggyData = Weather.getCurrentFoggyData(serverLevel);
+		if (foggyData.current.ordinal() >= 4 && (foggyData.target.ordinal() >= 4 || foggyData.getRatioToTarget() < 0.5f))
+			cir.setReturnValue(false);
 	}
 }

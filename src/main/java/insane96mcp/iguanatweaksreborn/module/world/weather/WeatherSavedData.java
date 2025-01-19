@@ -72,6 +72,11 @@ public class WeatherSavedData extends SavedData {
                     ", target=" + target +
                     '}';
         }
+
+        //Returns a value between 0 and 1, where 0 means it has already started at the current target and 1 means it has reached the target
+        public float getRatioToTarget() {
+            return (float) this.timer / (float) this.targetTime;
+        }
     }
 
     public static final class ThunderIntensityData {

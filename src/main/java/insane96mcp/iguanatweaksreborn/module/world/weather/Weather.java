@@ -16,8 +16,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Weather", description = "Thunderstorm Intensity and Foggy Weather")
-@LoadFeature(module = Modules.Ids.WORLD)
+@Label(name = "Weather", description = "Thunderstorm Intensity and Foggy Weather. Disable them via gamerules: iguanatweaks:thunderstormIntensity and iguanatweaks:foggyWeather")
+@LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
 public class Weather extends Feature {
     public static final GameRules.Key<GameRules.BooleanValue> RULE_THUNDERSTORMINTENSITY = GameRules.register("iguanatweaks:thunderstormIntensity", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
     public static final GameRules.Key<GameRules.BooleanValue> RULE_FOGGYWEATHER = GameRules.register("iguanatweaks:foggyWeather", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
@@ -43,6 +43,16 @@ public class Weather extends Feature {
         super(module, enabledByDefault, canBeDisabled);
     }
 
+    public static void onSkipNight(int timeSkipped, ServerLevel level) {
+        if (!Feature.isEnabled(Weather.class))
+            return;
+
+        if (level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
+            advanceFoggyWeather(level, timeSkipped);
+        if (level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
+            advanceVariableThunderstorm(level, timeSkipped);
+    }
+
     @SubscribeEvent
     public void onLevelTick(TickEvent.LevelTickEvent event) {
         if (!this.isEnabled()
@@ -52,39 +62,44 @@ public class Weather extends Feature {
                 /*|| event.level.tickCount % 20 != 10*/)
             return;
 
-        tickFoggyWeather(serverLevel, WeatherSavedData.get(serverLevel));
-        tickVariableThunderstorm(serverLevel, WeatherSavedData.get(serverLevel));
+        advanceFoggyWeather(serverLevel, 1);
+        advanceVariableThunderstorm(serverLevel, 1);
     }
 
-    public static void tickFoggyWeather(ServerLevel level, WeatherSavedData wsd) {
+    public static void advanceFoggyWeather(ServerLevel level, int ticks) {
         if (!level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
             return;
+        WeatherSavedData wsd = WeatherSavedData.get(level);
         WeatherSavedData.FoggyData foggyData = wsd.foggyData;
-        if (foggyData.targetTime == -1)
+        if (foggyData.targetTime <= 0)
             foggyData.targetTime = getNewFoggyTargetTime(level.random);
 
-        if (++foggyData.timer >= foggyData.targetTime) {
+        foggyData.timer += ticks;
+        while (foggyData.timer >= foggyData.targetTime) {
             if (foggyData.current == foggyData.target) {
                 foggyData.target = Foggy.getRandom(level.random);
-                foggyData.timer = 0;
+                foggyData.timer -= foggyData.targetTime;
                 foggyData.targetTime = getNewFoggyTargetTime(level.random);
                 level.players().forEach(player ->
                         FoggySync.sync(player, foggyData));
             }
             else {
                 foggyData.current = foggyData.target;
-                foggyData.timer = 0;
-                foggyData.targetTime = getNewFoggyTargetTime(level.random);
-                foggyData.targetTime = (int) (foggyData.targetTime * foggyData.current.timerMultiplier);
+                foggyData.timer -= foggyData.targetTime;
+                foggyData.targetTime = (int) (getNewFoggyTargetTime(level.random) * foggyData.current.timerMultiplier);
             }
         }
         wsd.setDirty();
+        if (ticks > 1)
+            level.players().forEach(player ->
+                    FoggySync.sync(player, foggyData));
     }
 
     private static int getNewFoggyTargetTime(RandomSource random) {
         return (int) ((random.nextFloat() * (foggyWeatherMaxTime - foggyWeatherMinTime) + foggyWeatherMinTime) * 60 * 20);
     }
 
+    //Change to player logged in event?
     @SubscribeEvent
     public void onPlayerJoinLevel(EntityJoinLevelEvent event) {
         if (!this.isEnabled()
@@ -131,20 +146,23 @@ public class Weather extends Feature {
         return WeatherSavedData.get(level).foggyData;
     }
 
-    public static void tickVariableThunderstorm(ServerLevel level, WeatherSavedData wsd) {
+    public static void advanceVariableThunderstorm(ServerLevel level, int ticks) {
         if (!level.getGameRules().getBoolean(RULE_THUNDERSTORMINTENSITY))
             return;
+
+        WeatherSavedData wsd = WeatherSavedData.get(level);
         WeatherSavedData.ThunderIntensityData tid = wsd.thunderIntensityData;
-        if (tid.targetIntensity == -1)
+        if (tid.targetIntensity <= 0)
             tid.targetIntensity = getNewTargetIntensity(level.random);
 
-        if (--tid.timer <= 0) {
-            tid.timer = (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.getIntensity();
+        tid.timer -= ticks;
+        while (tid.timer <= 0) {
+            tid.timer += (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.getIntensity();
             int delta = tid.targetIntensity > tid.getIntensity() ? 1 : -1;
             tid.addIntensity(delta);
             if (tid.getIntensity() == tid.targetIntensity)
                 tid.targetIntensity = getNewTargetIntensity(level.random);
-        }
+        };
         wsd.setDirty();
     }
 

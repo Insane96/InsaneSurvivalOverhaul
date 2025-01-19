@@ -4,6 +4,8 @@
 ### Changes
 * Auto breed chance is now in livestock data
   * So you can change chance per animal via data pack
+* Fog and thunderstorm intensity now advance when sleeping
+* Heavy fogs now prevent undeads from burning in sunlight
 
 ### Fixes
 * Compatibility with Quality Foods

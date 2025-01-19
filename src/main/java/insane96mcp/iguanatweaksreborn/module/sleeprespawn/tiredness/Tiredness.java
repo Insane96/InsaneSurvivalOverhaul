@@ -7,6 +7,7 @@ import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
@@ -319,7 +320,10 @@ public class Tiredness extends JsonFeature {
 		if (!this.isEnabled())
 			return;
 		AtomicInteger highestTired = new AtomicInteger();
-		event.getLevel().players().stream().filter(LivingEntity::isSleeping).filter(player -> player.hasEffect(TIRED.get())).toList().forEach(player -> {
+		event.getLevel().players().stream()
+				.filter(LivingEntity::isSleeping)
+				.filter(player -> player.hasEffect(TIRED.get()))
+				.toList().forEach(player -> {
 			float tirednessOnWakeUp = TirednessHandler.getOnWakeUp(player);
 			if (player.getEffect(TIRED.get()).getAmplifier() > highestTired.get())
 				highestTired.set(player.getEffect(TIRED.get()).getAmplifier());
@@ -327,11 +331,17 @@ public class Tiredness extends JsonFeature {
 			player.removeEffect(TIRED.get());
 		});
 
+		skipTime(event, highestTired.get());
+	}
+
+	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
 		timeSkipped = 12000;
-		//If above Tired I
-		if (highestTired.get() > 0)
-			timeSkipped += 1200 * highestTired.get();
+		//If above Tired I increase the time skipped by 1 minute per level
+		if (highestTiredAmplifier > 0)
+			timeSkipped += 1200 * highestTiredAmplifier;
 		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
+
+		Weather.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
 	}
 
 	public static boolean onSleepFinished(ServerLevel level, boolean original) {
