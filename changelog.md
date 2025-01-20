@@ -1,5 +1,7 @@
 # Changelog
 
+* Crouch right-clicking on bed should allow obelisk respawn overwrite
+
 ## Upcoming
 ### Additions
 * Arrow Stats.Piercing Crossbows
@@ -11,6 +13,7 @@
 * Fog and thunderstorm intensity now advance when sleeping
 * Heavy fogs now prevent undeads from burning in sunlight
 * Crossbows arrow speed is now lower (3.5 -> 2.5)
+* You now need to sneak to overwrite your obelisk respawn point with a bed
 
 ### Fixes
 * Compatibility with Quality Foods

@@ -98,8 +98,8 @@ public class Respawn extends JsonFeature {
 	public static Difficulty saturationOnRespawnMax = new Difficulty(10, 10, 6);
 
 	@Config
-	@Label(name = "Allow obelisk spawn point overwrite with beds", description = "If disabled, beds spawn point will not overwrite obelisk spawn point")
-	public static Boolean allowObeliskSpawnPointOverwriteWithBeds = true;
+	@Label(name = "Allow obelisk spawn point overwrite with beds when sneaking", description = "If enabled, sleeping a bed when sneaking will overwrite obelisk spawn point")
+	public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
 
 	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
 			IdTagValue.newId("minecraft:iron_block", 0.75d),
@@ -297,8 +297,9 @@ public class Respawn extends JsonFeature {
 				|| event.isForced())
 			return;
 
+		if (onSetSpawnPreventObeliskOverwrite(event))
+			return;
 		onSetSpawnLooseMessage(event);
-		onSetSpawnPreventObeliskOverwrite(event);
 	}
 
 	public void onSetSpawnLooseMessage(PlayerSetSpawnEvent event) {
@@ -314,19 +315,26 @@ public class Respawn extends JsonFeature {
 		player.displayClientMessage(Component.translatable(LOOSE_RESPAWN_POINT_SET), false);
 	}
 
-	public void onSetSpawnPreventObeliskOverwrite(PlayerSetSpawnEvent event) {
-		if (allowObeliskSpawnPointOverwriteWithBeds)
-			return;
+	/// Returns true if the spawn point was prevented from being overwritten
+	public boolean onSetSpawnPreventObeliskOverwrite(PlayerSetSpawnEvent event) {
 		ServerPlayer player = (ServerPlayer) event.getEntity();
-		if (player.getRespawnPosition() != null
-				&& player.level().dimension().equals(player.getRespawnDimension())
-				&& player.level().getBlockState(player.getRespawnPosition()).is(RESPAWN_OBELISK.block().get())
-				&& player.level().getBlockState(player.getRespawnPosition()).getValue(RespawnObeliskBlock.ENABLED)
-				&& event.getNewSpawn() != null
-				&& !player.level().getBlockState(event.getNewSpawn()).is(RESPAWN_OBELISK.block().get())) {
-			if (RespawnObeliskBlock.saveOldSpawn(player, event.getNewSpawn(), event.isForced(), 0f, event.getSpawnLevel()))
-				player.sendSystemMessage(Component.translatable("iguanatweaksreborn.set_old_respawn"));
-			event.setCanceled(true);
-		}
+		if (player.getRespawnPosition() == null
+				|| !player.level().dimension().equals(player.getRespawnDimension())
+				|| !player.level().getBlockState(player.getRespawnPosition()).is(RESPAWN_OBELISK.block().get())
+				|| !player.level().getBlockState(player.getRespawnPosition()).getValue(RespawnObeliskBlock.ENABLED)
+				|| event.getNewSpawn() == null
+				|| player.level().getBlockState(event.getNewSpawn()).is(RESPAWN_OBELISK.block().get()))
+			return false;
+		if (allowObeliskSpawnPointOverwriteWithBedsSneaking) {
+            if (!event.getEntity().isCrouching())
+                player.sendSystemMessage(Component.translatable("iguanatweaksreborn.sneak_to_overwrite"));
+			else
+            	return false;
+        }
+
+		if (RespawnObeliskBlock.saveOldSpawn(player, event.getNewSpawn(), event.isForced(), 0f, event.getSpawnLevel()))
+			player.sendSystemMessage(Component.translatable("iguanatweaksreborn.set_old_respawn"));
+		event.setCanceled(true);
+		return true;
 	}
 }
