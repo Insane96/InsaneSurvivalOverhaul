@@ -6,6 +6,7 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 
 @Label(name = "Arrow Stats")
 @LoadFeature(module = Modules.Ids.COMBAT)
@@ -24,10 +25,26 @@ public class ArrowStats extends Feature {
 	public static Double bowInaccuracy = 0.5d;
 	@Config(min = 0d, max = 10d)
 	@Label(name = "Crossbow velocity", description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
-	public static Double crossbowVelocity = 3.5d;
+	public static Double crossbowVelocity = 2.5d;
+	@Config
+	@Label(name = "Piercing Crossbow", description = "If true, crossbows will have an innate Piercing ability")
+	public static Boolean piercingCrossbow = true;
 
 	public ArrowStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+	}
+
+	public static float getCrossbowVelocity() {
+		if (!Feature.isEnabled(ArrowStats.class))
+			return 3.15f;
+		return crossbowVelocity.floatValue();
+	}
+
+	public static void piercingCrossbows(AbstractArrow abstractArrow) {
+		if (!Feature.isEnabled(ArrowStats.class) ||
+				!ArrowStats.piercingCrossbow)
+			return;
+		abstractArrow.setPierceLevel((byte) (abstractArrow.getPierceLevel() + 1));
 	}
 
 }

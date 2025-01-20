@@ -1,11 +1,16 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Arrow Stats.Piercing Crossbows
+  * Crossbow arrows will have an innate piercing level
+
 ### Changes
 * Auto breed chance is now in livestock data
   * So you can change chance per animal via data pack
 * Fog and thunderstorm intensity now advance when sleeping
 * Heavy fogs now prevent undeads from burning in sunlight
+* Crossbows arrow speed is now lower (3.5 -> 2.5)
 
 ### Fixes
 * Compatibility with Quality Foods
