@@ -1,8 +1,6 @@
 # Changelog
 
-* Crouch right-clicking on bed should allow obelisk respawn overwrite
-
-## Upcoming
+## 4.2.5
 ### Additions
 * Arrow Stats.Piercing Crossbows
   * Crossbow arrows will have an innate piercing level
@@ -11,8 +9,9 @@
 * Auto breed chance is now in livestock data
   * So you can change chance per animal via data pack
 * Fog and thunderstorm intensity now advance when sleeping
-* Heavy fogs now prevent undeads from burning in sunlight
-* Crossbows arrow speed is now lower (3.5 -> 2.5)
+* Heavy fogs now prevent undead from burning in sunlight
+* Crossbows arrow speed is now lower (~~3.5~~ -> 2.5)
+* Decreased Bows accuracy (~~0.5~~ -> 1) but increased damage (~~x0.5~~ -> x0.65)
 * You now need to sneak to overwrite your obelisk respawn point with a bed
 
 ### Fixes

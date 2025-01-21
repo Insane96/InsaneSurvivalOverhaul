@@ -19,10 +19,10 @@ public class ArrowStats extends Feature {
 	public static Boolean floatPointDamage = true;
 	@Config(min = 0d, max = 10d)
 	@Label(name = "Damage Multiplier", description = "Multiplies arrow's damage by this value. (this doesn't affect mobs arrows)")
-	public static Double damageMultiplier = 0.5d;
+	public static Double damageMultiplier = 0.65d;
 	@Config(min = 0d, max = 10d)
 	@Label(name = "Bow Inaccuracy", description = "Changes bows accuracy. Vanilla is 1.0")
-	public static Double bowInaccuracy = 0.5d;
+	public static Double bowInaccuracy = 1.0d;
 	@Config(min = 0d, max = 10d)
 	@Label(name = "Crossbow velocity", description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
 	public static Double crossbowVelocity = 2.5d;
