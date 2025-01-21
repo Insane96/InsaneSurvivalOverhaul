@@ -12,7 +12,7 @@
   * So you can change chance per animal via data pack
 * Fog and thunderstorm intensity now advance when sleeping
 * Heavy fogs now prevent undead from burning in sunlight
-* Crossbows arrow speed is now lower (~~3.5~~ -> 2.5)
+* Crossbows arrow speed is now lower (~~3.5~~ -> 2.25)
 * Decreased Bows accuracy (~~0.5~~ -> 1) but increased damage (~~x0.5~~ -> x0.65)
 * You now need to sneak to overwrite your obelisk respawn point with a bed
 

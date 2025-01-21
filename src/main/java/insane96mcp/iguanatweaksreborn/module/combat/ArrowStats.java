@@ -25,7 +25,7 @@ public class ArrowStats extends Feature {
 	public static Double bowInaccuracy = 1.0d;
 	@Config(min = 0d, max = 10d)
 	@Label(name = "Crossbow velocity", description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
-	public static Double crossbowVelocity = 2.5d;
+	public static Double crossbowVelocity = 2.25d;
 	@Config
 	@Label(name = "Piercing Crossbow", description = "If true, crossbows will have an innate Piercing ability")
 	public static Boolean piercingCrossbow = true;
