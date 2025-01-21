@@ -3,7 +3,9 @@
 ## 4.2.5
 ### Additions
 * Arrow Stats.Piercing Crossbows
-  * Crossbow arrows will have an innate piercing level
+  * Crossbow arrows now have an innate piercing level
+* Arrow Stats.Crossbow Inaccuracy
+  * Increased crossbow accuracy (1 -> 0.2)
 
 ### Changes
 * Auto breed chance is now in livestock data

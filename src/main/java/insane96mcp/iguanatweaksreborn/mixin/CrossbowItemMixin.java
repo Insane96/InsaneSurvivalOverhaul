@@ -24,4 +24,9 @@ public class CrossbowItemMixin {
     private static void iguanatweaksreborn$onSetPiercing(Level pLevel, LivingEntity pLivingEntity, ItemStack pCrossbowStack, ItemStack pAmmoStack, CallbackInfoReturnable<AbstractArrow> cir, @Local AbstractArrow abstractArrow) {
         ArrowStats.piercingCrossbows(abstractArrow);
     }
+
+    @ModifyExpressionValue(method = "use", at = @At(value = "CONSTANT", args = "floatValue=1.0"))
+    private float iguanatweaksreborn$inaccuracy(float original) {
+        return ArrowStats.getCrossbowInaccuracy(original);
+    }
 }

@@ -29,6 +29,9 @@ public class ArrowStats extends Feature {
 	@Config
 	@Label(name = "Piercing Crossbow", description = "If true, crossbows will have an innate Piercing ability")
 	public static Boolean piercingCrossbow = true;
+	@Config(min = 0d, max = 10d)
+	@Label(name = "Crossbow Inaccuracy", description = "Changes crossbows accuracy. Vanilla is 1.0")
+	public static Double crossbowInaccuracy = 0.2d;
 
 	public ArrowStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -45,6 +48,12 @@ public class ArrowStats extends Feature {
 				!ArrowStats.piercingCrossbow)
 			return;
 		abstractArrow.setPierceLevel((byte) (abstractArrow.getPierceLevel() + 1));
+	}
+
+	public static float getCrossbowInaccuracy(float original) {
+		if (!Feature.isEnabled(ArrowStats.class))
+			return original;
+		return crossbowInaccuracy.floatValue();
 	}
 
 }
