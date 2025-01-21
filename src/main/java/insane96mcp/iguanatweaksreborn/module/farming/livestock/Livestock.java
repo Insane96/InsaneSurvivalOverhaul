@@ -122,7 +122,7 @@ public class Livestock extends Feature {
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 				.filter(data -> data.matches(animal))
 				.forEach(data -> modifiersToApply.addAll(data.autoBreedChanceModifiers));
-		float chance = Modifier.applyModifiers(1f, modifiersToApply, animal.level(), animal.blockPosition(), animal);
+		float chance = Modifier.applyModifiers(0f, modifiersToApply, animal.level(), animal.blockPosition(), animal);
 		if (chance <= 0d || animal.getRandom().nextFloat() >= chance)
 			return;
         animal.setInLove(null);

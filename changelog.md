@@ -1,5 +1,15 @@
 # Changelog
 
+* Can't make iron hammer
+* Server thread58.45%
+  insane96mcp.enhancedai.modules.animal.AnimalScaredAttack$AnimalMeleeAttackGoal.canUse()52.70%
+  net.minecraft.world.entity.ai.goal.MeleeAttackGoal.canUse()52.70%
+  net.minecraft.world.entity.ai.navigation.GroundPathNavigation.createPath()52.70%
+
+## Upcoming
+### Fixes
+* Animals breeding like crazy automatically
+
 ## 4.2.5
 ### Additions
 * Arrow Stats.Piercing Crossbows

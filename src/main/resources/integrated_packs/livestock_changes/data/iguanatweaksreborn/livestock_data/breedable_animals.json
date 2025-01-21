@@ -90,7 +90,7 @@
         },
         {
             "id": "iguanatweaksreborn:age",
-            "modifier": 0.01,
+            "modifier": -0.01,
             "age": "old",
             "operation": "add"
         }
