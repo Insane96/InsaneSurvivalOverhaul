@@ -1,13 +1,13 @@
 # Changelog
 
 * Can't make iron hammer
-* pressure plates recipes for mods seem to not work
 
 ## Upcoming
 ### Fixes
 * Animals breeding like crazy automatically
 * Respawn Obelisk effects being like beacon ones
 * Atmospheric pressure plates recipes
+* Environmental redstone components recipes
 
 ## 4.2.5
 ### Additions
