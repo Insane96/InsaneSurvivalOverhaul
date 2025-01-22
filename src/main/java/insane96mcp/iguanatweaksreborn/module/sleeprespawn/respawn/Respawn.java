@@ -117,14 +117,14 @@ public class Respawn extends JsonFeature {
 
 	public static final List<ISOMobEffectInstance> RESPAWN_OBELISK_EFFECTS_DEFAULT = List.of(
 			new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
-					.ambientParticles()
+					.noParticles()
 					.build(),
 			new ISOMobEffectInstance.Builder(MobEffects.ABSORPTION, 60 * 20)
 					.setAmplifier(1)
-					.ambientParticles()
+					.noParticles()
 					.build(),
 			new ISOMobEffectInstance.Builder(MobEffects.MOVEMENT_SPEED, 60 * 20)
-					.ambientParticles()
+					.noParticles()
 					.build()
 	);
 

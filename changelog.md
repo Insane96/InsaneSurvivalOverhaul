@@ -1,14 +1,12 @@
 # Changelog
 
 * Can't make iron hammer
-* Server thread58.45%
-  insane96mcp.enhancedai.modules.animal.AnimalScaredAttack$AnimalMeleeAttackGoal.canUse()52.70%
-  net.minecraft.world.entity.ai.goal.MeleeAttackGoal.canUse()52.70%
-  net.minecraft.world.entity.ai.navigation.GroundPathNavigation.createPath()52.70%
+* pressure plates recipes for mods seem to not work
 
 ## Upcoming
 ### Fixes
 * Animals breeding like crazy automatically
+* Respawn Obelisk effects being like beacon ones
 
 ## 4.2.5
 ### Additions
