@@ -17,7 +17,7 @@
             "item": "minecraft:redstone"
           },
           "#": {
-            "item": "autumnity:laurel_planks"
+            "item": "atmospheric:laurel_planks"
           }
         },
         "pattern": [
@@ -25,7 +25,7 @@
           "##"
         ],
         "result": {
-          "item": "autumnity:laurel_pressure_plate",
+          "item": "atmospheric:laurel_pressure_plate",
           "count": 2
         },
         "show_notification": true

@@ -17,7 +17,7 @@
             "item": "minecraft:redstone"
           },
           "#": {
-            "item": "autumnity:grimwood_planks"
+            "item": "atmospheric:grimwood_planks"
           }
         },
         "pattern": [
@@ -25,7 +25,7 @@
           "##"
         ],
         "result": {
-          "item": "autumnity:grimwood_pressure_plate",
+          "item": "atmospheric:grimwood_pressure_plate",
           "count": 2
         },
         "show_notification": true

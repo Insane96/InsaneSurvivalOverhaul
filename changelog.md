@@ -7,6 +7,7 @@
 ### Fixes
 * Animals breeding like crazy automatically
 * Respawn Obelisk effects being like beacon ones
+* Atmospheric pressure plates recipes
 
 ## 4.2.5
 ### Additions

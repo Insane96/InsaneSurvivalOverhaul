@@ -17,7 +17,7 @@
             "item": "minecraft:redstone"
           },
           "#": {
-            "item": "autumnity:kousa_planks"
+            "item": "atmospheric:kousa_planks"
           }
         },
         "pattern": [
@@ -25,7 +25,7 @@
           "##"
         ],
         "result": {
-          "item": "autumnity:kousa_pressure_plate",
+          "item": "atmospheric:kousa_pressure_plate",
           "count": 2
         },
         "show_notification": true

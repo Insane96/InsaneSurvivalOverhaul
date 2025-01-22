@@ -17,7 +17,7 @@
             "item": "minecraft:redstone"
           },
           "#": {
-            "item": "autumnity:aspen_planks"
+            "item": "atmospheric:aspen_planks"
           }
         },
         "pattern": [
@@ -25,7 +25,7 @@
           "##"
         ],
         "result": {
-          "item": "autumnity:aspen_pressure_plate",
+          "item": "atmospheric:aspen_pressure_plate",
           "count": 2
         },
         "show_notification": true

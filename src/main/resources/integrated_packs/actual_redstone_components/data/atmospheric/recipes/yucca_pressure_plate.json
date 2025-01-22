@@ -17,7 +17,7 @@
             "item": "minecraft:redstone"
           },
           "#": {
-            "item": "autumnity:yucca_planks"
+            "item": "atmospheric:yucca_planks"
           }
         },
         "pattern": [
@@ -25,7 +25,7 @@
           "##"
         ],
         "result": {
-          "item": "autumnity:yucca_pressure_plate",
+          "item": "atmospheric:yucca_pressure_plate",
           "count": 2
         },
         "show_notification": true
