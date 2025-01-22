@@ -1,10 +1,9 @@
 # Changelog
 
-* Can't make iron hammer
-
-## Upcoming
+## 4.2.6
 ### Fixes
 * Animals breeding like crazy automatically
+  * Animals auto-breed chance was 102% instead of 2%. It's now 5%
 * Respawn Obelisk effects being like beacon ones
 * Atmospheric pressure plates recipes
 * Environmental redstone components recipes
