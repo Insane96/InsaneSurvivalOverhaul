@@ -8,7 +8,7 @@ import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.IProtectionEnchantment;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.movement.BetterClimbable;
 import insane96mcp.iguanatweaksreborn.module.movement.ElytraNerf;
@@ -184,22 +184,22 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;removeModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
     public void onRemoveSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || HealthRegen.sprintSpeedPenaltyBelowHunger == 0f)
+                || HealthRegenHunger.sprintSpeedPenaltyBelowHunger == 0f)
             return;
-        attributeInstance.removeModifier(HealthRegen.SPRINT_PENALTY_UUID);
+        attributeInstance.removeModifier(HealthRegenHunger.SPRINT_PENALTY_UUID);
     }
 
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
     public void onAddSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || HealthRegen.sprintSpeedPenaltyBelowHunger == 0f)
+                || HealthRegenHunger.sprintSpeedPenaltyBelowHunger == 0f)
             return;
         if (!((LivingEntity)(Object)this instanceof Player player))
             return;
-        float penalty = (HealthRegen.sprintSpeedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * HealthRegen.sprintSpeedReductionEachHunger.floatValue();
+        float penalty = (HealthRegenHunger.sprintSpeedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * HealthRegenHunger.sprintSpeedReductionEachHunger.floatValue();
         if (penalty <= 0f)
             return;
-        attributeInstance.addTransientModifier(new AttributeModifier(HealthRegen.SPRINT_PENALTY_UUID, "Hungry Speed Penalty", -penalty, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        attributeInstance.addTransientModifier(new AttributeModifier(HealthRegenHunger.SPRINT_PENALTY_UUID, "Hungry Speed Penalty", -penalty, AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 
     @WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;handleRelativeFrictionAndCalculateMovement(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;"))

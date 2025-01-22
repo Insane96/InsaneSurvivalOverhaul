@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -21,7 +21,7 @@ public class FoodDataMixin {
 
 	@Inject(at = @At("HEAD"), method = "tick", cancellable = true)
 	public void onTick(Player player, CallbackInfo callbackInfo) {
-		if (HealthRegen.tickFoodStats((FoodData) (Object) this, player))
+		if (HealthRegenHunger.tickFoodStats((FoodData) (Object) this, player))
 			callbackInfo.cancel();
 	}
 

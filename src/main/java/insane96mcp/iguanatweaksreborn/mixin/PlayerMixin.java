@@ -9,7 +9,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
 import insane96mcp.iguanatweaksreborn.module.combat.PlayerStats;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.insanelib.base.Feature;
@@ -164,7 +164,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
 	public boolean onCheckPeacefulRegen(boolean original) {
-		return original && !HealthRegen.peacefulHunger;
+		return original && !HealthRegenHunger.peacefulHunger;
 	}
 
 	@ModifyExpressionValue(method = "attack",at = @At(value = "CONSTANT", args = "doubleValue=0.4000000059604645"))

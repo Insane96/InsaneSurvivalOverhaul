@@ -30,7 +30,7 @@ import java.util.UUID;
 
 @Label(name = "Health Regen & Hunger", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
-public class HealthRegen extends Feature {
+public class HealthRegenHunger extends Feature {
 	public static final UUID SPRINT_PENALTY_UUID = UUID.fromString("a6d61c15-b60f-4503-b206-247c4690c436");
 
 	public static final String PASSIVE_REGEN_TICK = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "passive_regen_ticks";
@@ -91,7 +91,7 @@ public class HealthRegen extends Feature {
 	@Label(name = "Food Heal Multiplier", description = "When eating you'll get healed by this percentage of 'hunger + saturation' restored.")
 	public static Double foodHealMultiplier = 0d;
 
-	public HealthRegen(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public HealthRegenHunger(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 	}
 
@@ -103,7 +103,7 @@ public class HealthRegen extends Feature {
 				|| event.phase.equals(TickEvent.Phase.START))
 			return;
 
-		if (event.player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && HealthRegen.enablePassiveRegen && event.player.isHurt()) {
+		if (event.player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && HealthRegenHunger.enablePassiveRegen && event.player.isHurt()) {
 			incrementPassiveRegenTick(event.player);
 			int passiveRegen = getPassiveRegenSpeed(event.player);
 
@@ -117,7 +117,7 @@ public class HealthRegen extends Feature {
 
 	private static int getPassiveRegenSpeed(Player player) {
 		float healthPerc = 1f - (player.getHealth() / player.getMaxHealth());
-		float ticks = (float) ((HealthRegen.passiveRegenerationTime.max - HealthRegen.passiveRegenerationTime.min) * healthPerc + HealthRegen.passiveRegenerationTime.min);
+		float ticks = (float) ((HealthRegenHunger.passiveRegenerationTime.max - HealthRegenHunger.passiveRegenerationTime.min) * healthPerc + HealthRegenHunger.passiveRegenerationTime.min);
 		if (player.level().getDifficulty().equals(Difficulty.HARD))
 			ticks *= 1.5f;
         /*if (player.hasEffect(HealthRegen.VIGOUR.get())) {
@@ -129,15 +129,15 @@ public class HealthRegen extends Feature {
 	}
 
 	private static int getPassiveRegenTick(Player player) {
-		return player.getPersistentData().getInt(HealthRegen.PASSIVE_REGEN_TICK);
+		return player.getPersistentData().getInt(HealthRegenHunger.PASSIVE_REGEN_TICK);
 	}
 
 	private static void incrementPassiveRegenTick(Player player) {
-		player.getPersistentData().putInt(HealthRegen.PASSIVE_REGEN_TICK, getPassiveRegenTick(player) + FOOD_REGEN_TICK_RATE);
+		player.getPersistentData().putInt(HealthRegenHunger.PASSIVE_REGEN_TICK, getPassiveRegenTick(player) + FOOD_REGEN_TICK_RATE);
 	}
 
 	private static void resetPassiveRegenTick(Player player) {
-		player.getPersistentData().putInt(HealthRegen.PASSIVE_REGEN_TICK, 0);
+		player.getPersistentData().putInt(HealthRegenHunger.PASSIVE_REGEN_TICK, 0);
 	}
 
 	@SubscribeEvent
@@ -164,7 +164,7 @@ public class HealthRegen extends Feature {
 	 * Returns true if overrides the vanilla tick, otherwise false
 	 */
 	public static boolean tickFoodStats(FoodData foodStats, Player player) {
-		if (!Feature.isEnabled(HealthRegen.class))
+		if (!Feature.isEnabled(HealthRegenHunger.class))
 			return false;
 		Difficulty difficulty = player.level().getDifficulty();
 		foodStats.lastFoodLevel = foodStats.getFoodLevel();

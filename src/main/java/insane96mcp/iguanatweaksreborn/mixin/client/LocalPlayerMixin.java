@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.authlib.GameProfile;
 import insane96mcp.iguanatweaksreborn.module.client.Death;
-import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegen;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -41,9 +41,9 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @ModifyExpressionValue(method = "hasEnoughFoodToStartSprinting", at = @At(value = "CONSTANT", args = "floatValue=6.0"))
     public float insanesurvivaloverhaul$hasEnoughFoodToStartSprinting(float original) {
-        if (!Feature.isEnabled(HealthRegen.class))
+        if (!Feature.isEnabled(HealthRegenHunger.class))
             return original;
 
-        return HealthRegen.sprintMinHunger - 1;
+        return HealthRegenHunger.sprintMinHunger - 1;
     }
 }

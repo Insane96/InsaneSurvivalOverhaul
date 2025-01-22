@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Increased hunger from food
+  * 80% -> 100% of original value
+
 ## 4.2.6
 ### Fixes
 * Animals breeding like crazy automatically

@@ -85,10 +85,10 @@ public class FoodDrinks extends JsonFeature {
 
 	@Config
 	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
-	public static String foodHungerFormula = "ROUND(hunger * 0.8, 0)";
+	public static String foodHungerFormula = "hunger";
 	@Config
 	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
-	public static String foodSaturationModifierFormula = "saturation_modifier * 1.25";
+	public static String foodSaturationModifierFormula = "saturation_modifier";
 
 	@Config
 	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
