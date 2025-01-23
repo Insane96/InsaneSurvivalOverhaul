@@ -138,7 +138,7 @@ dependencies {
 
     //implementation fg.deobf("curse.maven:puzzles-lib-495476:4660882")
     //runtimeOnly fg.deobf("curse.maven:easy-magic-456239:4658750")
-    implementation fg.deobf("curse.maven:blueprint-382216:5228040")
+    implementation fg.deobf("curse.maven:blueprint-382216:5292242")
     implementation fg.deobf("curse.maven:caverns-and-chasms-438005:6040957")
     compileOnly fg.deobf("curse.maven:autumnity-365045:5229021")
     compileOnly fg.deobf("curse.maven:berry-good-355589:5228437")

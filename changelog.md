@@ -1,5 +1,7 @@
 # Changelog
 
+* Prefer land respawn
+
 ## Upcoming
 ### Changes
 * Increased hunger from food
