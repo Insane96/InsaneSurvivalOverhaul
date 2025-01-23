@@ -77,6 +77,9 @@ public class Respawn extends JsonFeature {
 	@Config(min = 0)
 	@Label(name = "Despawn mobs on bed respawn", description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
 	public static Integer despawnMobsOnBedRespawn = 32;
+	@Config
+	@Label(name = "Don't respawn on fluid", description = "If enabled, respawning will try to place you on land and not in fluids")
+	public static Boolean dontRespawnOnFluid = true;
 
 	@Config(min = 0, max = 20)
 	@Label(name = "Stats Penalty.Health.Minimum", description = "Min Health of respawning players")
@@ -241,7 +244,7 @@ public class Respawn extends JsonFeature {
 		BlockState stateBelow;
 		BlockPos.MutableBlockPos respawn = new BlockPos.MutableBlockPos();
 		boolean foundValidY = false;
-		int triesLeft = 1000;
+		int triesLeft = 1024;
 		do {
 			do {
 				x = random.nextInt((int) -minMax.max, (int) minMax.max);
@@ -265,6 +268,8 @@ public class Respawn extends JsonFeature {
 				}
 				y--;
 			} while (y > level.getMinBuildHeight());
+			if (dontRespawnOnFluid && !stateBelow.getFluidState().isEmpty())
+				foundValidY = false;
 			triesLeft--;
 		} while (!foundValidY && triesLeft > 0);
 		if (triesLeft <= 0) {

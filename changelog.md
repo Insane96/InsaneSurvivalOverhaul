@@ -4,6 +4,7 @@
 
 ## Upcoming
 ### Changes
+* Loose respawn now tries to respawn on land instead of water
 * Increased hunger from food
   * 80% -> 100% of original value
 * Heavy fogs will fade to the next fog faster
