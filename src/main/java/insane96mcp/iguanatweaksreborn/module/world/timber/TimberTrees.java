@@ -64,7 +64,8 @@ public class TimberTrees extends JsonFeature {
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:pine_log")).leaves(IdTagMatcher.newId("environmental:pine_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:plum_log")).leaves(IdTagMatcher.newId("environmental:plum_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:willow_log")).leaves(IdTagMatcher.newId("environmental:willow_leaves")).build(),
-            new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:wisteria_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:wisteria_leaves")).build()
+            new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:wisteria_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:wisteria_leaves")).build(),
+            new TreeInfo.Builder().log(IdTagMatcher.newId("caverns_and_chasms:azalea_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:azalea_leaves")).build()
     ));
     public static final ArrayList<TreeInfo> treeInfos = new ArrayList<>();
 

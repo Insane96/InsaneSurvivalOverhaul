@@ -75,7 +75,10 @@ public class BeaconConduit extends JsonFeature {
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:durium_block", 3.0d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:soul_steel_block", 1.5d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:quaron_block", 1.5d),
-            new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:keego_block", 3d)
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:sanguine_block", 1.5d),
+            new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:keego_block", 3d),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:silver_block", 1.8d),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:necronium_block", 4d)
     ));
     public static final ArrayList<IdTagValue> blocksList = new ArrayList<>();
     public static final ArrayList<IdTagValue> PAYMENT_TIMES_DEFAULT = new ArrayList<>(List.of(
@@ -87,7 +90,10 @@ public class BeaconConduit extends JsonFeature {
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:durium_ingot", 12000),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:keego", 96000),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:quaron_ingot", 96000),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:living_flesh", 96000),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:soul_steel_ingot", 96000),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:silver_ingot", 18000),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:necronium_ingot", 115200),
             new IdTagValue(IdTagMatcher.Type.ID, "minecraft:nether_star", 576000)
     ));
     public static final ArrayList<IdTagValue> paymentTimes = new ArrayList<>();

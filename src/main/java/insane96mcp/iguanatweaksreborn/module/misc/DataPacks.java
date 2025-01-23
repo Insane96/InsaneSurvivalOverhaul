@@ -27,7 +27,6 @@ public class DataPacks extends Feature {
     @Label(name = "Disable ALL data packs", description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
 
-    //Furnace requires copper, you get nuggets by smelting raw copper on campfire
     @Config
     @Label(name = "Hardcore Torches", description = """
             Changes vanilla torch recipes.
@@ -102,6 +101,9 @@ public class DataPacks extends Feature {
     @Config
     @Label(name = "Autumnity integration", description = "Integrates the mod with Autumnity. Changes animals loot to match the livestock changes.")
     public static Boolean autumnity = true;
+    @Config
+    @Label(name = "Caverns & Chasms integration", description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
+    public static Boolean cavernsAndChasms = true;
 
     @Config
     @Label(name = "Assets override", description = "Change some vanilla textures such as arrows to flint, spawners to echo and also some lang entries")
@@ -130,6 +132,7 @@ public class DataPacks extends Feature {
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "quark_integration", Component.literal("Insane's Survival Overhaul Quark Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && quark && ModList.get().isLoaded("quark")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "autumnity_integration", Component.literal("Insane's Survival Overhaul Autumnity Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "z_caverns_and_chasms_integration", Component.literal("Insane's Survival Overhaul Caverns & Chasms Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms")));
 
         IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> assetsOverride));
     }

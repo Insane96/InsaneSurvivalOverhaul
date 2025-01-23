@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mining;
 
+import com.teamabnormals.caverns_and_chasms.core.CCConfig;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -33,6 +35,9 @@ public class MiningMisc extends Feature {
 	@Config
 	@Label(name = "Efficiency based destroy delay", description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool efficiency.")
 	public static Boolean efficiencyBasedDestroyDelay = true;
+	@Config
+	@Label(name = "Caverns and Chasms Integration", description = "Changes some Caverns and Chasms config options.")
+	public static Boolean cavernsChasmsIntegration = true;
 
 	public MiningMisc(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -45,6 +50,11 @@ public class MiningMisc extends Feature {
 			if ((instaMineHeads && block instanceof AbstractSkullBlock)
 					|| (instaMineSilverfish && block instanceof InfestedBlock))
 				block.getStateDefinition().getPossibleStates().forEach(blockState -> blockState.destroySpeed = 0f);
+		}
+		if (ModList.get().isLoaded("caverns_and_chasms") && cavernsChasmsIntegration) {
+			CCConfig.COMMON.chainmailArmorIncreasesDamage.set(false);
+			CCConfig.COMMON.goldenArmorIncreasesSpeed.set(false);
+			CCConfig.COMMON.creeperExplosionNerf.set(false);
 		}
 	}
 

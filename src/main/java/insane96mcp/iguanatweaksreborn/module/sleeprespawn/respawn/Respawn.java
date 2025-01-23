@@ -107,13 +107,16 @@ public class Respawn extends JsonFeature {
 	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
 			IdTagValue.newId("minecraft:iron_block", 0.75d),
 			IdTagValue.newId("minecraft:gold_block", 0.3d),
+			IdTagValue.newId("caverns_and_chasms:silver_block", 0.3d),
+			IdTagValue.newId("caverns_and_chasms:sanguine_block", 0.25d),
 			IdTagValue.newId("iguanatweaksexpanded:durium_block", 0.075d),
 			IdTagValue.newId("minecraft:diamond_block", 0.05d),
 			IdTagValue.newId("iguanatweaksexpanded:keego_block", 0.05d),
 			IdTagValue.newId("iguanatweaksexpanded:quaron_block", 0.25d),
 			IdTagValue.newId("iguanatweaksexpanded:soul_steel_block", 0.05d),
 			IdTagValue.newId("minecraft:emerald_block", 0.35d),
-			IdTagValue.newId("minecraft:netherite_block", 0d)
+			IdTagValue.newId("minecraft:netherite_block", 0d),
+			IdTagValue.newId("caverns_and_chasms:necronium_block", 0d)
 	);
 
 	public static final ArrayList<IdTagValue> respawnObeliskCatalysts = new ArrayList<>();

@@ -1,6 +1,6 @@
 # Changelog
 
-* Prefer land respawn
+* Death message for old age
 
 ## Upcoming
 ### Changes
@@ -9,9 +9,10 @@
   * 80% -> 100% of original value
 * Heavy fogs will fade to the next fog faster
   * Previously only the "lasting" part was reduced
-* Minor Caverns and Chasms integration
-  * Adding full integration to this mod is too much work. Mobs, ores, ore gen and item stats
-  * Right now the only integration is the removal of coordinated from compasses and blacklist of TMT from Explosion Overhaul
+* Caverns and Chasms integration
+  * More ores generate in specific biomes
+  * Beacon, Timber Trees and Respawn Obelisk blocks and items
+  * A few config changes
 
 ## 4.2.6
 ### Fixes
