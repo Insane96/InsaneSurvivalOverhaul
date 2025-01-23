@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.misc;
 
+import com.teamabnormals.caverns_and_chasms.core.CCConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
@@ -25,6 +26,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.loading.FMLLoader;
 
 @Label(name = "Nerfs", description = "Various Nerfs")
@@ -36,7 +39,7 @@ public class Nerfs extends Feature {
 	@Label(name = "Iron from Golems only when killed by Players", description = "If true, Iron golems will only drop Iron when killed by the player.")
 	public static Boolean ironRequiresPlayer = true;
 	@Config
-	@Label(name = "No Coordinates", description = "If true, renderDebugInfo is enabled by default. Requires a world restart")
+	@Label(name = "No Coordinates", description = "If true, renderDebugInfo is enabled by default. Requires a world restart. This also changes Caverns and Chasms from displaying coordinates with compasses.")
 	public static Boolean noCoordinates = true;
 	@Config
 	@Label(name = "Reduced Random Tick Speed", description = "If true, randomTickSpeed is set to 2 from 3")
@@ -75,6 +78,14 @@ public class Nerfs extends Feature {
 
     public Nerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+	}
+
+	@Override
+	public void readConfig(ModConfigEvent event) {
+		super.readConfig(event);
+		if (noCoordinates && ModList.get().isLoaded("caverns_and_chasms")) {
+			CCConfig.CLIENT.compassesDisplayPosition.set(false);
+		}
 	}
 
 	public static boolean isFallingBlockDupeRemoved() {

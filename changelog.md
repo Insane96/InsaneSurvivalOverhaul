@@ -8,6 +8,9 @@
   * 80% -> 100% of original value
 * Heavy fogs will fade to the next fog faster
   * Previously only the "lasting" part was reduced
+* Minor Caverns and Chasms integration
+  * Adding full integration to this mod is too much work. Mobs, ores, ore gen and item stats
+  * Right now the only integration is the removal of coordinated from compasses and blacklist of TMT from Explosion Overhaul
 
 ## 4.2.6
 ### Fixes

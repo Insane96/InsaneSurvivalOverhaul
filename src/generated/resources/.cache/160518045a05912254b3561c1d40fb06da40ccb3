@@ -1,3 +1,4 @@
-// 1.20.1	2024-03-16T15:40:23.088098	Tags for minecraft:entity_type mod id iguanatweaksreborn
+// 1.20.1	2025-01-23T12:26:32.6060118	Tags for minecraft:entity_type mod id iguanatweaksreborn
 8668be65155e348ce38e81409decfc277b3b3c0f data/iguanatweaksreborn/tags/entity_types/enchanting/bane_of_sssss.json
 9c252854fe5992259ed1ed635f7174ed05a6a6ea data/iguanatweaksreborn/tags/entity_types/enchanting/smite.json
+b284362979b3d4a17e362ec4963d1721a875e20d data/iguanatweaksreborn/tags/entity_types/explosion_entity_blacklist.json
