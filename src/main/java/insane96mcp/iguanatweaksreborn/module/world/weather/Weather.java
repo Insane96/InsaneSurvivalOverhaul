@@ -79,7 +79,7 @@ public class Weather extends Feature {
             if (foggyData.current == foggyData.target) {
                 foggyData.target = Foggy.getRandom(level.random);
                 foggyData.timer -= foggyData.targetTime;
-                foggyData.targetTime = getNewFoggyTargetTime(level.random);
+                foggyData.targetTime = (int) (getNewFoggyTargetTime(level.random) * foggyData.current.timerMultiplier);
                 level.players().forEach(player ->
                         FoggySync.sync(player, foggyData));
             }

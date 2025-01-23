@@ -6,6 +6,8 @@
 ### Changes
 * Increased hunger from food
   * 80% -> 100% of original value
+* Heavy fogs will fade to the next fog faster
+  * Previously only the "lasting" part was reduced
 
 ## 4.2.6
 ### Fixes
