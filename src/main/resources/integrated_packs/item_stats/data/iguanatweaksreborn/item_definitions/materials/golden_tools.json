@@ -3,6 +3,7 @@
 	"durability": 49,
 	"efficiency": 10,
 	"enchantability": 18,
+	"harvest_level": "minecraft:stone",
 	"modifiers": [
 		{
 			"uuid": "294e0db0-1185-4d78-b95e-8823b8bb0041",

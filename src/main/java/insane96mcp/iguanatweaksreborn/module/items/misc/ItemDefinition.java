@@ -5,8 +5,10 @@ import com.google.common.collect.Multimap;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
+import insane96mcp.iguanatweaksreborn.mixin.TieredItemAccessor;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.data.SerializableAttributeModifier;
@@ -16,11 +18,14 @@ import insane96mcp.insanelib.util.json.validator.FloatMinMaxValidator;
 import insane96mcp.insanelib.util.json.validator.IntMinMaxValidator;
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +42,8 @@ public final class ItemDefinition {
 	@Nullable
 	private final Integer maxStackSize;
 	private final Durability durability;
+    @Nullable
+    private final String harvestLevel;
 	@Nullable
 	private final Double efficiency;
 	@Nullable
@@ -63,10 +70,11 @@ public final class ItemDefinition {
 	private final Double movementSpeedPenalty;
 	@Nullable
 	private final List<SerializableAttributeModifier> modifiers;
-    public ItemDefinition(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Integer scytheRadius, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
+    public ItemDefinition(@NotNull IdTagMatcher item, @Nullable Integer maxStackSize, @Nullable Integer durability, @Nullable Integer durabilityBonus, @Nullable Float durabilityMultiplier, @Nullable String harvestLevel, @Nullable Double efficiency, @Nullable Integer enchantability, @Nullable Double knockbackMultiplier, @Nullable Integer scytheRadius, @Nullable Double baseAttackDamage, @Nullable Double baseAttackSpeed, @Nullable Double baseArmor, @Nullable Double baseArmorToughness, @Nullable Double baseKnockbackResistance, @Nullable Double baseRegeneratingAbsorption, @Nullable Double baseRegenAbsorptionSpeed, @Nullable Double movementSpeedPenalty, @Nullable List<SerializableAttributeModifier> modifiers) {
         this.item = item;
         this.maxStackSize = maxStackSize;
         this.durability = new Durability(durability, durabilityBonus, durabilityMultiplier);
+        this.harvestLevel = harvestLevel;
         this.efficiency = efficiency;
         this.enchantability = enchantability;
         this.knockbackMultiplier = knockbackMultiplier;
@@ -96,9 +104,17 @@ public final class ItemDefinition {
                 durability.durabilityBonus = this.durability.durabilityBonus;
             if (this.durability.durabilityMultiplier != null)
                 durability.durabilityMultiplier = this.durability.durabilityMultiplier;
-
-            if (this.efficiency != null && item instanceof DiggerItem diggerItem)
-                diggerItem.speed = this.efficiency.floatValue();
+            if (item instanceof DiggerItem diggerItem) {
+                if (this.efficiency != null)
+                    diggerItem.speed = this.efficiency.floatValue();
+                if (this.harvestLevel != null) {
+                    Tier tier = TierSortingRegistry.byName(ResourceLocation.tryParse(harvestLevel));
+                    if (tier != null)
+                        ((TieredItemAccessor)diggerItem).setTier(tier);
+                    else
+                        ISOLogHelper.warn("Failed to parse harvest level %s", this.harvestLevel);
+                }
+            }
             if (this.maxStackSize != null)
                 item.maxStackSize = this.maxStackSize;
         }
@@ -217,6 +233,7 @@ public final class ItemDefinition {
             Integer durability = ILGsonHelper.getAsNullableInt(jObject, "durability", IntMinMaxValidator.atLeast(1));
             Integer durabilityBonus = ILGsonHelper.getAsNullableInt(jObject, "durability_bonus", IntMinMaxValidator.atLeast(1));
             Float durabilityMultiplier = ILGsonHelper.getAsNullableFloat(jObject, "durability_multiplier",  FloatMinMaxValidator.atLeast(0));
+            String harvestLevel = GsonHelper.getAsString(jObject, "harvest_level", null);
             Double efficiency = ILGsonHelper.getAsNullableDouble(jObject, "efficiency", DoubleMinMaxValidator.atLeast(0));
             Integer enchantability = ILGsonHelper.getAsNullableInt(jObject, "enchantability", IntMinMaxValidator.atLeast(0));
             Double knockbackMultiplier = ILGsonHelper.getAsNullableDouble(jObject, "knockback_multiplier", DoubleMinMaxValidator.between(0, 1));
@@ -232,7 +249,7 @@ public final class ItemDefinition {
             List<SerializableAttributeModifier> modifiers = null;
             if (jObject.has("modifiers"))
                 modifiers = context.deserialize(jObject.get("modifiers"), SerializableAttributeModifier.LIST_TYPE);
-            return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+            return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, harvestLevel, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, regeneratingAbsorption, regeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
         }
 
         @Override
@@ -243,6 +260,7 @@ public final class ItemDefinition {
             ILGsonHelper.addProperty(jObject, "durability", src.durability.durability);
             ILGsonHelper.addProperty(jObject, "durability_bonus", src.durability.durabilityBonus);
             ILGsonHelper.addProperty(jObject, "durability_multiplier", src.durability.durabilityMultiplier);
+            ILGsonHelper.addProperty(jObject, "harvest_level", src.harvestLevel);
             ILGsonHelper.addProperty(jObject, "efficiency", src.efficiency);
             ILGsonHelper.addProperty(jObject, "enchantability", src.enchantability);
             ILGsonHelper.addProperty(jObject, "knockback_multiplier", src.knockbackMultiplier);
@@ -269,6 +287,7 @@ public final class ItemDefinition {
         Integer durability = byteBuf.readNullable(FriendlyByteBuf::readInt);
         Integer durabilityBonus = byteBuf.readNullable(FriendlyByteBuf::readInt);
         Float durabilityMultiplier = byteBuf.readNullable(FriendlyByteBuf::readFloat);
+        String harvestLevel = byteBuf.readNullable(FriendlyByteBuf::readUtf);
         Double efficiency = byteBuf.readNullable(FriendlyByteBuf::readDouble);
         Integer enchantability = byteBuf.readNullable(FriendlyByteBuf::readInt);
         Double knockbackMultiplier = byteBuf.readNullable(FriendlyByteBuf::readDouble);
@@ -290,7 +309,7 @@ public final class ItemDefinition {
                 modifiers.add(SerializableAttributeModifier.fromNetwork(byteBuf));
             }
         }
-        return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
+        return new ItemDefinition(item, maxStackSize, durability, durabilityBonus, durabilityMultiplier, harvestLevel, efficiency, enchantability, knockbackMultiplier, scytheRadius, baseAttackDamage, baseAttackSpeed, baseArmor, baseToughness, baseKnockbackResistance, baseRegeneratingAbsorption, baseRegeneratingAbsorptionSpeed, movementSpeedPenalty, modifiers);
     }
 
     public void toNetwork(FriendlyByteBuf byteBuf) {
@@ -299,6 +318,7 @@ public final class ItemDefinition {
         byteBuf.writeNullable(this.durability.durability, FriendlyByteBuf::writeInt);
         byteBuf.writeNullable(this.durability.durabilityBonus, FriendlyByteBuf::writeInt);
         byteBuf.writeNullable(this.durability.durabilityMultiplier, FriendlyByteBuf::writeFloat);
+        byteBuf.writeNullable(this.harvestLevel, FriendlyByteBuf::writeUtf);
         byteBuf.writeNullable(this.efficiency, FriendlyByteBuf::writeDouble);
         byteBuf.writeNullable(this.enchantability, FriendlyByteBuf::writeInt);
         byteBuf.writeNullable(this.knockbackMultiplier, FriendlyByteBuf::writeDouble);
@@ -327,11 +347,6 @@ public final class ItemDefinition {
         return item;
     }
 
-    @Nullable
-    public Integer maxStackSize() {
-        return maxStackSize;
-    }
-
     public Durability durability() {
         return durability;
     }
@@ -354,46 +369,6 @@ public final class ItemDefinition {
     @Nullable
     public Integer scytheRadius() {
         return scytheRadius;
-    }
-
-    @Nullable
-    public Double baseAttackDamage() {
-        return baseAttackDamage;
-    }
-
-    @Nullable
-    public Double baseAttackSpeed() {
-        return baseAttackSpeed;
-    }
-
-    @Nullable
-    public Double baseArmor() {
-        return baseArmor;
-    }
-
-    @Nullable
-    public Double baseArmorToughness() {
-        return baseArmorToughness;
-    }
-
-    @Nullable
-    public Double baseKnockbackResistance() {
-        return baseKnockbackResistance;
-    }
-
-    @Nullable
-    public Double baseRegeneratingAbsorption() {
-        return baseRegeneratingAbsorption;
-    }
-
-    @Nullable
-    public Double baseRegenAbsorptionSpeed() {
-        return baseRegenAbsorptionSpeed;
-    }
-
-    @Nullable
-    public Double movementSpeedPenalty() {
-        return movementSpeedPenalty;
     }
 
     @Nullable

@@ -3,6 +3,10 @@
 * Death message for old age
 
 ## Upcoming
+### Additions
+* Item Definitions now have a new field: `harvest_level`
+  * With this, Gold feature no longer changes harvest level, instead it's done by item definition
+
 ### Changes
 * Loose respawn now tries to respawn on land instead of water
 * Increased hunger from food
