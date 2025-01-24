@@ -10,6 +10,10 @@
 			"required": false,
 			"id": "iguanatweaksexpanded:soul_steel_hoe"
 		},
-		"minecraft:netherite_hoe"
+		"minecraft:netherite_hoe",
+		{
+			"required": false,
+			"id": "caverns_and_chasms:silver_hoe"
+		}
 	]
 }

@@ -17,6 +17,10 @@
 		{
 			"required": false,
 			"id": "iguanatweaksexpanded:quaron_hoe"
+		},
+		{
+			"required": false,
+			"id": "caverns_and_chasms:necromium_hoe"
 		}
 	]
 }
