@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "caverns_and_chasms:necromium_pickaxe",
+        "caverns_and_chasms:necromium_axe",
+        "caverns_and_chasms:necromium_shovel",
+        "caverns_and_chasms:necromium_hoe"
+    ]
+}

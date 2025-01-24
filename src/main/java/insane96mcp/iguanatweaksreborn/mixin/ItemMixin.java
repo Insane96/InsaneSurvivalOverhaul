@@ -1,5 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.insanelib.base.Feature;
@@ -36,21 +38,31 @@ public class ItemMixin {
 		}
 	}
 
-	@Inject(method = "getBarWidth", at = @At("RETURN"), cancellable = true)
-	public void onGetBarWidth(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+	@ModifyReturnValue(method = "getBarWidth", at = @At("RETURN"))
+	public int iguanatweaksreborn$onGetBarWidth(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnbreakableItems.class)
 				|| !UnbreakableItems.isBroken(stack))
-			return;
+			return original;
 
-		cir.setReturnValue(13);
+		return 13;
 	}
 
-	@Inject(method = "getBarColor", at = @At("RETURN"), cancellable = true)
-	public void onGetBarColor(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+	@ModifyReturnValue(method = "getBarColor", at = @At("RETURN"))
+	public int iguanatweaksreborn$onGetBarColor(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnbreakableItems.class)
 				|| !UnbreakableItems.isBroken(stack))
-			return;
+			return original;
 
-		cir.setReturnValue(16711680);
+		return 16711680;
+	}
+
+	@ModifyExpressionValue(method = "getBarWidth", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getMaxDamage(Lnet/minecraft/world/item/ItemStack;)I"))
+	public int iguanatweaksreborn$onGetBarWidthMaxDamage(int original, ItemStack stack) {
+		return stack.getMaxDamage();
+	}
+
+	@ModifyExpressionValue(method = "getBarColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getMaxDamage(Lnet/minecraft/world/item/ItemStack;)I"))
+	public int iguanatweaksreborn$onGetBarColorMaxDamage(int original, ItemStack stack) {
+		return stack.getMaxDamage();
 	}
 }

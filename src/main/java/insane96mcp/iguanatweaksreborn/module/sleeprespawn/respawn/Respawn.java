@@ -116,7 +116,7 @@ public class Respawn extends JsonFeature {
 			IdTagValue.newId("iguanatweaksexpanded:soul_steel_block", 0.05d),
 			IdTagValue.newId("minecraft:emerald_block", 0.35d),
 			IdTagValue.newId("minecraft:netherite_block", 0d),
-			IdTagValue.newId("caverns_and_chasms:necronium_block", 0d)
+			IdTagValue.newId("caverns_and_chasms:necromium_block", 0d)
 	);
 
 	public static final ArrayList<IdTagValue> respawnObeliskCatalysts = new ArrayList<>();

@@ -41,7 +41,7 @@ public class Misc extends Feature {
     public static float getRedOutlineAmount(float original) {
         if (!isEnabled(Misc.class) || !redBlockOutlineWithWrongTool)
             return original;
-        return 0.3f;
+        return 0.35f;
     }
 
     //Render before Regenerating absorption

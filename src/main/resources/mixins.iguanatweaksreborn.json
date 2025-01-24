@@ -45,6 +45,7 @@
         "HoneyBottleItemMixin",
         "ItemEntityMixin",
         "ItemMixin",
+        "ItemStackMixin",
         "LeavesBlockMixin",
         "LevelStorageSourceMixin",
         "LivingEntityAccessor",
@@ -78,6 +79,7 @@
         "WanderingTraderMixin",
         "WolfMixin",
         "ZombieMixin",
+        "integration.cavernsandchasms.CCEntityTypesMixin",
         "integration.globalgamerules.WorldEventsMixin"
     ],
     "minVersion": "0.8",

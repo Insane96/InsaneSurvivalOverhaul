@@ -17,6 +17,8 @@
   * More ores generate in specific biomes
   * Beacon, Timber Trees and Respawn Obelisk blocks and items
   * A few config changes
+  * Item Definitions
+    * Silver and Necromium Tools are good for combat
 
 ## 4.2.6
 ### Fixes
