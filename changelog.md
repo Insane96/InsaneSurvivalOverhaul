@@ -19,6 +19,8 @@
   * A few config changes
   * Item Definitions
     * Silver and Necromium Tools are good for combat
+* Modifiers in item definitions without a slot now pick the default from the item
+  * So if the `slot` is omitted for e.g. a chestplate, it will automatically go to the `chest` slot
 
 ## 4.2.6
 ### Fixes

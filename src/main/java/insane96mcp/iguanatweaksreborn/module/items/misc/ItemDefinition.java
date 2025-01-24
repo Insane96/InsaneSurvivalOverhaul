@@ -21,6 +21,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -195,7 +196,9 @@ public final class ItemDefinition {
 
         if (this.modifiers != null) {
             for (SerializableAttributeModifier attributeModifier : this.modifiers) {
-                if (!attributeModifier.slots().contains(event.getSlotType()))
+                if (!attributeModifier.slots().isEmpty() && !attributeModifier.slots().contains(event.getSlotType()))
+                    continue;
+                if (LivingEntity.getEquipmentSlotForItem(stack) != event.getSlotType())
                     continue;
                 AttributeModifier modifier = attributeModifier.getModifier();
                 toAdd.put(attributeModifier.attribute().get(), modifier);
