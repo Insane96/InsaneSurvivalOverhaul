@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.mining;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -11,9 +12,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -52,18 +50,17 @@ public class Gold extends Feature {
 			return;
 
 		ItemStack stack = livingEntity.getMainHandItem();
-		if (stack.getItem() instanceof SwordItem swordItem && swordItem.builtInRegistryHolder().is()) {
+		if (stack.is(ISOItemTagsProvider.GOLDEN_HAND_EQUIPMENT)) {
 			if (event.getLootingLevel() < lootingLevel)
 				event.setLootingLevel(lootingLevel);
 		}
 	}
 
-	public static int getFortuneLevel(int prev, ItemStack itemStack) {
+	public static int getFortuneLevel(int original, ItemStack itemStack) {
 		if(!isEnabled(Gold.class)
-				|| !(itemStack.getItem() instanceof TieredItem tieredItem)
-				|| tieredItem.getTier() != Tiers.GOLD
-				|| prev >= fortuneLevel)
-			return prev;
+				|| !itemStack.is(ISOItemTagsProvider.GOLDEN_HAND_EQUIPMENT)
+				|| original >= fortuneLevel)
+			return original;
 
 		return fortuneLevel;
 	}
@@ -72,8 +69,7 @@ public class Gold extends Feature {
 	@SubscribeEvent
 	public void onTooltip(ItemTooltipEvent event) {
 		if (!this.isEnabled()
-				|| !(event.getItemStack().getItem() instanceof TieredItem tieredItem)
-				|| tieredItem.getTier() != Tiers.GOLD
+				|| !event.getItemStack().is(ISOItemTagsProvider.GOLDEN_HAND_EQUIPMENT)
 				|| event.getItemStack().getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) > 0
 				|| event.getItemStack().getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0
 				|| event.getItemStack().getEnchantmentLevel(Enchantments.MOB_LOOTING) > 0)
