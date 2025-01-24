@@ -1,0 +1,21 @@
+{
+	"item": "caverns_and_chasms:silver_leggings",
+	"durability": 60,
+	"armor": 1.5,
+	"modifiers": [
+		{
+			"uuid": "9c39adbb-6b9d-4064-88d2-7c3fcbf0ee44",
+			"name": "Material modifier",
+			"attribute": "minecraft:generic.attack_damage",
+			"amount": 0.05,
+			"operation": "multiply_total"
+		},
+		{
+			"uuid": "9c39adbb-6b9d-4064-88d2-7c3fcbf0ee44",
+			"name": "Material modifier",
+			"attribute": "caverns_and_chasms:magic_protection",
+			"amount": -0.1,
+			"operation": "multiply_base"
+		}
+	]
+}

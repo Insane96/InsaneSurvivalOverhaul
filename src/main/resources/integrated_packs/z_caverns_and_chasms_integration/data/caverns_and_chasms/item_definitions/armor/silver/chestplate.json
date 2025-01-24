@@ -1,0 +1,21 @@
+{
+	"item": "caverns_and_chasms:silver_chestplate",
+	"durability": 64,
+	"armor": 1.5,
+	"modifiers": [
+		{
+			"uuid": "8e1bd956-d935-4cc9-81eb-298fc2bc4c39",
+			"name": "Material modifier",
+			"attribute": "minecraft:generic.attack_damage",
+			"amount": 0.05,
+			"operation": "multiply_total"
+		},
+		{
+			"uuid": "8e1bd956-d935-4cc9-81eb-298fc2bc4c39",
+			"name": "Material modifier",
+			"attribute": "caverns_and_chasms:magic_protection",
+			"amount": -0.1,
+			"operation": "multiply_base"
+		}
+	]
+}

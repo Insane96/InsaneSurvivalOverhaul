@@ -19,6 +19,7 @@
   * A few config changes
   * Item Definitions
     * Silver and Necromium Tools are good for combat
+    * Silver armor gives x1.05 attack damage
 * Modifiers in item definitions without a slot now pick the default from the item
   * So if the `slot` is omitted for e.g. a chestplate, it will automatically go to the `chest` slot
 
