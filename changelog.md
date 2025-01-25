@@ -8,6 +8,7 @@
   * With this, Gold feature no longer changes harvest level, instead it's done by item definition
 
 ### Changes
+* Empowered spawners now drop treasure enchanted books
 * Loose respawn now tries to respawn on land instead of water
 * Increased hunger from food
   * 80% -> 100% of original value
