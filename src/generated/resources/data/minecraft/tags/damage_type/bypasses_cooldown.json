@@ -1,6 +1,7 @@
 {
   "values": [
     "iguanatweaksreborn:collide_with_wall",
-    "#iguanatweaksreborn:piercing_damage_type"
+    "#iguanatweaksreborn:piercing_damage_type",
+    "iguanatweaksreborn:old_age"
   ]
 }

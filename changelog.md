@@ -1,8 +1,8 @@
 # Changelog
 
-* Death message for old age
-* Clock, compass with forge
-* hardcore torches soul and cupric
+* Clock, compass with forge. Also silver, necromium and sanguine tools and armor. Toolbox, Barometer, Tuning fork, depth gauge, kunai
+* Arrows in fletching
+* Remove vanilla fletching recipe
 
 ## Upcoming
 ### Additions
@@ -12,6 +12,8 @@
 ### Changes
 * Empowered spawners now drop treasure enchanted books
 * Loose respawn now tries to respawn on land instead of water
+* Animals dying now have a proper death message
+  * '<entity> died of old age'
 * Increased hunger from food
   * 80% -> 100% of original value
 * Heavy fogs will fade to the next fog faster
