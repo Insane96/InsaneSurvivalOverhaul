@@ -97,6 +97,7 @@
         "client.LightTextureMixin",
         "client.LocalPlayerMixin",
         "client.MinecraftMixin",
-        "client.OptionsMixin"
+        "client.OptionsMixin",
+        "integration.appleskin.HUDOverlayHandlerMixin"
     ]
 }

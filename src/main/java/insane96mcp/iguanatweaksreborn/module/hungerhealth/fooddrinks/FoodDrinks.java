@@ -113,7 +113,7 @@ public class FoodDrinks extends JsonFeature {
 	@Label(name = "Raw food Poison Duration Multiplier", description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
 	public static Double rawFoodPoisonDurationMultiplier = 2d;
 	@Config
-	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current)")
+	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current). If AppleSkin is installed it also adds compatibility for saturation restored overlay")
 	public static Boolean combatSnapshotEatingSaturation = true;
 
 	@Config

@@ -97,7 +97,7 @@ repositories {
     }
     maven { url 'https://maven.blamejared.com' }
     maven { url 'https://maven.minecraftforge.net/' }
-
+    maven { url "https://maven.ryanliptak.com/" }
 }
 
 dependencies {
@@ -147,6 +147,8 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")
+
+    implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${mc_version}-${apple_skin_version}")
 
     //implementation fg.deobf("curse.maven:nostalgic-tweaks-592465:5602576")
     //implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
