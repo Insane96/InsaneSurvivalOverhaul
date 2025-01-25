@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashMap;
 import java.util.Map;
 
-@Label(name = "Stack Sizes", description = "Make food, items and blocks less stackable. Items and Blocks are disabled by default. Changing stuff might require a Minecraft restart.")
+@Label(name = "Stack Sizes", description = "Make food, items and blocks less stackable. Items and Blocks are disabled by default. Changing stuff requires a /reload, but might require a Minecraft restart.")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class StackSizes extends Feature {
     public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_stack_size_changes");
@@ -35,10 +35,7 @@ public class StackSizes extends Feature {
     public static Boolean foodStackReduction = true;
     @Config
     @Label(name = "Food Stack Reduction Formula", description = "The formula to calculate the stack size of a food item. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
-    public static String foodStackReductionFormula = "ROUND((1 - (effectiveness - 1) / 25) * 64 * 0.25, 0)";
-    @Config(min = 1, max = 64)
-    @Label(name = "Stackable Stews", description = "Stews will stack up to this number. It's overridden by 'foodStackReduction' if enabled. Still affected by black/whitelist")
-    public static Integer stackableSoups = 1;
+    public static String foodStackReductionFormula = "ROUND((1 - (effectiveness - 1) / 23) * 64 * 0.5, 0)";
     @Config(min = 0.01d, max = 64d)
     @Label(name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks) will be multiplied by this value. Foods will be overridden by 'Food Stack Reduction' or 'Food Stack Multiplier' if are active. Setting to 1 will disable this feature.")
     public static Double itemStackMultiplier = 1d;

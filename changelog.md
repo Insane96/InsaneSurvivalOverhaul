@@ -15,6 +15,7 @@
 * Heavy fogs will fade to the next fog faster
   * Previously only the "lasting" part was reduced
 * Increased Rabbit Stew's saturation
+* Increased foods stack sizes
 * Caverns and Chasms integration
   * More ores generate in specific biomes
   * Beacon, Timber Trees and Respawn Obelisk blocks and items
@@ -22,6 +23,8 @@
   * Item Definitions
     * Silver and Necromium Tools are good for combat
     * Silver armor gives x1.05 attack damage
+    * Necromium armor has really high defense at the cost of durability and enchantabilty
+    * Sanguine armor has low defense but life steal
 * Modifiers in item definitions without a slot now pick the default from the item
   * So if the `slot` is omitted for e.g. a chestplate, it will automatically go to the `chest` slot
 
