@@ -1,8 +1,11 @@
 # Changelog
 
-## Upcoming
+* 
+
+## 4.3.1
 ### Fixes
 * Silver ingots in Ore Smelting data pack
+* Crash fix
 
 ## 4.3.0
 ### Additions

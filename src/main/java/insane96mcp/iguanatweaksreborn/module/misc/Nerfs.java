@@ -1,6 +1,5 @@
 package insane96mcp.iguanatweaksreborn.module.misc;
 
-import com.teamabnormals.caverns_and_chasms.core.CCConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
@@ -84,7 +83,7 @@ public class Nerfs extends Feature {
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
 		if (noCoordinates && ModList.get().isLoaded("caverns_and_chasms")) {
-			CCConfig.CLIENT.compassesDisplayPosition.set(false);
+			//CCConfig.CLIENT.compassesDisplayPosition.set(false);
 		}
 	}
 
