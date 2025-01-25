@@ -1,6 +1,8 @@
 # Changelog
 
 * Death message for old age
+* Clock, compass with forge
+* hardcore torches soul and cupric
 
 ## Upcoming
 ### Additions
@@ -27,6 +29,11 @@
     * Sanguine armor has low defense but life steal
 * Modifiers in item definitions without a slot now pick the default from the item
   * So if the `slot` is omitted for e.g. a chestplate, it will automatically go to the `chest` slot
+
+### Fixes
+* Hardcore Torches
+  * Missing soul torch
+  * Missing torch with cloth if ISE wasn't installed
 
 ## 4.2.6
 ### Fixes

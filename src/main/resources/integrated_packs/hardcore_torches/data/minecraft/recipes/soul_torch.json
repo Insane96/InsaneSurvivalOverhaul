@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "pattern": [
-    "C ",
-    "SG"
+    "CG",
+    "SE"
   ],
   "key": {
     "C": [
@@ -33,10 +33,13 @@
       {
         "item": "minecraft:glow_lichen"
       }
-    ]
+    ],
+    "E": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
   },
   "result": {
-    "item": "minecraft:torch",
+    "item": "minecraft:soul_torch",
     "count": 3
   }
 }

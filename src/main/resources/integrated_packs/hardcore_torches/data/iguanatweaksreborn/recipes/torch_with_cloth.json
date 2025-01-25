@@ -1,38 +1,28 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "iguanatweaksexpanded"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "minecraft:stick"
-          },
-          [
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "pattern": [
+        "CG",
+        "S "
+    ],
+    "key": {
+        "C": [
             {
-              "item": "minecraft:coal"
+                "item": "minecraft:coal"
             },
             {
-              "item": "minecraft:charcoal"
+                "item": "minecraft:charcoal"
             }
-          ],
-          [
-            {
-              "item": "iguanatweaksreborn:cloth"
-            }
-          ]
         ],
-        "result": {
-          "item": "minecraft:torch",
-          "count": 3
+        "S": {
+            "tag": "forge:rods/wooden"
+        },
+        "G": {
+            "item": "iguanatweaksreborn:cloth"
         }
-      }
+    },
+    "result": {
+        "item": "minecraft:torch",
+        "count": 3
     }
-  ]
 }
