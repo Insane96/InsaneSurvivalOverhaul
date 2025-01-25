@@ -14,6 +14,7 @@
   * 80% -> 100% of original value
 * Heavy fogs will fade to the next fog faster
   * Previously only the "lasting" part was reduced
+* Increased Rabbit Stew's saturation
 * Caverns and Chasms integration
   * More ores generate in specific biomes
   * Beacon, Timber Trees and Respawn Obelisk blocks and items
