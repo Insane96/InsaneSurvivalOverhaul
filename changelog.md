@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Silver ingots in Ore Smelting data pack
+
 ## 4.3.0
 ### Additions
 * Item Definitions now have a new field: `harvest_level`
