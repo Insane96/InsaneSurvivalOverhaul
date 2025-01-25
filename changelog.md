@@ -1,10 +1,6 @@
 # Changelog
 
-* Clock, compass with forge. Also silver, necromium and sanguine tools and armor. Toolbox, Barometer, Tuning fork, depth gauge, kunai
-* Arrows in fletching
-* Remove vanilla fletching recipe
-
-## Upcoming
+## 4.3.0
 ### Additions
 * Item Definitions now have a new field: `harvest_level`
   * With this, Gold feature no longer changes harvest level, instead it's done by item definition
