@@ -3,6 +3,9 @@
 * Iron shield foirge recipe
 
 ## Upcoming
+### Changes
+* Upgrade Aquatic beachgrass no longer drops seeds
+
 ### Fixes
 * AppleSkin saturation stopping at old hunger
 
