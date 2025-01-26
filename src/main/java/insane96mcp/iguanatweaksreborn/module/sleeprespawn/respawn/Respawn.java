@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
-import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -19,6 +18,7 @@ import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.BlockTags;
@@ -27,8 +27,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -38,7 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
@@ -47,6 +45,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Label(name = "Respawn", description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
@@ -166,7 +165,7 @@ public class Respawn extends JsonFeature {
 			return;
 
 		applyStatsPenalty(event.getEntity());
-		tryLooseRespawnAndObelisk(event);
+		tryRespawnObelisk(event);
 	}
 
 	public void applyStatsPenalty(Player player) {
@@ -187,60 +186,57 @@ public class Respawn extends JsonFeature {
 		player.setHealth((float) Math.max(healthOnRespawn, minHealth));
 	}
 
-	public void tryLooseRespawnAndObelisk(PlayerEvent.PlayerRespawnEvent event) {
-		if (!event.getEntity().level().getGameRules().getBoolean(RULE_RANGEDRESPAWN))
-			return;
+	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player, Optional<Vec3> originalRespawn) {
+		if (!level.getGameRules().getBoolean(RULE_RANGEDRESPAWN))
+			return originalRespawn;
 
-		boolean hasRespawned = tryRespawnObelisk(event);
-		if (!hasRespawned)
-			hasRespawned = looseWorldSpawn(event);
-		if (!hasRespawned)
-			hasRespawned = looseBedSpawn(event);
+		Optional<Vec3> newRespawn = looseWorldSpawn(level, player);
+		if (newRespawn.isEmpty())
+			newRespawn = looseBedSpawn(level, player);
+		return newRespawn.or(() -> originalRespawn);
 	}
 
-	private boolean looseWorldSpawn(PlayerEvent.PlayerRespawnEvent event) {
+	private static Optional<Vec3> looseWorldSpawn(ServerLevel level, ServerPlayer player) {
 		if (looseWorldSpawnRange.min == 0d
-				|| event.getEntity().isSpectator())
-			return false;
-		ServerPlayer player = (ServerPlayer) event.getEntity();
+				|| player.isSpectator())
+			return Optional.empty();
 		BlockPos pos = player.getRespawnPosition();
 		if (pos != null)
-			return false;
+			return Optional.empty();
 
-		BlockPos respawnPos = getSpawnPositionInRange(player.level().getSharedSpawnPos(), looseWorldSpawnRange, player.level(), player.level().random);
+		BlockPos respawnPos = getSpawnPositionInRange(level.getSharedSpawnPos(), looseWorldSpawnRange, level, level.random);
 		if (respawnPos == null)
-			return false;
+			return Optional.empty();
 
-		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
-		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnWorldRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ISOLogHelper.info("Despawning %d entities", entities.size());
-		entities.forEach(Entity::discard);
-		return true;
+		//event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
+		//List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnWorldRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
+		//ISOLogHelper.info("Despawning %d entities", entities.size());
+		//entities.forEach(Entity::discard);
+		return Optional.of(new Vec3(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d));
 	}
 
-	private boolean looseBedSpawn(PlayerEvent.PlayerRespawnEvent event) {
+	private static Optional<Vec3> looseBedSpawn(ServerLevel level, ServerPlayer player) {
 		if (looseBedSpawnRange.min == 0d
-				|| event.getEntity().isSpectator())
-			return false;
-		ServerPlayer player = (ServerPlayer) event.getEntity();
+				|| player.isSpectator())
+			return Optional.empty();
 		BlockPos pos = player.getRespawnPosition();
 		if (pos == null
-				|| !event.getEntity().level().getBlockState(pos).is(BlockTags.BEDS))
-			return false;
+				|| !level.getBlockState(pos).is(BlockTags.BEDS))
+			return Optional.empty();
 
-		BlockPos respawnPos = getSpawnPositionInRange(pos, looseBedSpawnRange, player.level(), player.level().random);
+		BlockPos respawnPos = getSpawnPositionInRange(pos, looseBedSpawnRange, level, level.random);
 		if (respawnPos == null)
-			return false;
+			return Optional.empty();
 
-		event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
-		List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnBedRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		ISOLogHelper.info("Despawning %d entities", entities.size());
-		entities.forEach(Entity::discard);
-		return true;
+		//event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
+		//List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnBedRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
+		//ISOLogHelper.info("Despawning %d entities", entities.size());
+		//entities.forEach(Entity::discard);
+		return Optional.of(new Vec3(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d));
 	}
 
 	@Nullable
-	private BlockPos getSpawnPositionInRange(BlockPos center, MinMax minMax, Level level, RandomSource random) {
+	private static BlockPos getSpawnPositionInRange(BlockPos center, MinMax minMax, Level level, RandomSource random) {
 		double minSqr = minMax.min * minMax.min;
 		double maxSqr = minMax.max * minMax.max;
 		int x, y, z;
@@ -283,20 +279,19 @@ public class Respawn extends JsonFeature {
 		return respawn.immutable();
 	}
 
-	private boolean tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
+	private void tryRespawnObelisk(PlayerEvent.PlayerRespawnEvent event) {
 		ServerPlayer player = (ServerPlayer) event.getEntity();
 		BlockPos pos = player.getRespawnPosition();
 		if (pos == null
 				|| !player.level().getBlockState(pos).is(RESPAWN_OBELISK.block().get()))
-			return false;
+			return;
 
 		if (!player.level().getBlockState(pos).getValue(RespawnObeliskBlock.ENABLED)) {
 			player.sendSystemMessage(Component.translatable(FAIL_RESPAWN_OBELISK_LANG));
 			RespawnObeliskBlock.trySetOldSpawn(player);
-			return false;
+			return;
 		}
 		RespawnObeliskBlock.onObeliskRespawn(player, player.level(), pos);
-		return true;
 	}
 
 	@SubscribeEvent

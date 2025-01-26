@@ -59,6 +59,7 @@
         "OreVeinifierMixin",
         "PistonBaseBlockMixin",
         "PistonMovingBlockEntityMixin",
+        "PlayerListMixin",
         "PlayerMixin",
         "PotionItemMixin",
         "ProtectionEnchantmentMixin",

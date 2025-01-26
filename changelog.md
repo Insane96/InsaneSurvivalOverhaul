@@ -3,6 +3,8 @@
 ## Upcoming
 ### Changes
 * Upgrade Aquatic beachgrass no longer drops seeds
+* Loose respawn is now calculated earlier 
+  * In servers, players should no longer be placed for a second at the spawn point
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger
