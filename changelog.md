@@ -1,6 +1,10 @@
 # Changelog
 
-* 
+* Iron shield foirge recipe
+
+## Upcoming
+### Fixes
+* AppleSkin saturation stopping at old hunger
 
 ## 4.3.1
 ### Fixes

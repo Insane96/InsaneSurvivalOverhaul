@@ -18,7 +18,7 @@ public class HUDOverlayHandlerMixin {
                 || !FoodDrinks.combatSnapshotEatingSaturation)
             return original;
         float saturationRestored = modifiedFoodValues.hunger * modifiedFoodValues.saturationModifier * 2.0F;
-        float saturationAfter = Math.min(Math.max(stats.saturationLevel, saturationRestored), (float) stats.foodLevel);
+        float saturationAfter = Math.min(Math.max(stats.saturationLevel, saturationRestored), (float) stats.foodLevel + modifiedFoodValues.hunger);
         return saturationAfter - stats.saturationLevel;
     }
 }
