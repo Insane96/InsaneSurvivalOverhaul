@@ -1,7 +1,5 @@
 # Changelog
 
-* Iron shield foirge recipe
-
 ## Upcoming
 ### Changes
 * Upgrade Aquatic beachgrass no longer drops seeds
