@@ -9,6 +9,7 @@
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger
+* Zombies spawning with stone tools
 
 ## 4.3.1
 ### Fixes

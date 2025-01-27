@@ -85,10 +85,6 @@
                     "weight": 50
                 },
                 {
-                    "id": "minecraft:stone_axe",
-                    "weight": 50
-                },
-                {
                     "id": "iguanatweaksreborn:copper_axe",
                     "weight": 90
                 },
@@ -114,10 +110,6 @@
                 },
                 {
                     "id": "iguanatweaksreborn:flint_pickaxe",
-                    "weight": 50
-                },
-                {
-                    "id": "minecraft:stone_pickaxe",
                     "weight": 50
                 },
                 {
@@ -149,10 +141,6 @@
                     "weight": 50
                 },
                 {
-                    "id": "minecraft:stone_shovel",
-                    "weight": 50
-                },
-                {
                     "id": "iguanatweaksreborn:copper_shovel",
                     "weight": 90
                 },
@@ -178,10 +166,6 @@
                 },
                 {
                     "id": "iguanatweaksreborn:flint_hoe",
-                    "weight": 50
-                },
-                {
-                    "id": "minecraft:stone_hoe",
                     "weight": 50
                 },
                 {
