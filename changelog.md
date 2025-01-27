@@ -5,6 +5,7 @@
 * Upgrade Aquatic beachgrass no longer drops seeds
 * Loose respawn is now calculated earlier 
   * In servers, players should no longer be placed for a second at the spawn point
+* Deepers from Caverns and Chasms Deepers explosion now pierce through blocks more and have reduced knockback
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger

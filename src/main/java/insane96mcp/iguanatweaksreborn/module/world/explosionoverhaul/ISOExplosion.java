@@ -70,7 +70,7 @@ public class ISOExplosion extends Explosion {
 			if (source.getPersistentData().contains(BASE_RESISTANCE_ADD_TAG))
 				this.baseResistanceAdd = source.getPersistentData().getFloat(BASE_RESISTANCE_ADD_TAG);
 			if (source.getPersistentData().contains(RAY_STRENGTH_MULTIPLIER_TAG))
-				this.rayStrengthMultiplier = source.getPersistentData().getFloat(RAY_STRENGTH_MULTIPLIER_TAG);
+				this.rayStrengthMultiplier = Math.max(0.01f,source.getPersistentData().getFloat(RAY_STRENGTH_MULTIPLIER_TAG));
 		}
 		if (ExplosionOverhaul.limitExplosionSize != 0)
 			this.radius = Math.min(ExplosionOverhaul.limitExplosionSize, this.radius);
@@ -116,9 +116,8 @@ public class ISOExplosion extends Explosion {
 								float resistance = optional.get();
 								rayStrength -= (resistance + baseResistanceAdd) * rayStrengthMultiplier;
 							}
-							if (rayStrength > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockpos, blockstate, rayStrength)) {
+							if (rayStrength > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockpos, blockstate, rayStrength))
 								set.add(blockpos);
-							}
 							x += d0 * (double)0.3F;
 							y += d1 * (double)0.3F;
 							z += d2 * (double)0.3F;
@@ -351,5 +350,19 @@ public class ISOExplosion extends Explosion {
 
 	public static float getKnockbackMultiplier(@Nullable Entity entity) {
 		return entity != null && entity.getPersistentData().contains(KNOCKBACK_MULTIPLIER_TAG) ? entity.getPersistentData().getFloat(KNOCKBACK_MULTIPLIER_TAG) : 1f;
+	}
+
+	/// Vanilla is 0.3
+	public static void setBaseResistanceAdd(Entity entity, float baseResistanceAdd) {
+		entity.getPersistentData().putFloat(ISOExplosion.BASE_RESISTANCE_ADD_TAG, baseResistanceAdd);
+	}
+
+	/// Vanilla is 0.3
+	public static void setRayStrengthMultiplier(Entity entity, float rayStrengthMultiplier) {
+		entity.getPersistentData().putFloat(ISOExplosion.RAY_STRENGTH_MULTIPLIER_TAG, rayStrengthMultiplier);
+	}
+
+	public static void setKnockbackMultiplier(Entity entity, float knockbackMultiplier) {
+		entity.getPersistentData().putFloat(ISOExplosion.KNOCKBACK_MULTIPLIER_TAG, knockbackMultiplier);
 	}
 }

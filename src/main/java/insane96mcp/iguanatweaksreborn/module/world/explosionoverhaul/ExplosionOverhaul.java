@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
+import com.teamabnormals.caverns_and_chasms.core.registry.CCEntityTypes;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.ExplodeParticles;
@@ -17,9 +18,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 @Label(name = "Explosion Overhaul", description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
 @LoadFeature(module = Modules.Ids.WORLD)
@@ -60,11 +63,26 @@ public class ExplosionOverhaul extends Feature {
 	@Label(name = "Limit explosion size", description = "Disabled if set to 0.")
 	public static Integer limitExplosionSize = 12;
 	@Config
-	@Label(name = "Don't stack drops")
+	@Label(name = "Don't stack drops", description = "Like pre-1.14")
 	public static Boolean dontStackDrops = true;
+	@Config
+	@Label(name = "Caverns and Chasms Deepers", description = "If enabled and Caverns and Chasms is present, Deepers explosions will pierce through blocks more (like Breaching creepers and Angry Creepers in Enhanced AI).")
+	public static Boolean cavernsChasmsDeepers = true;
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+	}
+
+	@SubscribeEvent
+	public void onDeeperSpawn(EntityJoinLevelEvent event) {
+		if (!this.isEnabled()
+				|| !cavernsChasmsDeepers
+				|| !ModList.get().isLoaded("caverns_and_chasms")
+				|| event.getEntity().getType() != CCEntityTypes.DEEPER.get())
+			return;
+
+		ISOExplosion.setBaseResistanceAdd(event.getEntity(), 0.03f);
+		ISOExplosion.setKnockbackMultiplier(event.getEntity(), 0.75f);
 	}
 
 	@SubscribeEvent
