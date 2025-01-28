@@ -52,7 +52,7 @@ public class VillagersNerfs extends Feature {
 	public static Boolean clampNegativeDemand = true;
 	@Config
 	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
-	public static Boolean removeBadOmen = true;
+	public static Boolean removeBadOmen = false;
 
 	public VillagersNerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
