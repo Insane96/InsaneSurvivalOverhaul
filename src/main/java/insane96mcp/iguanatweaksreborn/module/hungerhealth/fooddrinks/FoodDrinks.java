@@ -38,7 +38,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder. Removing entries from the json requires a minecraft restart.")
+@Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder. Changing the json requires a minecraft restart.")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class FoodDrinks extends JsonFeature {
 
@@ -68,7 +68,7 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).setNutrition(1).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).setNutrition(2).alwaysEat(false).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).setNutrition(6).setEatingTime(40).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).setSaturationModifier(1.6f).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).setSaturationModifier(1f).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
 					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
@@ -85,11 +85,11 @@ public class FoodDrinks extends JsonFeature {
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
 	@Config
-	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
-	public static String foodHungerFormula = "hunger";
+	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Requires a Minecraft restart")
+	public static String foodHungerFormula = "";
 	@Config
-	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature")
-	public static String foodSaturationModifierFormula = "saturation_modifier";
+	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Requires a Minecraft restart")
+	public static String foodSaturationModifierFormula = "saturation_modifier * 1.1";
 
 	@Config
 	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
@@ -137,7 +137,7 @@ public class FoodDrinks extends JsonFeature {
 		if (!this.isEnabled())
 			return;
 		super.loadJsonConfigs();
-		processFoodMultipliers(false);
+		//processFoodMultipliers(false);
 	}
 
 	@SubscribeEvent
@@ -207,13 +207,13 @@ public class FoodDrinks extends JsonFeature {
 		}
 	}
 
-	private static boolean processedFoodMultipliers = false;
+	//private static boolean processedFoodMultipliers = false;
 
 	@SuppressWarnings("ConstantConditions")
 	public static void processFoodMultipliers(boolean isClientSide) {
-		if (processedFoodMultipliers)
+		/*if (processedFoodMultipliers)
 			return;
-		processedFoodMultipliers = true;
+		processedFoodMultipliers = true;*/
 		for (Item item : ForgeRegistries.ITEMS.getValues()) {
 			if (item.getFoodProperties() == null
 					|| isItemInTag(item, FOOD_BLACKLIST, isClientSide))
@@ -224,7 +224,6 @@ public class FoodDrinks extends JsonFeature {
 			if (!foodSaturationModifierFormula.isEmpty())
 				food.saturationModifier = MCUtils.computeFoodFormula(food, foodSaturationModifierFormula);
 		}
-
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -236,6 +235,7 @@ public class FoodDrinks extends JsonFeature {
 		}
 		//reset cache when reloading
 		customFoodPropertiesCache = null;
+		processFoodMultipliers(isClientSide);
 	}
 
 	public static boolean isRawFood(Item item) {

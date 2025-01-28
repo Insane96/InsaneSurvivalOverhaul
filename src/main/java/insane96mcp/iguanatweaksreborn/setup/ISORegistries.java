@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.setup;
 import com.mojang.serialization.Codec;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.condition.*;
+import insane96mcp.iguanatweaksreborn.data.function.EnchantWithTreasureFunction;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.DisenchantModifier;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.DropMultiplierModifier;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.LootPurgerModifier;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.registries.DeferredRegister;
@@ -74,6 +76,9 @@ public class ISORegistries {
 	public static final RegistryObject<LootItemConditionType> KILLED_BY_KILLED_PLAYER = LOOT_CONDITION_TYPES.register("killed_by_killed_player", () -> new LootItemConditionType(new KilledByKilledPlayerCondition.Serializer()));
 	public static final RegistryObject<LootItemConditionType> LIVESTOCK_AGE_CONDITION = LOOT_CONDITION_TYPES.register("livestock_age", () -> new LootItemConditionType(new LivestockAgeCondition.Serializer()));
 	public static final RegistryObject<LootItemConditionType> CURRENT_SEASON = LOOT_CONDITION_TYPES.register("current_season", () -> new LootItemConditionType(new LootItemCurrentSeasonCondition.Serializer()));
+
+	public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = createRegistry(Registries.LOOT_FUNCTION_TYPE.location());
+	public static final RegistryObject<LootItemFunctionType> ENCHANT_WITH_TREASURE = LOOT_FUNCTIONS.register("enchant_with_treasure", () -> new LootItemFunctionType(new EnchantWithTreasureFunction.Serializer()));
 
 	public static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = createRegistry(Registries.RULE_TEST);
 	public static final RegistryObject<RuleTestType<RandomBlockTagMatchTest>> RANDOM_BLOCK_TAG_MATCH = RULE_TEST_TYPES.register("random_block_tag_match", RandomBlockTagMatchTest.Type::new);
