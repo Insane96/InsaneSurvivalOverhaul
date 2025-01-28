@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.3.2
 ### Additions
 * `iguanatweaksreborn:explosion_damage_multiplier` NBT tag for entities to increase/decrease explosion damage
 * Villagers now heal every ~10 seconds
