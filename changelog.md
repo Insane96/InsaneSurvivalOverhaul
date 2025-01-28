@@ -13,6 +13,8 @@
 * Increased overall saturation from foods (+10%)
 * Re-enabled zombie villagers
   * You can get your long nosed ~~slaves~~ friends back, but you need to cure them
+* Vex nerf changed
+  * ~~-4 attack damage~~ -> -10 HP
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger

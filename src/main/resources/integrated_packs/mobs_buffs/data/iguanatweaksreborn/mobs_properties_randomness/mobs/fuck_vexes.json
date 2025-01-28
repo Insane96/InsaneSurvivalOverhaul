@@ -2,9 +2,9 @@
     "target": "minecraft:vex",
     "attributes": [
         {
-            "id": "minecraft:generic.attack_damage",
-            "modifier_name": "ITE mobs_buffs",
-            "amount": -4,
+            "id": "minecraft:generic.max_health",
+            "modifier_name": "ISO mobs_buffs",
+            "amount": -10,
             "operation": "addition"
         }
     ]
