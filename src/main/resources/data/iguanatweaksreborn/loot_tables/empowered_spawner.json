@@ -21,7 +21,7 @@
                             "levels": 25
                         },
                         {
-                            "function": "iguanatweaksexpanded:enchant_with_treasure"
+                            "function": "iguanatweaksreborn:enchant_with_treasure"
                         }
                     ]
                 }
