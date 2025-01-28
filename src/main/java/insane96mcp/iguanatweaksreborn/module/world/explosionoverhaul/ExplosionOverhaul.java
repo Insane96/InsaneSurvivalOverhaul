@@ -66,7 +66,7 @@ public class ExplosionOverhaul extends Feature {
 	@Label(name = "Don't stack drops", description = "Like pre-1.14")
 	public static Boolean dontStackDrops = true;
 	@Config
-	@Label(name = "Caverns and Chasms Deepers", description = "If enabled and Caverns and Chasms is present, Deepers explosions will pierce through blocks more (like Breaching creepers and Angry Creepers in Enhanced AI).")
+	@Label(name = "Caverns and Chasms Deepers", description = "If enabled and Caverns and Chasms is present, Deepers explosions will pierce through blocks more (like Breaching creepers and Angry Creepers in Enhanced AI), knockback and damage are reduced by 25%.")
 	public static Boolean cavernsChasmsDeepers = true;
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -83,6 +83,7 @@ public class ExplosionOverhaul extends Feature {
 
 		ISOExplosion.setBaseResistanceAdd(event.getEntity(), 0.03f);
 		ISOExplosion.setKnockbackMultiplier(event.getEntity(), 0.75f);
+		ISOExplosion.setDamageMultiplierTag(event.getEntity(), 0.75f);
 	}
 
 	@SubscribeEvent
