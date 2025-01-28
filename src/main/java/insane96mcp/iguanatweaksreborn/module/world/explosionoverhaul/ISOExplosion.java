@@ -52,6 +52,7 @@ public class ISOExplosion extends Explosion {
 	public static final String KNOCKBACK_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_knockback_multiplier";
 	public static final String BASE_RESISTANCE_ADD_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_base_resistance_add";
 	public static final String RAY_STRENGTH_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_ray_strength_multiplier";
+	public static final String DAMAGE_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_damage_multiplier";
 	ObjectArrayList<Pair<ItemStack, BlockPos>> droppedItems = new ObjectArrayList<>();
 	boolean creeperCollateral;
 	public final boolean poofParticles;
@@ -184,6 +185,7 @@ public class ISOExplosion extends Explosion {
 			double d10 = (1.0D - distanceRatio) * blockDensity;
 			//Damage Entities in the explosion radius
 			float damageAmount = (float) ((int) ((d10 * d10 + d10) / 2.0D * ExplosionOverhaul.explosionDamageCalculationMultiplier * (double) affectedEntitiesRadius + 1.0D));
+			damageAmount *= getDamageMultiplier(this.source);
 			if (blockDensity > 0d) {
 				DamageSource source = this.getDamageSource();
 				boolean isBlocking = false;
@@ -352,17 +354,25 @@ public class ISOExplosion extends Explosion {
 		return entity != null && entity.getPersistentData().contains(KNOCKBACK_MULTIPLIER_TAG) ? entity.getPersistentData().getFloat(KNOCKBACK_MULTIPLIER_TAG) : 1f;
 	}
 
+	public static float getDamageMultiplier(@Nullable Entity entity) {
+		return entity != null && entity.getPersistentData().contains(DAMAGE_MULTIPLIER_TAG) ? entity.getPersistentData().getFloat(DAMAGE_MULTIPLIER_TAG) : 1f;
+	}
+
 	/// Vanilla is 0.3
 	public static void setBaseResistanceAdd(Entity entity, float baseResistanceAdd) {
-		entity.getPersistentData().putFloat(ISOExplosion.BASE_RESISTANCE_ADD_TAG, baseResistanceAdd);
+		entity.getPersistentData().putFloat(BASE_RESISTANCE_ADD_TAG, baseResistanceAdd);
 	}
 
 	/// Vanilla is 0.3
 	public static void setRayStrengthMultiplier(Entity entity, float rayStrengthMultiplier) {
-		entity.getPersistentData().putFloat(ISOExplosion.RAY_STRENGTH_MULTIPLIER_TAG, rayStrengthMultiplier);
+		entity.getPersistentData().putFloat(RAY_STRENGTH_MULTIPLIER_TAG, rayStrengthMultiplier);
 	}
 
 	public static void setKnockbackMultiplier(Entity entity, float knockbackMultiplier) {
-		entity.getPersistentData().putFloat(ISOExplosion.KNOCKBACK_MULTIPLIER_TAG, knockbackMultiplier);
+		entity.getPersistentData().putFloat(KNOCKBACK_MULTIPLIER_TAG, knockbackMultiplier);
+	}
+
+	public static void setDamageMultiplierTag(Entity entity, float damageMultiplier) {
+		entity.getPersistentData().putFloat(DAMAGE_MULTIPLIER_TAG, damageMultiplier);
 	}
 }

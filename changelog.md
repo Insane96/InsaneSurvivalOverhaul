@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* `iguanatweaksreborn:explosion_damage_multiplier` NBT tag for entities to increase/decrease explosion damage
+
 ### Changes
 * Upgrade Aquatic beachgrass no longer drops seeds
 * Loose respawn is now calculated earlier 
