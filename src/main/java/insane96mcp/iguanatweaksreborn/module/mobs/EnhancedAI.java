@@ -26,8 +26,7 @@ public class EnhancedAI extends Feature {
     }
 
     @Override
-    public void readConfig(ModConfigEvent event) {
-        super.readConfig(event);
+    public void postReadConfig(ModConfigEvent event) {
         if (!this.isEnabled())
             return;
         Module.getFeature(Spawning.class).setConfigOption("Monsters Despawning Distance", 128);

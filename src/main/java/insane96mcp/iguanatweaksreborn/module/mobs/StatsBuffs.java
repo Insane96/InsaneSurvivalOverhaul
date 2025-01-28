@@ -23,7 +23,7 @@ public class StatsBuffs extends Feature {
     }
 
     @Override
-    public void readConfig(ModConfigEvent event) {
+    public void postReadConfig(ModConfigEvent event) {
         super.readConfig(event);
         if (ModList.get().isLoaded("enhancedai") && this.isEnabled())
             EnhancedAIIntegration.setupStatsBuffs(event);

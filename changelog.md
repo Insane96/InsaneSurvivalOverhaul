@@ -13,12 +13,14 @@
 * Increased overall saturation from foods (+10%)
 * Re-enabled zombie villagers
   * You can get your long nosed ~~slaves~~ friends back, but you need to cure them
+  * Bad omen has also been re-enabled
 * Vex nerf changed
   * ~~-4 attack damage~~ -> -10 HP
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger
 * Zombies spawning with stone tools
+* Hopefully fixed Enhanced AI config resetting at random
 
 ## 4.3.1
 ### Fixes
