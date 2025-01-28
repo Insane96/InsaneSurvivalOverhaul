@@ -11,6 +11,8 @@
 * Caverns and Chasms Deepers explosion now pierce through blocks more and have reduced knockback
 * Reduced saturation from rabbit stews (1.6 -> 0.8). Vanilla was 0.6
 * Increased overall saturation from foods (+10%)
+* Re-enabled zombie villagers
+  * You can get your long nosed ~~slaves~~ friends back, but you need to cure them
 
 ### Fixes
 * AppleSkin saturation stopping at old hunger

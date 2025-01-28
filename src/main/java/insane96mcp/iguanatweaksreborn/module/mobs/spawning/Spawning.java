@@ -48,7 +48,7 @@ public class Spawning extends Feature {
 
     @Config
     @Label(name = "No Zombie Villagers", description = "Disables Zombie Villagers")
-    public static Boolean noZombieVillagers = true;
+    public static Boolean noZombieVillagers = false;
     @Config
     @Label(name = "Allow world spawn spawn", description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
