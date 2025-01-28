@@ -50,6 +50,9 @@ public class VillagersNerfs extends Feature {
 	@Config
 	@Label(name = "Clamp Negative Demand", description = "When villagers restock, they update the 'demand'. Demand is a trade modifier that increases the price whenever a trade is done many times, BUT when a trade is not performed, at each restock the 'demand' goes negative, making possible for a trade to never increase it's price due to high negative demand. With this to true, negative demand will be capped at -max_uses of the trade (e.g. Carrot trade from a farmer will have it's minimum demand set to -16).")
 	public static Boolean clampNegativeDemand = true;
+	@Config(min = 0)
+	@Label(name = "Heal chance", description = "1 in X chance each tick for villagers to regain 1 health. Set to 0 to disable")
+	public static Integer healChance = 200;
 	@Config
 	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = false;
@@ -71,8 +74,15 @@ public class VillagersNerfs extends Feature {
 	@SubscribeEvent
 	public void onLivingTick(LivingEvent.LivingTickEvent event) {
 		if (!this.isEnabled()
-				|| !preventCureDiscount
-				|| !(event.getEntity() instanceof Villager villager)
+				|| !(event.getEntity() instanceof Villager villager))
+			return;
+
+		tryRemovingCureDiscount(villager);
+		tryHeal(villager);
+	}
+
+	public void tryRemovingCureDiscount(Villager villager) {
+		if (!preventCureDiscount
 				|| villager.getPersistentData().getBoolean(CURE_DISCOUNT_REMOVED))
 			return;
 
@@ -82,6 +92,18 @@ public class VillagersNerfs extends Feature {
 			villager.getGossips().remove(uuid, GossipType.MINOR_POSITIVE);
 		}));
 		villager.getPersistentData().putBoolean(CURE_DISCOUNT_REMOVED, true);
+	}
+
+	public void tryHeal(Villager villager) {
+		if (healChance == 0
+				|| villager.getRandom().nextInt(healChance) != 0)
+			return;
+
+		villager.heal(1f);
+	}
+
+	@SubscribeEvent
+	public void onLivingTick2(LivingEvent.LivingTickEvent event) {
 	}
 
 	public static int clampSpecialPrice(int specialPriceDiff, final ItemStack baseCostA) {
