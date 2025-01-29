@@ -235,6 +235,8 @@ public class Tiredness extends JsonFeature {
 			return;
 
 		ServerPlayer serverPlayer = (ServerPlayer) event.getEntity();
+		if (!serverPlayer.gameMode.isSurvival())
+			return;
 
 		float tiredness = TirednessHandler.get(serverPlayer);
 		TirednessHandler.add(serverPlayer, event.getAmount() * tirednessGainMultiplier.floatValue());

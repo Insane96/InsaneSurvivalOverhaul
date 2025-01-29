@@ -18,6 +18,7 @@
 * Missing Caverns and Chasms Ore smelting recipes
 * Always convert villager to zombie not working
 * Missing Caverns and chasms anvil repairs
+* Tiredness accumulating in creative/spectator mode
 
 ## 4.3.2
 ### Additions
