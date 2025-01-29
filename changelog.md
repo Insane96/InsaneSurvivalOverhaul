@@ -19,6 +19,7 @@
 * Always convert villager to zombie not working
 * Missing Caverns and chasms anvil repairs
 * Tiredness accumulating in creative/spectator mode
+* Living flesh recipe with cloth enabled
 
 ## 4.3.2
 ### Additions
