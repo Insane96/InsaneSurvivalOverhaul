@@ -5,10 +5,12 @@
 * Reduced auto-breed chance (5% -> 2%)
 * Reduced Iron Golems sight
 * Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
+* Increased wall hit min speed to get damaged
 
 ### Fixes
 * Missing Caverns and Chasms actual redstone components
 * Missing Caverns and Chasms Ore smelting recipes
+* Always convert villager to zombie not working
 
 ## 4.3.2
 ### Additions

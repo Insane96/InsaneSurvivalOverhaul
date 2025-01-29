@@ -369,8 +369,8 @@ public class Tweaks extends Feature {
         Vec3 originalResult = originalOperation.call(instance, pTravelVector, pFriction);
         if (instance.horizontalCollision && !instance.level().isClientSide) {
             double length = horizontalDistance - instance.getDeltaMovement().horizontalDistance();
-            if (length > 0.41f) {
-                instance.hurt(instance.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.2f) * collideWithWallsDamage));
+            if (length > 0.5f) {
+                instance.hurt(instance.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.5f) * collideWithWallsDamage));
 
                 if (!instance.level().isClientSide) {
                     double x = instance.getX();
