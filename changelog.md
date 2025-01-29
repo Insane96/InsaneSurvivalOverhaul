@@ -8,6 +8,7 @@
 
 ### Fixes
 * Missing Caverns and Chasms actual redstone components
+* Missing Caverns and Chasms Ore smelting recipes
 
 ## 4.3.2
 ### Additions
