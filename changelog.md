@@ -17,6 +17,7 @@
 * Missing Caverns and Chasms actual redstone components
 * Missing Caverns and Chasms Ore smelting recipes
 * Always convert villager to zombie not working
+* Missing Caverns and chasms anvil repairs
 
 ## 4.3.2
 ### Additions

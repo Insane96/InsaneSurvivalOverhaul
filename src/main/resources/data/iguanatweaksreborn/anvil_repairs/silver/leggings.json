@@ -1,0 +1,20 @@
+{
+	"item_to_repair": {
+		"id": "caverns_and_chasms:silver_leggings"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_ingot"
+			},
+			"amount": 6
+		},
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_nugget"
+			},
+			"amount": 50,
+			"cost_multiplier": 9
+		}
+	]
+}

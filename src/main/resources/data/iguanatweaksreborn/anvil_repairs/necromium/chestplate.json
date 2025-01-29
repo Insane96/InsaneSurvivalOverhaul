@@ -1,0 +1,21 @@
+{
+	"item_to_repair": {
+		"id": "caverns_and_chasms:necromium_chestplate"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:diamond"
+			},
+			"amount": 8,
+			"max_repair": 0.5
+		},
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:necromium_ingot"
+			},
+			"amount": 2,
+			"cost_multiplier": 0.01
+		}
+	]
+}

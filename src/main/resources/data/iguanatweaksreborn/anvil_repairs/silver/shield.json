@@ -1,0 +1,20 @@
+{
+	"item_to_repair": {
+		"id": "shieldsplus:golden_shield"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_ingot"
+			},
+			"amount": 3
+		},
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_nugget"
+			},
+			"amount": 29,
+			"cost_multiplier": 9
+		}
+	]
+}

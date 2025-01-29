@@ -1,0 +1,20 @@
+{
+	"item_to_repair": {
+		"id": "caverns_and_chasms:silver_helmet"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_ingot"
+			},
+			"amount": 4
+		},
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:silver_nugget"
+			},
+			"amount": 36,
+			"cost_multiplier": 9
+		}
+	]
+}
