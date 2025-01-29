@@ -1,0 +1,13 @@
+{
+	"item_to_repair": {
+		"id": "caverns_and_chasms:sanguine_helmet"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:living_flesh"
+			},
+			"amount": 4
+		}
+	]
+}
