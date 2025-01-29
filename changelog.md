@@ -5,6 +5,7 @@
 ### Upcoming
 ### Changes
 * Heavily increased animal spawn caps
+* Chance for bonemeal to fail to grow saplings reduced (20% -> 10%)
 
 ### Fixes
 * Item tooltips not working
