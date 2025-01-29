@@ -58,7 +58,7 @@ public class HealthRegenHunger extends Feature {
 	public static Boolean consumeHungerOnly = true;
 	@Config(min = 0d, max = 40d)
 	@Label(name = "Max Exhaustion", description = "Vanilla consumes 1 saturation or hunger whenever Exhaustion reaches 4.0. You can change that value with this config option. NOTE that Minecraft caps this value to 40.")
-	public static Double maxExhaustion = 4.0d;
+	public static Double maxExhaustion = 6.0d;
 	@Config(min = 0d, max = 1d)
 	@Label(name = "Hunger Consumption Chance", description = "If 'Consume Hunger Only' is true then this is the chance to consume an hunger whenever the player is healed (vanilla ignores this; Combat Test has this set to 0.5).")
 	public static Double hungerConsumptionChance = 0.5d;
