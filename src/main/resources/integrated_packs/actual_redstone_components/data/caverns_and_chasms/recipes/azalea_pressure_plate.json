@@ -1,0 +1,35 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "caverns_and_chasms"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "category": "redstone",
+                "group": "wooden_pressure_plate",
+                "key": {
+                    "r": {
+                        "item": "minecraft:redstone"
+                    },
+                    "#": {
+                        "item": "caverns_and_chasms:azalea_planks"
+                    }
+                },
+                "pattern": [
+                    " r",
+                    "##"
+                ],
+                "result": {
+                    "item": "caverns_and_chasms:azalea_pressure_plate",
+                    "count": 2
+                },
+                "show_notification": true
+            }
+        }
+    ]
+}

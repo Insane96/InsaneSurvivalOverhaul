@@ -6,6 +6,9 @@
 * Reduced Iron Golems sight
 * Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
 
+### Fixes
+* Missing Caverns and Chasms actual redstone components
+
 ## 4.3.2
 ### Additions
 * `iguanatweaksreborn:explosion_damage_multiplier` NBT tag for entities to increase/decrease explosion damage
