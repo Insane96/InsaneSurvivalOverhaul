@@ -1,11 +1,16 @@
 # Changelog
 
+* milk cooldown store game time instead of remaining ticks
+
 ## Upcoming
+### Additions
+* Added MiscItem.Item Tooltips
+  * If enabled, items in the `iguanatweaksreborn:has_tooltip` item tag will have tooltips added from the vanilla name translation string + .tooltip (.e.g item.minecraft.arrow.tooltip)
+
 ### Changes
 * Reduced auto-breed chance (5% -> 2%)
 * Reduced Iron Golems sight
 * Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
-* 
 
 ### Fixes
 * Missing Caverns and Chasms actual redstone components

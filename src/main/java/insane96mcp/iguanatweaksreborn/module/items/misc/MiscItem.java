@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items.misc;
 
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -14,7 +15,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,6 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class MiscItem extends Feature {
 
+	public static final TagKey<Item> HAS_TOOLTIP = ISOItemTagsProvider.create("has_tooltip");
 	public static final String TOOL_EFFICIENCY_LANG = "iguanatweaksreborn.tool_efficiency";
 
 	@Config
@@ -36,6 +40,10 @@ public class MiscItem extends Feature {
 	@Config
 	@Label(name = "Item Stats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
 	public static Boolean itemStatsDataPack = true;
+
+	@Config
+	@Label(name = "Item tooltips", description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
+	public static Boolean itemTooltips = true;
 
 	public MiscItem(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -68,5 +76,15 @@ public class MiscItem extends Feature {
 				toolEfficiency += bonusToolEfficiency;
 			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, InsaneLib.ONE_DECIMAL_FORMATTER.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
 		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void onItemTooltips(ItemTooltipEvent event) {
+		if (!this.isEnabled()
+				|| !itemTooltips
+				|| !event.getItemStack().is(HAS_TOOLTIP))
+			return;
+
+		event.getToolTip().add(0, Component.translatable(event.getItemStack().getItem().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
 	}
 }

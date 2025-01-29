@@ -150,6 +150,8 @@ dependencies {
 
     implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${mc_version}-${apple_skin_version}")
 
+    implementation fg.deobf("curse.maven:villager-comfort-updated-1082700:5622213")
+
     //implementation fg.deobf("curse.maven:nostalgic-tweaks-592465:5602576")
     //implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
