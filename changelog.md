@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Reduced auto-breed chance (5% -> 2%)
+* Reduced Iron Golems sight
 
 ## 4.3.2
 ### Additions

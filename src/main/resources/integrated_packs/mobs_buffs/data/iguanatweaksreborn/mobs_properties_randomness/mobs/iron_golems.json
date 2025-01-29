@@ -4,7 +4,7 @@
         {
             "id": "minecraft:generic.follow_range",
             "modifier_name": "More Sight for Iron Golems",
-            "amount": 2,
+            "amount": 1,
             "operation": "multiply_base"
         }
     ]
