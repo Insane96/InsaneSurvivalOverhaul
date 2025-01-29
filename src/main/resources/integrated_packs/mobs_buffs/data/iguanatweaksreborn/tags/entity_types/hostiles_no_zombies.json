@@ -1,6 +1,5 @@
 {
     "values": [
-        "minecraft:skeleton",
         "minecraft:spider",
         "minecraft:cave_spider",
         "minecraft:piglin",
@@ -21,10 +20,10 @@
         "minecraft:shulker",
         "minecraft:silverfish",
         "minecraft:slime",
-        "minecraft:stray",
         "minecraft:vindicator",
         "minecraft:warden",
         "minecraft:witch",
-        "minecraft:zoglin"
+        "minecraft:zoglin",
+        "#iguanatweaksreborn:overworld_skeletons"
     ]
 }

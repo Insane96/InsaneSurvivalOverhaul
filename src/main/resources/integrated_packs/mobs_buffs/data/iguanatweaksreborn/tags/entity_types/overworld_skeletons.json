@@ -1,6 +1,10 @@
 {
     "values": [
         "minecraft:skeleton",
-        "minecraft:stray"
+        "minecraft:stray",
+        {
+            "required": false,
+            "id": "savage_and_ravage:skeleton_villager"
+        }
     ]
 }
