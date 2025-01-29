@@ -2,7 +2,7 @@
 
 * milk cooldown store game time instead of remaining ticks
 
-## Upcoming
+## 4.3.3
 ### Additions
 * Added MiscItem.Item Tooltips
   * If enabled, items in the `iguanatweaksreborn:has_tooltip` item tag will have tooltips added from the vanilla name translation string + .tooltip (.e.g item.minecraft.arrow.tooltip)
