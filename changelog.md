@@ -3,6 +3,9 @@
 * milk cooldown store game time instead of remaining ticks
 
 ### Upcoming
+### Changes
+* Heavily increased animal spawn caps
+
 ### Fixes
 * Item tooltips not working
 
