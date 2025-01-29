@@ -9,6 +9,7 @@
         "minecraft:sheep",
         "minecraft:cat",
         "minecraft:fox",
-        "minecraft:rabbit"
+        "minecraft:rabbit",
+        "minecraft:ravager"
     ]
 }

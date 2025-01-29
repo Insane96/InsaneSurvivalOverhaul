@@ -11,6 +11,7 @@
 * Reduced auto-breed chance (5% -> 2%)
 * Reduced Iron Golems sight
 * Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
+* Reduced ravagers attack speed
 
 ### Fixes
 * Missing Caverns and Chasms actual redstone components
