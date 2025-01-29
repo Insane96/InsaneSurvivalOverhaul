@@ -3,6 +3,14 @@
     "minecraft:spider",
     "minecraft:cave_spider",
     "minecraft:silverfish",
-    "minecraft:creeper"
+    "minecraft:creeper",
+    {
+      "id": "caverns_and_chasms:deeper",
+      "required": false
+    },
+    {
+      "id": "caverns_and_chasms:peeper",
+      "required": false
+    }
   ]
 }

@@ -4,6 +4,7 @@
 ### Changes
 * Reduced auto-breed chance (5% -> 2%)
 * Reduced Iron Golems sight
+* Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
 
 ## 4.3.2
 ### Additions
