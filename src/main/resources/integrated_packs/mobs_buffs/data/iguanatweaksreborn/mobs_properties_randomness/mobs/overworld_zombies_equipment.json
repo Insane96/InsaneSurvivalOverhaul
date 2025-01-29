@@ -21,10 +21,10 @@
             "enchantments": [
                 {
                     "chance": {
-                        "value": 0.3,
+                        "value": 0.2,
                         "condition_modifier": {
-                            "operation": "multiply",
-                            "amount": 1.5,
+                            "operation": "add",
+                            "amount": 0.2,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -33,13 +33,8 @@
                         }
                     },
                     "with_levels": {
-                        "min": 5,
-                        "max": 15,
-                        "modifier_behavior": "max_only",
-                        "difficulty_modifier": {
-                            "operation": "add",
-                            "hard": 7
-                        }
+                        "min": 1,
+                        "max": 20
                     }
                 }
             ],
@@ -50,10 +45,6 @@
                 },
                 {
                     "id": "iguanatweaksreborn:flint_sword",
-                    "weight": 50
-                },
-                {
-                    "id": "minecraft:stone_sword",
                     "weight": 50
                 },
                 {
@@ -194,10 +185,10 @@
             "enchantments": [
                 {
                     "chance": {
-                        "value": 0.3,
+                        "value": 0.2,
                         "condition_modifier": {
-                            "operation": "multiply",
-                            "amount": 1.5,
+                            "operation": "add",
+                            "amount": 0.2,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -206,13 +197,8 @@
                         }
                     },
                     "with_levels": {
-                        "min": 5,
-                        "max": 15,
-                        "modifier_behavior": "max_only",
-                        "difficulty_modifier": {
-                            "operation": "add",
-                            "hard": 7
-                        }
+                        "min": 1,
+                        "max": 20
                     }
                 }
             ]
@@ -221,10 +207,10 @@
             "enchantments": [
                 {
                     "chance": {
-                        "value": 0.3,
+                        "value": 0.2,
                         "condition_modifier": {
-                            "operation": "multiply",
-                            "amount": 1.5,
+                            "operation": "add",
+                            "amount": 0.2,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -233,13 +219,8 @@
                         }
                     },
                     "with_levels": {
-                        "min": 5,
-                        "max": 15,
-                        "modifier_behavior": "max_only",
-                        "difficulty_modifier": {
-                            "operation": "add",
-                            "hard": 7
-                        }
+                        "min": 1,
+                        "max": 20
                     }
                 }
             ]
@@ -248,10 +229,10 @@
             "enchantments": [
                 {
                     "chance": {
-                        "value": 0.3,
+                        "value": 0.2,
                         "condition_modifier": {
-                            "operation": "multiply",
-                            "amount": 1.5,
+                            "operation": "add",
+                            "amount": 0.2,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -260,13 +241,8 @@
                         }
                     },
                     "with_levels": {
-                        "min": 5,
-                        "max": 15,
-                        "modifier_behavior": "max_only",
-                        "difficulty_modifier": {
-                            "operation": "add",
-                            "hard": 7
-                        }
+                        "min": 1,
+                        "max": 20
                     }
                 }
             ]
@@ -275,10 +251,10 @@
             "enchantments": [
                 {
                     "chance": {
-                        "value": 0.3,
+                        "value": 0.2,
                         "condition_modifier": {
-                            "operation": "multiply",
-                            "amount": 1.5,
+                            "operation": "add",
+                            "amount": 0.2,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -287,13 +263,8 @@
                         }
                     },
                     "with_levels": {
-                        "min": 5,
-                        "max": 15,
-                        "modifier_behavior": "max_only",
-                        "difficulty_modifier": {
-                            "operation": "add",
-                            "hard": 7
-                        }
+                        "min": 1,
+                        "max": 20
                     }
                 }
             ]
@@ -304,8 +275,8 @@
         "chance": {
             "value": 0.15,
             "condition_modifier": {
-                "operation": "multiply",
-                "amount": 1.5,
+                "operation": "add",
+                "amount": 0.10,
                 "condition": {
                     "world": {
                         "moon_phases": "full_moon"
