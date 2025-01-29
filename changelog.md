@@ -2,6 +2,10 @@
 
 * milk cooldown store game time instead of remaining ticks
 
+### Upcoming
+### Fixes
+* Item tooltips not working
+
 ## 4.3.3
 ### Additions
 * Added MiscItem.Item Tooltips

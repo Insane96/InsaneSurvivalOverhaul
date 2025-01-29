@@ -79,6 +79,7 @@ public class MiscItem extends Feature {
 	}
 
 	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent()
 	public void onItemTooltips(ItemTooltipEvent event) {
 		if (!this.isEnabled()
 				|| !itemTooltips
