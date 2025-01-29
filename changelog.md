@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reduced auto-breed chance (5% -> 2%)
+
 ## 4.3.2
 ### Additions
 * `iguanatweaksreborn:explosion_damage_multiplier` NBT tag for entities to increase/decrease explosion damage
