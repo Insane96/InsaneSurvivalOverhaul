@@ -5,7 +5,7 @@
 * Reduced auto-breed chance (5% -> 2%)
 * Reduced Iron Golems sight
 * Bane of SSSSS and Smite now affect caverns and chasms, savage and ravage and pet cemetery mobs
-* Increased wall hit min speed to get damaged
+* 
 
 ### Fixes
 * Missing Caverns and Chasms actual redstone components
@@ -35,7 +35,7 @@
 * Zombies spawning with stone tools
 * Hopefully fixed Enhanced AI config resetting at random
 
-## 4.3.1
+## 4.3.1Increased wall hit min speed to get damaged
 ### Fixes
 * Silver ingots in Ore Smelting data pack
 * Crash fix

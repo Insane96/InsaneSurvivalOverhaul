@@ -8,16 +8,9 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.gossip.GossipType;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +32,7 @@ public class VillagersNerfs extends Feature {
 	@Label(name = "Lock Trades", description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
 	public static Boolean lockTrades = true;
 	@Config
-	@Label(name = "Always Convert Zombie", description = "If true, villagers will always be transformed into Zombies, no matter the difficulty.")
+	@Label(name = "Always convert villager to zombie", description = "If true, villagers will always be transformed into Zombies no matter the difficulty.")
 	public static Boolean alwaysConvertZombie = true;
 	@Config(min = 0d, max = 1d)
 	@Label(name = "Max Discount Percentage", description = "Define a max percentage discount that villagers can give.")
@@ -102,10 +95,6 @@ public class VillagersNerfs extends Feature {
 		villager.heal(1f);
 	}
 
-	@SubscribeEvent
-	public void onLivingTick2(LivingEvent.LivingTickEvent event) {
-	}
-
 	public static int clampSpecialPrice(int specialPriceDiff, final ItemStack baseCostA) {
 		if (!isEnabled(VillagersNerfs.class)
 				|| maxDiscount == 1d)
@@ -134,26 +123,7 @@ public class VillagersNerfs extends Feature {
 			villager.setVillagerXp(1);
 	}
 
-	public static void onZombieKillEntity(Zombie zombie, ServerLevel level, LivingEntity killedEntity) {
-		if (!isEnabled(VillagersNerfs.class)
-				|| !alwaysConvertZombie
-				//If removed should mean that the Zombie Villager has already been converted
-				|| killedEntity.isRemoved())
-			return;
-
-		if (killedEntity instanceof Villager villager && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(killedEntity, EntityType.ZOMBIE_VILLAGER, (timer) -> {})) {
-			ZombieVillager zombievillager = villager.convertTo(EntityType.ZOMBIE_VILLAGER, false);
-			if (zombievillager == null)
-				return;
-			zombievillager.finalizeSpawn(level, level.getCurrentDifficultyAt(zombievillager.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(false, true), null);
-			zombievillager.setVillagerData(villager.getVillagerData());
-			zombievillager.setGossips(villager.getGossips().store(NbtOps.INSTANCE));
-			zombievillager.setTradeOffers(villager.getOffers().createTag());
-			zombievillager.setVillagerXp(villager.getVillagerXp());
-			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(killedEntity, zombievillager);
-			if (!zombie.isSilent()) {
-				level.levelEvent(null, 1026, zombie.blockPosition(), 0);
-			}
-		}
+	public static boolean shouldConvertVillagerToZombie() {
+		return isEnabled(VillagersNerfs.class) && alwaysConvertZombie;
 	}
 }

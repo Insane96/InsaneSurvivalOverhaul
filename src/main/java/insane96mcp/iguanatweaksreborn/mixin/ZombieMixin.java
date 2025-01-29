@@ -1,18 +1,31 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.mobs.VillagersNerfs;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Zombie.class)
 public class ZombieMixin {
-	@Inject(at = @At("TAIL"), method = "killedEntity")
-	private void wasKilled(ServerLevel level, LivingEntity killedEntity, CallbackInfoReturnable<Boolean> callbackInfo) {
-		VillagersNerfs.onZombieKillEntity((Zombie) (Object) this, level, killedEntity);
+	@Definition(id = "pLevel", local = @Local(type = ServerLevel.class, argsOnly = true))
+	@Definition(id = "getDifficulty", method = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;")
+	@Definition(id = "NORMAL", field = "Lnet/minecraft/world/Difficulty;NORMAL:Lnet/minecraft/world/Difficulty;")
+	@Expression("pLevel.getDifficulty() == NORMAL")
+	@ModifyExpressionValue(method = "killedEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
+	private boolean iguanatweaksreborn$shouldCovertAtAnyDifficulty(boolean original) {
+		return VillagersNerfs.shouldConvertVillagerToZombie();
+	}
+
+	@Definition(id = "random", field = "Lnet/minecraft/world/entity/monster/Zombie;random:Lnet/minecraft/util/RandomSource;")
+	@Definition(id = "nextBoolean", method = "Lnet/minecraft/util/RandomSource;nextBoolean()Z")
+	@Expression("this.random.nextBoolean()")
+	@ModifyExpressionValue(method = "killedEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
+	private boolean iguanatweaksreborn$nonHardChanceToConvert(boolean original) {
+		return !VillagersNerfs.shouldConvertVillagerToZombie();
 	}
 }
