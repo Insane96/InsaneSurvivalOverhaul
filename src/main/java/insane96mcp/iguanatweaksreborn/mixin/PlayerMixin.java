@@ -1,6 +1,8 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
@@ -46,6 +48,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@Shadow public abstract void resetAttackStrengthTicker();
 
+	@Shadow public abstract void respawn();
+
 	protected PlayerMixin(EntityType<? extends LivingEntity> type, Level level) {
 		super(type, level);
 	}
@@ -71,12 +75,21 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	//Changes efficiency formula
 	@ModifyVariable(method = "getDigSpeed", ordinal = 0, at = @At(value = "STORE", ordinal = 1), remap = false)
-	private float changeEfficiencyFormula(float efficiency, BlockState p_36282_, @Nullable BlockPos pos) {
-		int lvl = EnchantmentHelper.getBlockEfficiency((Player) (Object) this);
+	private float iguanatweaksreborn$applyBonusEnchantmentsEfficiency(float efficiency, BlockState p_36282_, @Nullable BlockPos pos, @Local(ordinal = 0) int efficiencyLvl) {
 		//Remove vanilla efficiency
-		efficiency -= (float)(lvl * lvl + 1);
+		efficiency -= (float)(efficiencyLvl * efficiencyLvl + 1);
 		return ISOEventFactory.getBonusEnchantmentEfficiency((Player) (Object) this, this.getMainHandItem(), efficiency);
-		//return efficiency + EnchantmentsFeature.getEfficiencyBonus(efficiency, lvl);
+	}
+
+	/**
+	 * Always returns 1 when getting efficiency enchantment level so it enters the check to
+	 * @param pEntity
+	 * @param original
+	 * @return
+	 */
+	@WrapOperation(method = "getDigSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getBlockEfficiency(Lnet/minecraft/world/entity/LivingEntity;)I"), remap = false)
+	private int iguanatweaksreborn$forceApplyBonusEnchantmentEfficiency(LivingEntity pEntity, Operation<Integer> original) {
+		return 1;
 	}
 
 	/*@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
