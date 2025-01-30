@@ -5,12 +5,13 @@
 ### Upcoming
 ### Changes
 * Heavily increased animal spawn caps
-* Chance for bonemeal to fail to grow saplings reduced (~~20%~~ -> 10%)
+* Chance for bone meal to fail to grow saplings reduced (~~20%~~ -> 10%)
 * Reduced chance for mobs to have enchanted gear (~~30% (+15% with full moon)~~ -> 20% (+20% with full moon))
 * Increased max exhaustion (~~4~~ -> 6)
 
 ### Fixes
 * Item tooltips not working
+* Being able to crouch block with broken shields
 
 ## 4.3.3
 ### Additions

@@ -9,8 +9,8 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
-import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
+import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;

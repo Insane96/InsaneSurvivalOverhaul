@@ -54,6 +54,13 @@ license="All rights reserved"
     side="BOTH"
 
 [[dependencies.iguanatweaksreborn]]
+    modId="shieldsplus"
+    mandatory=false
+    versionRange="[1.11.6,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.iguanatweaksreborn]]
     modId="toolbelt"
     mandatory=false
     versionRange="[1.20.02,)"

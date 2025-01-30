@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
-import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
+import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;

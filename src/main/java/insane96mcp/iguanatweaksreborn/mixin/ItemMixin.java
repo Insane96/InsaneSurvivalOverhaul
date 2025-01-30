@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
-import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
+import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;

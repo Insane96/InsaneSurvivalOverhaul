@@ -20,7 +20,8 @@ public class ComfortHelperMixin {
     @Definition(id = "COMFORT_PER_DAY_WITHOUT_SLEEP", field = "Ldev/ghen/villagercomfort/core/config/CommonConfig;COMFORT_PER_DAY_WITHOUT_SLEEP:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;")
     @Definition(id = "get", method = "Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;get()Ljava/lang/Object;")
     @Definition(id = "intValue", method = "Ljava/lang/Number;intValue()I")
-    @Expression("(villager.getBrain().getMemory(LAST_SLEPT).orElse(0) / 24000) * COMFORT_PER_DAY_WITHOUT_SLEEP.get().intValue()")
+    @Definition(id = "Number", type = Number.class)
+    @Expression("(villager.getBrain().getMemory(LAST_SLEPT).orElse(0) / 24000) * ((Number) COMFORT_PER_DAY_WITHOUT_SLEEP.get()).intValue()")
     @WrapOperation(method = "getVillagerComfort", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0), remap = false)
     private static int iguanatweaksreborn$fixDaysWithoutSleepComfort(int original) {
         return original;

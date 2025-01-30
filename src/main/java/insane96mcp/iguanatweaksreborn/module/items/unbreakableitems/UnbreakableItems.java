@@ -1,4 +1,4 @@
-package insane96mcp.iguanatweaksreborn.module.items;
+package insane96mcp.iguanatweaksreborn.module.items.unbreakableitems;
 
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -28,6 +29,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 @Label(name = "Unbreakable Items", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
 @LoadFeature(module = Modules.Ids.ITEMS)
@@ -48,6 +50,9 @@ public class UnbreakableItems extends Feature {
 
 	public UnbreakableItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		if (ModList.get().isLoaded("shieldsplus")) {
+			MinecraftForge.EVENT_BUS.addListener(ShieldsPlusIntegration::onBlockWithCrouch);
+		}
 	}
 
 	public static boolean isUnbreakable(ItemStack stack) {
@@ -111,7 +116,7 @@ public class UnbreakableItems extends Feature {
 	}
 
 	@SubscribeEvent
-	public void onBlockRightClick(PlayerInteractEvent.RightClickEmpty event) {
+	public void onEmptyRightClick(PlayerInteractEvent.RightClickEmpty event) {
 		if (!this.isEnabled())
 			return;
 
@@ -125,7 +130,7 @@ public class UnbreakableItems extends Feature {
 	}
 
 	@SubscribeEvent
-	public void onBlockRightClick(PlayerInteractEvent.RightClickItem event) {
+	public void onItemRightClick(PlayerInteractEvent.RightClickItem event) {
 		if (!this.isEnabled())
 			return;
 

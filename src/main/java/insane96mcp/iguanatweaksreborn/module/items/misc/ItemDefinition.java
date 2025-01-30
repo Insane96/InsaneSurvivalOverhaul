@@ -7,7 +7,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.mixin.TieredItemAccessor;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
-import insane96mcp.iguanatweaksreborn.module.items.UnbreakableItems;
+import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.data.IdTagMatcher;
