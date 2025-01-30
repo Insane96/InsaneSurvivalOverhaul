@@ -75,10 +75,10 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	//Changes efficiency formula
 	@ModifyVariable(method = "getDigSpeed", ordinal = 0, at = @At(value = "STORE", ordinal = 1), remap = false)
-	private float iguanatweaksreborn$applyBonusEnchantmentsEfficiency(float efficiency, BlockState p_36282_, @Nullable BlockPos pos, @Local(ordinal = 0) int efficiencyLvl) {
+	private float iguanatweaksreborn$applyBonusEnchantmentsEfficiency(float efficiency, BlockState state, @Nullable BlockPos pos, @Local(ordinal = 0) int efficiencyLvl) {
 		//Remove vanilla efficiency
 		efficiency -= (float)(efficiencyLvl * efficiencyLvl + 1);
-		return ISOEventFactory.getBonusEnchantmentEfficiency((Player) (Object) this, this.getMainHandItem(), efficiency);
+		return ISOEventFactory.getBonusEnchantmentEfficiency((Player) (Object) this, state, this.getMainHandItem(), efficiency);
 	}
 
 	/**

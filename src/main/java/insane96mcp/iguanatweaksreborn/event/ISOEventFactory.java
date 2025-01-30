@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ISOEventFactory {
@@ -63,9 +64,9 @@ public class ISOEventFactory {
         return event.getNewMaxDamage();
     }
 
-    public static float getBonusEnchantmentEfficiency(LivingEntity entity, ItemStack stack, float originalEfficiency)
+    public static float getBonusEnchantmentEfficiency(LivingEntity entity, BlockState state, ItemStack stack, float originalEfficiency)
     {
-        EnchantmentBonusEfficiencyEvent event = new EnchantmentBonusEfficiencyEvent(entity, stack, originalEfficiency);
+        EnchantmentBonusEfficiencyEvent event = new EnchantmentBonusEfficiencyEvent(entity, state, stack, originalEfficiency);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getNewEfficiency();
     }

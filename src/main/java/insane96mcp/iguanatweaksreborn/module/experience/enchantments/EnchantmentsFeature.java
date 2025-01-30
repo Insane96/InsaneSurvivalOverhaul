@@ -43,6 +43,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -57,6 +58,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -431,12 +433,12 @@ public class EnchantmentsFeature extends JsonFeature {
 		return stack.getEnchantmentValue();
 	}
 
-	public static float applyMiningSpeedModifiers(float miningSpeed, boolean applyEfficiency, LivingEntity entity) {
+	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, LivingEntity entity) {
 		if (applyEfficiency) {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);
 			ItemStack itemstack = entity.getMainHandItem();
 			if (i > 0 && !itemstack.isEmpty())
-				miningSpeed += ISOEventFactory.getBonusEnchantmentEfficiency(entity, itemstack, miningSpeed);
+				miningSpeed += ISOEventFactory.getBonusEnchantmentEfficiency(entity, state, itemstack, miningSpeed);
 		}
 
 		if (MobEffectUtil.hasDigSpeed(entity)) {
