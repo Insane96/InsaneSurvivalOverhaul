@@ -6,6 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ISOEventFactory {
@@ -53,5 +54,12 @@ public class ISOEventFactory {
         ISOLivingAttackEvent event = new ISOLivingAttackEvent(entity, src, amount);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getAmount();
+    }
+
+    public static int getStackMaxDamage(ItemStack stack, int originalMaxDurability)
+    {
+        StackMaxDamageEvent event = new StackMaxDamageEvent(stack, originalMaxDurability);
+        MinecraftForge.EVENT_BUS.post(event);
+        return event.getNewMaxDamage();
     }
 }

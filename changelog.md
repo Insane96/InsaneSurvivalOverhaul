@@ -3,6 +3,9 @@
 * milk cooldown store game time instead of remaining ticks
 
 ### Upcoming
+### Additions
+* Added a new StackMaxDamageEvent to change item stacks durability
+
 ### Changes
 * Heavily increased animal spawn caps
 * Chance for bone meal to fail to grow saplings reduced (~~20%~~ -> 10%)
