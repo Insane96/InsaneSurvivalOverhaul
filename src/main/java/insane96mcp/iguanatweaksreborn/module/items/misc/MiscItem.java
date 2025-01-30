@@ -19,7 +19,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -69,11 +68,8 @@ public class MiscItem extends Feature {
 
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() instanceof DiggerItem diggerItem){
-			int lvl = stack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
 			float toolEfficiency = diggerItem.speed;
-			float bonusToolEfficiency = ISOEventFactory.getBonusEnchantmentEfficiency(event.getEntity(), stack, toolEfficiency);
-			if (lvl > 0)
-				toolEfficiency += bonusToolEfficiency;
+			toolEfficiency += ISOEventFactory.getBonusEnchantmentEfficiency(event.getEntity(), stack, toolEfficiency);
 			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, InsaneLib.ONE_DECIMAL_FORMATTER.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
 		}
 	}
