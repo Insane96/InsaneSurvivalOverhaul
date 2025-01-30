@@ -231,7 +231,14 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (!EnchantmentsFeature.isBetterEfficiencyFormula())
 			return;
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-		event.setNewEfficiency(event.getNewEfficiency() + event.getNewEfficiency() * lvl * 0.2f);
+		event.setNewEfficiency(event.getNewEfficiency() + getEfficiencyBonus(event.getNewEfficiency(), lvl));
+	}
+
+	public static float getEfficiencyBonus(float baseEfficiency, int lvl) {
+		if (EnchantmentsFeature.isBetterEfficiencyFormula())
+			return baseEfficiency * lvl * 0.2f;
+		else
+			return 1 + (lvl * lvl);
 	}
 
 	public static boolean isThornsOverhaul() {
