@@ -6,6 +6,7 @@
 ### Additions
 * Added a new StackMaxDamageEvent to change item stacks durability
 * Added a new EnchantmentBonusEfficiencyEvent to change efficiency before the other modifiers
+* Fix for Villager Comfort: villagers that never sleept would not get comfort
 
 ### Changes
 * Heavily increased animal spawn caps
