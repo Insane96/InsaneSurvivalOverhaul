@@ -3,6 +3,8 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments;
 import com.google.common.collect.Lists;
 import com.teamabnormals.allurement.core.AllurementConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
+import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.IAttributeEnchantment;
@@ -224,13 +226,12 @@ public class EnchantmentsFeature extends JsonFeature {
 		return Feature.isEnabled(EnchantmentsFeature.class) && changeEfficiencyFormula;
 	}
 
-	public static float getEfficiencyBonus(float toolEfficiency, int lvl) {
-		if (isBetterEfficiencyFormula()) {
-			return toolEfficiency * lvl * 0.2f;
-		}
-		else {
-			return lvl * lvl + 1;
-		}
+	@SubscribeEvent
+	public void applyNewEfficiency(EnchantmentBonusEfficiencyEvent event) {
+		if (!EnchantmentsFeature.isBetterEfficiencyFormula())
+			return;
+		int lvl = event.getStack().getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
+		event.setNewEfficiency(event.getNewEfficiency() + event.getNewEfficiency() * lvl * 0.2f);
 	}
 
 	public static boolean isThornsOverhaul() {
@@ -432,9 +433,8 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (applyEfficiency) {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);
 			ItemStack itemstack = entity.getMainHandItem();
-			if (i > 0 && !itemstack.isEmpty()) {
-				miningSpeed += getEfficiencyBonus(miningSpeed, i);
-			}
+			if (i > 0 && !itemstack.isEmpty())
+				miningSpeed += ISOEventFactory.getBonusEnchantmentEfficiency(entity, itemstack, miningSpeed);
 		}
 
 		if (MobEffectUtil.hasDigSpeed(entity)) {

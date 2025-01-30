@@ -72,12 +72,11 @@ public abstract class PlayerMixin extends LivingEntity {
 	//Changes efficiency formula
 	@ModifyVariable(method = "getDigSpeed", ordinal = 0, at = @At(value = "STORE", ordinal = 1), remap = false)
 	private float changeEfficiencyFormula(float efficiency, BlockState p_36282_, @Nullable BlockPos pos) {
-		if (!EnchantmentsFeature.isBetterEfficiencyFormula())
-			return efficiency;
 		int lvl = EnchantmentHelper.getBlockEfficiency((Player) (Object) this);
 		//Remove vanilla efficiency
 		efficiency -= (float)(lvl * lvl + 1);
-		return efficiency + EnchantmentsFeature.getEfficiencyBonus(efficiency, lvl);
+		return ISOEventFactory.getBonusEnchantmentEfficiency((Player) (Object) this, this.getMainHandItem(), efficiency);
+		//return efficiency + EnchantmentsFeature.getEfficiencyBonus(efficiency, lvl);
 	}
 
 	/*@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 0), ordinal = 1)

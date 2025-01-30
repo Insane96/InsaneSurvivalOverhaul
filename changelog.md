@@ -5,6 +5,7 @@
 ### Upcoming
 ### Additions
 * Added a new StackMaxDamageEvent to change item stacks durability
+* Added a new EnchantmentBonusEfficiencyEvent to change efficiency before the other modifiers
 
 ### Changes
 * Heavily increased animal spawn caps
