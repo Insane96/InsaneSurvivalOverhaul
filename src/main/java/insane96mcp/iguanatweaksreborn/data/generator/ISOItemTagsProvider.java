@@ -13,6 +13,7 @@ import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
+import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+import sereneseasons.api.SSItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -39,6 +41,12 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> FLINT_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/flint");
     public static final TagKey<Item> GOLDEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/golden");
     public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ISOItemTagsProvider.create("equipment/armor/leather");
+
+    public static final TagKey<Item> HUD_CARDINAL_DIRECTION = ISOItemTagsProvider.create("hud/cardinal_direction");
+    public static final TagKey<Item> HUD_SEASON = ISOItemTagsProvider.create("hud/season");
+    public static final TagKey<Item> HUD_DEPTH = ISOItemTagsProvider.create("hud/depth");
+    public static final TagKey<Item> HUD_TIME = ISOItemTagsProvider.create("hud/time");
+    public static final TagKey<Item> HUD_BIOME = ISOItemTagsProvider.create("hud/biome");
 
     public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
@@ -56,7 +64,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.SWORDS).add(FlintExpansion.SWORD.get());
         tag(ItemTags.HOES).add(FlintExpansion.HOE.get());
 
-        //ITR
+        //ISO
         tag(StackSizes.NO_STACK_SIZE_CHANGES)
                 .add(Items.ROTTEN_FLESH, Items.SPIDER_EYE, Items.PUFFERFISH)
                 .addOptional(new ResourceLocation("supplementaries", "soap"));
@@ -101,6 +109,19 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(CoalFire.ITEM_ORES)
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
+
+        tag(HUD_CARDINAL_DIRECTION)
+                .add(Items.COMPASS);
+        tag(HUD_SEASON)
+                .addOptional(ForgeRegistries.ITEMS.getKey(SSItems.CALENDAR));
+        tag(HUD_DEPTH)
+                .addOptional(new ResourceLocation("caverns_and_chasms:depth_gauge"))
+                .addOptional(new ResourceLocation("iguanatweaksexpanded:altimeter"))
+                .addOptional(new ResourceLocation("supplementaries:altimeter"));
+        tag(HUD_TIME)
+                .add(Items.CLOCK);
+        tag(HUD_BIOME)
+                .add(BiomeCompass.COMPASS.get());
     }
 
     public static TagKey<Item> create(String tagName) {

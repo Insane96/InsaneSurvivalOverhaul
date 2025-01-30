@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "caverns_and_chasms:depth_gauge",
+      "required": false
+    },
+    {
+      "id": "iguanatweaksexpanded:altimeter",
+      "required": false
+    },
+    {
+      "id": "supplementaries:altimeter",
+      "required": false
+    }
+  ]
+}

@@ -2,6 +2,17 @@
 	"effect.iguanatweaksreborn.block_reach": "Block Reach",
 	"effect.iguanatweaksreborn.entity_reach": "Entity Reach",
 
+	"iguanatweaksreborn:client_module": "Client",
+	"hud_info.cardinal_direction.south": "South",
+	"hud_info.cardinal_direction.south_west": "South West",
+	"hud_info.cardinal_direction.west": "West",
+	"hud_info.cardinal_direction.north_west": "North West",
+	"hud_info.cardinal_direction.north": "North",
+	"hud_info.cardinal_direction.north_east": "North East",
+	"hud_info.cardinal_direction.east": "East",
+	"hud_info.cardinal_direction.south_east": "South East",
+	"hud_info.depth": "Y: %d",
+	"hud_info.time": "%d:%02d",
 
 	"iguanatweaksreborn:experience_module": "Experience",
 

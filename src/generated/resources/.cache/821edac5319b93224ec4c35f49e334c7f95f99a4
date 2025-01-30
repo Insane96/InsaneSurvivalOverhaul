@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-17T11:26:48.8510964	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-01-30T14:31:05.191315	Tags for minecraft:item mod id iguanatweaksreborn
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/iguanatweaksreborn/tags/items/chicken_food_items.json
 b4aedda3407e53b9160ab96c45a4af8ecba1e11d data/iguanatweaksreborn/tags/items/enchanting/accepts_damage_enchantments.json
 c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/enchanting/accepts_fire_aspect.json
@@ -7,6 +7,11 @@ c3841f8356b6571df7678be625b6ebfd2617dacb data/iguanatweaksreborn/tags/items/ench
 1feebc4d4dfb8dd4b39ea79e961a1b31359e0ff3 data/iguanatweaksreborn/tags/items/enchanting/accepts_sweeping_edge.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/iguanatweaksreborn/tags/items/energy_boost.json
 26f2befbc6ee3f5363c35bfdab94b999985b30ad data/iguanatweaksreborn/tags/items/hellish_coal_ores.json
+f8b4a272af30529dd75fc76ae0aaab0b6d86f7b0 data/iguanatweaksreborn/tags/items/hud/biome.json
+0389e0a2b30a501b5229643fd0faa175d4922bc4 data/iguanatweaksreborn/tags/items/hud/cardinal_direction.json
+72cdf12937f22b515afcfd076bfc809e650b5500 data/iguanatweaksreborn/tags/items/hud/depth.json
+1f3f3fee7df15333ac251e1f5d937f9ebf08e61d data/iguanatweaksreborn/tags/items/hud/season.json
+8180207eb4d779d1e1250798d7cdcd341751b533 data/iguanatweaksreborn/tags/items/hud/time.json
 f4610bfb2006d1e4ebb2e23fce69874e3946c500 data/iguanatweaksreborn/tags/items/not_unbreakable.json
 7886b306d2eafd075ee18ae7a6e005a68b2fb112 data/iguanatweaksreborn/tags/items/no_stack_size_changes.json
 052ffe27257d03d8d8891be763ddd93bc289c2d4 data/iguanatweaksreborn/tags/items/raw_food.json
