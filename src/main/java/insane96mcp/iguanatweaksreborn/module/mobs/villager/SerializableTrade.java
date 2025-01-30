@@ -1,4 +1,4 @@
-package insane96mcp.iguanatweaksreborn.module.world.wanderingtrader;
+package insane96mcp.iguanatweaksreborn.module.mobs.villager;
 
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
@@ -15,10 +15,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.item.EnchantedBookItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -39,7 +36,6 @@ import java.util.Locale;
 @JsonAdapter(SerializableTrade.SerializableTradeSerializer.class)
 public class SerializableTrade implements VillagerTrades.ItemListing {
 	public ItemStack itemA;
-	@Nullable
 	public ItemStack itemB;
 	public ItemStack result;
 	private int maxUses;
@@ -57,10 +53,10 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	}
 
 	public SerializableTrade(ItemStack itemA, ItemStack result, int maxUses) {
-		this(itemA, null, result, maxUses, 0);
+		this(itemA, ItemStack.EMPTY, result, maxUses, 0);
 	}
 
-	public SerializableTrade(ItemStack itemA, @Nullable ItemStack itemB, ItemStack result, int maxUses, int xp) {
+	public SerializableTrade(ItemStack itemA, ItemStack itemB, ItemStack result, int maxUses, int xp) {
 		this.itemA = itemA;
 		this.itemB = itemB;
 		this.result = result;
@@ -114,7 +110,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 				result.setHoverName(this.result.getHoverName());
             }
         }
-		return new MerchantOffer(this.itemA, this.itemB == null ? ItemStack.EMPTY : this.itemB, result, this.maxUses, this.xp, 1f);
+		return new MerchantOffer(this.itemA, this.itemB, result, this.maxUses, this.xp, 1f);
 	}
 
 	public static final Type SERIALIZABLE_TRADE_LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
@@ -124,48 +120,10 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 		public SerializableTrade deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
 			SerializableTrade serializableTrade = new SerializableTrade();
-			String sItemA = GsonHelper.getAsString(jObject, "item_a");
-			int itemACount = GsonHelper.getAsInt(jObject, "item_a_count", 1);
-			ResourceLocation itemA = new ResourceLocation(sItemA);
-			serializableTrade.itemA = new ItemStack(ForgeRegistries.ITEMS.getValue(itemA), itemACount);
-			if (jObject.has("item_a_tag")) {
-				String itemATag = GsonHelper.getAsString(jObject, "item_a_tag");
-				try {
-					CompoundTag resultTag = TagParser.parseTag(itemATag);
-					serializableTrade.itemA.setTag(resultTag);
-				} catch (Exception e) {
-					throw new JsonParseException("Failed to parse item_a_tag %s".formatted(e.getMessage()));
-				}
-			}
+			serializableTrade.itemA = stackFromJson("item_a", jObject, context);
+			serializableTrade.itemB = stackFromJson("item_b", jObject, context);
+			serializableTrade.result = stackFromJson("item_result", jObject, context);
 
-			String sItemB = GsonHelper.getAsString(jObject, "item_b", "");
-			if (!sItemB.isEmpty()) {
-				int itemBCount = GsonHelper.getAsInt(jObject, "item_b_count", 1);
-				ResourceLocation itemB = new ResourceLocation(sItemB);
-				serializableTrade.itemB = new ItemStack(ForgeRegistries.ITEMS.getValue(itemB), itemBCount);
-				if (jObject.has("item_b_tag")) {
-					String itemBTag = GsonHelper.getAsString(jObject, "item_b_tag");
-					try {
-						CompoundTag resultTag = TagParser.parseTag(itemBTag);
-						serializableTrade.itemB.setTag(resultTag);
-					} catch (Exception e) {
-						throw new JsonParseException("Failed to parse item_b_tag %s".formatted(e.getMessage()));
-					}
-				}
-			}
-			String sItemResult = GsonHelper.getAsString(jObject, "item_result");
-			ResourceLocation itemResult = new ResourceLocation(sItemResult);
-			int itemResultCount = GsonHelper.getAsInt(jObject, "item_result_count", 1);
-			serializableTrade.result = new ItemStack(ForgeRegistries.ITEMS.getValue(itemResult), itemResultCount);
-			if (jObject.has("item_result_tag")) {
-				String itemResultTag = GsonHelper.getAsString(jObject, "item_result_tag");
-				try {
-					CompoundTag resultTag = TagParser.parseTag(itemResultTag);
-					serializableTrade.result.setTag(resultTag);
-				} catch (Exception e) {
-					throw new JsonParseException("Failed to parse item_result_tag %s".formatted(e.getMessage()));
-				}
-			}
 			JsonObject enchantRandomly = GsonHelper.getAsJsonObject(jObject, "enchant_randomly", null);
 			if (enchantRandomly != null) {
 				serializableTrade.enchantRandomly = new EnchantRandomly(GsonHelper.getAsInt(enchantRandomly, "min_levels"), GsonHelper.getAsInt(enchantRandomly, "max_levels"), GsonHelper.getAsBoolean(enchantRandomly, "treasure"));
@@ -189,27 +147,16 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 
 		@Override
 		public JsonElement serialize(SerializableTrade src, Type typeOfSrc, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("item_a", ForgeRegistries.ITEMS.getKey(src.itemA.getItem()).toString());
-			jsonObject.addProperty("item_a_count", src.itemA.getCount());
-			if (src.itemA.getTag() != null)
-				jsonObject.addProperty("item_a_tag", src.itemA.getTag().toString());
-			if (src.itemB != null) {
-				jsonObject.addProperty("item_b", ForgeRegistries.ITEMS.getKey(src.itemB.getItem()).toString());
-				jsonObject.addProperty("item_b_count", src.itemB.getCount());
-				if (src.itemB.getTag() != null)
-					jsonObject.addProperty("item_b_tag", src.itemB.getTag().toString());
-			}
-			jsonObject.addProperty("item_result", ForgeRegistries.ITEMS.getKey(src.result.getItem()).toString());
-			jsonObject.addProperty("item_result_count", src.result.getCount());
-			if (src.result.getTag() != null)
-				jsonObject.addProperty("item_result_tag", src.result.getTag().toString());
+			JsonObject jObject = new JsonObject();
+			stackToJson(jObject, "item_a", src.itemA, context);
+			stackToJson(jObject, "item_b", src.itemB, context);
+			stackToJson(jObject, "item_result", src.result, context);
 			if (src.enchantRandomly != null) {
 				JsonObject enchantRandomly = new JsonObject();
 				enchantRandomly.addProperty("min_levels", src.enchantRandomly.minLevel);
 				enchantRandomly.addProperty("max_levels", src.enchantRandomly.maxLevel);
 				enchantRandomly.addProperty("treasure", src.enchantRandomly.treasure);
-				jsonObject.add("enchant_randomly", enchantRandomly);
+				jObject.add("enchant_randomly", enchantRandomly);
 			}
 			if (!src.enchantments.isEmpty()) {
 				JsonArray jsonArray = new JsonArray();
@@ -220,15 +167,51 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 						enchantmentsObject.addProperty("level", enchantmentInstance.level);
 					jsonArray.add(enchantmentsObject);
 				});
-				jsonObject.add("enchantments", jsonArray);
+				jObject.add("enchantments", jsonArray);
 			}
 			if (src.explorationMap != null) {
-				jsonObject.add("exploration_map", context.serialize(src.explorationMap));
+				jObject.add("exploration_map", context.serialize(src.explorationMap));
 			}
-			jsonObject.addProperty("max_uses", src.maxUses);
-			jsonObject.addProperty("xp", src.xp);
-			return jsonObject;
+			jObject.addProperty("max_uses", src.maxUses);
+			jObject.addProperty("xp", src.xp);
+			return jObject;
 		}
+	}
+
+	private static ItemStack stackFromJson(String name, JsonObject jObject, JsonDeserializationContext context) throws JsonParseException {
+		if (!jObject.has(name))
+			return ItemStack.EMPTY;
+		String itemString = GsonHelper.getAsString(jObject, name);
+		int count = GsonHelper.getAsInt(jObject, name + "_count", 1);
+		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString));
+		if (item == null) {
+			ISOLogHelper.warn("Item %s for SerializableTrade does not exist, ignoring".formatted(itemString));
+			return ItemStack.EMPTY;
+		}
+		else {
+			ItemStack stack = new ItemStack(item, count);
+			if (!jObject.has(name + "_tag"))
+				return stack;
+
+			String tagString = GsonHelper.getAsString(jObject, name + "_tag");
+			try {
+				CompoundTag compoundTag = TagParser.parseTag(tagString);
+				stack.setTag(compoundTag);
+			} catch (Exception e) {
+				throw new JsonParseException("Failed to parse %s_tag %s".formatted(name, e.getMessage()));
+			}
+			return stack;
+		}
+	}
+
+	private static void stackToJson(JsonObject jObject, String name, ItemStack stack, JsonSerializationContext context) throws JsonParseException {
+		if (stack.isEmpty())
+			return;
+		jObject.addProperty(name, ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+		if (stack.getCount() > 1)
+			jObject.addProperty(name + "_count", stack.getCount());
+		if (stack.getTag() != null)
+			jObject.addProperty(name + "_tag", stack.getTag().toString());
 	}
 
 	private record EnchantRandomly(int minLevel, int maxLevel, boolean treasure) {

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.world.wanderingtrader.WanderingTrades;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader.WanderingTrades;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.AbstractVillager;

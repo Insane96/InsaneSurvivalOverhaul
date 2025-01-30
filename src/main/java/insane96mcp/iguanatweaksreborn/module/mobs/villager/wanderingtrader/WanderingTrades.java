@@ -1,8 +1,9 @@
-package insane96mcp.iguanatweaksreborn.module.world.wanderingtrader;
+package insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.SerializableTrade;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @Label(name = "Wandering Trades", description = "Change wandering trader offers. Trades can be customized via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.WORLD)
+@LoadFeature(module = Modules.Ids.MOBS)
 public class WanderingTrades extends JsonFeature {
     public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "desert_pyramid"));
     public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "trail_ruins"));

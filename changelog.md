@@ -1,7 +1,5 @@
 # Changelog
 
-* milk cooldown store game time instead of remaining ticks
-
 ### Upcoming
 ### Additions
 * Added Hud Infos
@@ -18,6 +16,8 @@
 * Reduced chance for mobs to have enchanted gear (~~30% (+15% with full moon)~~ -> 20% (+20% with full moon))
 * Increased max exhaustion (~~4~~ -> 6)
 * Reduced netherite efficiency (7 -> 6)
+* Villagers Nerfs has been renamed to Villagers
+* Wandering Traders and Villagers Nerfs have been moved to Mobs module
 
 ### Fixes
 * Item tooltips not working

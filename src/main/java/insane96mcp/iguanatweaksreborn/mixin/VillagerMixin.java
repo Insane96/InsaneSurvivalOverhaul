@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
-import insane96mcp.iguanatweaksreborn.module.mobs.VillagersNerfs;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.Villagers;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public class VillagerMixin {
 		Villager $this = (Villager)(Object) this;
 		VillagerData villagerData = $this.getVillagerData();
 		if (villagerData.getProfession() != newVillagerData.getProfession()) {
-			VillagersNerfs.lockTrades($this);
+			Villagers.lockTrades($this);
 		}
 	}
 }

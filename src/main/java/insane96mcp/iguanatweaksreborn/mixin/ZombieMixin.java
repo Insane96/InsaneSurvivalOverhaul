@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import insane96mcp.iguanatweaksreborn.module.mobs.VillagersNerfs;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.Villagers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.monster.Zombie;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public class ZombieMixin {
 	@Expression("pLevel.getDifficulty() == NORMAL")
 	@ModifyExpressionValue(method = "killedEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
 	private boolean iguanatweaksreborn$shouldCovertAtAnyDifficulty(boolean original) {
-		return VillagersNerfs.shouldConvertVillagerToZombie();
+		return Villagers.shouldConvertVillagerToZombie();
 	}
 
 	@Definition(id = "random", field = "Lnet/minecraft/world/entity/monster/Zombie;random:Lnet/minecraft/util/RandomSource;")
@@ -26,6 +26,6 @@ public class ZombieMixin {
 	@Expression("this.random.nextBoolean()")
 	@ModifyExpressionValue(method = "killedEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
 	private boolean iguanatweaksreborn$nonHardChanceToConvert(boolean original) {
-		return !VillagersNerfs.shouldConvertVillagerToZombie();
+		return !Villagers.shouldConvertVillagerToZombie();
 	}
 }
