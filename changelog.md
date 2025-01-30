@@ -11,6 +11,7 @@
 * Chance for bone meal to fail to grow saplings reduced (~~20%~~ -> 10%)
 * Reduced chance for mobs to have enchanted gear (~~30% (+15% with full moon)~~ -> 20% (+20% with full moon))
 * Increased max exhaustion (~~4~~ -> 6)
+* Reduced netherite efficiency (7 -> 6)
 
 ### Fixes
 * Item tooltips not working
