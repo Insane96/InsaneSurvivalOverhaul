@@ -6,7 +6,9 @@
 ### Additions
 * Added Hud Infos
   * A new Client Feature to display infos on the hud as long as you have the items
-* Fix for Villager Comfort: villagers that never sleept would not get comfort
+* Fix for Villager Comfort
+  * Villagers that never sleept would not get the negative comfort
+  * If the villager has no bed now counts as max negative comfort
 * Added a new StackMaxDamageEvent to change item stacks durability
 * Added a new EnchantmentBonusEfficiencyEvent to change efficiency before the other modifiers
 
