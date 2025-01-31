@@ -25,6 +25,7 @@
 ### Fixes
 * Item tooltips not working
 * Being able to crouch block with broken shields
+* Villager not getting their trades locked the first time a villager would get a job
 
 ## 4.3.3
 ### Additions

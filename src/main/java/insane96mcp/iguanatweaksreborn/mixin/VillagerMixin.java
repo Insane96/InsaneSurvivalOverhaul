@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.Villagers;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +16,7 @@ public class VillagerMixin {
 	private void onSetVillagerData(VillagerData newVillagerData, CallbackInfo ci) {
 		Villager $this = (Villager)(Object) this;
 		VillagerData villagerData = $this.getVillagerData();
-		if (villagerData.getProfession() != newVillagerData.getProfession()) {
+		if (villagerData.getProfession() != newVillagerData.getProfession() && newVillagerData.getProfession() != VillagerProfession.NONE) {
 			Villagers.lockTrades($this);
 		}
 	}

@@ -17,7 +17,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -149,7 +148,7 @@ public class Villagers extends Feature {
 				|| !lockTrades)
 			return;
 
-		if (villager.getVillagerData().getProfession() != VillagerProfession.NONE && villager.getVillagerXp() == 0)
+		if (villager.getVillagerXp() == 0)
 			villager.setVillagerXp(1);
 	}
 
