@@ -1,0 +1,20 @@
+{
+    "block": "upgrade_aquatic:mulberry_vine",
+    "modifiers": [
+        {
+            "id": "iguanatweaksreborn:sunlight",
+            "min_sunlight": 10,
+            "modifier": 1.5,
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:season",
+            "seasons": [
+                "WINTER",
+                "SUMMER"
+            ],
+            "modifier": -1,
+            "operation": "multiply"
+        }
+    ]
+}

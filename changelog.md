@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Sugar canes can now grow in spring at lower speed
+* Upgrade Aquatic Mulberry now grow slower without sunlight and will not grow in WINTER and SUMMER
 
 ## 4.4.2
 * Server crash fix
