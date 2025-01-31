@@ -66,7 +66,7 @@ public class ISORegistries {
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> LOOT_PURGER_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("loot_purger", LootPurgerModifier.CODEC);
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> DISENCHANT_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("disenchant", DisenchantModifier.CODEC);
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> DROP_MULTIPLIER_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("drop_multiplier", DropMultiplierModifier.CODEC);
-	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> REPLACE_DROP_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("replace_drop", ReplaceLootModifier.CODEC);
+	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> REPLACE_LOOT_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("replace_loot", ReplaceLootModifier.CODEC);
 
 	public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = createRegistry(Registries.LOOT_CONDITION_TYPE.location());
 	public static final RegistryObject<LootItemConditionType> BLOCK_TAG_MATCH = LOOT_CONDITION_TYPES.register("block_tag_match", () -> new LootItemConditionType(new BlockTagCondition.Serializer()));

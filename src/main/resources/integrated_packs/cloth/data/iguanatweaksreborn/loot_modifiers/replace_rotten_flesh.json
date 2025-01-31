@@ -1,5 +1,5 @@
 {
-    "type": "iguanatweaksreborn:replace_drop",
+    "type": "iguanatweaksreborn:replace_loot",
     "conditions": [],
     "item_to_replace": "minecraft:rotten_flesh",
     "new_item": "iguanatweaksreborn:cloth",

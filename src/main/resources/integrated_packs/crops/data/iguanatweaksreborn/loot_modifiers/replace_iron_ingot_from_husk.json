@@ -1,5 +1,5 @@
 {
-  "type": "iguanatweaksreborn:replace_drop",
+  "type": "iguanatweaksreborn:replace_loot",
   "conditions": [
     {
       "condition": "minecraft:entity_properties",

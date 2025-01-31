@@ -1,5 +1,5 @@
 {
-  "type": "iguanatweaksreborn:replace_drop",
+  "type": "iguanatweaksreborn:replace_loot",
   "chests_only": true,
   "conditions": [],
   "item_to_replace": "minecraft:powered_rail",
