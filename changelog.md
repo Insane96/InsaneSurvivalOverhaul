@@ -7,6 +7,9 @@
 ### Additions
 * Added Hud Infos
   * A new Client Feature to display infos on the hud as long as you have the items
+* Customizable villager trades
+  * Thanks to magic of data packs, you can now customize villager trades
+  * By default, the librarian trades have been rebalanced with an integrated data pack
 * Fix for Villager Comfort
   * Villagers that never sleept would not get the negative comfort
   * If the villager has no bed now counts as max negative comfort

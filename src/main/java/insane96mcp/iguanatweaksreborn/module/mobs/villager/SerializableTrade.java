@@ -82,6 +82,8 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	@Nullable
 	@Override
 	public MerchantOffer getOffer(Entity entity, RandomSource random) {
+		if (this.result.isEmpty() || this.itemA.isEmpty())
+			return null;
 		ItemStack result = this.result.copy();
 		if (entity.level().isClientSide)
 			return null;
@@ -184,7 +186,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 		String itemString = GsonHelper.getAsString(jObject, name);
 		int count = GsonHelper.getAsInt(jObject, name + "_count", 1);
 		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString));
-		if (item == null) {
+		if (item == Items.AIR) {
 			ISOLogHelper.warn("Item %s for SerializableTrade does not exist, ignoring".formatted(itemString));
 			return ItemStack.EMPTY;
 		}
