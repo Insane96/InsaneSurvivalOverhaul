@@ -1,6 +1,10 @@
 # Changelog
 
-### 4.4.0
+## Upcoming
+### Fixes
+* Copper and durium tools for zombies having wrong ids
+
+## 4.4.0
 ### Additions
 * Added Hud Infos
   * A new Client Feature to display infos on the hud as long as you have the items
