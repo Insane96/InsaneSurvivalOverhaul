@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Sugar canes can now grow in spring at lower speed
+
 ## 4.4.2
 * Server crash fix
 

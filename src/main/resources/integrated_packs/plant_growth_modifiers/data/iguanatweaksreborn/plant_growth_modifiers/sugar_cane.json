@@ -11,11 +11,18 @@
             "id": "iguanatweaksreborn:season",
             "seasons": [
                 "WINTER",
-                "SPRING",
                 "AUTUMN"
             ],
             "modifier": -1,
             "operation": "multiply"
+        },
+        {
+            "id": "iguanatweaksreborn:season",
+            "seasons": [
+                "SUMMER"
+            ],
+            "modifier": 2,
+            "operation": "add"
         }
     ]
 }
