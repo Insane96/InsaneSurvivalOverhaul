@@ -12,7 +12,7 @@
 	"hud_info.cardinal_direction.east": "East",
 	"hud_info.cardinal_direction.south_east": "South East",
 	"hud_info.depth": "Y: %d",
-	"hud_info.time": "%d:%02d (Day: %d)",
+	"hud_info.time": "%d:%s (Day: %d)",
 
 	"iguanatweaksreborn:experience_module": "Experience",
 

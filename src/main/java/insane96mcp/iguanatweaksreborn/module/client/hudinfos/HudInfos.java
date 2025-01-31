@@ -69,7 +69,7 @@ public class HudInfos extends Feature {
             toDraw.add(Component.translatable("biome." + name).getString());
         }
         if (time && player.getInventory().contains(ISOItemTagsProvider.HUD_TIME)) {
-            toDraw.add(Component.translatable("hud_info.time", ((level.getDayTime() + 6000) % 24000 / 1000), level.getDayTime() % 1000 / 20, level.getGameTime() / 24000).getString());
+            toDraw.add(Component.translatable("hud_info.time", (int)((level.getDayTime() + 6000) % 24000 / 1000), String.format("%02d",level.getDayTime() % 1000 / 20), level.getGameTime() / 24000).getString());
         }
         if (ModList.get().isLoaded("sereneseasons") && season && player.getInventory().contains(ISOItemTagsProvider.HUD_SEASON)) {
             SereneSeasonsIntegration.addSeasonInfo(toDraw, level);
