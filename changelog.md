@@ -1,5 +1,8 @@
 # Changelog
 
+* Make nitwits possible from breeding
+* You can break and replace the workstation once to change trades ...
+
 ### Upcoming
 ### Additions
 * Added Hud Infos

@@ -11,23 +11,31 @@ import java.util.List;
 
 public class VillagerTrade {
     public final int level;
+    public boolean remove = false;
     public final List<SerializableTrade> trades = new ArrayList<>();
 
     public VillagerTrade(int level) {
         this.level = level;
     }
 
-    public void addTrade(SerializableTrade trade) {
+    private void addTrade(SerializableTrade trade) {
         trades.add(trade);
     }
 
-    public static final Type VILLAGER_TRADE_LIST_TYPE = new TypeToken<ArrayList<VillagerTrade>>(){}.getType();
+    private void remove() {
+        this.remove = true;
+    }
+
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<VillagerTrade>>(){}.getType();
 
     public static class Serializer implements JsonDeserializer<VillagerTrade>, JsonSerializer<VillagerTrade> {
         @Override
         public VillagerTrade deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jObject = json.getAsJsonObject();
             VillagerTrade villagerTrade = new VillagerTrade(GsonHelper.getAsInt(jObject, "level"));
+            boolean remove = GsonHelper.getAsBoolean(jObject, "remove", false);
+            if (remove)
+                villagerTrade.remove();
             JsonArray trades = GsonHelper.getAsJsonArray(jObject, "trades");
             for (JsonElement trade : trades) {
                 villagerTrade.addTrade(context.deserialize(trade, SerializableTrade.class));
@@ -39,6 +47,8 @@ public class VillagerTrade {
         public JsonElement serialize(VillagerTrade src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jObject = new JsonObject();
             jObject.addProperty("level", src.level);
+            if (src.remove)
+                jObject.addProperty("remove", true);
             JsonArray jArray = new JsonArray();
             for (SerializableTrade trade : src.trades) {
                 jArray.add(context.serialize(trade));

@@ -133,9 +133,9 @@ public class WanderingTrades extends JsonFeature {
             return;
         //Load this here so no need for a Supplier for items
         if (JSON_CONFIGS.isEmpty()) {
-            JSON_CONFIGS.add(new JsonConfig<>("generic_trades.json", wanderingTraderGenericTrades, WANDERING_TRADER_GENERIC_TRADES_DEFAULT.get(), SerializableTrade.SERIALIZABLE_TRADE_LIST_TYPE));
-            JSON_CONFIGS.add(new JsonConfig<>("rare_trades.json", wanderingTraderRareTrades, WANDERING_TRADER_RARE_TRADES_DEFAULT.get(), SerializableTrade.SERIALIZABLE_TRADE_LIST_TYPE));
-            JSON_CONFIGS.add(new JsonConfig<>("buying_trades.json", wanderingTraderBuyingTrades, WANDERING_TRADER_BUYING_TRADES_DEFAULT.get(), SerializableTrade.SERIALIZABLE_TRADE_LIST_TYPE));
+            JSON_CONFIGS.add(new JsonConfig<>("generic_trades.json", wanderingTraderGenericTrades, WANDERING_TRADER_GENERIC_TRADES_DEFAULT.get(), SerializableTrade.LIST_TYPE));
+            JSON_CONFIGS.add(new JsonConfig<>("rare_trades.json", wanderingTraderRareTrades, WANDERING_TRADER_RARE_TRADES_DEFAULT.get(), SerializableTrade.LIST_TYPE));
+            JSON_CONFIGS.add(new JsonConfig<>("buying_trades.json", wanderingTraderBuyingTrades, WANDERING_TRADER_BUYING_TRADES_DEFAULT.get(), SerializableTrade.LIST_TYPE));
         }
         super.loadJsonConfigs();
         NonNullList<VillagerTrades.ItemListing> generic = NonNullList.create();

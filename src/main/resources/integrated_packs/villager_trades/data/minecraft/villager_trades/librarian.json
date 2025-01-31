@@ -1,0 +1,100 @@
+[
+    {
+        "level": 1,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": "minecraft:paper",
+                "item_a_count": 24,
+                "item_result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_a_count": 9,
+                "item_result": "minecraft:bookshelf",
+                "max_uses": 12,
+                "xp": 1
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_a_count": 10,
+                "item_b": "minecraft:book",
+                "item_result": "minecraft:book",
+                "enchant_randomly": {
+                    "min_levels": 1,
+                    "max_levels": 5,
+                    "treasure": false
+                },
+                "max_uses": 12,
+                "xp": 1
+            }
+        ]
+    },
+    {
+        "level": 2,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": "minecraft:book",
+                "item_a_count": 4,
+                "item_result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 10
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_result": "minecraft:lantern",
+                "max_uses": 12,
+                "xp": 5
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_a_count": 20,
+                "item_b": "minecraft:book",
+                "item_result": "minecraft:book",
+                "enchant_randomly": {
+                    "min_levels": 1,
+                    "max_levels": 10,
+                    "treasure": false
+                },
+                "max_uses": 12,
+                "xp": 5
+            }
+        ]
+    },
+    {
+        "level": 3,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": "minecraft:ink_sack",
+                "item_a_count": 5,
+                "item_result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 20
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_result": "minecraft:glass",
+                "item_result_count": 4,
+                "max_uses": 12,
+                "xp": 10
+            },
+            {
+                "item_a": "minecraft:emerald",
+                "item_a_count": 40,
+                "item_b": "minecraft:book",
+                "item_result": "minecraft:book",
+                "enchant_randomly": {
+                    "min_levels": 5,
+                    "max_levels": 20,
+                    "treasure": false
+                },
+                "max_uses": 12,
+                "xp": 10
+            }
+        ]
+    }
+]

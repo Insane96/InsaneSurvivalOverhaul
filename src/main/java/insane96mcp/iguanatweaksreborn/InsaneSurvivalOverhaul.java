@@ -25,6 +25,7 @@ import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.SeasonSpawning;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.VillagerTradesReloadListener;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
@@ -139,6 +140,7 @@ public class InsaneSurvivalOverhaul
         event.addListener(BlockDefinitionReloadListener.INSTANCE);
         event.addListener(PlantsGrowthReloadListener.INSTANCE);
         event.addListener(LivestockDataReloadListener.INSTANCE);
+        event.addListener(VillagerTradesReloadListener.INSTANCE);
     }
 
     @SubscribeEvent

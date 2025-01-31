@@ -113,7 +113,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 		return new MerchantOffer(this.itemA, this.itemB, result, this.maxUses, this.xp, 1f);
 	}
 
-	public static final Type SERIALIZABLE_TRADE_LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
+	public static final Type LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
 
 	public static class SerializableTradeSerializer implements JsonDeserializer<SerializableTrade>, JsonSerializer<SerializableTrade> {
 		@Override

@@ -2,65 +2,40 @@ package insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
-import insane96mcp.iguanatweaksreborn.module.mobs.villager.SerializableTrade;
+import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 @Label(name = "Villagers", description = "Nerfs to villagers + change their trades via json config")
 @LoadFeature(module = Modules.Ids.MOBS)
 public class Villagers extends Feature {
 
 	private static final String CURE_DISCOUNT_REMOVED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "cure_discount_removed";
-
-	public static final Supplier<ArrayList<SerializableTrade>> VILLAGER_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.WHEAT_SEEDS), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Crops.CARROT_SEEDS.get()), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Crops.ROOTED_POTATO.get()), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.BEETROOT_SEEDS), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.BROWN_MUSHROOM), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.RED_MUSHROOM), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.MELON), 2),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.PUMPKIN), 2),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.VINE), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.LILY_PAD, 2), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.POINTED_DRIPSTONE, 2), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.SEA_PICKLE), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.CACTUS), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.KELP), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.ACACIA_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.BIRCH_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.CHERRY_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.SPRUCE_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.OAK_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.DARK_OAK_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.JUNGLE_SAPLING), 3),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.NAUTILUS_SHELL), 5),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.TROPICAL_FISH_BUCKET), 4),
-			new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.PUFFERFISH_BUCKET), 4)
-	));
-	public static final ArrayList<VillagerTrade> trades = new ArrayList<>();
 
 	@Config
 	@Label(name = "Lock Trades", description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
@@ -83,9 +58,30 @@ public class Villagers extends Feature {
 	@Config
 	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = false;
+	@Config
+	@Label(name = "Trades Data Pack", description = "Enables a data pack that changes villagers trades")
+	public static Boolean tradesDataPack = true;
 
 	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "villager_trades", Component.literal("Insane's Survival Overhaul Villager Trades"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack));
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onVillagerTrades(VillagerTradesEvent event) {
+		if (!this.isEnabled())
+			return;
+
+		Int2ObjectMap<List<VillagerTrades.ItemListing>> itemListing = event.getTrades();
+		itemListing.forEach(((level, value) -> {
+			VillagerTrade trades = VillagerTradesReloadListener.INSTANCE.getTradesOfLevel(event.getType(), level);
+			if (trades == null)
+				return;
+			if (trades.remove)
+				value.clear();
+
+            value.addAll(trades.trades);
+		}));
 	}
 
 	@SubscribeEvent
