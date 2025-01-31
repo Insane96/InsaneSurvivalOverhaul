@@ -1,6 +1,6 @@
 # Changelog
 
-### Upcoming
+### 4.4.0
 ### Additions
 * Added Hud Infos
   * A new Client Feature to display infos on the hud as long as you have the items
