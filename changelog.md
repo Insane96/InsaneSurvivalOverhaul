@@ -22,6 +22,8 @@
 * Reduced netherite efficiency (7 -> 6)
 * Villagers Nerfs has been renamed to Villagers
 * Wandering Traders and Villagers Nerfs have been moved to Mobs module
+* Enchantment descriptions now use the same translation keys as Enchantment descriptions mod
+  * Also this mod's Enchantment Descriptions are now disabled if the other mod is installed
 
 ### Fixes
 * Item tooltips not working

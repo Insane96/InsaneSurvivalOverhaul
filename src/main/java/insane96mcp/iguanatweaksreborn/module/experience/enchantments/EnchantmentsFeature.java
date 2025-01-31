@@ -133,7 +133,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static Boolean replaceOtherEnchantments = true;
 
 	@Config
-	@Label(name = "Enchantments info", description = "If true and shift it pressed, items will show enchantment info below the enchantments")
+	@Label(name = "Enchantments info", description = "If true and shift it pressed, items will show enchantment info below the enchantments. Disables itself if the Enchantment descriptions mod is installed")
 	public static Boolean enchantmentsInfo = true;
 
 	public static final ArrayList<IdTagMatcher> DISABLED_ENCHANTMENTS_DEFAULT = new ArrayList<>(List.of(
@@ -388,6 +388,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	@SubscribeEvent
 	public void onItemTooltip(ItemTooltipEvent event) {
 		if (!this.isEnabled()
+				|| ModList.get().isLoaded("enchdesc")
 				|| !enchantmentsInfo
 				|| (!event.getItemStack().isEnchanted() && !event.getItemStack().is(Items.ENCHANTED_BOOK))
 				|| !Screen.hasShiftDown())
@@ -399,7 +400,7 @@ public class EnchantmentsFeature extends JsonFeature {
 			if (line.getContents() instanceof TranslatableContents translatableContents) {
 				Optional<Enchantment> oEnchantment = enchantments.keySet().stream().filter(e -> translatableContents.getKey().equals(e.getDescriptionId())).findAny();
 				oEnchantment.ifPresent(enchantment -> {
-					tooltipsToAdd.put(event.getToolTip().indexOf(line) + 1 + added.getAndIncrement(), CommonComponents.space().append(Component.translatable(enchantment.getDescriptionId() + ".info").withStyle(ChatFormatting.LIGHT_PURPLE)));
+					tooltipsToAdd.put(event.getToolTip().indexOf(line) + 1 + added.getAndIncrement(), CommonComponents.space().append(Component.translatable(enchantment.getDescriptionId() + ".desc").withStyle(ChatFormatting.LIGHT_PURPLE)));
 				});
 			}
 		}
