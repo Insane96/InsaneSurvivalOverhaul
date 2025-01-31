@@ -87,18 +87,10 @@ public abstract class PlayerMixin extends LivingEntity {
 	 * @param original
 	 * @return
 	 */
-	@WrapOperation(method = "getDigSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getBlockEfficiency(Lnet/minecraft/world/entity/LivingEntity;)I"), remap = false)
+	@WrapOperation(method = "getDigSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getBlockEfficiency(Lnet/minecraft/world/entity/LivingEntity;)I"))
 	private int iguanatweaksreborn$forceApplyBonusEnchantmentEfficiency(LivingEntity pEntity, Operation<Integer> original) {
 		return 1;
 	}
-
-	/*@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-	private float onCalculateAbsorption(float f1, DamageSource damageSource, float amount) {
-		if (RegeneratingAbsorption.damageTypeTagOnly() && (damageSource.getEntity() == null || damageSource.is(DamageTypeTags.BYPASSES_ARMOR))) {
-			return amount;
-		}
-		return Math.max(amount - this.getAbsorptionAmount(), 0.0F);
-	}*/
 
 	@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 2), argsOnly = true, ordinal = 0)
 	public float onPreAbsorptionCalculation(float amount, DamageSource damageSource) {

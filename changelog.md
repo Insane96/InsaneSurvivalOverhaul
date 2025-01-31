@@ -1,8 +1,9 @@
 # Changelog
 
-## Upcoming
+## 4.4.1
 ### Fixes
 * Copper and durium tools for zombies having wrong ids
+* Startup crash
 
 ## 4.4.0
 ### Additions
