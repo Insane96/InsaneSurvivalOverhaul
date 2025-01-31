@@ -54,6 +54,9 @@ public class Villagers extends Feature {
 	@Config(min = 0)
 	@Label(name = "Heal chance", description = "1 in X chance each tick for villagers to regain 1 health. Set to 0 to disable")
 	public static Integer healChance = 200;
+	@Config(min = 0, max = 1)
+	@Label(name = "Nitwit chance", description = "Chance for a nitwit to spawn when two villagers breed")
+	public static Double nitwitChance = 0.1d;
 	@Config
 	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = false;
@@ -154,5 +157,9 @@ public class Villagers extends Feature {
 
 	public static boolean shouldConvertVillagerToZombie() {
 		return isEnabled(Villagers.class) && alwaysConvertZombie;
+	}
+
+	public static boolean shouldSpawnAsNitwit(Villager villager) {
+		return Feature.isEnabled(Villagers.class) && villager.getRandom().nextDouble() < nitwitChance;
 	}
 }

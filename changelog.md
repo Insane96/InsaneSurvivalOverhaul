@@ -1,7 +1,6 @@
 # Changelog
 
 * Make nitwits possible from breeding
-* You can break and replace the workstation once to change trades ...
 
 ### Upcoming
 ### Additions
@@ -10,6 +9,7 @@
 * Customizable villager trades
   * Thanks to magic of data packs, you can now customize villager trades
   * By default, the librarian trades have been rebalanced with an integrated data pack
+* Bred villagers now have 10% chance to be nitwits
 * Fix for Villager Comfort
   * Villagers that never sleept would not get the negative comfort
   * If the villager has no bed now counts as max negative comfort

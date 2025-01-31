@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.Villagers;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
@@ -19,5 +20,12 @@ public class VillagerMixin {
 		if (villagerData.getProfession() != newVillagerData.getProfession() && newVillagerData.getProfession() != VillagerProfession.NONE) {
 			Villagers.lockTrades($this);
 		}
+	}
+
+	@ModifyExpressionValue(method = "finalizeSpawn", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/npc/VillagerProfession;NONE:Lnet/minecraft/world/entity/npc/VillagerProfession;"))
+	public VillagerProfession iguanatweaksreborn$trySpawnNitwit(VillagerProfession original) {
+		if (Villagers.shouldSpawnAsNitwit((Villager) (Object) this))
+			return VillagerProfession.NITWIT;
+		return original;
 	}
 }
