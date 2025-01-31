@@ -14,7 +14,7 @@
                 "item_a": "minecraft:emerald",
                 "item_a_count": 9,
                 "item_result": "minecraft:bookshelf",
-                "max_uses": 16,
+                "max_uses": 12,
                 "xp": 1
             }
         ]
@@ -27,13 +27,13 @@
                 "item_a": "minecraft:book",
                 "item_a_count": 4,
                 "item_result": "minecraft:emerald",
-                "max_uses": 8,
+                "max_uses": 12,
                 "xp": 10
             },
             {
                 "item_a": "minecraft:emerald",
                 "item_result": "minecraft:lantern",
-                "max_uses": 8,
+                "max_uses": 12,
                 "xp": 5
             },
             {
@@ -47,7 +47,7 @@
                     "treasure": false
                 },
                 "max_uses": 8,
-                "xp": 1
+                "xp": 5
             }
         ]
     },
@@ -59,14 +59,14 @@
                 "item_a": "minecraft:ink_sac",
                 "item_a_count": 5,
                 "item_result": "minecraft:emerald",
-                "max_uses": 4,
+                "max_uses": 8,
                 "xp": 20
             },
             {
                 "item_a": "minecraft:emerald",
                 "item_result": "minecraft:glass",
                 "item_result_count": 4,
-                "max_uses": 4,
+                "max_uses": 8,
                 "xp": 10
             },
             {
@@ -80,7 +80,7 @@
                     "treasure": false
                 },
                 "max_uses": 4,
-                "xp": 5
+                "xp": 10
             }
         ]
     },
@@ -92,21 +92,21 @@
                 "item_a": "minecraft:writable_book",
                 "item_b": "minecraft:writable_book",
                 "item_result": "minecraft:emerald",
-                "max_uses": 2,
+                "max_uses": 4,
                 "xp": 30
             },
             {
                 "item_a": "minecraft:emerald",
                 "item_a_count": 4,
                 "item_result": "minecraft:compass",
-                "max_uses": 2,
+                "max_uses": 4,
                 "xp": 15
             },
             {
                 "item_a": "minecraft:emerald",
                 "item_a_count": 5,
                 "item_result": "minecraft:clock",
-                "max_uses": 2,
+                "max_uses": 4,
                 "xp": 15
             },
             {

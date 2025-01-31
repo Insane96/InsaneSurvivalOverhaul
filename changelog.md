@@ -1,7 +1,5 @@
 # Changelog
 
-* Make nitwits possible from breeding
-
 ### Upcoming
 ### Additions
 * Added Hud Infos
@@ -11,7 +9,7 @@
   * By default, the librarian trades have been rebalanced with an integrated data pack
 * Bred villagers now have 10% chance to be nitwits
 * Fix for Villager Comfort
-  * Villagers that never sleept would not get the negative comfort
+  * Villagers that never slept would not get the negative comfort
   * If the villager has no bed now counts as max negative comfort
 * Added a new StackMaxDamageEvent to change item stacks durability
 * Added a new EnchantmentBonusEfficiencyEvent to change efficiency before the other modifiers
