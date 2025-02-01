@@ -1,4 +1,22 @@
 {
 	"item": "minecraft:crossbow",
-	"durability": 232
+	"durability": 232,
+	"modifiers": [
+		{
+			"uuid": "ab919bd0-9439-4a50-a0a3-75e3e35f84d4",
+			"name": "Crossbow attack damage",
+			"slot": "mainhand",
+			"attribute": "minecraft:generic.attack_damage",
+			"amount": 2,
+			"operation": "addition"
+		},
+		{
+			"uuid": "ab919bd0-9439-4a50-a0a3-75e3e35f84d4",
+			"name": "Crossbow attack speed",
+			"slot": "mainhand",
+			"attribute": "minecraft:generic.attack_speed",
+			"amount": -3,
+			"operation": "addition"
+		}
+	]
 }

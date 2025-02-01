@@ -1,7 +1,14 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Added Shortbow
+  * A variant of the bow that's lighter letting you move faster when charging at the costs of less damage and velocity
+* Charging a (cross)bow now consumes hunger
+
 ### Changes
+* Crossbows now have 3 attack damage and 1 attack speed
+  * Have fun
 * Foods and Drinks
   * Changing the .json config or food formulas no longer requires a minecraft restart
   * Increased default saturation_multiplier (~~x1.1~~ -> x1.2)
