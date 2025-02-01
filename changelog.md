@@ -2,6 +2,10 @@
 
 ## Upcoming
 ### Changes
+* Foods and Drinks
+  * Changing the .json config or food formulas no longer requires a minecraft restart
+  * Increased default saturation_multiplier (~~x1.1~~ -> x1.2)
+  * Changes Food Stack size formula to account for the above
 * Sugar canes can now grow in spring at lower speed
 * Upgrade Aquatic Mulberry now grow slower without sunlight and will not grow in WINTER and SUMMER
 * Sleeping now depletes saturation again

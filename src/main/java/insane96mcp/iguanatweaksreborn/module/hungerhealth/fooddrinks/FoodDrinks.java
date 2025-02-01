@@ -36,9 +36,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-@Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder. Changing the json requires a minecraft restart.")
+@SuppressWarnings("deprecation")
+@Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
 public class FoodDrinks extends JsonFeature {
 
@@ -68,7 +73,7 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).setNutrition(1).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).setNutrition(2).alwaysEat(false).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).setNutrition(6).setEatingTime(40).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).setSaturationModifier(1f).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).setSaturationModifier(0.8f).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
 					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
@@ -85,11 +90,11 @@ public class FoodDrinks extends JsonFeature {
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
 	@Config
-	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Requires a Minecraft restart")
+	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
 	public static String foodHungerFormula = "";
 	@Config
-	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Requires a Minecraft restart")
-	public static String foodSaturationModifierFormula = "saturation_modifier * 1.1";
+	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
+	public static String foodSaturationModifierFormula = "saturation_modifier * 1.2";
 
 	@Config
 	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
@@ -207,13 +212,10 @@ public class FoodDrinks extends JsonFeature {
 		}
 	}
 
-	//private static boolean processedFoodMultipliers = false;
+	public static final Map<Item, FoodProperties> originalFoodProperties = new HashMap<>();
 
 	@SuppressWarnings("ConstantConditions")
 	public static void processFoodMultipliers(boolean isClientSide) {
-		/*if (processedFoodMultipliers)
-			return;
-		processedFoodMultipliers = true;*/
 		for (Item item : ForgeRegistries.ITEMS.getValues()) {
 			if (item.getFoodProperties() == null
 					|| isItemInTag(item, FOOD_BLACKLIST, isClientSide))
@@ -228,10 +230,23 @@ public class FoodDrinks extends JsonFeature {
 
 	@SuppressWarnings("ConstantConditions")
 	public static void processCustomFoodValues(List<CustomFoodProperties> list, boolean isClientSide) {
-		if (list.isEmpty())
-			return;
-		for (CustomFoodProperties foodValue : list) {
-			foodValue.apply();
+		if (!originalFoodProperties.isEmpty()) {
+			originalFoodProperties.forEach((item, food) -> {
+				item.getFoodProperties().nutrition = food.nutrition;
+				item.getFoodProperties().saturationModifier = food.saturationModifier;
+			});
+		}
+		if (originalFoodProperties.isEmpty()) {
+			originalFoodProperties.putAll(ForgeRegistries.ITEMS.getValues()
+					.stream().filter(item -> item.getFoodProperties() != null && !isItemInTag(item, FOOD_BLACKLIST, isClientSide))
+					.collect(Collectors.toMap(Function.identity(), item -> {
+						FoodProperties properties = item.getFoodProperties();
+                        return new FoodProperties.Builder().nutrition(properties.nutrition).saturationMod(properties.saturationModifier).build();
+					})));
+		}
+		if (!list.isEmpty()) {
+			for (CustomFoodProperties foodValue : list)
+				foodValue.apply();
 		}
 		//reset cache when reloading
 		customFoodPropertiesCache = null;

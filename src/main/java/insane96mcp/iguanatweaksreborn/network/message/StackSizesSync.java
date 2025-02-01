@@ -10,32 +10,28 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class StackSizesSync {
-	Boolean foodStackReduction;
 	String foodStackReductionFormula;
 	Double itemStackMultiplier;
 	Double blockStackMultiplier;
 
-	public StackSizesSync(Boolean foodStackReduction, String foodStackReductionFormula, Double itemStackMultiplier, Double blockStackMultiplier) {
-		this.foodStackReduction = foodStackReduction;
+	public StackSizesSync(String foodStackReductionFormula, Double itemStackMultiplier, Double blockStackMultiplier) {
 		this.foodStackReductionFormula = foodStackReductionFormula;
 		this.itemStackMultiplier = itemStackMultiplier;
 		this.blockStackMultiplier = blockStackMultiplier;
 	}
 
 	public static void encode(StackSizesSync pkt, FriendlyByteBuf buf) {
-		buf.writeBoolean(pkt.foodStackReduction);
 		buf.writeUtf(pkt.foodStackReductionFormula);
 		buf.writeDouble(pkt.itemStackMultiplier);
 		buf.writeDouble(pkt.blockStackMultiplier);
 	}
 
 	public static StackSizesSync decode(FriendlyByteBuf buf) {
-		return new StackSizesSync(buf.readBoolean(), buf.readUtf(), buf.readDouble(), buf.readDouble());
+		return new StackSizesSync(buf.readUtf(), buf.readDouble(), buf.readDouble());
 	}
 
 	public static void handle(final StackSizesSync message, Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			StackSizes.foodStackReduction = message.foodStackReduction;
 			StackSizes.foodStackReductionFormula = message.foodStackReductionFormula;
 			StackSizes.itemStackMultiplier = message.itemStackMultiplier;
 			StackSizes.blockStackMultiplier = message.blockStackMultiplier;
@@ -43,8 +39,8 @@ public class StackSizesSync {
 		ctx.get().setPacketHandled(true);
 	}
 
-	public static void sync(Boolean foodStackReduction, String foodStackReductionFormula, Double itemStackMultiplier, Double blockStackMultiplier, ServerPlayer player) {
-		Object msg = new StackSizesSync(foodStackReduction, foodStackReductionFormula, itemStackMultiplier, blockStackMultiplier);
+	public static void sync(String foodStackReductionFormula, Double itemStackMultiplier, Double blockStackMultiplier, ServerPlayer player) {
+		Object msg = new StackSizesSync(foodStackReductionFormula, itemStackMultiplier, blockStackMultiplier);
 		NetworkHandler.CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
 	}
 }
