@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.0
 ### Additions
 * Added Shortbow
   * A variant of the bow that's lighter letting you move faster when charging at the costs of less damage and velocity
