@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reduced zombies and skeletons enchanted equipment
+  * Chance changed to 15% (30 in full moon) for hand and armor
+  * Levels changed 1~15
+
 ## 4.5.0
 ### Additions
 * Added Shortbow
