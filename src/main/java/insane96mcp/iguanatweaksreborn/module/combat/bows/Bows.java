@@ -10,6 +10,8 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.event.PlayerUseItemSpeedModifierEvent;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -63,6 +65,7 @@ public class Bows extends Feature {
 		return crossbowInaccuracy.floatValue();
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onPlayerUseItemSpeedModifier(PlayerUseItemSpeedModifierEvent event) {
 		if (!event.getUseItem().is(SHORTBOW.get()))

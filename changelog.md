@@ -1,10 +1,13 @@
 # Changelog
 
-## Upcoming
+## 4.5.1
 ### Changes
 * Reduced zombies and skeletons enchanted equipment
   * Chance changed to 15% (30 in full moon) for hand and armor
   * Levels changed 1~15
+
+### Fixes
+* Server startup crash
 
 ## 4.5.0
 ### Additions
