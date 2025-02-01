@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import insane96mcp.iguanatweaksreborn.module.combat.ArrowStats;
+import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.CrossbowItem;
@@ -17,16 +17,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CrossbowItemMixin {
     @ModifyExpressionValue(method = "getShootingPower", at = @At(value = "CONSTANT", args = "floatValue=3.15"))
     private static float powerBonusFlat(float original) {
-        return ArrowStats.getCrossbowVelocity();
+        return Bows.getCrossbowVelocity();
     }
 
     @Inject(method = "getArrow", at = @At(value = "RETURN"))
     private static void iguanatweaksreborn$onSetPiercing(Level pLevel, LivingEntity pLivingEntity, ItemStack pCrossbowStack, ItemStack pAmmoStack, CallbackInfoReturnable<AbstractArrow> cir, @Local AbstractArrow abstractArrow) {
-        ArrowStats.piercingCrossbows(abstractArrow);
+        Bows.piercingCrossbows(abstractArrow);
     }
 
     @ModifyExpressionValue(method = "use", at = @At(value = "CONSTANT", args = "floatValue=1.0"))
     private float iguanatweaksreborn$inaccuracy(float original) {
-        return ArrowStats.getCrossbowInaccuracy(original);
+        return Bows.getCrossbowInaccuracy(original);
     }
 }

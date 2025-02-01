@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.message.ExhaustionSync;
 import insane96mcp.iguanatweaksreborn.network.message.SaturationSync;
@@ -13,6 +14,7 @@ import insane96mcp.insanelib.event.PlayerExhaustionEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -40,6 +42,9 @@ public class Exhaustion extends Feature {
 	@Config(min = 0d, max = 128d)
 	@Label(name = "Rowing Exhaustion", description = "Every tick of the player's rowing will get this exhaustion.")
 	public static Double rowingExhaustion = 0.005d;
+	@Config(min = 0d, max = 128d)
+	@Label(name = "Bow charge exhaustion", description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
+	public static Double bowChargeExhaustion = 0.005d;
 	@Config
 	@Label(name = "Effective Hunger Effect", description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
@@ -82,6 +87,9 @@ public class Exhaustion extends Feature {
 
 		if (rowingExhaustion > 0d && event.player.getVehicle() != null && event.player.zza != 0)
 			event.player.causeFoodExhaustion(rowingExhaustion.floatValue());
+
+		if (bowChargeExhaustion > 0d && (event.player.getUseItem().is(Items.BOW) || event.player.getUseItem().is(Items.CROSSBOW) || event.player.getUseItem().is(Bows.SHORTBOW.get())))
+			event.player.causeFoodExhaustion(bowChargeExhaustion.floatValue());
 	}
 
 	@SubscribeEvent

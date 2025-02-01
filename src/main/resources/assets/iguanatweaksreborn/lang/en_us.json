@@ -108,6 +108,8 @@
 	"attribute.name.critical_chance": "Crit Chance",
 	"attribute.name.critical_damage": "Crit Bonus Damage",
 
+	"item.iguanatweaksreborn.shortbow": "Shortbow",
+
 	"iguanatweaksreborn:farming_module": "Farming",
 
 	"iguanatweaksreborn.weak_hoe": "This hoe is too weak to till soil",
