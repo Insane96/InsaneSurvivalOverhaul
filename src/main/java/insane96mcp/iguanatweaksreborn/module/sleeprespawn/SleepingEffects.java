@@ -95,7 +95,7 @@ public class SleepingEffects extends JsonFeature {
 		});
 	}
 
-	@SubscribeEvent(priority = EventPriority.LOW)
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void tooHungryToSleep(PlayerSleepInBedEvent event) {
 		if (!this.isEnabled()
 				|| event.getResultStatus() != null

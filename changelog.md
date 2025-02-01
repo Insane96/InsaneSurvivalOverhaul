@@ -4,6 +4,10 @@
 ### Changes
 * Sugar canes can now grow in spring at lower speed
 * Upgrade Aquatic Mulberry now grow slower without sunlight and will not grow in WINTER and SUMMER
+* Sleeping now depletes saturation again
+
+### Fixes
+* Fixed No Sleep If Hungry not working
 
 ## 4.4.2
 * Server crash fix
