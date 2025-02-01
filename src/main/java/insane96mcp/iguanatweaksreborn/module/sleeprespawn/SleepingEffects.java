@@ -35,7 +35,7 @@ public class SleepingEffects extends JsonFeature {
 	public static final String NO_FOOD_FOR_SLEEP = "iguanatweaksreborn.no_food_for_sleep";
 
 	@Config(min = 0, max = 20)
-	@Label(name = "Hunger Depleted on Wake Up", description = "How much the hunger bar is depleted when you wake up in the morning. Setting to 0 will disable this feature.")
+	@Label(name = "Hunger & Saturation Depleted on Wake Up", description = "How much saturation and hunger are depleted when you wake up in the morning. Setting to 0 will disable this feature.")
 	public static Integer hungerDepletedOnWakeUp = 15;
 	@Config
 	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
@@ -70,12 +70,12 @@ public class SleepingEffects extends JsonFeature {
 			if (!ModList.get().isLoaded("nohunger")) {
 				FoodData foodData = player.getFoodData();
 				int hungerToDeplete = hungerDepletedOnWakeUp;
-				/*if (foodData.getSaturationLevel() > 0) {
+				if (foodData.getSaturationLevel() > 0) {
 					float saturation = foodData.saturationLevel;
 					int saturationToDeplete = (int) Math.min(hungerToDeplete, saturation);
 					foodData.setSaturation(saturation - saturationToDeplete);
 					hungerToDeplete -= saturationToDeplete;
-				}*/
+				}
 				if (hungerToDeplete > 0)
 					foodData.setFoodLevel(foodData.foodLevel - Math.min(hungerToDeplete, foodData.foodLevel));
 			}
