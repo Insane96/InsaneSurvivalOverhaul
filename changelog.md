@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Additions
+* HUD Infos now work even looking at item frames
+
 ## 4.5.1
 ### Changes
 * Reduced zombies and skeletons enchanted equipment

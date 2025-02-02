@@ -10,20 +10,26 @@ import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@Label(name = "HudInfos", description = "Adds various infos on top left of the screen")
+@Label(name = "HUD Infos", description = "Adds various infos on top left of the screen")
 @LoadFeature(module = ClientModules.Ids.CLIENT)
 public class HudInfos extends Feature {
     @Config
@@ -49,36 +55,101 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onHud(CustomizeGuiOverlayEvent.DebugText event) {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
-        Level level = mc.level;
+        Player player = Minecraft.getInstance().player;
 
-        if (mc.options.renderDebug || player == null || level == null)
+        if (Minecraft.getInstance().options.renderDebug || player == null)
             return;
 
         ArrayList<String> toDraw = new ArrayList<>();
-        if (cardinalDirection && player.getInventory().contains(ISOItemTagsProvider.HUD_CARDINAL_DIRECTION)) {
-            float direction = Mth.wrapDegrees(player.getYHeadRot());
-            String d = getDirectionTranslatable(direction);
-            toDraw.add(Component.translatable(d).getString());
-        }
-        if (depth && player.getInventory().contains(ISOItemTagsProvider.HUD_DEPTH)) {
-            toDraw.add(Component.translatable("hud_info.depth", player.getBlockY()).getString());
-        }
-        if (biome && player.getInventory().contains(ISOItemTagsProvider.HUD_BIOME)) {
-            Holder<Biome> biome = level.getBiome(player.blockPosition());
-            String name = biome.unwrapKey().get().location().toString();
-            name = name.replace(':', '.');
-            toDraw.add(Component.translatable("biome." + name).getString());
-        }
-        if (time && player.getInventory().contains(ISOItemTagsProvider.HUD_TIME)) {
-            toDraw.add(Component.translatable("hud_info.time", (int)((level.getDayTime() + 6000) % 24000 / 1000), String.format("%02d",level.getDayTime() % 1000 / 20), level.getGameTime() / 24000).getString());
-        }
-        if (ModList.get().isLoaded("sereneseasons") && season && player.getInventory().contains(ISOItemTagsProvider.HUD_SEASON)) {
-            SereneSeasonsIntegration.addSeasonInfo(toDraw, level);
-        }
+        tryRenderCardinalDirection(player, toDraw);
+        tryRenderDepth(player, toDraw);
+        tryRenderBiome(player, toDraw);
+        tryRenderTime(player, toDraw);
+        tryRenderSeason(player, toDraw);
 
         event.getLeft().addAll(toDraw);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tryRenderCardinalDirection(Player player, List<String> toDraw) {
+        if (!cardinalDirection
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_CARDINAL_DIRECTION))
+            return;
+
+        renderCardinalDirection(player, toDraw);
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderCardinalDirection(Player player, List<String> toDraw) {
+        float direction = Mth.wrapDegrees(player.getYHeadRot());
+        String d = getDirectionTranslatable(direction);
+        toDraw.add(Component.translatable(d).getString());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tryRenderDepth(Player player, List<String> toDraw) {
+        if (!depth
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_DEPTH))
+            return;
+
+        renderDepth(player, toDraw);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderDepth(Player player, List<String> toDraw) {
+        toDraw.add(Component.translatable("hud_info.depth", player.getBlockY()).getString());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tryRenderBiome(Player player, List<String> toDraw) {
+        if (!biome
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_BIOME))
+            return;
+
+        renderBiome(player, toDraw);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderBiome(Player player, List<String> toDraw) {
+        Holder<Biome> biome = player.level().getBiome(player.blockPosition());
+        String name = biome.unwrapKey().get().location().toString();
+        name = name.replace(':', '.');
+        toDraw.add(Component.translatable("biome." + name).getString());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tryRenderTime(Player player, List<String> toDraw) {
+        if (!time
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_TIME))
+            return;
+
+        renderTime(player, toDraw);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderTime(Player player, List<String> toDraw) {
+        toDraw.add(Component.translatable("hud_info.time", (int)((player.level().getDayTime() + 6000) % 24000 / 1000), String.format("%02d",player.level().getDayTime() % 1000 / 20), player.level().getGameTime() / 24000).getString());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void tryRenderSeason(Player player, List<String> toDraw) {
+        if (!ModList.get().isLoaded("sereneseasons")
+                || !season
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_SEASON))
+            return;
+
+        SereneSeasonsIntegration.addSeasonInfo(toDraw, player.level());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean shouldRender(Player player, @Nullable HitResult hitResult, TagKey<Item> itemTag) {
+        return player.getInventory().contains(itemTag) || isLookingAtItemFrameWith(hitResult, itemTag);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isLookingAtItemFrameWith(@Nullable HitResult hitResult, TagKey<Item> itemTag) {
+        return hitResult != null && hitResult.getType() == HitResult.Type.ENTITY && ((EntityHitResult) hitResult).getEntity() instanceof ItemFrame itemFrame && itemFrame.getItem().is(itemTag);
     }
 
     private static @NotNull String getDirectionTranslatable(float direction) {
