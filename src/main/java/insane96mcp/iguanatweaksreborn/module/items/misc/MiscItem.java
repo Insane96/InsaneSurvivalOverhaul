@@ -74,13 +74,13 @@ public class MiscItem extends Feature {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent()
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onItemTooltips(ItemTooltipEvent event) {
 		if (!this.isEnabled()
 				|| !itemTooltips
 				|| !event.getItemStack().is(HAS_TOOLTIP))
 			return;
 
-		event.getToolTip().add(0, Component.translatable(event.getItemStack().getItem().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
+		event.getToolTip().add(1, Component.translatable(event.getItemStack().getItem().getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
 	}
 }
