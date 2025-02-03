@@ -11,6 +11,7 @@
 
 ### Fixes
 * Item tooltips showing above the item name
+* Curpic torch and torch crafting recipe
 
 ## 4.5.1
 ### Changes
