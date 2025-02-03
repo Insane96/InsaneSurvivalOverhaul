@@ -16,6 +16,7 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.event.AddEatEffectEvent;
+import insane96mcp.insanelib.event.CakeEatEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -120,6 +121,9 @@ public class FoodDrinks extends JsonFeature {
 	@Config
 	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current). If AppleSkin is installed it also adds compatibility for saturation restored overlay")
 	public static Boolean combatSnapshotEatingSaturation = true;
+	@Config
+	@Label(name = "Buff cakes", description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
+	public static Boolean buffCake = true;
 
 	@Config
 	@Label(name = "No Furnace food and smoker recipe", description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
@@ -157,6 +161,16 @@ public class FoodDrinks extends JsonFeature {
 			//noinspection DataFlowIssue
 			player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (insane96mcp.insanelib.util.MCUtils.getFoodEffectiveness(item.getFoodProperties(event.getItem(), player)) * 20 * rawFoodPoisonDurationMultiplier), rawFoodPoisonAmplifier));
 		}
+	}
+
+	@SubscribeEvent
+	public void onCakeEat(CakeEatEvent event) {
+		if (!this.isEnabled()
+				|| !buffCake)
+			return;
+
+		event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false, true));
+		event.getEntity().addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 600, 0, false, false, true));
 	}
 
 	private static CustomFoodProperties customFoodPropertiesCache;

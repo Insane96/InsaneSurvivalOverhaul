@@ -1,11 +1,9 @@
 # Changelog
 
-* Increase cake
-* Disable one pancake
-
 ## Upcoming
 ### Additions
 * HUD Infos now work even looking at item frames
+* Eating cakes now gives 30s of Speed and Haste
 
 ### Changes
 * Deepers are now affected by mobs buffs data pack
