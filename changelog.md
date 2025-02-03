@@ -1,8 +1,8 @@
 # Changelog
 
-## Upcoming
+## 4.5.2
 ### Additions
-* HUD Infos now work even looking at item frames
+* HUD Infos now works even when looking at item frames
 * Eating cakes now gives 30s of Speed and Haste
 
 ### Changes
