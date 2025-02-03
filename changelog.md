@@ -7,6 +7,7 @@
 
 ### Changes
 * Deepers are now affected by mobs buffs data pack
+* Living Flesh is now made with Fermented Spider Eyes
 
 ### Fixes
 * Item tooltips showing above the item name
