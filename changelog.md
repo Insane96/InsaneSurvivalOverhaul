@@ -2,12 +2,13 @@
 
 * Increase cake
 * Disable one pancake
-* deepers targeting and stuff changes
-* arrows tooltip
 
 ## Upcoming
 ### Additions
 * HUD Infos now work even looking at item frames
+
+### Changes
+* Deepers are now affected by mobs buffs data pack
 
 ### Fixes
 * Item tooltips showing above the item name

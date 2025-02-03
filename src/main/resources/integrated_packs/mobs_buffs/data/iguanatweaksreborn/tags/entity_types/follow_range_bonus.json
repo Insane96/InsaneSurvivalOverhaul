@@ -86,6 +86,10 @@
         {
             "id": "quark:wraith",
             "required": false
+        },
+        {
+            "required": false,
+            "id": "caverns_and_chasms:deeper"
         }
     ]
 }

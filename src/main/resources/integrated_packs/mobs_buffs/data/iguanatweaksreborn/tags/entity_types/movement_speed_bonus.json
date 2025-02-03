@@ -93,6 +93,10 @@
         {
             "id": "conjurer_illager:conjurer",
             "required": false
+        },
+        {
+            "required": false,
+            "id": "caverns_and_chasms:deeper"
         }
     ]
 }

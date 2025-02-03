@@ -24,6 +24,10 @@
         "minecraft:warden",
         "minecraft:witch",
         "minecraft:zoglin",
-        "#iguanatweaksreborn:overworld_skeletons"
+        "#iguanatweaksreborn:overworld_skeletons",
+        {
+            "required": false,
+            "id": "caverns_and_chasms:deeper"
+        }
     ]
 }
