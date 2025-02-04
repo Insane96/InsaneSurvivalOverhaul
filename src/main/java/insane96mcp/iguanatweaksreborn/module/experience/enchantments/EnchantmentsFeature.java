@@ -246,7 +246,8 @@ public class EnchantmentsFeature extends JsonFeature {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onKnockback(LivingKnockBackEvent event) {
 		if (!this.isEnabled()
-				|| event.getEntity().getCombatTracker().entries.isEmpty())
+				|| event.getEntity().getCombatTracker().entries.isEmpty()
+				|| event.getEntity().getPersistentData().contains("iguanatweaksexpanded:cancel_knockback"))
 			return;
 
 		Entity directAttacker = event.getEntity().getCombatTracker().entries.get(event.getEntity().getCombatTracker().entries.size() - 1).source().getDirectEntity();
