@@ -3,6 +3,7 @@
 ## Upcoming
 ### Additions
 * Config options for animals aging
+* Anvil repair data for Savage and Ravage Cleaver of Beheading and Mask of Dishonesty 
 
 ### Changes
 * Animals now drop 50% more loot when adult and middle-aged

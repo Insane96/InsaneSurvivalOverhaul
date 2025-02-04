@@ -1,0 +1,18 @@
+{
+	"item_to_repair": "savage_and_ravage:mask_of_dishonesty",
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:leather"
+			},
+			"amount": 4
+		},
+		{
+			"repair_material": {
+				"id": "minecraft:rabbit_hide"
+			},
+			"amount": 14,
+			"max_repair": 0.5
+		}
+	]
+}

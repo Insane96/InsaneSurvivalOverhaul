@@ -1,0 +1,18 @@
+{
+	"item_to_repair": "savage_and_ravage:cleaver_of_beheading",
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:iron_ingot"
+			},
+			"amount": 14
+		},
+		{
+			"repair_material": {
+				"id": "minecraft:iron_nugget"
+			},
+			"amount": 129,
+			"cost_multiplier": 9
+		}
+	]
+}
