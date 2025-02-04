@@ -258,6 +258,10 @@ public class Seasons extends Feature {
 	}
 
 	public static float getDayNightCycleModifier() {
-		return Feature.isEnabled(Seasons.class) ? timeControlDayNightDuration.floatValue() / 10f : 1f;
+		return Feature.isEnabled(Seasons.class) && ModList.get().isLoaded("timecontrol") ? timeControlDayNightDuration.floatValue() / 10f : 1f;
+	}
+
+	public static float getDayDuration() {
+		return Feature.isEnabled(Seasons.class) && ModList.get().isLoaded("timecontrol") ? timeControlDayNightDuration.floatValue() * 2f : 20f;
 	}
 }

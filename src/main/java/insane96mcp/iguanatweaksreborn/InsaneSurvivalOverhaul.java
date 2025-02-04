@@ -44,6 +44,7 @@ import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
@@ -57,6 +58,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -141,6 +143,14 @@ public class InsaneSurvivalOverhaul
         event.addListener(PlantsGrowthReloadListener.INSTANCE);
         event.addListener(LivestockDataReloadListener.INSTANCE);
         event.addListener(VillagerTradesReloadListener.INSTANCE);
+    }
+
+    @SubscribeEvent
+    public void onDeath(LivingDeathEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player))
+            return;
+
+        player.getStats().sendStats(player);
     }
 
     @SubscribeEvent

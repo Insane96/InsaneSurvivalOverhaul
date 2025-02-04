@@ -14,6 +14,9 @@
 	"hud_info.depth": "Y: %d",
 	"hud_info.time": "%d:%s (Day: %d)",
 
+	"deathScreen.sinceLastDeath": "Since last death",
+
+
 	"iguanatweaksreborn:experience_module": "Experience",
 
 	"iguanatweaksreborn.partial_repair": "(Partially)",

@@ -18,6 +18,9 @@ public class Death extends Feature {
     @Config
     @Label(name = "Remove score", description = "Why is that still a thing?.")
     public static Boolean removeScore = true;
+    @Config
+    @Label(name = "Replace score with time since last death")
+    public static Boolean replaceScoreWithTimeSinceLastDeath = true;
 
     public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);

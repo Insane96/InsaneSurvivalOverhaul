@@ -1,9 +1,8 @@
 # Changelog
 
-* Time since last death in death screen
-
 ## Upcoming
 ### Additions
+* Death screen now shows the time since last death replacing the score
 * Experimental no explosion resistance fluids
   * Makes waterlogged blocks destroyed by explosions
 * Config options for animals aging
