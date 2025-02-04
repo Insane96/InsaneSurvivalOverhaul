@@ -9,6 +9,9 @@
   * Despawn distance (96 -> 112)
 * Reduced animals auto breed chance (2% -> 1% every 10 seconds)
 
+### Fixes
+* Shortbow not being repairable
+
 ## 4.5.3
 ### Additions
 * Death screen now shows the time since last death replacing the score
