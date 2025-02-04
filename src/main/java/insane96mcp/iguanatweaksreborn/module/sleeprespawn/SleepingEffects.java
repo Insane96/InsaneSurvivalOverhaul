@@ -34,9 +34,12 @@ public class SleepingEffects extends JsonFeature {
 	public static final ArrayList<ISOMobEffectInstance> effectsOnWakeUp = new ArrayList<>();
 	public static final String NO_FOOD_FOR_SLEEP = "iguanatweaksreborn.no_food_for_sleep";
 
-	@Config(min = 0, max = 20)
+	@Config(min = 0, max = 40)
 	@Label(name = "Hunger & Saturation Depleted on Wake Up", description = "How much saturation and hunger are depleted when you wake up in the morning. Setting to 0 will disable this feature.")
-	public static Integer hungerDepletedOnWakeUp = 15;
+	public static Integer hungerDepletedOnWakeUp = 12;
+	@Config(min = 0, max = 20)
+	@Label(name = "Tired bonus Hunger & Saturation Depleted", description = "How much more saturation and hunger are depleted per level of Tired.")
+	public static Integer tiredBonusHungerSaturationDepleted = 2;
 	@Config
 	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
 	public static Boolean noSleepIfHungry = true;
@@ -67,17 +70,22 @@ public class SleepingEffects extends JsonFeature {
 			return;
 
 		event.getLevel().players().stream().filter(LivingEntity::isSleeping).toList().forEach(player -> {
+			//noinspection DataFlowIssue
+			int tiredAmplifier = player.getEffect(Tiredness.TIRED.get()) != null ? player.getEffect(Tiredness.TIRED.get()).getAmplifier() : -1;
 			if (!ModList.get().isLoaded("nohunger")) {
 				FoodData foodData = player.getFoodData();
-				int hungerToDeplete = hungerDepletedOnWakeUp;
+				int hungerToDeplete = hungerDepletedOnWakeUp + (tiredAmplifier + 1) * tiredBonusHungerSaturationDepleted;
 				if (foodData.getSaturationLevel() > 0) {
 					float saturation = foodData.saturationLevel;
 					int saturationToDeplete = (int) Math.min(hungerToDeplete, saturation);
 					foodData.setSaturation(saturation - saturationToDeplete);
 					hungerToDeplete -= saturationToDeplete;
 				}
-				if (hungerToDeplete > 0)
-					foodData.setFoodLevel(foodData.foodLevel - Math.min(hungerToDeplete, foodData.foodLevel));
+				if (hungerToDeplete > 0) {
+					int foodToDeplete = Math.min(hungerToDeplete, foodData.foodLevel);
+					foodData.setFoodLevel(foodData.foodLevel - foodToDeplete);
+					hungerToDeplete -= foodToDeplete;
+				}
 			}
 
 			for (ISOMobEffectInstance mobEffectInstance : effectsOnWakeUp) {
@@ -88,7 +96,7 @@ public class SleepingEffects extends JsonFeature {
 				if (dizzyWhenToTired > -1
 						&& !mobEffectInstance.effect.get().isBeneficial()
 						&& Feature.isEnabled(Tiredness.class)
-						&& (player.getEffect(Tiredness.TIRED.get()) == null || player.getEffect(Tiredness.TIRED.get()).getAmplifier() < dizzyWhenToTired))
+						&& tiredAmplifier < dizzyWhenToTired)
 					continue;
 				player.addEffect(mobEffectInstance.getMobEffectInstance());
 			}
