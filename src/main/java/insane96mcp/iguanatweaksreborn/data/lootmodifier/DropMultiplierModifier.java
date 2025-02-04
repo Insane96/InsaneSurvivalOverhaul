@@ -46,7 +46,7 @@ public class DropMultiplierModifier extends LootModifier {
     //The item tag to modify
     private Optional<TagKey<Item>> tag;
     //The multiplier applied to the amount of items
-    private float multiplier;
+    private final float multiplier;
     //This amount is subtracted from the total amount before applying the multiplier
     private int amountToKeep;
     //Unstackable items will not be multiplied
@@ -74,12 +74,12 @@ public class DropMultiplierModifier extends LootModifier {
             }
             return true;
         };
-        List<ItemStack> stream = generatedLoot.stream().filter(MATCHES_ITEM_OR_TAG).toList();
-        if (stream.isEmpty())
+        List<ItemStack> filteredStacks = generatedLoot.stream().filter(MATCHES_ITEM_OR_TAG).toList();
+        if (filteredStacks.isEmpty())
             return generatedLoot;
 
         List<ItemStack> newStacks = new ArrayList<>();
-        for (ItemStack stack : stream) {
+        for (ItemStack stack : filteredStacks) {
             if (!stack.isStackable() && this.ignoreUnstackable)
                 continue;
             ItemStack existingStack = null;

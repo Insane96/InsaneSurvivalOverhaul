@@ -1,5 +1,13 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Config options for animals aging
+
+### Changes
+* Animals now drop 50% more loot when adult and middle-aged
+  * Was only Adult
+
 ## 4.5.2
 ### Additions
 * HUD Infos now works even when looking at item frames

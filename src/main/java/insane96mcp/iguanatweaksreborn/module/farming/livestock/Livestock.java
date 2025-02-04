@@ -81,6 +81,18 @@ public class Livestock extends Feature {
 	public static Integer milkingCooldown = 1200;
 
 	@Config
+	@Label(name = "Aging.Enable", description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult and mid age animals will drop 50% more stuff.")
+	public static Boolean agingEnable = true;
+
+	@Config
+	@Label(name = "Aging.Die of old age", description = "If true, animals die of old age.")
+	public static Boolean agingDieOfOldAge = true;
+
+	@Config
+	@Label(name = "Aging.Stop at", description = "If Die of old age is disabled you can still make animals grow up to this age")
+	public static Age agingStopAt = Age.MID_AGE;
+
+	@Config
 	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
 	public static Boolean dataPack = true;
 
@@ -108,7 +120,7 @@ public class Livestock extends Feature {
 		if (!event.getEntity().level().isClientSide) {
 			slowdownAnimalGrowth(event);
 			slowdownBreeding(event);
-			liveDeath(event);
+			aging(event);
 			eggLay(event);
 			tickFedTime(event);
 			tryAutoBreed(event);
@@ -162,9 +174,10 @@ public class Livestock extends Feature {
 		return mob.getRandom().nextFloat() < chance;
 	}
 
-	public static void liveDeath(LivingEvent.LivingTickEvent event) {
+	public static void aging(LivingEvent.LivingTickEvent event) {
         //noinspection DataFlowIssue
-        if (!(event.getEntity() instanceof AgeableMob ageableMob)
+        if (!agingEnable
+				|| !(event.getEntity() instanceof AgeableMob ageableMob)
 				|| (ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 20 != 0
 				|| ageableMob.isBaby())
 			return;
@@ -172,6 +185,7 @@ public class Livestock extends Feature {
 		boolean forceUpdateScale = false;
 		int age = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age");
 		int maxAge = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age");
+		//If a max age hasn't been set yet, calculate it
 		if (maxAge == 0) {
 			for (LivestockData data : LivestockDataReloadListener.LIVESTOCK_DATA) {
                 if (data.matches(ageableMob) && data.livingDays != null) {
@@ -184,13 +198,18 @@ public class Livestock extends Feature {
 				return;
 			forceUpdateScale = true;
 		}
+		Age currentAge = getAge(ageableMob);
+		if (currentAge == agingStopAt)
+			return;
 		age++;
+		currentAge = getAge(ageableMob);
+		if (currentAge == Age.OLD)
+			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.3d, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		if (age >= maxAge) {
-			ageableMob.hurt(ageableMob.damageSources().source(OLD_AGE, null), Float.MAX_VALUE);
+			if (agingDieOfOldAge)
+				ageableMob.hurt(ageableMob.damageSources().source(OLD_AGE, null), Float.MAX_VALUE);
 			return;
 		}
-		if (age >= maxAge * 0.75)
-			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.3d, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
 			PehkuiIntegration.setSize(ageableMob, (float) age / (float) maxAge);
 		ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age", age);
