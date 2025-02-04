@@ -39,7 +39,7 @@ public class SleepingEffects extends JsonFeature {
 	public static Integer hungerDepletedOnWakeUp = 12;
 	@Config(min = 0, max = 20)
 	@Label(name = "Tired bonus Hunger & Saturation Depleted", description = "How much more saturation and hunger are depleted per level of Tired.")
-	public static Integer tiredBonusHungerSaturationDepleted = 2;
+	public static Integer tiredBonusHungerSaturationDepleted = 1;
 	@Config
 	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
 	public static Boolean noSleepIfHungry = true;
