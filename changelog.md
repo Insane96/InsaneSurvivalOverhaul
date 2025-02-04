@@ -8,6 +8,7 @@
   * Mob cap (85 -> 70 (like vanilla))
   * Despawn distance (96 -> 112)
 * Reduced animals auto breed chance (2% -> 1% every 10 seconds)
+* Increased shields cooldown to be on par with Shields+
 
 ### Fixes
 * Shortbow not being repairable
