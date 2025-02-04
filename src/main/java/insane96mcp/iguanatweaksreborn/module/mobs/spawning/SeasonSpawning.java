@@ -18,7 +18,7 @@ public class SeasonSpawning extends Feature {
 
     @Config
     @Label(name = "Despawning.Winter", description = "Despawn Distance on winter, note that lower values increase the mobs around the player. Vanilla is 128")
-    public static Integer despawnDistanceWinter = 96;
+    public static Integer despawnDistanceWinter = 112;
     @Config
     @Label(name = "Despawning.Spring", description = "Despawn Distance on spring, note that lower values increase the mobs around the player. Vanilla is 128")
     public static Integer despawnDistanceSpring = 128;
@@ -31,7 +31,7 @@ public class SeasonSpawning extends Feature {
 
     @Config
     @Label(name = "Hostile Cap.Winter", description = "Hostile Mobs cap on winter.")
-    public static Integer hostileCapWinter = 85;
+    public static Integer hostileCapWinter = 70;
     @Config
     @Label(name = "Hostile Cap.Spring", description = "Hostile Mobs cap on spring.")
     public static Integer hostileCapSpring = 70;

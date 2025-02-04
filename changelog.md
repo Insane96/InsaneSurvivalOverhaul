@@ -4,6 +4,9 @@
 ### Changes
 * Disabled Depth hardness
   * Was way too much with the harder ores. Deepslate already does the job
+* Season spawning in winter has been toned down
+  * Mob cap (85 -> 70 (like vanilla))
+  * Despawn distance (96 -> 112)
 
 ## 4.5.3
 ### Additions
