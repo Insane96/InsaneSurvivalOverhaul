@@ -22,7 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Block Hardness", description = "Change blocks hardness. Dimension Hardness, Depth Hardness and Custom Hardness are controlled via json in this feature's folder")
+@Label(name = "Block Hardness", description = "Change blocks hardness. Dimension Hardness and Depth Hardness are controlled via json in this feature's folder. Block hardness can be changed with Block Data via data packs")
 @LoadFeature(module = Modules.Ids.MINING)
 public class BlockHardness extends JsonFeature {
 	public static final TagKey<Block> HARDNESS_BLACKLIST = ISOBlockTagsProvider.create("hardness_blacklist");
@@ -34,7 +34,7 @@ public class BlockHardness extends JsonFeature {
 	public static final ArrayList<DimensionHardnessMultiplier> dimensionHardnessMultiplier = new ArrayList<>();
 
 	public static final ArrayList<DepthHardnessDimension> DEPTH_MULTIPLIER_DIMENSION_DEFAULT = new ArrayList<>(List.of(
-			new DepthHardnessDimension("minecraft:overworld", 0.0078125, 64, 0)
+
 	));
 	public static final ArrayList<DepthHardnessDimension> depthMultiplierDimension = new ArrayList<>();
 

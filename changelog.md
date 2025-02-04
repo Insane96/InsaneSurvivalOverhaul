@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Disabled Depth hardness
+  * Was way too much with the harder ores. Deepslate already does the job
+
 ## 4.5.3
 ### Additions
 * Death screen now shows the time since last death replacing the score
