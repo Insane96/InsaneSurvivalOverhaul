@@ -25,6 +25,9 @@ public class Fluids extends Feature {
     @Label(name = "Water pushes when no blocks are around", description = "If true water pushes entities down with the same strength as there are no blocks around")
     public static Boolean waterPushesWhenNoBlocksAround = true;
     @Config
+    @Label(name = "[EXPERIMENTAL] No explosion resistance", description = "If true, water and lava will have 0 explosion resistance allowing waterlogged block to be destroyed by explosions")
+    public static Boolean noExplosionResistance = true;
+    @Config
     @Label(name = "[EXPERIMENTAL] Floaty entities", description = "If true, entities will float in water")
     public static Boolean floatyEntities = false;
 
@@ -38,6 +41,10 @@ public class Fluids extends Feature {
 
     public static boolean shouldWaterPushWhenNoBlocksAround() {
         return Feature.isEnabled(Fluids.class) && waterPushesWhenNoBlocksAround;
+    }
+
+    public static boolean shouldChangeFluidsExplosionResistance() {
+        return Feature.isEnabled(Fluids.class) && noExplosionResistance;
     }
 
     @SubscribeEvent

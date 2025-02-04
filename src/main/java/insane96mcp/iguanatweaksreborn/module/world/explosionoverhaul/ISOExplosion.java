@@ -230,6 +230,7 @@ public class ISOExplosion extends Explosion {
 		Util.shuffle(this.toBlow, this.level.getRandom());
 		for(BlockPos blockpos : this.getToBlow()) {
 			BlockState blockstate = this.level.getBlockState(blockpos);
+			FluidState fluidState = this.level.getFluidState(blockpos);
 			if (!blockstate.isAir()) {
 				BlockPos immutableBlockPos = blockpos.immutable();
 				this.level.getProfiler().push("explosion_blocks");
@@ -242,6 +243,9 @@ public class ISOExplosion extends Explosion {
 					blockstate.getDrops(lootparams$builder).forEach((stack) -> addBlockDrops(droppedItems, stack, immutableBlockPos));
 				}
 				blockstate.onBlockExploded(this.level, blockpos, this);
+				if (!fluidState.isEmpty()) {
+					this.level.setBlock(blockpos, fluidState.createLegacyBlock(), 3);
+				}
 				this.level.getProfiler().pop();
 			}
 		}

@@ -1,9 +1,11 @@
 # Changelog
 
-* More repair required with Enduring
+* Time since last death in death screen
 
 ## Upcoming
 ### Additions
+* Experimental no explosion resistance fluids
+  * Makes waterlogged blocks destroyed by explosions
 * Config options for animals aging
 * Anvil repair data for Savage and Ravage Cleaver of Beheading and Mask of Dishonesty 
 
