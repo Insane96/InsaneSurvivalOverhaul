@@ -64,7 +64,7 @@ public class HealthRegenHunger extends Feature {
 	public static Double hungerConsumptionChance = 0.5d;
 	@Config(min = 0)
 	@Label(name = "Starve.Speed", description = "Sets how many ticks between starve damage happens (vanilla is 80).")
-	public static Integer starveSpeed = 80;
+	public static Integer starveSpeed = 160;
 	@Config(min = 0)
 	@Label(name = "Starve.Damage", description = "Set how much damage is dealt when starving (vanilla is 1).")
 	public static Integer starveDamage = 1;

@@ -8,6 +8,7 @@
 * Animals now drop 50% more loot when adult and middle-aged
   * Was only Adult
 * You now get more hunger consumed when tired on wake up
+* Slowed down starve speed
 
 ## 4.5.2
 ### Additions
