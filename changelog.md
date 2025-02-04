@@ -7,6 +7,7 @@
 * Season spawning in winter has been toned down
   * Mob cap (85 -> 70 (like vanilla))
   * Despawn distance (96 -> 112)
+* Reduced animals auto breed chance (2% -> 1% every 10 seconds)
 
 ## 4.5.3
 ### Additions
