@@ -13,6 +13,7 @@
 * You now get more hunger consumed when tired on wake up
 * Slowed down starve speed
 * Savage and Ravage Cleavers now accept damaging enchantments
+* Further reduced mobs enchanted equipment chance
 
 ## 4.5.2
 ### Additions

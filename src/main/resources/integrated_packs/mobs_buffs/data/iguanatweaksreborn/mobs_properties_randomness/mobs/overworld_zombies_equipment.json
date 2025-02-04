@@ -5,17 +5,13 @@
             "chance": {
                 "value": 0.15,
                 "condition_modifier": {
-                    "operation": "multiply",
-                    "amount": 1.5,
+                    "operation": "add",
+                    "amount": 0.10,
                     "condition": {
                         "world": {
                             "moon_phases": "full_moon"
                         }
                     }
-                },
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.05
                 }
             },
             "enchantments": [
@@ -24,7 +20,7 @@
                         "value": 0.15,
                         "condition_modifier": {
                             "operation": "add",
-                            "amount": 0.15,
+                            "amount": 0.10,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -34,7 +30,7 @@
                     },
                     "with_levels": {
                         "min": 1,
-                        "max": 15
+                        "max": 10
                     }
                 }
             ],
@@ -188,7 +184,7 @@
                         "value": 0.15,
                         "condition_modifier": {
                             "operation": "add",
-                            "amount": 0.15,
+                            "amount": 0.10,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -198,7 +194,7 @@
                     },
                     "with_levels": {
                         "min": 1,
-                        "max": 15
+                        "max": 10
                     }
                 }
             ]
@@ -210,7 +206,7 @@
                         "value": 0.15,
                         "condition_modifier": {
                             "operation": "add",
-                            "amount": 0.15,
+                            "amount": 0.10,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -220,7 +216,7 @@
                     },
                     "with_levels": {
                         "min": 1,
-                        "max": 15
+                        "max": 10
                     }
                 }
             ]
@@ -232,7 +228,7 @@
                         "value": 0.15,
                         "condition_modifier": {
                             "operation": "add",
-                            "amount": 0.15,
+                            "amount": 0.10,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -242,7 +238,7 @@
                     },
                     "with_levels": {
                         "min": 1,
-                        "max": 15
+                        "max": 10
                     }
                 }
             ]
@@ -254,7 +250,7 @@
                         "value": 0.15,
                         "condition_modifier": {
                             "operation": "add",
-                            "amount": 0.15,
+                            "amount": 0.10,
                             "condition": {
                                 "world": {
                                     "moon_phases": "full_moon"
@@ -264,7 +260,7 @@
                     },
                     "with_levels": {
                         "min": 1,
-                        "max": 15
+                        "max": 10
                     }
                 }
             ]
