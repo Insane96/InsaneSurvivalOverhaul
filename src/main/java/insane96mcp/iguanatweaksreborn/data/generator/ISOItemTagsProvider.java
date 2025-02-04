@@ -95,7 +95,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(SweepingEdge.ACCEPTS_ENCHANTMENT)
                 .addTags(ItemTags.HOES);
         tag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
-                .addTags(ItemTags.AXES, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS);
+                .addTags(ItemTags.AXES, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS)
+                .addOptional(new ResourceLocation("savage_and_ravage:cleaver_of_beheading"));
         tag(Luck.ACCEPTS_ENCHANTMENT)
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
                 .add(Items.FISHING_ROD);

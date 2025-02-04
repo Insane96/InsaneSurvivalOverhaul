@@ -1,5 +1,7 @@
 # Changelog
 
+* More repair required with Enduring
+
 ## Upcoming
 ### Additions
 * Config options for animals aging
@@ -10,6 +12,7 @@
   * Was only Adult
 * You now get more hunger consumed when tired on wake up
 * Slowed down starve speed
+* Savage and Ravage Cleavers now accept damaging enchantments
 
 ## 4.5.2
 ### Additions

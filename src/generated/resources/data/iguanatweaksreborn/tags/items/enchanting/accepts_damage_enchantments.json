@@ -4,6 +4,10 @@
     "#minecraft:pickaxes",
     "#minecraft:shovels",
     "#minecraft:hoes",
-    "#minecraft:swords"
+    "#minecraft:swords",
+    {
+      "id": "savage_and_ravage:cleaver_of_beheading",
+      "required": false
+    }
   ]
 }
