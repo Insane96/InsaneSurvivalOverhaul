@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.3
 ### Additions
 * Death screen now shows the time since last death replacing the score
 * Experimental no explosion resistance fluids
