@@ -70,11 +70,12 @@ public class FoodDrinks extends JsonFeature {
 	public static final TagKey<Item> FOOD_BLACKLIST = ISOItemTagsProvider.create("food_drinks_no_hunger_changes");
 
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).setNutrition(2).setEatingTime(55).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).setNutrition(1).setEatingTime(40).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).setNutrition(2).alwaysEat(false).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).setNutrition(6).setEatingTime(40).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).setSaturationModifier(0.8f).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).setEatingTime(40).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).nutrition(2).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).nutrition(6).setEatingTime(40).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).saturationModifier(0.8f).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:glow_berries")).alwaysEat(true).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
 					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
@@ -83,10 +84,10 @@ public class FoodDrinks extends JsonFeature {
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.DAMAGE_RESISTANCE, 6000).build())
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.FIRE_RESISTANCE, 6000).build())
 					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:sweet_berry_meatballs")).setNutrition(9).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:glowgurt")).setNutrition(8).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:bone_broth")).setNutrition(6).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).setNutrition(5).build()
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:sweet_berry_meatballs")).nutrition(9).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:glowgurt")).nutrition(8).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:bone_broth")).nutrition(6).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).nutrition(5).build()
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 

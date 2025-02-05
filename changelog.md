@@ -1,5 +1,12 @@
 # Changelog
 
+* Advancements
+* paper for atlas
+
+## 4.5.5
+### Changes
+* You can now always eat glow berries
+
 ## 4.5.4
 ### Additions
 * Pets buffs

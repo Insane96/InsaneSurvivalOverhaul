@@ -66,12 +66,12 @@ public class CustomFoodProperties {
 			return this.customFoodProperties;
 		}
 
-		public Builder setNutrition(int nutrition) {
+		public Builder nutrition(int nutrition) {
 			this.customFoodProperties.nutrition = nutrition;
 			return this;
 		}
 
-		public Builder setSaturationModifier(float saturationModifier) {
+		public Builder saturationModifier(float saturationModifier) {
 			this.customFoodProperties.saturationModifier = saturationModifier;
 			return this;
 		}
@@ -122,8 +122,8 @@ public class CustomFoodProperties {
 			IdTagMatcher food = context.deserialize(jObject.get("food"), IdTagMatcher.class);
 
 			Builder builder = new Builder(food)
-					.setNutrition(GsonHelper.getAsInt(jObject, "nutrition", -1))
-					.setSaturationModifier(GsonHelper.getAsFloat(jObject, "saturation_modifier", -1f))
+					.nutrition(GsonHelper.getAsInt(jObject, "nutrition", -1))
+					.saturationModifier(GsonHelper.getAsFloat(jObject, "saturation_modifier", -1f))
 					.setEatingTime(GsonHelper.getAsInt(jObject, "eating_time", -1));
 			if (jObject.has("fast_eating"))
 				builder.fastEating(GsonHelper.getAsBoolean(jObject, "fast_eating"));
