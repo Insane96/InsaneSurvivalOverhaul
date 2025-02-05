@@ -14,6 +14,7 @@
 
 ### Fixes
 * Shortbow not being repairable
+* Respawn point not set when too hungry to sleep
 
 ## 4.5.3
 ### Additions

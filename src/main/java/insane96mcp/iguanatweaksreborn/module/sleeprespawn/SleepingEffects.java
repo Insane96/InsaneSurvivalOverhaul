@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -107,12 +108,14 @@ public class SleepingEffects extends JsonFeature {
 	public void tooHungryToSleep(PlayerSleepInBedEvent event) {
 		if (!this.isEnabled()
 				|| event.getResultStatus() != null
-				|| !noSleepIfHungry)
+				|| !noSleepIfHungry
+				|| !(event.getEntity() instanceof ServerPlayer player))
 			return;
-		if ((hungerDepletedOnWakeUp > 0 && event.getEntity().getFoodData().getFoodLevel() < hungerDepletedOnWakeUp)
-				|| (noSleepWithHungerEffect && event.getEntity().hasEffect(MobEffects.HUNGER))) {
+		if ((hungerDepletedOnWakeUp > 0 && player.getFoodData().getFoodLevel() < hungerDepletedOnWakeUp)
+				|| (noSleepWithHungerEffect && player.hasEffect(MobEffects.HUNGER))) {
 			event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
-			event.getEntity().displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP), true);
+			player.displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP), true);
+			player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
 		}
 	}
 }
