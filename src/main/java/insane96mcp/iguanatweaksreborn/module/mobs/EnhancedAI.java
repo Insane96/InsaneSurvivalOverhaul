@@ -4,6 +4,7 @@ import insane96mcp.enhancedai.modules.creeper.CreeperSwell;
 import insane96mcp.enhancedai.modules.mobs.Spawning;
 import insane96mcp.enhancedai.modules.mobs.fisher.FisherMobs;
 import insane96mcp.enhancedai.modules.mobs.movement.Movement;
+import insane96mcp.enhancedai.modules.pets.Wolves;
 import insane96mcp.enhancedai.modules.skeleton.SkeletonFleeTarget;
 import insane96mcp.enhancedai.modules.skeleton.shoot.SkeletonShoot;
 import insane96mcp.enhancedai.modules.witch.ThirstyWitches;
@@ -61,5 +62,10 @@ public class EnhancedAI extends Feature {
         Module.getFeature(ThirstyWitches.class).setConfigOption("Water Breathing Chance", 0.15d);
         Module.getFeature(ThirstyWitches.class).setConfigOption("Fire Resistance Chance", 0.15d);
         Module.getFeature(ThirstyWitches.class).readConfig(event);
+
+        //Controlled via MPR
+        Module.getFeature(Wolves.class).setEnabledConfig(false);
+        Module.getFeature(Wolves.class).readConfig(event);
+
     }
 }

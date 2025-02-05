@@ -1,6 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Pets buffs
+  * Wolves now have 2x health, 20% more speed, 50% more attack damage and 50% less attack speed (affected only with Enhanced AI)
+  * Wolves, Cats, Ocelots, Parrots and Foxes now heal 1 hp every ~10 seconds
+
 ### Changes
 * Disabled Depth hardness
   * Was way too much with the harder ores. Deepslate already does the job

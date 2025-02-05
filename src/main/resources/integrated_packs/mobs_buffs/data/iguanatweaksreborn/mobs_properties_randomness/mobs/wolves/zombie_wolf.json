@@ -1,0 +1,23 @@
+{
+    "target": "pet_cemetery:zombie_wolf",
+    "attributes": [
+        {
+            "id": "minecraft:generic.max_health",
+            "modifier_name": "More Health for Zombie Wolfies",
+            "amount": 1,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "Less Speed for Zombie Wolfies",
+            "amount": -0.2,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.attack_damage",
+            "modifier_name": "Less Damage for Zombie Wolfies",
+            "amount": -0.5,
+            "operation": "multiply_base"
+        }
+    ]
+}

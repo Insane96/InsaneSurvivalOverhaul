@@ -1,0 +1,11 @@
+{
+    "target": "#iguanatweaksreborn:pets",
+    "events": {
+        "on_tick": [
+            {
+                "chance": 0.1,
+                "function": "iguanatweaksreborn:heal_living"
+            }
+        ]
+    }
+}

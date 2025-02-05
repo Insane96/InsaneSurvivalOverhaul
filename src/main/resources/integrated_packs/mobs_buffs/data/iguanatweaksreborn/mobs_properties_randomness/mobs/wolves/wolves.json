@@ -1,0 +1,29 @@
+{
+    "target": "#iguanatweaksreborn:wolves",
+    "attributes": [
+        {
+            "id": "minecraft:generic.max_health",
+            "modifier_name": "More Health for Wolfies",
+            "amount": 1,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "More Speed for Wolfies",
+            "amount": 0.2,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.attack_damage",
+            "modifier_name": "More Damage for Wolfies",
+            "amount": 0.5,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.attack_speed",
+            "modifier_name": "Less Attack Speed for Wolfies",
+            "amount": -0.5,
+            "operation": "multiply_base"
+        }
+    ]
+}

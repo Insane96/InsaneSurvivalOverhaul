@@ -1,0 +1,23 @@
+{
+    "target": "pet_cemetery:skeleton_wolf",
+    "attributes": [
+        {
+            "id": "minecraft:generic.max_health",
+            "modifier_name": "Less Health for Skeleton Wolfies",
+            "amount": -1,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.movement_speed",
+            "modifier_name": "More Speed for Skeleton Wolfies",
+            "amount": 0.2,
+            "operation": "multiply_base"
+        },
+        {
+            "id": "minecraft:generic.attack_damage",
+            "modifier_name": "More Damage for Skeleton Wolfies",
+            "amount": 0.5,
+            "operation": "multiply_base"
+        }
+    ]
+}
