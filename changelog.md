@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.4
 ### Additions
 * Pets buffs
   * Wolves now have 2x health, 20% more speed, 50% more attack damage and 50% less attack speed (affected only with Enhanced AI)
