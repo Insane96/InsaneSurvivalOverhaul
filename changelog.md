@@ -9,6 +9,8 @@
   * Despawn distance (96 -> 112)
 * Reduced animals auto breed chance (2% -> 1% every 10 seconds)
 * Increased shields cooldown to be on par with Shields+
+* Mid-age animals now drop 2x loot instead of 1.5x
+  * Loot increase with age now also affects sheep shearing
 
 ### Fixes
 * Shortbow not being repairable

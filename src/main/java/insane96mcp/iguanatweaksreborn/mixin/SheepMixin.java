@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.util.MathHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -31,5 +33,18 @@ public abstract class SheepMixin extends Animal {
 			return;
 
 		level.addFreshEntity(new ExperienceOrb(level, this.getX(), this.getY(), this.getZ(), DroppedExperience.shearXp.getIntRandBetween(level.random)));
+	}
+
+	@ModifyVariable(method = "onSheared", at = @At(value = "STORE", ordinal = 0), ordinal = 1, remap = false)
+	private int iguanatweaksreborn$onWoolAmount(int amount) {
+		if (!Feature.isEnabled(Livestock.class))
+			return amount;
+
+		Livestock.Age age = Livestock.getAge(this);
+		if (age == Livestock.Age.ADULT)
+			return MathHelper.getAmountWithDecimalChance(this.random, amount * 1.5f);
+		if (age == Livestock.Age.MID_AGE)
+			return MathHelper.getAmountWithDecimalChance(this.random, amount * 2f);
+		return amount;
 	}
 }
