@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+* Magic damage no longer bypasses invincibility frames
+  * This should fix Pufferfishes instant kill
+
 ## 4.5.5
 ### Changes
 * You can now always eat glow berries
