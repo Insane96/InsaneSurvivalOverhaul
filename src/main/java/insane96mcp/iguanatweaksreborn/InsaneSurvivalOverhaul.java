@@ -64,7 +64,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -94,15 +93,15 @@ public class InsaneSurvivalOverhaul
 
     public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
 
-    public InsaneSurvivalOverhaul() {
+    public InsaneSurvivalOverhaul(FMLJavaModLoadingContext context) {
         //TODO
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC,NEW_MOD_ID + "/common.toml");
+        context.registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
+        context.registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC,NEW_MOD_ID + "/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpawnerDataAttacher.class);
         if (ModList.get().isLoaded("sereneseasons"))
             MinecraftForge.EVENT_BUS.register(SeasonChangedTrigger.class);
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::gatherData);
@@ -237,15 +236,15 @@ public class InsaneSurvivalOverhaul
 
     public void addPackFinders(AddPackFindersEvent event)
     {
-        for (IntegratedPack dataPack : IntegratedPack.INTEGRATED_PACKS) {
-            if (event.getPackType() != dataPack.getPackType())
+        for (IntegratedPack integratedPack : IntegratedPack.INTEGRATED_PACKS) {
+            if (event.getPackType() != integratedPack.getPackType())
                 continue;
-            if (!dataPack.shouldBeEnabled())
+            if (!integratedPack.shouldBeEnabled())
                 continue;
 
-            Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + dataPack.getPath());
-            var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath(), dataPack.getDescription(), dataPack.shouldBeEnabled(),
-                    (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, dataPack.shouldBeEnabled() ? PackSource.DEFAULT : ISOPackSource.DISABLED);
+            Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + integratedPack.getPath());
+            var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + integratedPack.getPath(), integratedPack.getDescription(), integratedPack.shouldBeEnabled() && integratedPack.getPackType() != PackType.CLIENT_RESOURCES,
+                    (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, integratedPack.shouldBeEnabled() ? PackSource.DEFAULT : ISOPackSource.DISABLED);
             event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
         }
     }

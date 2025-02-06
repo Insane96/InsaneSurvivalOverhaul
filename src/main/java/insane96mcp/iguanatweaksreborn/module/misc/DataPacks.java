@@ -106,10 +106,6 @@ public class DataPacks extends Feature {
     public static Boolean cavernsAndChasms = true;
 
     @Config
-    @Label(name = "Assets override", description = "Change some vanilla textures such as arrows to flint, spawners to echo and also some lang entries")
-    public static Boolean assetsOverride = true;
-
-    @Config
     @Label(name = "Force Reload world Data Packs", description = "When you add a new mod the game automatically sets the data pack of the mod at the bottom of all the data packs, making the data packs loaded from this mod not work. If this is set to true the enabled and disabled Data Packs of the world are reset and reloaded. WARNING: you'll lose disabled data packs!")
     public static Boolean forceReloadWorldDataPacks = false;
 
@@ -134,7 +130,7 @@ public class DataPacks extends Feature {
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "z_caverns_and_chasms_integration", Component.literal("Insane's Survival Overhaul Caverns & Chasms Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms")));
 
-        IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> assetsOverride));
+        IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> true));
     }
 
     @Override

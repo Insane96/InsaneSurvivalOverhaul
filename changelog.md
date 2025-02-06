@@ -1,8 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Changes
 * Magic damage no longer bypasses invincibility frames
   * This should fix Pufferfishes instant kill
+* Asset override can now be easily disabled via Resource Pack screen
+  * The config option was removes as didn't work
 
 ## 4.5.5
 ### Changes
