@@ -20,7 +20,7 @@
             "id": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for Zombies",
             "amount": {
-                "value": 8,
+                "value": 5,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {
