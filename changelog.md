@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Lowered zombies follow range
+
 ## 4.5.6
 ### Additions
 * Spawners now play the fire charge sound when spawning mobs
