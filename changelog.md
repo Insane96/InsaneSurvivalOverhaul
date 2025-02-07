@@ -1,8 +1,8 @@
 # Changelog
 
-## Upcoming
+## 4.5.6
 ### Additions
-* Spawners now play the firecharge sound when spawning mobs
+* Spawners now play the fire charge sound when spawning mobs
 
 ### Changes
 * Magic damage no longer bypasses invincibility frames
