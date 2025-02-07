@@ -352,6 +352,8 @@ public class Spawners extends JsonFeature {
 	}
 
 	private static boolean isEmpowered(SpawnerBlockEntity spawner) {
+		if (!empoweredEnabled)
+			return false;
 		LazyOptional<ISpawnerData> cap = spawner.getCapability(SpawnerData.INSTANCE);
 		return cap.map(ISpawnerData::isEmpowered).orElse(false);
 	}

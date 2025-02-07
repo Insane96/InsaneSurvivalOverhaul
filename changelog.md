@@ -7,6 +7,9 @@
 * Asset override can now be easily disabled via Resource Pack screen
   * The config option was removes as didn't work
 
+### Fixes
+* Empowered spawners still spawning mobs faster when disabled
+
 ## 4.5.5
 ### Changes
 * You can now always eat glow berries
