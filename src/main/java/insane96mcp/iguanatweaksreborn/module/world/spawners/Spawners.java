@@ -80,6 +80,9 @@ public class Spawners extends JsonFeature {
 	@Config
 	@Label(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `iguanatweaksreborn:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
 	public static Boolean reEnableWithSpawnerReactivator = true;
+	@Config
+	@Label(name = "Spawning sound effect", description = "If enabled, spawner will play a sound effect when spawning mobs")
+	public static Boolean spawningSoundEffect = true;
 
 	@Config
 	@Label(name = "Disable spawners.Enabled")
@@ -144,6 +147,8 @@ public class Spawners extends JsonFeature {
 			ISOLogHelper.warn("SpawnerBlockEntity is null at %s. Some mod is giving a spawner a non SpawnerBlockEntity.".formatted(spawnerPos));
 			return;
 		}
+		if (spawningSoundEffect)
+			level.playSound(null, spawnerPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2f, 1.5f);
 		mobSpawner.getCapability(SpawnerData.INSTANCE).ifPresent(spawnerCap -> {
 			spawnerCap.addSpawnedMobs(1);
 			disabledSpawners(mobSpawner, event.getEntity(), level, spawnerPos, spawnerCap);
