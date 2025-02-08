@@ -114,7 +114,7 @@ public class Tiredness extends JsonFeature {
 	public static MinMax fakeSoundCooldownBetweenMobs = new MinMax(12000, 24000);
 	@Config(min = 0)
 	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown. 'Maximum' is multiplied by the Tired effect level")
-	public static MinMax fakeSoundTimes = new MinMax(1, 3);
+	public static MinMax fakeSoundTimes = new MinMax(2, 3);
 	@Config
 	@Label(name = "Tired overlay")
 	public static Boolean tiredOverlay = true;
