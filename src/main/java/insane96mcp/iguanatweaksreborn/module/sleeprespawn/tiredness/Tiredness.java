@@ -211,7 +211,7 @@ public class Tiredness extends JsonFeature {
 	}
 
 	private static double getRandomRange(RandomSource random) {
-		double randomRange = random.nextFloat() * 16d - 8d;
+		double randomRange = random.nextFloat() * 24d - 12d;
 		if (randomRange > -6 && randomRange < 0)
 			randomRange = -6;
 		else if (randomRange >= 0 && randomRange < 6)
