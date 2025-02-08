@@ -16,6 +16,20 @@
 			"amount": 18,
 			"max_repair": 0.75,
 			"cost_multiplier": 2
+		},
+		{
+			"repair_material": {
+				"id": "upgrade_aquatic:thrasher_tooth"
+			},
+			"amount": 2.25,
+			"cost_multiplier": 2
+		},
+		{
+			"repair_material": {
+				"id": "progressivebosses:elder_guardian_spike"
+			},
+			"amount": 2.25,
+			"cost_multiplier": 2
 		}
 	]
 }

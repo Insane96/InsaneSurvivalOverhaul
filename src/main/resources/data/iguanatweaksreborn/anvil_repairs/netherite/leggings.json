@@ -7,7 +7,7 @@
 			"repair_material": {
 				"id": "minecraft:diamond"
 			},
-			"amount": 7,
+			"amount": 5.25,
 			"max_repair": 0.5
 		},
 		{

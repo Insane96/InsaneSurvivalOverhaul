@@ -5,13 +5,13 @@
 			"repair_material": {
 				"id": "minecraft:iron_ingot"
 			},
-			"amount": 14
+			"amount": 13.5
 		},
 		{
 			"repair_material": {
 				"id": "minecraft:iron_nugget"
 			},
-			"amount": 129,
+			"amount": 121,
 			"cost_multiplier": 9
 		}
 	]

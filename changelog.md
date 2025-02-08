@@ -4,6 +4,9 @@
 ### Changes
 * Lowered zombies follow range
 * [Chalks](https://www.curseforge.com/minecraft/mc-mods/chalk) are no longer unbreakable
+* Tridents can now be repaired with Elder Guardian Spike from Progressive bosses and Thrasher Tooth from Upgrade Aquatic
+* Reduced anvils degradation chance (7.5% -> 5%)
+* Overall slightly reduced repair material amount
 
 ### Fixes
 * Wolves missing regeneration

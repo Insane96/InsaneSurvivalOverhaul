@@ -11,7 +11,7 @@
 			"repair_material": {
 				"id": "minecraft:rabbit_hide"
 			},
-			"amount": 6,
+			"amount": 8,
 			"max_repair": 0.5
 		}
 	]

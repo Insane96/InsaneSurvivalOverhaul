@@ -7,13 +7,13 @@
 			"repair_material": {
 				"id": "caverns_and_chasms:silver_ingot"
 			},
-			"amount": 1
+			"amount": 0.75
 		},
 		{
 			"repair_material": {
 				"id": "caverns_and_chasms:silver_nugget"
 			},
-			"amount": 7,
+			"amount": 6,
 			"cost_multiplier": 9
 		}
 	]

@@ -5,13 +5,13 @@
 			"repair_material": {
 				"id": "minecraft:leather"
 			},
-			"amount": 4
+			"amount": 3.75
 		},
 		{
 			"repair_material": {
 				"id": "minecraft:rabbit_hide"
 			},
-			"amount": 14,
+			"amount": 10,
 			"max_repair": 0.5
 		}
 	]

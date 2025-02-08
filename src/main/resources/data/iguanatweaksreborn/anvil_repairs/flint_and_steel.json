@@ -5,13 +5,13 @@
 			"repair_material": {
 				"id": "iguanatweaksexpanded:soul_steel_ingot"
 			},
-			"amount": 1
+			"amount": 0.75
 		},
 		{
 			"repair_material": {
 				"id": "iguanatweaksexpanded:soul_steel_nugget"
 			},
-			"amount": 7,
+			"amount": 6,
 			"cost_multiplier": 9
 		}
 	]
