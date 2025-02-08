@@ -83,7 +83,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addOptional(ForgeRegistries.ITEMS.getKey(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()))
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/hand/copper"))
                 .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/armor/chained_copper"))
-                .addOptional(new ResourceLocation("shieldsplus:wooden_shield")).addOptional(new ResourceLocation("shieldsplus:stone_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:copper_shield"));
+                .addOptional(new ResourceLocation("shieldsplus:wooden_shield")).addOptional(new ResourceLocation("shieldsplus:stone_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:copper_shield"))
+                .addOptionalTag(new ResourceLocation("chalk:chalks"));
         tag(FoodDrinks.RAW_FOOD)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
                 .addOptional(new ResourceLocation("autumnity:turkey_piece"))

@@ -28,6 +28,10 @@
     {
       "id": "iguanatweaksexpanded:copper_shield",
       "required": false
+    },
+    {
+      "id": "#chalk:chalks",
+      "required": false
     }
   ]
 }

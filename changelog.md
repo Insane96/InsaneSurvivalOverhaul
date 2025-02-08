@@ -3,6 +3,10 @@
 ## Upcoming
 ### Changes
 * Lowered zombies follow range
+* [Chalks](https://www.curseforge.com/minecraft/mc-mods/chalk) are no longer unbreakable
+
+### Fixes
+* Wolves missing regeneration
 
 ## 4.5.6
 ### Additions
