@@ -13,6 +13,7 @@
     "mixins": [
         "AbstractArrowMixin",
         "AbstractMinecartMixin",
+        "AnimalMixin",
         "AnvilMenuMixin",
         "ApplyBonusCountMixin",
         "ApplyBonusCountOreDropsMixin",

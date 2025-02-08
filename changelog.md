@@ -4,6 +4,7 @@
 ### Additions
 * You can now merge incompatible enchantments in the Anvil
   * As long as Insane's Survival Extra is installed
+* Fixed [MC-93826](https://bugs.mojang.com/browse/MC-93826)
 
 ### Changes
 * Lowered zombies follow range
