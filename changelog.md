@@ -7,6 +7,7 @@
 * Tridents can now be repaired with Elder Guardian Spike from Progressive bosses and Thrasher Tooth from Upgrade Aquatic
 * Reduced anvils degradation chance (7.5% -> 5%)
 * Overall slightly reduced repair material amount
+* Changed yet again saturation modifier formula (~~saturation_modifier * 1.2~~ -> saturation_modifier * hunger / 7)
 
 ### Fixes
 * Wolves missing regeneration
