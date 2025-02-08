@@ -133,6 +133,7 @@ public class Livestock extends Feature {
 				|| !animal.canFallInLove()
 				|| animal.getAge() != 0)
 			return;
+		//TODO Last chance: Prevent breeding if there are too many animals
 		int tickCount = event.getEntity().tickCount + event.getEntity().getId();
 		if (tickCount % 600 != 0)
 			return;

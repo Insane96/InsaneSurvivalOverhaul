@@ -196,9 +196,9 @@ public class Tiredness extends JsonFeature {
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
 			SoundEvent soundEvent = ((MobAccessor)mobFakeSound).ambientSound();
 			event.player.level().playSound(event.player,
-					event.player.getX() + random.nextFloat() * 16d - 8d,
-					event.player.getY() + random.nextFloat() * 16d - 8d,
-					event.player.getZ() + random.nextFloat() * 16d - 8d,
+					event.player.getX() + getRandomRange(random),
+					event.player.getY() + getRandomRange(random),
+					event.player.getZ() + getRandomRange(random),
 					soundEvent,
 					mobFakeSound.getSoundSource(),
 					((LivingEntityAccessor)mobFakeSound).soundVolume(),
@@ -208,6 +208,15 @@ public class Tiredness extends JsonFeature {
 			if (fakeSoundTimesToPlay <= 0)
 				resetMobFakeSound(random, amplifier);
 		}
+	}
+
+	private static double getRandomRange(RandomSource random) {
+		double randomRange = random.nextFloat() * 16d - 8d;
+		if (randomRange > -6 && randomRange < 0)
+			randomRange = -6;
+		else if (randomRange >= 0 && randomRange < 6)
+			randomRange = 0;
+		return randomRange;
 	}
 
 	private void resetMobFakeSound(RandomSource random, int reduction) {
