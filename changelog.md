@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* You can now merge incompatible enchantments in the Anvil
+  * As long as Insane's Survival Extra is installed
+
 ### Changes
 * Lowered zombies follow range
 * [Chalks](https://www.curseforge.com/minecraft/mc-mods/chalk) are no longer unbreakable

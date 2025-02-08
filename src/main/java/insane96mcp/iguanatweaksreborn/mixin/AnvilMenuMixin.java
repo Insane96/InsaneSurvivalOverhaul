@@ -15,6 +15,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -238,7 +239,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 						canEnchant2 = true;
 
 					for (Enchantment enchantment : leftEnchantments.keySet()) {
-						if (enchantment != rightEnchantment && !rightEnchantment.isCompatibleWith(enchantment)) {
+						if (enchantment != rightEnchantment && (!rightEnchantment.isCompatibleWith(enchantment) && !ModList.get().isLoaded("iguanatweaksexpanded"))) {
 							canEnchant2 = false;
 							if (!Anvils.mergingCostBasedOffResult)
 								++mergeCost;
