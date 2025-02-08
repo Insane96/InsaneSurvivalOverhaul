@@ -134,7 +134,7 @@ public class Livestock extends Feature {
 				|| animal.getAge() != 0)
 			return;
 		int tickCount = event.getEntity().tickCount + event.getEntity().getId();
-		if (tickCount % 200 != 0)
+		if (tickCount % 600 != 0)
 			return;
 		List<Modifier> modifiersToApply = new ArrayList<>();
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()

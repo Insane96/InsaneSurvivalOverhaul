@@ -13,6 +13,8 @@
 * Reduced anvils degradation chance (7.5% -> 5%)
 * Overall slightly reduced repair material amount
 * Changed yet again saturation modifier formula (~~saturation_modifier * 1.2~~ -> saturation_modifier * hunger / 7)
+* Animals auto breed now runs every 30 seconds instead of 10. This should fix the animals breeding like crazy
+  * Chance to breed has been increased back to 2%
 
 ### Fixes
 * Wolves missing regeneration
