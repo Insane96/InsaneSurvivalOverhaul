@@ -18,6 +18,7 @@
 
 ### Fixes
 * Wolves missing regeneration
+* Environmental plum trees not falling
 
 ## 4.5.6
 ### Additions

@@ -43,6 +43,7 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> WISTERIA_LEAVES = create("wisteria_leaves");
     public static final TagKey<Block> ASPEN_LOGS = create("aspen_logs");
     public static final TagKey<Block> ASPEN_LEAVES = create("aspen_leaves");
+    public static final TagKey<Block> PLUM_LEAVES = create("plum_leaves");
 
     public ISOBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
         super(output, lookupProvider, modId, existingFileHelper);
@@ -130,6 +131,10 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addOptional(new ResourceLocation("environmental:purple_wisteria_leaves"))
                 .addOptional(new ResourceLocation("environmental:blue_wisteria_leaves"))
                 .addOptional(new ResourceLocation("environmental:white_wisteria_leaves"));
+        tag(PLUM_LEAVES)
+                .addOptional(new ResourceLocation("environmental:plum_leaves"))
+                .addOptional(new ResourceLocation("environmental:cheerful_plum_leaves"))
+                .addOptional(new ResourceLocation("environmental:moody_plum_leaves"));
 
         tag(ASPEN_LOGS)
                 .addOptional(new ResourceLocation("atmospheric:aspen_log"))
