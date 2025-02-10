@@ -24,7 +24,7 @@
 					"announce_to_chat": true,
 					"hidden": false
 				},
-				"parent": "iguanatweaksreborn:story/campfire",
+				"parent": "minecraft:adventure/root",
 				"criteria": {
 					"toolbelt": {
 						"trigger": "minecraft:inventory_changed",

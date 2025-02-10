@@ -14,7 +14,7 @@
 		"announce_to_chat": true,
 		"hidden": false
 	},
-	"parent": "iguanatweaksreborn:husbandry/root",
+	"parent": "minecraft:husbandry/root",
 	"criteria": {
 		"rich_farmland": {
 			"trigger": "iguanatweaksreborn:make_rich_farmland"
