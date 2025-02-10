@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.7
 ### Additions
 * You can now merge incompatible enchantments in the Anvil
   * As long as Insane's Survival Extra is installed
