@@ -14,7 +14,7 @@
 		"announce_to_chat": true,
 		"hidden": true
 	},
-	"parent": "minecraft:story/root",
+	"parent": "minecraft:adventure/root",
 	"criteria": {
 		"unfair_oneshot": {
 			"trigger": "iguanatweaksreborn:unfair_oneshot"

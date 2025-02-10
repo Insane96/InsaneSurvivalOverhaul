@@ -7,6 +7,8 @@
 * Fixed [MC-93826](https://bugs.mojang.com/browse/MC-93826)
 
 ### Changes
+* Minor advancements rework
+  * Re-enabled vanilla advancements tab
 * Lowered zombies follow range
 * [Chalks](https://www.curseforge.com/minecraft/mc-mods/chalk) are no longer unbreakable
 * Tridents can now be repaired with Elder Guardian Spike from Progressive bosses and Thrasher Tooth from Upgrade Aquatic
