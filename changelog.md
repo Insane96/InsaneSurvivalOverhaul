@@ -8,6 +8,7 @@
 ### Changes
 * Increased Tiredness per level (75 -> 125)
 * Ducks now are also no longer breedable
+* Foul Berry bushes now grow only in Summer and Autumn
 
 ### Fixes
 * Giant tall grass dropping seeds

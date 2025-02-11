@@ -1,0 +1,42 @@
+{
+    "block": "autumnity:foul_berry_bush",
+    "growth_multiplier": 2,
+    "modifiers": [
+        {
+            "id": "iguanatweaksreborn:sunlight",
+            "min_sunlight": 10,
+            "modifier": 2,
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:night_time",
+            "modifier": 1.5,
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:matches_biome",
+            "biomes": [
+                "#forge:is_taiga"
+            ],
+            "modifier": 3,
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:season",
+            "seasons": [
+                "AUTUMN",
+                "WINTER"
+            ],
+            "modifier": -1,
+            "operation": "multiply"
+        },
+        {
+            "id": "iguanatweaksreborn:season",
+            "seasons": [
+                "SPRING"
+            ],
+            "modifier": 2,
+            "operation": "multiply"
+        }
+    ]
+}

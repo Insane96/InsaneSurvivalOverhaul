@@ -62,7 +62,7 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 			}
 		}
 
-		ISOLogHelper.info("Loaded %s Block Data", DEFINITIONS.size());
+		ISOLogHelper.info("Loaded %s Block Definitions", DEFINITIONS.size());
 	}
 
 	public static void restoreOriginalDefinitionsAndClear() {
