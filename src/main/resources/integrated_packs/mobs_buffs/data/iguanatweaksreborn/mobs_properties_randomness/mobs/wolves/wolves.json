@@ -30,7 +30,7 @@
         "on_tick": [
             {
                 "chance": 0.1,
-                "function": "survivalreimagined:heal_living"
+                "function": "iguanatweaksreborn:heal_living"
             }
         ]
     }

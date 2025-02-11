@@ -93,7 +93,7 @@ public class Tiredness extends JsonFeature {
 	public static Double tirednessToEffect = 500d;
 	@Config(min = 0d)
 	@Label(name = "Tiredness per level", description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
-	public static Double tirednessPerLevel = 75d;
+	public static Double tirednessPerLevel = 125d;
 	@Config(min = 0d)
 	@Label(name = "Default Energy Boost Duration Multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effective nourishment (hunger + saturation) of the food. This multiplies the duration of the effect")
 	public static Double defaultEnergyBoostDurationMultiplier = 5d;

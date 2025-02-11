@@ -1,5 +1,15 @@
 # Changelog
 
+* Slightly increase tiredness
+* don't hide hunger bar when riding
+* witches invisib in water
+* Giant tall grass drops seeds
+* duck breeding
+
+## Upcoming
+### Changes
+* Increased Tiredness per level (75 -> 125)
+
 ## 4.5.7
 ### Additions
 * You can now merge incompatible enchantments in the Anvil
