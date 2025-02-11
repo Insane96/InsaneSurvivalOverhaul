@@ -1,13 +1,21 @@
 package insane96mcp.iguanatweaksreborn.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.world.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Gui.class)
 public class GuiMixin {
+    @Shadow @Final protected Minecraft minecraft;
+
     @ModifyExpressionValue(method = "renderHotbar", at = @At(value = "CONSTANT", args = "intValue=22", ordinal = 0))
     public int hotBarShift(int original) {
         if (!Misc.shouldRaiseHotbar())
@@ -79,5 +87,12 @@ public class GuiMixin {
         if (!Misc.shouldRaiseHotbar())
             return original;
         return original + Misc.floatyHotbar;
+    }
+
+    @ModifyVariable(method = "renderVehicleHealth", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
+    public int iguanatweaksreborn$onGetVehicleHealth(int original, @Local LivingEntity mount) {
+        if (!Misc.fixMountsGui())
+            return original;
+        return (int)(mount.getMaxHealth() + 0.5F) / 2;
     }
 }

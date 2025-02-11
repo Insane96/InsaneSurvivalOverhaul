@@ -86,6 +86,7 @@
         "WaterFluidMixin",
         "WolfMixin",
         "ZombieMixin",
+        "client.VanillaGuiOverlayMixin",
         "integration.cavernsandchasms.CCEntityTypesMixin",
         "integration.globalgamerules.WorldEventsMixin",
         "integration.villagercomfort.ComfortHelperMixin"

@@ -1,12 +1,15 @@
 # Changelog
 
-* Slightly increase tiredness
 * don't hide hunger bar when riding
 * witches invisib in water
 * Giant tall grass drops seeds
 * duck breeding
 
 ## Upcoming
+### Additions
+* Added Client Misc.Fix Mounts GUI
+  * Shows experience bar and hides jump bar unless jumping when riding an entity
+
 ### Changes
 * Increased Tiredness per level (75 -> 125)
 

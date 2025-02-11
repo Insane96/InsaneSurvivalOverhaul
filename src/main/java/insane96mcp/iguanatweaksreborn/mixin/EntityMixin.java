@@ -1,5 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import insane96mcp.iguanatweaksreborn.module.client.Misc;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.world.Fluids;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
@@ -41,7 +43,7 @@ public abstract class EntityMixin {
     }
 
     @ModifyConstant(method = "updateInWaterStateAndDoFluidPushing", constant = @Constant(floatValue = 1f))
-    private float onFluidFallModifer(float waterFallDamageModifier) {
+    private float onFluidFallModifier(float waterFallDamageModifier) {
         return Fluids.shouldOverrideWaterFallDamageModifier() && this.forgeFluidTypeHeight.object2DoubleEntrySet().stream().anyMatch(e -> e.getKey().equals(ForgeMod.WATER_TYPE.get())) ? 0.75f : waterFallDamageModifier;
     }
 
@@ -57,5 +59,12 @@ public abstract class EntityMixin {
         if (Fluids.shouldOverrideWaterFallDamageModifier())
             return;
         this.resetFallDistance();
+    }
+
+    @ModifyReturnValue(method = "showVehicleHealth", at = @At("RETURN"))
+    private boolean iguanatweaksreborn$onShowVehicleHealth(boolean original) {
+        if (!Misc.fixMountsGui())
+            return original;
+        return false;
     }
 }

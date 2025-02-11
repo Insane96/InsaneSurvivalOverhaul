@@ -27,8 +27,11 @@ public class Misc extends Feature {
     public static Boolean redBlockOutlineWithWrongTool = true;
 
     @Config(min = 0)
-    @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flowlessly if using the correct Forge GUI fields")
+    @Label(name = "Floaty hotbar", description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flawlessly if using the correct Forge GUI fields")
     public static Integer floatyHotbar = 2;
+    @Config
+    @Label(name = "Fix mounts GUI", description = "If true, hunger will be rendered event when the player is in riding an entity. Also hides the jump bar unless jumping (showing the XP bar)")
+    public static Boolean fixMountsGui = true;
 
     public Misc(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -36,6 +39,10 @@ public class Misc extends Feature {
 
     public static boolean shouldDisableTiltingWithNonDirectionalDamageTypes() {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
+    }
+
+    public static boolean fixMountsGui() {
+        return isEnabled(Misc.class) && fixMountsGui;
     }
 
     public static float getRedOutlineAmount(float original) {
@@ -47,7 +54,7 @@ public class Misc extends Feature {
     //Render before Regenerating absorption
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public void removeExperienceBar(final RenderGuiOverlayEvent.Pre event) {
+    public void riseLeftAndRightHeight(final RenderGuiOverlayEvent.Pre event) {
         if (!shouldRaiseHotbar())
             return;
 
