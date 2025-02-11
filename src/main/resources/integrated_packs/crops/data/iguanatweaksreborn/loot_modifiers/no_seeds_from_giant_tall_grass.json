@@ -1,0 +1,11 @@
+{
+  "type": "iguanatweaksreborn:drop_multiplier",
+  "conditions": [
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "environmental:giant_tall_grass"
+    }
+  ],
+  "item": "minecraft:wheat_seeds",
+  "multiplier": 0.0
+}
