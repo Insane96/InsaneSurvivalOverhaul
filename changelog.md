@@ -1,10 +1,5 @@
 # Changelog
 
-* don't hide hunger bar when riding
-* witches invisib in water
-* Giant tall grass drops seeds
-* duck breeding
-
 ## Upcoming
 ### Additions
 * Added Client Misc.Fix Mounts GUI
@@ -12,6 +7,10 @@
 
 ### Changes
 * Increased Tiredness per level (75 -> 125)
+* Ducks now are also no longer breedable
+
+### Fixes
+* Giant tall grass dropping seeds
 
 ## 4.5.7
 ### Additions

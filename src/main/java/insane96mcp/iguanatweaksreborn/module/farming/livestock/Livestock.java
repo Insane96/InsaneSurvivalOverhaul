@@ -148,10 +148,19 @@ public class Livestock extends Feature {
     }
 
 	@SubscribeEvent
-	public void onTryToSeedChickens(PlayerInteractEvent.EntityInteract event) {
+	public void fasterEggTime(PlayerInteractEvent.EntityInteract event) {
+		if (!this.isEnabled()
+				|| fasterEggTime <= 0)
+			return;
+
+		onTryToFeedChicken(event);
+		onTryToFeedDucks(event);
+	}
+
+	public void onTryToFeedChicken(PlayerInteractEvent.EntityInteract event) {
 		if (!this.isEnabled()
 				|| !(event.getTarget() instanceof Chicken chicken)
-		        || !event.getItemStack().is(Crops.CHICKEN_FOOD_ITEMS))
+				|| !event.getItemStack().is(Crops.CHICKEN_FOOD_ITEMS))
 			return;
 
 		event.setCanceled(true);
@@ -162,6 +171,13 @@ public class Livestock extends Feature {
 			if (!event.getEntity().getAbilities().instabuild)
 				event.getEntity().getItemInHand(event.getHand()).shrink(1);
 		}
+	}
+
+	public void onTryToFeedDucks(PlayerInteractEvent.EntityInteract event) {
+		if (!ModList.get().isLoaded("environmental"))
+			return;
+
+		EnvironmentalIntegration.onTryToFeedDucks(event);
 	}
 
 	public static boolean canSheepRegrowWool(Mob mob) {
