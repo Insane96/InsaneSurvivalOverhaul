@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.8
 ### Additions
 * Added Client Misc.Fix Mounts GUI
   * Shows experience bar and hides jump bar unless jumping when riding an entity
