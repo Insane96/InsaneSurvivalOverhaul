@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Changed how when explosions' detonation event is called
+  * This should fix compatibility with Creeper Heal and more mods
+
 ## 4.5.8
 ### Additions
 * Added Client Misc.Fix Mounts GUI

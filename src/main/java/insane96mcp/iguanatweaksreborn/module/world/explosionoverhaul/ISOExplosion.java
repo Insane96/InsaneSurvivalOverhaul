@@ -44,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -58,6 +59,8 @@ public class ISOExplosion extends Explosion {
 	public final boolean poofParticles;
 	private float baseResistanceAdd = 0.3f;
 	private float rayStrengthMultiplier = 0.3f;
+
+	private List<Entity> affectedEntities = new ArrayList<>();
 
 	public ISOExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, boolean creeperCollateral) {
 		this(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, creeperCollateral, true);
@@ -119,15 +122,19 @@ public class ISOExplosion extends Explosion {
 							}
 							if (rayStrength > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockpos, blockstate, rayStrength))
 								set.add(blockpos);
-							x += d0 * (double)0.3F;
-							y += d1 * (double)0.3F;
-							z += d2 * (double)0.3F;
+							x += d0 * (double) 0.3F;
+							y += d1 * (double) 0.3F;
+							z += d2 * (double) 0.3F;
 						}
 					}
 				}
 			}
 		}
 		this.getToBlow().addAll(set);
+		float affectedEntitiesRadius = this.radius * 2.0F;
+		gatherAffectedEntities(affectedEntitiesRadius);
+		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.level, this, this.affectedEntities, affectedEntitiesRadius);
+
 	}
 
 	public void fallingBlocks() {
@@ -161,9 +168,7 @@ public class ISOExplosion extends Explosion {
 
 	public void processEntities(boolean knockbackScaleWithSize) {
 		float affectedEntitiesRadius = this.radius * 2.0F;
-		List<Entity> list = gatherAffectedEntities(affectedEntitiesRadius);
-		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.level, this, list, affectedEntitiesRadius);
-		for (Entity entity : list) {
+		for (Entity entity : this.affectedEntities) {
 			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ISOFallingBlockEntity)  && !ExplosionOverhaul.affectJustSpawnedEntities)
 				continue;
 			if (entity.ignoreExplosion())
@@ -290,14 +295,14 @@ public class ISOExplosion extends Explosion {
 		}
 	}
 
-	private List<Entity> gatherAffectedEntities(float affectedRadius) {
+	private void gatherAffectedEntities(float affectedRadius) {
 		int x1 = Mth.floor(this.getPosition().x() - (double)affectedRadius - 1.0D);
 		int x2 = Mth.floor(this.getPosition().x() + (double)affectedRadius + 1.0D);
 		int y1 = Mth.floor(this.getPosition().y() - (double)affectedRadius - 1.0D);
 		int y2 = Mth.floor(this.getPosition().y() + (double)affectedRadius + 1.0D);
 		int z1 = Mth.floor(this.getPosition().z() - (double)affectedRadius - 1.0D);
 		int z2 = Mth.floor(this.getPosition().z() + (double)affectedRadius + 1.0D);
-		return this.level.getEntities(this.source, new AABB(x1, y1, z1, x2, y2, z2));
+		this.affectedEntities = this.level.getEntities(this.source, new AABB(x1, y1, z1, x2, y2, z2));
 	}
 
 	/*
