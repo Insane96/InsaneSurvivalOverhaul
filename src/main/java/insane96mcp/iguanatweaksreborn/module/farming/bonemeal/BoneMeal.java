@@ -77,9 +77,9 @@ public class BoneMeal extends Feature {
     @Label(name = "Bone meal dirt to grass", description = "If true, you can bone meal dirt that's near a grass block to get grass block.")
     public static Boolean boneMealDirtToGrass = true;
 
-    @Config
-    @Label(name = "Bone meal canes and cactus")
-    public static Boolean boneMealCanesAndCactus = true;
+    @Config(min = 0)
+    @Label(name = "Bone meal canes and cactus", description = "How many stages will cactus and sugar canes grow with one bone meal")
+    public static MinMax boneMealCanesAndCactus = new MinMax(1, 4);
 
     public BoneMeal(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -115,8 +115,8 @@ public class BoneMeal extends Feature {
         if (event.getResult() != Event.Result.ALLOW) {
             if (boneMealDirtToGrass)
                 tryBoneMealDirt(event, event.getLevel(), event.getBlock(), event.getPos());
-            if (boneMealCanesAndCactus)
-                tryBoneMealCanesAndCactus(event, event.getLevel(), event.getBlock(), event.getPos());
+
+            tryBoneMealCanesAndCactus(event, event.getLevel(), event.getBlock(), event.getPos());
         }
     }
 
@@ -230,6 +230,9 @@ public class BoneMeal extends Feature {
             return;
         if (!level.isEmptyBlock(pos.above()))
             return;
+        int growthAmount = boneMealCanesAndCactus.getIntRandBetween(level.random);
+        if (growthAmount == 0)
+            return;
         IntegerProperty ageProperty = state.is(Blocks.SUGAR_CANE) ? SugarCaneBlock.AGE : CactusBlock.AGE;
         int height = 1;
         while (level.getBlockState(pos.below(height)).is(Blocks.SUGAR_CANE) || level.getBlockState(pos.below(height)).is(Blocks.CACTUS)) {
@@ -239,12 +242,13 @@ public class BoneMeal extends Feature {
             return;
 
         int age = state.getValue(ageProperty);
-        if (age == 15) {
+        age += growthAmount;
+        if (age >= 15) {
             level.setBlockAndUpdate(pos.above(), state.getBlock().defaultBlockState());
-            level.setBlock(pos, state.setValue(ageProperty, 0), 4);
+            level.setBlock(pos, state.setValue(ageProperty, age - 15), 4);
         }
         else {
-            level.setBlock(pos, state.setValue(ageProperty, Math.min(age + level.getRandom().nextInt(3) + 1, 15)), 4);
+            level.setBlock(pos, state.setValue(ageProperty, age), 4);
         }
         event.getEntity().swing(event.getEntity().getMainHandItem().getItem() == event.getStack().getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
         event.setResult(Event.Result.ALLOW);

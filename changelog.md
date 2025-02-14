@@ -4,6 +4,7 @@
 ### Changes
 * Changed how when explosions' detonation event is called
   * This should fix compatibility with Creeper Heal and more mods
+* Flax no longer grows 3x slower
 
 ## 4.5.8
 ### Additions
