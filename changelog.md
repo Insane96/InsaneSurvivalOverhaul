@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Campfires turning off even in biomes where doesn't rain
+* CC Silver armor not stacking
+* CC Mimes not being buffed
+
 ## 4.5.9
 ### Changes
 * Changed when explosions' detonation event is called

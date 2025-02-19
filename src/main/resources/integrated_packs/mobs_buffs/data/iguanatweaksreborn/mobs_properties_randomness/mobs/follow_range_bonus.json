@@ -6,13 +6,6 @@
             "modifier_name": "More Follow Range for non-zombie mobs",
             "amount": {
                 "value": 24,
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
-                    },
-                    "amount": 0.5
-                },
                 "world_spawn_distance_modifier": {
                     "operation": "add",
                     "amount_per_step": 1,
