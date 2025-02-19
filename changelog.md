@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Reduced gold generated in Badlands
+
 ### Fixes
 * Campfires turning off even in biomes where doesn't rain
 * CC Silver armor not stacking
