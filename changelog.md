@@ -14,6 +14,7 @@
 * Campfires turning off even in biomes where doesn't rain
 * CC Silver armor not stacking
 * CC Mimes not being buffed
+* Flint and steel recipe overridden by ISE
 
 ## 4.5.9
 ### Changes

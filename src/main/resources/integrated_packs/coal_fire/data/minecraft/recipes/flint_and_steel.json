@@ -1,17 +1,33 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
+	"type": "forge:conditional",
+	"recipes": [
 		{
-			"item": "minecraft:iron_ingot"
-		},
-		{
-			"item": "minecraft:flint"
-		},
-		{
-			"item": "minecraft:blaze_powder"
+			"conditions": [
+				{
+					"type": "forge:not",
+					"value": {
+						"type": "forge:mod_loaded",
+						"modid": "iguanatweaksexpanded"
+					}
+				}
+			],
+			"recipe": {
+				"type": "minecraft:crafting_shapeless",
+				"ingredients": [
+					{
+						"item": "minecraft:iron_ingot"
+					},
+					{
+						"item": "minecraft:flint"
+					},
+					{
+						"item": "minecraft:blaze_powder"
+					}
+				],
+				"result": {
+					"item": "minecraft:flint_and_steel"
+				}
+			}
 		}
-	],
-	"result": {
-		"item": "minecraft:flint_and_steel"
-	}
+	]
 }
