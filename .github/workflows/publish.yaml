@@ -13,7 +13,7 @@ permissions:
 
 jobs:                                     #The place where you actually tell the GitHub server what to do.
   build:                                  #To publish your mod you only need one 'job', here it is called 'build'.
-    runs-on: ubuntu-latest                #'runs-on' specifies the operation system (linux).
+    runs-on: ubuntu-latest                #'runs-on' specifies the operating system (linux).
     steps:                                #Under 'steps' you will list all the individual commands, such as MC-Publish by Kir-Antipov.
       - name: Check Environment Variables
         run: env
@@ -45,4 +45,4 @@ jobs:                                     #The place where you actually tell the
           modrinth-id: 72JfV3Be
           modrinth-token: "${{env.MODRINTH_TOKEN}}"
 
-          changelog-file: CHANGELOG.md
+          changelog-file: /changelog.md
