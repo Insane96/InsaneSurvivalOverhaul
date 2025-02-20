@@ -17,6 +17,7 @@
 * CC Mimes not being buffed
 * Flint and steel recipe overridden by ISE
 * Merging enchanted books and applying them in anvil has no cost
+* Fixed wrong flint tools id for zombies equipment
 
 ## 4.5.9
 ### Changes
