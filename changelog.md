@@ -7,6 +7,7 @@
     * In previous version, all ore veins would generate ~25% less per chunk, on top of veins being smaller.  
       Now only veins are smaller, the vein count per chunk is the same as vanilla
   * Extra ores in specific biomes now generate with the same vein size as vanilla, but with increased vein count
+  * Increased copper generation in dripstone caves
   * Reduced gold generated in Badlands
 
 ### Fixes
