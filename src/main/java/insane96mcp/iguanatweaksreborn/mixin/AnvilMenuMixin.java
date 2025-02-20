@@ -277,7 +277,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 					}
 				}
 				//If the right item is not enchanted then I'm repairing the left one with it, so there should be no cost
-				if (!right.isEnchanted())
+				if (!right.isEnchanted() && !right.is(Items.ENCHANTED_BOOK))
 					mergeCost = 0;
 
 				if (cannotEnchant && !canEnchant) {
