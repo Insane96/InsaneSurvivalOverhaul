@@ -1,8 +1,5 @@
 # Changelog
 
-## 4.5.11
-* Just a test to auto-publish on both CF and Modrinth
-
 ## 4.5.10
 ### Additions
 * Climbing ladders is now 50% faster
