@@ -19,23 +19,24 @@ jobs:                                     #The place where you actually tell the
     steps:                                #Under 'steps' you will list all the individual commands, such as MC-Publish by Kir-Antipov.
       - name: Check Environment Variables
         run: env
-          - name: Checkout Repository
-            uses: actions/checkout@v3
-            with:
-              submodules: true
 
-          - name: Setup Java
-            uses: actions/setup-java@v2
-            with:
-              distribution: "temurin"
-              java-version: 17
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
 
-          - name: Make Gradle Wrapper Executable
-            if: ${{ runner.os != 'Windows' }}
-            run: chmod +x ./gradlew
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
 
-          - name: Build
-            run: ./gradlew clean build
+      - name: Make Gradle Wrapper Executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build
 
       - name: Publish (CurseForge/Modrinth/GitHub)
         uses: Kir-Antipov/mc-publish@v3.3
