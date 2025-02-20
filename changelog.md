@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Climbing ladders is now 50% faster
+
 ### Changes
 * Ore generation
   * Removed reduced ores per chunk generation

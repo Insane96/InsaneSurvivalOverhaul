@@ -116,7 +116,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     }
 
     @Inject(method = "onClimbable", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    public void onCheckIfOnClimbable(CallbackInfoReturnable<Boolean> cir) {
+    public void iguanatweaksreborn$onCheckIfOnClimbable(CallbackInfoReturnable<Boolean> cir) {
         if (!Feature.isEnabled(BetterClimbable.class)
                 || !BetterClimbable.notOnClimbableWhenOnGround)
             return;
@@ -124,11 +124,18 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     }
 
     @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;horizontalCollision:Z"))
-    public boolean onCheckIfOnClimbable(boolean original) {
+    public boolean iguanatweaksreborn$onCheckIfOnClimbable(boolean original) {
         if (!Feature.isEnabled(BetterClimbable.class)
                 || !BetterClimbable.onlyClimbWithJump)
             return original;
         return false;
+    }
+
+    @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "CONSTANT", args = "doubleValue=0.2"))
+    public double iguanatweaksreborn$climbSpeed(double original) {
+        if (!Feature.isEnabled(BetterClimbable.class))
+            return original;
+        return BetterClimbable.climbSpeed;
     }
 
     @WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"))

@@ -23,8 +23,11 @@ import net.minecraftforge.fml.ModList;
 public class BetterClimbable extends Feature {
 
 	@Config(min = 0, max = 5d)
-	@Label(name = "Speed", description = "How much faster the players moves down climbable blocks")
-	public static Double speed = 0.2d;
+	@Label(name = "Climb Speed", description = "Speed at which players move up climbable blocks. Vanilla is 0.2")
+	public static Double climbSpeed = 0.3d;
+	@Config(min = 0, max = 5d)
+	@Label(name = "Descend Speed", description = "How much faster players move down climbable blocks")
+	public static Double descendSpeed = 0.2d;
 
 	@Config
 	@Label(name = "Not on climbable when on ground", description = "Entities will not count as on climbable when on the ground, preventing slowdown when passing through climbable blocks.")
@@ -55,7 +58,7 @@ public class BetterClimbable extends Feature {
 				&& !localPlayer.input.jumping
 				&& !localPlayer.onGround()
 				&& !localPlayer.getAbilities().flying) {
-			localPlayer.move(MoverType.SELF, new Vec3(0, -speed.floatValue(), 0));
+			localPlayer.move(MoverType.SELF, new Vec3(0, -descendSpeed.floatValue(), 0));
 		}
 	}
 
