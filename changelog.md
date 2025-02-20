@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.10
 ### Additions
 * Climbing ladders is now 50% faster
 
@@ -13,6 +13,7 @@
   * Heavily increased copper generation in dripstone caves
   * Increased iron ore veins count
   * Reduced gold generated in Badlands
+* Increased back auto-breed chance (2% -> 3%)
 
 ### Fixes
 * Campfires turning off even in biomes where doesn't rain
