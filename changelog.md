@@ -2,7 +2,11 @@
 
 ## Upcoming
 ### Changes
-* Reduced gold generated in Badlands
+* Ore generation
+  * Removed reduced ores per chunk generation
+    * In previous version, all ore veins would generate ~25% less per chunk, on top of veins being smaller.  
+      Now only veins are smaller, the ore generation is the same
+  * Reduced gold generated in Badlands
 
 ### Fixes
 * Campfires turning off even in biomes where doesn't rain
