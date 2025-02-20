@@ -45,4 +45,9 @@ jobs:                                     #The place where you actually tell the
           modrinth-id: 72JfV3Be
           modrinth-token: "${{env.MODRINTH_TOKEN}}"
 
+          files: |
+            build/libs/!(*-@(slim)).jar
+
           changelog: https://github.com/Insane96/IguanaTweaksReborn/blob/1.20.1/changelog.md
+          name: "${{env.VERSION}}"
+          version: "${{env.RELEASE_NAME}}"
