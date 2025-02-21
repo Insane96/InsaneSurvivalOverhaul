@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.5.11
 ### Changes
 * Firestarters can now be repaired with iron nuggets
 * Respawn obelisks now also give saturation on respawn
