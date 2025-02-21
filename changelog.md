@@ -6,7 +6,8 @@
 * Respawn obelisks now also give saturation on respawn
 
 ### Fixes
-* Hoe scything duplicating blocks
+* Hoe scything duplicating items
+* Hoe scything triggering with any insta-break block
 
 ## 4.5.10
 ### Additions

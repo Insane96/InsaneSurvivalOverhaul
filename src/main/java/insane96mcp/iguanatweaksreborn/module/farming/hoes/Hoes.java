@@ -82,7 +82,8 @@ public class Hoes extends Feature {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onBlockBreak(BlockEvent.BreakEvent event) {
 		if (!this.isEnabled()
-				|| event.getState().destroySpeed > 0f)
+				|| event.getState().destroySpeed > 0f
+				|| !event.getState().is(CAN_SCYTHE))
 			return;
 		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			if (!itemDefinition.matches(event.getPlayer().getMainHandItem())
