@@ -1,0 +1,11 @@
+{
+	"item_to_repair": "iguanatweaksreborn:firestarter",
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:iron_nugget"
+			},
+			"amount": 6.75
+		}
+	]
+}
