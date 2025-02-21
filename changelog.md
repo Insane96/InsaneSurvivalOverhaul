@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Firestarters can now be repaired with iron nuggets
+* Respawn obelisks now also give saturation on respawn
 
 ### Fixes
 * Hoe scything duplicating blocks

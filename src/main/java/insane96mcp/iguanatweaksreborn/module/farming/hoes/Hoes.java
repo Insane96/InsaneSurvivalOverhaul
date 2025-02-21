@@ -99,12 +99,10 @@ public class Hoes extends Feature {
 								|| pos.equals(event.getPos()))
 							return;
 						state.getBlock().playerWillDestroy(event.getPlayer().level(), pos, state, event.getPlayer());
-						//event.getPlayer().level().removeBlock(pos, false);
 						if (state.getBlock().canHarvestBlock(state, event.getPlayer().level(), pos, event.getPlayer()))
 							state.getBlock().playerDestroy(event.getPlayer().level(), event.getPlayer(), pos, state, null, event.getPlayer().getMainHandItem());
 						event.getLevel().destroyBlock(pos, false);
 						event.getLevel().levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
-						//BreakWithNoSound.send((ServerPlayer) event.getPlayer(), pos, state);
 					});
 		}
 	}
