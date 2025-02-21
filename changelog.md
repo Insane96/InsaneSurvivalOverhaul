@@ -4,6 +4,9 @@
 ### Changes
 * Firestarters can now be repaired with iron nuggets
 
+### Fixes
+* Hoe scything duplicating blocks
+
 ## 4.5.10
 ### Additions
 * Climbing ladders is now 50% faster

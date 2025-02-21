@@ -94,11 +94,11 @@ public class Hoes extends Feature {
 			BlockPos.betweenClosedStream(event.getPos().offset(-radius, -(radius - 1), -radius), event.getPos().offset(radius, radius - 1, radius))
 					.forEach(pos -> {
 						BlockState state = event.getPlayer().level().getBlockState(pos);
-						state.getBlock().playerWillDestroy(event.getPlayer().level(), pos, state, event.getPlayer());
 						if (!state.is(CAN_SCYTHE)
 								|| state.destroySpeed > 0f
 								|| pos.equals(event.getPos()))
 							return;
+						state.getBlock().playerWillDestroy(event.getPlayer().level(), pos, state, event.getPlayer());
 						//event.getPlayer().level().removeBlock(pos, false);
 						if (state.getBlock().canHarvestBlock(state, event.getPlayer().level(), pos, event.getPlayer()))
 							state.getBlock().playerDestroy(event.getPlayer().level(), event.getPlayer(), pos, state, null, event.getPlayer().getMainHandItem());

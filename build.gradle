@@ -114,7 +114,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5051316")
     runtimeOnly fg.deobf("curse.maven:better-advancements-272515:4631253")
     // runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
-    compileOnly fg.deobf("curse.maven:supplementaries-412082:5225134")
+    implementation fg.deobf("curse.maven:supplementaries-412082:5225134")
 
     implementation fg.deobf("com.github.glitchfiend:GlitchCore-forge:${mc_version}-${glitchcore_version}")
     implementation fg.deobf("com.github.glitchfiend:SereneSeasons-forge:${mc_version}-${sereneseasons_version}")
