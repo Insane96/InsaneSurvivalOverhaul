@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Blindness no longer prevents sprinting
+
 ## 4.5.11
 ### Changes
 * Firestarters can now be repaired with iron nuggets

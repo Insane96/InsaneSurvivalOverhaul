@@ -138,6 +138,9 @@ public class Tweaks extends Feature {
     @Label(name = "Ding on mob hit at distance", description = "Plays a sound effect when a mob is hit at least from this distance.")
     public static Integer dingDistance = 40;
 
+    @Config
+    public static Boolean blindnessNoLongerPreventsSprinting = true;
+
     public static boolean discreteNameTags = true;
 
     public Tweaks(Module module, boolean enabledByDefault, boolean canBeDisabled) {

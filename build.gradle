@@ -7,7 +7,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = "${mod_version}-mc${mc_version}"
+version = "${mod_version}"
 group = 'insane96mcp.iguanatweaksreborn'
 
 base {

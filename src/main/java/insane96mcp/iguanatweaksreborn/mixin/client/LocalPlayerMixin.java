@@ -1,9 +1,12 @@
 package insane96mcp.iguanatweaksreborn.mixin.client;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.authlib.GameProfile;
 import insane96mcp.iguanatweaksreborn.module.client.Death;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
+import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -45,5 +48,29 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
             return original;
 
         return HealthRegenHunger.sprintMinHunger - 1;
+    }
+
+    @Definition(id = "hasEffect", method = "Lnet/minecraft/client/player/LocalPlayer;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z")
+    @Definition(id = "BLINDNESS", field = "Lnet/minecraft/world/effect/MobEffects;BLINDNESS:Lnet/minecraft/world/effect/MobEffect;")
+    @Expression("this.hasEffect(BLINDNESS)")
+    @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+    public boolean insanesurvivaloverhaul$blindnessPreventSprint(boolean original) {
+        if (!Feature.isEnabled(Tweaks.class))
+            return original;
+
+        //Inverted because the check is negated
+        return !Tweaks.blindnessNoLongerPreventsSprinting;
+    }
+
+    @Definition(id = "hasEffect", method = "Lnet/minecraft/client/player/LocalPlayer;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z")
+    @Definition(id = "BLINDNESS", field = "Lnet/minecraft/world/effect/MobEffects;BLINDNESS:Lnet/minecraft/world/effect/MobEffect;")
+    @Expression("this.hasEffect(BLINDNESS)")
+    @ModifyExpressionValue(method = "aiStep", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+    public boolean insanesurvivaloverhaul$blindnessPreventSprint2(boolean original) {
+        if (!Feature.isEnabled(Tweaks.class))
+            return original;
+
+        //Inverted because the check is negated
+        return !Tweaks.blindnessNoLongerPreventsSprinting;
     }
 }
