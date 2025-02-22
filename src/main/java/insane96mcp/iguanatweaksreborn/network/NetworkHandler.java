@@ -8,7 +8,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetworkHandler {
-	private static final String PROTOCOL_VERSION = Integer.toString(4);
+	private static final String PROTOCOL_VERSION = Integer.toString(5);
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
 			.named(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "network_channel"))
 			.clientAcceptedVersions(s -> true)
@@ -31,7 +31,6 @@ public class NetworkHandler {
 		CHANNEL.registerMessage(++index, TirednessSync.class, TirednessSync::encode, TirednessSync::decode, TirednessSync::handle);
 		CHANNEL.registerMessage(++index, SetITRBeaconEffects.class, SetITRBeaconEffects::encode, SetITRBeaconEffects::decode, SetITRBeaconEffects::handle);
 		CHANNEL.registerMessage(++index, RegenAbsorptionSync.class, RegenAbsorptionSync::encode, RegenAbsorptionSync::decode, RegenAbsorptionSync::handle);
-		CHANNEL.registerMessage(++index, PlantGrowthMultiplierSync.class, PlantGrowthMultiplierSync::encode, PlantGrowthMultiplierSync::decode, PlantGrowthMultiplierSync::handle);
 		CHANNEL.registerMessage(++index, ForgeDataIntSync.class, ForgeDataIntSync::encode, ForgeDataIntSync::decode, ForgeDataIntSync::handle);
 		CHANNEL.registerMessage(++index, BlockDefinitionSync.class, BlockDefinitionSync::encode, BlockDefinitionSync::decode, BlockDefinitionSync::handle);
 		CHANNEL.registerMessage(++index, SyncExperienceFeature.class, SyncExperienceFeature::encode, SyncExperienceFeature::decode, SyncExperienceFeature::handle);
