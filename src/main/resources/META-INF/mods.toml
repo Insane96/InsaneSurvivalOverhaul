@@ -40,6 +40,16 @@ license="All rights reserved"
     side="BOTH"
 
 [[dependencies.iguanatweaksreborn]]
+    modId="maxhealthfix"
+    mandatory=true
+    versionRange="[12.0.2,)"
+    ordering="NONE"
+    side="BOTH"
+    [dependencies.iguanatweaksreborn.mc-publish]
+        modrinth="max-health-fix" # Modrinth's project slug
+        curseforge="max-health-fix" # CurseForge's project slug
+
+[[dependencies.iguanatweaksreborn]]
     modId="mobspropertiesrandomness"
     mandatory=false
     versionRange="[4.10.14,)"
@@ -64,13 +74,6 @@ license="All rights reserved"
     modId="toolbelt"
     mandatory=false
     versionRange="[1.20.02,)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.iguanatweaksreborn]]
-    modId="maxhealthfix"
-    mandatory=true
-    versionRange="[12.0.2,)"
     ordering="NONE"
     side="BOTH"
 
