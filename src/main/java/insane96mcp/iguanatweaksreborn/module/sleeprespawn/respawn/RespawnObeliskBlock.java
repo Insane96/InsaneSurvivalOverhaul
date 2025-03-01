@@ -23,10 +23,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.DismountHelper;
+import net.minecraft.world.level.CollisionGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -45,22 +46,28 @@ public class RespawnObeliskBlock extends Block {
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
     private static final ImmutableList<Vec3i> CATALYST_RELATIVE_POSITIONS = ImmutableList.of(
-            /*new Vec3i(-2, 0, 0),
-            new Vec3i(2, 0, 0),
-            new Vec3i(0, 0, -2),
-            new Vec3i(0, 0, 2),
-            new Vec3i(-3, 0, 0),
-            new Vec3i(3, 0, 0),
-            new Vec3i(0, 0, -3),
-            new Vec3i(0, 0, 3),*/
             new Vec3i(-4, 0, 0),
             new Vec3i(4, 0, 0),
             new Vec3i(0, 0, -4),
             new Vec3i(0, 0, 4)
     );
 
-    private static final ImmutableList<Vec3i> RESPAWN_HORIZONTAL_OFFSETS = ImmutableList.of(new Vec3i(0, 0, -1), new Vec3i(-1, 0, 0), new Vec3i(0, 0, 1), new Vec3i(1, 0, 0), new Vec3i(-1, 0, -1), new Vec3i(1, 0, -1), new Vec3i(-1, 0, 1), new Vec3i(1, 0, 1));
-    private static final ImmutableList<Vec3i> RESPAWN_OFFSETS = (new ImmutableList.Builder<Vec3i>()).addAll(RESPAWN_HORIZONTAL_OFFSETS).addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(Vec3i::below).iterator()).addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(Vec3i::above).iterator()).add(new Vec3i(0, 1, 0)).build();
+    private static final ImmutableList<Vec3i> RESPAWN_HORIZONTAL_OFFSETS = ImmutableList.of(
+            new Vec3i(0, 0, -1),
+            new Vec3i(-1, 0, 0),
+            new Vec3i(0, 0, 1),
+            new Vec3i(1, 0, 0),
+            new Vec3i(-1, 0, -1),
+            new Vec3i(1, 0, -1),
+            new Vec3i(-1, 0, 1),
+            new Vec3i(1, 0, 1));
+    private static final ImmutableList<Vec3i> RESPAWN_OFFSETS = (new ImmutableList.Builder<Vec3i>())
+            .addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(offset -> offset.below(3)).iterator())
+            .addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(offset -> offset.below(2)).iterator())
+            .addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(Vec3i::below).iterator())
+            .addAll(RESPAWN_HORIZONTAL_OFFSETS)
+            .addAll(RESPAWN_HORIZONTAL_OFFSETS.stream().map(Vec3i::above).iterator())
+            .build();
 
     public RespawnObeliskBlock(Properties properties) {
         super(properties);
@@ -124,7 +131,26 @@ public class RespawnObeliskBlock extends Block {
         if (!levelReader.getBlockState(pos).getValue(RespawnObeliskBlock.ENABLED))
             return Optional.empty();
         if (state.getBlock() instanceof RespawnObeliskBlock)
-            return RespawnAnchorBlock.findStandUpPosition(type, levelReader, pos);
+            return findStandUpPosition(type, levelReader, pos);
+        return Optional.empty();
+    }
+
+    public static Optional<Vec3> findStandUpPosition(EntityType<?> pEntityType, CollisionGetter pLevel, BlockPos pPos) {
+        Optional<Vec3> optional = findStandUpPosition(pEntityType, pLevel, pPos, true);
+        return optional.isPresent() ? optional : findStandUpPosition(pEntityType, pLevel, pPos, false);
+    }
+
+    private static Optional<Vec3> findStandUpPosition(EntityType<?> pEntityType, CollisionGetter pLevel, BlockPos pPos, boolean pSimulate) {
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+
+        for (Vec3i vec3i : RESPAWN_OFFSETS) {
+            blockpos$mutableblockpos.set(pPos).move(vec3i);
+            Vec3 vec3 = DismountHelper.findSafeDismountLocation(pEntityType, pLevel, blockpos$mutableblockpos, pSimulate);
+            if (vec3 != null) {
+                return Optional.of(vec3);
+            }
+        }
+
         return Optional.empty();
     }
 

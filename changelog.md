@@ -4,6 +4,9 @@
 ### Additions
 * Blindness no longer prevents sprinting
 
+### Changes
+* Respawn obelisk can now respawn up to 3 blocks below its position
+
 ## 4.5.11
 ### Changes
 * Firestarters can now be repaired with iron nuggets
