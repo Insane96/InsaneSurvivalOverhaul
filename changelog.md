@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Sleeping possibly requiring more hunger than possible
+
 ## 4.6.0
 ### Additions
 * Blindness no longer prevents sprinting

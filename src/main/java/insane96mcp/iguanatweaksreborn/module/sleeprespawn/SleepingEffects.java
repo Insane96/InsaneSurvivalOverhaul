@@ -75,7 +75,7 @@ public class SleepingEffects extends JsonFeature {
 			int tiredAmplifier = player.getEffect(Tiredness.TIRED.get()) != null ? player.getEffect(Tiredness.TIRED.get()).getAmplifier() : -1;
 			if (!ModList.get().isLoaded("nohunger")) {
 				FoodData foodData = player.getFoodData();
-				int hungerToDeplete = hungerDepletedOnWakeUp + (tiredAmplifier + 1) * tiredBonusHungerSaturationDepleted;
+				int hungerToDeplete = Math.min(hungerDepletedOnWakeUp + (tiredAmplifier + 1) * tiredBonusHungerSaturationDepleted, 20);
 				if (foodData.getSaturationLevel() > 0) {
 					float saturation = foodData.saturationLevel;
 					int saturationToDeplete = (int) Math.min(hungerToDeplete, saturation);
