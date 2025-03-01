@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.6.0
 ### Additions
 * Blindness no longer prevents sprinting
 
