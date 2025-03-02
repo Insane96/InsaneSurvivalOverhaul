@@ -1,5 +1,6 @@
 {
     "block": "minecraft:sugar_cane",
+    "growth_multiplier": 2,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

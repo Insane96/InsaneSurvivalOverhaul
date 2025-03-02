@@ -1,5 +1,6 @@
 {
     "block": "atmospheric:dragon_roots",
+    "growth_multiplier": 2,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

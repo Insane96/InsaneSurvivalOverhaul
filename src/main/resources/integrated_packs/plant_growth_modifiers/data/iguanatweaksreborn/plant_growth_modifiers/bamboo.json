@@ -1,6 +1,6 @@
 {
     "block": "minecraft:bamboo",
-    "growth_multiplier": 2,
+    "growth_multiplier": 3,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

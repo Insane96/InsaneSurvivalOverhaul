@@ -1,6 +1,6 @@
 {
     "block": "minecraft:kelp",
-    "growth_multiplier": 2,
+    "growth_multiplier": 3,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:matches_biome",

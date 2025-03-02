@@ -1,5 +1,6 @@
 {
     "block": "minecraft:potatoes",
+    "growth_multiplier": 2,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

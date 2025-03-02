@@ -1,6 +1,6 @@
 {
     "block": "minecraft:cocoa",
-    "growth_multiplier": 3,
+    "growth_multiplier": 5,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

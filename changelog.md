@@ -7,6 +7,7 @@
 ### Changes
 * Zombies and skeletons can now spawn with shields (rarely enchanted)
   * Unfortunately for them, they don't know how to use them (yet)
+* Due to tick speed increase, plants growth has been slowed down
 * Leashed mobs are no longer affected by collide with wall damage
 * Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
 
