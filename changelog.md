@@ -10,6 +10,10 @@
 * Leashed mobs are no longer affected by collide with wall damage
 * Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
 
+### Removed
+* Reduced random tick speed
+  * The randomTickSpeed gamerule is now 3 again
+
 ### Fixes
 * Sleeping possibly requiring more hunger than possible
 
