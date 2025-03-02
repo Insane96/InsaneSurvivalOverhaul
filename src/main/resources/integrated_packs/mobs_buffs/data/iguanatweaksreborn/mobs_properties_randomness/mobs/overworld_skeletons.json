@@ -25,6 +25,71 @@
                 }
             ]
         },
+        "off_hand": {
+            "override": true,
+            "chance": {
+                "value": 0.06,
+                "condition_modifier": {
+                    "operation": "add",
+                    "amount": 0.04,
+                    "condition": {
+                        "world": {
+                            "moon_phases": "full_moon"
+                        }
+                    }
+                }
+            },
+            "items": [
+                {
+                    "id": "shieldsplus:wooden_shield",
+                    "weight": 90
+                },
+                {
+                    "id": "iguanatweaksreborn:flint_shield",
+                    "weight": 50
+                },
+                {
+                    "id": "iguanatweaksexpanded:copper_shield",
+                    "weight": 90
+                },
+                {
+                    "id": "shieldsplus:iron_shield",
+                    "weight": 10
+                },
+                {
+                    "id": "iguanatweaksexpanded:durium_shield",
+                    "weight": 10
+                },
+                {
+                    "id": "shieldsplus:golden_shield",
+                    "weight": 30
+                },
+                {
+                    "id": "shieldsplus:diamond_shield",
+                    "weight": 1
+                }
+            ],
+            "enchantments": [
+                {
+                    "chance": {
+                        "value": 0.15,
+                        "condition_modifier": {
+                            "operation": "add",
+                            "amount": 0.10,
+                            "condition": {
+                                "world": {
+                                    "moon_phases": "full_moon"
+                                }
+                            }
+                        }
+                    },
+                    "with_levels": {
+                        "min": 1,
+                        "max": 10
+                    }
+                }
+            ]
+        },
         "head": {
             "enchantments": [
                 {

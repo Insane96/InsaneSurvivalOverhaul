@@ -5,6 +5,8 @@
 * Increased leash distance from 10 to 16
 
 ### Changes
+* Zombies and skeletons can now spawn with shields (rarely enchanted)
+  * Unfortunately for them, they don't know how to use them (yet)
 * Leashed mobs are no longer affected by collide with wall damage
 * Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
 
