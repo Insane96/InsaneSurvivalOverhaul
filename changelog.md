@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
+
 ### Fixes
 * Sleeping possibly requiring more hunger than possible
 

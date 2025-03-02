@@ -1,0 +1,18 @@
+{
+	"item_to_repair": "hangglider:hang_glider",
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:leather"
+			},
+			"amount": 12
+		},
+		{
+			"repair_material": {
+				"id": "minecraft:rabbit_hide"
+			},
+			"amount": 24,
+			"max_repair": 0.5
+		}
+	]
+}

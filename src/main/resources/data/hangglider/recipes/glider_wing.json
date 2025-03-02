@@ -1,0 +1,36 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "hangglider"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "category": "equipment",
+                "key": {
+                    "#": [
+                        {
+                            "item": "minecraft:leather"
+                        }
+                    ],
+                    "S": {
+                        "item": "minecraft:stick"
+                    }
+                },
+                "pattern": [
+                    "SS#",
+                    "S##",
+                    "###"
+                ],
+                "result": {
+                    "item": "hangglider:glider_wing"
+                },
+                "show_notification": true
+            }
+        }
+    ]
+}
