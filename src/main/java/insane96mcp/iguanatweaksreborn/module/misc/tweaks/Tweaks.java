@@ -130,6 +130,10 @@ public class Tweaks extends Feature {
     @Label(name = "Collide with walls damage", description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable")
     public static Double collideWithWallsDamage = 2.5d;
 
+    @Config(min = 0)
+    @Label(description = "Vanilla is 10")
+    public static Double leashMaxDistance = 16d;
+
     @Config(min = -1, max = 0)
     @Label(name = "Frozen Movement Speed modifier", description = "The speed modifier when frozen. Vanilla is -0.05")
     public static Double frozenMovementSpeedModifier = -0.1d;

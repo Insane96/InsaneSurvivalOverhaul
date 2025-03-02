@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Increased leash distance from 10 to 16
+
 ### Changes
 * Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
 

@@ -62,6 +62,7 @@
         "MobMixin",
         "NaturalSpawnerMixin",
         "OreVeinifierMixin",
+        "PathfinderMobMixin",
         "PistonBaseBlockMixin",
         "PistonMovingBlockEntityMixin",
         "PlayerListMixin",
