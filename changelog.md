@@ -5,6 +5,7 @@
 * Increased leash distance from 10 to 16
 
 ### Changes
+* Leashed mobs are no longer affected by collide with wall damage
 * Changed Fuzs' Hang Glider recipe to require more leather and made it repairable
 
 ### Fixes

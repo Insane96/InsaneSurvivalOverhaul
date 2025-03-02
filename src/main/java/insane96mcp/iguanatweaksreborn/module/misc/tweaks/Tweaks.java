@@ -29,10 +29,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -369,7 +366,8 @@ public class Tweaks extends Feature {
 
     public static Vec3 onCollideWithWall(LivingEntity instance, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {
         if (!Feature.isEnabled(Tweaks.class)
-                || collideWithWallsDamage == 0)
+                || collideWithWallsDamage == 0
+                || (instance instanceof Mob mob && mob.isLeashed()))
             return originalOperation.call(instance, pTravelVector, pFriction);
         Vec3 oldDeltaMovement = instance.getDeltaMovement();
         double horizontalDistance = oldDeltaMovement.horizontalDistance();
