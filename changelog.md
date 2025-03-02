@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.7.1
+### Fixes
+* Environmental Plum trees not falling
+
 ## 4.7.0
 ### Additions
 * Increased leash distance from 10 to 16
