@@ -2,11 +2,13 @@ package insane96mcp.iguanatweaksreborn.data.generator;
 
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.BaneOfSSSS;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.Smite;
+import insane96mcp.iguanatweaksreborn.module.mobs.MiscMobs;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ExplosionOverhaul;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -31,5 +33,8 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addOptional(new ResourceLocation("pet_cemetery:zombie_cat")).addOptional(new ResourceLocation("pet_cemetery:zombie_parrot")).addOptional(new ResourceLocation("pet_cemetery:zombie_wolf")).addOptional(new ResourceLocation("pet_cemetery:skeleton_cat")).addOptional(new ResourceLocation("pet_cemetery:skeleton_parrot")).addOptional(new ResourceLocation("pet_cemetery:skeleton_wolf"));
         tag(ExplosionOverhaul.ENTITY_BLACKLIST)
                 .addOptional(new ResourceLocation("caverns_and_chasms:tmt"));
+        tag(MiscMobs.PASSIVE_REGEN)
+                .add(EntityType.VILLAGER)
+                .addTag(EntityTypeTags.RAIDERS);
     }
 }

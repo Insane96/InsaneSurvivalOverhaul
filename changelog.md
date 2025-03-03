@@ -1,6 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* New feature `Misc Mobs`
+  * Passive Regen: mobs in the `iguanatweaksreborn:passive_regen` entity type tag will regenerate health every ~10 seconds.  
+    By default its villagers and raiders
+
 ### Changes
 * Entities now drown 50% slower
 * Animals no longer slowly change in size when aging (requires Pehkui), instead the 4 stages now have fixed sizes 
@@ -298,7 +303,10 @@
 * Zombies spawning with stone tools
 * Hopefully fixed Enhanced AI config resetting at random
 
-## 4.3.1Increased wall hit min speed to get damaged
+## 4.3.1
+### Changes
+* Increased wall hit min speed to get damaged
+
 ### Fixes
 * Silver ingots in Ore Smelting data pack
 * Crash fix
@@ -340,7 +348,7 @@
 ### Fixes
 * Animals breeding like crazy automatically
   * Animals auto-breed chance was 102% instead of 2%. It's now 5%
-* Respawn Obelisk effects being like beacon ones
+* Respawn Obelisk effects being "ambient" like beacon ones
 * Atmospheric pressure plates recipes
 * Environmental redstone components recipes
 
