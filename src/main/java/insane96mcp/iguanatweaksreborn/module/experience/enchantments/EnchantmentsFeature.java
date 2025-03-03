@@ -25,11 +25,6 @@ import insane96mcp.insanelib.base.*;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.util.MathHelper;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
@@ -40,7 +35,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -50,7 +44,6 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -60,8 +53,9 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 @Label(name = "Enchantments", description = "Changes to some enchantments related stuff.")
@@ -132,10 +126,6 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Config
 	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceOtherEnchantments = true;
-
-	@Config
-	@Label(name = "Enchantments info", description = "If true and shift it pressed, items will show enchantment info below the enchantments. Disables itself if the Enchantment descriptions mod is installed")
-	public static Boolean enchantmentsInfo = true;
 
 	public static final ArrayList<IdTagMatcher> DISABLED_ENCHANTMENTS_DEFAULT = new ArrayList<>(List.of(
 			IdTagMatcher.newId("minecraft:sharpness"),
@@ -387,30 +377,6 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (lvl <= 0)
 			return;
 		event.setDistance(event.getDistance() - lvl);
-	}
-
-	@SubscribeEvent
-	public void onItemTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| ModList.get().isLoaded("enchdesc")
-				|| !enchantmentsInfo
-				|| (!event.getItemStack().isEnchanted() && !event.getItemStack().is(Items.ENCHANTED_BOOK))
-				|| !Screen.hasShiftDown())
-			return;
-		LinkedHashMap<Integer, Component> tooltipsToAdd = new LinkedHashMap<>();
-		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(event.getItemStack());
-		AtomicInteger added = new AtomicInteger();
-		for (Component line : event.getToolTip()) {
-			if (line.getContents() instanceof TranslatableContents translatableContents) {
-				Optional<Enchantment> oEnchantment = enchantments.keySet().stream().filter(e -> translatableContents.getKey().equals(e.getDescriptionId())).findAny();
-				oEnchantment.ifPresent(enchantment -> {
-					tooltipsToAdd.put(event.getToolTip().indexOf(line) + 1 + added.getAndIncrement(), CommonComponents.space().append(Component.translatable(enchantment.getDescriptionId() + ".desc").withStyle(ChatFormatting.LIGHT_PURPLE)));
-				});
-			}
-		}
-		for (Map.Entry<Integer, Component> tooltipToAdd : tooltipsToAdd.entrySet()) {
-			event.getToolTip().add(tooltipToAdd.getKey(), tooltipToAdd.getValue());
-		}
 	}
 
 	public static boolean isInfinityOverhaulEnabled() {

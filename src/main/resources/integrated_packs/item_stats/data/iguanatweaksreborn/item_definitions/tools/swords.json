@@ -10,6 +10,22 @@
 			"attribute": "forge:entity_reach",
 			"amount": -0.25,
 			"operation": "addition"
+		},
+		{
+			"uuid": "c26eadc4-9afc-4102-9e13-c5fa0a7faba3",
+			"name": "Tool modifier",
+			"slot": "mainhand",
+			"attribute": "iguanatweaksreborn:critical_chance",
+			"amount": 0.20,
+			"operation": "addition"
+		},
+		{
+			"uuid": "c26eadc4-9afc-4102-9e13-c5fa0a7faba3",
+			"name": "Tool modifier",
+			"slot": "mainhand",
+			"attribute": "iguanatweaksreborn:critical_damage",
+			"amount": -0.25,
+			"operation": "addition"
 		}
 	]
 }

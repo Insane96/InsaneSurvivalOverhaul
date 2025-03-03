@@ -23,6 +23,10 @@
   * This can now be disabled in the config
 * Elder animals now drop 50% more loot instead of reduced loot
 
+### Removed
+* Enchantment infos
+  * Just use Enchantment descriptions mod
+
 ### Fixes
 * Animals not dying of old age
 * Fall from mount player only
