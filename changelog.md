@@ -10,6 +10,7 @@
 * Reduced animal cap by 25%
 * Falling on climbables now reduces fall damage by 40%
   * This can now be disabled in the config
+* Elder animals no longer drop reduced loot
 
 ### Fixes
 * Fall from mount player only
@@ -553,9 +554,6 @@ This is a breaking version: configs and data packs have got a huge update.
 * Hoes
   * Scythable blocks are now defined in the `iguanatweaksreborn:can_scythe` block tag
   * Moved hoes scythe radius to Item Definition
-* Knockback
-  * No weapon penalty and spam penalty are now two separate config options
-  * Knockback multiplier has been moved Item Definitions
 * Twins chance has been moved to data packs (livestock_data)
 * Health Regen
   * Passive regen has been moved here from No Hunger
@@ -568,6 +566,9 @@ This is a breaking version: configs and data packs have got a huge update.
   * Player stats has its own feature now
     * Mining range reduction moved from Mining Misc
   * Arrow stats has its own feature now
+  * Knockback
+    * No weapon penalty and spam penalty are now two separate config options
+    * Knockback multiplier has been moved Item Definitions
 * Experience.Dropped Experience
   * Renamed from Experience.Experience
   * Milk and shear xp have been moved here from Livestock
