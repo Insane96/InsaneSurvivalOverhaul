@@ -11,6 +11,9 @@
 * Falling on climbables now reduces fall damage by 40%
   * This can now be disabled in the config
 
+### Fixes
+* Fall from mount player only
+
 ## 4.7.1
 ### Fixes
 * Environmental Plum trees not falling

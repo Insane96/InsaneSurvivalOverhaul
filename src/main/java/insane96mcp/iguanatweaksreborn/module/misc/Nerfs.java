@@ -62,10 +62,10 @@ public class Nerfs extends Feature {
 	public static Boolean antiFishingFarms = true;
 
 	@Config(min = 0, max = 1)
-	@Label(name = "Fall from mount chance", description = "When an entity is hit and on a mount they have this chance to fall")
+	@Label(description = "When an entity is hit and on a mount they have this chance to fall")
 	public static Double fallFromMountChance = 0.2d;
 	@Config
-	@Label(name = "Fall from mount player only", description = "If true, only players are affected by 'Fall from mount chance'")
+	@Label(description = "If true, only players are affected by 'Fall from mount chance'")
 	public static Boolean fallFromMountPlayerOnly = true;
 
 	@Config(min = 0)
@@ -120,7 +120,7 @@ public class Nerfs extends Feature {
 				|| fallFromMountChance == 0)
 			return;
 
-		if (fallFromMountPlayerOnly && !(event.getSource().getEntity() instanceof Player))
+		if (fallFromMountPlayerOnly && !(event.getEntity() instanceof Player))
 			return;
 
 		if (event.getEntity().getRandom().nextFloat() < fallFromMountChance) {
