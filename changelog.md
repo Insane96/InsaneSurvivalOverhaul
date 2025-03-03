@@ -2,6 +2,7 @@
 
 ## Upcoming
 ### Changes
+* Entities now drown 50% slower
 * Sped up cactus growth
 * Tiredness fake sounds 
   * Now play between 2 and 5 times, no matter the Amplifier
@@ -505,7 +506,7 @@
 ## 4.0.0
 This is a breaking version: configs and data packs have got a huge update.
 ### Additions
-* Better Climbamble
+* Better Climbable
   * Added 'Not on climbable when on ground'
     * Prevents slowdown when walking near ladders
   * Added 'Only climb with jump'
@@ -644,7 +645,7 @@ This is a breaking version: configs and data packs have got a huge update.
     * And made it configurable
 * Graves are now less explosion resistant
 
-## 3.20.1****
+## 3.20.1
 * Fixed foggy weather overwriting Blindness
 
 ## 3.20.0

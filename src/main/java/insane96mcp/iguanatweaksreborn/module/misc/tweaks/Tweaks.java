@@ -100,14 +100,18 @@ public class Tweaks extends Feature {
     public static Boolean betterHardcoreDeath = true;
 
     @Config(min = 0, max = 100)
-    @Label(name = "Breathe.Air ticks consumed", description = "The amount of ticks the player consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
-    public static Double playerConsumeAirAmount = 1.5d;
+    @Label(name = "Breathe.Air ticks consumed", description = "The amount of ticks the entities consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
+    public static Double breatheAirTicksConsumed = 1.5d;
+
+    @Config(min = 0, max = 100)
+    @Label(name = "Breathe.Drown Speed", description = "Every how many ticks will entities drown")
+    public static Integer breatheDrownSpeed = 30;
     @Config
-    @Label(name = "Breathe.Air ticks refilled", description = "The amount of air ticks the player regains each tick when out of water. Min is the amount as soon as you exit water, Max is a few seconds out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4.")
-    public static MinMax playerRefillAirAmount = new MinMax(1, 2.5);
+    @Label(name = "Breathe.Air ticks refilled", description = "The amount of air ticks the entities regains each tick when out of water. Min is the amount as soon as you exit water, Max is a few seconds out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4.")
+    public static MinMax breatheAirTicksRefilled = new MinMax(1, 2.5);
     @Config
     @Label(name = "Breathe.Increase drown damage the more drowning")
-    public static Boolean increaseDrownDamageTheMoreDrowning = true;
+    public static Boolean breatheIncreaseDrownDamageTheMoreDrowning = true;
     @Config
     @Label(name = "Totem resistance", description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
     public static Boolean totemResistance = true;
@@ -323,16 +327,16 @@ public class Tweaks extends Feature {
             ticksSinceOutOfWater = 0;
             event.getEntity().getPersistentData().putLong(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "tick_since_out_of_water", event.getEntity().level().getGameTime());
         }
-        int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerConsumeAirAmount);
+        int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksConsumed);
         int respiration = EnchantmentHelper.getRespiration(event.getEntity());
         airConsumed = respiration > 0 && event.getEntity().getRandom().nextInt(respiration + 1) > 0 ? 0 : airConsumed;
         if (event.getEntity().getAirSupply() <= 0)
             airConsumed = 1;
         event.setConsumeAirAmount(airConsumed);
 
-        int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerRefillAirAmount.min);
+        int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksRefilled.min);
         if (ticksSinceOutOfWater > 75) {
-            refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), playerRefillAirAmount.max);
+            refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksRefilled.max);
             if (event.canBreathe())
                 setTimesDrowned(event.getEntity(), 0);
         }
@@ -343,10 +347,11 @@ public class Tweaks extends Feature {
     @SubscribeEvent
     public void onDrown(LivingDrownEvent event) {
         if (!this.isEnabled()
-                || !increaseDrownDamageTheMoreDrowning
+                || !breatheIncreaseDrownDamageTheMoreDrowning
                 || !event.getEntity().canDrownInFluidType(event.getEntity().getEyeInFluidType()))
             return;
 
+        event.setDrowning(event.getEntity().getAirSupply() <= -breatheDrownSpeed);
         if (event.isDrowning()) {
             int timesDrowned = getTimesDrowned(event.getEntity());
             setTimesDrowned(event.getEntity(), ++timesDrowned);
