@@ -5,6 +5,7 @@
 * Entities now drown 50% slower
 * Animals no longer slowly change in size when aging (requires Pehkui), instead the 4 stages now have fixed sizes 
 * Sped up cactus growth
+* Respawn obelisks now show the position at which catalyst blocks should be placed 
 * Tiredness fake sounds 
   * Now play between 2 and 5 times, no matter the Amplifier
   * Cooldown is now reduced by 8% per level of Tired (instead of being divided by the level)
@@ -463,7 +464,7 @@
 * Respawn Hunger and Saturation have been expanded
   * Added a Min and Max hunger and saturation when respawning.  
     If on death the player's hunger and saturation were below or above these values they will be set to them
-* Durability repaired when merging items in an is now reduced if the item is enchanted
+* Durability repaired when merging items in an anvil is now reduced if the item is enchanted
 * Bonus durability when merging items in an anvil is now applied to the final durability, not the item's max durability
 * Swing Through Grass no longer prevents the block from breaking
 * Enhanced Foggy weather

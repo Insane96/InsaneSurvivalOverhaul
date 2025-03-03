@@ -9,11 +9,13 @@ import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -81,8 +83,12 @@ public class RespawnObeliskBlock extends Block {
                 return InteractionResult.SUCCESS;
             }
             else {
-                if (!level.isClientSide && hand == InteractionHand.MAIN_HAND)
-                    player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), false);
+                if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
+                    player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), true);
+                    for (Vec3i catalystPos : CATALYST_RELATIVE_POSITIONS) {
+                        ((ServerLevel) level).sendParticles(ParticleTypes.WAX_ON, (double)pos.getX() + 0.5D + (double)catalystPos.getX(), (double)pos.getY() + 0.5d + (double)catalystPos.getY(), (double)pos.getZ() + 0.5D + (double)catalystPos.getZ(), 10, 0.2D, 0.2D, 0.2D, 0D);
+                    }
+                }
                 return InteractionResult.PASS;
             }
         }
