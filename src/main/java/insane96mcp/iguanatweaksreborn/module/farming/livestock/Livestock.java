@@ -216,7 +216,7 @@ public class Livestock extends Feature {
 			forceUpdateScale = true;
 		}
 		Age currentAge = getAge(ageableMob);
-		if (currentAge == agingStopAt)
+		if (currentAge == agingStopAt && !agingDieOfOldAge)
 			return;
 		age++;
 		currentAge = getAge(ageableMob);
@@ -228,7 +228,7 @@ public class Livestock extends Feature {
 			return;
 		}
 		if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
-			PehkuiIntegration.setSize(ageableMob, (float) age / (float) maxAge);
+			PehkuiIntegration.setSize(ageableMob, currentAge);
 		ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age", age);
     }
 

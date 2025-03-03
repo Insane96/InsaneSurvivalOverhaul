@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Entities now drown 50% slower
+* Animals no longer slowly change in size when aging (requires Pehkui), instead the 4 stages now have fixed sizes 
 * Sped up cactus growth
 * Tiredness fake sounds 
   * Now play between 2 and 5 times, no matter the Amplifier
@@ -13,6 +14,7 @@
 * Elder animals no longer drop reduced loot
 
 ### Fixes
+* Animals not dying of old age
 * Fall from mount player only
 
 ## 4.7.1
