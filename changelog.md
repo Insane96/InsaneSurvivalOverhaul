@@ -3,6 +3,9 @@
 ## Upcoming
 ### Changes
 * Sped up cactus growth
+* Tiredness fake sounds 
+  * Now play between 2 and 5 times, no matter the Amplifier
+  * Cooldown is now reduced by 8% per level of Tired (instead of being divided by the level)
 
 ## 4.7.1
 ### Fixes
@@ -640,7 +643,7 @@ This is a breaking version: configs and data packs have got a huge update.
     * And made it configurable
 * Graves are now less explosion resistant
 
-## 3.20.1
+## 3.20.1****
 * Fixed foggy weather overwriting Blindness
 
 ## 3.20.0

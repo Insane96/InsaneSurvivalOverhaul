@@ -107,14 +107,14 @@ public class Tiredness extends JsonFeature {
 	public static OnDeath onDeathBehaviour = OnDeath.SET_AT_EFFECT;
 	@Config
 	@Label(name = "Fake sound.Mobs", description = "List of mobs (and optional dimension where they should play) that will have their ambience sound played when the player is tired")
-	public static List<String> fakeSoundMobsConfig = List.of("minecraft:skeleton,minecraft:overworld", "minecraft:zombie,minecraft:overworld", "minecraft:spider,minecraft:overworld", "minecraft:ghast,minecraft:the_nether", "minecraft:zombified_piglin,minecraft:the_nether");//List.of(IdTagMatcher.newId("minecraft:skeleton", "minecraft:overworld"), IdTagMatcher.newId("minecraft:zombie", "minecraft:overworld"), IdTagMatcher.newId("minecraft:spider", "minecraft:overworld"), IdTagMatcher.newId("minecraft:ghast", "minecraft:the_nether"), IdTagMatcher.newId("minecraft:wither_skeleton", "minecraft:the_nether"));
+	public static List<String> fakeSoundMobsConfig = List.of("minecraft:skeleton,minecraft:overworld", "minecraft:zombie,minecraft:overworld", "minecraft:spider,minecraft:overworld", "minecraft:ghast,minecraft:the_nether", "minecraft:zombified_piglin,minecraft:the_nether");
 	public static List<IdTagMatcher> fakeSoundMobs = new ArrayList<>();
 	@Config(min = 0)
-	@Label(name = "Fake sound.Cooldown", description = "The cooldown (in ticks) between choosing a mob to play the fake sound. This is divided by the Tired effect level")
+	@Label(name = "Fake sound.Cooldown", description = "The cooldown (in ticks) between choosing a mob to play the fake sound. This is reduced with higher Tired effect levels")
 	public static MinMax fakeSoundCooldownBetweenMobs = new MinMax(12000, 24000);
 	@Config(min = 0)
-	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown. 'Maximum' is multiplied by the Tired effect level")
-	public static MinMax fakeSoundTimes = new MinMax(2, 3);
+	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown")
+	public static MinMax fakeSoundTimes = new MinMax(2, 5);
 	@Config
 	@Label(name = "Tired overlay")
 	public static Boolean tiredOverlay = true;
@@ -191,7 +191,7 @@ public class Tiredness extends JsonFeature {
 				return;
 			}
 			mobFakeSound = (Mob) entity;
-			fakeSoundTimesToPlay = (int) (random.triangle(fakeSoundTimes.min, fakeSoundTimes.max * amplifier));
+			fakeSoundTimesToPlay = (int) (random.triangle(fakeSoundTimes.min, fakeSoundTimes.max + 1));
 		}
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
 			SoundEvent soundEvent = ((MobAccessor)mobFakeSound).ambientSound();
@@ -221,7 +221,7 @@ public class Tiredness extends JsonFeature {
 
 	private void resetMobFakeSound(RandomSource random, int reduction) {
 		fakeSoundTimesToPlay = 0;
-		fakeSoundCooldown = fakeSoundCooldownBetweenMobs.getIntRandBetween(random) / reduction;
+		fakeSoundCooldown = (long) (fakeSoundCooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.08f * reduction));
 		mobFakeSound = null;
 	}
 
