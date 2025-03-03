@@ -20,7 +20,7 @@
         {
             "id": "iguanatweaksreborn:season",
             "seasons": [
-                "SUMMER"
+                "SPRING"
             ],
             "modifier": 2,
             "operation": "add"

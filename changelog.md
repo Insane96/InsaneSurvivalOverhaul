@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Sped up cactus growth
+
 ## 4.7.1
 ### Fixes
 * Environmental Plum trees not falling

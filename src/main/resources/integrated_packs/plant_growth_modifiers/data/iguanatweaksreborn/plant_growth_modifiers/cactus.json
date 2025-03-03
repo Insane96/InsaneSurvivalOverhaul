@@ -1,6 +1,5 @@
 {
     "block": "minecraft:cactus",
-    "growth_multiplier": 2,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",
