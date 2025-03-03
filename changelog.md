@@ -11,6 +11,7 @@
 ### Changes
 * Unbreaking now actually increases durability by 50%
 * Entities now drown 50% slower
+* Simplified back the saturation modifier formula
 * Animals no longer slowly change in size when aging (requires Pehkui), instead the 4 stages now have fixed sizes 
 * Sped up cactus growth
 * Respawn obelisks now show the position at which catalyst blocks should be placed 
@@ -20,7 +21,7 @@
 * Reduced animal cap by 25%
 * Falling on climbables now reduces fall damage by 40%
   * This can now be disabled in the config
-* Elder animals no longer drop reduced loot
+* Elder animals now drop 50% more loot instead of reduced loot
 
 ### Fixes
 * Animals not dying of old age

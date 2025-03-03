@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
+import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -33,6 +34,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -87,7 +89,8 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:sweet_berry_meatballs")).nutrition(9).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:glowgurt")).nutrition(8).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:bone_broth")).nutrition(6).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).nutrition(5).build()
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).nutrition(5).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("buzzier_bees:honey_bread")).nutrition(5).build()
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
@@ -96,7 +99,7 @@ public class FoodDrinks extends JsonFeature {
 	public static String foodHungerFormula = "";
 	@Config
 	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
-	public static String foodSaturationModifierFormula = "saturation_modifier * hunger / 7";
+	public static String foodSaturationModifierFormula = "saturation_modifier * 1.2";
 
 	@Config
 	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
@@ -240,6 +243,8 @@ public class FoodDrinks extends JsonFeature {
 				food.nutrition = (int) MCUtils.computeFoodFormula(food, foodHungerFormula);
 			if (!foodSaturationModifierFormula.isEmpty())
 				food.saturationModifier = MCUtils.computeFoodFormula(food, foodSaturationModifierFormula);
+			if (!FMLLoader.isProduction())
+				ISOLogHelper.debug("Food multiplier applied to item " + item.getDescriptionId() + ": hunger: " + food.nutrition + ", saturationMod: " + food.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(food));
 		}
 	}
 
@@ -256,6 +261,8 @@ public class FoodDrinks extends JsonFeature {
 					.stream().filter(item -> item.getFoodProperties() != null && !isItemInTag(item, FOOD_BLACKLIST, isClientSide))
 					.collect(Collectors.toMap(Function.identity(), item -> {
 						FoodProperties properties = item.getFoodProperties();
+						if (!FMLLoader.isProduction())
+							ISOLogHelper.debug("Storing original food properties for item " + item.getDescriptionId() + ": hunger: " + properties.nutrition + ", saturationMod: " + properties.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(properties));
                         return new FoodProperties.Builder().nutrition(properties.nutrition).saturationMod(properties.saturationModifier).build();
 					})));
 		}
