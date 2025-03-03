@@ -5,6 +5,7 @@ import com.teamabnormals.allurement.core.AllurementConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
+import insane96mcp.iguanatweaksreborn.event.StackMaxDamageEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.IAttributeEnchantment;
@@ -214,14 +215,16 @@ public class EnchantmentsFeature extends JsonFeature {
 		return Feature.isEnabled(EnchantmentsFeature.class) && unbreakingOverhaul;
 	}
 
-	public static float unbreakingBonus(int lvl) {
-		if (isUnbreakingOverhaul()) {
-			//Tools last 50% more per level
-			return 1 - 1 / (1 + (lvl * 0.5f));
-		}
-		else {
-			return 1f / (lvl + 1);
-		}
+	@SubscribeEvent
+	public void onStackDurability(StackMaxDamageEvent event) {
+		if (!this.isEnabled()
+				|| !unbreakingOverhaul)
+			return;
+
+		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
+		if (lvl <= 0)
+			return;
+		event.setNewMaxDamage((int) (event.getNewMaxDamage() * (1f + lvl * 0.5f)));
 	}
 
 	public static boolean isBetterEfficiencyFormula() {

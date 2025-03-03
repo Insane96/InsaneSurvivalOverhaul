@@ -7,6 +7,7 @@
     By default its villagers and raiders
 
 ### Changes
+* Unbreaking now actually increases durability by 50%
 * Entities now drown 50% slower
 * Animals no longer slowly change in size when aging (requires Pehkui), instead the 4 stages now have fixed sizes 
 * Sped up cactus growth
@@ -108,7 +109,7 @@
 ### Additions
 * You can now merge incompatible enchantments in the Anvil
   * As long as Insane's Survival Extra is installed
-* Fixed [MC-93826](https://bugs.mojang.com/browse/MC-93826)
+* Fixed [Breeding hearts only show once and not all the time an animal can breed anymore](https://bugs.mojang.com/browse/MC-93826)
 
 ### Changes
 * Minor advancements rework
