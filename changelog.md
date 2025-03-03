@@ -5,6 +5,8 @@
 * New feature `Misc Mobs`
   * Passive Regen: mobs in the `iguanatweaksreborn:passive_regen` entity type tag will regenerate health every ~10 seconds.  
     By default its villagers and raiders
+* Crossbows now accept damaging enchantments
+  * Changed base attack damage from 2 to 4 and added -50% attack damage
 
 ### Changes
 * Unbreaking now actually increases durability by 50%

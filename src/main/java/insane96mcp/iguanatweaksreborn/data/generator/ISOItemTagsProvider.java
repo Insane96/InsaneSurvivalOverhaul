@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Knockback;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Luck;
@@ -97,10 +98,13 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTags(ItemTags.HOES);
         tag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
                 .addTags(ItemTags.AXES, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS)
+                .add(Items.CROSSBOW)
                 .addOptional(new ResourceLocation("savage_and_ravage:cleaver_of_beheading"));
         tag(Luck.ACCEPTS_ENCHANTMENT)
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
-                .add(Items.FISHING_ROD);
+                .add(Items.FISHING_ROD)
+                .add(Items.BOW)
+                .add(Bows.SHORTBOW.get());
         tag(Knockback.ACCEPTS_ENCHANTMENT)
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
         tag(FireAspect.ACCEPTS_ENCHANTMENT)
