@@ -108,11 +108,11 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         return ISOEventFactory.onLivingHurtPreAbsorption((LivingEntity) (Object) this, damageSource, amount);
     }
 
-    @Redirect(method = "handleOnClimbable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;resetFallDistance()V"))
-    public void onResetFallDamageOnClimbable(LivingEntity instance) {
-        if (instance.fallDistance > 0f)
-            instance.causeFallDamage(instance.fallDistance, 1f, instance.damageSources().fall());
-        instance.resetFallDistance();
+    @WrapOperation(method = "handleOnClimbable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;resetFallDistance()V"))
+    public void iguanatweaksreborn$onResetFallDamageOnClimbable(LivingEntity instance, Operation<Void> original) {
+        if (Feature.isEnabled(BetterClimbable.class) && BetterClimbable.fallDamageOnClimbables && instance.fallDistance > 0f)
+            instance.causeFallDamage(instance.fallDistance, 0.6f, instance.damageSources().fall());
+        original.call(instance);
     }
 
     @Inject(method = "onClimbable", at = @At(value = "RETURN", ordinal = 1), cancellable = true)

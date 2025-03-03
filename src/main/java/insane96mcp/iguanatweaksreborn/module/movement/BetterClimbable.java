@@ -37,6 +37,10 @@ public class BetterClimbable extends Feature {
 	@Label(name = "Only climb with jump", description = "If enabled you'll only be able to climb when pressing jump and not when against a wall and moving.")
 	public static Boolean onlyClimbWithJump = true;
 
+	@Config
+	@Label(description = "If enabled, climbables will no longer cancel fall damage. Damage is reduced by 40%.")
+	public static Boolean fallDamageOnClimbables = true;
+
 	public BetterClimbable(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 	}
