@@ -6,6 +6,7 @@
 * Tiredness fake sounds 
   * Now play between 2 and 5 times, no matter the Amplifier
   * Cooldown is now reduced by 8% per level of Tired (instead of being divided by the level)
+* Reduced animal cap by 25%
 
 ## 4.7.1
 ### Fixes

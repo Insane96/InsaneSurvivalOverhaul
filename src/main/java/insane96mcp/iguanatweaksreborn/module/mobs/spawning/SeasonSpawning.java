@@ -47,13 +47,13 @@ public class SeasonSpawning extends Feature {
     public static Integer animalsCapWinter = 0;
     @Config
     @Label(name = "Animals Cap.Spring", description = "Animals Mobs cap on spring.")
-    public static Integer animalsCapSpring = 45;
+    public static Integer animalsCapSpring = 35;
     @Config
     @Label(name = "Animals Cap.Summer", description = "Animals Mobs cap on summer.")
-    public static Integer animalsCapSummer = 70;
+    public static Integer animalsCapSummer = 55;
     @Config
     @Label(name = "Animals Cap.Autumn", description = "Animals Mobs cap on autumn.")
-    public static Integer animalsCapAutumn = 20;
+    public static Integer animalsCapAutumn = 15;
 
     @Config
     @Label(name = "No Sea creature in cold seasons", description = "Sea Creatures can no longer naturally spawn in Winter and will spawn less in autumn.")
