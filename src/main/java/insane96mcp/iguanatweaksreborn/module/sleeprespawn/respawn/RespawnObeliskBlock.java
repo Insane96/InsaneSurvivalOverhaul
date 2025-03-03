@@ -80,17 +80,14 @@ public class RespawnObeliskBlock extends Block {
         if (!state.getValue(ENABLED)) {
             if (hasCatalysts(level, pos)) {
                 enable(player, level, pos, state);
-                return InteractionResult.SUCCESS;
             }
-            else {
-                if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
-                    player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), true);
-                    for (Vec3i catalystPos : CATALYST_RELATIVE_POSITIONS) {
-                        ((ServerLevel) level).sendParticles(ParticleTypes.WAX_ON, (double)pos.getX() + 0.5D + (double)catalystPos.getX(), (double)pos.getY() + 0.5d + (double)catalystPos.getY(), (double)pos.getZ() + 0.5D + (double)catalystPos.getZ(), 10, 0.2D, 0.2D, 0.2D, 0D);
-                    }
+            else if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
+                player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), true);
+                for (Vec3i catalystPos : CATALYST_RELATIVE_POSITIONS) {
+                    ((ServerLevel) level).sendParticles(ParticleTypes.WAX_ON, (double)pos.getX() + 0.5D + (double)catalystPos.getX(), (double)pos.getY() + 0.5d + (double)catalystPos.getY(), (double)pos.getZ() + 0.5D + (double)catalystPos.getZ(), 10, 0.2D, 0.2D, 0.2D, 0D);
                 }
-                return InteractionResult.PASS;
             }
+            return InteractionResult.SUCCESS;
         }
         else if (state.getValue(ENABLED) && !level.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer)player;
