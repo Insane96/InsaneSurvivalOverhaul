@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BlockEvent.BreakEvent.class)
 public abstract class BreakEventMixin {
-	@ModifyExpressionValue(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentLevel(Lnet/minecraft/world/item/enchantment/Enchantment;)I", ordinal = 0), remap = false)
+	@ModifyExpressionValue(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentLevel(Lnet/minecraft/world/item/enchantment/Enchantment;)I", ordinal = 0))
     private int iguanatweaksreborn$onItemEnchantmentLevel(int original) {
 		return EnchantmentsFeature.getLuckLevel(original, original);
 	}

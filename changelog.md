@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.8.1
+* Startup crash fix
+
 ## 4.8.0
 ### Additions
 * Italian translation! 🤌
