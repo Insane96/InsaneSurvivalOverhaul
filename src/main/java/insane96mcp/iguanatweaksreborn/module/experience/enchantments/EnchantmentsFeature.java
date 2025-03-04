@@ -92,10 +92,6 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Label(name = "Nerf Respiration", description = "Respiration decreases air consumption by 50% per level instead of 100%.")
 	public static Boolean nerfRespiration = true;
 
-	@Config
-	@Label(name = "Nerf Fortune", description = "The ore_drops formula is changed to 20%/50%/85%/125% drop increase from 33%/75%/120%/166%")
-	public static Boolean nerfForune = true;
-
 	@Config(min = 0d, max = 2d)
 	@Label(name = "Power Enchantment Damage", description = "Set arrow's damage increase with the Power enchantment (vanilla is 0.5). If set to a value != 0.5 the flat 0.5 bonus is also removed. Set to 0.5 to disable.")
 	public static Double powerEnchantmentDamage = 0.2d;
@@ -121,8 +117,8 @@ public class EnchantmentsFeature extends JsonFeature {
             Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
 	public static Boolean replaceDamagingEnchantments = true;
 	@Config
-	@Label(name = "Replace bonus loot enchantments", description = "If true, vanilla looting, fortune and Luck of the Sea enchantments are replaced with a single one: Luck. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
-	public static Boolean replaceBonusLootEnchantments = true;
+	@Label(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
+	public static Boolean reworkBonusLootEnchantments = true;
 	@Config
 	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceOtherEnchantments = true;
@@ -169,13 +165,13 @@ public class EnchantmentsFeature extends JsonFeature {
 		else
 			Enchantments.INFINITY_ARROWS.rarity = Enchantment.Rarity.VERY_RARE;
 
-		if (thornsOverhaul)
+		if (this.isEnabled() && thornsOverhaul)
 			Enchantments.THORNS.rarity = Enchantment.Rarity.RARE;
 		else
 			Enchantments.THORNS.rarity = Enchantment.Rarity.VERY_RARE;
 
 		//Can this make something blow up?
-		if (replaceBonusLootEnchantments)
+		if (this.isEnabled() && reworkBonusLootEnchantments)
 			Enchantments.BLOCK_FORTUNE = LUCK.get();
 	}
 
@@ -392,8 +388,19 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public static boolean shouldReplaceWithLuck(Enchantment enchantment) {
 		return (enchantment == Enchantments.BLOCK_FORTUNE || enchantment == Enchantments.MOB_LOOTING || enchantment == Enchantments.FISHING_LUCK)
-				&& Feature.isEnabled(EnchantmentsFeature.class)
-				&& EnchantmentsFeature.replaceBonusLootEnchantments;
+				&& isBonusLootEnchantmentReworkEnabled();
+	}
+
+	public static int getLuckLevel(int original, int luckLvl) {
+		if (!isBonusLootEnchantmentReworkEnabled()
+				|| luckLvl == 0)
+			return original;
+		return 2;
+	}
+
+	public static boolean isBonusLootEnchantmentReworkEnabled() {
+		return Feature.isEnabled(EnchantmentsFeature.class)
+				&& reworkBonusLootEnchantments;
 	}
 
 	public static int getEnchantmentValue(ItemStack stack) {

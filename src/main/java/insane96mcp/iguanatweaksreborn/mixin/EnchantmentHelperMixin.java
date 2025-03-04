@@ -23,15 +23,11 @@ public class EnchantmentHelperMixin {
 
     @Inject(method = "getMobLooting", at = @At(value = "RETURN"), cancellable = true)
     private static void onGetMobLooting(LivingEntity pEntity, CallbackInfoReturnable<Integer> cir) {
-        int luckLvl = EnchantmentHelper.getEnchantmentLevel(EnchantmentsFeature.LUCK.get(), pEntity);
-        if (luckLvl > cir.getReturnValue())
-            cir.setReturnValue(luckLvl);
+        cir.setReturnValue(EnchantmentsFeature.getLuckLevel(cir.getReturnValue(), EnchantmentHelper.getEnchantmentLevel(EnchantmentsFeature.LUCK.get(), pEntity)));
     }
 
     @Inject(method = "getFishingLuckBonus", at = @At(value = "RETURN"), cancellable = true)
     private static void onGetFishingLuckBonus(ItemStack pStack, CallbackInfoReturnable<Integer> cir) {
-        int luckLvl = pStack.getEnchantmentLevel(EnchantmentsFeature.LUCK.get());
-        if (luckLvl > cir.getReturnValue())
-            cir.setReturnValue(luckLvl);
+        cir.setReturnValue(EnchantmentsFeature.getLuckLevel(cir.getReturnValue(), pStack.getEnchantmentLevel(EnchantmentsFeature.LUCK.get())));
     }
 }

@@ -10,6 +10,9 @@
   * Changed base attack damage from 2 to 4 and added -50% attack damage
 
 ### Changes
+* Luck rework
+  * Now only 1 level, equal to vanilla Fortune/Looting/LoTS II
+  * Removed fortune rework
 * Unbreaking now actually increases durability by 50%
 * Entities now drown 50% slower
 * Simplified back the saturation modifier formula

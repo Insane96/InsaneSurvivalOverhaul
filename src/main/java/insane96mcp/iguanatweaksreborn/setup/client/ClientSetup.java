@@ -116,7 +116,7 @@ public class ClientSetup {
                     removeBookWithEnchantment(event, Enchantments.SMITE);
                     removeBookWithEnchantment(event, Enchantments.BANE_OF_ARTHROPODS);
                 }
-                if (EnchantmentsFeature.replaceBonusLootEnchantments) {
+                if (EnchantmentsFeature.isBonusLootEnchantmentReworkEnabled()) {
                     removeBookWithEnchantment(event, Enchantments.FISHING_LUCK);
                     removeBookWithEnchantment(event, Enchantments.BLOCK_FORTUNE);
                     removeBookWithEnchantment(event, Enchantments.MOB_LOOTING);
