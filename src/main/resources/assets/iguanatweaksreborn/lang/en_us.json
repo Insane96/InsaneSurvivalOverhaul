@@ -259,6 +259,8 @@
 	"advancements.iso.anvil_fix.description": "Repair an anvil with Iron Blocks.",
 	"advancements.iso.golden_pickaxe.title": "Lucky Gold",
 	"advancements.iso.golden_pickaxe.description": "Obtain a Gold Pickaxe. You'll feel luck run through your veins.",
+	"advancements.iso.spawner.title": "Bring back the spawner",
+	"advancements.iso.spawner.description": "Wait for an empowered mob spawner to finish spawning mobs, it will drop enchanted book and echo shard, which can be used to re-enable the spawner",
 	"advancements.iso.respawn_obelisk.title": "The ancients respawned here",
 	"advancements.iso.respawn_obelisk.description": "Find a Respawn Obelisk.",
 	"advancements.iso.activate_respawn_obelisk.title": "A precise respawn",
