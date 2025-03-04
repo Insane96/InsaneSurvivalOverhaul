@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.8.0
 ### Additions
 * Italian translation! 🤌
 * New feature `Misc Mobs`
