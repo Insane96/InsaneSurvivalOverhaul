@@ -2,6 +2,7 @@
 
 ## Upcoming
 ### Additions
+* Italian translation! 🤌
 * New feature `Misc Mobs`
   * Passive Regen: mobs in the `iguanatweaksreborn:passive_regen` entity type tag will regenerate health every ~10 seconds.  
     By default its villagers and raiders
