@@ -13,6 +13,7 @@
 * Luck rework
   * Now only 1 level, equal to vanilla Fortune/Looting/LoTS II
   * Removed fortune rework
+  * Gold items now have fortune/looting I (was Fortune I, Looting II)
 * Unbreaking now actually increases durability by 50%
 * Entities now drown 50% slower
 * Simplified back the saturation modifier formula
