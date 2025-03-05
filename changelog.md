@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Added `Mob Misc`.`Guardian magic damage only`
+  * Guardians now only deal magic damage equal to their attack damage attribute
+
 ### Changes
 * Mob fake sounds now set the current player block pos so it always plays in the same area even if the player leaves
 

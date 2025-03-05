@@ -47,6 +47,7 @@
         "FluidTypeMixin",
         "FoodDataMixin",
         "ForgeHooksMixin",
+        "GuardianAttackGoalMixin",
         "HoneyBottleItemMixin",
         "ItemEntityMixin",
         "ItemMixin",

@@ -23,6 +23,10 @@ public class MiscMobs extends Feature {
     @Label(description = "1 in X chance each tick for mobs in the `iguanatweaksreborn:passive_regen` entity type tag to regain 1 health. Set to 0 to disable")
     public static Integer passiveRegenChance = 200;
 
+    @Config
+    @Label(description = "Instead of dealing magic and melee damage, guardians now only deal magic damage equal to their attack_damage attribute")
+    public static Boolean guardianMagicDamageOnly = true;
+
     public MiscMobs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
     }
