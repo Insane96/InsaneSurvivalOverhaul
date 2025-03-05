@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.8.2
 ### Additions
 * Added `Mob Misc`.`Guardian magic damage only`
   * Guardians now only deal magic damage equal to their attack damage attribute
