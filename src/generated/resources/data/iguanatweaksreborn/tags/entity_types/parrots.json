@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:cat",
+    {
+      "id": "pet_cemetery:zombie_parrot",
+      "required": false
+    },
+    {
+      "id": "pet_cemetery:skeleton_parrot",
+      "required": false
+    }
+  ]
+}

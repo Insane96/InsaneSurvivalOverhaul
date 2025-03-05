@@ -25,13 +25,5 @@
             "amount": -0.5,
             "operation": "multiply_base"
         }
-    ],
-    "events": {
-        "on_tick": [
-            {
-                "chance": 0.1,
-                "function": "iguanatweaksreborn:heal_living"
-            }
-        ]
-    }
+    ]
 }

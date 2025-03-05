@@ -140,7 +140,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:easy-magic-456239:4658750")
     implementation fg.deobf("curse.maven:blueprint-382216:5292242")
     implementation fg.deobf("curse.maven:caverns-and-chasms-438005:6040957")
-    implementation fg.deobf("curse.maven:buzzier-bees-355458:6151411")
+    //implementation fg.deobf("curse.maven:buzzier-bees-355458:6151411")
     compileOnly fg.deobf("curse.maven:autumnity-365045:5229021")
     compileOnly fg.deobf("curse.maven:environmental-388992:6060255")
     compileOnly fg.deobf("curse.maven:berry-good-355589:5228437")

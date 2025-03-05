@@ -5,6 +5,7 @@
     "#minecraft:shovels",
     "#minecraft:hoes",
     "#minecraft:swords",
+    "minecraft:crossbow",
     {
       "id": "savage_and_ravage:cleaver_of_beheading",
       "required": false
