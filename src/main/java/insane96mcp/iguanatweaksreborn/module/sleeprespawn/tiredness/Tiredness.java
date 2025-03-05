@@ -19,6 +19,7 @@ import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -157,6 +158,8 @@ public class Tiredness extends JsonFeature {
 	private static long fakeSoundTimesToPlay = 0;
 	private static long ambientSoundTime = 0;
 	private static Mob mobFakeSound;
+	private static BlockPos fakeMobPos;
+
 	@SubscribeEvent
 	public void onClientPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (!this.isEnabled()
@@ -192,13 +195,14 @@ public class Tiredness extends JsonFeature {
 			}
 			mobFakeSound = (Mob) entity;
 			fakeSoundTimesToPlay = (int) (random.triangle(fakeSoundTimes.min, fakeSoundTimes.max + 1));
+			fakeMobPos = event.player.blockPosition();
 		}
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
 			SoundEvent soundEvent = ((MobAccessor)mobFakeSound).ambientSound();
 			event.player.level().playSound(event.player,
-					event.player.getX() + getRandomRange(random),
-					event.player.getY() + getRandomRange(random),
-					event.player.getZ() + getRandomRange(random),
+					fakeMobPos.getX() + getRandomRange(random),
+					fakeMobPos.getY() + getRandomRange(random),
+					fakeMobPos.getZ() + getRandomRange(random),
 					soundEvent,
 					mobFakeSound.getSoundSource(),
 					((LivingEntityAccessor)mobFakeSound).soundVolume(),

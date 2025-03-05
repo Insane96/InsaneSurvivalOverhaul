@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Mob fake sounds now set the current player block pos so it always plays in the same area even if the player leaves
+
 ## 4.8.1
 * Startup crash fix
 
