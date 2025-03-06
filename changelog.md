@@ -1,5 +1,13 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reworked Weighted Equipment (now Weighted Armor)
+  * You can now set a formula for the slowdown instead of fixed values
+
+### Fixes
+* Being able to "milk" any animal
+
 ## 4.8.2
 ### Additions
 * Added `Mob Misc`.`Guardian magic damage only`
