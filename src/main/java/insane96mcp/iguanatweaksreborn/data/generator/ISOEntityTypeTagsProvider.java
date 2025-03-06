@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.data.generator;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.BaneOfSSSS;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.Smite;
+import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.module.mobs.MiscMobs;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ExplosionOverhaul;
 import net.minecraft.core.HolderLookup;
@@ -60,6 +61,11 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(WOLVES)
                 .addTag(CATS)
                 .addTag(PARROTS);
+        tag(Livestock.MILKABLE)
+                .add(EntityType.COW)
+                .add(EntityType.MOOSHROOM)
+                .addOptional(ResourceLocation.fromNamespaceAndPath("buzzier_bees", "moobloom"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("buzzier_bees", "moobloom"));
         tag(ExplosionOverhaul.ENTITY_BLACKLIST)
                 .addOptional(new ResourceLocation("caverns_and_chasms:tmt"));
         tag(MiscMobs.PASSIVE_REGEN)

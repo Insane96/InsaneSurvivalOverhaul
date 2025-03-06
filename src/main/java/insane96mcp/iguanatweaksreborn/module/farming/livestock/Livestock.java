@@ -26,13 +26,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -60,6 +58,7 @@ import java.util.UUID;
 @Label(name = "Livestock", description = "Slower breeding, Growing, Egging and Milking. Lower yield.")
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Livestock extends Feature {
+	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "milkable"));
 
 	public static final String MILK_COOLDOWN_LANG = InsaneSurvivalOverhaul.MOD_ID + ".milk_cooldown";
 	public static final String MILK_COOLDOWN = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "milk_cooldown";
@@ -347,6 +346,7 @@ public class Livestock extends Feature {
 	@SubscribeEvent
 	public void onAnimalMilk(PlayerInteractEvent.EntityInteract event) {
 		if (!this.isEnabled()
+				|| !event.getEntity().getType().is(MILKABLE)
 				|| !(event.getTarget() instanceof Animal animal)
 				|| animal.getAge() < 0)
 			return;

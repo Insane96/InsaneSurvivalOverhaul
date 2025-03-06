@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:cow",
+    "minecraft:mooshroom",
+    {
+      "id": "buzzier_bees:moobloom",
+      "required": false
+    },
+    {
+      "id": "buzzier_bees:moobloom",
+      "required": false
+    }
+  ]
+}
