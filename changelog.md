@@ -1,7 +1,20 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Breeding no more!
+  * Feeding animals no longer breeds them instantly, instead, sets them into a well fed state for 1h
+    During this time, animals gain some bonuses: 
+    * Heavily increases auto-breed chance
+    * Chickens lay eggs faster (removed the chicken lay egg faster feature, basically moved it to this fed mechanic)
+    * Cows fluid cooldown is reduced
+    * Sheep chance to regrow wool is increased
+
 ### Changes
+* Reworked animal aging
+  * There are now three stages instead of four: Young, Adult and elder.
+    * Young age lasts for 30% of lifespan, adult for 40% and elder for 30%
+    * Young and elder animals have normal drops, Adult have increased drops
 * Reworked Weighted Equipment (now Weighted Armor)
   * You can now set a formula for the slowdown instead of fixed values
 

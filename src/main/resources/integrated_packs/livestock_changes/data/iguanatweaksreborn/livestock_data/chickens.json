@@ -7,17 +7,22 @@
             "operation": "add"
         },
         {
+            "id": "iguanatweaksreborn:has_been_fed_recently",
+            "modifier": -1.5,
+            "operation": "add"
+        },
+        {
             "id": "iguanatweaksreborn:age",
             "modifier": 0.5,
             "operation": "add",
-            "age": "old"
+            "age": "elder"
         },
         {
             "id": "iguanatweaksreborn:season",
             "seasons": [
                 "WINTER"
             ],
-            "modifier": 0.5,
+            "modifier": 2.5,
             "operation": "add"
         },
         {
@@ -25,7 +30,7 @@
             "seasons": [
                 "SPRING"
             ],
-            "modifier": -0.4,
+            "modifier": -0.2,
             "operation": "add"
         },
         {
@@ -33,7 +38,7 @@
             "seasons": [
                 "SUMMER"
             ],
-            "modifier": -0.8,
+            "modifier": -0.4,
             "operation": "add"
         }
     ]

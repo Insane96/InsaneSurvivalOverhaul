@@ -3,7 +3,7 @@
     "growth_speed_modifiers": [
         {
             "id": "iguanatweaksreborn:true",
-            "modifier": 2,
+            "modifier": 3,
             "operation": "add"
         }
     ],
@@ -25,7 +25,7 @@
             "seasons": [
                 "WINTER"
             ],
-            "modifier": 0.5,
+            "modifier": 2,
             "operation": "add"
         },
         {
@@ -33,7 +33,7 @@
             "seasons": [
                 "SPRING"
             ],
-            "modifier": -0.3,
+            "modifier": -0.15,
             "operation": "add"
         },
         {
@@ -41,7 +41,7 @@
             "seasons": [
                 "SUMMER"
             ],
-            "modifier": -0.6,
+            "modifier": -0.3,
             "operation": "add"
         }
     ],
@@ -54,7 +54,7 @@
         {
             "id": "iguanatweaksreborn:age",
             "modifier": 0.2,
-            "age": "old",
+            "age": "elder",
             "operation": "add"
         },
         {
@@ -85,13 +85,18 @@
     "auto_breed_chance_modifiers": [
         {
             "id": "iguanatweaksreborn:true",
-            "modifier": 0.03,
+            "modifier": 0.01,
             "operation": "add"
         },
         {
             "id": "iguanatweaksreborn:age",
             "modifier": -0.02,
-            "age": "old",
+            "age": "elder",
+            "operation": "add"
+        },
+        {
+            "id": "iguanatweaksreborn:has_been_fed_recently",
+            "modifier": 0.04,
             "operation": "add"
         }
     ]

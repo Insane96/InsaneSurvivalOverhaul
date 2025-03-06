@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
-import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.network.message.ForgeDataIntSync;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
@@ -15,7 +14,6 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -59,11 +57,12 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Livestock extends Feature {
 	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "milkable"));
+	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "prevent_breeding"));
 
 	public static final String MILK_COOLDOWN_LANG = InsaneSurvivalOverhaul.MOD_ID + ".milk_cooldown";
 	public static final String MILK_COOLDOWN = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "milk_cooldown";
 
-	public static final String FED_TIME = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "fed_time";
+	public static final String LAST_FED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "last_fed";
 
 	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "old_age"));
 
@@ -72,15 +71,15 @@ public class Livestock extends Feature {
 	public static Integer chickenFromEggChance = 8;
 
 	@Config
-	@Label(name = "Faster egg time", description = "If not 0, chickens will no longer breed, instead when fed will make eggs twice as fast for the seconds set here.")
-	public static Integer fasterEggTime = 900;
-
-	@Config
 	@Label(name = "Milk Cooldown", description = "Seconds until you can milk cows (or stew mooshrooms)")
 	public static Integer milkingCooldown = 1200;
 
 	@Config
-	@Label(name = "Aging.Enable", description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult and mid age animals will drop 50% more stuff.")
+	@Label(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
+	public static Boolean preventBreeding = false;
+
+	@Config
+	@Label(name = "Aging.Enable", description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
 	public static Boolean agingEnable = true;
 
 	@Config
@@ -89,7 +88,15 @@ public class Livestock extends Feature {
 
 	@Config
 	@Label(name = "Aging.Stop at", description = "If Die of old age is disabled you can still make animals grow up to this age")
-	public static Age agingStopAt = Age.MID_AGE;
+	public static Age agingStopAt = Age.ELDER;
+
+	@Config(min = 0)
+	@Label(name = "Aging.Starvation death", description = "If true, animals will die if not young and haven't been fed in a while.")
+	public static Boolean agingStarvationDeath = false;
+
+	@Config(min = 0)
+	@Label(name = "Aging.Last fed duration", description = "How long (in minutes) will an animal remain marked as fed after eating?")
+	public static Integer agingLastFedDuration = 60;
 
 	@Config
 	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
@@ -121,7 +128,6 @@ public class Livestock extends Feature {
 			slowdownBreeding(event);
 			aging(event);
 			eggLay(event);
-			tickFedTime(event);
 			tryAutoBreed(event);
 		}
 		cowMilkTick(event);
@@ -132,7 +138,7 @@ public class Livestock extends Feature {
 				|| !animal.canFallInLove()
 				|| animal.getAge() != 0)
 			return;
-		//TODO Last chance: Prevent breeding if there are too many animals
+
 		int tickCount = event.getEntity().tickCount + event.getEntity().getId();
 		if (tickCount % 600 != 0)
 			return;
@@ -145,39 +151,6 @@ public class Livestock extends Feature {
 			return;
         animal.setInLove(null);
     }
-
-	@SubscribeEvent
-	public void fasterEggTime(PlayerInteractEvent.EntityInteract event) {
-		if (!this.isEnabled()
-				|| fasterEggTime <= 0)
-			return;
-
-		onTryToFeedChicken(event);
-		onTryToFeedDucks(event);
-	}
-
-	public void onTryToFeedChicken(PlayerInteractEvent.EntityInteract event) {
-		if (!this.isEnabled()
-				|| !(event.getTarget() instanceof Chicken chicken)
-				|| !event.getItemStack().is(Crops.CHICKEN_FOOD_ITEMS))
-			return;
-
-		event.setCanceled(true);
-		if (chicken.getPersistentData().getInt(FED_TIME) <= 0) {
-			chicken.getPersistentData().putInt(FED_TIME, fasterEggTime * 20);
-			event.getEntity().swing(event.getHand());
-			chicken.level().addParticle(ParticleTypes.HAPPY_VILLAGER, chicken.getX(), chicken.getY() + chicken.getBbHeight() + 0.5D, chicken.getZ(), 0.0D, 0.0D, 0.0D);
-			if (!event.getEntity().getAbilities().instabuild)
-				event.getEntity().getItemInHand(event.getHand()).shrink(1);
-		}
-	}
-
-	public void onTryToFeedDucks(PlayerInteractEvent.EntityInteract event) {
-		if (!ModList.get().isLoaded("environmental"))
-			return;
-
-		EnvironmentalIntegration.onTryToFeedDucks(event);
-	}
 
 	public static boolean canSheepRegrowWool(Mob mob) {
 		List<Modifier> modifiersToApply = new ArrayList<>();
@@ -214,20 +187,23 @@ public class Livestock extends Feature {
 				return;
 			forceUpdateScale = true;
 		}
-		Age currentAge = getAge(ageableMob);
-		if (currentAge == agingStopAt && !agingDieOfOldAge)
+		Age prevAge = getAge(ageableMob);
+		if (prevAge == agingStopAt && !agingDieOfOldAge)
 			return;
 		age++;
-		currentAge = getAge(ageableMob);
-		if (currentAge == Age.OLD)
-			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.3d, AttributeModifier.Operation.MULTIPLY_BASE, false);
+		Age newAge = getAge(ageableMob);
+		if (agingStarvationDeath && newAge != Age.YOUNG && !hasBeenFedRecently(ageableMob))
+			ageableMob.hurt(ageableMob.damageSources().starve(), Float.MAX_VALUE);
+		if (newAge == Age.ELDER)
+			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.35d, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		if (age >= maxAge) {
 			if (agingDieOfOldAge)
 				ageableMob.hurt(ageableMob.damageSources().source(OLD_AGE, null), Float.MAX_VALUE);
 			return;
 		}
-		if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
-			PehkuiIntegration.setSize(ageableMob, currentAge);
+        //noinspection DataFlowIssue - isClientSide is checked in caller method
+        if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
+			PehkuiIntegration.setSize(ageableMob, newAge);
 		ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age", age);
     }
 
@@ -237,16 +213,14 @@ public class Livestock extends Feature {
 
 	public static Age getAge(AgeableMob mob) {
 		float ratio = getAgeRatio(mob);
-		if (ratio < 0.25f)
+		if (ratio < 0.30f)
 			return Age.YOUNG;
-		if (ratio < 0.5f)
+		if (ratio < 0.70f)
 			return Age.ADULT;
-		if (ratio < 0.75f)
-			return Age.MID_AGE;
-		return Age.OLD;
+		return Age.ELDER;
 	}
 
-	public void slowdownAnimalGrowth(LivingEvent.LivingTickEvent event) {
+	public static void slowdownAnimalGrowth(LivingEvent.LivingTickEvent event) {
 		if (!(event.getEntity() instanceof AgeableMob mob))
 			return;
 
@@ -267,7 +241,7 @@ public class Livestock extends Feature {
 			mob.setAge(growingAge - 1);
 	}
 
-	public void slowdownBreeding(LivingEvent.LivingTickEvent event) {
+	public static void slowdownBreeding(LivingEvent.LivingTickEvent event) {
 		if (!(event.getEntity() instanceof AgeableMob mob))
 			return;
 
@@ -288,13 +262,12 @@ public class Livestock extends Feature {
 			mob.setAge(growingAge + 1);
 	}
 
-	public void eggLay(LivingEvent.LivingTickEvent event) {
+	public static void eggLay(LivingEvent.LivingTickEvent event) {
 		if (!(event.getEntity() instanceof Chicken chicken)
 				|| chicken.isBaby())
 			return;
 
-		int timeUntilNextEgg = chicken.eggTime;
-		if (timeUntilNextEgg < 0)
+		if (chicken.eggTime < 0)
 			return;
 
 		List<Modifier> modifiersToApply = new ArrayList<>();
@@ -305,30 +278,9 @@ public class Livestock extends Feature {
 		if (chanceToSlowDown <= 1d)
 			return;
 
-		int fedTime = chicken.getPersistentData().getInt(FED_TIME);
-
 		double chance = 1d / chanceToSlowDown;
-		if (chicken.getRandom().nextFloat() > chance) {
-			timeUntilNextEgg += 1;
-			if (fedTime > 0)
-				timeUntilNextEgg += 1;
-		}
-		if (fedTime > 0)
-			timeUntilNextEgg -= 1;
-
-		chicken.eggTime = timeUntilNextEgg;
-	}
-
-	public void tickFedTime(LivingEvent.LivingTickEvent event) {
-		if (!(event.getEntity() instanceof Chicken chicken)
-				|| chicken.isBaby()
-				|| chicken.tickCount % 20 != 0)
-			return;
-		int fedTime = chicken.getPersistentData().getInt(FED_TIME);
-		if (fedTime <= 0)
-			return;
-
-		chicken.getPersistentData().putInt(FED_TIME, fedTime - 20);
+		if (chicken.getRandom().nextFloat() > chance)
+			chicken.eggTime++;
 	}
 
 	public void cowMilkTick(LivingEvent.LivingTickEvent event) {
@@ -341,6 +293,30 @@ public class Livestock extends Feature {
 		if (milkCooldown > 0)
 			milkCooldown -= 20;
 		cowNBT.putInt(MILK_COOLDOWN, milkCooldown);
+	}
+
+	@SubscribeEvent
+	public void onAnimalFeed(PlayerInteractEvent.EntityInteract event) {
+		if (event.isCanceled()
+				|| !this.isEnabled()
+				|| !(event.getTarget() instanceof Animal animal))
+			return;
+
+		if (animal.isFood(event.getItemStack())) {
+			int age = animal.getAge();
+			if (!animal.level().isClientSide && age == 0 && animal.canFallInLove()) {
+				setLastEat(animal);
+			}
+		}
+	}
+
+	public static void setLastEat(LivingEntity living) {
+		living.getPersistentData().putLong(LAST_FED, living.level().getGameTime());
+	}
+
+	public static boolean hasBeenFedRecently(LivingEntity living) {
+		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * 60 * 20);
 	}
 
 	@SubscribeEvent
@@ -444,9 +420,7 @@ public class Livestock extends Feature {
 		YOUNG,
 		@SerializedName("adult")
 		ADULT,
-		@SerializedName("mid_age")
-		MID_AGE,
-		@SerializedName("old")
-		OLD
+		@SerializedName("elder")
+		ELDER
 	}
 }

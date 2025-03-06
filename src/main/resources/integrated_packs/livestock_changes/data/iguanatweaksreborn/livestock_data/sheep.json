@@ -7,11 +7,16 @@
             "operation": "add"
         },
         {
+            "id": "iguanatweaksreborn:has_been_fed_recently",
+            "modifier": 0.2,
+            "operation": "add"
+        },
+        {
             "id": "iguanatweaksreborn:season",
             "seasons": [
                 "AUTUMN"
             ],
-            "modifier": 0.1,
+            "modifier": -0.1,
             "operation": "add"
         },
         {
@@ -19,7 +24,7 @@
             "seasons": [
                 "WINTER"
             ],
-            "modifier": 0.2,
+            "modifier": -0.2,
             "operation": "add"
         }
     ]

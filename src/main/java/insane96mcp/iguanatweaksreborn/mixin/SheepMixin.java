@@ -42,8 +42,6 @@ public abstract class SheepMixin extends Animal {
 
 		Livestock.Age age = Livestock.getAge(this);
 		if (age == Livestock.Age.ADULT)
-			return MathHelper.getAmountWithDecimalChance(this.random, amount * 1.5f);
-		if (age == Livestock.Age.MID_AGE)
 			return MathHelper.getAmountWithDecimalChance(this.random, amount * 2f);
 		return amount;
 	}

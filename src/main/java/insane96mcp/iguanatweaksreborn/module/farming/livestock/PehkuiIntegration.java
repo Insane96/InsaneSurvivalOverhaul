@@ -7,10 +7,9 @@ public class PehkuiIntegration {
 
     public static void setSize(LivingEntity entity, Livestock.Age age) {
         float scale = switch (age) {
-            case YOUNG -> 0.75f;
-            case ADULT -> 0.9f;
-            case MID_AGE -> 1.2f;
-            case OLD -> 1.05f;
+            case YOUNG -> 0.85f;
+            case ADULT -> 1.2f;
+            case ELDER -> 1.0f;
         };
         ScaleTypes.MODEL_WIDTH.getScaleData(entity).setScale(scale);
         ScaleTypes.MODEL_HEIGHT.getScaleData(entity).setScale(scale);

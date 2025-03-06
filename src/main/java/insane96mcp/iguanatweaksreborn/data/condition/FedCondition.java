@@ -8,8 +8,8 @@ import com.google.gson.JsonSerializationContext;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -18,18 +18,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public class LivestockAgeCondition implements LootItemCondition {
+public class FedCondition implements LootItemCondition {
 
     final LootContext.EntityTarget entityTarget;
-    final Livestock.Age age;
 
-    LivestockAgeCondition(LootContext.EntityTarget entityTarget, Livestock.Age age) {
+    FedCondition(LootContext.EntityTarget entityTarget) {
         this.entityTarget = entityTarget;
-        this.age = age;
     }
 
     public @NotNull LootItemConditionType getType() {
-        return ISORegistries.LIVESTOCK_AGE_CONDITION.get();
+        return ISORegistries.HAS_BEEN_FED_RECENTLY.get();
     }
 
     public @NotNull Set<LootContextParam<?>> getReferencedContextParams() {
@@ -38,21 +36,18 @@ public class LivestockAgeCondition implements LootItemCondition {
 
     public boolean test(LootContext context) {
         Entity entity = context.getParamOrNull(this.entityTarget.getParam());
-        if (!(entity instanceof AgeableMob mob))
-            return false;
-        return Livestock.getAge(mob) == this.age;
+        return entity instanceof LivingEntity living && Livestock.hasBeenFedRecently(living);
     }
 
-    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<LivestockAgeCondition> {
+    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<FedCondition> {
         @Override
-        public @NotNull LivestockAgeCondition deserialize(@NotNull JsonObject jsonObject, @NotNull JsonDeserializationContext context) {
-            return new LivestockAgeCondition(GsonHelper.getAsObject(jsonObject, "entity", context, LootContext.EntityTarget.class), context.deserialize(jsonObject.get("age"), Livestock.Age.class));
+        public @NotNull FedCondition deserialize(@NotNull JsonObject jsonObject, @NotNull JsonDeserializationContext context) {
+            return new FedCondition(GsonHelper.getAsObject(jsonObject, "entity", context, LootContext.EntityTarget.class));
         }
 
         @Override
-        public void serialize(JsonObject jsonObject, LivestockAgeCondition livestockAgeCondition, JsonSerializationContext context) {
+        public void serialize(JsonObject jsonObject, FedCondition livestockAgeCondition, JsonSerializationContext context) {
             jsonObject.add("entity", context.serialize(livestockAgeCondition.entityTarget));
-            jsonObject.add("age", context.serialize(livestockAgeCondition.age));
         }
     }
 }

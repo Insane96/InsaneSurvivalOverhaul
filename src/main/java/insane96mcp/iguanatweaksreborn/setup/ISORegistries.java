@@ -76,6 +76,7 @@ public class ISORegistries {
 	public static final RegistryObject<LootItemConditionType> KILLED_BY_KILLED_PLAYER = LOOT_CONDITION_TYPES.register("killed_by_killed_player", () -> new LootItemConditionType(new KilledByKilledPlayerCondition.Serializer()));
 	public static final RegistryObject<LootItemConditionType> LIVESTOCK_AGE_CONDITION = LOOT_CONDITION_TYPES.register("livestock_age", () -> new LootItemConditionType(new LivestockAgeCondition.Serializer()));
 	public static final RegistryObject<LootItemConditionType> CURRENT_SEASON = LOOT_CONDITION_TYPES.register("current_season", () -> new LootItemConditionType(new LootItemCurrentSeasonCondition.Serializer()));
+	public static final RegistryObject<LootItemConditionType> HAS_BEEN_FED_RECENTLY = LOOT_CONDITION_TYPES.register("has_been_fed_recently", () -> new LootItemConditionType(new FedCondition.Serializer()));
 
 	public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = createRegistry(Registries.LOOT_FUNCTION_TYPE.location());
 	public static final RegistryObject<LootItemFunctionType> ENCHANT_WITH_TREASURE = LOOT_FUNCTIONS.register("enchant_with_treasure", () -> new LootItemFunctionType(new EnchantWithTreasureFunction.Serializer()));

@@ -26,6 +26,7 @@
         "BoatMixin",
         "BonusLevelTableConditionMixin",
         "BowItemMixin",
+        "BreedGoalMixin",
         "CampfireBlockEntityMixin",
         "CampfireBlockMixin",
         "ChunkMap$TrackedEntityMixin",

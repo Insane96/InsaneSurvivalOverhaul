@@ -17,6 +17,7 @@ public class Modifiers {
         registerModifier(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "night_time"), NightTimeModifier.class);
         registerModifier(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "matches_biome"), BiomeModifier.class);
         registerModifier(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "age"), AgeModifier.class);
+        registerModifier(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "has_been_fed_recently"), FedModifier.class);
         if (ModList.get().isLoaded("sereneseasons"))
             registerModifier(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "season"), SeasonModifier.class);
     }

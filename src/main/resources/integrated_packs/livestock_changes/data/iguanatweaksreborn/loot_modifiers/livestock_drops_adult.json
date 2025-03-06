@@ -4,9 +4,8 @@
         {
             "condition": "iguanatweaksreborn:livestock_age",
             "entity": "this",
-            "min_age": 0.25,
-            "max_age": 0.5
+            "age": "adult"
         }
     ],
-    "multiplier": 1.5
+    "multiplier": 2
 }
