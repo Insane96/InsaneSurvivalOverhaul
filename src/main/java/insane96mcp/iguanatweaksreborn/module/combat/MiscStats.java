@@ -164,6 +164,8 @@ public class MiscStats extends Feature {
 										|| attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get())) {
 									amount += event.getEntity().getAttributeBaseValue(attribute);
 									isEqualTooltip = true;
+									if (attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get()))
+										amount += 1;
 								}
 							}
 							if (!isEqualTooltip && amount == 0d)
