@@ -3,8 +3,9 @@
 ## Upcoming
 ### Additions
 * Breeding no more!
-  * Feeding animals no longer breeds them instantly, instead, sets them into a well fed state for 1h
-    During this time, animals gain some bonuses: 
+  * Feeding animals no longer breeds them instantly, instead, sets them into a well fed state for 1h  
+    Recently fed animals show a heart sporadically  
+    During this time, animals gain some bonuses:  
     * Heavily increases auto-breed chance
     * Chickens lay eggs faster (removed the chicken lay egg faster feature, basically moved it to this fed mechanic)
     * Cows fluid cooldown is reduced
@@ -17,6 +18,7 @@
     * Young and elder animals have normal drops, Adult have increased drops
 * Reworked Weighted Equipment (now Weighted Armor)
   * You can now set a formula for the slowdown instead of fixed values
+* Critical damage is now shown as 1xx% instead of xx%
 
 ### Fixes
 * Being able to "milk" any animal

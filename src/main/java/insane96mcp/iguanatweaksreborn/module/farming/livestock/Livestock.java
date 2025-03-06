@@ -14,6 +14,7 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageType;
@@ -76,7 +78,7 @@ public class Livestock extends Feature {
 
 	@Config
 	@Label(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
-	public static Boolean preventBreeding = false;
+	public static Boolean preventBreeding = true;
 
 	@Config
 	@Label(name = "Aging.Enable", description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
@@ -129,8 +131,22 @@ public class Livestock extends Feature {
 			aging(event);
 			eggLay(event);
 			tryAutoBreed(event);
+			if (hasBeenFedRecently(event.getEntity()) && event.getEntity().getRandom().nextInt(200) == 0)
+				((ServerLevel) event.getEntity().level()).sendParticles(ParticleTypes.HEART, Livestock.getRandomXWithin(event.getEntity(), 0.2f), event.getEntity().getRandomY() + 0.5, Livestock.getRandomZWithin(event.getEntity(),0.2f), 1, 0, 0, 0, 0.1f);
 		}
 		cowMilkTick(event);
+	}
+
+	public static double getRandomXWithin(LivingEntity entity, double delta) {
+		return getRandomValueInWidth(entity, delta) + entity.getX();
+	}
+
+	public static double getRandomZWithin(LivingEntity entity, double delta) {
+		return getRandomValueInWidth(entity, delta) + entity.getZ();
+	}
+
+	public static double getRandomValueInWidth(LivingEntity entity, double delta) {
+		return Mth.nextDouble(entity.getRandom(), -entity.getBbWidth() - delta, entity.getBbWidth() + delta);
 	}
 
 	public static void tryAutoBreed(LivingEvent.LivingTickEvent event) {
@@ -139,8 +155,7 @@ public class Livestock extends Feature {
 				|| animal.getAge() != 0)
 			return;
 
-		int tickCount = event.getEntity().tickCount + event.getEntity().getId();
-		if (tickCount % 600 != 0)
+		if ((event.getEntity().tickCount + event.getEntity().getId()) % 600 != 0)
 			return;
 		List<Modifier> modifiersToApply = new ArrayList<>();
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()

@@ -25,6 +25,10 @@ public abstract class BreedGoalMixin {
                 || !original)
             return original;
 
-        return this.animal.getLoveCause() == null;
+        if (this.animal.getLoveCause() != null) {
+            this.animal.resetLove();
+            return false;
+        }
+        return false;
     }
 }
