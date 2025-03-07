@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.9.0
 ### Additions
 * Breeding no more!
   * Feeding animals no longer breeds them instantly, instead, sets them into a well fed state for 1h  
