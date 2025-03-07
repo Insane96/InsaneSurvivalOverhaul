@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reduced adult sizes (x1.2 -> x1.15) 
+
 ## 4.9.0
 ### Additions
 * Breeding no more!
