@@ -1,9 +1,9 @@
-// 1.20.1	2025-03-06T13:45:36.7078575	Tags for minecraft:entity_type mod id iguanatweaksreborn
+// 1.20.1	2025-03-08T10:33:35.676052	Tags for minecraft:entity_type mod id iguanatweaksreborn
 7b340ec9bb077e697791c2df49c07cd5c24eb38b data/iguanatweaksreborn/tags/entity_types/cats.json
 65e4436788da1a3572a00bfe2d31c2d5af69c547 data/iguanatweaksreborn/tags/entity_types/enchanting/bane_of_sssss.json
 98b824852e1e5d9aab022a1b6c5c2e680a062474 data/iguanatweaksreborn/tags/entity_types/enchanting/smite.json
 b284362979b3d4a17e362ec4963d1721a875e20d data/iguanatweaksreborn/tags/entity_types/explosion_entity_blacklist.json
-007e300b1f66902458fe07c086cc165e8109bb9a data/iguanatweaksreborn/tags/entity_types/milkable.json
+79da3f5f668c9f58f6d9e6da9acf27814ed8f44f data/iguanatweaksreborn/tags/entity_types/milkable.json
 f1eb465c10b7200ac943367340c90bd349afa085 data/iguanatweaksreborn/tags/entity_types/parrots.json
 fa590e90c52009d8f001b50ac266b054a987a9f5 data/iguanatweaksreborn/tags/entity_types/passive_regen.json
 664c143ccc1f3b75c87d733cf59b2d5f8c7e49d8 data/iguanatweaksreborn/tags/entity_types/pets.json

@@ -64,6 +64,7 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
         tag(Livestock.MILKABLE)
                 .add(EntityType.COW)
                 .add(EntityType.MOOSHROOM)
+                .add(EntityType.GOAT)
                 .addOptional(ResourceLocation.fromNamespaceAndPath("buzzier_bees", "moobloom"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "yak"));
         tag(Livestock.PREVENT_BREEDING)

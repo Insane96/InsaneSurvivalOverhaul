@@ -2,6 +2,7 @@
   "values": [
     "minecraft:cow",
     "minecraft:mooshroom",
+    "minecraft:goat",
     {
       "id": "buzzier_bees:moobloom",
       "required": false

@@ -1,5 +1,5 @@
 {
-    "entity": "#iguanatweaksreborn:cows",
+    "entity": "#iguanatweaksreborn:milkable",
     "cow_fluid_cooldown_modifiers": [
         {
             "id": "iguanatweaksreborn:age",
