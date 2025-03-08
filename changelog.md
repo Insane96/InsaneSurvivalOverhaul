@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Reduced adult sizes (x1.2 -> x1.15) 
+* Removed shields from zombies
 
 ## 4.9.0
 ### Additions
