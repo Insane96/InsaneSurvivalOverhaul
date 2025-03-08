@@ -46,6 +46,7 @@ import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -334,7 +335,7 @@ public class Livestock extends Feature {
 		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * 60 * 20);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onAnimalMilk(PlayerInteractEvent.EntityInteract event) {
 		if (!this.isEnabled()
 				|| !event.getEntity().getType().is(MILKABLE)
