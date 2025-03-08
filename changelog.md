@@ -4,6 +4,7 @@
 ### Changes
 * Reduced adult sizes (x1.2 -> x1.15) 
 * Removed shields from zombies
+* Cocoa beans now drop 2 beans instead of 3
 
 ## 4.9.0
 ### Additions
