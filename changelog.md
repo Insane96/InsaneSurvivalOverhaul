@@ -5,6 +5,7 @@
 * Reduced adult sizes (x1.2 -> x1.15) 
 * Removed shields from zombies
 * Cocoa beans now drop 2 beans instead of 3
+* Increased crossbow % damage (-50% -> -40%)
 
 ## 4.9.0
 ### Additions
