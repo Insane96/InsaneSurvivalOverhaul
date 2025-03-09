@@ -10,6 +10,9 @@
 * Increased crossbow % damage (-50% -> -40%)
 * Goats now also have milk cooldown
 
+### Fixes
+* Respawn obelisks not blending into terrain (expecially underwater)
+
 ## 4.9.0
 ### Additions
 * Breeding no more!
