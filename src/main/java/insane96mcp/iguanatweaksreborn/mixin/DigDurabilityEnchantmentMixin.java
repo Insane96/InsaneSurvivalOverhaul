@@ -16,10 +16,4 @@ public abstract class DigDurabilityEnchantmentMixin {
 		if (EnchantmentsFeature.isUnbreakingOverhaul())
 			cir.setReturnValue(false);
 	}
-
-	@Inject(method = "getMaxLevel", at = @At("RETURN"), cancellable = true)
-	public void onGetMaxLevel(CallbackInfoReturnable<Integer> cir) {
-		if (EnchantmentsFeature.isUnbreakingOverhaul())
-			cir.setReturnValue(5);
-	}
 }

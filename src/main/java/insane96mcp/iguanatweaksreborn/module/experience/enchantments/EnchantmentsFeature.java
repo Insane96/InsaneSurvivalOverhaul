@@ -20,8 +20,8 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.util.MathHelper;
@@ -76,7 +76,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Label(name = "Infinity overhaul", description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;
 	@Config
-	@Label(name = "Less unbreakable unbreaking", description = "Unbreaking max level is now 5 and tool lasts 50% more per level")
+	@Label(name = "Less unbreakable unbreaking", description = "Unbreaking increases tool durability by 75% per level")
 	public static Boolean unbreakingOverhaul = true;
 	@Config
 	@Label(name = "Small Thorns Overhaul", description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
@@ -210,7 +210,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
 		if (lvl <= 0)
 			return;
-		event.setNewMaxDamage((int) (event.getNewMaxDamage() * (1f + lvl * 0.5f)));
+		event.setNewMaxDamage((int) (event.getNewMaxDamage() * (1f + lvl * 0.75f)));
 	}
 
 	public static boolean isBetterEfficiencyFormula() {
