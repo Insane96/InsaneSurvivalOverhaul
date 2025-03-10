@@ -9,6 +9,7 @@
 * Cocoa beans now drop 2 beans instead of 3
 * Increased crossbow % damage (-50% -> -40%)
 * Goats now also have milk cooldown
+* Increased xp to level up (35 -> 40)
 
 ### Fixes
 * Respawn obelisks not blending into terrain (especially underwater)

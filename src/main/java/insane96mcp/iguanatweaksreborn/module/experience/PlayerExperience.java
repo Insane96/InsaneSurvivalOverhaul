@@ -19,12 +19,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class PlayerExperience extends Feature {
 
 	@Config
-	@Label(name = "Level Scaling Formula", description = """
+	@Label(name = "Level up formula", description = """
 						The experience required to level up is calculated by this formula. The variable available is 'current_level'
 						Set to empty to disable.
 						This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.
 						Incompatible with Allurement's 'Remove level Scaling' or any other mod that does something similar""")
-	public static String levelScalingFormula = "40";//"(2 * current_level) + 5";
+	public static String levelUpFormula = "40";
 	@Config(min = -1d, max = 1d)
 	@Label(name = "Dropped Experience on Death", description = """
 						On death, players will drop this percentage of experience instead of max 7 levels. Setting to -1 will disable this.
@@ -54,10 +54,10 @@ public class PlayerExperience extends Feature {
 	 */
 	public static int getBetterScalingLevel(int currentLevel) {
 		if (!isEnabled(PlayerExperience.class)
-				|| levelScalingFormula.isEmpty())
+				|| levelUpFormula.isEmpty())
 			return -1;
 
-		Expression expression = new Expression(levelScalingFormula);
+		Expression expression = new Expression(levelUpFormula);
 		try {
 			//noinspection ConstantConditions
 			EvaluationValue result = expression
