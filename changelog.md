@@ -11,7 +11,8 @@
 * Goats now also have milk cooldown
 
 ### Fixes
-* Respawn obelisks not blending into terrain (expecially underwater)
+* Respawn obelisks not blending into terrain (especially underwater)
+* Fixed passive regen applying every tick
 
 ## 4.9.0
 ### Additions

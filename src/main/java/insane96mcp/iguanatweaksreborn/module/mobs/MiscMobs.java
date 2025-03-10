@@ -38,6 +38,7 @@ public class MiscMobs extends Feature {
                 || !event.getEntity().getType().is(PASSIVE_REGEN))
             return;
 
-        event.getEntity().heal(1f);
+        if (event.getEntity().getRandom().nextInt(passiveRegenChance) == 0)
+            event.getEntity().heal(1f);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerExperience extends Feature {
 						Set to empty to disable.
 						This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.
 						Incompatible with Allurement's 'Remove level Scaling' or any other mod that does something similar""")
-	public static String levelScalingFormula = "35";//"(2 * current_level) + 5";
+	public static String levelScalingFormula = "40";//"(2 * current_level) + 5";
 	@Config(min = -1d, max = 1d)
 	@Label(name = "Dropped Experience on Death", description = """
 						On death, players will drop this percentage of experience instead of max 7 levels. Setting to -1 will disable this.
