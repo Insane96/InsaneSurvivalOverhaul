@@ -2,7 +2,7 @@
 	"item": "#iguanatweaksreborn:equipment/hand/stone",
 	"durability": 63,
 	"efficiency": 3,
-	"enchantability": 14,
+	"enchantability": 11,
 	"modifiers": [
 		{
 			"uuid": "294e0db0-1185-4d78-b95e-8823b8bb0041",
