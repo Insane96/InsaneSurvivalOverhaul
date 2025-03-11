@@ -30,7 +30,7 @@ public class OverallProtection extends ISOProtectionEnchantment {
 
     @Override
     public float getDamageReductionPerLevel() {
-        return 0.06f;
+        return 0.075f;
     }
 
     @Override
