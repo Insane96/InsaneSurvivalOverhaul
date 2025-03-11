@@ -16,6 +16,7 @@
   * Unbreaking max level has been reduced from 5 to 3 and increased durability from 50% to 75%
   * Increased Protection damage reduction (6% -> 7.5%)
   * Bottle o' Enchanting now always award 50 xp (1 level)
+  * Thorns damage reduced from `lvl ~ lvl + lvl - 1` to `lvl`
 * Removed shields from zombies
 * Cocoa beans now drop 2 beans instead of 3
 * Increased crossbow % damage (-50% -> -40%)
