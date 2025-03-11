@@ -16,7 +16,6 @@ import insane96mcp.insanelib.setup.ILStrings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -83,8 +82,8 @@ public class DroppedExperience extends Feature {
 	public static Integer bonusExperiencePerEnchantedEquipment = 2;
 
 	@Config(min = 0, max = 512)
-	@Label(name = "Bottle o' Enchanting Bonus XP", description = "Bottle o' enchanting will drop this more XP. Experience is still affected by 'Global Experience Multiplier'\nCan be set to 0 to make Bottle o' enchanting drop no bonus experience")
-	public static Integer xpBottleBonus = 35;
+	@Label(name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
+	public static Integer xpBottleDroppedXp = 50;
 
 	@Config(min = 0)
 	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
@@ -205,13 +204,8 @@ public class DroppedExperience extends Feature {
 		}
 	}
 
-	public static void onXpBottleHit(ThrownExperienceBottle xpBottle) {
-		if (!isEnabled(DroppedExperience.class)
-				|| xpBottleBonus == 0)
-			return;
-
-		if (xpBottle.level() instanceof ServerLevel)
-			ExperienceOrb.award((ServerLevel)xpBottle.level(), xpBottle.position(), xpBottleBonus);
+	public static int getXpBottleDroppedExperience(ThrownExperienceBottle thrownExperienceBottle) {
+		return xpBottleDroppedXp;
 	}
 
 	@SubscribeEvent
