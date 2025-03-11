@@ -316,6 +316,7 @@ public class Livestock extends Feature {
 		if (event.isCanceled()
 				|| !this.isEnabled()
 				|| !(event.getTarget() instanceof Animal animal)
+				|| !event.getEntity().getType().is(PREVENT_BREEDING)
 				|| !animal.isFood(event.getItemStack()))
 			return;
 

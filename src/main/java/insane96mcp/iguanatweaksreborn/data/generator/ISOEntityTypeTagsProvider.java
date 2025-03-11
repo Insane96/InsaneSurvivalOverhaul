@@ -84,7 +84,6 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.TURTLE)
                 .add(EntityType.PANDA)
                 .add(EntityType.FOX)
-                .add(EntityType.BEE)
                 .add(EntityType.STRIDER)
                 .add(EntityType.HOGLIN)
                 .add(EntityType.FROG)

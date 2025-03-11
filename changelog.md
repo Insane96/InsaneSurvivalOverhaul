@@ -6,15 +6,18 @@
 
 ## Upcoming
 ### Changes
-* Unbreaking max level has been reduced from 5 to 3 and increased durability from 50% to 75%
-* Reduced adult sizes (x1.2 -> x1.15) 
-* Animals can no longer be fed for 30 minutes after being fed
+* Livestock
+  * Animals can no longer be fed for 30 minutes after being fed
+  * Bees are no longer affected by the fed mechanic, and breed like normal
+  * Reduced adult sizes (x1.2 -> x1.15)
+  * Goats now also have milk cooldown
+* Enchanting
+  * Increased xp to level up (35 -> 40)
+  * Reduced materials enchantability by ~25%
+  * Unbreaking max level has been reduced from 5 to 3 and increased durability from 50% to 75%
 * Removed shields from zombies
 * Cocoa beans now drop 2 beans instead of 3
 * Increased crossbow % damage (-50% -> -40%)
-* Goats now also have milk cooldown
-* Increased xp to level up (35 -> 40)
-* Reduced materials enchantability by ~25%
 
 ### Fixes
 * Respawn obelisks not blending into terrain (especially underwater)
