@@ -2,12 +2,13 @@
 
 * Sweeping overhaul should apply post damage effects
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
-* Reduced armor enchantability by ~20%
+* It's really hard that bees fap since they spend most of the time in the hive
 
 ## Upcoming
 ### Changes
 * Unbreaking max level has been reduced from 5 to 3 and increased durability from 50% to 75%
 * Reduced adult sizes (x1.2 -> x1.15) 
+* Animals can no longer be fed for 30 minutes after being fed
 * Removed shields from zombies
 * Cocoa beans now drop 2 beans instead of 3
 * Increased crossbow % damage (-50% -> -40%)

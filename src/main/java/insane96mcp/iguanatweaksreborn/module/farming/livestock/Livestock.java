@@ -315,14 +315,17 @@ public class Livestock extends Feature {
 	public void onAnimalFeed(PlayerInteractEvent.EntityInteract event) {
 		if (event.isCanceled()
 				|| !this.isEnabled()
-				|| !(event.getTarget() instanceof Animal animal))
+				|| !(event.getTarget() instanceof Animal animal)
+				|| !animal.isFood(event.getItemStack()))
 			return;
 
-		if (animal.isFood(event.getItemStack())) {
-			int age = animal.getAge();
-			if (!animal.level().isClientSide && age == 0 && animal.canFallInLove()) {
-				setLastEat(animal);
-			}
+		if (!canBeFed(animal)) {
+			event.setCanceled(true);
+			return;
+		}
+		int age = animal.getAge();
+		if (!animal.level().isClientSide && age == 0 && animal.canFallInLove()) {
+			setLastEat(animal);
 		}
 	}
 
@@ -330,9 +333,17 @@ public class Livestock extends Feature {
 		living.getPersistentData().putLong(LAST_FED, living.level().getGameTime());
 	}
 
+	private static final int FED_DURATION = 60;
+	private static final int CAN_BE_FED_AFTER = 30;
+
 	public static boolean hasBeenFedRecently(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
-		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * 60 * 20);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * FED_DURATION * 20);
+	}
+
+	public static boolean canBeFed(LivingEntity living) {
+		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * CAN_BE_FED_AFTER * 20);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
