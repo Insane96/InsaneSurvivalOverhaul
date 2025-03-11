@@ -2,7 +2,6 @@
 
 * Sweeping overhaul should apply post damage effects
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
-* It's really hard that bees fap since they spend most of the time in the hive
 
 ## Upcoming
 ### Changes
@@ -22,6 +21,7 @@
 ### Fixes
 * Respawn obelisks not blending into terrain (especially underwater)
 * Fixed passive regen applying every tick
+* Multiply total attribute tooltip
 
 ## 4.9.0
 ### Additions

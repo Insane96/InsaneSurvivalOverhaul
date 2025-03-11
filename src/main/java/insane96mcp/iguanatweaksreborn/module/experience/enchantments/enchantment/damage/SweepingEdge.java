@@ -32,8 +32,4 @@ public class SweepingEdge extends Enchantment {
     public int getMaxLevel() {
         return 3;
     }
-
-    public static float getSweepingDamageRatio(int pLevel) {
-        return 1.0F - 1.0F / (float)(pLevel + 1);
-    }
 }

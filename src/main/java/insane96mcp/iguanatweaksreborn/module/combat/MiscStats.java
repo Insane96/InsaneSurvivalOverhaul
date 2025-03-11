@@ -177,19 +177,16 @@ public class MiscStats extends Feature {
 								translationString = "attribute.modifier.equals.";
 							else if (amount < 0)
 								translationString = "attribute.modifier.take.";
+							final MutableComponent attributeComponent = Component.translatable(attribute.getDescriptionId());
 							switch (operation) {
 								case ADDITION -> {
 									if (attribute.equals(Attributes.KNOCKBACK_RESISTANCE) || attribute.equals(CriticalRework.CHANCE_ATTRIBUTE.get()) || attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get()))
-										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount * 100) + "%", Component.translatable(attribute.getDescriptionId()));
+										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount * 100) + "%", attributeComponent);
 									else
-										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount)), Component.translatable(attribute.getDescriptionId()));
+										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount)), attributeComponent);
 								}
-								case MULTIPLY_BASE -> {
-									component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount) * 100), Component.translatable(attribute.getDescriptionId()));
-								}
-								case MULTIPLY_TOTAL -> {
-									component = Component.literal("x").append(Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount) + 1), Component.translatable(attribute.getDescriptionId())));
-								}
+								case MULTIPLY_BASE -> component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount) * 100), attributeComponent);
+								case MULTIPLY_TOTAL -> component = Component.translatable(translationString + operation.toValue(), "x" + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount > 0 ? Math.abs(amount) + 1f : 1f - Math.abs(amount)), attributeComponent);
 							}
 							if (isEqualTooltip)
 								component = CommonComponents.space().append(component.withStyle(ChatFormatting.DARK_GREEN));
