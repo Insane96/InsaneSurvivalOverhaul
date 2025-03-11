@@ -270,10 +270,10 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (!(enchantment instanceof BonusDamageEnchantment bonusDamageEnchantment))
 			return 0f;
 		float damageBonus = bonusDamageEnchantment.getDamageBonus(attacker, target, attacker.getMainHandItem(), lvl);
-		if (attacker instanceof Player player) {
+		/*if (attacker instanceof Player player) {
 			float f = player.getAttackStrengthScale(0.5f);
 			damageBonus *= f * f;
-		}
+		}*/
 		return damageBonus;
 	}
 

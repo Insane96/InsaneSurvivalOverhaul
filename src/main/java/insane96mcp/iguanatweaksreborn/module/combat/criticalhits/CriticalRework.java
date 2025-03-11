@@ -31,7 +31,7 @@ public class CriticalRework extends Feature {
 	public static Double enchantmentChance = 0.1d;
 	@Config(min = -1d, max = 1d)
 	@Label(name = "Enchantment Damage", description = "iguanatweaksreborn:critical_damage increase per level of Critical enchantment.")
-	public static Double enchantmentBonusDamage = 0.3d;
+	public static Double enchantmentBonusDamage = 0.1d;
 
 	public CriticalRework(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);

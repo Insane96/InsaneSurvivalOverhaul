@@ -1,5 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
@@ -139,6 +142,16 @@ public abstract class PlayerMixin extends LivingEntity {
 		for (Enchantment enchantment : allEnchantments.keySet()) {
 			original += EnchantmentsFeature.bonusDamageEnchantment(enchantment, allEnchantments.get(enchantment), this, target);
 		}
+		return original;
+	}
+
+	@Definition(id = "f", local = @Local(type = float.class, ordinal = 0))
+	@Definition(id = "f1", local = @Local(type = float.class, ordinal = 1))
+	@Expression("f + f1")
+	@ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+	public float iguanatweaksreborn$increaseEnchantmentDamageWithCrit(float original, @Local(name = "flag2") boolean flag2, @Local(name = "f1") float f1, @Local CriticalHitEvent hitResult) {
+		if (flag2)
+			return original + (f1 * hitResult.getDamageModifier() - f1);
 		return original;
 	}
 

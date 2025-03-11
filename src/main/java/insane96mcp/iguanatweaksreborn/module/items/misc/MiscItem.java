@@ -60,7 +60,7 @@ public class MiscItem extends Feature {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent(priority = EventPriority.HIGH)
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onTooltip(ItemTooltipEvent event) {
 		if (!this.isEnabled()
 				|| !efficiencyTooltip)

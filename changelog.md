@@ -18,6 +18,8 @@
   * Bottle o' Enchanting now always award 50 xp (1 level)
   * Thorns damage reduced from `lvl ~ lvl + lvl - 1` to `lvl`.
     * Thorns damage now bypasses shields
+  * Reduced critical enchantment bonus damage (+30% -> +10%)
+  * Critical damage now applies to extra damage too (Sharpness, Smite, etc.)
 * Removed shields from zombies
 * Cocoa beans now drop 2 beans instead of 3
 * Increased crossbow % damage (-50% -> -40%)
