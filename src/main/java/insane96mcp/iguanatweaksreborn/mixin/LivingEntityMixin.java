@@ -154,7 +154,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         MutableFloat damageReduction = new MutableFloat();
         for (ItemStack stack : this.getArmorSlots()) {
             stack.getAllEnchantments().forEach((enchantment, lvl) -> {
-                if (enchantment instanceof IProtectionEnchantment protectionEnchantment && ((IProtectionEnchantment) enchantment).isSourceReduced(damageSource))
+                if (enchantment instanceof IProtectionEnchantment protectionEnchantment && protectionEnchantment.isSourceReduced(damageSource))
                     damageReduction.add(protectionEnchantment.getDamageReduction(lvl));
             });
         }

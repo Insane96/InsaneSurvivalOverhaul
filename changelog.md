@@ -11,7 +11,7 @@
   * Reduced adult sizes (x1.2 -> x1.15)
   * Goats now also have milk cooldown
 * Enchanting
-  * Increased xp to level up (35 -> 40)
+  * Increased xp to level up (35 -> 50)
   * Reduced materials enchantability by ~25%
   * Unbreaking max level has been reduced from 5 to 3 and increased durability from 50% to 75%
 * Removed shields from zombies
