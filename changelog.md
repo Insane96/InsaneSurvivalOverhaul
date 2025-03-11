@@ -3,7 +3,7 @@
 * Sweeping overhaul should apply post damage effects
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
 
-## Upcoming
+## Alpha 4.10.0
 ### Changes
 * Livestock
   * Animals can no longer be fed for 30 minutes after being fed
