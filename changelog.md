@@ -3,6 +3,9 @@
 * Sweeping overhaul should apply post damage effects
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
 
+### Upcoming
+* Reduced leather drops
+
 ## Alpha 4.10.0
 ### Changes
 * Livestock
