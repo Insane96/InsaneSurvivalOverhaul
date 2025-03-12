@@ -158,6 +158,8 @@ public class Livestock extends Feature {
 
 		if ((event.getEntity().tickCount + event.getEntity().getId()) % 600 != 0)
 			return;
+		if (event.getEntity().level().getEntities(event.getEntity(), animal.getBoundingBox().inflate(16d), entity -> entity.getType() == animal.getType()).size() > 16)
+			return;
 		List<Modifier> modifiersToApply = new ArrayList<>();
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 				.filter(data -> data.matches(animal))

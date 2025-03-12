@@ -96,7 +96,7 @@
         },
         {
             "id": "iguanatweaksreborn:has_been_fed_recently",
-            "modifier": 0.04,
+            "modifier": 0.09,
             "operation": "add"
         }
     ]

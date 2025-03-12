@@ -60,7 +60,7 @@ public class UnbreakableItems extends Feature {
 	}
 
 	public static boolean isBroken(ItemStack stack) {
-		return stack.isDamageableItem() && isUnbreakable(stack) && stack.getDamageValue() >= stack.getMaxDamage() - 1;
+		return stack.isDamageableItem() && (isUnbreakable(stack) && stack.getDamageValue() >= stack.getMaxDamage() - 1) || (!isUnbreakable(stack) && stack.getDamageValue() >= stack.getMaxDamage());
 	}
 
 	@SubscribeEvent
@@ -216,7 +216,7 @@ public class UnbreakableItems extends Feature {
             else if (durabilityTooltip)
                 component = Component.translatable(TOOL_DURABILITY_LANG, durabilityLeft, durability).withStyle(ChatFormatting.GRAY);
 			if (component != null)
-				event.getToolTip().add(component);
+				event.getToolTip().add(event.getToolTip().size(), component);
 		}
 	}
 }
