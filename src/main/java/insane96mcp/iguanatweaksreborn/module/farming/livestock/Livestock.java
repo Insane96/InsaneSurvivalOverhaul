@@ -318,7 +318,7 @@ public class Livestock extends Feature {
 		if (event.isCanceled()
 				|| !this.isEnabled()
 				|| !(event.getTarget() instanceof Animal animal)
-				|| !event.getEntity().getType().is(PREVENT_BREEDING)
+				|| !animal.getType().is(PREVENT_BREEDING)
 				|| !animal.isFood(event.getItemStack()))
 			return;
 
@@ -336,17 +336,23 @@ public class Livestock extends Feature {
 		living.getPersistentData().putLong(LAST_FED, living.level().getGameTime());
 	}
 
-	private static final int FED_DURATION = 60;
-	private static final int CAN_BE_FED_AFTER = 30;
-
 	public static boolean hasBeenFedRecently(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
-		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * FED_DURATION * 20);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * 60 * 20);
 	}
 
 	public static boolean canBeFed(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
-		return lastFed > 0 && living.level().getGameTime() - lastFed > (agingLastFedDuration * CAN_BE_FED_AFTER * 20);
+		if (lastFed == 0)
+			return true;
+		return living.level().getGameTime() - lastFed > (agingLastFedDuration / 2f * 60 * 20);
+	}
+
+	public static void consumeFeed(LivingEntity living) {
+		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		if (lastFed > 0)
+			lastFed -= (long) (agingLastFedDuration / 3f * 60 * 20);
+		living.getPersistentData().putLong(LAST_FED, lastFed);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -418,23 +424,34 @@ public class Livestock extends Feature {
 	}
 
 	@SubscribeEvent
-	public void failBreeding(BabyEntitySpawnEvent event) {
+	public void onBreed(BabyEntitySpawnEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getParentA() instanceof Animal parentA))
 			return;
 
+		if (failBreeding(event, parentA))
+			return;
+		twins(event, parentA);
+		consumeFeed(parentA);
+		consumeFeed(event.getParentB());
+	}
+
+	private boolean failBreeding(BabyEntitySpawnEvent event, Animal parentA) {
 		List<Modifier> modifiersToApply = new ArrayList<>();
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 				.filter(data -> data.matches(parentA))
 				.forEach(data -> modifiersToApply.addAll(data.breedingFailChanceModifiers));
 		float failChance = Modifier.applyModifiers(0f, modifiersToApply, parentA.level(), parentA.blockPosition(), parentA);
 		if (failChance <= 0)
-			return;
+			return false;
 		if (failChance >= 1f || parentA.getRandom().nextFloat() < failChance) {
 			event.setCanceled(true);
-			return;
+			return true;
 		}
+		return false;
+	}
 
+	private void twins(BabyEntitySpawnEvent event, Animal parentA) {
 		List<Modifier> modifiersToApplyTwins = new ArrayList<>();
 		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 				.filter(data -> data.matches(parentA))

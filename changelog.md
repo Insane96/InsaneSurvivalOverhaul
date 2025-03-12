@@ -11,8 +11,10 @@
 * Sweep attack
   * All creatures hit are affected by enchantments post hurt effect (e.g. Bane of SSSSS slowness) and fire aspect]
   * Particles
-* Auto-breed now stop when there are more than 16 animals in a range
-* Increased auto-breed chance
+* Breeding
+  * Breeding now consumes 20 minutes of well fed per child born
+  * Increased auto-breed chance
+  * Auto-breed now stop when there are more than 16 animals in a range
 * Reduced leather drops
 
 ### Fixes
