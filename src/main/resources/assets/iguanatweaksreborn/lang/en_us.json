@@ -50,6 +50,9 @@
 	"enchantment.iguanatweaksreborn.feather_falling.desc": "Reduced Fall Damage",
 	"enchantment.passablefoliage.leaf_walker.desc": "Allows the user to walk on leaves",
 
+	"multishot.not_enough_arrows": "Not enough %s for Multishot",
+
+
 	"iguanatweaksreborn:combat_module": "Combat",
 
 	"attribute.name.piercing_damage": "Piercing Damage",

@@ -73,13 +73,16 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ISORegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
 	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISORegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
 	@Config
-	@Label(name = "Infinity overhaul", description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
+	@Label(description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;
 	@Config
-	@Label(name = "Less unbreakable unbreaking", description = "Unbreaking increases tool durability by 75% per level")
+	@Label(description = "Unbreaking increases tool durability by 75% per level")
 	public static Boolean unbreakingOverhaul = true;
 	@Config
-	@Label(name = "Small Thorns Overhaul", description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
+	@Label(description = "Changes Multishot to actually load 3 arrows, instead of materializing 2 arrows from thin air")
+	public static Boolean actualMultishot = true;
+	@Config
+	@Label(description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
 	public static Boolean thornsOverhaul = true;
 
 	@Config

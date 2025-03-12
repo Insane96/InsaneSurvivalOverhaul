@@ -1,16 +1,14 @@
 # Changelog
 
-* Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
-
 ## Upcoming
 ### Additions
+* Multishot now actually consumes and loads 3 arrows in the crossbow
 * Allow endermen to teleport when inside blocks (they get stuck on top of tree leaves with Passable Leaves)
 * Heavily broken tooltip
   * When shown, it means that the item's durability is below 0
 
 ### Changes
 * Sweep attack
-  * All creatures hit are affected by critical hits
   * All creatures hit are affected by enchantments post hurt effect (e.g. Bane of SSSSS slowness) and fire aspect]
   * Particles
 * Auto-breed now stop when there are more than 16 animals in a range

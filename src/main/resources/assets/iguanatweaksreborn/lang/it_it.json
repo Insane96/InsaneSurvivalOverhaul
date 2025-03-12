@@ -41,7 +41,7 @@
 	"enchantment.iguanatweaksreborn.sharpness.desc": "Aumenta i danni contro qualunque creatura",
 	"enchantment.iguanatweaksreborn.smite.desc": "Aumenta i danni contro i non-morti",
 	"enchantment.iguanatweaksreborn.critical.desc": "Aumenta la possibilità e il danno dei colpi critici",
-	"enchantment.iguanatweaksreborn.fire_aspect.desc": "Da fuoco alle creature",
+	"enchantment.iguanatweaksreborn.fire_aspect.desc": "Da fuoco alle creature colpite",
 	"enchantment.iguanatweaksreborn.knockback.desc": "Aumenta la potenza di spinta dell'oggetto",
 	"enchantment.iguanatweaksreborn.protection.desc": "Aumentata resistenza ai danni",
 	"enchantment.iguanatweaksreborn.blast_protection.desc": "Ridotti danni da esplosioni",
@@ -49,6 +49,9 @@
 	"enchantment.iguanatweaksreborn.projectile_protection.desc": "Ridotti danni da proiettili",
 	"enchantment.iguanatweaksreborn.feather_falling.desc": "Ridotti danni da caduta",
 	"enchantment.passablefoliage.leaf_walker.desc": "Permette di camminare sulle foglie",
+
+	"multishot.not_enough_arrows": "Non abbastanza %s per Tiro multiplo",
+
 
 	"iguanatweaksreborn:combat_module": "Cambattimento",
 
