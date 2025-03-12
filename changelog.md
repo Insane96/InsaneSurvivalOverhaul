@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.10.1
 ### Additions
 * Multishot now actually consumes and loads 3 arrows in the crossbow
 * Allow endermen to teleport when inside blocks (they get stuck on top of tree leaves with Passable Leaves)
