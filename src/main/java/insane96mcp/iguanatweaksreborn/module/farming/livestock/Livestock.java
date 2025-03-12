@@ -344,7 +344,7 @@ public class Livestock extends Feature {
 
 	public static boolean canBeFed(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
-		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * CAN_BE_FED_AFTER * 20);
+		return lastFed > 0 && living.level().getGameTime() - lastFed > (agingLastFedDuration * CAN_BE_FED_AFTER * 20);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

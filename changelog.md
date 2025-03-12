@@ -4,7 +4,11 @@
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
 
 ### Upcoming
+### Changes
 * Reduced leather drops
+
+### Fixes
+* Still able to infinitely feed animals
 
 ## Alpha 4.10.0
 ### Changes
