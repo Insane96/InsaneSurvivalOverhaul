@@ -69,6 +69,7 @@
         "PathfinderMobMixin",
         "PistonBaseBlockMixin",
         "PistonMovingBlockEntityMixin",
+        "Player2Mixin",
         "PlayerListMixin",
         "PlayerMixin",
         "PotionItemMixin",

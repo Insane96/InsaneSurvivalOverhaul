@@ -18,6 +18,8 @@ import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -52,6 +54,14 @@ public abstract class PlayerMixin extends LivingEntity {
 	@Shadow public abstract void resetAttackStrengthTicker();
 
 	@Shadow public abstract void respawn();
+
+	@Shadow public abstract void crit(Entity pEntityHit);
+
+	@Shadow public abstract void magicCrit(Entity pEntityHit);
+
+	@Shadow public abstract void causeFoodExhaustion(float pExhaustion);
+
+	@Shadow public abstract void awardStat(ResourceLocation pStat, int pIncrement);
 
 	protected PlayerMixin(EntityType<? extends LivingEntity> type, Level level) {
 		super(type, level);
@@ -96,30 +106,22 @@ public abstract class PlayerMixin extends LivingEntity {
 	}
 
 	@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 2), argsOnly = true, ordinal = 0)
-	public float onPreAbsorptionCalculation(float amount, DamageSource damageSource) {
+	public float iguanatweaksreborn$onPreAbsorptionCalculation(float amount, DamageSource damageSource) {
 		return ISOEventFactory.onLivingHurtPreAbsorption(this, damageSource, amount);
 	}
 
 	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.2f, ordinal = 0))
-	public float attackStrengthAtMaxCooldown(float value) {
+	public float iguanatweaksreborn$attackStrengthAtMaxCooldown(float value) {
         return PlayerStats.noDamageWhenSpamming() ? 0f : value;
     }
 
 	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.8f, ordinal = 0))
-	public float attackStrengthAtFullSwing(float value) {
+	public float iguanatweaksreborn$attackStrengthAtFullSwing(float value) {
 		return PlayerStats.noDamageWhenSpamming() ? 1f : value;
 	}
 
-	@ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-	public float changeSweepingDamage(float original, @Local(ordinal = 0) float f) {
-		if (!MiscStats.sweepingOverhaul
-				|| !Feature.isEnabled(MiscStats.class))
-			return original;
-		return f;
-	}
-
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getSweepHitBox(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;"))
-	public AABB changeSweepingHitbox(AABB original) {
+	public AABB iguanatweaksreborn$changeSweepingHitbox(AABB original) {
 		if (!MiscStats.sweepingOverhaul
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
@@ -128,12 +130,44 @@ public abstract class PlayerMixin extends LivingEntity {
 	}
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getEntityReach()D"))
-	public double increaseSweepingReach(double original) {
+	public double iguanatweaksreborn$increaseSweepingReach(double original) {
 		if (!MiscStats.sweepingOverhaul
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
 		return original + 0.5f + lvl * 0.25f;
+	}
+
+	@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", shift = At.Shift.AFTER))
+	public void iguanatweaksreborn$onSweepHurt(Entity pTarget, CallbackInfo ci, @Local(name = "flag") boolean flag, @Local(name = "flag2") boolean flag2, @Local(name = "flag3") boolean flag3, @Local(name = "f1") float f1, @Local(name = "f4") float f4, @Local(name = "j") int fireAspect, @Local LivingEntity sweepTarget) {
+		if (flag2) {
+			this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, this.getSoundSource(), 1.0F, 1.0F);
+			this.crit(sweepTarget);
+		}
+
+		if (!flag2 && !flag3) {
+			if (flag)
+				this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, this.getSoundSource(), 1.0F, 1.0F);
+			else
+				this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_ATTACK_WEAK, this.getSoundSource(), 1.0F, 1.0F);
+		}
+
+		if (f1 > 0.0F)
+			this.magicCrit(sweepTarget);
+
+		EnchantmentHelper.doPostHurtEffects(sweepTarget, this);
+		EnchantmentHelper.doPostDamageEffects(this, sweepTarget);
+
+		//float damageDealt = f4 - living.getHealth();
+		//this.awardStat(Stats.DAMAGE_DEALT, Math.round(damageDealt * 10.0F));
+		if (fireAspect > 0) {
+			sweepTarget.setSecondsOnFire(fireAspect * 4);
+		}
+
+		//if (this.level() instanceof ServerLevel serverLevel && damageDealt > 2.0F) {
+		//	int k = (int)((double)damageDealt * 0.5D);
+		//	serverLevel.sendParticles(ParticleTypes.DAMAGE_INDICATOR, pTarget.getX(), pTarget.getY(0.5D), pTarget.getZ(), k, 0.1D, 0.0D, 0.1D, 0.2D);
+		//}
 	}
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageBonus(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/MobType;)F"))
