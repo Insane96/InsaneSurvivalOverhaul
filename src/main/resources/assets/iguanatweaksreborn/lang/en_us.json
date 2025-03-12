@@ -110,6 +110,7 @@
 	"iguanatweaksreborn.tool_efficiency": "%.1f Tool Efficiency",
 	"iguanatweaksreborn.tool_durability": "Durability: %d/%d",
 	"iguanatweaksreborn.broken_durability": "Broken",
+	"iguanatweaksreborn.heavily_broken_durability": "Heavily Broken",
 
 	"item.iguanatweaksreborn.flint_axe": "Flint Axe",
 	"item.iguanatweaksreborn.flint_pickaxe": "Flint Pickaxe",

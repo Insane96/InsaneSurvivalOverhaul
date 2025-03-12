@@ -106,6 +106,7 @@
 	"iguanatweaksreborn.tool_efficiency": "%.1f Efficienza attrezzo",
 	"iguanatweaksreborn.tool_durability": "Durabilità: %d/%d",
 	"iguanatweaksreborn.broken_durability": "Rotto",
+	"iguanatweaksreborn.heavily_broken_durability": "Estremamente rotto",
 
 	"item.iguanatweaksreborn.flint_axe": "Ascia di selce",
 	"item.iguanatweaksreborn.flint_pickaxe": "Piccone di selce",

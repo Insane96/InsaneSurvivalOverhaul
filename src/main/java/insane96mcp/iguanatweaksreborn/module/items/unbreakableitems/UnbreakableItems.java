@@ -211,8 +211,12 @@ public class UnbreakableItems extends Feature {
 				durability--;
 			int durabilityLeft = durability - stack.getDamageValue();
 			MutableComponent component = null;
-            if (isBroken(stack))
-                component = Component.translatable(BROKEN_DURABILITY_LANG).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
+            if (isBroken(stack)) {
+				if (durabilityLeft < -stack.getDamageValue() * 0.05f)
+					component = Component.translatable("iguanatweaksreborn.heavily_broken_durability").withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
+				else
+					component = Component.translatable(BROKEN_DURABILITY_LANG).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
+			}
             else if (durabilityTooltip)
                 component = Component.translatable(TOOL_DURABILITY_LANG, durabilityLeft, durability).withStyle(ChatFormatting.GRAY);
 			if (component != null)

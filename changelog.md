@@ -6,6 +6,8 @@
 ## Upcoming
 ### Additions
 * Allow endermen to teleport when inside blocks (they get stuck on top of tree leaves with Passable Leaves)
+* Heavily broken tooltip
+  * When shown, it means that the item's durability is below 0
 
 ### Changes
 * Auto-breed now stop when there are more than 16 animals in a range
