@@ -38,6 +38,7 @@
         "EnchantmentHelperMixin",
         "EnchantmentMixin",
         "EnchantRandomlyFunctionMixin",
+        "EnderManMixin",
         "EntityMixin",
         "ExplosionMixin",
         "FallingBlockEntityMixin",

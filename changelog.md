@@ -3,7 +3,10 @@
 * Sweeping overhaul should apply post damage effects
 * Multishot should actually charge multiple arrows and have multiple levels, increasing arrows charged by 2
 
-### Upcoming
+## Upcoming
+### Additions
+* Allow endermen to teleport when inside blocks (they get stuck on top of tree leaves with Passable Leaves)
+
 ### Changes
 * Reduced leather drops
 
