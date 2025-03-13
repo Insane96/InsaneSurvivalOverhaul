@@ -4,6 +4,7 @@
 ### Additions
 * `iguanatweaksreborn:shouldnt_drop_nametag` entity type tag
   * Entities in this tag will not drop a name tag on death. Useful with mods like pet cemetery
+* Fixed a vanilla bug that made experience from Grindstone pop out inside the block, most of the time making them stuck
 
 ### Fixes
 * Some lang entries
