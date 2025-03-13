@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Some lang entries
+
 ## 4.10.1
 ### Additions
 * Multishot now actually consumes and loads 3 arrows in the crossbow
