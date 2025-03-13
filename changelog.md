@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* `iguanatweaksreborn:shouldnt_drop_nametag` entity type tag
+  * Entities in this tag will not drop a name tag on death. Useful with mods like pet cemetery
+
 ### Fixes
 * Some lang entries
 

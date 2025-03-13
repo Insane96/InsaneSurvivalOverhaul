@@ -6,6 +6,10 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Name tags", description = "Retrieve name tags from name tagged entities.")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class NameTags extends Feature {
+    public static final TagKey<EntityType<?>> SHOULDNT_DROP_NAMETAG = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "shouldnt_drop_nametag"));
 
     public NameTags(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -49,6 +54,7 @@ public class NameTags extends Feature {
     public void onEntityDeath(LivingDeathEvent event) {
         if (!this.isEnabled()
                 || event.getEntity().level().isClientSide
+                || event.getEntity().getType().is(SHOULDNT_DROP_NAMETAG)
                 || !event.getEntity().getPersistentData().contains(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "has_name_tag"))
             return;
 
