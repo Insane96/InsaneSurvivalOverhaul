@@ -1,5 +1,12 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Increased spawners xp dropped
+
+### Fixes
+* Tool efficiency tooltip using the machine language decimal separators
+
 ## 4.10.2
 ### Additions
 * `iguanatweaksreborn:shouldnt_drop_nametag` entity type tag

@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
-import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -69,7 +68,7 @@ public class MiscItem extends Feature {
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() instanceof DiggerItem diggerItem){
 			float toolEfficiency = ISOEventFactory.getBonusEnchantmentEfficiency(event.getEntity(), null, stack, diggerItem.speed);
-			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, InsaneLib.ONE_DECIMAL_FORMATTER.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
+			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
 		}
 	}
 
