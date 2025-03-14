@@ -35,6 +35,7 @@
         "CrossbowItemMixin",
         "DigDurabilityEnchantmentMixin",
         "DiggerItemMixin",
+        "EnchantmentAccessor",
         "EnchantmentHelperMixin",
         "EnchantmentMixin",
         "EnchantRandomlyFunctionMixin",

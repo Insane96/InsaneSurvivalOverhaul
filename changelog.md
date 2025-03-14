@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* You can no longer enchant shields with Curse of Binding
+  * Can now be applied only to items and blocks that go in the armor slots
+
 ### Changes
 * Increased spawners xp dropped
 

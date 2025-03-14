@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.event.StackMaxDamageEvent;
+import insane96mcp.iguanatweaksreborn.mixin.EnchantmentAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.IAttributeEnchantment;
@@ -34,10 +35,13 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -61,6 +65,8 @@ import java.util.function.Predicate;
 @Label(name = "Enchantments", description = "Changes to some enchantments related stuff.")
 @LoadFeature(module = Modules.Ids.EXPERIENCE)
 public class EnchantmentsFeature extends JsonFeature {
+	static final EnchantmentCategory ACTUALLY_WEARABLE = EnchantmentCategory.create("actually_wearable", item -> (item instanceof Equipable equipable && equipable.getEquipmentSlot().isArmor()) || Block.byItem(item) instanceof Equipable);
+
 	public static final RegistryObject<Enchantment> SHARPNESS = ISORegistries.ENCHANTMENTS.register("sharpness", Sharpness::new);
 	public static final RegistryObject<Enchantment> SMITE = ISORegistries.ENCHANTMENTS.register("smite", Smite::new);
 	public static final RegistryObject<Enchantment> BANE_OF_SSSSS = ISORegistries.ENCHANTMENTS.register("bane_of_sssss", BaneOfSSSS::new);
@@ -120,7 +126,7 @@ public class EnchantmentsFeature extends JsonFeature {
             Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
 	public static Boolean replaceDamagingEnchantments = true;
 	@Config
-	@Label(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
+	@Label(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`. Requires a Minecraft restart")
 	public static Boolean reworkBonusLootEnchantments = true;
 	@Config
 	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
@@ -176,6 +182,9 @@ public class EnchantmentsFeature extends JsonFeature {
 		//Can this make something blow up?
 		if (this.isEnabled() && reworkBonusLootEnchantments)
 			Enchantments.BLOCK_FORTUNE = LUCK.get();
+
+		if (this.isEnabled())
+			((EnchantmentAccessor) Enchantments.BINDING_CURSE).setCategory(ACTUALLY_WEARABLE);
 	}
 
 	@SubscribeEvent
