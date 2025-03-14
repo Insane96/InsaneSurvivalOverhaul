@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.10.3
 ### Additions
 * You can no longer enchant shields with Curse of Binding
   * Can now be applied only to items and blocks that go in the armor slots
