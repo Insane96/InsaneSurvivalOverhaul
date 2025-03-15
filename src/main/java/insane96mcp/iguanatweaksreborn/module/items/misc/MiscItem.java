@@ -3,8 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.items.misc;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -13,7 +11,6 @@ import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
@@ -33,19 +30,15 @@ public class MiscItem extends Feature {
 	public static final String TOOL_EFFICIENCY_LANG = "iguanatweaksreborn.tool_efficiency";
 
 	@Config
-	@Label(name = "Efficiency tooltip", description = "Tools get an efficiency tooltip.")
+	@Label(description = "Tools get a tool efficiency tooltip.")
 	public static Boolean efficiencyTooltip = true;
-	@Config
-	@Label(name = "Item Stats Data Pack", description = "Enables a data pack that rebalances all the items, from armor to efficiency to weapons. Also changes some item stacks.")
-	public static Boolean itemStatsDataPack = true;
 
 	@Config
-	@Label(name = "Item tooltips", description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
+	@Label(description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
 	public static Boolean itemTooltips = true;
 
 	public MiscItem(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "item_stats", Component.literal("Insane's Survival Overhaul Item Stats"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && itemStatsDataPack));
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

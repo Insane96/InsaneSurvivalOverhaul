@@ -4,7 +4,9 @@ import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.SweepingEdge;
+import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
+import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -16,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.effect.AttackDamageMobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -65,8 +68,13 @@ public class MiscStats extends Feature {
 	@Label(name = "Sweeping overhaul", description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the Sweeping Edge enchantment increases the range. This also replaces the vanilla sweeping edge enchantment with a new one that can be applied to hoes instead of swords.")
 	public static Boolean sweepingOverhaul = true;
 
+	@Config
+	@Label(description = "Enables a data pack that reworks armor, weapons and tools.")
+	public static Boolean combatReworkDataPack = true;
+
 	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "combat_rework", Component.literal("Insane's Survival Overhaul Combat Rework"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && combatReworkDataPack));
 	}
 
 	@Override

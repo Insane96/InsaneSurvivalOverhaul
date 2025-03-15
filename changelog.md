@@ -1,8 +1,15 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Absorption armor is now enabled by default, but ...
+  * ... only toughness is converted to absorption in a 0.25x ratio
+
 ### Changes
 * No damage when spamming is now applied to Tinkers Construct too
+* `item_stats` data pack has been split into 2
+  * `item_stacks`: changes item stacks
+  * `combat_rework`: changes everything else
 
 ## 4.10.3
 ### Additions
