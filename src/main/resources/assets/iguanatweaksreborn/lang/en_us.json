@@ -109,6 +109,8 @@
 
 	"iguanatweaksreborn.no_damage_item": "This item is not sharp, hits like a fist",
 	"iguanatweaksreborn.no_efficiency_item": "This item is old and rusty, can't mine anything",
+	"iguanatweaksreborn.no_equip_item": "This item doesn't fit you",
+	"iguanatweaksreborn.disabled_item": "This item is disabled and cannot be used/equipped",
 	"iguanatweaksreborn.broken_item": "This item is broken, must be repaired",
 	"iguanatweaksreborn.tool_efficiency": "%.1f Tool Efficiency",
 	"iguanatweaksreborn.tool_durability": "Durability: %d/%d",

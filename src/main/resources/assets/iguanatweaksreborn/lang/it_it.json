@@ -105,6 +105,8 @@
 
 	"iguanatweaksreborn.no_damage_item": "Questo oggetto non è affilato, colpisce come un pugno",
 	"iguanatweaksreborn.no_efficiency_item": "Questo oggetto è vecchio e arrugginito, non può rompere nessun blocco",
+	"iguanatweaksreborn.no_equip_item": "Questo oggeto non ti calza",
+	"iguanatweaksreborn.disabled_item": "Questo oggetto é disattivato e non può essere utilizzato / equipaggiato",
 	"iguanatweaksreborn.broken_item": "Questo oggetto è rotto, deve essere riparato",
 	"iguanatweaksreborn.tool_efficiency": "Efficienza attrezzo: %.1f",
 	"iguanatweaksreborn.tool_durability": "Durabilità: %d/%d",

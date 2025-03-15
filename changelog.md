@@ -4,6 +4,10 @@
 ### Additions
 * Absorption armor is now enabled by default, but ...
   * ... only toughness is converted to absorption in a 0.25x ratio
+* `iguanatweaksreborn:no_equip` item tag
+  * Items in this tag cannot be equipped in the armor slots
+* `iguanatweaksreborn:disabled` item tag
+  * Items in this tag will not respond to left and right click actions and will be unequipped if equipped in armor slots
 
 ### Changes
 * No damage when spamming is now applied to Tinkers Construct too
