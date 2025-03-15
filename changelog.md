@@ -8,6 +8,8 @@
   * Items in this tag cannot be equipped in the armor slots
 * `iguanatweaksreborn:disabled` item tag
   * Items in this tag will not respond to left and right click actions and will be unequipped if equipped in armor slots
+* Tinkers' Construct integration
+  * Disables vanilla items
 
 ### Changes
 * No damage when spamming is now applied to Tinkers Construct too
