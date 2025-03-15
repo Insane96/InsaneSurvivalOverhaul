@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* No damage when spamming is now applied to Tinkers Construct too
+
 ## 4.10.3
 ### Additions
 * You can no longer enchant shields with Curse of Binding

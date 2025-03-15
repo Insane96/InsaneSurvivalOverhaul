@@ -95,9 +95,22 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
+    maven {
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
     maven { url 'https://maven.blamejared.com' }
     maven { url 'https://maven.minecraftforge.net/' }
     maven { url "https://maven.ryanliptak.com/" }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 dependencies {
@@ -128,13 +141,18 @@ dependencies {
 
     compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
     runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
-    implementation fg.deobf("curse.maven:jei-238222:5101366")
 
     implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-${mc_version}-forge")
 
     runtimeOnly fg.deobf("net.darkhax.maxhealthfix:MaxHealthFix-Forge-${mc_version}:${max_health_fix_version}")
 
-    //runtimeOnly fg.deobf("curse.maven:corail-woodcutter-331983:4685515")
+    implementation fg.deobf("slimeknights.mantle:Mantle:${mc_version}-${mantle_build}")
+    implementation fg.deobf("slimeknights.tconstruct:TConstruct:${mc_version}-${ticon_build}")
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
     //implementation fg.deobf("curse.maven:puzzles-lib-495476:4660882")
     //runtimeOnly fg.deobf("curse.maven:easy-magic-456239:4658750")

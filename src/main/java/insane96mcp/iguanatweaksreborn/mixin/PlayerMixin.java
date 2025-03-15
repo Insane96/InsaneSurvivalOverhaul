@@ -110,13 +110,13 @@ public abstract class PlayerMixin extends LivingEntity {
 		return ISOEventFactory.onLivingHurtPreAbsorption(this, damageSource, amount);
 	}
 
-	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.2f, ordinal = 0))
-	public float iguanatweaksreborn$attackStrengthAtMaxCooldown(float value) {
+	@ModifyExpressionValue(method = "attack", at = @At(value = "CONSTANT", args = "floatValue=0.2", ordinal = 0))
+	public float iguanatweaksreborn$noDamageWhenSpamming(float value) {
         return PlayerStats.noDamageWhenSpamming() ? 0f : value;
     }
 
-	@ModifyConstant(method = "attack", constant = @Constant(floatValue = 0.8f, ordinal = 0))
-	public float iguanatweaksreborn$attackStrengthAtFullSwing(float value) {
+	@ModifyExpressionValue(method = "attack", at = @At(value = "CONSTANT", args = "floatValue=0.8"))
+	public float iguanatweaksreborn$noDamageWhenSpamming2(float value) {
 		return PlayerStats.noDamageWhenSpamming() ? 1f : value;
 	}
 
@@ -170,25 +170,6 @@ public abstract class PlayerMixin extends LivingEntity {
 		//}
 	}
 
-	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageBonus(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/MobType;)F"))
-	public float onEnchantmentDamage(float original, Entity target) {
-		Map<Enchantment, Integer> allEnchantments = this.getMainHandItem().getAllEnchantments();
-		for (Enchantment enchantment : allEnchantments.keySet()) {
-			original += EnchantmentsFeature.bonusDamageEnchantment(enchantment, allEnchantments.get(enchantment), this, target);
-		}
-		return original;
-	}
-
-	@Definition(id = "f", local = @Local(type = float.class, ordinal = 0))
-	@Definition(id = "f1", local = @Local(type = float.class, ordinal = 1))
-	@Expression("f + f1")
-	@ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-	public float iguanatweaksreborn$increaseEnchantmentDamageWithCrit(float original, @Local(name = "flag2") boolean flag2, @Local(name = "f1") float f1, @Local CriticalHitEvent hitResult) {
-		if (flag2)
-			return original + (f1 * hitResult.getDamageModifier() - f1);
-		return original;
-	}
-
 	/*@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/PlayerStats;onGround()Z", ordinal = 1))
 	public boolean allowSweepingOffGround(boolean original) {
 		return true;
@@ -213,17 +194,36 @@ public abstract class PlayerMixin extends LivingEntity {
 		return flag3.get();
 	}
 
-	@ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
-	public boolean onCheckPeacefulRegen(boolean original) {
-		return original && !HealthRegenHunger.peacefulHunger;
-	}
-
 	@ModifyExpressionValue(method = "attack",at = @At(value = "CONSTANT", args = "doubleValue=0.4000000059604645"))
 	public double onSweepKnockbackStrength(double original, @Local(name = "i") float i) {
 		if (!MiscStats.sweepingOverhaul
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
 		return i * 0.5F;
+	}
+
+	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageBonus(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/MobType;)F"))
+	public float onEnchantmentDamage(float original, Entity target) {
+		Map<Enchantment, Integer> allEnchantments = this.getMainHandItem().getAllEnchantments();
+		for (Enchantment enchantment : allEnchantments.keySet()) {
+			original += EnchantmentsFeature.bonusDamageEnchantment(enchantment, allEnchantments.get(enchantment), this, target);
+		}
+		return original;
+	}
+
+	@Definition(id = "f", local = @Local(type = float.class, ordinal = 0))
+	@Definition(id = "f1", local = @Local(type = float.class, ordinal = 1))
+	@Expression("f + f1")
+	@ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+	public float iguanatweaksreborn$increaseEnchantmentDamageWithCrit(float original, @Local(name = "flag2") boolean flag2, @Local(name = "f1") float f1, @Local CriticalHitEvent hitResult) {
+		if (flag2)
+			return original + (f1 * hitResult.getDamageModifier() - f1);
+		return original;
+	}
+
+	@ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"))
+	public boolean onCheckPeacefulRegen(boolean original) {
+		return original && !HealthRegenHunger.peacefulHunger;
 	}
 
 	@ModifyExpressionValue(method = "turtleHelmetTick", at = @At(value = "CONSTANT", args = "intValue=200"))
