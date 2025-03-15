@@ -69,7 +69,7 @@ public class RegeneratingAbsorption extends Feature {
     @Label(name = "Cap to health", description = "The amount of regenerating absorption hearts cannot go over the entity's current health.")
     public static Boolean capToHealth = true;
     @Config
-    @Label(name = "Decay Speed", description = "How fast will absorption hearts decay when higher than the current maximum.")
+    @Label(description = "How fast (each tick) will absorption hearts decay when higher than the current maximum.")
     public static Double decaySpeed = 0.1d;
     @Config
     @Label(name = "Absorbing bypasses_armor damage only", description = "If true, absorption hearts will not shield from damages in the bypasses_armor damage type tag.")

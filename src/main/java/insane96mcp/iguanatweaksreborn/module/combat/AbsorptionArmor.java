@@ -7,6 +7,7 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
+import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -14,8 +15,12 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Label(name = "Absorption Armor", description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness")
-@LoadFeature(module = Modules.Ids.COMBAT, enabledByDefault = false)
+@LoadFeature(module = Modules.Ids.COMBAT)
 public class AbsorptionArmor extends Feature {
+
+    @Config
+    @Label(description = "If > 0, Armor Toughness on items will be converted to absorption, multiplying it by this, and Armor will stay the same.")
+    public static Double toughnessToAbsorptionRatio = .25d;
 
     public AbsorptionArmor(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -29,15 +34,20 @@ public class AbsorptionArmor extends Feature {
         Multimap<Attribute, AttributeModifier> toAdd = HashMultimap.create();
         Multimap<Attribute, AttributeModifier> toRemove = HashMultimap.create();
         event.getModifiers().forEach((attribute, modifier) -> {
-            if (attribute.equals(Attributes.ARMOR)) {
+            if (attribute.equals(Attributes.ARMOR) && toughnessToAbsorptionRatio == 0) {
                 toAdd.put(RegeneratingAbsorption.ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount(), modifier.getOperation()));
                 toRemove.put(attribute, modifier);
             }
             if (attribute.equals(Attributes.ARMOR_TOUGHNESS)) {
-                if (modifier.getOperation() == AttributeModifier.Operation.ADDITION)
-                    toAdd.put(RegeneratingAbsorption.SPEED_ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount() * 0.1d, AttributeModifier.Operation.MULTIPLY_BASE));
-                else
-                    toAdd.put(RegeneratingAbsorption.SPEED_ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount(), modifier.getOperation()));
+                if (toughnessToAbsorptionRatio > 0) {
+                    toAdd.put(RegeneratingAbsorption.ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount(), modifier.getOperation()));
+                }
+                else {
+                    if (modifier.getOperation() == AttributeModifier.Operation.ADDITION)
+                        toAdd.put(RegeneratingAbsorption.SPEED_ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount() * 0.1d, AttributeModifier.Operation.MULTIPLY_BASE));
+                    else
+                        toAdd.put(RegeneratingAbsorption.SPEED_ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount(), modifier.getOperation()));
+                }
                 toRemove.put(attribute, modifier);
             }
         });
