@@ -16,6 +16,8 @@
 * `item_stats` data pack has been split into 2
   * `item_stacks`: changes item stacks
   * `combat_rework`: changes everything else
+* Weighted armor formula is now the same as pre-rework
+  * The feature is still disabled by default
 
 ## 4.10.3
 ### Additions

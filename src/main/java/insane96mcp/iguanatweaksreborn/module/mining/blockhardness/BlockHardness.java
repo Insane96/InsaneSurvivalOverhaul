@@ -4,8 +4,8 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.GlobalHardnessSync;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagValue;
 import net.minecraft.core.BlockPos;
@@ -41,6 +41,10 @@ public class BlockHardness extends JsonFeature {
 	@Config(min = 0d, max = 128d)
 	@Label(name = "Hardness Multiplier", description = "Multiplier applied to the hardness of blocks. E.g. with this set to 2.0 blocks will take 2 times longer to break.")
 	public static Double hardnessMultiplier = 1d;
+
+	@Config(min = 0d, max = 128d)
+	@Label(description = "Multiplier applied to tinkers construct tools mining speed. This also applies to additive modifiers")
+	public static Double tiConMiningSpeedModifier = 0.75d;
 
 	public BlockHardness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
