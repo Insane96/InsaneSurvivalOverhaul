@@ -51,7 +51,7 @@ public class WeightedArmor extends JsonFeature {
 
     @Config
     @Label(description = "Formula to calculate the slowdown of a piece of armor. Variables available are: armor, armor_toughness. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Please note that 1 means 100% slowdown")
-    public static String slowdownFormula = "0";
+    public static String slowdownFormula = "(armor * 0.01) * (1 + (armor_toughness * 0.05))";
 
     public WeightedArmor(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
