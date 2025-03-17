@@ -180,7 +180,7 @@ public class EnchantmentsFeature extends JsonFeature {
 			Enchantments.THORNS.rarity = Enchantment.Rarity.VERY_RARE;
 
 		//Can this make something blow up?
-		if (this.isEnabled() && reworkBonusLootEnchantments)
+		if (isBonusLootEnchantmentReworkEnabled())
 			Enchantments.BLOCK_FORTUNE = LUCK.get();
 
 		if (this.isEnabled())
