@@ -217,8 +217,7 @@ public class DroppedExperience extends Feature {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void removeExperienceBar(final RenderGuiOverlayEvent.Pre event) {
-		if (!this.isEnabled()
-			|| !disableExperience)
+		if (!disableExperience)
 			return;
 
 		if (Minecraft.getInstance().player.jumpableVehicle() == null && event.getOverlay().equals(VanillaGuiOverlay.VIGNETTE.type())) {

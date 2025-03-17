@@ -5,6 +5,9 @@
 * Create integration
   * A data pack that reduces overall zinc generation but with greater quantities in peaks
 
+### Fixes
+* Experience bar ignoring disable xp game rule in some circumstances
+
 ## 4.11.0
 ### Additions
 * Absorption armor is now enabled by default, but ...
