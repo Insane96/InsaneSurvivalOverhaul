@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Create integration
+  * A data pack that reduces overall zinc generation but with greater quantities in peaks
+
 ## 4.11.0
 ### Additions
 * Absorption armor is now enabled by default, but ...

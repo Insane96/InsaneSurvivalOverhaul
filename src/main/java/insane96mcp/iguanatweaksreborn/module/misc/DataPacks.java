@@ -105,6 +105,9 @@ public class DataPacks extends Feature {
     @Label(name = "Caverns & Chasms integration", description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
     public static Boolean cavernsAndChasms = true;
     @Config
+    @Label(name = "Create integration", description = "Integrates the mod with Crate. Alters ore generation.")
+    public static Boolean create = true;
+    @Config
     @Label(name = "Tinkers' Construct integration", description = "Integrates the mod with Tinker's Construct. Disables vanilla items.")
     public static Boolean tinkersConstruct = false;
 
@@ -132,6 +135,7 @@ public class DataPacks extends Feature {
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "autumnity_integration", Component.literal("Insane's Survival Overhaul Autumnity Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "farmers_delight_integration", Component.literal("Insane's Survival Overhaul Farmer's Delight Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "z_caverns_and_chasms_integration", Component.literal("Insane's Survival Overhaul Caverns & Chasms Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms")));
+        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "z_create_integration", Component.literal("Insane's Survival Overhaul Create Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && create && ModList.get().isLoaded("create")));
         IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "tconstruct_integration", Component.literal("Insane's Survival Overhaul Tinkers' Construct Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tinkersConstruct));
 
         IntegratedPack.addPack(new IntegratedPack(PackType.CLIENT_RESOURCES, "assets_override", Component.literal("Insane's Survival Overhaul Assets Override"), () -> true));
