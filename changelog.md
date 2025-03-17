@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.0
 ### Additions
 * Absorption armor is now enabled by default, but ...
   * ... only toughness is converted to absorption in a 0.25x ratio
