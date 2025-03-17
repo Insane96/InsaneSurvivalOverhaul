@@ -79,7 +79,7 @@ public class DroppedExperience extends Feature {
 	public static Integer bonusExperiencePerEquipment = 2;
 	@Config(min = 0)
 	@Label(name = "Mobs.Bonus experience per equipment if enchanted", description = "This is added to 'Bonus experience per equipment'.")
-	public static Integer bonusExperiencePerEnchantedEquipment = 2;
+	public static Integer bonusExperiencePerEnchantedEquipment = 3;
 
 	@Config(min = 0, max = 512)
 	@Label(name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
@@ -87,13 +87,13 @@ public class DroppedExperience extends Feature {
 
 	@Config(min = 0)
 	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
-	public static MinMax honeyHarvestExperience = new MinMax(2, 5);
+	public static MinMax honeyHarvestExperience = new MinMax(3, 5);
 	@Config(min = 0)
 	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if Fluid Cooldown is enabled.")
-	public static MinMax milkXp = new MinMax(2, 5);
+	public static MinMax milkXp = new MinMax(3, 5);
 	@Config(min = 0)
 	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")
-	public static MinMax shearXp = new MinMax(1, 3);
+	public static MinMax shearXp = new MinMax(2, 3);
 
 	public static Boolean disableExperience = false;
 

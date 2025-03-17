@@ -19,6 +19,7 @@
 * Weighted armor formula is now the same as pre-rework
   * The feature is still disabled by default
 * Fed animals now emit happy villagers particles instead of hearts so don't get mixed with in love ones
+* Increased experience dropped from enchanted gear mobs, harvesting honey, milking cows and shearing sheep
 
 ### Fixes
 * Animals not breeding anymore
