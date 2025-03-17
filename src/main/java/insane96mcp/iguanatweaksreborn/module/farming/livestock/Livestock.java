@@ -133,7 +133,7 @@ public class Livestock extends Feature {
 			eggLay(event);
 			tryAutoBreed(event);
 			if (hasBeenFedRecently(event.getEntity()) && event.getEntity().getRandom().nextInt(200) == 0)
-				((ServerLevel) event.getEntity().level()).sendParticles(ParticleTypes.HEART, Livestock.getRandomXWithin(event.getEntity(), 0.2f), event.getEntity().getRandomY() + 0.5, Livestock.getRandomZWithin(event.getEntity(),0.2f), 1, 0, 0, 0, 0.1f);
+				((ServerLevel) event.getEntity().level()).sendParticles(ParticleTypes.HAPPY_VILLAGER, event.getEntity().getX(), event.getEntity().getY() + event.getEntity().getBbHeight() / 1.5f, event.getEntity().getZ(), 5, 0.25, 0.25, 0.25, 0.2f);
 		}
 		cowMilkTick(event);
 	}

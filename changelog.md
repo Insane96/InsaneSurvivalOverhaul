@@ -10,14 +10,19 @@
   * Items in this tag will not respond to left and right click actions and will be unequipped if equipped in armor slots
 * Tinkers' Construct integration
   * Disables vanilla items
+* No damage when spamming is now applied to Tinkers Construct too
 
 ### Changes
-* No damage when spamming is now applied to Tinkers Construct too
 * `item_stats` data pack has been split into 2
   * `item_stacks`: changes item stacks
   * `combat_rework`: changes everything else
 * Weighted armor formula is now the same as pre-rework
   * The feature is still disabled by default
+* Fed animals now emit happy villagers particles instead of hearts so don't get mixed with in love ones
+
+### Fixes
+* Animals not breeding anymore
+* Love hearts spawning in the wrong place (x, y, x instead of x, y, z)
 
 ## 4.10.3
 ### Additions
