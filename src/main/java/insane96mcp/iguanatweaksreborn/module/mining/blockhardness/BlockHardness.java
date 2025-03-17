@@ -42,10 +42,6 @@ public class BlockHardness extends JsonFeature {
 	@Label(name = "Hardness Multiplier", description = "Multiplier applied to the hardness of blocks. E.g. with this set to 2.0 blocks will take 2 times longer to break.")
 	public static Double hardnessMultiplier = 1d;
 
-	@Config(min = 0d, max = 128d)
-	@Label(description = "Multiplier applied to tinkers construct tools mining speed. This also applies to additive modifiers")
-	public static Double tiConMiningSpeedModifier = 0.75d;
-
 	public BlockHardness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "dimension_hardness"), new SyncType(json -> loadAndReadJson(json, dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE)));

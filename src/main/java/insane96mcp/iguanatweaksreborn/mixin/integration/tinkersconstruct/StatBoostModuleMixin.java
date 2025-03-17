@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct;
 
-import insane96mcp.iguanatweaksreborn.module.mining.blockhardness.BlockHardness;
+import insane96mcp.iguanatweaksreborn.module.misc.TinkerIntegration;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,9 +21,11 @@ public class StatBoostModuleMixin {
 		if (operation != StatBoostModule.StatOperation.ADD)
 			return value;
 		if (this.stat != ToolStats.MINING_SPEED)
-			return value * BlockHardness.tiConMiningSpeedModifier.floatValue();
+			return value * TinkerIntegration.miningSpeedModifier();
 		if (this.stat != ToolStats.ATTACK_DAMAGE)
-			return value * BlockHardness.tiConMiningSpeedModifier.floatValue();
+			return value * TinkerIntegration.damageModifier();
+		if (this.stat != ToolStats.DURABILITY)
+			return value * TinkerIntegration.durabilityModifier();
 		return value;
 	}
 }

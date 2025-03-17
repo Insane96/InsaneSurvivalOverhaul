@@ -29,7 +29,10 @@ public class ModLoadedPlugin implements IMixinConfigPlugin {
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.appleskin.HUDOverlayHandlerMixin", () -> LoadingModList.get().getModFileById("appleskin") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.villagercomfort.ComfortHelperMixin", () -> LoadingModList.get().getModFileById("villagercomfort") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct.ToolAttackUtilMixin", () -> LoadingModList.get().getModFileById("tconstruct") != null)
+            .put("insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct.HeadMaterialStatsMixin", () -> LoadingModList.get().getModFileById("tconstruct") != null)
+            .put("insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct.StatBoostModuleMixin", () -> LoadingModList.get().getModFileById("tconstruct") != null)
             .build();
+
     @Override
     public void onLoad(String mixinPackage) {
 

@@ -9,7 +9,8 @@
 * `iguanatweaksreborn:disabled` item tag
   * Items in this tag will not respond to left and right click actions and will be unequipped if equipped in armor slots
 * Tinkers' Construct integration
-  * Disables vanilla items
+  * Mining speed, attack damage and durability multipliers. Default to 0.75
+  * A data pack that disables vanilla items
 * No damage when spamming is now applied to Tinkers Construct too
 
 ### Changes
@@ -19,6 +20,7 @@
 * Weighted armor formula is now the same as pre-rework
   * The feature is still disabled by default
 * Fed animals now emit happy villagers particles instead of hearts so don't get mixed with in love ones
+  * Auto breed when fed has been reduced
 * Increased experience dropped from enchanted gear mobs, harvesting honey, milking cows and shearing sheep
 
 ### Fixes
