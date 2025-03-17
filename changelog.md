@@ -7,6 +7,8 @@
 
 ### Fixes
 * Experience bar ignoring disable xp game rule in some circumstances
+* Luck enchantment and gold feature breaking items enchantment even if disabled
+* Luck not applied correctly when breaking blocks
 
 ## 4.11.0
 ### Additions

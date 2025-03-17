@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.mining;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -12,6 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -56,13 +58,18 @@ public class Gold extends Feature {
 		}
 	}
 
-	public static int getFortuneLevel(int original, ItemStack itemStack) {
-		if(!isEnabled(Gold.class)
-				|| !itemStack.is(ISOItemTagsProvider.GOLDEN_HAND_EQUIPMENT)
-				|| original >= fortuneLevel)
+	public static int getFortuneLevel(ItemStack stack, int original) {
+		if (!shouldApply(stack))
 			return original;
+		int luckLvl = EnchantmentHelper.getTagEnchantmentLevel(EnchantmentsFeature.LUCK.get(), stack);
+		if (original >= luckLvl)
+			return Math.max(original, fortuneLevel);
 
-		return fortuneLevel;
+		return Math.max(luckLvl, fortuneLevel);
+	}
+
+	public static boolean shouldApply(ItemStack stack) {
+		return isEnabled(Gold.class) && stack.is(ISOItemTagsProvider.GOLDEN_HAND_EQUIPMENT);
 	}
 
 	@OnlyIn(Dist.CLIENT)
