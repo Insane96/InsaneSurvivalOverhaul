@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.1
 ### Additions
 * Create integration
   * A data pack that reduces overall zinc generation but with greater quantities in peaks
