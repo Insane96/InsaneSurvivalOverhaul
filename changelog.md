@@ -5,6 +5,10 @@
 * Create integration
   * A data pack that reduces overall zinc generation but with greater quantities in peaks
 
+### Changes
+* Tinkers Construct data pack
+  * Luck on tools has been reduced to max level 2
+
 ### Fixes
 * Experience bar ignoring disable xp game rule in some circumstances
 * Luck enchantment and gold feature breaking items enchantment even if disabled
