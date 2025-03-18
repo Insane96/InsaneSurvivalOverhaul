@@ -9,8 +9,8 @@ import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.data.IdTagMatcher;
@@ -96,8 +96,11 @@ public class Tiredness extends JsonFeature {
 	@Label(name = "Tiredness per level", description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
 	public static Double tirednessPerLevel = 125d;
 	@Config(min = 0d)
-	@Label(name = "Default Energy Boost Duration Multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effective nourishment (hunger + saturation) of the food. This multiplies the duration of the effect")
-	public static Double defaultEnergyBoostDurationMultiplier = 5d;
+	@Label(name = "Energy boost.Tiredness reduction", description = "If the player has energy boost, reduce tiredness by this value (multiplied by the effect level) each tick.")
+	public static Double energyBoostTirednessReduction = 0.025d;
+	@Config(min = 0d)
+	@Label(name = "Energy boost.Duration multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effective nourishment (hunger + saturation) of the food. This multiplies the duration of the effect")
+	public static Double energyBoostDurationMultiplier = 5d;
 	@Config
 	@Label(name = "On death behaviour", description = """
 			What to do with tiredness when the player dies.
@@ -235,7 +238,7 @@ public class Tiredness extends JsonFeature {
 
 		//noinspection ConstantConditions
 		int effectLevel = player.getEffect(ENERGY_BOOST.get()).getAmplifier() + 1;
-		TirednessHandler.subtract(player, 0.025f * effectLevel);
+		TirednessHandler.subtract(player, energyBoostTirednessReduction.floatValue() * effectLevel);
 
 		if (player.tickCount % 20 == 0)
 			TirednessHandler.syncToClient(player);
@@ -258,22 +261,24 @@ public class Tiredness extends JsonFeature {
 	}
 
 	private static void tryApplyTired(float tiredness, ServerPlayer player) {
-		int amplifier = Math.min((int) ((tiredness - tirednessToEffect) / tirednessPerLevel), 4);
-		if (amplifier >= 0) {
-			int oAmplifier = -1;
+		int wantedAmplifier = -1;
+		if (tiredness >= tirednessToEffect)
+			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 4);
+		if (wantedAmplifier >= 0) {
+			int currAmplifier = -1;
 			if (player.hasEffect(TIRED.get())) {
 				//noinspection DataFlowIssue
-				oAmplifier = player.getEffect(TIRED.get()).getAmplifier();
+				currAmplifier = player.getEffect(TIRED.get()).getAmplifier();
 			}
-			if (amplifier != oAmplifier) {
-				player.addEffect(new MobEffectInstance(TIRED.get(), -1, amplifier, true, false, true));
-				if (amplifier == 0)
+			if (wantedAmplifier != currAmplifier) {
+				player.addEffect(new MobEffectInstance(TIRED.get(), -1, wantedAmplifier, true, false, true));
+				if (wantedAmplifier == 0)
 					player.displayClientMessage(Component.translatable(TIRED_ENOUGH), false);
-				else if (amplifier == 4)
+				else if (wantedAmplifier == 4)
 					player.displayClientMessage(Component.translatable(TOO_TIRED), false);
 			}
 		}
-		else {
+		else if (!player.hasEffect(ENERGY_BOOST.get())) {
 			if (player.hasEffect(TIRED.get()))
 				player.removeEffect(TIRED.get());
 		}

@@ -1,5 +1,12 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Tiredness kicking in too early
+  * Instead of 500 tiredness, it would kick in at 375
+* "You are tired" message spam with energy boost
+  * If you are tired and have the energy boost effect, the tired effect is no longer removed to prevent spam
+
 ## 4.11.1
 ### Additions
 * Create integration
