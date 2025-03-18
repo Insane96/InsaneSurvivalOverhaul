@@ -1,11 +1,16 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Tool efficiency is now referred as `Mining speed`
+
 ### Fixes
 * Tiredness kicking in too early
   * Instead of 500 tiredness, it would kick in at 375
 * "You are tired" message spam with energy boost
   * If you are tired and have the energy boost effect, the tired effect is no longer removed to prevent spam
+* Efficiency increased by 1 on any tool
+* Hoes with efficiency using the vanilla formula to break crops
 
 ## 4.11.1
 ### Additions

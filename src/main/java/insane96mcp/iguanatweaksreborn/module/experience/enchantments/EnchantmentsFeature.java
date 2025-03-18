@@ -92,7 +92,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static Boolean thornsOverhaul = true;
 
 	@Config
-	@Label(name = "Tool Efficiency Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_efficiency * (0.5*lvl)`")
+	@Label(name = "Tool Mining Speed Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_mining_speed * (0.5*lvl)`")
 	public static Boolean changeEfficiencyFormula = true;
 	@Config
 	@Label(name = "Nerf Mending", description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
@@ -236,6 +236,8 @@ public class EnchantmentsFeature extends JsonFeature {
 	}
 
 	public static float getEfficiencyBonus(float baseEfficiency, int lvl) {
+		if (lvl == 0)
+			return 0f;
         return EnchantmentsFeature.isBetterEfficiencyFormula() ? baseEfficiency * lvl * 0.2f : 1 + (lvl * lvl);
 	}
 
