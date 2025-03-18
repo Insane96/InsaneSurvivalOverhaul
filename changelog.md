@@ -12,6 +12,7 @@
 * Efficiency increased by 1 on any tool
 * Hoes using the vanilla mining speed to break crops
 * Hoes with efficiency using the vanilla formula to break crops
+* Environmental's giant tall grass still dropping wheat seeds
 
 ## 4.11.1
 ### Additions
