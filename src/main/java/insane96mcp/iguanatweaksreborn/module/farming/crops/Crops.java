@@ -244,11 +244,11 @@ public class Crops extends Feature {
 				|| !event.getState().is(HARDER_CROPS_TAG))
 			return;
 		ItemStack heldStack = event.getEntity().getMainHandItem();
-		if (!(heldStack.getItem() instanceof TieredItem heldItem))
+		if (!(heldStack.getItem() instanceof DiggerItem diggerItem))
 			return;
-		if (!heldItem.canPerformAction(heldStack, ToolActions.HOE_DIG) && !heldItem.canPerformAction(heldStack, ToolActions.AXE_DIG))
+		if (!diggerItem.canPerformAction(heldStack, ToolActions.HOE_DIG) && !diggerItem.canPerformAction(heldStack, ToolActions.AXE_DIG))
 			return;
-		float miningSpeed = heldItem.getTier().getSpeed();
+		float miningSpeed = diggerItem.speed;
 		if (miningSpeed > 1.0F) {
 			int efficiencyLevel = EnchantmentHelper.getBlockEfficiency(event.getEntity());
 			ItemStack itemstack = event.getEntity().getMainHandItem();
@@ -256,10 +256,10 @@ public class Crops extends Feature {
 				miningSpeed += EnchantmentsFeature.getEfficiencyBonus(miningSpeed, efficiencyLevel);
 			}
 		}
-		if (heldItem.canPerformAction(heldStack, ToolActions.HOE_DIG))
+		if (diggerItem.canPerformAction(heldStack, ToolActions.HOE_DIG))
 			event.setNewSpeed(event.getNewSpeed() * miningSpeed);
 		else
-			event.setNewSpeed(event.getNewSpeed() / miningSpeed);
+			event.setNewSpeed(event.getNewSpeed() / 5f);
 	}
 
 	public static int getWaterHydrationRadius() {

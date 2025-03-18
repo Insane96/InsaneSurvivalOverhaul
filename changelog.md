@@ -10,6 +10,7 @@
 * "You are tired" message spam with energy boost
   * If you are tired and have the energy boost effect, the tired effect is no longer removed to prevent spam
 * Efficiency increased by 1 on any tool
+* Hoes using the vanilla mining speed to break crops
 * Hoes with efficiency using the vanilla formula to break crops
 
 ## 4.11.1
