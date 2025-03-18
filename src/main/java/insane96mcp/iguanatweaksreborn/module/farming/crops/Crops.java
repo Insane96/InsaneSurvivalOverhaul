@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.farming.crops;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -247,18 +248,18 @@ public class Crops extends Feature {
 			return;
 		if (!heldItem.canPerformAction(heldStack, ToolActions.HOE_DIG) && !heldItem.canPerformAction(heldStack, ToolActions.AXE_DIG))
 			return;
-		float efficiency = heldItem.getTier().getSpeed();
-		if (efficiency > 1.0F) {
+		float miningSpeed = heldItem.getTier().getSpeed();
+		if (miningSpeed > 1.0F) {
 			int efficiencyLevel = EnchantmentHelper.getBlockEfficiency(event.getEntity());
 			ItemStack itemstack = event.getEntity().getMainHandItem();
 			if (efficiencyLevel > 0 && !itemstack.isEmpty()) {
-				efficiency += (float) (efficiencyLevel * efficiencyLevel + 1);
+				miningSpeed += EnchantmentsFeature.getEfficiencyBonus(miningSpeed, efficiencyLevel);
 			}
 		}
 		if (heldItem.canPerformAction(heldStack, ToolActions.HOE_DIG))
-			event.setNewSpeed(event.getNewSpeed() * efficiency);
+			event.setNewSpeed(event.getNewSpeed() * miningSpeed);
 		else
-			event.setNewSpeed(event.getNewSpeed() / efficiency);
+			event.setNewSpeed(event.getNewSpeed() / miningSpeed);
 	}
 
 	public static int getWaterHydrationRadius() {
