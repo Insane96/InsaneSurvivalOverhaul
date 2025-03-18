@@ -108,7 +108,7 @@
 	"iguanatweaksreborn.no_equip_item": "Questo oggeto non ti calza",
 	"iguanatweaksreborn.disabled_item": "Questo oggetto é disattivato e non può essere utilizzato / equipaggiato",
 	"iguanatweaksreborn.broken_item": "Questo oggetto è rotto, deve essere riparato",
-	"iguanatweaksreborn.tool_efficiency": "Efficienza attrezzo: %.1f",
+	"iguanatweaksreborn.tool_mining_speed": "Velocità scavo: %.1f",
 	"iguanatweaksreborn.tool_durability": "Durabilità: %d/%d",
 	"iguanatweaksreborn.broken_durability": "Rotto",
 	"iguanatweaksreborn.heavily_broken_durability": "Estremamente rotto",

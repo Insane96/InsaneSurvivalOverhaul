@@ -33,7 +33,7 @@ public class MiningMisc extends Feature {
 	@Label(name = "Faster slabs, stairs and walls", description = "Makes slabs, stairs and walls take less time to break")
 	public static Boolean fastSlabsStairsWalls = true;
 	@Config
-	@Label(name = "Efficiency based destroy delay", description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool efficiency.")
+	@Label(name = "Efficiency based destroy delay", description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool mining speed.")
 	public static Boolean efficiencyBasedDestroyDelay = true;
 	@Config
 	@Label(name = "Caverns and Chasms Integration", description = "Changes some Caverns and Chasms config options.")

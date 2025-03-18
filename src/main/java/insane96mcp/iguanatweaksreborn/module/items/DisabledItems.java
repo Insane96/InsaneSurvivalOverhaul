@@ -34,8 +34,8 @@ public class DisabledItems extends Feature {
 
 	public static final TagKey<Item> NO_DAMAGE = ISOItemTagsProvider.create("no_damage");
 	public static final String NO_DAMAGE_ITEM_LANG = "iguanatweaksreborn.no_damage_item";
-	public static final TagKey<Item> NO_EFFICIENCY = ISOItemTagsProvider.create("no_efficiency");
-	public static final String NO_EFFICIENCY_ITEM_LANG = "iguanatweaksreborn.no_efficiency_item";
+	public static final TagKey<Item> NO_MINING = ISOItemTagsProvider.create("no_mining");
+	public static final String NO_MINING_ITEM_LANG = "iguanatweaksreborn.no_mining_item";
 	public static final TagKey<Item> NO_EQUIP = ISOItemTagsProvider.create("no_equip");
 	public static final String NO_EQUIP_ITEM_LANG = "iguanatweaksreborn.no_equip_item";
 
@@ -70,9 +70,9 @@ public class DisabledItems extends Feature {
 
 		Player player = event.getEntity();
 		ItemStack stack = player.getMainHandItem();
-		if (stack.is(NO_EFFICIENCY) || stack.is(DISABLED)) {
+		if (stack.is(NO_MINING) || stack.is(DISABLED)) {
 			event.setCanceled(true);
-			event.getEntity().displayClientMessage(Component.translatable(NO_EFFICIENCY_ITEM_LANG), true);
+			event.getEntity().displayClientMessage(Component.translatable(NO_MINING_ITEM_LANG), true);
 		}
 	}
 
@@ -124,8 +124,8 @@ public class DisabledItems extends Feature {
 		ItemStack stack = event.getItemStack();
 		if (stack.is(NO_DAMAGE))
 			event.getToolTip().add(Component.translatable(NO_DAMAGE_ITEM_LANG).withStyle(ChatFormatting.RED));
-		if (stack.is(NO_EFFICIENCY))
-			event.getToolTip().add(Component.translatable(NO_EFFICIENCY_ITEM_LANG).withStyle(ChatFormatting.RED));
+		if (stack.is(NO_MINING))
+			event.getToolTip().add(Component.translatable(NO_MINING_ITEM_LANG).withStyle(ChatFormatting.RED));
 		if (stack.is(NO_EQUIP))
 			event.getToolTip().add(Component.translatable(NO_EQUIP_ITEM_LANG).withStyle(ChatFormatting.RED));
 		if (stack.is(DISABLED))

@@ -27,11 +27,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class MiscItem extends Feature {
 
 	public static final TagKey<Item> HAS_TOOLTIP = ISOItemTagsProvider.create("has_tooltip");
-	public static final String TOOL_EFFICIENCY_LANG = "iguanatweaksreborn.tool_efficiency";
+	public static final String TOOL_MINING_SPEED_LANG = "iguanatweaksreborn.tool_mining_speed";
 
 	@Config
-	@Label(description = "Tools get a tool efficiency tooltip.")
-	public static Boolean efficiencyTooltip = true;
+	@Label(description = "Tools get a mining speed tooltip.")
+	public static Boolean miningSpeedTooltip = true;
 
 	@Config
 	@Label(description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
@@ -55,13 +55,13 @@ public class MiscItem extends Feature {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onTooltip(ItemTooltipEvent event) {
 		if (!this.isEnabled()
-				|| !efficiencyTooltip)
+				|| !miningSpeedTooltip)
 			return;
 
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() instanceof DiggerItem diggerItem){
 			float toolEfficiency = ISOEventFactory.getBonusEnchantmentEfficiency(event.getEntity(), null, stack, diggerItem.speed);
-			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_EFFICIENCY_LANG, ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
+			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_MINING_SPEED_LANG, ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
 		}
 	}
 
