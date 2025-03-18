@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.2
 ### Changes
 * Tool efficiency is now referred as `Mining speed`
 
