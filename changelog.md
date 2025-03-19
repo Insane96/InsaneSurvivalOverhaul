@@ -4,11 +4,15 @@
 ### Changes
 * Worlds should load faster as data packs are no longer loaded twice
 * Magic damage now bypasses again invincibility frames
+  * Pufferfishes are no longer instant kill
 
 ### Internal
 * Reworked IntegratedPacks 
   * Allowing to be used by other mods
   * Allowing for priorities for loading order
+
+### Fixes
+* Crash on world creation / load when environmental not present
 
 ## 4.11.2
 ### Changes

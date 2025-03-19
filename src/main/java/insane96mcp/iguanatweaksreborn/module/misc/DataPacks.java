@@ -132,8 +132,8 @@ public class DataPacks extends Feature {
         InsaneSurvivalOverhaul.addServerPack("quark_integration", "Insane's Survival Overhaul Quark Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && quark && ModList.get().isLoaded("quark"));
         InsaneSurvivalOverhaul.addServerPack("autumnity_integration", "Insane's Survival Overhaul Autumnity Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity"));
         InsaneSurvivalOverhaul.addServerPack("farmers_delight_integration", "Insane's Survival Overhaul Farmer's Delight Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight"));
-        InsaneSurvivalOverhaul.addServerPack(1, "z_caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
-        InsaneSurvivalOverhaul.addServerPack(1, "z_create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && create && ModList.get().isLoaded("create"));
+        InsaneSurvivalOverhaul.addServerPack(1, "caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
+        InsaneSurvivalOverhaul.addServerPack(1, "create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && create && ModList.get().isLoaded("create"));
         InsaneSurvivalOverhaul.addServerPack(1, "tconstruct_integration", "Insane's Survival Overhaul Tinkers' Construct Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tinkersConstruct);
 
         InsaneSurvivalOverhaul.addClientPack("assets_override", "Insane's Survival Overhaul Assets Override", () -> true);

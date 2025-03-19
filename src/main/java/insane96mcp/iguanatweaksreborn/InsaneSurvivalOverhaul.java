@@ -230,18 +230,18 @@ public class InsaneSurvivalOverhaul
     }
 
     public static void addServerPack(String path, String description, BooleanSupplier enabled) {
-        IntegratedPack.addServerPack(InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+        IntegratedPack.addServerPack(MOD_ID, path, description, enabled);
     }
 
     public static void addServerPack(int priority, String path, String description, BooleanSupplier enabled) {
-        IntegratedPack.addServerPack(priority, InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+        IntegratedPack.addServerPack(priority, MOD_ID, path, description, enabled);
     }
 
     public static void addClientPack(String path, String description, BooleanSupplier enabled) {
-        IntegratedPack.addClientPack(InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+        IntegratedPack.addClientPack(MOD_ID, path, description, enabled);
     }
 
     public static void addClientPack(int priority, String path, String description, BooleanSupplier enabled) {
-        IntegratedPack.addClientPack(priority, InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+        IntegratedPack.addClientPack(priority, MOD_ID, path, description, enabled);
     }
 }
