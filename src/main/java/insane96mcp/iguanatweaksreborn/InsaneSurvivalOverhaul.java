@@ -1,6 +1,5 @@
 package insane96mcp.iguanatweaksreborn;
 
-import com.google.common.collect.Lists;
 import glitchcore.event.EventManager;
 import insane96mcp.iguanatweaksreborn.command.ISOCommand;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
@@ -36,7 +35,6 @@ import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDa
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.setup.ISOCommonConfig;
-import insane96mcp.iguanatweaksreborn.setup.ISOPackSource;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
@@ -45,11 +43,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.PathPackResources;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackRepository;
-import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
@@ -59,7 +52,6 @@ import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -75,10 +67,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 @Mod("iguanatweaksreborn")
 public class InsaneSurvivalOverhaul
@@ -236,21 +225,11 @@ public class InsaneSurvivalOverhaul
 
     public void addPackFinders(AddPackFindersEvent event)
     {
-        for (IntegratedPack integratedPack : IntegratedPack.INTEGRATED_PACKS) {
-            if (event.getPackType() != integratedPack.getPackType())
-                continue;
-            if (!integratedPack.shouldBeEnabled())
-                continue;
-
-            Path resourcePath = ModList.get().getModFileById(MOD_ID).getFile().findResource("integrated_packs/" + integratedPack.getPath());
-            var pack = Pack.readMetaAndCreate(InsaneSurvivalOverhaul.RESOURCE_PREFIX + integratedPack.getPath(), integratedPack.getDescription(), integratedPack.shouldBeEnabled() && integratedPack.getPackType() != PackType.CLIENT_RESOURCES,
-                    (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, integratedPack.shouldBeEnabled() ? PackSource.DEFAULT : ISOPackSource.DISABLED);
-            event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
-        }
+        IntegratedPack.onAddPackFinders(event, MOD_ID);
     }
 
     //Reload the data packs to disable the ones that have been disabled
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void onServerStartedEvent(ServerStartedEvent event)
     {
         boolean hasDisabledPack = false;
@@ -266,6 +245,6 @@ public class InsaneSurvivalOverhaul
         }
         if (hasDisabledPack)
             event.getServer().reloadResources(list.stream().map(Pack::getId).collect(Collectors.toList()));
-    }
+    }*/
 
 }

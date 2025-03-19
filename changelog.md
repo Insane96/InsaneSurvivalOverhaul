@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Internal
+* Reworked IntegratedPacks allowing for priorities to be set
+
 ## 4.11.2
 ### Changes
 * Tool efficiency is now referred as `Mining speed`
