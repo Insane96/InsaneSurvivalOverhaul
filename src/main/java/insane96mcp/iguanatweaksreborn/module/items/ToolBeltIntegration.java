@@ -2,16 +2,14 @@ package insane96mcp.iguanatweaksreborn.module.items;
 
 import dev.gigaherz.toolbelt.ToolBelt;
 import dev.gigaherz.toolbelt.belt.ToolBeltItem;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -31,7 +29,7 @@ public class ToolBeltIntegration extends Feature {
 
 	public ToolBeltIntegration(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "toolbelt_integration", Component.literal("Insane's Survival Overhaul Tool Belt Integration"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt));
+		InsaneSurvivalOverhaul.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt);
 	}
 
 	@Override

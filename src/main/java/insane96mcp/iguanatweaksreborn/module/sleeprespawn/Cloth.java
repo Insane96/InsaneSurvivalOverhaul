@@ -1,16 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -32,6 +30,6 @@ public class Cloth extends Feature {
 
 	public Cloth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "cloth", Component.literal("Insane's Survival Overhaul Cloth"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		InsaneSurvivalOverhaul.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 }

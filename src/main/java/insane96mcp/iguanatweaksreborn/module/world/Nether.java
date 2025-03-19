@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -13,7 +12,6 @@ import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
@@ -50,7 +48,7 @@ public class Nether extends Feature {
 
     public Nether(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "nether_tweaks", Component.literal("Insane's Survival Overhaul Nether Tweaks"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks));
+        InsaneSurvivalOverhaul.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks);
     }
 
     public static boolean shouldDisableLavaPockets(SpringConfiguration configuration) {

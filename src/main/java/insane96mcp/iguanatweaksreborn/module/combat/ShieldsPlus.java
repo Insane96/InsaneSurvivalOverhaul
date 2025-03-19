@@ -1,15 +1,13 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraftforge.fml.ModList;
 
 @Label(name = "Shields+ Integration")
@@ -21,6 +19,6 @@ public class ShieldsPlus extends Feature {
 
     public ShieldsPlus(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "shieldsplus_integration", Component.literal("Insane's Survival Overhaul Shields+ Integration"), () -> super.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("shieldsplus")));
+        InsaneSurvivalOverhaul.addServerPack("shieldsplus_integration", "Insane's Survival Overhaul Shields+ Integration", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("shieldsplus"));
     }
 }

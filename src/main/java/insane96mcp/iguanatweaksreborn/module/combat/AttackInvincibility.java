@@ -1,18 +1,16 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.network.message.InvulnerableTimeMessageSync;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -31,7 +29,7 @@ public class AttackInvincibility extends Feature {
 
 	public AttackInvincibility(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "attack_invincibility", Component.literal("Insane's Survival Overhaul Attack Invincibility"), () -> super.isEnabled() && !DataPacks.disableAllDataPacks && arrowsMagicNoInvincFrames));
+		InsaneSurvivalOverhaul.addServerPack("attack_invincibility", "Insane's Survival Overhaul Attack Invincibility", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && arrowsMagicNoInvincFrames);
 	}
 
 	@SubscribeEvent

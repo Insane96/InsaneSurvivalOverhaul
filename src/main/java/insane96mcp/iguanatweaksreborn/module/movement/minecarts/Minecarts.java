@@ -1,16 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.movement.minecarts;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -28,6 +26,6 @@ public class Minecarts extends Feature {
 
 	public Minecarts(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_rails", Component.literal("Insane's Survival Overhaul Better Rails"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack));
+		InsaneSurvivalOverhaul.addServerPack("better_rails", "Insane's Survival Overhaul Better Rails", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 }

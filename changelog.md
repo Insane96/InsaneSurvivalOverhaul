@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Worlds should load faster as data packs are no longer loaded twice
+* Magic damage now bypasses again invincibility frames
 
 ### Internal
 * Reworked IntegratedPacks 

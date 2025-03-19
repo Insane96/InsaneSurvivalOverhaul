@@ -1,16 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.data.worldgen.features.TreeFeatures;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -37,7 +35,7 @@ public class PlantsGrowth extends Feature {
 
 	public PlantsGrowth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "plant_growth_modifiers", Component.literal("Insane's Survival Overhaul Plant Growth modifiers"), () -> super.isEnabled() && !DataPacks.disableAllDataPacks && plantGrowthMultipliersDataPack));
+		InsaneSurvivalOverhaul.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && plantGrowthMultipliersDataPack);
 	}
 
 	@SubscribeEvent

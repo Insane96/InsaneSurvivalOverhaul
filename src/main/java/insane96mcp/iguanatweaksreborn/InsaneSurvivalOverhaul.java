@@ -68,6 +68,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BooleanSupplier;
 
 @Mod("iguanatweaksreborn")
 public class InsaneSurvivalOverhaul
@@ -226,5 +227,21 @@ public class InsaneSurvivalOverhaul
     public void addPackFinders(AddPackFindersEvent event)
     {
         IntegratedPack.onAddPackFinders(event);
+    }
+
+    public static void addServerPack(String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addServerPack(InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+    }
+
+    public static void addServerPack(int priority, String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addServerPack(priority, InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+    }
+
+    public static void addClientPack(String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addClientPack(InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
+    }
+
+    public static void addClientPack(int priority, String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addClientPack(priority, InsaneSurvivalOverhaul.MOD_ID, path, description, enabled);
     }
 }

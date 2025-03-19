@@ -1,16 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.world;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
@@ -53,8 +51,8 @@ public class Berries extends Feature {
 
     public Berries(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries", Component.literal("Insane's Survival Overhaul Berries"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "berries_berry_good", Component.literal("Insane's Survival Overhaul Berries (Berry Good compat)"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good")));
+        InsaneSurvivalOverhaul.addServerPack("berries", "Insane's Survival Overhaul Berries", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good"));
+        InsaneSurvivalOverhaul.addServerPack("berries_berry_good", "Insane's Survival Overhaul Berries (Berry Good compat)", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good"));
     }
 
     @SubscribeEvent

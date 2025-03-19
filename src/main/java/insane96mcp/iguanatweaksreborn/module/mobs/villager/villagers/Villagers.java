@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -11,8 +10,6 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.gossip.GossipType;
@@ -63,7 +60,7 @@ public class Villagers extends Feature {
 
 	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "villager_trades", Component.literal("Insane's Survival Overhaul Villager Trades"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack));
+		InsaneSurvivalOverhaul.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

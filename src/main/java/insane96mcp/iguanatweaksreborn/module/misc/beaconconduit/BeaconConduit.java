@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -19,9 +18,7 @@ import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.GsonHelper;
@@ -133,7 +130,7 @@ public class BeaconConduit extends JsonFeature {
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));
         addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "beacon_effects")));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "better_beacon", Component.literal("Insane's Survival Overhaul Better Beacon"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
+        InsaneSurvivalOverhaul.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
     }
 
     @Override

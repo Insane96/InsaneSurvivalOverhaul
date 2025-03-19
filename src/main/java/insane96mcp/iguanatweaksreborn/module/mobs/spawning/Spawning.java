@@ -1,10 +1,10 @@
 package insane96mcp.iguanatweaksreborn.module.mobs.spawning;
 
 import com.google.common.collect.ImmutableSet;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -13,9 +13,7 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
@@ -61,8 +59,8 @@ public class Spawning extends Feature {
 
     public Spawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "yung_better_fortresses", Component.literal("Insane's Survival Overhaul Yung Better Fortresses"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses));
-        IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "ocean_guardians", Component.literal("Insane's Survival Overhaul Ocean Guardians"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && guardiansInDeepOceans));
+        InsaneSurvivalOverhaul.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
+        InsaneSurvivalOverhaul.addServerPack("ocean_guardians", "Insane's Survival Overhaul Ocean Guardians", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && guardiansInDeepOceans);
     }
 
     @SubscribeEvent

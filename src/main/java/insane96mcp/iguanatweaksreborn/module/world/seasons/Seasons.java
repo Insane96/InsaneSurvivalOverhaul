@@ -1,10 +1,10 @@
 package insane96mcp.iguanatweaksreborn.module.world.seasons;
 
 import com.google.common.collect.Lists;
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -15,12 +15,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.DistanceManager;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.GameRules;
@@ -93,8 +91,8 @@ public class Seasons extends Feature {
 
 	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "serene_seasons_changes", Component.literal("Insane's Survival Overhaul Serene Seasons Changes"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass));
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "no_saplings_in_winter", Component.literal("Insane's Survival Overhaul No Saplings in Winter"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter));
+		InsaneSurvivalOverhaul.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
+		InsaneSurvivalOverhaul.addServerPack("no_saplings_in_winter", "Insane's Survival Overhaul No Saplings in Winter", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter);
 	}
 
 	@Override

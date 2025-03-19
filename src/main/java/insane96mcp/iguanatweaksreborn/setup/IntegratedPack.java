@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.setup;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.PathPackResources;
@@ -75,6 +76,22 @@ public class IntegratedPack implements Comparable<IntegratedPack> {
         if (index < 0)
             index = -(index + 1);
         INTEGRATED_PACKS.add(index, integratedPack);
+    }
+
+    public static void addServerPack(String modId, String path, String description, BooleanSupplier enabled) {
+        addServerPack(0, modId, path, description, enabled);
+    }
+
+    public static void addServerPack(int priority, String modId, String path, String description, BooleanSupplier enabled) {
+        addPack(new IntegratedPack(priority, PackType.SERVER_DATA, modId, path, Component.literal(description), enabled));
+    }
+
+    public static void addClientPack(String modId, String path, String description, BooleanSupplier enabled) {
+        addServerPack(0, modId, path, description, enabled);
+    }
+
+    public static void addClientPack(int priority, String modId, String path, String description, BooleanSupplier enabled) {
+        addPack(new IntegratedPack(priority, PackType.CLIENT_RESOURCES, modId, path, Component.literal(description), enabled));
     }
 
     public static void onAddPackFinders(AddPackFindersEvent event) {

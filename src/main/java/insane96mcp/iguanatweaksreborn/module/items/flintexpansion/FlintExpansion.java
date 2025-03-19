@@ -1,9 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.items.flintexpansion;
 
+import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -13,8 +13,6 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.item.ILItemTier;
 import insane96mcp.shieldsplus.world.item.SPShieldItem;
 import insane96mcp.shieldsplus.world.item.SPShieldMaterial;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -42,8 +40,8 @@ public class FlintExpansion extends Feature {
 
 	public FlintExpansion(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "disable_stone_tools", Component.literal("Insane's Survival Overhaul Disable Stone Tools"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableStoneTools));
-		IntegratedPack.addPack(new IntegratedPack(PackType.SERVER_DATA, "flint_expansion", Component.literal("Insane's Survival Overhaul Flint Expansion"), () -> this.isEnabled() && !DataPacks.disableAllDataPacks));
+		InsaneSurvivalOverhaul.addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableStoneTools);
+		InsaneSurvivalOverhaul.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
 	}
 
 	public static boolean areStoneToolsDisabled() {
