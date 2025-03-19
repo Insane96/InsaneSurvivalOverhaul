@@ -5,8 +5,9 @@
 * Worlds should load faster as data packs are no longer loaded twice
 
 ### Internal
-* Reworked IntegratedPacks allowing for priorities to be set and to be used by other mods (ISE)
-
+* Reworked IntegratedPacks 
+  * Allowing to be used by other mods
+  * Allowing for priorities for loading order
 
 ## 4.11.2
 ### Changes

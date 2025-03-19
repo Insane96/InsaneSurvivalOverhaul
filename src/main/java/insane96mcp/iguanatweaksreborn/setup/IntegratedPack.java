@@ -22,20 +22,22 @@ public class IntegratedPack implements Comparable<IntegratedPack> {
 
     int priority;
     PackType packType;
+    String modId;
     String path;
     MutableComponent description;
     BooleanSupplier enabled;
 
-    public IntegratedPack(int priority, PackType packType, String path, MutableComponent description, BooleanSupplier enabled) {
+    public IntegratedPack(int priority, PackType packType, String modId, String path, MutableComponent description, BooleanSupplier enabled) {
         this.priority = priority;
         this.packType = packType;
+        this.modId = modId;
         this.path = path;
         this.description = description;
         this.enabled = enabled;
     }
 
-    public IntegratedPack(PackType packType, String path, MutableComponent description, BooleanSupplier enabled) {
-        this(0, packType, path, description, enabled);
+    public IntegratedPack(PackType packType, String modId, String path, MutableComponent description, BooleanSupplier enabled) {
+        this(0, packType, modId, path, description, enabled);
     }
 
     public int getPriority() {
@@ -75,15 +77,14 @@ public class IntegratedPack implements Comparable<IntegratedPack> {
         INTEGRATED_PACKS.add(index, integratedPack);
     }
 
-    public static void onAddPackFinders(AddPackFindersEvent event, String modId) {
-        String resourcePrefix = modId + ":";
+    public static void onAddPackFinders(AddPackFindersEvent event) {
         for (var integratedPack : INTEGRATED_PACKS) {
             if (event.getPackType() != integratedPack.getPackType()
                     || !integratedPack.shouldBeEnabled())
                 continue;
 
-            Path resourcePath = ModList.get().getModFileById(modId).getFile().findResource("integrated_packs/" + integratedPack.getPath());
-            var pack = Pack.readMetaAndCreate(resourcePrefix + integratedPack.getPath(), integratedPack.getDescription(), integratedPack.shouldBeEnabled() && integratedPack.getPackType() != PackType.CLIENT_RESOURCES,
+            Path resourcePath = ModList.get().getModFileById(integratedPack.modId).getFile().findResource("integrated_packs/" + integratedPack.getPath());
+            var pack = Pack.readMetaAndCreate(integratedPack.modId + ":" + integratedPack.getPath(), integratedPack.getDescription(), integratedPack.shouldBeEnabled() && integratedPack.getPackType() != PackType.CLIENT_RESOURCES,
                     (path) -> new PathPackResources(path, resourcePath, false), PackType.SERVER_DATA, Pack.Position.TOP, integratedPack.shouldBeEnabled() ? PackSource.DEFAULT : ISOPackSource.DISABLED);
             event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
         }

@@ -77,13 +77,13 @@ public class InsaneSurvivalOverhaul
 	public static final String RESOURCE_PREFIX = MOD_ID + ":";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    //TODO
+    //TODO ISO
     public static final String CONFIG_FOLDER = "config/" + NEW_MOD_ID;
 
     public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
 
     public InsaneSurvivalOverhaul(FMLJavaModLoadingContext context) {
-        //TODO
+        //TODO ISO
         context.registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
         context.registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC,NEW_MOD_ID + "/common.toml");
         MinecraftForge.EVENT_BUS.register(this);
@@ -225,6 +225,6 @@ public class InsaneSurvivalOverhaul
 
     public void addPackFinders(AddPackFindersEvent event)
     {
-        IntegratedPack.onAddPackFinders(event, MOD_ID);
+        IntegratedPack.onAddPackFinders(event);
     }
 }
