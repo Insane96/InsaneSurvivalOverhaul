@@ -227,24 +227,4 @@ public class InsaneSurvivalOverhaul
     {
         IntegratedPack.onAddPackFinders(event, MOD_ID);
     }
-
-    //Reload the data packs to disable the ones that have been disabled
-    /*@SubscribeEvent
-    public void onServerStartedEvent(ServerStartedEvent event)
-    {
-        boolean hasDisabledPack = false;
-        PackRepository packRepository = event.getServer().getPackRepository();
-        List<Pack> list = Lists.newArrayList(packRepository.getSelectedPacks());
-        for (IntegratedPack dataPack : IntegratedPack.INTEGRATED_PACKS) {
-            String dataPackId = InsaneSurvivalOverhaul.RESOURCE_PREFIX + dataPack.getPath();
-            Pack pack = packRepository.getPack(dataPackId);
-            if (pack != null && !dataPack.shouldBeEnabled()) {
-                list.remove(pack);
-                hasDisabledPack = true;
-            }
-        }
-        if (hasDisabledPack)
-            event.getServer().reloadResources(list.stream().map(Pack::getId).collect(Collectors.toList()));
-    }*/
-
 }

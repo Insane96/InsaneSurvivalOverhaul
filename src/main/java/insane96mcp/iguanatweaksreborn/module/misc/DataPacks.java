@@ -52,7 +52,7 @@ public class DataPacks extends Feature {
     public static Boolean miscTweaks = true;
 
     @Config
-    @Label(name = "Actual Redstone Components", description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc). Also makes Corail's Woodcutter no longer able to make buttons and pressure plates.")
+    @Label(name = "Actual Redstone Components", description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
     public static Boolean actualRedstoneComponents = true;
 
     @Config
