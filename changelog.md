@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.3
 ### Additions
 * Config option to always eat, ignoring the full hunger bar
 
