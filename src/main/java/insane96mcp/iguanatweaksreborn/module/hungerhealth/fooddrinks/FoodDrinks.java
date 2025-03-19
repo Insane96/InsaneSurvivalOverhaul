@@ -110,6 +110,9 @@ public class FoodDrinks extends JsonFeature {
 	@Config
 	@Label(name = "Stop consuming on hit", description = "If true, eating/drinking stops when the player's hit.")
 	public static Boolean stopConsumingOnHit = true;
+	@Config
+	@Label(description = "If true, eating will always be possible, even with full hunger.")
+	public static Boolean alwaysEat = false;
 	@Config(min = 0d, max = 1f)
 	@Label(name = "Raw food Poison Chance", description = "Raw food has this chance to poison the player. Raw food is defined in the iguanatweaksreborn:raw_food tag")
 	public static Double rawFoodPoisonChance = 0.7d;

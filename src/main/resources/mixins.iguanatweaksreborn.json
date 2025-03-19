@@ -50,6 +50,7 @@
         "FlowingFluidMixin",
         "FluidTypeMixin",
         "FoodDataMixin",
+        "FoodPropertiesMixin",
         "ForgeHooksMixin",
         "GuardianAttackGoalMixin",
         "HoneyBottleItemMixin",
