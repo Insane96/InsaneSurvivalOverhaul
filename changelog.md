@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Changed again food stack size formula
+  * It's now much simpler and based off hunger restored
+* Reduced Steaks hunger restored (8 -> 6)
+
 ## 4.11.3
 ### Additions
 * Config option to always eat, ignoring the full hunger bar
