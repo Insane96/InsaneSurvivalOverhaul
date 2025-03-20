@@ -72,6 +72,7 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).nutrition(2).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_beef")).nutrition(6).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).nutrition(6).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).nutrition(12).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:glow_berries")).alwaysEat(true).build(),
