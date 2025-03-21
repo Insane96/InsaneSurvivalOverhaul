@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Experience to level up reduced (50 -> 40)
+
 ## 4.11.4
 ### Changes
 * Changed again food stack size formula
