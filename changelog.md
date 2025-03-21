@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.4
 ### Changes
 * Changed again food stack size formula
   * It's now much simpler and based off hunger restored
