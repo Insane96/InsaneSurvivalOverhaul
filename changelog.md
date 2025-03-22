@@ -2,7 +2,7 @@
 
 ## Upcoming
 ### Additions
-* Config option to disable respawn obelisks generation
+* Phantoms now only spawn when Tired is III or more
 
 ### Changes
 * Experience to level up reduced (50 -> 40)

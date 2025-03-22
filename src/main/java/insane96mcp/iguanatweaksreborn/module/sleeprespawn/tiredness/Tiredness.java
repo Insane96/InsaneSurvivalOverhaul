@@ -39,6 +39,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
@@ -48,6 +49,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
 import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -123,8 +125,8 @@ public class Tiredness extends JsonFeature {
 	@Label(name = "Tired overlay")
 	public static Boolean tiredOverlay = true;
 	@Config
-	@Label(description = "Insomnia gamerule is set to false")
-	public static Boolean disablePhantoms = true;
+	@Label(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III or more.")
+	public static Boolean tiredPhantoms = true;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -413,8 +415,26 @@ public class Tiredness extends JsonFeature {
 			return;
 
 		event.getServer().getGameRules().getRule(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE).set(1, event.getServer());
-		if (disablePhantoms)
-			event.getServer().getGameRules().getRule(GameRules.RULE_DOINSOMNIA).set(false, event.getServer());
+	}
+
+	@SubscribeEvent
+	public void onPhantomSpawn(PlayerSpawnPhantomsEvent event) {
+		if (!this.isEnabled()
+				|| !tiredPhantoms
+				|| event.getEntity().getEffect(TIRED.get()) == null)
+			return;
+		Level level = event.getEntity().level();
+        //noinspection DataFlowIssue
+        int amplifier = event.getEntity().getEffect(TIRED.get()).getAmplifier();
+		if (amplifier <= 1
+				|| !level.dimensionType().hasSkyLight()
+				|| !level.canSeeSky(event.getEntity().blockPosition()))
+		{
+			event.setResult(Event.Result.DENY);
+			return;
+		}
+		event.setResult(Event.Result.ALLOW);
+		event.setPhantomsToSpawn(amplifier);
 	}
 
 	@SubscribeEvent
