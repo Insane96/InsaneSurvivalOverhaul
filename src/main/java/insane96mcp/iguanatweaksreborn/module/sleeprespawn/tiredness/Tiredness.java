@@ -122,6 +122,9 @@ public class Tiredness extends JsonFeature {
 	@Config
 	@Label(name = "Tired overlay")
 	public static Boolean tiredOverlay = true;
+	@Config
+	@Label(description = "Insomnia gamerule is set to false")
+	public static Boolean disablePhantoms = true;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -410,6 +413,8 @@ public class Tiredness extends JsonFeature {
 			return;
 
 		event.getServer().getGameRules().getRule(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE).set(1, event.getServer());
+		if (disablePhantoms)
+			event.getServer().getGameRules().getRule(GameRules.RULE_DOINSOMNIA).set(false, event.getServer());
 	}
 
 	@SubscribeEvent
