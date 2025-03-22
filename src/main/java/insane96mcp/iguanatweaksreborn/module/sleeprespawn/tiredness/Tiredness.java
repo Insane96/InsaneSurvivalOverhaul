@@ -420,16 +420,18 @@ public class Tiredness extends JsonFeature {
 	@SubscribeEvent
 	public void onPhantomSpawn(PlayerSpawnPhantomsEvent event) {
 		if (!this.isEnabled()
-				|| !tiredPhantoms
-				|| event.getEntity().getEffect(TIRED.get()) == null)
+				|| !tiredPhantoms)
 			return;
+		if (event.getEntity().getEffect(TIRED.get()) == null) {
+			event.setResult(Event.Result.DENY);
+			return;
+		}
 		Level level = event.getEntity().level();
         //noinspection DataFlowIssue
         int amplifier = event.getEntity().getEffect(TIRED.get()).getAmplifier();
 		if (amplifier <= 1
 				|| !level.dimensionType().hasSkyLight()
-				|| !level.canSeeSky(event.getEntity().blockPosition()))
-		{
+				|| !level.canSeeSky(event.getEntity().blockPosition())) {
 			event.setResult(Event.Result.DENY);
 			return;
 		}
