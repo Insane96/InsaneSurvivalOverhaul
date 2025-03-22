@@ -4,6 +4,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -98,6 +99,9 @@ public class Respawn extends JsonFeature {
 	public static Difficulty saturationOnRespawnMax = new Difficulty(10, 10, 6);
 
 	@Config
+	@Label(description = "Data pack that makes respawn obelisks generate in the world")
+	public static Boolean respawnObelisks = true;
+	@Config
 	@Label(name = "Allow obelisk spawn point overwrite with beds when sneaking", description = "If enabled, sleeping a bed when sneaking will overwrite obelisk spawn point")
 	public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
 
@@ -140,7 +144,7 @@ public class Respawn extends JsonFeature {
 		super(module, enabledByDefault, canBeDisabled);
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
-		InsaneSurvivalOverhaul.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", this::isEnabled);
+		InsaneSurvivalOverhaul.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && respawnObelisks);
 	}
 
 	@Override
