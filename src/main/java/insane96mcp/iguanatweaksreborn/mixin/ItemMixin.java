@@ -41,7 +41,7 @@ public class ItemMixin {
 	@ModifyReturnValue(method = "getBarWidth", at = @At("RETURN"))
 	public int iguanatweaksreborn$onGetBarWidth(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnbreakableItems.class)
-				|| !UnbreakableItems.isBroken(stack))
+				|| (!UnbreakableItems.isBroken(stack) && stack.getDamageValue() <= stack.getMaxDamage()))
 			return original;
 
 		return 13;
@@ -50,7 +50,7 @@ public class ItemMixin {
 	@ModifyReturnValue(method = "getBarColor", at = @At("RETURN"))
 	public int iguanatweaksreborn$onGetBarColor(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnbreakableItems.class)
-				|| !UnbreakableItems.isBroken(stack))
+				|| (!UnbreakableItems.isBroken(stack) && stack.getDamageValue() <= stack.getMaxDamage()))
 			return original;
 
 		return 16711680;

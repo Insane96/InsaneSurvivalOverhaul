@@ -6,7 +6,7 @@
 
 ### Changes
 * Experience to level up reduced (50 -> 40)
-* Insomnia game rule is now set to false when tiredness is enabled
+* Items are no longer marked as "broken" when their durability is negative, instead, they just show the red durability bar
 
 ## 4.11.4
 ### Changes
