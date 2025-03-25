@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.5
 ### Additions
 * Phantoms now only spawn when Tired is III or more
 
