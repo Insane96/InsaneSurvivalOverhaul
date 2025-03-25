@@ -112,8 +112,10 @@ public class DroppedExperience extends Feature {
 			return;
 
 		if (event.getEntity() instanceof ExperienceOrb xpOrb) {
-			if (disableExperience)
+			if (disableExperience) {
 				event.setCanceled(true);
+				return;
+			}
 
 			handleGlobalExperience(xpOrb);
 		}
