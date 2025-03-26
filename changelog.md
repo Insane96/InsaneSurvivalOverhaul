@@ -1,7 +1,8 @@
 # Changelog
 
-* Soulbound  + grave dupe armor?
-* atlas map in the nether
+## Upcoming
+### Changes
+* Experience is now also stored in the grave
 
 ## 4.11.5
 ### Additions

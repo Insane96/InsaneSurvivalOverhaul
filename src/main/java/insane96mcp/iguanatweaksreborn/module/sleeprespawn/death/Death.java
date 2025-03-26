@@ -71,7 +71,7 @@ public class Death extends Feature {
 	public static Boolean vindicationVsKiller = true;
 	@Config
 	@Label(name = "Grave keeps experience", description = "If true, the player's experience is stored in the grave.")
-	public static Boolean graveExperience = false;
+	public static Boolean graveExperience = true;
 
 	public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
