@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.13.8
+* Crash fix with SoL Valheim
+
 ## 2.13.7
 * Crash fix for Crossroads mod
 
