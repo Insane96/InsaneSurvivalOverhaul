@@ -7,10 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -111,7 +109,9 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean p_60519_) {
         if (!state.is(newState.getBlock())) {
-            dropGraveItems(level, pos);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof GraveBlockEntity graveBlockEntity)
+                graveBlockEntity.dropContent(pos);
             int chunkX = SectionPos.blockToSectionCoord(pos.getX());
             int chunkZ = SectionPos.blockToSectionCoord(pos.getZ());
             ((ServerLevel) level).setChunkForced(chunkX, chunkZ, false);
@@ -127,29 +127,6 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
             return super.use(pState, level, pos, player, pHand, pHit);
         player.sendSystemMessage(Component.literal("This grave has a message: \"").append(graveBlockEntity.getMessage()).append(Component.literal("\"")));
         return InteractionResult.SUCCESS;
-    }
-
-    public static void dropGraveItems(Level level, BlockPos pos) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof GraveBlockEntity graveBlockEntity) {
-            graveBlockEntity.getItems().forEach(itemStack -> dropGraveItem(level, itemStack, pos));
-            graveBlockEntity.getItems().clear();
-        }
-    }
-
-    public static void dropGraveItem(Level level, ItemStack stack, BlockPos pos) {
-        if (stack.isEmpty())
-            return;
-
-        ItemEntity itementity = new ItemEntity(level, pos.getCenter().x, pos.getCenter().y + 0.8, pos.getCenter().z, stack);
-        itementity.setPickUpDelay(5);
-        //2 minutes
-        itementity.lifespan = 2400;
-
-        float f = level.random.nextFloat() * 0.1F;
-        float f1 = level.random.nextFloat() * ((float)Math.PI * 2F);
-        itementity.setDeltaMovement((-Mth.sin(f1) * f), 0.1F, (Mth.cos(f1) * f));
-        level.addFreshEntity(itementity);
     }
 
     @Nullable

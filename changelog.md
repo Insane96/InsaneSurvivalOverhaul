@@ -3,6 +3,10 @@
 ## Upcoming
 ### Changes
 * Experience is now also stored in the grave
+* Bottle o' enchanting now drop 1 level again
+
+### Fixes
+* Graves dropping no xp if config option was enabled
 
 ## 4.11.5
 ### Additions

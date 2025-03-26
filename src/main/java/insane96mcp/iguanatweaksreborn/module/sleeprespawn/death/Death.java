@@ -67,11 +67,14 @@ public class Death extends Feature {
 	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "killer_blacklist"));
 
 	@Config
-	@Label(name = "Players's killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
+	@Label(name = "Players' killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
 	public static Boolean vindicationVsKiller = true;
 	@Config
-	@Label(name = "Grave keeps experience", description = "If true, the player's experience is stored in the grave.")
-	public static Boolean graveExperience = true;
+	@Label(description = "If true, the player's experience is stored in the grave.")
+	public static Boolean graveKeepsExperience = true;
+	@Config
+	@Label(description = "In how many ticks will items despawn after dropping from a grave.")
+	public static Integer despawnTime = 2400;
 
 	public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -110,31 +113,42 @@ public class Death extends Feature {
 				|| !(event.getEntity() instanceof ServerPlayer player))
 			return;
 
-		breakOldGrave(player);
-        if (!player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)
-                && player.level().getGameRules().getBoolean(RULE_DEATHGRAVE)
-				&& !player.level().isOutsideBuildHeight(player.blockPosition().getY()))
-            summonGrave(player, event.getSource());
-
-		if (vindicationVsKiller && event.getSource().getEntity() instanceof Mob killer && !killer.getPersistentData().contains(KILLED_PLAYER)) {
-			if (killer.isRemoved() || killer.isDeadOrDying() || killer.getType().is(KILLER_BLACKLIST))
-				return;
-			ScheduledTasks.schedule(new ScheduledTickTask(1) {
-				@Override
-				public void run() {
-					killer.setPersistenceRequired();
-					double experienceMultiplier = 5d;
-					if (killer.getPersistentData().contains(ILStrings.Tags.EXPERIENCE_MULTIPLIER))
-						experienceMultiplier *= killer.getPersistentData().getDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER);
-					killer.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, experienceMultiplier);
-					killer.getPersistentData().putUUID(KILLED_PLAYER, player.getUUID());
-					killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()));
-				}
-			});
-		}
+		trySummonGrave(player, event.getSource());
+		vindication(player, event.getSource());
 	}
 
-	public static void breakOldGrave(ServerPlayer player) {
+	public static void trySummonGrave(ServerPlayer player, DamageSource source) {
+		dropOldGraveContent(player);
+		if (!player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)
+				&& player.level().getGameRules().getBoolean(RULE_DEATHGRAVE)
+				&& !player.level().isOutsideBuildHeight(player.blockPosition().getY()))
+			summonGrave(player, source);
+	}
+
+	public static void vindication(ServerPlayer player, DamageSource source) {
+        if (!vindicationVsKiller
+                || !(source.getEntity() instanceof Mob killer)
+                || killer.getPersistentData().contains(KILLED_PLAYER)
+				|| killer.isRemoved()
+				|| killer.isDeadOrDying()
+				|| killer.getType().is(KILLER_BLACKLIST))
+            return;
+
+        ScheduledTasks.schedule(new ScheduledTickTask(1) {
+            @Override
+            public void run() {
+                killer.setPersistenceRequired();
+                double experienceMultiplier = 5d;
+                if (killer.getPersistentData().contains(ILStrings.Tags.EXPERIENCE_MULTIPLIER))
+                    experienceMultiplier *= killer.getPersistentData().getDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER);
+                killer.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, experienceMultiplier);
+                killer.getPersistentData().putUUID(KILLED_PLAYER, player.getUUID());
+                killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()));
+            }
+        });
+    }
+
+	public static void dropOldGraveContent(ServerPlayer player) {
 		if (player.getLastDeathLocation().isEmpty())
 			return;
 
@@ -144,9 +158,8 @@ public class Death extends Feature {
 		ServerLevel level = player.getServer().getLevel(pos.dimension());
 		if (level == null)
 			return;
-		if (level.isLoaded(pos.pos()) && level.getBlockState(pos.pos()).is(GRAVE.block().get())) {
-			GraveBlock.dropGraveItems(level, pos.pos());
-			//level.destroyBlock(pos.pos(), true, player);
+		if (level.isLoaded(pos.pos()) && level.getBlockEntity(pos.pos()) instanceof GraveBlockEntity graveBlockEntity) {
+			graveBlockEntity.dropContent(pos.pos());
 
 			int chunkX = SectionPos.blockToSectionCoord(pos.pos().getX());
 			int chunkZ = SectionPos.blockToSectionCoord(pos.pos().getZ());
@@ -172,7 +185,7 @@ public class Death extends Feature {
 		});
 		if (ModList.get().isLoaded("toolbelt"))
 			ToolBelt.onDeath(items, player);
-		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveExperience))
+		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveKeepsExperience))
 			return;
 		BlockPos pos = player.blockPosition();
 		if (pos.getY() < player.level().getMinBuildHeight())
@@ -188,7 +201,7 @@ public class Death extends Feature {
 		if (graveBlockEntity == null)
 			return;
 		graveBlockEntity.setItems(items);
-		if (graveExperience && player.experienceLevel > 0) {
+		if (graveKeepsExperience && player.experienceLevel > 0) {
 			int xpDropped = PlayerExperience.getExperienceOnDeath(player, true);
 			graveBlockEntity.setXpStored(xpDropped);
 			player.setExperienceLevels(0);

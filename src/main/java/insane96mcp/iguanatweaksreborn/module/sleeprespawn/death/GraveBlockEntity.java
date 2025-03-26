@@ -11,7 +11,9 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -141,30 +143,59 @@ public class GraveBlockEntity extends BlockEntity {
             return;
         Optional<ServerPlayer> oPlayer = getPlayerOwner((ServerLevel) level, graveBlockEntity.owner);
         oPlayer.ifPresent(player -> {
-            if (player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)) != graveBlockEntity.deathNumber) {
-                if (graveBlockEntity.getXpStored() > 0) {
-                    ExperienceOrb xpOrb = new ExperienceOrb(level, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, graveBlockEntity.getXpStored());
-                    xpOrb.getPersistentData().putBoolean(DroppedExperience.XP_PROCESSED, true);
-                    level.addFreshEntity(xpOrb);
-                    graveBlockEntity.setXpStored(0);
-                }
-                /*ItemStack grave = new ItemStack(Death.GRAVE.item().get());
-                if (graveBlockEntity.message != null) {
-                    CompoundTag compoundTag = new CompoundTag();
-                    compoundTag.putString("message", Component.Serializer.toJson(graveBlockEntity.message));
-                    BlockItem.setBlockEntityData(grave, Death.GRAVE_BLOCK_ENTITY_TYPE.get(), compoundTag);
-                }
-                level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), grave));*/
-                GraveBlock.dropGraveItems(level, pos);
-                graveBlockEntity.owner = null;
-            }
+            if (player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)) != graveBlockEntity.deathNumber)
+                graveBlockEntity.dropContent(pos);
         });
     }
 
+    public void dropContent(BlockPos pos) {
+        this.dropExperience(pos);
+        this.dropItems(pos);
+        this.owner = null;
+    }
+
+    public void dropExperience(BlockPos pos) {
+        if (!(level instanceof ServerLevel serverLevel))
+            return;
+        int amount = this.getXpStored();
+        if (amount > 0) {
+            while(amount > 0) {
+                int i = ExperienceOrb.getExperienceValue(amount);
+                amount -= i;
+                if (!ExperienceOrb.tryMergeToExisting(serverLevel, pos.getCenter(), i)) {
+                    ExperienceOrb xpOrb = new ExperienceOrb(level, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, i);
+                    level.addFreshEntity(xpOrb);
+                    xpOrb.getPersistentData().putBoolean(DroppedExperience.XP_PROCESSED, true);
+                }
+            }
+            this.setXpStored(0);
+        }
+    }
+
+    public void dropItems(BlockPos pos) {
+        this.getItems().forEach(itemStack -> dropItem(level, itemStack, pos));
+        this.getItems().clear();
+    }
+
+    public static void dropItem(Level level, ItemStack stack, BlockPos pos) {
+        if (stack.isEmpty())
+            return;
+
+        ItemEntity itementity = new ItemEntity(level, pos.getCenter().x, pos.getCenter().y + 0.8, pos.getCenter().z, stack);
+        itementity.setPickUpDelay(5);
+        //2 minutes
+        itementity.lifespan = Death.despawnTime;
+
+        float f = level.random.nextFloat() * 0.1F;
+        float f1 = level.random.nextFloat() * ((float)Math.PI * 2F);
+        itementity.setDeltaMovement((-Mth.sin(f1) * f), 0.1F, (Mth.cos(f1) * f));
+        level.addFreshEntity(itementity);
+    }
+
     public static Optional<ServerPlayer> getPlayerOwner(ServerLevel level, UUID playerUUID) {
-        for(ServerPlayer player : level.players()) {
+        for (ServerPlayer player : level.players()) {
             UUID uuid = player.getUUID();
-            if(uuid.equals(playerUUID))
+            if (uuid.equals(playerUUID))
                 return Optional.of(player);
         }
 

@@ -83,7 +83,7 @@ public class DroppedExperience extends Feature {
 
 	@Config(min = 0, max = 512)
 	@Label(name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
-	public static Integer xpBottleDroppedXp = 50;
+	public static Integer xpBottleDroppedXp = 40;
 
 	@Config(min = 0)
 	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
