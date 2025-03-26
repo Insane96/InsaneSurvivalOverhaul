@@ -4,8 +4,10 @@
 ### Changes
 * Experience is now also stored in the grave
 * Bottle o' enchanting now drop 1 level again
+* Reduced Porkchops hunger restored (8 -> 7)
 
 ### Fixes
+* Luck not working on ore drops
 * Graves dropping no xp if config option was enabled
 
 ## 4.11.5

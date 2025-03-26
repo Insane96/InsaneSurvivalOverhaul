@@ -412,6 +412,13 @@ public class EnchantmentsFeature extends JsonFeature {
 		return 2;
 	}
 
+	public static int getLuckLevel(ItemStack stack, int original) {
+		int luckLvl = EnchantmentHelper.getTagEnchantmentLevel(EnchantmentsFeature.LUCK.get(), stack);
+		if (luckLvl <= 0)
+			return original;
+		return 2;
+	}
+
 	public static boolean isBonusLootEnchantmentReworkEnabled() {
 		return Feature.isEnabled(EnchantmentsFeature.class)
 				&& reworkBonusLootEnchantments;
