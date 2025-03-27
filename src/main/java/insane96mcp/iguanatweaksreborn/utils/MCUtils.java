@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.utils;
 import com.ezylang.evalex.Expression;
 import com.ezylang.evalex.data.EvaluationValue;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
-import insane96mcp.insanelib.util.LogHelper;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -113,7 +112,7 @@ public class MCUtils {
             return result.getNumberValue().floatValue();
         }
         catch (Exception ex) {
-            LogHelper.error("Failed to evaluate food formula: %s", expression);
+            ISOLogHelper.error("Failed to evaluate food formula: %s\n%s", formula, ex.getMessage());
             return -1f;
         }
     }

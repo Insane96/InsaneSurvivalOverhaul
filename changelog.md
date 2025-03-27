@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Food stack sizes formula erroring for foods with no hunger
+
 ## 4.11.6
 ### Changes
 * Experience is now also stored in the grave
