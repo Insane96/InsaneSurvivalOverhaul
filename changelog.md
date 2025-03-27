@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.6
 ### Changes
 * Experience is now also stored in the grave
 * Bottle o' enchanting now drop 1 level again
