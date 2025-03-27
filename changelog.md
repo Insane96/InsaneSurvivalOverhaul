@@ -5,6 +5,7 @@
 * Experience is now also stored in the grave
 * Bottle o' enchanting now drop 1 level again
 * Reduced Porkchops hunger restored (8 -> 7)
+* Heavily reduced anvils degradation chance (5% -> 1%)
 
 ### Fixes
 * Luck not working on ore drops

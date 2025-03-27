@@ -101,7 +101,7 @@ public class Anvils extends Feature {
     public static Integer mergingRepairBonus = 10;
     @Config(min = 0)
     @Label(name = "Degradation chance", description = "Chance for an anvil to become chipped/damaged/break. Vanilla is 12%")
-    public static Double degradationChance = 0.05d;
+    public static Double degradationChance = 0.01d;
     @Config
     @Label(name = "Fix with Iron blocks")
     public static Boolean allowFixingAnvils = true;
