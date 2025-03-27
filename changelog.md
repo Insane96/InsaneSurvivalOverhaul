@@ -6,6 +6,9 @@
 * Bottle o' enchanting now drop 1 level again
 * Reduced Porkchops hunger restored (8 -> 7)
 * Heavily reduced anvils degradation chance (5% -> 1%)
+* Rails are now less expensive
+  * Rails recipe now outputs 4 rails instead of 3
+  * Copper rails recipe now upgrades 4 rails instead of 3
 
 ### Fixes
 * Luck not working on ore drops
