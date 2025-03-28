@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Increased tools enchantability by 1 (2 for gold)
+
 ### Fixes
 * Food stack sizes formula erroring for foods with no hunger
 

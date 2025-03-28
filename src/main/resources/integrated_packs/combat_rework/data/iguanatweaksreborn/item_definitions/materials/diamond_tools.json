@@ -2,7 +2,7 @@
 	"item": "#iguanatweaksreborn:equipment/hand/diamond",
 	"durability": 1561,
 	"efficiency": 5.5,
-	"enchantability": 5,
+	"enchantability": 6,
 	"modifiers": [
 		{
 			"uuid": "294e0db0-1185-4d78-b95e-8823b8bb0041",

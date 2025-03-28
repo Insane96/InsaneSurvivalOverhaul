@@ -2,7 +2,7 @@
 	"item": "#caverns_and_chasms:equipment/hand/silver",
 	"durability": 157,
 	"efficiency": 4,
-	"enchantability": 12,
+	"enchantability": 13,
 	"harvest_level": "minecraft:stone",
 	"modifiers": [
 		{
