@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Curse of Vanishing now affects items in Tool Belt
+
 ## 4.11.7
 ### Changes
 * Increased tools enchantability by 1 (2 for gold)

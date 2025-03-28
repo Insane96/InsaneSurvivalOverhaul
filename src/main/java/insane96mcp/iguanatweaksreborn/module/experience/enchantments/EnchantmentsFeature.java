@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.event.StackMaxDamageEvent;
+import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.mixin.EnchantmentAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
@@ -379,6 +380,12 @@ public class EnchantmentsFeature extends JsonFeature {
 				stack.setDamageValue(stack.getDamageValue() - 1);
 			}
 		}*/
+	}
+
+	public static void destroyVanishingCurseItemsInToolBelt(LivingEntity player) {
+		if (!ModList.get().isLoaded("toolbelt"))
+			return;
+		ToolBeltIntegration.removeCursedItemsOnDeath(player);
 	}
 
 	@SubscribeEvent

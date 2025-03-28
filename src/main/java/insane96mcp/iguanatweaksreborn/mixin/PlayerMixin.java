@@ -36,7 +36,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -238,6 +240,13 @@ public abstract class PlayerMixin extends LivingEntity {
 		if (!Feature.isEnabled(Nether.class))
 			return original;
 		return Nether.portalWaitTime;
+	}
+
+	@Inject(method = "destroyVanishingCursedItems", at = @At(value = "RETURN"))
+	public void iguanatweaksreborn$onVanishingCurseItemDestroy(CallbackInfo ci) {
+		if (!Feature.isEnabled(EnchantmentsFeature.class))
+			return;
+		EnchantmentsFeature.destroyVanishingCurseItemsInToolBelt(this);
 	}
 
 	/*@ModifyExpressionValue(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/PlayerStats;isSwimming()Z"))
