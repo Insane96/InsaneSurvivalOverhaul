@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ApplyBonusCountOreDropsMixin {
     @Inject(method = "calculateNewCount", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
     public void onCalculateNewCount(RandomSource random, int originalCount, int enchantmentLvl, CallbackInfoReturnable<Integer> cir) {
-        if (!EnchantmentsFeature.isBonusLootEnchantmentReworkEnabled())
+        if (!EnchantmentsFeature.isBonusLootEnchantmentReworkEnabled() || enchantmentLvl <= 0)
             return;
 
         int i = random.nextInt(4) - 1;
