@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.8
 ### Changes
 * Unbreaking mini-rework
   * Added a flat bonus durability (+10/15/25 for armors/shields/tools per level)
