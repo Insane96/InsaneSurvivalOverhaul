@@ -1,6 +1,5 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
@@ -21,12 +20,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -43,8 +40,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -70,8 +65,8 @@ import java.util.stream.Collectors;
 public class Tiredness extends JsonFeature {
 
 	public static final RegistryObject<MobEffect> TIRED = ISORegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
-			.addAttributeModifier(Attributes.MOVEMENT_SPEED, "697c48dd-6bbd-4082-8501-040bb9812c09", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL)
-			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.025F, AttributeModifier.Operation.MULTIPLY_TOTAL));
+			.addAttributeModifier(Attributes.MOVEMENT_SPEED, "697c48dd-6bbd-4082-8501-040bb9812c09", -0.04F, AttributeModifier.Operation.MULTIPLY_TOTAL)
+			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.04F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISORegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	public static final String NOT_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".not_tired";
@@ -97,12 +92,12 @@ public class Tiredness extends JsonFeature {
 	public static Double tirednessToEffect = 500d;
 	@Config(min = 0d)
 	@Label(name = "Tiredness per level", description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
-	public static Double tirednessPerLevel = 125d;
+	public static Double tirednessPerLevel = 250d;
 	@Config(min = 0d)
 	@Label(name = "Energy boost.Tiredness reduction", description = "If the player has energy boost, reduce tiredness by this value (multiplied by the effect level) each tick.")
 	public static Double energyBoostTirednessReduction = 0.025d;
 	@Config(min = 0d)
-	@Label(name = "Energy boost.Duration multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effective nourishment (hunger + saturation) of the food. This multiplies the duration of the effect")
+	@Label(name = "Energy boost.Duration multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effectiveness (hunger + saturation) of the food. This multiplies the duration of the effect")
 	public static Double energyBoostDurationMultiplier = 5d;
 	@Config
 	@Label(name = "On death behaviour", description = """
@@ -121,12 +116,9 @@ public class Tiredness extends JsonFeature {
 	public static MinMax fakeSoundCooldownBetweenMobs = new MinMax(12000, 24000);
 	@Config(min = 0)
 	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown")
-	public static MinMax fakeSoundTimes = new MinMax(2, 5);
+	public static MinMax fakeSoundTimes = new MinMax(2, 6);
 	@Config
-	@Label(name = "Tired overlay")
-	public static Boolean tiredOverlay = true;
-	@Config
-	@Label(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III or more.")
+	@Label(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
 	public static Boolean tiredPhantoms = true;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -172,6 +164,7 @@ public class Tiredness extends JsonFeature {
 	@SubscribeEvent
 	public void onClientPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (!this.isEnabled()
+				|| fakeSoundMobs.isEmpty()
 				//|| event.player.tickCount % 20 != 13
 				|| !event.player.level().isClientSide
 				|| event.phase == TickEvent.Phase.START
@@ -234,7 +227,7 @@ public class Tiredness extends JsonFeature {
 
 	private void resetMobFakeSound(RandomSource random, int reduction) {
 		fakeSoundTimesToPlay = 0;
-		fakeSoundCooldown = (long) (fakeSoundCooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.08f * reduction));
+		fakeSoundCooldown = (long) (fakeSoundCooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.15f * reduction));
 		mobFakeSound = null;
 	}
 
@@ -269,7 +262,7 @@ public class Tiredness extends JsonFeature {
 	private static void tryApplyTired(float tiredness, ServerPlayer player) {
 		int wantedAmplifier = -1;
 		if (tiredness >= tirednessToEffect)
-			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 4);
+			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 2);
 		if (wantedAmplifier >= 0) {
 			int currAmplifier = -1;
 			if (player.hasEffect(TIRED.get())) {
@@ -309,9 +302,7 @@ public class Tiredness extends JsonFeature {
 
 		//noinspection ConstantConditions
 		int level = event.getEntity().getEffect(TIRED.get()).getAmplifier() + 1;
-		if (level == 1)
-			return;
-		event.setNewSpeed(event.getNewSpeed() * (1 - (level * 0.02f)));
+		event.setNewSpeed(event.getNewSpeed() * (1 - (level * 0.04f)));
 	}
 
 	@SubscribeEvent
@@ -362,9 +353,8 @@ public class Tiredness extends JsonFeature {
 
 	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
 		timeSkipped = 12000;
-		//If above Tired I increase the time skipped by 1 minute per level
-		if (highestTiredAmplifier > 0)
-			timeSkipped += 1200 * highestTiredAmplifier;
+		//If above Tired I increase the time skipped by 5 minutes per level
+		timeSkipped += 6000 * highestTiredAmplifier;
 		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
 
 		Weather.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
@@ -419,7 +409,7 @@ public class Tiredness extends JsonFeature {
 	}
 
 	@SubscribeEvent
-	public void onPhantomSpawn(PlayerSpawnPhantomsEvent event) {
+	public void onPhantomTryToSpawn(PlayerSpawnPhantomsEvent event) {
 		if (!this.isEnabled()
 				|| !tiredPhantoms)
 			return;
@@ -428,16 +418,17 @@ public class Tiredness extends JsonFeature {
 			return;
 		}
 		Level level = event.getEntity().level();
-        //noinspection DataFlowIssue
-        int amplifier = event.getEntity().getEffect(TIRED.get()).getAmplifier();
-		if (amplifier <= 1
+		//noinspection DataFlowIssue
+		int amplifier = event.getEntity().getEffect(TIRED.get()).getAmplifier();
+		//Only summon them at Tired III
+		if (amplifier < 2
 				|| !level.dimensionType().hasSkyLight()
 				|| !level.canSeeSky(event.getEntity().blockPosition())) {
 			event.setResult(Event.Result.DENY);
 			return;
 		}
 		event.setResult(Event.Result.ALLOW);
-		event.setPhantomsToSpawn(amplifier);
+		event.setPhantomsToSpawn(event.getPhantomsToSpawn() * amplifier);
 	}
 
 	@SubscribeEvent
@@ -464,29 +455,6 @@ public class Tiredness extends JsonFeature {
 		}
 
 		TirednessHandler.set(event.getEntity(), tiredness);
-	}
-
-	protected static final ResourceLocation OVERLAY_LOCATION = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/misc/tiredness_overlay.png");
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public static void registerGui(RegisterGuiOverlaysEvent event) {
-		event.registerAbove(VanillaGuiOverlay.VIGNETTE.id(), "tired_overlay", (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
-			if (!tiredOverlay)
-				return;
-			LocalPlayer player = Minecraft.getInstance().player;
-			if (!player.hasEffect(TIRED.get()))
-				return;
-			//noinspection DataFlowIssue
-			int amplifier = player.getEffect(TIRED.get()).getAmplifier() + 1;
-			float brightness = Mth.clamp(amplifier * 0.1f * ((amplifier - 1) * 0.6f), 0f, 1f);
-			Minecraft.getInstance().getProfiler().push("tired_overlay");
-			guiGraphics.setColor(1f, 1f, 1f, brightness);
-			guiGraphics.blit(OVERLAY_LOCATION, 0, 0, -90, 0.0F, 0.0F, screenWidth, screenHeight, screenWidth, screenHeight);
-			guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-			Minecraft.getInstance().getProfiler().pop();
-			RenderSystem.defaultBlendFunc();
-		});
 	}
 
 	@OnlyIn(Dist.CLIENT)

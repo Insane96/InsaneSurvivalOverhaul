@@ -4,11 +4,18 @@
 ### Changes
 * Unbreaking mini-rework
   * Added a flat bonus durability (+10/15/25 for armors/shields/tools per level)
-  * Max level increased (3 -> 5)
+  * Max level increased (III -> V)
   * Bonus durability has been reduced (+75% -> +25%)
 * Efficiency mini-rework
   * Added a flat bonus mining speed (0.35)
   * Increased % mining speed per level (+20% -> +25%)
+* Tiredness mini rework
+  * Tired max level has been reduced (V -> III)
+  * Tired movement speed, attack speed (-2.5% -> -4% per level) and mining speed penalty per level increased (-2% -> -4% per level, [NEW] also at Tired I)
+  * Tiredness per level doubled (125 -> 250)
+  * Phantoms still spawn at Tired III
+  * Removed tired overlay
+    * Was ugly and didn't work properly with many mods overlays
 * Curse of Vanishing now affects items in Tool Belt
 * Reduced cookies nutrition (2 -> 1)
 * Atmospheric Orange Pudding is now an energy boost item

@@ -69,8 +69,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     private void onGetCurrentSwingDuration(CallbackInfoReturnable<Integer> cir) {
         int ret = cir.getReturnValue();
         //noinspection DataFlowIssue
-        if (this.hasEffect(Tiredness.TIRED.get()) && this.getEffect(Tiredness.TIRED.get()).getAmplifier() > 2)
-            cir.setReturnValue(ret + 1);
+        if (this.hasEffect(Tiredness.TIRED.get()) && this.getEffect(Tiredness.TIRED.get()).getAmplifier() > 0)
+            cir.setReturnValue(ret + 2);
     }
 
     @Redirect(method = "jumpFromGround", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isSprinting()Z"))

@@ -4,8 +4,8 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,7 +40,7 @@ public class SleepingEffects extends JsonFeature {
 	public static Integer hungerDepletedOnWakeUp = 12;
 	@Config(min = 0, max = 20)
 	@Label(name = "Tired bonus Hunger & Saturation Depleted", description = "How much more saturation and hunger are depleted per level of Tired.")
-	public static Integer tiredBonusHungerSaturationDepleted = 1;
+	public static Integer tiredBonusHungerSaturationDepleted = 2;
 	@Config
 	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
 	public static Boolean noSleepIfHungry = true;
@@ -52,7 +52,7 @@ public class SleepingEffects extends JsonFeature {
 	public static Boolean noBeneficialEffectWhenHungry = true;
 	@Config(min = -1, max = 255)
 	@Label(name = "Dizzy when tired", description = "Apply the bad effects only when the Tired effect is equal or above this amplifier. -1 to disable")
-	public static Integer dizzyWhenToTired = 3;
+	public static Integer dizzyWhenToTired = 1;
 
 	public SleepingEffects(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
