@@ -88,8 +88,6 @@ public class ClientSetup {
 
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
             addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
-
-            addAfter(event, Items.BOW, Bows.SHORTBOW.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
@@ -97,6 +95,8 @@ public class ClientSetup {
 
             if (ModList.get().isLoaded("shieldsplus"))
                 addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
+
+            addAfter(event, Items.BOW, Bows.SHORTBOW.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
