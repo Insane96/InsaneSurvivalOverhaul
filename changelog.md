@@ -19,6 +19,7 @@
 * Curse of Vanishing now affects items in Tool Belt
 * Reduced cookies nutrition (2 -> 1)
 * Atmospheric Orange Pudding is now an energy boost item
+* Hand Glider now requires Phantom membrane to craft and repair
 
 ### Fixes
 * Shortbow in creative menu

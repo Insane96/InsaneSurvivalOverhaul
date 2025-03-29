@@ -3,16 +3,9 @@
 	"repair": [
 		{
 			"repair_material": {
-				"id": "minecraft:leather"
+				"id": "minecraft:phantom_membrane"
 			},
-			"amount": 12
-		},
-		{
-			"repair_material": {
-				"id": "minecraft:rabbit_hide"
-			},
-			"amount": 24,
-			"max_repair": 0.5
+			"amount": 6
 		}
 	]
 }
