@@ -10,6 +10,8 @@
   * Added a flat bonus mining speed (0.35)
   * Increased % mining speed per level (+20% -> +25%)
 * Curse of Vanishing now affects items in Tool Belt
+* Reduced cookies nutrition (2 -> 1)
+* Atmospheric Orange Pudding is now an energy boost item
 
 ### Fixes
 * Shortbow in creative menu
