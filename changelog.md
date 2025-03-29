@@ -3,8 +3,12 @@
 ## Upcoming
 ### Changes
 * Unbreaking mini-rework
-  * Bonus durability has been reduced (+75% -> +40%)
   * Added a flat bonus durability (+10/15/25 for armors/shields/tools per level)
+  * Max level increased (3 -> 5)
+  * Bonus durability has been reduced (+75% -> +25%)
+* Efficiency mini-rework
+  * Added a flat bonus mining speed (0.35)
+  * Increased % mining speed per level (+20% -> +25%)
 * Curse of Vanishing now affects items in Tool Belt
 
 ### Fixes

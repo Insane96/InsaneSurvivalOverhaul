@@ -64,7 +64,7 @@ public class ISOEventFactory {
         return event.getNewMaxDamage();
     }
 
-    public static float getBonusEnchantmentEfficiency(LivingEntity entity, BlockState state, ItemStack stack, float originalEfficiency)
+    public static float getEfficiencyWithEnchantments(LivingEntity entity, BlockState state, ItemStack stack, float originalEfficiency)
     {
         EnchantmentBonusEfficiencyEvent event = new EnchantmentBonusEfficiencyEvent(entity, state, stack, originalEfficiency);
         MinecraftForge.EVENT_BUS.post(event);

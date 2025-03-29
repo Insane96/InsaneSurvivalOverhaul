@@ -225,7 +225,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
 		if (lvl <= 0)
 			return;
-		event.setNewMaxDamage((int) ((event.getNewMaxDamage() + getBonusFlatUnbreakingDurability(event.getStack()) * lvl) * (1f + lvl * 0.4f)));
+		event.setNewMaxDamage((int) ((event.getNewMaxDamage() + getBonusFlatUnbreakingDurability(event.getStack()) * lvl) * (1f + lvl * 0.25f)));
 	}
 
 	public static int getBonusFlatUnbreakingDurability(ItemStack stack) {
@@ -257,7 +257,9 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static float getEfficiencyBonus(float baseEfficiency, int lvl) {
 		if (lvl == 0)
 			return 0f;
-        return EnchantmentsFeature.isBetterEfficiencyFormula() ? baseEfficiency * lvl * 0.2f : 1 + (lvl * lvl);
+		if (!isBetterEfficiencyFormula())
+			return 1 + (lvl * lvl);
+        return (0.35f * lvl) + (baseEfficiency + 0.35f * lvl) * lvl * 0.25f;
 	}
 
 	public static boolean isThornsOverhaul() {
@@ -462,7 +464,7 @@ public class EnchantmentsFeature extends JsonFeature {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);
 			ItemStack itemstack = entity.getMainHandItem();
 			if (i > 0 && !itemstack.isEmpty())
-				miningSpeed += ISOEventFactory.getBonusEnchantmentEfficiency(entity, state, itemstack, miningSpeed);
+				miningSpeed += ISOEventFactory.getEfficiencyWithEnchantments(entity, state, itemstack, miningSpeed);
 		}
 
 		if (MobEffectUtil.hasDigSpeed(entity)) {
