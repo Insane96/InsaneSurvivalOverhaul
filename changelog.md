@@ -2,6 +2,9 @@
 
 ## Upcoming
 ### Changes
+* Unbreaking mini-rework
+  * Bonus durability has been reduced (+75% -> +40%)
+  * Added a flat bonus durability (+10/15/25 for armors/shields/tools per level)
 * Curse of Vanishing now affects items in Tool Belt
 
 ### Fixes
