@@ -90,19 +90,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         return ISOEventFactory.onLivingAttack((LivingEntity) (Object) this, source, amount);
     }
 
-    /*@ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-    private float onCalculateAbsorption(float f1, DamageSource damageSource, float amount) {
-        if (RegeneratingAbsorption.damageTypeTagOnly() && damageSource.is(DamageTypeTags.BYPASSES_ARMOR)) {
-            return amount;
-        }
-        return Math.max(amount - this.getAbsorptionAmount(), 0.0F);
-    }
-
-    @Redirect(method = "actuallyHurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setAbsorptionAmount(F)V", ordinal = 1))
-    private void onSetAbsorptionSecondTime(LivingEntity instance, float absorption) {
-        //Cancel Mojang damaging absorption twice for some reason
-    }*/
-
     @ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 2), argsOnly = true, ordinal = 0)
     public float onPreAbsorptionCalculation(float amount, DamageSource damageSource) {
         return ISOEventFactory.onLivingHurtPreAbsorption((LivingEntity) (Object) this, damageSource, amount);
@@ -126,7 +113,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;horizontalCollision:Z"))
     public boolean iguanatweaksreborn$onCheckIfOnClimbable(boolean original) {
         if (!Feature.isEnabled(BetterClimbable.class)
-                || !BetterClimbable.onlyClimbWithJump)
+                || !BetterClimbable.onlyClimbWithJump
+                || !((LivingEntity) (Object) this instanceof Player))
             return original;
         return false;
     }

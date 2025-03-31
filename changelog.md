@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.11.9
+### Fixes
+* Spiders not able to climb with Better Climbable.Only climb with jump enabled
+
 ## 4.11.8
 ### Changes
 * Unbreaking mini-rework
@@ -52,7 +56,7 @@
 ### Changes
 * Experience to level up reduced (50 -> 40)
 * Items are no longer marked as "broken" when their durability is negative, instead, they just show the red durability bar
-
+****
 ## 4.11.4
 ### Changes
 * Changed again food stack size formula
