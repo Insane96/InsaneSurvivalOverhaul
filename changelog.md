@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.10
 ### Changes
 * Sleeping when tired now skips 1/8 and 1/4 of a day more when Tired II and III
   * Was 1/4 and half a day
