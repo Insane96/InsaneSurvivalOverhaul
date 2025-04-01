@@ -354,7 +354,7 @@ public class Tiredness extends JsonFeature {
 	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
 		timeSkipped = 12000;
 		//If above Tired I increase the time skipped by 5 minutes per level
-		timeSkipped += 6000 * highestTiredAmplifier;
+		timeSkipped += 3000 * highestTiredAmplifier;
 		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
 
 		Weather.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());

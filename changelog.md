@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Sleeping when tired now skips 1/8 and 1/4 of a day more when Tired II and III
+  * Was 1/4 and half a day
+
 ## 4.11.9
 ### Fixes
 * Spiders not able to climb with Better Climbable.Only climb with jump enabled
@@ -56,7 +61,7 @@
 ### Changes
 * Experience to level up reduced (50 -> 40)
 * Items are no longer marked as "broken" when their durability is negative, instead, they just show the red durability bar
-****
+
 ## 4.11.4
 ### Changes
 * Changed again food stack size formula
