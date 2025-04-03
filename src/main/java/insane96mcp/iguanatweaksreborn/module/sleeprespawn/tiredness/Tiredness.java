@@ -353,7 +353,7 @@ public class Tiredness extends JsonFeature {
 
 	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
 		timeSkipped = 12000;
-		//If above Tired I increase the time skipped by 5 minutes per level
+		//If above Tired I increase the time skipped by 2.5 minutes per level
 		timeSkipped += 3000 * highestTiredAmplifier;
 		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
 
@@ -428,7 +428,7 @@ public class Tiredness extends JsonFeature {
 			return;
 		}
 		event.setResult(Event.Result.ALLOW);
-		event.setPhantomsToSpawn(event.getPhantomsToSpawn() * amplifier);
+		event.setPhantomsToSpawn(event.getPhantomsToSpawn());
 	}
 
 	@SubscribeEvent
