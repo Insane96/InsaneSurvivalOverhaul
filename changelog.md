@@ -11,6 +11,7 @@
 ### Fixes
 * Spawning way too many Phantoms
 * Experience still dropping if disabled
+* Disenchant equipment affecting players' equipment
 
 ## 4.11.10
 ### Changes

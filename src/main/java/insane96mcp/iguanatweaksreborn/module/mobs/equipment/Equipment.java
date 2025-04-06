@@ -11,6 +11,7 @@ import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.setup.ILStrings;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -86,7 +87,8 @@ public class Equipment extends JsonFeature {
     @SubscribeEvent
     public void onLivingDrop(LivingDropsEvent event) {
         if (!this.isEnabled()
-                || !disenchantEquipment)
+                || !disenchantEquipment
+                || event.getEntity() instanceof Player)
             return;
 
         event.getDrops().forEach(itemEntity -> {
