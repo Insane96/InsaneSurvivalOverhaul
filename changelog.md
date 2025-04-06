@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.11
 ### Additions
 * Curios integration
   * On death items are added to graves
