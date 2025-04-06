@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
+import insane96mcp.iguanatweaksreborn.integration.CuriosIntegration;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
@@ -185,6 +186,8 @@ public class Death extends Feature {
 		});
 		if (ModList.get().isLoaded("toolbelt"))
 			ToolBeltIntegration.onDeath(items, player);
+		if (ModList.get().isLoaded("curios"))
+			CuriosIntegration.onDeath(items, player);
 		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveKeepsExperience))
 			return;
 		BlockPos pos = player.blockPosition();

@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Curios integration
+  * On death items are added to graves
+
 ### Changes
 * Increased phantom drops (0\~1 -> 0\~2)
 

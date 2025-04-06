@@ -111,6 +111,10 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 dependencies {
@@ -167,6 +171,11 @@ dependencies {
 
     compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")
+
+    // Compile against only the API artifact
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${mc_version}:api"))
+    // Use the full Curios API jar at runtime
+    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${mc_version}"))
 
     implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${mc_version}-${apple_skin_version}")
 
