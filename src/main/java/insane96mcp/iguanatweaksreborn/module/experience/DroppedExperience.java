@@ -107,12 +107,12 @@ public class DroppedExperience extends Feature {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
-	public void onXPOrbDrop(EntityJoinLevelEvent event) {
+	public void onEntityJoinLevel(EntityJoinLevelEvent event) {
 		if (!this.isEnabled())
 			return;
 
 		if (event.getEntity() instanceof ExperienceOrb xpOrb) {
-			if (disableExperience) {
+			if (xpOrb.level().getGameRules().getBoolean(RULE_DISABLEEXPERIENCE)) {
 				event.setCanceled(true);
 				return;
 			}

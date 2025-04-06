@@ -1,8 +1,12 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Increased phantom drops (0\~1 -> 0\~2)
+
 ### Fixes
-* Fixed spawning way too many Phantoms
+* Spawning way too many Phantoms
+* Experience still dropping if disabled
 
 ## 4.11.10
 ### Changes
