@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 @Label(name = "Minecarts")
-@LoadFeature(module = Modules.Ids.MOVEMENT, canBeDisabled = false)
+@LoadFeature(module = Modules.Ids.MOVEMENT)
 public class Minecarts extends Feature {
 
 	public static final SimpleBlockWithItem GOLDEN_POWERED_RAIL = SimpleBlockWithItem.register("golden_powered_rail", () -> new ISOPoweredRail(BlockBehaviour.Properties.copy(Blocks.POWERED_RAIL), 1f, 0.18f));

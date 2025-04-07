@@ -17,7 +17,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.RegistryObject;
 
 @Label(name = "Biome Compass")
-@LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
+@LoadFeature(module = Modules.Ids.WORLD)
 public class BiomeCompass extends Feature {
     public static final RegistryObject<Item> COMPASS = ISORegistries.ITEMS.register("biome_compass", () -> new BiomeCompassItem(new Item.Properties()));
 
