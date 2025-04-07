@@ -12,15 +12,15 @@ import insane96mcp.insanelib.base.config.Config;
 public class TinkerIntegration extends Feature {
 
     @Config(min = 0d, max = 128d)
-    @Label(description = "Multiplier applied to tinkers construct heads mining speed. This also applies to additive modifiers")
+    @Label(description = "Multiplier applied to tinkers construct heads and modifiers mining speed. This also applies to additive modifiers")
     public static Double miningSpeedModifier = 0.75d;
 
     @Config(min = 0d, max = 128d)
-    @Label(description = "Multiplier applied to tinkers construct heads attack damage. This also applies to additive modifiers")
+    @Label(description = "Multiplier applied to tinkers construct heads and modifiers attack damage. This also applies to additive modifiers")
     public static Double damageModifier = 0.75d;
 
     @Config(min = 0d, max = 128d)
-    @Label(description = "Multiplier applied to tinkers construct heads durability. This also applies to additive modifiers")
+    @Label(description = "Multiplier applied to tinkers construct heads and modifiers durability. This also applies to additive modifiers")
     public static Double durabilityModifier = 0.75d;
 
     public TinkerIntegration(Module module, boolean enabledByDefault, boolean canBeDisabled) {
