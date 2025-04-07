@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "C C",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blackstone"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "quark:blackstone_furnace"
+  },
+  "conditions": [
+      {
+        "type": "quark:flag",
+        "flag": "variant_furnaces"
+      }
+  ]
+}

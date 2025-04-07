@@ -5,6 +5,7 @@
 * Enabling Tinkers construct data pack now also disables ITE items
   * Copper tools no longer have iron mining tier
   * Kama and Scythe no longer have the ability to right-click harvest crops 
+* Quark integration data pack now changes furnace recipes to also need copper
 
 ## 4.11.12
 ### Changes

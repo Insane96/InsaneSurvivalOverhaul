@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:logs"
+    },
+    "X": {
+      "item": "quark:deepslate_furnace"
+    },
+    "I": {
+      "item": "iguanatweaksexpanded:durium_ingot"
+    }
+  },
+  "result": {
+    "item": "minecraft:smoker"
+  },
+  "conditions": [
+    {
+      "type": "quark:flag",
+      "flag": "variant_furnaces"
+    }
+  ]
+}
