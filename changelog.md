@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Enabling Tinkers construct data pack now also disables ITE items
+
 ## 4.11.12
 ### Changes
 * Disabling features now also hides the relative items and blocks from creative inventory
