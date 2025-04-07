@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.11.12
 ### Changes
 * Disabling features now also hides the relative items and blocks from creative inventory
 * Flint expansion feature can now be disabled, disabling recipes, advancements, ground flint generation and items in creative inventory
