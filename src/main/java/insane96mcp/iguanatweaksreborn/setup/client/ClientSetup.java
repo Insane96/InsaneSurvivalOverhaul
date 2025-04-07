@@ -75,13 +75,16 @@ public class ClientSetup {
             addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
             addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
             addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get());
-            addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
+            if (Feature.isEnabled(FlintExpansion.class))
+                addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
-            addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
-            addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
-            addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
+            if (Feature.isEnabled(FlintExpansion.class)) {
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
+            }
 
             addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
             addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());
@@ -90,11 +93,13 @@ public class ClientSetup {
             addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
-            addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
+            if (Feature.isEnabled(FlintExpansion.class)) {
+                addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
+                addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
 
-            if (ModList.get().isLoaded("shieldsplus"))
-                addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
+                if (ModList.get().isLoaded("shieldsplus"))
+                    addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
+            }
 
             addAfter(event, Items.BOW, Bows.SHORTBOW.get());
         }

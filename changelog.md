@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Flint expansion feature can now be disabled, disabling recipes, advancements, ground flint generation and items in creative inventory
+
 ## 4.11.11
 ### Additions
 * Curios integration

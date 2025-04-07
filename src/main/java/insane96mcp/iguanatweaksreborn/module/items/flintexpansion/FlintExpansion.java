@@ -21,7 +21,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 
 @Label(name = "Flint Expansion", description = "Add flint tools and shield.")
-@LoadFeature(module = Modules.Ids.ITEMS, canBeDisabled = false)
+@LoadFeature(module = Modules.Ids.ITEMS)
 public class FlintExpansion extends Feature {
 
 	public static final SimpleBlockWithItem FLINT_ROCK = SimpleBlockWithItem.register("flint_rock", () -> new GroundFlintBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5F, 1F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape()));
