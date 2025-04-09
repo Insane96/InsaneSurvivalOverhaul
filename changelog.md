@@ -1,6 +1,11 @@
 # Changelog
 
 ## 4.11.15
+### Additions
+* Combat.Shields feature
+  * Shields no longer have a windup time and always take damage.
+  * Disables itself if Shields+ is present
+
 ### Changes
 * Tinkers' Construct data pack now also touches shields
   * Blocking amount has been reduced travelers (10 -> 5) and plate (100 -> 20) shields

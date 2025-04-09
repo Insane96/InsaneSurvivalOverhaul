@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
+import insane96mcp.iguanatweaksreborn.module.combat.Shields;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.protection.IProtectionEnchantment;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
@@ -63,6 +64,11 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     public LivingEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @ModifyExpressionValue(method = "isBlocking", at = @At(value = "CONSTANT", args = "intValue=5"))
+    private int shieldsPlus$blockingWindupTime(int ticks) {
+        return Shields.getShieldWindUp(ticks);
     }
 
     @Inject(method = "getCurrentSwingDuration", at = @At("RETURN"), cancellable = true)

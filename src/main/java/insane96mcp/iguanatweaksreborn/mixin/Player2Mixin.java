@@ -1,8 +1,10 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
+import insane96mcp.iguanatweaksreborn.module.combat.Shields;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,5 +21,10 @@ public class Player2Mixin {
                 || !Feature.isEnabled(MiscStats.class))
             return;
         f3.set(f);
+    }
+
+    @ModifyExpressionValue(method = "hurtCurrentlyUsedShield", at = @At(value = "CONSTANT", args = "floatValue=3.0"))
+    private float shieldsPlus$blockingWindupTime(float minDamage) {
+        return Shields.getMinHurtDamage(minDamage);
     }
 }
