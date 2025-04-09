@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.11.15
+### Changes
+* Tinkers' Construct data pack now also touches shields
+  * Blocking amount has been reduced travelers (10 -> 5) and plate (100 -> 20) shields
+
 ## 4.11.14
 ### Fixes
 * Tinkers' Kama and Scythe

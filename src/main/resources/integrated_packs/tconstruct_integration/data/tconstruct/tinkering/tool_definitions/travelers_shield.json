@@ -1,0 +1,61 @@
+{
+    "modules": [
+        {
+            "type": "tconstruct:base_stats",
+            "stats": {
+                "tconstruct:block_amount": 5.0,
+                "tconstruct:block_angle": 90.0,
+                "tconstruct:durability": 200.0,
+                "tconstruct:use_item_speed": 0.8
+            }
+        },
+        {
+            "type": "tconstruct:modifier_slots",
+            "slots": {
+                "abilities": 1,
+                "defense": 2,
+                "upgrades": 3
+            }
+        },
+        {
+            "type": "tconstruct:material_repair",
+            "durability": 200,
+            "material": "tconstruct:leather"
+        },
+        {
+            "type": "tconstruct:material_repair",
+            "durability": 100,
+            "material": "tconstruct:wood"
+        },
+        {
+            "type": "tconstruct:traits",
+            "traits": [
+                {
+                    "level": 1,
+                    "name": "tconstruct:blocking"
+                },
+                {
+                    "level": 1,
+                    "name": "tconstruct:tanned"
+                }
+            ]
+        },
+        {
+            "type": "tconstruct:preference_set_interaction",
+            "preferred_modifiers": {
+                "type": "mantle:or",
+                "predicates": [
+                    {
+                        "type": "tconstruct:single",
+                        "modifier": "tconstruct:blocking"
+                    },
+                    {
+                        "type": "tconstruct:tag",
+                        "tag": "tconstruct:block_while_charging"
+                    }
+                ]
+            },
+            "preferred_source": "right_click"
+        }
+    ]
+}
