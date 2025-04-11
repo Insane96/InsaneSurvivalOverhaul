@@ -6,7 +6,6 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.shieldsplus.module.BaseFeature;
 import net.minecraftforge.fml.ModList;
 
 @Label(name = "Shields", description = "This feature disables itself if Shields+ is installed")
@@ -29,11 +28,11 @@ public class Shields extends Feature {
 	}
 
 	public static int getShieldWindUp(int original) {
-		return isEnabled(BaseFeature.class) ? shieldWindup : original;
+		return isEnabled(Shields.class) ? shieldWindup : original;
 	}
 
 	public static float getMinHurtDamage(float original) {
-		return isEnabled(BaseFeature.class) ? minShieldHurtDamage.floatValue() : original;
+		return isEnabled(Shields.class) ? minShieldHurtDamage.floatValue() : original;
 	}
 
 }

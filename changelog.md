@@ -4,6 +4,9 @@
 ### Changes
 * Updated Cheaper chains data pack for latest tconstruct
 
+### Fixes
+* Crash with Shields+ not installed
+
 ## 4.11.15
 ### Additions
 * Combat.Shields feature
