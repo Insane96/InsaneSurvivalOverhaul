@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-05T17:38:31.0369657	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-04-23T19:23:54.1978296	Tags for minecraft:item mod id iguanatweaksreborn
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/iguanatweaksreborn/tags/items/chicken_food_items.json
 968f4e6c24656d4127f149e96496cb2f8254ec62 data/iguanatweaksreborn/tags/items/enchanting/accepts_damage_enchantments.json
 c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/enchanting/accepts_fire_aspect.json
@@ -14,6 +14,7 @@ f8b4a272af30529dd75fc76ae0aaab0b6d86f7b0 data/iguanatweaksreborn/tags/items/hud/
 8180207eb4d779d1e1250798d7cdcd341751b533 data/iguanatweaksreborn/tags/items/hud/time.json
 d62f3d6eec9f6884581d47d2ea5437a2341baa94 data/iguanatweaksreborn/tags/items/not_unbreakable.json
 7886b306d2eafd075ee18ae7a6e005a68b2fb112 data/iguanatweaksreborn/tags/items/no_stack_size_changes.json
+ea8fb5ca2917f2ee2be7d67dcf329402d69d1ec4 data/iguanatweaksreborn/tags/items/no_timber.json
 052ffe27257d03d8d8891be763ddd93bc289c2d4 data/iguanatweaksreborn/tags/items/raw_food.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/iguanatweaksreborn/tags/items/spawner_reactivator.json
 c157cdd5b8874bea4777cb5656df05b50e04785e data/iguanatweaksreborn/tags/items/world_immune.json

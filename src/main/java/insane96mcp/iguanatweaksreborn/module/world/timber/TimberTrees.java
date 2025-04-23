@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world.timber;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -18,6 +19,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -40,6 +42,7 @@ import java.util.*;
 public class TimberTrees extends JsonFeature {
 
     public static final TagKey<Block> TIMBER_TRUNKS = ISOBlockTagsProvider.create("timber_trunks");
+    public static final TagKey<Item> BLACKLISTED_ITEMS = ISOItemTagsProvider.create("no_timber");
 
     public static final ArrayList<TreeInfo> TREE_INFOS_DEFAULT = new ArrayList<>(List.of(
             new TreeInfo.Builder().log(IdTagMatcher.newId("minecraft:oak_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:oak_log_leaves")).build(),
@@ -89,7 +92,8 @@ public class TimberTrees extends JsonFeature {
             || !event.getState().is(TIMBER_TRUNKS)
             || !(event.getState().getBlock() instanceof RotatedPillarBlock)
             || event.getState().getValue(RotatedPillarBlock.AXIS) != Direction.Axis.Y
-            || (requiresAxe && !(event.getPlayer().getMainHandItem().is(ItemTags.AXES))))
+            || (requiresAxe && !(event.getPlayer().getMainHandItem().is(ItemTags.AXES)))
+            || event.getPlayer().getMainHandItem().is(BLACKLISTED_ITEMS))
             return;
 
         BlockPos brokenPos = event.getPos();

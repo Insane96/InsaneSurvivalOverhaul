@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Added item tag that doesn't trigger timber trees
+  * Currently only holds Tinkers' Broad Axe
+
 ## 4.11.16
 ### Changes
 * Updated Cheaper chains data pack for latest tconstruct

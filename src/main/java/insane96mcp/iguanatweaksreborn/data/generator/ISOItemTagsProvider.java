@@ -18,6 +18,7 @@ import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
+import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -115,6 +116,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(CoalFire.ITEM_ORES)
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
+
+        tag(TimberTrees.BLACKLISTED_ITEMS)
+                .addOptional(new ResourceLocation("tconstruct:broad_axe"));
 
         tag(HUD_CARDINAL_DIRECTION)
                 .add(Items.COMPASS);
