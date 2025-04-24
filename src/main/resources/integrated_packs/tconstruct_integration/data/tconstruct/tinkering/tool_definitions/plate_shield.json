@@ -36,7 +36,7 @@
         {
             "type": "tconstruct:base_stats",
             "stats": {
-                "tconstruct:block_amount": 20.0,
+                "tconstruct:block_amount": 10.0,
                 "tconstruct:block_angle": 180.0
             }
         },

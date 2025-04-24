@@ -7,6 +7,7 @@
 * TConstruct integration
   * Most replaced enchantments can now be extracted for Tinkers' modifiers crystals
   * Reduced Power modifier power
+  * Reduced shields blocking amount (and also reduced Tinker Things shield block amount)
 
 ## 4.11.16
 ### Changes
