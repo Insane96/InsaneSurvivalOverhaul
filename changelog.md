@@ -4,6 +4,7 @@
 ### Changes
 * Added item tag that doesn't trigger timber trees
   * Currently only holds Tinkers' Broad Axe
+* Most replaced enchantments can now be extracted for Tinkers' modifiers crystals
 
 ## 4.11.16
 ### Changes
