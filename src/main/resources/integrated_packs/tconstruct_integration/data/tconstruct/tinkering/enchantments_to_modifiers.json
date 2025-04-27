@@ -9,5 +9,6 @@
     "#tconstruct:modifier_like/projectile_protection": "tconstruct:projectile_protection",
     "#tconstruct:modifier_like/protection": "tconstruct:protection",
     "#tconstruct:modifier_like/sharpness": "tconstruct:sharpness",
-    "#tconstruct:modifier_like/smite": "tconstruct:smite"
+    "#tconstruct:modifier_like/smite": "tconstruct:smite",
+    "#tconstruct:modifier_like/sweeping_edge": "tconstruct:sweeping_edge"
 }

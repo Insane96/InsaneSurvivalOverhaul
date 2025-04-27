@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Missing sweeping edge to modifier
+
 ## 4.11.17
 ### Changes
 * Added item tag that doesn't trigger timber trees
