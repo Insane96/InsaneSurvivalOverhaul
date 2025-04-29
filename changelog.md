@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Misc Tweaks Data Pack
+  * Leads are now crafted with strings only, like latest snapshot
+
 ### Fixes
 * Missing sweeping edge to modifier
 
