@@ -1,9 +1,14 @@
 # Changelog
 
-## Upcoming
+## 4.11.18
 ### Changes
+* Looking at a grave now shows the death message on the action bar
+  * You can still right-click them
 * Misc Tweaks Data Pack
   * Leads are now crafted with strings only, like latest snapshot
+* Mobs Buffs Data Pack
+  * Mobs no longer gain bonus stats the farther away from spawn
+* Disabled items no longer show the "no_mining" or "no_damage" messages
 
 ### Fixes
 * Missing sweeping edge to modifier

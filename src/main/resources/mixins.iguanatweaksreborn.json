@@ -115,6 +115,7 @@
         "client.DeathScreenMixin",
         "client.EntityRendererMixin",
         "client.GameRendererMixin",
+        "client.GuiAccessor",
         "client.GuiMixin",
         "client.LevelRendererMixin",
         "client.LightTextureMixin",
@@ -122,5 +123,5 @@
         "client.MinecraftMixin",
         "client.OptionsMixin",
         "integration.appleskin.HUDOverlayHandlerMixin"
-	]
+    ]
 }

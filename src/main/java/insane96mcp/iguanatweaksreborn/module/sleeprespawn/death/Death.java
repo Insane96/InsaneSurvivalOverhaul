@@ -4,6 +4,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.integration.CuriosIntegration;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
+import insane96mcp.iguanatweaksreborn.mixin.client.GuiAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -16,6 +17,7 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.setup.ILStrings;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.SectionPos;
@@ -36,6 +38,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,6 +46,10 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -73,6 +80,9 @@ public class Death extends Feature {
 	@Config
 	@Label(description = "If true, the player's experience is stored in the grave.")
 	public static Boolean graveKeepsExperience = true;
+	@Config
+	@Label(description = "If true, graves will be placed even if the player has no items/xp.")
+	public static Boolean summonGraveEvenWithNoItems = true;
 	@Config
 	@Label(description = "In how many ticks will items despawn after dropping from a grave.")
 	public static Integer despawnTime = 2400;
@@ -188,7 +198,7 @@ public class Death extends Feature {
 			ToolBeltIntegration.onDeath(items, player);
 		if (ModList.get().isLoaded("curios"))
 			CuriosIntegration.onDeath(items, player);
-		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveKeepsExperience))
+		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveKeepsExperience) && !summonGraveEvenWithNoItems)
 			return;
 		BlockPos pos = player.blockPosition();
 		if (pos.getY() < player.level().getMinBuildHeight())
@@ -233,4 +243,22 @@ public class Death extends Feature {
 		//noinspection DataFlowIssue
 		mob.level().getServer().getPlayerList().broadcastSystemMessage(deathMessage, false);
 	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+		if (event.phase == TickEvent.Phase.END
+				|| !event.player.level().isClientSide
+				|| !(Minecraft.getInstance().hitResult instanceof BlockHitResult blockHitResult))
+			return;
+
+		BlockEntity blockEntity = event.player.level().getBlockEntity(blockHitResult.getBlockPos());
+
+        if (!(blockEntity instanceof GraveBlockEntity graveBlockEntity)
+				|| graveBlockEntity.getMessage() == null)
+            return;
+
+		event.player.displayClientMessage(graveBlockEntity.getMessage(), true);
+		((GuiAccessor) Minecraft.getInstance().gui).setOverlayMessageTime(20);
+    }
 }
