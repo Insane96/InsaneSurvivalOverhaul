@@ -15,13 +15,6 @@
                         "spawner_behaviour": "spawner_only"
                     },
                     "amount": 0.75
-                },
-                "world_spawn_distance_modifier": {
-                    "operation": "add",
-                    "amount_per_step": 1,
-                    "step": 1000,
-                    "shift": 1000,
-                    "distance_cap": 17000
                 }
             },
             "operation": "addition"
