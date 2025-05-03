@@ -59,7 +59,8 @@ public class DisabledItems extends Feature {
 		ItemStack stack = player.getMainHandItem();
 		if (stack.is(NO_DAMAGE) || stack.is(DISABLED)) {
 			event.setCanceled(true);
-			player.displayClientMessage(Component.translatable(NO_DAMAGE_ITEM_LANG), true);
+			if (stack.is(NO_DAMAGE))
+				player.displayClientMessage(Component.translatable(NO_DAMAGE_ITEM_LANG), true);
 		}
 	}
 
@@ -72,7 +73,8 @@ public class DisabledItems extends Feature {
 		ItemStack stack = player.getMainHandItem();
 		if (stack.is(NO_MINING) || stack.is(DISABLED)) {
 			event.setCanceled(true);
-			event.getEntity().displayClientMessage(Component.translatable(NO_MINING_ITEM_LANG), true);
+			if (stack.is(NO_MINING))
+				event.getEntity().displayClientMessage(Component.translatable(NO_MINING_ITEM_LANG), true);
 		}
 	}
 
