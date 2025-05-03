@@ -7,6 +7,7 @@
 
 ### Fixes
 * Missing sweeping edge to modifier
+* Disabling experience module and using the gamerule to disable experience not working
 
 ## 4.11.17
 ### Changes

@@ -108,17 +108,15 @@ public class DroppedExperience extends Feature {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onEntityJoinLevel(EntityJoinLevelEvent event) {
+		if (event.getEntity() instanceof ExperienceOrb xpOrb
+				&& xpOrb.level().getGameRules().getBoolean(RULE_DISABLEEXPERIENCE)) {
+			event.setCanceled(true);
+			return;
+		}
 		if (!this.isEnabled())
 			return;
-
-		if (event.getEntity() instanceof ExperienceOrb xpOrb) {
-			if (xpOrb.level().getGameRules().getBoolean(RULE_DISABLEEXPERIENCE)) {
-				event.setCanceled(true);
-				return;
-			}
-
+		if (event.getEntity() instanceof ExperienceOrb xpOrb)
 			handleGlobalExperience(xpOrb);
-		}
 		handleMobsMultiplier(event);
 	}
 
