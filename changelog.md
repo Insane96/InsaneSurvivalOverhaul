@@ -6,6 +6,7 @@
 
 ### Changes
 * Lowered Iron Golems attack speed (with Enhanced AI and MPR installed)
+* Foggy weather and thunderstorm intensity no longer tick if doWeatherCycle is false
 
 ## 4.11.18
 ### Changes

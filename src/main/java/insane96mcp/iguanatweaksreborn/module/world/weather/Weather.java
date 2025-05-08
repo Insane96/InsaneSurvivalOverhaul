@@ -44,7 +44,8 @@ public class Weather extends Feature {
     }
 
     public static void onSkipNight(int timeSkipped, ServerLevel level) {
-        if (!Feature.isEnabled(Weather.class))
+        if (!Feature.isEnabled(Weather.class)
+                || !level.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE))
             return;
 
         if (level.getGameRules().getBoolean(RULE_FOGGYWEATHER))
