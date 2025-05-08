@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Lowered Iron Golems attack speed
+
 ## 4.11.18
 ### Changes
 * Looking at a grave now shows the death message on the action bar

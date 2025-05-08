@@ -10,6 +10,7 @@
         "minecraft:cat",
         "minecraft:fox",
         "minecraft:rabbit",
-        "minecraft:ravager"
+        "minecraft:ravager",
+        "minecraft:iron_golem"
     ]
 }
