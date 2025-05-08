@@ -27,6 +27,10 @@ public class MiscMobs extends Feature {
     @Label(description = "Instead of dealing magic and melee damage, guardians now only deal magic damage equal to their attack_damage attribute")
     public static Boolean guardianMagicDamageOnly = true;
 
+    @Config
+    @Label(description = "Iron golems no longer deal randomized damage, but fixed attack_damage attribute damage instead")
+    public static Boolean fixedIronGolemDamage = true;
+
     public MiscMobs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
     }

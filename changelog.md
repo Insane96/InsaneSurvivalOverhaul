@@ -1,7 +1,11 @@
 # Changelog
 
 ## Upcoming
-* Lowered Iron Golems attack speed
+### Additions
+* Iron golems now deal a fixed amount of damage
+
+### Changes
+* Lowered Iron Golems attack speed (with Enhanced AI and MPR installed)
 
 ## 4.11.18
 ### Changes

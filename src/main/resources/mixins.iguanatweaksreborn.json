@@ -54,6 +54,7 @@
         "ForgeHooksMixin",
         "GuardianAttackGoalMixin",
         "HoneyBottleItemMixin",
+        "IronGolemMixin",
         "ItemEntityMixin",
         "ItemMixin",
         "ItemStackMixin",
