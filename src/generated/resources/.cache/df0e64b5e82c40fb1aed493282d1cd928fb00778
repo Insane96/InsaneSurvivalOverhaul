@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-02T13:27:19.5932662	Tags for minecraft:block mod id iguanatweaksreborn
+// 1.20.1	2025-05-08T10:40:01.0725852	Tags for minecraft:block mod id iguanatweaksreborn
 9075694bac6be77d009053c187da60a08f762304 data/iguanatweaksreborn/tags/blocks/aspen_leaves.json
 3dfd7c9ffc9262265b75bf5090bf8a0cb9fd5e98 data/iguanatweaksreborn/tags/blocks/aspen_logs.json
 33e91aee8aadac89fdcdfb63a56cf5d7c281c254 data/iguanatweaksreborn/tags/blocks/azalea_leaves.json
@@ -17,7 +17,7 @@ acab7344abee921bb217f74b6166add9a6bc12e6 data/iguanatweaksreborn/tags/blocks/oak
 6709e029dcdb781bc96e92c5e95ef69620b94c99 data/iguanatweaksreborn/tags/blocks/portal_corners.json
 ac37cd654850943fcc007084876459bf0f24c761 data/iguanatweaksreborn/tags/blocks/structures/respawn_obelisk/blocks_to_rot.json
 4dfbc84d27256c10f00e5897253558b278b80487 data/iguanatweaksreborn/tags/blocks/tall_grass.json
-f1f66e3903e5e7e8e7b3d6a0044d115f663150dd data/iguanatweaksreborn/tags/blocks/timber_trunks.json
+63b21ee54668aebaea817b968760fbe4a7b27904 data/iguanatweaksreborn/tags/blocks/timber_trunks.json
 9e1527517dbe0c3cc0b749baad71725f105c0a6b data/iguanatweaksreborn/tags/blocks/trumpet_leaves.json
 8723e5d46b51843a0a557421bd1b6028355de7a4 data/iguanatweaksreborn/tags/blocks/wisteria_leaves.json
 e7a8c631b3ba3bd9a98d2bb83f927b25fe348d37 data/minecraft/tags/blocks/fall_damage_resetting.json

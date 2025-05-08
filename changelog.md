@@ -8,6 +8,9 @@
 * Lowered Iron Golems attack speed (with Enhanced AI and MPR installed)
 * Foggy weather and thunderstorm intensity no longer tick if doWeatherCycle is false
 
+### Fixes
+* Tinkers' slime trees not timbering
+
 ## 4.11.18
 ### Changes
 * Looking at a grave now shows the death message on the action bar

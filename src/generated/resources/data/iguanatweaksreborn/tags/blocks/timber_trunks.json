@@ -4,6 +4,18 @@
     {
       "id": "quark:ancient_log",
       "required": false
+    },
+    {
+      "id": "tconstruct:greenheart_log",
+      "required": false
+    },
+    {
+      "id": "tconstruct:skyroot_log",
+      "required": false
+    },
+    {
+      "id": "tconstruct:enderbark_log",
+      "required": false
     }
   ]
 }

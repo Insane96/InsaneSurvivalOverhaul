@@ -68,7 +68,10 @@ public class TimberTrees extends JsonFeature {
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:plum_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:plum_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:willow_log")).leaves(IdTagMatcher.newId("environmental:willow_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:wisteria_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:wisteria_leaves")).build(),
-            new TreeInfo.Builder().log(IdTagMatcher.newId("caverns_and_chasms:azalea_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:azalea_leaves")).build()
+            new TreeInfo.Builder().log(IdTagMatcher.newId("caverns_and_chasms:azalea_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:azalea_leaves")).build(),
+            new TreeInfo.Builder().log(IdTagMatcher.newId("tconstruct:greenheart_log")).leaves(IdTagMatcher.newId("tconstruct:earth_slime_leaves")).build(),
+            new TreeInfo.Builder().log(IdTagMatcher.newId("tconstruct:skyroot_log")).leaves(IdTagMatcher.newId("tconstruct:sky_slime_leaves")).build(),
+            new TreeInfo.Builder().log(IdTagMatcher.newId("tconstruct:enderbark_log")).leaves(IdTagMatcher.newId("tconstruct:ender_slime_leaves")).build()
     ));
     public static final ArrayList<TreeInfo> treeInfos = new ArrayList<>();
 

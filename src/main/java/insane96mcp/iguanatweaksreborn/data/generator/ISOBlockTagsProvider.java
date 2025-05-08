@@ -149,7 +149,10 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 		//noinspection unchecked
 		tag(TimberTrees.TIMBER_TRUNKS)
 				.addTags(BlockTags.OVERWORLD_NATURAL_LOGS)
-                .addOptional(new ResourceLocation("quark:ancient_log"));
+                .addOptional(new ResourceLocation("quark:ancient_log"))
+                .addOptional(new ResourceLocation("tconstruct:greenheart_log"))
+                .addOptional(new ResourceLocation("tconstruct:skyroot_log"))
+                .addOptional(new ResourceLocation("tconstruct:enderbark_log"));
 
         tag(Nether.PORTAL_CORNERS)
                 .add(Blocks.CRYING_OBSIDIAN);
