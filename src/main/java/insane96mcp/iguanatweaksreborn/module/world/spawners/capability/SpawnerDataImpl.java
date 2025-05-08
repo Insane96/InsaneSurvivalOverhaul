@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.world.spawners.capability;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -9,9 +10,11 @@ public class SpawnerDataImpl implements ISpawnerData {
     public static final String SPAWNED_MOBS = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "spawned_mobs";
 	public static final String SPAWNER_DISABLED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "spawner_disabled";
 	public static final String SPAWNER_EMPOWERED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "spawner_empowered";
+	public static final String SPAWNER_REACTIVATED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "spawner_reactivated";
     private int spawnedMobs;
 	private boolean disabled;
 	private boolean empowered = true;
+	private boolean hasBeenReactivated;
 
 	@Override
 	public int getSpawnedMobs() {
@@ -49,11 +52,22 @@ public class SpawnerDataImpl implements ISpawnerData {
 	}
 
 	@Override
+	public void setHasBeenReactivated(boolean hasBeenReactivated) {
+		this.hasBeenReactivated = hasBeenReactivated;
+	}
+
+	@Override
+	public boolean hasBeenReactivated() {
+		return this.hasBeenReactivated;
+	}
+
+	@Override
 	public CompoundTag serializeNBT() {
 		CompoundTag nbt = new CompoundTag();
 		nbt.putInt(SPAWNED_MOBS, this.getSpawnedMobs());
 		nbt.putBoolean(SPAWNER_DISABLED, this.isDisabled());
 		nbt.putBoolean(SPAWNER_EMPOWERED, this.isEmpowered());
+		nbt.putBoolean(SPAWNER_REACTIVATED, this.hasBeenReactivated());
 		return nbt;
 	}
 
@@ -62,15 +76,17 @@ public class SpawnerDataImpl implements ISpawnerData {
 		this.setSpawnedMobs(nbt.getInt(SPAWNED_MOBS));
 		this.setDisabled(nbt.getBoolean(SPAWNER_DISABLED));
 		if (!nbt.contains(SPAWNER_EMPOWERED))
-			this.setEmpowered(true);
+			this.setEmpowered(Spawners.empoweredEnabled);
 		else
 			this.setEmpowered(nbt.getBoolean(SPAWNER_EMPOWERED));
+		this.setHasBeenReactivated(nbt.getBoolean(SPAWNER_REACTIVATED));
 	}
 
 	public void toNetwork(FriendlyByteBuf buf) {
 		buf.writeInt(this.spawnedMobs);
 		buf.writeBoolean(this.disabled);
 		buf.writeBoolean(this.empowered);
+		buf.writeBoolean(this.hasBeenReactivated);
 	}
 
 	public static SpawnerDataImpl fromNetwork(FriendlyByteBuf buf) {
@@ -78,6 +94,7 @@ public class SpawnerDataImpl implements ISpawnerData {
 		spawnerData.spawnedMobs = buf.readInt();
 		spawnerData.disabled = buf.readBoolean();
 		spawnerData.empowered = buf.readBoolean();
+		spawnerData.hasBeenReactivated = buf.readBoolean();
 		return spawnerData;
 	}
 }

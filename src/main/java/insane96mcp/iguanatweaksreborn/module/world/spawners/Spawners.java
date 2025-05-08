@@ -8,8 +8,8 @@ import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDa
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataImpl;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.data.IdTagValue;
@@ -17,7 +17,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -57,6 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//TODO Refactor, make a "spawners type" enum with FIXED_SPAWN and EMPOWERED and make every type configurable with light, delay, spawned mobs etc
 @Label(name = "Spawners", description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Spawners extends JsonFeature {
@@ -85,10 +85,10 @@ public class Spawners extends JsonFeature {
 	public static Boolean spawningSoundEffect = true;
 
 	@Config
-	@Label(name = "Disable spawners.Enabled")
+	@Label(name = "Disable spawners.Enabled", description = "If true, spawners will be disabled after spawning a certain amount of mobs.")
 	public static Boolean disableSpawnersEnabled = false;
 	@Config(min = 0)
-	@Label(name = "Disable spawners.Minimum Spawnable Mobs", description = "The minimum amount of spawnable mobs (when the spawner is basically in the same position as the world spawn). The amount of spawnable mobs before deactivating is equal to the distance divided by 8 (plus this value). E.g. At 160 blocks from spawn the max spawnable mobs will be 160 / 8 + 25 = 20 + 25 = 55")
+	@Label(name = "Disable spawners.Minimum Spawnable Mobs", description = "The minimum amount of spawnable mobs (when the spawner is basically in the same position as the world spawn). The amount of spawnable mobs before deactivating is equal to the distance divided by 8 (plus this value). E.g. At 160 blocks from spawn the max spawnable mobs will be 160 / 8 + 20 = 20 + 20 = 40")
 	public static Integer disableSpawnersMinSpawnableMobs = 20;
 	@Config(min = 0d)
 	@Label(name = "Disable spawners.Spawnable mobs multiplier", description = "This multiplier increases the max mobs spawned.")
@@ -102,7 +102,7 @@ public class Spawners extends JsonFeature {
 	public static Boolean empoweredDisableOnEnd = true;
 	@Config(min = 0)
 	@Label(name = "Empowered.Mobs amount", description = "How many mobs are spawned before empowered ends.")
-	public static Integer empoweredMobsAmount = 24;
+	public static Integer empoweredMobsAmount = 20;
 	@Config(min = 1)
 	@Label(name = "Empowered.Delay", description = "Spawning Delay (in ticks) when the Spawner is empowered.")
 	public static MinMax empoweredDelay = new MinMax(150, 300);
@@ -116,6 +116,16 @@ public class Spawners extends JsonFeature {
 	@Label(name = "Empowered.Sound effect", description = "When the Spawner stops being empowered, will play a sound effect")
 	public static Boolean empoweredSoundEffect = true;
 
+	@Config(min = -1)
+	@Label(description = "The range of a player nearby in which the spawner will be active. Setting to -1 should keep the spawners always active (untested) as long as the chunk is loaded (hostiles will still despawn in a 128 block radius).")
+	public static Integer reactivatedSpawners$playerRange = 128;
+	@Config
+	@Label(description = "How many ticks will the spawner try to summon mobs.")
+	public static MinMax reactivatedSpawners$delay = new MinMax(3600, 6000);
+	@Config
+	@Label(description = "Reactivated spawners spawn mobs no matter the light level.")
+	public static Boolean reactivatedSpawners$ignoreLight = false;
+
 	public static final ArrayList<IdTagValue> FIXED_SPAWNER_SPAWNABLE_DEFAULT = new ArrayList<>(List.of(
 			//new IdTagValue(IdTagMatcher.newId("minecraft:blaze", "minecraft:the_nether"), 64)
 	));
@@ -123,7 +133,7 @@ public class Spawners extends JsonFeature {
 
 	public Spawners(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		JSON_CONFIGS.add(new JsonConfig<>("spawners.json", fixedSpawnerSpawnable, FIXED_SPAWNER_SPAWNABLE_DEFAULT, IdTagValue.LIST_TYPE));
+		JSON_CONFIGS.add(new JsonConfig<>("fixed_spawners_spawnable.json", fixedSpawnerSpawnable, FIXED_SPAWNER_SPAWNABLE_DEFAULT, IdTagValue.LIST_TYPE));
 	}
 
 	@Override
@@ -139,8 +149,6 @@ public class Spawners extends JsonFeature {
 				|| event.getSpawner().getSpawnerBlockEntity() == null)
 			return;
 
-		CompoundTag nbt = new CompoundTag();
-		event.getSpawner().save(nbt);
 		BlockPos spawnerPos = event.getSpawner().getSpawnerBlockEntity().getBlockPos();
 		ServerLevel level = (ServerLevel) event.getLevel();
 		if (!(event.getSpawner().getSpawnerBlockEntity() instanceof SpawnerBlockEntity mobSpawner)) {
@@ -218,13 +226,17 @@ public class Spawners extends JsonFeature {
 		if (!event.getEntity().getAbilities().instabuild)
 			event.getItemStack().shrink(1);
 		event.getEntity().swing(event.getHand(), true);
-		resetSpawner(spawner);
+		setSpawnerDisabled(spawner, false);
+		spawner.getCapability(SpawnerData.INSTANCE).ifPresent(spawnerCap -> {
+			spawnerCap.setSpawnedMobs(0);
+			spawnerCap.setHasBeenReactivated(true);
+		});
+		spawner.setChanged();
 	}
 
 	@SubscribeEvent
 	public void onSpawnCheck(MobSpawnEvent.SpawnPlacementCheck event) {
 		if (!this.isEnabled()
-				|| !ignoreLight
 				|| event.getSpawnType() != MobSpawnType.SPAWNER
 				|| event.getEntityType().is(BLACKLISTED_SPAWNERS)
 				|| event.getDefaultResult()
@@ -239,13 +251,19 @@ public class Spawners extends JsonFeature {
 	@SubscribeEvent
 	public void onSpawnCheck(MobSpawnEvent.PositionCheck event) {
 		if (!this.isEnabled()
-				|| !ignoreLight
 				|| event.getSpawnType() != MobSpawnType.SPAWNER
-				|| event.getEntity().getType().is(BLACKLISTED_SPAWNERS))
+				|| event.getEntity().getType().is(BLACKLISTED_SPAWNERS)
+				|| event.getSpawner() == null
+				|| !(event.getSpawner().getSpawnerBlockEntity() instanceof SpawnerBlockEntity spawnerBlockEntity))
 			return;
-
-		if (event.getEntity().checkSpawnObstruction(event.getLevel()))
+		if (hasBeenReactivated(spawnerBlockEntity)) {
+			if (reactivatedSpawners$ignoreLight) {
+				event.setResult(Event.Result.ALLOW);
+			}
+		}
+		else if (ignoreLight && event.getEntity().checkSpawnObstruction(event.getLevel())) {
 			event.setResult(Event.Result.ALLOW);
+		}
 	}
 
 	/**
@@ -255,19 +273,6 @@ public class Spawners extends JsonFeature {
         if (!(spawner.getSpawnerBlockEntity() instanceof SpawnerBlockEntity spawnerBlockEntity)
                 || !Feature.isEnabled(Spawners.class))
 			return false;
-		/*spawnerBlockEntity.getCapability(SpawnerData.INSTANCE).ifPresent(spawnerData -> {
-			Level level = spawnerBlockEntity.getLevel();
-			if (level == null
-					|| !spawner.isNearPlayer(level, spawnerBlockEntity.getBlockPos()))
-				return;
-			if (spawnerData.isEmpowered())
-				spawner.spawnDelay = Math.max(spawner.spawnDelay - (MathHelper.getAmountWithDecimalChance(level.getRandom(), empoweredSpawningSpeed) - 1), 0);
-			else if (empoweredNormalSpeed > 1)
-				spawner.spawnDelay = Math.max(spawner.spawnDelay - (MathHelper.getAmountWithDecimalChance(level.getRandom(), empoweredNormalSpeed) - 1), 0);
-			else if (empoweredNormalSpeed < 1 && level.getRandom().nextFloat() >= empoweredNormalSpeed){
-				spawner.spawnDelay = Math.max(spawner.spawnDelay + 1, 0);
-			}
-		});*/
 		return isDisabled(spawnerBlockEntity);
 	}
 
@@ -291,11 +296,16 @@ public class Spawners extends JsonFeature {
 		if (!Feature.isEnabled(Spawners.class)
 				|| !(spawner.getSpawnerBlockEntity() instanceof SpawnerBlockEntity spawnerBlockEntity))
 			return;
+		int playerRange = requiredPlayerRange;
         if (isEmpowered(spawnerBlockEntity))
             spawner.spawnDelay = empoweredDelay.getIntRandBetween(level.getRandom());
+		else if (hasBeenReactivated(spawnerBlockEntity)) {
+			spawner.spawnDelay = reactivatedSpawners$delay.getIntRandBetween(level.getRandom());
+			playerRange = reactivatedSpawners$playerRange;
+		}
         else if (overrideSpawnDelay)
             spawner.spawnDelay = delay.getIntRandBetween(level.getRandom());
-		spawner.requiredPlayerRange = requiredPlayerRange;
+		spawner.requiredPlayerRange = playerRange;
 		syncSpawnerData(spawnerBlockEntity);
     }
 
@@ -345,12 +355,6 @@ public class Spawners extends JsonFeature {
 		});
     }
 
-	private static void resetSpawner(SpawnerBlockEntity spawner) {
-		setSpawnerDisabled(spawner, false);
-		spawner.getCapability(SpawnerData.INSTANCE).ifPresent(spawnerCap -> spawnerCap.setSpawnedMobs(0));
-		spawner.setChanged();
-	}
-
 	private static boolean isDisabled(SpawnerBlockEntity spawner) {
 		LazyOptional<ISpawnerData> cap = spawner.getCapability(SpawnerData.INSTANCE);
 		return cap.map(ISpawnerData::isDisabled).orElse(false);
@@ -361,6 +365,11 @@ public class Spawners extends JsonFeature {
 			return false;
 		LazyOptional<ISpawnerData> cap = spawner.getCapability(SpawnerData.INSTANCE);
 		return cap.map(ISpawnerData::isEmpowered).orElse(false);
+	}
+
+	private static boolean hasBeenReactivated(SpawnerBlockEntity spawner) {
+		LazyOptional<ISpawnerData> cap = spawner.getCapability(SpawnerData.INSTANCE);
+		return cap.map(ISpawnerData::hasBeenReactivated).orElse(false);
 	}
 
 	@SubscribeEvent

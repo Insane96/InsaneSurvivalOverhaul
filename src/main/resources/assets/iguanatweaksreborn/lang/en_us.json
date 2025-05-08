@@ -207,7 +207,7 @@
 
 	"item.iguanatweaksreborn.sweet_berry_seeds": "Sweet Berry Seeds",
 
-	"iguanatweaksreborn.spawner_reactivator": "This item can reactivate a Mob Spawner",
+	"iguanatweaksreborn.spawner_reactivator": "This item can reactivate a Mob Spawner.\nThe spawner will be really slow but players nearby are no longer required for them to work and will not ignore light level",
 
 	"death.fell.accident.water": "%s thought could drop in shallow water safely",
 

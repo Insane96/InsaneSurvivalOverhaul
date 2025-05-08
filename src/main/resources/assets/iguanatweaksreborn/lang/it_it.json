@@ -203,7 +203,7 @@
 
 	"item.iguanatweaksreborn.sweet_berry_seeds": "Semi di bacche dolci",
 
-	"iguanatweaksreborn.spawner_reactivator": "Questo oggetto può riattivare un generatore di mostri",
+	"iguanatweaksreborn.spawner_reactivator": "Questo oggetto può riattivare un generatore di mostri.\nIl generatore sarà molto lento ma non sarà richiesto un giocatore vicino per farlo funzionare e non ignorerà il livello di luce.",
 
 	"death.fell.accident.water": "%s pensava di potersi buttare nell'acqua bassa in tutta tranquillità",
 

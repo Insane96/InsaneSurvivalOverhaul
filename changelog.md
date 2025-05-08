@@ -1,5 +1,12 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Reactivated spawners with echo shards are now slower but have increased range
+  * Spawn delay (20s\~80s -> 3m\~5m)
+  * Required player range (24 -> 128)
+  * Doesn't ignore light level
+
 ## 4.11.19
 ### Additions
 * Iron golems now deal a fixed amount of damage

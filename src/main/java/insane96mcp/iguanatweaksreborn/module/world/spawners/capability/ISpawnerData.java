@@ -13,4 +13,7 @@ public interface ISpawnerData extends INBTSerializable<CompoundTag> {
 
 	void setEmpowered(boolean isEmpowered);
 	boolean isEmpowered();
+
+	void setHasBeenReactivated(boolean hasBeenReactivated);
+	boolean hasBeenReactivated();
 }
