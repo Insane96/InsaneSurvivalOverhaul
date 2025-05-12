@@ -6,6 +6,8 @@
   * Spawn delay (20s\~80s -> 3m\~5m)
   * Required player range (24 -> 128)
   * Doesn't ignore light level
+* Lowered mobs amount spawned by empowered spawners
+* Fixed wild crops missing lang
 
 ## 4.11.19
 ### Additions

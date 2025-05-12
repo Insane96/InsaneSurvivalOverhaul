@@ -78,6 +78,11 @@
 
 	"block.iguanatweaksreborn.rich_farmland": "Terra zappata ricca",
 
+	"block.iguanatweaksreborn.wild_wheat": "Grano Selvatico",
+	"block.iguanatweaksreborn.wild_potatoes": "Patate Selvatiche",
+	"block.iguanatweaksreborn.wild_carrots": "Carote Selvatiche",
+	"block.iguanatweaksreborn.wild_beetroots": "Barbabietole Selvatiche",
+
 	"block.minecraft.carrots.seeds": "Semi di carote",
 	"block.minecraft.potatoes.seeds": "Patata con radici",
 	"block.farmersdelight.onions.seeds": "Cipolla con radici",

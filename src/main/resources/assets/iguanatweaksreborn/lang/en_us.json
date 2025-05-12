@@ -78,6 +78,11 @@
 
 	"block.iguanatweaksreborn.rich_farmland": "Rich Farmland",
 
+	"block.iguanatweaksreborn.wild_wheat": "Wild Wheat",
+	"block.iguanatweaksreborn.wild_potatoes": "Wild Potatoes",
+	"block.iguanatweaksreborn.wild_carrots": "Wild Carrots",
+	"block.iguanatweaksreborn.wild_beetroots": "Wild Beetroots",
+
 	"block.minecraft.carrots.seeds": "Carrot Seeds",
 	"block.minecraft.potatoes.seeds": "Rooted Potato",
 	"block.farmersdelight.onions.seeds": "Rooted Onion",
