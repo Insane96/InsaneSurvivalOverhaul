@@ -8,6 +8,7 @@
   * Doesn't ignore light level
 * Lowered mobs amount spawned by empowered spawners
 * Fixed wild crops missing lang
+* Fixed terrain slowdown not resetting when in fluids
 
 ## 4.11.19
 ### Additions

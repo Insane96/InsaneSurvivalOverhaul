@@ -25,6 +25,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -64,17 +65,18 @@ public class TerrainSlowdown extends JsonFeature {
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (!this.isEnabled()
-				|| event.phase != TickEvent.Phase.START
-				|| !event.player.onGround())
+				|| event.phase != TickEvent.Phase.START)
 			return;
 
-		applyTerrainSlowdown(event.player, 1f);
+		if (event.player.onGround())
+			applyTerrainSlowdown(event.player, 1f);
+		else if (event.player.isInFluidType())
+			removeTerrainSlowdown(event.player);
 	}
 
 	@SubscribeEvent
 	public void onLivingTick(LivingEvent.LivingTickEvent event) {
 		if (!this.isEnabled()
-				|| !event.getEntity().onGround()
 				|| event.getEntity() instanceof Player
 				|| (event.getEntity().tickCount + event.getEntity().getId()) % 5 != 0)
 			return;
@@ -136,19 +138,29 @@ public class TerrainSlowdown extends JsonFeature {
 			inTerrainSlowdown /= blocks;
 
 		double slowdown = (onTerrainSlowdown + inTerrainSlowdown) * multiplier;
+		applySlowdown(entity, slowdown);
+	}
 
+	public static void applySlowdown(LivingEntity entity, double slowdown) {
 		AttributeModifier modifier = entity.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TERRAIN_SLOWDOWN);
-		if (slowdown != 0d) {
-			if (modifier == null) {
-				MCUtils.applyModifier(entity, Attributes.MOVEMENT_SPEED, TERRAIN_SLOWDOWN, "terrain slowdown", -slowdown, AttributeModifier.Operation.MULTIPLY_BASE, false);
-			}
-			else if (modifier.getAmount() != -slowdown) {
-				entity.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TERRAIN_SLOWDOWN);
-				MCUtils.applyModifier(entity, Attributes.MOVEMENT_SPEED, TERRAIN_SLOWDOWN, "terrain slowdown", -slowdown, AttributeModifier.Operation.MULTIPLY_BASE, false);
-			}
+		if (slowdown == 0d) {
+			removeTerrainSlowdown(entity, modifier);
+			return;
 		}
-		else if (modifier != null) {
-            entity.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TERRAIN_SLOWDOWN);
-        }
+		if (modifier == null || modifier.getAmount() != -slowdown) {
+			if (modifier != null)
+				removeTerrainSlowdown(entity, modifier);
+			MCUtils.applyModifier(entity, Attributes.MOVEMENT_SPEED, TERRAIN_SLOWDOWN, "terrain slowdown", -slowdown, AttributeModifier.Operation.MULTIPLY_BASE, false);
+		}
+	}
+
+	public static void removeTerrainSlowdown(LivingEntity entity, @Nullable AttributeModifier modifier) {
+		if (modifier != null)
+			entity.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TERRAIN_SLOWDOWN);
+	}
+
+	public static void removeTerrainSlowdown(LivingEntity entity) {
+		AttributeModifier modifier = entity.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TERRAIN_SLOWDOWN);
+		removeTerrainSlowdown(entity, modifier);
 	}
 }
