@@ -17,7 +17,7 @@ public class TinkerIntegration extends Feature {
 
     @Config(min = 0d, max = 128d)
     @Label(description = "Multiplier applied to tinkers construct heads and modifiers attack damage. This also applies to additive modifiers")
-    public static Double damageModifier = 0.6d;
+    public static Double damageModifier = 0.5d;
 
     @Config(min = 0d, max = 128d)
     @Label(description = "Multiplier applied to tinkers construct heads and modifiers durability. This also applies to additive modifiers")

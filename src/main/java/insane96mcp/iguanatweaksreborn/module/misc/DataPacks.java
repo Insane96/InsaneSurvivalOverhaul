@@ -106,7 +106,7 @@ public class DataPacks extends Feature {
     @Label(name = "Create integration", description = "Integrates the mod with Crate. Alters ore generation.")
     public static Boolean create = true;
     @Config
-    @Label(name = "Tinkers' Construct integration", description = "Integrates the mod with Tinker's Construct. Disables vanilla items.")
+    @Label(name = "Tinkers' Construct integration", description = "Integrates the mod with Tinker's Construct. Disables vanilla items. Changes some stats and adds modifiers")
     public static Boolean tinkersConstruct = false;
 
     @Config

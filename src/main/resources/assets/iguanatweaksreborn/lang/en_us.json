@@ -218,6 +218,10 @@
 
 	"iguanatweaksreborn.requires_corners": "The portal needs Crying Obsidian in the corners to be activated",
 
+	"modifier.iguanatweaksreborn.critical": "Critical",
+	"modifier.iguanatweaksreborn.critical.flavor": "20 nat",
+	"modifier.iguanatweaksreborn.critical.description": "Increases crit chance and damage by 10%",
+
 	"emi.info.iguanatweaksreborn.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Can be found in the wild",
 

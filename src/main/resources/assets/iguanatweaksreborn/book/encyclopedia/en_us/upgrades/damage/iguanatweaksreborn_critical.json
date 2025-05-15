@@ -1,0 +1,14 @@
+{
+    "modifier_id": "iguanatweaksreborn:critical",
+    "text": [
+        {
+            "text": "Grants +10% chance to crit and +10% crit damage per level."
+        }
+    ],
+    "more_text_space": true,
+    "effects": [
+        "Can apply levels incrementally",
+        "Maximum of 5 levels",
+        "Requires 1 upgrade slot per level"
+    ]
+}

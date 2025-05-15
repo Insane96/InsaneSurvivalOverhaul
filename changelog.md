@@ -6,9 +6,18 @@
   * Spawn delay (20s\~80s -> 3m\~5m)
   * Required player range (24 -> 128)
   * Doesn't ignore light level
-* Lowered mobs amount spawned by empowered spawners
-* Fixed wild crops missing lang
-* Fixed terrain slowdown not resetting when in fluids
+* Critical modifier for Tinkers' Construct
+
+### Changes
+* Lowered mobs amount spawned by empowered spawners (24 -> 20)
+* Lowered tiredness to effect (500 -> 400)
+* Renamed Bane of SSSSS to Bane of Hissing
+
+### Fixes
+* Wild crops missing lang
+* Terrain slowdown not resetting when in fluids
+* Quark Shiba not counting as wolves
+* Wild crops not minable with hoes
 
 ## 4.11.19
 ### Additions
