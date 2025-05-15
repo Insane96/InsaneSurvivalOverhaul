@@ -85,7 +85,7 @@ public class DataPacks extends Feature {
             * Removes some advancements (like villagers ones)""")
     public static Boolean advancements = true;
     @Config
-    @Label(name = "Supplementaries integration", description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
+    @Label(name = "Supplementaries integration", description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
     public static Boolean supplementaries = true;
     @Config
     @Label(name = "Farmer's Delight integration", description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
