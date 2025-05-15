@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.0
 ### Additions
 * Reactivated spawners with echo shards are now slower but have increased range
   * Spawn delay (20s\~80s -> 3m\~5m)
