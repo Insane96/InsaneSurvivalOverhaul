@@ -63,6 +63,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(BoneMeal.RICH_FARMLAND.block().get())
                 .add(CoalFire.CHARCOAL_LAYER.block().get())
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.block().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.block().get());
+        tag(BlockTags.MINEABLE_WITH_HOE)
+                .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.block().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.block().get());
         tag(BlockTags.RAILS)

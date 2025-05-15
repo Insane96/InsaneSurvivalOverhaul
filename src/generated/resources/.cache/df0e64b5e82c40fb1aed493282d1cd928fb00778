@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-08T10:40:01.0725852	Tags for minecraft:block mod id iguanatweaksreborn
+// 1.20.1	2025-05-15T11:10:42.6637767	Tags for minecraft:block mod id iguanatweaksreborn
 9075694bac6be77d009053c187da60a08f762304 data/iguanatweaksreborn/tags/blocks/aspen_leaves.json
 3dfd7c9ffc9262265b75bf5090bf8a0cb9fd5e98 data/iguanatweaksreborn/tags/blocks/aspen_logs.json
 33e91aee8aadac89fdcdfb63a56cf5d7c281c254 data/iguanatweaksreborn/tags/blocks/azalea_leaves.json
@@ -21,6 +21,7 @@ ac37cd654850943fcc007084876459bf0f24c761 data/iguanatweaksreborn/tags/blocks/str
 9e1527517dbe0c3cc0b749baad71725f105c0a6b data/iguanatweaksreborn/tags/blocks/trumpet_leaves.json
 8723e5d46b51843a0a557421bd1b6028355de7a4 data/iguanatweaksreborn/tags/blocks/wisteria_leaves.json
 e7a8c631b3ba3bd9a98d2bb83f927b25fe348d37 data/minecraft/tags/blocks/fall_damage_resetting.json
+11bef7bcd908153737ec12957beec6a3a57697ee data/minecraft/tags/blocks/mineable/hoe.json
 f70bf513cd42f31f63186811d86dc063d164d721 data/minecraft/tags/blocks/mineable/pickaxe.json
 9c51cbff4498997218864d887211457f8e17aefc data/minecraft/tags/blocks/mineable/shovel.json
 26f2befbc6ee3f5363c35bfdab94b999985b30ad data/minecraft/tags/blocks/needs_iron_tool.json
