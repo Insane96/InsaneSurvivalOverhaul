@@ -6,6 +6,8 @@
   * Blocks in this tag will fall together with trees.
     Contains Bee hives and nests by default
     Also hives and nests falling will anger bees
+* Misc Tweaks Data Pack
+  * Saddles are now craftable like latest snapshot, and all saddles in chests have been replaced with leather
 
 ### Changes
 * Lowered mobs range and chance of xray

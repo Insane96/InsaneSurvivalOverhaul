@@ -1,0 +1,9 @@
+{
+  "type": "iguanatweaksreborn:replace_loot",
+  "chests_only": true,
+  "conditions": [],
+  "item_to_replace": "minecraft:saddle",
+  "keep_durability": true,
+  "new_item": "minecraft:leather",
+  "multipliers": [ 2.5 ]
+}
