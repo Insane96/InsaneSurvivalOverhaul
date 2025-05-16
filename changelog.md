@@ -1,6 +1,12 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* `iguanatweaksreborn:attached_blocks` block tag
+  * Blocks in this tag will fall together with trees.
+    Contains Bee hives and nests by default
+    Also hives and nests falling will anger bees
+
 ### Changes
 * Lowered mobs range and chance of xray
 

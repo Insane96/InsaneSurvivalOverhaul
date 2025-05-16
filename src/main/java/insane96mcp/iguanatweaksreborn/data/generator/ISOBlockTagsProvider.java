@@ -156,6 +156,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addOptional(new ResourceLocation("tconstruct:skyroot_log"))
                 .addOptional(new ResourceLocation("tconstruct:enderbark_log"));
 
+        tag(TimberTrees.ATTACHED_BLOCKS)
+                .add(Blocks.BEEHIVE, Blocks.BEE_NEST);
+
         tag(Nether.PORTAL_CORNERS)
                 .add(Blocks.CRYING_OBSIDIAN);
 

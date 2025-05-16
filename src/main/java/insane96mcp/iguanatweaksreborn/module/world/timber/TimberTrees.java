@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -42,6 +43,7 @@ import java.util.*;
 public class TimberTrees extends JsonFeature {
 
     public static final TagKey<Block> TIMBER_TRUNKS = ISOBlockTagsProvider.create("timber_trunks");
+    public static final TagKey<Block> ATTACHED_BLOCKS = ISOBlockTagsProvider.create("attached_blocks");
     public static final TagKey<Item> BLACKLISTED_ITEMS = ISOItemTagsProvider.create("no_timber");
 
     public static final ArrayList<TreeInfo> TREE_INFOS_DEFAULT = new ArrayList<>(List.of(
@@ -136,6 +138,12 @@ public class TimberTrees extends JsonFeature {
             if (state.getBlock() instanceof RotatedPillarBlock)
                 state = rotatePillar(state, direction.getAxis());
             ISOFallingBlockEntity fallingBlock = new ISOFallingBlockEntity(level, fallingBlockPos, state, direction);
+            if (state.hasBlockEntity()) {
+                //noinspection DataFlowIssue
+                fallingBlock.blockData = level.getBlockEntity(pos).saveWithoutMetadata();
+                if (level.getBlockEntity(pos) instanceof BeehiveBlockEntity beehiveBlockEntity)
+                    beehiveBlockEntity.emptyAllLivingFromHive(event.getPlayer(), state, BeehiveBlockEntity.BeeReleaseStatus.BEE_RELEASED);
+            }
             fallingBlock.move(MoverType.SELF, new Vec3(0, 0.1d * horizontalDistance, 0));
             if (state.is(TIMBER_TRUNKS))
                 fallingBlock.setHurtsEntities(0.5f, 20);
@@ -207,6 +215,11 @@ public class TimberTrees extends JsonFeature {
                     boolean isInDistance = xzDistance(posImmutable, pos) <= treeInfo.maxDistanceFromLogs;
                     boolean isCurrLeaves = currState.is(BlockTags.LEAVES);
                     boolean isCorrectLeavesDistance = isLeaves && isCurrLeaves && (stateToCheck.getValue(LeavesBlock.DISTANCE) > currState.getValue(LeavesBlock.DISTANCE) || stateToCheck.getValue(LeavesBlock.DISTANCE) == 7);
+                    boolean isAttached = stateToCheck.is(ATTACHED_BLOCKS);
+                    if (isAttached) {
+                        blocks.add(posImmutable);
+                        continue;
+                    }
                     if (isLeaves && validLeaves == null) {
                         validLeaves = IdTagMatcher.newId(ForgeRegistries.BLOCKS.getKey(stateToCheck.getBlock()).toString());
                         isValidLeaves = true;
