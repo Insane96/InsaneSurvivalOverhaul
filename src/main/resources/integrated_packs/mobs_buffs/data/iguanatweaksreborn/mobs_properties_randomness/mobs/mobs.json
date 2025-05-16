@@ -4,11 +4,18 @@
         {
             "id": "enhancedai:generic.xray_follow_range",
             "chance": {
-                "value": 0.5
+                "value": 0.05,
+                "depth_modifier": {
+                    "operation": "add",
+                    "amount_per_step": 0.05,
+                    "step": 16,
+                    "starting_y": 80
+                }
             },
             "modifier_name": "More XRay Range for Mobs",
             "amount": {
-                "value": 24,
+                "min": 8,
+                "max": 24,
                 "condition_modifier": {
                     "operation": "multiply",
                     "condition": {

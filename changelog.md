@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Lowered mobs range and chance of xray
+
 ### Fixes
 * toughnessToAbsorptionRatio ignored
 
