@@ -6,6 +6,7 @@
 
 ### Fixes
 * toughnessToAbsorptionRatio ignored
+* Season Spawning not applied when world is loaded
 
 ## 4.12.0
 ### Additions

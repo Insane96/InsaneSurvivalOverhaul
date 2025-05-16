@@ -7,9 +7,12 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonChangedEvent;
+import sereneseasons.api.season.SeasonHelper;
 import sereneseasons.init.ModConfig;
 
 @Label(name = "Season Spawning", description = "Changes to mob spawn with Serene Seasons installed")
@@ -66,6 +69,14 @@ public class SeasonSpawning extends Feature {
     @Override
     public boolean isEnabled() {
         return super.isEnabled() && ModList.get().isLoaded("sereneseasons");
+    }
+
+    @SubscribeEvent
+    public void onServerStarted(ServerStartedEvent event) {
+        if (!this.isEnabled())
+            return;
+
+        update(SeasonHelper.getSeasonState(event.getServer().overworld()).getSeason());
     }
 
     public static void onSeasonChanged(SeasonChangedEvent.Standard event) {
