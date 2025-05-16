@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* toughnessToAbsorptionRatio ignored
+
 ## 4.12.0
 ### Additions
 * Reactivated spawners with echo shards are now slower but have increased range

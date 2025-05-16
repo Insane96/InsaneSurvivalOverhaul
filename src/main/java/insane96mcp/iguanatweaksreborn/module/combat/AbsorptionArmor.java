@@ -40,7 +40,7 @@ public class AbsorptionArmor extends Feature {
             }
             if (attribute.equals(Attributes.ARMOR_TOUGHNESS)) {
                 if (toughnessToAbsorptionRatio > 0) {
-                    toAdd.put(RegeneratingAbsorption.ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount(), modifier.getOperation()));
+                    toAdd.put(RegeneratingAbsorption.ATTRIBUTE.get(), new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount() * toughnessToAbsorptionRatio, modifier.getOperation()));
                 }
                 else {
                     if (modifier.getOperation() == AttributeModifier.Operation.ADDITION)
