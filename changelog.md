@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.1
 ### Additions
 * `iguanatweaksreborn:attached_blocks` block tag
   * Blocks in this tag will fall together with trees.
@@ -15,6 +15,7 @@
 ### Fixes
 * toughnessToAbsorptionRatio ignored
 * Season Spawning not applied when world is loaded
+* Critical not showing up in encyclopedia
 
 ## 4.12.0
 ### Additions
