@@ -84,7 +84,6 @@
 		{ "required": false, "id": "iguanatweaksexpanded:soul_steel_chestplate" },
 		{ "required": false, "id": "iguanatweaksexpanded:soul_steel_leggings" },
 		{ "required": false, "id": "iguanatweaksexpanded:soul_steel_boots" },
-		"#iguanatweaksreborn:vanilla_armors",
 		"minecraft:shears",
 		"minecraft:flint_and_steel",
 		"minecraft:bow",

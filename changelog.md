@@ -4,6 +4,8 @@
 ### Changes
 * First death now shows "Survived for" on the death screen, instead of "Since last death"
 * Added EMI infos for portal corners
+* TConstruct integration now disables the equipping of armors instead of the item altogether
+  * This fixes leather armor not placeable on armor stands or Farmer's Delight cutting board
 
 ## 4.12.1
 ### Additions
