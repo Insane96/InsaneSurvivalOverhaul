@@ -7,6 +7,13 @@
 * TConstruct integration now disables the equipping of armors instead of the item altogether
   * This fixes leather armor not placeable on armor stands or Farmer's Delight cutting board
 
+### Removed
+* Tinkers' Construct integration
+  * Was not working well.
+    For mining speed just increase block hardness
+    For attack damage just increase mobs' health
+    The only thing that can't be actually changed is durability. You'll have to use data packs
+
 ## 4.12.1
 ### Additions
 * `iguanatweaksreborn:attached_blocks` block tag

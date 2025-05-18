@@ -101,8 +101,6 @@
         "client.VanillaGuiOverlayMixin",
         "integration.cavernsandchasms.CCEntityTypesMixin",
         "integration.globalgamerules.WorldEventsMixin",
-        "integration.tinkersconstruct.HeadMaterialStatsMixin",
-        "integration.tinkersconstruct.StatBoostModuleMixin",
         "integration.tinkersconstruct.ToolAttackUtilMixin",
         "integration.villagercomfort.ComfortHelperMixin"
     ],
