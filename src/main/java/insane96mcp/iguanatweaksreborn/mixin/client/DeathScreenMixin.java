@@ -59,6 +59,7 @@ public abstract class DeathScreenMixin extends Screen {
 				|| !Death.replaceScoreWithTimeSinceLastDeath)
 			return;
 		int time = this.minecraft.player.getStats().getValue(Stats.CUSTOM, Stats.TIME_SINCE_DEATH) / 20;
+		int deaths = this.minecraft.player.getStats().getValue(Stats.CUSTOM, Stats.DEATHS);
 		String sTime = String.format("%dh %dm %ds", time / 3600, time % 3600 / 60, time % 60);
 		float dayDuration = 20f;
 		if (ModList.get().isLoaded("sereneseasons"))
@@ -66,6 +67,9 @@ public abstract class DeathScreenMixin extends Screen {
 		float days = time / 60f / dayDuration;
 		if ((int) days > 0)
 			sTime += String.format(" (%.1f days)", days);
+		String lang = "deathScreen.sinceLastDeath";
+		if (deaths <= 0)
+			lang = "deathScreen.firstDeath";
 		this.deathScore = Component.translatable("deathScreen.sinceLastDeath")
 				.append(": ")
 				.append(Component.literal(sTime).withStyle(ChatFormatting.YELLOW));

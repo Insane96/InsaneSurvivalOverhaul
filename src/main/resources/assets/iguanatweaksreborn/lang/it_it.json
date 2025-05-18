@@ -15,6 +15,7 @@
 	"hud_info.time": "%d:%s (Giorno: %d)",
 
 	"deathScreen.sinceLastDeath": "Dall'ultima morte",
+	"deathScreen.firstDeath": "Sopravvissuto per",
 
 
 	"iguanatweaksreborn:experience_module": "Esperienza",
