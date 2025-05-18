@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Killers now have a light gray name to better distinguish from other names
+
 ## 4.12.2
 ### Changes
 * First death now shows "Survived for" on the death screen, instead of "Since last death"

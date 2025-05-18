@@ -17,6 +17,7 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.setup.ILStrings;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
@@ -154,7 +155,7 @@ public class Death extends Feature {
                     experienceMultiplier *= killer.getPersistentData().getDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER);
                 killer.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, experienceMultiplier);
                 killer.getPersistentData().putUUID(KILLED_PLAYER, player.getUUID());
-                killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()));
+                killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()).withStyle(ChatFormatting.GRAY));
             }
         });
     }
