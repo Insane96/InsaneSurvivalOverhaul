@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * First death now shows "Survived for" on the death screen, instead of "Since last death"
+* Added EMI infos for portal corners
 
 ## 4.12.1
 ### Additions

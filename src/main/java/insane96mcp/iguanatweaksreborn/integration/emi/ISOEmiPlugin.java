@@ -14,6 +14,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
+import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.data.IdTagMatcher;
@@ -78,6 +79,10 @@ public class ISOEmiPlugin implements EmiPlugin {
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
+		}
+		if (Feature.isEnabled(Nether.class)) {
+			if (Nether.portalRequiresCryingObsidian)
+				registry.addRecipe(createSimpleInfo(EmiIngredient.of(Nether.PORTAL_CORNERS), "info_portal_corners", Component.translatable("emi.info.iguanatweaksreborn.portal_corners")));
 		}
 	}
 

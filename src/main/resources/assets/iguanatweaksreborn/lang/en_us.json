@@ -93,14 +93,6 @@
 
 	"iguanatweaksreborn:hunger_health_module": "Hunger & Health",
 
-	"iguanatweaksreborn.tooltip.health": "Health",
-	"iguanatweaksreborn.tooltip.missing_health": "Missing Health",
-	"iguanatweaksreborn.tooltip.sec": "sec",
-	"iguanatweaksreborn.tooltip.snack": "Snack",
-	"iguanatweaksreborn.tooltip.nosh": "Nosh",
-	"iguanatweaksreborn.tooltip.meal": "Meal",
-	"iguanatweaksreborn.tooltip.feast": "Feast",
-
 	"iguanatweaksreborn.subtitle.unfair_one_shot": "Player triggers Relentless Endurance",
 
 	"item.iguanatweaksreborn.brown_mushroom_stew": "Brown Mushroom Stew",
@@ -218,10 +210,11 @@
 	"death.fell.accident.water": "%s thought could drop in shallow water safely",
 
 	"iguanatweaksreborn.requires_corners": "The portal needs Crying Obsidian in the corners to be activated",
+	"emi.info.iguanatweaksreborn.portal_corners": "To activate a nether portal, this block is required in the corners",
 
 	"modifier.iguanatweaksreborn.critical": "Critical",
 	"modifier.iguanatweaksreborn.critical.flavor": "20 nat",
-	"modifier.iguanatweaksreborn.critical.description": "Increases crit chance and damage by 10%",
+	"modifier.iguanatweaksreborn.critical.description": "Increases critical hits chance and damage",
 
 	"emi.info.iguanatweaksreborn.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Can be found in the wild",

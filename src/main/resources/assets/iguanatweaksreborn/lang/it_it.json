@@ -93,10 +93,6 @@
 
 	"iguanatweaksreborn:hunger_health_module": "Fame e vita",
 
-	"iguanatweaksreborn.tooltip.health": "Vita",
-	"iguanatweaksreborn.tooltip.missing_health": "Vita mancante",
-	"iguanatweaksreborn.tooltip.sec": "sec",
-
 	"iguanatweaksreborn.subtitle.unfair_one_shot": "Giocatore attiva Resistenza Implacabile",
 
 	"item.iguanatweaksreborn.brown_mushroom_stew": "Zuppa di funghi marroni",
@@ -110,7 +106,7 @@
 	"iguanatweaksreborn:items_module": "Oggetti",
 
 	"iguanatweaksreborn.no_damage_item": "Questo oggetto non è affilato, colpisce come un pugno",
-	"iguanatweaksreborn.no_efficiency_item": "Questo oggetto è vecchio e arrugginito, non può rompere nessun blocco",
+	"iguanatweaksreborn.no_mining_item": "Questo oggetto è vecchio ed arrugginito, non può rompere nessun blocco",
 	"iguanatweaksreborn.no_equip_item": "Questo oggeto non ti calza",
 	"iguanatweaksreborn.disabled_item": "Questo oggetto é disattivato e non può essere utilizzato / equipaggiato",
 	"iguanatweaksreborn.broken_item": "Questo oggetto è rotto, deve essere riparato",
@@ -214,6 +210,11 @@
 	"death.fell.accident.water": "%s pensava di potersi buttare nell'acqua bassa in tutta tranquillità",
 
 	"iguanatweaksreborn.requires_corners": "Il portale richiede ossidiana piangente negli angoli per poter essere attivata",
+	"emi.info.iguanatweaksreborn.portal_corners": "Questo blocco è richiesto negli angoli del portale del nether per attivarlo",
+
+	"modifier.iguanatweaksreborn.critical": "Critico",
+	"modifier.iguanatweaksreborn.critical.flavor": "20 nat",
+	"modifier.iguanatweaksreborn.critical.description": "Aumenta la possibilità e il danno da critico",
 
 	"emi.info.iguanatweaksreborn.items.name_tags": "Se applicato a un'entità con nome, restituisce la targhetta precedente. Se la targetta non è rinominata, rimuove il nome dall'entità.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Si trovano in natura",
