@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.2
 ### Changes
 * First death now shows "Survived for" on the death screen, instead of "Since last death"
 * Added EMI infos for portal corners
@@ -11,7 +11,7 @@
 * Tinkers' Construct integration
   * Was not working well.
     For mining speed just increase block hardness
-    For attack damage just increase mobs' health
+    For attack damage just increase mobs' health with MPR
     The only thing that can't be actually changed is durability. You'll have to use data packs
 
 ## 4.12.1
