@@ -1,6 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* `iguanatweaksreborn:snow_slowdown_ignore` item tag
+  * Items in this tag worn in feet slot will prevent slowdown from `#minecraft:snow` blocks
+    Leather boots and Tinkers' Travelers Boots are already in this tag
+
 ### Changes
 * Killers now have a light gray name to better distinguish from other names
 

@@ -13,6 +13,7 @@ import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
+import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
@@ -119,6 +120,10 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(TimberTrees.BLACKLISTED_ITEMS)
                 .addOptional(new ResourceLocation("tconstruct:broad_axe"));
+
+        tag(TerrainSlowdown.SNOW_SLOWDOWN_IGNORE)
+                .add(Items.LEATHER_BOOTS)
+                .addOptional(new ResourceLocation("tconstruct:travelers_boots"));
 
         tag(HUD_CARDINAL_DIRECTION)
                 .add(Items.COMPASS);

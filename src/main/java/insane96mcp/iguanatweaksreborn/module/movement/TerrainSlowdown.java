@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.movement;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -12,12 +13,14 @@ import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -34,6 +37,7 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.MOVEMENT)
 public class TerrainSlowdown extends JsonFeature {
 	private static final UUID TERRAIN_SLOWDOWN = UUID.fromString("a849043f-b280-4789-bafd-5da8e8e1078e");
+	public static final TagKey<Item> SNOW_SLOWDOWN_IGNORE = ISOItemTagsProvider.create("snow_slowdown_ignore");
 
 	public static final ArrayList<IdTagValue> CUSTOM_TERRAIN_SLOWDOWN_DEFAULT = new ArrayList<>(List.of(
 			IdTagValue.newTag("minecraft:ice", 0.55d)
@@ -46,8 +50,11 @@ public class TerrainSlowdown extends JsonFeature {
 	public static final ArrayList<IdTagValue> customInTerrainSlowdown = new ArrayList<>();
 
 	@Config
-	@Label(name = "Frost walker reduces Ice slowdown")
-	public static Boolean frostWalkerOnIce = true;
+	public static Boolean frostWalkerReducesIceSlowdown = true;
+
+	@Config
+	@Label(description = "If true, snow slowdown is ignored if wearing leather boots (or any item in iguanatweaksreborn:snow_slowdown_ignore item tag)")
+	public static Boolean snowSlowdownIgnoredWithLeatherBoots = true;
 
 	public TerrainSlowdown(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -100,9 +107,14 @@ public class TerrainSlowdown extends JsonFeature {
 				for (IdTagValue idTagValue : customTerrainSlowdown) {
 					if (idTagValue.id.matchesBlock(state.getBlock())) {
 						blockSlowdown = idTagValue.value;
-						if (state.is(BlockTags.ICE) && frostWalkerOnIce) {
-							int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, entity);
+						if (state.is(BlockTags.ICE) && frostWalkerReducesIceSlowdown) {
+							int lvl = entity.getItemBySlot(EquipmentSlot.FEET).getEnchantmentLevel(Enchantments.FROST_WALKER);
 							blockSlowdown -= blockSlowdown * (lvl * 0.5f);
+						}
+						else if (state.is(BlockTags.SNOW)
+								&& entity.getItemBySlot(EquipmentSlot.FEET).is(SNOW_SLOWDOWN_IGNORE)
+								&& snowSlowdownIgnoredWithLeatherBoots) {
+							blockSlowdown = 0;
 						}
 						blocks++;
 						break;
@@ -126,6 +138,11 @@ public class TerrainSlowdown extends JsonFeature {
 					for (IdTagValue idTagValue : customInTerrainSlowdown) {
 						if (idTagValue.id.matchesBlock(state.getBlock())) {
 							blockSlowdown = idTagValue.value;
+							if (state.is(BlockTags.SNOW)
+									&& entity.getItemBySlot(EquipmentSlot.FEET).is(SNOW_SLOWDOWN_IGNORE)
+									&& snowSlowdownIgnoredWithLeatherBoots) {
+								blockSlowdown = 0;
+							}
 							blocks++;
 							break;
 						}
