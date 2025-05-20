@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Foggy Weather game rule not syncing client side on player join
+
 ## 4.12.3
 ### Additions
 * `iguanatweaksreborn:snow_slowdown_ignore` item tag

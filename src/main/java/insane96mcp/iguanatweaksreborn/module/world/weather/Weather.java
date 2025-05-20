@@ -113,6 +113,7 @@ public class Weather extends Feature {
                 || !(event.getEntity() instanceof ServerPlayer player))
             return;
 
+        FoggyEnabledSync.sync(player, event.getLevel().getGameRules().getBoolean(RULE_FOGGYWEATHER));
         FoggySync.sync(player, WeatherSavedData.get(player.serverLevel()).foggyData);
     }
 
