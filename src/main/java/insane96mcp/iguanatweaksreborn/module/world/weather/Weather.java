@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.world.weather;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.network.message.FoggyEnabledSync;
 import insane96mcp.iguanatweaksreborn.network.message.FoggySync;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -20,7 +21,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
 public class Weather extends Feature {
     public static final GameRules.Key<GameRules.BooleanValue> RULE_THUNDERSTORMINTENSITY = GameRules.register("iguanatweaks:thunderstormIntensity", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
-    public static final GameRules.Key<GameRules.BooleanValue> RULE_FOGGYWEATHER = GameRules.register("iguanatweaks:foggyWeather", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
+    public static final GameRules.Key<GameRules.BooleanValue> RULE_FOGGYWEATHER = GameRules.register("iguanatweaks:foggyWeather", GameRules.Category.MISC, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
+        for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
+            FoggyEnabledSync.sync(serverPlayer, booleanValue.get());
+        }
+    }));
 
     @Config(min = 1)
     @Label(name = "Thunderstorm Intensity.Min Intensity", description = "Minimum thunderstorm intensity.")

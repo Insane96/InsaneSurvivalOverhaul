@@ -5,6 +5,9 @@
 * `iguanatweaksreborn:snow_slowdown_ignore` item tag
   * Items in this tag worn in feet slot will prevent slowdown from `#minecraft:snow` blocks
     Leather boots and Tinkers' Travelers Boots are already in this tag
+* Added back Client Overworld Fog
+  * Like before its removal, adds back fog to the overworld similar to older versions of minecraft, and more foggy when rains / snows
+  * Now disables itself if Foggy Weather is enabled
 
 ### Changes
 * Killers now have a light gray name to better distinguish from other names

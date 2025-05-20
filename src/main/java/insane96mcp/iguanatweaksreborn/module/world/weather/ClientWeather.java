@@ -46,9 +46,6 @@ public class ClientWeather extends Feature {
         if (!level.isClientSide)
             return;
 
-        //for (Player player : level.players())
-        //    player.displayClientMessage(Component.literal("foggyTimer: %d, foggyTargetTime: %d, currentFoggy: %s, targetFoggy: %s".formatted(foggyTimer, foggyTargetTime, currentFoggy, targetFoggy)), true);
-
         if (currentFoggy != targetFoggy && ++foggyTimer >= foggyTargetTime)
             currentFoggy = targetFoggy;
     }
@@ -96,9 +93,4 @@ public class ClientWeather extends Feature {
             event.getLeft().add(String.format("fT: %s, fTT: %s, cF: %s, tF: %s", foggyTimer, foggyTargetTime, currentFoggy, targetFoggy));
         }
     }
-    /*public static int getRenderDistance(int original) {
-        if (!currentFoggy.flat)
-            return original;
-        return (int) (currentFoggy.farDistance / 16);
-    }*/
 }
