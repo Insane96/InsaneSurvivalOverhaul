@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.3
 ### Additions
 * `iguanatweaksreborn:snow_slowdown_ignore` item tag
   * Items in this tag worn in feet slot will prevent slowdown from `#minecraft:snow` blocks
