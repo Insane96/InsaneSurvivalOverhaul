@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Battlesign now have reduced block amount
+
 ### Fixes
 * Foggy Weather game rule not syncing client side on player join
 
