@@ -111,10 +111,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
 }
 
 dependencies {
@@ -167,7 +163,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:environmental-388992:6060255")
     compileOnly fg.deobf("curse.maven:berry-good-355589:5228437")
     compileOnly fg.deobf("curse.maven:allurement-438003:5228059")
-    compileOnly fg.deobf("curse.maven:farmers-delight-398521:5051242")
+    implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")

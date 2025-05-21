@@ -6,6 +6,7 @@
 
 ### Fixes
 * Foggy Weather game rule not syncing client side on player join
+* Farmer's delight cabbages not dropping seeds
 
 ## 4.12.3
 ### Additions

@@ -58,15 +58,6 @@
                     "type": "minecraft:item",
                     "name": "farmersdelight:cabbage_seeds"
                 }
-            ],
-            "conditions": [
-                {
-                    "condition": "minecraft:block_state_property",
-                    "block": "farmersdelight:cabbages",
-                    "properties": {
-                        "age": "7"
-                    }
-                }
             ]
         }
     ],
