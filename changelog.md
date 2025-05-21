@@ -2,7 +2,7 @@
 
 ## Upcoming
 ### Changes
-* Battlesign now have reduced block amount
+* Battlesigns, daggers, staffs and melting pan now have reduced block amount
 
 ### Fixes
 * Foggy Weather game rule not syncing client side on player join
