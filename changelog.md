@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.4
 ### Changes
 * Battlesigns, daggers, staffs and melting pan now have reduced block amount
 
