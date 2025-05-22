@@ -1,11 +1,11 @@
 # Changelog
 
-## Upcoming
+## 4.12.5
 ### Changes
 * Rain fog is now less intense when skylight is lower
   * This makes so rain fog is no longer visible in caves / underground areas
 * Overhauled grass growth / decay
-  * Chance is now much lower, so the world shouldn't be already completely grassy in mid-spring
+  * Chance is now much lower, so the world shouldn't be already completely grassy by mid-spring
   * In summer, grass and ferns can grow into the taller versions and light level required for them to grow has been reduced
 * You no longer take wall damage if you have Bouncy modifier from Tinkers' Construct
 * Lowered chance for miner zombies (10% -> 5%; [Removed] +5% in Hard)
