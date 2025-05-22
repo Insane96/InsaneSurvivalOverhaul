@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -69,8 +70,13 @@ public class Fog extends Feature {
         float rainLevel = entity.level().getRainLevel(1f);
         float ratio = overworld$fogStartRatio.floatValue();
         if (rainLevel > 0f) {
-            float ratioOnRain = overworld$fogStartRatioOnRain.floatValue();
-            event.setNearPlaneDistance(event.getFarPlaneDistance() * (ratio - (rainLevel * (ratio - ratioOnRain))));
+            float skyLight = entity.level().getBrightness(LightLayer.SKY, entity.blockPosition());
+            float skyLightRatio = skyLight / 12f;
+            if (skyLightRatio > 1f)
+                skyLightRatio = 1f;
+            float interpolatedRatio = overworld$fogStartRatio.floatValue() * (1f - skyLightRatio)
+                    + overworld$fogStartRatioOnRain.floatValue() * skyLightRatio;
+            event.setNearPlaneDistance(event.getFarPlaneDistance() * (ratio - (rainLevel * (ratio - interpolatedRatio))));
         }
         else
             event.setNearPlaneDistance(event.getFarPlaneDistance() * ratio);

@@ -1,12 +1,19 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Rain fog is now less intense when skylight is lower
+  * This makes so rain fog is no longer visible in caves / underground areas
+
+### Fixes
+* Farmer's delight cabbages not dropping seeds
+
 ## 4.12.4
 ### Changes
 * Battlesigns, daggers, staffs and melting pan now have reduced block amount
 
 ### Fixes
 * Foggy Weather game rule not syncing client side on player join
-* Farmer's delight cabbages not dropping seeds
 
 ## 4.12.3
 ### Additions
