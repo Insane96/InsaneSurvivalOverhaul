@@ -7,6 +7,7 @@
 * Overhauled grass growth / decay
   * Chance is now much lower, so the world shouldn't be already completely grassy in mid-spring
   * In summer, grass and ferns can grow into the taller versions and light level required for them to grow has been reduced
+* You no longer take wall damage if you have Bouncy modifier from Tinkers' Construct
 
 ### Fixes
 * Farmer's delight cabbages not dropping seeds

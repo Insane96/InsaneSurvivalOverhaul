@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.integration.TConstruct;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.SyncDiscreteNameTags;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -53,6 +54,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -369,31 +371,32 @@ public class Tweaks extends Feature {
         return entity.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "times_drowned");
     }
 
-    public static Vec3 onCollideWithWall(LivingEntity instance, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {
+    public static Vec3 onCollideWithWall(LivingEntity living, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {
         if (!Feature.isEnabled(Tweaks.class)
                 || collideWithWallsDamage == 0
-                || (instance instanceof Mob mob && mob.isLeashed()))
-            return originalOperation.call(instance, pTravelVector, pFriction);
-        Vec3 oldDeltaMovement = instance.getDeltaMovement();
+                || (living instanceof Mob mob && mob.isLeashed())
+                || (ModList.get().isLoaded("tconstruct") && TConstruct.hasBouncy(living)))
+            return originalOperation.call(living, pTravelVector, pFriction);
+        Vec3 oldDeltaMovement = living.getDeltaMovement();
         double horizontalDistance = oldDeltaMovement.horizontalDistance();
-        Vec3 originalResult = originalOperation.call(instance, pTravelVector, pFriction);
-        if (instance.horizontalCollision && !instance.level().isClientSide) {
-            double length = horizontalDistance - instance.getDeltaMovement().horizontalDistance();
+        Vec3 originalResult = originalOperation.call(living, pTravelVector, pFriction);
+        if (living.horizontalCollision && !living.level().isClientSide) {
+            double length = horizontalDistance - living.getDeltaMovement().horizontalDistance();
             if (length > 0.5f) {
-                instance.hurt(instance.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.5f) * collideWithWallsDamage));
+                living.hurt(living.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.5f) * collideWithWallsDamage));
 
-                if (!instance.level().isClientSide) {
-                    double x = instance.getX();
-                    double y = instance.getY();
-                    double z = instance.getZ();
+                if (!living.level().isClientSide) {
+                    double x = living.getX();
+                    double y = living.getY();
+                    double z = living.getZ();
                     Direction direction = Direction.getNearest(oldDeltaMovement.x, oldDeltaMovement.y, oldDeltaMovement.z);
                     BlockPos pos = BlockPos.containing(x, y, z).relative(direction);
-                    BlockState state = instance.level().getBlockState(pos);
+                    BlockState state = living.level().getBlockState(pos);
                     if (state.isAir()) {
-                        int height = Mth.ceil(instance.getBbHeight());
+                        int height = Mth.ceil(living.getBbHeight());
                         for (int i = 1; i < height; i++) {
                             pos = pos.above();
-                            state = instance.level().getBlockState(pos);
+                            state = living.level().getBlockState(pos);
                             if (!state.isAir())
                                 break;
                         }
@@ -402,8 +405,8 @@ public class Tweaks extends Feature {
                         return originalResult;
 
                     int particleCount = 150;
-                    instance.playSound(instance.getFallSounds().big(), 1.0F, 0.7F);
-                    ((ServerLevel)instance.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state).setPos(pos), x, instance.getY() + instance.getBbHeight() / 2f, z, particleCount, 0.0D, 0.0D, 0.0D, 0.15F);
+                    living.playSound(living.getFallSounds().big(), 1.0F, 0.7F);
+                    ((ServerLevel)living.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state).setPos(pos), x, living.getY() + living.getBbHeight() / 2f, z, particleCount, 0.0D, 0.0D, 0.0D, 0.15F);
                 }
             }
         }
