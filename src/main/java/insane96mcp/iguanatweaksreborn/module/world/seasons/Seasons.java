@@ -25,6 +25,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -146,18 +147,18 @@ public class Seasons extends Feature {
 	}
 
 	static final Map<Season.SubSeason, Float> CHANCE_TO_GROW_OR_DECAY = Map.ofEntries(
-			Map.entry(Season.SubSeason.EARLY_SUMMER, 0.075f),
-			Map.entry(Season.SubSeason.MID_SUMMER, 0.025f),
-			Map.entry(Season.SubSeason.LATE_SUMMER, 0.02f),
-			Map.entry(Season.SubSeason.EARLY_AUTUMN, 0f),
-			Map.entry(Season.SubSeason.MID_AUTUMN, 0f),
-			Map.entry(Season.SubSeason.LATE_AUTUMN, -0.10f),
-			Map.entry(Season.SubSeason.EARLY_WINTER, -0.30f),
-			Map.entry(Season.SubSeason.MID_WINTER, -0.50f),
-			Map.entry(Season.SubSeason.LATE_WINTER, -0.30f),
-			Map.entry(Season.SubSeason.EARLY_SPRING, 0f),
-			Map.entry(Season.SubSeason.MID_SPRING, 0.10f),
-			Map.entry(Season.SubSeason.LATE_SPRING, 0.125f)
+			Map.entry(Season.SubSeason.EARLY_SPRING, 0.01f),
+			Map.entry(Season.SubSeason.MID_SPRING, 0.02f),
+			Map.entry(Season.SubSeason.LATE_SPRING, 0.04f),
+			Map.entry(Season.SubSeason.EARLY_SUMMER, 0.03f),
+			Map.entry(Season.SubSeason.MID_SUMMER, 0.02f),
+			Map.entry(Season.SubSeason.LATE_SUMMER, 0.01f),
+			Map.entry(Season.SubSeason.EARLY_AUTUMN, -0.01f),
+			Map.entry(Season.SubSeason.MID_AUTUMN, -0.02f),
+			Map.entry(Season.SubSeason.LATE_AUTUMN, -0.04f),
+			Map.entry(Season.SubSeason.EARLY_WINTER, -0.1f),
+			Map.entry(Season.SubSeason.MID_WINTER, -0.15f),
+			Map.entry(Season.SubSeason.LATE_WINTER, -0.05f)
 	);
 
 	@SubscribeEvent
@@ -170,10 +171,8 @@ public class Seasons extends Feature {
             return;
 
         Season.SubSeason subSeason = SeasonHelper.getSeasonState(event.level).getSubSeason();
-		float chance = CHANCE_TO_GROW_OR_DECAY.get(subSeason);
-		if (chance == 0f)
-			return;
-		if (chance > 0f && event.level.isNight())
+		Optional<GrassTickingData> data = GrassTickingData.get(subSeason);
+		if (data.isEmpty() || !data.get().shouldTick(event.level))
 			return;
 
         ServerLevel level = (ServerLevel)event.level;
@@ -192,13 +191,13 @@ public class Seasons extends Feature {
 		for (ChunkAndHolder chunkAndHolder : list) {
 			ChunkPos chunkPos = chunkAndHolder.chunk.getPos();
 			if (level.shouldTickBlocksAt(chunkPos.toLong()) && (chunkMap.anyPlayerCloseEnoughForSpawning(chunkPos) || distanceManager.shouldForceTicks(chunkPos.toLong()))) {
-				tickPlantsLifeDeath(chunkMap, chunkAndHolder.chunk, subSeason, chance / 10f);
+				tickPlantsLifeDeath(chunkMap, chunkAndHolder.chunk, data.get());
 			}
 		}
 		level.getProfiler().pop();
     }
 
-	private static void tickPlantsLifeDeath(ChunkMap chunkMap, LevelChunk levelChunk, Season.SubSeason subSeason, float chance) {
+	private static void tickPlantsLifeDeath(ChunkMap chunkMap, LevelChunk levelChunk, GrassTickingData data) {
 		ServerLevel level = chunkMap.level;
 		ChunkPos chunkpos = levelChunk.getPos();
 		int x = chunkpos.getMinBlockX();
@@ -211,23 +210,32 @@ public class Seasons extends Feature {
 				int sectionY = levelChunk.getSectionYFromSectionIndex(s);
 				int y = SectionPos.sectionToBlockCoord(sectionY);
 
-				for (int t = 0; t < level.getGameRules().getInt(GameRules.RULE_RANDOMTICKING); t++) {
+				int randomTickSpeed = level.getGameRules().getInt(GameRules.RULE_RANDOMTICKING);
+				for (int t = 0; t < randomTickSpeed; t++) {
 					BlockPos pos = level.getBlockRandomPos(x, y, z, 15);
 					BlockState state = levelchunksection.getBlockState(pos.getX() - x, pos.getY() - y, pos.getZ() - z);
 					BlockPos abovePos = pos.above();
-					if (state.is(BlockTags.DIRT) && level.getBrightness(LightLayer.SKY, abovePos) >= 10) {
+					if (level.getBrightness(LightLayer.SKY, abovePos) < data.lightLevel)
+						continue;
+					if (state.is(BlockTags.DIRT)) {
 						BlockState stateUp = level.getBlockState(abovePos);
-						if (chance < 0f && level.getRandom().nextFloat() < -chance) {
+						if (level.getRandom().nextInt(data.chance) == 0) {
 							if (stateUp.is(Blocks.FERN) || stateUp.is(Blocks.GRASS) || stateUp.is(Blocks.TALL_GRASS) || stateUp.is(Blocks.LARGE_FERN))
 								level.setBlock(abovePos, Blocks.AIR.defaultBlockState(), 3);
 							else if (stateUp.is(BlockTags.SAPLINGS))
 								level.setBlock(abovePos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 						}
-						else if (level.isDay() && state.is(Blocks.GRASS_BLOCK) && level.getRandom().nextFloat() < chance && stateUp.isAir()) {
+						else if (state.is(Blocks.GRASS_BLOCK) && level.getRandom().nextInt(data.chance) == 0 && stateUp.isAir()) {
 							Optional<Holder.Reference<PlacedFeature>> oPlacedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
 							oPlacedFeature.ifPresent(placedFeatureReference ->
 									placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, abovePos));
 						}
+					}
+					else if (data.canGrowTall && level.getRandom().nextInt(data.chance) == 0) {
+						if (state.is(Blocks.GRASS))
+							DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 2);
+						else if (state.is(Blocks.FERN))
+							DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 2);
 					}
 				}
 			}
@@ -235,6 +243,39 @@ public class Seasons extends Feature {
 	}
 
 	record ChunkAndHolder(LevelChunk chunk, ChunkHolder holder) {}
+
+	public static final List<GrassTickingData> GRASS_TICKING_DATA = List.of(
+			new GrassTickingData(Season.SubSeason.EARLY_SPRING, 1000, GrassTickingType.GROW, 12, false),
+			new GrassTickingData(Season.SubSeason.MID_SPRING, 1000, GrassTickingType.GROW, 12, false),
+			new GrassTickingData(Season.SubSeason.LATE_SPRING, 500, GrassTickingType.GROW, 10, false),
+			new GrassTickingData(Season.SubSeason.EARLY_SUMMER, 250, GrassTickingType.GROW, 8, true),
+			new GrassTickingData(Season.SubSeason.MID_SUMMER, 250, GrassTickingType.GROW, 7, true),
+			new GrassTickingData(Season.SubSeason.LATE_SUMMER, 250, GrassTickingType.GROW, 7, true),
+			new GrassTickingData(Season.SubSeason.EARLY_AUTUMN, 2000, GrassTickingType.DECAY, 0, false),
+			new GrassTickingData(Season.SubSeason.MID_AUTUMN, 1000, GrassTickingType.DECAY, 0, false),
+			new GrassTickingData(Season.SubSeason.LATE_AUTUMN, 500, GrassTickingType.DECAY, 0, false),
+			new GrassTickingData(Season.SubSeason.EARLY_WINTER, 200, GrassTickingType.DECAY, 0, false),
+			new GrassTickingData(Season.SubSeason.MID_WINTER, 100, GrassTickingType.DECAY, 0, false),
+			new GrassTickingData(Season.SubSeason.LATE_WINTER, 400, GrassTickingType.DECAY, 0, false)
+	);
+
+	public record GrassTickingData(Season.SubSeason subSeason, int chance, GrassTickingType grassTickingType, int lightLevel, boolean canGrowTall) {
+		public boolean shouldTick(Level level) {
+			return chance > 0 && (grassTickingType == GrassTickingType.DECAY || level.isDay());
+		}
+
+		public static Optional<GrassTickingData> get(Season.SubSeason subSeason) {
+			for (GrassTickingData grassTickingData : GRASS_TICKING_DATA) {
+				if (grassTickingData.subSeason == subSeason)
+					return Optional.of(grassTickingData);
+			}
+			return Optional.empty();
+		}
+	}
+	public enum GrassTickingType {
+		GROW,
+		DECAY
+	}
 
 	@SubscribeEvent
 	public void shouldSlowdownFishing(HookTickToHookLureEvent event) {

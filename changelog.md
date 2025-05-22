@@ -4,6 +4,9 @@
 ### Changes
 * Rain fog is now less intense when skylight is lower
   * This makes so rain fog is no longer visible in caves / underground areas
+* Overhauled grass growth / decay
+  * Chance is now much lower, so the world shouldn't be already completely grassy in mid-spring
+  * In summer, grass and ferns can grow into the taller versions and light level required for them to grow has been reduced
 
 ### Fixes
 * Farmer's delight cabbages not dropping seeds
