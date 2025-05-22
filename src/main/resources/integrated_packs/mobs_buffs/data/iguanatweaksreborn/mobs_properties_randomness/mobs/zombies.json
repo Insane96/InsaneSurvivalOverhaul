@@ -49,7 +49,7 @@
             "nbt_tag": "enhancedai:miner",
             "type": "boolean",
             "value": {
-                "value": 0.10,
+                "value": 0.05,
                 "depth_modifier": {
                     "operation": "add",
                     "amount_per_step": 0.01,
@@ -62,10 +62,6 @@
                         "spawner_behaviour": "spawner_only"
                     },
                     "amount": 0.35
-                },
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.05
                 }
             },
             "persistent_data": true
