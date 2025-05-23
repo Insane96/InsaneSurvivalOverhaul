@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Slowed down Farmers' Delight's crops growth
+* Tinkers' Daggers are now considered knives
 
 ## 4.12.5
 ### Changes
