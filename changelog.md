@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Slowed down Farmers' Delight's crops growth
+
 ## 4.12.5
 ### Changes
 * Rain fog is now less intense when skylight is lower
