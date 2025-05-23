@@ -38,7 +38,6 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
@@ -170,7 +169,7 @@ public class RegeneratingAbsorption extends Feature {
     }
 
     @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         ResourceLocation aboveOverlay = VanillaGuiOverlay.PLAYER_HEALTH.id();
         if (ModList.get().isLoaded("stamina"))

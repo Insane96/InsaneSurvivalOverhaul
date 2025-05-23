@@ -1,4 +1,5 @@
 # Changelog
+* No hunger health regen bar
 
 ## Upcoming
 ### Changes
