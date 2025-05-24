@@ -4,7 +4,6 @@
 ### Changes
 * Slowed down Farmers' Delight's crops growth
 * Tinkers' Daggers are now considered knives
-* Rain fog is now less intense when player cannot see sky
 
 ## 4.12.5
 ### Changes
