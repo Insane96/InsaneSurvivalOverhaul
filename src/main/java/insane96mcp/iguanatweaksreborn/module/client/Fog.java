@@ -74,6 +74,8 @@ public class Fog extends Feature {
             float skyLightRatio = skyLight / 12f;
             if (skyLightRatio > 1f)
                 skyLightRatio = 1f;
+            if (!entity.level().canSeeSky(entity.blockPosition()))
+                skyLightRatio *= 0.5f;
             float interpolatedRatio = overworld$fogStartRatio.floatValue() * (1f - skyLightRatio)
                     + overworld$fogStartRatioOnRain.floatValue() * skyLightRatio;
             event.setNearPlaneDistance(event.getFarPlaneDistance() * (ratio - (rainLevel * (ratio - interpolatedRatio))));
