@@ -2,7 +2,10 @@
 
 ## Upcoming
 ### Fixes
-* Cutting rice panicle not giving seeds
+* Cutting rice panicle and wild onions not giving seeds
+  * Same for Create's Milling
+* Farmer's Delight wild crops being insta-break
+  * Same for Supplementaries Wild Flax
 
 ## 4.12.6
 ### Changes

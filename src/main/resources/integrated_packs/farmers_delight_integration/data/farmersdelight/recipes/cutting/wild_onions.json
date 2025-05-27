@@ -1,0 +1,35 @@
+{
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "create"
+        }
+    ],
+    "type": "create:milling",
+    "ingredients": [
+        {
+            "item": "farmersdelight:wild_onions"
+        }
+    ],
+    "results": [
+        {
+            "item": "minecraft:magenta_dye",
+            "count": 1
+        },
+        {
+            "item": "minecraft:magenta_dye",
+            "count": 3,
+            "chance": 0.2
+        },
+        {
+            "item": "minecraft:lime_dye",
+            "count": 1,
+            "chance": 0.1
+        },
+        {
+            "item": "iguanatweaksreborn:rooted_onion",
+            "count": 1
+        }
+    ],
+    "processingTime": 50
+}
