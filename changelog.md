@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Cutting rice panicle not giving seeds
+
 ## 4.12.6
 ### Changes
 * Slowed down Farmers' Delight's crops growth

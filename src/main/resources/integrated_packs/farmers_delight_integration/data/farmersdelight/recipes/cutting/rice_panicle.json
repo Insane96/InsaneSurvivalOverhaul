@@ -1,0 +1,22 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "item": "farmersdelight:rice_panicle"
+        }
+    ],
+    "result": [
+        {
+            "item": "farmersdelight:rice"
+        },
+        {
+            "item": "farmersdelight:straw"
+        },
+        {
+            "item": "iguanatweaksreborn:rice_seeds"
+        }
+    ],
+    "tool": {
+        "tag": "forge:tools/knives"
+    }
+}
