@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-16T11:39:28.4035129	Tags for minecraft:block mod id iguanatweaksreborn
+// 1.20.1	2025-05-28T09:10:38.3563203	Tags for minecraft:block mod id iguanatweaksreborn
 9075694bac6be77d009053c187da60a08f762304 data/iguanatweaksreborn/tags/blocks/aspen_leaves.json
 3dfd7c9ffc9262265b75bf5090bf8a0cb9fd5e98 data/iguanatweaksreborn/tags/blocks/aspen_logs.json
 077cbdf449fccc3020a4159bf29058a7aff232d8 data/iguanatweaksreborn/tags/blocks/attached_blocks.json
@@ -14,6 +14,8 @@ ebea422d3e1dac37dbc9b6219754b2d33b7ff6bc data/iguanatweaksreborn/tags/blocks/lau
 12816a85694a93904a3103303c85ce204e5d1c1f data/iguanatweaksreborn/tags/blocks/morado_leaves.json
 acab7344abee921bb217f74b6166add9a6bc12e6 data/iguanatweaksreborn/tags/blocks/oak_log_leaves.json
 858b4736f63a64046a40e9dbd025c709c79d7cb2 data/iguanatweaksreborn/tags/blocks/obsidians.json
+347d7db9633b91359c616fd62d97385b7de8bc73 data/iguanatweaksreborn/tags/blocks/plants_to_dead_bush.json
+336549c47eecd0578ba39572caee0b50075b11a7 data/iguanatweaksreborn/tags/blocks/plants_to_decay.json
 452d31bce10b1ff7d5ef23b5c5ea04ee75a3992d data/iguanatweaksreborn/tags/blocks/plum_leaves.json
 6709e029dcdb781bc96e92c5e95ef69620b94c99 data/iguanatweaksreborn/tags/blocks/portal_corners.json
 ac37cd654850943fcc007084876459bf0f24c761 data/iguanatweaksreborn/tags/blocks/structures/respawn_obelisk/blocks_to_rot.json

@@ -1,6 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Added two new block tags `iguanatweaksreborn:plants_to_decay` and `iguanatweaksreborn:plants_to_dead_bush`.
+  * Blocks in these tags will decay and transformed into dead bushes in winter.
+  * Environmental giant tall grass now also decays
+
 ### Fixes
 * Cutting rice panicle and wild onions not giving seeds
   * Same for Create's Milling

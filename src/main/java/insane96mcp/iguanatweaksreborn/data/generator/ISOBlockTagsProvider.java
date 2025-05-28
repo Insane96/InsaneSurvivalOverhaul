@@ -14,6 +14,7 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
+import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -162,6 +163,12 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         tag(Nether.PORTAL_CORNERS)
                 .add(Blocks.CRYING_OBSIDIAN);
 
+        tag(Seasons.PLANTS_TO_DECAY)
+                .add(Blocks.GRASS, Blocks.FERN, Blocks.TALL_GRASS, Blocks.LARGE_FERN)
+                .addOptional(new ResourceLocation("environmental:giant_tall_grass"));
+
+        tag(Seasons.PLANTS_TO_DEAD_BUSH)
+                .addTag(BlockTags.SAPLINGS);
     }
 
     public static TagKey<Block> create(String tagName) {

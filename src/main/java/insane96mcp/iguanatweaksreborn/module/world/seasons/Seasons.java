@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world.seasons;
 
 import com.google.common.collect.Lists;
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -20,10 +21,12 @@ import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.DistanceManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,7 +49,6 @@ import sereneseasons.season.SeasonTime;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Label(name = "Seasons", description = "Change a few things relative to Serene Seasons")
@@ -54,6 +56,9 @@ import java.util.Optional;
 public class Seasons extends Feature {
 
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_SEASONGRASSGROWDEATH = GameRules.register("iguanatweaks:doSeasonGrassGrowDeath", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
+
+	public static final TagKey<Block> PLANTS_TO_DECAY = ISOBlockTagsProvider.create("plants_to_decay");
+	public static final TagKey<Block> PLANTS_TO_DEAD_BUSH = ISOBlockTagsProvider.create("plants_to_dead_bush");
 
 	@Config
 	@Label(name = "Serene Seasons changes", description = """
@@ -146,21 +151,6 @@ public class Seasons extends Feature {
 		}
 	}
 
-	static final Map<Season.SubSeason, Float> CHANCE_TO_GROW_OR_DECAY = Map.ofEntries(
-			Map.entry(Season.SubSeason.EARLY_SPRING, 0.01f),
-			Map.entry(Season.SubSeason.MID_SPRING, 0.02f),
-			Map.entry(Season.SubSeason.LATE_SPRING, 0.04f),
-			Map.entry(Season.SubSeason.EARLY_SUMMER, 0.03f),
-			Map.entry(Season.SubSeason.MID_SUMMER, 0.02f),
-			Map.entry(Season.SubSeason.LATE_SUMMER, 0.01f),
-			Map.entry(Season.SubSeason.EARLY_AUTUMN, -0.01f),
-			Map.entry(Season.SubSeason.MID_AUTUMN, -0.02f),
-			Map.entry(Season.SubSeason.LATE_AUTUMN, -0.04f),
-			Map.entry(Season.SubSeason.EARLY_WINTER, -0.1f),
-			Map.entry(Season.SubSeason.MID_WINTER, -0.15f),
-			Map.entry(Season.SubSeason.LATE_WINTER, -0.05f)
-	);
-
 	@SubscribeEvent
 	public void onLevelTick(TickEvent.LevelTickEvent event) {
         if (!this.isEnabled()
@@ -220,9 +210,9 @@ public class Seasons extends Feature {
 					if (state.is(BlockTags.DIRT)) {
 						BlockState stateUp = level.getBlockState(abovePos);
 						if (level.getRandom().nextInt(data.chance) == 0) {
-							if (stateUp.is(Blocks.FERN) || stateUp.is(Blocks.GRASS) || stateUp.is(Blocks.TALL_GRASS) || stateUp.is(Blocks.LARGE_FERN))
+							if (stateUp.is(PLANTS_TO_DECAY))
 								level.setBlock(abovePos, Blocks.AIR.defaultBlockState(), 3);
-							else if (stateUp.is(BlockTags.SAPLINGS))
+							else if (stateUp.is(PLANTS_TO_DEAD_BUSH))
 								level.setBlock(abovePos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 						}
 						else if (state.is(Blocks.GRASS_BLOCK) && level.getRandom().nextInt(data.chance) == 0 && stateUp.isAir()) {
