@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.12.7
 ### Additions
 * Added two new block tags `iguanatweaksreborn:plants_to_decay` and `iguanatweaksreborn:plants_to_dead_bush`.
   * Blocks in these tags will decay and transformed into dead bushes in winter.
