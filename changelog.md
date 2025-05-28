@@ -6,6 +6,9 @@
   * Blocks in these tags will decay and transformed into dead bushes in winter.
   * Environmental giant tall grass now also decays
 
+### Changes
+* Slowed down grass growth by 10%
+
 ### Fixes
 * Cutting rice panicle and wild onions not giving seeds
   * Same for Create's Milling
