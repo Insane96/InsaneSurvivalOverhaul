@@ -180,7 +180,7 @@
 	"item.iguanatweaksreborn.cloth": "Cloth",
 
 	"effect.iguanatweaksreborn.tired": "Tired",
-	"effect.iguanatweaksreborn.tired.description": "Obtained when haven't slept in a while. Reduces movement speed and sight.",
+	"effect.iguanatweaksreborn.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",
 	"effect.iguanatweaksreborn.energy_boost": "Energy Boost",
 	"effect.iguanatweaksreborn.energy_boost.description": "Lowers tiredness",
 	"iguanatweaksreborn.not_tired": "You're not tired enough to sleep",

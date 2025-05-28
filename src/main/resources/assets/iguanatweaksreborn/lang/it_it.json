@@ -180,7 +180,7 @@
 	"item.iguanatweaksreborn.cloth": "Tessuto",
 
 	"effect.iguanatweaksreborn.tired": "Stanco",
-	"effect.iguanatweaksreborn.tired.description": "Ottenuto quando non hai dormito per un po'. Riduce velocità di movimento e rottura dei blocchi",
+	"effect.iguanatweaksreborn.tired.description": "Ottenuto quando non hai dormito per un po'. Riduce leggermente velocità di movimento, scavo e attacco",
 	"effect.iguanatweaksreborn.energy_boost": "Carica di energia",
 	"effect.iguanatweaksreborn.energy_boost.description": "Riduce la stanchezza",
 	"iguanatweaksreborn.not_tired": "Non sei abbastanza stanco per dormire",
