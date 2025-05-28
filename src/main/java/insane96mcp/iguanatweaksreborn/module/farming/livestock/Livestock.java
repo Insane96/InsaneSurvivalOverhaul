@@ -356,9 +356,9 @@ public class Livestock extends Feature {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onAnimalMilk(PlayerInteractEvent.EntityInteract event) {
 		if (!this.isEnabled()
-				|| !event.getEntity().getType().is(MILKABLE)
-				|| !(event.getTarget() instanceof Animal animal)
-				|| animal.getAge() < 0)
+				|| !event.getTarget().getType().is(MILKABLE)
+				|| (event.getTarget() instanceof Animal animal && animal.getAge() < 0)
+				|| !(event.getTarget() instanceof LivingEntity living))
 			return;
 
 		Player player = event.getEntity();
@@ -367,33 +367,33 @@ public class Livestock extends Feature {
 		if (equipped.isEmpty() || equipped.getItem() == Items.AIR)
 			return;
 		Item item = equipped.getItem();
-		if ((!FluidUtil.getFluidHandler(equipped).isPresent() || !FluidStack.loadFluidStackFromNBT(equipped.getTag()).isEmpty()) && (!(animal instanceof MushroomCow) || item != Items.BOWL))
+		if ((!FluidUtil.getFluidHandler(equipped).isPresent() || !FluidStack.loadFluidStackFromNBT(equipped.getTag()).isEmpty()) && (!(living instanceof MushroomCow) || item != Items.BOWL))
 			return;
-		CompoundTag cowNBT = animal.getPersistentData();
+		CompoundTag cowNBT = living.getPersistentData();
 		int milkCooldown = cowNBT.getInt(MILK_COOLDOWN);
 		if (milkCooldown > 0) {
 			event.setCanceled(true);
 			if (!player.level().isClientSide) {
-				animal.playSound(SoundEvents.COW_HURT, 0.4F, (event.getEntity().level().random.nextFloat() - event.getEntity().level().random.nextFloat()) * 0.2F + 1.2F);
-				MutableComponent message = Component.translatable(MILK_COOLDOWN_LANG, animal.getDisplayName());
+				living.playSound(SoundEvents.COW_HURT, 0.4F, (event.getEntity().level().random.nextFloat() - event.getEntity().level().random.nextFloat()) * 0.2F + 1.2F);
+				MutableComponent message = Component.translatable(MILK_COOLDOWN_LANG, living.getDisplayName());
 				player.displayClientMessage(message, true);
 			}
 			else
 				event.setCancellationResult(InteractionResult.SUCCESS);
 		}
-		else if (!animal.level().isClientSide) {
+		else if (!living.level().isClientSide) {
 			List<Modifier> modifiersToApply = new ArrayList<>();
 			LivestockDataReloadListener.LIVESTOCK_DATA.stream()
-					.filter(data -> data.matches(animal))
+					.filter(data -> data.matches(living))
 					.forEach(data -> modifiersToApply.addAll(data.cowFluidCooldownModifiers));
-			float cooldown = Modifier.applyModifiers(milkingCooldown, modifiersToApply, animal.level(), animal.blockPosition(), animal);
-			DroppedExperience.tryGenerateMilkXp(animal);
+			float cooldown = Modifier.applyModifiers(milkingCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
+			DroppedExperience.tryGenerateMilkXp(living);
 			if (cooldown <= 0)
 				return;
 
 			milkCooldown = (int) (cooldown * 20);
 			cowNBT.putInt(MILK_COOLDOWN, milkCooldown);
-			ForgeDataIntSync.sync(animal, MILK_COOLDOWN, milkCooldown);
+			ForgeDataIntSync.sync(living, MILK_COOLDOWN, milkCooldown);
 			//player.swing(event.getHand());
 		}
 	}

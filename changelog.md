@@ -10,6 +10,7 @@
 * Slowed down grass growth by 10%
 
 ### Fixes
+* Milk cooldown completely broken
 * Cutting rice panicle and wild onions not giving seeds
   * Same for Create's Milling
 * Farmer's Delight wild crops being insta-break
