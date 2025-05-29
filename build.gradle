@@ -116,7 +116,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    implementation fg.deobf("blank:InsaneLib:${lib_version}-mc${mc_version}")
+    implementation fg.deobf("blank:insanelib:${lib_version}")
     implementation fg.deobf("blank:Stamina:1.1.1")
     runtimeOnly fg.deobf("blank:MobsPropertiesRandomness:${mpr_version}-mc${mc_version}")
     implementation fg.deobf("blank:EnhancedAI:${enhancedai_version}-mc${mc_version}")

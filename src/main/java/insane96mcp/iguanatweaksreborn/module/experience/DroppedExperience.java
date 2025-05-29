@@ -12,16 +12,13 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
-import insane96mcp.insanelib.setup.ILStrings;
+import insane96mcp.insanelib.module.base.TagsFeature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -142,10 +139,10 @@ public class DroppedExperience extends Feature {
 				|| mob.getType().is(NO_ENTITY_XP_MULTIPLIER))
 			return;
 
-		if (mob.getPersistentData().getBoolean(ILStrings.Tags.SPAWNED_FROM_SPAWNER))
-			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, mobsMultiplierSpawner);
+		if (TagsFeature.isSpawnType(MobSpawnType.SPAWNER, mob))
+			TagsFeature.setExperienceMultiplier(mobsMultiplierSpawner, mob);
 		else
-			mob.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, mobsMultiplierNatural);
+			TagsFeature.setExperienceMultiplier(mobsMultiplierNatural, mob);
 	}
 
 	//Run before smartness

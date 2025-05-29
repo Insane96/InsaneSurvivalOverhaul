@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Updated for latest InsaneLib
+
 ## 4.12.7
 ### Additions
 * Added two new block tags `iguanatweaksreborn:plants_to_decay` and `iguanatweaksreborn:plants_to_dead_bush`.

@@ -35,7 +35,7 @@ license="All rights reserved"
 [[dependencies.iguanatweaksreborn]]
     modId="insanelib"
     mandatory=true
-    versionRange="[1.18.2,)"
+    versionRange="[1.21.1,)"
     ordering="NONE"
     side="BOTH"
 

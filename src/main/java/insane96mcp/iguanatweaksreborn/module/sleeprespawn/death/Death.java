@@ -14,7 +14,8 @@ import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.setup.ILStrings;
+import insane96mcp.insanelib.module.base.TagsFeature;
+import insane96mcp.insanelib.util.ModNBTData;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
 import net.minecraft.ChatFormatting;
@@ -73,7 +74,7 @@ public class Death extends Feature {
 
 	public static final String KILLED_PLAYER = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "killed_player";
 	public static final String PLAYER_KILLER_LANG = InsaneSurvivalOverhaul.MOD_ID + ".player_killer";
-	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "killer_blacklist"));
+	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(InsaneSurvivalOverhaul.MOD_ID, "killer_blacklist"));
 
 	@Config
 	@Label(name = "Players' killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
@@ -151,9 +152,9 @@ public class Death extends Feature {
             public void run() {
                 killer.setPersistenceRequired();
                 double experienceMultiplier = 5d;
-                if (killer.getPersistentData().contains(ILStrings.Tags.EXPERIENCE_MULTIPLIER))
-                    experienceMultiplier *= killer.getPersistentData().getDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER);
-                killer.getPersistentData().putDouble(ILStrings.Tags.EXPERIENCE_MULTIPLIER, experienceMultiplier);
+				if (ModNBTData.contains(killer, TagsFeature.EXPERIENCE_MULTIPLIER))
+					experienceMultiplier *= ModNBTData.get(killer, TagsFeature.EXPERIENCE_MULTIPLIER, Double.class);
+				TagsFeature.setExperienceMultiplier(experienceMultiplier, killer);
                 killer.getPersistentData().putUUID(KILLED_PLAYER, player.getUUID());
                 killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()).withStyle(ChatFormatting.GRAY));
             }
