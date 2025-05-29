@@ -3,6 +3,7 @@
 ## Upcoming
 ### Fixes
 * Updated for latest InsaneLib
+* Farmers' delight seeds cutting
 
 ## 4.12.7
 ### Additions

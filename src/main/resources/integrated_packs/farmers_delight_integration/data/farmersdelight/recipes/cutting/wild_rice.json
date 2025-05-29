@@ -2,7 +2,7 @@
     "type": "farmersdelight:cutting",
     "ingredients": [
         {
-            "item": "farmersdelight:rice_panicle"
+            "item": "farmersdelight:wild_rice"
         }
     ],
     "result": [
@@ -10,6 +10,7 @@
             "item": "farmersdelight:rice"
         },
         {
+            "chance": 0.5,
             "item": "farmersdelight:straw"
         },
         {
