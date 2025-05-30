@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Lowered FD's Pumpkin slice nutrition
+
 ### Fixes
 * Updated for latest InsaneLib
 * Farmers' delight seeds cutting
@@ -9,7 +12,7 @@
 ### Additions
 * Added two new block tags `iguanatweaksreborn:plants_to_decay` and `iguanatweaksreborn:plants_to_dead_bush`.
   * Blocks in these tags will decay and transformed into dead bushes in winter.
-  * Environmental giant tall grass now also decays
+  * Environmental's giant tall grass now also decays
 
 ### Changes
 * Slowed down grass growth by 10%
