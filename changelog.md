@@ -9,6 +9,8 @@
 
 ### Fixes
 * Updated for latest InsaneLib
+* Food's nutrition and saturation messed up if modded foods used the same `FoodProperties` for multiple items
+  * Tide was one of the mods affected
 * Farmers' delight seeds cutting
 
 ## 4.12.7

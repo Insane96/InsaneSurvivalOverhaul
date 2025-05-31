@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 @Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
@@ -234,41 +232,47 @@ public class FoodDrinks extends JsonFeature {
 		}
 	}
 
-	public static final Map<Item, FoodProperties> originalFoodProperties = new HashMap<>();
+	public static final Map<FoodProperties, FoodProperties> originalFoodProperties = new HashMap<>();
 
 	@SuppressWarnings("ConstantConditions")
 	public static void processFoodMultipliers(boolean isClientSide) {
+		List<FoodProperties> processed = new ArrayList<>();
 		for (Item item : ForgeRegistries.ITEMS.getValues()) {
 			if (item.getFoodProperties() == null
 					|| isItemInTag(item, FOOD_BLACKLIST, isClientSide))
 				continue;
 			FoodProperties food = item.getFoodProperties();
+			if (processed.contains(food))
+				continue;
 			if (!foodHungerFormula.isEmpty())
 				food.nutrition = (int) MCUtils.computeFoodFormula(food, foodHungerFormula);
 			if (!foodSaturationModifierFormula.isEmpty())
 				food.saturationModifier = MCUtils.computeFoodFormula(food, foodSaturationModifierFormula);
 			if (!FMLLoader.isProduction())
 				ISOLogHelper.debug("Food multiplier applied to item " + item.getDescriptionId() + ": hunger: " + food.nutrition + ", saturationMod: " + food.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(food));
+			processed.add(food);
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	public static void processCustomFoodValues(List<CustomFoodProperties> list, boolean isClientSide) {
 		if (!originalFoodProperties.isEmpty()) {
-			originalFoodProperties.forEach((item, food) -> {
-				item.getFoodProperties().nutrition = food.nutrition;
-				item.getFoodProperties().saturationModifier = food.saturationModifier;
+			originalFoodProperties.forEach((foodProperty, originalFoodProperty) -> {
+				foodProperty.nutrition = originalFoodProperty.nutrition;
+				foodProperty.saturationModifier = originalFoodProperty.saturationModifier;
 			});
 		}
-		if (originalFoodProperties.isEmpty()) {
-			originalFoodProperties.putAll(ForgeRegistries.ITEMS.getValues()
-					.stream().filter(item -> item.getFoodProperties() != null && !isItemInTag(item, FOOD_BLACKLIST, isClientSide))
-					.collect(Collectors.toMap(Function.identity(), item -> {
+		else {
+			ForgeRegistries.ITEMS.getValues()
+					.stream().filter(item -> item.getFoodProperties() != null)
+					.forEach(item -> {
+						if (originalFoodProperties.containsKey(item.getFoodProperties()))
+							return;
 						FoodProperties properties = item.getFoodProperties();
 						if (!FMLLoader.isProduction())
 							ISOLogHelper.debug("Storing original food properties for item " + item.getDescriptionId() + ": hunger: " + properties.nutrition + ", saturationMod: " + properties.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(properties));
-                        return new FoodProperties.Builder().nutrition(properties.nutrition).saturationMod(properties.saturationModifier).build();
-					})));
+						originalFoodProperties.put(properties, new FoodProperties.Builder().nutrition(properties.nutrition).saturationMod(properties.saturationModifier).build());
+					});
 		}
 		if (!list.isEmpty()) {
 			for (CustomFoodProperties foodValue : list)
