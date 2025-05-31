@@ -2,15 +2,12 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
 import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
-import insane96mcp.iguanatweaksreborn.integration.CuriosIntegration;
-import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.mixin.client.GuiAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.PlayerExperience;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -37,7 +34,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -55,14 +51,13 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Death", description = "Add graves on death, and lose items on death. Controlled via game rules. Also adds a bounty system for the mob that killed the player. Graves can be disabled with the iguanatweaks:deathGrave game rule. Items percentage lost can be configured with the iguanatweaks:deathLoseItemsPercentage and iguanatweaks:deathLoseItemsEnchanted game rules.")
-@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
+@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN,
+		name = "Death",
+		description = "Add graves on death, and lose items on death. Controlled via game rules. Also adds a bounty system for the mob that killed the player. Graves can be disabled with the iguanatweaks:deathGrave game rule. Items percentage lost can be configured with the iguanatweaks:deathLoseItemsPercentage and iguanatweaks:deathLoseItemsEnchanted game rules.")
 public class Death extends Feature {
 
 	public static final SimpleBlockWithItem GRAVE = SimpleBlockWithItem.register("grave", () -> new GraveBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK).mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).forceSolidOn().strength(1.5F, 4.5f)));
@@ -76,18 +71,19 @@ public class Death extends Feature {
 	public static final String PLAYER_KILLER_LANG = InsaneSurvivalOverhaul.MOD_ID + ".player_killer";
 	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(InsaneSurvivalOverhaul.MOD_ID, "killer_blacklist"));
 
-	@Config
-	@Label(name = "Players' killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
+	@Config(name = "Players' killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
 	public static Boolean vindicationVsKiller = true;
-	@Config
-	@Label(description = "If true, the player's experience is stored in the grave.")
+	@Config(description = "If true, the player's experience is stored in the grave.")
 	public static Boolean graveKeepsExperience = true;
-	@Config
-	@Label(description = "If true, graves will be placed even if the player has no items/xp.")
+	@Config(description = "If true, graves will be placed even if the player has no items/xp.")
 	public static Boolean summonGraveEvenWithNoItems = true;
-	@Config
-	@Label(description = "In how many ticks will items despawn after dropping from a grave.")
+	@Config(description = "In how many ticks will items despawn after dropping from a grave.")
 	public static Integer despawnTime = 2400;
+
+	@Config(description = "If true, players can crouch right-click to take items from graves. Experience still requires breaking the grave.")
+	public static Boolean crouchTakeItems = false;
+	@Config(description = "If true, only players that generated the grave can crouch right-click to take items from graves.")
+	public static Boolean crouchTakeItemsOnlyOwner = false;
 
 	public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -183,25 +179,6 @@ public class Death extends Feature {
 	public static void summonGrave(ServerPlayer player, DamageSource source) {
 		if (source.is(DOESNT_SPAWN_GRAVE))
 			return;
-		List<ItemStack> items = new ArrayList<>();
-		player.getInventory().items.forEach(itemStack -> {
-			if (!itemStack.isEmpty() && itemStack.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
-				items.add(itemStack);
-		});
-		player.getInventory().armor.forEach(itemStack -> {
-			if (!itemStack.isEmpty() && itemStack.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
-				items.add(itemStack);
-		});
-		player.getInventory().offhand.forEach(itemStack -> {
-			if (!itemStack.isEmpty() && itemStack.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
-				items.add(itemStack);
-		});
-		if (ModList.get().isLoaded("toolbelt"))
-			ToolBeltIntegration.onDeath(items, player);
-		if (ModList.get().isLoaded("curios"))
-			CuriosIntegration.onDeath(items, player);
-		if (items.isEmpty() && (player.experienceLevel <= 0 || !graveKeepsExperience) && !summonGraveEvenWithNoItems)
-			return;
 		BlockPos pos = player.blockPosition();
 		if (pos.getY() < player.level().getMinBuildHeight())
 			pos = pos.atY(player.level().getMinBuildHeight() + 1);
@@ -215,12 +192,19 @@ public class Death extends Feature {
 		GraveBlockEntity graveBlockEntity = (GraveBlockEntity) player.level().getBlockEntity(pos);
 		if (graveBlockEntity == null)
 			return;
-		graveBlockEntity.setItems(items);
+		if (!graveBlockEntity.addPlayerItems(player)
+				&& (player.experienceLevel <= 0 || !graveKeepsExperience)
+				&& !summonGraveEvenWithNoItems)
+			return;
 		if (graveKeepsExperience && player.experienceLevel > 0) {
 			int xpDropped = PlayerExperience.getExperienceOnDeath(player, true);
-			graveBlockEntity.setXpStored(xpDropped);
-			player.setExperienceLevels(0);
-			player.setExperiencePoints(0);
+			if (xpDropped == -1)
+				xpDropped = player.getExperienceReward();
+			if (xpDropped > 0) {
+				graveBlockEntity.setXpStored(xpDropped);
+				player.setExperienceLevels(0);
+				player.setExperiencePoints(0);
+			}
 		}
 		graveBlockEntity.setOwner(player.getUUID());
 		graveBlockEntity.setDeathNumber(player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)) + 1);

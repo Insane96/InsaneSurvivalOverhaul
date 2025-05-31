@@ -4,6 +4,7 @@ import dev.gigaherz.toolbelt.ToolBelt;
 import dev.gigaherz.toolbelt.belt.ToolBeltItem;
 import dev.gigaherz.toolbelt.slot.BeltExtensionSlot;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.GraveBlockEntity;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -16,12 +17,12 @@ import java.util.List;
 
 public class ToolBeltIntegration {
     public static final TagKey<Item> TOOL_BELT_TICKABLE = ISOItemTagsProvider.create("toolbelt_tickable");
-    public static void onDeath(List<ItemStack> items, Player player) {
+    public static void onDeath(List<GraveBlockEntity.SlottedStack> items, Player player) {
         LazyOptional<BeltExtensionSlot> oBeltExtensionSlot = BeltExtensionSlot.get(player);
         oBeltExtensionSlot.ifPresent(beltExtensionSlot -> {
             beltExtensionSlot.getSlots().forEach(extensionSlot -> {
                 if (!extensionSlot.getContents().isEmpty())
-                    items.add(extensionSlot.getContents());
+                    items.add(new GraveBlockEntity.SlottedStack(extensionSlot.getContents()));
                 extensionSlot.setContents(ItemStack.EMPTY);
             });
         });

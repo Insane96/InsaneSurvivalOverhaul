@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Config options to let you crouch-right-click a grave to pick up items
+
 ### Changes
 * Lowered FD's Pumpkin slice nutrition
 

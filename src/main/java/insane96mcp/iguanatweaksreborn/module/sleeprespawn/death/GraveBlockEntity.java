@@ -1,7 +1,10 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
+import insane96mcp.iguanatweaksreborn.integration.CuriosIntegration;
+import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -10,21 +13,23 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class GraveBlockEntity extends BlockEntity {
     public static final String ITEMS_TAG = "items";
@@ -32,7 +37,7 @@ public class GraveBlockEntity extends BlockEntity {
     public static final String OWNER_TAG = "owner";
     public static final String DEATH_NUMBER_TAG = "death_number";
     public static final String MESSAGE_TAG = "message";
-    private List<ItemStack> items = new ArrayList<>();
+    private List<SlottedStack> items = new ArrayList<>();
     private int xpStored = 0;
     private UUID owner;
     private int deathNumber;
@@ -42,13 +47,51 @@ public class GraveBlockEntity extends BlockEntity {
         super(Death.GRAVE_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 
-    public List<ItemStack> getItems() {
+    public List<SlottedStack> getItems() {
         return this.items;
     }
 
-    public void setItems(List<ItemStack> items) {
+    public void setItems(List<SlottedStack> items) {
         this.items = items;
         this.setChanged();
+    }
+
+    public void addItem(ItemStack stack) {
+        this.items.add(new SlottedStack(stack));
+        this.setChanged();
+    }
+
+    public void addItem(byte slot, ItemStack stack) {
+        this.items.add(new SlottedStack(slot, stack));
+        this.setChanged();
+    }
+
+    /// True if at least one item was added, false otherwise
+    public boolean addPlayerItems(Player player) {
+        NonNullList<ItemStack> itemStacks = player.getInventory().items;
+        for (int i = 0; i < itemStacks.size(); i++) {
+            ItemStack item = itemStacks.get(i);
+            if (!item.isEmpty() && item.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
+                this.addItem((byte) i, item);
+        }
+        itemStacks = player.getInventory().armor;
+        for (int i = 0; i < itemStacks.size(); i++) {
+            ItemStack item = itemStacks.get(i);
+            if (!item.isEmpty() && item.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
+                this.addItem((byte) (i + player.getInventory().items.size()), item);
+        }
+        itemStacks = player.getInventory().offhand;
+        for (int i = 0; i < itemStacks.size(); i++) {
+            ItemStack item = itemStacks.get(i);
+            if (!item.isEmpty() && item.getEnchantmentLevel(Enchantments.VANISHING_CURSE) == 0)
+                this.addItem((byte) (i + player.getInventory().items.size() + player.getInventory().armor.size()), item);
+        }
+        if (ModList.get().isLoaded("toolbelt"))
+            ToolBeltIntegration.onDeath(this.items, player);
+        if (ModList.get().isLoaded("curios"))
+            CuriosIntegration.onDeath(this.items, player);
+        this.setChanged();
+        return !this.items.isEmpty();
     }
 
     public int getXpStored() {
@@ -90,8 +133,13 @@ public class GraveBlockEntity extends BlockEntity {
         ListTag itemsList = compoundTag.getList(ITEMS_TAG, 10);
 
         for(int i = 0; i < itemsList.size(); ++i) {
-            CompoundTag itemStackTag = itemsList.getCompound(i);
-            this.items.add(ItemStack.of(itemStackTag));
+            CompoundTag slottedStackTag = itemsList.getCompound(i);
+            if (!slottedStackTag.contains("Slot"))
+                this.items.add(new SlottedStack(net.minecraft.world.item.ItemStack.of(slottedStackTag)));
+            else {
+                byte j = slottedStackTag.getByte("Slot");
+                this.items.add(new SlottedStack(j, net.minecraft.world.item.ItemStack.of(slottedStackTag)));
+            }
         }
         this.xpStored = compoundTag.getInt(XP_STORED_TAG);
         if (compoundTag.contains(OWNER_TAG)) {
@@ -104,12 +152,14 @@ public class GraveBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag) {
+    protected void saveAdditional(@NotNull CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
         ListTag itemsList = new ListTag();
-        for (ItemStack itemStack : this.items) {
+        for (SlottedStack slottedStack : this.items) {
             CompoundTag itemStackTag = new CompoundTag();
-            itemStack.save(itemStackTag);
+            if (slottedStack.slot != null)
+                itemStackTag.putByte("Slot", slottedStack.slot);
+            slottedStack.stack.save(itemStackTag);
             itemsList.add(itemStackTag);
         }
         compoundTag.put(ITEMS_TAG, itemsList);
@@ -148,6 +198,24 @@ public class GraveBlockEntity extends BlockEntity {
         });
     }
 
+    public void giveContentToPlayer(Player player) {
+        this.items.stream()
+                .filter(slottedStack -> slottedStack.slot != null)
+                .forEach(slottedStack -> {
+                    if (player.getInventory().getItem(slottedStack.slot).isEmpty())
+                        player.getInventory().setItem(slottedStack.slot, slottedStack.stack);
+                    else
+                        slottedStack.invalidateSlot();
+                });
+        this.items.stream()
+                .filter(slottedStack -> slottedStack.slot == null)
+                .forEach(slottedStack -> player.getInventory().add(slottedStack.stack));
+        this.items.clear();
+        player.level().playSound(null, player, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
+        this.dropExperience(player.blockPosition());
+        this.owner = null;
+    }
+
     public void dropContent(BlockPos pos) {
         this.dropExperience(pos);
         this.dropItems(pos);
@@ -173,7 +241,7 @@ public class GraveBlockEntity extends BlockEntity {
     }
 
     public void dropItems(BlockPos pos) {
-        this.getItems().forEach(itemStack -> dropItem(level, itemStack, pos));
+        this.getItems().forEach(itemStack -> dropItem(level, itemStack.stack, pos));
         this.getItems().clear();
     }
 
@@ -200,5 +268,55 @@ public class GraveBlockEntity extends BlockEntity {
         }
 
         return Optional.empty();
+    }
+
+    public static final class SlottedStack {
+        @Nullable
+        private Byte slot;
+        private final ItemStack stack;
+
+        public SlottedStack(byte slot, ItemStack stack) {
+            this.slot = slot;
+            this.stack = stack;
+        }
+
+        public SlottedStack(ItemStack stack) {
+            this.slot = null;
+            this.stack = stack;
+        }
+
+        @Nullable
+        public Byte slot() {
+            return slot;
+        }
+
+        public void invalidateSlot() {
+            this.slot = null;
+        }
+
+        public ItemStack stack() {
+            return stack;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) return true;
+            if (obj == null || obj.getClass() != this.getClass()) return false;
+            var that = (SlottedStack) obj;
+            return Objects.equals(this.slot, that.slot) &&
+                    Objects.equals(this.stack, that.stack);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(slot, stack);
+        }
+
+        @Override
+        public String toString() {
+            return "SlottedStack{" +
+                    "slot=" + slot + ", " +
+                    "stack=" + stack + '}';
+        }
     }
 }

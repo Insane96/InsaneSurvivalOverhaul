@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -42,7 +41,7 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
     protected static final VoxelShape SHAPE_Z = Block.box(6.0D, 0.0D, 3.0D, 10.0D, 12.0D, 13.0d);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
+    public static final ResourceLocation CONTENTS = ResourceLocation.parse("contents");
 
     public GraveBlock(Properties properties) {
         super(properties);
@@ -88,15 +87,6 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
     }
 
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder context) {
-        BlockEntity blockentity = context.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (blockentity instanceof GraveBlockEntity graveBlockEntity) {
-            context = context.withDynamicDrop(CONTENTS, (consumer) -> {
-                for(ItemStack itemStack : graveBlockEntity.getItems()) {
-                    consumer.accept(itemStack);
-                }
-            });
-        }
-
         return super.getDrops(state, context);
     }
 
@@ -121,12 +111,23 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level level, BlockPos pos, Player player, InteractionHand pHand, BlockHitResult pHit) {
-        if (!level.isClientSide
-                || !(level.getBlockEntity(pos) instanceof GraveBlockEntity graveBlockEntity)
-                || graveBlockEntity.getMessage() == null)
+        if (!(level.getBlockEntity(pos) instanceof GraveBlockEntity graveBlockEntity))
             return super.use(pState, level, pos, player, pHand, pHit);
-        player.sendSystemMessage(Component.literal("This grave has a message: \"").append(graveBlockEntity.getMessage()).append(Component.literal("\"")));
-        return InteractionResult.SUCCESS;
+        if (player.isCrouching()
+                && Death.crouchTakeItems
+                && !graveBlockEntity.getItems().isEmpty()
+                && !level.isClientSide
+                && (graveBlockEntity.getOwner().equals(player.getUUID()) || !Death.crouchTakeItemsOnlyOwner)) {
+            graveBlockEntity.giveContentToPlayer(player);
+            return InteractionResult.SUCCESS;
+        }
+        if (graveBlockEntity.getMessage() != null
+                && level.isClientSide
+                && !player.isCrouching()) {
+            player.sendSystemMessage(Component.literal("This grave has a message: \"").append(graveBlockEntity.getMessage()).append(Component.literal("\"")));
+            return InteractionResult.SUCCESS;
+        }
+        return super.use(pState, level, pos, player, pHand, pHit);
     }
 
     @Nullable

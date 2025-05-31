@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.integration;
 
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.GraveBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CuriosIntegration {
-    public static void onDeath(List<ItemStack> items, Player player) {
+    public static void onDeath(List<GraveBlockEntity.SlottedStack> items, Player player) {
         LazyOptional<ICuriosItemHandler> maybeCuriosInventory = CuriosApi.getCuriosInventory(player);
         maybeCuriosInventory.ifPresent(curiosInventory -> {
             Map<String, ICurioStacksHandler> curios = curiosInventory.getCurios();
@@ -23,11 +24,11 @@ public class CuriosIntegration {
         });
     }
 
-    public static void saveAndRemoveItem(List<ItemStack> items, IDynamicStackHandler dynamicStackHandler) {
+    public static void saveAndRemoveItem(List<GraveBlockEntity.SlottedStack> items, IDynamicStackHandler dynamicStackHandler) {
         for (int i = 0; i < dynamicStackHandler.getSlots(); i++) {
             ItemStack stack = dynamicStackHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
-                items.add(stack);
+                items.add(new GraveBlockEntity.SlottedStack(stack));
                 dynamicStackHandler.setStackInSlot(i, ItemStack.EMPTY);
             }
         }
