@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.client.hudinfos;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -29,23 +28,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "HUD Infos", description = "Adds various infos on top left of the screen")
-@LoadFeature(module = ClientModules.Ids.CLIENT)
+@LoadFeature(module = ClientModules.Ids.CLIENT,
+        name = "HUD Infos",
+        description = "Adds various infos on top left of the screen")
 public class HudInfos extends Feature {
-    @Config
-    @Label(name = "Cardinal Direction", description = "If true, items in the iguanatweaksreborn:hud/cardinal_direction will display the cardinal direction.")
+    @Config(description = "If true, items in the iguanatweaksreborn:hud/cardinal_direction will display the cardinal direction.")
     public static Boolean cardinalDirection = true;
-    @Config
-    @Label(name = "Season", description = "If true, items in the iguanatweaksreborn:hud/season will display the current season. Only available if Serene Seasons is installed")
+    @Config(description = "If true, items in the iguanatweaksreborn:hud/season will display the current season. Only available if Serene Seasons is installed")
     public static Boolean season = true;
-    @Config
-    @Label(name = "Depth", description = "If true, items in the iguanatweaksreborn:hud/depth will display the current Y level")
+    @Config(description = "If true, items in the iguanatweaksreborn:hud/depth will display the current Y level")
     public static Boolean depth = true;
-    @Config
-    @Label(name = "Time", description = "If true, items in the iguanatweaksreborn:hud/time will display the time of day")
+    @Config(description = "If true, items in the iguanatweaksreborn:hud/time will display the time of day")
     public static Boolean time = true;
-    @Config
-    @Label(name = "Biome", description = "If true, items in the iguanatweaksreborn:hud/biome will display the current biome")
+    @Config(description = "If true, items in the iguanatweaksreborn:hud/biome will display the current biome")
     public static Boolean biome = true;
 
     public HudInfos(Module module, boolean enabledByDefault, boolean canBeDisabled) {

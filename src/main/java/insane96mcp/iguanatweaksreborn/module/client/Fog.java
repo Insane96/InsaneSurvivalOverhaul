@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.client;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.iguanatweaksreborn.module.world.weather.ClientWeather;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -22,24 +21,20 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Fog", description = "Makes fog less invasive in some contexts")
-@LoadFeature(module = ClientModules.Ids.CLIENT)
+@LoadFeature(module = ClientModules.Ids.CLIENT,
+        name = "Fog",
+        description = "Makes fog less invasive in some contexts")
 public class Fog extends Feature {
 
-    @Config
-    @Label(name = "Better visibility in Lava with Fire Resistance Lava", description = "If true you'll be able to see better in lava when with the Fire Resistance Effect.")
+    @Config(name = "Better visibility in Lava with Fire Resistance Lava", description = "If true you'll be able to see better in lava when with the Fire Resistance Effect.")
     public static Boolean betterFireResistanceLavaFog = true;
-    @Config
-    @Label(name = "Better Nether Fog", description = "If true Nether Fog is no longer limited to 12 chunks.")
+    @Config(description = "If true Nether Fog is no longer limited to 12 chunks.")
     public static Boolean betterNetherFog = true;
-    @Config(min = 0d, max = 1d)
-    @Label(name = "Nether Fog Ratio", description = "Render distance is multiplied by this value in the Nether. Vanilla is 0.5.")
+    @Config(min = 0d, max = 1d, description = "Render distance is multiplied by this value in the Nether. Vanilla is 0.5.")
     public static Double netherFogRatio = 0.75d;
-    @Config(min = 0d, max = 1d)
-    @Label(description = "Changes fog to start closer to the player. E.g. A value of 0.5 makes fog start at half the render distance. Vanilla is 1, Pre-1.18.1 was 0.75, Pre-1.7.2 was 0.25. This disables itself if Foggy Weather is enabled.")
+    @Config(min = 0d, max = 1d, description = "Changes fog to start closer to the player. E.g. A value of 0.5 makes fog start at half the render distance. Vanilla is 1, Pre-1.18.1 was 0.75, Pre-1.7.2 was 0.25. This disables itself if Foggy Weather is enabled.")
     public static Double overworld$fogStartRatio = 0.4d;
-    @Config(max = 1d)
-    @Label(description = "Changes fog ratio when raining. Vanilla is 1. This disables itself if Foggy Weather is enabled.")
+    @Config(max = 1d, description = "Changes fog ratio when raining. Vanilla is 1. This disables itself if Foggy Weather is enabled.")
     public static Double overworld$fogStartRatioOnRain = -0.2d;
 
     public Fog(Module module, boolean enabledByDefault, boolean canBeDisabled) {

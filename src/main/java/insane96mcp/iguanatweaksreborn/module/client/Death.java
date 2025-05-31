@@ -2,24 +2,21 @@ package insane96mcp.iguanatweaksreborn.module.client;
 
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 
-@Label(name = "Death", description = "Changes to death")
-@LoadFeature(module = ClientModules.Ids.CLIENT)
+@LoadFeature(module = ClientModules.Ids.CLIENT,
+        name = "Death",
+        description = "Changes to death")
 public class Death extends Feature {
-    @Config
-    @Label(name = "Third person", description = "If true, when you die, you switch to third person camera.")
+    @Config(description = "If true, when you die, you switch to third person camera.")
     public static Boolean thirdPerson = true;
-    @Config
-    @Label(name = "Remove score", description = "Why is that still a thing?.")
+    @Config(description = "Why is that still a thing?.")
     public static Boolean removeScore = true;
-    @Config
-    @Label(name = "Replace score with time since last death")
+    @Config(name = "Replace score with time since last death")
     public static Boolean replaceScoreWithTimeSinceLastDeath = true;
 
     public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {

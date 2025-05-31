@@ -20,8 +20,13 @@ public abstract class LevelRendererMixin {
 	@ModifyVariable(at = @At(value = "STORE"), method = "renderWorldBorder", ordinal = 4)
 	private double onWorldBorderHeight(double value) {
 		if (WorldBorder.shouldShorten())
-			return Math.min(WorldBorder.capHeight, value / 4d);
+			return Math.min(WorldBorder.capHeight, value * WorldBorder.heightMultiplier);
 		return value;
+	}
+
+	@ModifyVariable(at = @At(value = "STORE", ordinal = 2), method = "renderWorldBorder", ordinal = 1)
+	private double onWorldBorderAlpha(double value) {
+		return value * WorldBorder.getTransparencyMultiplier();
 	}
 
 	@ModifyExpressionValue(method = "renderHitOutline", at = @At(value = "CONSTANT", args = "floatValue=0.0", ordinal = 0))

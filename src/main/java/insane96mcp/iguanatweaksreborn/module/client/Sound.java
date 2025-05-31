@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.client;
 
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -11,12 +10,12 @@ import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-@Label(name = "Sounds & Music", description = "Changes to sounds and music. Disabling this feature requires a Minecraft restart.")
-@LoadFeature(module = ClientModules.Ids.CLIENT)
+@LoadFeature(module = ClientModules.Ids.CLIENT,
+        name = "Sounds & Music",
+        description = "Changes to sounds and music. Disabling this feature requires a Minecraft restart.")
 public class Sound extends Feature {
 
-    @Config
-    @Label(name = "Music delay multiplier", description = "Multiplies the time it takes for music to play by this value (in vanilla, normal music plays each 10 to 20 minutes).")
+    @Config(name = "Music delay multiplier", description = "Multiplies the time it takes for music to play by this value (in vanilla, normal music plays each 10 to 20 minutes).")
     public static Double musicDelayMultiplier = 0.1d;
 
     public Sound(Module module, boolean enabledByDefault, boolean canBeDisabled) {

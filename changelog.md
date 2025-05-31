@@ -1,17 +1,21 @@
 # Changelog
 
 ## Upcoming
+**Backup your config file, some config option names have changed**
+
 ### Additions
 * Config options to let you crouch-right-click a grave to pick up items
 
 ### Changes
+* Updated for latest InsaneLib
 * Lowered FD's Pumpkin slice nutrition
 
 ### Fixes
-* Updated for latest InsaneLib
 * Food's nutrition and saturation messed up if modded foods used the same `FoodProperties` for multiple items
   * Tide was one of the mods affected
 * Farmers' delight seeds cutting
+* World border client feature height multiplier not working
+* World border client feature transparency gone
 
 ## 4.12.7
 ### Additions
