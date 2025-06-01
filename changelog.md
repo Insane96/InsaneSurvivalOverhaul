@@ -16,6 +16,7 @@
 * Farmers' delight seeds cutting
 * World border client feature height multiplier not working
 * World border client feature transparency gone
+* Crash with latest Tinkers' Construct update
 
 ## 4.12.7
 ### Additions
