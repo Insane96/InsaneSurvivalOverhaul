@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Crash with Create diesel generators
+
 ## 4.12.8
 **Backup your config file, some config option names have changed**
 
