@@ -1,10 +1,6 @@
 # Changelog
 
 ## Upcoming
-### Additions
-* Misc Tweaks datapack
-  * Backported saddle recipe
-
 ### Fixes
 * Crash with Create diesel generators
 
