@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Seasons plant growth and decay now work with the vanilla random tick methods
+  * This should increase performance a bit
+
 ### Fixes
 * Crash with Create diesel generators
 
