@@ -47,5 +47,3 @@ jobs:                                     #The place where you actually tell the
             build/libs/!(*-@(slim)).jar
 
           changelog: https://github.com/Insane96/IguanaTweaksReborn/blob/1.20.1/changelog.md
-          name: "${{env.VERSION}}"
-          version: "${{env.VERSION}}"
