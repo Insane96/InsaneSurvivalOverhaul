@@ -4,6 +4,7 @@
 ### Changes
 * Seasons plant growth and decay now work with the vanilla random tick methods
   * This should increase performance a bit
+* Updated workspace so it uses Forge instead of Neo
 
 ### Fixes
 * Crash with Create diesel generators

@@ -7,11 +7,11 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = "${mod_version}"
-group = 'insane96mcp.iguanatweaksreborn'
+version = mod_version
+group = mod_group_id
 
 base {
-    archivesName = 'InsaneSurvivalOverhaul'
+    archivesName = mod_id
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -21,7 +21,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 
 jarJar.enable()
 minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+    mappings channel: mapping_channel, version: mapping_version
 
     copyIdeResources = true
 
@@ -114,14 +114,16 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("blank:insanelib:${lib_version}")
     implementation fg.deobf("blank:Stamina:1.1.1")
-    runtimeOnly fg.deobf("blank:MobsPropertiesRandomness:${mpr_version}-mc${mc_version}")
-    implementation fg.deobf("blank:EnhancedAI:${enhancedai_version}-mc${mc_version}")
-    implementation fg.deobf("blank:Shields+:${shieldsplus_version}-mc${mc_version}")
+    runtimeOnly fg.deobf("blank:MobsPropertiesRandomness:${mpr_version}-mc${minecraft_version}")
+    implementation fg.deobf("blank:EnhancedAI:${enhancedai_version}-mc${minecraft_version}")
+    implementation fg.deobf("blank:Shields+:${shieldsplus_version}-mc${minecraft_version}")
     compileOnly fg.deobf("blank:nohunger:1.0.1:slim")
+
+    runtimeOnly fg.deobf("net.darkhax.maxhealthfix:MaxHealthFix-Forge-${minecraft_version}:${max_health_fix_version}")
 
     implementation fg.deobf("curse.maven:selene-499980:5254462")
     runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5051316")
@@ -129,30 +131,28 @@ dependencies {
     // runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
     implementation fg.deobf("curse.maven:supplementaries-412082:5225134")
 
-    implementation fg.deobf("com.github.glitchfiend:GlitchCore-forge:${mc_version}-${glitchcore_version}")
-    implementation fg.deobf("com.github.glitchfiend:SereneSeasons-forge:${mc_version}-${sereneseasons_version}")
+    implementation fg.deobf("com.github.glitchfiend:GlitchCore-forge:${minecraft_version}-${glitchcore_version}")
+    implementation fg.deobf("com.github.glitchfiend:SereneSeasons-forge:${minecraft_version}-${sereneseasons_version}")
     implementation fg.deobf("curse.maven:time-control-303570:5095704")
 
     compileOnly fg.deobf("curse.maven:tool-belt-260262:5929061")
     //Needed for data gen
-    runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-${mc_version}:1.8.0")
+    runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-${minecraft_version}:1.8.0")
 
     compileOnly fg.deobf("curse.maven:global-gamerules-227657:4587490")
 
     compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
     runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
 
-    implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-${mc_version}-forge")
+    implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-${minecraft_version}-forge")
 
-    runtimeOnly fg.deobf("net.darkhax.maxhealthfix:MaxHealthFix-Forge-${mc_version}:${max_health_fix_version}")
-
-    implementation fg.deobf("slimeknights.mantle:Mantle:${mc_version}-${mantle_build}")
-    implementation fg.deobf("slimeknights.tconstruct:TConstruct:${mc_version}-${ticon_build}")
+    implementation fg.deobf("slimeknights.mantle:Mantle:${minecraft_version}-${mantle_build}")
+    implementation fg.deobf("slimeknights.tconstruct:TConstruct:${minecraft_version}-${ticon_build}")
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
     //implementation fg.deobf("curse.maven:puzzles-lib-495476:4660882")
     //runtimeOnly fg.deobf("curse.maven:easy-magic-456239:4658750")
@@ -172,11 +172,11 @@ dependencies {
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")
 
     // Compile against only the API artifact
-    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${mc_version}:api"))
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api"))
     // Use the full Curios API jar at runtime
-    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${mc_version}"))
+    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}"))
 
-    implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${mc_version}-${apple_skin_version}")
+    implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${minecraft_version}-${apple_skin_version}")
 
     implementation fg.deobf("curse.maven:villager-comfort-updated-1082700:5622213")
 
@@ -188,11 +188,38 @@ dependencies {
     minecraftLibrary 'com.ezylang:EvalEx:3.4.0'
     jarJar(group: 'com.ezylang', name: 'EvalEx', version: '[3.0,4.0)')
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0-beta.5"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0-beta.5")) {
-        jarJar.ranged(it, "[0.5.0-beta.5,)")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+        jarJar.ranged(it, "[${mixin_extras_version},)")
     }
 }
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
+            lib_version: lib_version, lib_version_range: lib_version_range,
+            mpr_version: mpr_version, enhancedai_version: enhancedai_version, shieldsplus_version: shieldsplus_version,
+            glitchcore_version: glitchcore_version, sereneseasons_version: sereneseasons_version,
+            max_health_fix_version: max_health_fix_version,
+            emi_version: emi_version,
+            pehkui_version: pehkui_version,
+            mantle_build: mantle_build, ticon_build: ticon_build,
+            jei_version: jei_version,
+            curios_version: curios_version,
+            apple_skin_version: apple_skin_version,
+            mixin_version: mixin_version, mixin_extras_version: mixin_extras_version
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
 
 tasks.named('jar', Jar).configure {
     manifest {
