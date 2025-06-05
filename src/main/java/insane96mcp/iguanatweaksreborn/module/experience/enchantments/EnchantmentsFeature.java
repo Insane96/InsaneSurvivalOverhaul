@@ -28,7 +28,6 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.util.MathHelper;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -81,46 +80,35 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static final RegistryObject<Enchantment> FIRE_PROTECTION = ISORegistries.ENCHANTMENTS.register("fire_protection", FireProtection::new);
 	public static final RegistryObject<Enchantment> PROJECTILE_PROTECTION = ISORegistries.ENCHANTMENTS.register("projectile_protection", ProjectileProtection::new);
 	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISORegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
-	@Config
-	@Label(description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
+	@Config(description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;
-	@Config
-	@Label(description = "Unbreaking increases tool durability by 75% per level")
+	@Config(description = "Unbreaking increases tool durability by 75% per level")
 	public static Boolean unbreakingOverhaul = true;
-	@Config
-	@Label(description = "Changes Multishot to actually load 3 arrows, instead of materializing 2 arrows from thin air")
+	@Config(description = "Changes Multishot to actually load 3 arrows, instead of materializing 2 arrows from thin air")
 	public static Boolean actualMultishot = true;
-	@Config
-	@Label(description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
+	@Config(description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
 	public static Boolean thornsOverhaul = true;
 
-	@Config
-	@Label(name = "Tool Mining Speed Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_mining_speed * (0.5*lvl)`")
+	@Config(name = "Tool Mining Speed Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_mining_speed * (0.5*lvl)`")
 	public static Boolean changeEfficiencyFormula = true;
-	@Config
-	@Label(name = "Nerf Mending", description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
+	@Config(description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
 	public static Boolean nerfMending = true;
-	@Config
-	@Label(name = "Nerf Respiration", description = "Respiration decreases air consumption by 50% per level instead of 100%.")
+	@Config(description = "Respiration decreases air consumption by 50% per level instead of 100%.")
 	public static Boolean nerfRespiration = true;
 
-	@Config(min = 0d, max = 2d)
-	@Label(name = "Power Enchantment Damage", description = "Set arrow's damage increase with the Power enchantment (vanilla is 0.5). If set to a value != 0.5 the flat 0.5 bonus is also removed. Set to 0.5 to disable.")
+	@Config(description = "Set arrow's damage increase with the Power enchantment (vanilla is 0.5). If set to a value != 0.5 the flat 0.5 bonus is also removed. Set to 0.5 to disable.")
 	public static Double powerEnchantmentDamage = 0.2d;
 
-	@Config
-	@Label(name = "Power affects base arrow damage", description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
+	@Config(description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
 	public static Boolean powerAffectsBaseArrowDamage = true;
 
 	@Config
-	@Label(name = "Prevent farmland trampling with Feather Falling")
 	public static Boolean preventFarmlandTramplingWithFeatherFalling = true;
-	@Config
-	@Label(name = "Replace protection enchantments", description = "If true, vanilla protection enchantments are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.\n" +
-			"Protection has only one level, protects 6% per level and is treasure. Other protections work the same except for projectile that reduces the sight range of mobs by 2% per level. Feather falling protects for 16% per level instead of 12% + 1 per level.")
+	@Config(description = """
+            If true, vanilla protection enchantments are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.
+            Protection has only one level, protects 6% per level and is treasure. Other protections work the same except for projectile that reduces the sight range of mobs by 2% per level. Feather falling protects for 16% per level instead of 12% + 1 per level.""")
 	public static Boolean replaceProtectionEnchantments = true;
-	@Config
-	@Label(name = "Replace damaging enchantments", description = """
+	@Config(description = """
             If true, vanilla damaging enchantments (such as smite or sharpness) are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.
             Changes to damaging enchantments:
             Enchantments deal bonus damage based off the item's attack damage. So Sharpness on a Sword adds less damage than Sharpness on an Axe.
@@ -128,11 +116,9 @@ public class EnchantmentsFeature extends JsonFeature {
             Smite deals +1 damage per level to undead and applies weakness
             Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
 	public static Boolean replaceDamagingEnchantments = true;
-	@Config
-	@Label(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`. Requires a Minecraft restart")
+	@Config(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`. Requires a Minecraft restart")
 	public static Boolean reworkBonusLootEnchantments = true;
-	@Config
-	@Label(name = "Replace other enchantments", description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
+	@Config(description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceOtherEnchantments = true;
 
 	public static final ArrayList<IdTagMatcher> DISABLED_ENCHANTMENTS_DEFAULT = new ArrayList<>(List.of(
@@ -157,8 +143,8 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public EnchantmentsFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "disabled_enchantments")));
+		addSyncType(InsaneSO.location("disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, InsaneSO.location("disabled_enchantments")));
 	}
 
 	@Override

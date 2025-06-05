@@ -90,7 +90,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 		ItemStack right = this.inputSlots.getItem(1);
 		Map<Enchantment, Integer> leftEnchantments = EnchantmentHelper.getEnchantments(resultStack);
 		//Don't add the repair cost of the items if remove repair cost increase
-		if (!Anvils.noXpRepairCost)
+		if (!Anvils.xpCost$noCost)
 			baseCost += left.getBaseRepairCost() + (right.isEmpty() ? 0 : right.getBaseRepairCost());
 		this.repairItemCountCost = 0;
 		boolean isEnchantedBook = false;
@@ -109,20 +109,20 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 					int maxPartialRepairDmg = Mth.ceil(resultStack.getMaxDamage() * (1f - repairData.maxRepair()));
 					float amountRequired = repairData.amountRequired();
 					int xpCost = 0;
-					if (Anvils.moreMaterialIfEnchanted > 0f && left.isEnchanted()) {
+					if (Anvils.materialCost$increaseMaterialsRequiredWithEnchantments > 0f && left.isEnchanted()) {
 						float increase = 0f;
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
-							increase += Anvils.moreMaterialIfEnchanted.floatValue() * lvl;
-							if (Anvils.differentXpRepairCost)
+							increase += Anvils.materialCost$increaseMaterialsRequiredWithEnchantments.floatValue() * lvl;
+							if (Anvils.xpCost$differentRepairCost)
 								xpCost += lvl;
 						}
 						amountRequired *= 1 + increase;
 					}
-					if (Anvils.moreMaterialIfEnchantedFlat > 0f && left.isEnchanted()) {
+					if (Anvils.materialCost$increaseMaterialsRequiredWithEnchantmentsFlat > 0f && left.isEnchanted()) {
 						float increase = 0f;
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
-							increase += Anvils.moreMaterialIfEnchantedFlat.floatValue() * lvl;
-							if (Anvils.differentXpRepairCost)
+							increase += Anvils.materialCost$increaseMaterialsRequiredWithEnchantmentsFlat.floatValue() * lvl;
+							if (Anvils.xpCost$differentRepairCost)
 								xpCost += lvl;
 						}
 						amountRequired += (increase * oRepairData.get().costMultiplier());
@@ -137,7 +137,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 					float damageValue = resultStack.getDamageValue();
 					for (repairItemCountCost = 0; repairSteps > 0 && repairItemCountCost < right.getCount() && damageValue > maxPartialRepairDmg; ++repairItemCountCost) {
 						damageValue -= repairSteps;
-						if (!Anvils.noXpRepairCost)
+						if (!Anvils.xpCost$noCost)
 							//Vanilla behaviour
 							++mergeCost;
 						repairSteps = Math.min(damageValue, resultStack.getMaxDamage() / amountRequired);
@@ -151,19 +151,19 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 				else {
 					float amountRequired = 4;
 					int xpCost = 0;
-					if (Anvils.moreMaterialIfEnchanted > 0f && left.isEnchanted()) {
+					if (Anvils.materialCost$increaseMaterialsRequiredWithEnchantments > 0f && left.isEnchanted()) {
 						float increase = 0f;
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
-							increase += Anvils.moreMaterialIfEnchanted.floatValue() * lvl;
-							if (Anvils.differentXpRepairCost)
+							increase += Anvils.materialCost$increaseMaterialsRequiredWithEnchantments.floatValue() * lvl;
+							if (Anvils.xpCost$differentRepairCost)
 								xpCost += lvl;
 						}
 						amountRequired *= 1 + increase;
 					}
-					if (Anvils.moreMaterialIfEnchantedFlat > 0f && left.isEnchanted()) {
+					if (Anvils.materialCost$increaseMaterialsRequiredWithEnchantmentsFlat > 0f && left.isEnchanted()) {
 						float increase = 0f;
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
-							increase += Anvils.moreMaterialIfEnchantedFlat.floatValue() * lvl;
+							increase += Anvils.materialCost$increaseMaterialsRequiredWithEnchantmentsFlat.floatValue() * lvl;
 						}
 						amountRequired += increase;
 					}
@@ -177,7 +177,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 					for (repairItemCountCost = 0; repairSteps > 0 && repairItemCountCost < right.getCount(); ++repairItemCountCost) {
 						int dmgAfterRepair = resultStack.getDamageValue() - repairSteps;
 						resultStack.setDamageValue(dmgAfterRepair);
-						if (!Anvils.noXpRepairCost)
+						if (!Anvils.xpCost$noCost)
 							//Vanilla behaviour
 							++mergeCost;
 						repairSteps = (int) Math.min(resultStack.getDamageValue(), resultStack.getMaxDamage() / amountRequired);
@@ -203,8 +203,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 				if (resultStack.isDamageableItem() && !isEnchantedBook && Anvils.allowMergingItems) {
 					int leftDurabilityLeft = left.getMaxDamage() - left.getDamageValue();
 					float rightDurabilityLeft = right.getMaxDamage() - right.getDamageValue();
-                    if (left.isEnchanted() && Anvils.mergeRepairIfEnchanted > 0f) {
-						float multiplier = 1f - Anvils.mergeRepairIfEnchanted.floatValue();
+                    if (left.isEnchanted() && Anvils.mergeRepair$decreaseRepairAmountWithEnchantments > 0f) {
+						float multiplier = 1f - Anvils.mergeRepair$decreaseRepairAmountWithEnchantments.floatValue();
 						for (Integer lvl : EnchantmentHelper.getEnchantments(left).values()) {
 							rightDurabilityLeft *= (float) Math.pow(multiplier, lvl);
 						}
@@ -218,7 +218,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 
 					if (damageValue < resultStack.getDamageValue()) {
 						resultStack.setDamageValue(damageValue);
-						if (!Anvils.mergingCostBasedOffResult)
+						if (!Anvils.xpCost$mergingCostIsBasedOffResult)
 							mergeCost += 2;
 					}
 				}
@@ -241,7 +241,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 					for (Enchantment enchantment : leftEnchantments.keySet()) {
 						if (enchantment != rightEnchantment && (!rightEnchantment.isCompatibleWith(enchantment) && !ModList.get().isLoaded("iguanatweaksexpanded"))) {
 							canEnchant2 = false;
-							if (!Anvils.mergingCostBasedOffResult)
+							if (!Anvils.xpCost$mergingCostIsBasedOffResult)
 								++mergeCost;
 						}
 					}
@@ -261,13 +261,13 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 						if (isEnchantedBook)
 							enchantmentRarityCost = Math.max(1, enchantmentRarityCost / 2);
 
-						if (!Anvils.mergingCostBasedOffResult)
+						if (!Anvils.xpCost$mergingCostIsBasedOffResult)
 							mergeCost += enchantmentRarityCost * rightLvl;
 					}
                 }
 
 				//If "Merging cost is based off result" is enabled, I loop all the enchantments to calculate the cost based off the result
-				if (Anvils.mergingCostBasedOffResult) {
+				if (Anvils.xpCost$mergingCostIsBasedOffResult) {
 					for (Map.Entry<Enchantment, Integer> enchantment : leftEnchantments.entrySet()) {
 						int enchantmentRarityCost = Anvils.getRarityCost(enchantment.getKey());
 
@@ -301,21 +301,21 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 		if (isEnchantedBook && !resultStack.isBookEnchantable(right))
 			resultStack = ItemStack.EMPTY;
 
-		this.cost.set((int) Math.round((baseCost + mergeCost) * Anvils.repairCostMultiplier));
-		if (isRenaming && !Anvils.renamingNoCost)
+		this.cost.set((int) Math.round((baseCost + mergeCost) * Anvils.xpCost$Multiplier));
+		if (isRenaming && !Anvils.renaming$noCost)
 			this.cost.set(this.cost.get() + COST_RENAME);
 
-		if (isRenaming && Anvils.renamingNoCost && mergeCost <= 0)
+		if (isRenaming && Anvils.renaming$noCost && mergeCost <= 0)
 			this.cost.set(0);
 		if (!isRenaming && right.isEmpty())
 			resultStack = ItemStack.EMPTY;
 
 		//Set Too Expensive cap
-		if (this.cost.get() >= Anvils.anvilRepairCap && !this.player.getAbilities().instabuild)
+		if (this.cost.get() >= Anvils.xpCost$repairCap && !this.player.getAbilities().instabuild)
 			resultStack = ItemStack.EMPTY;
 
 		if (!resultStack.isEmpty()) {
-			if (!Anvils.noXpRepairCost) {
+			if (!Anvils.xpCost$noCost) {
 				int toolRepairCost = resultStack.getBaseRepairCost();
 				if (!right.isEmpty() && toolRepairCost < right.getBaseRepairCost())
 					toolRepairCost = right.getBaseRepairCost();

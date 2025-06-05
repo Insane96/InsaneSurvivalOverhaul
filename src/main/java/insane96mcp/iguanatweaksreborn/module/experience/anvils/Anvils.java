@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.experience.anvils;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -41,70 +40,51 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Label(name = "Anvils", description = "Better repair, free rename and merge. With this feature enabled, EMI's repairs and enchanting in anvil recipes are removed.")
-@LoadFeature(module = Modules.Ids.EXPERIENCE)
+@LoadFeature(module = Modules.Ids.EXPERIENCE, description = "Better repair, free rename and merge. With this feature enabled, EMI's repairs and enchanting in anvil recipes are removed.")
 public class Anvils extends Feature {
 
     public static final String CAN_BE_REPAIRED_WITH_LANG = InsaneSO.MOD_ID + ".can_be_repaired_with";
 
-    @Config
-    @Label(name = "Renaming.No cost", description = "Removes the cost for renaming items in Anvil")
-    public static Boolean renamingNoCost = true;
-    @Config
-    @Label(name = "Renaming.No break", description = "If true, anvils don't wear down when only used for renaming")
-    public static Boolean renamingNoBreak = true;
+    @Config(description = "Removes the cost for renaming items in Anvil")
+    public static Boolean renaming$noCost = true;
+    @Config(description = "If true, anvils don't wear down when only used for renaming")
+    public static Boolean renaming$noBreak = true;
 
-    @Config(min = 0)
-    @Label(name = "XP Cost.Repair cap", description = "Set the cap for repairing items in the anvil (vanilla is 40)")
-    public static Integer anvilRepairCap = 1024;
-    @Config(min = 0)
-    @Label(name = "XP Cost.Multiplier", description = "Multiplier for the levels required to repair or merge an item.")
-    public static Double repairCostMultiplier = 1d;
-    @Config
-    @Label(name = "XP Cost.Merging cost is based off result", description = "The cost when merging two items is calculated from the final item, no longer from a strange calculations between the two items merging.")
-    public static Boolean mergingCostBasedOffResult = true;
-    @Config
-    @Label(name = "XP Cost.No cost", description = "Repairing items in an anvil doesn't cost xp")
-    public static Boolean noXpRepairCost = true;
-    @Config
-    @Label(name = "XP Cost.Different repair cost", description = "XP cost when repairing an item in an anvil is based of the levels of the enchantments. This is not affected by 'Repair cost multiplier'")
-    public static Boolean differentXpRepairCost = false;
-    @Config(min = 0)
-    @Label(name = "XP Cost.Enchantments cost by rarity.Common", description = "Vanilla: 1")
-    public static Integer enchantmentCostCommon = 1;
-    @Config(min = 0)
-    @Label(name = "XP Cost.Enchantments cost by rarity.Uncommon", description = "Vanilla: 2")
-    public static Integer enchantmentCostUncommon = 2;
-    @Config(min = 0)
-    @Label(name = "XP Cost.Enchantments cost by rarity.Rare", description = "Vanilla: 4")
-    public static Integer enchantmentCostRare = 3;
-    @Config(min = 0)
-    @Label(name = "XP Cost.Enchantments cost by rarity.Very Rare", description = "Vanilla: 8")
-    public static Integer enchantmentCostVeryRare = 6;
+    @Config(min = 0, description = "Set the cap for repairing items in the anvil (vanilla is 40)")
+    public static Integer xpCost$repairCap = 1024;
+    @Config(min = 0, description = "Multiplier for the levels required to repair or merge an item.")
+    public static Double xpCost$Multiplier = 1d;
+    @Config(description = "The cost when merging two items is calculated from the final item, no longer from a strange calculations between the two items merging.")
+    public static Boolean xpCost$mergingCostIsBasedOffResult = true;
+    @Config(description = "Repairing items in an anvil doesn't cost xp")
+    public static Boolean xpCost$noCost = true;
+    @Config(description = "XP cost when repairing an item in an anvil is based of the levels of the enchantments. This is not affected by 'Repair cost multiplier'")
+    public static Boolean xpCost$differentRepairCost = false;
+    @Config(min = 0, description = "Vanilla: 1")
+    public static Integer xpCost$enchantmentsCostByRarity$common = 1;
+    @Config(min = 0, description = "Vanilla: 2")
+    public static Integer xpCost$enchantmentsCostByRarity$uncommon = 2;
+    @Config(min = 0, description = "Vanilla: 4")
+    public static Integer xpCost$enchantmentsCostByRarity$rare = 3;
+    @Config(min = 0, description = "Vanilla: 8")
+    public static Integer xpCost$enchantmentsCostByRarity$veryRare = 6;
 
-    @Config
-    @Label(name = "Material Cost.Increase materials required with enchantments", description = "Repairing items in an anvil costs more materials if the item is enchanted. This is the percentage increase for each level of enchantment on the item")
-    public static Double moreMaterialIfEnchanted = 0.05d;
-    @Config
-    @Label(name = "Material Cost.Increase materials required with enchantments (Flat)", description = "Repairing items in an anvil costs more materials if the item is enchanted. This is the flat increase for each level of enchantment on the item")
-    public static Double moreMaterialIfEnchantedFlat = 0.5d;
+    @Config(description = "Repairing items in an anvil costs more materials if the item is enchanted. This is the percentage increase for each level of enchantment on the item")
+    public static Double materialCost$increaseMaterialsRequiredWithEnchantments = 0.05d;
+    @Config(description = "Repairing items in an anvil costs more materials if the item is enchanted. This is the flat increase for each level of enchantment on the item")
+    public static Double materialCost$increaseMaterialsRequiredWithEnchantmentsFlat = 0.5d;
 
-    @Config
-    @Label(name = "Merge Repair.Decrease repair amount with enchantments", description = "Merging items in an anvil will reduce the repair amount if the left is enchanted. This is the multiplicative percentage decrease for each level of enchantment on the item. This is applied to the right item durability before the bonus repair.")
-    public static Double mergeRepairIfEnchanted = 0.05d;
+    @Config(description = "Merging items in an anvil will reduce the repair amount if the left is enchanted. This is the multiplicative percentage decrease for each level of enchantment on the item. This is applied to the right item durability before the bonus repair.")
+    public static Double mergeRepair$decreaseRepairAmountWithEnchantments = 0.05d;
 
-    @Config
-    @Label(name = "Allow Merging Items", description = "If true you can merge items in the anvil and get a repair bonus")
+    @Config(description = "If true you can merge items in the anvil and get a repair bonus")
     public static Boolean allowMergingItems = true;
-    @Config(min = 0, max = 100)
-    @Label(name = "Merging Repair bonus", description = "Vanilla is 12%")
+    @Config(min = 0, max = 100, description = "Vanilla is 12%")
     public static Integer mergingRepairBonus = 10;
-    @Config(min = 0)
-    @Label(name = "Degradation chance", description = "Chance for an anvil to become chipped/damaged/break. Vanilla is 12%")
+    @Config(min = 0, description = "Chance for an anvil to become chipped/damaged/break. Vanilla is 12%")
     public static Double degradationChance = 0.01d;
     @Config
-    @Label(name = "Fix with Iron blocks")
-    public static Boolean allowFixingAnvils = true;
+    public static Boolean fixAnvilsWithIronBlocks = true;
 
     public Anvils(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -138,7 +118,7 @@ public class Anvils extends Feature {
     @SubscribeEvent
     public void onRightClickAnvil(PlayerInteractEvent.RightClickBlock event) {
         if (!this.isEnabled()
-                || !allowFixingAnvils
+                || !fixAnvilsWithIronBlocks
                 || !event.getItemStack().is(Items.IRON_BLOCK))
             return;
         BlockState state = event.getLevel().getBlockState(event.getPos());
@@ -170,7 +150,7 @@ public class Anvils extends Feature {
             return;
 
         event.setBreakChance(degradationChance.floatValue());
-        if (renamingNoBreak && ItemStack.isSameItem(event.getLeft(), event.getOutput()) && event.getRight().isEmpty())
+        if (renaming$noBreak && ItemStack.isSameItem(event.getLeft(), event.getOutput()) && event.getRight().isEmpty())
             event.setBreakChance(0);
     }
 
@@ -215,10 +195,10 @@ public class Anvils extends Feature {
 
     public static int getRarityCost(Enchantment enchantment) {
         return switch (enchantment.getRarity()) {
-            case COMMON -> enchantmentCostCommon;
-            case UNCOMMON -> enchantmentCostUncommon;
-            case RARE -> enchantmentCostRare;
-            case VERY_RARE -> enchantmentCostVeryRare;
+            case COMMON -> xpCost$enchantmentsCostByRarity$common;
+            case UNCOMMON -> xpCost$enchantmentsCostByRarity$uncommon;
+            case RARE -> xpCost$enchantmentsCostByRarity$rare;
+            case VERY_RARE -> xpCost$enchantmentsCostByRarity$veryRare;
         };
     }
 }

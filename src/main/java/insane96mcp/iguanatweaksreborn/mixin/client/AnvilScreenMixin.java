@@ -41,7 +41,7 @@ public class AnvilScreenMixin extends ItemCombinerScreen<AnvilMenu> {
 			constant = @Constant(intValue = 40)
 	)
 	private int tooExpensiveCap(int cap) {
-		return Anvils.anvilRepairCap;
+		return Anvils.xpCost$repairCap;
 	}
 
 	//Show no cost text

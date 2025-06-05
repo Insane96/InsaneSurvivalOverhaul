@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinit
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.network.message.SyncExperienceFeature;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -15,7 +14,6 @@ import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.module.base.TagsFeature;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
@@ -36,8 +34,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Dropped Experience", description = "Various changes to experience. You can also use the iguanatweaks:disableExperience game rule to make experience disappear altogether.")
-@LoadFeature(module = Modules.Ids.EXPERIENCE)
+@LoadFeature(module = Modules.Ids.EXPERIENCE, description = "Various changes to experience. You can also use the iguanatweaks:disableExperience game rule to make experience disappear altogether.")
 public class DroppedExperience extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DISABLEEXPERIENCE = GameRules.register("iguanatweaks:disableExperience", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false, (server, booleanValue) -> {
 		DroppedExperience.disableExperience = booleanValue.get();
@@ -48,48 +45,38 @@ public class DroppedExperience extends Feature {
 
 	public static final String XP_PROCESSED = InsaneSO.RESOURCE_PREFIX + "xp_processed";
 	public static final TagKey<Block> NO_BLOCK_XP_MULTIPLIER = ISOBlockTagsProvider.create("no_xp_multiplier");
-	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "no_xp_multiplier"));
+	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("no_xp_multiplier"));
 
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Global Experience Multiplier", description = "ALL Experience dropped will be multiplied by this value, regardless if affected by another multiplier.\nUse the iguanatweaks:disableExperience game rule to disable experience completely.")
+	@Config(min = 0d, max = 128d, description = "ALL Experience dropped will be multiplied by this value, regardless if affected by another multiplier.\nUse the iguanatweaks:disableExperience game rule to disable experience completely.")
 	public static Double globalMultiplier = 1d;
 
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Experience from Blocks Multiplier", description = "Experience dropped by blocks (Ores and Spawners) will be multiplied by this multiplier. Experience dropped by blocks are still affected by 'Global Experience Multiplier'\nCan be set to 0 to make blocks drop no experience")
+	@Config(min = 0d, max = 128d, description = "Experience dropped by blocks (Ores and Spawners) will be multiplied by this multiplier. Experience dropped by blocks are still affected by 'Global Experience Multiplier'\nCan be set to 0 to make blocks drop no experience")
 	public static Double blockMultiplier = 1d;
-	@Config(min = 0, max = 128d)
-	@Label(name = "Mobs.Multiplier: Spawners", description = """
+	@Config(min = 0, max = 128d, name = "Mobs.Multiplier: Spawners", description = """
 						Experience dropped from mobs that come from spawners will be multiplied by this multiplier.
 						Experience dropped by mobs from spawners are still affected by 'Global Experience Multiplier'
 						Can be set to 0 to disable experience drop from mob that come from spawners.""")
-	public static Double mobsMultiplierSpawner = 0.5d;
+	public static Double mobs$multiplierSpawner = 0.5d;
 
-	@Config(min = 0, max = 128d)
-	@Label(name = "Mobs.Multiplier: Natural", description = """
+	@Config(min = 0, max = 128d, name = "Mobs.Multiplier: Natural", description = """
 						Experience dropped from mobs that DON'T come from spawners will be multiplied by this multiplier.
 						Experience dropped from mobs that DON'T come from spawners is still affected by 'Global Experience Multiplier'
 						Can be set to 0 to disable experience drop from mob that DON'T come from spawners.""")
-	public static Double mobsMultiplierNatural = 1d;
+	public static Double mobs$multiplierNatural = 1d;
 
-	@Config(min = 0)
-	@Label(name = "Mobs.Bonus experience per equipment", description = "Vanilla mobs drop 1~4 xp per equipment they have.")
-	public static Integer bonusExperiencePerEquipment = 2;
-	@Config(min = 0)
-	@Label(name = "Mobs.Bonus experience per equipment if enchanted", description = "This is added to 'Bonus experience per equipment'.")
+	@Config(min = 0, description = "Vanilla mobs drop 1~4 xp per equipment they have.")
+	public static Integer mobs$bonusExperiencePerEquipment = 2;
+	@Config(min = 0, description = "This is added to 'Bonus experience per equipment'.")
 	public static Integer bonusExperiencePerEnchantedEquipment = 3;
 
-	@Config(min = 0, max = 512)
-	@Label(name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
+	@Config(min = 0, max = 512, name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
 	public static Integer xpBottleDroppedXp = 40;
 
-	@Config(min = 0)
-	@Label(name = "Honey Harvest Experience", description = "Experience gained from harvesting Honey or Honeycombs from beehives")
+	@Config(min = 0, description = "Experience gained from harvesting Honey or Honeycombs from beehives")
 	public static MinMax honeyHarvestExperience = new MinMax(3, 5);
-	@Config(min = 0)
-	@Label(name = "Milk xp", description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if Fluid Cooldown is enabled.")
+	@Config(min = 0, description = "Experience obtained when cows or mooshrooms are milked or stewed. This only works if Fluid Cooldown is enabled.")
 	public static MinMax milkXp = new MinMax(3, 5);
-	@Config(min = 0)
-	@Label(name = "Shear xp", description = "Experience obtained when shearing sheep.")
+	@Config(min = 0, description = "Experience obtained when shearing sheep.")
 	public static MinMax shearXp = new MinMax(2, 3);
 
 	public static Boolean disableExperience = false;
@@ -134,15 +121,15 @@ public class DroppedExperience extends Feature {
 	}
 
 	public static void handleMobsMultiplier(EntityJoinLevelEvent event) {
-		if ((mobsMultiplierSpawner == 1d && mobsMultiplierNatural == 1d)
+		if ((mobs$multiplierSpawner == 1d && mobs$multiplierNatural == 1d)
 				|| !(event.getEntity() instanceof Mob mob)
 				|| mob.getType().is(NO_ENTITY_XP_MULTIPLIER))
 			return;
 
 		if (TagsFeature.isSpawnType(MobSpawnType.SPAWNER, mob))
-			TagsFeature.setExperienceMultiplier(mobsMultiplierSpawner, mob);
+			TagsFeature.setExperienceMultiplier(mobs$multiplierSpawner, mob);
 		else
-			TagsFeature.setExperienceMultiplier(mobsMultiplierNatural, mob);
+			TagsFeature.setExperienceMultiplier(mobs$multiplierNatural, mob);
 	}
 
 	//Run before smartness
@@ -187,14 +174,14 @@ public class DroppedExperience extends Feature {
 
 		for (ItemStack stack : mob.getArmorSlots()) {
 			if (!stack.isEmpty()) {
-				mob.xpReward += bonusExperiencePerEquipment;
+				mob.xpReward += mobs$bonusExperiencePerEquipment;
 				if (stack.isEnchanted())
 					mob.xpReward += bonusExperiencePerEnchantedEquipment;
 			}
 		}
 		for (ItemStack stack : mob.getHandSlots()) {
 			if (!stack.isEmpty()) {
-				mob.xpReward += bonusExperiencePerEquipment;
+				mob.xpReward += mobs$bonusExperiencePerEquipment;
 				if (stack.isEnchanted())
 					mob.xpReward += bonusExperiencePerEnchantedEquipment;
 			}

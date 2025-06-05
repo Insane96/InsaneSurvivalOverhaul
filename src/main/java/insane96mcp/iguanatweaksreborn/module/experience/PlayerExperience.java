@@ -5,7 +5,6 @@ import com.ezylang.evalex.data.EvaluationValue;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -14,24 +13,20 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Players Experience", description = "Changes the experience lost on death and xp per level required.")
-@LoadFeature(module = Modules.Ids.EXPERIENCE)
+@LoadFeature(module = Modules.Ids.EXPERIENCE, description = "Changes the experience lost on death and xp per level required.")
 public class PlayerExperience extends Feature {
 
-	@Config
-	@Label(name = "Level up formula", description = """
+	@Config(description = """
 						The experience required to level up is calculated by this formula. The variable available is 'current_level'
 						Set to empty to disable.
 						This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.
 						Incompatible with Allurement's 'Remove level Scaling' or any other mod that does something similar""")
 	public static String levelUpFormula = "40";
-	@Config(min = -1d, max = 1d)
-	@Label(name = "Dropped Experience on Death", description = """
+	@Config(min = -1d, max = 1d, description = """
 						On death, players will drop this percentage of experience instead of max 7 levels. Setting to -1 will disable this.
 						Due to Minecraft limitations this is incompatible with other mods that change the level scaling (e.g. Allurement's 'Remove level Scaling').""")
 	public static Double droppedExperienceOnDeath = 0.8d;
-	@Config(min = -1d, max = 1d)
-	@Label(name = "Pickup XP Faster", description = "Players will pick up experience faster")
+	@Config(min = -1d, max = 1d, description = "Players will pick up experience faster")
 	public static Boolean pickUpFaster = true;
 
 	public PlayerExperience(Module module, boolean enabledByDefault, boolean canBeDisabled) {
