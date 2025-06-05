@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.movement.minecarts;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
@@ -26,6 +26,6 @@ public class Minecarts extends Feature {
 
 	public Minecarts(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("better_rails", "Insane's Survival Overhaul Better Rails", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("better_rails", "Insane's Survival Overhaul Better Rails", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 }

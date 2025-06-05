@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
@@ -69,9 +69,9 @@ public class Tiredness extends JsonFeature {
 			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.04F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISORegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
-	public static final String NOT_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".not_tired";
-	public static final String TIRED_ENOUGH = InsaneSurvivalOverhaul.MOD_ID + ".tired_enough";
-	public static final String TOO_TIRED = InsaneSurvivalOverhaul.MOD_ID + ".too_tired";
+	public static final String NOT_TIRED = InsaneSO.MOD_ID + ".not_tired";
+	public static final String TIRED_ENOUGH = InsaneSO.MOD_ID + ".tired_enough";
+	public static final String TOO_TIRED = InsaneSO.MOD_ID + ".too_tired";
 	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISOItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
@@ -134,7 +134,7 @@ public class Tiredness extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	public enum OnDeath {

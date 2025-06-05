@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.farming.livestock;
 
 import com.google.gson.annotations.SerializedName;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
@@ -19,7 +19,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -57,15 +56,15 @@ import java.util.UUID;
 @Label(name = "Livestock", description = "Slower breeding, Growing, Egging and Milking. Lower yield.")
 @LoadFeature(module = Modules.Ids.FARMING)
 public class Livestock extends Feature {
-	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "milkable"));
-	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "prevent_breeding"));
+	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("milkable"));
+	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("prevent_breeding"));
 
-	public static final String MILK_COOLDOWN_LANG = InsaneSurvivalOverhaul.MOD_ID + ".milk_cooldown";
-	public static final String MILK_COOLDOWN = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "milk_cooldown";
+	public static final String MILK_COOLDOWN_LANG = InsaneSO.MOD_ID + ".milk_cooldown";
+	public static final String MILK_COOLDOWN = InsaneSO.RESOURCE_PREFIX + "milk_cooldown";
 
-	public static final String LAST_FED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "last_fed";
+	public static final String LAST_FED = InsaneSO.RESOURCE_PREFIX + "last_fed";
 
-	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "old_age"));
+	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("old_age"));
 
 	@Config
 	@Label(name = "Chicken from egg chance", description = "Changes the chance for a chicken to come out from an egg (1 in this value). Vanilla is 8")
@@ -105,7 +104,7 @@ public class Livestock extends Feature {
 
 	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 
 	@SubscribeEvent
@@ -188,14 +187,14 @@ public class Livestock extends Feature {
 			return;
 
 		boolean forceUpdateScale = false;
-		int age = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age");
-		int maxAge = ageableMob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age");
+		int age = ageableMob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "age");
+		int maxAge = ageableMob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "max_age");
 		//If a max age hasn't been set yet, calculate it
 		if (maxAge == 0) {
 			for (LivestockData data : LivestockDataReloadListener.LIVESTOCK_DATA) {
                 if (data.matches(ageableMob) && data.livingDays != null) {
 					maxAge = (int) (data.getLivingDays(ageableMob) * 20 * 60);
-					ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age", maxAge);
+					ageableMob.getPersistentData().putInt(InsaneSO.RESOURCE_PREFIX + "max_age", maxAge);
                     break;
                 }
 			}
@@ -220,11 +219,11 @@ public class Livestock extends Feature {
         //noinspection DataFlowIssue - isClientSide is checked in caller method
         if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
 			PehkuiIntegration.setSize(ageableMob, newAge);
-		ageableMob.getPersistentData().putInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age", age);
+		ageableMob.getPersistentData().putInt(InsaneSO.RESOURCE_PREFIX + "age", age);
     }
 
 	public static float getAgeRatio(AgeableMob mob) {
-		return (float) mob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "age") / (float) mob.getPersistentData().getInt(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "max_age");
+		return (float) mob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "age") / (float) mob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "max_age");
 	}
 
 	public static Age getAge(AgeableMob mob) {

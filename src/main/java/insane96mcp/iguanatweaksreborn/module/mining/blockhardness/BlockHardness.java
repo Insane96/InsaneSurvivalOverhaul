@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mining.blockhardness;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.GlobalHardnessSync;
@@ -44,15 +44,15 @@ public class BlockHardness extends JsonFeature {
 
 	public BlockHardness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "dimension_hardness"), new SyncType(json -> loadAndReadJson(json, dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("dimension_hardness.json", dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "dimension_hardness")));
-		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "depth_multipliers"), new SyncType(json -> loadAndReadJson(json, depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("depth_multipliers.json", depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "depth_multipliers")));
+		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "dimension_hardness"), new SyncType(json -> loadAndReadJson(json, dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("dimension_hardness.json", dimensionHardnessMultiplier, DIMENSION_HARDNESS_MULTIPLIERS_DEFAULT, DimensionHardnessMultiplier.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "dimension_hardness")));
+		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "depth_multipliers"), new SyncType(json -> loadAndReadJson(json, depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("depth_multipliers.json", depthMultiplierDimension, DEPTH_MULTIPLIER_DIMENSION_DEFAULT, DepthHardnessDimension.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "depth_multipliers")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	private static final Object mutex = new Object();

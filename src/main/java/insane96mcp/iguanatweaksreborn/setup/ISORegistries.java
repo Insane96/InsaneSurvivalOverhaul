@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.setup;
 
 import com.mojang.serialization.Codec;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.condition.*;
 import insane96mcp.iguanatweaksreborn.data.function.EnchantWithTreasureFunction;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.DisenchantModifier;
@@ -59,8 +59,8 @@ public class ISORegistries {
 	public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(ForgeRegistries.POI_TYPES);
 
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(ForgeRegistries.SOUND_EVENTS);
-	public static final RegistryObject<SoundEvent> UNFAIR_ONE_SHOT = SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "unfair_one_shot"), 16f));
-	public static final RegistryObject<SoundEvent> ABSORPTION_HIT = SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "absorption_hit"), 16f));
+	public static final RegistryObject<SoundEvent> UNFAIR_ONE_SHOT = SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(InsaneSO.MOD_ID, "unfair_one_shot"), 16f));
+	public static final RegistryObject<SoundEvent> ABSORPTION_HIT = SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(InsaneSO.MOD_ID, "absorption_hit"), 16f));
 
 	public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = createRegistry(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> LOOT_PURGER_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("loot_purger", LootPurgerModifier.CODEC);
@@ -85,19 +85,19 @@ public class ISORegistries {
 	public static final RegistryObject<RuleTestType<RandomBlockTagMatchTest>> RANDOM_BLOCK_TAG_MATCH = RULE_TEST_TYPES.register("random_block_tag_match", RandomBlockTagMatchTest.Type::new);
 
 	static <R> DeferredRegister<R> createRegistry(ResourceKey<? extends Registry<R>> key) {
-		DeferredRegister<R> register = DeferredRegister.create(key, InsaneSurvivalOverhaul.MOD_ID);
+		DeferredRegister<R> register = DeferredRegister.create(key, InsaneSO.MOD_ID);
 		REGISTRIES.add(register);
 		return register;
 	}
 
 	static <R> DeferredRegister<R> createRegistry(IForgeRegistry<R> reg) {
-		DeferredRegister<R> register = DeferredRegister.create(reg, InsaneSurvivalOverhaul.MOD_ID);
+		DeferredRegister<R> register = DeferredRegister.create(reg, InsaneSO.MOD_ID);
 		REGISTRIES.add(register);
 		return register;
 	}
 
 	static <R> DeferredRegister<R> createRegistry(ResourceLocation registryName) {
-		DeferredRegister<R> register = DeferredRegister.create(registryName, InsaneSurvivalOverhaul.MOD_ID);
+		DeferredRegister<R> register = DeferredRegister.create(registryName, InsaneSO.MOD_ID);
 		REGISTRIES.add(register);
 		return register;
 	}

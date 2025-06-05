@@ -25,9 +25,6 @@ import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadLis
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.SeasonSpawning;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.VillagerTradesReloadListener;
-import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
@@ -36,9 +33,9 @@ import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDa
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.setup.ISOCommonConfig;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.setup.IntegratedPack;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
 import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
+import insane96mcp.insanelib.util.IntegratedPack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -62,7 +59,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +67,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BooleanSupplier;
 
 @Mod("iguanatweaksreborn")
-public class InsaneSurvivalOverhaul
+public class InsaneSO
 {
     public static final String MOD_ID = "iguanatweaksreborn";
     public static final String NEW_MOD_ID = "insanesurvivaloverhaul";
@@ -81,9 +77,7 @@ public class InsaneSurvivalOverhaul
     //TODO ISO
     public static final String CONFIG_FOLDER = "config/" + NEW_MOD_ID;
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/icons.png");
-
-    public InsaneSurvivalOverhaul(FMLJavaModLoadingContext context) {
+    public InsaneSO(FMLJavaModLoadingContext context) {
         //TODO ISO
         context.registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
         context.registerConfig(ModConfig.Type.COMMON, ISOCommonConfig.CONFIG_SPEC,NEW_MOD_ID + "/common.toml");
@@ -144,49 +138,10 @@ public class InsaneSurvivalOverhaul
 
     @SubscribeEvent
     public void remapFromITE(MissingMappingsEvent event) {
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
-                .forEach(mapping -> mapping.remap(Respawn.RESPAWN_OBELISK.item().get()));
-        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:respawn_obelisk"))
-                .forEach(mapping -> mapping.remap(Respawn.RESPAWN_OBELISK.block().get()));
-
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
-                .forEach(mapping -> mapping.remap(Minecarts.GOLDEN_POWERED_RAIL.item().get()));
-        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:golden_powered_rail"))
-                .forEach(mapping -> mapping.remap(Minecarts.GOLDEN_POWERED_RAIL.block().get()));
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
-                .forEach(mapping -> mapping.remap(Minecarts.COPPER_POWERED_RAIL.item().get()));
-        event.getMappings(ForgeRegistries.Keys.BLOCKS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:copper_powered_rail"))
-                .forEach(mapping -> mapping.remap(Minecarts.COPPER_POWERED_RAIL.block().get()));
-
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:cloth"))
-                .forEach(mapping -> mapping.remap(Cloth.ITEM.get()));
-
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_axe"))
-                .forEach(mapping -> mapping.remap(FlintExpansion.AXE.get()));
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_pickaxe"))
-                .forEach(mapping -> mapping.remap(FlintExpansion.PICKAXE.get()));
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_shovel"))
-                .forEach(mapping -> mapping.remap(FlintExpansion.SHOVEL.get()));
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_sword"))
-                .forEach(mapping -> mapping.remap(FlintExpansion.SWORD.get()));
-        event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_hoe"))
-                .forEach(mapping -> mapping.remap(FlintExpansion.HOE.get()));
-        if (ModList.get().isLoaded("shieldsplus"))
-            event.getMappings(ForgeRegistries.Keys.ITEMS, MOD_ID).stream()
-                    .filter(mapping -> mapping.getKey().getNamespace().contains("iguanatweaksexpanded:flint_shield"))
-                    .forEach(mapping -> mapping.remap(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()));
+        /*InsaneLib.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> switch (name) {
+            case "cyan_flower" -> CyanFlower.FLOWER.block().get();
+            default -> null;
+        });*/
     }
 
     @SubscribeEvent
@@ -199,8 +154,8 @@ public class InsaneSurvivalOverhaul
         Modifiers.init();
 
         event.enqueueWork(() -> {
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "cyan_flower"), CyanFlower.POTTED_FLOWER);
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
         });
     }
 
@@ -214,14 +169,14 @@ public class InsaneSurvivalOverhaul
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         /*generator.addProvider(event.includeServer(), new SRRecipeProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new SRGlobalLootModifierProvider(generator.getPackOutput(), IguanaTweaksReborn.MOD_ID));*/
-        ISOBlockTagsProvider blockTags = new ISOBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper);
+        ISOBlockTagsProvider blockTags = new ISOBlockTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSO.MOD_ID, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ISOItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ISODamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ISOEntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ISOBlockStatesProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ISOBlockModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ISOItemModelsProvider(generator.getPackOutput(), InsaneSurvivalOverhaul.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISOItemTagsProvider(generator.getPackOutput(), lookupProvider, blockTags.contentsGetter(), InsaneSO.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISODamageTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSO.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ISOEntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, InsaneSO.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOBlockStatesProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOBlockModelsProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ISOItemModelsProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
     }
 
     public void addPackFinders(AddPackFindersEvent event)
@@ -243,5 +198,9 @@ public class InsaneSurvivalOverhaul
 
     public static void addClientPack(int priority, String path, String description, BooleanSupplier enabled) {
         IntegratedPack.addClientPack(priority, MOD_ID, path, description, enabled);
+    }
+
+    public static ResourceLocation location(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

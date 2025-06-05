@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.misc.beaconconduit;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -128,14 +128,14 @@ public class BeaconConduit extends JsonFeature {
 
         JSON_CONFIGS.add(new JsonConfig<>("beacon_blocks_ranges.json", blocksList, BLOCKS_LIST_DEFAULT, IdTagValue.LIST_TYPE));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));
-        addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
-        JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "beacon_effects")));
-        InsaneSurvivalOverhaul.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
+        addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
+        JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, new ResourceLocation(InsaneSO.MOD_ID, "beacon_effects")));
+        InsaneSO.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
     }
 
     @Override
     public String getModConfigFolder() {
-        return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+        return InsaneSO.CONFIG_FOLDER;
     }
 
     public static int getPaymentTime(ItemStack stack) {

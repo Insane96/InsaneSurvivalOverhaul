@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -23,7 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Name tags", description = "Retrieve name tags from name tagged entities.")
 @LoadFeature(module = Modules.Ids.ITEMS)
 public class NameTags extends Feature {
-    public static final TagKey<EntityType<?>> SHOULDNT_DROP_NAMETAG = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "shouldnt_drop_nametag"));
+    public static final TagKey<EntityType<?>> SHOULDNT_DROP_NAMETAG = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "shouldnt_drop_nametag"));
 
     public NameTags(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -39,12 +39,12 @@ public class NameTags extends Feature {
                 || target.isDeadOrDying())
             return;
 
-        if (target.getPersistentData().contains(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "has_name_tag"))
+        if (target.getPersistentData().contains(InsaneSO.RESOURCE_PREFIX + "has_name_tag"))
             dropNameTag(target.level(), target);
         if (event.getItemStack().hasCustomHoverName())
-            target.getPersistentData().putBoolean(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "has_name_tag", true);
+            target.getPersistentData().putBoolean(InsaneSO.RESOURCE_PREFIX + "has_name_tag", true);
         else {
-            target.getPersistentData().remove(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "has_name_tag");
+            target.getPersistentData().remove(InsaneSO.RESOURCE_PREFIX + "has_name_tag");
             target.setCustomName(null);
         }
 
@@ -55,7 +55,7 @@ public class NameTags extends Feature {
         if (!this.isEnabled()
                 || event.getEntity().level().isClientSide
                 || event.getEntity().getType().is(SHOULDNT_DROP_NAMETAG)
-                || !event.getEntity().getPersistentData().contains(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "has_name_tag"))
+                || !event.getEntity().getPersistentData().contains(InsaneSO.RESOURCE_PREFIX + "has_name_tag"))
             return;
 
         dropNameTag(event.getEntity().level(), event.getEntity());

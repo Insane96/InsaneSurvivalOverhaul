@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mobs;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.integration.EnhancedAIIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -17,7 +17,7 @@ public class StatsBuffs extends Feature {
 
     public StatsBuffs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSurvivalOverhaul.addServerPack("mobs_buffs", "Insane's Survival Overhaul Mobs Stats Buffs", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
+        InsaneSO.addServerPack("mobs_buffs", "Insane's Survival Overhaul Mobs Stats Buffs", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
     }
 
     @Override

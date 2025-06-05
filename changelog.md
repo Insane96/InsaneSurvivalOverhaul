@@ -1,5 +1,13 @@
 # Changelog
 
+## Upcoming
+**Backup your config file, some config option names have changed**
+
+### Removed
+* Swing Through Grass
+  * The feature was disabled by default, now it's completely removed  
+    Use Fuzz's Swing Through Grass mod instead
+
 ## Alpha 4.12.9
 ### Changes
 * Seasons plant growth and decay now work with the vanilla random tick methods

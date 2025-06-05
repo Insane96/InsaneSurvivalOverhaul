@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.combat.bows;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -15,29 +14,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Bows", description = "Bows, crossbows and short bows")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Bows, crossbows and short bows")
 public class Bows extends Feature {
-	@Config
-	@Label(name = "Disable Critical Arrows bonus damage", description = "If true, Arrows from Bows and Crossbows will no longer deal more damage when fully charged.")
+	@Config(description = "If true, Arrows from Bows and Crossbows will no longer deal more damage when fully charged.")
 	public static Boolean disableCritArrowsBonusDamage = true;
-	@Config
-	@Label(name = "Float point damage", description = "If true, arrows will deal float damage instead of being rounded up.")
+	@Config(description = "If true, arrows will deal float damage instead of being rounded up.")
 	public static Boolean floatPointDamage = true;
-	@Config(min = 0d, max = 10d)
-	@Label(name = "Damage Multiplier", description = "Multiplies arrow's damage by this value. (this doesn't affect mobs arrows)")
+	@Config(min = 0d, max = 10d, description = "Multiplies arrow's damage by this value. (this doesn't affect mobs arrows)")
 	public static Double damageMultiplier = 0.65d;
-	@Config(min = 0d, max = 10d)
-	@Label(name = "Bow Inaccuracy", description = "Changes bows accuracy. Vanilla is 1.0")
+	@Config(min = 0d, max = 10d, description = "Changes bows accuracy. Vanilla is 1.0")
 	public static Double bowInaccuracy = 1.0d;
-	@Config(min = 0d, max = 10d)
-	@Label(name = "Crossbow velocity", description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
+	@Config(min = 0d, max = 10d, description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
 	public static Double crossbowVelocity = 2.25d;
-	@Config
-	@Label(name = "Piercing Crossbow", description = "If true, crossbows will have an innate Piercing ability")
+	@Config(description = "If true, crossbows will have an innate Piercing ability")
 	public static Boolean piercingCrossbow = true;
-	@Config(min = 0d, max = 10d)
-	@Label(name = "Crossbow Inaccuracy", description = "Changes crossbows accuracy. Vanilla is 1.0")
+	@Config(min = 0d, max = 10d, description = "Changes crossbows accuracy. Vanilla is 1.0")
 	public static Double crossbowInaccuracy = 0.2d;
 
 	public static final RegistryObject<Item> SHORTBOW = ISORegistries.ITEMS.register("shortbow", () -> new ShortbowItem(new Item.Properties().durability(127)));

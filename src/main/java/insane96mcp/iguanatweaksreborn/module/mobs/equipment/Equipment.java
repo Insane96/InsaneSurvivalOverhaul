@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mobs.equipment;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.Label;
@@ -58,7 +58,7 @@ public class Equipment extends JsonFeature {
 
     @Override
     public String getModConfigFolder() {
-        return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+        return InsaneSO.CONFIG_FOLDER;
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

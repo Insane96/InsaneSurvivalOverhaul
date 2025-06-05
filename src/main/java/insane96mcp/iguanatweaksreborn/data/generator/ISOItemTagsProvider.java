@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Knockback;
@@ -113,7 +113,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
-                .addOptionalTag(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "equipment/netherite"));
+                .addOptionalTag(new ResourceLocation(InsaneSO.MOD_ID, "equipment/netherite"));
 
         tag(CoalFire.ITEM_ORES)
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
@@ -140,6 +140,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     }
 
     public static TagKey<Item> create(String tagName) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, tagName));
+        return TagKey.create(Registries.ITEM, new ResourceLocation(InsaneSO.MOD_ID, tagName));
     }
 }

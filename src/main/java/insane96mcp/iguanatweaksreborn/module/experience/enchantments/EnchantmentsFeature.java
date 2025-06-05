@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.experience.enchantments;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.allurement.core.AllurementConfig;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.event.StackMaxDamageEvent;
@@ -157,13 +157,13 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public EnchantmentsFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "disabled_enchantments")));
+		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "disabled_enchantments"), new SyncType(json -> loadAndReadJson(json, disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("disabled_enchantments.json", disabledEnchantments, DISABLED_ENCHANTMENTS_DEFAULT, IdTagMatcher.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "disabled_enchantments")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	@Override

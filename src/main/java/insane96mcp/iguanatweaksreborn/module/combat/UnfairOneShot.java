@@ -8,7 +8,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -40,17 +39,14 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Unfair one-shot", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, name = "Unfair one-shot", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 public class UnfairOneShot extends Feature {
 	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ISORegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
 
-	@Config
-	@Label(name = "Effects", description = "A list of effects to give when Unfair One Shot triggers, separated by semi-colons")
+	@Config(description = "A list of effects to give when Unfair One Shot triggers, separated by semi-colons")
 	public static String effectsConfig = "minecraft:resistance,50,4;minecraft:resistance,100,3;minecraft:resistance,150,1";
 	private static final List<MobEffectInstance> effects = new ArrayList<>();
-	@Config
-	@Label(name = "Animation", description = "If true, an animation is played on activation")
+	@Config(description = "If true, an animation is played on activation")
 	public static Boolean animation = true;
 
 	public UnfairOneShot(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -66,7 +62,7 @@ public class UnfairOneShot extends Feature {
 		for (String effect : effectsArray) {
 			if (!effect.isEmpty()) {
 				String[] effectArray = effect.split(",");
-				MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(effectArray[0]));
+				MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse(effectArray[0]));
 				if (mobEffect == null)
 					continue;
 				int duration = Integer.parseInt(effectArray[1]);
@@ -115,19 +111,15 @@ public class UnfairOneShot extends Feature {
 			float f3 = 10.25F * f2 * f1 - 24.95F * f1 * f1 + 25.5F * f2 - 13.8F * f1 + 4.0F * f;
 			float f4 = f3 * (float)Math.PI;
 			float f5 = 0;/*activationOffX * (float)(screenWidth / 4)*/;
-			float f6 = screenHeight /*activationOffY * (float)(screenHeight / 4)*/;
 			RenderSystem.enableDepthTest();
 			RenderSystem.disableCull();
 			PoseStack posestack = new PoseStack();
 			posestack.pushPose();
-			posestack.translate((float)(screenWidth / 2) + f5 * Mth.abs(Mth.sin(f4 * 2f)), /*(float)(screenHeight / 2) + f6 * Mth.abs(Mth.sin(f4 * 2.0F))*/(f6 * f), -50.0F);
+			posestack.translate((float)(screenWidth / 2) + f5 * Mth.abs(Mth.sin(f4 * 2f)), /*(float)(screenHeight / 2) + f6 * Mth.abs(Mth.sin(f4 * 2.0F))*/(screenHeight * f), -50.0F);
 			float f7 = 120.0F * Mth.sin(f4);
 			posestack.scale(f7, -f7, f7);
 			posestack.mulPose(Axis.YP.rotationDegrees(180.0F * Mth.abs(Mth.sin(f4))));
-			//posestack.mulPose(Axis.XP.rotationDegrees(3.0F * Mth.cos(f * 4.0F)));
-			//posestack.mulPose(Axis.ZP.rotationDegrees(3.0F * Mth.cos(f * 4.0F)));
-			//guiGraphics.blit(new ResourceLocation("textures/gui/icons.png"), 0, 0, 0, 0, screenWidth, screenHeight);
-			MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+            MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
 			Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(HALF_HEART_TEXTURE.get()), ItemDisplayContext.FIXED, 15728880, OverlayTexture.NO_OVERLAY, posestack, multibuffersource$buffersource, Minecraft.getInstance().level, 0);
 			posestack.popPose();
 			multibuffersource$buffersource.endBatch();

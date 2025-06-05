@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mining;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 @LoadFeature(module = Modules.Ids.MINING)
 public class Gold extends Feature {
 
-	public static final String LUCKY_GOLD_TOOLTIP = InsaneSurvivalOverhaul.MOD_ID + ".innate_luck";
+	public static final String LUCKY_GOLD_TOOLTIP = InsaneSO.MOD_ID + ".innate_luck";
 
 	@Config(min = 0, max = 255)
 	@Label(name = "Looting Level", description = "Set the innate looting level of gold tools.")

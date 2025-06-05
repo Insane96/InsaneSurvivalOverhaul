@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -33,7 +33,7 @@ import java.util.UUID;
 public class HealthRegenHunger extends Feature {
 	public static final UUID SPRINT_PENALTY_UUID = UUID.fromString("a6d61c15-b60f-4503-b206-247c4690c436");
 
-	public static final String PASSIVE_REGEN_TICK = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "passive_regen_ticks";
+	public static final String PASSIVE_REGEN_TICK = InsaneSO.RESOURCE_PREFIX + "passive_regen_ticks";
 	private static final int PASSIVE_REGEN_TICK_RATE = 10;
 	private static final int FOOD_REGEN_TICK_RATE = 10;
 

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -30,6 +30,6 @@ public class Cloth extends Feature {
 
 	public Cloth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 }

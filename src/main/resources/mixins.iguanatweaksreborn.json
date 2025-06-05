@@ -119,7 +119,6 @@
         "client.LevelRendererMixin",
         "client.LightTextureMixin",
         "client.LocalPlayerMixin",
-        "client.MinecraftMixin",
         "client.OptionsMixin",
         "integration.appleskin.HUDOverlayHandlerMixin"
     ]

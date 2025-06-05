@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.items;
 
 import dev.gigaherz.toolbelt.ToolBelt;
 import dev.gigaherz.toolbelt.belt.ToolBeltItem;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -30,7 +30,7 @@ public class ToolBeltIntegrationFeature extends Feature {
 
 	public ToolBeltIntegrationFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt);
+		InsaneSO.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt);
 	}
 
 	@Override

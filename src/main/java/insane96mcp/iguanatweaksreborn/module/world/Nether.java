@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -27,7 +27,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 @Label(name = "Nether")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Nether extends Feature {
-    public static final String REQUIRES_CORNERS_LANG = InsaneSurvivalOverhaul.MOD_ID + ".requires_corners";
+    public static final String REQUIRES_CORNERS_LANG = InsaneSO.MOD_ID + ".requires_corners";
     public static final TagKey<Block> PORTAL_CORNERS = ISOBlockTagsProvider.create("portal_corners");
 
     @Config
@@ -48,7 +48,7 @@ public class Nether extends Feature {
 
     public Nether(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSurvivalOverhaul.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks);
+        InsaneSO.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks);
     }
 
     public static boolean shouldDisableLavaPockets(SpringConfiguration configuration) {

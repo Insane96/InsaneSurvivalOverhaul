@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 
 import com.google.common.collect.ImmutableList;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
@@ -42,8 +42,8 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class RespawnObeliskBlock extends Block {
-    public static final String REQUIRES_CATALYST_LANG = InsaneSurvivalOverhaul.MOD_ID + ".requires_catalyst";
-    public static final String OBELISK_DISABLED = InsaneSurvivalOverhaul.MOD_ID + ".obelisk_disabled";
+    public static final String REQUIRES_CATALYST_LANG = InsaneSO.MOD_ID + ".requires_catalyst";
+    public static final String OBELISK_DISABLED = InsaneSO.MOD_ID + ".obelisk_disabled";
 
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 

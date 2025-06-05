@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.network.message.BlockDefinitionSync;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = InsaneSurvivalOverhaul.MOD_ID)
+@Mod.EventBusSubscriber(modid = InsaneSO.MOD_ID)
 public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListener {
 	public static final List<BlockDefinition> DEFINITIONS = new ArrayList<>();
 	public static final List<BlockDefinition> ORIGINAL_DEFINITIONS = new ArrayList<>();

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -50,10 +50,10 @@ import java.util.Optional;
 import java.util.Set;
 
 public class ISOExplosion extends Explosion {
-	public static final String KNOCKBACK_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_knockback_multiplier";
-	public static final String BASE_RESISTANCE_ADD_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_base_resistance_add";
-	public static final String RAY_STRENGTH_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_ray_strength_multiplier";
-	public static final String DAMAGE_MULTIPLIER_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "explosion_damage_multiplier";
+	public static final String KNOCKBACK_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_knockback_multiplier";
+	public static final String BASE_RESISTANCE_ADD_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_base_resistance_add";
+	public static final String RAY_STRENGTH_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_ray_strength_multiplier";
+	public static final String DAMAGE_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_damage_multiplier";
 	ObjectArrayList<Pair<ItemStack, BlockPos>> droppedItems = new ObjectArrayList<>();
 	boolean creeperCollateral;
 	public final boolean poofParticles;

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mining;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
@@ -35,8 +35,8 @@ public class MaterialsAndOres extends Feature {
 
 	public MaterialsAndOres(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("farmable_iron", "Insane's Survival Overhaul Farmable Iron", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmableIronDataPack);
-		InsaneSurvivalOverhaul.addServerPack("ore_smelting", "Insane's Survival Overhaul Ore Smelting", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreSmelting);
-		InsaneSurvivalOverhaul.addServerPack("ore_generation", "Insane's Survival Overhaul Ore Generation Overhaul", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreGenerationOverhaul);
+		InsaneSO.addServerPack("farmable_iron", "Insane's Survival Overhaul Farmable Iron", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmableIronDataPack);
+		InsaneSO.addServerPack("ore_smelting", "Insane's Survival Overhaul Ore Smelting", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreSmelting);
+		InsaneSO.addServerPack("ore_generation", "Insane's Survival Overhaul Ore Generation Overhaul", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreGenerationOverhaul);
 	}
 }

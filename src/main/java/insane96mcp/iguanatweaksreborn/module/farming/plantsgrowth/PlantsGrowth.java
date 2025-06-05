@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
@@ -35,7 +35,7 @@ public class PlantsGrowth extends Feature {
 
 	public PlantsGrowth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && plantGrowthMultipliersDataPack);
+		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && plantGrowthMultipliersDataPack);
 	}
 
 	@SubscribeEvent

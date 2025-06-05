@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.experience;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
@@ -46,9 +46,9 @@ public class DroppedExperience extends Feature {
 		}
 	}));
 
-	public static final String XP_PROCESSED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "xp_processed";
+	public static final String XP_PROCESSED = InsaneSO.RESOURCE_PREFIX + "xp_processed";
 	public static final TagKey<Block> NO_BLOCK_XP_MULTIPLIER = ISOBlockTagsProvider.create("no_xp_multiplier");
-	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "no_xp_multiplier"));
+	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "no_xp_multiplier"));
 
 	@Config(min = 0d, max = 128d)
 	@Label(name = "Global Experience Multiplier", description = "ALL Experience dropped will be multiplied by this value, regardless if affected by another multiplier.\nUse the iguanatweaks:disableExperience game rule to disable experience completely.")

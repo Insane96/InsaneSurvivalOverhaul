@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
@@ -61,7 +61,7 @@ public class SleepingEffects extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	@SubscribeEvent

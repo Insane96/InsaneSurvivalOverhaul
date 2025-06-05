@@ -1,9 +1,8 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -19,13 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Label(name = "Player Stats", description = "Apply attribute modifiers to players. Attributes can be added in the json config of this feature's folder. Changing attribute modifiers requires player rejoin")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Apply attribute modifiers to players. Attributes can be added in the json config of this feature's folder. Changing attribute modifiers requires player rejoin")
 public class PlayerStats extends JsonFeature {
 	public static final UUID MOVEMENT_SPEED_REDUCTION_UUID = UUID.fromString("a88ac0d1-e2b3-4cf1-bb0e-9577486c874a");
 	public static final UUID BLOCK_REACH_REDUCTION_UUID = UUID.fromString("bae34f6a-c58e-4622-b2ab-f1b89b73b781");
-	@Config
-	@Label(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%. This also mixins into Tinkers Construct to apply the same effect.")
+	@Config(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%. This also mixins into Tinkers Construct to apply the same effect.")
 	public static Boolean noDamageWhenSpamming = true;
 
 	public static final ArrayList<SerializableAttributeModifier> ATTRIBUTE_MODIFIERS_DEFAULT = new ArrayList<>(List.of(
@@ -41,7 +38,7 @@ public class PlayerStats extends JsonFeature {
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	public static boolean noDamageWhenSpamming() {

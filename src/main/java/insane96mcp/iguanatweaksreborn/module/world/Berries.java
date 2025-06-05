@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -51,8 +51,8 @@ public class Berries extends Feature {
 
     public Berries(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSurvivalOverhaul.addServerPack("berries", "Insane's Survival Overhaul Berries", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good"));
-        InsaneSurvivalOverhaul.addServerPack("berries_berry_good", "Insane's Survival Overhaul Berries (Berry Good compat)", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good"));
+        InsaneSO.addServerPack("berries", "Insane's Survival Overhaul Berries", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && !ModList.get().isLoaded("berry_good"));
+        InsaneSO.addServerPack("berries_berry_good", "Insane's Survival Overhaul Berries (Berry Good compat)", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("berry_good"));
     }
 
     @SubscribeEvent

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mobs;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.Label;
@@ -17,7 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @Label(name = "Misc Mobs")
 @LoadFeature(module = Modules.Ids.MOBS)
 public class MiscMobs extends Feature {
-    public static final TagKey<EntityType<?>> PASSIVE_REGEN = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "passive_regen"));
+    public static final TagKey<EntityType<?>> PASSIVE_REGEN = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "passive_regen"));
 
     @Config(min = 0)
     @Label(description = "1 in X chance each tick for mobs in the `iguanatweaksreborn:passive_regen` entity type tag to regain 1 health. Set to 0 to disable")

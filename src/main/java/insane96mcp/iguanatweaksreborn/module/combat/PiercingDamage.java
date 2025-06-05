@@ -1,18 +1,16 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -28,11 +26,10 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Piercing damage", description = "Adds a new attribute that deals bonus damage that bypasses armor")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Adds a new attribute that deals bonus damage that bypasses armor")
 public class PiercingDamage extends Feature {
-	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "piercing_mob_attack"));
-	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "piercing_player_attack"));
+	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_mob_attack"));
+	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_player_attack"));
 
 	public static final RegistryObject<Attribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new RangedAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
 
@@ -61,7 +58,7 @@ public class PiercingDamage extends Feature {
 				|| event.getEntity().isDeadOrDying()
 				|| event.getSource().is(DOESNT_TRIGGER_PIERCING)
 				|| attacker.getAttribute(PIERCING_DAMAGE.get()) == null
-				|| (isEnabled(UnbreakableItems.class) && Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(attacker.getMainHandItem())))
+				|| (Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(attacker.getMainHandItem())))
 			return;
 
 		AttributeInstance piercingInstance = attacker.getAttribute(PIERCING_DAMAGE.get());

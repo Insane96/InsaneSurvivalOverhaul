@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.hoes.Hoes;
@@ -172,6 +172,6 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     }
 
     public static TagKey<Block> create(String tagName) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, tagName));
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSO.MOD_ID, tagName));
     }
 }

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.BaneOfSSSS;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.Smite;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
@@ -21,10 +21,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
-    public static final TagKey<EntityType<?>> WOLVES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "wolves"));
-    public static final TagKey<EntityType<?>> CATS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "cats"));
-    public static final TagKey<EntityType<?>> PARROTS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "parrots"));
-    public static final TagKey<EntityType<?>> PETS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "pets"));
+    public static final TagKey<EntityType<?>> WOLVES = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "wolves"));
+    public static final TagKey<EntityType<?>> CATS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "cats"));
+    public static final TagKey<EntityType<?>> PARROTS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "parrots"));
+    public static final TagKey<EntityType<?>> PETS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "pets"));
 
     public ISOEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, modId, existingFileHelper);

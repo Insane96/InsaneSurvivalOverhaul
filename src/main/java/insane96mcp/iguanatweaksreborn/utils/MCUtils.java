@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.utils;
 
 import com.ezylang.evalex.Expression;
 import com.ezylang.evalex.data.EvaluationValue;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,7 +38,7 @@ public class MCUtils {
         return r;
     }
 
-    private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(InsaneSurvivalOverhaul.RESOURCE_PREFIX + "anti_knockback", 1f, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(InsaneSO.RESOURCE_PREFIX + "anti_knockback", 1f, AttributeModifier.Operation.ADDITION);
 
     //Stolen from Tinkers Construct ToolAttackUtil
     public static void attackEntityIgnoreInvFrames(DamageSource source, float damage, Entity target, @Nullable LivingEntity living, boolean noKnockback) {

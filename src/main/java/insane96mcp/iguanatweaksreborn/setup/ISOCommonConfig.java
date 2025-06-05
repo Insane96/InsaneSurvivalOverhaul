@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.setup;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Module;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -23,7 +23,7 @@ public class ISOCommonConfig {
 	public static class CommonConfig {
 		public CommonConfig(final ForgeConfigSpec.Builder builder) {
 			Modules.init();
-			Module.loadFeatures(ModConfig.Type.COMMON, InsaneSurvivalOverhaul.MOD_ID, this.getClass().getClassLoader());
+			Module.loadFeatures(ModConfig.Type.COMMON, InsaneSO.MOD_ID, this.getClass().getClassLoader());
 		}
 	}
 }

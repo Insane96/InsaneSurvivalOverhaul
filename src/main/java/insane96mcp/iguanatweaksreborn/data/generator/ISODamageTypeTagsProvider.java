@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
@@ -43,6 +43,6 @@ public class ISODamageTypeTagsProvider extends DamageTypeTagsProvider {
     }
 
     public static TagKey<DamageType> create(String tagName) {
-        return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, tagName));
+        return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSO.MOD_ID, tagName));
     }
 }

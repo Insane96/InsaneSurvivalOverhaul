@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.farming.bonemeal;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
@@ -179,7 +179,7 @@ public class BoneMeal extends Feature {
         if (state.getBlock() instanceof BushBlock bushBlock) {
             Optional<IntegerProperty> oAgeProperty = getAgeProperty(state);
             if (oAgeProperty.isEmpty()) {
-                InsaneSurvivalOverhaul.LOGGER.debug("No vanilla age property found for state %s".formatted(state));
+                InsaneSO.LOGGER.debug("No vanilla age property found for state %s".formatted(state));
                 return;
             }
             int age = state.getValue(oAgeProperty.get());

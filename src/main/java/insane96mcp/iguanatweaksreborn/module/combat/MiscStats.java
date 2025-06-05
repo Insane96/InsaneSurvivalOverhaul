@@ -1,14 +1,13 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.google.common.collect.Multimap;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.SweepingEdge;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -43,53 +42,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Label(name = "Misc Stats")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class MiscStats extends Feature {
 	public static final RegistryObject<Enchantment> SWEEPING_EDGE = ISORegistries.ENCHANTMENTS.register("sweeping_edge", SweepingEdge::new);
 
-	@Config
-	@Label(name = "Fix tooltips", description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
+	@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
 	public static Boolean fixTooltips = true;
-	@Config
-	@Label(name = "Better strength and weakness", description = "Changes Strength and Weakness +/-3 damage per level to +/-20% damage per level. (Requires a Minecraft restart)")
-	public static Boolean betterStrengthWeakness = true;
-	@Config
-	@Label(name = "Better haste/mining fatigue", description = "Changes Mining fatigue and haste to no longer affects attack speed. (Requires a Minecraft restart)")
-	public static Boolean betterHasteMiningFatigue = true;
-	@Config
-	@Label(name = "Better healing potion", description = "Changes Healing potions to work like pre 1.6.1 by healing 3 health per level")
+	@Config(description = "Changes Strength and Weakness +/-3 damage per level to +/-20% damage per level. (Requires a Minecraft restart)")
+	public static Boolean betterStrengthAndWeakness = true;
+	@Config(description = "Changes Mining fatigue and haste to no longer affects attack speed. (Requires a Minecraft restart)")
+	public static Boolean betterHasteAndMiningFatigue = true;
+	@Config(description = "Changes Healing potions to work like pre 1.6.1 by healing 3 health per level")
 	public static Boolean betterHealingPotion = true;
-	@Config
-	@Label(name = "1 damage for tools attacking", description = "If enabled, tools will not take 2 damage when used to hurt entities")
+	@Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
 	public static Boolean oneDamageForToolAttacking = true;
-	@Config
-	@Label(name = "Sweeping overhaul", description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the Sweeping Edge enchantment increases the range. This also replaces the vanilla sweeping edge enchantment with a new one that can be applied to hoes instead of swords.")
+	@Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the Sweeping Edge enchantment increases the range. This also replaces the vanilla sweeping edge enchantment with a new one that can be applied to hoes instead of swords.")
 	public static Boolean sweepingOverhaul = true;
 
-	@Config
-	@Label(description = "Enables a data pack that reworks armor, weapons and tools.")
+	@Config(description = "Enables a data pack that reworks armor, weapons and tools.")
 	public static Boolean combatReworkDataPack = true;
 
 	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && combatReworkDataPack);
+		InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && combatReworkDataPack);
 	}
 
 	@Override
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
-		if (betterStrengthWeakness) {
+		if (betterStrengthAndWeakness) {
 			MobEffects.DAMAGE_BOOST.attributeModifiers.remove(Attributes.ATTACK_DAMAGE);
 			MobEffects.DAMAGE_BOOST.addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.0D, AttributeModifier.Operation.MULTIPLY_BASE);
 			((AttackDamageMobEffect)MobEffects.DAMAGE_BOOST).multiplier = 0.2d;
 		}
-		if (betterStrengthWeakness) {
+		if (betterStrengthAndWeakness) {
 			MobEffects.WEAKNESS.attributeModifiers.remove(Attributes.ATTACK_DAMAGE);
 			MobEffects.WEAKNESS.addAttributeModifier(Attributes.ATTACK_DAMAGE, "22653B89-116E-49DC-9B6B-9971489B5BE5", 0.0D, AttributeModifier.Operation.MULTIPLY_BASE);
 			((AttackDamageMobEffect)MobEffects.WEAKNESS).multiplier = -0.2d;
 		}
-		if (betterHasteMiningFatigue) {
+		if (betterHasteAndMiningFatigue) {
 			MobEffects.DIG_SPEED.attributeModifiers.remove(Attributes.ATTACK_SPEED);
 			MobEffects.DIG_SLOWDOWN.attributeModifiers.remove(Attributes.ATTACK_SPEED);
 		}

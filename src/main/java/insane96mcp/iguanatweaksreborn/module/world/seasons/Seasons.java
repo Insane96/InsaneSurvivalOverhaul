@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.world.seasons;
 
 import com.google.common.collect.Lists;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -97,8 +97,8 @@ public class Seasons extends Feature {
 
 	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
-		InsaneSurvivalOverhaul.addServerPack("no_saplings_in_winter", "Insane's Survival Overhaul No Saplings in Winter", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter);
+		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
+		InsaneSO.addServerPack("no_saplings_in_winter", "Insane's Survival Overhaul No Saplings in Winter", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter);
 	}
 
 	@Override

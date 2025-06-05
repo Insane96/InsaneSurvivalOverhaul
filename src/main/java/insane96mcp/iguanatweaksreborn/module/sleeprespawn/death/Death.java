@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.iguanatweaksreborn.mixin.client.GuiAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -67,9 +67,9 @@ public class Death extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHLOSEITEMSENCHANTED = GameRules.register("iguanatweaks:deathLoseItemsEnchanted", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
 	public static final TagKey<DamageType> DOESNT_SPAWN_GRAVE = ISODamageTypeTagsProvider.create("doesnt_spawn_grave");
 
-	public static final String KILLED_PLAYER = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "killed_player";
-	public static final String PLAYER_KILLER_LANG = InsaneSurvivalOverhaul.MOD_ID + ".player_killer";
-	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(InsaneSurvivalOverhaul.MOD_ID, "killer_blacklist"));
+	public static final String KILLED_PLAYER = InsaneSO.RESOURCE_PREFIX + "killed_player";
+	public static final String PLAYER_KILLER_LANG = InsaneSO.MOD_ID + ".player_killer";
+	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(InsaneSO.MOD_ID, "killer_blacklist"));
 
 	@Config(name = "Players' killer bounty", description = "If true, the player's killer will not despawn and when killed will drop 4x more items and experience.")
 	public static Boolean vindicationVsKiller = true;

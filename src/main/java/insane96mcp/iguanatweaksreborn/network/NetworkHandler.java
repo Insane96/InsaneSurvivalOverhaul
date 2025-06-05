@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.network;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.SpawnerStatusSync;
 import insane96mcp.iguanatweaksreborn.network.message.*;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +10,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 public class NetworkHandler {
 	private static final String PROTOCOL_VERSION = Integer.toString(5);
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "network_channel"))
+			.named(new ResourceLocation(InsaneSO.MOD_ID, "network_channel"))
 			.clientAcceptedVersions(s -> true)
 			.serverAcceptedVersions(s -> true)
 			.networkProtocolVersion(() -> PROTOCOL_VERSION)

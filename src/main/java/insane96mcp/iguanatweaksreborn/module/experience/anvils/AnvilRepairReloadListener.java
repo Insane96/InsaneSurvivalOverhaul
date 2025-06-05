@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.network.message.AnvilRepairSync;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = InsaneSurvivalOverhaul.MOD_ID)
+@Mod.EventBusSubscriber(modid = InsaneSO.MOD_ID)
 public class AnvilRepairReloadListener extends SimpleJsonResourceReloadListener {
 	public static HashMap<ResourceLocation, AnvilRepair> REPAIRS = new HashMap<>();
 	public static final AnvilRepairReloadListener INSTANCE;

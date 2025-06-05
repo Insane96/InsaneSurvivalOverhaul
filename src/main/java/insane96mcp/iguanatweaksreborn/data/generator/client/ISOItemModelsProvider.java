@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.data.generator.client;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -36,8 +36,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(Berries.SWEET_BERRY_SEEDS.get());
 
-        basicItemWithTexture(CyanFlower.FLOWER.item().get(), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/cyan_flower"));
-        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/solanum_neorossii"));
+        basicItemWithTexture(CyanFlower.FLOWER.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/cyan_flower"));
+        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/solanum_neorossii"));
 
         basicItem(BiomeCompass.COMPASS.get());
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
@@ -48,7 +48,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.NETHERIZED_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
 
-        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/copper_powered_rail"));
+        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
 
         basicItem(Cloth.ITEM.get());
@@ -60,12 +60,12 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(FlintExpansion.SWORD.get());
         shield(FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
 
-        withExistingParent("respawn_obelisk", new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/respawn_obelisk_disabled"));
+        withExistingParent("respawn_obelisk", new ResourceLocation(InsaneSO.MOD_ID, "block/respawn_obelisk_disabled"));
 
-        withExistingParent("soul_sand_hellish_coal_ore", new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/soul_sand_hellish_coal_ore"));
-        withExistingParent("soul_soil_hellish_coal_ore", new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/soul_soil_hellish_coal_ore"));
+        withExistingParent("soul_sand_hellish_coal_ore", new ResourceLocation(InsaneSO.MOD_ID, "block/soul_sand_hellish_coal_ore"));
+        withExistingParent("soul_soil_hellish_coal_ore", new ResourceLocation(InsaneSO.MOD_ID, "block/soul_soil_hellish_coal_ore"));
 
-        withExistingParent("charcoal_layer", new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "block/charcoal_layer/height_2"));
+        withExistingParent("charcoal_layer", new ResourceLocation(InsaneSO.MOD_ID, "block/charcoal_layer/height_2"));
         basicItem(CoalFire.FIRESTARTER.get());
         basicItem(CoalFire.HELLISH_COAL.get());
     }

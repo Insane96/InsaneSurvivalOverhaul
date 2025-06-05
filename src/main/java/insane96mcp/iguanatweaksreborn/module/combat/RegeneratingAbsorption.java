@@ -1,13 +1,12 @@
 package insane96mcp.iguanatweaksreborn.module.combat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.integration.NoHungerIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.RegenAbsorptionSync;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -42,14 +41,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Regenerating Absorption", description = "Adds a new attribute to add regenerating absorption hearts to the player.")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player.")
 public class RegeneratingAbsorption extends Feature {
 
-    public static final ResourceLocation GUI_ICONS = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "textures/gui/absorption.png");
-    public static final String REGEN_ABSORPTION_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "regen_absorption";
-    public static final String HURT_COOLDOWN_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
-    public static final String NO_HURT_SOUND_TAG = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "no_hurt_sound";
+    public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/absorption.png");
+    public static final String REGEN_ABSORPTION_TAG = InsaneSO.RESOURCE_PREFIX + "regen_absorption";
+    public static final String HURT_COOLDOWN_TAG = InsaneSO.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
+    public static final String NO_HURT_SOUND_TAG = InsaneSO.RESOURCE_PREFIX + "no_hurt_sound";
 
     public static final RegistryObject<Attribute> ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
 
@@ -58,27 +56,20 @@ public class RegeneratingAbsorption extends Feature {
     public static final RegistryObject<MobEffect> EFFECT = ISORegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
             .addAttributeModifier(ATTRIBUTE.get(), "704d7291-63ba-4346-8aa8-a08e90a13fdf", 4, AttributeModifier.Operation.ADDITION));
 
-    @Config(min = 0)
-    @Label(name = "Un-damaged time to regen", description = "Ticks that must pass from the last hit to regen absorption hearts. This is affected by regenerating absorption speed (absorp regen speed * this)")
+    @Config(min = 0, name = "Un-damaged time to regen", description = "Ticks that must pass from the last hit to regen absorption hearts. This is affected by regenerating absorption speed (absorp regen speed * this)")
     public static Integer unDamagedTimeToRegen = 150;
-    @Config(min = 0)
-    @Label(name = "Un-damaged time to regen cap", description = "Min Un-damaged time to regen")
+    @Config(min = 0, name = "Un-damaged time to regen cap", description = "Min Un-damaged time to regen")
     public static Integer unDamagedTimeToRegenCap = 60;
-    @Config
-    @Label(name = "Cap to health", description = "The amount of regenerating absorption hearts cannot go over the entity's current health.")
+    @Config(description = "The amount of regenerating absorption hearts cannot go over the entity's current health.")
     public static Boolean capToHealth = true;
-    @Config
-    @Label(description = "How fast (each tick) will absorption hearts decay when higher than the current maximum.")
+    @Config(description = "How fast (each tick) will absorption hearts decay when higher than the current maximum.")
     public static Double decaySpeed = 0.1d;
-    @Config
-    @Label(name = "Absorbing bypasses_armor damage only", description = "If true, absorption hearts will not shield from damages in the bypasses_armor damage type tag.")
+    @Config(name = "Absorbing bypasses_armor damage only", description = "If true, absorption hearts will not shield from damages in the bypasses_armor damage type tag.")
     public static Boolean absorbingDamageTypeTagOnly = true;
-    @Config
-    @Label(name = "Sound on absorption hurt", description = "If true, a sound is played when the absorption is damaged.")
+    @Config(description = "If true, a sound is played when the absorption is damaged.")
     public static Boolean soundOnAbsorptionHurt = true;
-    @Config
-    @Label(name = "Render on the right", description = "(Client only) If true, regenerating absorption hearts are rendered on the right instead on top of hearts.")
-    public static Boolean renderOnRight = false;
+    @Config(description = "(Client only) If true, regenerating absorption hearts are rendered on the right instead on top of hearts.")
+    public static Boolean renderOnTheRight = false;
 
     public RegeneratingAbsorption(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -173,10 +164,10 @@ public class RegeneratingAbsorption extends Feature {
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         ResourceLocation aboveOverlay = VanillaGuiOverlay.PLAYER_HEALTH.id();
         if (ModList.get().isLoaded("stamina"))
-            aboveOverlay = new ResourceLocation("stamina:stamina_overlay");
-        if (renderOnRight) {
+            aboveOverlay = ResourceLocation.parse("stamina:stamina_overlay");
+        if (renderOnTheRight) {
             if (ModList.get().isLoaded("nohunger") && NoHungerIntegration.doesRenderArmorAtHunger())
-                aboveOverlay = new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "armor");
+                aboveOverlay = InsaneSO.location("armor");
             else
                 aboveOverlay = VanillaGuiOverlay.FOOD_LEVEL.id();
         }
@@ -200,8 +191,8 @@ public class RegeneratingAbsorption extends Feature {
         mc.getProfiler().push("regen_absorption");
 
         RenderSystem.enableBlend();
-        int left = width / 2 + (!renderOnRight ? -91 : 82);
-        int top = height - (!renderOnRight ? gui.leftHeight : gui.rightHeight);
+        int left = width / 2 + (!renderOnTheRight ? -91 : 82);
+        int top = height - (!renderOnTheRight ? gui.leftHeight : gui.rightHeight);
 
         int absorption = Mth.ceil(mc.player.getPersistentData().getFloat(REGEN_ABSORPTION_TAG));
         boolean highlight = absorptionBlinkTime > (long) gui.getGuiTicks() && (absorptionBlinkTime - (long) gui.getGuiTicks()) / 3L % 2L == 1L;
@@ -235,25 +226,25 @@ public class RegeneratingAbsorption extends Feature {
                 ClientUtils.setRenderColor(1, 0, 0, 1f);
             //ClientUtils.blitVericallyMirrored(GUI_ICONS, guiGraphics, left, top, 9, v, 9, 9, 18, 18);
             int u = i % 2 == 0 ? 0 : 9;
-            if (!renderOnRight)
+            if (!renderOnTheRight)
                 guiGraphics.blit(GUI_ICONS, left, top, u, v, 9, 9, 18, 18);
             else
                 ClientUtils.blitVericallyMirrored(GUI_ICONS, guiGraphics,left, top, u, v, 9, 9, 18, 18);
             if (i % 20 == 0 && i != displayAbsorption) {
-                left = width / 2 + (!renderOnRight ? -91 : 82);
+                left = width / 2 + (!renderOnTheRight ? -91 : 82);
                 top -= 10;
-                if (!renderOnRight)
+                if (!renderOnTheRight)
                     gui.leftHeight += 10;
                 else
                     gui.rightHeight += 10;
             }
             else if (i % 2 == 0)
-                left += renderOnRight ? -8 : 8;
+                left += renderOnTheRight ? -8 : 8;
             if (i > absorption)
                 ClientUtils.resetRenderColor();
         }
         if (displayAbsorption > 0)
-            if (!renderOnRight)
+            if (!renderOnTheRight)
                 gui.leftHeight += 10;
             else
                 gui.rightHeight += 10;

@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.farming.crops;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
@@ -93,7 +93,7 @@ public class Crops extends Feature {
 
 	public Crops(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 
 	@SubscribeEvent

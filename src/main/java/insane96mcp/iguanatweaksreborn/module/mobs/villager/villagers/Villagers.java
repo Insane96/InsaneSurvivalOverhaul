@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
@@ -31,7 +31,7 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.MOBS)
 public class Villagers extends Feature {
 
-	private static final String CURE_DISCOUNT_REMOVED = InsaneSurvivalOverhaul.RESOURCE_PREFIX + "cure_discount_removed";
+	private static final String CURE_DISCOUNT_REMOVED = InsaneSO.RESOURCE_PREFIX + "cure_discount_removed";
 
 	@Config
 	@Label(name = "Lock Trades", description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
@@ -60,7 +60,7 @@ public class Villagers extends Feature {
 
 	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSurvivalOverhaul.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
+		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.misc.beaconconduit;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.insanelib.data.IdTagValue;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -352,7 +352,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
 
     @Override
     protected Component getDefaultName() {
-        return Component.translatable(InsaneSurvivalOverhaul.MOD_ID + ".container.beacon");
+        return Component.translatable(InsaneSO.MOD_ID + ".container.beacon");
     }
 
     @Override

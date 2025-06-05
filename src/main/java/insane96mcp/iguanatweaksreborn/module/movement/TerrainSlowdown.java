@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.movement;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -58,15 +58,15 @@ public class TerrainSlowdown extends JsonFeature {
 
 	public TerrainSlowdown(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "custom_terrain_slowdown"), new SyncType(json -> loadAndReadJson(json, customTerrainSlowdown, CUSTOM_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("custom_terrain_slowdown.json", customTerrainSlowdown, CUSTOM_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "custom_terrain_slowdown")));
-		addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "custom_in_terrain_slowdown"), new SyncType(json -> loadAndReadJson(json, customInTerrainSlowdown, CUSTOM_IN_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("custom_in_terrain_slowdown.json", customInTerrainSlowdown, CUSTOM_IN_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "custom_in_terrain_slowdown")));
+		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "custom_terrain_slowdown"), new SyncType(json -> loadAndReadJson(json, customTerrainSlowdown, CUSTOM_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("custom_terrain_slowdown.json", customTerrainSlowdown, CUSTOM_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "custom_terrain_slowdown")));
+		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "custom_in_terrain_slowdown"), new SyncType(json -> loadAndReadJson(json, customInTerrainSlowdown, CUSTOM_IN_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("custom_in_terrain_slowdown.json", customInTerrainSlowdown, CUSTOM_IN_TERRAIN_SLOWDOWN_DEFAULT, IdTagValue.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "custom_in_terrain_slowdown")));
 	}
 
 	@Override
 	public String getModConfigFolder() {
-		return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	@SubscribeEvent

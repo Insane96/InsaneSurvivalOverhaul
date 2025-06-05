@@ -4,7 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -14,12 +13,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Absorption Armor", description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness")
-@LoadFeature(module = Modules.Ids.COMBAT)
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness")
 public class AbsorptionArmor extends Feature {
 
-    @Config
-    @Label(description = "If > 0, Armor Toughness on items will be converted to absorption, multiplying it by this, and Armor will stay the same.")
+    @Config(description = "If > 0, only Armor Toughness on items will be converted to absorption, multiplying it by this.")
     public static Double toughnessToAbsorptionRatio = .25d;
 
     public AbsorptionArmor(Module module, boolean enabledByDefault, boolean canBeDisabled) {

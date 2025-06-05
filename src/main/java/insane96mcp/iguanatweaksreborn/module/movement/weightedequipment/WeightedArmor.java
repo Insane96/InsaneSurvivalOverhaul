@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.movement.weightedequipment;
 
 import com.ezylang.evalex.Expression;
 import com.google.common.collect.Multimap;
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanelib.base.JsonFeature;
@@ -41,7 +41,7 @@ import java.util.UUID;
 @Label(name = "Weighted Armor", description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. If you need more control over armor, use item definitions")
 @LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false)
 public class WeightedArmor extends JsonFeature {
-    public static final String ARMOR_SLOWDOWN = InsaneSurvivalOverhaul.MOD_ID + ".armor_slowdown";
+    public static final String ARMOR_SLOWDOWN = InsaneSO.MOD_ID + ".armor_slowdown";
     public static final UUID ARMOR_SLOWDOWN_UUID = UUID.fromString("8588420e-ce50-4e4e-a3e4-974dfc8a98ec");
 
     public static final ArrayList<ArmorEnchantmentWeight> ENCHANTMENTS_LIST_DEFAULT = new ArrayList<>(List.of(
@@ -55,13 +55,13 @@ public class WeightedArmor extends JsonFeature {
 
     public WeightedArmor(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        addSyncType(new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
-        JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, new ResourceLocation(InsaneSurvivalOverhaul.MOD_ID, "enchantments_weights")));
+        addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
+        JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "enchantments_weights")));
     }
 
     @Override
     public String getModConfigFolder() {
-        return InsaneSurvivalOverhaul.CONFIG_FOLDER;
+        return InsaneSO.CONFIG_FOLDER;
     }
 
     //Can't use ItemAttributeModifierEvent as I need all the modifiers of the item (ItemStack#getAttributeModifiers) and that causes a loop

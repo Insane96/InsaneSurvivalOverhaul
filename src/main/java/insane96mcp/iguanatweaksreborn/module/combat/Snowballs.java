@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -12,17 +11,13 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Snowballs")
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class Snowballs extends Feature {
-	@Config(min = 0d, max = 100d)
-	@Label(name = "Damage", description = "Snowballs deal this amount of damage.")
+	@Config(min = 0d, max = 100d , description = "Snowballs deal this amount of damage.")
 	public static Double damage = 0.5d;
-	@Config(min = 0)
-	@Label(name = "Freezing Ticks", description = "Snowballs fill freeze entities for this amount of ticks.")
+	@Config(min = 0, description = "Snowballs fill freeze entities for this amount of ticks.")
 	public static Integer freezingTicks = 30;
-	@Config
-	@Label(name = "Freezing Stacks", description = "If true, freezing stacks each hit.")
+	@Config(description = "If true, freezing stacks each hit.")
 	public static Boolean freezingStacks = true;
 
 	public Snowballs(Module module, boolean enabledByDefault, boolean canBeDisabled) {

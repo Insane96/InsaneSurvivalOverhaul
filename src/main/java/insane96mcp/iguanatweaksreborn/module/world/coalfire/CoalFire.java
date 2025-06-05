@@ -1,6 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.coalfire;
 
-import insane96mcp.iguanatweaksreborn.InsaneSurvivalOverhaul;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
@@ -85,7 +85,7 @@ public class CoalFire extends Feature {
 
     public CoalFire(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSurvivalOverhaul.addServerPack("coal_fire", "Insane's Survival Overhaul No Charcoal Smelting and Iron Coal", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noCharcoalSmeltingAndIronCoal);
+        InsaneSO.addServerPack("coal_fire", "Insane's Survival Overhaul No Charcoal Smelting and Iron Coal", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noCharcoalSmeltingAndIronCoal);
     }
 
     public static boolean areCampfiresUnlit() {
