@@ -5,6 +5,9 @@
 ## Upcoming
 **Backup your config file, some config option names have changed**
 
+### Additions
+* Feeding a poisonous potato to an animal will stop it from aging
+
 ### Changes
 * Heavily lowered FD Rice panicle generation
 * Fog now affects sky fog too
@@ -14,6 +17,9 @@
 * Swing Through Grass
   * The feature was disabled by default, now it's completely removed  
     Use Fuzz's Swing Through Grass mod instead
+
+### Fixes
+* Baby animals no longer growing when fed
 
 ## Alpha 4.12.9
 ### Changes

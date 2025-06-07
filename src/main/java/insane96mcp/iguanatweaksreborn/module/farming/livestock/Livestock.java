@@ -28,6 +28,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -87,9 +89,8 @@ public class Livestock extends Feature {
 	@Config(description = "If Die of old age is disabled you can still make animals grow up to this age")
 	public static Age aging$stopAt = Age.ELDER;
 
-	@Config(min = 0)
-	@Label(name = "Aging.Starvation death", description = "If true, animals will die if not young and haven't been fed in a while.")
-	public static Boolean agingStarvationDeath = false;
+	@Config(description = "If fed a poisonous potato, animals will stop aging at a 'Stop At With Poisonous Potato' age.")
+	public static Boolean aging$stopAgingWithPoisonousPotato = true;
 
 	@Config(description = "If true, animals will die if not young and haven't been fed in a while.")
 	public static Boolean aging$starvationDeath = false;
@@ -187,6 +188,9 @@ public class Livestock extends Feature {
 				|| ageableMob.isBaby())
 			return;
 
+		if (aging$stopAgingWithPoisonousPotato && ModNBTData.get(ageableMob, STOP_AGING, Boolean.class))
+			return;
+
 		boolean forceUpdateScale = false;
 		int age = ModNBTData.get(ageableMob, AGE, Integer.class);
 		int maxAge = ModNBTData.get(ageableMob, MAX_AGE, Integer.class);
@@ -203,8 +207,8 @@ public class Livestock extends Feature {
 				return;
 			forceUpdateScale = true;
 		}
-		Age prevAge = getAge(ageableMob);
-		if (prevAge == aging$stopAt && !aging$dieOfOldAge)
+		Age currAge = getAge(ageableMob);
+		if (currAge == aging$stopAt && !aging$dieOfOldAge)
 			return;
 		age++;
 		Age newAge = getAge(ageableMob);
@@ -315,19 +319,39 @@ public class Livestock extends Feature {
 	public void onAnimalFeed(PlayerInteractEvent.EntityInteract event) {
 		if (event.isCanceled()
 				|| !this.isEnabled()
-				|| !(event.getTarget() instanceof Animal animal)
-				|| !animal.getType().is(PREVENT_BREEDING)
-				|| !animal.isFood(event.getItemStack()))
+				|| !(event.getTarget() instanceof Animal animal))
 			return;
 
+		feedToBreed(event, animal);
+		if (event.isCanceled())
+			return;
+		poisonAnimal(event, animal);
+	}
+
+	public static void feedToBreed(PlayerInteractEvent.EntityInteract event, Animal animal) {
+		if (!animal.isFood(event.getItemStack())
+				|| !animal.getType().is(PREVENT_BREEDING)
+				|| animal.isBaby())
+			return;
 		if (!canBeFed(animal)) {
 			event.setCanceled(true);
 			return;
 		}
 		int age = animal.getAge();
-		if (!animal.level().isClientSide && age == 0 && animal.canFallInLove()) {
+		if (!animal.level().isClientSide && age == 0 && animal.canFallInLove())
 			setLastEat(animal);
-		}
+	}
+
+	public static void poisonAnimal(PlayerInteractEvent.EntityInteract event, Animal animal) {
+		if (!aging$stopAgingWithPoisonousPotato
+				|| !event.getItemStack().is(Items.POISONOUS_POTATO)
+				|| animal.isBaby()
+				|| ModNBTData.get(animal, STOP_AGING, Boolean.class))
+			return;
+		animal.addEffect(new MobEffectInstance(MobEffects.POISON, 80));
+		ModNBTData.put(animal, STOP_AGING, true);
+		event.getItemStack().shrink(1);
+		event.getEntity().swing(event.getHand());
 	}
 
 	public static void setLastEat(LivingEntity living) {
