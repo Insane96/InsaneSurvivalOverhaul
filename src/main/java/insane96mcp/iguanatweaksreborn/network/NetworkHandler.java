@@ -3,18 +3,17 @@ package insane96mcp.iguanatweaksreborn.network;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.SpawnerStatusSync;
 import insane96mcp.iguanatweaksreborn.network.message.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetworkHandler {
 	private static final String PROTOCOL_VERSION = Integer.toString(5);
-	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(InsaneSO.MOD_ID, "network_channel"))
-			.clientAcceptedVersions(s -> true)
-			.serverAcceptedVersions(s -> true)
-			.networkProtocolVersion(() -> PROTOCOL_VERSION)
-			.simpleChannel();
+	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+			InsaneSO.location("network_channel"),
+			() -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals,
+			PROTOCOL_VERSION::equals
+	);
 
 	private static int index = 0;
 
