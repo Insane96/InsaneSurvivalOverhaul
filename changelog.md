@@ -8,6 +8,7 @@
 ### Changes
 * Heavily lowered FD Rice panicle generation
 * Fog now affects sky fog too
+* Crops data pack now changes hay block recipe to use 4 wheat instead of 9
 
 ### Removed
 * Swing Through Grass
