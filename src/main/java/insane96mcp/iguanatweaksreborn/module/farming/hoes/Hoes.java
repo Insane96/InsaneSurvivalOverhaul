@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -29,8 +28,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Hoes", description = "Hoes can now scythe grass and flowers. Also makes them break faster when tilling farmland")
-@LoadFeature(module = Modules.Ids.FARMING)
+@LoadFeature(module = Modules.Ids.FARMING, description = "Hoes can now scythe grass and flowers. Also makes them break faster when tilling farmland")
 public class Hoes extends Feature {
 
 	public static final String TOO_WEAK = InsaneSO.MOD_ID + ".weak_hoe";
@@ -39,10 +37,8 @@ public class Hoes extends Feature {
 	public static final TagKey<Item> DISABLED_HOES = ISOItemTagsProvider.create("disabled_hoes");
 
 	@Config(min = 1)
-	@Label(name = "Durability used on right-click")
 	public static Integer durabilityOnRightClick = 4;
-	@Config
-	@Label(name = "Extra durability only for tilling", description = "'Durability used on right-click' is only applied for farmland, and not e.g. when using hoes on rooted dirt")
+	@Config(description = "'Durability used on right-click' is only applied for farmland, and not e.g. when using hoes on rooted or coarse dirt")
 	public static Boolean extraDurabilityOnlyForTilling = true;
 
 	public Hoes(Module module, boolean enabledByDefault, boolean canBeDisabled) {

@@ -53,13 +53,13 @@ public class RichFarmlandBlock extends FarmBlock {
         }
 
         if (moisture == MAX_MOISTURE && isUnderCrops) {
-            for (int e = 0; e < BoneMeal.richFarmlandExtraTicks; e++) {
+            for (int e = 0; e < BoneMeal.richFarmland$extraTicks; e++) {
                 level.getBlockState(pos.above()).randomTick(level, pos.above(), random);
             }
             //Bone meal particles
             level.levelEvent(2005, pos.above(), 0);
         }
-        if (random.nextDouble() < BoneMeal.richFarmlandChanceToDecay) {
+        if (random.nextDouble() < BoneMeal.richFarmland$chanceToDecay) {
             loseRichness(null, state, level, pos);
         }
     }

@@ -10,7 +10,6 @@ import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -48,8 +47,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Crops", description = "Crops tweaks and less yield from crops")
-@LoadFeature(module = Modules.Ids.FARMING)
+@LoadFeature(module = Modules.Ids.FARMING, description = "Crops tweaks and less yield from crops")
 public class Crops extends Feature {
 
 	public static final TagKey<Item> CHICKEN_FOOD_ITEMS = ISOItemTagsProvider.create("chicken_food_items");
@@ -68,8 +66,7 @@ public class Crops extends Feature {
 	public static final SimpleBlockWithItem SOLANUM_NEOROSSII = SimpleBlockWithItem.register("solanum_neorossii", () -> new FlowerBlock(() -> MobEffects.MOVEMENT_SPEED, 10, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ)));
 	public static final RegistryObject<Block> POTTED_SOLANUM_NEOROSSII = ISORegistries.BLOCKS.register("potted_solanum_neorossii", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SOLANUM_NEOROSSII.block().get(), BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM)));
 
-	@Config
-	@Label(name = "Crops Require Water", description = """
+	@Config(description = """
 						Set if crops require wet farmland to grow.
 						Valid Values:
 						NO: Crops will not require water to grow
@@ -77,12 +74,10 @@ public class Crops extends Feature {
 						ANY_CASE: Will make Crops not grow in any case when on dry farmland""")
 	public static CropsRequireWater cropsRequireWater = CropsRequireWater.ANY_CASE;
 
-	@Config(min = 1)
-	@Label(name = "Water Hydration Radius", description = "Radius where water hydrates farmland, vanilla is 4.")
+	@Config(min = 1, description = "Radius where water hydrates farmland, vanilla is 4.")
 	public static Integer waterHydrationRadius = 2;
 
-	@Config
-	@Label(name = "Crops data pack", description = """
+	@Config(description = """
 		Makes potatoes and carrots not plantable and also enables a data pack that makes the following changes:
 		* Makes all vanilla crops drop only one seed (and makes carrots and potatoes drop the new seed item)
 		* Makes melon seeds and pumpkin seeds harder to obtain
@@ -197,6 +192,9 @@ public class Crops extends Feature {
 	public void onPickBlock(InputEvent.InteractionKeyMappingTriggered event) {
 		if (!this.isEnabled()
 				|| !event.getKeyMapping().same(Minecraft.getInstance().options.keyPickItem)
+				|| Minecraft.getInstance().player == null
+				|| Minecraft.getInstance().level == null
+				|| Minecraft.getInstance().gameMode == null
 				|| Minecraft.getInstance().hitResult == null
 				|| Minecraft.getInstance().hitResult.getType() != HitResult.Type.BLOCK)
 			return;

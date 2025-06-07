@@ -9,7 +9,6 @@ import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinit
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -41,8 +40,7 @@ import sereneseasons.api.season.SeasonHelper;
 import java.util.Map;
 import java.util.Optional;
 
-@Label(name = "Bone meal", description = "Increase uses for bone meal and nerf its use on some plants")
-@LoadFeature(module = Modules.Ids.FARMING)
+@LoadFeature(module = Modules.Ids.FARMING, description = "Increase uses for bone meal and nerf its use on some plants")
 public class BoneMeal extends Feature {
 
     public static final SimpleBlockWithItem RICH_FARMLAND = SimpleBlockWithItem.register("rich_farmland", () -> new RichFarmlandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).randomTicks().strength(0.6F).sound(SoundType.GRAVEL).isViewBlocking((state, blockGetter, pos) -> true).isSuffocating((state, blockGetter, pos) -> true)));
@@ -50,35 +48,26 @@ public class BoneMeal extends Feature {
     public static final TagKey<Item> ITEM_BLACKLIST = ISOItemTagsProvider.create("bone_meal_blacklist");
     public static final TagKey<Block> BLOCK_BLACKLIST = ISOBlockTagsProvider.create("bone_meal_blacklist");
 
-    @Config
-    @Label(name = "Rich Farmland", description = "Bone meal used on Farmland (or shift right clicked on crops) transforms it into Rich Farmland.")
-    public static Boolean richFarmland = true;
-    @Config(min = 1)
-    @Label(name = "Rich Farmland Extra Ticks", description = "How many extra random ticks does Rich Farmland give to the crop sitting on top?")
-    public static Integer richFarmlandExtraTicks = 3;
+    @Config(description = "Bone meal used on Farmland (or crouch right clicked on crops) transforms it into Rich Farmland.")
+    public static Boolean richFarmland$enable = true;
+    @Config(min = 1, description = "How many extra random ticks does Rich Farmland give to the crop sitting on top?")
+    public static Integer richFarmland$extraTicks = 3;
+    @Config(min = 0d, max = 1d, description = "Chance for a Rich farmland to decay back to farmland")
+    public static Double richFarmland$chanceToDecay = 0.4d;
 
-    @Config(min = 0d, max = 1d)
-    @Label(name = "Rich Farmland Chance to Decay", description = "Chance for a Rich farmland to decay back to farmland")
-    public static Double richFarmlandChanceToDecay = 0.4d;
-
-    @Config(min = 0, max = 25)
-    @Label(name = "Stage growth", description = "How many stages will bone meal make stuff grow?")
+    @Config(min = 0, max = 25, description = "How many stages will bone meal make stuff grow?")
     public static MinMax stageGrowth = new MinMax(1, 1);
 
     @Config
-    @Label(name = "Compostable Rotten Flesh")
     public static Boolean compostableRottenFlesh = true;
 
-    @Config
-    @Label(name = "Season fail chance", description = "Chance for a bone meal to fail to grow something. Empty this string to disable. Accepts a list of seasons and chances separated by a ;")
+    @Config(description = "Chance for a bone meal to fail to grow something. Empty this string to disable. Accepts a list of seasons and chances separated by a ;")
     public static String seasonFailChance = "WINTER,0.65";
 
-    @Config
-    @Label(name = "Bone meal dirt to grass", description = "If true, you can bone meal dirt that's near a grass block to get grass block.")
+    @Config(description = "If true, you can bone meal dirt that's near a grass block to get grass block.")
     public static Boolean boneMealDirtToGrass = true;
 
-    @Config(min = 0)
-    @Label(name = "Bone meal canes and cactus", description = "How many stages will cactus and sugar canes grow with one bone meal")
+    @Config(min = 0, description = "How many stages will cactus and sugar canes grow with one bone meal. Set to 0 to disable.")
     public static MinMax boneMealCanesAndCactus = new MinMax(1, 4);
 
     public BoneMeal(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -121,7 +110,7 @@ public class BoneMeal extends Feature {
     }
 
     private void tryMakeRichFarmland(BonemealEvent event) {
-        if (!richFarmland)
+        if (!richFarmland$enable)
             return;
         BlockPos farmlandPos = null;
         if (event.getBlock().is(Blocks.FARMLAND))
@@ -179,7 +168,7 @@ public class BoneMeal extends Feature {
         if (state.getBlock() instanceof BushBlock bushBlock) {
             Optional<IntegerProperty> oAgeProperty = getAgeProperty(state);
             if (oAgeProperty.isEmpty()) {
-                InsaneSO.LOGGER.debug("No vanilla age property found for state %s".formatted(state));
+                InsaneSO.LOGGER.debug("No vanilla age property found for state {}}", state);
                 return;
             }
             int age = state.getValue(oAgeProperty.get());

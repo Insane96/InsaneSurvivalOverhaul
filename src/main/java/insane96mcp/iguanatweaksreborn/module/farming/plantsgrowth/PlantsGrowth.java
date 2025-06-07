@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -19,23 +18,19 @@ import net.minecraftforge.event.level.SaplingGrowTreeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Plants Growth", description = "Slower Plants (non-crops) growing. Plants properties are controlled via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.FARMING)
+@LoadFeature(module = Modules.Ids.FARMING, description = "Slower Plants (non-crops) growing. Plants properties are controlled via data packs")
 public class PlantsGrowth extends Feature {
 	@Config
-	@Label(name = "Huge mushrooms on Mycelium only")
 	public static Boolean hugeMushroomsOnMyceliumOnly = true;
-	@Config(min = 0)
-	@Label(name = "Cave vines underground", description = "If != 1, cave vines will grow this slower above sea level or if they can see the sky light")
+	@Config(min = 0, description = "If != 1, cave vines will grow this slower above sea level or if they can see the sky light")
 	public static Double caveVinesUnderground = 3d;
 
-	@Config
-	@Label(name = "Plant growth multipliers data pack", description = "If true, a data pack is enabled that changes the growth of plants based off various factors, such as sunlight and biome")
-	public static Boolean plantGrowthMultipliersDataPack = true;
+	@Config(description = "If true, a data pack is enabled that changes the growth of plants based off various factors, such as sunlight and biome")
+	public static Boolean dataPack = true;
 
 	public PlantsGrowth(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && plantGrowthMultipliersDataPack);
+		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
 	}
 
 	@SubscribeEvent
@@ -48,7 +43,8 @@ public class PlantsGrowth extends Feature {
 			multiplier *= plantGrowthMultiplier.getMultiplier(event.getState(), (Level) event.getLevel(), event.getPos());
 		}
 		if (caveVinesUnderground != 1 && event.getLevel().getBlockState(event.getPos().above()).is(BlockTags.CAVE_VINES)) {
-			if (event.getLevel().getSeaLevel() > event.getPos().getY()
+            //noinspection deprecation
+            if (event.getLevel().getSeaLevel() > event.getPos().getY()
 					|| event.getLevel().getBrightness(LightLayer.SKY, event.getPos()) > 0)
 				multiplier *= caveVinesUnderground;
 		}
