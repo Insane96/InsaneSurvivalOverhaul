@@ -18,6 +18,7 @@ import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
+import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
@@ -36,10 +37,13 @@ import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
 import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
 import insane96mcp.insanelib.util.IntegratedPack;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
@@ -48,7 +52,9 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -63,6 +69,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BooleanSupplier;
 
@@ -115,6 +122,57 @@ public class InsaneSO
             modEventBus.addListener(ClientSetup::registerEntityRenderers);
             //modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
             //modEventBus.addListener(ClientSetup::registerParticleFactories);
+        }
+    }
+
+    public static HashMap<String, ResourceLocation> DATA_MIGRATION = new HashMap<>();
+
+    @SubscribeEvent
+    public void migrateData(ServerStartingEvent event) {
+        if (!DATA_MIGRATION.isEmpty())
+            return;
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "age", Livestock.AGE);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "max_age", Livestock.MAX_AGE);
+    }
+
+    @SubscribeEvent
+    public void migrateData(EntityJoinLevelEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity entity))
+            return;
+
+        for (String key : DATA_MIGRATION.keySet()) {
+            migrateData(entity, key, DATA_MIGRATION.get(key));
+        }
+    }
+
+    public static void migrateData(LivingEntity entity, String oldKey, ResourceLocation newKey) {
+        if (entity.getPersistentData().contains(oldKey)) {
+            Tag tag = entity.getPersistentData().get(oldKey);
+            if (tag instanceof ByteTag byteTag)
+                ModNBTData.put(entity, newKey, byteTag.getAsByte());
+            else if (tag instanceof ShortTag shortTag)
+                ModNBTData.put(entity, newKey, shortTag.getAsShort());
+            else if (tag instanceof IntTag intTag)
+                ModNBTData.put(entity, newKey, intTag.getAsInt());
+            else if (tag instanceof LongTag longTag)
+                ModNBTData.put(entity, newKey, longTag.getAsLong());
+            else if (tag instanceof FloatTag floatTag)
+                ModNBTData.put(entity, newKey, floatTag.getAsFloat());
+            else if (tag instanceof DoubleTag doubleTag)
+                ModNBTData.put(entity, newKey, doubleTag.getAsDouble());
+            else if (tag instanceof ByteArrayTag byteArrayTag)
+                ModNBTData.put(entity, newKey, byteArrayTag.getAsByteArray());
+            else if (tag instanceof StringTag stringTag)
+                ModNBTData.put(entity, newKey, stringTag.getAsString());
+            else if (tag instanceof ListTag listTag)
+                ModNBTData.put(entity, newKey, listTag);
+            else if (tag instanceof CompoundTag compoundTag)
+                ModNBTData.put(entity, newKey, compoundTag);
+            else if (tag instanceof IntArrayTag intArrayTag)
+                ModNBTData.put(entity, newKey, intArrayTag.getAsIntArray());
+            else if (tag instanceof LongArrayTag longArrayTag)
+                ModNBTData.put(entity, newKey, longArrayTag.getAsLongArray());
+            entity.getPersistentData().remove(oldKey);
         }
     }
 

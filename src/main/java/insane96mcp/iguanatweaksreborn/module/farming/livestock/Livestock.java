@@ -8,17 +8,18 @@ import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.network.message.ForgeDataIntSync;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -53,58 +54,58 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Label(name = "Livestock", description = "Slower breeding, Growing, Egging and Milking. Lower yield.")
-@LoadFeature(module = Modules.Ids.FARMING)
+@LoadFeature(module = Modules.Ids.FARMING, description = "Slower breeding, Growing, Egging and Milking. Lower yield.")
 public class Livestock extends Feature {
 	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("milkable"));
 	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("prevent_breeding"));
 
 	public static final String MILK_COOLDOWN_LANG = InsaneSO.MOD_ID + ".milk_cooldown";
 	public static final String MILK_COOLDOWN = InsaneSO.RESOURCE_PREFIX + "milk_cooldown";
+	public static ResourceLocation AGE;
+	public static ResourceLocation MAX_AGE;
+	public static ResourceLocation STOP_AGING;
 
 	public static final String LAST_FED = InsaneSO.RESOURCE_PREFIX + "last_fed";
 
 	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("old_age"));
 
-	@Config
-	@Label(name = "Chicken from egg chance", description = "Changes the chance for a chicken to come out from an egg (1 in this value). Vanilla is 8")
+	@Config(description = "Changes the chance for a chicken to come out from an egg (1 in this value). Vanilla is 8")
 	public static Integer chickenFromEggChance = 8;
 
-	@Config
-	@Label(name = "Milk Cooldown", description = "Seconds until you can milk cows (or stew mooshrooms)")
-	public static Integer milkingCooldown = 1200;
+	@Config(min = 0,description = "Seconds until you can milk cows (or stew mooshrooms)")
+	public static Integer milkCooldown = 1200;
 
-	@Config
-	@Label(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
+	@Config(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
 	public static Boolean preventBreeding = true;
 
-	@Config
-	@Label(name = "Aging.Enable", description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
-	public static Boolean agingEnable = true;
+	@Config(description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
+	public static Boolean aging$enable = true;
 
-	@Config
-	@Label(name = "Aging.Die of old age", description = "If true, animals die of old age.")
-	public static Boolean agingDieOfOldAge = true;
+	@Config(description = "If true, animals die of old age.")
+	public static Boolean aging$dieOfOldAge = true;
 
-	@Config
-	@Label(name = "Aging.Stop at", description = "If Die of old age is disabled you can still make animals grow up to this age")
-	public static Age agingStopAt = Age.ELDER;
+	@Config(description = "If Die of old age is disabled you can still make animals grow up to this age")
+	public static Age aging$stopAt = Age.ELDER;
 
 	@Config(min = 0)
 	@Label(name = "Aging.Starvation death", description = "If true, animals will die if not young and haven't been fed in a while.")
 	public static Boolean agingStarvationDeath = false;
 
-	@Config(min = 0)
-	@Label(name = "Aging.Last fed duration", description = "How long (in minutes) will an animal remain marked as fed after eating?")
-	public static Integer agingLastFedDuration = 60;
+	@Config(description = "If true, animals will die if not young and haven't been fed in a while.")
+	public static Boolean aging$starvationDeath = false;
 
-	@Config
-	@Label(name = "Data Pack", description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
+	@Config(min = 0, description = "How long (in minutes) will an animal remain marked as fed after eating?")
+	public static Integer aging$lastFedDuration = 60;
+
+	@Config(description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
 	public static Boolean dataPack = true;
 
 	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		AGE = this.createDataKey("age");
+		MAX_AGE = this.createDataKey("max_age");
+		STOP_AGING = this.createDataKey("stop_aging");
 	}
 
 	@SubscribeEvent
@@ -180,21 +181,21 @@ public class Livestock extends Feature {
 
 	public static void aging(LivingEvent.LivingTickEvent event) {
         //noinspection DataFlowIssue
-        if (!agingEnable
+        if (!aging$enable
 				|| !(event.getEntity() instanceof AgeableMob ageableMob)
 				|| (ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 20 != 0
 				|| ageableMob.isBaby())
 			return;
 
 		boolean forceUpdateScale = false;
-		int age = ageableMob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "age");
-		int maxAge = ageableMob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "max_age");
+		int age = ModNBTData.get(ageableMob, AGE, Integer.class);
+		int maxAge = ModNBTData.get(ageableMob, MAX_AGE, Integer.class);
 		//If a max age hasn't been set yet, calculate it
 		if (maxAge == 0) {
 			for (LivestockData data : LivestockDataReloadListener.LIVESTOCK_DATA) {
                 if (data.matches(ageableMob) && data.livingDays != null) {
 					maxAge = (int) (data.getLivingDays(ageableMob) * 20 * 60);
-					ageableMob.getPersistentData().putInt(InsaneSO.RESOURCE_PREFIX + "max_age", maxAge);
+					ModNBTData.put(ageableMob, MAX_AGE, maxAge);
                     break;
                 }
 			}
@@ -203,27 +204,27 @@ public class Livestock extends Feature {
 			forceUpdateScale = true;
 		}
 		Age prevAge = getAge(ageableMob);
-		if (prevAge == agingStopAt && !agingDieOfOldAge)
+		if (prevAge == aging$stopAt && !aging$dieOfOldAge)
 			return;
 		age++;
 		Age newAge = getAge(ageableMob);
-		if (agingStarvationDeath && newAge != Age.YOUNG && !hasBeenFedRecently(ageableMob))
+		if (aging$starvationDeath && newAge != Age.YOUNG && !hasBeenFedRecently(ageableMob))
 			ageableMob.hurt(ageableMob.damageSources().starve(), Float.MAX_VALUE);
 		if (newAge == Age.ELDER)
 			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, UUID.fromString("e2083ae7-e37a-47c4-ab3e-84cf14fe6b6c"), "Old animal modifier", -0.35d, AttributeModifier.Operation.MULTIPLY_BASE, false);
 		if (age >= maxAge) {
-			if (agingDieOfOldAge)
+			if (aging$dieOfOldAge)
 				ageableMob.hurt(ageableMob.damageSources().source(OLD_AGE, null), Float.MAX_VALUE);
 			return;
 		}
         //noinspection DataFlowIssue - isClientSide is checked in caller method
         if (ModList.get().isLoaded("pehkui") && ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale))
 			PehkuiIntegration.setSize(ageableMob, newAge);
-		ageableMob.getPersistentData().putInt(InsaneSO.RESOURCE_PREFIX + "age", age);
+		ModNBTData.put(ageableMob, AGE, age);
     }
 
 	public static float getAgeRatio(AgeableMob mob) {
-		return (float) mob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "age") / (float) mob.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "max_age");
+		return (float) ModNBTData.get(mob, AGE, Integer.class) / (float) ModNBTData.get(mob, MAX_AGE, Integer.class);
 	}
 
 	public static Age getAge(AgeableMob mob) {
@@ -335,20 +336,20 @@ public class Livestock extends Feature {
 
 	public static boolean hasBeenFedRecently(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
-		return lastFed > 0 && living.level().getGameTime() - lastFed < (agingLastFedDuration * 60 * 20);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (aging$lastFedDuration * 60 * 20);
 	}
 
 	public static boolean canBeFed(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
 		if (lastFed == 0)
 			return true;
-		return living.level().getGameTime() - lastFed > (agingLastFedDuration / 2f * 60 * 20);
+		return living.level().getGameTime() - lastFed > (aging$lastFedDuration / 2f * 60 * 20);
 	}
 
 	public static void consumeFeed(LivingEntity living) {
 		long lastFed = living.getPersistentData().getLong(LAST_FED);
 		if (lastFed > 0)
-			lastFed -= (long) (agingLastFedDuration / 3f * 60 * 20);
+			lastFed -= (long) (aging$lastFedDuration / 3f * 60 * 20);
 		living.getPersistentData().putLong(LAST_FED, lastFed);
 	}
 
@@ -385,7 +386,7 @@ public class Livestock extends Feature {
 			LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 					.filter(data -> data.matches(living))
 					.forEach(data -> modifiersToApply.addAll(data.cowFluidCooldownModifiers));
-			float cooldown = Modifier.applyModifiers(milkingCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
+			float cooldown = Modifier.applyModifiers(Livestock.milkCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
 			DroppedExperience.tryGenerateMilkXp(living);
 			if (cooldown <= 0)
 				return;
@@ -467,4 +468,5 @@ public class Livestock extends Feature {
 		@SerializedName("elder")
 		ELDER
 	}
+
 }
