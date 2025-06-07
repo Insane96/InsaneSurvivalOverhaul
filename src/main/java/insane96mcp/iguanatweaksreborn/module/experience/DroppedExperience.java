@@ -12,8 +12,10 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.module.base.TagsFeature;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
@@ -43,7 +45,7 @@ public class DroppedExperience extends Feature {
 		}
 	}));
 
-	public static final String XP_PROCESSED = InsaneSO.RESOURCE_PREFIX + "xp_processed";
+	public static final ResourceLocation XP_PROCESSED = InsaneSO.location("xp_processed");
 	public static final TagKey<Block> NO_BLOCK_XP_MULTIPLIER = ISOBlockTagsProvider.create("no_xp_multiplier");
 	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("no_xp_multiplier"));
 
@@ -106,7 +108,7 @@ public class DroppedExperience extends Feature {
 
 	private static void handleGlobalExperience(ExperienceOrb xpOrb) {
 		if (globalMultiplier == 1d
-				|| xpOrb.getPersistentData().getBoolean(XP_PROCESSED)
+				|| ModNBTData.get(xpOrb, XP_PROCESSED, Boolean.class)
 				|| xpOrb.level().isClientSide)
 			return;
 
@@ -115,7 +117,7 @@ public class DroppedExperience extends Feature {
 		else
 			xpOrb.value *= globalMultiplier;
 
-		xpOrb.getPersistentData().putBoolean(XP_PROCESSED, true);
+		ModNBTData.put(xpOrb, XP_PROCESSED, true);
 		if (xpOrb.value <= 0d)
 			xpOrb.remove(Entity.RemovalReason.KILLED);
 	}
@@ -201,7 +203,8 @@ public class DroppedExperience extends Feature {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void removeExperienceBar(final RenderGuiOverlayEvent.Pre event) {
-		if (!disableExperience)
+		if (!disableExperience
+				|| Minecraft.getInstance().player == null)
 			return;
 
 		if (Minecraft.getInstance().player.jumpableVehicle() == null && event.getOverlay().equals(VanillaGuiOverlay.VIGNETTE.type())) {

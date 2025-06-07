@@ -291,12 +291,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static float bonusDamageEnchantment(Enchantment enchantment, int lvl, LivingEntity attacker, Entity target) {
 		if (!(enchantment instanceof BonusDamageEnchantment bonusDamageEnchantment))
 			return 0f;
-		float damageBonus = bonusDamageEnchantment.getDamageBonus(attacker, target, attacker.getMainHandItem(), lvl);
-		/*if (attacker instanceof Player player) {
-			float f = player.getAttackStrengthScale(0.5f);
-			damageBonus *= f * f;
-		}*/
-		return damageBonus;
+		return bonusDamageEnchantment.getDamageBonus(attacker, target, attacker.getMainHandItem(), lvl);
 	}
 
 	@SubscribeEvent
@@ -354,39 +349,12 @@ public class EnchantmentsFeature extends JsonFeature {
 
 		for (Map.Entry<EquipmentSlot, ItemStack> entry : map.entrySet()) {
 			ItemStack itemStack = entry.getValue();
-			if (!itemStack.isEmpty() && EnchantmentHelper.getItemEnchantmentLevel(enchantment, itemStack) > 0 && pStackCondition.test(itemStack)) {
+			if (!itemStack.isEmpty() && EnchantmentHelper.getTagEnchantmentLevel(enchantment, itemStack) > 0 && pStackCondition.test(itemStack)) {
 				list.add(itemStack);
 			}
 		}
-		if (ModList.get().isLoaded("toolbelt")) {
-			/*List<ItemStack> toolbeltStacks = new ArrayList<>();
-			ToolBelt.putItems(toolbeltStacks, livingEntity);
-			toolbeltStacks.removeIf(stack -> stack.isEmpty() || EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack) <= 0 || !stack.isDamaged());
-			list.addAll(toolbeltStacks);*/
-		}
 
 		return list.isEmpty() ? null : list.get(livingEntity.getRandom().nextInt(list.size()));
-	}
-
-	/**
-	 * Make Allurement's reforming work with ToolBelt items
-	 */
-	@SubscribeEvent
-	public static void onLivingUpdate(LivingEvent.LivingTickEvent event) {
-		/*if (!ModList.get().isLoaded("toolbelt")
-				|| !ModList.get().isLoaded("allurement")
-				|| event.getEntity().level().getGameTime() % AllurementConfig.COMMON.reformingTickRate.get() != 0)
-			return;
-		LivingEntity entity = event.getEntity();
-		Level level = entity.getCommandSenderWorld();
-		List<ItemStack> stacksInToolbelt = new ArrayList<>();
-		ToolBelt.putItems(stacksInToolbelt, entity);
-		for (ItemStack stack : stacksInToolbelt) {
-			int lvl = EnchantmentHelper.getTagEnchantmentLevel(AllurementEnchantments.REFORMING.get(), stack);
-			if (!stack.isEmpty() && stack.isDamaged() && lvl > 0) {
-				stack.setDamageValue(stack.getDamageValue() - 1);
-			}
-		}*/
 	}
 
 	public static void destroyVanishingCurseItemsInToolBelt(LivingEntity player) {
@@ -459,7 +427,8 @@ public class EnchantmentsFeature extends JsonFeature {
 		}
 
 		if (entity.hasEffect(MobEffects.DIG_SLOWDOWN)) {
-			float miningFatigueMultiplier = switch (entity.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier()) {
+            //noinspection DataFlowIssue
+            float miningFatigueMultiplier = switch (entity.getEffect(MobEffects.DIG_SLOWDOWN).getAmplifier()) {
 				case 0 -> 0.3F;
 				case 1 -> 0.09F;
 				case 2 -> 0.0027F;
