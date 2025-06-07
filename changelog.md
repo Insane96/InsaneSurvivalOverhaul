@@ -7,6 +7,7 @@
 
 ### Changes
 * Heavily lowered FD Rice panicle generation
+* Fog now affects sky fog too
 
 ### Removed
 * Swing Through Grass

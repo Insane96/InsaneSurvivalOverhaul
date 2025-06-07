@@ -57,7 +57,7 @@ public class Fog extends Feature {
                 || overworld$fogStartRatio == 1d && overworld$fogStartRatioOnRain == 1d
                 || event.isCanceled()
                 || event.getCamera().getFluidInCamera() != FogType.NONE
-                || event.getMode() != FogRenderer.FogMode.FOG_TERRAIN)
+                || (event.getMode() != FogRenderer.FogMode.FOG_TERRAIN && event.getMode() != FogRenderer.FogMode.FOG_SKY))
             return;
 
         if (!(event.getCamera().getEntity() instanceof LivingEntity entity))
@@ -77,45 +77,6 @@ public class Fog extends Feature {
             event.setNearPlaneDistance(event.getFarPlaneDistance() * ratio);
         event.setCanceled(true);
     }
-
-    /*private void seasonFog(ViewportEvent.RenderFog event) {
-        if (!fogChangeOnRain
-                || event.isCanceled()
-                || event.getCamera().getFluidInCamera() != FogType.NONE
-                || event.getMode() != FogRenderer.FogMode.FOG_TERRAIN)
-            return;
-
-        if (!(event.getCamera().getEntity() instanceof LivingEntity entity))
-            return;
-        if (entity.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()
-                || entity.level().dimension() != Level.OVERWORLD
-                || !entity.level().isRaining()
-                || entity.hasEffect(MobEffects.BLINDNESS)
-                //TODO Smooth out
-                || entity.getY() < entity.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, entity.blockPosition()).getY() - 16d)
-            return;
-
-        float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
-        float rainLevel = entity.level().getRainLevel(1f);
-        //Lower than 1 means a percentage of current render distance, higher means a fixed render distance
-        float near = switch (SeasonHelper.getSeasonState(entity.level()).getSeason()) {
-            case SPRING -> 0.7F;
-            case SUMMER -> 0.85F;
-            case AUTUMN -> 0.6F;
-            case WINTER -> 24F;
-        };
-        float far = switch (SeasonHelper.getSeasonState(entity.level()).getSeason()) {
-            case SPRING -> 0.8F;
-            case SUMMER -> 0.9F;
-            case AUTUMN -> 0.75F;
-            case WINTER -> 48F;
-        };
-        if (near <= 1f) event.setNearPlaneDistance(renderDistance * near);
-        else event.setNearPlaneDistance(near);
-        if (far <= 1f) event.setFarPlaneDistance(renderDistance * far);
-        else event.setFarPlaneDistance(far);
-        event.setCanceled(true);
-    }*/
 
     public void lavaFog(ViewportEvent.RenderFog event) {
         if (!betterFireResistanceLavaFog
