@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.experience.enchantments;
 
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.teamabnormals.allurement.core.AllurementConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
@@ -437,12 +438,12 @@ public class EnchantmentsFeature extends JsonFeature {
 				&& reworkBonusLootEnchantments;
 	}
 
-	public static int getEnchantmentValue(ItemStack stack) {
+	public static int getEnchantmentValue(ItemStack stack, Operation<Integer> original) {
 		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
 			if (itemDefinition.enchantability() != null && itemDefinition.item().matchesItem(stack))
 				return itemDefinition.enchantability();
 		}
-		return stack.getEnchantmentValue();
+		return original.call(stack);
 	}
 
 	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, LivingEntity entity) {
