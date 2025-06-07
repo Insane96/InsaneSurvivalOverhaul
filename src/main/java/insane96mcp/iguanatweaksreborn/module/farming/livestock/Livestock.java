@@ -6,22 +6,20 @@ import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.network.message.ForgeDataIntSync;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.network.message.EntityModNBTDataSync;
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -62,12 +60,12 @@ public class Livestock extends Feature {
 	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("prevent_breeding"));
 
 	public static final String MILK_COOLDOWN_LANG = InsaneSO.MOD_ID + ".milk_cooldown";
-	public static final String MILK_COOLDOWN = InsaneSO.RESOURCE_PREFIX + "milk_cooldown";
+
 	public static ResourceLocation AGE;
 	public static ResourceLocation MAX_AGE;
 	public static ResourceLocation STOP_AGING;
-
-	public static final String LAST_FED = InsaneSO.RESOURCE_PREFIX + "last_fed";
+	public static ResourceLocation LAST_FED;
+	public static ResourceLocation MILK_COOLDOWN;
 
 	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("old_age"));
 
@@ -75,7 +73,7 @@ public class Livestock extends Feature {
 	public static Integer chickenFromEggChance = 8;
 
 	@Config(min = 0,description = "Seconds until you can milk cows (or stew mooshrooms)")
-	public static Integer milkCooldown = 1200;
+	public static Integer fluidCooldown = 1200;
 
 	@Config(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
 	public static Boolean preventBreeding = true;
@@ -107,6 +105,8 @@ public class Livestock extends Feature {
 		AGE = this.createDataKey("age");
 		MAX_AGE = this.createDataKey("max_age");
 		STOP_AGING = this.createDataKey("stop_aging");
+		LAST_FED = this.createDataKey("last_fed");
+		MILK_COOLDOWN = this.createDataKey("milk_cooldown");
 	}
 
 	@SubscribeEvent
@@ -303,18 +303,6 @@ public class Livestock extends Feature {
 			chicken.eggTime++;
 	}
 
-	public void cowMilkTick(LivingEvent.LivingTickEvent event) {
-		if (event.getEntity().tickCount % 20 != 0 ||
-				!(event.getEntity() instanceof Animal animal))
-			return;
-
-		CompoundTag cowNBT = animal.getPersistentData();
-		int milkCooldown = cowNBT.getInt(MILK_COOLDOWN);
-		if (milkCooldown > 0)
-			milkCooldown -= 20;
-		cowNBT.putInt(MILK_COOLDOWN, milkCooldown);
-	}
-
 	@SubscribeEvent
 	public void onAnimalFeed(PlayerInteractEvent.EntityInteract event) {
 		if (event.isCanceled()
@@ -354,27 +342,47 @@ public class Livestock extends Feature {
 		event.getEntity().swing(event.getHand());
 	}
 
+	public static void setLastEat(LivingEntity living, long lastFed) {
+		ModNBTData.put(living, LAST_FED, lastFed);
+	}
+
 	public static void setLastEat(LivingEntity living) {
-		living.getPersistentData().putLong(LAST_FED, living.level().getGameTime());
+		setLastEat(living, living.level().getGameTime());
+	}
+
+	public static long getLastFed(LivingEntity living) {
+		return ModNBTData.get(living, LAST_FED, Long.class);
 	}
 
 	public static boolean hasBeenFedRecently(LivingEntity living) {
-		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		long lastFed = getLastFed(living);
 		return lastFed > 0 && living.level().getGameTime() - lastFed < (aging$lastFedDuration * 60 * 20);
 	}
 
 	public static boolean canBeFed(LivingEntity living) {
-		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		long lastFed = getLastFed(living);;
 		if (lastFed == 0)
 			return true;
 		return living.level().getGameTime() - lastFed > (aging$lastFedDuration / 2f * 60 * 20);
 	}
 
 	public static void consumeFeed(LivingEntity living) {
-		long lastFed = living.getPersistentData().getLong(LAST_FED);
+		long lastFed = getLastFed(living);;
 		if (lastFed > 0)
 			lastFed -= (long) (aging$lastFedDuration / 3f * 60 * 20);
-		living.getPersistentData().putLong(LAST_FED, lastFed);
+		setLastEat(living, lastFed);
+	}
+
+	public void cowMilkTick(LivingEvent.LivingTickEvent event) {
+		if (event.getEntity().tickCount % 20 != 0
+				|| !event.getEntity().getType().is(MILKABLE)
+				|| !(event.getEntity() instanceof Animal animal))
+			return;
+
+		int milkCooldown = ModNBTData.get(animal, MILK_COOLDOWN, Integer.class);
+		if (milkCooldown > 0)
+			milkCooldown -= 20;
+		ModNBTData.put(animal, MILK_COOLDOWN, milkCooldown);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -393,8 +401,7 @@ public class Livestock extends Feature {
 		Item item = equipped.getItem();
 		if ((!FluidUtil.getFluidHandler(equipped).isPresent() || !FluidStack.loadFluidStackFromNBT(equipped.getTag()).isEmpty()) && (!(living instanceof MushroomCow) || item != Items.BOWL))
 			return;
-		CompoundTag cowNBT = living.getPersistentData();
-		int milkCooldown = cowNBT.getInt(MILK_COOLDOWN);
+		int milkCooldown = ModNBTData.get(living, MILK_COOLDOWN, Integer.class);
 		if (milkCooldown > 0) {
 			event.setCanceled(true);
 			if (!player.level().isClientSide) {
@@ -410,15 +417,14 @@ public class Livestock extends Feature {
 			LivestockDataReloadListener.LIVESTOCK_DATA.stream()
 					.filter(data -> data.matches(living))
 					.forEach(data -> modifiersToApply.addAll(data.cowFluidCooldownModifiers));
-			float cooldown = Modifier.applyModifiers(Livestock.milkCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
 			DroppedExperience.tryGenerateMilkXp(living);
+
+			float cooldown = Modifier.applyModifiers(fluidCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
 			if (cooldown <= 0)
 				return;
-
 			milkCooldown = (int) (cooldown * 20);
-			cowNBT.putInt(MILK_COOLDOWN, milkCooldown);
-			ForgeDataIntSync.sync(living, MILK_COOLDOWN, milkCooldown);
-			//player.swing(event.getHand());
+			ModNBTData.put(living, MILK_COOLDOWN, milkCooldown);
+			EntityModNBTDataSync.sync(living, MILK_COOLDOWN, Integer.class);
 		}
 	}
 
@@ -427,10 +433,10 @@ public class Livestock extends Feature {
 		if (!this.isEnabled()
 				|| event.getLevel().isClientSide
 				|| !(event.getEntity() instanceof LivingEntity livingEntity)
-				|| !livingEntity.getPersistentData().contains(MILK_COOLDOWN))
+				|| ModNBTData.contains(livingEntity, MILK_COOLDOWN))
 			return;
 
-		ForgeDataIntSync.sync(livingEntity, MILK_COOLDOWN, livingEntity.getPersistentData().getInt(MILK_COOLDOWN));
+		EntityModNBTDataSync.sync(livingEntity, MILK_COOLDOWN, Integer.class);
 	}
 
 	@SubscribeEvent
@@ -440,8 +446,8 @@ public class Livestock extends Feature {
 			return;
 
 		for (Entity entity : ((ServerLevel) event.getEntity().level()).getEntities().getAll()) {
-			if (entity instanceof LivingEntity livingEntity && livingEntity.getPersistentData().contains(MILK_COOLDOWN))
-				ForgeDataIntSync.sync((ServerPlayer) event.getEntity(), livingEntity, MILK_COOLDOWN, livingEntity.getPersistentData().getInt(MILK_COOLDOWN));
+			if (entity instanceof LivingEntity livingEntity && ModNBTData.contains(livingEntity, MILK_COOLDOWN))
+				EntityModNBTDataSync.sync(livingEntity, MILK_COOLDOWN, Integer.class);
 		}
 	}
 

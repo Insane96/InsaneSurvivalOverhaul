@@ -78,6 +78,7 @@ public class InsaneSO
 {
     public static final String MOD_ID = "iguanatweaksreborn";
     public static final String NEW_MOD_ID = "insanesurvivaloverhaul";
+    @Deprecated(forRemoval = true)
 	public static final String RESOURCE_PREFIX = MOD_ID + ":";
     public static final Logger LOGGER = LogManager.getLogger();
 
@@ -133,6 +134,8 @@ public class InsaneSO
             return;
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "age", Livestock.AGE);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "max_age", Livestock.MAX_AGE);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "last_fed", Livestock.LAST_FED);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "milk_cooldown", Livestock.MILK_COOLDOWN);
     }
 
     @SubscribeEvent
