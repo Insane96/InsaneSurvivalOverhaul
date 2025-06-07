@@ -10,14 +10,12 @@ import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.event.AddEatEffectEvent;
 import insane96mcp.insanelib.event.CakeEatEvent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -41,8 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
-@Label(name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
-@LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
+@LoadFeature(module = Modules.Ids.HUNGER_HEALTH, name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
 public class FoodDrinks extends JsonFeature {
 
 	public static final RegistryObject<Item> BROWN_MUSHROOM_STEW = ISORegistries.ITEMS.register("brown_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
@@ -93,53 +90,39 @@ public class FoodDrinks extends JsonFeature {
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
-	@Config
-	@Label(name = "Food Hunger Formula", description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
+	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
 	public static String foodHungerFormula = "";
-	@Config
-	@Label(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
+	@Config(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
 	public static String foodSaturationModifierFormula = "saturation_modifier * 1.2";
 
-	@Config
-	@Label(name = "Faster Drink Consuming", description = "Makes potion, milk and honey faster to drink, 1 second instead of 1.6.")
+	@Config(description = "Makes potions and, milk faster to drink, 1 second instead of 1.6.")
 	public static Boolean fasterDrinkConsuming = true;
-	@Config
-	@Label(name = "Eating Speed Based Off Food Restored", description = "Makes the speed for eating food based off the hunger and saturation they provide.")
-	public static Boolean eatingSpeedBasedOffFood = true;
-	@Config
-	@Label(name = "Eating Speed Formula", description = "The formula to calculate the ticks required to eat a food. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. The default formula increases the time to eat exponentially when higher effectiveness.")
+	@Config(description = "The formula to calculate the ticks required to eat a food. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. The default formula increases the time to eat exponentially when higher effectiveness. Empty to disable")
 	public static String eatingSpeedFormula = "MIN(MAX((IF(fast_food, 16, 32) * effectiveness) * 0.075, IF(fast_food, 12, 20)), 75)";
-	@Config
-	@Label(name = "Stop consuming on hit", description = "If true, eating/drinking stops when the player's hit.")
+	@Config(description = "If true, eating/drinking stops when the player's hit.")
 	public static Boolean stopConsumingOnHit = true;
-	@Config
-	@Label(description = "If true, eating will always be possible, even with full hunger.")
+	@Config(description = "If true, eating will always be possible, even with full hunger.")
 	public static Boolean alwaysEat = false;
-	@Config(min = 0d, max = 1f)
-	@Label(name = "Raw food Poison Chance", description = "Raw food has this chance to poison the player. Raw food is defined in the iguanatweaksreborn:raw_food tag")
+	//TODO Item properties
+	@Config(min = 0d, max = 1f, description = "Raw food has this chance to poison the player. Raw food is defined in the iguanatweaksreborn:raw_food tag")
 	public static Double rawFoodPoisonChance = 0.7d;
-	@Config(min = 0d, max = 255)
-	@Label(name = "Raw food Poison Amplifier", description = "Raw food will give this level of poison to the player.")
+	@Config(min = 0d, max = 255, description = "Raw food will give this level of poison to the player.")
 	public static Integer rawFoodPoisonAmplifier = 1;
-	@Config(min = 0d)
-	@Label(name = "Raw food Poison Duration Multiplier", description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
+	@Config(min = 0d, description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
 	public static Double rawFoodPoisonDurationMultiplier = 2d;
-	@Config
-	@Label(name = "Combat Snapshot eating saturation", description = "If enabled, when eating food the saturation will not sum, instead will just be set to the food's saturation (if higher than the current). If AppleSkin is installed it also adds compatibility for saturation restored overlay")
+	@Config(description = "If enabled, when eating food, the saturation will not sum, instead will just be set to the food's saturation (if higher than the current). If AppleSkin is installed it also adds compatibility for saturation restored overlay")
 	public static Boolean combatSnapshotEatingSaturation = true;
-	@Config
-	@Label(name = "Buff cakes", description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
+	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
 	public static Boolean buffCake = true;
 
-	@Config
-	@Label(name = "No Furnace food and smoker recipe", description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
+	@Config(description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
 
 	public FoodDrinks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
-		addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
-		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, new ResourceLocation(InsaneSO.MOD_ID, "food_properties")));
+		addSyncType(InsaneSO.location("food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
+		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, InsaneSO.location("food_properties")));
 	}
 
 	@Override

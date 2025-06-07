@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.message.ExhaustionSync;
 import insane96mcp.iguanatweaksreborn.network.message.SaturationSync;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -27,26 +26,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Label(name = "Exhaustion", description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
-@LoadFeature(module = Modules.Ids.HUNGER_HEALTH)
+@LoadFeature(module = Modules.Ids.HUNGER_HEALTH, description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
 public class Exhaustion extends Feature {
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Block Break Exhaustion Multiplier", description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
+	@Config(min = 0d, max = 128d, description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
 	public static Double blockBreakExhaustionMultiplier = 0d;
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Exhaustion per tick when breaking a block", description = "When breaking block you'll get exhaustion every tick during the breaking.")
+	@Config(min = 0d, max = 128d, description = "When breaking block you'll get exhaustion every tick during the breaking.")
 	public static Double exhaustionOnBlockBreaking = 0.005d;
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Passive Exhaustion", description = "Every second the player will get this exhaustion.")
+	@Config(min = 0d, max = 128d, description = "Every second the player will get this exhaustion.")
 	public static Double passiveExhaustion = 0.005d;
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Rowing Exhaustion", description = "Every tick of the player's rowing will get this exhaustion.")
+	@Config(min = 0d, max = 128d, description = "Every tick of the player's rowing will get this exhaustion.")
 	public static Double rowingExhaustion = 0.005d;
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Bow charge exhaustion", description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
+	@Config(min = 0d, max = 128d, description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
 	public static Double bowChargeExhaustion = 0.005d;
-	@Config
-	@Label(name = "Effective Hunger Effect", description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
+	@Config(description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
 
 	public Exhaustion(Module module, boolean enabledByDefault, boolean canBeDisabled) {

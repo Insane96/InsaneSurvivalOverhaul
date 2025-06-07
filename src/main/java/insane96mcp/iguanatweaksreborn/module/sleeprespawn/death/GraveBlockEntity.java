@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 import insane96mcp.iguanatweaksreborn.integration.CuriosIntegration;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -233,7 +234,7 @@ public class GraveBlockEntity extends BlockEntity {
                 if (!ExperienceOrb.tryMergeToExisting(serverLevel, pos.getCenter(), i)) {
                     ExperienceOrb xpOrb = new ExperienceOrb(level, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, i);
                     level.addFreshEntity(xpOrb);
-                    xpOrb.getPersistentData().putBoolean(DroppedExperience.XP_PROCESSED, true);
+                    ModNBTData.put(xpOrb, DroppedExperience.XP_PROCESSED, true);
                 }
             }
             this.setXpStored(0);

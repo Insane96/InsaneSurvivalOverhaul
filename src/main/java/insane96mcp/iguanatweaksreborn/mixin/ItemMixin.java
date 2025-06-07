@@ -18,7 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ItemMixin {
 	@Inject(at = @At("HEAD"), method = "getUseDuration", cancellable = true)
 	public void getUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> callbackInfo) {
-		if (!FoodDrinks.eatingSpeedBasedOffFood || !Feature.isEnabled(FoodDrinks.class))
+		if (!FoodDrinks.eatingSpeedFormula.isEmpty()
+				|| !Feature.isEnabled(FoodDrinks.class))
 			return;
 
 		if (stack.getItem().getFoodProperties() != null)

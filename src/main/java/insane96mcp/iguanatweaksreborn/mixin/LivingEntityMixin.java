@@ -185,7 +185,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;removeModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
     public void onRemoveSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || HealthRegenHunger.sprintSpeedPenaltyBelowHunger == 0f)
+                || HealthRegenHunger.sprint$speedPenaltyBelowHunger == 0f)
             return;
         attributeInstance.removeModifier(HealthRegenHunger.SPRINT_PENALTY_UUID);
     }
@@ -193,11 +193,11 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V"))
     public void onAddSprintingModifier(boolean pSprinting, CallbackInfo ci, @Local AttributeInstance attributeInstance) {
         if (!Feature.isEnabled(EnchantmentsFeature.class)
-                || HealthRegenHunger.sprintSpeedPenaltyBelowHunger == 0f)
+                || HealthRegenHunger.sprint$speedPenaltyBelowHunger == 0f)
             return;
         if (!((LivingEntity)(Object)this instanceof Player player))
             return;
-        float penalty = (HealthRegenHunger.sprintSpeedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * HealthRegenHunger.sprintSpeedReductionEachHunger.floatValue();
+        float penalty = (HealthRegenHunger.sprint$speedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * HealthRegenHunger.sprint$speedReductionEachHunger.floatValue();
         if (penalty <= 0f)
             return;
         attributeInstance.addTransientModifier(new AttributeModifier(HealthRegenHunger.SPRINT_PENALTY_UUID, "Hungry Speed Penalty", -penalty, AttributeModifier.Operation.MULTIPLY_TOTAL));

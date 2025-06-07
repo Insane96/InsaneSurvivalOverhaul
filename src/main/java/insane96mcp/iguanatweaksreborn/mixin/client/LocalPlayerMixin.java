@@ -47,7 +47,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         if (!Feature.isEnabled(HealthRegenHunger.class))
             return original;
 
-        return HealthRegenHunger.sprintMinHunger - 1;
+        return HealthRegenHunger.sprint$minHunger - 1;
     }
 
     @Definition(id = "hasEffect", method = "Lnet/minecraft/client/player/LocalPlayer;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z")

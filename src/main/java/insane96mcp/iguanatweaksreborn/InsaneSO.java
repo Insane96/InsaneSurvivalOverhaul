@@ -16,11 +16,13 @@ import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
+import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -136,6 +138,8 @@ public class InsaneSO
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "max_age", Livestock.MAX_AGE);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "last_fed", Livestock.LAST_FED);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "milk_cooldown", Livestock.MILK_COOLDOWN);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "xp_processed", DroppedExperience.XP_PROCESSED);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "passive_regen_ticks", HealthRegenHunger.PASSIVE_REGEN_TICK);
     }
 
     @SubscribeEvent

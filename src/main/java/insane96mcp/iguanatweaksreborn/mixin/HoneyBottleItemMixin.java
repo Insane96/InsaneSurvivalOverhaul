@@ -15,9 +15,7 @@ public class HoneyBottleItemMixin {
     public void getUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> callbackInfo) {
         if (!Feature.isEnabled(FoodDrinks.class))
             return;
-        if (FoodDrinks.eatingSpeedBasedOffFood)
+        if (!FoodDrinks.eatingSpeedFormula.isEmpty())
             callbackInfo.setReturnValue(FoodDrinks.getFoodConsumingTime(stack));
-        else if (FoodDrinks.fasterDrinkConsuming)
-            callbackInfo.setReturnValue(20);
     }
 }

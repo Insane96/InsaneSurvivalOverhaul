@@ -45,7 +45,7 @@ public class DroppedExperience extends Feature {
 		}
 	}));
 
-	public static final ResourceLocation XP_PROCESSED = InsaneSO.location("xp_processed");
+	public static ResourceLocation XP_PROCESSED;
 	public static final TagKey<Block> NO_BLOCK_XP_MULTIPLIER = ISOBlockTagsProvider.create("no_xp_multiplier");
 	public static final TagKey<EntityType<?>> NO_ENTITY_XP_MULTIPLIER = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("no_xp_multiplier"));
 
@@ -85,6 +85,7 @@ public class DroppedExperience extends Feature {
 
 	public DroppedExperience(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		XP_PROCESSED = this.createDataKey("xp_processed");
 	}
 
 	public static void tryGenerateMilkXp(Entity entity) {
