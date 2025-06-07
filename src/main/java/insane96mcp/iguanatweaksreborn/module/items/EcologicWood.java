@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.items;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -18,16 +17,13 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Ecologic Wood", description = "Wooden items have a lower chance to break in sunlight.")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have a lower chance to break in sunlight.")
 public class EcologicWood extends Feature {
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
 
-    @Config(min = 0, max = 1)
-    @Label(name = "Chance at 'Max sunlight'", description = "Chance for the wooden item to not consume durability at 'Max sunlight'.")
+    @Config(min = 0, max = 1, description = "Chance for the wooden item to not consume durability at 'Max sunlight'.")
     public static Double chanceAtMaxSunlight = 0.75d;
     @Config(min = 0, max = 15)
-    @Label(name = "Max sunlight")
     public static Integer maxSunlight = 12;
 
     public EcologicWood(Module module, boolean enabledByDefault, boolean canBeDisabled) {

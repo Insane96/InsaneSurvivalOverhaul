@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -23,19 +22,16 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Misc", description = "Control Items properties via data packs. Add more tooltips.")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Control Items properties via data packs. Add more tooltips.")
 public class MiscItem extends Feature {
 
 	public static final TagKey<Item> HAS_TOOLTIP = ISOItemTagsProvider.create("has_tooltip");
 	public static final String TOOL_MINING_SPEED_LANG = "iguanatweaksreborn.tool_mining_speed";
 
-	@Config
-	@Label(description = "Tools get a mining speed tooltip.")
+	@Config(description = "Tools get a mining speed tooltip.")
 	public static Boolean miningSpeedTooltip = true;
 
-	@Config
-	@Label(description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
+	@Config(description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
 	public static Boolean itemTooltips = true;
 
 	public MiscItem(Module module, boolean enabledByDefault, boolean canBeDisabled) {

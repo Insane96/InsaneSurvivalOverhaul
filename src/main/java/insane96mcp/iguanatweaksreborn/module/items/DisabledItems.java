@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.items;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -28,8 +27,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Disabled Items", description = "Make items not able to mine / attack")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Make items not able to mine / attack")
 public class DisabledItems extends Feature {
 
 	public static final TagKey<Item> NO_DAMAGE = ISOItemTagsProvider.create("no_damage");
@@ -42,8 +40,7 @@ public class DisabledItems extends Feature {
 	public static final TagKey<Item> DISABLED = ISOItemTagsProvider.create("disabled");
 	public static final String DISABLED_ITEM_LANG = "iguanatweaksreborn.disabled_item";
 
-	@Config
-	@Label(name = "Add tooltip", description = "If set to true items in the 'no_damage', 'no_efficiency', 'no_equip' and 'disabled' item tags will get a tooltip.")
+	@Config(description = "If set to true items in the 'no_damage', 'no_efficiency', 'no_equip' and 'disabled' item tags will get a tooltip.")
 	public static Boolean addTooltip = true;
 
 	public DisabledItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {

@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -20,8 +19,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Flint Expansion", description = "Add flint tools and shield.")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Replace stone tools with flint ones.")
 public class FlintExpansion extends Feature {
 
 	public static final SimpleBlockWithItem FLINT_ROCK = SimpleBlockWithItem.register("flint_rock", () -> new GroundFlintBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5F, 1F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape()));
@@ -34,8 +32,7 @@ public class FlintExpansion extends Feature {
 	public static final RegistryObject<Item> AXE = ISORegistries.ITEMS.register("flint_axe", () -> new AxeItem(ITEM_TIER, 7.0F, -3.1F, new Item.Properties()));
 	public static final RegistryObject<Item> HOE = ISORegistries.ITEMS.register("flint_hoe", () -> new HoeItem(ITEM_TIER, -1, -2.0F, new Item.Properties()));
 
-	@Config
-	@Label(name = "Disable Stone Tools", description = "If true, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with flint ones")
+	@Config(description = "If true, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with flint ones")
 	public static Boolean disableStoneTools = true;
 
 	public FlintExpansion(Module module, boolean enabledByDefault, boolean canBeDisabled) {

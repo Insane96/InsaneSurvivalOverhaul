@@ -23,6 +23,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.livestock.Livestock;
 import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
+import insane96mcp.iguanatweaksreborn.module.items.NameTags;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -140,6 +141,7 @@ public class InsaneSO
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "milk_cooldown", Livestock.MILK_COOLDOWN);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "xp_processed", DroppedExperience.XP_PROCESSED);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "passive_regen_ticks", HealthRegenHunger.PASSIVE_REGEN_TICK);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "has_name_tag", NameTags.HAS_NAME_TAG);
     }
 
     @SubscribeEvent

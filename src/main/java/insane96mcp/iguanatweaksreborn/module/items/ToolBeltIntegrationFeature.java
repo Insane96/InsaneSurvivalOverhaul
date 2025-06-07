@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -17,15 +16,12 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@Label(name = "gigaherz Tool Belt")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, name = "gigaherz Tool Belt")
 public class ToolBeltIntegrationFeature extends Feature {
 
-	@Config
-	@Label(name = "Bigger base belt", description = "Enables a data pack that changes the crafting of the Tool Belt to give more slots (2 -> 4)")
+	@Config(description = "Enables a data pack that changes the crafting of the Tool Belt to give more slots (2 -> 4)")
 	public static Boolean biggerBaseBelt = true;
-	@Config
-	@Label(name = "Reduce upgrade cost", description = "Reduces cost to apply pouches to tool belts")
+	@Config(description = "Reduces cost to apply pouches to tool belts")
 	public static Boolean reduceUpgradeCost = true;
 
 	public ToolBeltIntegrationFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {

@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.items.unbreakableitems;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -31,8 +30,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@Label(name = "Unbreakable Items", description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
-@LoadFeature(module = Modules.Ids.ITEMS)
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
 public class UnbreakableItems extends Feature {
 
 	public static final String TOOL_DURABILITY_LANG = "iguanatweaksreborn.tool_durability";
@@ -41,22 +39,21 @@ public class UnbreakableItems extends Feature {
 	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
 	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
 
-	@Config
-	@Label(name = "Durability Tooltip", description = "Items with durability get a durability tooltip.")
+	@Config(description = "Items with durability get a durability tooltip.")
 	public static Boolean durabilityTooltip = true;
-	@Config
-	@Label(name = "Any enchanted item", description = "If set to true items will no longer break if enchanted. Ignores the iguanatweaksreborn:not_unbreakable item tag.")
+	@Config(description = "If set to true items will no longer break if enchanted.")
 	public static Boolean unbreakableEnchantedItems = true;
 
 	public UnbreakableItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		if (ModList.get().isLoaded("shieldsplus")) {
+		if (ModList.get().isLoaded("shieldsplus"))
 			MinecraftForge.EVENT_BUS.addListener(ShieldsPlusIntegration::onBlockWithCrouch);
-		}
 	}
 
 	public static boolean isUnbreakable(ItemStack stack) {
-		return !stack.is(NOT_UNBREAKABLE) || (unbreakableEnchantedItems && stack.isEnchanted());
+		if (stack.is(NOT_UNBREAKABLE))
+			return true;
+		return unbreakableEnchantedItems && stack.isEnchanted();
 	}
 
 	public static boolean isBroken(ItemStack stack) {
