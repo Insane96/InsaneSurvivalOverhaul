@@ -1,0 +1,36 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "quark"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "pattern": [
+                    "###",
+                    "###",
+                    "###"
+                ],
+                "key": {
+                    "#": {
+                        "item": "minecraft:wheat"
+                    }
+                },
+                "result": {
+                    "item": "quark:thatch",
+                    "count": 8
+                },
+                "conditions": [
+                    {
+                        "type": "quark:flag",
+                        "flag": "thatch"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -10,6 +10,7 @@
 * Heavily lowered FD Rice panicle generation
 * Fog now affects sky fog too
 * Crops data pack now changes hay block recipe to use 4 wheat instead of 9
+  * This also changes Quark's Thatch block recipe to use 9 but output more 
 * 'Unbreakable Enchanted Items' no longer affects items in the item tag `iguanatweaksreborn:not_unbreakable`
 
 ### Removed
