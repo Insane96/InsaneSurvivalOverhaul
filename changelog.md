@@ -1,7 +1,12 @@
 # Changelog
 
+* Giving poison potatoes to entities will prevent them from aging
+
 ## Upcoming
 **Backup your config file, some config option names have changed**
+
+### Changes
+* Heavily lowered FD Rice panicle generation
 
 ### Removed
 * Swing Through Grass
