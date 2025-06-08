@@ -414,6 +414,14 @@ public class EnchantmentsFeature extends JsonFeature {
 		return original.call(stack);
 	}
 
+	public static int getEnchantmentValue(ItemStack stack) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
+			if (itemDefinition.enchantability() != null && itemDefinition.item().matchesItem(stack))
+				return itemDefinition.enchantability();
+		}
+		return stack.getEnchantmentValue();
+	}
+
 	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, LivingEntity entity) {
 		if (applyEfficiency) {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);

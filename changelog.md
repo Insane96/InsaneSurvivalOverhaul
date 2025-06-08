@@ -1,5 +1,9 @@
 # Changelog
 
+## Alpha 4.12.11
+### Fixes
+* Missing method for ISE
+
 ## Alpha 4.12.10
 **Backup your config file, some config option names have changed**
 
