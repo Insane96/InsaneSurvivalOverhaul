@@ -301,7 +301,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 		if (isEnchantedBook && !resultStack.isBookEnchantable(right))
 			resultStack = ItemStack.EMPTY;
 
-		this.cost.set((int) Math.round((baseCost + mergeCost) * Anvils.xpCost$Multiplier));
+		this.cost.set((int) Math.round((baseCost + mergeCost) * Anvils.xpCost$multiplier));
 		if (isRenaming && !Anvils.renaming$noCost)
 			this.cost.set(this.cost.get() + COST_RENAME);
 

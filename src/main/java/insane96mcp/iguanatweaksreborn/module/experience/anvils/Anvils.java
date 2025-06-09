@@ -53,7 +53,7 @@ public class Anvils extends Feature {
     @Config(min = 0, description = "Set the cap for repairing items in the anvil (vanilla is 40)")
     public static Integer xpCost$repairCap = 1024;
     @Config(min = 0, description = "Multiplier for the levels required to repair or merge an item.")
-    public static Double xpCost$Multiplier = 1d;
+    public static Double xpCost$multiplier = 1d;
     @Config(description = "The cost when merging two items is calculated from the final item, no longer from a strange calculations between the two items merging.")
     public static Boolean xpCost$mergingCostIsBasedOffResult = true;
     @Config(description = "Repairing items in an anvil doesn't cost xp")
