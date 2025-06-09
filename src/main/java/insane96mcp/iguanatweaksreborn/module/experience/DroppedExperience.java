@@ -69,7 +69,7 @@ public class DroppedExperience extends Feature {
 	@Config(min = 0, description = "Vanilla mobs drop 1~4 xp per equipment they have.")
 	public static Integer mobs$bonusExperiencePerEquipment = 2;
 	@Config(min = 0, description = "This is added to 'Bonus experience per equipment'.")
-	public static Integer bonusExperiencePerEnchantedEquipment = 3;
+	public static Integer mobs$bonusExperiencePerEnchantedEquipment = 3;
 
 	@Config(min = 0, max = 512, name = "Bottle o' Enchanting XP", description = "Bottle o' enchanting will drop this amount of experience. Can be set to 0 to make Bottle o' enchanting drop no experience")
 	public static Integer xpBottleDroppedXp = 40;
@@ -179,14 +179,14 @@ public class DroppedExperience extends Feature {
 			if (!stack.isEmpty()) {
 				mob.xpReward += mobs$bonusExperiencePerEquipment;
 				if (stack.isEnchanted())
-					mob.xpReward += bonusExperiencePerEnchantedEquipment;
+					mob.xpReward += mobs$bonusExperiencePerEnchantedEquipment;
 			}
 		}
 		for (ItemStack stack : mob.getHandSlots()) {
 			if (!stack.isEmpty()) {
 				mob.xpReward += mobs$bonusExperiencePerEquipment;
 				if (stack.isEnchanted())
-					mob.xpReward += bonusExperiencePerEnchantedEquipment;
+					mob.xpReward += mobs$bonusExperiencePerEnchantedEquipment;
 			}
 		}
 	}
