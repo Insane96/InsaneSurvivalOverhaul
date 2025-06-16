@@ -1,60 +1,100 @@
 {
-    "equipment": {
-        "head": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+    "properties": [
+        {
+            "property": "equipment",
+            "slot": "head",
             "items": [
                 {
-                    "id": "minecraft:golden_helmet"
+                    "item": "minecraft:chainmail_helmet"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "chest": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "chest",
             "items": [
                 {
-                    "id": "minecraft:golden_chestplate"
+                    "item": "minecraft:chainmail_chestplate"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "legs": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "legs",
             "items": [
                 {
-                    "id": "minecraft:golden_leggings"
+                    "item": "minecraft:chainmail_leggings"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "feet": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "feet",
             "items": [
                 {
-                    "id": "minecraft:golden_boots"
+                    "item": "minecraft:chainmail_boots"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         }
-    }
+    ]
 }

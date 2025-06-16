@@ -1,60 +1,100 @@
 {
-    "equipment": {
-        "head": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+    "properties": [
+        {
+            "property": "equipment",
+            "slot": "head",
             "items": [
                 {
-                    "id": "minecraft:diamond_helmet"
+                    "item": "minecraft:diamond_helmet"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "chest": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "chest",
             "items": [
                 {
-                    "id": "minecraft:diamond_chestplate"
+                    "item": "minecraft:diamond_chestplate"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "legs": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "legs",
             "items": [
                 {
-                    "id": "minecraft:diamond_leggings"
+                    "item": "minecraft:diamond_leggings"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         },
-        "feet": {
-            "chance": {
-                "value": 0.5,
-                "difficulty_modifier": {
-                    "operation": "add",
-                    "hard": 0.25
-                }
-            },
+        {
+            "property": "equipment",
+            "slot": "feet",
             "items": [
                 {
-                    "id": "minecraft:diamond_boots"
+                    "item": "minecraft:diamond_boots"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.5,
+                        "modifiers": [
+                            {
+                                "modifier": "difficulty",
+                                "operation": "add",
+                                "hard": 0.25
+                            }
+                        ]
+                    }
                 }
             ]
         }
-    }
+    ]
 }

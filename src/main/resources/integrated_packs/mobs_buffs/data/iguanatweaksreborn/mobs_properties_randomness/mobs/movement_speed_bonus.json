@@ -1,20 +1,12 @@
 {
     "target": "#iguanatweaksreborn:movement_speed_bonus",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.movement_speed",
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.movement_speed",
             "modifier_name": "More Speed for non-zombie mobs",
-            "amount": {
-                "value": 0.09,
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
-                    },
-                    "amount": 0.75
-                }
-            },
-            "operation": "multiply_base"
+            "operation": "multiply_base",
+            "amount": 0.09
         }
     ]
 }

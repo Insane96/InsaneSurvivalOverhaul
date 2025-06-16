@@ -1,36 +1,52 @@
 {
     "target": "#iguanatweaksreborn:mobs_no_bosses",
-    "attributes": [
+    "properties": [
         {
-            "id": "enhancedai:generic.xray_follow_range",
-            "chance": {
-                "value": 0.05,
-                "depth_modifier": {
-                    "operation": "add",
-                    "amount_per_step": 0.05,
-                    "step": 16,
-                    "starting_y": 80
-                }
-            },
+            "property": "attribute_modifier",
+            "attribute": "enhancedai:generic.xray_follow_range",
             "modifier_name": "More XRay Range for Mobs",
+            "operation": "addition",
             "amount": {
                 "min": 8,
                 "max": 24,
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
-                    },
-                    "amount": 0.75
-                }
+                "modifiers": [
+                    {
+                        "modifier": "condition",
+                        "operation": "multiply",
+                        "value": 0.75,
+                        "conditions": [
+                            {
+                                "condition": "spawn_type",
+                                "spawn_types": ["spawner"]
+                            }
+                        ]
+                    }
+                ]
             },
-            "operation": "addition"
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.05,
+                        "modifiers": [
+                            {
+                                "modifier": "deepness",
+                                "operation": "add",
+                                "amount_per_step": 0.05,
+                                "step": 16,
+                                "starting_y": 80
+                            }
+                        ]
+                    }
+                }
+            ]
         },
         {
-            "id": "forge:swim_speed",
+            "property": "attribute_modifier",
+            "attribute": "forge:swim_speed",
             "modifier_name": "More Swim Speed for Mobs",
-            "amount": 2,
-            "operation": "multiply_base"
+            "operation": "multiply_base",
+            "amount": 2
         }
     ],
     "priority": 1

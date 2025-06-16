@@ -1,70 +1,82 @@
 {
     "target": "#iguanatweaksreborn:zombies",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.movement_speed",
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.movement_speed",
             "modifier_name": "More Speed for Zombies",
             "amount": {
                 "value": 0.03,
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
-                    },
-                    "amount": 0.5
-                }
+                "modifiers": [
+                    {
+                        "modifier": "condition",
+                        "operation": "multiply",
+                        "value": 0.5,
+                        "conditions": [
+                            {
+                                "condition": "spawn_type",
+                                "spawn_types": ["spawner"]
+                            }
+                        ]
+                    }
+                ]
             },
             "operation": "multiply_base"
         },
         {
-            "id": "minecraft:generic.follow_range",
-            "modifier_name": "More Follow Range for Zombies",
-            "amount": {
-                "value": 5,
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
-                    },
-                    "amount": 0.5
-                }
-            },
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.attack_damage",
+            "modifier_name": "Attack damage nerf for zombies",
+            "amount": 5,
             "operation": "addition"
         },
         {
-            "id": "minecraft:generic.attack_damage",
-            "modifier_name": "Attack damage nerf for zombies",
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.follow_range",
+            "modifier_name": "More Follow Range for Zombies",
             "amount": -0.25,
             "operation": "multiply_total"
         },
         {
-            "id": "minecraft:generic.attack_speed",
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.attack_speed",
             "modifier_name": "Attack speed nerf for zombies",
             "amount": -0.5,
             "operation": "multiply_total"
-        }
-    ],
-    "set_nbt": [
+        },
         {
-            "nbt_tag": "enhancedai:miner",
+            "property": "set_nbt",
+            "path": "ForgeData.enhancedai:miner",
             "type": "boolean",
             "value": {
                 "value": 0.05,
-                "depth_modifier": {
-                    "operation": "add",
-                    "amount_per_step": 0.01,
-                    "step": 8,
-                    "starting_y": 80
-                },
-                "condition_modifier": {
-                    "operation": "multiply",
-                    "condition": {
-                        "spawner_behaviour": "spawner_only"
+                "modifiers": [
+                    {
+                        "modifier": "deepness",
+                        "operation": "add",
+                        "amount_per_step": 0.01,
+                        "step": 8,
+                        "starting_y": 80
                     },
-                    "amount": 0.35
-                }
-            },
-            "persistent_data": true
+                    {
+                        "modifier": "condition",
+                        "operation": "multiply",
+                        "value": 0.35,
+                        "conditions": [
+                            {
+                                "condition": "spawn_type",
+                                "spawn_types": ["spawner"]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "property": "set_nbt",
+            "path": "IsBaby",
+            "type": "boolean",
+            "value": 0
         }
     ]
 }
