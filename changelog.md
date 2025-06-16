@@ -3,6 +3,13 @@
 ## Upcoming
 **Backup your config file, many config option names have changed**
 
+### Additions
+* Added Shield Block damage
+  * Vanilla shields now block only 5 damage
+
+### Changes
+* Ported mobs_buffs data pack to MPR 5
+
 ## Alpha 4.12.11
 ### Fixes
 * Missing method for ISE

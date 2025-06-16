@@ -1,11 +1,12 @@
 {
     "target": "#iguanatweaksreborn:speed_nerf",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.movement_speed",
-            "modifier_name": "Speed nerf",
-            "amount": -0.15,
-            "operation": "multiply_base"
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.movement_speed",
+            "modifier_name": "ISO speed nerf",
+            "operation": "multiply_base",
+            "amount": -0.15
         }
     ]
 }

@@ -1,11 +1,12 @@
 {
     "target": "minecraft:vindicator",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.attack_damage",
-            "modifier_name": "ISO mobs_buffs",
-            "amount": -5,
-            "operation": "addition"
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.attack_damage",
+            "modifier_name": "ISO Vindicator nerf",
+            "operation": "addition",
+            "amount": -5
         }
     ]
 }

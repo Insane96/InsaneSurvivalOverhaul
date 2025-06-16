@@ -1,7 +1,8 @@
 {
     "target": "#iguanatweaksreborn:skeletons",
-    "scale_pehkui": [
+    "properties": [
         {
+            "property": "scale",
             "scale": {
                 "min": 0.8,
                 "max": 1

@@ -1,7 +1,8 @@
 {
     "target": "minecraft:vex",
-    "scale_pehkui": [
+    "properties": [
         {
+            "property": "scale",
             "scale": 1.2,
             "scale_types": [
                 "pehkui:width",

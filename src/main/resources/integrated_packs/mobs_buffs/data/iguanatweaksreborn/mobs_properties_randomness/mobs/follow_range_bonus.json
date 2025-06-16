@@ -1,13 +1,12 @@
 {
     "target": "#iguanatweaksreborn:follow_range_bonus",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.follow_range",
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for non-zombie mobs",
-            "amount": {
-                "value": 24
-            },
-            "operation": "addition"
+            "operation": "addition",
+            "amount": 24
         }
     ]
 }

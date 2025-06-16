@@ -1,7 +1,8 @@
 {
     "target": "minecraft:bee",
-    "scale_pehkui": [
+    "properties": [
         {
+            "property": "scale",
             "scale": 0.8,
             "scale_types": [
                 "pehkui:width",

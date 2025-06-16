@@ -1,11 +1,12 @@
 {
     "target": "minecraft:iron_golem",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.follow_range",
-            "modifier_name": "More Sight for Iron Golems",
-            "amount": 1,
-            "operation": "multiply_base"
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.max_health",
+            "modifier_name": "More Health for Iron Golems",
+            "operation": "multiply_base",
+            "amount": 1
         }
     ]
 }

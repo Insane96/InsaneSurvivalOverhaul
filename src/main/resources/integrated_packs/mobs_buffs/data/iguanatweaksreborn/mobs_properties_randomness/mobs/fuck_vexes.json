@@ -1,11 +1,12 @@
 {
     "target": "minecraft:vex",
-    "attributes": [
+    "properties": [
         {
-            "id": "minecraft:generic.max_health",
-            "modifier_name": "ISO mobs_buffs",
-            "amount": -10,
-            "operation": "addition"
+            "property": "attribute_modifier",
+            "attribute": "minecraft:generic.max_health",
+            "modifier_name": "ISO nerf Vexes",
+            "operation": "addition",
+            "amount": -10
         }
     ]
 }

@@ -5,6 +5,8 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
 @LoadFeature(module = Modules.Ids.COMBAT, description = "This feature disables itself if Shields+ is installed")
@@ -13,6 +15,8 @@ public class Shields extends Feature {
 	public static Integer shieldWindup = 0;
 	@Config(min = 0d, max = Float.MAX_VALUE, description = "The minimum damage dealt to the player for the shield to take damage. Vanilla is 3. E.g. With this set to 3, the shield will not be damaged if damage received is lower than.")
 	public static Double minShieldHurtDamage = 0d;
+	@Config(min = 0, description = "The amount of damage a shield blocks")
+	public static Integer shieldBlockDamage = 0;
 
 	public Shields(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -29,6 +33,14 @@ public class Shields extends Feature {
 
 	public static float getMinHurtDamage(float original) {
 		return isEnabled(Shields.class) ? minShieldHurtDamage.floatValue() : original;
+	}
+
+	@SubscribeEvent
+	public void blockEvent(ShieldBlockEvent event) {
+		if (!this.isEnabled())
+			return;
+
+		event.setBlockedDamage(shieldBlockDamage);
 	}
 
 }

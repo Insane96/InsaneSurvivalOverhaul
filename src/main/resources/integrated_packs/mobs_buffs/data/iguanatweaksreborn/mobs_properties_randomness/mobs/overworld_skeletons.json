@@ -1,227 +1,266 @@
 {
     "target": "#iguanatweaksreborn:overworld_skeletons",
-    "set_nbt": [
+    "properties": [
         {
-            "nbt_tag": "enhancedai:inaccuracy",
+            "property": "set_nbt",
+            "path": "ForgeData.enhancedai:inaccuracy",
             "type": "double",
             "value": {
                 "min": 6,
                 "max": 10,
-                "difficulty_modifier": {
-                    "operation": "multiply",
-                    "hard": 0.5
-                }
-            },
-            "persistent_data": true
-        }
-    ],
-    "equipment": {
-        "main_hand": {
-            "override": true,
-            "chance": 0.05,
-            "items": [
-                {
-                    "id": "minecraft:stick"
-                }
-            ]
-        },
-        "off_hand": {
-            "override": true,
-            "chance": {
-                "value": 0.06,
-                "condition_modifier": {
-                    "operation": "add",
-                    "amount": 0.04,
-                    "condition": {
-                        "world": {
-                            "moon_phases": "full_moon"
-                        }
+                "modifiers": [
+                    {
+                        "modifier": "difficulty",
+                        "operation": "multiply",
+                        "hard": 0.5
                     }
-                }
-            },
+                ]
+            }
+        },
+        {
+            "property": "equipment",
+            "slot": "offhand",
             "items": [
                 {
-                    "id": "shieldsplus:wooden_shield",
+                    "item": "shieldsplus:wooden_shield",
                     "weight": 90
                 },
                 {
-                    "id": "iguanatweaksreborn:flint_shield",
+                    "item": "iguanatweaksreborn:flint_shield",
                     "weight": 50
                 },
                 {
-                    "id": "iguanatweaksexpanded:copper_shield",
-                    "weight": 90
-                },
-                {
-                    "id": "shieldsplus:iron_shield",
+                    "item": "shieldsplus:iron_shield",
                     "weight": 10
                 },
                 {
-                    "id": "iguanatweaksexpanded:durium_shield",
-                    "weight": 10
-                },
-                {
-                    "id": "shieldsplus:golden_shield",
+                    "item": "shieldsplus:golden_shield",
                     "weight": 30
                 },
                 {
-                    "id": "shieldsplus:diamond_shield",
+                    "item": "shieldsplus:diamond_shield",
                     "weight": 1
                 }
             ],
-            "enchantments": [
+            "functions": [
                 {
-                    "chance": {
-                        "value": 0.15,
-                        "condition_modifier": {
-                            "operation": "add",
-                            "amount": 0.10,
-                            "condition": {
-                                "world": {
-                                    "moon_phases": "full_moon"
-                                }
-                            }
-                        }
-                    },
-                    "with_levels": {
+                    "function": "enchant",
+                    "type": "with_levels",
+                    "lvl": {
                         "min": 1,
                         "max": 10
+                    },
+                    "conditions": [
+                        {
+                            "condition": "chance",
+                            "chance": {
+                                "value": 0.15,
+                                "modifiers": [
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "moon_phase",
+                                                "phases": [ "full_moon" ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
+                    "chance": {
+                        "value": 0.06,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.04,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
         },
-        "head": {
-            "enchantments": [
+        {
+            "property": "presets",
+            "presets": [
                 {
+                    "preset": "iguanatweaksreborn:leather_armor",
+                    "weight": 180
+                },
+                {
+                    "preset": "iguanatweaksreborn:chainmail_armor",
+                    "weight": 40
+                },
+                {
+                    "preset": "iguanatweaksreborn:golden_armor",
+                    "weight": 220
+                },
+                {
+                    "preset": "iguanatweaksreborn:iron_armor",
+                    "weight": 8
+                },
+                {
+                    "preset": "iguanatweaksreborn:diamond_armor",
+                    "weight": 1
+                }
+
+            ],
+            "conditions": [
+                {
+                    "condition": "chance",
                     "chance": {
                         "value": 0.15,
-                        "condition_modifier": {
-                            "operation": "add",
-                            "amount": 0.10,
-                            "condition": {
-                                "world": {
-                                    "moon_phases": "full_moon"
-                                }
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
                             }
-                        }
-                    },
-                    "with_levels": {
-                        "min": 1,
-                        "max": 10
+                        ]
                     }
                 }
             ]
         },
-        "chest": {
-            "enchantments": [
+        {
+            "property": "equipment",
+            "slot": "head",
+            "functions": [
                 {
-                    "chance": {
-                        "value": 0.15,
-                        "condition_modifier": {
-                            "operation": "add",
-                            "amount": 0.10,
-                            "condition": {
-                                "world": {
-                                    "moon_phases": "full_moon"
-                                }
-                            }
-                        }
-                    },
-                    "with_levels": {
+                    "function": "enchant",
+                    "type": "with_levels",
+                    "lvl": {
                         "min": 1,
                         "max": 10
+                    },
+                    "chance": {
+                        "value": 0.15,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
         },
-        "legs": {
-            "enchantments": [
+        {
+            "property": "equipment",
+            "slot": "chest",
+            "functions": [
                 {
-                    "chance": {
-                        "value": 0.15,
-                        "condition_modifier": {
-                            "operation": "add",
-                            "amount": 0.10,
-                            "condition": {
-                                "world": {
-                                    "moon_phases": "full_moon"
-                                }
-                            }
-                        }
-                    },
-                    "with_levels": {
+                    "function": "enchant",
+                    "type": "with_levels",
+                    "lvl": {
                         "min": 1,
                         "max": 10
+                    },
+                    "chance": {
+                        "value": 0.15,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
         },
-        "feet": {
-            "enchantments": [
+        {
+            "property": "equipment",
+            "slot": "legs",
+            "functions": [
                 {
-                    "chance": {
-                        "value": 0.15,
-                        "condition_modifier": {
-                            "operation": "add",
-                            "amount": 0.10,
-                            "condition": {
-                                "world": {
-                                    "moon_phases": "full_moon"
-                                }
-                            }
-                        }
-                    },
-                    "with_levels": {
+                    "function": "enchant",
+                    "type": "with_levels",
+                    "lvl": {
                         "min": 1,
                         "max": 10
+                    },
+                    "chance": {
+                        "value": 0.15,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "property": "equipment",
+            "slot": "feet",
+            "functions": [
+                {
+                    "function": "enchant",
+                    "type": "with_levels",
+                    "lvl": {
+                        "min": 1,
+                        "max": 10
+                    },
+                    "chance": {
+                        "value": 0.15,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
         }
-    },
-    "presets": {
-        "mode": "before",
-        "chance": {
-            "value": 0.15,
-            "condition_modifier": {
-                "operation": "add",
-                "amount": 0.10,
-                "condition": {
-                    "world": {
-                        "moon_phases": "full_moon"
-                    }
-                }
-            }
-        },
-        "list": [
-            {
-                "id": "iguanatweaksreborn:leather_armor",
-                "weight": 180
-            },
-            {
-                "id": "iguanatweaksreborn:chained_copper_armor",
-                "weight": 120
-            },
-            {
-                "id": "iguanatweaksreborn:chainmail_armor",
-                "weight": 40
-            },
-            {
-                "id": "iguanatweaksreborn:golden_armor",
-                "weight": 220
-            },
-            {
-                "id": "iguanatweaksreborn:iron_armor",
-                "weight": 8
-            },
-            {
-                "id": "iguanatweaksreborn:durium_armor",
-                "weight": 8
-            },
-            {
-                "id": "iguanatweaksreborn:diamond_armor",
-                "weight": 1
-            }
-        ]
-    }
+    ]
 }
