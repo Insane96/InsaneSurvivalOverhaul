@@ -5,7 +5,7 @@
 
 ### Additions
 * Added Shield Block damage
-  * Vanilla shields now block only 5 damage
+  * Vanilla shields now blocks only 5 damage
 
 ### Changes
 * Ported mobs_buffs data pack to MPR 5

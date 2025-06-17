@@ -68,6 +68,8 @@
 
 	"item.iguanatweaksreborn.shortbow": "Shortbow",
 
+	"iguanatweaksreborn.shield_block_damage": "Blocked damage: %f",
+
 	"iguanatweaksreborn:farming_module": "Farming",
 
 	"iguanatweaksreborn.weak_hoe": "This hoe is too weak to till soil",
