@@ -499,4 +499,8 @@ public class Livestock extends Feature {
 		ELDER
 	}
 
+	public static boolean isBreedingDisabled(Animal animal) {
+		return Feature.isEnabled(Livestock.class) && preventBreeding && animal.getType().is(PREVENT_BREEDING);
+	}
+
 }

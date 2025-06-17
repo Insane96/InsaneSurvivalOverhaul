@@ -10,6 +10,9 @@
 ### Changes
 * Ported mobs_buffs data pack to MPR 5
 
+### Fixes
+* Disabling Livestock not disabling "prevent breeding"
+
 ## Alpha 4.12.11
 ### Fixes
 * Missing method for ISE

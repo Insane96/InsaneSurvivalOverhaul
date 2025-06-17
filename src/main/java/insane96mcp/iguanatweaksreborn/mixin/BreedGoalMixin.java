@@ -20,8 +20,7 @@ public abstract class BreedGoalMixin {
     @Expression("this.animal.isInLove()")
     @ModifyExpressionValue(method = "canUse", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public boolean iguanatweaksreborn$preventBreedingIfPlayerTriggered(boolean original) {
-        if (!Livestock.preventBreeding
-                || !this.animal.getType().is(Livestock.PREVENT_BREEDING)
+        if (!Livestock.isBreedingDisabled(this.animal)
                 || !original)
             return original;
 
