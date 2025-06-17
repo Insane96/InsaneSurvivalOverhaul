@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -36,25 +35,20 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 import java.util.UUID;
 
-@Label(name = "Spawning", description = "Add a brand new Echo Torch and some changes to mob spawn")
-@LoadFeature(module = Modules.Ids.MOBS)
+@LoadFeature(module = Modules.Ids.MOBS, description = "Add a brand new Echo Torch and some changes to mob spawn")
 public class Spawning extends Feature {
     public static final UUID GUARDIAN_MODIFIER_UUID = UUID.fromString("93e7f541-3fee-4e79-8b9f-1e75fa71082e");
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(state -> 7)));
     public static final RegistryObject<PoiType> ECHO_LANTERN_POI = ISORegistries.POI_TYPES.register("echo_lantern", () -> new PoiType(ImmutableSet.copyOf(ECHO_LANTERN.block().get().getStateDefinition().getPossibleStates()), 1, 64));
 
-    @Config
-    @Label(name = "No Zombie Villagers", description = "Disables Zombie Villagers")
+    @Config(description = "Disables Zombie Villagers")
     public static Boolean noZombieVillagers = false;
-    @Config
-    @Label(name = "Allow world spawn spawn", description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
+    @Config(description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
-    @Config
-    @Label(name = "Remove skeletons from Fortresses", description = "Disables normal skeletons from spawning in Fortresses.")
+    @Config(description = "Disables normal skeletons from spawning in Fortresses.")
     public static Boolean removeSkeletonsFromFortresses = true;
-    @Config
-    @Label(name = "Guardians in Deep Oceans", description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
+    @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
     public static Boolean guardiansInDeepOceans = true;
 
     public Spawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {

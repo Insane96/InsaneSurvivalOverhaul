@@ -3,14 +3,14 @@ package insane96mcp.iguanatweaksreborn.module.mobs.equipment;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
-import insane96mcp.insanelib.setup.ILStrings;
+import insane96mcp.insanelib.module.base.TagsFeature;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -21,8 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Equipment", description = "Changes to mobs equipment")
-@LoadFeature(module = Modules.Ids.MOBS)
+@LoadFeature(module = Modules.Ids.MOBS, description = "Changes to mobs equipment")
 public class Equipment extends JsonFeature {
 
     public static final ArrayList<EquipmentDropChance> EQUIPMENT_DROP_CHANCES_DEFAULT = new ArrayList<>(List.of(
@@ -38,17 +37,13 @@ public class Equipment extends JsonFeature {
             new EquipmentDropChance(IdTagMatcher.newId("progressivebosses:wither_minion"), EquipmentSlot.MAINHAND)
     ));
     public static final ArrayList<EquipmentDropChance> equipmentDropChances = new ArrayList<>();
-    @Config
-    @Label(name = "Drop chance", description = "Set the drop chance for mobs equipment.")
+    @Config(description = "Set the drop chance for mobs equipment.")
     public static Double dropChance = 0.5d;
-    @Config
-    @Label(name = "Drop chance from Spawners", description = "Set the drop chance for mobs equipment when spawned from spawners.")
+    @Config(description = "Set the drop chance for mobs equipment when spawned from spawners.")
     public static Double dropChanceFromSpawners = 0.2d;
-    @Config(min = 0, max = 1)
-    @Label(name = "Max durability", description = "Max durability of items dropped by mobs. This also fixes https://bugs.mojang.com/browse/MC-136374. Setting to 0 will disable this feature.")
+    @Config(min = 0, max = 1, description = "Max durability of items dropped by mobs. This also fixes https://bugs.mojang.com/browse/MC-136374. Setting to 0 will disable this feature.")
     public static Double maxDurability = 0.6d;
-    @Config
-    @Label(name = "Disenchant equipment", description = "All drops from mobs will be disenchanted.")
+    @Config(description = "All drops from mobs will be disenchanted.")
     public static Boolean disenchantEquipment = false;
 
     public Equipment(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -76,7 +71,7 @@ public class Equipment extends JsonFeature {
                 }
             }
             if (!customDropChance) {
-                if (entity.getPersistentData().getBoolean(ILStrings.Tags.SPAWNED_FROM_SPAWNER))
+                if (TagsFeature.isSpawnType(MobSpawnType.SPAWNER, entity))
                     entity.setDropChance(slot, dropChanceFromSpawners.floatValue());
                 else
                     entity.setDropChance(slot, dropChance.floatValue());

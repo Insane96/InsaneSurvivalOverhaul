@@ -5,14 +5,12 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.SerializableTrade;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -33,13 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-@Label(name = "Wandering Trades", description = "Change wandering trader offers. Trades can be customized via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.MOBS)
+@LoadFeature(module = Modules.Ids.MOBS, description = "Change wandering trader offers. Trades can be customized via json in this feature's folder")
 public class WanderingTrades extends JsonFeature {
-    public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "desert_pyramid"));
-    public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "trail_ruins"));
-    public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "jungle_pyramid"));
-    public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "igloo"));
+    public static final TagKey<Structure> DESERT_TEMPLE_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("desert_pyramid"));
+    public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("trail_ruins"));
+    public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("jungle_pyramid"));
+    public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("igloo"));
 
     public static final Supplier<ArrayList<SerializableTrade>> WANDERING_TRADER_GENERIC_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
             new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.WHEAT_SEEDS), 4),
@@ -106,16 +103,13 @@ public class WanderingTrades extends JsonFeature {
 
     public static final ArrayList<SerializableTrade> wanderingTraderBuyingTrades = new ArrayList<>();
 
-    @Config
-    @Label(name = "Amount of Buying trades", description = "Vanilla is 0 pre-23w31a experimental feature, 2 otherwise")
+    @Config(description = "Vanilla is 0 pre-23w31a experimental feature, 2 otherwise")
     public static Integer buyingTrades = 2;
 
-    @Config
-    @Label(name = "Amount of Ordinary trades", description = "Vanilla is 5")
+    @Config(description = "Vanilla is 5")
     public static Integer ordinaryTrades = 6;
 
-    @Config
-    @Label(name = "Amount of Rare trades", description = "Vanilla is 1")
+    @Config(description = "Vanilla is 1")
     public static Integer rareTrades = 2;
 
     public WanderingTrades(Module module, boolean enabledByDefault, boolean canBeDisabled) {
