@@ -10,6 +10,10 @@
 ### Changes
 * Ported mobs_buffs data pack to MPR 5
 
+### Removed
+* Enhanced AI integration
+  * Was just changing config options
+
 ### Fixes
 * Disabling Livestock not disabling "prevent breeding"
 
