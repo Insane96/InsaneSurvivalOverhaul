@@ -4,12 +4,13 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.util.ModNBTData;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.gossip.GossipType;
@@ -27,40 +28,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Label(name = "Villagers", description = "Nerfs to villagers + change their trades via json config")
-@LoadFeature(module = Modules.Ids.MOBS)
+@LoadFeature(module = Modules.Ids.MOBS, description = "Nerfs to villagers + change their trades via json config")
 public class Villagers extends Feature {
 
-	private static final String CURE_DISCOUNT_REMOVED = InsaneSO.RESOURCE_PREFIX + "cure_discount_removed";
+	public static ResourceLocation CURE_DISCOUNT_REMOVED;
+	public static ResourceLocation WAS_CONVERTED_ZOMBIE;
 
-	@Config
-	@Label(name = "Lock Trades", description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
+	@Config(description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
 	public static Boolean lockTrades = true;
-	@Config
-	@Label(name = "Always convert villager to zombie", description = "If true, villagers will always be transformed into Zombies no matter the difficulty.")
+	@Config(description = "If true, villagers will always be transformed into Zombies no matter the difficulty.")
 	public static Boolean alwaysConvertZombie = true;
-	@Config(min = 0d, max = 1d)
-	@Label(name = "Max Discount Percentage", description = "Define a max percentage discount that villagers can give.")
+	@Config(min = 0d, max = 1d, description = "Define a max percentage discount that villagers can give.")
 	public static Double maxDiscount = 0.5d;
-	@Config
-	@Label(name = "Prevent Cure Discount", description = "If true, villagers will no longer get the discount when cured from Zombies to prevent over discounting.")
+	@Config(description = "If true, discount from curing zombie villagers will only be applied to zombie villagers that were naturally spawned.")
 	public static Boolean preventCureDiscount = true;
-	@Config
-	@Label(name = "Clamp Negative Demand", description = "When villagers restock, they update the 'demand'. Demand is a trade modifier that increases the price whenever a trade is done many times, BUT when a trade is not performed, at each restock the 'demand' goes negative, making possible for a trade to never increase it's price due to high negative demand. With this to true, negative demand will be capped at -max_uses of the trade (e.g. Carrot trade from a farmer will have it's minimum demand set to -16).")
+	@Config(description = "When villagers restock, they update the 'demand'. Demand is a trade modifier that increases the price whenever a trade is done many times, BUT when a trade is not performed, at each restock the 'demand' goes negative, making possible for a trade to never increase it's price due to high negative demand. With this to true, negative demand will be capped at -max_uses of the trade (e.g. Carrot trade from a farmer will have it's minimum demand set to -16).")
 	public static Boolean clampNegativeDemand = true;
-	@Config(min = 0, max = 1)
-	@Label(name = "Nitwit chance", description = "Chance for a nitwit to spawn when two villagers breed")
+	@Config(min = 0, max = 1, description = "Chance for a nitwit to spawn when two villagers breed")
 	public static Double nitwitChance = 0.1d;
-	@Config
-	@Label(name = "Remove Bad Omen", description = "If true, the effect can no longer be applied to entities")
+	@Config(description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = false;
-	@Config
-	@Label(name = "Trades Data Pack", description = "Enables a data pack that changes villagers trades")
+	@Config(description = "Enables a data pack that changes villagers trades")
 	public static Boolean tradesDataPack = true;
 
 	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
+		CURE_DISCOUNT_REMOVED = this.createDataKey("cure_discount_removed");
+		WAS_CONVERTED_ZOMBIE = this.createDataKey("was_converted_zombie");
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -101,7 +96,8 @@ public class Villagers extends Feature {
 
 	public void tryRemovingCureDiscount(Villager villager) {
 		if (!preventCureDiscount
-				|| villager.getPersistentData().getBoolean(CURE_DISCOUNT_REMOVED))
+				|| ModNBTData.get(villager, CURE_DISCOUNT_REMOVED, Boolean.class)
+				|| !ModNBTData.get(villager, WAS_CONVERTED_ZOMBIE, Boolean.class))
 			return;
 
 		Map<UUID, Object2IntMap<GossipType>> gossips = villager.getGossips().getGossipEntries();
@@ -109,7 +105,7 @@ public class Villagers extends Feature {
 			villager.getGossips().remove(uuid, GossipType.MAJOR_POSITIVE);
 			villager.getGossips().remove(uuid, GossipType.MINOR_POSITIVE);
 		}));
-		villager.getPersistentData().putBoolean(CURE_DISCOUNT_REMOVED, true);
+		ModNBTData.put(villager, CURE_DISCOUNT_REMOVED, true);
 	}
 
 	public static int clampSpecialPrice(int specialPriceDiff, final ItemStack baseCostA) {

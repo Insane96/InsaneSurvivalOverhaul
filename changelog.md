@@ -9,6 +9,8 @@
 
 ### Changes
 * Ported mobs_buffs data pack to MPR 5
+* Prevent Cure Discount now only applies to killed villagers and not naturally spawned zombie villagers
+* Disabled items tooltips are now gray
 
 ### Removed
 * Enhanced AI integration
