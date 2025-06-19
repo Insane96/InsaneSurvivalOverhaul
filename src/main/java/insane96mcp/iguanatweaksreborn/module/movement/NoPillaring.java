@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.movement;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -20,15 +19,19 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "No Pillaring", description = "Prevents the player from placing blocks below him when in mid air.")
-@LoadFeature(module = Modules.Ids.MOVEMENT)
+@LoadFeature(module = Modules.Ids.MOVEMENT, description = "Prevents the player from placing blocks below him when in mid air.")
 public class NoPillaring extends Feature {
 
 	public static final String NO_PILLARING_LANG = "iguanatweaksreborn.no_pillaring";
 
-	@Config
-	@Label(name = "Monsters Only", description = "If true, pillaring will be negated only if there are monsters nearby")
-	public static Boolean monstersOnly = true;
+	@Config(description = "If true, pillaring will be negated only if there are monsters nearby")
+	public static Boolean monstersNearby = true;
+
+	@Config(description = "Range at which monsters must be in order to negate pillaring")
+	public static Integer monstersRange = 12;
+
+	@Config(description = "If true, pillaring will be negated only if the player is engaged in combat")
+	public static Boolean engaged = true;
 
 	public NoPillaring(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -43,8 +46,8 @@ public class NoPillaring extends Feature {
 				|| playerEntity.isInWater()
 				|| playerEntity.onClimbable())
 			return;
-        if (monstersOnly
-				&& event.getLevel().getNearestEntity(Monster.class, TargetingConditions.forNonCombat().ignoreLineOfSight(), event.getEntity(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity().getBoundingBox().inflate(16d)) == null)
+        if (monstersNearby
+				&& event.getLevel().getNearestEntity(Monster.class, TargetingConditions.forNonCombat().ignoreLineOfSight(), event.getEntity(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), event.getEntity().getBoundingBox().inflate(monstersRange)) == null)
             return;
 		//noinspection ConstantConditions
 		BlockPos placedPos = event.getPos().relative(event.getFace());
