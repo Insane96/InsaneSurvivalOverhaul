@@ -122,12 +122,12 @@ public class DisabledItems extends Feature {
 
 		ItemStack stack = event.getItemStack();
 		if (stack.is(NO_DAMAGE))
-			event.getToolTip().add(Component.translatable(NO_DAMAGE_ITEM_LANG).withStyle(ChatFormatting.GRAY));
+			event.getToolTip().add(Component.translatable(NO_DAMAGE_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
 		if (stack.is(NO_MINING))
-			event.getToolTip().add(Component.translatable(NO_MINING_ITEM_LANG).withStyle(ChatFormatting.GRAY));
+			event.getToolTip().add(Component.translatable(NO_MINING_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
 		if (stack.is(NO_EQUIP))
-			event.getToolTip().add(Component.translatable(NO_EQUIP_ITEM_LANG).withStyle(ChatFormatting.GRAY));
+			event.getToolTip().add(Component.translatable(NO_EQUIP_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
 		if (stack.is(DISABLED))
-			event.getToolTip().add(Component.translatable(DISABLED_ITEM_LANG).withStyle(ChatFormatting.GRAY));
+			event.getToolTip().add(Component.translatable(DISABLED_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
 	}
 }
