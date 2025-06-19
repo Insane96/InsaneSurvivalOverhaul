@@ -5,7 +5,6 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -22,17 +21,14 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-@Label(name = "Gold", description = "Changes Gold tools to have an innate Fortune/Looting I")
-@LoadFeature(module = Modules.Ids.MINING)
+@LoadFeature(module = Modules.Ids.MINING, description = "Changes Gold tools to have an innate Fortune/Looting I")
 public class Gold extends Feature {
 
 	public static final String LUCKY_GOLD_TOOLTIP = InsaneSO.MOD_ID + ".innate_luck";
 
-	@Config(min = 0, max = 255)
-	@Label(name = "Looting Level", description = "Set the innate looting level of gold tools.")
+	@Config(min = 0, max = 255, description = "Set the innate looting level of gold tools.")
 	public static Integer lootingLevel = 1;
-	@Config(min = 0, max = 255)
-	@Label(name = "Fortune Level", description = "Set the innate fortune level of gold tools.")
+	@Config(min = 0, max = 255, description = "Set the innate fortune level of gold tools.")
 	public static Integer fortuneLevel = 1;
 
 	public Gold(Module module, boolean enabledByDefault, boolean canBeDisabled) {

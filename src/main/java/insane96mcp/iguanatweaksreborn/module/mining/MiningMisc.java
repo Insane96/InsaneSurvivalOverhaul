@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.mining;
 import com.teamabnormals.caverns_and_chasms.core.CCConfig;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -18,25 +17,18 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Label(name = "Misc", description = "Various mining changes")
-@LoadFeature(module = Modules.Ids.MINING)
+@LoadFeature(module = Modules.Ids.MINING, description = "Various mining changes")
 public class MiningMisc extends Feature {
-
-	@Config
-	@Label(name = "Insta-Mine Silverfish", description = "Silverfish blocks will insta-mine like pre-1.17")
+	@Config(name = "Insta-Mine Silverfish", description = "Silverfish blocks will insta-mine like pre-1.17")
 	public static Boolean instaMineSilverfish = true;
-	@Config
-	@Label(name = "Insta-Mine Heads", description = "Heads will insta-break")
+	@Config(name = "Insta-Mine Heads", description = "Heads will insta-break")
 	public static Boolean instaMineHeads = true;
 
-	@Config
-	@Label(name = "Faster slabs, stairs and walls", description = "Makes slabs, stairs and walls take less time to break")
+	@Config(name = "Faster slabs, stairs and walls", description = "Makes slabs, stairs and walls take less time to break")
 	public static Boolean fastSlabsStairsWalls = true;
-	@Config
-	@Label(name = "Efficiency based destroy delay", description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool mining speed.")
+	@Config(description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool mining speed.")
 	public static Boolean efficiencyBasedDestroyDelay = true;
-	@Config
-	@Label(name = "Caverns and Chasms Integration", description = "Changes some Caverns and Chasms config options.")
+	@Config(description = "Changes some Caverns and Chasms config options.")
 	public static Boolean cavernsChasmsIntegration = true;
 
 	public MiningMisc(Module module, boolean enabledByDefault, boolean canBeDisabled) {
