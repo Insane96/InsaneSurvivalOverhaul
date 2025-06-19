@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -17,28 +16,23 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import vectorwing.farmersdelight.common.Configuration;
 
-@Label(name = "Data Packs & Integration", description = "Various data packs that can be enabled/disabled")
-@LoadFeature(module = Modules.Ids.MISC)
+@LoadFeature(module = Modules.Ids.MISC, name = "Data Packs & Integration", description = "Various data packs that can be enabled/disabled")
 public class DataPacks extends Feature {
 
-    @Config
-    @Label(name = "Disable ALL data packs", description = "If true, no integrated data pack will be loaded")
+    @Config(description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
 
-    @Config
-    @Label(name = "Hardcore Torches", description = """
+    @Config(description = """
             Changes vanilla torch recipes.
             * Torches can be only made on Campfires early on in the game
             * With shears you can make 3 torches out of coal
             * With Fire Charges you can make them later in the game.""")
     public static Boolean hardcoreTorches = true;
 
-    @Config
-    @Label(name = "Cheaper Chains", description = "Changes vanilla chains recipe. Makes chains easily craftable with nuggets only.")
+    @Config(description = "Changes vanilla chains recipe. Makes chains easily craftable with nuggets only.")
     public static Boolean cheaperChains = true;
 
-    @Config
-    @Label(name = "Misc tweaks", description = """
+    @Config(description = """
             Minor changes:
             * Cakes now drop when broken and not eaten
             * Dark Prismarine is made easier
@@ -49,68 +43,49 @@ public class DataPacks extends Feature {
             * Levers and glass can now be broken faster with pickaxes, cactus with hoes""")
     public static Boolean miscTweaks = true;
 
-    @Config
-    @Label(name = "Actual Redstone Components", description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
+    @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
     public static Boolean actualRedstoneComponents = true;
 
-    @Config
-    @Label(name = "Copper Furnace", description = "If true a data pack will be enabled that makes furnaces require copper. Copper ingots can be obtained from raw copper on campfires.")
+    @Config(description = "If true a data pack will be enabled that makes furnaces require copper. Copper ingots can be obtained from raw copper on campfires.")
     public static Boolean copperFurnace = true;
 
-    @Config
-    @Label(name = "Disable Long Noses Structures", description = "If true a data pack will be enabled that disables villages and pillagers outpost generation.")
-    public static Boolean disableLongNoses = true;
+    @Config(description = "If true a data pack will be enabled that disables villages and pillagers outpost generation.")
+    public static Boolean disableLongNosesStructures = true;
 
-    @Config
-    @Label(name = "Fishing Loot Changes", description = "If true a data pack will be enabled that changes fishing Loot.")
+    @Config(description = "If true a data pack will be enabled that changes fishing Loot.")
     public static Boolean fishingLootChanges = true;
-    @Config
-    @Label(name = "Increase End Cities", description = "If true, a data pack will be enabled that makes End Cities will be more common.")
+    @Config(description = "If true, a data pack will be enabled that makes End Cities more common.")
     public static Boolean increaseEndCities = true;
 
-    @Config
-    @Label(name = "Better Structure Loot", description = "If true a data pack will be enabled that overhauls structure loot. Disables itself if iguanatweaksexpanded is present")
+    @Config(description = "If true a data pack will be enabled that overhauls structure loot. Disables itself if iguanatweaksexpanded is present")
     public static Boolean betterStructureLoot = true;
-    @Config
-    @Label(name = "Less loot closer to spawn", description = "If true a data pack will be enabled that reduces loot from structures closer to spawn")
+    @Config(description = "If true a data pack will be enabled that reduces loot from structures closer to spawn")
     public static Boolean lessLootCloserToSpawn = true;
-    @Config
-    @Label(name = "Mob loot changes", description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
+    @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean mobLootChanges = true;
-    @Config
-    @Label(name = "Advancements overhaul", description = """
+    @Config(description = """
             Overhauls vanilla advancements:
-            * Merges them in a big giant advancement tree
             * Heavily increases experience reward
             * Removes some advancements (like villagers ones)""")
     public static Boolean advancements = true;
-    @Config
-    @Label(name = "Supplementaries integration", description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
+    @Config(description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
     public static Boolean supplementaries = true;
-    @Config
-    @Label(name = "Farmer's Delight integration", description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
+    @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
     public static Boolean farmersDelight = true;
-    @Config
-    @Label(name = "Environmental integration", description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
+    @Config(description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
     public static Boolean environmental = true;
-    @Config
-    @Label(name = "Quark integration", description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
+    @Config(description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
     public static Boolean quark = true;
-    @Config
-    @Label(name = "Autumnity integration", description = "Integrates the mod with Autumnity. Changes animals loot to match the livestock changes.")
+    @Config(description = "Integrates the mod with Autumnity. Changes animals loot to match the livestock changes.")
     public static Boolean autumnity = true;
-    @Config
-    @Label(name = "Caverns & Chasms integration", description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
+    @Config(description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
     public static Boolean cavernsAndChasms = true;
-    @Config
-    @Label(name = "Create integration", description = "Integrates the mod with Crate. Alters ore generation.")
+    @Config(description = "Integrates the mod with Crate. Alters ore generation.")
     public static Boolean create = true;
-    @Config
-    @Label(name = "Tinkers' Construct integration", description = "Integrates the mod with Tinker's Construct. Disables vanilla items. Changes some stats and adds modifiers")
+    @Config(description = "Integrates the mod with Tinker's Construct. Disables vanilla items. Changes some stats and adds modifiers")
     public static Boolean tinkersConstruct = false;
 
-    @Config
-    @Label(name = "Force Reload world Data Packs", description = "When you add a new mod the game automatically sets the data pack of the mod at the bottom of all the data packs, making the data packs loaded from this mod not work. If this is set to true the enabled and disabled Data Packs of the world are reset and reloaded. WARNING: you'll lose disabled data packs!")
+    @Config(description = "When you add a new mod the game automatically sets the data pack of the mod at the bottom of all the data packs, making the data packs loaded from this mod not work. If this is set to true the enabled and disabled Data Packs of the world are reset and reloaded. WARNING: you'll lose disabled data packs!")
     public static Boolean forceReloadWorldDataPacks = false;
 
     public DataPacks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -120,7 +95,7 @@ public class DataPacks extends Feature {
         InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && miscTweaks);
         InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && actualRedstoneComponents);
         InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && copperFurnace);
-        InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableLongNoses);
+        InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableLongNosesStructures);
         InsaneSO.addServerPack("fishing_loot_changes", "Insane's Survival Overhaul Fishing Loot Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && fishingLootChanges);
         InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && increaseEndCities);
         InsaneSO.addServerPack("better_loot", "Insane's Survival Overhaul Better Loot", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded"));

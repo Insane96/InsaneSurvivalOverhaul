@@ -9,7 +9,6 @@ import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -47,8 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Label(name = "Beacon & Conduit", description = "Beacon has been redesigned to have more effects and range based off blocks used for pyramid. Effects and blocks ranges are controlled via json config in this feature's folder.")
-@LoadFeature(module = Modules.Ids.MISC)
+@LoadFeature(module = Modules.Ids.MISC, name = "Beacon & Conduit", description = "Beacon has been redesigned to have more effects and range based off blocks used for pyramid. Effects and blocks ranges are controlled via json config in this feature's folder.")
 public class BeaconConduit extends JsonFeature {
 
     public static final SimpleBlockWithItem BEACON = SimpleBlockWithItem.register("beacon", () -> new ISOBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)));
@@ -113,23 +111,20 @@ public class BeaconConduit extends JsonFeature {
     ));
     public static final ArrayList<BeaconEffect> effects = new ArrayList<>();
 
-    @Config
-    @Label(name = "Conduit.Better Protection", description = "Greatly increases the range and damage of the conduit")
-    public static Boolean betterConduitProtection = true;
-    @Config(min = 0d, max = 64d)
-    @Label(name = "Conduit.Protection Distance Multiplier", description = "Distance multiplier (formula is `blocks_around / 7 * this_multiplier`) from the conduit at which it will deal damage to enemies.")
-    public static Double conduitProtectionDistanceMultiplier = 8d;
-    @Config(min = 0d, max = 96d)
-    @Label(name = "Conduit.Protection Max Damage Distance", description = "If a mob is within this radius from the conduit, it will be dealt the maximum amount of damage.")
-    public static Double conduitProtectionMaxDamageDistance = 8d;
+    @Config(description = "Greatly increases the range and damage of the conduit")
+    public static Boolean conduit$betterProtection = true;
+    @Config(min = 0d, max = 64d, description = "Distance multiplier (formula is `blocks_around / 7 * this_multiplier`) from the conduit at which it will deal damage to enemies.")
+    public static Double conduit$protectionDistanceMultiplier = 8d;
+    @Config(min = 0d, max = 96d, description = "If a mob is within this radius from the conduit, it will be dealt the maximum amount of damage.")
+    public static Double conduit$protectionMaxDamageDistance = 8d;
 
     public BeaconConduit(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
 
         JSON_CONFIGS.add(new JsonConfig<>("beacon_blocks_ranges.json", blocksList, BLOCKS_LIST_DEFAULT, IdTagValue.LIST_TYPE));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));
-        addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
-        JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, new ResourceLocation(InsaneSO.MOD_ID, "beacon_effects")));
+        addSyncType(InsaneSO.location("beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
+        JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, InsaneSO.location("beacon_effects")));
         InsaneSO.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
     }
 
@@ -178,7 +173,7 @@ public class BeaconConduit extends JsonFeature {
 
     public static boolean conduitUpdateDestroyEnemies(Level level, BlockPos blockPos, List<BlockPos> blocks) {
         if (!isEnabled(BeaconConduit.class)
-                || !betterConduitProtection)
+                || !conduit$betterProtection)
             return false;
 
         LivingEntity nearestEntity = level.getNearestEntity(LivingEntity.class, TargetingConditions.forNonCombat().selector(livingEntity -> livingEntity instanceof Enemy && livingEntity.isInWaterOrRain()), null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), getDamageAABB(blockPos, blocks));
@@ -188,16 +183,16 @@ public class BeaconConduit extends JsonFeature {
         level.playSound(null, nearestEntity.getX(), nearestEntity.getY(), nearestEntity.getZ(), SoundEvents.CONDUIT_ATTACK_TARGET, SoundSource.BLOCKS, 1.0F, 1.0F);
         double distance = nearestEntity.position().distanceTo(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
         float damage;
-        if (distance < conduitProtectionMaxDamageDistance)
+        if (distance < conduit$protectionMaxDamageDistance)
             damage = MAX_DAMAGE;
         else
-            damage = (float) (1 - (distance - conduitProtectionMaxDamageDistance) / (maxRangeRadius() - conduitProtectionMaxDamageDistance)) * (MAX_DAMAGE - MIN_DAMAGE) + MIN_DAMAGE;
+            damage = (float) (1 - (distance - conduit$protectionMaxDamageDistance) / (maxRangeRadius() - conduit$protectionMaxDamageDistance)) * (MAX_DAMAGE - MIN_DAMAGE) + MIN_DAMAGE;
         nearestEntity.hurt(nearestEntity.damageSources().magic(), damage);
         return true;
     }
 
     private static AABB getDamageAABB(BlockPos blockPos, List<BlockPos> blocks) {
-        double range = blocks.size() / 7d * conduitProtectionDistanceMultiplier;
+        double range = blocks.size() / 7d * conduit$protectionDistanceMultiplier;
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
@@ -205,7 +200,7 @@ public class BeaconConduit extends JsonFeature {
     }
 
     private static double maxRange() {
-        return 42 / 7d * conduitProtectionDistanceMultiplier;
+        return 42 / 7d * conduit$protectionDistanceMultiplier;
     }
 
     private static double maxRangeRadius() {
@@ -218,13 +213,13 @@ public class BeaconConduit extends JsonFeature {
         int heightRequired;
 
         public BeaconEffect(String location, int[] timeCost, int heightRequired) {
-            super(Type.ID, new ResourceLocation(location), null);
+            super(Type.ID, ResourceLocation.parse(location), null);
             this.timeCost = timeCost;
             this.heightRequired = heightRequired;
         }
 
         public BeaconEffect(MobEffect mobEffect, int[] timeCost, int heightRequired) {
-            super(Type.ID, ForgeRegistries.MOB_EFFECTS.getKey(mobEffect), null);
+            super(Type.ID, Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getKey(mobEffect)), null);
             this.timeCost = timeCost;
             this.heightRequired = heightRequired;
         }

@@ -232,7 +232,7 @@ public abstract class PlayerMixin extends LivingEntity {
 	public int onTurtleHelmetTick(int original) {
 		if (!Feature.isEnabled(Tweaks.class))
 			return original;
-		return Tweaks.turtleHelmetWaterBreathingTime;
+		return Tweaks.turtle$helmetWaterBreathingTime;
 	}
 
 	@ModifyExpressionValue(method = "getPortalWaitTime", at = @At(value = "CONSTANT", args = "intValue=80"))

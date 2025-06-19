@@ -9,7 +9,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.SyncDiscreteNameTags;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -21,7 +20,6 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -58,8 +56,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Tweaks", description = "Various stuff that doesn't fit in any other Feature.")
-@LoadFeature(module = Modules.Ids.MISC)
+@LoadFeature(module = Modules.Ids.MISC, description = "Various stuff that doesn't fit in any other Feature.")
 public class Tweaks extends Feature {
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("iguanatweaks:painful_world_border", GameRules.Category.MISC, GameRules.IntegerValue.create(0));
@@ -74,75 +71,56 @@ public class Tweaks extends Feature {
     public static final TagKey<Block> BREAK_ON_FALL = ISOBlockTagsProvider.create("break_on_fall");
     public static final TagKey<Item> WORLD_IMMUNE = ISOItemTagsProvider.create("world_immune");
 
-    public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "collide_with_wall"));
+    public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("collide_with_wall"));
 
-    @Config
-    @Label(name = "Prevent fire with resistance", description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
+    @Config(description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
     public static Boolean preventFireWithResistance = true;
 
-    @Config
-    @Label(name = "Falling breaking glass", description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. iguanatweaksreborn:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
+    @Config(description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. iguanatweaksreborn:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
     public static Boolean fallingBreakingGlass = true;
-    @Config(min = 1)
-    @Label(name = "Poison damage speed", description = "Poison will damage the player every this ticks at level I. Vanilla is 25.")
+    @Config(min = 1, description = "Poison will damage the player every this ticks at level I. Vanilla is 25.")
     public static Integer poisonDamageSpeed = 60;
 
-    @Config
-    @Label(name = "Sponge.Maximum Soak Blocks", description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
-    public static Integer maxSpongeSoakBlocks = 256;
-    @Config
-    @Label(name = "Sponge.Maximum Soak Range", description = "The maximum range at which sponges will check for soakable blocks. (Vanilla is 5, disabled if quark is installed)")
-    public static Integer maxSpongeSoakRange = 10;
-    @Config
-    @Label(name = "Sponge.Dry in the sun and wet in rain", description = "If exposed to the sun sponges may dry and if exposed to rain sponges might get wet. Requires a Minecraft restart if disabled")
-    public static Boolean spongesDryInTheSun = true;
+    @Config(description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
+    public static Integer sponge$maxSoakBlocks = 256;
+    @Config(description = "The maximum range at which sponges will check for soakable blocks. (Vanilla is 5, disabled if quark is installed)")
+    public static Integer sponge$maxSoakRange = 10;
+    @Config(description = "If exposed to the sun sponges may dry and if exposed to rain sponges might get wet")
+    public static Boolean sponges$dryWetWeather = true;
 
-    @Config
-    @Label(name = "Better hardcore death", description = "When you die in hardcore, your spawn point is set to where you died and a lightning strike is summoned")
+    @Config(description = "When you die in hardcore, your spawn point is set to where you died and a lightning strike is summoned")
     public static Boolean betterHardcoreDeath = true;
 
-    @Config(min = 0, max = 100)
-    @Label(name = "Breathe.Air ticks consumed", description = "The amount of ticks the entities consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
-    public static Double breatheAirTicksConsumed = 1.5d;
+    @Config(min = 0, max = 100, description = "The amount of ticks the entities consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
+    public static Double breathe$airTicksConsumed = 1.5d;
 
-    @Config(min = 0, max = 100)
-    @Label(name = "Breathe.Drown Speed", description = "Every how many ticks will entities drown")
-    public static Integer breatheDrownSpeed = 30;
+    @Config(min = 0, max = 100, description = "Every how many ticks will entities drown")
+    public static Integer breathe$drownSpeed = 30;
+    @Config(description = "The amount of air ticks the entities regains each tick when out of water. Min is the amount as soon as you exit water, Max is a few seconds out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4.")
+    public static MinMax breathe$airTicksRefilled = new MinMax(1, 2.5);
     @Config
-    @Label(name = "Breathe.Air ticks refilled", description = "The amount of air ticks the entities regains each tick when out of water. Min is the amount as soon as you exit water, Max is a few seconds out of water. For non integer numbers the decimal part will count as a chance to have a +1. Vanilla is 4.")
-    public static MinMax breatheAirTicksRefilled = new MinMax(1, 2.5);
-    @Config
-    @Label(name = "Breathe.Increase drown damage the more drowning")
-    public static Boolean breatheIncreaseDrownDamageTheMoreDrowning = true;
-    @Config
-    @Label(name = "Totem resistance", description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
+    public static Boolean breathe$increaseDrownDamageTheMoreDrowning = true;
+    @Config(description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
     public static Boolean totemResistance = true;
 
-    @Config
-    @Label(name = "Turtle.Helmet water breathing time", description = "The ticks of Water Breathing given by the Turtle Helmet. Vanilla is 200")
-    public static Integer turtleHelmetWaterBreathingTime = 900;
-    @Config
-    @Label(name = "Turtle.Scute drop as block", description = "If true scutes will drop as a block and not as item")
-    public static Boolean scuteDropAsBlock = true;
+    @Config(description = "The ticks of Water Breathing given by the Turtle Helmet. Vanilla is 200")
+    public static Integer turtle$helmetWaterBreathingTime = 900;
+    @Config(description = "If true scutes will drop as a block and not as item")
+    public static Boolean turtle$scuteDropsAsBlock = true;
 
-    @Config
-    @Label(name = "Splash potions throw strength", description = "The strength used to throw splash potions. Vanilla is 0.5")
-    public static Double splashPotionThrowStrength = 1d;
+    @Config(description = "The strength used to throw splash potions. Vanilla is 0.5")
+    public static Double splashPotionThrowStrength = 0.8d;
 
-    @Config(min = 0)
-    @Label(name = "Collide with walls damage", description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable")
+    @Config(min = 0, description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable. Please note that even if set to 0, might still show up in performance profilers.")
     public static Double collideWithWallsDamage = 2.5d;
 
-    @Config(min = 0)
-    @Label(description = "Vanilla is 10")
+    @Config(min = 0, description = "Vanilla is 10")
     public static Double leashMaxDistance = 16d;
 
-    @Config(min = -1, max = 0)
-    @Label(name = "Frozen Movement Speed modifier", description = "The speed modifier when frozen. Vanilla is -0.05")
+    @Config(min = -1, max = 0, description = "The speed modifier when frozen. Vanilla is -0.05")
     public static Double frozenMovementSpeedModifier = -0.1d;
 
-    @Config
-    @Label(name = "Ding on mob hit at distance", description = "Plays a sound effect when a mob is hit at least from this distance.")
+    @Config(description = "Plays a sound effect when a mob is hit at least from this distance.")
     public static Integer dingDistance = 40;
 
     @Config
@@ -157,10 +135,8 @@ public class Tweaks extends Feature {
     @Override
     public void readConfig(ModConfigEvent event) {
         super.readConfig(event);
-        if (spongesDryInTheSun) {
-            Blocks.WET_SPONGE.isRandomlyTicking = true;
-            Blocks.SPONGE.isRandomlyTicking = true;
-        }
+        Blocks.WET_SPONGE.isRandomlyTicking = sponges$dryWetWeather;
+        Blocks.SPONGE.isRandomlyTicking = sponges$dryWetWeather;
     }
 
     public static boolean isFireImmune(Entity entity) {
@@ -177,7 +153,7 @@ public class Tweaks extends Feature {
             return soakableBlocks;
 
         //Vanilla uses 65 and not 64
-        return maxSpongeSoakBlocks + 1;
+        return sponge$maxSoakBlocks + 1;
     }
 
 	public static int changeSpongeMaxRange(int range) {
@@ -185,7 +161,7 @@ public class Tweaks extends Feature {
 			return range;
 
 		//Vanilla uses < instead of <=
-		return maxSpongeSoakRange + 1;
+		return sponge$maxSoakRange + 1;
 	}
 
     public static void onSpongeTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -329,16 +305,16 @@ public class Tweaks extends Feature {
             ticksSinceOutOfWater = 0;
             event.getEntity().getPersistentData().putLong(InsaneSO.RESOURCE_PREFIX + "tick_since_out_of_water", event.getEntity().level().getGameTime());
         }
-        int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksConsumed);
+        int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksConsumed);
         int respiration = EnchantmentHelper.getRespiration(event.getEntity());
         airConsumed = respiration > 0 && event.getEntity().getRandom().nextInt(respiration + 1) > 0 ? 0 : airConsumed;
         if (event.getEntity().getAirSupply() <= 0)
             airConsumed = 1;
         event.setConsumeAirAmount(airConsumed);
 
-        int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksRefilled.min);
+        int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksRefilled.min);
         if (ticksSinceOutOfWater > 75) {
-            refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breatheAirTicksRefilled.max);
+            refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksRefilled.max);
             if (event.canBreathe())
                 setTimesDrowned(event.getEntity(), 0);
         }
@@ -349,11 +325,11 @@ public class Tweaks extends Feature {
     @SubscribeEvent
     public void onDrown(LivingDrownEvent event) {
         if (!this.isEnabled()
-                || !breatheIncreaseDrownDamageTheMoreDrowning
+                || !breathe$increaseDrownDamageTheMoreDrowning
                 || !event.getEntity().canDrownInFluidType(event.getEntity().getEyeInFluidType()))
             return;
 
-        event.setDrowning(event.getEntity().getAirSupply() <= -breatheDrownSpeed);
+        event.setDrowning(event.getEntity().getAirSupply() <= -breathe$drownSpeed);
         if (event.isDrowning()) {
             int timesDrowned = getTimesDrowned(event.getEntity());
             setTimesDrowned(event.getEntity(), ++timesDrowned);

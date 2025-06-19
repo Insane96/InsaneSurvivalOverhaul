@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.misc;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -29,47 +28,35 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.loading.FMLLoader;
 
-@Label(name = "Nerfs", description = "Various Nerfs")
-@LoadFeature(module = Modules.Ids.MISC)
+@LoadFeature(module = Modules.Ids.MISC, description = "Various Nerfs")
 public class Nerfs extends Feature {
 	static final String LAST_FISHING_POS_TAG = InsaneSO.RESOURCE_PREFIX + "last_fishing_pos";
 	static final String LAST_FISHING_COUNT_TAG = InsaneSO.RESOURCE_PREFIX + "last_fishing_count";
-	@Config
-	@Label(name = "Iron from Golems only when killed by Players", description = "If true, Iron golems will only drop Iron when killed by the player.")
-	public static Boolean ironRequiresPlayer = true;
-	@Config
-	@Label(name = "No Coordinates", description = "If true, renderDebugInfo is enabled by default. Requires a world restart. This also changes Caverns and Chasms from displaying coordinates with compasses.")
+	@Config(description = "If true, Iron golems will only drop Iron when killed by the player.")
+	public static Boolean ironFromGolemsRequiresPlayer = true;
+	@Config(description = "If true, renderDebugInfo is enabled by default. Requires a world restart. This also changes Caverns and Chasms from displaying coordinates with compasses.")
 	public static Boolean noCoordinates = true;
-	@Config
-	@Label(name = "Reduced mob cramming", description = "If true, maxEntityCramming game rule is set to 6 from 24")
+	@Config(description = "If true, maxEntityCramming game rule is set to 6 from 24")
 	public static Boolean reducedMobCramming = true;
-	@Config
-	@Label(name = "Less burn time for Kelp block", description = "Kelp blocks smelt 16 items instead of 20")
+	@Config(description = "Kelp blocks smelt 16 items instead of 20")
 	public static Boolean lessBurnTimeForKelpBlock = true;
 
-	@Config
-	@Label(name = "Remove Falling Block Dupe across dimensions", description = "Prevents duping falling blocks when they travel across dimensions. (If quark is present this is disabled)")
+	@Config(description = "Prevents duping falling blocks when they travel across dimensions. (If quark is present this is disabled)")
 	public static Boolean removeFallingBlockDupe = true;
-	@Config
-	@Label(name = "Remove piston physics exploit", description = "Fixes several piston physics exploits like TNT duping. (If quark is present this is disabled)")
+	@Config(description = "Fixes several piston physics exploits like TNT duping. (If quark is present this is disabled)")
 	public static Boolean removePistonPhysicsExploit = true;
 
-	@Config(min = 0d, max = 1d)
-	@Label(name = "Fishing has a chance to fish a guardian")
+	@Config(min = 0d, max = 1d, name = "Fishing has a chance to fish a guardian")
 	public static Double fishingCreatureChance = 0d;
-	@Config
-	@Label(name = "No fish if fishing in the same spot", description = "If enabled after fishing for a few times in the same spot you won't be able to fish again unless you move in another spot")
+	@Config(description = "If enabled after fishing for a few times in the same spot you won't be able to fish again unless you move in another spot")
 	public static Boolean antiFishingFarms = true;
 
-	@Config(min = 0, max = 1)
-	@Label(description = "When an entity is hit and on a mount they have this chance to fall")
+	@Config(min = 0, max = 1, description = "When an entity is hit and on a mount they have this chance to fall")
 	public static Double fallFromMountChance = 0.2d;
-	@Config
-	@Label(description = "If true, only players are affected by 'Fall from mount chance'")
+	@Config(description = "If true, only players are affected by 'Fall from mount chance'")
 	public static Boolean fallFromMountPlayerOnly = true;
 
-	@Config(min = 0)
-	@Label(name = "Prone mining speed multiplier", description = "When prone your mining speed is multiplied by this")
+	@Config(min = 0, name = "Prone mining speed multiplier", description = "When prone your mining speed is multiplied by this")
 	public static Double proneMiningSpeedMultiplier = 0.5d;
 
     public Nerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -97,7 +84,7 @@ public class Nerfs extends Feature {
 		if (!this.isEnabled())
 			return;
 
-		if (ironRequiresPlayer && event.getEntity() instanceof IronGolem && !(event.getSource().getDirectEntity() instanceof Player))
+		if (ironFromGolemsRequiresPlayer && event.getEntity() instanceof IronGolem && !(event.getSource().getDirectEntity() instanceof Player))
 			event.getDrops().removeIf(itemEntity -> itemEntity.getItem().is(Items.IRON_INGOT));
 	}
 

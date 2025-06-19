@@ -25,7 +25,7 @@ public abstract class TurtleMixin extends Animal {
     @WrapOperation(method = "ageBoundaryReached", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Turtle;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;I)Lnet/minecraft/world/entity/item/ItemEntity;"))
     public ItemEntity onSpawnScute(Turtle instance, ItemLike itemLike, int i, Operation<ItemEntity> original) {
         if (!Feature.isEnabled(Tweaks.class)
-                || !Tweaks.scuteDropAsBlock)
+                || !Tweaks.turtle$scuteDropsAsBlock)
             return original.call(instance, itemLike, i);
 
         BlockState blockState = this.level().getBlockState(this.blockPosition());

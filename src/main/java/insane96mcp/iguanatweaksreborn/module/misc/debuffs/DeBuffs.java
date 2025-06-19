@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.misc.debuffs;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.util.MCUtils;
@@ -16,12 +15,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "DeBuffs", description = "Apply potion effects on certain hunger / health / experience level. Debuffs are controlled via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.MISC, enabledByDefault = false)
+@LoadFeature(module = Modules.Ids.MISC, enabledByDefault = false, name = "DeBuffs", description = "Apply potion effects on certain hunger / health / experience level. Debuffs are controlled via json in this feature's folder")
 public class DeBuffs extends JsonFeature {
 	public static final ArrayList<DeBuff> DEBUFFS_DEFAULT = new ArrayList<>(List.of(
-			new DeBuff(DeBuff.Stat.HEALTH, Double.MIN_VALUE, 2d, MobEffects.DIG_SLOWDOWN, 0),
-			new DeBuff(DeBuff.Stat.HUNGER, Double.MIN_VALUE, 6d, MobEffects.DIG_SLOWDOWN, 0)
+			new DeBuff(DeBuff.Stat.HEALTH, 0, 2d, MobEffects.DIG_SLOWDOWN, 0),
+			new DeBuff(DeBuff.Stat.HUNGER, 0, 6d, MobEffects.DIG_SLOWDOWN, 0)
 	));
 	public static final ArrayList<DeBuff> deBuffs = new ArrayList<>();
 
