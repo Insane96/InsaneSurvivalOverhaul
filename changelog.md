@@ -8,6 +8,9 @@
   * Vanilla shields now blocks only 5 damage
 
 ### Changes
+* No Pillaring
+  * Now only prevents pillaring if monsters that dealt damage to the player are nearby
+  * Is now disabled by default
 * Ported mobs_buffs data pack to MPR 5
 * Prevent Cure Discount now only applies to killed villagers and not naturally spawned zombie villagers
 * Disabled items tooltips are now gray
