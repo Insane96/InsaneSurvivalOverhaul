@@ -80,6 +80,7 @@ public class Crops extends Feature {
 	@Config(description = """
 		Makes potatoes and carrots not plantable and also enables a data pack that makes the following changes:
 		* Makes all vanilla crops drop only one seed (and makes carrots and potatoes drop the new seed item)
+		* Makes crops hard to break, requiring an hoe as correct tool
 		* Makes melon seeds and pumpkin seeds harder to obtain
 		* Removes carrots and potato drops from zombies
 		* Removes wheat seeds from tall grass

@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Harder crops jsons have been moved from "block_data" data pack to "crops" data pack
+* Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
+
 ## Beta 4.12.12
 **Backup your config file, many config option names have changed**
 

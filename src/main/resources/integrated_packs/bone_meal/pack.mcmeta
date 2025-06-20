@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Makes bone meal fail on some blocks with a chance",
+        "pack_format": 15
+    }
+}

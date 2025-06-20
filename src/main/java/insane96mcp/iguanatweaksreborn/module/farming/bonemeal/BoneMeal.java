@@ -7,6 +7,7 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -70,8 +71,12 @@ public class BoneMeal extends Feature {
     @Config(min = 0, description = "How many stages will cactus and sugar canes grow with one bone meal. Set to 0 to disable.")
     public static MinMax boneMealCanesAndCactus = new MinMax(1, 4);
 
+    @Config(description = "Makes bone meal have a chance to fail on Cave Vines, Saplings and Sweet Berry Bushes.")
+    public static Boolean dataPack = true;
+
     public BoneMeal(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
+        InsaneSO.addServerPack("bone_meal", "Insane's Survival Overhaul Bone Meal", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
     }
 
     @Override
