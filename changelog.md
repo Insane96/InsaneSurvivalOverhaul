@@ -21,6 +21,7 @@
 
 ### Fixes
 * Disabling Livestock not disabling "prevent breeding"
+* Errors when Tinkers construct is not installed
 
 ## Alpha 4.12.11
 ### Fixes
