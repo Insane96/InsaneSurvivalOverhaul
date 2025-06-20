@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## Beta 4.12.12
 **Backup your config file, many config option names have changed**
 
 ### Additions
