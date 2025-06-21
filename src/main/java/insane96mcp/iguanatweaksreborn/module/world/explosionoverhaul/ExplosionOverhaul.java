@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
 import com.teamabnormals.caverns_and_chasms.core.registry.CCEntityTypes;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.ExplodeParticles;
 import insane96mcp.insanelib.base.Feature;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -26,6 +28,7 @@ import net.minecraftforge.fml.ModList;
 public class ExplosionOverhaul extends Feature {
 	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_knockback_blacklist"));
 	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_entity_blacklist"));
+	public static final TagKey<Block> FLYING_BLOCKS_EXPLOSION_BLACKLIST = ISOBlockTagsProvider.create("flying_blocks_explosion_blacklist");
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_MOBGRIEFING = GameRules.register("iguanatweaks:explosionMobGriefing", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 
 	@Config(description = "Vanilla Explosions use a random number that changes the explosion power. With this enabled the ray strength will be as the explosion size.")

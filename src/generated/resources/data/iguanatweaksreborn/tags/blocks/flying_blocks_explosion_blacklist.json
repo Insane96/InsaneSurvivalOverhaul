@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:tnt",
+    "#minecraft:beds",
+    "#minecraft:doors",
+    "#minecraft:tall_flowers",
+    "minecraft:chest",
+    "minecraft:trapped_chest",
+    "minecraft:tall_grass",
+    "minecraft:large_fern"
+  ]
+}

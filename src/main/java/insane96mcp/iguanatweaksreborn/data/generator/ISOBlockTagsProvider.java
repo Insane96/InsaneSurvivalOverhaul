@@ -14,6 +14,7 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
+import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ExplosionOverhaul;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
@@ -83,8 +84,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         tag(Crops.HARDER_CROPS_TAG)
                 .add(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get())
-                .addOptional(new ResourceLocation("supplementaries", "flax"))
-                .addOptional(new ResourceLocation("farmersdelight", "tomatoes")).addOptional(new ResourceLocation("farmersdelight", "budding_tomatoes")).addOptional(new ResourceLocation("farmersdelight", "rice")).addOptional(new ResourceLocation("farmersdelight", "rice_panicles")).addOptional(new ResourceLocation("farmersdelight", "cabbages")).addOptional(new ResourceLocation("farmersdelight", "onions"));
+                .addOptional(ResourceLocation.parse("supplementaries:flax"))
+                .addOptional(ResourceLocation.parse("farmersdelight:tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:budding_tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:rice")).addOptional(ResourceLocation.parse("farmersdelight:rice_panicles")).addOptional(ResourceLocation.parse("farmersdelight:cabbages")).addOptional(ResourceLocation.parse("farmersdelight:onions"));
 
         tag(BlockHardness.HARDNESS_BLACKLIST)
                 .add(Blocks.ENDER_CHEST)
@@ -108,43 +109,43 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTag(AZALEA_LEAVES);
 
         tag(TRUMPET_LEAVES)
-                .addOptional(new ResourceLocation("quark:blue_blossom_leaves"))
-                .addOptional(new ResourceLocation("quark:lavender_blossom_leaves"))
-                .addOptional(new ResourceLocation("quark:orange_blossom_leaves"))
-                .addOptional(new ResourceLocation("quark:yellow_blossom_leaves"))
-                .addOptional(new ResourceLocation("quark:red_blossom_leaves"));
+                .addOptional(ResourceLocation.parse("quark:blue_blossom_leaves"))
+                .addOptional(ResourceLocation.parse("quark:lavender_blossom_leaves"))
+                .addOptional(ResourceLocation.parse("quark:orange_blossom_leaves"))
+                .addOptional(ResourceLocation.parse("quark:yellow_blossom_leaves"))
+                .addOptional(ResourceLocation.parse("quark:red_blossom_leaves"));
 
         tag(MAPLE_LEAVES)
-                .addOptional(new ResourceLocation("autumnity:maple_leaves"))
-                .addOptional(new ResourceLocation("autumnity:yellow_maple_leaves"))
-                .addOptional(new ResourceLocation("autumnity:orange_maple_leaves"))
-                .addOptional(new ResourceLocation("autumnity:red_maple_leaves"));
+                .addOptional(ResourceLocation.parse("autumnity:maple_leaves"))
+                .addOptional(ResourceLocation.parse("autumnity:yellow_maple_leaves"))
+                .addOptional(ResourceLocation.parse("autumnity:orange_maple_leaves"))
+                .addOptional(ResourceLocation.parse("autumnity:red_maple_leaves"));
 
         tag(LAUREL_LEAVES)
-                .addOptional(new ResourceLocation("atmospheric:laurel_leaves"))
-                .addOptional(new ResourceLocation("atmospheric:dry_laurel_leaves"));
+                .addOptional(ResourceLocation.parse("atmospheric:laurel_leaves"))
+                .addOptional(ResourceLocation.parse("atmospheric:dry_laurel_leaves"));
 
         tag(MORADO_LEAVES)
-                .addOptional(new ResourceLocation("atmospheric:morado_leaves"))
-                .addOptional(new ResourceLocation("atmospheric:flowering_morado_leaves"));
+                .addOptional(ResourceLocation.parse("atmospheric:morado_leaves"))
+                .addOptional(ResourceLocation.parse("atmospheric:flowering_morado_leaves"));
 
         tag(WISTERIA_LEAVES)
-                .addOptional(new ResourceLocation("environmental:wisteria_leaves"))
-                .addOptional(new ResourceLocation("environmental:pink_wisteria_leaves"))
-                .addOptional(new ResourceLocation("environmental:purple_wisteria_leaves"))
-                .addOptional(new ResourceLocation("environmental:blue_wisteria_leaves"))
-                .addOptional(new ResourceLocation("environmental:white_wisteria_leaves"));
+                .addOptional(ResourceLocation.parse("environmental:wisteria_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:pink_wisteria_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:purple_wisteria_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:blue_wisteria_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:white_wisteria_leaves"));
         tag(PLUM_LEAVES)
-                .addOptional(new ResourceLocation("environmental:plum_leaves"))
-                .addOptional(new ResourceLocation("environmental:cheerful_plum_leaves"))
-                .addOptional(new ResourceLocation("environmental:moody_plum_leaves"));
+                .addOptional(ResourceLocation.parse("environmental:plum_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:cheerful_plum_leaves"))
+                .addOptional(ResourceLocation.parse("environmental:moody_plum_leaves"));
 
         tag(ASPEN_LOGS)
-                .addOptional(new ResourceLocation("atmospheric:aspen_log"))
-                .addOptional(new ResourceLocation("atmospheric:watchful_aspen_log"));
+                .addOptional(ResourceLocation.parse("atmospheric:aspen_log"))
+                .addOptional(ResourceLocation.parse("atmospheric:watchful_aspen_log"));
         tag(ASPEN_LEAVES)
-                .addOptional(new ResourceLocation("atmospheric:aspen_leaves"))
-                .addOptional(new ResourceLocation("atmospheric:green_aspen_leaves"));
+                .addOptional(ResourceLocation.parse("atmospheric:aspen_leaves"))
+                .addOptional(ResourceLocation.parse("atmospheric:green_aspen_leaves"));
 
 		//noinspection unchecked
 		tag(Tweaks.BREAK_ON_FALL)
@@ -152,10 +153,10 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 		//noinspection unchecked
 		tag(TimberTrees.TIMBER_TRUNKS)
 				.addTags(BlockTags.OVERWORLD_NATURAL_LOGS)
-                .addOptional(new ResourceLocation("quark:ancient_log"))
-                .addOptional(new ResourceLocation("tconstruct:greenheart_log"))
-                .addOptional(new ResourceLocation("tconstruct:skyroot_log"))
-                .addOptional(new ResourceLocation("tconstruct:enderbark_log"));
+                .addOptional(ResourceLocation.parse("quark:ancient_log"))
+                .addOptional(ResourceLocation.parse("tconstruct:greenheart_log"))
+                .addOptional(ResourceLocation.parse("tconstruct:skyroot_log"))
+                .addOptional(ResourceLocation.parse("tconstruct:enderbark_log"));
 
         tag(TimberTrees.ATTACHED_BLOCKS)
                 .add(Blocks.BEEHIVE, Blocks.BEE_NEST);
@@ -165,13 +166,22 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         tag(Seasons.PLANTS_TO_DECAY)
                 .add(Blocks.GRASS, Blocks.FERN, Blocks.TALL_GRASS, Blocks.LARGE_FERN)
-                .addOptional(new ResourceLocation("environmental:giant_tall_grass"));
+                .addOptional(ResourceLocation.parse("environmental:giant_tall_grass"));
 
         tag(Seasons.PLANTS_TO_DEAD_BUSH)
                 .addTag(BlockTags.SAPLINGS);
+
+        tag(ExplosionOverhaul.FLYING_BLOCKS_EXPLOSION_BLACKLIST)
+                .add(Blocks.TNT)
+                .addTag(BlockTags.BEDS)
+                .addTag(BlockTags.DOORS)
+                .addTag(BlockTags.TALL_FLOWERS)
+                .add(Blocks.CHEST, Blocks.TRAPPED_CHEST)
+                .add(Blocks.TALL_GRASS, Blocks.LARGE_FERN);
+
     }
 
     public static TagKey<Block> create(String tagName) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(InsaneSO.MOD_ID, tagName));
+        return TagKey.create(Registries.BLOCK, InsaneSO.location(tagName));
     }
 }

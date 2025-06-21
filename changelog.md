@@ -9,6 +9,9 @@
 * Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
 * Campfires now have a high chance to be extinguished instead of instantly extinguishing when starts raining
 * Mod's no longer compatible with versions past Forge 47.4.0
+* Enhanced Experimental flying blocks explosion
+  * Stuff like beds, doors etc are no longer affected
+  * Fixed blocks not flying
 
 ## Beta 4.12.12
 **Backup your config file, many config option names have changed**

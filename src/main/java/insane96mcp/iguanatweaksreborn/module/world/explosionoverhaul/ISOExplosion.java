@@ -30,7 +30,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.MovingPistonBlock;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
@@ -140,16 +139,12 @@ public class ISOExplosion extends Explosion {
 	public void fallingBlocks() {
 		if (!this.interactsWithBlocks())
 			return;
+		List<BlockPos> toClear = new ArrayList<>();
 		for (BlockPos blockpos : this.getToBlow()) {
 			BlockState blockstate = this.level.getBlockState(blockpos);
 			Block block = blockstate.getBlock();
-			if (blockstate.isAir())
+			if (blockstate.isAir() || blockstate.is(ExplosionOverhaul.FLYING_BLOCKS_EXPLOSION_BLACKLIST))
 				continue;
-			if (block instanceof TntBlock) {
-				block.wasExploded(this.level, blockpos, this);
-				this.level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
-				continue;
-			}
 			if (block instanceof MovingPistonBlock) {
 				PistonMovingBlockEntity tileEntity = (PistonMovingBlockEntity) this.level.getBlockEntity(blockpos);
 				blockstate = tileEntity.getMovedState();
@@ -162,8 +157,10 @@ public class ISOExplosion extends Explosion {
 			fallingBlockEntity.time = 1;
 			fallingBlockEntity.source = this.source;
 			this.level.addFreshEntity(fallingBlockEntity);
+			this.affectedEntities.add(fallingBlockEntity);
+			toClear.add(blockpos);
 		}
-		this.clearToBlow();
+		this.toBlow.removeAll(toClear);
 	}
 
 	public void processEntities() {
