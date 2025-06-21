@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -51,8 +50,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Label(name = "Seasons", description = "Change a few things relative to Serene Seasons")
-@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"})
+@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons")
 public class Seasons extends Feature {
 
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_SEASONGRASSGROWDEATH = GameRules.register("iguanatweaks:doSeasonGrassGrowDeath", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
@@ -60,39 +58,31 @@ public class Seasons extends Feature {
 	public static final TagKey<Block> PLANTS_TO_DECAY = ISOBlockTagsProvider.create("plants_to_decay");
 	public static final TagKey<Block> PLANTS_TO_DEAD_BUSH = ISOBlockTagsProvider.create("plants_to_dead_bush");
 
-	@Config
-	@Label(name = "Serene Seasons changes", description = """
+	@Config(description = """
 			Makes the following changes to Serene Seasons config:
 			* seasonal_crops is set to false, as it's controlled by Plants Growth
 			* Sets the starting season to the one in 'Starting season'""")
 	public static Boolean changeSereneSeasonsConfig = true;
 
-	@Config
-	@Label(name = "No greenhouse glass", description = "Removes greenhouse glass.")
+	@Config(description = "Removes greenhouse glass.")
 	public static Boolean noGreenHouseGlass = true;
 
-	@Config
-	@Label(name = "No Saplings in Winter", description = "Saplings no longer drop in Winter.")
+	@Config(description = "Saplings no longer drop in Winter.")
 	public static Boolean noSaplingsInWinter = true;
 
-	@Config
-	@Label(name = "Grass Decay and Growth", description = "Grass and tall grass decays in Winter and regrows back in Spring. Saplings are also transformed into Dead Bushes.")
+	@Config(description = "Grass and tall grass decays in Winter and regrows back in Spring. Saplings are also transformed into Dead Bushes.")
 	public static Boolean grassDecayAndGrowth = true;
 
-	@Config
-	@Label(name = "Starting season", description = "Has no effect if 'Serene Seasons changes' is disabled")
+	@Config(description = "Has no effect if 'Serene Seasons changes' is disabled")
 	public static Season.SubSeason startingSeason = Season.SubSeason.EARLY_SUMMER;
 
-	@Config(min = 0)
-	@Label(name = "Time Control day night duration", description = "How many minutes will day and night duration be (with this set to 10 the day will last 10 minutes and the night 10 minutes for a grand total of 20 minutes). This also adjusts the day_duration config option in Serene Seasons. Vanilla is 10. Requires Time Control mod")
+	@Config(min = 0, description = "How many minutes will day and night duration be (with this set to 10 the day will last 10 minutes and the night 10 minutes for a grand total of 20 minutes). This also adjusts the day_duration config option in Serene Seasons. Vanilla is 10. Requires Time Control mod")
 	public static Double timeControlDayNightDuration = 15d;
 
-	@Config(min = 0)
-	@Label(name = "Time Control day night shift", description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable. Requires Time Control mod")
+	@Config(min = 0, description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable. Requires Time Control mod")
 	public static Double timeControlDayNightShift = 1.5d;
 
 	@Config
-	@Label(name = "Season based fishing time")
 	public static Boolean seasonBasedFishingTime = true;
 
 	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {

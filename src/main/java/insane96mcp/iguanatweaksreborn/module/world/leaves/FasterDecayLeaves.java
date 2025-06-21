@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.world.leaves;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -17,19 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Faster Decay Leaves")
 @LoadFeature(module = Modules.Ids.WORLD)
-public class Leaves extends Feature {
+public class FasterDecayLeaves extends Feature {
 
 	@Config(min = 1)
-	@Label(name = "Min ticks to decay")
 	public static Integer minTicksToDecay = 50;
 
 	@Config(min = 1)
-	@Label(name = "Max ticks to decay")
 	public static Integer maxTicksToDecay = 300;
 
-	public Leaves(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+	public FasterDecayLeaves(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 	}
 
@@ -47,7 +43,7 @@ public class Leaves extends Feature {
 	}
 
 	public static void decayAdjacentLeaves(ServerLevel level, BlockPos pos, RandomSource random, float multiplier) {
-		if (!Feature.isEnabled(Leaves.class))
+		if (!Feature.isEnabled(FasterDecayLeaves.class))
 			return;
 
 		Direction.stream().forEach(direction -> {

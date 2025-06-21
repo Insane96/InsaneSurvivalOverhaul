@@ -8,7 +8,9 @@ import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDa
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataImpl;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
-import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
@@ -18,7 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -57,73 +58,53 @@ import java.util.List;
 import java.util.Optional;
 
 //TODO Refactor, make a "spawners type" enum with FIXED_SPAWN and EMPOWERED and make every type configurable with light, delay, spawned mobs etc
-@Label(name = "Spawners", description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
-@LoadFeature(module = Modules.Ids.WORLD)
+@LoadFeature(module = Modules.Ids.WORLD, description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
 public class Spawners extends JsonFeature {
 
-	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "blacklisted_spawners"));
+	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("blacklisted_spawners"));
 	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISOItemTagsProvider.create("spawner_reactivator");
-	public static final String SPAWNER_REACTIVATOR = InsaneSO.MOD_ID + ".spawner_reactivator";
+	public static final String SPAWNER_REACTIVATOR_LANG = InsaneSO.lang("spawner_reactivator");
 
-	@Config(min = 1)
-	@Label(name = "Override Spawn Delay", description = "If true, the spawner delay is set to 'Delay' instead of using MinSpawnDelay and MaxSpawnDelay")
+	@Config(min = 1, description = "If true, the spawner delay is set to 'Delay' instead of using MinSpawnDelay and MaxSpawnDelay")
 	public static Boolean overrideSpawnDelay = true;
-	@Config(min = 1)
-	@Label(name = "Delay", description = "Spawning Delay (in ticks) of the spawner. Vanilla is 200~800. Requires 'Override Spawn Delay' to be enabled.")
+	@Config(min = 1, description = "Spawning Delay (in ticks) of the spawner. Vanilla is 200~800. Requires 'Override Spawn Delay' to be enabled.")
 	public static MinMax delay = new MinMax(400, 1600);
-	@Config(min = 0)
-	@Label(name = "Required Players Range", description = "Range in which a player must be present for a spawner to work. Vanilla is 16.")
+	@Config(min = 0, description = "Range in which a player must be present for a spawner to work. Vanilla is 16.")
 	public static int requiredPlayerRange = 24;
-	@Config
-	@Label(name = "Ignore Light", description = "If true, monsters from spawners will spawn no matter the light level.")
+	@Config(description = "If true, monsters from spawners will spawn no matter the light level.")
 	public static Boolean ignoreLight = true;
-	@Config
-	@Label(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `iguanatweaksreborn:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
+	@Config(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `iguanatweaksreborn:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
 	public static Boolean reEnableWithSpawnerReactivator = true;
-	@Config
-	@Label(name = "Spawning sound effect", description = "If enabled, spawner will play a sound effect when spawning mobs")
+	@Config(description = "If enabled, spawner will play a sound effect when spawning mobs")
 	public static Boolean spawningSoundEffect = true;
 
-	@Config
-	@Label(name = "Disable spawners.Enabled", description = "If true, spawners will be disabled after spawning a certain amount of mobs.")
-	public static Boolean disableSpawnersEnabled = false;
-	@Config(min = 0)
-	@Label(name = "Disable spawners.Minimum Spawnable Mobs", description = "The minimum amount of spawnable mobs (when the spawner is basically in the same position as the world spawn). The amount of spawnable mobs before deactivating is equal to the distance divided by 8 (plus this value). E.g. At 160 blocks from spawn the max spawnable mobs will be 160 / 8 + 20 = 20 + 20 = 40")
-	public static Integer disableSpawnersMinSpawnableMobs = 20;
-	@Config(min = 0d)
-	@Label(name = "Disable spawners.Spawnable mobs multiplier", description = "This multiplier increases the max mobs spawned.")
-	public static Double disableSpawnersSpawnableMobsMultiplier = 1.0d;
+	@Config(description = "If true, spawners will be disabled after spawning a certain amount of mobs.")
+	public static Boolean disableSpawners$enabled = false;
+	@Config(min = 0, description = "The minimum amount of spawnable mobs (when the spawner is basically in the same position as the world spawn). The amount of spawnable mobs before deactivating is equal to the distance divided by 8 (plus this value). E.g. At 160 blocks from spawn the max spawnable mobs will be 160 / 8 + 20 = 20 + 20 = 40")
+	public static Integer disableSpawners$minSpawnableMobs = 20;
+	@Config(min = 0d, description = "This multiplier increases the max mobs spawned.")
+	public static Double disableSpawners$spawnableMobsMultiplier = 1.0d;
 
-	@Config
-	@Label(name = "Empowered.Enabled", description = "If true, spawners will generate in an empowered state. When empowered, will generate mobs really fast for a while and then will slow down.")
-	public static Boolean empoweredEnabled = true;
-	@Config(min = 0)
-	@Label(name = "Empowered.Disable on end", description = "When the spawner stops being empowered, the spawner is now disabled.")
-	public static Boolean empoweredDisableOnEnd = true;
-	@Config(min = 0)
-	@Label(name = "Empowered.Mobs amount", description = "How many mobs are spawned before empowered ends.")
+	@Config(description = "If true, spawners will generate in an empowered state. When empowered, will generate mobs really fast for a while and then will slow down.")
+	public static Boolean empowered$enabled = true;
+	@Config(min = 0, description = "When the spawner stops being empowered, it is disabled and will stop spawning mobs.")
+	public static Boolean empowered$disableOnEnd = true;
+	@Config(min = 0, name = "Empowered.Mobs amount", description = "How many mobs are spawned before empowered ends.")
 	public static Integer empoweredMobsAmount = 20;
-	@Config(min = 1)
-	@Label(name = "Empowered.Delay", description = "Spawning Delay (in ticks) when the Spawner is empowered.")
+	@Config(min = 1, name = "Empowered.Delay", description = "Spawning Delay (in ticks) when the Spawner is empowered.")
 	public static MinMax empoweredDelay = new MinMax(150, 300);
-	@Config(min = 0)
-	@Label(name = "Empowered.Experience Reward", description = "When the Spawner stops being empowered, will generate this amount of experience")
+	@Config(min = 0, name = "Empowered.Experience Reward", description = "When the Spawner stops being empowered, will generate this amount of experience")
 	public static MinMax empoweredExperienceReward = new MinMax(150, 200);
-	@Config
-	@Label(name = "Empowered.Loot Reward", description = "When the Spawner stops being empowered, will generate loot from the iguanatweaksreborn:empowered_spawner loot table")
+	@Config(name = "Empowered.Loot Reward", description = "When the Spawner stops being empowered, will generate loot from the iguanatweaksreborn:empowered_spawner loot table")
 	public static Boolean empoweredLootReward = true;
-	@Config
-	@Label(name = "Empowered.Sound effect", description = "When the Spawner stops being empowered, will play a sound effect")
+	@Config(name = "Empowered.Sound effect", description = "When the Spawner stops being empowered, will play a sound effect")
 	public static Boolean empoweredSoundEffect = true;
 
-	@Config(min = -1)
-	@Label(description = "The range of a player nearby in which the spawner will be active. Setting to -1 should keep the spawners always active (untested) as long as the chunk is loaded (hostiles will still despawn in a 128 block radius).")
+	@Config(min = -1, description = "The range of a player nearby in which the spawner will be active. Setting to -1 should keep the spawners always active (untested) as long as the chunk is loaded (hostiles will still despawn in a 128 block radius).")
 	public static Integer reactivatedSpawners$playerRange = 128;
-	@Config
-	@Label(description = "How many ticks will the spawner try to summon mobs.")
+	@Config(description = "How many ticks will the spawner try to summon mobs.")
 	public static MinMax reactivatedSpawners$delay = new MinMax(3600, 6000);
-	@Config
-	@Label(description = "Reactivated spawners spawn mobs no matter the light level.")
+	@Config(description = "Reactivated spawners spawn mobs no matter the light level.")
 	public static Boolean reactivatedSpawners$ignoreLight = false;
 
 	public static final ArrayList<IdTagValue> FIXED_SPAWNER_SPAWNABLE_DEFAULT = new ArrayList<>(List.of(
@@ -165,7 +146,7 @@ public class Spawners extends JsonFeature {
 	}
 
 	private void disabledSpawners(SpawnerBlockEntity spawnerBlockEntity, Mob mob, ServerLevel level, BlockPos spawnerPos, ISpawnerData spawnerCap) {
-        if (!disableSpawnersEnabled
+        if (!disableSpawners$enabled
 				|| mob.getType().is(BLACKLISTED_SPAWNERS))
 			return;
 
@@ -178,7 +159,7 @@ public class Spawners extends JsonFeature {
 		}
 		if (maxSpawned <= 0) {
 			double distance = Math.sqrt(spawnerPos.distSqr(level.getSharedSpawnPos()));
-			maxSpawned = (int) ((disableSpawnersMinSpawnableMobs + (distance / 8d)) * disableSpawnersSpawnableMobsMultiplier);
+			maxSpawned = (int) ((disableSpawners$minSpawnableMobs + (distance / 8d)) * disableSpawners$spawnableMobsMultiplier);
 		}
 
 		if (spawnerCap.getSpawnedMobs() >= maxSpawned)
@@ -187,7 +168,7 @@ public class Spawners extends JsonFeature {
 	}
 
 	private static void empoweredSpawner(SpawnerBlockEntity spawnerBlockEntity, Mob mob, ServerLevel level, BlockPos spawnerPos, ISpawnerData spawnerCap) {
-		if (!empoweredEnabled
+		if (!empowered$enabled
 				|| mob.getType().is(BLACKLISTED_SPAWNERS)
 				|| !spawnerCap.isEmpowered())
 			return;
@@ -199,11 +180,11 @@ public class Spawners extends JsonFeature {
 			if (empoweredLootReward) {
 				LootParams.Builder lootParamsBuilder = (new LootParams.Builder(level)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(spawnerPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_STATE, level.getBlockState(spawnerPos)).withOptionalParameter(LootContextParams.BLOCK_ENTITY, spawnerBlockEntity);
 				LootParams lootParams = lootParamsBuilder.create(LootContextParamSets.EMPTY);
-				LootTable loottable = level.getServer().getLootData().getLootTable(new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "empowered_spawner"));
+				LootTable loottable = level.getServer().getLootData().getLootTable(InsaneSO.location("empowered_spawner"));
 				loottable.getRandomItems(lootParams).forEach(stack ->
 						level.addFreshEntity(new ItemEntity(level, spawnerPos.getX() + 0.5f, spawnerPos.getY() + 1.1f, spawnerPos.getZ() + 0.5f, stack)));
 			}
-			if (empoweredDisableOnEnd)
+			if (empowered$disableOnEnd)
 				setSpawnerDisabled(spawnerBlockEntity, true);
 			if (empoweredSoundEffect)
 				level.playSound(null, spawnerPos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 3.0f, 1.5f);
@@ -361,7 +342,7 @@ public class Spawners extends JsonFeature {
 	}
 
 	private static boolean isEmpowered(SpawnerBlockEntity spawner) {
-		if (!empoweredEnabled)
+		if (!empowered$enabled)
 			return false;
 		LazyOptional<ISpawnerData> cap = spawner.getCapability(SpawnerData.INSTANCE);
 		return cap.map(ISpawnerData::isEmpowered).orElse(false);
@@ -380,6 +361,6 @@ public class Spawners extends JsonFeature {
 				|| !event.getItemStack().is(SPAWNER_REACTIVATOR_TAG))
 			return;
 
-		event.getToolTip().add(Component.translatable(SPAWNER_REACTIVATOR).withStyle(ChatFormatting.LIGHT_PURPLE));
+		event.getToolTip().add(Component.translatable(SPAWNER_REACTIVATOR_LANG).withStyle(ChatFormatting.LIGHT_PURPLE));
 	}
 }

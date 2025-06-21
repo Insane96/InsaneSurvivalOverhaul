@@ -1,9 +1,14 @@
 # Changelog
 
 ## Upcoming
+**Backup your config file, many config option names have changed**
+
 ### Changes
+* Nether to overworld ratio is now 2 and no longer 4 (so 1 block in the Nether is 2 blocks in the Overworld)
 * Harder crops jsons have been moved from "block_data" data pack to "crops" data pack
 * Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
+* Campfires now have a high chance to be extinguished instead of instantly extinguishing when starts raining
+* Mod's no longer compatible with versions past Forge 47.4.0
 
 ## Beta 4.12.12
 **Backup your config file, many config option names have changed**

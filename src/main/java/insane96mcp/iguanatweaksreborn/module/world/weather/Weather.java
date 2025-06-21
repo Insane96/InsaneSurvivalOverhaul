@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.FoggyEnabledSync;
 import insane96mcp.iguanatweaksreborn.network.message.FoggySync;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -17,8 +16,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Weather", description = "Thunderstorm Intensity and Foggy Weather. Disable them via gamerules: iguanatweaks:thunderstormIntensity and iguanatweaks:foggyWeather")
-@LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
+@LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false, description = "Thunderstorm Intensity and Foggy Weather. Disable them via gamerules: iguanatweaks:thunderstormIntensity and iguanatweaks:foggyWeather")
 public class Weather extends Feature {
     public static final GameRules.Key<GameRules.BooleanValue> RULE_THUNDERSTORMINTENSITY = GameRules.register("iguanatweaks:thunderstormIntensity", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
     public static final GameRules.Key<GameRules.BooleanValue> RULE_FOGGYWEATHER = GameRules.register("iguanatweaks:foggyWeather", GameRules.Category.MISC, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
@@ -27,21 +25,16 @@ public class Weather extends Feature {
         }
     }));
 
-    @Config(min = 1)
-    @Label(name = "Thunderstorm Intensity.Min Intensity", description = "Minimum thunderstorm intensity.")
+    @Config(min = 1, name = "Thunderstorm Intensity.Min Intensity", description = "Minimum thunderstorm intensity.")
     public static Integer thunderstormIntensityMin = 1;
-    @Config(min = 1)
-    @Label(name = "Thunderstorm Intensity.Max Intensity", description = "Maximum thunderstorm intensity.")
+    @Config(min = 1, name = "Thunderstorm Intensity.Max Intensity", description = "Maximum thunderstorm intensity.")
     public static Integer thunderstormIntensityMax = 15;
-    @Config(min = 1)
-    @Label(name = "Thunderstorm Intensity.Base Duration", description = "Base duration of each intensity (in minutes). Lasts less and less the higher the intensity")
+    @Config(min = 1, name = "Thunderstorm Intensity.Base Duration", description = "Base duration of each intensity (in minutes). Lasts less and less the higher the intensity")
     public static Integer thunderstormIntensityBaseDuration = 4;
 
-    @Config(min = 1)
-    @Label(name = "Foggy Weather.Min Time", description = "Minimum time (in minutes) a foggy weather can last.")
+    @Config(min = 1, name = "Foggy Weather.Min Time", description = "Minimum time (in minutes) a foggy weather can last.")
     public static Integer foggyWeatherMinTime = 5;
-    @Config(min = 1)
-    @Label(name = "Foggy Weather.Max Time", description = "Maximum time (in minutes) a foggy weather can last.")
+    @Config(min = 1, name = "Foggy Weather.Max Time", description = "Maximum time (in minutes) a foggy weather can last.")
     public static Integer foggyWeatherMaxTime = 30;
 
     public Weather(Module module, boolean enabledByDefault, boolean canBeDisabled) {

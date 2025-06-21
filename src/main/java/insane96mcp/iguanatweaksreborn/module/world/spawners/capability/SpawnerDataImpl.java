@@ -76,7 +76,7 @@ public class SpawnerDataImpl implements ISpawnerData {
 		this.setSpawnedMobs(nbt.getInt(SPAWNED_MOBS));
 		this.setDisabled(nbt.getBoolean(SPAWNER_DISABLED));
 		if (!nbt.contains(SPAWNER_EMPOWERED))
-			this.setEmpowered(Spawners.empoweredEnabled);
+			this.setEmpowered(Spawners.empowered$enabled);
 		else
 			this.setEmpowered(nbt.getBoolean(SPAWNER_EMPOWERED));
 		this.setHasBeenReactivated(nbt.getBoolean(SPAWNER_REACTIVATED));

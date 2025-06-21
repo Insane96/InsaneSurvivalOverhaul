@@ -15,9 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CampfireBlockEntityMixin {
 
 	@Inject(method = "cookTick", at = @At("HEAD"))
-	private static void onGetStateForPlacement(Level pLevel, BlockPos pPos, BlockState pState, CampfireBlockEntity pBlockEntity, CallbackInfo ci) {
-		if (!CoalFire.canRainTurnOffCampfires()
-				|| !pLevel.isRainingAt(pPos))
+	private static void iguanatweaksreborn$onCookTick(Level pLevel, BlockPos pPos, BlockState pState, CampfireBlockEntity pBlockEntity, CallbackInfo ci) {
+		if (!pState.getValue(CampfireBlock.LIT)
+				|| !CoalFire.canRainTurnOffCampfires()
+				|| !pLevel.isRainingAt(pPos)
+				|| pLevel.random.nextInt(40) > 0)
 			return;
 		pLevel.levelEvent(null, 1009, pPos, 0);
 		CampfireBlock.dowse(null, pLevel, pPos, pState);

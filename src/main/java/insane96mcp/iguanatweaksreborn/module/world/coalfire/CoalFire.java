@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -37,8 +36,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-@Label(name = "Coal & Fire")
-@LoadFeature(module = Modules.Ids.WORLD)
+@LoadFeature(module = Modules.Ids.WORLD, name = "Coal & Fire")
 public class CoalFire extends Feature {
     public static final TagKey<Item> ITEM_ORES = ISOItemTagsProvider.create("hellish_coal_ores");
 
@@ -52,12 +50,10 @@ public class CoalFire extends Feature {
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("iguanatweaks:fireSpeedMultiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
 
-    @Config(min = 0d, max = 1d)
-    @Label(name = "Charcoal from burnt logs chance", description = "Chance for logs to release charcoal layer when burnt")
+    @Config(min = 0d, max = 1d, description = "Chance for logs to release charcoal layer when burnt")
     public static Double charcoalFromBurntLogsChance = 0.8d;
 
-    @Config
-    @Label(name = "No charcoal smelting and iron coal", description = """
+    @Config(description = """
 			If enabled, a data pack will be enabled that:
 			* Removes the Charcoal recipe from smelting
 			* Makes Coal Ore require an Iron Pickaxe or better to mine
@@ -65,22 +61,17 @@ public class CoalFire extends Feature {
 			* Changes flint and steel recipe to require blaze powder""")
     public static Boolean noCharcoalSmeltingAndIronCoal = true;
 
-    @Config
-    @Label(name = "Two flint fire starter.Enabled", description = "If true, two flints (on per hand) can start a fire")
-    public static Boolean twoFlintFireStarter = true;
-    @Config(min = 0d, max = 1d)
-    @Label(name = "Two flint fire starter.Ignite Chance", description = "Chance to ignite a block when using two flints")
-    public static Double twoFlintFireStarterIgniteChance = 0.35d;
-    @Config(min = 0d, max = 1d)
-    @Label(name = "Two flint fire starter.Break Chance", description = "Chance for the flint to break when using two flints")
-    public static Double twoFlintFireStarterBreakChance = 0.3d;
+    @Config(description = "If true, two flints (on per hand) can start a fire")
+    public static Boolean twoFlintFireStarter$enabled = true;
+    @Config(min = 0d, max = 1d, description = "Chance to ignite a block when using two flints")
+    public static Double twoFlintFireStarter$igniteChance = 0.35d;
+    @Config(min = 0d, max = 1d, description = "Chance for the flint to break when using two flints")
+    public static Double twoFlintFireStarter$breakChance = 0.3d;
 
-    @Config
-    @Label(name = "Unlit campfire", description = "If true, campfires must be lit")
+    @Config(description = "If true, campfires must be lit")
     public static Boolean unlitCampfires = true;
 
-    @Config
-    @Label(name = "Campfire turn off under rain", description = "If true, campfires will be extinguished when it starts to rain")
+    @Config(description = "If true, campfires will be extinguished when it starts to rain")
     public static Boolean campfireTurnOffUnderRain = true;
 
     public CoalFire(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -111,7 +102,7 @@ public class CoalFire extends Feature {
     @SubscribeEvent
     public void onBlockRightClicked(PlayerInteractEvent.RightClickBlock event) {
         if (!this.isEnabled()
-                || !twoFlintFireStarter
+                || !twoFlintFireStarter$enabled
                 || event.getHand() != InteractionHand.MAIN_HAND
                 || !event.getItemStack().is(Items.FLINT)
                 || !event.getEntity().getOffhandItem().is(Items.FLINT)
@@ -127,7 +118,7 @@ public class CoalFire extends Feature {
         event.setCanceled(true);
         event.getEntity().getCooldowns().addCooldown(event.getItemStack().getItem(), 15);
 
-        if (ignite < twoFlintFireStarterIgniteChance) {
+        if (ignite < twoFlintFireStarter$igniteChance) {
             UseOnContext context = new UseOnContext(event.getEntity(), event.getHand(), new BlockHitResult(event.getHitVec().getLocation(), event.getHitVec().getDirection(), event.getPos(), event.getHitVec().isInside()));
             //Yes, I copy-pasted FlintAndSteelItem#use
             Player player = context.getPlayer();
@@ -153,12 +144,12 @@ public class CoalFire extends Feature {
             event.getLevel().playSound(null, event.getPos(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, event.getLevel().getRandom().nextFloat() * 0.4F + 1.5F);
         }
 
-        if (breakMain < twoFlintFireStarterBreakChance) {
+        if (breakMain < twoFlintFireStarter$breakChance) {
             event.getItemStack().shrink(1);
             event.getEntity().broadcastBreakEvent(event.getHand());
             net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(event.getEntity(), event.getItemStack(), event.getHand());
         }
-        if (breakOff < twoFlintFireStarterBreakChance) {
+        if (breakOff < twoFlintFireStarter$breakChance) {
             event.getEntity().getOffhandItem().shrink(1);
             event.getEntity().broadcastBreakEvent(InteractionHand.OFF_HAND);
             net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(event.getEntity(), event.getEntity().getOffhandItem(), InteractionHand.OFF_HAND);

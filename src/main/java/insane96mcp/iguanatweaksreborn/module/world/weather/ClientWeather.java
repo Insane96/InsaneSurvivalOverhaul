@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.world.weather;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import net.minecraft.client.Minecraft;
@@ -19,7 +18,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Client Weather")
 @LoadFeature(module = Modules.Ids.WORLD, canBeDisabled = false)
 public class ClientWeather extends Feature {
     public ClientWeather(Module module, boolean enabledByDefault, boolean canBeDisabled) {

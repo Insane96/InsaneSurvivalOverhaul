@@ -166,10 +166,10 @@ public class ISOExplosion extends Explosion {
 		this.clearToBlow();
 	}
 
-	public void processEntities(boolean knockbackScaleWithSize) {
+	public void processEntities() {
 		float affectedEntitiesRadius = this.radius * 2.0F;
 		for (Entity entity : this.affectedEntities) {
-			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ISOFallingBlockEntity)  && !ExplosionOverhaul.affectJustSpawnedEntities)
+			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ISOFallingBlockEntity))
 				continue;
 			if (entity.ignoreExplosion())
 				continue;
@@ -199,10 +199,9 @@ public class ISOExplosion extends Explosion {
 				boolean isLiving = entity instanceof LivingEntity;
 				if (entity.hurt(source, damageAmount) || isBlocking || !isLiving) {
 					double d11 = d10;
-					if (isLiving) {
+					if (isLiving)
 						d11 = getKnockbackReduction((LivingEntity) entity, d11);
-					}
-					if (knockbackScaleWithSize)
+					if (ExplosionOverhaul.knockbackScalesWithSize)
 						d11 *= this.radius;
 					d11 = Math.max(d11, this.radius * 0.05d);
  					if (entity instanceof ISOFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
@@ -345,7 +344,7 @@ public class ISOExplosion extends Explosion {
 		if (ExplosionOverhaul.enableFlyingBlocks)
 			explosion.fallingBlocks();
 		explosion.destroyBlocks();
-		explosion.processEntities(ExplosionOverhaul.knockbackScalesWithSize);
+		explosion.processEntities();
 		explosion.dropItems();
 		explosion.processFire();
 		if (explosion.blockInteraction == BlockInteraction.KEEP) {

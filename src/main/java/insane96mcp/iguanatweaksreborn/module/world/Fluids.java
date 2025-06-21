@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.world;
 
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -12,23 +11,17 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Fluids")
 @LoadFeature(module = Modules.Ids.WORLD)
 public class Fluids extends Feature {
-    @Config
-    @Label(name = "Water fall damage", description = "If enabled, water will deal fall damage if too shallow")
+    @Config(name = "Water fall damage", description = "If enabled, water will deal fall damage if too shallow")
     public static Boolean waterFallDamage = true;
-    @Config
-    @Label(name = "Water push force", description = "How strong does water push entities. Vanilla is 0.014")
+    @Config(name = "Water push force", description = "How strong does water push entities. Vanilla is 0.014")
     public static Double waterPushForce = 0.03d;
-    @Config
-    @Label(name = "Water pushes when no blocks are around", description = "If true water pushes entities down with the same strength as there are no blocks around")
+    @Config(name = "Water pushes when no blocks are around", description = "If true water pushes entities down with the same strength as there are no blocks around")
     public static Boolean waterPushesWhenNoBlocksAround = true;
-    @Config
-    @Label(name = "[EXPERIMENTAL] No explosion resistance", description = "If true, water and lava will have 0 explosion resistance allowing waterlogged block to be destroyed by explosions")
+    @Config(name = "[EXPERIMENTAL] No explosion resistance", description = "If true, water and lava will have 0 explosion resistance allowing waterlogged block to be destroyed by explosions")
     public static Boolean noExplosionResistance = true;
-    @Config
-    @Label(name = "[EXPERIMENTAL] Floaty entities", description = "If true, entities will float in water")
+    @Config(name = "[EXPERIMENTAL] Floaty entities", description = "If true, entities will float in water")
     public static Boolean floatyEntities = false;
 
     public Fluids(Module module, boolean enabledByDefault, boolean canBeDisabled) {

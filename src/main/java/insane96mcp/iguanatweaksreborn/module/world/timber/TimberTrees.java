@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -38,8 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 
-@Label(name = "Timber Trees", description = "Trees fall when cut.")
-@LoadFeature(module = Modules.Ids.WORLD)
+@LoadFeature(module = Modules.Ids.WORLD, description = "Trees fall when cut.")
 public class TimberTrees extends JsonFeature {
 
     public static final TagKey<Block> TIMBER_TRUNKS = ISOBlockTagsProvider.create("timber_trunks");
@@ -77,8 +75,7 @@ public class TimberTrees extends JsonFeature {
     ));
     public static final ArrayList<TreeInfo> treeInfos = new ArrayList<>();
 
-    @Config
-    @Label(name = "Requires #minecraft:axes", description = "Trees will timber only if an item in the minecraft:axes item tag is used")
+    @Config(name = "Requires #minecraft:axes", description = "Trees will timber only if an item in the minecraft:axes item tag is used")
     public static Boolean requiresAxe = false;
 
     public TimberTrees(Module module, boolean enabledByDefault, boolean canBeDisabled) {

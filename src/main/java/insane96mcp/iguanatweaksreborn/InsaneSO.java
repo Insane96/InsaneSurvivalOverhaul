@@ -270,4 +270,8 @@ public class InsaneSO
     public static ResourceLocation location(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
+
+    public static String lang(String path) {
+        return MOD_ID + "." + path;
+    }
 }

@@ -5,12 +5,10 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.ExplodeParticles;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -24,52 +22,35 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@Label(name = "Explosion Overhaul", description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
-@LoadFeature(module = Modules.Ids.WORLD)
+@LoadFeature(module = Modules.Ids.WORLD, description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
 public class ExplosionOverhaul extends Feature {
-	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "explosion_knockback_blacklist"));
-	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(InsaneSO.MOD_ID, "explosion_entity_blacklist"));
+	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_knockback_blacklist"));
+	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_entity_blacklist"));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_MOBGRIEFING = GameRules.register("iguanatweaks:explosionMobGriefing", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
 
-	@Config
-	@Label(name = "Disable Explosion Randomness", description = "Vanilla Explosions use a random number that changes the explosion power. With this enabled the ray strength will be as the explosion size.")
+	@Config(description = "Vanilla Explosions use a random number that changes the explosion power. With this enabled the ray strength will be as the explosion size.")
 	public static Boolean disableExplosionRandomness = true;
-	@Config
-	@Label(name = "Enable Poof Particles", description = "Somewhere around 1.15 Mojang (for performance issues) removed the poof particles from Explosions. Keep them disabled if you have a low end PC.\n" +
-			"These particles aren't shown when explosion power is <= 1")
+	@Config(description = "Somewhere around 1.15 Mojang (for performance issues) removed the poof particles from Explosions. Keep them disabled if you have a low end PC.\nThese particles aren't shown when explosion power is <= 1")
 	public static Boolean enablePoofParticles = true;
-	@Config
-	@Label(name = "Disable Emitter Particles", description = "Removes the particles spawned by the explosion.")
+	@Config(description = "Removes the particles spawned by the explosion.")
 	public static Boolean disableEmitterParticles = true;
-	@Config
-	@Label(name = "Knockback Scales With Size", description = "While enabled knockback is greatly increased by explosion size")
+	@Config(description = "While enabled knockback is greatly increased by explosion size")
 	public static Boolean knockbackScalesWithSize = true;
-	@Config
-	@Label(name = "Explosions at Half Entity", description = "Explosions will start from the middle of the entity instead of feets.")
+	@Config(description = "Explosions will generate from the middle of the entity instead of bottom of their bounding box.")
 	public static Boolean explosionAtHalfEntity = true;
-	@Config
-	@Label(name = "Explosion Affect Just Spawned Entities", description = "Explosions affect even entities spawned by the explosions, like TnTs or chests content. BE AWARE that containers content will get destroyed.")
-	public static Boolean affectJustSpawnedEntities = false;
-	@Config
-	@Label(name = "Enable Flying Blocks", description = "EXPERIMENTAL! This will make explosion blast blocks away. Blocks that can't land will drop the block as a TNT would have destroyed it.")
+	@Config(description = "EXPERIMENTAL! This will make explosion blast blocks away. Blocks that can't land will drop the block as a TNT would have destroyed it.")
 	public static Boolean enableFlyingBlocks = false;
-	@Config
-	@Label(name = "Creeper collateral", description = "If true, creepers explosions will drop no blocks.")
+	@Config(description = "If true, creepers explosions will drop no blocks.")
 	public static Boolean creeperCollateral = false;
-	@Config
-	@Label(name = "Explosion Damage calculation multiplier", description = "Number in the explosion damage calculation. Vanilla is 7. Higher = More damage")
+	@Config(description = "Number in the explosion damage calculation. Vanilla is 7. Higher = More damage")
 	public static Double explosionDamageCalculationMultiplier = 6d;
-	@Config
-	@Label(name = "Limit explosion size", description = "Disabled if set to 0.")
+	@Config(description = "Disabled if set to 0.")
 	public static Integer limitExplosionSize = 12;
-	@Config
-	@Label(name = "Don't stack drops", description = "Like pre-1.14")
+	@Config(name = "Don't stack drops", description = "Like pre-1.14")
 	public static Boolean dontStackDrops = true;
-	@Config
-	@Label(name = "Don't apply to non-entities", description = "If true, the overhaul will not be applied for explosions generated by non-entities. E.g. Supplementaries gunpowder")
+	@Config(name = "Don't apply to non-entities", description = "If true, the overhaul will not be applied for explosions generated by non-entities. E.g. Supplementaries gunpowder")
 	public static Boolean dontApplyToNonEntities = true;
-	@Config
-	@Label(name = "Caverns and Chasms Deepers", description = "If enabled and Caverns and Chasms is present, Deepers explosions will pierce through blocks more (like Breaching creepers and Angry Creepers in Enhanced AI), knockback and damage are reduced by 25%.")
+	@Config(description = "If enabled and Caverns and Chasms is present, Deepers explosions will pierce through blocks more (like Breaching creepers and Angry Creepers in Enhanced AI), knockback and damage are reduced by 25%.")
 	public static Boolean cavernsChasmsDeepers = true;
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
