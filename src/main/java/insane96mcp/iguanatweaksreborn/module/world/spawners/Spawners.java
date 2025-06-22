@@ -57,7 +57,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//TODO Refactor, make a "spawners type" enum with FIXED_SPAWN and EMPOWERED and make every type configurable with light, delay, spawned mobs etc
 @LoadFeature(module = Modules.Ids.WORLD, description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
 public class Spawners extends JsonFeature {
 
@@ -78,14 +77,14 @@ public class Spawners extends JsonFeature {
 	@Config(description = "If enabled, spawner will play a sound effect when spawning mobs")
 	public static Boolean spawningSoundEffect = true;
 
-	@Config(description = "If true, spawners will be disabled after spawning a certain amount of mobs.")
+	@Config(description = "If true, spawners will be disabled after spawning a certain amount of mobs. This is not compatible with empowered spawners.")
 	public static Boolean disableSpawners$enabled = false;
 	@Config(min = 0, description = "The minimum amount of spawnable mobs (when the spawner is basically in the same position as the world spawn). The amount of spawnable mobs before deactivating is equal to the distance divided by 8 (plus this value). E.g. At 160 blocks from spawn the max spawnable mobs will be 160 / 8 + 20 = 20 + 20 = 40")
 	public static Integer disableSpawners$minSpawnableMobs = 20;
 	@Config(min = 0d, description = "This multiplier increases the max mobs spawned.")
 	public static Double disableSpawners$spawnableMobsMultiplier = 1.0d;
 
-	@Config(description = "If true, spawners will generate in an empowered state. When empowered, will generate mobs really fast for a while and then will slow down.")
+	@Config(description = "If true, spawners will generate in an empowered state. When empowered, will generate mobs really fast for a while and then will disable. This is not compatible with disable spawners.")
 	public static Boolean empowered$enabled = true;
 	@Config(min = 0, description = "When the spawner stops being empowered, it is disabled and will stop spawning mobs.")
 	public static Boolean empowered$disableOnEnd = true;
