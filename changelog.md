@@ -12,6 +12,7 @@
 * Enhanced Experimental flying blocks explosion
   * Stuff like beds, doors etc are no longer affected
   * Fixed blocks not flying
+* Crouch when in interface on climbable can now be disabled
 
 ## Beta 4.12.12
 **Backup your config file, many config option names have changed**

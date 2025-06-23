@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.movement;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.BackwardsSlowdownUpdate;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -18,14 +17,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
 
-@Label(name = "Backwards slowdown", description = "Players's slowed down when walking backwards.")
-@LoadFeature(module = Modules.Ids.MOVEMENT)
+@LoadFeature(module = Modules.Ids.MOVEMENT, description = "Players's slowed down when walking backwards.")
 public class BackwardsSlowdown extends Feature {
 
 	private static final UUID BACKWARD_WALK_SLOWDOWN_UUID = UUID.fromString("3c085336-5bee-465f-b4a8-6677f245e7fc");
 
-	@Config(min = 0d, max = 1d)
-	@Label(name = "Slowdown", description = "How much slower will the player go when walking backwards.")
+	@Config(min = 0d, max = 1d, description = "How much slower will the player go when walking backwards.")
 	public static Double slowdown = 0.3d;
 
 	public BackwardsSlowdown(Module module, boolean enabledByDefault, boolean canBeDisabled) {

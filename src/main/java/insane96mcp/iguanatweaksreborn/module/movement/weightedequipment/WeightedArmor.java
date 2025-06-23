@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -18,7 +17,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -38,8 +36,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Label(name = "Weighted Armor", description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. If you need more control over armor, use item definitions")
-@LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false)
+@LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false, description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. If you need custom armor slowdown, use item definitions")
 public class WeightedArmor extends JsonFeature {
     public static final String ARMOR_SLOWDOWN = InsaneSO.MOD_ID + ".armor_slowdown";
     public static final UUID ARMOR_SLOWDOWN_UUID = UUID.fromString("8588420e-ce50-4e4e-a3e4-974dfc8a98ec");
@@ -49,14 +46,13 @@ public class WeightedArmor extends JsonFeature {
     ));
     public static final ArrayList<ArmorEnchantmentWeight> enchantmentsList = new ArrayList<>();
 
-    @Config
-    @Label(description = "Formula to calculate the slowdown of a piece of armor. Variables available are: armor, armor_toughness. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Please note that 1 means 100% slowdown")
+    @Config(description = "Formula to calculate the slowdown of a piece of armor. Variables available are: armor, armor_toughness. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Please note that 1 means 100% slowdown")
     public static String slowdownFormula = "(armor * 0.01) * (1 + (armor_toughness * 0.05))";
 
     public WeightedArmor(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        addSyncType(new ResourceLocation(InsaneSO.MOD_ID, "enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
-        JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, new ResourceLocation(InsaneSO.MOD_ID, "enchantments_weights")));
+        addSyncType(InsaneSO.location("enchantments_weights"), new SyncType(json -> loadAndReadJson(json, enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE)));
+        JSON_CONFIGS.add(new JsonConfig<>("enchantments_weights.json", enchantmentsList, ENCHANTMENTS_LIST_DEFAULT, ArmorEnchantmentWeight.LIST_TYPE, true, InsaneSO.location("enchantments_weights")));
     }
 
     @Override
