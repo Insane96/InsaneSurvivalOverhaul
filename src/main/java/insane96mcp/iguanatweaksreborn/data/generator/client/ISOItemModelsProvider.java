@@ -36,8 +36,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(Berries.SWEET_BERRY_SEEDS.get());
 
-        basicItemWithTexture(CyanFlower.FLOWER.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/cyan_flower"));
-        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/solanum_neorossii"));
+        basicItemWithTexture(CyanFlower.FLOWER.item().get(), InsaneSO.location("block/cyan_flower"));
+        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
 
         basicItem(BiomeCompass.COMPASS.get());
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
@@ -48,8 +48,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.NETHERIZED_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
 
-        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), new ResourceLocation(InsaneSO.MOD_ID, "block/copper_powered_rail"));
-        withExistingParent("golden_powered_rail", new ResourceLocation("item/powered_rail"));
+        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), InsaneSO.location("block/copper_powered_rail"));
+        withExistingParent("golden_powered_rail", ResourceLocation.parse("item/powered_rail"));
 
         basicItem(Cloth.ITEM.get());
 
@@ -60,12 +60,12 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(FlintExpansion.SWORD.get());
         shield(FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
 
-        withExistingParent("respawn_obelisk", new ResourceLocation(InsaneSO.MOD_ID, "block/respawn_obelisk_disabled"));
+        withExistingParent("respawn_obelisk", InsaneSO.location("block/respawn_obelisk_disabled"));
 
-        withExistingParent("soul_sand_hellish_coal_ore", new ResourceLocation(InsaneSO.MOD_ID, "block/soul_sand_hellish_coal_ore"));
-        withExistingParent("soul_soil_hellish_coal_ore", new ResourceLocation(InsaneSO.MOD_ID, "block/soul_soil_hellish_coal_ore"));
+        withExistingParent("soul_sand_hellish_coal_ore", InsaneSO.location("block/soul_sand_hellish_coal_ore"));
+        withExistingParent("soul_soil_hellish_coal_ore", InsaneSO.location("block/soul_soil_hellish_coal_ore"));
 
-        withExistingParent("charcoal_layer", new ResourceLocation(InsaneSO.MOD_ID, "block/charcoal_layer/height_2"));
+        withExistingParent("charcoal_layer", InsaneSO.location("block/charcoal_layer/height_2"));
         basicItem(CoalFire.FIRESTARTER.get());
         basicItem(CoalFire.HELLISH_COAL.get());
     }
@@ -89,7 +89,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
     private ItemModelBuilder shield(ResourceLocation item) {
         return getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("shieldsplus:item/wooden_shield"))
-                .override().predicate(new ResourceLocation("blocking"), 1)
+                .override().predicate(ResourceLocation.parse("blocking"), 1)
                 .model(new ModelFile.UncheckedModelFile("shieldsplus:item/wooden_shield_blocking"))
                 .end();
     }
@@ -101,6 +101,6 @@ public class ISOItemModelsProvider extends ItemModelProvider {
     private ItemModelBuilder handHeld(ResourceLocation item) {
         return getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
-                .texture("layer0", new ResourceLocation(item.getNamespace(), "item/" + item.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
     }
 }

@@ -59,7 +59,8 @@ public class ISOBeaconBlock extends BaseEntityBlock implements BeaconBeamBlock {
      * whenever possible. Implementing/overriding is fine.
      */
     @SuppressWarnings("deprecation")
-    public @NotNull RenderShape getRenderShape(BlockState pState) {
+	@Deprecated
+	public @NotNull RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 

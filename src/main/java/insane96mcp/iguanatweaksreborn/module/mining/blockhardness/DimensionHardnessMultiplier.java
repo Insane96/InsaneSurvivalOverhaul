@@ -14,7 +14,7 @@ public class DimensionHardnessMultiplier {
     public final double multiplier;
 
     public DimensionHardnessMultiplier(String dimension, double multiplier) {
-        this.dimension = new ResourceLocation(dimension);
+        this.dimension = ResourceLocation.parse(dimension);
         this.multiplier = multiplier;
     }
 

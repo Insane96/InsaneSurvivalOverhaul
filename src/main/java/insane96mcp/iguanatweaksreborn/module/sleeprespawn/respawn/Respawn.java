@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -46,8 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Label(name = "Respawn", description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
-@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
+@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 public class Respawn extends JsonFeature {
 	public static final TagKey<Block> RESPAWN_OBELISK_BLOCKS_TO_ROT = ISOBlockTagsProvider.create("structures/respawn_obelisk/blocks_to_rot");
 
@@ -62,47 +60,34 @@ public class Respawn extends JsonFeature {
 
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
-	@Config(min = 0)
-	@Label(name = "Loose World Spawn Range", description = "The range from world spawn where players will respawn.")
+	@Config(min = 0, description = "The range from world spawn where players will respawn.")
 	public static MinMax looseWorldSpawnRange = new MinMax(96d, 192d);
-	@Config(min = 0)
-	@Label(name = "Despawn mobs on world respawn", description = "Mobs in this range from the player will be despawned when respawning at world spawn.")
-	public static Integer despawnMobsOnWorldRespawn = 64;
+	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at world spawn.")
+	//public static Integer despawnMobsOnWorldRespawn = 64;
 
-	@Config(min = 0)
-	@Label(name = "Loose Bed Spawn Range", description = "The range from beds where players will respawn.")
+	@Config(min = 0, description = "The range from beds where players will respawn.")
 	public static MinMax looseBedSpawnRange = new MinMax(64d, 128d);
-	@Config(min = 0)
-	@Label(name = "Despawn mobs on bed respawn", description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
-	public static Integer despawnMobsOnBedRespawn = 32;
-	@Config
-	@Label(name = "Don't respawn on fluid", description = "If enabled, respawning will try to place you on land and not in fluids")
+	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
+	//public static Integer despawnMobsOnBedRespawn = 32;
+	@Config(description = "If enabled, respawning will try to place you on land and not in fluids")
 	public static Boolean dontRespawnOnFluid = true;
 
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Health.Minimum", description = "Min Health of respawning players")
-	public static Difficulty minHealthOnRespawn = new Difficulty(10, 10, 6);
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Health.Per Death", description = "How much health respawning players lose on respawn (not max health)")
-	public static Difficulty perDeathHealthOnRespawn = new Difficulty(1, 2, 2);
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Hunger.Minimum", description = "Min Hunger of respawning players. If below this value on death will be set to this value")
-	public static Difficulty hungerOnRespawnMin = new Difficulty(6, 6, 6);
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Hunger.Maximum", description = "Max Hunger of respawning players. If above this value on death will be set to this value")
-	public static Difficulty hungerOnRespawnMax = new Difficulty(14, 14, 10);
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Saturation.Minimum", description = "Min Saturation of respawning players. If below this value on death will be set to this value")
-	public static Difficulty saturationOnRespawnMin = new Difficulty(6, 6, 6);
-	@Config(min = 0, max = 20)
-	@Label(name = "Stats Penalty.Saturation.Maximum", description = "Max Saturation of respawning players. If above this value on death will be set to this value")
-	public static Difficulty saturationOnRespawnMax = new Difficulty(10, 10, 6);
+	@Config(min = 0, max = 20, description = "Min Health of respawning players")
+	public static Difficulty statsPenalty$health$minimum = new Difficulty(10, 10, 6);
+	@Config(min = 0, max = 20, description = "How much health respawning players lose on respawn (not max health)")
+	public static Difficulty statsPenalty$health$perDeath = new Difficulty(1, 2, 2);
+	@Config(min = 0, max = 20, description = "Min Hunger of respawning players. If below this value on death will be set to this value")
+	public static Difficulty statsPenalty$hunger$min = new Difficulty(6, 6, 6);
+	@Config(min = 0, max = 20, description = "Max Hunger of respawning players. If above this value on death will be set to this value")
+	public static Difficulty statsPenalty$hunger$maximum = new Difficulty(14, 14, 10);
+	@Config(min = 0, max = 20, description = "Min Saturation of respawning players. If below this value on death will be set to this value")
+	public static Difficulty statsPenalty$saturation$minimum = new Difficulty(6, 6, 6);
+	@Config(min = 0, max = 20, description = "Max Saturation of respawning players. If above this value on death will be set to this value")
+	public static Difficulty statsPenalty$saturation$maximum = new Difficulty(10, 10, 6);
 
-	@Config
-	@Label(description = "Data pack that makes respawn obelisks generate in the world")
+	@Config(description = "Data pack that makes respawn obelisks generate in the world")
 	public static Boolean respawnObelisks = true;
-	@Config
-	@Label(name = "Allow obelisk spawn point overwrite with beds when sneaking", description = "If enabled, sleeping a bed when sneaking will overwrite obelisk spawn point")
+	@Config(description = "If enabled, sleeping a bed when sneaking will overwrite obelisk spawn point")
 	public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
 
 	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
@@ -175,30 +160,30 @@ public class Respawn extends JsonFeature {
 
 	public void applyStatsPenalty(Player player) {
 		int hunger = MCUtils.getOrCreatePersistedData(player).getInt(HUNGER_ON_DEATH_TAG);
-		int maxHunger = (int) hungerOnRespawnMax.getByDifficulty(player.level());
-		int minHunger = (int) hungerOnRespawnMin.getByDifficulty(player.level());
+		int maxHunger = (int) statsPenalty$hunger$maximum.getByDifficulty(player.level());
+		int minHunger = (int) statsPenalty$hunger$min.getByDifficulty(player.level());
 		hunger = Mth.clamp(hunger, minHunger, maxHunger);
 		player.getFoodData().foodLevel = hunger;
 
 		float saturation = MCUtils.getOrCreatePersistedData(player).getFloat(SATURATION_ON_DEATH_TAG);
-		float maxSaturation = (float) saturationOnRespawnMax.getByDifficulty(player.level());
-		float minSaturation = (float) saturationOnRespawnMin.getByDifficulty(player.level());
+		float maxSaturation = (float) statsPenalty$saturation$maximum.getByDifficulty(player.level());
+		float minSaturation = (float) statsPenalty$saturation$minimum.getByDifficulty(player.level());
 		saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
 		player.getFoodData().saturationLevel = saturation;
 
-		double healthOnRespawn = player.getMaxHealth() - (perDeathHealthOnRespawn.getByDifficulty(player.level()) * MCUtils.getOrCreatePersistedData(player).getInt(DEATHS));
-		double minHealth = minHealthOnRespawn.getByDifficulty(player.level());
+		double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * MCUtils.getOrCreatePersistedData(player).getInt(DEATHS));
+		double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
 		player.setHealth((float) Math.max(healthOnRespawn, minHealth));
 	}
 
-	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player, Optional<Vec3> originalRespawn) {
+	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
 		if (!level.getGameRules().getBoolean(RULE_RANGEDRESPAWN))
-			return originalRespawn;
+			return Optional.empty();
 
 		Optional<Vec3> newRespawn = looseWorldSpawn(level, player);
 		if (newRespawn.isEmpty())
 			newRespawn = looseBedSpawn(level, player);
-		return newRespawn.or(() -> originalRespawn);
+		return newRespawn;
 	}
 
 	private static Optional<Vec3> looseWorldSpawn(ServerLevel level, ServerPlayer player) {

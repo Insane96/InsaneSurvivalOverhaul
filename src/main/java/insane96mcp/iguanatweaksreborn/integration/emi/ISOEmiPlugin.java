@@ -70,12 +70,12 @@ public class ISOEmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(CoalFire.class) && CoalFire.charcoalFromBurntLogsChance > 0) {
 			Ingredient fire = Ingredient.of(CoalFire.FIRESTARTER.get(), Items.FLINT_AND_STEEL);
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(new ResourceLocation(InsaneSO.MOD_ID, "charcoal_from_burning_logs"))
+					.id(InsaneSO.location("charcoal_from_burning_logs"))
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(Items.CHARCOAL)).build());
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(new ResourceLocation(InsaneSO.MOD_ID, "charcoal_layer_from_burning_logs"))
+					.id(InsaneSO.location("charcoal_layer_from_burning_logs"))
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
 					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
@@ -87,11 +87,11 @@ public class ISOEmiPlugin implements EmiPlugin {
 	}
 
 	public EmiInfoRecipe createSimpleInfo(Item item, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), new ResourceLocation(InsaneSO.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredientOf(item)), List.of(component), InsaneSO.location(id));
 	}
 
 	public EmiInfoRecipe createSimpleInfo(EmiIngredient emiIngredient, String id, Component component) {
-		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), new ResourceLocation(InsaneSO.MOD_ID, id));
+		return new EmiInfoRecipe(List.of(emiIngredient), List.of(component), InsaneSO.location(id));
 	}
 
 	public static EmiIngredient emiIngredientOf(Item... item) {

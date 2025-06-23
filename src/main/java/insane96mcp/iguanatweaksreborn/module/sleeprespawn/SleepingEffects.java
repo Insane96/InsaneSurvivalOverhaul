@@ -4,7 +4,9 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
-import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.network.chat.Component;
@@ -22,8 +24,7 @@ import net.minecraftforge.fml.ModList;
 import java.util.ArrayList;
 import java.util.List;
 
-@Label(name = "Sleeping Effects", description = "Prevents the player from sleeping if has not enough Hunger and gives him effects on wake up. Effects on wake up are controlled via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
+@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Prevents the player from sleeping if has not enough Hunger and gives him effects on wake up. Effects on wake up are controlled via json in this feature's folder")
 public class SleepingEffects extends JsonFeature {
 
 	public static final List<ISOMobEffectInstance> EFFECTS_ON_WAKE_UP_DEFAULT = List.of(
@@ -35,23 +36,17 @@ public class SleepingEffects extends JsonFeature {
 	public static final ArrayList<ISOMobEffectInstance> effectsOnWakeUp = new ArrayList<>();
 	public static final String NO_FOOD_FOR_SLEEP = "iguanatweaksreborn.no_food_for_sleep";
 
-	@Config(min = 0, max = 40)
-	@Label(name = "Hunger & Saturation Depleted on Wake Up", description = "How much saturation and hunger are depleted when you wake up in the morning. Setting to 0 will disable this feature.")
+	@Config(min = 0, max = 40, name = "Hunger & Saturation Depleted on Wake Up", description = "How much saturation and hunger are depleted when you wake up in the morning. Setting to 0 will disable this feature.")
 	public static Integer hungerDepletedOnWakeUp = 12;
-	@Config(min = 0, max = 20)
-	@Label(name = "Tired bonus Hunger & Saturation Depleted", description = "How much more saturation and hunger are depleted per level of Tired.")
+	@Config(min = 0, max = 20, name = "Tired bonus Hunger & Saturation Depleted", description = "How much more saturation and hunger are depleted per level of Tired.")
 	public static Integer tiredBonusHungerSaturationDepleted = 2;
-	@Config
-	@Label(name = "No Sleep If Hungry", description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
+	@Config(description = "If the player's hunger bar is below 'Hunger Depleted on Wake Up' he can't sleep.")
 	public static Boolean noSleepIfHungry = true;
-	@Config
-	@Label(name = "No Sleep with Hunger effect", description = "If the player's has the hunger effect he can't sleep.")
+	@Config(description = "If the player's has the hunger effect he can't sleep.")
 	public static Boolean noSleepWithHungerEffect = true;
-	@Config
-	@Label(name = "No beneficial effect when hungry", description = "If the player has no hunger on wake up, beneficial effects are not applied.")
+	@Config(description = "If the player has no hunger on wake up, beneficial effects are not applied.")
 	public static Boolean noBeneficialEffectWhenHungry = true;
-	@Config(min = -1, max = 255)
-	@Label(name = "Dizzy when tired", description = "Apply the bad effects only when the Tired effect is equal or above this amplifier. -1 to disable")
+	@Config(min = -1, max = 255, description = "Apply the bad effects only when the Tired effect is equal or above this amplifier. -1 to disable")
 	public static Integer dizzyWhenToTired = 1;
 
 	public SleepingEffects(Module module, boolean enabledByDefault, boolean canBeDisabled) {

@@ -16,6 +16,7 @@ import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.event.AddEatEffectEvent;
 import insane96mcp.insanelib.event.CakeEatEvent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -41,6 +42,7 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 @LoadFeature(module = Modules.Ids.HUNGER_HEALTH, name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
 public class FoodDrinks extends JsonFeature {
+	public static final ResourceLocation PUMPKIN_SHEAR_LOOT_TABLE = InsaneSO.location("gameplay/pumpkin_shear");
 
 	public static final RegistryObject<Item> BROWN_MUSHROOM_STEW = ISORegistries.ITEMS.register("brown_mushroom_stew", () -> new BowlFoodItem(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(3).saturationMod(0.6F).build())
@@ -114,6 +116,8 @@ public class FoodDrinks extends JsonFeature {
 	public static Boolean combatSnapshotEatingSaturation = true;
 	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
 	public static Boolean buffCake = true;
+	@Config(description = "Adds a loot table when shearing pumpkins (iguanatweaksreborn:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
+	public static Boolean addPumpkinShearLootTable = true;
 
 	@Config(description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;

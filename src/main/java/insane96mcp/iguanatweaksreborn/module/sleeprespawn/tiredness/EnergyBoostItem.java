@@ -40,7 +40,7 @@ public class EnergyBoostItem {
         if (this.duration == 0) {
             FoodProperties food = stack.getFoodProperties(player);
             //noinspection ConstantConditions .getFoodProperties() == null is checked
-            duration += (int) (MCUtils.getFoodEffectiveness(food) * 20 * Tiredness.energyBoostDurationMultiplier);
+            duration += (int) (MCUtils.getFoodEffectiveness(food) * 20 * Tiredness.energyBoost$durationMultiplier);
         }
         else {
             duration += this.duration;

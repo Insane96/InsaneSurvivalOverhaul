@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
-    static final ResourceLocation BEACON_LOCATION = new ResourceLocation(InsaneSO.RESOURCE_PREFIX + "textures/gui/container/beacon.png");
+    static final ResourceLocation BEACON_LOCATION = InsaneSO.location("textures/gui/container/beacon.png");
     public final List<BeaconButton> beaconButtons = Lists.newArrayList();
     @Nullable
     MobEffect effect;

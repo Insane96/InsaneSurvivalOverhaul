@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class UnfairOneShotTrigger extends SimpleCriterionTrigger<UnfairOneShotTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(InsaneSO.MOD_ID, "unfair_oneshot");
+	static final ResourceLocation ID = InsaneSO.location("unfair_oneshot");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

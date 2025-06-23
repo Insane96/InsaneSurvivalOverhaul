@@ -1,9 +1,12 @@
 # Changelog
 
 ## Upcoming
-**Backup your config file, many config option names have changed**
+**Backup your config file, many config option names have changed so will be reset to default values**  
+This should hopefully be the last update
 
 ### Changes
+* Season spawning feature is now a JSON controlled feature
+  * Much customization, such wow
 * Nether to overworld ratio is now 2 and no longer 4 (so 1 block in the Nether is 2 blocks in the Overworld)
 * Harder crops jsons have been moved from "block_data" data pack to "crops" data pack
 * Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
@@ -13,9 +16,10 @@
   * Stuff like beds, doors etc are no longer affected
   * Fixed blocks not flying
 * Crouch when in interface on climbable can now be disabled
+* Fall damage reduction on climbable has been reduced (40% -> 25%)
 
 ## Beta 4.12.12
-**Backup your config file, many config option names have changed**
+**Backup your config file, many config option names have changed so will be reset to default values**
 
 ### Additions
 * Added Shield Block damage

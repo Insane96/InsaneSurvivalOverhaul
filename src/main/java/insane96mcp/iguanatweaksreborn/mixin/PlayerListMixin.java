@@ -17,7 +17,7 @@ import java.util.Optional;
 public abstract class PlayerListMixin {
 	@Inject(method = "respawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getLevelData()Lnet/minecraft/world/level/storage/LevelData;"))
 	private void iguanatweaksreborn$tryLooseRespawnWithoutPos(ServerPlayer pPlayer, boolean pKeepEverything, CallbackInfoReturnable<ServerPlayer> cir, @Local(ordinal = 1) ServerPlayer serverPlayer) {
-		Optional<Vec3> respawnPos = Respawn.tryLooseRespawn((ServerLevel) serverPlayer.level(), serverPlayer, Optional.empty());
+		Optional<Vec3> respawnPos = Respawn.tryLooseRespawn((ServerLevel) serverPlayer.level(), serverPlayer);
 		respawnPos.ifPresent(serverPlayer::moveTo);
 	}
 }

@@ -24,7 +24,9 @@ import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.world.item.DurabilityModifier;
-import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
@@ -65,8 +67,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-@Label(name = "Enchantments", description = "Changes to some enchantments related stuff.")
-@LoadFeature(module = Modules.Ids.EXPERIENCE)
+@LoadFeature(module = Modules.Ids.EXPERIENCE, description = "Changes to some enchantments related stuff.")
 public class EnchantmentsFeature extends JsonFeature {
 	static final EnchantmentCategory ACTUALLY_WEARABLE = EnchantmentCategory.create("actually_wearable", item -> (item instanceof Equipable equipable && equipable.getEquipmentSlot().isArmor()) || Block.byItem(item) instanceof Equipable);
 

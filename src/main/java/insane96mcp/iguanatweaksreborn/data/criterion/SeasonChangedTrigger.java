@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonChangedTrigger extends SimpleCriterionTrigger<SeasonChangedTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(InsaneSO.MOD_ID, "season_changed");
+	static final ResourceLocation ID = InsaneSO.location("season_changed");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate pPredicate, DeserializationContext context) {

@@ -84,7 +84,7 @@ public class ISOMobEffectInstance {
 			if (!id.isEmpty() && !ResourceLocation.isValidResourceLocation(id)) {
 				throw new JsonParseException("Invalid id: %s".formatted(id));
 			}
-			MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(id));
+			MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse(id));
 			if (mobEffect == null) {
 				throw new JsonParseException("%d is not a known mob_effect".formatted(id));
 			}

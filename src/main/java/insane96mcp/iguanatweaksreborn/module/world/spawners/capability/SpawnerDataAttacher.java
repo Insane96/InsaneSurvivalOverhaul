@@ -16,11 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SpawnerDataAttacher {
-    public static final String SPAWNER_DATA = InsaneSO.RESOURCE_PREFIX + "spawner_data";
-
     public static class SpawnerDataProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-
-        public static final ResourceLocation IDENTIFIER = new ResourceLocation(SPAWNER_DATA);
+        public static final ResourceLocation IDENTIFIER = InsaneSO.location("spawner_data");
 
         private final ISpawnerData backend = new SpawnerDataImpl();
         private final LazyOptional<ISpawnerData> optionalData = LazyOptional.of(() -> backend);

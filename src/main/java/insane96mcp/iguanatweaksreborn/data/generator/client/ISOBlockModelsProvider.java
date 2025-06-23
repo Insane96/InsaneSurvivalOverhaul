@@ -14,10 +14,10 @@ public class ISOBlockModelsProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        cross("cyan_flower", new ResourceLocation(InsaneSO.MOD_ID, "block/cyan_flower")).renderType("cutout");
-        flowerPotCross("potted_cyan_flower", new ResourceLocation(InsaneSO.MOD_ID, "block/cyan_flower")).renderType("cutout");
-        cross("solanum_neorossii", new ResourceLocation(InsaneSO.MOD_ID, "block/solanum_neorossii")).renderType("cutout");
-        flowerPotCross("potted_solanum_neorossii", new ResourceLocation(InsaneSO.MOD_ID, "block/solanum_neorossii")).renderType("cutout");
+        cross("cyan_flower", InsaneSO.location("block/cyan_flower")).renderType("cutout");
+        flowerPotCross("potted_cyan_flower", InsaneSO.location("block/cyan_flower")).renderType("cutout");
+        cross("solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
+        flowerPotCross("potted_solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
 
         cubeAll("soul_sand_hellish_coal_ore", "block/soul_sand_hellish_coal_ore");
         cubeAll("soul_soil_hellish_coal_ore", "block/soul_soil_hellish_coal_ore");
@@ -28,6 +28,6 @@ public class ISOBlockModelsProvider extends BlockModelProvider {
     }
 
     public BlockModelBuilder cubeAll(String name, String texture) {
-        return super.cubeAll(InsaneSO.RESOURCE_PREFIX + name, new ResourceLocation(InsaneSO.MOD_ID, texture));
+        return super.cubeAll(InsaneSO.MOD_ID + ":" + name, InsaneSO.location(texture));
     }
 }

@@ -185,7 +185,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 			return ItemStack.EMPTY;
 		String itemString = GsonHelper.getAsString(jObject, name);
 		int count = GsonHelper.getAsInt(jObject, name + "_count", 1);
-		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString));
+		Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(itemString));
 		if (item == Items.AIR) {
 			ISOLogHelper.warn("Item %s for SerializableTrade does not exist, ignoring".formatted(itemString));
 			return ItemStack.EMPTY;
@@ -260,7 +260,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 
 			private static TagKey<Structure> readStructure(JsonObject pJson) {
 				String s = GsonHelper.getAsString(pJson, "destination");
-				return TagKey.create(Registries.STRUCTURE, new ResourceLocation(s));
+				return TagKey.create(Registries.STRUCTURE, ResourceLocation.parse(s));
 			}
 		}
 }

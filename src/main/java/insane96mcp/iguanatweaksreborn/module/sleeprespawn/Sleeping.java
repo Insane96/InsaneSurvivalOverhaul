@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.insanelib.base.Feature;
-import insane96mcp.insanelib.base.Label;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -17,20 +16,16 @@ import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Label(name = "Sleeping and Spawn Point", description = "Changes to sleeping and spawn points")
-@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, enabledByDefault = false)
+@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, enabledByDefault = false, name = "Sleeping and Spawn Point", description = "Changes to sleeping and spawn points")
 public class Sleeping extends Feature {
 
 	public static final String DECORATIVE_BEDS = "iguanatweaksreborn.decorative_beds";
 	public static final String ENJOY_THE_NIGHT = "iguanatweaksreborn.enjoy_the_night";
-	@Config
-	@Label(name = "Disable Sleeping", description = "If set to true the player will not be able to sleep.")
+	@Config(description = "If set to true the player will not be able to sleep.")
 	public static Boolean disableSleeping = true;
-	@Config
-	@Label(name = "Disable Spawn Point", description = "If set to true the player spawn point cannot be changed with beds.")
+	@Config(description = "If set to true the player spawn point cannot be changed with beds.")
 	public static Boolean disableSpawnPoint = false;
-	@Config
-	@Label(name = "Allow Sleeping During Day", description = "If set to true the player will be able to sleep during day time. On wake up it will be night time. Note that with 'Tiredness' feature enabled you are still not able to sleep during day unless you're tired enough.")
+	@Config(description = "If set to true the player will be able to sleep during day time. On wake up it will be night time. Note that with 'Tiredness' feature enabled you are still not able to sleep during day unless you're tired enough.")
 	public static Boolean allowDaySleep = false;
 
 	public Sleeping(Module module, boolean enabledByDefault, boolean canBeDisabled) {

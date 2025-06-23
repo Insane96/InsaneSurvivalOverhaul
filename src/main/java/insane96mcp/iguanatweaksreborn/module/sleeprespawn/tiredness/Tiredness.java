@@ -8,7 +8,9 @@ import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.insanelib.base.*;
+import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
+import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
@@ -60,8 +62,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@Label(name = "Tiredness", description = "Prevents sleeping if the player is not tired. Tiredness is gained by gaining exhaustion. Allows you to sleep during daytime if too tired. Energy Boost Items are controlled via json in this feature's folder")
-@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN)
+@LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Prevents sleeping if the player is not tired. Tiredness is gained by gaining exhaustion. Allows you to sleep during daytime if too tired. Energy Boost Items are controlled via json in this feature's folder")
 public class Tiredness extends JsonFeature {
 
 	public static final RegistryObject<MobEffect> TIRED = ISORegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
@@ -69,9 +70,9 @@ public class Tiredness extends JsonFeature {
 			.addAttributeModifier(Attributes.ATTACK_SPEED, "40c789ef-d30d-4a27-8f46-13fe0edbb259", -0.04F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 	public static final RegistryObject<MobEffect> ENERGY_BOOST = ISORegistries.MOB_EFFECTS.register("energy_boost", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
-	public static final String NOT_TIRED = InsaneSO.MOD_ID + ".not_tired";
-	public static final String TIRED_ENOUGH = InsaneSO.MOD_ID + ".tired_enough";
-	public static final String TOO_TIRED = InsaneSO.MOD_ID + ".too_tired";
+	public static final String NOT_TIRED = InsaneSO.lang("not_tired");
+	public static final String TIRED_ENOUGH = InsaneSO.lang("tired_enough");
+	public static final String TOO_TIRED = InsaneSO.lang("too_tired");
 	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISOItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
@@ -81,45 +82,34 @@ public class Tiredness extends JsonFeature {
 	));
 	public static final List<EnergyBoostItem> energyBoostItems = new ArrayList<>();
 
-	@Config(min = 0d, max = 128d)
-	@Label(name = "Tiredness gained multiplier", description = "Multiply the tiredness gained by this value. Normally you gain tiredness equal to the exhaustion gained. 'Effective Hunger' doesn't affect the exhaustion gained.")
+	@Config(min = 0d, max = 128d, description = "Multiply the tiredness gained by this value. Normally you gain tiredness equal to the exhaustion gained. 'Effective Hunger' doesn't affect the exhaustion gained.")
 	public static Double tirednessGainMultiplier = 1d;
-	@Config
-	@Label(name = "Prevent Spawn Point", description = "If true the player will not set the spawn point if can't sleep.")
+	@Config(description = "If true the player will not set the spawn point if can't sleep.")
 	public static Boolean shouldPreventSpawnPoint = false;
-	@Config(min = 0d)
-	@Label(name = "Tiredness for effect", description = "Tiredness required to get the Tired effect and be able to sleep.")
+	@Config(min = 0d, description = "Tiredness required to get the Tired effect and be able to sleep.")
 	public static Double tirednessToEffect = 400d;
-	@Config(min = 0d)
-	@Label(name = "Tiredness per level", description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
+	@Config(min = 0d, description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
 	public static Double tirednessPerLevel = 250d;
-	@Config(min = 0d)
-	@Label(name = "Energy boost.Tiredness reduction", description = "If the player has energy boost, reduce tiredness by this value (multiplied by the effect level) each tick.")
-	public static Double energyBoostTirednessReduction = 0.025d;
-	@Config(min = 0d)
-	@Label(name = "Energy boost.Duration multiplier", description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effectiveness (hunger + saturation) of the food. This multiplies the duration of the effect")
-	public static Double energyBoostDurationMultiplier = 5d;
-	@Config
-	@Label(name = "On death behaviour", description = """
+	@Config(min = 0d, description = "If the player has energy boost, reduce tiredness by this value (multiplied by the effect level) each tick.")
+	public static Double energyBoost$tirednessReduction = 0.025d;
+	@Config(min = 0d, description = "By default if omitted in the json, food items will give 1 second of Energy Boost per effectiveness (hunger + saturation) of the food. This multiplies the duration of the effect")
+	public static Double energyBoost$durationMultiplier = 5d;
+	@Config(description = """
 			What to do with tiredness when the player dies.
 			RESET resets the tiredness to 0
 			KEEP keeps the current tiredness
-			SET_AT_EFFECT keeps the current tiredness but if higher than 'Tiredness for effect' it's set to that
-			REMOVE_ONE_LEVEL keeps the current tiredness but if higher than 'Tiredness for effect' removes one level of Tired to a minimum of I""")
+			SET_AT_EFFECT keeps the current tiredness but if higher than 'Tiredness to effect' it's set to that
+			REMOVE_ONE_LEVEL keeps the current tiredness but if higher than 'Tiredness to effect' removes one level of Tired to a minimum of I""")
 	public static OnDeath onDeathBehaviour = OnDeath.SET_AT_EFFECT;
-	@Config
-	@Label(name = "Fake sound.Mobs", description = "List of mobs (and optional dimension where they should play) that will have their ambience sound played when the player is tired")
-	public static List<String> fakeSoundMobsConfig = List.of("minecraft:skeleton,minecraft:overworld", "minecraft:zombie,minecraft:overworld", "minecraft:spider,minecraft:overworld", "minecraft:ghast,minecraft:the_nether", "minecraft:zombified_piglin,minecraft:the_nether");
+	@Config(description = "List of mobs (and optional dimension where they should play) that will have their ambience sound played when the player is tired")
+	public static List<String> fakeSound$mobs = List.of("minecraft:skeleton,minecraft:overworld", "minecraft:zombie,minecraft:overworld", "minecraft:spider,minecraft:overworld", "minecraft:ghast,minecraft:the_nether", "minecraft:zombified_piglin,minecraft:the_nether");
 	public static List<IdTagMatcher> fakeSoundMobs = new ArrayList<>();
-	@Config(min = 0)
-	@Label(name = "Fake sound.Cooldown", description = "The cooldown (in ticks) between choosing a mob to play the fake sound. This is reduced with higher Tired effect levels")
-	public static MinMax fakeSoundCooldownBetweenMobs = new MinMax(12000, 24000);
-	@Config(min = 0)
-	@Label(name = "Fake sound.Times", description = "How many times will a fake sound of a mob play before going into cooldown")
-	public static MinMax fakeSoundTimes = new MinMax(2, 6);
-	@Config
-	@Label(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
-	public static Boolean tiredPhantoms = true;
+	@Config(min = 0, description = "The cooldown (in ticks) between choosing a mob to play the fake sound. This is reduced with higher Tired effect levels")
+	public static MinMax fakeSound$cooldownBetweenMobs = new MinMax(12000, 24000);
+	@Config(min = 0, description = "How many times will a fake sound of a mob play before going into cooldown")
+	public static MinMax fakeSound$times = new MinMax(2, 6);
+	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
+	public static Boolean tiredTiedPhantoms = true;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -129,7 +119,7 @@ public class Tiredness extends JsonFeature {
 	@Override
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
-		fakeSoundMobs = fakeSoundMobsConfig.stream().map(IdTagMatcher::parseLine).collect(Collectors.toList());
+		fakeSoundMobs = fakeSound$mobs.stream().map(IdTagMatcher::parseLine).collect(Collectors.toList());
 	}
 
 	@Override
@@ -196,7 +186,7 @@ public class Tiredness extends JsonFeature {
 				return;
 			}
 			mobFakeSound = (Mob) entity;
-			fakeSoundTimesToPlay = (int) (random.triangle(fakeSoundTimes.min, fakeSoundTimes.max + 1));
+			fakeSoundTimesToPlay = (int) (random.triangle(fakeSound$times.min, fakeSound$times.max + 1));
 			fakeMobPos = event.player.blockPosition();
 		}
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
@@ -227,7 +217,7 @@ public class Tiredness extends JsonFeature {
 
 	private void resetMobFakeSound(RandomSource random, int reduction) {
 		fakeSoundTimesToPlay = 0;
-		fakeSoundCooldown = (long) (fakeSoundCooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.15f * reduction));
+		fakeSoundCooldown = (long) (fakeSound$cooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.15f * reduction));
 		mobFakeSound = null;
 	}
 
@@ -237,7 +227,7 @@ public class Tiredness extends JsonFeature {
 
 		//noinspection ConstantConditions
 		int effectLevel = player.getEffect(ENERGY_BOOST.get()).getAmplifier() + 1;
-		TirednessHandler.subtract(player, energyBoostTirednessReduction.floatValue() * effectLevel);
+		TirednessHandler.subtract(player, energyBoost$tirednessReduction.floatValue() * effectLevel);
 
 		if (player.tickCount % 20 == 0)
 			TirednessHandler.syncToClient(player);
@@ -411,7 +401,7 @@ public class Tiredness extends JsonFeature {
 	@SubscribeEvent
 	public void onPhantomTryToSpawn(PlayerSpawnPhantomsEvent event) {
 		if (!this.isEnabled()
-				|| !tiredPhantoms)
+				|| !tiredTiedPhantoms)
 			return;
 		if (event.getEntity().getEffect(TIRED.get()) == null) {
 			event.setResult(Event.Result.DENY);

@@ -70,11 +70,11 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         //ISO
         tag(StackSizes.NO_STACK_SIZE_CHANGES)
                 .add(Items.ROTTEN_FLESH, Items.SPIDER_EYE, Items.PUFFERFISH)
-                .addOptional(new ResourceLocation("supplementaries", "soap"));
+                .addOptional(ResourceLocation.fromNamespaceAndPath("supplementaries", "soap"));
 
         tag(Tiredness.ENERGY_BOOST_ITEM_TAG)
                 .add(Items.COOKIE)
-                .addOptional(new ResourceLocation("farmersdelight:chocolate_pie_slice")).addOptional(new ResourceLocation("create:bar_of_chocolate")).addOptional(new ResourceLocation("create:chocolate_glazed_berries"));
+                .addOptional(ResourceLocation.parse("farmersdelight:chocolate_pie_slice")).addOptional(ResourceLocation.parse("create:bar_of_chocolate")).addOptional(ResourceLocation.parse("create:chocolate_glazed_berries"));
 
         tag(Crops.CHICKEN_FOOD_ITEMS)
                 .add(Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.TORCHFLOWER_SEEDS);
@@ -84,15 +84,15 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(CoalFire.FIRESTARTER.get())
                 .addTag(FLINT_HAND_EQUIPMENT)
                 .addOptional(ForgeRegistries.ITEMS.getKey(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()))
-                .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/hand/copper"))
-                .addOptionalTag(new ResourceLocation("iguanatweaksexpanded:equipment/armor/chained_copper"))
-                .addOptional(new ResourceLocation("shieldsplus:wooden_shield")).addOptional(new ResourceLocation("shieldsplus:stone_shield")).addOptional(new ResourceLocation("iguanatweaksexpanded:copper_shield"))
-                .addOptionalTag(new ResourceLocation("chalk:chalks"));
+                .addOptionalTag(ResourceLocation.parse("iguanatweaksexpanded:equipment/hand/copper"))
+                .addOptionalTag(ResourceLocation.parse("iguanatweaksexpanded:equipment/armor/chained_copper"))
+                .addOptional(ResourceLocation.parse("shieldsplus:wooden_shield")).addOptional(ResourceLocation.parse("shieldsplus:stone_shield")).addOptional(ResourceLocation.parse("iguanatweaksexpanded:copper_shield"))
+                .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
         tag(FoodDrinks.RAW_FOOD)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
-                .addOptional(new ResourceLocation("autumnity:turkey_piece"))
-                .addOptional(new ResourceLocation("berry_good:sweet_berry_mince"))
-                .addOptional(new ResourceLocation("environmental:venison"));
+                .addOptional(ResourceLocation.parse("autumnity:turkey_piece"))
+                .addOptional(ResourceLocation.parse("berry_good:sweet_berry_mince"))
+                .addOptional(ResourceLocation.parse("environmental:venison"));
 		tag(Spawners.SPAWNER_REACTIVATOR_TAG)
 				.add(Items.ECHO_SHARD);
 
@@ -101,7 +101,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
                 .addTags(ItemTags.AXES, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS)
                 .add(Items.CROSSBOW)
-                .addOptional(new ResourceLocation("savage_and_ravage:cleaver_of_beheading"));
+                .addOptional(ResourceLocation.parse("savage_and_ravage:cleaver_of_beheading"));
         tag(Luck.ACCEPTS_ENCHANTMENT)
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT)
                 .add(Items.FISHING_ROD)
@@ -113,26 +113,26 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
-                .addOptionalTag(new ResourceLocation(InsaneSO.MOD_ID, "equipment/netherite"));
+                .addOptionalTag(InsaneSO.location("equipment/netherite"));
 
         tag(CoalFire.ITEM_ORES)
                 .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
 
         tag(TimberTrees.BLACKLISTED_ITEMS)
-                .addOptional(new ResourceLocation("tconstruct:broad_axe"));
+                .addOptional(ResourceLocation.parse("tconstruct:broad_axe"));
 
         tag(TerrainSlowdown.SNOW_SLOWDOWN_IGNORE)
                 .add(Items.LEATHER_BOOTS)
-                .addOptional(new ResourceLocation("tconstruct:travelers_boots"));
+                .addOptional(ResourceLocation.parse("tconstruct:travelers_boots"));
 
         tag(HUD_CARDINAL_DIRECTION)
                 .add(Items.COMPASS);
         tag(HUD_SEASON)
                 .addOptional(ForgeRegistries.ITEMS.getKey(SSItems.CALENDAR));
         tag(HUD_DEPTH)
-                .addOptional(new ResourceLocation("caverns_and_chasms:depth_gauge"))
-                .addOptional(new ResourceLocation("iguanatweaksexpanded:altimeter"))
-                .addOptional(new ResourceLocation("supplementaries:altimeter"));
+                .addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
+                .addOptional(ResourceLocation.parse("iguanatweaksexpanded:altimeter"))
+                .addOptional(ResourceLocation.parse("supplementaries:altimeter"));
         tag(HUD_TIME)
                 .add(Items.CLOCK);
         tag(HUD_BIOME)
@@ -140,6 +140,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     }
 
     public static TagKey<Item> create(String tagName) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(InsaneSO.MOD_ID, tagName));
+        return TagKey.create(Registries.ITEM, InsaneSO.location(tagName));
     }
 }

@@ -203,13 +203,14 @@ public class ClientSetup {
 
     public static void init(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemProperties.register(Bows.SHORTBOW.get(), new ResourceLocation("pull"), (stack, clientLevel, livingEntity, seed) -> {
-                if (livingEntity == null)
+            ItemProperties.register(Bows.SHORTBOW.get(), ResourceLocation.parse("pull"), (stack, clientLevel, livingEntity, seed) -> {
+                if (livingEntity == null
+                        || livingEntity.getUseItem() != stack)
                     return 0.0F;
                 else
-                    return livingEntity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) ShortbowItem.getFullChargeTicks();
+                    return (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) ShortbowItem.getFullChargeTicks();
             });
-            ItemProperties.register(Bows.SHORTBOW.get(), new ResourceLocation("pulling"),
+            ItemProperties.register(Bows.SHORTBOW.get(), ResourceLocation.parse("pulling"),
                     (stack, clientLevel, livingEntity, seed)
                             -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
         });

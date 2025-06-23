@@ -12,18 +12,17 @@ public class Modifiers {
     public static final Map<ResourceLocation, Type> MODIFIERS = new HashMap<>();
 
     public static void init() {
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "true"), Modifier.class);
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "sunlight"), SunlightModifier.class);
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "night_time"), NightTimeModifier.class);
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "matches_biome"), BiomeModifier.class);
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "age"), AgeModifier.class);
-        registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "has_been_fed_recently"), FedModifier.class);
+        registerModifier(InsaneSO.location("true"), Modifier.class);
+        registerModifier(InsaneSO.location("sunlight"), SunlightModifier.class);
+        registerModifier(InsaneSO.location("night_time"), NightTimeModifier.class);
+        registerModifier(InsaneSO.location("matches_biome"), BiomeModifier.class);
+        registerModifier(InsaneSO.location("age"), AgeModifier.class);
+        registerModifier(InsaneSO.location("has_been_fed_recently"), FedModifier.class);
         if (ModList.get().isLoaded("sereneseasons"))
-            registerModifier(new ResourceLocation(InsaneSO.MOD_ID, "season"), SeasonModifier.class);
+            registerModifier(InsaneSO.location("season"), SeasonModifier.class);
     }
 
-    public static Type registerModifier(ResourceLocation id, Type modifier) {
+    public static void registerModifier(ResourceLocation id, Type modifier) {
         MODIFIERS.put(id, modifier);
-        return modifier;
     }
 }

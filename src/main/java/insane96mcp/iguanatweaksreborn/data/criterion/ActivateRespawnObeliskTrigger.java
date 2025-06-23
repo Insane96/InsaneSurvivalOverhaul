@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class ActivateRespawnObeliskTrigger extends SimpleCriterionTrigger<ActivateRespawnObeliskTrigger.TriggerInstance> {
-	static final ResourceLocation ID = new ResourceLocation(InsaneSO.MOD_ID, "activate_respawn_obelisk");
+	static final ResourceLocation ID = InsaneSO.location("activate_respawn_obelisk");
 
 	@Override
 	protected TriggerInstance createInstance(JsonObject pJson, ContextAwarePredicate pPredicate, DeserializationContext pDeserializationContext) {

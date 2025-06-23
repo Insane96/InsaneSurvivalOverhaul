@@ -18,7 +18,7 @@ import org.joml.Matrix4f;
 import java.util.List;
 
 public class ISOBeaconRenderer implements BlockEntityRenderer<ISOBeaconBlockEntity> {
-    public static final ResourceLocation BEAM_LOCATION = new ResourceLocation("textures/entity/beacon_beam.png");
+    public static final ResourceLocation BEAM_LOCATION = ResourceLocation.parse("textures/entity/beacon_beam.png");
     public static final int MAX_RENDER_Y = 1024;
 
     public ISOBeaconRenderer(BlockEntityRendererProvider.Context pContext) {
