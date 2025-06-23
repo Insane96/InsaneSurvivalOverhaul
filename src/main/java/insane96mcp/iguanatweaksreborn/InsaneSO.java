@@ -142,6 +142,7 @@ public class InsaneSO
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "xp_processed", DroppedExperience.XP_PROCESSED);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "passive_regen_ticks", HealthRegenHunger.PASSIVE_REGEN_TICK);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "has_name_tag", NameTags.HAS_NAME_TAG);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "tiredness", Tiredness.NBT_TAG);
     }
 
     @SubscribeEvent

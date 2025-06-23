@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -64,6 +65,7 @@ import java.util.stream.Collectors;
 
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Prevents sleeping if the player is not tired. Tiredness is gained by gaining exhaustion. Allows you to sleep during daytime if too tired. Energy Boost Items are controlled via json in this feature's folder")
 public class Tiredness extends JsonFeature {
+	public static ResourceLocation NBT_TAG;
 
 	public static final RegistryObject<MobEffect> TIRED = ISORegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
 			.addAttributeModifier(Attributes.MOVEMENT_SPEED, "697c48dd-6bbd-4082-8501-040bb9812c09", -0.04F, AttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -114,6 +116,7 @@ public class Tiredness extends JsonFeature {
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		JSON_CONFIGS.add(new JsonConfig<>("energy_boost_items.json", energyBoostItems, ENERGY_BOOST_ITEMS_DEFAULT, EnergyBoostItem.LIST_TYPE));
+		NBT_TAG = this.createDataKey("tiredness");
 	}
 
 	@Override

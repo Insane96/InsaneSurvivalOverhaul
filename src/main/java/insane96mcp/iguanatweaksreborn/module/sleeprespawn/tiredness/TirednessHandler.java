@@ -1,8 +1,8 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
-import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.network.NetworkHandler;
 import insane96mcp.iguanatweaksreborn.network.message.TirednessSync;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,15 +10,15 @@ import net.minecraftforge.network.NetworkDirection;
 
 import java.util.Collection;
 
-public class TirednessHandler {
-    public static final String TIREDNESS_TAG = InsaneSO.RESOURCE_PREFIX + "tiredness";
+import static insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness.NBT_TAG;
 
+public class TirednessHandler {
     public static float get(LivingEntity entity) {
-        return entity.getPersistentData().getFloat(TIREDNESS_TAG);
+        return ModNBTData.get(entity, NBT_TAG, Float.class);
     }
 
     public static void set(LivingEntity entity, float tiredness) {
-        entity.getPersistentData().putFloat(TIREDNESS_TAG, Math.max(tiredness, 0));
+        ModNBTData.put(entity, NBT_TAG, Math.max(tiredness, 0));
     }
 
     public static void add(LivingEntity entity, float tiredness) {
@@ -43,11 +43,11 @@ public class TirednessHandler {
     }
 
     public static void reset(LivingEntity entity) {
-        entity.getPersistentData().remove(TIREDNESS_TAG);
+        ModNBTData.put(entity, NBT_TAG, 0);
     }
 
     public static float getOnWakeUp(LivingEntity entity) {
-        return 0;//Mth.clamp(get(entity) - Tiredness.tirednessToEffect.floatValue(), 0, Float.MAX_VALUE);
+        return 0;
     }
 
     public static void syncToClient(ServerPlayer player) {
