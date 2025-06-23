@@ -14,12 +14,14 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.util.MathHelper;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -58,6 +60,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 @LoadFeature(module = Modules.Ids.MISC, description = "Various stuff that doesn't fit in any other Feature.")
 public class Tweaks extends Feature {
+
+    public static ResourceLocation WAS_BREATHING;
+    public static ResourceLocation TICK_SINCE_OUT_OF_WATER;
+    public static ResourceLocation TIMES_DROWNED;
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("iguanatweaks:painful_world_border", GameRules.Category.MISC, GameRules.IntegerValue.create(0));
     public static final GameRules.Key<GameRules.BooleanValue> RULE_DISCRETE_NAME_TAGS = GameRules.register("iguanatweaks:discrete_name_tags", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
@@ -130,6 +136,9 @@ public class Tweaks extends Feature {
 
     public Tweaks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
+        WAS_BREATHING = this.createDataKey("was_breathing");
+        TICK_SINCE_OUT_OF_WATER = this.createDataKey("tick_since_out_of_water");
+        TIMES_DROWNED = this.createDataKey("times_drowned");
     }
 
     @Override
@@ -299,11 +308,11 @@ public class Tweaks extends Feature {
                 || event.getEntity().level().isClientSide)
             return;
 
-        boolean wasBreathing = event.getEntity().getPersistentData().getBoolean(InsaneSO.RESOURCE_PREFIX + "was_breathing");
-        long ticksSinceOutOfWater = event.getEntity().level().getGameTime() - event.getEntity().getPersistentData().getLong(InsaneSO.RESOURCE_PREFIX + "tick_since_out_of_water");
+        boolean wasBreathing = ModNBTData.get(event.getEntity(), WAS_BREATHING, Boolean.class);
+        long ticksSinceOutOfWater = event.getEntity().level().getGameTime() - ModNBTData.get(event.getEntity(), TICK_SINCE_OUT_OF_WATER, Long.class);
         if (!wasBreathing && event.canBreathe()) {
             ticksSinceOutOfWater = 0;
-            event.getEntity().getPersistentData().putLong(InsaneSO.RESOURCE_PREFIX + "tick_since_out_of_water", event.getEntity().level().getGameTime());
+            ModNBTData.put(event.getEntity(), TICK_SINCE_OUT_OF_WATER, event.getEntity().level().getGameTime());
         }
         int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksConsumed);
         int respiration = EnchantmentHelper.getRespiration(event.getEntity());
@@ -319,7 +328,7 @@ public class Tweaks extends Feature {
                 setTimesDrowned(event.getEntity(), 0);
         }
         event.setRefillAirAmount(refillAmount);
-        event.getEntity().getPersistentData().putBoolean(InsaneSO.RESOURCE_PREFIX + "was_breathing", event.canBreathe());
+        ModNBTData.put(event.getEntity(), WAS_BREATHING, event.canBreathe());
     }
 
     @SubscribeEvent
@@ -340,11 +349,11 @@ public class Tweaks extends Feature {
     }
 
     public static void setTimesDrowned(LivingEntity entity, int timesDrowned) {
-        entity.getPersistentData().putInt(InsaneSO.RESOURCE_PREFIX + "times_drowned", timesDrowned);
+        ModNBTData.put(entity, TIMES_DROWNED, timesDrowned);
     }
 
     public static int getTimesDrowned(LivingEntity entity) {
-        return entity.getPersistentData().getInt(InsaneSO.RESOURCE_PREFIX + "times_drowned");
+        return ModNBTData.get(entity, TIMES_DROWNED, Integer.class);
     }
 
     public static Vec3 onCollideWithWall(LivingEntity living, Vec3 pTravelVector, float pFriction, Operation<Vec3> originalOperation) {

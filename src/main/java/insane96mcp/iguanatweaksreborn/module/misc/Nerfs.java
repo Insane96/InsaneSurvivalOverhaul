@@ -6,9 +6,10 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,17 +25,16 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.loading.FMLLoader;
 
 @LoadFeature(module = Modules.Ids.MISC, description = "Various Nerfs")
 public class Nerfs extends Feature {
-	static final String LAST_FISHING_POS_TAG = InsaneSO.RESOURCE_PREFIX + "last_fishing_pos";
-	static final String LAST_FISHING_COUNT_TAG = InsaneSO.RESOURCE_PREFIX + "last_fishing_count";
+	public static ResourceLocation LAST_FISHING_POS_TAG;
+	public static ResourceLocation LAST_FISHING_COUNT_TAG;
 	@Config(description = "If true, Iron golems will only drop Iron when killed by the player.")
 	public static Boolean ironFromGolemsRequiresPlayer = true;
-	@Config(description = "If true, renderDebugInfo is enabled by default. Requires a world restart. This also changes Caverns and Chasms from displaying coordinates with compasses.")
+	@Config(description = "If true, renderDebugInfo is enabled by default. Requires a world restart.")
 	public static Boolean noCoordinates = true;
 	@Config(description = "If true, maxEntityCramming game rule is set to 6 from 24")
 	public static Boolean reducedMobCramming = true;
@@ -47,7 +47,7 @@ public class Nerfs extends Feature {
 	public static Boolean removePistonPhysicsExploit = true;
 
 	@Config(min = 0d, max = 1d, name = "Fishing has a chance to fish a guardian")
-	public static Double fishingCreatureChance = 0d;
+	public static Double fishingGuardianChance = 0d;
 	@Config(description = "If enabled after fishing for a few times in the same spot you won't be able to fish again unless you move in another spot")
 	public static Boolean antiFishingFarms = true;
 
@@ -61,14 +61,13 @@ public class Nerfs extends Feature {
 
     public Nerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		LAST_FISHING_POS_TAG = this.createDataKey("last_fishing_pos");
+		LAST_FISHING_COUNT_TAG = this.createDataKey("last_fishing_count");
 	}
 
 	@Override
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
-		if (noCoordinates && ModList.get().isLoaded("caverns_and_chasms")) {
-			//CCConfig.CLIENT.compassesDisplayPosition.set(false);
-		}
 	}
 
 	public static boolean isFallingBlockDupeRemoved() {
@@ -150,32 +149,33 @@ public class Nerfs extends Feature {
 		if (!antiFishingFarms
 				|| event.getHookEntity().getPlayerOwner() == null)
 			return;
-		CompoundTag persistentData = event.getHookEntity().getPlayerOwner().getPersistentData();
-		if (persistentData.contains(LAST_FISHING_POS_TAG)) {
-			BlockPos lastFishingPos = new BlockPos(persistentData.getIntArray(LAST_FISHING_POS_TAG)[0], persistentData.getIntArray(LAST_FISHING_POS_TAG)[1], persistentData.getIntArray(LAST_FISHING_POS_TAG)[2]);
+		Player owner = event.getHookEntity().getPlayerOwner();
+		int[] aPos = ModNBTData.getPersisted(owner, LAST_FISHING_POS_TAG, int[].class);
+		if (aPos.length == 3) {
+			BlockPos lastFishingPos = new BlockPos(aPos[0], aPos[1], aPos[2]);
 			int distance = lastFishingPos.distManhattan(event.getHookEntity().blockPosition());
-			int lastFishingCount = persistentData.getInt(LAST_FISHING_COUNT_TAG);
+			int lastFishingCount = ModNBTData.getPersisted(owner, LAST_FISHING_COUNT_TAG, Integer.class);
 			if (distance <= 6) {
 				lastFishingCount++;
-				if (lastFishingCount >= 10) {
+				if (lastFishingCount >= 8) {
 					event.setCanceled(true);
-					event.getHookEntity().getPlayerOwner().displayClientMessage(Component.translatable(InsaneSO.MOD_ID + ".too_much_fishing_in_this_spot"), true);
+					event.getHookEntity().getPlayerOwner().displayClientMessage(Component.translatable(InsaneSO.lang("too_much_fishing_in_this_spot")), true);
 				}
-				persistentData.putInt(LAST_FISHING_COUNT_TAG, lastFishingCount);
+				ModNBTData.putPersisted(owner, LAST_FISHING_COUNT_TAG, lastFishingCount);
 			}
 			else {
-				persistentData.putIntArray(LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
-				persistentData.putInt(LAST_FISHING_COUNT_TAG, 0);
+				ModNBTData.putPersisted(owner, LAST_FISHING_COUNT_TAG, 0);
+				ModNBTData.putPersisted(owner, LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
 			}
 		}
 		else {
-			persistentData.putIntArray(LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
+			ModNBTData.putPersisted(owner, LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
 		}
 	}
 
 	public static void trySummonGuardian(ItemFishedEvent event) {
-		if (fishingCreatureChance == 0d
-				|| event.getHookEntity().level().random.nextFloat() > fishingCreatureChance)
+		if (fishingGuardianChance == 0d
+				|| event.getHookEntity().level().random.nextFloat() > fishingGuardianChance)
 			return;
 		LivingEntity guardian = EntityType.GUARDIAN.create(event.getHookEntity().level());
 		guardian.setPos(event.getHookEntity().position().add(0, guardian.getBbHeight(), 0));

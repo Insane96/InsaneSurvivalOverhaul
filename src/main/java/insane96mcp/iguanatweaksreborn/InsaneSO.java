@@ -29,6 +29,7 @@ import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadLis
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mobs.spawning.SeasonSpawning;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.VillagerTradesReloadListener;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
@@ -143,6 +144,7 @@ public class InsaneSO
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "passive_regen_ticks", HealthRegenHunger.PASSIVE_REGEN_TICK);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "has_name_tag", NameTags.HAS_NAME_TAG);
         DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "tiredness", Tiredness.NBT_TAG);
+        DATA_MIGRATION.put(InsaneSO.RESOURCE_PREFIX + "killed_player", Death.KILLED_PLAYER);
     }
 
     @SubscribeEvent

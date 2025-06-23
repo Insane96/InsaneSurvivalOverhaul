@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.Entity;
@@ -40,9 +41,9 @@ public class KilledByKilledPlayerCondition implements LootItemCondition {
         if (!context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER) || entity == null)
             return false;
 
-        if (!entity.getPersistentData().contains(Death.KILLED_PLAYER))
+        if (!ModNBTData.contains(entity, Death.KILLED_PLAYER))
             return false;
-        UUID killedPlayer = entity.getPersistentData().getUUID(Death.KILLED_PLAYER);
+        UUID killedPlayer = ModNBTData.get(entity, Death.KILLED_PLAYER, UUID.class);
         ServerPlayer player = (ServerPlayer) context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
         return player.getUUID().equals(killedPlayer);
     }

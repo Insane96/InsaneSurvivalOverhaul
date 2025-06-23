@@ -17,6 +17,7 @@ import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -54,9 +55,9 @@ public class Respawn extends JsonFeature {
 	public static final String LOOSE_RESPAWN_POINT_SET = InsaneSO.MOD_ID + ".loose_bed_respawn_point_set";
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 
-	public static final String DEATHS = InsaneSO.RESOURCE_PREFIX + "deaths";
-	public static final String HUNGER_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "hunger_on_death";
-	public static final String SATURATION_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "saturation_on_death";
+	public static ResourceLocation DEATHS = InsaneSO.RESOURCE_PREFIX + "deaths";
+	public static ResourceLocation HUNGER_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "hunger_on_death";
+	public static ResourceLocation SATURATION_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "saturation_on_death";
 
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 

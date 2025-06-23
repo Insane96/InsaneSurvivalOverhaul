@@ -67,7 +67,7 @@ public class Death extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHLOSEITEMSENCHANTED = GameRules.register("iguanatweaks:deathLoseItemsEnchanted", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
 	public static final TagKey<DamageType> DOESNT_SPAWN_GRAVE = ISODamageTypeTagsProvider.create("doesnt_spawn_grave");
 
-	public static final String KILLED_PLAYER = InsaneSO.RESOURCE_PREFIX + "killed_player";
+	public static ResourceLocation KILLED_PLAYER;
 	public static final String PLAYER_KILLER_LANG = InsaneSO.MOD_ID + ".player_killer";
 	public static final TagKey<EntityType<?>> KILLER_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(InsaneSO.MOD_ID, "killer_blacklist"));
 
@@ -87,6 +87,7 @@ public class Death extends Feature {
 
 	public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		KILLED_PLAYER = this.createDataKey("killed_player");
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -137,7 +138,7 @@ public class Death extends Feature {
 	public static void vindication(ServerPlayer player, DamageSource source) {
         if (!vindicationVsKiller
                 || !(source.getEntity() instanceof Mob killer)
-                || killer.getPersistentData().contains(KILLED_PLAYER)
+				|| ModNBTData.contains(killer, KILLED_PLAYER)
 				|| killer.isRemoved()
 				|| killer.isDeadOrDying()
 				|| killer.getType().is(KILLER_BLACKLIST))
@@ -151,7 +152,7 @@ public class Death extends Feature {
 				if (ModNBTData.contains(killer, TagsFeature.EXPERIENCE_MULTIPLIER))
 					experienceMultiplier *= ModNBTData.get(killer, TagsFeature.EXPERIENCE_MULTIPLIER, Double.class);
 				TagsFeature.setExperienceMultiplier(experienceMultiplier, killer);
-                killer.getPersistentData().putUUID(KILLED_PLAYER, player.getUUID());
+				ModNBTData.put(killer, KILLED_PLAYER, player.getUUID());
                 killer.setCustomName(Component.translatable(PLAYER_KILLER_LANG, player.getGameProfile().getName(), killer.getName()).withStyle(ChatFormatting.GRAY));
             }
         });
@@ -221,7 +222,7 @@ public class Death extends Feature {
 		if (!this.isEnabled()
 				|| !(event.getEntity() instanceof Mob mob)
 				|| !mob.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)
-				|| !mob.getPersistentData().contains(KILLED_PLAYER)
+				|| !ModNBTData.contains(mob, KILLED_PLAYER)
 				|| mob.level().isClientSide)
 			return;
 		Component deathMessage = event.getEntity().getCombatTracker().getDeathMessage();
