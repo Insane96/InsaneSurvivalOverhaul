@@ -2,7 +2,6 @@ package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
-import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -49,10 +48,6 @@ import java.util.Optional;
 import java.util.Set;
 
 public class ISOExplosion extends Explosion {
-	public static final String KNOCKBACK_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_knockback_multiplier";
-	public static final String BASE_RESISTANCE_ADD_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_base_resistance_add";
-	public static final String RAY_STRENGTH_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_ray_strength_multiplier";
-	public static final String DAMAGE_MULTIPLIER_TAG = InsaneSO.RESOURCE_PREFIX + "explosion_damage_multiplier";
 	ObjectArrayList<Pair<ItemStack, BlockPos>> droppedItems = new ObjectArrayList<>();
 	boolean creeperCollateral;
 	public final boolean poofParticles;
@@ -69,24 +64,10 @@ public class ISOExplosion extends Explosion {
 		super(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction);
 		this.creeperCollateral = creeperCollateral;
 		this.poofParticles = poofParticles;
-		if (source != null) {
-			if (source.getPersistentData().contains(BASE_RESISTANCE_ADD_TAG))
-				this.baseResistanceAdd = source.getPersistentData().getFloat(BASE_RESISTANCE_ADD_TAG);
-			if (source.getPersistentData().contains(RAY_STRENGTH_MULTIPLIER_TAG))
-				this.rayStrengthMultiplier = Math.max(0.01f,source.getPersistentData().getFloat(RAY_STRENGTH_MULTIPLIER_TAG));
-		}
+		this.baseResistanceAdd = ExplosionOverhaul.getBaseResistanceAdd(source);
+		this.rayStrengthMultiplier = Math.max(0.01f, ExplosionOverhaul.getRayStrengthMultiplier(source));
 		if (ExplosionOverhaul.limitExplosionSize != 0)
 			this.radius = Math.min(ExplosionOverhaul.limitExplosionSize, this.radius);
-	}
-
-	public ISOExplosion setBaseResistanceAdd(float baseResistanceAdd) {
-		this.baseResistanceAdd = baseResistanceAdd;
-		return this;
-	}
-
-	public ISOExplosion rayStrengthMultiplier(float rayStrengthMultiplier) {
-		this.rayStrengthMultiplier = rayStrengthMultiplier;
-		return this;
 	}
 
 	public void gatherAffectedBlocks(boolean randomize) {
@@ -187,7 +168,7 @@ public class ISOExplosion extends Explosion {
 			double d10 = (1.0D - distanceRatio) * blockDensity;
 			//Damage Entities in the explosion radius
 			float damageAmount = (float) ((int) ((d10 * d10 + d10) / 2.0D * ExplosionOverhaul.explosionDamageCalculationMultiplier * (double) affectedEntitiesRadius + 1.0D));
-			damageAmount *= getDamageMultiplier(this.source);
+			damageAmount *= ExplosionOverhaul.getDamageMultiplier(this.source);
 			if (blockDensity > 0d) {
 				DamageSource source = this.getDamageSource();
 				boolean isBlocking = false;
@@ -203,7 +184,7 @@ public class ISOExplosion extends Explosion {
 					d11 = Math.max(d11, this.radius * 0.05d);
  					if (entity instanceof ISOFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
 						d11 *= 0.2d;
-					d11 *= getKnockbackMultiplier(this.source);
+					d11 *= ExplosionOverhaul.getKnockbackMultiplier(this.source);
 					d11 = Math.min(d11, 10f);
 					if (entity instanceof ISOFallingBlockEntity) {
 						d11 = Math.min(d11, 1f);
@@ -353,31 +334,5 @@ public class ISOExplosion extends Explosion {
 			}
 		}
 		return explosion;
-	}
-
-	public static float getKnockbackMultiplier(@Nullable Entity entity) {
-		return entity != null && entity.getPersistentData().contains(KNOCKBACK_MULTIPLIER_TAG) ? entity.getPersistentData().getFloat(KNOCKBACK_MULTIPLIER_TAG) : 1f;
-	}
-
-	public static float getDamageMultiplier(@Nullable Entity entity) {
-		return entity != null && entity.getPersistentData().contains(DAMAGE_MULTIPLIER_TAG) ? entity.getPersistentData().getFloat(DAMAGE_MULTIPLIER_TAG) : 1f;
-	}
-
-	/// Vanilla is 0.3
-	public static void setBaseResistanceAdd(Entity entity, float baseResistanceAdd) {
-		entity.getPersistentData().putFloat(BASE_RESISTANCE_ADD_TAG, baseResistanceAdd);
-	}
-
-	/// Vanilla is 0.3
-	public static void setRayStrengthMultiplier(Entity entity, float rayStrengthMultiplier) {
-		entity.getPersistentData().putFloat(RAY_STRENGTH_MULTIPLIER_TAG, rayStrengthMultiplier);
-	}
-
-	public static void setKnockbackMultiplier(Entity entity, float knockbackMultiplier) {
-		entity.getPersistentData().putFloat(KNOCKBACK_MULTIPLIER_TAG, knockbackMultiplier);
-	}
-
-	public static void setDamageMultiplierTag(Entity entity, float damageMultiplier) {
-		entity.getPersistentData().putFloat(DAMAGE_MULTIPLIER_TAG, damageMultiplier);
 	}
 }

@@ -9,7 +9,9 @@ import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -24,8 +26,15 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
+import javax.annotation.Nullable;
+
 @LoadFeature(module = Modules.Ids.WORLD, description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
 public class ExplosionOverhaul extends Feature {
+	public static ResourceLocation KNOCKBACK_MULTIPLIER_TAG;
+	public static ResourceLocation BASE_RESISTANCE_ADD_TAG;
+	public static ResourceLocation RAY_STRENGTH_MULTIPLIER_TAG;
+	public static ResourceLocation DAMAGE_MULTIPLIER_TAG;
+
 	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_knockback_blacklist"));
 	public static final TagKey<EntityType<?>> ENTITY_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_entity_blacklist"));
 	public static final TagKey<Block> FLYING_BLOCKS_EXPLOSION_BLACKLIST = ISOBlockTagsProvider.create("flying_blocks_explosion_blacklist");
@@ -58,6 +67,10 @@ public class ExplosionOverhaul extends Feature {
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
+		KNOCKBACK_MULTIPLIER_TAG = this.createDataKey("knockback_multiplier");
+		BASE_RESISTANCE_ADD_TAG = this.createDataKey("base_resistance_add");
+		RAY_STRENGTH_MULTIPLIER_TAG = this.createDataKey("ray_strength_multiplier");
+		DAMAGE_MULTIPLIER_TAG = this.createDataKey("damage_multiplier");
 	}
 
 	@SubscribeEvent
@@ -68,9 +81,9 @@ public class ExplosionOverhaul extends Feature {
 				|| event.getEntity().getType() != CCEntityTypes.DEEPER.get())
 			return;
 
-		ISOExplosion.setBaseResistanceAdd(event.getEntity(), 0.03f);
-		ISOExplosion.setKnockbackMultiplier(event.getEntity(), 0.75f);
-		ISOExplosion.setDamageMultiplierTag(event.getEntity(), 0.75f);
+		setBaseResistanceAdd(event.getEntity(), 0.03f);
+		setKnockbackMultiplier(event.getEntity(), 0.75f);
+		setDamageMultiplierTag(event.getEntity(), 0.75f);
 	}
 
 	@SubscribeEvent
@@ -112,5 +125,39 @@ public class ExplosionOverhaul extends Feature {
 			return true;
 
 		return entity.getType().is(KNOCKBACK_BLACKLIST);
+	}
+
+	/// Vanilla is 0.3
+	public static void setBaseResistanceAdd(Entity entity, float baseResistanceAdd) {
+		ModNBTData.put(entity, BASE_RESISTANCE_ADD_TAG, baseResistanceAdd);
+	}
+
+	public static float getBaseResistanceAdd(@Nullable Entity entity) {
+		return entity != null && ModNBTData.contains(entity, BASE_RESISTANCE_ADD_TAG) ? ModNBTData.get(entity, BASE_RESISTANCE_ADD_TAG, Float.class) : 0.03f;
+	}
+
+	/// Vanilla is 0.3
+	public static void setRayStrengthMultiplier(Entity entity, float rayStrengthMultiplier) {
+		ModNBTData.put(entity, RAY_STRENGTH_MULTIPLIER_TAG, rayStrengthMultiplier);
+	}
+
+	public static float getRayStrengthMultiplier(@Nullable Entity entity) {
+		return entity != null && ModNBTData.contains(entity, RAY_STRENGTH_MULTIPLIER_TAG) ? ModNBTData.get(entity, RAY_STRENGTH_MULTIPLIER_TAG, Float.class) : 0.03f;
+	}
+
+	public static void setKnockbackMultiplier(Entity entity, float knockbackMultiplier) {
+		ModNBTData.put(entity, KNOCKBACK_MULTIPLIER_TAG, knockbackMultiplier);
+	}
+
+	public static float getKnockbackMultiplier(@Nullable Entity entity) {
+		return entity != null && ModNBTData.contains(entity, KNOCKBACK_MULTIPLIER_TAG) ? ModNBTData.get(entity, KNOCKBACK_MULTIPLIER_TAG, Float.class) : 1f;
+	}
+
+	public static void setDamageMultiplierTag(Entity entity, float damageMultiplier) {
+		ModNBTData.put(entity, DAMAGE_MULTIPLIER_TAG, damageMultiplier);
+	}
+
+	public static float getDamageMultiplier(@Nullable Entity entity) {
+		return entity != null && ModNBTData.contains(entity, DAMAGE_MULTIPLIER_TAG) ? ModNBTData.get(entity, DAMAGE_MULTIPLIER_TAG, Float.class) : 1f;
 	}
 }
