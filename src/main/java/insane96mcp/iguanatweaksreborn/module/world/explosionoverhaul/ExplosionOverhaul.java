@@ -30,9 +30,9 @@ import javax.annotation.Nullable;
 
 @LoadFeature(module = Modules.Ids.WORLD, description = "Various changes to explosions, like higher knockback and getting hit when behind blown up blocks.")
 public class ExplosionOverhaul extends Feature {
-	public static ResourceLocation KNOCKBACK_MULTIPLIER_TAG;
 	public static ResourceLocation BASE_RESISTANCE_ADD_TAG;
 	public static ResourceLocation RAY_STRENGTH_MULTIPLIER_TAG;
+	public static ResourceLocation KNOCKBACK_MULTIPLIER_TAG;
 	public static ResourceLocation DAMAGE_MULTIPLIER_TAG;
 
 	public static final TagKey<EntityType<?>> KNOCKBACK_BLACKLIST = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("explosion_knockback_blacklist"));
@@ -67,9 +67,9 @@ public class ExplosionOverhaul extends Feature {
 
 	public ExplosionOverhaul(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		KNOCKBACK_MULTIPLIER_TAG = this.createDataKey("knockback_multiplier");
 		BASE_RESISTANCE_ADD_TAG = this.createDataKey("base_resistance_add");
 		RAY_STRENGTH_MULTIPLIER_TAG = this.createDataKey("ray_strength_multiplier");
+		KNOCKBACK_MULTIPLIER_TAG = this.createDataKey("knockback_multiplier");
 		DAMAGE_MULTIPLIER_TAG = this.createDataKey("damage_multiplier");
 	}
 
@@ -133,7 +133,7 @@ public class ExplosionOverhaul extends Feature {
 	}
 
 	public static float getBaseResistanceAdd(@Nullable Entity entity) {
-		return entity != null && ModNBTData.contains(entity, BASE_RESISTANCE_ADD_TAG) ? ModNBTData.get(entity, BASE_RESISTANCE_ADD_TAG, Float.class) : 0.03f;
+		return entity != null && ModNBTData.contains(entity, BASE_RESISTANCE_ADD_TAG) ? ModNBTData.get(entity, BASE_RESISTANCE_ADD_TAG, Float.class) : 0.3f;
 	}
 
 	/// Vanilla is 0.3
@@ -142,7 +142,7 @@ public class ExplosionOverhaul extends Feature {
 	}
 
 	public static float getRayStrengthMultiplier(@Nullable Entity entity) {
-		return entity != null && ModNBTData.contains(entity, RAY_STRENGTH_MULTIPLIER_TAG) ? ModNBTData.get(entity, RAY_STRENGTH_MULTIPLIER_TAG, Float.class) : 0.03f;
+		return entity != null && ModNBTData.contains(entity, RAY_STRENGTH_MULTIPLIER_TAG) ? ModNBTData.get(entity, RAY_STRENGTH_MULTIPLIER_TAG, Float.class) : 0.3f;
 	}
 
 	public static void setKnockbackMultiplier(Entity entity, float knockbackMultiplier) {
