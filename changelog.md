@@ -1,8 +1,9 @@
 # Changelog
 
-## Upcoming
+## Beta 4.13.0
 **Backup your config file, many config option names have changed so will be reset to default values**  
-This should hopefully be the last update
+  This should hopefully be the last update 
+Mod's no longer compatible with versions past Forge 47.4.0
 
 ### Changes
 * Season spawning feature is now a JSON controlled feature
@@ -13,7 +14,6 @@ This should hopefully be the last update
 * Harder crops jsons have been moved from "block_data" data pack to "crops" data pack
 * Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
 * Campfires now have a high chance to be extinguished instead of instantly extinguishing when starts raining
-* Mod's no longer compatible with versions past Forge 47.4.0
 * Enhanced Experimental flying blocks explosion
   * Stuff like beds, doors etc are no longer affected
   * Fixed blocks not flying
