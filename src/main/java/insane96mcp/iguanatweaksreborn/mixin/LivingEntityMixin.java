@@ -18,6 +18,7 @@ import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.util.MCUtils;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -134,7 +135,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     @WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"))
     public void onPlayHurtSound(LivingEntity instance, DamageSource pSource, Operation<Void> original) {
-        if (instance.getPersistentData().contains(RegeneratingAbsorption.NO_HURT_SOUND_TAG))
+        if (ModNBTData.contains(instance, RegeneratingAbsorption.NO_HURT_SOUND_TAG))
             return;
         original.call(instance, pSource);
     }
@@ -159,7 +160,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     @WrapOperation(method = "handleDamageEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
     public void onPlayHurtSoundClientSide(LivingEntity instance, SoundEvent soundEvent, float volume, float pitch, Operation<Void> original, DamageSource source) {
-        if (RegeneratingAbsorption.canDamageAbsorption(source) && instance.getPersistentData().getFloat(RegeneratingAbsorption.REGEN_ABSORPTION_TAG) > 0)
+        if (RegeneratingAbsorption.canDamageAbsorption(source) && ModNBTData.get(instance, RegeneratingAbsorption.REGEN_ABSORPTION_TAG, Float.class) > 0)
             return;
         original.call(instance, soundEvent, volume, pitch);
     }

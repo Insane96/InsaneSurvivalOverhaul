@@ -18,7 +18,7 @@ public class ISOLivingAttackEvent extends LivingEvent
     }
 
     public DamageSource getSource() { return this.source; }
-    public float getOriginalAmount() { return this.amount; }
+    public float getOriginalAmount() { return this.originalAmount; }
     public float getAmount() { return this.amount; }
     public void setAmount(float amount) { this.amount = amount; }
 }
