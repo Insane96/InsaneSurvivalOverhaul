@@ -11,6 +11,7 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.ClientUtils;
+import insane96mcp.insanelib.util.ModNBTData;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -45,9 +46,9 @@ import net.minecraftforge.registries.RegistryObject;
 public class RegeneratingAbsorption extends Feature {
 
     public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/absorption.png");
-    public static final String REGEN_ABSORPTION_TAG = InsaneSO.RESOURCE_PREFIX + "regen_absorption";
-    public static final String HURT_COOLDOWN_TAG = InsaneSO.RESOURCE_PREFIX + "regen_absorption_hurt_cooldown";
-    public static final String NO_HURT_SOUND_TAG = InsaneSO.RESOURCE_PREFIX + "no_hurt_sound";
+    public static ResourceLocation REGEN_ABSORPTION_TAG;
+    public static ResourceLocation HURT_COOLDOWN_TAG;
+    public static ResourceLocation NO_HURT_SOUND_TAG;
 
     public static final RegistryObject<Attribute> ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d));
 
@@ -73,6 +74,9 @@ public class RegeneratingAbsorption extends Feature {
 
     public RegeneratingAbsorption(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
+        REGEN_ABSORPTION_TAG = this.createDataKey("regen_absorption");
+        HURT_COOLDOWN_TAG = this.createDataKey("regen_absorption_hurt_cooldown");
+        NO_HURT_SOUND_TAG = this.createDataKey("no_hurt_sound");
     }
 
     public static void addAttribute(EntityAttributeModificationEvent event) {
@@ -92,16 +96,16 @@ public class RegeneratingAbsorption extends Feature {
             return;
 
         LivingEntity entity = event.getEntity();
-        int hurtCooldown = entity.getPersistentData().getInt(HURT_COOLDOWN_TAG);
+        int hurtCooldown = ModNBTData.get(entity, HURT_COOLDOWN_TAG, Integer.class);
         if (hurtCooldown > 0) {
             hurtCooldown--;
-            entity.getPersistentData().putInt(HURT_COOLDOWN_TAG, hurtCooldown);
+            ModNBTData.put(entity, HURT_COOLDOWN_TAG, hurtCooldown);
             return;
         }
         float maxAbsorption = (float) entity.getAttributeValue(ATTRIBUTE.get());
         float regenSpeed = (float) (entity.getAttributeValue(SPEED_ATTRIBUTE.get()) / 20f);
 
-        float currentAbsorption = entity.getPersistentData().getFloat(REGEN_ABSORPTION_TAG);
+        float currentAbsorption = ModNBTData.get(entity, REGEN_ABSORPTION_TAG, Float.class);
         if (capToHealth)
             maxAbsorption = Math.min(maxAbsorption, Mth.ceil(entity.getHealth()));
         if (currentAbsorption < 0f || currentAbsorption == maxAbsorption)
@@ -114,7 +118,7 @@ public class RegeneratingAbsorption extends Feature {
 
         if (entity instanceof ServerPlayer player)
             RegenAbsorptionSync.sync(player, currentAbsorption);
-        entity.getPersistentData().putFloat(REGEN_ABSORPTION_TAG, currentAbsorption);
+        ModNBTData.put(entity, REGEN_ABSORPTION_TAG, currentAbsorption);
     }
 
     @SubscribeEvent
@@ -126,7 +130,7 @@ public class RegeneratingAbsorption extends Feature {
             return;
 
         double absorptionSpeed = event.getEntity().getAttributeValue(SPEED_ATTRIBUTE.get());
-        event.getEntity().getPersistentData().putInt(HURT_COOLDOWN_TAG, (int) Math.max(unDamagedTimeToRegen * (1f - absorptionSpeed), unDamagedTimeToRegenCap));
+        ModNBTData.put(event.getEntity(), HURT_COOLDOWN_TAG, (int) Math.max(unDamagedTimeToRegen * (1f - absorptionSpeed), unDamagedTimeToRegenCap));
     }
 
     @SubscribeEvent
@@ -136,7 +140,7 @@ public class RegeneratingAbsorption extends Feature {
                 || event.getAmount() <= 0)
             return;
 
-        float currentAbsorption = event.getEntity().getPersistentData().getFloat(REGEN_ABSORPTION_TAG);
+        float currentAbsorption = ModNBTData.get(event.getEntity(), REGEN_ABSORPTION_TAG, Float.class);
         if (currentAbsorption <= 0)
             return;
         //if (currentAbsorption < event.getAmount())
@@ -146,7 +150,7 @@ public class RegeneratingAbsorption extends Feature {
         float toRemove = Math.min(currentAbsorption, event.getAmount());
         currentAbsorption -= toRemove;
         event.setAmount(event.getAmount() - toRemove);
-        event.getEntity().getPersistentData().putFloat(REGEN_ABSORPTION_TAG, currentAbsorption);
+        ModNBTData.put(event.getEntity(), REGEN_ABSORPTION_TAG, currentAbsorption);
         if (soundOnAbsorptionHurt)
             event.getEntity().level().playSound(null, event.getEntity(), ISORegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
@@ -194,7 +198,7 @@ public class RegeneratingAbsorption extends Feature {
         int left = width / 2 + (!renderOnTheRight ? -91 : 82);
         int top = height - (!renderOnTheRight ? gui.leftHeight : gui.rightHeight);
 
-        int absorption = Mth.ceil(mc.player.getPersistentData().getFloat(REGEN_ABSORPTION_TAG));
+        int absorption = Mth.ceil(ModNBTData.get(mc.player, REGEN_ABSORPTION_TAG, Float.class));
         boolean highlight = absorptionBlinkTime > (long) gui.getGuiTicks() && (absorptionBlinkTime - (long) gui.getGuiTicks()) / 3L % 2L == 1L;
         int v = highlight ? 9 : 0;
 
