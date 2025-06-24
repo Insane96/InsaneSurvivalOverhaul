@@ -100,10 +100,15 @@ public class ISOFallingBlockEntity extends FallingBlockEntity {
 						if (!this.cancelDrop) {
 							boolean canBeReplaced = blockstate.canBeReplaced(new DirectionalPlaceContext(this.level(), blockpos, Direction.DOWN, ItemStack.EMPTY, Direction.UP));
 							//boolean isHarderThanInside = blockstate.getDestroySpeed(this.level, blockpos) < this.blockState.getDestroySpeed(this.level, blockpos);
-							boolean isFree = FallingBlock.isFree(this.level().getBlockState(blockpos.below())) && (!isConcretePowder || !canBeHydrated);
-							boolean canSurviveAndIsNotFree = this.blockState.canSurvive(this.level(), blockpos) && !isFree;
-							if (canBeReplaced && canSurviveAndIsNotFree)
-								this.place(blockstate, block, blockpos, true);
+							boolean isFreeBelow = FallingBlock.isFree(this.level().getBlockState(blockpos.below())) && (!isConcretePowder || !canBeHydrated);
+							if (canBeReplaced) {
+								if (isFreeBelow && this.blockState.canSurvive(this.level(), blockpos.below())) {
+									BlockPos posOn = this.getOnPos();
+									this.move(MoverType.SELF, new Vec3((this.blockPosition().getX() - posOn.getX()) * 0.5d, 0d, (this.blockPosition().getZ() - posOn.getZ()) * 0.5d));
+								}
+								else
+									this.place(blockstate, block, blockpos, true);
+							}
 							else
 								this.tryStackAboveOrMove(blockpos);
 						}
@@ -144,7 +149,6 @@ public class ISOFallingBlockEntity extends FallingBlockEntity {
 				dir = Arrays.stream(Direction.values()).filter((direction) -> direction.getAxis().isHorizontal() && direction != this.movedFrom).skip(this.random.nextInt(4)).findFirst().get();
 			//blockPos.set(pos.relative(dir));
 			this.directionFalling = dir;
-			//TODO prevent moving back from where it came
 			this.movedFrom = dir.getOpposite();
 			this.setPos(this.position().relative(dir, 1d).relative(Direction.UP, 2));
 		}
@@ -155,9 +159,15 @@ public class ISOFallingBlockEntity extends FallingBlockEntity {
 		BlockState stateOn = this.level().getBlockState(blockPos.below());
 		boolean canBeReplaced = stateAt.canBeReplaced(new DirectionalPlaceContext(this.level(), blockPos, Direction.DOWN, ItemStack.EMPTY, Direction.UP));
 		boolean isHarderThanInside = !stateAt.getFluidState().isEmpty() || stateAt.getDestroySpeed(this.level(), blockPos) < this.blockState.getDestroySpeed(this.level(), blockPos);
-		boolean canSurvive = this.blockState.canSurvive(this.level(), blockPos) && !stateOn.isAir();
+		boolean canSurvive = this.blockState.canSurvive(this.level(), blockPos);
+		boolean isFree = FallingBlock.isFree(this.level().getBlockState(blockPos.below()));
 		if (canBeReplaced && isHarderThanInside && canSurvive) {
-			this.place(stateOn, this.blockState.getBlock(), blockPos, true);
+			if (isFree && this.blockState.canSurvive(this.level(), blockPos.below())) {
+				BlockPos posOn = this.getOnPos();
+				this.move(MoverType.SELF, new Vec3((this.blockPosition().getX() - posOn.getX()) * 0.5d, 0d, (this.blockPosition().getZ() - posOn.getZ()) * 0.5d));
+			}
+			else
+				this.place(stateOn, this.blockState.getBlock(), blockPos, true);
 			return true;
 		}
 		return false;

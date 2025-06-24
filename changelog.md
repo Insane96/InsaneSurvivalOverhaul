@@ -8,6 +8,8 @@ This should hopefully be the last update
 * Season spawning feature is now a JSON controlled feature
   * Much customization, such wow
 * Nether to overworld ratio is now 2 and no longer 4 (so 1 block in the Nether is 2 blocks in the Overworld)
+* Enhanced mod's falling blocks
+  * They are now smarter and will not just slide on a block if not centered and stay there, they'll instead move on the side and keep falling
 * Harder crops jsons have been moved from "block_data" data pack to "crops" data pack
 * Bone Meal fail jsons have been moved from "block_data" to a new "bone_meal" data pack
 * Campfires now have a high chance to be extinguished instead of instantly extinguishing when starts raining
