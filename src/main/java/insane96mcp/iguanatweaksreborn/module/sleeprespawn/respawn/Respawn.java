@@ -14,12 +14,13 @@ import insane96mcp.insanelib.base.config.Difficulty;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
-import insane96mcp.insanelib.util.MCUtils;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
@@ -55,9 +56,8 @@ public class Respawn extends JsonFeature {
 	public static final String LOOSE_RESPAWN_POINT_SET = InsaneSO.MOD_ID + ".loose_bed_respawn_point_set";
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 
-	public static ResourceLocation DEATHS = InsaneSO.RESOURCE_PREFIX + "deaths";
-	public static ResourceLocation HUNGER_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "hunger_on_death";
-	public static ResourceLocation SATURATION_ON_DEATH_TAG = InsaneSO.RESOURCE_PREFIX + "saturation_on_death";
+	public static ResourceLocation HUNGER_ON_DEATH_TAG;
+	public static ResourceLocation SATURATION_ON_DEATH_TAG;
 
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
@@ -131,6 +131,8 @@ public class Respawn extends JsonFeature {
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 		InsaneSO.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && respawnObelisks);
+		HUNGER_ON_DEATH_TAG = this.createDataKey("hunger_on_death");
+		SATURATION_ON_DEATH_TAG = this.createDataKey("saturation_on_death");
 	}
 
 	@Override
@@ -143,10 +145,8 @@ public class Respawn extends JsonFeature {
 		if (!this.isEnabled()
 				|| !(event.getEntity() instanceof Player player))
 			return;
-
-		MCUtils.getOrCreatePersistedData(player).putInt(DEATHS, MCUtils.getOrCreatePersistedData(player).getInt(DEATHS) + 1);
-		MCUtils.getOrCreatePersistedData(player).putInt(HUNGER_ON_DEATH_TAG, player.getFoodData().foodLevel);
-		MCUtils.getOrCreatePersistedData(player).putFloat(SATURATION_ON_DEATH_TAG, player.getFoodData().saturationLevel);
+		ModNBTData.putPersisted(player, HUNGER_ON_DEATH_TAG, player.getFoodData().foodLevel);
+		ModNBTData.putPersisted(player, SATURATION_ON_DEATH_TAG, player.getFoodData().saturationLevel);
 	}
 
 	@SubscribeEvent
@@ -160,21 +160,25 @@ public class Respawn extends JsonFeature {
 	}
 
 	public void applyStatsPenalty(Player player) {
-		int hunger = MCUtils.getOrCreatePersistedData(player).getInt(HUNGER_ON_DEATH_TAG);
+		int hunger = ModNBTData.getPersisted(player, HUNGER_ON_DEATH_TAG, Integer.class);
 		int maxHunger = (int) statsPenalty$hunger$maximum.getByDifficulty(player.level());
 		int minHunger = (int) statsPenalty$hunger$min.getByDifficulty(player.level());
 		hunger = Mth.clamp(hunger, minHunger, maxHunger);
 		player.getFoodData().foodLevel = hunger;
+		ModNBTData.removePersisted(player, HUNGER_ON_DEATH_TAG);
 
-		float saturation = MCUtils.getOrCreatePersistedData(player).getFloat(SATURATION_ON_DEATH_TAG);
+		float saturation = ModNBTData.getPersisted(player, SATURATION_ON_DEATH_TAG, Float.class);
 		float maxSaturation = (float) statsPenalty$saturation$maximum.getByDifficulty(player.level());
 		float minSaturation = (float) statsPenalty$saturation$minimum.getByDifficulty(player.level());
 		saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
 		player.getFoodData().saturationLevel = saturation;
+		ModNBTData.removePersisted(player, SATURATION_ON_DEATH_TAG);
 
-		double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * MCUtils.getOrCreatePersistedData(player).getInt(DEATHS));
-		double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
-		player.setHealth((float) Math.max(healthOnRespawn, minHealth));
+		if (player instanceof ServerPlayer serverPlayer) {
+			double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * serverPlayer.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)));
+			double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
+			player.setHealth((float) Math.max(healthOnRespawn, minHealth));
+		}
 	}
 
 	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
