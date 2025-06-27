@@ -67,7 +67,7 @@ public class Respawn extends JsonFeature {
 	//public static Integer despawnMobsOnWorldRespawn = 64;
 
 	@Config(min = 0, description = "The range from beds where players will respawn.")
-	public static MinMax looseBedSpawnRange = new MinMax(64d, 128d);
+	public static MinMax looseBedSpawnRange = new MinMax(96d, 192d);
 	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
 	//public static Integer despawnMobsOnBedRespawn = 32;
 	@Config(description = "If enabled, respawning will try to place you on land and not in fluids")

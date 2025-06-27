@@ -3,9 +3,10 @@
 ## Upcoming
 ### Changes
 * Reduced follow range of mobs (~~24~~ -> 8\~24, ~~40~~ -> 16\~24 for zombies)
+* Increased the respawn range with bed (same as world spawn)
 
 ### Fixes
-* Fixed zombies dealing a shit-load of damage
+* Fixed zombies dealing a shitload of damage
 
 ## Beta 4.13.0
 **Backup your config file, many config option names have changed so will be reset to default values**  
