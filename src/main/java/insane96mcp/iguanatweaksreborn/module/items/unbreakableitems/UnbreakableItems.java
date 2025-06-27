@@ -52,7 +52,7 @@ public class UnbreakableItems extends Feature {
 
 	public static boolean isUnbreakable(ItemStack stack) {
 		if (stack.is(NOT_UNBREAKABLE))
-			return true;
+			return false;
 		return unbreakableEnchantedItems && stack.isEnchanted();
 	}
 

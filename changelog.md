@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.13.3
+### Fixes
+* Fixed items in `not_unbreakable` item tag being unbreakable
+
 ## 4.13.2
 ### Changes
 * Rebalanced materials
