@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.13.1
 ### Addition
 * Brush XP
   * Experience given when brushing blocks
