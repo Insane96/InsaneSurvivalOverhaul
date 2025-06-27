@@ -80,6 +80,8 @@ public class DroppedExperience extends Feature {
 	public static MinMax milkXp = new MinMax(3, 5);
 	@Config(min = 0, description = "Experience obtained when shearing sheep.")
 	public static MinMax shearXp = new MinMax(2, 3);
+	@Config(min = 0, description = "Experience obtained when brushing blocks.")
+	public static MinMax brushingXp = new MinMax(6, 10);
 
 	public static Boolean disableExperience = false;
 
@@ -91,6 +93,11 @@ public class DroppedExperience extends Feature {
 	public static void tryGenerateMilkXp(Entity entity) {
 		if (milkXp.min > 0 || milkXp.max > 0)
 			entity.level().addFreshEntity(new ExperienceOrb(entity.level(), entity.getX(), entity.getY(), entity.getZ(), milkXp.getIntRandBetween(entity.level().random)));
+	}
+
+	public static void tryGenerateBrushXp(Entity entity) {
+		if (brushingXp.min > 0 || brushingXp.max > 0)
+			entity.level().addFreshEntity(new ExperienceOrb(entity.level(), entity.getX(), entity.getY(), entity.getZ(), brushingXp.getIntRandBetween(entity.level().random)));
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

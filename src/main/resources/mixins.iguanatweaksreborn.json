@@ -28,6 +28,7 @@
 		"BowItemMixin",
 		"BreakEventMixin",
 		"BreedGoalMixin",
+		"BrushableBlockEntityMixin",
 		"CampfireBlockEntityMixin",
 		"CampfireBlockMixin",
 		"ChunkMap$TrackedEntityMixin",

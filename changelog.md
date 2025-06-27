@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Addition
+* Brush XP
+  * Experience given when brushing blocks
+
 ### Changes
 * Reduced follow range of mobs (~~24~~ -> 8\~24, ~~40~~ -> 16\~24 for zombies)
 * Increased the respawn range with bed (same as world spawn)
