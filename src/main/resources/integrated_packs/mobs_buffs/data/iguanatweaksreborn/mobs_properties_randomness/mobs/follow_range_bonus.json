@@ -6,7 +6,10 @@
             "attribute": "minecraft:generic.follow_range",
             "modifier_name": "More Follow Range for non-zombie mobs",
             "operation": "addition",
-            "amount": 24
+            "amount": {
+                "min": 8,
+                "max": 24
+            }
         }
     ]
 }

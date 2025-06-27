@@ -3,38 +3,19 @@
     "properties": [
         {
             "property": "attribute_modifier",
-            "attribute": "minecraft:generic.movement_speed",
-            "modifier_name": "More Speed for Zombies",
+            "attribute": "minecraft:generic.follow_range",
+            "modifier_name": "Reduced Zombies Follow Range",
+            "operation": "addition",
             "amount": {
-                "value": 0.03,
-                "modifiers": [
-                    {
-                        "modifier": "condition",
-                        "operation": "multiply",
-                        "value": 0.5,
-                        "conditions": [
-                            {
-                                "condition": "spawn_type",
-                                "spawn_types": ["spawner"]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "operation": "multiply_base"
+                "min": 0,
+                "max": -11
+            }
         },
         {
             "property": "attribute_modifier",
             "attribute": "minecraft:generic.attack_damage",
             "modifier_name": "Attack damage nerf for zombies",
-            "amount": 5,
-            "operation": "addition"
-        },
-        {
-            "property": "attribute_modifier",
-            "attribute": "minecraft:generic.follow_range",
-            "modifier_name": "More Follow Range for Zombies",
-            "amount": -0.25,
+            "amount": -0.2,
             "operation": "multiply_total"
         },
         {

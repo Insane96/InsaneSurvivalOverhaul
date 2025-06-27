@@ -1,5 +1,12 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reduced follow range of mobs (~~24~~ -> 8\~24, ~~40~~ -> 16\~24 for zombies)
+
+### Fixes
+* Fixed zombies dealing a shit-load of damage
+
 ## Beta 4.13.0
 **Backup your config file, many config option names have changed so will be reset to default values**  
   This should hopefully be the last update 
