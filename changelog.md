@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.13.2
+### Changes
+* Rebalanced materials
+  * Increased efficiency of tools, more for high tier ones
+  * Increased wood damage and attack speed
+  * Increased flint attack damage
+  * Increased gold attack speed
+  * Decreased iron attack speed but increased damage and added a +20% crit chance
+  * Increased diamand attack damage
+
 ## 4.13.1
 ### Addition
 * Brush XP

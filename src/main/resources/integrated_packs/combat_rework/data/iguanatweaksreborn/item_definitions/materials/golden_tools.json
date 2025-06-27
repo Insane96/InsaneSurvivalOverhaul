@@ -1,7 +1,7 @@
 {
 	"item": "#iguanatweaksreborn:equipment/hand/golden",
 	"durability": 49,
-	"efficiency": 10,
+	"efficiency": 12,
 	"enchantability": 15,
 	"harvest_level": "minecraft:stone",
 	"modifiers": [
@@ -10,7 +10,7 @@
 			"name": "Material modifier",
 			"slot": "mainhand",
 			"attribute": "minecraft:generic.attack_speed",
-			"amount": 0.1,
+			"amount": 0.2,
 			"operation": "multiply_base"
 		},
 		{

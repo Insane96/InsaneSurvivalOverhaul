@@ -1,7 +1,7 @@
 {
 	"item": "#caverns_and_chasms:equipment/hand/silver",
 	"durability": 157,
-	"efficiency": 4,
+	"efficiency": 6,
 	"enchantability": 13,
 	"harvest_level": "minecraft:stone",
 	"modifiers": [
@@ -10,7 +10,7 @@
 			"name": "Material modifier",
 			"slot": "mainhand",
 			"attribute": "minecraft:generic.attack_speed",
-			"amount": -0.15,
+			"amount": -0.20,
 			"operation": "multiply_base"
 		},
 		{
@@ -18,7 +18,7 @@
 			"name": "Material modifier",
 			"slot": "mainhand",
 			"attribute": "minecraft:generic.attack_damage",
-			"amount": 1.5,
+			"amount": 2,
 			"operation": "addition"
 		},
 		{
