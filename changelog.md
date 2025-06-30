@@ -1,7 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Changes
 * Increased golden tools efficiency (12 -> 15)
+
+### Fixes
+* Fixed quark integration recipe being wrong
 
 ## 4.13.3
 ### Fixes
