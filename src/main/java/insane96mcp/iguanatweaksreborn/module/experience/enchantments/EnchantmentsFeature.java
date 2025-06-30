@@ -211,7 +211,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
 		if (lvl <= 0)
 			return;
-		event.setNewMaxDamage((int) (event.getNewMaxDamage() * (1f + lvl * 0.2f)));
+		event.setNewMaxDamage(Math.round(event.getNewMaxDamage() * (1f + lvl * 0.2f)));
 	}
 
 	public static boolean isBetterEfficiencyFormula() {
