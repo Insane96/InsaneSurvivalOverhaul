@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Increased golden tools efficiency (12 -> 15)
+
 ## 4.13.3
 ### Fixes
 * Fixed items in `not_unbreakable` item tag being unbreakable
@@ -12,7 +15,7 @@
   * Increased flint attack damage
   * Increased gold attack speed
   * Decreased iron attack speed but increased damage and added a +20% crit chance
-  * Increased diamand attack damage
+  * Increased diamond attack damage
 
 ## 4.13.1
 ### Addition
