@@ -247,8 +247,7 @@ public class EnchantmentsFeature extends JsonFeature {
 			return 0f;
 		if (!isBetterEfficiencyFormula())
 			return 1 + (lvl * lvl);
-		float flatBonus = 0.4f * lvl;
-        return flatBonus + (baseEfficiency + flatBonus) * lvl * 0.2f;
+        return baseEfficiency * lvl * 0.2f;
 	}
 
 	public static boolean isThornsOverhaul() {
