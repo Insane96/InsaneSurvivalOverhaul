@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
@@ -55,10 +56,11 @@ public class Shields extends Feature {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onItemTooltips(ItemTooltipEvent event) {
 		if (!this.isEnabled()
-				|| shieldBlockDamage == 0)
+				|| shieldBlockDamage == 0
+				|| !event.getItemStack().is(Items.SHIELD))
 			return;
 
-		event.getToolTip().add(CommonComponents.space().append(Component.translatable("iguanatweaksreborn.shield_block_damage").withStyle(ChatFormatting.DARK_GREEN)));
+		event.getToolTip().add(CommonComponents.space().append(Component.translatable("iguanatweaksreborn.shield_block_damage", shieldBlockDamage).withStyle(ChatFormatting.DARK_GREEN)));
 	}
 
 }

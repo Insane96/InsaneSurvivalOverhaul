@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.13.5
+### Fixes
+* Blocked damage tooltip showing up for any item and not showing the blocked damage
+
 ## 4.13.4
 ### Changes
 * Increased golden tools efficiency (12 -> 15)
