@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Increased golden tools efficiency (12 -> 15)
+* Slightly changed efficiency formula (+0.35 flat bonus -> +0.4 flat bonus per level; +25% bonus -> +20% bonus per level)
 
 ### Fixes
 * Fixed quark integration recipe being wrong
