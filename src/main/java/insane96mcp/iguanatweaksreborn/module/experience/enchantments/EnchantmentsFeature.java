@@ -23,7 +23,6 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
-import insane96mcp.iguanatweaksreborn.world.item.DurabilityModifier;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -41,7 +40,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -213,23 +211,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
 		if (lvl <= 0)
 			return;
-		event.setNewMaxDamage((int) ((event.getNewMaxDamage() + getBonusFlatUnbreakingDurability(event.getStack()) * lvl) * (1f + lvl * 0.25f)));
-	}
-
-	public static int getBonusFlatUnbreakingDurability(ItemStack stack) {
-		float durModifier = stack.getItem() instanceof DurabilityModifier durabilityModifier
-				? durabilityModifier.getDurabilityMultiplier(stack)
-				: 1f;
-		for (ItemDefinition definition : ItemDefinitionsReloadListener.getDefinitions()) {
-			if (!definition.item().matchesItem(stack))
-				continue;
-
-			if (definition.durability() != null && definition.durability().durabilityMultiplier != null)
-				durModifier *= definition.durability().durabilityMultiplier;
-		}
-		if (stack.getItem() instanceof ShieldItem)
-			return (int) (15 * durModifier);
-		return (int) ((stack.getItem() instanceof ArmorItem ? 10 : 25) * durModifier);
+		event.setNewMaxDamage((int) (event.getNewMaxDamage() * (1f + lvl * 0.2f)));
 	}
 
 	public static boolean isBetterEfficiencyFormula() {
@@ -278,7 +260,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	}
 
 	@SubscribeEvent
-	public void onLivingHurt(LivingEvent.LivingVisibilityEvent event) {
+	public void onVisibility(LivingEvent.LivingVisibilityEvent event) {
 		if (!this.isEnabled())
 			return;
 
