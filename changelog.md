@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.13.4
 ### Changes
 * Increased golden tools efficiency (12 -> 15)
 * Removed flat efficiency bonus and reduced percentage bonus (+0.35 flat bonus -> REMOVED; +25% bonus -> +20% bonus per level)
