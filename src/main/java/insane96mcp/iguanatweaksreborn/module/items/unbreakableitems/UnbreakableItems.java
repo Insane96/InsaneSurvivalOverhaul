@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.items.unbreakableitems;
 
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
@@ -30,19 +31,19 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@LoadFeature(module = Modules.Ids.ITEMS, description = "Less durable items and efficient tools. Items Durability and Efficiency are controlled via data packs")
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Enchanted items no longer break, will sit at one durability and can't be used. Items in the item tag `iguanatweaksreborn:not_unbreakable` are not affected.")
 public class UnbreakableItems extends Feature {
 
-	public static final String TOOL_DURABILITY_LANG = "iguanatweaksreborn.tool_durability";
-	public static final String BROKEN_DURABILITY_LANG = "iguanatweaksreborn.broken_durability";
-	public static final String BROKEN_ITEM_LANG = "iguanatweaksreborn.broken_item";
+	public static final String TOOL_DURABILITY_LANG = InsaneSO.lang("tool_durability");
+	public static final String BROKEN_DURABILITY_LANG = InsaneSO.lang("broken_durability");
+	public static final String BROKEN_ITEM_LANG = InsaneSO.lang("broken_item");
 	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
 	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
 
-	@Config(description = "Items with durability get a durability tooltip.")
+	@Config(description = "Items with durability get a durability tooltip")
 	public static Boolean durabilityTooltip = true;
-	@Config(description = "If set to true items will no longer break if enchanted.")
-	public static Boolean unbreakableEnchantedItems = true;
+	@Config(description = "If set to true only enchanted items will no longer break")
+	public static Boolean enchantedItemsOnly = true;
 
 	public UnbreakableItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -53,8 +54,8 @@ public class UnbreakableItems extends Feature {
 	public static boolean isUnbreakable(ItemStack stack) {
 		if (stack.is(NOT_UNBREAKABLE))
 			return false;
-		return unbreakableEnchantedItems && stack.isEnchanted();
-	}
+        return !enchantedItemsOnly || stack.isEnchanted();
+    }
 
 	public static boolean isBroken(ItemStack stack) {
 		return stack.isDamageableItem() && (isUnbreakable(stack) && stack.getDamageValue() >= stack.getMaxDamage() - 1);

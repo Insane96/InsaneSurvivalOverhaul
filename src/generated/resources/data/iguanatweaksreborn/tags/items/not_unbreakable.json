@@ -1,34 +1,5 @@
 {
   "values": [
-    "#iguanatweaksreborn:equipment/hand/wooden",
-    "#iguanatweaksreborn:equipment/hand/stone",
-    "#iguanatweaksreborn:equipment/armor/leather",
-    "iguanatweaksreborn:firestarter",
-    "#iguanatweaksreborn:equipment/hand/flint",
-    {
-      "id": "iguanatweaksreborn:flint_shield",
-      "required": false
-    },
-    {
-      "id": "#iguanatweaksexpanded:equipment/hand/copper",
-      "required": false
-    },
-    {
-      "id": "#iguanatweaksexpanded:equipment/armor/chained_copper",
-      "required": false
-    },
-    {
-      "id": "shieldsplus:wooden_shield",
-      "required": false
-    },
-    {
-      "id": "shieldsplus:stone_shield",
-      "required": false
-    },
-    {
-      "id": "iguanatweaksexpanded:copper_shield",
-      "required": false
-    },
     {
       "id": "#chalk:chalks",
       "required": false

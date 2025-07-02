@@ -80,13 +80,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.TORCHFLOWER_SEEDS);
 
         tag(UnbreakableItems.NOT_UNBREAKABLE)
-                .addTags(WOODEN_HAND_EQUIPMENT, STONE_HAND_EQUIPMENT, LEATHER_ARMOR_EQUIPMENT)
-                .add(CoalFire.FIRESTARTER.get())
-                .addTag(FLINT_HAND_EQUIPMENT)
-                .addOptional(ForgeRegistries.ITEMS.getKey(FlintExpansion.ShieldsPlusIntegration.SHIELD.get()))
-                .addOptionalTag(ResourceLocation.parse("iguanatweaksexpanded:equipment/hand/copper"))
-                .addOptionalTag(ResourceLocation.parse("iguanatweaksexpanded:equipment/armor/chained_copper"))
-                .addOptional(ResourceLocation.parse("shieldsplus:wooden_shield")).addOptional(ResourceLocation.parse("shieldsplus:stone_shield")).addOptional(ResourceLocation.parse("iguanatweaksexpanded:copper_shield"))
                 .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
         tag(FoodDrinks.RAW_FOOD)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)

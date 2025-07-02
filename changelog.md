@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.13.6
+### Changes
+* Integration data packs are now disabled by default
+* Unbreakable items now only applies to enchanted items (configurable)
+
 ## 4.13.5
 ### Fixes
 * Blocked damage tooltip showing up for any item and not showing the blocked damage
