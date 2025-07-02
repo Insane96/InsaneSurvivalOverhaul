@@ -1,5 +1,9 @@
 # Changelog
 
+## Changes
+### Changes
+* Slightly increased mobs movement speed
+
 ## 4.13.6
 ### Changes
 * Unbreakable items now only applies to enchanted items (configurable)

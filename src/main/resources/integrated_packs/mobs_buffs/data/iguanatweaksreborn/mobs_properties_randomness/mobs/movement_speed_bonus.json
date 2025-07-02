@@ -6,7 +6,7 @@
             "attribute": "minecraft:generic.movement_speed",
             "modifier_name": "More Speed for non-zombie mobs",
             "operation": "multiply_base",
-            "amount": 0.09
+            "amount": 0.1
         }
     ]
 }
