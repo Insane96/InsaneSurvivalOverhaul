@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@LoadFeature(module = Modules.Ids.ITEMS, name = "gigaherz Tool Belt")
+@LoadFeature(module = Modules.Ids.ITEMS, name = "gigaherz Tool Belt", enabledByDefault = false)
 public class ToolBeltIntegrationFeature extends Feature {
 
 	@Config(description = "Enables a data pack that changes the crafting of the Tool Belt to give more slots (2 -> 4)")

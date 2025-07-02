@@ -2,8 +2,9 @@
 
 ## 4.13.6
 ### Changes
-* Integration data packs are now disabled by default
 * Unbreakable items now only applies to enchanted items (configurable)
+* Integration data packs are now disabled by default
+* Toolbelt, Stats Buffs and Seasons integration are now disabled by default
 
 ## 4.13.5
 ### Fixes

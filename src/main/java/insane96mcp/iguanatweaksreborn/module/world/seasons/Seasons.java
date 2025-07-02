@@ -50,7 +50,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons")
+@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons", enabledByDefault = false)
 public class Seasons extends Feature {
 
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_SEASONGRASSGROWDEATH = GameRules.register("iguanatweaks:doSeasonGrassGrowDeath", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
