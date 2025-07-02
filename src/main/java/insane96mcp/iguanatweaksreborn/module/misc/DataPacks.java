@@ -69,19 +69,19 @@ public class DataPacks extends Feature {
             * Removes some advancements (like villagers ones)""")
     public static Boolean advancements = true;
     @Config(description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
-    public static Boolean supplementaries = true;
+    public static Boolean supplementaries = false;
     @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
-    public static Boolean farmersDelight = true;
+    public static Boolean farmersDelight = false;
     @Config(description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
-    public static Boolean environmental = true;
+    public static Boolean environmental = false;
     @Config(description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
-    public static Boolean quark = true;
+    public static Boolean quark = false;
     @Config(description = "Integrates the mod with Autumnity. Changes animals loot to match the livestock changes.")
-    public static Boolean autumnity = true;
+    public static Boolean autumnity = false;
     @Config(description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
-    public static Boolean cavernsAndChasms = true;
+    public static Boolean cavernsAndChasms = false;
     @Config(description = "Integrates the mod with Crate. Alters ore generation.")
-    public static Boolean create = true;
+    public static Boolean create = false;
     @Config(description = "Integrates the mod with Tinker's Construct. Disables vanilla items. Changes some stats and adds modifiers")
     public static Boolean tinkersConstruct = false;
 
