@@ -1,8 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* 
+
 ### Fixes
-* Copper equipment recipes
+* Copper equipment recipes and armor texture
 
 ## Alpha 4.14.0
 ### Additions
