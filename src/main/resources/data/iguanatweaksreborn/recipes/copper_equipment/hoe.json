@@ -5,7 +5,7 @@
       "conditions": [
         {
           "type": "insanelib:feature_enabled",
-          "feature": "Copper expansion"
+          "feature": "Copper equipment"
         }
       ],
       "recipe": {

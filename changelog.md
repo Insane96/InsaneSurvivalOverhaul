@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Copper equipment recipes
+
 ## Alpha 4.14.0
 ### Additions
 * Added Copper equipment

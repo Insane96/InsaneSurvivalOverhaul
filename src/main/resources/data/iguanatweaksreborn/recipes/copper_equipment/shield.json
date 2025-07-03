@@ -5,29 +5,31 @@
       "conditions": [
         {
           "type": "insanelib:feature_enabled",
-          "feature": "Forging"
+          "feature": "Copper equipment"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "shieldsplus"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "category": "equipment",
-        "key": {
-          "M": {
-            "item": "minecraft:copper_ingot"
-          },
-          "S": {
-            "item": "minecraft:stick"
-          }
-        },
         "pattern": [
-          "MMM",
-          "MSM",
+          " S ",
+          "SLS",
           " S "
         ],
-        "result": {
-          "item": "iguanatweaksreborn:copper_hammer"
+        "key": {
+          "S": {
+            "item": "minecraft:copper_ingot"
+          },
+          "L": {
+            "tag": "minecraft:logs"
+          }
         },
-        "show_notification": true
+        "result": {
+          "item": "iguanatweaksreborn:copper_shield"
+        }
       }
     }
   ]
