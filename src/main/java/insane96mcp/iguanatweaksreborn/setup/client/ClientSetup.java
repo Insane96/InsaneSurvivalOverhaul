@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.Enchantment
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ISOBeaconRenderer;
@@ -102,6 +103,13 @@ public class ClientSetup {
                 addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
             }
 
+            if (Feature.isEnabled(CopperEquipment.class)) {
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
+            }
+
             if (Feature.isEnabled(BiomeCompass.class)) {
                 addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
             }
@@ -121,6 +129,16 @@ public class ClientSetup {
 
                 if (ModList.get().isLoaded("shieldsplus"))
                     addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
+            }
+            if (Feature.isEnabled(CopperEquipment.class)) {
+                addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD.get());
+                addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE.get());
+                if (ModList.get().isLoaded("shieldsplus"))
+                    addAfter(event, SPItems.WOODEN_SHIELD.get(), CopperEquipment.ShieldsPlusIntegration.SHIELD.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.BOOTS.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET.get());
             }
 
             if (Feature.isEnabled(Bows.class)) {

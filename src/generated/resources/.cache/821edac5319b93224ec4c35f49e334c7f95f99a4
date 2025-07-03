@@ -1,4 +1,8 @@
-// 1.20.1	2025-07-02T09:09:29.6910764	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-07-03T15:03:40.8379525	Tags for minecraft:item mod id iguanatweaksreborn
+995391829d61969aa6c4ca0bc5df866e333ce1f7 data/forge/tags/items/armors/boots.json
+c71c91e6cd35b0797ba0b9f3267a45ad9dc72880 data/forge/tags/items/armors/chestplates.json
+ac8aa9bc90f22e6eefe0740dc44b8e63af6d5027 data/forge/tags/items/armors/helmets.json
+a45ef50a4f7a96bb69e364bcc0586fcb95a5abda data/forge/tags/items/armors/leggings.json
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/iguanatweaksreborn/tags/items/chicken_food_items.json
 968f4e6c24656d4127f149e96496cb2f8254ec62 data/iguanatweaksreborn/tags/items/enchanting/accepts_damage_enchantments.json
 c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/enchanting/accepts_fire_aspect.json
@@ -19,9 +23,10 @@ ea8fb5ca2917f2ee2be7d67dcf329402d69d1ec4 data/iguanatweaksreborn/tags/items/no_t
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/iguanatweaksreborn/tags/items/snow_slowdown_ignore.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/iguanatweaksreborn/tags/items/spawner_reactivator.json
 c157cdd5b8874bea4777cb5656df05b50e04785e data/iguanatweaksreborn/tags/items/world_immune.json
-a10b26f4f18eb0b82469b076ef253e4ef2cb12b5 data/minecraft/tags/items/axes.json
+3ef293bb0f2165d953d1861f1d026afb6867fa81 data/minecraft/tags/items/axes.json
 509c4246a15cb50b91aac773a0d94a3dbb043351 data/minecraft/tags/items/flowers.json
-5582198bbb8808cc5ee5074d3997e6d7227c2a7a data/minecraft/tags/items/hoes.json
-a6b8571d91d8deb6e28053379637fdfeb8677961 data/minecraft/tags/items/pickaxes.json
-49e2f1f26bb9d7c90147546a0f3c6a91ba6513b8 data/minecraft/tags/items/shovels.json
-576fd1253c0ed0da096f8b834fd271b94385665e data/minecraft/tags/items/swords.json
+1fd6e9c50b0ed15151d3db72cec7042667d39ba6 data/minecraft/tags/items/hoes.json
+c600a99f3b05c14cd243193581e294859cc54582 data/minecraft/tags/items/pickaxes.json
+802402c24b4925b126410972bda3e06793b0ab5d data/minecraft/tags/items/shovels.json
+a96625266b18c8147581686a35b1372bb0691368 data/minecraft/tags/items/swords.json
+de4c31f10e04cec690093988a1d683daa93c4cdc data/minecraft/tags/items/trimmable_armor.json

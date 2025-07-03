@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "insanelib:feature_enabled",
+          "feature": "Copper expansion"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "f": {
+            "item": "minecraft:copper_ingot"
+          },
+          "s": {
+            "item": "minecraft:stick"
+          }
+        },
+        "pattern": [
+          "fff",
+          " s ",
+          " s "
+        ],
+        "result": {
+          "item": "iguanatweaksreborn:copper_pickaxe"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

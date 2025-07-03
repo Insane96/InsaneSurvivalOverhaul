@@ -24,6 +24,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.livestock.LivestockDataRelo
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.healthregen.HealthRegenHunger;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
+import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -119,8 +120,10 @@ public class InsaneSO
 
         ISOTriggers.init();
 
-        if (ModList.get().isLoaded("shieldsplus"))
+        if (ModList.get().isLoaded("shieldsplus")) {
             FlintExpansion.ShieldsPlusIntegration.init();
+            CopperEquipment.ShieldsPlusIntegration.init();
+        }
 
         if (FMLLoader.getDist().isClient()) {
             modEventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);

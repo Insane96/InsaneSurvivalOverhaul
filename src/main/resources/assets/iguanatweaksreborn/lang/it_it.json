@@ -125,6 +125,18 @@
 	"item.iguanatweaksreborn.flint_shield": "Scudo di selce",
 	"block.iguanatweaksreborn.flint_rock": "Selce roccia",
 
+	"item.iguanatweaksreborn.copper_helmet": "Elmo di rame",
+	"item.iguanatweaksreborn.copper_chestplate": "Corazza di rame",
+	"item.iguanatweaksreborn.copper_leggings": "Gambiere di rame",
+	"item.iguanatweaksreborn.copper_boots": "Stivali di rame",
+
+	"item.iguanatweaksreborn.copper_axe": "Ascia di rame",
+	"item.iguanatweaksreborn.copper_pickaxe": "Piccone di rame",
+	"item.iguanatweaksreborn.copper_sword": "Spada di rame",
+	"item.iguanatweaksreborn.copper_shovel": "Pala di rame",
+	"item.iguanatweaksreborn.copper_hoe": "Zappa di rame",
+	"item.iguanatweaksreborn.copper_shield": "Scudo di rame",
+
 
 	"iguanatweaksreborn:mining_module": "Estrazione",
 

@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "insanelib:feature_enabled",
+          "feature": "Copper expansion"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "c": {
+            "item": "minecraft:iron_nugget"
+          },
+          "m": {
+            "item": "minecraft:copper_ingot"
+          }
+        },
+        "pattern": [
+          "cmc",
+          "m m"
+        ],
+        "result": {
+          "item": "iguanatweaksexpanded:chained_copper_helmet"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

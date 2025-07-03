@@ -125,6 +125,17 @@
 	"item.iguanatweaksreborn.flint_shield": "Flint Shield",
 	"block.iguanatweaksreborn.flint_rock": "Flint Rock",
 
+	"item.iguanatweaksreborn.copper_helmet": "Copper Helmet",
+	"item.iguanatweaksreborn.copper_chestplate": "Copper Chestplate",
+	"item.iguanatweaksreborn.copper_leggings": "Copper Leggings",
+	"item.iguanatweaksreborn.copper_boots": "Copper Boots",
+
+	"item.iguanatweaksreborn.copper_axe": "Copper Axe",
+	"item.iguanatweaksreborn.copper_pickaxe": "Copper Pickaxe",
+	"item.iguanatweaksreborn.copper_sword": "Copper Sword",
+	"item.iguanatweaksreborn.copper_shovel": "Copper Shovel",
+	"item.iguanatweaksreborn.copper_hoe": "Copper Hoe",
+	"item.iguanatweaksreborn.copper_shield": "Copper Shield",
 
 	"iguanatweaksreborn:mining_module": "Mining",
 

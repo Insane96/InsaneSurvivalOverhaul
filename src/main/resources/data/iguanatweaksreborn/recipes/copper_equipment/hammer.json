@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "insanelib:feature_enabled",
+          "feature": "Forging"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "M": {
+            "item": "minecraft:copper_ingot"
+          },
+          "S": {
+            "item": "minecraft:stick"
+          }
+        },
+        "pattern": [
+          "MMM",
+          "MSM",
+          " S "
+        ],
+        "result": {
+          "item": "iguanatweaksreborn:copper_hammer"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

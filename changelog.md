@@ -1,6 +1,11 @@
 # Changelog
 
-## Changes
+## Alpha 4.14.0
+### Additions
+* Added Copper equipment
+  * Partially ported from ISE
+  * Same stats as upcoming vanilla update (without the combat rework data pack)
+
 ### Changes
 * Slightly increased mobs movement speed
 

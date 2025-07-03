@@ -10,6 +10,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
+import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
@@ -30,6 +31,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
@@ -61,11 +63,20 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         //Vanilla
         tag(ItemTags.FLOWERS)
                 .add(CyanFlower.FLOWER.item().get());
-        tag(ItemTags.PICKAXES).add(FlintExpansion.PICKAXE.get());
-        tag(ItemTags.AXES).add(FlintExpansion.AXE.get());
-        tag(ItemTags.SHOVELS).add(FlintExpansion.SHOVEL.get());
-        tag(ItemTags.SWORDS).add(FlintExpansion.SWORD.get());
-        tag(ItemTags.HOES).add(FlintExpansion.HOE.get());
+        tag(ItemTags.PICKAXES).add(FlintExpansion.PICKAXE.get()).add(CopperEquipment.PICKAXE.get());
+        tag(ItemTags.AXES).add(FlintExpansion.AXE.get()).add(CopperEquipment.AXE.get());
+        tag(ItemTags.SHOVELS).add(FlintExpansion.SHOVEL.get()).add(CopperEquipment.SHOVEL.get());
+        tag(ItemTags.SWORDS).add(FlintExpansion.SWORD.get()).add(CopperEquipment.SWORD.get());
+        tag(ItemTags.HOES).add(FlintExpansion.HOE.get()).add(CopperEquipment.HOE.get());
+
+        tag(ItemTags.TRIMMABLE_ARMOR)
+                .add(CopperEquipment.HELMET.get(), CopperEquipment.CHESTPLATE.get(), CopperEquipment.LEGGINGS.get(), CopperEquipment.BOOTS.get());
+
+        //Forge
+        tag(Tags.Items.ARMORS_HELMETS).add(CopperEquipment.HELMET.get());
+        tag(Tags.Items.ARMORS_CHESTPLATES).add(CopperEquipment.CHESTPLATE.get());
+        tag(Tags.Items.ARMORS_LEGGINGS).add(CopperEquipment.LEGGINGS.get());
+        tag(Tags.Items.ARMORS_BOOTS).add(CopperEquipment.BOOTS.get());
 
         //ISO
         tag(StackSizes.NO_STACK_SIZE_CHANGES)

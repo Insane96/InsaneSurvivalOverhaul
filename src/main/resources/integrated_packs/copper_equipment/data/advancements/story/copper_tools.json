@@ -1,0 +1,40 @@
+{
+    "display": {
+        "icon": {
+            "item": "iguanatweaksreborn:copper_pickaxe"
+        },
+        "title": {
+            "translate": "advancements.sr_story.copper_tools.title"
+        },
+        "description": {
+            "translate": "advancements.sr_story.copper_tools.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "iguanatweaksreborn:story/furnace",
+    "criteria": {
+        "copper_tools": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "iguanatweaksreborn:copper_pickaxe",
+                            "iguanatweaksreborn:copper_axe",
+                            "iguanatweaksreborn:copper_shovel",
+                            "iguanatweaksreborn:copper_hoe"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "copper_tools"
+        ]
+    ]
+}

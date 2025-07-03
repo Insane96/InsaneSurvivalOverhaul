@@ -1,0 +1,11 @@
+{
+    "parent": "shieldsplus:item/wooden_shield",
+    "overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "shieldsplus:item/wooden_shield_blocking"
+        }
+    ]
+}

@@ -1,10 +1,7 @@
 {
 	"values": [
 		"minecraft:wooden_hoe",
-		{
-			"required": false,
-			"id": "iguanatweaksexpanded:copper_hoe"
-		},
+		"iguanatweaksreborn:copper_hoe",
 		"minecraft:iron_hoe",
 		{
 			"required": false,
