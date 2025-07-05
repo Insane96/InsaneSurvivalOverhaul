@@ -5,7 +5,8 @@
 * Backported copper equipment textures
   * Except armor one, since I can't find it anywhere
 * Tried to mimic the vanilla stats for copper equipment
-* Copper hand equipment are now balanced in combat rework data pack
+* Copper equipment is now balanced in combat rework data pack
+* Slightly increased iron armor armor points
 
 ### Fixes
 * Copper equipment recipes and armor texture missing
