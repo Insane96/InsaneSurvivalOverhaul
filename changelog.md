@@ -1,11 +1,13 @@
 # Changelog
 
-## Upcoming
+## Alpha 4.14.1
 ### Changes
-* 
+* Backported copper equipment textures
+  * Except armor one, since I can't find it anywhere
+* Tried to mimic the vanilla stats for copper equipment
 
 ### Fixes
-* Copper equipment recipes and armor texture
+* Copper equipment recipes and armor texture missing
 
 ## Alpha 4.14.0
 ### Additions

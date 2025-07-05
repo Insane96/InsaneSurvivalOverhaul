@@ -20,7 +20,7 @@ import java.util.EnumMap;
 
 @LoadFeature(module = Modules.Ids.ITEMS, description = "Basically backports copper equipment from latest MC versions.")
 public class CopperEquipment extends Feature {
-	public static final ILItemTier ITEM_TIER = new ILItemTier(0, 191, 5f, 2.0f, 10, () -> Ingredient.of(Items.COPPER_INGOT));
+	public static final ILItemTier ITEM_TIER = new ILItemTier(1, 191, 5f, 1f, 12, () -> Ingredient.of(Items.COPPER_INGOT));
 
 	public static final RegistryObject<Item> SWORD = ISORegistries.ITEMS.register("copper_sword", () -> new SwordItem(ITEM_TIER, 3, -2.4F, new Item.Properties()));
 	public static final RegistryObject<Item> SHOVEL = ISORegistries.ITEMS.register("copper_shovel", () -> new ShovelItem(ITEM_TIER, 1.5F, -3.0F, new Item.Properties()));
@@ -33,7 +33,7 @@ public class CopperEquipment extends Feature {
 		p_266652_.put(ArmorItem.Type.LEGGINGS, 3);
 		p_266652_.put(ArmorItem.Type.CHESTPLATE, 4);
 		p_266652_.put(ArmorItem.Type.HELMET, 2);
-	}), 13, SoundEvents.ARMOR_EQUIP_CHAIN, 0f, 0f, () -> Ingredient.of(Items.COPPER_INGOT));
+	}), 7, SoundEvents.ARMOR_EQUIP_CHAIN, 0f, 0f, () -> Ingredient.of(Items.COPPER_INGOT));
 
 	public static final RegistryObject<Item> BOOTS = ISORegistries.ITEMS.register("copper_boots", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 	public static final RegistryObject<Item> LEGGINGS = ISORegistries.ITEMS.register("copper_leggings", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
