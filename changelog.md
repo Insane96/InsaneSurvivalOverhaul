@@ -1,5 +1,9 @@
 # Changelog
 
+## Alpha 4.14.2
+### Fixes
+* Copper mining speed too high
+
 ## Alpha 4.14.1
 ### Changes
 * Backported copper equipment textures
