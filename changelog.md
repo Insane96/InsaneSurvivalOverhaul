@@ -7,6 +7,7 @@
 * Tried to mimic the vanilla stats for copper equipment
 * Copper equipment is now balanced in combat rework data pack
 * Slightly increased iron armor armor points
+* Increased CC's Silver armor attack damage (x1.05 -> x1.1)
 
 ### Fixes
 * Copper equipment recipes and armor texture missing

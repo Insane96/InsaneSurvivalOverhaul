@@ -7,7 +7,7 @@
 			"uuid": "389bac74-aa5e-4967-ab90-4e96e3408976",
 			"name": "Material modifier",
 			"attribute": "minecraft:generic.attack_damage",
-			"amount": 0.05,
+			"amount": 0.1,
 			"operation": "multiply_total"
 		},
 		{
