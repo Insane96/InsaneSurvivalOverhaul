@@ -32,6 +32,8 @@ public class Fog extends Feature {
     public static Boolean betterNetherFog = true;
     @Config(min = 0d, max = 1d, description = "Render distance is multiplied by this value in the Nether. Vanilla is 0.5.")
     public static Double netherFogRatio = 0.75d;
+    @Config(description = "If true, overworld fog will be use the values from the config.")
+    public static Boolean overworldFog = true;
     @Config(min = 0d, max = 1d, description = "Changes fog to start closer to the player. E.g. A value of 0.5 makes fog start at half the render distance. Vanilla is 1, Pre-1.18.1 was 0.75, Pre-1.7.2 was 0.25. This disables itself if Foggy Weather is enabled.")
     public static Double overworld$fogStartRatio = 0.4d;
     @Config(max = 1d, description = "Changes fog ratio when raining. Vanilla is 1. This disables itself if Foggy Weather is enabled.")
@@ -54,7 +56,7 @@ public class Fog extends Feature {
 
     private void overworldFog(ViewportEvent.RenderFog event) {
         if (Feature.get(ClientWeather.class).isEnabled()
-                || overworld$fogStartRatio == 1d && overworld$fogStartRatioOnRain == 1d
+                || !overworldFog
                 || event.isCanceled()
                 || event.getCamera().getFluidInCamera() != FogType.NONE
                 || (event.getMode() != FogRenderer.FogMode.FOG_TERRAIN && event.getMode() != FogRenderer.FogMode.FOG_SKY))
