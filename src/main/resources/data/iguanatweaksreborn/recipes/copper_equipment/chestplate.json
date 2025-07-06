@@ -13,19 +13,16 @@
         "category": "equipment",
         "key": {
           "c": {
-            "item": "minecraft:iron_nugget"
-          },
-          "m": {
             "item": "minecraft:copper_ingot"
           }
         },
         "pattern": [
           "c c",
-          "mcm",
-          "mmm"
+          "ccc",
+          "ccc"
         ],
         "result": {
-          "item": "iguanatweaksexpanded:chained_copper_chestplate"
+          "item": "iguanatweaksreborn:copper_chestplate"
         },
         "show_notification": true
       }

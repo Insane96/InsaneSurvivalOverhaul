@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Fixed copper armor not craftable
+
 ## Alpha 4.14.2
 ### Changes
 * Added config option to disable overworld fog changes
