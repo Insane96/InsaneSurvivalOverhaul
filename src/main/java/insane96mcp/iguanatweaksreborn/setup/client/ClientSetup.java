@@ -96,18 +96,17 @@ public class ClientSetup {
                 addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            if (Feature.isEnabled(FlintExpansion.class)) {
-                addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
-                addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
-                addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
-                addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
-            }
-
             if (Feature.isEnabled(CopperEquipment.class)) {
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
+            }
+            if (Feature.isEnabled(FlintExpansion.class)) {
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
+                addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
             }
 
             if (Feature.isEnabled(BiomeCompass.class)) {
@@ -123,13 +122,6 @@ public class ClientSetup {
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            if (Feature.isEnabled(FlintExpansion.class)) {
-                addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
-                addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
-
-                if (ModList.get().isLoaded("shieldsplus"))
-                    addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
-            }
             if (Feature.isEnabled(CopperEquipment.class)) {
                 addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD.get());
                 addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE.get());
@@ -139,6 +131,13 @@ public class ClientSetup {
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS.get());
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE.get());
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET.get());
+            }
+            if (Feature.isEnabled(FlintExpansion.class)) {
+                addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
+                addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
+
+                if (ModList.get().isLoaded("shieldsplus"))
+                    addAfter(event, SPItems.WOODEN_SHIELD.get(), FlintExpansion.ShieldsPlusIntegration.SHIELD.get());
             }
 
             if (Feature.isEnabled(Bows.class)) {
