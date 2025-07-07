@@ -4,6 +4,7 @@
 ### Fixes
 * Copper armor not craftable
 * Creative ordering of copper equipment in creative menu
+* Copper shield stats
 
 ## Alpha 4.14.2
 ### Changes
