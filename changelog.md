@@ -7,6 +7,7 @@
 * Fishing now slows down only when the fishing is luring and not before hooking
 * Lowered Tide's Cooked Fish nutrition
 * Flints in both hands no longer break if in creative
+* 1.20.2 Diamond ore generation backport is now a separate data pack that disables itself if Terralith is installed
 
 ### Removed
 * Unused textures
