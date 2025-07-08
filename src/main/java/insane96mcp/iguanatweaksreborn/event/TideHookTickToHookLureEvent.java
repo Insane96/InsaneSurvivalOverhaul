@@ -1,21 +1,21 @@
 package insane96mcp.iguanatweaksreborn.event;
 
-import net.minecraft.world.entity.projectile.FishingHook;
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraftforge.eventbus.api.Event;
 
-public class HookTickToHookLureEvent extends Event {
-    private final FishingHook hook;
+public class TideHookTickToHookLureEvent extends Event {
+    private final TideFishingHook hook;
     private int tick;
     private final Type type;
 
-    public HookTickToHookLureEvent(FishingHook hook, int tick, Type type)
+    public TideHookTickToHookLureEvent(TideFishingHook hook, int tick, Type type)
     {
         this.hook = hook;
         this.tick = tick;
         this.type = type;
     }
 
-    public FishingHook getHookEntity() {
+    public TideFishingHook getHookEntity() {
         return this.hook;
     }
 

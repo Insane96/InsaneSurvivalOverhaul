@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
+import insane96mcp.iguanatweaksreborn.event.TideHookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -89,6 +91,8 @@ public class Seasons extends Feature {
 		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
 		InsaneSO.addServerPack("no_saplings_in_winter", "Insane's Survival Overhaul No Saplings in Winter", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter);
+		if (ModList.get().isLoaded("tide"))
+			MinecraftForge.EVENT_BUS.addListener(Seasons::shouldTideSlowdownFishing);
 	}
 
 	@Override
@@ -291,11 +295,20 @@ public class Seasons extends Feature {
 
 	@SubscribeEvent
 	public void shouldSlowdownFishing(HookTickToHookLureEvent event) {
+		if (event.getType() == HookTickToHookLureEvent.Type.LURE && slowdownFishing(event.getHookEntity().level()))
+			event.setTick(event.getTick() - 1);
+	}
+
+	public static void shouldTideSlowdownFishing(TideHookTickToHookLureEvent event) {
+		if (event.getType() == TideHookTickToHookLureEvent.Type.LURE && slowdownFishing(event.getHookEntity().level()))
+			event.setTick(event.getTick() - 1);
+	}
+
+	public static boolean slowdownFishing(Level level) {
 		if (!Feature.isEnabled(Seasons.class)
 				|| !seasonBasedFishingTime)
-			return;
+			return false;
 
-		Level level = event.getHookEntity().level();
 		Season season = SeasonHelper.getSeasonState(level).getSeason();
 		//Chance to slowdown fishing
 		float rng = switch (season) {
@@ -304,8 +317,7 @@ public class Seasons extends Feature {
 			case AUTUMN -> 0.2F;
 			case WINTER -> 0.5F;
 		};
-		if (level.getRandom().nextFloat() < rng)
-			event.setTick(event.getTick() - 1);
+		return level.getRandom().nextFloat() < rng;
 	}
 
 	public static float getDayNightCycleModifier() {

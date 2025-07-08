@@ -166,7 +166,7 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     runtimeOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
-    implementation fg.deobf("curse.maven:tide-884685:6513554")
+    compileOnly fg.deobf("curse.maven:tide-884685:6513554")
 
     compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")

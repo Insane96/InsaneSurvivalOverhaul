@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.event;
 
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosion;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosionCreatedEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -34,11 +35,21 @@ public class ISOEventFactory {
     /**
      * Apply changes to the ticks that will be removed from the hook to lure and hook
      */
-    public static int onHookTickToHookLure(FishingHook hook, int tick)
+    public static int onHookTickToHookLure(FishingHook hook, int tick, HookTickToHookLureEvent.Type type)
     {
-        HookTickToHookLureEvent event = new HookTickToHookLureEvent(hook, tick);
+        HookTickToHookLureEvent event = new HookTickToHookLureEvent(hook, tick, type);
         MinecraftForge.EVENT_BUS.post(event);
-        return event.getTick();
+        return Math.max(0, event.getTick());
+    }
+
+    /**
+     * Apply changes to the ticks that will be removed from the hook to lure and hook
+     */
+    public static int onTideHookTickToHookLure(TideFishingHook hook, int tick, TideHookTickToHookLureEvent.Type type)
+    {
+        TideHookTickToHookLureEvent event = new TideHookTickToHookLureEvent(hook, tick, type);
+        MinecraftForge.EVENT_BUS.post(event);
+        return Math.max(0, event.getTick());
     }
 
     public static float onLivingAttack(LivingEntity entity, DamageSource src, float amount)

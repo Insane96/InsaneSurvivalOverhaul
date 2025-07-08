@@ -29,6 +29,7 @@ public class ModLoadedPlugin implements IMixinConfigPlugin {
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.appleskin.HUDOverlayHandlerMixin", () -> LoadingModList.get().getModFileById("appleskin") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.villagercomfort.ComfortHelperMixin", () -> LoadingModList.get().getModFileById("villagercomfort") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct.ToolAttackUtilMixin", () -> LoadingModList.get().getModFileById("tconstruct") != null)
+            .put("insane96mcp.iguanatweaksreborn.mixin.integration.tide.TideFishingHookMixin", () -> LoadingModList.get().getModFileById("tide") != null)
             .build();
 
     @Override

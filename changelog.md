@@ -1,8 +1,16 @@
 # Changelog
 
+* flints are consumed in creative
+
 ## Upcoming
 ### Changes
+* Added support for Tide fishing
+  * It's now slowed down based off seasons
+* Fishing now slows down only when the fishing is luring and not before hooking
 * Lowered Tide's Cooked Fish nutrition
+
+### Removed
+* Unused textures
 
 ## Alpha 4.14.3
 ### Fixes
