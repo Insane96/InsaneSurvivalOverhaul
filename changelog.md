@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Lowered Tide's Cooked Fish nutrition
+
 ## Alpha 4.14.3
 ### Fixes
 * Copper armor not craftable
