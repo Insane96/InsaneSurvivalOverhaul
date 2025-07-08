@@ -20,6 +20,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameRules;
@@ -144,15 +145,17 @@ public class CoalFire extends Feature {
             event.getLevel().playSound(null, event.getPos(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, event.getLevel().getRandom().nextFloat() * 0.4F + 1.5F);
         }
 
-        if (breakMain < twoFlintFireStarter$breakChance) {
-            event.getItemStack().shrink(1);
-            event.getEntity().broadcastBreakEvent(event.getHand());
-            net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(event.getEntity(), event.getItemStack(), event.getHand());
+        if (!event.getEntity().isCreative()) {
+            tryBreakFlint(event.getEntity(), event.getHand(), event.getItemStack());
+            tryBreakFlint(event.getEntity(), InteractionHand.OFF_HAND, event.getEntity().getOffhandItem());
         }
-        if (breakOff < twoFlintFireStarter$breakChance) {
-            event.getEntity().getOffhandItem().shrink(1);
-            event.getEntity().broadcastBreakEvent(InteractionHand.OFF_HAND);
-            net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(event.getEntity(), event.getEntity().getOffhandItem(), InteractionHand.OFF_HAND);
-        }
+    }
+
+    private static void tryBreakFlint(Player player, InteractionHand hand, ItemStack stack) {
+        if (player.getRandom().nextDouble() >= twoFlintFireStarter$breakChance)
+            return;
+        stack.shrink(1);
+        player.broadcastBreakEvent(hand);
+        net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, stack, hand);
     }
 }
