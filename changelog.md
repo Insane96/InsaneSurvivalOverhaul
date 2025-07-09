@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.14.4
 ### Changes
 * Added support for Tide fishing
   * It's now slowed down based off seasons
