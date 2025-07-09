@@ -26,7 +26,7 @@ public abstract class FishingHookMixin extends Projectile {
     @Definition(id = "timeUntilHooked", field = "Lnet/minecraft/world/entity/projectile/FishingHook;timeUntilHooked:I")
     @Definition(id = "i", local = @Local(type = int.class, ordinal = 0))
     @Expression("?.timeUntilHooked = ?.timeUntilHooked - @(i)")
-    @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = false)
+    @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public int iguanatweaksreborn$hookingFishEvent(int i) {
         return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, i, HookTickToHookLureEvent.Type.HOOK);
     }
@@ -34,7 +34,7 @@ public abstract class FishingHookMixin extends Projectile {
     @Definition(id = "timeUntilLured", field = "Lnet/minecraft/world/entity/projectile/FishingHook;timeUntilLured:I")
     @Definition(id = "i", local = @Local(type = int.class, ordinal = 0))
     @Expression("?.timeUntilLured = ?.timeUntilLured - @(i)")
-    @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = false)
+    @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public int iguanatweaksreborn$luringFishEvent(int i) {
         return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, i, HookTickToHookLureEvent.Type.LURE);
     }

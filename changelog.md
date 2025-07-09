@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.14.5
+### Fixes
+* Startup crash
+
 ## 4.14.4
 ### Changes
 * Added support for Tide fishing
