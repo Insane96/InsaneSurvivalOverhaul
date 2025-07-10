@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.14.6
+### Removed
+* Villager comfort fixes
+  * Should have been fixed in 
+
 ## 4.14.5
 ### Fixes
 * Startup crash

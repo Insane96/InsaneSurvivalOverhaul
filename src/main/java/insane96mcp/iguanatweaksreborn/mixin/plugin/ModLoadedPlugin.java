@@ -27,7 +27,6 @@ public class ModLoadedPlugin implements IMixinConfigPlugin {
             //.put("insane96mcp.iguanatweaksreborn.mixin.integration.farmersdelight.PieBlockMixin", () -> LoadingModList.get().getModFileById("farmersdelight") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.cavernsandchasms.CCEntityTypesMixin", () -> LoadingModList.get().getModFileById("caverns_and_chasms") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.appleskin.HUDOverlayHandlerMixin", () -> LoadingModList.get().getModFileById("appleskin") != null)
-            .put("insane96mcp.iguanatweaksreborn.mixin.integration.villagercomfort.ComfortHelperMixin", () -> LoadingModList.get().getModFileById("villagercomfort") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.tinkersconstruct.ToolAttackUtilMixin", () -> LoadingModList.get().getModFileById("tconstruct") != null)
             .put("insane96mcp.iguanatweaksreborn.mixin.integration.tide.TideFishingHookMixin", () -> LoadingModList.get().getModFileById("tide") != null)
             .build();
