@@ -8,6 +8,7 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -65,6 +66,13 @@ public class MiningMisc extends Feature {
 	}
 
 	public static int destroyDelay(ItemStack stack, DiggerItem item, BlockState state) {
-		return isEnabled(MiningMisc.class) && efficiencyBasedDestroyDelay ? Math.max(5 - (int) (item.speed / 2f), 1) : 5;
+		if (!isEnabled(MiningMisc.class)
+				|| !efficiencyBasedDestroyDelay)
+			return 5;
+		float delay = 5f - (int) (item.speed / 2.5f);
+		int efficiency = stack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
+		if (efficiency > 0)
+			delay -= efficiency / 2f;
+		return (int) Math.max(delay, 1);
 	}
 }
