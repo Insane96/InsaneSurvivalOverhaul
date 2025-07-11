@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Reduced Copper durability
+
 ## 4.14.6
 ### Removed
 * Villager comfort fixes
