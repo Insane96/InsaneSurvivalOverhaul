@@ -9,7 +9,7 @@
 ## 4.14.6
 ### Removed
 * Villager comfort fixes
-  * Should have been fixed in 
+  * Should have been fixed in the latest update of the mod
 
 ## 4.14.5
 ### Fixes

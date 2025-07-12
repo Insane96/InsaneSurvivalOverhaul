@@ -9,7 +9,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
 
 public class CopperShield extends SPShieldItem {
-	public static final SPShieldMaterial SHIELD_MATERIAL = new SPShieldMaterial("copper", 134, () -> Items.COPPER_INGOT, 10, Rarity.COMMON);
+	public static final SPShieldMaterial SHIELD_MATERIAL = new SPShieldMaterial("copper", 104, () -> Items.COPPER_INGOT, 10, Rarity.COMMON);
 	public CopperShield(Properties p_43089_) {
 		super(SHIELD_MATERIAL, p_43089_);
 	}
