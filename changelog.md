@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.14.7
 ### Changes
 * Reduced Copper durability
 * Efficiency now decreases the delay between destroying blocks
