@@ -4,31 +4,41 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.event.HurtItemStackEvent;
+import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanelib.util.MathHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have a lower chance to break in sunlight.")
+import java.util.UUID;
+
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have bonuses when used in sunlight.")
 public class EcologicWood extends Feature {
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
+    public static final UUID ATTACK_SPEED_MODIFIER_UUID = UUID.fromString("435317e9-0146-4f1b-bc21-67f466ee5f9c");
 
-    @Config(min = 0, max = 1, description = "Chance for the wooden item to not consume durability at 'Max sunlight'.")
-    public static Double chanceAtMaxSunlight = 0.75d;
+    @Config(min = 0, max = 1, description = "Chance for the wooden item to not consume durability when >= 'Max sunlight'.")
+    public static Double chanceAtMaxSunlight = 0.5d;
+    @Config(description = "Bonus attack speed when >= 'Max sunlight'.")
+    public static Double bonusAttackSpeed = 0.2d;
+    @Config(description = "Efficiency is multiplied by this when >= 'Max sunlight'.")
+    public static Double efficiencyMultiplier = 2d;
+    @Config(description = "Lower cooldown by this many ticks when >= 'Max sunlight'.")
+    public static Double shieldCooldownReduction = 10d;
     @Config(min = 0, max = 15)
     public static Integer maxSunlight = 12;
-
-    public EcologicWood(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
-    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void processItemDamaging(HurtItemStackEvent event) {
@@ -41,6 +51,30 @@ public class EcologicWood extends Feature {
         float ratio = 1f - (chanceAtMaxSunlight.floatValue() * skyLightRatio);
         float amount = event.getAmount() * ratio;
         event.setAmount(MathHelper.getAmountWithDecimalChance(event.getRandom(), amount));
+    }
+
+    @SubscribeEvent
+    public void addAttackSpeed(LivingEvent.LivingTickEvent event) {
+        if (!this.isEnabled()
+                || bonusAttackSpeed == 0
+                || event.getEntity().tickCount % 2 != 1)
+            return;
+
+        Attribute attr = Attributes.ATTACK_SPEED;
+        AttributeInstance attributeInstance = event.getEntity().getAttribute(attr);
+        if (attributeInstance == null)
+            return;
+
+        float calculatedSkyLightRatio = getCalculatedSkyLightRatio(event.getEntity());
+        float amount = bonusAttackSpeed.floatValue() * calculatedSkyLightRatio;
+        AttributeModifier modifier = attributeInstance.getModifier(ATTACK_SPEED_MODIFIER_UUID);
+        if (!event.getEntity().getMainHandItem().is(WOODEN_HAND_EQUIPMENT)) {
+            attributeInstance.removeModifier(ATTACK_SPEED_MODIFIER_UUID);
+            return;
+        }
+        else if (modifier != null && amount == 0f)
+            return;
+        MCUtils.applyModifier(event.getEntity(), attr, ATTACK_SPEED_MODIFIER_UUID, "Ecologic wood boost", amount, AttributeModifier.Operation.MULTIPLY_BASE, false);
     }
 
     public static float getCalculatedSkyLight(Entity entity) {
