@@ -1,5 +1,9 @@
 # Changelog
 
+* Can't repair copper stuff with nuggets
+* Lower copper shield dur
+* 23 emeralds from pots
+
 ## Upcoming
 ### Changes
 * Minor rework to wooden equipment
