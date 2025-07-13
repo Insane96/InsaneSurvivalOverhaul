@@ -29,6 +29,7 @@
 
 ### Fixes
 * Missing copper equipment repair
+* Tall grass replacing blocks when growing with seasons
 
 ## 4.14.7
 ### Changes

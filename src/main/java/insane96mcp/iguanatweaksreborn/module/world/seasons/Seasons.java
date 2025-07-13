@@ -215,7 +215,7 @@ public class Seasons extends Feature {
 									placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, abovePos));
 						}
 					}
-					else if (data.canGrowTall && level.getRandom().nextInt(data.chance) == 0) {
+					else if (data.canGrowTall && level.getRandom().nextInt(data.chance) == 0 && level.getBlockState(pos.above()).canBeReplaced()) {
 						if (state.is(Blocks.GRASS))
 							DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 2);
 						else if (state.is(Blocks.FERN))
