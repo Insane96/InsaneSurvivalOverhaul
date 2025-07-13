@@ -1,6 +1,7 @@
 # Changelog
 
 * Replace vanilla fishing rods with iron_fishing_rod
+* tide fishes drop rates
 
 ## Upcoming
 ### Addition
@@ -15,7 +16,7 @@
   * Lowered durability (118 -> 108)
   * Lowered unbreaking (80% -> 50% chance to not consume durability)
 * Leather, Copper and Chainmail armor durability has been increased
-* Increased Iron tools durability by 50%
+* Increased Iron tools durability by 35%
 * Adjusted Necromium stats
   * Increased % attack speed (-20% -> -15%)
   * Increased % damage (-10% -> -5%)
