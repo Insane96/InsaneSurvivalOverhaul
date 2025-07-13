@@ -1,6 +1,6 @@
 {
 	"item": "#iguanatweaksreborn:equipment/hand/wooden",
-	"durability": 118,
+	"durability": 108,
 	"efficiency": 2.5,
 	"enchantability": 12,
 	"modifiers": [
@@ -9,7 +9,7 @@
 			"name": "Material modifier",
 			"slot": "mainhand",
 			"attribute": "minecraft:generic.attack_speed",
-			"amount": 0.10,
+			"amount": 0,
 			"operation": "multiply_base"
 		},
 		{

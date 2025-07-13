@@ -19,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -27,14 +28,15 @@ import java.util.UUID;
 @LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have bonuses when used in sunlight.")
 public class EcologicWood extends Feature {
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
+    public static final TagKey<Item> WOODEN_SHIELD = ISOItemTagsProvider.create("equipment/shield/wooden");
     public static final UUID ATTACK_SPEED_MODIFIER_UUID = UUID.fromString("435317e9-0146-4f1b-bc21-67f466ee5f9c");
 
     @Config(min = 0, max = 1, description = "Chance for the wooden item to not consume durability when >= 'Max sunlight'.")
     public static Double chanceAtMaxSunlight = 0.5d;
     @Config(description = "Bonus attack speed when >= 'Max sunlight'.")
     public static Double bonusAttackSpeed = 0.2d;
-    @Config(description = "Efficiency is multiplied by this when >= 'Max sunlight'.")
-    public static Double efficiencyMultiplier = 2d;
+    @Config(description = "Percentage efficiency bonus when >= 'Max sunlight'.")
+    public static Double bonusEfficiency = 1d;
     @Config(description = "Lower cooldown by this many ticks when >= 'Max sunlight'.")
     public static Double shieldCooldownReduction = 10d;
     @Config(min = 0, max = 15)
@@ -44,7 +46,7 @@ public class EcologicWood extends Feature {
     public void processItemDamaging(HurtItemStackEvent event) {
         if (!this.isEnabled()
                 || event.getPlayer() == null
-                || !event.getStack().is(WOODEN_HAND_EQUIPMENT))
+                || (!event.getStack().is(WOODEN_HAND_EQUIPMENT) && !event.getStack().is(WOODEN_SHIELD)))
             return;
 
         float skyLightRatio = getCalculatedSkyLightRatio(event.getPlayer());
@@ -68,14 +70,40 @@ public class EcologicWood extends Feature {
         float calculatedSkyLightRatio = getCalculatedSkyLightRatio(event.getEntity());
         float amount = bonusAttackSpeed.floatValue() * calculatedSkyLightRatio;
         AttributeModifier modifier = attributeInstance.getModifier(ATTACK_SPEED_MODIFIER_UUID);
-        if (!event.getEntity().getMainHandItem().is(WOODEN_HAND_EQUIPMENT)) {
+        if (!event.getEntity().getMainHandItem().is(WOODEN_HAND_EQUIPMENT)
+                || amount == 0f) {
             attributeInstance.removeModifier(ATTACK_SPEED_MODIFIER_UUID);
             return;
         }
-        else if (modifier != null && amount == 0f)
+        else if (modifier != null)
             return;
         MCUtils.applyModifier(event.getEntity(), attr, ATTACK_SPEED_MODIFIER_UUID, "Ecologic wood boost", amount, AttributeModifier.Operation.MULTIPLY_BASE, false);
     }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onEfficiency(PlayerEvent.BreakSpeed event) {
+        if (!this.isEnabled()
+                || bonusEfficiency == 0
+                || !event.getEntity().getMainHandItem().is(WOODEN_HAND_EQUIPMENT)
+                || !event.getEntity().getMainHandItem().isCorrectToolForDrops(event.getState()))
+            return;
+
+        float calculatedSkyLightRatio = getCalculatedSkyLightRatio(event.getEntity());
+        float efficiencyMult = bonusEfficiency.floatValue() * calculatedSkyLightRatio;
+        if (efficiencyMult == 0f)
+            return;
+        event.setNewSpeed(event.getOriginalSpeed() * (1f + efficiencyMult));
+    }
+
+    /*@SubscribeEvent
+    public void onShieldCooldown(ShieldCooldownEvent event) {
+        if (!this.isEnabled()
+                || shieldCooldownReduction == 0
+                || !event.getEntity().getMainHandItem().is(WOODEN_SHIELD))
+            return;
+
+        event.setNewCooldown(event.getOriginalCooldown() - shieldCooldownReduction.intValue());
+    }*/
 
     public static float getCalculatedSkyLight(Entity entity) {
         return getCalculatedSkyLight(entity.level(), entity.blockPosition());
