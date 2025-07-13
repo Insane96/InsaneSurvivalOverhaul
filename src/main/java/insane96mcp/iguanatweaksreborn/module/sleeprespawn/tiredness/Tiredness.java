@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.integration.SimpleClouds;
 import insane96mcp.iguanatweaksreborn.mixin.LivingEntityAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.MobAccessor;
 import insane96mcp.iguanatweaksreborn.mixin.ServerLevelAccessor;
@@ -43,6 +44,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -54,6 +56,7 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -112,6 +115,8 @@ public class Tiredness extends JsonFeature {
 	public static MinMax fakeSound$times = new MinMax(2, 6);
 	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
 	public static Boolean tiredTiedPhantoms = true;
+	@Config(description = "If true, Simple Clouds' clouds will speed up when player skips time by sleeping.")
+	public static Boolean simpleCloudsIntegration = false;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -119,10 +124,16 @@ public class Tiredness extends JsonFeature {
 		NBT_TAG = this.createDataKey("tiredness");
 	}
 
+	private static boolean hasRegisteredSimpleCloudsEvent = false;
+
 	@Override
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
 		fakeSoundMobs = fakeSound$mobs.stream().map(IdTagMatcher::parseLine).collect(Collectors.toList());
+		if (simpleCloudsIntegration && ModList.get().isLoaded("simpleclouds") && !hasRegisteredSimpleCloudsEvent) {
+			MinecraftForge.EVENT_BUS.addListener(SimpleClouds::modifyCloudSpeed);
+			hasRegisteredSimpleCloudsEvent = true;
+		}
 	}
 
 	@Override
@@ -351,6 +362,8 @@ public class Tiredness extends JsonFeature {
 		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
 
 		Weather.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
+		if (ModList.get().isLoaded("simpleclouds"))
+			SimpleClouds.onSleepSkipTime(timeSkipped);
 	}
 
 	public static boolean onSleepFinished(ServerLevel level, boolean original) {

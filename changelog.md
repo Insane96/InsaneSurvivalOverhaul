@@ -3,6 +3,10 @@
 * Replace vanilla fishing rods with iron_fishing_rod
 
 ## Upcoming
+### Addition
+* Simple clouds integration (disabled by default)
+  * If enabled, thunderous clouds will no longer be removed on sleep and clouds will be fast forwarded
+
 ### Changes
 * Minor rework to wooden equipment
   * Wooden equipment now gains +20% attack speed and x2 mining speed when used in sunlight
