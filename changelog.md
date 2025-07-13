@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Leather, Copper and chainmail armor durability has been increased
+
 ## 4.14.7
 ### Changes
 * Reduced Copper durability
