@@ -7,6 +7,7 @@ import insane96mcp.insanelib.util.MathHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntityTypePredicate;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +34,7 @@ public class ReplaceLootModifier extends LootModifier {
                             Codec.INT.optionalFieldOf("amount_to_replace", -1).forGetter(m -> m.amountToReplace),
                             Codec.list(Codec.FLOAT).optionalFieldOf("chances", List.of(1f)).forGetter(m -> m.chances),
                             Codec.list(Codec.FLOAT).optionalFieldOf("multipliers", List.of(1f)).forGetter(m -> m.multipliers),
-                            Codec.BOOL.optionalFieldOf("keep_durability", false).forGetter(m -> m.chestsOnly),
+                            Codec.BOOL.optionalFieldOf("keep_durability", false).forGetter(m -> m.keepDurability),
                             Codec.BOOL.optionalFieldOf("chests_only", false).forGetter(m -> m.chestsOnly)
                     )).apply(inst, ReplaceLootModifier::new)
             ));
@@ -93,16 +94,26 @@ public class ReplaceLootModifier extends LootModifier {
                     toRemove.add(stack);
                     if (amountToReplace == -1) {
                         int newAmount = MathHelper.getAmountWithDecimalChance(context.getRandom(), stack.getCount() * multiplier);
-                        ItemStack newItemStack = new ItemStack(newItem, newAmount);
-                        if (keepDurability) {
-                            newItemStack.setDamageValue((int) (newItemStack.getMaxDamage() * percentageDurability));
+                        ItemStack newStack = new ItemStack(newItem, newAmount);
+                        if (keepDurability)
+                            newStack.setDamageValue((int) (newStack.getMaxDamage() * percentageDurability));
+                        CompoundTag tag = stack.getTag();
+                        if (tag != null) {
+                            tag.remove("Damage");
+                            newStack.setTag(tag);
                         }
-                        toAdd.add(newItemStack);
+                        toAdd.add(newStack);
                     }
                     else {
                         int newAmount = MathHelper.getAmountWithDecimalChance(context.getRandom(), Math.min(stack.getCount(), amountToReplace) * multiplier);
-                        ItemStack replacedStack = new ItemStack(this.newItem, newAmount);
-                        toAdd.add(replacedStack);
+                        ItemStack newStack = new ItemStack(this.newItem, newAmount);
+                        CompoundTag tag = stack.getTag();
+                        if (tag != null) {
+                            tag.remove("Damage");
+                            newStack.setTag(tag);
+                        }
+
+                        toAdd.add(newStack);
                         if (amountToReplace < stack.getCount()) {
                             ItemStack oldStack = new ItemStack(this.itemToReplace, stack.getCount() - amountToReplace);
                             toAdd.add(oldStack);

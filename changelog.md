@@ -23,6 +23,7 @@
 * Shields+
   * Lowered copper shield durability
   * Lowered flint and wooden shield time blocked
+* `iguanatweaksreborn:replace_loot` modifier now also keeps nbt tag of the item
 
 ### Fixes
 * Missing copper equipment repair
