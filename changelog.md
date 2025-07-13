@@ -1,8 +1,6 @@
 # Changelog
 
-* Can't repair copper stuff with nuggets
 * Lower copper shield dur
-* 23 emeralds from pots
 
 ## Upcoming
 ### Changes
@@ -18,6 +16,9 @@
   * Increased % attack speed (-20% -> -15%)
   * Increased % damage (-10% -> -5%)
   * Lowered base attack damage (6 -> 5)
+
+### Fixes
+* Missing copper equipment repair
 
 ## 4.14.7
 ### Changes

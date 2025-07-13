@@ -1,0 +1,20 @@
+{
+	"item_to_repair": {
+		"id": "iguanatweaksreborn:copper_axe"
+	},
+	"repair": [
+		{
+			"repair_material": {
+				"id": "minecraft:copper_ingot"
+			},
+			"amount": 2.25
+		},
+		{
+			"repair_material": {
+				"id": "caverns_and_chasms:copper_nugget"
+			},
+			"amount": 20,
+			"cost_multiplier": 9
+		}
+	]
+}
