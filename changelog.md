@@ -8,7 +8,8 @@
   * Lowered bonus attack speed (+10% -> NONE)
   * Lowered durability (118 -> 108)
   * Lowered unbreaking (80% -> 50% chance to not consume durability)
-* Leather, Copper and chainmail armor durability has been increased
+* Leather, Copper and Chainmail armor durability has been increased
+* Increased Iron tools durability by 50%
 
 ## 4.14.7
 ### Changes
