@@ -17,6 +17,7 @@
   * Lowered unbreaking (80% -> 50% chance to not consume durability)
 * Leather, Copper and Chainmail armor durability has been increased
 * Increased Iron tools durability by 35%
+* Increased shears durability
 * Adjusted Necromium stats
   * Increased % attack speed (-20% -> -15%)
   * Increased % damage (-10% -> -5%)
