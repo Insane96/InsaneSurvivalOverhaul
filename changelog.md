@@ -1,6 +1,6 @@
 # Changelog
 
-* Lower copper shield dur
+* Replace vanilla fishing rods with iron_fishing_rod
 
 ## Upcoming
 ### Changes
@@ -16,6 +16,9 @@
   * Increased % attack speed (-20% -> -15%)
   * Increased % damage (-10% -> -5%)
   * Lowered base attack damage (6 -> 5)
+* Shields+
+  * Lowered copper shield durability
+  * Lowered flint and wooden shield time blocked
 
 ### Fixes
 * Missing copper equipment repair
