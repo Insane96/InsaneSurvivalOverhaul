@@ -4,7 +4,7 @@
 
 ## Upcoming
 ### Addition
-* Simple clouds integration (disabled by default)
+* Simple clouds integration with Tiredness (disabled by default)
   * If enabled, thunderous clouds will no longer be removed on sleep and clouds will be fast forwarded
 
 ### Changes
