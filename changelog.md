@@ -5,11 +5,15 @@
 * Minor rework to wooden equipment
   * Wooden equipment now gains +20% attack speed and x2 mining speed when used in sunlight
   * Lowered base mining speed (2.5 -> 2)
-  * Lowered bonus attack speed (+10% -> NONE)
+  * Lowered % attack speed (+10% -> NONE)
   * Lowered durability (118 -> 108)
   * Lowered unbreaking (80% -> 50% chance to not consume durability)
 * Leather, Copper and Chainmail armor durability has been increased
 * Increased Iron tools durability by 50%
+* Adjusted Necromium stats
+  * Increased % attack speed (-20% -> -15%)
+  * Increased % damage (-10% -> -5%)
+  * Lowered base attack damage (6 -> 5)
 
 ## 4.14.7
 ### Changes
