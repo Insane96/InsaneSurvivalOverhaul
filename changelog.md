@@ -2,6 +2,8 @@
 
 * Replace vanilla fishing rods with iron_fishing_rod
 * tide fishes drop rates
+* reduce flint and steel durability
+* reduce plum nutrition
 
 ## Upcoming
 ### Addition
