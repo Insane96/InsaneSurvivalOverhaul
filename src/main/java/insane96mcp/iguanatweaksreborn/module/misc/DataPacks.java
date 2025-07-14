@@ -80,6 +80,8 @@ public class DataPacks extends Feature {
     public static Boolean autumnity = false;
     @Config(description = "Integrates the mod with Caverns & Chasms. Slightly alters ore generation and adds item stats.")
     public static Boolean cavernsAndChasms = false;
+    @Config(description = "Integrates the mod with Tide. Lowers chance for fishes to drop fish.")
+    public static Boolean tide = false;
     @Config(description = "Integrates the mod with Crate. Alters ore generation.")
     public static Boolean create = false;
     @Config(description = "Integrates the mod with Tinker's Construct. Disables vanilla items. Changes some stats and adds modifiers")
@@ -108,6 +110,7 @@ public class DataPacks extends Feature {
         InsaneSO.addServerPack("autumnity_integration", "Insane's Survival Overhaul Autumnity Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity"));
         InsaneSO.addServerPack("farmers_delight_integration", "Insane's Survival Overhaul Farmer's Delight Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight"));
         InsaneSO.addServerPack(1, "caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
+        InsaneSO.addServerPack(1, "tide_integration", "Insane's Survival Overhaul Tide Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tide && ModList.get().isLoaded("tide"));
         InsaneSO.addServerPack(1, "create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && create && ModList.get().isLoaded("create"));
         InsaneSO.addServerPack(1, "tconstruct_integration", "Insane's Survival Overhaul Tinkers' Construct Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tinkersConstruct);
 

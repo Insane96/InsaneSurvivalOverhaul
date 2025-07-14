@@ -1,7 +1,6 @@
 # Changelog
 
 * Replace vanilla fishing rods with iron_fishing_rod
-* tide fishes drop rates
 * reduce plum nutrition
 * can't transform fertilized soil to dirt
 
@@ -9,6 +8,8 @@
 ### Addition
 * Simple clouds integration with Tiredness (disabled by default)
   * If enabled, thunderous clouds will no longer be removed on sleep and clouds will be fast forwarded
+* Tide integration data pack (disabled by default)
+  * If enabled, will change fish entities to only have a chance to drop the fish
 
 ### Changes
 * Minor rework to wooden equipment
