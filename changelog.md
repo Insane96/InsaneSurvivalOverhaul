@@ -1,9 +1,6 @@
 # Changelog
 
-* reduce plum nutrition
-* can't transform fertilized soil to dirt
-
-## Upcoming
+## 4.15.0
 ### Addition
 * Simple clouds integration with Tiredness (disabled by default)
   * If enabled, thunderous clouds will no longer be removed on sleep and clouds will be fast forwarded
