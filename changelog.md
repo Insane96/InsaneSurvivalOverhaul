@@ -1,6 +1,5 @@
 # Changelog
 
-* Replace vanilla fishing rods with iron_fishing_rod
 * reduce plum nutrition
 * can't transform fertilized soil to dirt
 
@@ -30,6 +29,7 @@
   * Lowered copper shield durability
   * Lowered flint and wooden shield time blocked
 * `iguanatweaksreborn:replace_loot` modifier now also keeps nbt tag of the item
+* Lowered environmental plum nutrition
 
 ### Fixes
 * Missing copper equipment repair

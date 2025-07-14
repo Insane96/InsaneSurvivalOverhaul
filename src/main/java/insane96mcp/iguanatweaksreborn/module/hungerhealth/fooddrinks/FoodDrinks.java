@@ -89,7 +89,8 @@ public class FoodDrinks extends JsonFeature {
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).nutrition(5).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("buzzier_bees:honey_bread")).nutrition(5).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:pumpkin_slice")).nutrition(2).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("tide:cooked_fish")).nutrition(5).build()
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("tide:cooked_fish")).nutrition(5).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("environmental:plum")).nutrition(3).build()
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();
 
