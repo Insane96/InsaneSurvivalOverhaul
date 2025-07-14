@@ -2,8 +2,8 @@
 
 * Replace vanilla fishing rods with iron_fishing_rod
 * tide fishes drop rates
-* reduce flint and steel durability
 * reduce plum nutrition
+* can't transform fertilized soil to dirt
 
 ## Upcoming
 ### Addition
@@ -20,6 +20,7 @@
 * Leather, Copper and Chainmail armor durability has been increased
 * Increased Iron tools durability by 35%
 * Increased shears durability
+* Reduced flint and steel durability
 * Adjusted Necromium stats
   * Increased % attack speed (-20% -> -15%)
   * Increased % damage (-10% -> -5%)
