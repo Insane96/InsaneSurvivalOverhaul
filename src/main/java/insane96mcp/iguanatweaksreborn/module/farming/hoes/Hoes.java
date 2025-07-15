@@ -81,7 +81,7 @@ public class Hoes extends Feature {
 				|| event.getState().destroySpeed > 0f
 				|| !event.getState().is(CAN_SCYTHE))
 			return;
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
 			if (!itemDefinition.matches(event.getPlayer().getMainHandItem())
 					|| itemDefinition.scytheRadius() == null)
 				continue;
@@ -114,7 +114,7 @@ public class Hoes extends Feature {
 			event.getToolTip().add(Component.translatable(TOO_WEAK).withStyle(ChatFormatting.RED));
 		}
 		else {
-			for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
+			for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
 				if (!itemDefinition.matches(event.getItemStack().getItem()))
 					continue;
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Possible ConcurrentModificationException with Item Definitions
+
 ## 4.15.0
 ### Addition
 * Simple clouds integration with Tiredness (disabled by default)

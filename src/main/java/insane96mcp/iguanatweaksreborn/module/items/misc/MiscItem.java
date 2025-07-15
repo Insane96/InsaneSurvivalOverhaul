@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
@@ -34,16 +33,12 @@ public class MiscItem extends Feature {
 	@Config(description = "If enabled items in the iguanatweaksreborn:has_tooltip item tag will get a tooltip with the vanilla name + .tooltip (e.g. item.minecraft.arrow.tooltip)")
 	public static Boolean itemTooltips = true;
 
-	public MiscItem(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
-
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onAttributeEvent(ItemAttributeModifierEvent event) {
 		if (!this.isEnabled())
 			return;
 
-		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.getDefinitions()) {
+		for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS) {
 			itemDefinition.applyAttributes(event, event.getItemStack(), event.getModifiers());
 		}
 	}
