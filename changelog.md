@@ -10,6 +10,7 @@
 
 ### Fixes
 * Possible ConcurrentModificationException with Item Definitions
+* With experience disabled the jump bar of mounts is no longer hidden
 
 ## 4.15.0
 ### Addition

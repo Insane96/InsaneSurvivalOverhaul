@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -21,7 +22,7 @@ public abstract class VanillaGuiOverlayMixin {
 		if (!Misc.fixMountsGui())
 			return original.call(left, right);
 		//noinspection DataFlowIssue
-		return original.call(left, right) && gui.getMinecraft().player.getJumpRidingScale() > 0;
+		return original.call(left, right) && (gui.getMinecraft().player.getJumpRidingScale() > 0 || DroppedExperience.disableExperience);
 	}
 
 	@Definition(id = "gui", local = @Local(type = ForgeGui.class, argsOnly = true))
