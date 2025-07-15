@@ -65,8 +65,8 @@ public class Tweaks extends Feature {
     public static ResourceLocation TICK_SINCE_OUT_OF_WATER;
     public static ResourceLocation TIMES_DROWNED;
 
-    public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("iguanatweaks:painful_world_border", GameRules.Category.MISC, GameRules.IntegerValue.create(0));
-    public static final GameRules.Key<GameRules.BooleanValue> RULE_DISCRETE_NAME_TAGS = GameRules.register("iguanatweaks:discrete_name_tags", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
+    public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("iguanatweaks:painfulWorldBorder", GameRules.Category.MISC, GameRules.IntegerValue.create(0));
+    public static final GameRules.Key<GameRules.BooleanValue> RULE_DISCRETE_NAME_TAGS = GameRules.register("iguanatweaks:discreteNameTags", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
         for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
             SyncDiscreteNameTags.sync(booleanValue.get(), serverPlayer);
         }
