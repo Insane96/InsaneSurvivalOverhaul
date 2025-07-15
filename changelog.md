@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Clearer description for Weighted Armor and Regenerating Absorption
+* Increased despawn time of items from graves (2m -> 3m)
 
 ### Fixes
 * Possible ConcurrentModificationException with Item Definitions

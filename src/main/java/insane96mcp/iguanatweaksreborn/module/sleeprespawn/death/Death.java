@@ -78,15 +78,15 @@ public class Death extends Feature {
 	@Config(description = "If true, graves will be placed even if the player has no items/xp.")
 	public static Boolean summonGraveEvenWithNoItems = true;
 	@Config(description = "In how many ticks will items despawn after dropping from a grave.")
-	public static Integer despawnTime = 2400;
+	public static Integer despawnTime = 3600;
 
 	@Config(description = "If true, players can crouch right-click to take items from graves. Experience still requires breaking the grave.")
 	public static Boolean crouchTakeItems = false;
 	@Config(description = "If true, only players that generated the grave can crouch right-click to take items from graves.")
 	public static Boolean crouchTakeItemsOnlyOwner = false;
 
-	public Death(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		KILLED_PLAYER = this.createDataKey("killed_player");
 	}
 
