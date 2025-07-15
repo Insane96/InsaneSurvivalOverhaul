@@ -6,6 +6,7 @@
 * Increased despawn time of items from graves (2m -> 3m)
 * Lowered chance for animals to auto breed
 * Painful world border and descrete name tags gamerules names are now the same as other gamerules (e.g. `iguanatweaks:discrete_name_tags` -> `iguanatweaks:discreteNameTags`)
+* Ground flint is now slightly more common
 
 ### Fixes
 * Possible ConcurrentModificationException with Item Definitions
