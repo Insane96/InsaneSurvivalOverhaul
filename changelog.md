@@ -4,6 +4,7 @@
 ### Changes
 * Clearer description for Weighted Armor and Regenerating Absorption
 * Increased despawn time of items from graves (2m -> 3m)
+* Lowered chance for animals to auto breed
 
 ### Fixes
 * Possible ConcurrentModificationException with Item Definitions

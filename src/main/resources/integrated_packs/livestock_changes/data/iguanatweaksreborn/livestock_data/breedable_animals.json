@@ -85,7 +85,7 @@
     "auto_breed_chance_modifiers": [
         {
             "id": "iguanatweaksreborn:true",
-            "modifier": 0.02,
+            "modifier": 0.015,
             "operation": "add"
         },
         {
