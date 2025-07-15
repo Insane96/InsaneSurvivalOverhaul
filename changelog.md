@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Clearer description for Weighted Armor and Regenerating Absorption
+
 ### Fixes
 * Possible ConcurrentModificationException with Item Definitions
 

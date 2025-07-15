@@ -42,7 +42,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 
-@LoadFeature(module = Modules.Ids.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player.")
+@LoadFeature(module = Modules.Ids.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player. Please note that default mods' regenerating absorption is done through item definitions within the combat_rework data pack, disabling this will only disable the regenerating absorption functionality.")
 public class RegeneratingAbsorption extends Feature {
 
     public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/absorption.png");

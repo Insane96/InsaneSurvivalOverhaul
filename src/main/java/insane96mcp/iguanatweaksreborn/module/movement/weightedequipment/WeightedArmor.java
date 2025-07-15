@@ -36,7 +36,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false, description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. If you need custom armor slowdown, use item definitions")
+@LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false, description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. Please note that default mods' armor slowdown is done through item definitions within the combat_rework data pack")
 public class WeightedArmor extends JsonFeature {
     public static final String ARMOR_SLOWDOWN = InsaneSO.MOD_ID + ".armor_slowdown";
     public static final UUID ARMOR_SLOWDOWN_UUID = UUID.fromString("8588420e-ce50-4e4e-a3e4-974dfc8a98ec");
