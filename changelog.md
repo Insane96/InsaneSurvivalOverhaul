@@ -1,7 +1,5 @@
 # Changelog
 
-* Can't enchant through books
-
 ## Upcoming
 ### Additions
 * Plants growth/death can now make grass become flowers
@@ -10,6 +8,7 @@
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
 * Grass now grows more commonly in spring than summer
+* Reduced deepers explosion damage and knockback, but increased block damage
 
 ### Fixes
 * Plants growth/death was ticking twice as often
