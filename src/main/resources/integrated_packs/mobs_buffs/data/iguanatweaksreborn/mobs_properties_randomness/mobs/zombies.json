@@ -13,13 +13,6 @@
         },
         {
             "property": "attribute_modifier",
-            "attribute": "minecraft:generic.attack_damage",
-            "modifier_name": "Attack damage nerf for zombies",
-            "amount": -0.2,
-            "operation": "multiply_total"
-        },
-        {
-            "property": "attribute_modifier",
             "attribute": "minecraft:generic.attack_speed",
             "modifier_name": "Attack speed nerf for zombies",
             "amount": -0.5,

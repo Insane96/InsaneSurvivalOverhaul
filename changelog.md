@@ -1,5 +1,11 @@
 # Changelog
 
+* Can't enchant through books
+
+## Upcoming
+* `mobs_buffs` data pack
+  * Removed damage nerf to zombies
+
 ## 4.15.1
 ### Changes
 * Clearer description for Weighted Armor and Regenerating Absorption
