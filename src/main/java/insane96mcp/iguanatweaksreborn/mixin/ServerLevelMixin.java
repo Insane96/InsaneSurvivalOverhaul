@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
-import insane96mcp.insanelib.base.Feature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -43,7 +42,7 @@ public abstract class ServerLevelMixin extends Level {
     @WrapOperation(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;isRandomlyTicking()Z"))
     public boolean iguanatweaksreborn$randomTickBlock(BlockState state, Operation<Boolean> original, @Local(name = "blockpos3") BlockPos pos, @Local ProfilerFiller profiler) {
         if (!ModList.get().isLoaded("sereneseasons")
-                || !Feature.get(Seasons.class).isEnabled())
+                || !this.getGameRules().getBoolean(Seasons.RULE_SEASONGRASSGROWDEATH))
             return original.call(state);
         profiler.push("iguanatweaksreborn:seasons");
         Seasons.tickPlantLifeDeath(state, pos, (ServerLevel) (Object) this);

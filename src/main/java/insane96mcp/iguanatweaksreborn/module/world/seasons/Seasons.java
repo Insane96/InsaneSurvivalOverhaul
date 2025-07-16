@@ -46,7 +46,7 @@ import sereneseasons.season.SeasonTime;
 import java.util.List;
 import java.util.Optional;
 
-@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons", enabledByDefault = false)
+@LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons. Grass and tall grass decays in Winter and regrows back in Spring. Saplings are also transformed into Dead Bushes. This can be disabled with the iguanatweaks:doSeasonGrassGrowDeath game rule", enabledByDefault = false)
 public class Seasons extends Feature {
 
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_SEASONGRASSGROWDEATH = GameRules.register("iguanatweaks:doSeasonGrassGrowDeath", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
@@ -65,9 +65,6 @@ public class Seasons extends Feature {
 
 	@Config(description = "Saplings no longer drop in Winter.")
 	public static Boolean noSaplingsInWinter = true;
-
-	@Config(description = "Grass and tall grass decays in Winter and regrows back in Spring. Saplings are also transformed into Dead Bushes.")
-	public static Boolean grassDecayAndGrowth = true;
 
 	@Config(description = "Has no effect if 'Serene Seasons changes' is disabled")
 	public static Season.SubSeason startingSeason = Season.SubSeason.EARLY_SUMMER;
