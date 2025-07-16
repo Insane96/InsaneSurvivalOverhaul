@@ -9,6 +9,7 @@
 ### Changes
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
+* Grass now grows more commonly in spring than summer
 
 ### Fixes
 * Plants growth/death was ticking twice as often
