@@ -3,6 +3,9 @@
 * Can't enchant through books
 
 ## Upcoming
+### Additions
+* Plants growth/death can now make grass become flowers
+
 ### Changes
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
