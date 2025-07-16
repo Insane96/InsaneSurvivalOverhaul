@@ -3,8 +3,12 @@
 * Can't enchant through books
 
 ## Upcoming
+### Changes
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
+
+### Fixes
+* Plants growth/death was ticking twice as often
 
 ## 4.15.1
 ### Changes
