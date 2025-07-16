@@ -184,12 +184,12 @@ public class Seasons extends Feature {
 	record ChunkAndHolder(LevelChunk chunk, ChunkHolder holder) {}
 
 	public static final List<GrassTickingData> GRASS_TICKING_DATA = List.of(
-			new GrassTickingData(Season.SubSeason.EARLY_SPRING, 275, GrassTickingType.GROW, 12, false, true),
-			new GrassTickingData(Season.SubSeason.MID_SPRING, 275, GrassTickingType.GROW, 12, false, true),
-			new GrassTickingData(Season.SubSeason.LATE_SPRING, 275, GrassTickingType.GROW, 10, false, true),
-			new GrassTickingData(Season.SubSeason.EARLY_SUMMER, 550, GrassTickingType.GROW, 8, true, true),
-			new GrassTickingData(Season.SubSeason.MID_SUMMER, 1100, GrassTickingType.GROW, 7, true, false),
-			new GrassTickingData(Season.SubSeason.LATE_SUMMER, 1100, GrassTickingType.GROW, 7, true, false),
+			new GrassTickingData(Season.SubSeason.EARLY_SPRING, 275, GrassTickingType.GROW, 7, false, true),
+			new GrassTickingData(Season.SubSeason.MID_SPRING, 275, GrassTickingType.GROW, 7, false, true),
+			new GrassTickingData(Season.SubSeason.LATE_SPRING, 275, GrassTickingType.GROW, 8, false, true),
+			new GrassTickingData(Season.SubSeason.EARLY_SUMMER, 550, GrassTickingType.GROW, 10, true, true),
+			new GrassTickingData(Season.SubSeason.MID_SUMMER, 1100, GrassTickingType.GROW, 12, true, false),
+			new GrassTickingData(Season.SubSeason.LATE_SUMMER, 1100, GrassTickingType.GROW, 12, true, false),
 			new GrassTickingData(Season.SubSeason.EARLY_AUTUMN, 2000, GrassTickingType.DECAY, 0, false, false),
 			new GrassTickingData(Season.SubSeason.MID_AUTUMN, 1000, GrassTickingType.DECAY, 0, false, false),
 			new GrassTickingData(Season.SubSeason.LATE_AUTUMN, 500, GrassTickingType.DECAY, 0, false, false),
