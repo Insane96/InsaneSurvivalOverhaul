@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "iguanatweaksexpanded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "MCM",
+          " M "
+        ],
+        "key": {
+          "M": {
+            "item": "iguanatweaksexpanded:durium_ingot"
+          },
+          "C": {
+            "item": "minecraft:amethyst_shard"
+          }
+        },
+        "result": {
+          "item": "iguanatweaksreborn:repair_kit",
+          "nbt": "{repair_material:\"iguanatweaksexpanded:durium_ingot\",color:1333871}"
+        }
+      }
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
+import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.world.Berries;
@@ -101,6 +102,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         withExistingParent("charcoal_layer", InsaneSO.location("block/charcoal_layer/height_2"));
         basicItem(CoalFire.FIRESTARTER.get());
         basicItem(CoalFire.HELLISH_COAL.get());
+
+        basicItem(RepairKits.ITEM.get());
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)

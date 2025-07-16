@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -57,6 +58,7 @@ public class ISORegistries {
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = createRegistry(ForgeRegistries.ENCHANTMENTS);
 	public static final DeferredRegister<MobEffect> MOB_EFFECTS = createRegistry(ForgeRegistries.MOB_EFFECTS);
 	public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(ForgeRegistries.POI_TYPES);
+	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = createRegistry(ForgeRegistries.RECIPE_SERIALIZERS);
 
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(ForgeRegistries.SOUND_EVENTS);
 	public static final RegistryObject<SoundEvent> UNFAIR_ONE_SHOT = SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("unfair_one_shot"), 16f));

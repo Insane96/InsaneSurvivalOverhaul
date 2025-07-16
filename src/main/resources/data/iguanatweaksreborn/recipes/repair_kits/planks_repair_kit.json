@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MCM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "iguanatweaksreborn:repair_kit",
+    "nbt": "{repair_material:\"minecraft:oak_planks\",color:12096607}"
+  }
+}

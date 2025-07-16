@@ -1,0 +1,16 @@
+"#minecraft:planks", "minecraft:oak_planks", 184, 148, 95
+"minecraft:flint", "minecraft:flint", 61, 60, 60
+"minecraft:copper_ingot", "minecraft:copper_ingot", 209, 104, 69
+"minecraft:gold_ingot", "minecraft:gold_ingot", 253, 245, 95
+"minecraft:iron_ingot", "minecraft:iron_ingot", 216, 216, 216
+"iguanatweaksexpanded:solarium_ball", "iguanatweaksexpanded:solarium_ball", 164, 162, 10, requires_mod: "iguanatweaksexpanded"
+"iguanatweaksexpanded:durium_ingot", "iguanatweaksexpanded:durium_ingot", 20, 90, 111, requires_mod: "iguanatweaksexpanded"
+"minecraft:obsidian", "minecraft:obsidian", 26, 19, 47
+"iguanatweaksexpanded:keego_gem", "iguanatweaksexpanded:keego_gem", 0, 133, 213, requires_mod: "iguanatweaksexpanded"
+"iguanatweaksexpanded:quaron_ingot", "iguanatweaksexpanded:quaron_ingot", 227, 190, 255, requires_mod: "iguanatweaksexpanded"
+"minecraft:diamond", "minecraft:diamond", 161, 251, 232
+"iguanatweaksexpanded:soul_steel_ingot", "iguanatweaksexpanded:soul_steel_ingot", 73, 55, 44, requires_mod: "iguanatweaksexpanded"
+"minecraft:netherite_ingot", "minecraft:netherite_ingot", 76, 65, 67
+"caverns_and_chasms:silver_ingot", "caverns_and_chasms:silver_ingot", 206, 213, 229, requires_mod: "caverns_and_chasms"
+"caverns_and_chasms:necromium_ingot", "caverns_and_chasms:necromium_ingot", 176, 189, 182, requires_mod: "caverns_and_chasms"
+"caverns_and_chasms:living_flesh", "caverns_and_chasms:living_flesh", 152, 136, 139, requires_mod: "caverns_and_chasms"

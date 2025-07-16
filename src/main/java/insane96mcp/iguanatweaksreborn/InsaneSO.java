@@ -128,6 +128,7 @@ public class InsaneSO
         if (FMLLoader.getDist().isClient()) {
             modEventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
             modEventBus.addListener(ClientSetup::registerEntityRenderers);
+            modEventBus.addListener(ClientSetup::registerItemColorHandlers);
             //modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
             //modEventBus.addListener(ClientSetup::registerParticleFactories);
         }

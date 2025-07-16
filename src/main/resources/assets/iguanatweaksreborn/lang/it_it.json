@@ -137,6 +137,9 @@
 	"item.iguanatweaksreborn.copper_hoe": "Zappa di rame",
 	"item.iguanatweaksreborn.copper_shield": "Scudo di rame",
 
+	"item.iguanatweaksreborn.repair_kit": "Kit di riparazione di %s",
+	"emi.info.iguanatweaksreborn.repair_kit": "Può essere utilizzato per riparare oggetti nella griglia di fabbricazione, come in un incudine.",
+
 
 	"iguanatweaksreborn:mining_module": "Estrazione",
 

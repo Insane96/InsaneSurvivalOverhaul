@@ -3,12 +3,15 @@
 ## Upcoming
 ### Additions
 * Plants growth/death can now make grass become flowers
+* Added Repair Kits
+  * Crafted with materials and an amethyst shard can repair items in a crafting grid, at the cost of more material compared to an anvil
+  * This was mostly ported from ISE
 
 ### Changes
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
 * Grass now grows more commonly in spring than summer
-* Reduced deepers explosion damage and knockback, but increased block damage
+* Reduced Caverns and Chasms' Deepers explosion damage and knockback, but increased block damage
 
 ### Fixes
 * Plants growth/death was ticking twice as often
