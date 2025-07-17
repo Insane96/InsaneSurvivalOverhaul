@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Foxhounds now have a really high life span
+
 ## 4.16.0
 ### Additions
 * Plants growth/death can now make grass become flowers

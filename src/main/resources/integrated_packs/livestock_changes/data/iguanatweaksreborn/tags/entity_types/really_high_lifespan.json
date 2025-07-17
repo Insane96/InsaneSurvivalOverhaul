@@ -7,6 +7,10 @@
         {
             "required": false,
             "id": "quark:shiba"
+        },
+        {
+            "required": false,
+            "id": "quark:foxhound"
         }
     ]
 }
