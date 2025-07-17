@@ -6,6 +6,7 @@
 * Added Repair Kits
   * Crafted with materials and an amethyst shard can repair items in a crafting grid, at the cost of more material compared to an anvil
   * This was mostly ported from ISE
+* Actual redstone components support for Endergetic Expansion
 
 ### Changes
 * `mobs_buffs` data pack
