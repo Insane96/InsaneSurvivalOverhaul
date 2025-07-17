@@ -5,12 +5,12 @@
             "conditions": [
                 {
                     "type": "forge:mod_loaded",
-                    "modid": "caverns_and_chasms"
+                    "modid": "endergetic"
                 }
             ],
             "recipe": {
                 "type": "minecraft:crafting_shaped",
-                "category": "building",
+                "category": "misc",
                 "pattern": [
                     "CG",
                     "SE"
@@ -45,11 +45,11 @@
                         }
                     ],
                     "E": {
-                        "tag": "caverns_and_chasms:cupric_fire_base_blocks"
+                        "tag": "endergetic:ender_fire_base_blocks"
                     }
                 },
                 "result": {
-                    "item": "caverns_and_chasms:cupric_torch",
+                    "item": "endergetic:ender_torch",
                     "count": 4
                 }
             }
