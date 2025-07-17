@@ -23,8 +23,8 @@
                 },
                 "pattern": [
                     "SS#",
-                    "S##",
-                    "###"
+                    "S# ",
+                    "#  "
                 ],
                 "result": {
                     "item": "hangglider:glider_wing"

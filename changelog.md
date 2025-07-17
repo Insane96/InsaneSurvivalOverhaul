@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Foxhounds now have a really high life span
+* Lowered the amount of phantom membrane required to make and repair a hang glider
 
 ## 4.16.0
 ### Additions
