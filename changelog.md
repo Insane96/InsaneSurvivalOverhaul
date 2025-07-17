@@ -12,6 +12,7 @@
 * `mobs_buffs` data pack
   * Removed damage nerf to zombies
 * Grass now grows more commonly in spring than summer
+* Increased torches from crafting recipes
 * Reduced Caverns and Chasms' Deepers explosion damage and knockback, but increased block damage
 
 ### Fixes
