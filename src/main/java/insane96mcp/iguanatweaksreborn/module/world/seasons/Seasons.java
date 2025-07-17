@@ -78,6 +78,9 @@ public class Seasons extends Feature {
 	@Config
 	public static Boolean seasonBasedFishingTime = true;
 
+	@Config
+	public static Boolean growFlowersFromGrass = true;
+
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
@@ -166,7 +169,7 @@ public class Seasons extends Feature {
 			else if (state.is(Blocks.FERN))
 				DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 2);
 		}
-		else if (data.canGrowFlower
+		else if (growFlowersFromGrass && data.canGrowFlower
 				&& (state.is(Blocks.GRASS) || state.is(Blocks.FERN))
 				&& level.getRandom().nextInt(data.chance * 10) == 0) {
 			List<ConfiguredFeature<?, ?>> list = level.getBiome(pos).value().getGenerationSettings().getFlowerFeatures();
