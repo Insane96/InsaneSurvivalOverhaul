@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"entries": [
-		"iguanatweaksreborn:no_seeds_from_giant_tall_grass"
+		"iguanatweaksreborn:no_seeds_from_giant_tall_grass",
+		"iguanatweaksreborn:plums_only_in_summer"
 	]
 }

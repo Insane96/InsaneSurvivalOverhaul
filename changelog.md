@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Apples now only drop from leaves in Spring
+  * With Environmental integration, plums only drop in summer
 * Foxhounds now have a really high life span
 * Lowered the amount of phantom membrane required to make and repair a hang glider
 * Increased low tier materials durability
