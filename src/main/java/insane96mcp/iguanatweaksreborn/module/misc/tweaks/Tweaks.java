@@ -134,8 +134,8 @@ public class Tweaks extends Feature {
 
     public static boolean discreteNameTags = true;
 
-    public Tweaks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         WAS_BREATHING = this.createDataKey("was_breathing");
         TICK_SINCE_OUT_OF_WATER = this.createDataKey("tick_since_out_of_water");
         TIMES_DROWNED = this.createDataKey("times_drowned");
@@ -146,6 +146,10 @@ public class Tweaks extends Feature {
         super.readConfig(event);
         Blocks.WET_SPONGE.isRandomlyTicking = sponges$dryWetWeather;
         Blocks.SPONGE.isRandomlyTicking = sponges$dryWetWeather;
+    }
+
+    public static boolean doesBlindnessPreventSprint() {
+        return Feature.isEnabled(Tweaks.class)  && Tweaks.blindnessNoLongerPreventsSprinting;
     }
 
     public static boolean isFireImmune(Entity entity) {

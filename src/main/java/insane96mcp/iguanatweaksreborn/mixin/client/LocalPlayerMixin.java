@@ -55,11 +55,10 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
     @Expression("this.hasEffect(BLINDNESS)")
     @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public boolean insanesurvivaloverhaul$blindnessPreventSprint(boolean original) {
-        if (!Feature.isEnabled(Tweaks.class))
+        if (!Tweaks.doesBlindnessPreventSprint())
             return original;
 
-        //Inverted because the check is negated
-        return !Tweaks.blindnessNoLongerPreventsSprinting;
+        return false;
     }
 
     @Definition(id = "hasEffect", method = "Lnet/minecraft/client/player/LocalPlayer;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z")
@@ -67,10 +66,9 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
     @Expression("this.hasEffect(BLINDNESS)")
     @ModifyExpressionValue(method = "aiStep", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public boolean insanesurvivaloverhaul$blindnessPreventSprint2(boolean original) {
-        if (!Feature.isEnabled(Tweaks.class))
+        if (!Tweaks.doesBlindnessPreventSprint())
             return original;
 
-        //Inverted because the check is negated
-        return !Tweaks.blindnessNoLongerPreventsSprinting;
+        return false;
     }
 }

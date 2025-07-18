@@ -6,6 +6,9 @@
 * Lowered the amount of phantom membrane required to make and repair a hang glider
 * Increased low tier materials durability
 
+### Fixes
+* 'Blindness prevents sprinting' disabled prevents sprinting altogether
+
 ## 4.16.0
 ### Additions
 * Plants growth/death can now make grass become flowers
