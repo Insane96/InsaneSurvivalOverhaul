@@ -13,6 +13,7 @@
   * Golden tools (49 -> 64)
   * Silver Tools (157 -> 207)
 * The config option to replace the loot bonus enchantments has been split from setting the max level to 1
+* Increased the threshold at which colliding with walls deals damage
 
 ### Fixes
 * 'Blindness prevents sprinting' disabled prevents sprinting altogether

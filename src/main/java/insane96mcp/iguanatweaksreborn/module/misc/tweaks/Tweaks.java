@@ -118,7 +118,7 @@ public class Tweaks extends Feature {
     public static Double splashPotionThrowStrength = 0.8d;
 
     @Config(min = 0, description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable. Please note that even if set to 0, might still show up in performance profilers.")
-    public static Double collideWithWallsDamage = 2.5d;
+    public static Double collideWithWallsDamage = 3d;
 
     @Config(min = 0, description = "Vanilla is 10")
     public static Double leashMaxDistance = 16d;
@@ -371,8 +371,8 @@ public class Tweaks extends Feature {
         Vec3 originalResult = originalOperation.call(living, pTravelVector, pFriction);
         if (living.horizontalCollision && !living.level().isClientSide) {
             double length = horizontalDistance - living.getDeltaMovement().horizontalDistance();
-            if (length > 0.5f) {
-                living.hurt(living.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.5f) * collideWithWallsDamage));
+            if (length > 0.6f) {
+                living.hurt(living.damageSources().source(Tweaks.COLLIDE_WITH_WALL, null), (float) ((length - 0.6f) * collideWithWallsDamage));
 
                 if (!living.level().isClientSide) {
                     double x = living.getX();
