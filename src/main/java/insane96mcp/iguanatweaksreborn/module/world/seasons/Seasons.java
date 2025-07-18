@@ -63,8 +63,11 @@ public class Seasons extends Feature {
 	@Config(description = "Removes greenhouse glass.")
 	public static Boolean noGreenHouseGlass = true;
 
-	@Config(description = "Saplings no longer drop in Winter.")
-	public static Boolean noSaplingsInWinter = true;
+	@Config(description = """
+            Changes what leaves can drop in different seasons.
+            Sapling no longer drop in winter
+            Apples only drop in spring""")
+	public static Boolean leavesDrops = true;
 
 	@Config(description = "Has no effect if 'Serene Seasons changes' is disabled")
 	public static Season.SubSeason startingSeason = Season.SubSeason.EARLY_SUMMER;
@@ -84,7 +87,7 @@ public class Seasons extends Feature {
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
-		InsaneSO.addServerPack("no_saplings_in_winter", "Insane's Survival Overhaul No Saplings in Winter", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noSaplingsInWinter);
+		InsaneSO.addServerPack("leaves_drops", "Insane's Survival Overhaul Leaves Drops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && leavesDrops);
 		if (ModList.get().isLoaded("tide"))
 			MinecraftForge.EVENT_BUS.addListener(Seasons::shouldTideSlowdownFishing);
 	}
