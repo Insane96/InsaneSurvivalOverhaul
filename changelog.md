@@ -5,6 +5,7 @@
 * Foxhounds now have a really high life span
 * Lowered the amount of phantom membrane required to make and repair a hang glider
 * Increased low tier materials durability
+* The config option to replace the loot bonus enchantments has been split from setting the max level to 1
 
 ### Fixes
 * 'Blindness prevents sprinting' disabled prevents sprinting altogether

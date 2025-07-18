@@ -116,8 +116,10 @@ public class EnchantmentsFeature extends JsonFeature {
             Smite deals +1 damage per level to undead and applies weakness
             Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
 	public static Boolean replaceDamagingEnchantments = true;
-	@Config(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single level one: Luck. Luck works like Fortune/Looting/LoTS II. To re-enable vanilla enchantments refer to `disabled_enchantments.json`. Requires a Minecraft restart")
+	@Config(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single one: Luck. Requires a Minecraft restart")
 	public static Boolean reworkBonusLootEnchantments = true;
+	@Config(description = "If true, Luck will only have one level, working like Fortune/Looting/LoTS II.")
+	public static Boolean luckOneLevelOnly = true;
 	@Config(description = "If true, vanilla fire aspect and knockback are replaced with mod's ones. To re-enable vanilla enchantments refer to `disabled_enchantments.json`.")
 	public static Boolean replaceOtherEnchantments = true;
 
@@ -372,6 +374,7 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public static int getLuckLevel(int original, int luckLvl) {
 		if (!isBonusLootEnchantmentReworkEnabled()
+				|| !isLuckOneLevelOnly()
 				|| luckLvl == 0)
 			return original;
 		return 2;
@@ -381,12 +384,17 @@ public class EnchantmentsFeature extends JsonFeature {
 		int luckLvl = EnchantmentHelper.getTagEnchantmentLevel(EnchantmentsFeature.LUCK.get(), stack);
 		if (luckLvl <= 0)
 			return original;
-		return 2;
+		return isLuckOneLevelOnly() ? 2 : luckLvl;
 	}
 
 	public static boolean isBonusLootEnchantmentReworkEnabled() {
 		return Feature.isEnabled(EnchantmentsFeature.class)
 				&& reworkBonusLootEnchantments;
+	}
+
+	public static boolean isLuckOneLevelOnly() {
+		return Feature.isEnabled(EnchantmentsFeature.class)
+				&& luckOneLevelOnly;
 	}
 
 	public static int getEnchantmentValue(ItemStack stack, Operation<Integer> original) {

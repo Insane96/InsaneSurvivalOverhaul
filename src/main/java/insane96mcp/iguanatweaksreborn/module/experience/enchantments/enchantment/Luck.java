@@ -21,7 +21,7 @@ public class Luck extends LootBonusEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return EnchantmentsFeature.isLuckOneLevelOnly() ? 1 : 3;
     }
 
     @Override
