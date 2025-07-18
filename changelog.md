@@ -6,6 +6,11 @@
 * Foxhounds now have a really high life span
 * Lowered the amount of phantom membrane required to make and repair a hang glider
 * Increased low tier materials durability
+  * Wooden tools (108 -> 128)
+  * Flint tools (63 -> 99)
+  * Copper tools (101 -> 109)
+  * Golden tools (49 -> 64)
+  * Silver Tools (157 -> 207)
 * The config option to replace the loot bonus enchantments has been split from setting the max level to 1
 
 ### Fixes
