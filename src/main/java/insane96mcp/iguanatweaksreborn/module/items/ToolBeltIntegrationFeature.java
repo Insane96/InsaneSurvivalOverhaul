@@ -5,6 +5,7 @@ import dev.gigaherz.toolbelt.belt.ToolBeltItem;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
+import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -24,8 +25,8 @@ public class ToolBeltIntegrationFeature extends Feature {
 	@Config(description = "Reduces cost to apply pouches to tool belts")
 	public static Boolean reduceUpgradeCost = true;
 
-	public ToolBeltIntegrationFeature(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt);
 	}
 
@@ -43,7 +44,7 @@ public class ToolBeltIntegrationFeature extends Feature {
 			return;
 
 		int slots = ToolBeltItem.getSlotsCount(event.getLeft()) - 4;
-		if (slots < 0)
+		if (slots < 0 || DroppedExperience.disableExperience)
 			event.setCost(0);
 		else
 			event.setCost(ToolBeltItem.xpCost[slots]);

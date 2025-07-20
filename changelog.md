@@ -3,6 +3,7 @@
 ## Upcoming
 ### Fixes
 * Bamboo growing out of season
+* Tool belt upgrade costing experience if disabled
 
 ## 4.17.0
 ### Changes
