@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Bamboo growing out of season
+
 ## 4.17.0
 ### Changes
 * Reworked Json Trades 

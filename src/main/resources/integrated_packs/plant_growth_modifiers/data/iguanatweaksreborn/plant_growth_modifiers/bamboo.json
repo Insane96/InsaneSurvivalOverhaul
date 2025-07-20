@@ -1,5 +1,5 @@
 {
-    "block": "minecraft:bamboo",
+    "block": "#iguanatweaksreborn:bamboo",
     "growth_multiplier": 3,
     "modifiers": [
         {
