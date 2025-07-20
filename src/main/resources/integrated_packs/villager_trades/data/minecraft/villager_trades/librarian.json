@@ -4,16 +4,20 @@
         "remove": true,
         "trades": [
             {
-                "item_a": "minecraft:paper",
-                "item_a_count": 24,
-                "item_result": "minecraft:emerald",
+                "item_a": {
+                    "item": "minecraft:paper",
+                    "count": 24
+                },
+                "result": "minecraft:emerald",
                 "max_uses": 16,
                 "xp": 2
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 9,
-                "item_result": "minecraft:bookshelf",
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 9
+                },
+                "result": "minecraft:bookshelf",
                 "max_uses": 12,
                 "xp": 1
             }
@@ -24,23 +28,27 @@
         "remove": true,
         "trades": [
             {
-                "item_a": "minecraft:book",
-                "item_a_count": 4,
-                "item_result": "minecraft:emerald",
+                "item_a": {
+                    "item": "minecraft:book",
+                    "count": 4
+                },
+                "result": "minecraft:emerald",
                 "max_uses": 12,
                 "xp": 10
             },
             {
                 "item_a": "minecraft:emerald",
-                "item_result": "minecraft:lantern",
+                "result": "minecraft:lantern",
                 "max_uses": 12,
                 "xp": 5
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 10,
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 10
+                },
                 "item_b": "minecraft:book",
-                "item_result": "minecraft:book",
+                "result": "minecraft:book",
                 "enchant_randomly": {
                     "min_levels": 1,
                     "max_levels": 5,
@@ -56,24 +64,30 @@
         "remove": true,
         "trades": [
             {
-                "item_a": "minecraft:ink_sac",
-                "item_a_count": 5,
-                "item_result": "minecraft:emerald",
+                "item_a": {
+                    "item": "minecraft:ink_sac",
+                    "count": 5
+                },
+                "result": "minecraft:emerald",
                 "max_uses": 8,
                 "xp": 20
             },
             {
                 "item_a": "minecraft:emerald",
-                "item_result": "minecraft:glass",
-                "item_result_count": 4,
+                "result": {
+                    "item": "minecraft:glass",
+                    "count": 4
+                },
                 "max_uses": 8,
                 "xp": 10
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 20,
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 20
+                },
                 "item_b": "minecraft:book",
-                "item_result": "minecraft:book",
+                "result": "minecraft:book",
                 "enchant_randomly": {
                     "min_levels": 5,
                     "max_levels": 10,
@@ -90,30 +104,35 @@
         "trades": [
             {
                 "item_a": "minecraft:writable_book",
-                "item_b": "minecraft:writable_book",
-                "item_result": "minecraft:emerald",
+                "result": "minecraft:emerald",
                 "max_uses": 4,
                 "xp": 30
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 4,
-                "item_result": "minecraft:compass",
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 4
+                },
+                "result": "minecraft:compass",
                 "max_uses": 4,
                 "xp": 15
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 5,
-                "item_result": "minecraft:clock",
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 5
+                },
+                "result": "minecraft:clock",
                 "max_uses": 4,
                 "xp": 15
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 40,
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 40
+                },
                 "item_b": "minecraft:book",
-                "item_result": "minecraft:book",
+                "result": "minecraft:book",
                 "enchant_randomly": {
                     "min_levels": 10,
                     "max_levels": 20,
@@ -129,18 +148,24 @@
         "remove": true,
         "trades": [
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 20,
-                "item_result": "minecraft:name_tag",
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 20
+                },
+                "result": "minecraft:name_tag",
                 "max_uses": 1,
                 "xp": 30
             },
             {
-                "item_a": "minecraft:emerald",
-                "item_a_count": 40,
-                "item_b": "minecraft:emerald",
-                "item_b_count": 40,
-                "item_result": "minecraft:book",
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 40
+                },
+                "item_b": {
+                    "item": "minecraft:emerald",
+                    "count": 40
+                },
+                "result": "minecraft:book",
                 "enchant_randomly": {
                     "min_levels": 20,
                     "max_levels": 40,

@@ -1,16 +1,20 @@
 package insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.SerializableTrade;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.SerializableTrade.Count;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -38,67 +42,112 @@ public class WanderingTrades extends JsonFeature {
     public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("jungle_pyramid"));
     public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("igloo"));
 
+    public static final TagKey<Item> CORAL_BLOCKS = ISOItemTagsProvider.create("coral_blocks");
+
     public static final Supplier<ArrayList<SerializableTrade>> WANDERING_TRADER_GENERIC_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.WHEAT_SEEDS), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Crops.CARROT_SEEDS.get()), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Crops.ROOTED_POTATO.get()), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.BEETROOT_SEEDS), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.BROWN_MUSHROOM), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.RED_MUSHROOM), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.MELON), 2),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.PUMPKIN), 2),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.VINE), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.LILY_PAD, 2), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.POINTED_DRIPSTONE, 2), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 2), new ItemStack(Items.SEA_PICKLE), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.CACTUS), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.KELP), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.ACACIA_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.BIRCH_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.CHERRY_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.SPRUCE_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.OAK_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.DARK_OAK_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.JUNGLE_SAPLING), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.NAUTILUS_SHELL), 5),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.TROPICAL_FISH_BUCKET), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.PUFFERFISH_BUCKET), 4)
+            SerializableTrade.emeraldToItems(Count.ONE, Items.BROWN_MUSHROOM, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.RED_MUSHROOM, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.VINE, Count.of(3)).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.LILY_PAD, Count.of(5)).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.SUGAR_CANE, Count.ONE).setMaxUses(8),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.PUMPKIN, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.SMALL_DRIPLEAF, Count.of(2)).setMaxUses(5),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.MOSS_BLOCK, Count.ONE).setMaxUses(5),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.POINTED_DRIPSTONE, Count.of(2)).setMaxUses(5),
+
+            SerializableTrade.emeraldToItems(Count.of(2), Items.WHEAT_SEEDS, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(2), Crops.CARROT_SEEDS.get(), Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(2), Crops.ROOTED_POTATO.get(), Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(2), Items.BEETROOT_SEEDS, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(2), Items.SEA_PICKLE, Count.ONE).setMaxUses(3),
+            SerializableTrade.emeraldToItems(Count.of(2), Items.GLOWSTONE, Count.ONE).setMaxUses(5),
+
+            SerializableTrade.emeraldToItems(Count.of(3), Items.MELON, Count.ONE).setMaxUses(2),
+            SerializableTrade.emeraldToItems(Count.of(3), Items.PUMPKIN, Count.ONE).setMaxUses(2),
+            SerializableTrade.emeraldToItems(Count.of(3), Items.CACTUS, Count.ONE).setMaxUses(3),
+            SerializableTrade.emeraldToItems(Count.of(3), Items.KELP, Count.ONE).setMaxUses(3),
+            SerializableTrade.emeraldToItems(Count.of(3), Items.TROPICAL_FISH_BUCKET, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(3), Items.PUFFERFISH_BUCKET, Count.ONE).setMaxUses(4),
+
+            SerializableTrade.emeraldToItems(Count.of(4), Items.SLIME_BALL, Count.ONE).setMaxUses(5),
+
+            SerializableTrade.emeraldToItems(Count.of(5), ItemTags.SAPLINGS, Count.ONE).setMaxUses(8),
+            SerializableTrade.emeraldToItems(Count.of(5), Items.NAUTILUS_SHELL, Count.ONE).setMaxUses(5)
     ));
 
     public static final ArrayList<SerializableTrade> wanderingTraderGenericTrades = new ArrayList<>();
 
     public static final Supplier<ArrayList<SerializableTrade>> WANDERING_TRADER_RARE_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
-            new SerializableTrade(new ItemStack(Items.EMERALD, 9), new ItemStack(Items.BOOK), 1)
-                    .enchantResult(12, 22, true),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 3), new ItemStack(Items.BOOK), 1)
+            SerializableTrade.emeraldToItems(Count.ONE, Items.GUNPOWDER, Count.of(4)).setMaxUses(2),
+            SerializableTrade.emeraldToItems(Count.ONE, ItemTags.LOGS_THAT_BURN, Count.of(8)).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.ONE, Items.PACKED_ICE, Count.ONE).setMaxUses(6),
+
+            SerializableTrade.emeraldToItems(Count.of(3), Items.BOOK, Count.ONE)
                     .enchantResult(4, 8, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.GUNPOWDER, 4), 3),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.LILY_PAD, 5), 2),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 1), new ItemStack(Items.PACKED_ICE, 1), 6),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 6), new ItemStack(Items.EXPERIENCE_BOTTLE), 4),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.desert_pyramid")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(5), null)
+                    .setResult(new SerializableTrade.Stack(
+                            PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LONG_INVISIBILITY).getItem(), null, Count.ONE,
+                            PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LONG_INVISIBILITY).getTag()
+                    )),
+
+            SerializableTrade.emeraldToItems(Count.of(6), Items.EXPERIENCE_BOTTLE, Count.ONE).setMaxUses(4),
+            SerializableTrade.emeraldToItems(Count.of(6), Items.BLUE_ICE, Count.ONE).setMaxUses(6),
+
+            SerializableTrade.emeraldToItems(Count.of(9), Items.BOOK, Count.ONE)
+                    .enchantResult(12, 24, true),
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.desert_pyramid")))
                     .explorationMap(DESERT_TEMPLE_TAG, MapDecoration.Type.MANSION, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.jungle_pyramid")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.jungle_pyramid")))
                     .explorationMap(JUNGLE_PYRAMID_TAG, MapDecoration.Type.MANSION, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.igloo")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.igloo")))
                     .explorationMap(IGLOO_TAG, MapDecoration.Type.MANSION, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.trail_ruins")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.trail_ruins")))
                     .explorationMap(TRAIL_RUINS_TAG, MapDecoration.Type.TARGET_POINT, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.mansion")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.mansion")))
                     .explorationMap(StructureTags.ON_WOODLAND_EXPLORER_MAPS, MapDecoration.Type.MANSION, ExplorationMapFunction.DEFAULT_ZOOM, 100, false),
-            new SerializableTrade(new ItemStack(Items.EMERALD, 8), createStackWithName(Items.MAP, 1, Component.translatable("filled_map.monument")), 1)
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.monument")))
                     .explorationMap(StructureTags.ON_OCEAN_EXPLORER_MAPS, MapDecoration.Type.MONUMENT, ExplorationMapFunction.DEFAULT_ZOOM, 50, false)
-    ));
+            ));
 
     public static final ArrayList<SerializableTrade> wanderingTraderRareTrades = new ArrayList<>();
 
     public static final Supplier<ArrayList<SerializableTrade>> WANDERING_TRADER_BUYING_TRADES_DEFAULT = () -> new ArrayList<>(List.of(
-            new SerializableTrade(new ItemStack(Items.BAKED_POTATO, 4), new ItemStack(Items.EMERALD), 1),
-            new SerializableTrade(new ItemStack(Items.FERMENTED_SPIDER_EYE, 1), new ItemStack(Items.EMERALD, 3), 1),
-            new SerializableTrade(new ItemStack(Items.HAY_BLOCK, 1), new ItemStack(Items.EMERALD), 1),
-            new SerializableTrade(new ItemStack(Items.MILK_BUCKET, 1), new ItemStack(Items.EMERALD, 2), 1),
-            new SerializableTrade(PotionUtils.setPotion(new ItemStack(Items.POTION, 1), Potions.WATER), new ItemStack(Items.EMERALD), 1),
-            new SerializableTrade(new ItemStack(Items.WATER_BUCKET, 1), new ItemStack(Items.EMERALD, 2), 1)
+            SerializableTrade
+                    .itemToEmeralds(Items.BAKED_POTATO, Count.of(4), Count.ONE),
+            SerializableTrade
+                    .itemToEmeralds(Items.FERMENTED_SPIDER_EYE, Count.ONE, Count.of(3)),
+            SerializableTrade
+                    .itemToEmeralds(Items.HAY_BLOCK, Count.ONE, Count.ONE),
+            SerializableTrade
+                    .itemToEmeralds(Items.MILK_BUCKET, Count.ONE, Count.of(2)),
+            new SerializableTrade()
+                    .setItemA(new SerializableTrade.Stack(
+                            PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER).getItem(), null, Count.ONE,
+                            PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER).getTag()
+                    ))
+                    .setResult(Items.EMERALD, Count.ONE, null),
+            SerializableTrade
+                    .itemToEmeralds(Items.WATER_BUCKET, Count.ONE, Count.of(2))
     ));
 
     public static final ArrayList<SerializableTrade> wanderingTraderBuyingTrades = new ArrayList<>();
@@ -154,9 +203,9 @@ public class WanderingTrades extends JsonFeature {
         VillagerTrades.WANDERING_TRADER_TRADES.put(3, wanderingTraderBuyingTrades.toArray(new VillagerTrades.ItemListing[0]));
     }
 
-    public static ItemStack createStackWithName(Item item, int count, Component name) {
+    public static CompoundTag getHoverNameNBT(Item item, int count, Component name) {
         ItemStack stack = new ItemStack(item, count);
         stack.setHoverName(name);
-        return stack;
+        return stack.getTag();
     }
 }

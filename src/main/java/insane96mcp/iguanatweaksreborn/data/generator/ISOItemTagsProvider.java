@@ -14,6 +14,7 @@ import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
+import insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader.WanderingTrades;
 import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
@@ -141,6 +142,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.CLOCK);
         tag(HUD_BIOME)
                 .add(BiomeCompass.COMPASS.get());
+
+        tag(WanderingTrades.CORAL_BLOCKS)
+                .add(Items.BRAIN_CORAL_BLOCK, Items.BUBBLE_CORAL_BLOCK, Items.FIRE_CORAL_BLOCK, Items.HORN_CORAL_BLOCK, Items.TUBE_CORAL_BLOCK);
     }
 
     public static TagKey<Item> create(String tagName) {

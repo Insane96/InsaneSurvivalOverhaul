@@ -5,6 +5,10 @@
 * Json Trades 
   * Added `tag_a` for a list of random items from the specified item tag
   * For villager trades, added `low_priority` to replace modded trades 
+* Wandering trades have been updated and slightly changed
+
+### Fixes
+* Librarian writable books trade taking two books
 
 ## 4.16.1
 ### Changes
