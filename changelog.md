@@ -1,8 +1,8 @@
 # Changelog
 
-## Upcoming
+## 4.17.0
 ### Changes
-* Json Trades 
+* Reworked Json Trades 
   * Added `tag_a` for a list of random items from the specified item tag
   * For villager trades, added `low_priority` to replace modded trades 
 * Wandering trades have been updated and slightly changed
