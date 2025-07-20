@@ -26,6 +26,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.storage.loot.functions.ExplorationMapFunction;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITag;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Type;
@@ -36,6 +37,10 @@ import java.util.Locale;
 @JsonAdapter(SerializableTrade.SerializableTradeSerializer.class)
 public class SerializableTrade implements VillagerTrades.ItemListing {
 	public ItemStack itemA;
+	@Nullable
+	public TagKey<Item> tagA;
+	private int tagACount = 1;
+	private List<Item> tagACache = new ArrayList<>();
 	public ItemStack itemB;
 	public ItemStack result;
 	private int maxUses;
@@ -52,12 +57,26 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 
 	}
 
+	public SerializableTrade(TagKey<Item> tagA, int tagACount, ItemStack result, int maxUses) {
+		this(tagA, tagACount, ItemStack.EMPTY, result, maxUses, 0);
+	}
+
 	public SerializableTrade(ItemStack itemA, ItemStack result, int maxUses) {
 		this(itemA, ItemStack.EMPTY, result, maxUses, 0);
 	}
 
 	public SerializableTrade(ItemStack itemA, ItemStack itemB, ItemStack result, int maxUses, int xp) {
 		this.itemA = itemA;
+		this.itemB = itemB;
+		this.result = result;
+		this.maxUses = maxUses;
+		this.xp = xp;
+	}
+
+	public SerializableTrade(@Nullable TagKey<Item> tagA, int tagACount, ItemStack itemB, ItemStack result, int maxUses, int xp) {
+		this.itemA = ItemStack.EMPTY;
+		this.tagA = tagA;
+		this.tagACount = tagACount;
 		this.itemB = itemB;
 		this.result = result;
 		this.maxUses = maxUses;
@@ -82,7 +101,8 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	@Nullable
 	@Override
 	public MerchantOffer getOffer(Entity entity, RandomSource random) {
-		if (this.result.isEmpty() || this.itemA.isEmpty())
+		if (this.result.isEmpty()
+				|| (this.itemA.isEmpty() && this.tagA == null))
 			return null;
 		ItemStack result = this.result.copy();
 		if (entity.level().isClientSide)
@@ -112,7 +132,15 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 				result.setHoverName(this.result.getHoverName());
             }
         }
-		return new MerchantOffer(this.itemA, this.itemB, result, this.maxUses, this.xp, 1f);
+		ItemStack stackA = this.itemA;
+		if (stackA.isEmpty()) {
+			if (this.tagACache.isEmpty()) {
+				ITag<Item> itemTag = ForgeRegistries.ITEMS.tags().getTag(this.tagA);
+				this.tagACache = itemTag.stream().toList();
+			}
+			stackA = new ItemStack(this.tagACache.get(random.nextInt(this.tagACache.size())), this.tagACount);
+		}
+		return new MerchantOffer(stackA, this.itemB, result, this.maxUses, this.xp, 1f);
 	}
 
 	public static final Type LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
@@ -125,6 +153,11 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 			serializableTrade.itemA = stackFromJson("item_a", jObject, context);
 			serializableTrade.itemB = stackFromJson("item_b", jObject, context);
 			serializableTrade.result = stackFromJson("item_result", jObject, context);
+
+			if (jObject.has("tag_a")) {
+				serializableTrade.tagA = TagKey.create(Registries.ITEM, ResourceLocation.parse(GsonHelper.getAsString(jObject, "tag_a")));
+				serializableTrade.tagACount = GsonHelper.getAsInt(jObject, "item_a_count", 1);
+			}
 
 			JsonObject enchantRandomly = GsonHelper.getAsJsonObject(jObject, "enchant_randomly", null);
 			if (enchantRandomly != null) {

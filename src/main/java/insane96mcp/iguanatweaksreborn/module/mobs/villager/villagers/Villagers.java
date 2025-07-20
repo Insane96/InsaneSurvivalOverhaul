@@ -51,28 +51,38 @@ public class Villagers extends Feature {
 	@Config(description = "Enables a data pack that changes villagers trades")
 	public static Boolean tradesDataPack = true;
 
-	public Villagers(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
 		CURE_DISCOUNT_REMOVED = this.createDataKey("cure_discount_removed");
 		WAS_CONVERTED_ZOMBIE = this.createDataKey("was_converted_zombie");
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onVillagerTrades(VillagerTradesEvent event) {
+	public void onVillagerTradesHighPriority(VillagerTradesEvent event) {
+		processVillagerTrades(event, false);
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onVillagerTradesLowPriority(VillagerTradesEvent event) {
+		processVillagerTrades(event, true);
+	}
+
+	private void processVillagerTrades(VillagerTradesEvent event, boolean isLowPriority) {
 		if (!this.isEnabled())
 			return;
 
 		Int2ObjectMap<List<VillagerTrades.ItemListing>> itemListing = event.getTrades();
-		itemListing.forEach(((level, value) -> {
+		itemListing.forEach((level, value) -> {
 			VillagerTrade trades = VillagerTradesReloadListener.INSTANCE.getTradesOfLevel(event.getType(), level);
-			if (trades == null)
+			if (trades == null
+					|| trades.lowPriority != isLowPriority)
 				return;
 			if (trades.remove)
 				value.clear();
 
-            value.addAll(trades.trades);
-		}));
+			value.addAll(trades.trades);
+		});
 	}
 
 	@SubscribeEvent
