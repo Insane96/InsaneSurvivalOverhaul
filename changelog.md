@@ -1,5 +1,12 @@
 # Changelog
 
+* repair kit in EMI
+* you can enchant over max enchantability?
+
+## 4.17.3
+### Fixes
+* Supplementaries wild flax doesn't break faster with hoe
+
 ## 4.17.2
 ### Fixes
 * Grass grow/decay only growing
