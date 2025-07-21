@@ -3,6 +3,10 @@
 * repair kit in EMI
 * you can enchant over max enchantability?
 
+## Upcoming
+### Fixes
+* Repair kits in EMI
+
 ## 4.17.3
 ### Fixes
 * Supplementaries wild flax doesn't break faster with hoe

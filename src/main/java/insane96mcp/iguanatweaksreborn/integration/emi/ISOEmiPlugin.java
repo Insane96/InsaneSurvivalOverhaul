@@ -13,7 +13,6 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReload
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
-import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKitItem;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
@@ -29,7 +28,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -89,12 +87,13 @@ public class ISOEmiPlugin implements EmiPlugin {
 		}
 		if (Feature.isEnabled(RepairKits.class)) {
 			//This is sooo bad
-			for (Recipe recipe : manager.getRecipes()) {
+			/*for (Recipe recipe : manager.getRecipes()) {
 				ItemStack resultItem = recipe.getResultItem(null);
 				if (resultItem.getItem() instanceof RepairKitItem) {
 					registry.addEmiStack(EmiStack.of(resultItem));
 				}
-			}
+			}*/
+			registry.addEmiStack(EmiStack.of(RepairKits.ITEM.get()));
 			registry.addRecipe(createSimpleInfo(RepairKits.ITEM.get(), "info_repair_kit", Component.translatable("emi.info.iguanatweaksreborn.repair_kit")));
 		}
 	}

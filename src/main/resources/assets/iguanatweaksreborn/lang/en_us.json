@@ -137,7 +137,8 @@
 	"item.iguanatweaksreborn.copper_hoe": "Copper Hoe",
 	"item.iguanatweaksreborn.copper_shield": "Copper Shield",
 
-	"item.iguanatweaksreborn.repair_kit": "%s Repair Kit",
+	"item.iguanatweaksreborn.repair_kit": "Repair Kit",
+	"item.iguanatweaksreborn.repair_kit_material": "Repair Kit (%s)",
 	"emi.info.iguanatweaksreborn.repair_kit": "Can be used in a crafting grid to repair items, like when repairing with an Anvil.",
 
 	"iguanatweaksreborn:mining_module": "Mining",
