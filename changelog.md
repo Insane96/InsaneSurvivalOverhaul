@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.17.2
+### Fixes
+* Grass grow/decay only growing
+
 ## 4.17.1
 ### Fixes
 * Bamboo growing out of season

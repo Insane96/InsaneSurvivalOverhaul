@@ -16,7 +16,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -81,6 +80,8 @@ public class Seasons extends Feature {
 	@Config
 	public static Boolean seasonBasedFishingTime = true;
 
+	@Config
+	public static Boolean growDoubleTallGrass = true;
 	@Config
 	public static Boolean growFlowersFromGrass = true;
 
@@ -152,34 +153,41 @@ public class Seasons extends Feature {
 		BlockPos abovePos = pos.above();
 		if (level.getBrightness(LightLayer.SKY, abovePos) < data.lightLevel)
 			return;
-		if (state.is(BlockTags.DIRT)) {
-			BlockState stateUp = level.getBlockState(abovePos);
-			if (level.getRandom().nextInt(data.chance) == 0) {
-				if (stateUp.is(PLANTS_TO_DECAY))
-					level.setBlock(abovePos, Blocks.AIR.defaultBlockState(), 3);
-				else if (stateUp.is(PLANTS_TO_DEAD_BUSH))
-					level.setBlock(abovePos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
-			}
-			else if (state.is(Blocks.GRASS_BLOCK) && level.getRandom().nextInt(data.chance) == 0 && stateUp.isAir()) {
-				Optional<Holder.Reference<PlacedFeature>> oPlacedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
-				oPlacedFeature.ifPresent(placedFeatureReference ->
-						placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, abovePos));
-			}
+		if (data.grassTickingType == GrassTickingType.DECAY
+				&& (state.is(PLANTS_TO_DECAY) || state.is(PLANTS_TO_DEAD_BUSH))
+				&& level.getRandom().nextInt(data.chance) == 0) {
+			if (state.is(PLANTS_TO_DECAY))
+				level.setBlock(abovePos, Blocks.AIR.defaultBlockState(), 3);
+			else if (state.is(PLANTS_TO_DEAD_BUSH))
+				level.setBlock(abovePos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 		}
-		else if (data.canGrowTall && level.getRandom().nextInt(data.chance) == 0) {
-			if (state.is(Blocks.GRASS))
-				DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 2);
-			else if (state.is(Blocks.FERN))
-				DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 2);
-		}
-		else if (growFlowersFromGrass && data.canGrowFlower
-				&& (state.is(Blocks.GRASS) || state.is(Blocks.FERN))
-				&& level.getRandom().nextInt(data.chance * 10) == 0) {
-			List<ConfiguredFeature<?, ?>> list = level.getBiome(pos).value().getGenerationSettings().getFlowerFeatures();
-			if (!list.isEmpty()) {
-				Holder<PlacedFeature> holder = ((RandomPatchConfiguration)list.get(0).config()).feature();
-				level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-				holder.value().place(level, level.getChunkSource().getGenerator(), level.random, pos);
+		else if (data.grassTickingType == GrassTickingType.GROW) {
+			if (state.is(Blocks.GRASS_BLOCK)
+					&& level.getRandom().nextInt(data.chance) == 0) {
+				BlockState stateUp = level.getBlockState(abovePos);
+				if (stateUp.isAir()) {
+					Optional<Holder.Reference<PlacedFeature>> oPlacedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
+					oPlacedFeature.ifPresent(placedFeatureReference ->
+							placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, abovePos));
+				}
+			}
+			else if (state.is(Blocks.GRASS) || state.is(Blocks.FERN)) {
+				if (growDoubleTallGrass && data.canGrowTall
+						&& level.getRandom().nextInt(data.chance) == 0) {
+					if (state.is(Blocks.GRASS))
+						DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 2);
+					else if (state.is(Blocks.FERN))
+						DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 2);
+				}
+				else if (growFlowersFromGrass && data.canGrowFlower
+						&& level.getRandom().nextInt(data.chance * 10) == 0) {
+					List<ConfiguredFeature<?, ?>> list = level.getBiome(pos).value().getGenerationSettings().getFlowerFeatures();
+					if (!list.isEmpty()) {
+						Holder<PlacedFeature> holder = ((RandomPatchConfiguration)list.get(0).config()).feature();
+						level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+						holder.value().place(level, level.getChunkSource().getGenerator(), level.random, pos);
+					}
+				}
 			}
 		}
 	}
