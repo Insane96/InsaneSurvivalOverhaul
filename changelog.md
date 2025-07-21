@@ -1,8 +1,5 @@
 # Changelog
 
-* repair kit in EMI
-* you can enchant over max enchantability?
-
 ## Upcoming
 ### Fixes
 * Repair kits in EMI
