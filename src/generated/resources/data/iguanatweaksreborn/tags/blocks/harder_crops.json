@@ -13,6 +13,10 @@
       "required": false
     },
     {
+      "id": "supplementaries:wild_flax",
+      "required": false
+    },
+    {
       "id": "farmersdelight:tomatoes",
       "required": false
     },
