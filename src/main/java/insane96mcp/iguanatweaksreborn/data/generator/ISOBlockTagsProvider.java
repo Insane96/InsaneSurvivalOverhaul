@@ -17,6 +17,7 @@ import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ExplosionOverhaul;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
+import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -46,6 +48,12 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> ASPEN_LOGS = create("aspen_logs");
     public static final TagKey<Block> ASPEN_LEAVES = create("aspen_leaves");
     public static final TagKey<Block> PLUM_LEAVES = create("plum_leaves");
+
+    public static final TagKey<Block> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
+    public static final TagKey<Block> HUD_SEASON = create("hud/season");
+    public static final TagKey<Block> HUD_DEPTH = create("hud/depth");
+    public static final TagKey<Block> HUD_TIME = create("hud/time");
+    public static final TagKey<Block> HUD_BIOME = create("hud/biome");
 
     public ISOBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
         super(output, lookupProvider, modId, existingFileHelper);
@@ -179,6 +187,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(Blocks.CHEST, Blocks.TRAPPED_CHEST)
                 .add(Blocks.TALL_GRASS, Blocks.LARGE_FERN);
 
+        tag(HUD_TIME)
+                .addOptional(ForgeRegistries.BLOCKS.getKey(ModRegistry.CLOCK_BLOCK.get()));
     }
 
     public static TagKey<Block> create(String tagName) {

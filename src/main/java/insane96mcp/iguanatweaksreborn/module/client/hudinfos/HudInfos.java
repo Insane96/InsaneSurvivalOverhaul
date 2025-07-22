@@ -1,10 +1,10 @@
 package insane96mcp.iguanatweaksreborn.module.client.hudinfos;
 
+import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -14,7 +14,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
@@ -43,10 +46,6 @@ public class HudInfos extends Feature {
     @Config(description = "If true, items in the iguanatweaksreborn:hud/biome will display the current biome")
     public static Boolean biome = true;
 
-    public HudInfos(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
-    }
-
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onHud(CustomizeGuiOverlayEvent.DebugText event) {
@@ -68,11 +67,10 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public void tryRenderCardinalDirection(Player player, List<String> toDraw) {
         if (!cardinalDirection
-                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_CARDINAL_DIRECTION))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_CARDINAL_DIRECTION, ISOBlockTagsProvider.HUD_CARDINAL_DIRECTION))
             return;
 
         renderCardinalDirection(player, toDraw);
-
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -85,7 +83,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public void tryRenderDepth(Player player, List<String> toDraw) {
         if (!depth
-                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_DEPTH))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_DEPTH, ISOBlockTagsProvider.HUD_DEPTH))
             return;
 
         renderDepth(player, toDraw);
@@ -99,7 +97,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public void tryRenderBiome(Player player, List<String> toDraw) {
         if (!biome
-                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_BIOME))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_BIOME, ISOBlockTagsProvider.HUD_BIOME))
             return;
 
         renderBiome(player, toDraw);
@@ -116,7 +114,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public void tryRenderTime(Player player, List<String> toDraw) {
         if (!time
-                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_TIME))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_TIME, ISOBlockTagsProvider.HUD_TIME))
             return;
 
         renderTime(player, toDraw);
@@ -131,20 +129,25 @@ public class HudInfos extends Feature {
     public void tryRenderSeason(Player player, List<String> toDraw) {
         if (!ModList.get().isLoaded("sereneseasons")
                 || !season
-                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_SEASON))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, ISOItemTagsProvider.HUD_SEASON, ISOBlockTagsProvider.HUD_SEASON))
             return;
 
         SereneSeasonsIntegration.addSeasonInfo(toDraw, player.level());
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean shouldRender(Player player, @Nullable HitResult hitResult, TagKey<Item> itemTag) {
-        return player.getInventory().contains(itemTag) || isLookingAtItemFrameWith(hitResult, itemTag);
+    public boolean shouldRender(Player player, @Nullable HitResult hitResult, TagKey<Item> itemTag, TagKey<Block> blockTagKey) {
+        return player.getInventory().contains(itemTag) || isLookingAtItemFrameWith(hitResult, itemTag) || isLookingAtBlock(hitResult, player.level(), blockTagKey);
     }
 
     @OnlyIn(Dist.CLIENT)
     public boolean isLookingAtItemFrameWith(@Nullable HitResult hitResult, TagKey<Item> itemTag) {
         return hitResult != null && hitResult.getType() == HitResult.Type.ENTITY && ((EntityHitResult) hitResult).getEntity() instanceof ItemFrame itemFrame && itemFrame.getItem().is(itemTag);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isLookingAtBlock(HitResult hitResult, Level level, TagKey<Block> blockTag) {
+        return hitResult != null && hitResult.getType() == HitResult.Type.BLOCK && level.getBlockState(((BlockHitResult) hitResult).getBlockPos()).is(blockTag);
     }
 
     private static @NotNull String getDirectionTranslatable(float direction) {

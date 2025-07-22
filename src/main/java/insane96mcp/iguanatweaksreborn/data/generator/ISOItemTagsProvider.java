@@ -42,17 +42,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class ISOItemTagsProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
-    public static final TagKey<Item> STONE_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/stone");
-    public static final TagKey<Item> FLINT_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/flint");
-    public static final TagKey<Item> GOLDEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/golden");
-    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = ISOItemTagsProvider.create("equipment/armor/leather");
+    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
+    public static final TagKey<Item> STONE_HAND_EQUIPMENT = create("equipment/hand/stone");
+    public static final TagKey<Item> FLINT_HAND_EQUIPMENT = create("equipment/hand/flint");
+    public static final TagKey<Item> GOLDEN_HAND_EQUIPMENT = create("equipment/hand/golden");
+    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = create("equipment/armor/leather");
 
-    public static final TagKey<Item> HUD_CARDINAL_DIRECTION = ISOItemTagsProvider.create("hud/cardinal_direction");
-    public static final TagKey<Item> HUD_SEASON = ISOItemTagsProvider.create("hud/season");
-    public static final TagKey<Item> HUD_DEPTH = ISOItemTagsProvider.create("hud/depth");
-    public static final TagKey<Item> HUD_TIME = ISOItemTagsProvider.create("hud/time");
-    public static final TagKey<Item> HUD_BIOME = ISOItemTagsProvider.create("hud/biome");
+    public static final TagKey<Item> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
+    public static final TagKey<Item> HUD_SEASON = create("hud/season");
+    public static final TagKey<Item> HUD_DEPTH = create("hud/depth");
+    public static final TagKey<Item> HUD_TIME = create("hud/time");
+    public static final TagKey<Item> HUD_BIOME = create("hud/biome");
 
     public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);

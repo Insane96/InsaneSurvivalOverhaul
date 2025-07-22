@@ -1,5 +1,15 @@
 # Changelog
 
+* look at block to show info on top left
+  * supplementaries:clock_block
+* Slowdown growth of mulberries
+* lower fishing rod durability
+
+## Upcoming
+### Additions
+* You can now look at some blocks and get hud infos like when holding certain items like clock
+  * By default works with supplementaries:clock_block
+
 ## 4.17.5
 ### Fixes
 * Tentative fix for health not setting on respawn
