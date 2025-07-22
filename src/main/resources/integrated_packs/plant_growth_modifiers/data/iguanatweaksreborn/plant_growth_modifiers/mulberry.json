@@ -1,6 +1,6 @@
 {
     "block": "upgrade_aquatic:mulberry_vine",
-    "growth_multiplier": 2,
+    "growth_multiplier": 3.5,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",
