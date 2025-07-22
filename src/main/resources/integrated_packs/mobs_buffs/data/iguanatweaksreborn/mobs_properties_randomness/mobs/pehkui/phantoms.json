@@ -9,7 +9,8 @@
                 "bias": "max"
             },
             "scale_types": [
-                "pehkui:base"
+                "pehkui:width",
+                "pehkui:height"
             ],
             "operation": "set"
         }

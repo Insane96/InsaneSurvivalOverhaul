@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.17.4
 ### Changes
 * mobs_buffs data pack
   * Increased bonus follow range (8\~24 -> 16\~32 (biased to bottom))
