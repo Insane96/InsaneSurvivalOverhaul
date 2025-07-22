@@ -4,6 +4,7 @@
 ### Fixes
 * Repair kits in EMI
 * Zombies properties broken with latest MPR
+* Drowned trident damage not nerfed
 
 ## 4.17.3
 ### Fixes
