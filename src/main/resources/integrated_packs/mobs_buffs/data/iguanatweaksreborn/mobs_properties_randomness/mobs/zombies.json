@@ -3,16 +3,6 @@
     "properties": [
         {
             "property": "attribute_modifier",
-            "attribute": "minecraft:generic.follow_range",
-            "modifier_name": "Reduced Zombies Follow Range",
-            "operation": "addition",
-            "amount": {
-                "min": -11,
-                "max": 0
-            }
-        },
-        {
-            "property": "attribute_modifier",
             "attribute": "minecraft:generic.attack_speed",
             "modifier_name": "Attack speed nerf for zombies",
             "amount": -0.5,
