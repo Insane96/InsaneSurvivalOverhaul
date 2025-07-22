@@ -1,8 +1,6 @@
 # Changelog
 
-* lower fishing rod durability
-
-## Upcoming
+## 4.17.6
 ### Additions
 * You can now look at some blocks and get hud infos like when holding certain items like clock
   * By default works with supplementaries:clock_block
