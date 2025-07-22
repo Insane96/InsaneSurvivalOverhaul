@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.17.5
+### Fixes
+* Tentative fix for health not setting on respawn
+
 ## 4.17.4
 ### Changes
 * mobs_buffs data pack

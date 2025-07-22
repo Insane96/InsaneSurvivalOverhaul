@@ -15,6 +15,8 @@ import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.util.ModNBTData;
+import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
+import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -160,25 +162,30 @@ public class Respawn extends JsonFeature {
 	}
 
 	public void applyStatsPenalty(Player player) {
-		int hunger = ModNBTData.getPersisted(player, HUNGER_ON_DEATH_TAG, Integer.class);
-		int maxHunger = (int) statsPenalty$hunger$maximum.getByDifficulty(player.level());
-		int minHunger = (int) statsPenalty$hunger$min.getByDifficulty(player.level());
-		hunger = Mth.clamp(hunger, minHunger, maxHunger);
-		player.getFoodData().foodLevel = hunger;
-		ModNBTData.removePersisted(player, HUNGER_ON_DEATH_TAG);
+		ScheduledTasks.schedule(new ScheduledTickTask(2) {
+			@Override
+			public void run() {
+				if (!(player instanceof ServerPlayer serverPlayer))
+					return;
+				int hunger = ModNBTData.getPersisted(player, HUNGER_ON_DEATH_TAG, Integer.class);
+				int maxHunger = (int) statsPenalty$hunger$maximum.getByDifficulty(player.level());
+				int minHunger = (int) statsPenalty$hunger$min.getByDifficulty(player.level());
+				hunger = Mth.clamp(hunger, minHunger, maxHunger);
+				player.getFoodData().foodLevel = hunger;
+				ModNBTData.removePersisted(player, HUNGER_ON_DEATH_TAG);
 
-		float saturation = ModNBTData.getPersisted(player, SATURATION_ON_DEATH_TAG, Float.class);
-		float maxSaturation = (float) statsPenalty$saturation$maximum.getByDifficulty(player.level());
-		float minSaturation = (float) statsPenalty$saturation$minimum.getByDifficulty(player.level());
-		saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
-		player.getFoodData().saturationLevel = saturation;
-		ModNBTData.removePersisted(player, SATURATION_ON_DEATH_TAG);
+				float saturation = ModNBTData.getPersisted(player, SATURATION_ON_DEATH_TAG, Float.class);
+				float maxSaturation = (float) statsPenalty$saturation$maximum.getByDifficulty(player.level());
+				float minSaturation = (float) statsPenalty$saturation$minimum.getByDifficulty(player.level());
+				saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
+				player.getFoodData().saturationLevel = saturation;
+				ModNBTData.removePersisted(player, SATURATION_ON_DEATH_TAG);
 
-		if (player instanceof ServerPlayer serverPlayer) {
-			double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * serverPlayer.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)));
-			double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
-			player.setHealth((float) Math.max(healthOnRespawn, minHealth));
-		}
+				double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * serverPlayer.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)));
+				double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
+				player.setHealth((float) Math.max(healthOnRespawn, minHealth));
+			}
+		});
 	}
 
 	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
