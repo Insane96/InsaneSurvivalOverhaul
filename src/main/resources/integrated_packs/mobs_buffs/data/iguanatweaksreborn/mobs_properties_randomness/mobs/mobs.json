@@ -8,7 +8,8 @@
             "operation": "addition",
             "amount": {
                 "min": 8,
-                "max": 24,
+                "max": 32,
+                "bias": "min",
                 "modifiers": [
                     {
                         "modifier": "condition",
@@ -32,7 +33,7 @@
                             {
                                 "modifier": "deepness",
                                 "operation": "add",
-                                "amount_per_step": 0.05,
+                                "amount_per_step": 0.10,
                                 "step": 16,
                                 "starting_y": 80
                             }

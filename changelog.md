@@ -1,6 +1,12 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* mobs_buffs data pack
+  * Increased bonus follow range (8\~24 -> 16\~32 (biased to bottom))
+  * Increased xray follow range (8\~24 -> 8\~32 (biased to bottom))
+  * Skeletons and zombies enchanted equipment are now enchanted at higher levels during full moons
+
 ### Fixes
 * Repair kits in EMI
 * Zombies properties broken with latest MPR

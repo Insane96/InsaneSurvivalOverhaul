@@ -4,11 +4,12 @@
         {
             "property": "attribute_modifier",
             "attribute": "minecraft:generic.follow_range",
-            "modifier_name": "More Follow Range for non-zombie mobs",
+            "modifier_name": "mobs_buffs bonus follow range",
             "operation": "addition",
             "amount": {
-                "min": 8,
-                "max": 24
+                "min": 16,
+                "max": 32,
+                "bias": "min"
             }
         }
     ]

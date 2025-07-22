@@ -57,7 +57,20 @@
                     "type": "with_levels",
                     "lvl": {
                         "min": 1,
-                        "max": 10
+                        "max": 10,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "chance": {
                         "value": 0.15,
@@ -87,7 +100,20 @@
                     "type": "with_levels",
                     "lvl": {
                         "min": 1,
-                        "max": 10
+                        "max": 10,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "chance": {
                         "value": 0.15,
@@ -117,7 +143,20 @@
                     "type": "with_levels",
                     "lvl": {
                         "min": 1,
-                        "max": 10
+                        "max": 10,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "chance": {
                         "value": 0.15,
@@ -147,7 +186,20 @@
                     "type": "with_levels",
                     "lvl": {
                         "min": 1,
-                        "max": 10
+                        "max": 10,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "chance": {
                         "value": 0.15,
@@ -279,7 +331,20 @@
                     "type": "with_levels",
                     "lvl": {
                         "min": 1,
-                        "max": 10
+                        "max": 10,
+                        "modifiers": [
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "moon_phase",
+                                        "phases": [ "full_moon" ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "chance": {
                         "value": 0.15,
