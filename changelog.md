@@ -11,6 +11,7 @@
 * Repair kits in EMI
 * Zombies properties broken with latest MPR
 * Drowned trident damage not nerfed
+* Spiders speed too high
 
 ## 4.17.3
 ### Fixes
