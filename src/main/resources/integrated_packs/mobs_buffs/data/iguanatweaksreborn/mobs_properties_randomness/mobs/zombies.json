@@ -7,8 +7,8 @@
             "modifier_name": "Reduced Zombies Follow Range",
             "operation": "addition",
             "amount": {
-                "min": 0,
-                "max": -11
+                "min": -11,
+                "max": 0
             }
         },
         {

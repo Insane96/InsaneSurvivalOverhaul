@@ -3,6 +3,7 @@
 ## Upcoming
 ### Fixes
 * Repair kits in EMI
+* Zombies properties broken with latest MPR
 
 ## 4.17.3
 ### Fixes
