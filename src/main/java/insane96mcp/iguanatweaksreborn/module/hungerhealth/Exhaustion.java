@@ -7,7 +7,6 @@ import insane96mcp.iguanatweaksreborn.network.message.ExhaustionSync;
 import insane96mcp.iguanatweaksreborn.network.message.SaturationSync;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.event.PlayerExhaustionEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -40,10 +39,6 @@ public class Exhaustion extends Feature {
 	public static Double bowChargeExhaustion = 0.005d;
 	@Config(description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
-
-	public Exhaustion(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
 
 	@SubscribeEvent
 	public void breakExhaustion(BlockEvent.BreakEvent event) {
