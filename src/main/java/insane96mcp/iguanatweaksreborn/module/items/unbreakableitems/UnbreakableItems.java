@@ -31,13 +31,14 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-@LoadFeature(module = Modules.Ids.ITEMS, description = "Enchanted items no longer break, will sit at one durability and can't be used. Items in the item tag `iguanatweaksreborn:not_unbreakable` are not affected.")
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Enchanted items no longer break, will sit at one durability and can't be used. Items in the item tag `iguanatweaksreborn:not_unbreakable` are not affected and items in the item tag `iguanatweaksreborn:unbreakable` are always unbreakable.")
 public class UnbreakableItems extends Feature {
 
 	public static final String TOOL_DURABILITY_LANG = InsaneSO.lang("tool_durability");
 	public static final String BROKEN_DURABILITY_LANG = InsaneSO.lang("broken_durability");
 	public static final String BROKEN_ITEM_LANG = InsaneSO.lang("broken_item");
 	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
+	public static final TagKey<Item> UNBREAKABLE = ISOItemTagsProvider.create("unbreakable");
 	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
 
 	@Config(description = "Items with durability get a durability tooltip")
@@ -45,8 +46,8 @@ public class UnbreakableItems extends Feature {
 	@Config(description = "If set to true only enchanted items will no longer break")
 	public static Boolean enchantedItemsOnly = true;
 
-	public UnbreakableItems(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		if (ModList.get().isLoaded("shieldsplus"))
 			MinecraftForge.EVENT_BUS.addListener(ShieldsPlusIntegration::onBlockWithCrouch);
 	}
@@ -54,6 +55,8 @@ public class UnbreakableItems extends Feature {
 	public static boolean isUnbreakable(ItemStack stack) {
 		if (stack.is(NOT_UNBREAKABLE))
 			return false;
+		else if (stack.is(UNBREAKABLE))
+			return true;
         return !enchantedItemsOnly || stack.isEnchanted();
     }
 

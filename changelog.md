@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Item tag `iguanatweaksreborn:unbreakable`
+  * Items here will always be unbreakable. `iguanatweaksreborn:not_unbreakable` takes priority
+
 ## 4.17.6
 ### Additions
 * You can now look at some blocks and get hud infos like when holding certain items like clock
