@@ -27,9 +27,9 @@ public class EmiAnvilRepairRecipe implements EmiRecipe {
 		ItemStack item = itemToRepair.copy();
 		item.setDamageValue(itemToRepair.getMaxDamage() - 1);
 		this.itemToRepair = EmiStack.of(item);
-		this.resource = EmiIngredient.of(material, (long) materialAmount);
+		this.resource = EmiIngredient.of(material, 1);
 		item = itemToRepair.copy();
-		item.setDamageValue(item.getMaxDamage() - (int) (item.getMaxDamage() * maxRepair));
+		item.setDamageValue(item.getMaxDamage() - (int) (item.getMaxDamage() / materialAmount));
 		this.output = EmiStack.of(item);
 	}
 

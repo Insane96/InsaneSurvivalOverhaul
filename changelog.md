@@ -1,7 +1,5 @@
 # Changelog
 
-* Enhance anvil repair by showing the repair amount with 1 material
-* flint and steel repair
 * mnobs are always enchanted
 * enchantment.stamina.vigour.des
 
@@ -9,6 +7,9 @@
 ### Additions
 * Item tag `iguanatweaksreborn:unbreakable`
   * Items here will always be unbreakable. `iguanatweaksreborn:not_unbreakable` takes priority
+
+### Changes
+* EMI's Anvil Repair now shows how much an item will be repaired with one material
 
 ### Fixes
 * Flint and steel repair requiring Soul Steel
