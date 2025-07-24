@@ -3,16 +3,23 @@
 	"repair": [
 		{
 			"repair_material": {
-				"id": "iguanatweaksexpanded:soul_steel_ingot"
+				"id": "minecraft:blaze_powder"
 			},
-			"amount": 0.75
+			"amount": 1
 		},
 		{
 			"repair_material": {
-				"id": "iguanatweaksexpanded:soul_steel_nugget"
+				"id": "minecraft:iron_ingot"
 			},
-			"amount": 6,
-			"cost_multiplier": 9
+			"amount": 0.75,
+			"max_repair": 0.25
+		},
+		{
+			"repair_material": {
+				"id": "minecraft:iron_nugget"
+			},
+			"amount": 6.75,
+			"max_repair": 0.25
 		}
 	]
 }
