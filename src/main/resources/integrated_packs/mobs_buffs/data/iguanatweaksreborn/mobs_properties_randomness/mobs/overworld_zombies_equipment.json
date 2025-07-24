@@ -9,6 +9,10 @@
                     "weight": 180
                 },
                 {
+                    "preset": "iguanatweaksreborn:copper_armor",
+                    "weight": 100
+                },
+                {
                     "preset": "iguanatweaksreborn:chainmail_armor",
                     "weight": 40
                 },
@@ -40,6 +44,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -67,6 +94,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -86,6 +136,29 @@
                                             {
                                                 "condition": "moon_phase",
                                                 "phases": [ "full_moon" ]
+                                            },
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 12,
+                                                    "max": 15
+                                                },
+                                                "type": "sky"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 0,
+                                                    "max": 12
+                                                },
+                                                "type": "sky"
                                             }
                                         ]
                                     }
@@ -115,6 +188,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -134,6 +230,29 @@
                                             {
                                                 "condition": "moon_phase",
                                                 "phases": [ "full_moon" ]
+                                            },
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 12,
+                                                    "max": 15
+                                                },
+                                                "type": "sky"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 0,
+                                                    "max": 12
+                                                },
+                                                "type": "sky"
                                             }
                                         ]
                                     }
@@ -163,6 +282,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -182,6 +324,29 @@
                                             {
                                                 "condition": "moon_phase",
                                                 "phases": [ "full_moon" ]
+                                            },
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 12,
+                                                    "max": 15
+                                                },
+                                                "type": "sky"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 0,
+                                                    "max": 12
+                                                },
+                                                "type": "sky"
                                             }
                                         ]
                                     }
@@ -211,6 +376,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -230,6 +418,29 @@
                                             {
                                                 "condition": "moon_phase",
                                                 "phases": [ "full_moon" ]
+                                            },
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 12,
+                                                    "max": 15
+                                                },
+                                                "type": "sky"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 0,
+                                                    "max": 12
+                                                },
+                                                "type": "sky"
                                             }
                                         ]
                                     }
@@ -253,6 +464,10 @@
                     "weight": 50
                 },
                 {
+                    "item": "iguanatweaksreborn:copper_sword",
+                    "weight": 50
+                },
+                {
                     "item": "minecraft:iron_sword",
                     "weight": 10
                 },
@@ -270,6 +485,10 @@
                 },
                 {
                     "item": "iguanatweaksreborn:flint_axe",
+                    "weight": 50
+                },
+                {
+                    "item": "iguanatweaksreborn:copper_axe",
                     "weight": 50
                 },
                 {
@@ -293,6 +512,10 @@
                     "weight": 50
                 },
                 {
+                    "item": "iguanatweaksreborn:copper_pickaxe",
+                    "weight": 50
+                },
+                {
                     "item": "minecraft:iron_pickaxe",
                     "weight": 10
                 },
@@ -313,6 +536,10 @@
                     "weight": 50
                 },
                 {
+                    "item": "iguanatweaksreborn:copper_shovel",
+                    "weight": 50
+                },
+                {
                     "item": "minecraft:iron_shovel",
                     "weight": 10
                 },
@@ -330,6 +557,10 @@
                 },
                 {
                     "item": "iguanatweaksreborn:flint_hoe",
+                    "weight": 50
+                },
+                {
+                    "item": "iguanatweaksreborn:copper_hoe",
                     "weight": 50
                 },
                 {
@@ -361,6 +592,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "multiply",
+                                "value": 2,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }
@@ -380,6 +634,29 @@
                                             {
                                                 "condition": "moon_phase",
                                                 "phases": [ "full_moon" ]
+                                            },
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 12,
+                                                    "max": 15
+                                                },
+                                                "type": "sky"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "light_level",
+                                                "light_level": {
+                                                    "min": 0,
+                                                    "max": 12
+                                                },
+                                                "type": "sky"
                                             }
                                         ]
                                     }
@@ -403,6 +680,29 @@
                                     {
                                         "condition": "moon_phase",
                                         "phases": [ "full_moon" ]
+                                    },
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 12,
+                                            "max": 15
+                                        },
+                                        "type": "sky"
+                                    }
+                                ]
+                            },
+                            {
+                                "modifier": "condition",
+                                "operation": "add",
+                                "value": 0.10,
+                                "conditions": [
+                                    {
+                                        "condition": "light_level",
+                                        "light_level": {
+                                            "min": 0,
+                                            "max": 12
+                                        },
+                                        "type": "sky"
                                     }
                                 ]
                             }

@@ -7,6 +7,8 @@
 
 ### Changes
 * EMI's Anvil Repair now shows how much an item will be repaired with one material
+* Zombies and skeletons have higher chance to spawn with gear, higher chance to be enchanted and enchanted at higher levels during full moons or in caves
+* Zombies can now spawn with copper gear
 
 ### Fixes
 * Flint and steel repair requiring Soul Steel
