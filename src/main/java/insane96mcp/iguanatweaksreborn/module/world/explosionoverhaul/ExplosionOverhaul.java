@@ -83,7 +83,7 @@ public class ExplosionOverhaul extends Feature {
 
 		setBaseResistanceAdd(event.getEntity(), 0f);
 		setKnockbackMultiplier(event.getEntity(), 0.60f);
-		setDamageMultiplierTag(event.getEntity(), 0.60f);
+		setDamageMultiplierTag(event.getEntity(), 0.75f);
 	}
 
 	@SubscribeEvent

@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Increased back Deepers damage (60% -> 75%)
+
 ## 4.17.7
 ### Additions
 * Item tag `iguanatweaksreborn:unbreakable`
