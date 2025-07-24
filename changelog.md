@@ -7,12 +7,15 @@
 
 ### Changes
 * EMI's Anvil Repair now shows how much an item will be repaired with one material
-* Zombies and skeletons have higher chance to spawn with gear, higher chance to be enchanted and enchanted at higher levels during full moons or in caves
-* Zombies can now spawn with copper gear
+* MPR Data pack
+  * Zombies and skeletons have higher chance to spawn with gear, higher chance to be enchanted and enchanted at higher levels during full moons or in caves
+  * Zombies can now spawn with copper gear
+  * Pillagers now also have the speed nerf
 
 ### Fixes
 * Flint and steel repair requiring Soul Steel
-* Zombies and Skeletons always spawning with enchanted gear
+* MPR Data pack
+  * Zombies and Skeletons always spawning with enchanted gear
 
 ## 4.17.6
 ### Additions

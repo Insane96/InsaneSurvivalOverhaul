@@ -4,6 +4,7 @@
         "minecraft:enderman",
         "minecraft:wolf",
         "minecraft:trader_llama",
-        "minecraft:llama"
+        "minecraft:llama",
+        "minecraft:pillager"
     ]
 }
