@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.17.7
 ### Additions
 * Item tag `iguanatweaksreborn:unbreakable`
   * Items here will always be unbreakable. `iguanatweaksreborn:not_unbreakable` takes priority
