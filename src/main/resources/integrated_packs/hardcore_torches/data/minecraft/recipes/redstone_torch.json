@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "G": [
+      {
+        "item": "minecraft:grass"
+      },
+      {
+        "item": "minecraft:fern"
+      },
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "minecraft:seagrass"
+      },
+      {
+        "item": "minecraft:glow_lichen"
+      }
+    ]
+  },
+  "pattern": [
+    "XG",
+    "# "
+  ],
+  "result": {
+    "item": "minecraft:redstone_torch",
+    "count": 2
+  },
+  "show_notification": true
+}

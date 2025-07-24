@@ -2,6 +2,7 @@
 
 ## Upcoming
 ### Changes
+* Redstone torches now require grass like items like normal torches but craft 2
 * Increased back Deepers damage (60% -> 75%)
 
 ## 4.17.7
