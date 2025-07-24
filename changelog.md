@@ -1,8 +1,5 @@
 # Changelog
 
-* mnobs are always enchanted
-* enchantment.stamina.vigour.des
-
 ## Upcoming
 ### Additions
 * Item tag `iguanatweaksreborn:unbreakable`
@@ -13,11 +10,12 @@
 
 ### Fixes
 * Flint and steel repair requiring Soul Steel
+* Zombies and Skeletons always spawning with enchanted gear
 
 ## 4.17.6
 ### Additions
 * You can now look at some blocks and get hud infos like when holding certain items like clock
-  * By default works with supplementaries:clock_block
+  * Works with supplementaries:clock_block by default
 
 ### Changes
 * Slowed down mulberry growth speed

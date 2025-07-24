@@ -179,22 +179,27 @@
                             }
                         ]
                     },
-                    "chance": {
-                        "value": 0.15,
-                        "modifiers": [
-                            {
-                                "modifier": "condition",
-                                "operation": "add",
-                                "value": 0.10,
-                                "conditions": [
+                    "conditions": [
+                        {
+                            "condition": "chance",
+                            "chance": {
+                                "value": 0.15,
+                                "modifiers": [
                                     {
-                                        "condition": "moon_phase",
-                                        "phases": [ "full_moon" ]
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "moon_phase",
+                                                "phases": [ "full_moon" ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             ]
         },
@@ -222,22 +227,27 @@
                             }
                         ]
                     },
-                    "chance": {
-                        "value": 0.15,
-                        "modifiers": [
-                            {
-                                "modifier": "condition",
-                                "operation": "add",
-                                "value": 0.10,
-                                "conditions": [
+                    "conditions": [
+                        {
+                            "condition": "chance",
+                            "chance": {
+                                "value": 0.15,
+                                "modifiers": [
                                     {
-                                        "condition": "moon_phase",
-                                        "phases": [ "full_moon" ]
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "moon_phase",
+                                                "phases": [ "full_moon" ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             ]
         },
@@ -265,22 +275,27 @@
                             }
                         ]
                     },
-                    "chance": {
-                        "value": 0.15,
-                        "modifiers": [
-                            {
-                                "modifier": "condition",
-                                "operation": "add",
-                                "value": 0.10,
-                                "conditions": [
+                    "conditions": [
+                        {
+                            "condition": "chance",
+                            "chance": {
+                                "value": 0.15,
+                                "modifiers": [
                                     {
-                                        "condition": "moon_phase",
-                                        "phases": [ "full_moon" ]
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "moon_phase",
+                                                "phases": [ "full_moon" ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             ]
         },
@@ -308,22 +323,27 @@
                             }
                         ]
                     },
-                    "chance": {
-                        "value": 0.15,
-                        "modifiers": [
-                            {
-                                "modifier": "condition",
-                                "operation": "add",
-                                "value": 0.10,
-                                "conditions": [
+                    "conditions": [
+                        {
+                            "condition": "chance",
+                            "chance": {
+                                "value": 0.15,
+                                "modifiers": [
                                     {
-                                        "condition": "moon_phase",
-                                        "phases": [ "full_moon" ]
+                                        "modifier": "condition",
+                                        "operation": "add",
+                                        "value": 0.10,
+                                        "conditions": [
+                                            {
+                                                "condition": "moon_phase",
+                                                "phases": [ "full_moon" ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             ]
         }
