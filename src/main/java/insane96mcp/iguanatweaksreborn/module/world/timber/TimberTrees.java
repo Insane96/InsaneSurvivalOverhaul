@@ -64,6 +64,7 @@ public class TimberTrees extends JsonFeature {
             new TreeInfo.Builder().log(IdTagMatcher.newId("atmospheric:kousa_log")).leaves(IdTagMatcher.newId("atmospheric:kousa_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newTag("iguanatweaksreborn:aspen_logs")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:aspen_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("atmospheric:laurel_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:laurel_leaves")).build(),
+            new TreeInfo.Builder().log(IdTagMatcher.newId("atmospheric:morado_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:morado_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:pine_log")).leaves(IdTagMatcher.newId("environmental:pine_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:plum_log")).leaves(IdTagMatcher.newTag("iguanatweaksreborn:plum_leaves")).build(),
             new TreeInfo.Builder().log(IdTagMatcher.newId("environmental:willow_log")).leaves(IdTagMatcher.newId("environmental:willow_leaves")).build(),
