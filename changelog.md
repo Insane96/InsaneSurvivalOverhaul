@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Heavily reduced projectile protection mobs sight reduction (15% -> 5% per level)
+
 ### Fixes
 * Atmospheric morado leaves not timbering
 

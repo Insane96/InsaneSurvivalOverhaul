@@ -270,7 +270,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (lvl < 1)
 			return;
 
-		event.modifyVisibility(1f - 0.15f * lvl);
+		event.modifyVisibility(1f - 0.05f * lvl);
 	}
 
 	public static float bonusDamageEnchantment(Enchantment enchantment, int lvl, LivingEntity attacker, Entity target) {
