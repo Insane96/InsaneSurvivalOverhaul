@@ -1,5 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.world.seasons;
 
+import com.google.gson.*;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
@@ -7,6 +11,7 @@ import insane96mcp.iguanatweaksreborn.event.TideHookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
+import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
@@ -14,9 +19,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -24,7 +29,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -42,11 +46,14 @@ import sereneseasons.season.SeasonHandler;
 import sereneseasons.season.SeasonSavedData;
 import sereneseasons.season.SeasonTime;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @LoadFeature(module = Modules.Ids.WORLD, requiresMods = {"sereneseasons"}, description = "Change a few things relative to Serene Seasons. Grass and tall grass decays in Winter and regrows back in Spring. Saplings are also transformed into Dead Bushes. This can be disabled with the iguanatweaks:doSeasonGrassGrowDeath game rule", enabledByDefault = false)
-public class Seasons extends Feature {
+public class Seasons extends JsonFeature {
 
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_SEASONGRASSGROWDEATH = GameRules.register("iguanatweaks:doSeasonGrassGrowDeath", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 
@@ -83,14 +90,36 @@ public class Seasons extends Feature {
 	@Config
 	public static Boolean growDoubleTallGrass = true;
 	@Config
-	public static Boolean growFlowersFromGrass = true;
+	public static Boolean growFlowersFromGrass = false;
 
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
+	public static final ArrayList<GrassTickingData> GRASS_GROWTH_DECAY_DEFAULT = new ArrayList<>(List.of(
+			new GrassTickingData(Season.SubSeason.EARLY_SPRING, 1000, GrassTickingType.GROW, 12, false, false),
+			new GrassTickingData(Season.SubSeason.MID_SPRING, 1000, GrassTickingType.GROW, 12, false, true),
+			new GrassTickingData(Season.SubSeason.LATE_SPRING, 1000, GrassTickingType.GROW, 12, false, true),
+			new GrassTickingData(Season.SubSeason.EARLY_SUMMER, 2000, GrassTickingType.GROW, 10, true, true),
+			new GrassTickingData(Season.SubSeason.MID_SUMMER, 2000, GrassTickingType.GROW, 8, true, false),
+			new GrassTickingData(Season.SubSeason.LATE_SUMMER, 2000, GrassTickingType.GROW, 7, true, false),
+			new GrassTickingData(Season.SubSeason.EARLY_AUTUMN, 2000, GrassTickingType.DECAY, 0, false, false),
+			new GrassTickingData(Season.SubSeason.MID_AUTUMN, 1000, GrassTickingType.DECAY, 0, false, false),
+			new GrassTickingData(Season.SubSeason.LATE_AUTUMN, 500, GrassTickingType.DECAY, 0, false, false),
+			new GrassTickingData(Season.SubSeason.EARLY_WINTER, 200, GrassTickingType.DECAY, 0, false, false),
+			new GrassTickingData(Season.SubSeason.MID_WINTER, 100, GrassTickingType.DECAY, 0, false, false),
+			new GrassTickingData(Season.SubSeason.LATE_WINTER, 400, GrassTickingType.DECAY, 0, false, false)
+	));
+	public static final ArrayList<GrassTickingData> grassGrowthDecay = new ArrayList<>();
+
+	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
 		InsaneSO.addServerPack("leaves_drops", "Insane's Survival Overhaul Leaves Drops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && leavesDrops);
 		if (ModList.get().isLoaded("tide"))
 			MinecraftForge.EVENT_BUS.addListener(Seasons::shouldTideSlowdownFishing);
+		JSON_CONFIGS.add(new JsonConfig<>("grass_growth_decay.json", grassGrowthDecay, GRASS_GROWTH_DECAY_DEFAULT, GrassTickingData.LIST_TYPE));
+	}
+
+	@Override
+	public String getModConfigFolder() {
+		return InsaneSO.CONFIG_FOLDER;
 	}
 
 	@Override
@@ -150,34 +179,32 @@ public class Seasons extends Feature {
 			return;
 		GrassTickingData data = oData.get();
 
-		BlockPos abovePos = pos.above();
-		if (level.getBrightness(LightLayer.SKY, abovePos) < data.lightLevel)
+		if (level.getBrightness(LightLayer.SKY, pos) < data.lightLevel)
 			return;
 		if (data.grassTickingType == GrassTickingType.DECAY
 				&& (state.is(PLANTS_TO_DECAY) || state.is(PLANTS_TO_DEAD_BUSH))
 				&& level.getRandom().nextInt(data.chance) == 0) {
 			if (state.is(PLANTS_TO_DECAY))
-				level.setBlock(abovePos, Blocks.AIR.defaultBlockState(), 3);
+				level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 			else if (state.is(PLANTS_TO_DEAD_BUSH))
-				level.setBlock(abovePos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
+				level.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 		}
 		else if (data.grassTickingType == GrassTickingType.GROW) {
-			if (state.is(Blocks.GRASS_BLOCK)
+			if (state.isAir()
+					&& level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)
 					&& level.getRandom().nextInt(data.chance) == 0) {
-				BlockState stateUp = level.getBlockState(abovePos);
-				if (stateUp.isAir()) {
-					Optional<Holder.Reference<PlacedFeature>> oPlacedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
-					oPlacedFeature.ifPresent(placedFeatureReference ->
-							placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, abovePos));
-				}
+				Optional<Holder.Reference<PlacedFeature>> oPlacedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
+				oPlacedFeature.ifPresent(placedFeatureReference ->
+						placedFeatureReference.value().place(level, level.getChunkSource().getGenerator(), level.random, pos));
 			}
 			else if (state.is(Blocks.GRASS) || state.is(Blocks.FERN)) {
 				if (growDoubleTallGrass && data.canGrowTall
+						&& level.getBlockState(pos.above()).canBeReplaced()
 						&& level.getRandom().nextInt(data.chance) == 0) {
 					if (state.is(Blocks.GRASS))
-						DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 2);
+						DoublePlantBlock.placeAt(level, Blocks.TALL_GRASS.defaultBlockState(), pos, 3);
 					else if (state.is(Blocks.FERN))
-						DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 2);
+						DoublePlantBlock.placeAt(level, Blocks.LARGE_FERN.defaultBlockState(), pos, 3);
 				}
 				else if (growFlowersFromGrass && data.canGrowFlower
 						&& level.getRandom().nextInt(data.chance * 10) == 0) {
@@ -192,38 +219,63 @@ public class Seasons extends Feature {
 		}
 	}
 
-	record ChunkAndHolder(LevelChunk chunk, ChunkHolder holder) {}
-
-	public static final List<GrassTickingData> GRASS_TICKING_DATA = List.of(
-			new GrassTickingData(Season.SubSeason.EARLY_SPRING, 275, GrassTickingType.GROW, 7, true, true),
-			new GrassTickingData(Season.SubSeason.MID_SPRING, 275, GrassTickingType.GROW, 7, true, true),
-			new GrassTickingData(Season.SubSeason.LATE_SPRING, 275, GrassTickingType.GROW, 8, true, true),
-			new GrassTickingData(Season.SubSeason.EARLY_SUMMER, 550, GrassTickingType.GROW, 10, true, true),
-			new GrassTickingData(Season.SubSeason.MID_SUMMER, 1100, GrassTickingType.GROW, 12, false, false),
-			new GrassTickingData(Season.SubSeason.LATE_SUMMER, 1100, GrassTickingType.GROW, 12, false, false),
-			new GrassTickingData(Season.SubSeason.EARLY_AUTUMN, 2000, GrassTickingType.DECAY, 0, false, false),
-			new GrassTickingData(Season.SubSeason.MID_AUTUMN, 1000, GrassTickingType.DECAY, 0, false, false),
-			new GrassTickingData(Season.SubSeason.LATE_AUTUMN, 500, GrassTickingType.DECAY, 0, false, false),
-			new GrassTickingData(Season.SubSeason.EARLY_WINTER, 200, GrassTickingType.DECAY, 0, false, false),
-			new GrassTickingData(Season.SubSeason.MID_WINTER, 100, GrassTickingType.DECAY, 0, false, false),
-			new GrassTickingData(Season.SubSeason.LATE_WINTER, 400, GrassTickingType.DECAY, 0, false, false)
-	);
-
+	@JsonAdapter(GrassTickingData.Serializer.class)
 	public record GrassTickingData(Season.SubSeason subSeason, int chance, GrassTickingType grassTickingType, int lightLevel, boolean canGrowTall, boolean canGrowFlower) {
+		public static final Type LIST_TYPE = new TypeToken<ArrayList<GrassTickingData>>(){}.getType();
+
 		public boolean shouldTick(Level level) {
 			return chance > 0 && (grassTickingType == GrassTickingType.DECAY || level.isDay());
 		}
 
 		public static Optional<GrassTickingData> get(Season.SubSeason subSeason) {
-			for (GrassTickingData grassTickingData : GRASS_TICKING_DATA) {
+			for (GrassTickingData grassTickingData : grassGrowthDecay) {
 				if (grassTickingData.subSeason == subSeason)
 					return Optional.of(grassTickingData);
 			}
 			return Optional.empty();
 		}
+
+		public static class Serializer implements JsonDeserializer<GrassTickingData>, JsonSerializer<GrassTickingData> {
+			@Override
+			public GrassTickingData deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+				JsonObject jObject = json.getAsJsonObject();
+				String subSeasonStr = jObject.get("sub_season").getAsString().toUpperCase();
+				Season.SubSeason subSeason = null;
+				try {
+					subSeason = Season.SubSeason.valueOf(subSeasonStr);
+				} catch (IllegalArgumentException e) {
+					throw new JsonParseException("Unknown sub_season: " + subSeasonStr, e);
+				}
+
+				int chance = GsonHelper.getAsInt(jObject, "chance");
+				GrassTickingType grassTickingType = context.deserialize(jObject.get("grass_ticking_type"), GrassTickingType.class);
+				int lightLevel = GsonHelper.getAsInt(jObject, "light_level", 0);
+				boolean canGrowTall = GsonHelper.getAsBoolean(jObject, "can_grow_tall", false);
+				boolean canGrowFlower = GsonHelper.getAsBoolean(jObject, "can_grow_flower", false);
+				return new GrassTickingData(subSeason, chance, grassTickingType, lightLevel, canGrowTall, canGrowFlower);
+			}
+
+			@Override
+			public JsonElement serialize(GrassTickingData src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+				JsonObject jsonObject = new JsonObject();
+				jsonObject.addProperty("sub_season", src.subSeason.name().toLowerCase(Locale.ROOT));
+				jsonObject.addProperty("chance", src.chance);
+				jsonObject.add("grass_ticking_type", context.serialize(src.grassTickingType));
+				if (src.lightLevel > 0)
+					jsonObject.addProperty("light_level", src.lightLevel);
+				if (src.canGrowTall)
+					jsonObject.addProperty("can_grow_tall", true);
+				if (src.canGrowFlower)
+					jsonObject.addProperty("can_grow_flower", true);
+
+				return jsonObject;
+			}
+		}
 	}
 	public enum GrassTickingType {
+		@SerializedName("grow")
 		GROW,
+		@SerializedName("decay")
 		DECAY
 	}
 
@@ -246,10 +298,10 @@ public class Seasons extends Feature {
 		Season season = SeasonHelper.getSeasonState(level).getSeason();
 		//Chance to slowdown fishing
 		float rng = switch (season) {
-			case SPRING -> 0.1F;
-			case SUMMER -> 0.0F;
-			case AUTUMN -> 0.2F;
-			case WINTER -> 0.5F;
+			case SPRING -> 0.0F;
+			case SUMMER -> 0.25F;
+			case AUTUMN -> 0.0F;
+			case WINTER -> 0.75F;
 		};
 		return level.getRandom().nextFloat() < rng;
 	}

@@ -3,9 +3,13 @@
 ## Upcoming
 ### Changes
 * Heavily reduced projectile protection mobs sight reduction (15% -> 5% per level)
+* Grass Grow/decay is now a json config in `World/Seasons/grass_growth_decay.json`
+  * The default config has been adjusted
 
 ### Fixes
 * Atmospheric morado leaves not timbering
+* Grass grow/decay not working
+* Tall grass growing replacing blocks above
 
 ## 4.17.9
 ### Changes
