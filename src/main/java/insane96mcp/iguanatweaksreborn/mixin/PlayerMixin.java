@@ -29,7 +29,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -127,8 +126,7 @@ public abstract class PlayerMixin extends LivingEntity {
 		if (!MiscStats.sweepingOverhaul
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
-		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
-		return original.inflate(0.5f + lvl * 0.5f, 0.05f + lvl * 0.05f, 0.5f + lvl * 0.25f);
+		return original.inflate(1.5f, 0.15f, 1.5f);
 	}
 
 	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getEntityReach()D"))
@@ -136,8 +134,7 @@ public abstract class PlayerMixin extends LivingEntity {
 		if (!MiscStats.sweepingOverhaul
 				|| !Feature.isEnabled(MiscStats.class))
 			return original;
-		int lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this);
-		return original + 0.5f + lvl * 0.25f;
+		return original + 1f;
 	}
 
 	@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", shift = At.Shift.AFTER))

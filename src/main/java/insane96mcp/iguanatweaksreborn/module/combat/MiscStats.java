@@ -4,9 +4,7 @@ import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
-import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.SweepingEdge;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
-import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -25,8 +23,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -34,7 +30,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,8 +39,6 @@ import java.util.stream.Collectors;
 
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class MiscStats extends Feature {
-	public static final RegistryObject<Enchantment> SWEEPING_EDGE = ISORegistries.ENCHANTMENTS.register("sweeping_edge", SweepingEdge::new);
-
 	@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
 	public static Boolean fixTooltips = true;
 	@Config(description = "Changes Strength and Weakness +/-3 damage per level to +/-20% damage per level. (Requires a Minecraft restart)")
@@ -56,14 +49,14 @@ public class MiscStats extends Feature {
 	public static Boolean betterHealingPotion = true;
 	@Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
 	public static Boolean oneDamageForToolAttacking = true;
-	@Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the Sweeping Edge enchantment increases the range. This also replaces the vanilla sweeping edge enchantment with a new one that can be applied to hoes instead of swords.")
+	@Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. Sweeping edge enchantment has been disabled via the enchantments feature disable_enchantments.json")
 	public static Boolean sweepingOverhaul = true;
 
 	@Config(description = "Enables a data pack that reworks armor, weapons and tools.")
 	public static Boolean combatReworkDataPack = true;
 
-	public MiscStats(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && combatReworkDataPack);
 	}
 
@@ -88,7 +81,6 @@ public class MiscStats extends Feature {
 		if (sweepingOverhaul) {
 			ToolActions.DEFAULT_SWORD_ACTIONS.remove(ToolActions.SWORD_SWEEP);
 			ToolActions.DEFAULT_HOE_ACTIONS.add(ToolActions.SWORD_SWEEP);
-			Enchantments.SWEEPING_EDGE = SWEEPING_EDGE.get();
 		}
 		else {
             ToolActions.DEFAULT_SWORD_ACTIONS.add(ToolActions.SWORD_SWEEP);

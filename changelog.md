@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.17.9
+### Changes
+* Sweeping overhaul
+  * Removed mod's sweeping enchantment. Hoes sweeping reach has been increased without enchantments
+  * Vanilla Sweeping enchantment is still disabled
+
 ## 4.17.8
 ### Changes
 * Redstone torches now require grass like items like normal torches but craft 2
