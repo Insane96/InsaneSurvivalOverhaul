@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.17.10
 ### Changes
 * Heavily reduced projectile protection mobs sight reduction (15% -> 5% per level)
 * Grass Grow/decay is now a json config in `World/Seasons/grass_growth_decay.json`
