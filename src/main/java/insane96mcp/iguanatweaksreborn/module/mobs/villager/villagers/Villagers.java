@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.mixin.VillagerDataAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.insanelib.base.Feature;
@@ -23,6 +24,7 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ public class Villagers extends Feature {
 
 	public static ResourceLocation CURE_DISCOUNT_REMOVED;
 	public static ResourceLocation WAS_CONVERTED_ZOMBIE;
+	private static final int[] VANILLA_LEVEL_UP_XP = new int[]{0, 10, 70, 150, 250};
 
 	@Config(description = "If true, villagers will be given 1 trading experience as soon as they choose their job to lock the trades.")
 	public static Boolean lockTrades = true;
@@ -48,6 +51,8 @@ public class Villagers extends Feature {
 	public static Double nitwitChance = 0.1d;
 	@Config(description = "If true, the effect can no longer be applied to entities")
 	public static Boolean removeBadOmen = false;
+	@Config(description = "Multiplier to experience required by villagers to level up")
+	public static Double experienceToLevelUpMultiplier = 1.3d;
 	@Config(description = "Enables a data pack that changes villagers trades")
 	public static Boolean tradesDataPack = true;
 
@@ -56,6 +61,15 @@ public class Villagers extends Feature {
 		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
 		CURE_DISCOUNT_REMOVED = this.createDataKey("cure_discount_removed");
 		WAS_CONVERTED_ZOMBIE = this.createDataKey("was_converted_zombie");
+	}
+
+	@Override
+	public void readConfig(ModConfigEvent event) {
+		super.readConfig(event);
+		int[] newLevelUpXp = new int[5];
+		for (int i = 0; i < newLevelUpXp.length; i++)
+			newLevelUpXp[i] = (int) (VANILLA_LEVEL_UP_XP[i] * experienceToLevelUpMultiplier);
+		VillagerDataAccessor.setNextLevelXpThresholds(newLevelUpXp);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
