@@ -1,0 +1,26 @@
+[
+    {
+        "level": 4,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:glass_bottle",
+                    "count": 9
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 30
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 5
+                },
+                "result": "minecraft:ender_pearl",
+                "max_uses": 12,
+                "xp": 15
+            }
+        ]
+    }
+]
