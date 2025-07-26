@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Potatoes can now drop again poisonous potatoes
+
 ## 4.17.11
 ### Additions
 * Villagers' Xp to level up multiplier
