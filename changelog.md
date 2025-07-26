@@ -2,8 +2,8 @@
 
 ## Upcoming
 ### Changes
-* Rebalanced Armorer and Cartographer trades
-  * Based off new villager rebalance experiment
+* Rebalanced Armorer, Toolsmith and Cartographer trades
+  * Based off new villager rebalance experiment, except that you can trade for gear less often
 * Added back flat bonus durability and efficiency
   * Now configurable
 
