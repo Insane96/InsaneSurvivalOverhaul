@@ -1,0 +1,40 @@
+[
+    {
+        "level": 2,
+        "remove": false,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 2
+                },
+                "result": "iguanatweaksreborn:shortbow",
+                "max_uses": 12,
+                "xp": 5
+            }
+        ]
+    },
+    {
+        "level": 4,
+        "remove": false,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": {
+                        "min": 7,
+                        "max": 21
+                    }
+                },
+                "result": "iguanatweaksreborn:shortbow",
+                "enchant_randomly": {
+                    "min_levels": 5,
+                    "max_levels": 19,
+                    "treasure": false
+                },
+                "max_uses": 3,
+                "xp": 15
+            }
+        ]
+    }
+]
