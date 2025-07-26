@@ -1,9 +1,8 @@
 # Changelog
 
-* Change villagers trades to have more materials and tools
-
 ## Upcoming
 ### Changes
+* Rebalanced Armorer trades
 * Added back flat bonus durability and efficiency
   * Now configurable
 
