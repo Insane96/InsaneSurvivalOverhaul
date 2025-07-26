@@ -1,0 +1,13 @@
+{
+    "values": [
+        "minecraft:witch_hut",
+        {
+            "id": "#betterwitchhuts:better_witch_hut",
+            "required": false
+        },
+        {
+            "id": "#betterwitchhuts:witch_circle",
+            "required": false
+        }
+    ]
+}

@@ -41,6 +41,7 @@ public class WanderingTrades extends JsonFeature {
     public static final TagKey<Structure> TRAIL_RUINS_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("trail_ruins"));
     public static final TagKey<Structure> JUNGLE_PYRAMID_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("jungle_pyramid"));
     public static final TagKey<Structure> IGLOO_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("igloo"));
+    public static final TagKey<Structure> SWAMP_HUT_TAG = TagKey.create(Registries.STRUCTURE, InsaneSO.location("swamp_hut"));
 
     public static final TagKey<Item> CORAL_BLOCKS = ISOItemTagsProvider.create("coral_blocks");
 
@@ -117,6 +118,11 @@ public class WanderingTrades extends JsonFeature {
                     .setItemA(Items.EMERALD, Count.of(8), null)
                     .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.trail_ruins")))
                     .explorationMap(TRAIL_RUINS_TAG, MapDecoration.Type.TARGET_POINT, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
+
+            new SerializableTrade()
+                    .setItemA(Items.EMERALD, Count.of(8), null)
+                    .setResult(Items.MAP, Count.ONE, getHoverNameNBT(Items.MAP, 1, Component.translatable("filled_map.swamp_hut")))
+                    .explorationMap(SWAMP_HUT_TAG, MapDecoration.Type.TARGET_POINT, ExplorationMapFunction.DEFAULT_ZOOM, 50, false),
 
             new SerializableTrade()
                     .setItemA(Items.EMERALD, Count.of(8), null)

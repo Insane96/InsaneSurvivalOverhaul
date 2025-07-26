@@ -2,7 +2,8 @@
 
 ## Upcoming
 ### Changes
-* Rebalanced Armorer trades
+* Rebalanced Armorer and Cartographer trades
+  * Based off new villager rebalance experiment
 * Added back flat bonus durability and efficiency
   * Now configurable
 
