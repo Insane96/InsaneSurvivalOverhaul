@@ -180,6 +180,10 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 		return new MerchantOffer(stackA, stackB, result, this.maxUses, this.xp, 1f);
 	}
 
+	public boolean isValid() {
+		return this.valid;
+	}
+
 	public static final Type LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
 
 	public static class SerializableTradeSerializer implements JsonDeserializer<SerializableTrade>, JsonSerializer<SerializableTrade> {

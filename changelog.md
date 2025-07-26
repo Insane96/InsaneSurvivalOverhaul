@@ -1,8 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Villagers' Xp to level up multiplier
+
 ### Changes
-* Rebalanced Armorer, Toolsmith and Cartographer trades
+* Rebalanced Armorer, Toolsmith, Weaponsmith and Cartographer trades
   * Based off new villager rebalance experiment, except that you can trade for gear less often
 * Added back flat bonus durability and efficiency
   * Now configurable

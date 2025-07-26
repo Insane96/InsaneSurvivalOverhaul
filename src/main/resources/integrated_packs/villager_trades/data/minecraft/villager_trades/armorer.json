@@ -145,7 +145,7 @@
                 "item_a": "minecraft:lava_bucket",
                 "result": "minecraft:emerald",
                 "max_uses": 12,
-                "xp": 20
+                "xp": 10
             },
             {
                 "item_a": {

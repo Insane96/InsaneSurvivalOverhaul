@@ -19,8 +19,9 @@ public class VillagerTrade {
         this.level = level;
     }
 
-    private void addTrade(SerializableTrade trade) {
-        trades.add(trade);
+    private void addTradeIfValid(SerializableTrade trade) {
+        if (trade.isValid())
+            trades.add(trade);
     }
 
     public static final Type LIST_TYPE = new TypeToken<ArrayList<VillagerTrade>>(){}.getType();
@@ -34,7 +35,7 @@ public class VillagerTrade {
             villagerTrade.lowPriority = GsonHelper.getAsBoolean(jObject, "low_priority", false);
             JsonArray trades = GsonHelper.getAsJsonArray(jObject, "trades");
             for (JsonElement trade : trades) {
-                villagerTrade.addTrade(context.deserialize(trade, SerializableTrade.class));
+                villagerTrade.addTradeIfValid(context.deserialize(trade, SerializableTrade.class));
             }
             return villagerTrade;
         }

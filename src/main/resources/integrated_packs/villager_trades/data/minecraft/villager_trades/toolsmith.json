@@ -103,7 +103,7 @@
                 },
                 "result": "minecraft:emerald",
                 "max_uses": 12,
-                "xp": 20
+                "xp": 10
             },
             {
                 "item_a": {
@@ -112,7 +112,16 @@
                 },
                 "result": "minecraft:emerald",
                 "max_uses": 12,
-                "xp": 20
+                "xp": 10
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 36
+                },
+                "result": "minecraft:bell",
+                "max_uses": 12,
+                "xp": 10
             }
         ]
     },
@@ -130,7 +139,7 @@
                     "count": 1
                 },
                 "result": "minecraft:diamond_axe",
-                "max_uses": 3,
+                "max_uses": 1,
                 "xp": 15
             },
             {
@@ -143,7 +152,7 @@
                     "count": 1
                 },
                 "result": "minecraft:diamond_pickaxe",
-                "max_uses": 3,
+                "max_uses": 1,
                 "xp": 15
             },
             {
@@ -302,7 +311,7 @@
                     "max_levels": 5,
                     "treasure": false
                 },
-                "max_uses": 3,
+                "max_uses": 1,
                 "xp": 30
             },
             {
@@ -320,7 +329,7 @@
                     "max_levels": 5,
                     "treasure": false
                 },
-                "max_uses": 3,
+                "max_uses": 1,
                 "xp": 30
             },
             {
