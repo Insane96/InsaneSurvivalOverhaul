@@ -23,6 +23,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.integration
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinition;
 import insane96mcp.iguanatweaksreborn.module.items.misc.ItemDefinitionsReloadListener;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
+import insane96mcp.iguanatweaksreborn.world.item.DurabilityModifier;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -40,6 +41,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -82,15 +84,29 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static final RegistryObject<Enchantment> FEATHER_FALLING = ISORegistries.ENCHANTMENTS.register("feather_falling", FeatherFalling::new);
 	@Config(description = "Infinity can go up to level 4. Each level makes an arrow have only 1 in level+1 chance to consume. E.g. with Infinity 4 there's 1 in 5 chance to consume the arrow, and 4 in 5 to not consume it.")
 	public static Boolean infinityOverhaul = true;
-	@Config(description = "Unbreaking increases tool durability by 75% per level")
-	public static Boolean unbreakingOverhaul = true;
+	@Config(description = "Changes Unbreaking max level and actually increases item's durability instead of giving a chance for the item to not consume durability.")
+	public static Boolean unbreakingOverhaul$enable = true;
+	@Config
+	public static Integer unbreakingOverhaul$maxLevel = 5;
+	@Config
+	public static Double unbreakingOverhaul$percentageIncrease = 0.20d;
+	@Config
+	public static Integer unbreakingOverhaul$flatIncrease$armor = 10;
+	@Config
+	public static Integer unbreakingOverhaul$flatIncrease$shields = 15;
+	@Config
+	public static Integer unbreakingOverhaul$flatIncrease$tools = 25;
+	@Config(description = "Change the bonus efficiency formula from `lvl*lvl+1` to a percentage and flat increase.")
+	public static Boolean efficiencyOverhaul$enable = true;
+	@Config
+	public static Double efficiencyOverhaul$percentageIncrease = 0.20d;
+	@Config
+	public static Double efficiencyOverhaul$flatIncrease = 0.5d;
 	@Config(description = "Changes Multishot to actually load 3 arrows, instead of materializing 2 arrows from thin air")
 	public static Boolean actualMultishot = true;
 	@Config(description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
 	public static Boolean thornsOverhaul = true;
 
-	@Config(name = "Tool Mining Speed Scaled Efficiency Formula", description = "Change the bonus efficiency formula from `lvl*lvl+1` to `tool_mining_speed * (0.5*lvl)`")
-	public static Boolean changeEfficiencyFormula = true;
 	@Config(description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
 	public static Boolean nerfMending = true;
 	@Config(description = "Respiration decreases air consumption by 50% per level instead of 100%.")
@@ -200,24 +216,39 @@ public class EnchantmentsFeature extends JsonFeature {
 		return false;
 	}
 
-	public static boolean isUnbreakingOverhaul() {
-		return Feature.isEnabled(EnchantmentsFeature.class) && unbreakingOverhaul;
+	public static boolean isUnbreakingOverhaulEnabled() {
+		return Feature.isEnabled(EnchantmentsFeature.class) && unbreakingOverhaul$enable;
 	}
 
 	@SubscribeEvent
 	public void onStackDurability(StackMaxDamageEvent event) {
-		if (!this.isEnabled()
-				|| !unbreakingOverhaul)
+		if (!isUnbreakingOverhaulEnabled())
 			return;
 
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.UNBREAKING);
 		if (lvl <= 0)
 			return;
-		event.setNewMaxDamage(Math.round(event.getNewMaxDamage() * (1f + lvl * 0.2f)));
+		event.setNewMaxDamage((int) ((event.getNewMaxDamage() + getBonusFlatUnbreakingDurability(event.getStack()) * lvl) * (1f + lvl * unbreakingOverhaul$percentageIncrease)));
+	}
+
+	public static int getBonusFlatUnbreakingDurability(ItemStack stack) {
+		float durModifier = stack.getItem() instanceof DurabilityModifier durabilityModifier
+				? durabilityModifier.getDurabilityMultiplier(stack)
+				: 1f;
+		for (ItemDefinition definition : ItemDefinitionsReloadListener.DEFINITIONS) {
+			if (!definition.item().matchesItem(stack))
+				continue;
+
+			if (definition.durability() != null && definition.durability().durabilityMultiplier != null)
+				durModifier *= definition.durability().durabilityMultiplier;
+		}
+		if (stack.getItem() instanceof ShieldItem)
+			return (int) (unbreakingOverhaul$flatIncrease$shields * durModifier);
+		return (int) ((stack.getItem() instanceof ArmorItem ? unbreakingOverhaul$flatIncrease$armor : unbreakingOverhaul$flatIncrease$tools) * durModifier);
 	}
 
 	public static boolean isBetterEfficiencyFormula() {
-		return Feature.isEnabled(EnchantmentsFeature.class) && changeEfficiencyFormula;
+		return Feature.isEnabled(EnchantmentsFeature.class) && efficiencyOverhaul$enable;
 	}
 
 	@SubscribeEvent
@@ -231,7 +262,8 @@ public class EnchantmentsFeature extends JsonFeature {
 			return 0f;
 		if (!isBetterEfficiencyFormula())
 			return 1 + (lvl * lvl);
-        return baseEfficiency * lvl * 0.2f;
+		float flatBonus = efficiencyOverhaul$flatIncrease.floatValue() * lvl;
+        return flatBonus + (baseEfficiency + flatBonus) * lvl * efficiencyOverhaul$percentageIncrease.floatValue();
 	}
 
 	public static boolean isThornsOverhaul() {

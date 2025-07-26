@@ -1,5 +1,12 @@
 # Changelog
 
+* Change villagers trades to have more materials and tools
+
+## Upcoming
+### Changes
+* Added back flat bonus durability and efficiency
+  * Now configurable
+
 ## 4.17.10
 ### Changes
 * Heavily reduced projectile protection mobs sight reduction (15% -> 5% per level)
@@ -19,7 +26,7 @@
 
 ## 4.17.8
 ### Changes
-* Redstone torches now require grass like items like normal torches but craft 2
+* Redstone torches now require grass like items, like normal torches, but craft 2
 * Increased back Deepers damage (60% -> 75%)
 
 ## 4.17.7

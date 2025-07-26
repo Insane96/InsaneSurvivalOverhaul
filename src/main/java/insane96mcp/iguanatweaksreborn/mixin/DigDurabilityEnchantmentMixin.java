@@ -10,15 +10,15 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class DigDurabilityEnchantmentMixin {
 	@ModifyReturnValue(at = @At(value = "RETURN"), method = "shouldIgnoreDurabilityDrop")
 	private static boolean iguanatweaksreborn$preventDurabilityDrop(boolean original) {
-		if (EnchantmentsFeature.isUnbreakingOverhaul())
+		if (EnchantmentsFeature.isUnbreakingOverhaulEnabled())
 			return false;
 		return original;
 	}
 
 	@ModifyReturnValue(at = @At(value = "RETURN"), method = "getMaxLevel")
 	private int iguanatweaksreborn$maxLevel(int original) {
-		if (EnchantmentsFeature.isUnbreakingOverhaul())
-			return 5;
+		if (EnchantmentsFeature.isUnbreakingOverhaulEnabled())
+			return EnchantmentsFeature.unbreakingOverhaul$maxLevel;
 		return original;
 	}
 }
