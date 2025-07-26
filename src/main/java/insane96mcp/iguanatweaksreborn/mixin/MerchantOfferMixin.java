@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.Villagers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -33,5 +34,10 @@ public class MerchantOfferMixin {
 	@Inject(at = @At("TAIL"), method = "updateDemand")
 	private void updateDemand(CallbackInfo callbackInfo) {
 		this.demand = Villagers.clampDemand(this.demand, this.maxUses);
+	}
+
+	@ModifyExpressionValue(method = "getCostA", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+	private int iguanatweaksreborn$preventClampStackSize(int original) {
+		return 64;
 	}
 }

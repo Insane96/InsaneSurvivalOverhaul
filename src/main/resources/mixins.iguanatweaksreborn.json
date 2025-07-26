@@ -65,6 +65,7 @@
         "LevelStorageSourceMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
+        "MerchantMenuMixin",
         "MerchantOfferMixin",
         "MilkBucketItemMixin",
         "MobAccessor",

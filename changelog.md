@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Potatoes can now drop again poisonous potatoes
+* Villagers trading slots now accept 64 items
 
 ## 4.17.11
 ### Additions
