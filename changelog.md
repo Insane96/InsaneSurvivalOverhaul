@@ -5,9 +5,11 @@
 * Villagers' Xp to level up multiplier
 
 ### Changes
-* Rebalanced Armorer, Toolsmith, Weaponsmith and Cartographer trades
-  * Based off new villager rebalance experiment, except that you can trade for gear less often
-* Clerics no longer buy turtle scutes and buy spider eyes instead of rotten flesh
+* Villagers trades
+  * Rebalanced Armorer, Toolsmith, Weaponsmith and Cartographer trades
+    * Based off new villager rebalance experiment, except that you can trade for gear less often
+  * Clerics no longer buy turtle scutes and buy spider eyes instead of rotten flesh
+  * Leatherworkers now buy cloth
 * Added back flat bonus durability and efficiency
   * Now configurable
 
