@@ -7,7 +7,7 @@
 ### Changes
 * Rebalanced Armorer, Toolsmith, Weaponsmith and Cartographer trades
   * Based off new villager rebalance experiment, except that you can trade for gear less often
-* Clerics no longer buy turtle scutes
+* Clerics no longer buy turtle scutes and buy spider eyes instead of rotten flesh
 * Added back flat bonus durability and efficiency
   * Now configurable
 

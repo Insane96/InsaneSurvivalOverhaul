@@ -1,5 +1,32 @@
 [
     {
+        "level": 1,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:spider_eye",
+                    "count": 8
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": {
+                    "item": "minecraft:redstone",
+                    "count": 2
+                },
+                "max_uses": 12,
+                "xp": 1
+            }
+        ]
+    },
+    {
         "level": 4,
         "remove": true,
         "trades": [
