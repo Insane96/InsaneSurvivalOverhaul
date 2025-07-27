@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -31,5 +32,13 @@ public class EnchantmentHelperMixin {
     @Inject(method = "getFishingLuckBonus", at = @At(value = "RETURN"), cancellable = true)
     private static void onGetFishingLuckBonus(ItemStack pStack, CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(EnchantmentsFeature.getLuckLevel(cir.getReturnValue(), pStack.getEnchantmentLevel(EnchantmentsFeature.LUCK.get())));
+    }
+
+    @ModifyReturnValue(method = "getLoyalty", at = @At(value = "RETURN"))
+    private static int iguanatweaksreborn$onGetLoyalty(int original) {
+        if (!EnchantmentsFeature.isLoyaltyMiniReworkEnabled()
+                || original == 0)
+            return original;
+        return 2;
     }
 }

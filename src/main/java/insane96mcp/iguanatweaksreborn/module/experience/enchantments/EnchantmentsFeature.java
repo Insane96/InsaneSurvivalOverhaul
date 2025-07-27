@@ -106,6 +106,8 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static Boolean actualMultishot = true;
 	@Config(description = "Thorns is no longer compatible with other protections, but deals damage every time (higher levels deal more damage) and no longer damages items.")
 	public static Boolean thornsOverhaul = true;
+	@Config(description = "Loyalty is now one level only, equal to lvl II of the original enchantment.")
+	public static Boolean loyaltyMiniRework = true;
 
 	@Config(description = "Mending only makes the tool repair by one durability every 2 xp instead of 2 durability/1 xp.")
 	public static Boolean nerfMending = true;
@@ -218,6 +220,10 @@ public class EnchantmentsFeature extends JsonFeature {
 
 	public static boolean isUnbreakingOverhaulEnabled() {
 		return Feature.isEnabled(EnchantmentsFeature.class) && unbreakingOverhaul$enable;
+	}
+
+	public static boolean isLoyaltyMiniReworkEnabled() {
+		return Feature.isEnabled(EnchantmentsFeature.class) && loyaltyMiniRework;
 	}
 
 	@SubscribeEvent

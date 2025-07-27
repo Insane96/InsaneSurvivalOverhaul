@@ -1,9 +1,12 @@
 # Changelog
 
-* Rework loyalty (1 level only, equal to III, 3 cost)
 * Rework impaling
 
 ## Upcoming
+### Additions
+* Loyalty Mini-rework
+  * Loyalty is now one level only, equal to original lvl II
+
 ### Changes
 * Rebalanced novice farmer and fletcher trades
 * The regenerating absorption effect now increases regen speed
