@@ -5,6 +5,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.Enchantment
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -44,5 +45,9 @@ public class Knockback extends Enchantment {
     @Override
     public boolean isDiscoverable() {
         return super.isDiscoverable() && EnchantmentsFeature.replaceOtherEnchantments && Feature.isEnabled(EnchantmentsFeature.class);
+    }
+
+    public static float getKnockback(LivingEntity living) {
+        return living.getMainHandItem().getEnchantmentLevel(EnchantmentsFeature.KNOCKBACK.get()) * 0.4f;
     }
 }

@@ -68,8 +68,8 @@ public class PiercingDamage extends Feature {
 		DamageSource piercingDamageSource = attacker.damageSources().source(PIERCING_MOB_ATTACK, attacker);
 		if (attacker instanceof Player player) {
 			piercingDamageSource = attacker.damageSources().source(PIERCING_PLAYER_ATTACK, attacker);
-			float f2 = player.getAttackStrengthScale(0.5F);
-			amount *= f2 * f2;
+			float f = player.getAttackStrengthScale(0.5F);
+			amount *= f * f;
 		}
 
 		MCUtils.attackEntityIgnoreInvFrames(piercingDamageSource, amount, event.getEntity(), event.getEntity(), true);

@@ -282,7 +282,7 @@ public class EnchantmentsFeature extends JsonFeature {
 		if (!(directAttacker instanceof LivingEntity attacker))
 			return;
 
-		float knockback = attacker.getMainHandItem().getEnchantmentLevel(KNOCKBACK.get());
+		float knockback = Knockback.getKnockback(attacker);
 		if (knockback == 0)
 			return;
 		if (attacker instanceof Player player) {

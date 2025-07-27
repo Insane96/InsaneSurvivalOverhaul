@@ -54,8 +54,10 @@ public class FireAspect extends Enchantment {
     @Override
     public void doPostAttack(@NotNull LivingEntity attacker, @NotNull Entity target, int lvl) {
         int ticks = this.secondsOnFirePerLevel() * lvl * 20 + 10;
-        if (attacker instanceof Player player)
-            ticks = (int) (ticks * player.getAttackStrengthScale(0.5f));
+        if (attacker instanceof Player player) {
+            float f = player.getAttackStrengthScale(0.5f);
+            ticks = (int) (ticks * f * f);
+        }
         if (target instanceof LivingEntity)
             ticks = ProtectionEnchantment.getFireAfterDampener((LivingEntity) target, ticks);
 
