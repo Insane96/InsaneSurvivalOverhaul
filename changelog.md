@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Lowered silver tools enchantability (11 -> 13)
+
 ## 4.18.0
 ### Additions
 * Loyalty Mini-rework
