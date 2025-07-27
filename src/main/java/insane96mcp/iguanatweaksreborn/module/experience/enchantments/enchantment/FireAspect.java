@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -53,6 +54,8 @@ public class FireAspect extends Enchantment {
     @Override
     public void doPostAttack(@NotNull LivingEntity attacker, @NotNull Entity target, int lvl) {
         int ticks = this.secondsOnFirePerLevel() * lvl * 20 + 10;
+        if (attacker instanceof Player player)
+            ticks = (int) (ticks * player.getAttackStrengthScale(0.5f));
         if (target instanceof LivingEntity)
             ticks = ProtectionEnchantment.getFireAfterDampener((LivingEntity) target, ticks);
 
@@ -61,6 +64,6 @@ public class FireAspect extends Enchantment {
     }
 
     public int secondsOnFirePerLevel() {
-        return 4;
+        return 3;
     }
 }

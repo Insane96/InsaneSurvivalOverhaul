@@ -4,6 +4,7 @@
 ### Changes
 * Rebalanced novice farmer and fletcher trades
 * The regenerating absorption effect now increases regen speed
+* Lowered Fire Aspect seconds on fire (4 -> 3 per level) and the seconds on fire now scale with player attack cooldown
 
 ### Fixes
 * Luck enchantment being harder to obtain compared to Silk Touch
