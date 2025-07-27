@@ -2,7 +2,7 @@
 
 ## Upcoming
 ### Changes
-* Rebalanced farmer trades
+* Rebalanced novice farmer and fletcher trades
 
 ## 4.17.12
 ### Changes

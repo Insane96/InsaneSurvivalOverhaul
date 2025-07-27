@@ -1,5 +1,52 @@
 [
     {
+        "level": 1,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:stick",
+                    "count": 32
+                },
+                "item_b": {
+                    "item": "minecraft:stick",
+                    "count": 32
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 2
+                },
+                "result": {
+                    "item": "minecraft:arrow",
+                    "count": 16
+                },
+                "max_uses": 12,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:gravel",
+                    "count": 10
+                },
+                "item_b": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": {
+                    "item": "minecraft:flint",
+                    "count": 10
+                },
+                "max_uses": 16,
+                "xp": 2
+            }
+        ]
+    },
+    {
         "level": 2,
         "remove": false,
         "trades": [
