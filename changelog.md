@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.18.0
 ### Additions
 * Loyalty Mini-rework
   * Loyalty is now one level only, equal to original lvl II
