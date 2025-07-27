@@ -4,6 +4,9 @@
 ### Changes
 * Rebalanced novice farmer and fletcher trades
 
+### Fixes
+* Luck enchantment being harder to obtain compared to Silk Touch
+
 ## 4.17.12
 ### Changes
 * Potatoes can now drop again poisonous potatoes

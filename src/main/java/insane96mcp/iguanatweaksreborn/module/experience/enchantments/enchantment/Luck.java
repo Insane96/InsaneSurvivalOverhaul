@@ -26,12 +26,12 @@ public class Luck extends LootBonusEnchantment {
 
     @Override
     public int getMinCost(int pEnchantmentLevel) {
-        return super.getMinCost(2);
+        return super.getMinCost(EnchantmentsFeature.isLuckOneLevelOnly() ? 1 : pEnchantmentLevel);
     }
 
     @Override
     public int getMaxCost(int pEnchantmentLevel) {
-        return super.getMaxCost(2);
+        return super.getMaxCost(EnchantmentsFeature.isLuckOneLevelOnly() ? 1 : pEnchantmentLevel);
     }
 
     @Override
