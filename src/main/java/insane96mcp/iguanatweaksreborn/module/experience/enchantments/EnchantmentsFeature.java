@@ -132,7 +132,8 @@ public class EnchantmentsFeature extends JsonFeature {
             Enchantments deal bonus damage based off the item's attack damage. So Sharpness on a Sword adds less damage than Sharpness on an Axe.
             Sharpness deals +0.5 damage per level
             Smite deals +1 damage per level to undead and applies weakness
-            Bane of Arthropods has been replaced with Bane of SSSSS that deals +1 damage per level to arthropods and creepers and applies slowness""")
+            Bane of Arthropods has been replaced with Bane of Hissing that deals +1 damage per level to arthropods and creepers and applies slowness.
+            Impaling is not replaced, but the bonus damage is lowered to 1 per level""")
 	public static Boolean replaceDamagingEnchantments = true;
 	@Config(description = "If true, Looting, Fortune and Luck of the Sea enchantments are replaced with a single one: Luck. Requires a Minecraft restart")
 	public static Boolean reworkBonusLootEnchantments = true;

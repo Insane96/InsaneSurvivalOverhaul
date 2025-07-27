@@ -1,11 +1,10 @@
 # Changelog
 
-* Rework impaling
-
 ## Upcoming
 ### Additions
 * Loyalty Mini-rework
   * Loyalty is now one level only, equal to original lvl II
+* Impaling damage lowered (2.5 -> 1 per level)
 
 ### Changes
 * Rebalanced novice farmer and fletcher trades

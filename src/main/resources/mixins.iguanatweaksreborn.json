@@ -95,6 +95,7 @@
         "ThrownEggMixin",
         "ThrownExperienceBottleMixin",
         "TieredItemAccessor",
+        "TridentImpalerEnchantmentMixin",
         "TridentLoyaltyEnchantmentMixin",
         "TurtleMixin",
         "VillagerDataAccessor",
