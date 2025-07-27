@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Rebalanced farmer trades
+
 ## 4.17.12
 ### Changes
 * Potatoes can now drop again poisonous potatoes

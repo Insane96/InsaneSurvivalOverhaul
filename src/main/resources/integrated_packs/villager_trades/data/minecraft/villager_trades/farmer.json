@@ -1,0 +1,53 @@
+[
+    {
+        "level": 1,
+        "remove": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:wheat",
+                    "count": 7
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:potato",
+                    "count": 8
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:carrot",
+                    "count": 7
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:beetroot",
+                    "count": 5
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 16,
+                "xp": 2
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "minecraft:bread",
+                "max_uses": 16,
+                "xp": 1
+            }
+        ]
+    }
+]
