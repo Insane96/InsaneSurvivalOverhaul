@@ -9,6 +9,7 @@
 * The regenerating absorption effect now increases regen speed
 * Lowered Fire Aspect seconds on fire (4 -> 3 per level) and the seconds on fire now scale with player attack cooldown
 * Heavily lowered Knockback strength (1 -> 0.4 per level) and now scales correctly with player attack cooldown
+* Decreased Shortbow charge time (0.9s -> 0.75s) and increased damage ratio (60% -> 75%)
 
 ### Fixes
 * Luck enchantment being harder to obtain compared to Silk Touch

@@ -13,10 +13,10 @@ public class ShortbowItem extends BowItem {
     public static float getPowerForTime(int chargeTicks) {
         float power = ((float)chargeTicks / getFullChargeTicks());
         power = (power * power + power * 2.0F) / 3.0F;
-        return Math.min(power, 1.0F) * 0.6f;
+        return Math.min(power, 1.0F) * 0.75f;
     }
 
     public static int getFullChargeTicks() {
-        return 18;
+        return 15;
     }
 }
