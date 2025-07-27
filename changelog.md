@@ -5,10 +5,11 @@
 * Rebalanced novice farmer and fletcher trades
 * The regenerating absorption effect now increases regen speed
 * Lowered Fire Aspect seconds on fire (4 -> 3 per level) and the seconds on fire now scale with player attack cooldown
-* Heavily lowered Knockback strength (1 -> 0.4 per level)
+* Heavily lowered Knockback strength (1 -> 0.4 per level) and now scales correctly with player attack cooldown
 
 ### Fixes
 * Luck enchantment being harder to obtain compared to Silk Touch
+* Trident item's definition overwriting ISE enchantability
 
 ## 4.17.12
 ### Changes
