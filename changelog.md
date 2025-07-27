@@ -1,5 +1,8 @@
 # Changelog
 
+* Rework loyalty (1 level only, equal to III, 3 cost)
+* Rework impaling
+
 ## Upcoming
 ### Changes
 * Rebalanced novice farmer and fletcher trades

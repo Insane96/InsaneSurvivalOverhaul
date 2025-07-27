@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = EnchantmentHelper.class)
+@Mixin(value = EnchantmentHelper.class, priority = 1001)
 public class EnchantmentHelperMixin {
     @WrapOperation(method = "getEnchantmentCost", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentValue()I"))
     private static int iguanatweaksreborn$onStackEnchantabilityGetEnchantmentCost(ItemStack instance, Operation<Integer> original) {
