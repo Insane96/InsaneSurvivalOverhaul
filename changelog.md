@@ -3,6 +3,7 @@
 ## Upcoming
 ### Changes
 * Rebalanced novice farmer and fletcher trades
+* The regenerating absorption effect now increases regen speed
 
 ### Fixes
 * Luck enchantment being harder to obtain compared to Silk Touch
