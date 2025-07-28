@@ -1,12 +1,11 @@
 # Changelog
 
-## Upcoming
-### Fixes
-* Golden shield repairable with silver
-
 ## 4.18.1
 ### Changes
 * Lowered silver tools enchantability (13 -> 12)
+
+### Fixes
+* Golden shield repairable with silver
 
 ## 4.18.0
 ### Additions
