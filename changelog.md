@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.18.1
 ### Changes
 * Lowered silver tools enchantability (13 -> 12)
 
