@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.teamabnormals.allurement.core.AllurementConfig;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
-import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusEfficiencyEvent;
+import insane96mcp.iguanatweaksreborn.event.EnchantmentBonusMiningSpeedEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.event.StackMaxDamageEvent;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
@@ -259,9 +259,9 @@ public class EnchantmentsFeature extends JsonFeature {
 	}
 
 	@SubscribeEvent
-	public void applyNewEfficiency(EnchantmentBonusEfficiencyEvent event) {
+	public void applyNewEfficiency(EnchantmentBonusMiningSpeedEvent event) {
 		int lvl = event.getStack().getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-		event.setNewEfficiency(event.getNewEfficiency() + getEfficiencyBonus(event.getNewEfficiency(), lvl));
+		event.setNewMiningSpeed(event.getNewMiningSpeed() + getEfficiencyBonus(event.getNewMiningSpeed(), lvl));
 	}
 
 	public static float getEfficiencyBonus(float baseEfficiency, int lvl) {
@@ -452,12 +452,14 @@ public class EnchantmentsFeature extends JsonFeature {
 		return stack.getEnchantmentValue();
 	}
 
-	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, LivingEntity entity) {
+	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, @Nullable LivingEntity entity) {
+		if (entity == null)
+			return miningSpeed;
 		if (applyEfficiency) {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);
 			ItemStack itemstack = entity.getMainHandItem();
 			if (i > 0 && !itemstack.isEmpty())
-				miningSpeed += ISOEventFactory.getEfficiencyWithEnchantments(entity, state, itemstack, miningSpeed);
+				miningSpeed += ISOEventFactory.getMiningSpeedWithEnchantments(entity, state, itemstack, miningSpeed);
 		}
 
 		if (MobEffectUtil.hasDigSpeed(entity)) {

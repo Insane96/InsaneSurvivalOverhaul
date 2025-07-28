@@ -2,7 +2,7 @@
 
 ## Upcoming
 ### Changes
-* Lowered silver tools enchantability (11 -> 12)
+* Lowered silver tools enchantability (13 -> 12)
 
 ## 4.18.0
 ### Additions
