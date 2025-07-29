@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.18.2
+### Changes
+* Lowered pumpkin pulp from shearing pumpkins (3\~4 -> 1\~2)
+
+### Fixes
+* Hopefully fixed pumpkin shear loot table not working correctly 
+
 ## 4.18.1
 ### Changes
 * Lowered silver tools enchantability (13 -> 12)
