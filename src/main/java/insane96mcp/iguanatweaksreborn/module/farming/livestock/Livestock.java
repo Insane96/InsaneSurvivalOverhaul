@@ -319,7 +319,8 @@ public class Livestock extends Feature {
 	public static void feedToBreed(PlayerInteractEvent.EntityInteract event, Animal animal) {
 		if (!animal.isFood(event.getItemStack())
 				|| !animal.getType().is(PREVENT_BREEDING)
-				|| animal.isBaby())
+				|| animal.isBaby()
+				|| animal instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame())
 			return;
 		if (!canBeFed(animal)) {
 			event.setCanceled(true);

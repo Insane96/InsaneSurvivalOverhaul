@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Can't tame animals such as cats and horses due to feed only once
+
 ## 4.18.2
 ### Changes
 * Lowered pumpkin pulp from shearing pumpkins (3\~4 -> 1\~2)
