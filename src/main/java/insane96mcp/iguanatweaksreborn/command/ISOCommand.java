@@ -9,7 +9,9 @@ import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,6 +24,7 @@ import net.minecraftforge.server.command.EnumArgument;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ISOCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -80,6 +83,24 @@ public class ISOCommand {
                                     player.sendSystemMessage(Component.literal(Weather.getCurrentThunderIntensityData(context.getSource().getServer().getLevel(Level.OVERWORLD)).toString()));
                                     return 1;
                                 }))
+                )
+                .then(Commands.literal("villager_professions_list")
+                        .executes(context -> {
+                            if (context.getSource().getEntity() == null)
+                                return 0;
+                            ForgeRegistries.VILLAGER_PROFESSIONS.getValues().forEach(profession -> {
+                                AtomicReference<MutableComponent> component = new AtomicReference<>(Component.literal(profession.name()).append("["));
+                                ForgeRegistries.POI_TYPES.getValues().forEach(poiType -> {
+                                    if (profession.heldJobSite().test(Holder.direct(poiType))) {
+                                        poiType.matchingStates().forEach(state -> {
+                                            component.get().append(ForgeRegistries.BLOCKS.getKey(state.getBlock()).toString()).append(", ");
+                                        });
+                                    }
+                                });
+                                context.getSource().getEntity().sendSystemMessage(component.get().append("]"));
+                            });
+                            return 1;
+                        })
                 )
                 .then(Commands.literal("test")
                         .executes(context -> {
