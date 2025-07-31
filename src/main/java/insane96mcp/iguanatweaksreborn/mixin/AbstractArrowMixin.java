@@ -97,8 +97,7 @@ public abstract class AbstractArrowMixin extends Projectile {
     }
 
     @Definition(id = "getBaseDamage", method = "Lnet/minecraft/world/entity/projectile/AbstractArrow;getBaseDamage()D")
-    @Definition(id = "i", local = @Local(type = int.class, name = "i"))
-    @Expression("this.getBaseDamage() + (double) i * 0.5 + 0.5")
+    @Expression("this.getBaseDamage() + (double) ? * ? + ?")
     @ModifyExpressionValue(method = "setEnchantmentEffectsFromEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
     public double iguanatweaksreborn$setBaseDamage(double pBaseDamage, @Local(ordinal = 0) int powerLvl) {
         if (!EnchantmentsFeature.powerAffectsBaseArrowDamage && EnchantmentsFeature.powerEnchantmentDamage == 0.5d)
@@ -107,5 +106,12 @@ public abstract class AbstractArrowMixin extends Projectile {
             return this.getBaseDamage() + (this.getBaseDamage() * EnchantmentsFeature.powerEnchantmentDamage * powerLvl);
         else
             return this.getBaseDamage() + EnchantmentsFeature.powerEnchantmentDamage + EnchantmentsFeature.powerEnchantmentDamage * powerLvl;
+    }
+
+    @ModifyExpressionValue(method = "onHitEntity", at = @At(value = "CONSTANT", args = "doubleValue=0.6"))
+    public double iguanatweaksreborn$setPunchStrength(double strength) {
+        if (!Feature.isEnabled(EnchantmentsFeature.class))
+            return strength;
+        return EnchantmentsFeature.punchStrength;
     }
 }

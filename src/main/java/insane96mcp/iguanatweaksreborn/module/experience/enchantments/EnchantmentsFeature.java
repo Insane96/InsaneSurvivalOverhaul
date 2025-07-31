@@ -120,6 +120,9 @@ public class EnchantmentsFeature extends JsonFeature {
 	@Config(description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
 	public static Boolean powerAffectsBaseArrowDamage = true;
 
+	@Config(description = "Vanilla is 0.6")
+	public static Double punchStrength = 0.5d;
+
 	@Config
 	public static Boolean preventFarmlandTramplingWithFeatherFalling = true;
 	@Config(description = """
