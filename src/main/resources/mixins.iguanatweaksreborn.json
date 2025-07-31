@@ -110,7 +110,8 @@
         "integration.globalgamerules.WorldEventsMixin",
         "integration.simpleclouds.SimpleCloudsEventsMixin",
         "integration.tide.TideFishingHookMixin",
-        "integration.tinkersconstruct.ToolAttackUtilMixin"
+        "integration.tinkersconstruct.ToolAttackUtilMixin",
+        "integration.villagercomfort.ComfortHelperMixin"
     ],
     "minVersion": "0.8",
     "client": [
