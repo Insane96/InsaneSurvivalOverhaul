@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.18.4
+### Changes
+* Backported copper armor texture
+
 ## 4.18.3
 ### Fixes
 * Can't tame animals such as cats and horses due to feed only once

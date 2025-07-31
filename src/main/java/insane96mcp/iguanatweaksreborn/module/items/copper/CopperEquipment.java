@@ -28,7 +28,7 @@ public class CopperEquipment extends Feature {
 	public static final RegistryObject<Item> AXE = ISORegistries.ITEMS.register("copper_axe", () -> new AxeItem(ITEM_TIER, 7.0F, -3.1F, new Item.Properties()));
 	public static final RegistryObject<Item> HOE = ISORegistries.ITEMS.register("copper_hoe", () -> new HoeItem(ITEM_TIER, -1, -2.0F, new Item.Properties()));
 
-	private static final ISOArmorMaterial ARMOR_MATERIAL = new ISOArmorMaterial(InsaneSO.location("chained_copper"), 11, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266652_) -> {
+	private static final ISOArmorMaterial ARMOR_MATERIAL = new ISOArmorMaterial(InsaneSO.location("copper"), 11, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266652_) -> {
 		p_266652_.put(ArmorItem.Type.BOOTS, 1);
 		p_266652_.put(ArmorItem.Type.LEGGINGS, 3);
 		p_266652_.put(ArmorItem.Type.CHESTPLATE, 4);
