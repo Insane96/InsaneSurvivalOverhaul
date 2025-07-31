@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.18.5
+### Changes
+* Added back the Villager comfort mixin
+  * The latest version has a severe crash, so I've reverted this for now
+
 ## 4.18.4
 ### Changes
 * Backported copper armor texture
