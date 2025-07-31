@@ -1,8 +1,11 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.combat.MiscStats;
 import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -35,6 +38,8 @@ public abstract class AbstractArrowMixin extends Projectile {
     @Shadow public abstract void setBaseDamage(double pBaseDamage);
 
     @Shadow private double baseDamage;
+
+    @Shadow public abstract double getBaseDamage();
 
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @ModifyVariable(method = "onHitEntity", at = @At(value = "STORE"), ordinal = 0)
@@ -91,13 +96,16 @@ public abstract class AbstractArrowMixin extends Projectile {
         }
     }
 
-    @ModifyExpressionValue(method = "setEnchantmentEffectsFromEntity", at = @At(value = "CONSTANT", args = "doubleValue=0.5", ordinal = 0))
-    public double powerBonusPerLevel(double pBaseDamage) {
-        return EnchantmentsFeature.powerEnchantmentDamage;
-    }
-
-    @ModifyExpressionValue(method = "setEnchantmentEffectsFromEntity", at = @At(value = "CONSTANT", args = "doubleValue=0.5", ordinal = 1))
-    public double powerBonusFlat(double pBaseDamage) {
-        return EnchantmentsFeature.powerEnchantmentDamage != 0.5d ? 0 : pBaseDamage;
+    @Definition(id = "getBaseDamage", method = "Lnet/minecraft/world/entity/projectile/AbstractArrow;getBaseDamage()D")
+    @Definition(id = "i", local = @Local(type = int.class, name = "i"))
+    @Expression("this.getBaseDamage() + (double) i * 0.5 + 0.5")
+    @ModifyExpressionValue(method = "setEnchantmentEffectsFromEntity", at = @At("MIXINEXTRAS:EXPRESSION"))
+    public double iguanatweaksreborn$setBaseDamage(double pBaseDamage, @Local(ordinal = 0) int powerLvl) {
+        if (!EnchantmentsFeature.powerAffectsBaseArrowDamage && EnchantmentsFeature.powerEnchantmentDamage == 0.5d)
+            return pBaseDamage;
+        if (EnchantmentsFeature.powerAffectsBaseArrowDamage)
+            return this.getBaseDamage() + (this.getBaseDamage() * EnchantmentsFeature.powerEnchantmentDamage * powerLvl);
+        else
+            return this.getBaseDamage() + EnchantmentsFeature.powerEnchantmentDamage + EnchantmentsFeature.powerEnchantmentDamage * powerLvl;
     }
 }

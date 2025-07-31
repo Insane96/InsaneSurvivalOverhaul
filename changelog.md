@@ -11,6 +11,9 @@
   * Growing crops with bone meal now requires ~4 per stage
   * Increased default rich farmland extra ticks (3 -> 4) and reduced chance to decay (40% -> 30%)
 
+### Fixes
+* Power on mobs' arrows now scale like the players ones
+
 ## 4.18.5
 ### Changes
 * Added back the Villager comfort mixin

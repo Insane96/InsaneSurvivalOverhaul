@@ -115,7 +115,7 @@ public class EnchantmentsFeature extends JsonFeature {
 	public static Boolean nerfRespiration = true;
 
 	@Config(description = "Set arrow's damage increase with the Power enchantment (vanilla is 0.5). If set to a value != 0.5 the flat 0.5 bonus is also removed. Set to 0.5 to disable.")
-	public static Double powerEnchantmentDamage = 0.2d;
+	public static Double powerEnchantmentDamage = 0.1d;
 
 	@Config(description = "If true, the formula for bonus damage for arrows is changed from `'Power Enchantment Damage' + 'Power Enchantment Damage' * lvl` to `base_damage * 'Power Enchantment Damage' * lvl`.")
 	public static Boolean powerAffectsBaseArrowDamage = true;
