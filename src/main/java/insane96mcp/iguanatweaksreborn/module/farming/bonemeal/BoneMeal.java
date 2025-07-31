@@ -52,9 +52,9 @@ public class BoneMeal extends Feature {
     @Config(description = "Bone meal used on Farmland (or crouch right clicked on crops) transforms it into Rich Farmland.")
     public static Boolean richFarmland$enable = true;
     @Config(min = 1, description = "How many extra random ticks does Rich Farmland give to the crop sitting on top?")
-    public static Integer richFarmland$extraTicks = 3;
+    public static Integer richFarmland$extraTicks = 4;
     @Config(min = 0d, max = 1d, description = "Chance for a Rich farmland to decay back to farmland")
-    public static Double richFarmland$chanceToDecay = 0.4d;
+    public static Double richFarmland$chanceToDecay = 0.35d;
 
     @Config(min = 0, max = 25, description = "How many stages will bone meal make stuff grow?")
     public static MinMax stageGrowth = new MinMax(1, 1);
@@ -131,6 +131,13 @@ public class BoneMeal extends Feature {
     }
 
     private void tryConsumeWithFail(BonemealEvent event) {
+        Optional<IntegerProperty> oAgeProperty = getAgeProperty(event.getBlock());
+        if (oAgeProperty.isPresent()) {
+            int age = event.getBlock().getValue(oAgeProperty.get());
+            int maxAge = AGE_PROPERTIES.get(oAgeProperty.get());
+            if (age == maxAge)
+                return;
+        }
         failFromBlockDefinitions(event);
         if (event.getResult() != Event.Result.ALLOW)
             failFromSeason(event);

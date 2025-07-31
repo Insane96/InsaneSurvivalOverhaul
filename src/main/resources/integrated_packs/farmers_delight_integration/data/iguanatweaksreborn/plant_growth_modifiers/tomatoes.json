@@ -1,6 +1,6 @@
 {
     "block": "#farmersdelight:tomato_crops",
-    "growth_multiplier": 3,
+    "growth_multiplier": 4,
     "modifiers": [
         {
             "id": "iguanatweaksreborn:sunlight",

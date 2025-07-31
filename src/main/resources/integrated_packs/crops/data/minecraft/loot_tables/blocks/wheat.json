@@ -16,55 +16,31 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "minecraft:wheat"
-                }
-            ],
-            "conditions": [
-                {
-                    "condition": "minecraft:block_state_property",
-                    "block": "minecraft:wheat",
-                    "properties": {
-                        "age": "7"
-                    }
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {}
-                }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:wheat"
-                }
-            ],
-            "conditions": [
-                {
-                    "condition": "minecraft:block_state_property",
-                    "block": "minecraft:wheat",
-                    "properties": {
-                        "age": "7"
-                    }
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {}
-                },
-                {
-                    "condition": "minecraft:table_bonus",
-                    "enchantment": "minecraft:fortune",
-                    "chances": [
-                        0,
-                        0.10,
-                        0.25,
-                        0.4285,
-                        0.625
+                    "name": "minecraft:wheat",
+                    "functions": [
+                        {
+                            "function": "minecraft:looting_enchant",
+                            "count": {
+                                "type": "minecraft:uniform",
+                                "min": -3,
+                                "max": 1
+                            }
+                        }
                     ]
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "minecraft:wheat",
+                    "properties": {
+                        "age": "7"
+                    }
+                },
+                {
+                    "condition": "minecraft:entity_properties",
+                    "entity": "this",
+                    "predicate": {}
                 }
             ]
         }
