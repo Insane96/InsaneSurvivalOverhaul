@@ -1,8 +1,10 @@
 package insane96mcp.iguanatweaksreborn.module.farming.crops;
 
+import com.google.common.collect.ImmutableSet;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.mixin.VillagerAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
@@ -20,6 +22,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,7 +48,10 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Set;
 
 @LoadFeature(module = Modules.Ids.FARMING, description = "Crops tweaks and less yield from crops")
 public class Crops extends Feature {
@@ -87,9 +93,39 @@ public class Crops extends Feature {
 		* Makes wild crops generate in the world""")
 	public static Boolean dataPack = true;
 
+	@Config(description = "If true, villagers will be able to pick up and (farmers) plant mod's seeds and rooted items. Also prevents villagers from trampling farmland")
+	public static Boolean fixVillagers = true;
+
 	public Crops(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+	}
+
+	/** Defaults items a villager regardless of its profession can pick up. */
+	private static final Set<Item> VANILLA_WANTED_ITEMS = ImmutableSet.of(Items.BREAD, Items.POTATO, Items.CARROT, Items.WHEAT, Items.WHEAT_SEEDS, Items.BEETROOT, Items.BEETROOT_SEEDS, Items.TORCHFLOWER_SEEDS, Items.PITCHER_POD);
+
+	@Override
+	public void readConfig(ModConfigEvent event) {
+		super.readConfig(event);
+		if (!fixVillagers) {
+			VillagerAccessor.setWantedItems(ImmutableSet.copyOf(VANILLA_WANTED_ITEMS));
+		}
+		else {
+			VillagerAccessor.setWantedItems(ImmutableSet.<Item>builder()
+					.addAll(VANILLA_WANTED_ITEMS)
+					.add(CARROT_SEEDS.get(), ROOTED_POTATO.get(), ROOTED_ONION.get(), RICE_SEEDS.get())
+					.build());
+		}
+	}
+
+	@SubscribeEvent
+	public void onFarmlandTrample(BlockEvent.FarmlandTrampleEvent event) {
+		if (!this.isEnabled()
+				|| !fixVillagers
+				|| !(event.getEntity() instanceof Villager))
+			return;
+
+		event.setCanceled(true);
 	}
 
 	@SubscribeEvent

@@ -73,6 +73,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(CopperEquipment.HELMET.get(), CopperEquipment.CHESTPLATE.get(), CopperEquipment.LEGGINGS.get(), CopperEquipment.BOOTS.get());
 
+        tag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+                .add(Crops.CARROT_SEEDS.get(), Crops.ROOTED_POTATO.get(), Crops.RICE_SEEDS.get(), Crops.ROOTED_ONION.get());
+
         //Forge
         tag(Tags.Items.ARMORS_HELMETS).add(CopperEquipment.HELMET.get());
         tag(Tags.Items.ARMORS_CHESTPLATES).add(CopperEquipment.CHESTPLATE.get());

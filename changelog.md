@@ -1,5 +1,12 @@
 # Changelog
 
+* Fix clouds not reaching the player
+
+## Upcoming
+### Additions
+* Crops.Villagers fix
+  * Prevents villagers from trampling crops and allows them to pick up and plant the mod's seeds and rooted items
+
 ## 4.18.5
 ### Changes
 * Added back the Villager comfort mixin

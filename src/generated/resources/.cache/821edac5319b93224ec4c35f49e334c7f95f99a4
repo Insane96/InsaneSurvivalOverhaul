@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-20T15:34:23.1777206	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-07-31T19:58:40.0619331	Tags for minecraft:item mod id iguanatweaksreborn
 995391829d61969aa6c4ca0bc5df866e333ce1f7 data/forge/tags/items/armors/boots.json
 c71c91e6cd35b0797ba0b9f3267a45ad9dc72880 data/forge/tags/items/armors/chestplates.json
 ac8aa9bc90f22e6eefe0740dc44b8e63af6d5027 data/forge/tags/items/armors/helmets.json
@@ -31,3 +31,4 @@ c600a99f3b05c14cd243193581e294859cc54582 data/minecraft/tags/items/pickaxes.json
 802402c24b4925b126410972bda3e06793b0ab5d data/minecraft/tags/items/shovels.json
 a96625266b18c8147581686a35b1372bb0691368 data/minecraft/tags/items/swords.json
 de4c31f10e04cec690093988a1d683daa93c4cdc data/minecraft/tags/items/trimmable_armor.json
+97bb5f120fe8724b83db1e8e6a80c8946d9e859f data/minecraft/tags/items/villager_plantable_seeds.json
