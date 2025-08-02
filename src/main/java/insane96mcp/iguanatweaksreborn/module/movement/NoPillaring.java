@@ -1,9 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.movement;
 
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -21,17 +21,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.MOVEMENT, enabledByDefault = false, description = "Prevents the player from placing blocks below him when in mid air.")
 public class NoPillaring extends Feature {
 
-	public static final String NO_PILLARING_LANG = "iguanatweaksreborn.no_pillaring";
+	public static final String NO_PILLARING_MONSTERS_LANG = InsaneSO.lang("no_pillaring_monsters");
+	public static final String NO_PILLARING_LANG = InsaneSO.lang("no_pillaring");
 
 	@Config(description = "If true, pillaring will be negated only if the last mobs that hit you are nearby")
 	public static Boolean engagedMobs = true;
 
 	@Config(description = "Range at which monsters must be in order to negate pillaring")
 	public static Integer monstersRange = 24;
-
-	public NoPillaring(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
 
 	@SubscribeEvent
 	public void playerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -63,7 +60,10 @@ public class NoPillaring extends Feature {
 		if (isSolidBlock && player.getViewXRot(1.0f) > 40f && !player.onGround() && event.getItemStack().getItem() instanceof BlockItem && distance <= allowedDistance && player.getY() > placedPos.getY()) {
 			event.setCanceled(true);
 			event.setResult(Event.Result.DENY);
-			event.getEntity().displayClientMessage(Component.translatable(NO_PILLARING_LANG), true);
+			if (engagedMobs)
+				event.getEntity().displayClientMessage(Component.translatable(NO_PILLARING_MONSTERS_LANG), true);
+			//else
+			//	event.getEntity().displayClientMessage(Component.translatable(NO_PILLARING_LANG), true);
 		}
 	}
 
