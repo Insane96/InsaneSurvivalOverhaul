@@ -1,6 +1,9 @@
 # Changelog
 
-## Upcoming
+* Can't mine copper with wooden tools
+* copper nugget missing without caverns and chasms
+
+## 4.18.6
 ### Additions
 * Crops.Villagers fix
   * Prevents villagers from trampling crops and allows them to pick up and plant the mod's seeds and rooted items
@@ -15,7 +18,7 @@
   * Increased default rich farmland extra ticks (3 -> 4) and lowered the chance to decay (40% -> 30%)
 
 ### Removed
-* Villager comfort fixes
+* Villager comfort fixes (again)
   * The crash should have been fixed in 1.1.1
 
 ### Fixes
@@ -27,7 +30,7 @@
 * Added back the Villager comfort mixin
   * The latest version has a severe crash, so I've reverted this for now
 
-## 4.18.4****
+## 4.18.4
 ### Changes
 * Backported copper armor texture
 
