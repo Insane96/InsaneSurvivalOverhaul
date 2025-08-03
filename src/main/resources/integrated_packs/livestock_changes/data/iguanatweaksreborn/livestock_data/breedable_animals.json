@@ -48,7 +48,7 @@
     "breeding_fail_chance_modifiers": [
         {
             "id": "iguanatweaksreborn:true",
-            "modifier": 0.5,
+            "modifier": 0.4,
             "operation": "add"
         },
         {

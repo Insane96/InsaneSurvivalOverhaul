@@ -2,8 +2,13 @@
 
 * Can't mine copper with wooden tools
 * copper nugget missing without caverns and chasms
+* Prevent grass spreading in winter
+* slowdown aloe
 
 ## Upcoming
+### Changes
+* Lowered base breed fail chance
+
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage
 
