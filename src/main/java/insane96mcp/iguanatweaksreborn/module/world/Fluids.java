@@ -24,8 +24,8 @@ public class Fluids extends Feature {
     @Config(name = "[EXPERIMENTAL] Floaty entities", description = "If true, entities will float in water")
     public static Boolean floatyEntities = false;
 
-    public Fluids(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
     }
 
     public static boolean shouldOverrideWaterFallDamageModifier() {

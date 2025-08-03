@@ -3,6 +3,10 @@
 * Can't mine copper with wooden tools
 * copper nugget missing without caverns and chasms
 
+## Upcoming
+### Fixes
+* Setting 'Water fall damage' to false would prevent ladder fall damage
+
 ## 4.18.6
 ### Additions
 * Crops.Villagers fix
