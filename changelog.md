@@ -4,6 +4,7 @@
 * copper nugget missing without caverns and chasms
 * Prevent grass spreading in winter
 * slowdown aloe
+* slowdown fishing by nchanging timer
 
 ## Upcoming
 ### Changes

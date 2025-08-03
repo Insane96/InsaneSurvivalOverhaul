@@ -46,11 +46,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "type": "minecraft:loot_table",
-                    "weight": 15,
-                    "name": "minecraft:gameplay/fishing/fish"
                 }
             ]
         }
