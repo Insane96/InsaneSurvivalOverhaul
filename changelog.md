@@ -6,6 +6,7 @@
   * Prevents villagers from trampling crops and allows them to pick up and plant the mod's seeds and rooted items
 * Enchantments.Punch strength
   * Slightly lowered the strength of punch
+* Config option to disable flint tools
 
 ### Changes
 * Beetroots, Carrots and Potatoes now take 2x time to grow but yield between 1 and 3 produce (so basically 2x)

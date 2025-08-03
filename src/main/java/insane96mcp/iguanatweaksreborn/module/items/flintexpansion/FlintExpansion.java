@@ -35,10 +35,13 @@ public class FlintExpansion extends Feature {
 	@Config(description = "If true, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with flint ones")
 	public static Boolean disableStoneTools = true;
 
-	public FlintExpansion(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	@Config(description = "If you want to just disable stone tools")
+	public static Boolean dontEnableFlintTools = true;
+
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableStoneTools);
-		InsaneSO.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
+		InsaneSO.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && !dontEnableFlintTools);
 	}
 
 	public static boolean areStoneToolsDisabled() {
