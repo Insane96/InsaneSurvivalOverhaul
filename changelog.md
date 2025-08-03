@@ -13,6 +13,10 @@
   * Growing crops with bone meal now requires ~4 per stage
   * Increased default rich farmland extra ticks (3 -> 4) and reduced chance to decay (40% -> 30%)
 
+### Removed
+* Villager comfort fixes
+  * The crash should have been fixed in 1.1.1
+
 ### Fixes
 * Power on mobs' arrows now scale like the players ones
 * Removed "no pillaring because of monsters" message if engaged mobs is disabled 
