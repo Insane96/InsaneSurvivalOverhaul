@@ -36,8 +36,8 @@ public class BetterClimbable extends Feature {
 	@Config(description = "If enabled, climbable will no longer cancel fall damage. Damage is reduced by 25%.")
 	public static Boolean fallDamageOnClimbable = true;
 
-	public BetterClimbable(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 	}
 
 	@OnlyIn(Dist.CLIENT)

@@ -11,15 +11,15 @@
 * Beetroots, Carrots and Potatoes now take 2x time to grow but yield between 1 and 3 produce (so basically 2x)
   * Changed the looting formula (10/25/42/65% chance for another item -> -1\~1 bonus items per level of Fortune (avg 0.33), -3~1 for wheat (avg 0.2))
   * Growing crops with bone meal now requires ~4 per stage
-  * Increased default rich farmland extra ticks (3 -> 4) and reduced chance to decay (40% -> 30%)
+  * Increased default rich farmland extra ticks (3 -> 4) and lowered the chance to decay (40% -> 30%)
 
 ### Removed
 * Villager comfort fixes
   * The crash should have been fixed in 1.1.1
 
 ### Fixes
-* Power on mobs' arrows now scale like the players ones
-* Removed "no pillaring because of monsters" message if engaged mobs is disabled 
+* Power on mobs' arrows now scale like the players' ones
+* Removed "no pillaring because of monsters" message if "engaged mobs" is disabled 
 
 ## 4.18.5
 ### Changes
@@ -32,7 +32,7 @@
 
 ## 4.18.3
 ### Fixes
-* Can't tame animals such as cats and horses due to feed only once
+* Can't tame animals such as cats and horses due to only being able to feed them only once
 
 ## 4.18.2
 ### Changes
