@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.19.1
+### Fixes
+* Startup crash with Tide
+
 ## 4.19.0
 ### Additions
 * Grass no longer spreads in Autumn and Winter
