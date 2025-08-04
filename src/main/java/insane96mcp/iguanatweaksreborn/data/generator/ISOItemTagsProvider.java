@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.BonusDamageEnchantment;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.damage.SweepingEdge;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
+import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowth;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
@@ -148,6 +149,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(WanderingTrades.CORAL_BLOCKS)
                 .add(Items.BRAIN_CORAL_BLOCK, Items.BUBBLE_CORAL_BLOCK, Items.FIRE_CORAL_BLOCK, Items.HORN_CORAL_BLOCK, Items.TUBE_CORAL_BLOCK);
+
+        tag(PlantsGrowth.MULBERRY)
+                .addOptional(ResourceLocation.parse("upgrade_aquatic:mulberry"));
     }
 
     public static TagKey<Item> create(String tagName) {

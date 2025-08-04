@@ -2,7 +2,6 @@
 
 * Can't mine copper with wooden tools
 * copper nugget missing without caverns and chasms
-* prevent planting mulberry
 
 ## Upcoming
 ### Additions
@@ -14,6 +13,7 @@
   * By default, Summer adds 10s where Winter 30s
 * Lowered base breed fail chance
 * Slowed down aloe vera growth speed
+* Upgrade aquatic mulberries can no longer be planted
 
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage

@@ -168,6 +168,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:environmental-388992:6060255")
     compileOnly fg.deobf("curse.maven:berry-good-355589:5228437")
     compileOnly fg.deobf("curse.maven:allurement-438003:5228059")
+    compileOnly fg.deobf("curse.maven:upgrade-aquatic-326895:6393133")
     implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     runtimeOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
