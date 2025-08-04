@@ -1,8 +1,5 @@
 # Changelog
 
-* Can't mine copper with wooden tools
-* copper nugget missing without caverns and chasms
-
 ## Upcoming
 ### Additions
 * Grass no longer spreads in Autumn and Winter
@@ -11,10 +8,11 @@
 ### Changes
 * Enhanced fishing slowdown with seasons
   * Now just adds time to lure the fish instead of having a chance each tick to not decrease
-  * By default, Summer adds 10s where Winter 30s
+  * By default, Summer adds 10s, Autumn 5s, Winter 30s
 * Lowered base breed fail chance
 * Slowed down aloe vera growth speed
 * Upgrade aquatic mulberries can no longer be planted
+* Copper ore can now be mined with wooden pickaxes
 
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage
