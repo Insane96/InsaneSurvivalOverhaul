@@ -39,7 +39,7 @@ public class ISOEventFactory {
     {
         HookTickToHookLureEvent event = new HookTickToHookLureEvent(hook, tick, type);
         MinecraftForge.EVENT_BUS.post(event);
-        return Math.max(0, event.getTick());
+        return event.getTick();
     }
 
     /**
@@ -49,7 +49,7 @@ public class ISOEventFactory {
     {
         TideHookTickToHookLureEvent event = new TideHookTickToHookLureEvent(hook, tick, type);
         MinecraftForge.EVENT_BUS.post(event);
-        return Math.max(0, event.getTick());
+        return event.getTick();
     }
 
     public static float onLivingAttack(LivingEntity entity, DamageSource src, float amount)

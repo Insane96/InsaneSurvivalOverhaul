@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.mixin;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import net.minecraft.world.entity.EntityType;
@@ -23,19 +22,19 @@ public abstract class FishingHookMixin extends Projectile {
         super(pEntityType, pLevel);
     }
 
-    @Definition(id = "timeUntilHooked", field = "Lnet/minecraft/world/entity/projectile/FishingHook;timeUntilHooked:I")
-    @Definition(id = "i", local = @Local(type = int.class, ordinal = 0))
-    @Expression("?.timeUntilHooked = ?.timeUntilHooked - @(i)")
+    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I")
+    @Definition(id = "random", field = "Lnet/minecraft/world/entity/projectile/FishingHook;random:Lnet/minecraft/util/RandomSource;")
+    @Expression("nextInt(this.random, 20, 80)")
     @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public int iguanatweaksreborn$hookingFishEvent(int i) {
-        return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, i, HookTickToHookLureEvent.Type.HOOK);
+    public int iguanatweaksreborn$hookingFishEvent(int original) {
+        return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, original, HookTickToHookLureEvent.Type.HOOK);
     }
 
-    @Definition(id = "timeUntilLured", field = "Lnet/minecraft/world/entity/projectile/FishingHook;timeUntilLured:I")
-    @Definition(id = "i", local = @Local(type = int.class, ordinal = 0))
-    @Expression("?.timeUntilLured = ?.timeUntilLured - @(i)")
+    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I")
+    @Definition(id = "random", field = "Lnet/minecraft/world/entity/projectile/FishingHook;random:Lnet/minecraft/util/RandomSource;")
+    @Expression("nextInt(this.random, 100, 600)")
     @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public int iguanatweaksreborn$luringFishEvent(int i) {
-        return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, i, HookTickToHookLureEvent.Type.LURE);
+    public int iguanatweaksreborn$luringFishEvent(int original) {
+        return ISOEventFactory.onHookTickToHookLure((FishingHook) (Object) this, original, HookTickToHookLureEvent.Type.LURE);
     }
 }

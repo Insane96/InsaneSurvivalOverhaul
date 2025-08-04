@@ -287,29 +287,32 @@ public class Seasons extends JsonFeature {
 
 	@SubscribeEvent
 	public void shouldSlowdownFishing(HookTickToHookLureEvent event) {
-		if (event.getType() == HookTickToHookLureEvent.Type.LURE && slowdownFishing(event.getHookEntity().level()))
-			event.setTick(event.getTick() - 1);
+		int slowdown = slowdownFishing(event.getHookEntity().level());
+		if (event.getType() != HookTickToHookLureEvent.Type.LURE)
+			slowdown /= 10;
+		event.setTick(event.getTick() + slowdown);
 	}
 
 	public static void shouldTideSlowdownFishing(TideHookTickToHookLureEvent event) {
-		if (event.getType() == TideHookTickToHookLureEvent.Type.LURE && slowdownFishing(event.getHookEntity().level()))
-			event.setTick(event.getTick() - 1);
+		int slowdown = slowdownFishing(event.getHookEntity().level());
+		if (event.getType() != TideHookTickToHookLureEvent.Type.LURE)
+			slowdown /= 10;
+		event.setTick(event.getTick() + slowdown);
 	}
 
-	public static boolean slowdownFishing(Level level) {
+	public static int slowdownFishing(Level level) {
 		if (!Feature.isEnabled(Seasons.class)
 				|| !seasonBasedFishingTime)
-			return false;
+			return 0;
 
 		Season season = SeasonHelper.getSeasonState(level).getSeason();
-		//Chance to slowdown fishing
-		float rng = switch (season) {
-			case SPRING -> 0.0F;
-			case SUMMER -> 0.25F;
-			case AUTUMN -> 0.0F;
-			case WINTER -> 0.75F;
+		//Ticks added to slowdown fishing
+		return switch (season) {
+			case SPRING -> 0;
+			case SUMMER -> 200;
+			case AUTUMN -> 0;
+			case WINTER -> 600;
 		};
-		return level.getRandom().nextFloat() < rng;
 	}
 
 	public static float getDayNightCycleModifier() {

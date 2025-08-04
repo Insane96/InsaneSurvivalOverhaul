@@ -3,20 +3,29 @@ package insane96mcp.iguanatweaksreborn.event;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraftforge.eventbus.api.Event;
 
+/**
+ * Triggered when the game calculates the time will take to {@link Type#LURE} and to {@link Type#HOOK} the fish
+ */
 public class HookTickToHookLureEvent extends Event {
     private final FishingHook hook;
+    private final int originalTick;
     private int tick;
     private final Type type;
 
     public HookTickToHookLureEvent(FishingHook hook, int tick, Type type)
     {
         this.hook = hook;
+        this.originalTick = tick;
         this.tick = tick;
         this.type = type;
     }
 
     public FishingHook getHookEntity() {
         return this.hook;
+    }
+
+    public int getOriginalTick() {
+        return this.originalTick;
     }
 
     public int getTick() {
