@@ -1,6 +1,6 @@
 {
     "values": [
-        "minecraft:witch_hut",
+        "minecraft:swamp_hut",
         {
             "id": "#betterwitchhuts:better_witch_hut",
             "required": false
