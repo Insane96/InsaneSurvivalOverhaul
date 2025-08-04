@@ -4,11 +4,8 @@
         {
             "conditions": [
                 {
-                    "type": "forge:not",
-                    "value": {
-                        "type": "forge:mod_loaded",
-                        "modid": "caverns_and_chasms"
-                    }
+                    "type": "forge:mod_loaded",
+                    "modid": "caverns_and_chasms"
                 }
             ],
             "recipe": {
@@ -16,8 +13,8 @@
                 "ingredient": {
                     "item": "minecraft:raw_copper"
                 },
-                "result": "minecraft:copper_ingot",
-                "cookingtime": 4800
+                "result": "caverns_and_chasms:copper_nugget",
+                "cookingtime": 500
             }
         }
     ]

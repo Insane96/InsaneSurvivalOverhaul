@@ -4,11 +4,8 @@
         {
             "conditions": [
                 {
-                    "type": "forge:not",
-                    "value": {
-                        "type": "forge:mod_loaded",
-                        "modid": "caverns_and_chasms"
-                    }
+                    "type": "forge:mod_loaded",
+                    "modid": "caverns_and_chasms"
                 }
             ],
             "advancement": {
@@ -29,7 +26,7 @@
                     "has_the_recipe": {
                         "trigger": "minecraft:recipe_unlocked",
                         "conditions": {
-                            "recipe": "iguanatweaksreborn:copper_ingot_from_campfire"
+                            "recipe": "iguanatweaksreborn:copper_nugget_from_campfire"
                         }
                     }
                 },
@@ -41,7 +38,7 @@
                 ],
                 "rewards": {
                     "recipes": [
-                        "iguanatweaksreborn:copper_ingot_from_campfire"
+                        "iguanatweaksreborn:copper_nugget_from_campfire"
                     ]
                 }
             }
