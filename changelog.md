@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.19.0
 ### Additions
 * Grass no longer spreads in Autumn and Winter
 * Explosion knockback multiplier config option
