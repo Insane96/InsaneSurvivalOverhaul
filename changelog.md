@@ -6,6 +6,10 @@
 * Explosion knockback multiplier config option
 
 ### Changes
+* Flint expansion is now disabled by default, but stone tools are still disabled, use copper tools
+* Rebalanced materials (since flint tools are gone)
+  * Increased copper tools durability, efficiency, enchantability, attack damage, % attack damage. Removed % attack speed
+  * Wooden tools have 10% attack speed now
 * Enhanced fishing slowdown with seasons
   * Now just adds time to lure the fish instead of having a chance each tick to not decrease
   * By default, Summer adds 10s, Autumn 5s, Winter 30s

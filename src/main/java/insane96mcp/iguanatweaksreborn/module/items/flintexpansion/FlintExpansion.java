@@ -36,7 +36,7 @@ public class FlintExpansion extends Feature {
 	public static Boolean disableStoneTools = true;
 
 	@Config(description = "If you want to just disable stone tools")
-	public static Boolean dontEnableFlintTools = false;
+	public static Boolean dontEnableFlintTools = true;
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
