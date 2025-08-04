@@ -96,7 +96,7 @@ public class PlantsGrowth extends Feature {
 	@SubscribeEvent
 	public void onMulberryPlant(PlayerInteractEvent.RightClickBlock event) {
 		if (!this.isEnabled()
-				|| preventPlantingUpgradeAquaticMulberries
+				|| !preventPlantingUpgradeAquaticMulberries
 				|| !event.getItemStack().is(MULBERRY))
 			return;
 

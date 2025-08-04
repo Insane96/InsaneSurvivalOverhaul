@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.19.2
+### Fixes
+* Upgrade aquatic mulberries still plantable
+
 ## 4.19.1
 ### Fixes
 * Startup crash with Tide
