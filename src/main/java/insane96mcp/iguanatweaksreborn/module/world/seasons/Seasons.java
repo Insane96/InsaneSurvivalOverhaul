@@ -310,7 +310,7 @@ public class Seasons extends JsonFeature {
 		return switch (season) {
 			case SPRING -> 0;
 			case SUMMER -> 200;
-			case AUTUMN -> 0;
+			case AUTUMN -> 100;
 			case WINTER -> 600;
 		};
 	}
