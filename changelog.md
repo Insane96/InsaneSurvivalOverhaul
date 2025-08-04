@@ -11,6 +11,7 @@
 
 ### Changes
 * Lowered base breed fail chance
+* Slowed down aloe vera growth speed
 
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage
