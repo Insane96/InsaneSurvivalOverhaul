@@ -18,16 +18,16 @@ public abstract class TideFishingHookMixin extends Projectile {
         super(pEntityType, pLevel);
     }
 
-    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I")
-    @Definition(id = "random", field = "Lcom/li64/tide/registries/entities/misc/fishing/TideFishingHook;random:Lnet/minecraft/util/RandomSource;", remap = false)
+    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I", remap = true)
+    @Definition(id = "random", field = "Lcom/li64/tide/registries/entities/misc/fishing/TideFishingHook;random:Lnet/minecraft/util/RandomSource;", remap = true)
     @Expression("nextInt(this.random, 20, 80)")
     @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = false)
     public int iguanatweaksreborn$hookingFishEvent(int original) {
         return ISOEventFactory.onTideHookTickToHookLure((TideFishingHook) (Object) this, original, TideHookTickToHookLureEvent.Type.HOOK);
     }
 
-    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I")
-    @Definition(id = "random", field = "Lcom/li64/tide/registries/entities/misc/fishing/TideFishingHook;random:Lnet/minecraft/util/RandomSource;", remap = false)
+    @Definition(id = "nextInt", method = "Lnet/minecraft/util/Mth;nextInt(Lnet/minecraft/util/RandomSource;II)I", remap = true)
+    @Definition(id = "random", field = "Lcom/li64/tide/registries/entities/misc/fishing/TideFishingHook;random:Lnet/minecraft/util/RandomSource;", remap = true)
     @Expression("nextInt(this.random, 200, 600)")
     @ModifyExpressionValue(method = "catchingFish", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = false)
     public int iguanatweaksreborn$luringFishEvent(int original) {
