@@ -7,6 +7,7 @@
 
 ### Changes
 * Flint expansion is now disabled by default, but stone tools are still disabled, use copper tools
+* If caverns and chasms is present, raw copper is smelted to nuggets, instead of ingots, in the campfire only taking 25 seconds
 * Rebalanced materials (since flint tools are gone)
   * Increased copper tools durability, efficiency, enchantability, attack damage, % attack damage. Removed % attack speed
   * Wooden tools have 10% attack speed now
@@ -21,6 +22,7 @@
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage
 * Flint expansion being disabled by default
+* Swamp hut map not working
 
 ## 4.18.6
 ### Additions
