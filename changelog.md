@@ -2,11 +2,13 @@
 
 * Can't mine copper with wooden tools
 * copper nugget missing without caverns and chasms
-* Prevent grass spreading in winter
 * slowdown aloe
 * slowdown fishing by nchanging timer
 
 ## Upcoming
+### Additions
+* Grass no longer spreads in Autumn and Winter
+
 ### Changes
 * Lowered base breed fail chance
 

@@ -89,6 +89,7 @@
         "SheepMixin",
         "SmeltItemFunctionMixin",
         "SpongeBlockMixin",
+        "SpreadingSnowyDirtBlockMixin",
         "SpringFeatureMixin",
         "ThornsEnchantmentMixin",
         "ThrowablePotionItemMixin",

@@ -83,6 +83,8 @@ public class Seasons extends JsonFeature {
 
 	@Config(min = 0, description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable. Requires Time Control mod")
 	public static Double timeControlDayNightShift = 1.5d;
+	@Config
+	public static Boolean preventGrassSpreadingInAutumnAndWinter = true;
 
 	@Config
 	public static Boolean seasonBasedFishingTime = true;
@@ -133,6 +135,10 @@ public class Seasons extends JsonFeature {
 	@Override
 	public boolean isEnabled() {
 		return super.isEnabled() && ModList.get().isLoaded("sereneseasons");
+	}
+
+	public static boolean shouldPreventGrassSpreadingInAutumnAndWinter() {
+		return Feature.isEnabled(Seasons.class) && preventGrassSpreadingInAutumnAndWinter;
 	}
 
 	public static void onSeasonChanged(SeasonChangedEvent.Standard event) {
