@@ -17,6 +17,7 @@
 
 ### Fixes
 * Setting 'Water fall damage' to false would prevent ladder fall damage
+* Flint expansion being disabled by default
 
 ## 4.18.6
 ### Additions
