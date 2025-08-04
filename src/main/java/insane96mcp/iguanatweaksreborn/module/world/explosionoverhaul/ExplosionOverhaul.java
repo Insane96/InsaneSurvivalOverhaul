@@ -54,6 +54,8 @@ public class ExplosionOverhaul extends Feature {
 	public static Boolean enableFlyingBlocks = false;
 	@Config(description = "If true, creepers explosions will drop no blocks.")
 	public static Boolean creeperCollateral = false;
+	@Config
+	public static Double knockbackMultiplier = 1d;
 	@Config(description = "Number in the explosion damage calculation. Vanilla is 7. Higher = More damage")
 	public static Double explosionDamageCalculationMultiplier = 6d;
 	@Config(description = "Disabled if set to 0.")

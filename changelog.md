@@ -6,6 +6,7 @@
 ## Upcoming
 ### Additions
 * Grass no longer spreads in Autumn and Winter
+* Explosion knockback multiplier config option
 
 ### Changes
 * Enhanced fishing slowdown with seasons

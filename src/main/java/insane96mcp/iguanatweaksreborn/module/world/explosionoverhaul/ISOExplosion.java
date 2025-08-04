@@ -185,6 +185,7 @@ public class ISOExplosion extends Explosion {
  					if (entity instanceof ISOFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
 						d11 *= 0.2d;
 					d11 *= ExplosionOverhaul.getKnockbackMultiplier(this.source);
+					d11 *= ExplosionOverhaul.knockbackMultiplier;
 					d11 = Math.min(d11, 10f);
 					if (entity instanceof ISOFallingBlockEntity) {
 						d11 = Math.min(d11, 1f);
