@@ -1,7 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Changes
 * Updated biometer texture and recipe, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
+* Increased back breed fail chance
 
 ## 4.19.2
 ### Fixes
