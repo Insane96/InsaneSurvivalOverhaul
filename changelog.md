@@ -1,7 +1,7 @@
 # Changelog
 
 ## Upcoming
-* Updated biometer texture. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
+* Updated biometer texture and recipe, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
 
 ## 4.19.2
 ### Fixes
