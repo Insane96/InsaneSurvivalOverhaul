@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -179,6 +180,9 @@ public class ISOExplosion extends Explosion {
 					double d11 = d10;
 					if (isLiving)
 						d11 = getKnockbackReduction((LivingEntity) entity, d11);
+                    if (this.getDamageSource().getDirectEntity() instanceof LivingEntity directExploder && ExplosionOverhaul.applyEffectFromExploder && isLiving) {
+                        directExploder.getActiveEffects().forEach(effect -> ((LivingEntity) entity).addEffect(new MobEffectInstance(effect.getEffect(), (int) (effect.getDuration() * d10), effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon())));
+                    }
 					if (ExplosionOverhaul.knockbackScalesWithSize)
 						d11 *= this.radius;
 					d11 = Math.max(d11, this.radius * 0.05d);
