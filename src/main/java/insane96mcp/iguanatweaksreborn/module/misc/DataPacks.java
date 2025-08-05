@@ -72,6 +72,8 @@ public class DataPacks extends Feature {
     public static Boolean supplementaries = false;
     @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
     public static Boolean farmersDelight = false;
+    @Config(description = "If true, the nourishment effect from Farmers' Delight is replaced with Speed or Vigour if Stamina mod is present")
+    public static Boolean replaceFDNourishmentEffect = false;
     @Config(description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
     public static Boolean environmental = false;
     @Config(description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
@@ -132,7 +134,7 @@ public class DataPacks extends Feature {
     public void onTryRichSoilFarmland(PlayerInteractEvent.RightClickBlock event) {
         if (!ModList.get().isLoaded("farmersdelight")
                 || !this.isEnabled()
-                || !DataPacks.farmersDelight
+                || !farmersDelight
                 || !event.getItemStack().canPerformAction(ToolActions.HOE_TILL))
             return;
 
@@ -144,7 +146,7 @@ public class DataPacks extends Feature {
     public void onEffectApplicable(MobEffectEvent.Applicable event) {
         if (!ModList.get().isLoaded("farmersdelight")
                 || !this.isEnabled()
-                || !DataPacks.farmersDelight)
+                || !replaceFDNourishmentEffect)
             return;
 
         FarmersDelightIntegration.onEffectApplicable(event);
