@@ -24,6 +24,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -84,7 +85,7 @@ public class Seasons extends JsonFeature {
 	@Config(min = 0, description = "How many minutes will day and night duration be shifted based off seasons? E.g. in Mid spring / autumn the duration of day and night is vanilla, when moving off those seasons day and night will last this many minutes more/less. In mid summer / winter the duration of day and night duration will be more / less by 3 times this value. Set to 0 to disable. Requires Time Control mod")
 	public static Double timeControlDayNightShift = 1.5d;
 	@Config
-	public static Boolean preventGrassSpreadingInAutumnAndWinter = true;
+	public static Boolean slowdownGrassSpreading = true;
 
 	@Config
 	public static Boolean seasonBasedFishingTime = true;
@@ -137,8 +138,18 @@ public class Seasons extends JsonFeature {
 		return super.isEnabled() && ModList.get().isLoaded("sereneseasons");
 	}
 
-	public static boolean shouldPreventGrassSpreadingInAutumnAndWinter() {
-		return Feature.isEnabled(Seasons.class) && preventGrassSpreadingInAutumnAndWinter;
+	public static boolean shouldSlowdownGrassSpreading(LevelReader level) {
+		if (!Feature.isEnabled(Seasons.class)
+                || !slowdownGrassSpreading)
+            return false;
+
+        Season season = SeasonHelper.getSeasonState((Level) level).getSeason();
+        double failChance = switch (season) {
+            case SPRING, SUMMER -> 0d;
+            case AUTUMN -> 0.3d;
+            case WINTER -> 0.75d;
+        };
+        return ((Level) level).random.nextDouble() < failChance;
 	}
 
 	public static void onSeasonChanged(SeasonChangedEvent.Standard event) {

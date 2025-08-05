@@ -120,6 +120,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
         tag(FireAspect.ACCEPTS_ENCHANTMENT)
                 .addTag(BonusDamageEnchantment.ACCEPTS_ENCHANTMENT);
+
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
                 .addOptionalTag(InsaneSO.location("equipment/netherite"));
