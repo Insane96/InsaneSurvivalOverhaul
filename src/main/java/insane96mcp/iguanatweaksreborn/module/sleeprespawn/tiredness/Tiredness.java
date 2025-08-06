@@ -115,8 +115,10 @@ public class Tiredness extends JsonFeature {
 	public static MinMax fakeSound$times = new MinMax(2, 6);
 	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
 	public static Boolean tiredTiedPhantoms = true;
-	@Config(description = "If true, Simple Clouds' clouds will speed up when player skips time by sleeping.")
-	public static Boolean simpleCloudsIntegration = false;
+    @Config
+    public static Boolean allowSleepingEvenWhenNotTired = false;
+    @Config(description = "If true, Simple Clouds' clouds will speed up when player skips time by sleeping.")
+    public static Boolean simpleCloudsIntegration = false;
 
 	public Tiredness(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
@@ -318,7 +320,7 @@ public class Tiredness extends JsonFeature {
 
 		ServerPlayer player = (ServerPlayer) event.getEntity();
 
-		if (!player.hasEffect(TIRED.get()) && !player.getAbilities().instabuild) {
+		if (!player.hasEffect(TIRED.get()) && !allowSleepingEvenWhenNotTired && !player.getAbilities().instabuild) {
 			event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
 			player.displayClientMessage(Component.translatable(NOT_TIRED), true);
 			if (!shouldPreventSpawnPoint)
@@ -403,7 +405,7 @@ public class Tiredness extends JsonFeature {
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean canSleepDuringDay(Player player) {
 		return isEnabled(Tiredness.class)
-				&& player.hasEffect(TIRED.get());
+				&& (player.hasEffect(TIRED.get()) || allowSleepingEvenWhenNotTired || player.getAbilities().instabuild);
 	}
 
 	@SubscribeEvent

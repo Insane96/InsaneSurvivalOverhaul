@@ -1,14 +1,20 @@
 # Changelog
 
+* Butcher nerf
+
 ## Upcoming
 ### Additions
 * Explosions now transfer mob effects to hit entities
+* Allow sleeping even when not tired config option
 
 ### Changes
 * Autumn and Winter no longer prevent grass from spreading; instead, there's a chance for grass to fail to spread
 * Updated biometer texture and recipe, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
 * Increased back breed fail chance
 * Added config option to replace Farmer's Delight nourishment effect
+
+### Fixes
+* Creative players not being able to sleep if day or if too hungry
 
 ## 4.19.2
 ### Fixes

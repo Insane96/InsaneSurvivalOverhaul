@@ -34,7 +34,7 @@ public class SleepingEffects extends JsonFeature {
 			new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 600).build()*/
 	);
 	public static final ArrayList<ISOMobEffectInstance> effectsOnWakeUp = new ArrayList<>();
-	public static final String NO_FOOD_FOR_SLEEP = "iguanatweaksreborn.no_food_for_sleep";
+	public static final String NO_FOOD_FOR_SLEEP_LANG = "iguanatweaksreborn.no_food_for_sleep";
 
 	@Config(min = 0, max = 40, name = "Hunger & Saturation Depleted on Wake Up", description = "How much saturation and hunger are depleted when you wake up in the morning. Setting to 0 will disable this feature.")
 	public static Integer hungerDepletedOnWakeUp = 12;
@@ -104,12 +104,13 @@ public class SleepingEffects extends JsonFeature {
 		if (!this.isEnabled()
 				|| event.getResultStatus() != null
 				|| !noSleepIfHungry
-				|| !(event.getEntity() instanceof ServerPlayer player))
+				|| !(event.getEntity() instanceof ServerPlayer player)
+                || player.getAbilities().instabuild)
 			return;
 		if ((hungerDepletedOnWakeUp > 0 && player.getFoodData().getFoodLevel() < hungerDepletedOnWakeUp)
 				|| (noSleepWithHungerEffect && player.hasEffect(MobEffects.HUNGER))) {
 			event.setResult(Player.BedSleepingProblem.OTHER_PROBLEM);
-			player.displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP), true);
+			player.displayClientMessage(Component.translatable(NO_FOOD_FOR_SLEEP_LANG), true);
 			player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
 		}
 	}
