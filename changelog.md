@@ -1,9 +1,6 @@
 # Changelog
 
-* Persistance effect from yucca gateau
-* yucca gateau doesn't heal
-
-## Upcoming
+## 4.19.3
 ### Additions
 * Explosions now transfer mob effects to hit entities
 * Allow sleeping even when not tired config option
