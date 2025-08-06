@@ -12,6 +12,7 @@
 * Updated biometer texture, recipe and name, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
 * Increased back breed fail chance
 * Added config option to replace Farmer's Delight nourishment effect
+* Rebalanced butcher trades
 
 ### Fixes
 * Creative players not being able to sleep if day or if too hungry
