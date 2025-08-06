@@ -53,7 +53,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	@Nullable
 	private ExplorationMap explorationMap;
 
-	private boolean valid = false;
+	private boolean invalid = false;
 
 	public SerializableTrade() {
 
@@ -142,7 +142,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	@Nullable
 	@Override
 	public MerchantOffer getOffer(@NotNull Entity entity, @NotNull RandomSource random) {
-        if (this.valid
+        if (this.invalid
 				|| entity.level().isClientSide)
 			return null;
         ItemStack result = this.result.get(random);
@@ -181,7 +181,7 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 	}
 
 	public boolean isValid() {
-		return this.valid;
+		return !this.invalid;
 	}
 
 	public static final Type LIST_TYPE = new TypeToken<ArrayList<SerializableTrade>>(){}.getType();
@@ -193,13 +193,13 @@ public class SerializableTrade implements VillagerTrades.ItemListing {
 			SerializableTrade serializableTrade = new SerializableTrade();
 			serializableTrade.itemA = GsonHelper.getAsObject(jObject, "item_a", context, Stack.class);
 			if (serializableTrade.itemA.item != null && serializableTrade.itemA.item.equals(Items.AIR))
-				serializableTrade.valid = false;
+				serializableTrade.invalid = false;
 			serializableTrade.itemB = GsonHelper.getAsObject(jObject, "item_b", null, context, Stack.class);
 			if (serializableTrade.itemB != null && serializableTrade.itemB.item != null && serializableTrade.itemB.item.equals(Items.AIR))
-				serializableTrade.valid = false;
+				serializableTrade.invalid = false;
 			serializableTrade.result = GsonHelper.getAsObject(jObject, "result", context, Stack.class);
 			if (serializableTrade.result.item != null && serializableTrade.result.item.equals(Items.AIR))
-				serializableTrade.valid = false;
+				serializableTrade.invalid = false;
 
 			JsonObject enchantRandomly = GsonHelper.getAsJsonObject(jObject, "enchant_randomly", null);
 			if (enchantRandomly != null) {
