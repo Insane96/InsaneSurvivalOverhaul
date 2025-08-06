@@ -9,7 +9,7 @@
 
 ### Changes
 * Autumn and Winter no longer prevent grass from spreading; instead, there's a chance for grass to fail to spread
-* Updated biometer texture and recipe, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
+* Updated biometer texture, recipe and name, it's now a Sextant. Thanks to [Zeykehasnt](https://github.com/Zeykehasnt) ([#377](https://github.com/Insane96/IguanaTweaksReborn/issues/377))
 * Increased back breed fail chance
 * Added config option to replace Farmer's Delight nourishment effect
 

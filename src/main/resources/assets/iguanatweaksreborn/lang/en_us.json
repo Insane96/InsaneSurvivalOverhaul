@@ -219,7 +219,7 @@
 
 	"block.iguanatweaksreborn.cyan_flower": "Cyan Flower",
 
-	"item.iguanatweaksreborn.biome_compass": "Biometer",
+	"item.iguanatweaksreborn.biome_compass": "Sextant",
 
 	"item.iguanatweaksreborn.sweet_berry_seeds": "Sweet Berry Seeds",
 
@@ -299,7 +299,7 @@
 	"advancements.iso.hellish_coal.title": "Hot Coal",
 	"advancements.iso.hellish_coal.description": "Obtain Hellish Coal",
 	"advancements.iso.biometer.title": "Different Ecosystems",
-	"advancements.iso.biometer.description": "Since some ores are more abundant in certain biomes, the Biometer will help you track in which biome you are in.",
+	"advancements.iso.biometer.description": "Since some ores are more abundant in certain biomes, the Sextant will help you track in which biome you are in.",
 	"advancements.iso.ores.coal.title": "From plants to fuel",
 	"advancements.iso.ores.coal.description": "Great amounts of Coal can be found in Desert",
 	"advancements.iso.ores.iron.title": "In coldness",
