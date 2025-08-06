@@ -49,5 +49,136 @@
                 "xp": 1
             }
         ]
+    },
+    {
+        "level": 2,
+        "remove": true,
+        "low_priority": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:pumpkin",
+                    "count": 6
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 10
+            },
+            {
+                "item_a": {
+                    "item": "atmospheric:aloe_leaves",
+                    "count": 4
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 10
+            },
+            {
+                "item_a": {
+                    "item": "atmospheric:yukka_fruit",
+                    "count": 4
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 10
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "minecraft:pumpkin_pie",
+                "max_uses": 12,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "minecraft:apple",
+                "max_uses": 16,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "environmental:plum",
+                "max_uses": 16,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "upgrade_aquatic:mulberry",
+                "max_uses": 16,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 2
+                },
+                "result": "autumnity:foul_berries",
+                "max_uses": 16,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "environmental:cherries",
+                "max_uses": 16,
+                "xp": 5
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "atmospheric:passion_fruit_tart",
+                "max_uses": 16,
+                "xp": 5
+            }
+        ]
+    },
+    {
+        "level": 3,
+        "remove": true,
+        "low_priority": true,
+        "trades": [
+            {
+                "item_a": {
+                    "item": "minecraft:melon",
+                    "count": 2
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 20
+            },
+            {
+                "item_a": {
+                    "item": "atmospheric:passion_fruit",
+                    "count": 2
+                },
+                "result": "minecraft:emerald",
+                "max_uses": 12,
+                "xp": 20
+            },
+            {
+                "item_a": {
+                    "item": "minecraft:emerald",
+                    "count": 1
+                },
+                "result": "minecraft:cookie",
+                "max_uses": 12,
+                "xp": 10
+            }
+        ]
     }
 ]
