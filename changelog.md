@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Possible performance loss on world loading with data pack loading
+
 ## 4.19.3
 ### Additions
 * Explosions now transfer mob effects to hit entities

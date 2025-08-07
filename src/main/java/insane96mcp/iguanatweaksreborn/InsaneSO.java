@@ -54,7 +54,6 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -102,7 +101,6 @@ public class InsaneSO
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::gatherData);
-        modEventBus.addListener(this::addPackFinders);
         modEventBus.addListener(PiercingDamage::addAttribute);
         modEventBus.addListener(RegeneratingAbsorption::addAttribute);
         modEventBus.addListener(CriticalRework::addAttribute);
@@ -251,11 +249,6 @@ public class InsaneSO
         generator.addProvider(event.includeClient(), new ISOBlockStatesProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
         generator.addProvider(event.includeClient(), new ISOBlockModelsProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
         generator.addProvider(event.includeClient(), new ISOItemModelsProvider(generator.getPackOutput(), InsaneSO.MOD_ID, existingFileHelper));
-    }
-
-    public void addPackFinders(AddPackFindersEvent event)
-    {
-        IntegratedPack.onAddPackFinders(event);
     }
 
     public static void addServerPack(String path, String description, BooleanSupplier enabled) {
