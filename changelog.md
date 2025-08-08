@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.19.4
 ### Additions
 * Conduit effect no longer grants haste
 
