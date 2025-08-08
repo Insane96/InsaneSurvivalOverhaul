@@ -1,6 +1,8 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.ISOPoweredRail;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -13,9 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.extensions.IForgeAbstractMinecart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(AbstractMinecart.class)
 public abstract class AbstractMinecartMixin extends Entity implements IForgeAbstractMinecart {
@@ -29,7 +28,7 @@ public abstract class AbstractMinecartMixin extends Entity implements IForgeAbst
         return 20f;
     }
 
-    @ModifyConstant(method = "moveAlongTrack", constant = @Constant(doubleValue = 0.06d))
+    @ModifyExpressionValue(method = "moveAlongTrack", at = @At(value = "CONSTANT", args = "doubleValue=0.06"))
     private double preventAcceleration(double acceleration, BlockPos pos, BlockState state) {
         BaseRailBlock baserailblock = (BaseRailBlock) state.getBlock();
         float railMaxSpeed = baserailblock.getRailMaxSpeed(state, this.level(), pos, (AbstractMinecart) (Object) this);
@@ -40,12 +39,19 @@ public abstract class AbstractMinecartMixin extends Entity implements IForgeAbst
         return acceleration;
     }
 
-    @ModifyVariable(method = "getMaxSpeedWithRail", at = @At(value = "STORE"), ordinal = 0, remap = false)
-    public float railMaxSpeed(float maxSpeed) {
+    @WrapOperation(method = "getMaxSpeedWithRail", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BaseRailBlock;getRailMaxSpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/vehicle/AbstractMinecart;)F"), remap = false)
+    public float railMaxSpeed(BaseRailBlock instance, BlockState blockState, Level level, BlockPos blockPos, AbstractMinecart abstractMinecart, Operation<Float> original) {
         BlockPos pos = this.getCurrentRailPosition();
         BlockState state = this.level().getBlockState(pos);
         if (state.is(Blocks.RAIL))
             return 0.7f;
-        return maxSpeed;
+        return original.call(instance, blockState, level, blockPos, abstractMinecart);
     }
+
+    /*@ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))
+    public double railMaxSpeed(double original) {
+        if (Minecarts.speedUpMinecartsUnderwater())
+            return 8d / 20d;
+        return original;
+    }*/
 }

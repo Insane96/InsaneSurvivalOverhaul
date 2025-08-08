@@ -18,8 +18,9 @@ public class ISOPoweredRail extends PoweredRailBlock {
 
     @Override
     public float getRailMaxSpeed(BlockState state, Level level, BlockPos pos, AbstractMinecart cart) {
-        if (cart instanceof MinecartFurnace) return cart.isInWater() ? this.baseSpeed * 0.375f : this.baseSpeed * 0.5f;
-        else return cart.isInWater() ? this.baseSpeed * 0.5f : this.baseSpeed;
+        if (cart instanceof MinecartFurnace)
+            return cart.isInWater() && !Minecarts.speedUpMinecartsUnderwater() ? this.baseSpeed * 0.375f : this.baseSpeed * 0.5f;
+        else return cart.isInWater() && !Minecarts.speedUpMinecartsUnderwater() ? this.baseSpeed * 0.5f : this.baseSpeed;
     }
 
     public float getRailAcceleration(BlockState state, Level level, BlockPos pos, AbstractMinecart cart) {

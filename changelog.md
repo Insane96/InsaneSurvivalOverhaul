@@ -1,5 +1,9 @@
 # Changelog
 
+* Remove conduit haste 
+* F3 H
+* auto walk
+
 ## Upcoming
 ### Fixes
 * Possible performance loss on world loading with data pack loading
