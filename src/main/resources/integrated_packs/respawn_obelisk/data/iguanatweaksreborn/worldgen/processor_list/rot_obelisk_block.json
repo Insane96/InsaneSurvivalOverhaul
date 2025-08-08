@@ -1,0 +1,12 @@
+[
+    {
+        "processor_type": "minecraft:block_rot",
+        "integrity": 0.65,
+        "rottable_blocks": "#iguanatweaksreborn:structures/respawn_obelisk/blocks_to_rot"
+    },
+    {
+        "processor_type": "minecraft:block_rot",
+        "integrity": 0,
+        "rottable_blocks": "minecraft:iron_block"
+    }
+]

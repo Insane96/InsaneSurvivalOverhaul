@@ -55,6 +55,7 @@ public class RespawnObeliskBlock extends Block {
     );
 
     private static final ImmutableList<Vec3i> RESPAWN_HORIZONTAL_OFFSETS = ImmutableList.of(
+            new Vec3i(0, 0, 0),
             new Vec3i(0, 0, -1),
             new Vec3i(-1, 0, 0),
             new Vec3i(0, 0, 1),
@@ -77,9 +78,11 @@ public class RespawnObeliskBlock extends Block {
     }
 
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
-        if (!state.getValue(ENABLED)) {
-            if (hasCatalysts(level, pos)) {
+        boolean enabled = state.getValue(ENABLED);
+        if (!enabled) {
+            if (hasCatalysts(level, pos) || !Respawn.respawnObelisksRequireCatalystBlocks) {
                 enable(player, level, pos, state);
+                enabled = true;
             }
             else if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
                 player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), true);
@@ -87,14 +90,13 @@ public class RespawnObeliskBlock extends Block {
                     ((ServerLevel) level).sendParticles(ParticleTypes.WAX_ON, (double)pos.getX() + 0.5D + (double)catalystPos.getX(), (double)pos.getY() + 0.5d + (double)catalystPos.getY(), (double)pos.getZ() + 0.5D + (double)catalystPos.getZ(), 10, 0.2D, 0.2D, 0.2D, 0D);
                 }
             }
-            return InteractionResult.SUCCESS;
         }
-        else if (state.getValue(ENABLED) && !level.isClientSide) {
-            ServerPlayer serverPlayer = (ServerPlayer)player;
-            if (!hasCatalysts(level, pos)) {
+        if (enabled) {
+            if (player.isCrouching()) {
                 disable(player, level, pos, state, true);
+                return InteractionResult.SUCCESS;
             }
-            else if (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition())) {
+            else if (player instanceof ServerPlayer serverPlayer && (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition()))) {
                 trySaveOldSpawn(serverPlayer);
                 serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
                 level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -109,20 +111,19 @@ public class RespawnObeliskBlock extends Block {
         p_55886_.add(ENABLED);
     }
 
-    public static void enable(@Nullable Entity p_270997_, Level p_270172_, BlockPos p_270534_, BlockState p_270661_) {
-        BlockState blockstate = p_270661_.setValue(ENABLED, true);
-        p_270172_.setBlock(p_270534_, blockstate, 3);
-        p_270172_.gameEvent(GameEvent.BLOCK_CHANGE, p_270534_, GameEvent.Context.of(p_270997_, blockstate));
+    public static void enable(@Nullable Entity p_270997_, Level p_270172_, BlockPos p_270534_, BlockState state) {
+        state = state.setValue(ENABLED, true);
+        p_270172_.setBlock(p_270534_, state, 3);
+        p_270172_.gameEvent(GameEvent.BLOCK_CHANGE, p_270534_, GameEvent.Context.of(p_270997_, state));
         p_270172_.playSound(null, (double)p_270534_.getX() + 0.5D, (double)p_270534_.getY() + 0.5D, (double)p_270534_.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 
     public static void disable(@Nullable Entity entity, Level level, BlockPos pos, BlockState state, boolean showDisabledMessage) {
         level.setBlock(pos, state.setValue(RespawnObeliskBlock.ENABLED, false), 3);
         level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
-        if (entity instanceof Player player && showDisabledMessage) {
-            player.displayClientMessage(Component.translatable(OBELISK_DISABLED), false);
-        }
         if (entity instanceof ServerPlayer serverPlayer) {
+            if (showDisabledMessage)
+                serverPlayer.displayClientMessage(Component.translatable(OBELISK_DISABLED), false);
             if (!trySetOldSpawn(serverPlayer)) {
                 serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0f, false, false);
             }
@@ -158,23 +159,25 @@ public class RespawnObeliskBlock extends Block {
     }
 
     public static void onObeliskRespawn(Player player, Level level, BlockPos respawnPos) {
-        BlockPos.MutableBlockPos relativePos = new BlockPos.MutableBlockPos();
-        for (Vec3i rel : CATALYST_RELATIVE_POSITIONS) {
-            relativePos.set(respawnPos).move(rel);
-            if (!isBlockCatalyst(level.getBlockState(relativePos).getBlock()))
-                continue;
-            double chance = getCatalystBlockChanceToBreak(level.getBlockState(relativePos).getBlock());
-            if (chance > 0d && level.getRandom().nextDouble() < chance) {
-                level.destroyBlock(relativePos, false);
+        if (Respawn.respawnObelisksRequireCatalystBlocks) {
+            BlockPos.MutableBlockPos relativePos = new BlockPos.MutableBlockPos();
+            for (Vec3i rel : CATALYST_RELATIVE_POSITIONS) {
+                relativePos.set(respawnPos).move(rel);
+                if (!isBlockCatalyst(level.getBlockState(relativePos).getBlock()))
+                    continue;
+                double chance = getCatalystBlockChanceToBreak(level.getBlockState(relativePos).getBlock());
+                if (chance > 0d && level.getRandom().nextDouble() < chance) {
+                    level.destroyBlock(relativePos, false);
+                }
+                //Try to break only one block
+                break;
             }
-            //Try to break only one block
-            break;
+            if (!hasCatalysts(level, respawnPos) && Respawn.respawnObelisksRequireCatalystBlocks)
+                disable(player, level, respawnPos, level.getBlockState(respawnPos), true);
         }
         for (ISOMobEffectInstance ISOMobEffectInstance : Respawn.respawnObeliskEffects) {
             player.addEffect(ISOMobEffectInstance.getMobEffectInstance());
         }
-        if (!hasCatalysts(level, respawnPos))
-            disable(player, level, respawnPos, level.getBlockState(respawnPos), true);
     }
 
     public static boolean hasCatalysts(Level level, BlockPos pos) {

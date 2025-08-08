@@ -7,20 +7,7 @@
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
                 "location": "iguanatweaksreborn:respawn_obelisk_birch",
-                "processors": {
-                    "processors": [
-                        {
-                            "processor_type": "minecraft:block_rot",
-                            "integrity": 0.75,
-                            "rottable_blocks": "#iguanatweaksreborn:structures/respawn_obelisk/blocks_to_rot"
-                        },
-                        {
-                            "processor_type": "minecraft:block_rot",
-                            "integrity": 0.4,
-                            "rottable_blocks": "minecraft:iron_block"
-                        }
-                    ]
-                }
+                "processors": "iguanatweaksreborn:rot_obelisk_block"
             }
         }
     ]

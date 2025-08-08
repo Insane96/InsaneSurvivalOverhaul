@@ -1,14 +1,19 @@
 # Changelog
 
-* F3 H
-* auto walk
-
 ## Upcoming
 ### Additions
 * Conduit effect no longer grants haste
 
+### Changes
+* Minor rework to Respawn Obelisks
+  * They no longer require catalyst blocks (configurable)
+  * Removed iron blocks on the structure
+  * Right-clicking on a respawn obelisk will now both enable it and set your respawn point with one click
+  * Shift-right-clicking on a respawn obelisk will now disable it
+  * Fixed not being able to respawn on top of the obelisk (and right below)
+
 ### Fixes
-* Possible performance loss on world loading with data pack loading
+* Minor performance loss on world loading when loading data packs
 
 ## 4.19.3
 ### Additions

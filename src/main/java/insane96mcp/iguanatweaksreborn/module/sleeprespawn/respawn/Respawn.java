@@ -90,8 +90,10 @@ public class Respawn extends JsonFeature {
 
 	@Config(description = "Data pack that makes respawn obelisks generate in the world")
 	public static Boolean respawnObelisks = true;
-	@Config(description = "If enabled, sleeping a bed when sneaking will overwrite obelisk spawn point")
-	public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
+    @Config(description = "If true, sleeping a bed when sneaking will overwrite obelisk spawn point")
+    public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
+    @Config(description = "If true, respawn obelisks will require (and consume) precious blocks to let you respawn")
+    public static Boolean respawnObelisksRequireCatalystBlocks = false;
 
 	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
 			IdTagValue.newId("minecraft:iron_block", 0.75d),
