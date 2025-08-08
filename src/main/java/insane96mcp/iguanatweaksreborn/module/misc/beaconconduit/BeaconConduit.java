@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
+import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -117,6 +118,8 @@ public class BeaconConduit extends JsonFeature {
     public static Double conduit$protectionDistanceMultiplier = 8d;
     @Config(min = 0d, max = 96d, description = "If a mob is within this radius from the conduit, it will be dealt the maximum amount of damage.")
     public static Double conduit$protectionMaxDamageDistance = 8d;
+    @Config(description = "If true, conduit effect will no longer speed up mining speed.")
+    public static Boolean conduit$removeHaste = true;
 
     public BeaconConduit(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
@@ -284,5 +287,9 @@ public class BeaconConduit extends JsonFeature {
                 return jObject;
             }
         }
+    }
+
+    public static boolean shouldRemoveConduitHaste() {
+        return Feature.isEnabled(BeaconConduit.class) && BeaconConduit.conduit$removeHaste;
     }
 }

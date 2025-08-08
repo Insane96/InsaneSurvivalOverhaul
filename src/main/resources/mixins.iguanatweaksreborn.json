@@ -70,6 +70,7 @@
         "MilkBucketItemMixin",
         "MobAccessor",
         "MobEffectMixin",
+        "MobEffectUtilMixin",
         "MobMixin",
         "NaturalSpawnerMixin",
         "OreVeinifierMixin",

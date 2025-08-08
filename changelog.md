@@ -1,10 +1,12 @@
 # Changelog
 
-* Remove conduit haste 
 * F3 H
 * auto walk
 
 ## Upcoming
+### Additions
+* Conduit effect no longer grants haste
+
 ### Fixes
 * Possible performance loss on world loading with data pack loading
 
