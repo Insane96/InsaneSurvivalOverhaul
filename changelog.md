@@ -1,5 +1,12 @@
 # Changelog
 
+* Repair kits in EMI
+
+## Upcoming
+### Changes
+* Season Fishing slowdown no longer affects hooking speed
+* Timber trees' logs now always fall sideways to prevent fallen logs from triggering another tree fall
+
 ## 4.19.4
 ### Additions
 * Conduit effect no longer grants haste

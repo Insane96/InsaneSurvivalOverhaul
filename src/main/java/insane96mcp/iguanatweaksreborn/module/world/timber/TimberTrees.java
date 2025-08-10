@@ -280,23 +280,10 @@ public class TimberTrees extends JsonFeature {
         return pos1.atY(pos2.getY()).distManhattan(pos2);
     }
 
-    public static BlockState rotatePillar(BlockState state, Direction.Axis axis) {
-        switch (axis) {
-            case X -> {
-                return switch (state.getValue(RotatedPillarBlock.AXIS)) {
-                    case X -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
-                    case Y -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.X);
-                    default -> state;
-                };
-            }
-            case Z -> {
-                return switch (state.getValue(RotatedPillarBlock.AXIS)) {
-                    case Y -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Z);
-                    case Z -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
-                    default -> state;
-                };
-            }
-        }
-        return state;
+    public static BlockState rotatePillar(BlockState state, Direction.Axis playerAxis) {
+		Direction.Axis logAxis = state.getValue(RotatedPillarBlock.AXIS);
+		if (logAxis == Direction.Axis.Y)
+			return state.setValue(RotatedPillarBlock.AXIS, playerAxis);
+		return state;
     }
 }

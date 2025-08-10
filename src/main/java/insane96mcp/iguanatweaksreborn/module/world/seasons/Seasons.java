@@ -298,16 +298,16 @@ public class Seasons extends JsonFeature {
 
 	@SubscribeEvent
 	public void shouldSlowdownFishing(HookTickToHookLureEvent event) {
-		int slowdown = slowdownFishing(event.getHookEntity().level());
 		if (event.getType() != HookTickToHookLureEvent.Type.LURE)
-			slowdown /= 10;
+			return;
+		int slowdown = slowdownFishing(event.getHookEntity().level());
 		event.setTick(event.getTick() + slowdown);
 	}
 
 	public static void shouldTideSlowdownFishing(TideHookTickToHookLureEvent event) {
-		int slowdown = slowdownFishing(event.getHookEntity().level());
 		if (event.getType() != TideHookTickToHookLureEvent.Type.LURE)
-			slowdown /= 10;
+			return;
+		int slowdown = slowdownFishing(event.getHookEntity().level());
 		event.setTick(event.getTick() + slowdown);
 	}
 
