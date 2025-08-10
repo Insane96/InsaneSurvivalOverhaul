@@ -6,6 +6,7 @@
 ### Changes
 * Season Fishing slowdown no longer affects hooking speed
 * Timber trees' logs now always fall sideways to prevent fallen logs from triggering another tree fall
+* Environmental cherries now only drop in summer
 
 ### Fixes
 * Aloe vera plant growth not working

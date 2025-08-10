@@ -86,13 +86,6 @@ public class ISOEmiPlugin implements EmiPlugin {
 				registry.addRecipe(createSimpleInfo(EmiIngredient.of(Nether.PORTAL_CORNERS), "info_portal_corners", Component.translatable("emi.info.iguanatweaksreborn.portal_corners")));
 		}
 		if (Feature.isEnabled(RepairKits.class)) {
-			//This is sooo bad
-			/*for (Recipe recipe : manager.getRecipes()) {
-				ItemStack resultItem = recipe.getResultItem(null);
-				if (resultItem.getItem() instanceof RepairKitItem) {
-					registry.addEmiStack(EmiStack.of(resultItem));
-				}
-			}*/
 			registry.addEmiStack(EmiStack.of(RepairKits.ITEM.get()));
 			registry.addRecipe(createSimpleInfo(RepairKits.ITEM.get(), "info_repair_kit", Component.translatable("emi.info.iguanatweaksreborn.repair_kit")));
 		}
