@@ -1,5 +1,5 @@
 {
-    "block": "iguanatweaksreborn:aloe_vera",
+    "block": "#iguanatweaksreborn:aloe_vera",
     "growth_multiplier": 3,
     "modifiers": [
         {
