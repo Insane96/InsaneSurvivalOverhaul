@@ -28,6 +28,6 @@ E.g. https://pastebin.com/1AbCDEFG
 **Config**:  
 E.g. https://pastebin.com/1AbCDEFG
 
-**Can be reproduced with a minimal set of mods? (IguanaTweaks Reborn + InsaneLib + e.g. Quark)?**:  
+**Can be reproduced with a minimal set of mods? (IguanaTweaks Reborn + InsaneLib + e.g. Quark)? Deleting or ignoring this will result in invalid issue**:  
 <Your answer here>
 
