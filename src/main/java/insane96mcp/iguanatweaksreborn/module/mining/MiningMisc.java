@@ -30,7 +30,7 @@ public class MiningMisc extends Feature {
 	@Config(description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2 tool mining speed.")
 	public static Boolean efficiencyBasedDestroyDelay = true;
 	@Config(description = "Changes some Caverns and Chasms config options.")
-	public static Boolean cavernsChasmsIntegration = true;
+	public static Boolean cavernsChasmsIntegration = false;
 
 	public MiningMisc(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
