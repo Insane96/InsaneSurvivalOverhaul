@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "iguanatweaksreborn:copper_axe"
+        "recipe": "iguanatweaksreborn:copper_equipment/axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "iguanatweaksreborn:copper_axe"
+      "iguanatweaksreborn:copper_equipment/axe"
     ]
   },
   "sends_telemetry_event": false

@@ -1,14 +1,4 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "insanelib:feature_enabled",
-          "feature": "Copper equipment"
-        }
-      ],
-      "recipe": {
         "type": "minecraft:crafting_shaped",
         "category": "equipment",
         "key": {
@@ -17,15 +7,11 @@
           }
         },
         "pattern": [
-          "ccc",
           "c c",
           "c c"
         ],
         "result": {
-          "item": "iguanatweaksreborn:copper_leggings"
+          "item": "iguanatweaksreborn:copper_boots"
         },
         "show_notification": true
       }
-    }
-  ]
-}

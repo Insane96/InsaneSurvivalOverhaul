@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "iguanatweaksreborn:copper_hoe"
+        "recipe": "iguanatweaksreborn:copper_equipment/shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "iguanatweaksreborn:copper_hoe"
+      "iguanatweaksreborn:copper_equipment/shovel"
     ]
   },
   "sends_telemetry_event": false

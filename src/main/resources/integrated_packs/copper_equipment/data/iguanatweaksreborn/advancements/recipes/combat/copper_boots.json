@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "iguanatweaksreborn:copper_shovel"
+        "recipe": "iguanatweaksreborn:copper_equipment/boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "iguanatweaksreborn:copper_shovel"
+      "iguanatweaksreborn:copper_equipment/boots"
     ]
   },
   "sends_telemetry_event": false

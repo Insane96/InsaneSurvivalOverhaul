@@ -1,14 +1,4 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "insanelib:feature_enabled",
-          "feature": "Copper equipment"
-        }
-      ],
-      "recipe": {
         "type": "minecraft:crafting_shaped",
         "category": "equipment",
         "key": {
@@ -29,6 +19,3 @@
         },
         "show_notification": true
       }
-    }
-  ]
-}

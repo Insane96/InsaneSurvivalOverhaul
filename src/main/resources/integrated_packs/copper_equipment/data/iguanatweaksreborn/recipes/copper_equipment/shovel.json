@@ -1,14 +1,4 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "insanelib:feature_enabled",
-          "feature": "Copper equipment"
-        }
-      ],
-      "recipe": {
         "type": "minecraft:crafting_shaped",
         "category": "equipment",
         "key": {
@@ -20,15 +10,12 @@
           }
         },
         "pattern": [
-          "fff",
-          " s ",
-          " s "
+          "f",
+          "s",
+          "s"
         ],
         "result": {
-          "item": "iguanatweaksreborn:copper_pickaxe"
+          "item": "iguanatweaksreborn:copper_shovel"
         },
         "show_notification": true
       }
-    }
-  ]
-}

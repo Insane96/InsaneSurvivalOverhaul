@@ -1,0 +1,17 @@
+{
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "c": {
+            "item": "minecraft:copper_ingot"
+          }
+        },
+        "pattern": [
+          "ccc",
+          "c c"
+        ],
+        "result": {
+          "item": "iguanatweaksreborn:copper_helmet"
+        },
+        "show_notification": true
+      }
