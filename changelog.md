@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.19.7
 ### Changes
 * Stone tools are now replaced with copper ones instead of flint
 
