@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.19.8
+### Fixes
+* Stone items not replaced with copper ones
+
 ## 4.19.7
 ### Changes
 * Stone tools are now replaced with copper ones instead of flint
