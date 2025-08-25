@@ -1,7 +1,5 @@
 # Changelog
 
-* Repair kits in EMI
-
 ## Upcoming
 ### Changes
 * Season Fishing slowdown no longer affects hooking speed
@@ -11,6 +9,7 @@
 
 ### Fixes
 * Aloe vera plant growth not working
+* Copper recipes not unlocked and not disabled by disabling the copper equipment feature
 
 ## 4.19.4
 ### Additions

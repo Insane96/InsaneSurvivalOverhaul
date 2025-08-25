@@ -1,12 +1,12 @@
 {
 	"parent": "minecraft:story/mine_stone",
 	"criteria": {
-		"flint_pickaxe": {
+		"copper_pickaxe": {
 			"conditions": {
 				"items": [
 					{
 						"items": [
-							"iguanatweaksreborn:flint_pickaxe"
+							"iguanatweaksreborn:copper_pickaxe"
 						]
 					}
 				]
@@ -22,7 +22,7 @@
 		"frame": "task",
 		"hidden": false,
 		"icon": {
-			"item": "iguanatweaksreborn:flint_pickaxe",
+			"item": "iguanatweaksreborn:copper_pickaxe",
 			"nbt": "{Damage:0}"
 		},
 		"show_toast": true,
@@ -32,7 +32,7 @@
 	},
 	"requirements": [
 		[
-			"flint_pickaxe"
+			"copper_pickaxe"
 		]
 	]
 }
