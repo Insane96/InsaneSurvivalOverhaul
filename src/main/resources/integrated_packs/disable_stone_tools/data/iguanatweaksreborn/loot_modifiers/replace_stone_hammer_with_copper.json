@@ -2,5 +2,5 @@
     "type": "iguanatweaksreborn:replace_loot",
     "conditions": [],
     "item_to_replace": "iguanatweaksexpanded:stone_hammer",
-    "new_item": "iguanatweaksexpanded:flint_hammer"
+    "new_item": "iguanatweaksexpanded:copper_hammer"
 }

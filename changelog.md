@@ -1,9 +1,17 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Stone tools are now replaced with copper ones instead of flint
+
+### Fixes
+* Copper recipes
+* Zombies spawning with flint equipment
+
 ## 4.19.6
 ### Removed
 * MPR Swim and movement speed bonus
-  * Will be available in Enhanced AI 3
+  * Will be available in Enhanced AI 3 
 
 ## 4.19.5
 ### Changes
