@@ -1,8 +1,8 @@
 # Changelog
 
-## Upcoming
+## 4.19.6
 ### Removed
-* Swim and movement speed bonus
+* MPR Swim and movement speed bonus
   * Will be available in Enhanced AI 3
 
 ## 4.19.5
