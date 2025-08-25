@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.19.5
 ### Changes
 * Season Fishing slowdown no longer affects hooking speed
 * Timber trees' logs now always fall sideways to prevent fallen logs from triggering another tree fall
