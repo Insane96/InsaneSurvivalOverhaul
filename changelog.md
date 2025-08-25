@@ -1,5 +1,12 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Lowered shields slowdown (10% -> 5%)
+
+### Fixes
+* Advancements
+
 ## 4.19.8
 ### Fixes
 * Stone items not replaced with copper ones
