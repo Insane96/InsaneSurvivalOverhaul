@@ -41,13 +41,6 @@
                     }
                 }
             ]
-        },
-        {
-            "property": "attribute_modifier",
-            "attribute": "forge:swim_speed",
-            "modifier_name": "More Swim Speed for Mobs",
-            "operation": "multiply_base",
-            "amount": 2
         }
     ],
     "priority": 1

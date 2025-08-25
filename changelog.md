@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Removed
+* Swim and movement speed bonus
+  * Will be available in Enhanced AI 3
+
 ## 4.19.5
 ### Changes
 * Season Fishing slowdown no longer affects hooking speed
