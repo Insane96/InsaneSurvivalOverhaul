@@ -256,8 +256,10 @@
 
 	"advancements.iso.wooden_pickaxe.title": "Photosynthesis",
 	"advancements.iso.wooden_pickaxe.description": "Obtain your first Wooden Tool. Lasts a lot under the sunlight.",
-	"advancements.iso.seeds.title": "Seedy Business",
-	"advancements.iso.seeds.description": "Obtain seeds from wild crops",
+    "advancements.iso.seeds.title": "Seedy Business",
+    "advancements.iso.seeds.description": "Obtain seeds from wild crops",
+    "advancements.iso.copper_tools.title": "Doesn't oxidize",
+    "advancements.iso.copper_tools.description": "Obtain a copper tool",
 	"advancements.iso.winter_is_coming.title": "Winter is coming",
 	"advancements.iso.winter_is_coming.description": "It's autumn! Make sure to stack up food and wood before Winter as almost nothing grows and animals don't spawn. A calendar can help you keep track of the season.",
 	"advancements.iso.iron_nugget.title": "Small traces in stone",

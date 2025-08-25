@@ -1,13 +1,11 @@
 {
 	"parent": "minecraft:story/mine_stone",
 	"criteria": {
-		"copper_pickaxe": {
+		"hoe": {
 			"conditions": {
 				"items": [
 					{
-						"items": [
-							"iguanatweaksreborn:copper_pickaxe"
-						]
+						"tag": "minecraft:hoes"
 					}
 				]
 			},
@@ -22,7 +20,7 @@
 		"frame": "task",
 		"hidden": false,
 		"icon": {
-			"item": "iguanatweaksreborn:copper_pickaxe",
+			"item": "minecraft:wooden_hoe",
 			"nbt": "{Damage:0}"
 		},
 		"show_toast": true,
@@ -32,7 +30,7 @@
 	},
 	"requirements": [
 		[
-			"copper_pickaxe"
+			"hoe"
 		]
 	]
 }

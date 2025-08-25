@@ -14,7 +14,7 @@
         "announce_to_chat": true,
         "hidden": false
     },
-    "parent": "iguanatweaksreborn:story/furnace",
+    "parent": "iguanatweaksreborn:story/campfire",
     "criteria": {
         "copper_tools": {
             "trigger": "minecraft:inventory_changed",
