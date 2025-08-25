@@ -9,7 +9,7 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.event.HookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.event.TideHookTickToHookLureEvent;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -113,8 +113,8 @@ public class Seasons extends JsonFeature {
 
 	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noGreenHouseGlass);
-		InsaneSO.addServerPack("leaves_drops", "Insane's Survival Overhaul Leaves Drops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && leavesDrops);
+		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && noGreenHouseGlass);
+		InsaneSO.addServerPack("leaves_drops", "Insane's Survival Overhaul Leaves Drops", () -> this.isEnabled() && !Packs.disableAllDataPacks && leavesDrops);
 		if (ModList.get().isLoaded("tide"))
 			MinecraftForge.EVENT_BUS.addListener(Seasons::shouldTideSlowdownFishing);
 		JSON_CONFIGS.add(new JsonConfig<>("grass_growth_decay.json", grassGrowthDecay, GRASS_GROWTH_DECAY_DEFAULT, GrassTickingData.LIST_TYPE));

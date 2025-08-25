@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.items.copper;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.item.ISOArmorMaterial;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -42,7 +42,7 @@ public class CopperEquipment extends Feature {
 
 	public CopperEquipment(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("copper_equipment", "Insane's Survival Extra Copper Expansion", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
+		InsaneSO.addServerPack("copper_equipment", "Insane's Survival Extra Copper Expansion", () -> this.isEnabled() && !Packs.disableAllDataPacks);
 	}
 
 	/*@SubscribeEvent

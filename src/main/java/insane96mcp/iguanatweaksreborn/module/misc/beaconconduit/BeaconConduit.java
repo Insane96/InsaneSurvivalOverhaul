@@ -5,7 +5,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -128,7 +128,7 @@ public class BeaconConduit extends JsonFeature {
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));
         addSyncType(InsaneSO.location("beacon_effects"), new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE, (list, isClientSide) -> list.removeIf(beaconEffect -> beaconEffect.getEffect() == null), true, InsaneSO.location("beacon_effects")));
-        InsaneSO.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !DataPacks.disableAllDataPacks);
+        InsaneSO.addServerPack("better_beacon", "Insane's Survival Overhaul Better Beacon", () -> this.isEnabled() && !Packs.disableAllDataPacks);
     }
 
     @Override

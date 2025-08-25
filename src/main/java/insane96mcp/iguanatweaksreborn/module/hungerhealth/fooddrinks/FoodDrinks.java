@@ -5,7 +5,7 @@ import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
@@ -126,7 +126,7 @@ public class FoodDrinks extends JsonFeature {
 
 	public FoodDrinks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
+		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
 		addSyncType(InsaneSO.location("food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
 		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, InsaneSO.location("food_properties")));
 	}

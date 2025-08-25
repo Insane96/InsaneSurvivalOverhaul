@@ -6,7 +6,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.integration.ToolBeltIntegration;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -27,7 +27,7 @@ public class ToolBeltIntegrationFeature extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && biggerBaseBelt);
+		InsaneSO.addServerPack("toolbelt_integration", "Insane's Survival Overhaul Tool Belt Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && biggerBaseBelt);
 	}
 
 	@Override

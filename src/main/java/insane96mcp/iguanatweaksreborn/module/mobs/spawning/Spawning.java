@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.mobs.spawning;
 import com.google.common.collect.ImmutableSet;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -53,8 +53,8 @@ public class Spawning extends Feature {
 
     public Spawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
-        InsaneSO.addServerPack("ocean_guardians", "Insane's Survival Overhaul Ocean Guardians", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && guardiansInDeepOceans);
+        InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() && !Packs.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
+        InsaneSO.addServerPack("ocean_guardians", "Insane's Survival Overhaul Ocean Guardians", () -> this.isEnabled() && !Packs.disableAllDataPacks && guardiansInDeepOceans);
     }
 
     @SubscribeEvent

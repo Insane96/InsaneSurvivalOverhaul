@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.items.flintexpansion;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -40,8 +40,8 @@ public class FlintExpansion extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableStoneTools);
-		InsaneSO.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && !dontEnableFlintTools);
+		InsaneSO.addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableStoneTools);
+		InsaneSO.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !Packs.disableAllDataPacks && !dontEnableFlintTools);
 	}
 
 	public static boolean areStoneToolsDisabled() {

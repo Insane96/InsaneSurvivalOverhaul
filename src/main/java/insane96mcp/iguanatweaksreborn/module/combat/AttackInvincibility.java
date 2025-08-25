@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.network.message.InvulnerableTimeMessageSync;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -25,7 +25,7 @@ public class AttackInvincibility extends Feature {
 
 	public AttackInvincibility(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("attack_invincibility", "Insane's Survival Overhaul Attack Invincibility", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && arrowsMagicNoInvincFrames);
+		InsaneSO.addServerPack("attack_invincibility", "Insane's Survival Overhaul Attack Invincibility", () -> super.isEnabled() && !Packs.disableAllDataPacks && arrowsMagicNoInvincFrames);
 	}
 
 	@SubscribeEvent

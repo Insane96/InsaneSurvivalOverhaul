@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.world;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -41,7 +41,7 @@ public class Nether extends Feature {
 
     public Nether(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && netherTweaks);
+        InsaneSO.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && netherTweaks);
     }
 
     public static boolean shouldDisableLavaPockets(SpringConfiguration configuration) {

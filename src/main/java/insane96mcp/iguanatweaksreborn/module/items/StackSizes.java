@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.items;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.network.message.StackSizesSync;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.Feature;
@@ -45,7 +45,7 @@ public class StackSizes extends Feature {
 
 	public StackSizes(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("item_stacks", "Insane's Survival Overhaul Item Stacks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+        InsaneSO.addServerPack("item_stacks", "Insane's Survival Overhaul Item Stacks", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
     }
 
     public static void processStackSizes(boolean isClientSide) {

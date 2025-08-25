@@ -8,7 +8,7 @@ import insane96mcp.iguanatweaksreborn.mixin.VillagerAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
@@ -98,7 +98,7 @@ public class Crops extends Feature {
 
 	public Crops(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 	}
 
 	/** Defaults items a villager regardless of its profession can pick up. */

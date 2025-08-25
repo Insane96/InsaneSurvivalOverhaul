@@ -7,7 +7,7 @@ import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.iguanatweaksreborn.module.mining.blockdefinition.BlockDefinitionReloadListener;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -76,7 +76,7 @@ public class BoneMeal extends Feature {
 
     public BoneMeal(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("bone_meal", "Insane's Survival Overhaul Bone Meal", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+        InsaneSO.addServerPack("bone_meal", "Insane's Survival Overhaul Bone Meal", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
     }
 
     @Override

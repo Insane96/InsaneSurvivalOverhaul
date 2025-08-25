@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -39,7 +39,7 @@ public class PlantsGrowth extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 	}
 
 	@SubscribeEvent

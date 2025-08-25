@@ -16,8 +16,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import vectorwing.farmersdelight.common.Configuration;
 
-@LoadFeature(module = Modules.Ids.MISC, name = "Data Packs & Integration", description = "Various data packs that can be enabled/disabled")
-public class DataPacks extends Feature {
+@LoadFeature(module = Modules.Ids.MISC, name = "Data / Resource Packs & Integration", description = "Various packs that can be enabled/disabled")
+public class Packs extends Feature {
 
     @Config(description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
@@ -92,31 +92,32 @@ public class DataPacks extends Feature {
     @Config(description = "When you add a new mod the game automatically sets the data pack of the mod at the bottom of all the data packs, making the data packs loaded from this mod not work. If this is set to true the enabled and disabled Data Packs of the world are reset and reloaded. WARNING: you'll lose disabled data packs!")
     public static Boolean forceReloadWorldDataPacks = false;
 
-    public DataPacks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+    public Packs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("hardcore_torches", "Insane's Survival Overhaul Hardcore Torches", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && hardcoreTorches);
-        InsaneSO.addServerPack("cheaper_chains", "Insane's Survival Overhaul Cheaper Chains", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cheaperChains);
-        InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && miscTweaks);
-        InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && actualRedstoneComponents);
-        InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && copperFurnace);
-        InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && disableLongNosesStructures);
-        InsaneSO.addServerPack("fishing_loot_changes", "Insane's Survival Overhaul Fishing Loot Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && fishingLootChanges);
-        InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && increaseEndCities);
-        InsaneSO.addServerPack("better_loot", "Insane's Survival Overhaul Better Loot", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded"));
-        InsaneSO.addServerPack("hardcore_loot", "Insane's Survival Overhaul Less Loot Closer to Spawn", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && lessLootCloserToSpawn);
-        InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && mobLootChanges);
-        InsaneSO.addServerPack("advancements", "Insane's Survival Overhaul Advancements", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && advancements);
-        InsaneSO.addServerPack("supplementaries_integration", "Insane's Survival Overhaul Supplementaries Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries"));
-        InsaneSO.addServerPack("environmental_integration", "Insane's Survival Overhaul Environmental Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && environmental && ModList.get().isLoaded("environmental"));
-        InsaneSO.addServerPack("quark_integration", "Insane's Survival Overhaul Quark Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && quark && ModList.get().isLoaded("quark"));
-        InsaneSO.addServerPack("autumnity_integration", "Insane's Survival Overhaul Autumnity Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity"));
-        InsaneSO.addServerPack("farmers_delight_integration", "Insane's Survival Overhaul Farmer's Delight Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight"));
-        InsaneSO.addServerPack(1, "caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
-        InsaneSO.addServerPack(1, "tide_integration", "Insane's Survival Overhaul Tide Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tide && ModList.get().isLoaded("tide"));
-        InsaneSO.addServerPack(1, "create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && create && ModList.get().isLoaded("create"));
-        InsaneSO.addServerPack(1, "tconstruct_integration", "Insane's Survival Overhaul Tinkers' Construct Integration", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tinkersConstruct);
+        InsaneSO.addServerPack("hardcore_torches", "Insane's Survival Overhaul Hardcore Torches", () -> this.isEnabled() && !Packs.disableAllDataPacks && hardcoreTorches);
+        InsaneSO.addServerPack("cheaper_chains", "Insane's Survival Overhaul Cheaper Chains", () -> this.isEnabled() && !Packs.disableAllDataPacks && cheaperChains);
+        InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && miscTweaks);
+        InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !Packs.disableAllDataPacks && actualRedstoneComponents);
+        InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && copperFurnace);
+        InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableLongNosesStructures);
+        InsaneSO.addServerPack("fishing_loot_changes", "Insane's Survival Overhaul Fishing Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && fishingLootChanges);
+        InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !Packs.disableAllDataPacks && increaseEndCities);
+        InsaneSO.addServerPack("better_loot", "Insane's Survival Overhaul Better Loot", () -> this.isEnabled() && !Packs.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded"));
+        InsaneSO.addServerPack("hardcore_loot", "Insane's Survival Overhaul Less Loot Closer to Spawn", () -> this.isEnabled() && !Packs.disableAllDataPacks && lessLootCloserToSpawn);
+        InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && mobLootChanges);
+        InsaneSO.addServerPack("advancements", "Insane's Survival Overhaul Advancements", () -> this.isEnabled() && !Packs.disableAllDataPacks && advancements);
+        InsaneSO.addServerPack("supplementaries_integration", "Insane's Survival Overhaul Supplementaries Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries"));
+        InsaneSO.addServerPack("environmental_integration", "Insane's Survival Overhaul Environmental Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && environmental && ModList.get().isLoaded("environmental"));
+        InsaneSO.addServerPack("quark_integration", "Insane's Survival Overhaul Quark Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && quark && ModList.get().isLoaded("quark"));
+        InsaneSO.addServerPack("autumnity_integration", "Insane's Survival Overhaul Autumnity Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity"));
+        InsaneSO.addServerPack("farmers_delight_integration", "Insane's Survival Overhaul Farmer's Delight Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight"));
+        InsaneSO.addServerPack(1, "caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
+        InsaneSO.addServerPack(1, "tide_integration", "Insane's Survival Overhaul Tide Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && tide && ModList.get().isLoaded("tide"));
+        InsaneSO.addServerPack(1, "create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && create && ModList.get().isLoaded("create"));
+        InsaneSO.addServerPack(1, "tconstruct_integration", "Insane's Survival Overhaul Tinkers' Construct Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && tinkersConstruct);
 
-        InsaneSO.addClientPack("assets_override", "Insane's Survival Overhaul Assets Override", () -> true);
+        InsaneSO.addClientPack("assets_override", "ISO Assets Override", () -> true);
+        InsaneSO.addClientPack("programmer_art", "ISO Programmer Art", () -> true);
     }
 
     @Override
@@ -156,7 +157,7 @@ public class DataPacks extends Feature {
         if (!forceReloadWorldDataPacks)
             return levelTag;
 
-        Feature.get(DataPacks.class).getConfigOption("Force Reload world Data Packs").set(false);
+        Feature.get(Packs.class).getConfigOption("Force Reload world Data Packs").set(false);
         CompoundTag dataTag = levelTag.getCompound("Data");
         dataTag.remove("DataPacks");
         return levelTag;

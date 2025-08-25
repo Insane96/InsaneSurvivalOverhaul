@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.mining;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -32,9 +32,9 @@ public class MaterialsAndOres extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("farmable_iron", "Insane's Survival Overhaul Farmable Iron", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && farmableIronDataPack);
-		InsaneSO.addServerPack("ore_smelting", "Insane's Survival Overhaul Ore Smelting", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreSmelting);
-		InsaneSO.addServerPack("ore_generation", "Insane's Survival Overhaul Ore Generation Overhaul", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && oreGenerationOverhaul);
-		InsaneSO.addServerPack("diamond_gen_backport", "Insane's Survival Overhaul Diamond Generation Backport", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && diamondGenerationBackport && !ModList.get().isLoaded("terralith"));
+		InsaneSO.addServerPack("farmable_iron", "Insane's Survival Overhaul Farmable Iron", () -> this.isEnabled() && !Packs.disableAllDataPacks && farmableIronDataPack);
+		InsaneSO.addServerPack("ore_smelting", "Insane's Survival Overhaul Ore Smelting", () -> this.isEnabled() && !Packs.disableAllDataPacks && oreSmelting);
+		InsaneSO.addServerPack("ore_generation", "Insane's Survival Overhaul Ore Generation Overhaul", () -> this.isEnabled() && !Packs.disableAllDataPacks && oreGenerationOverhaul);
+		InsaneSO.addServerPack("diamond_gen_backport", "Insane's Survival Overhaul Diamond Generation Backport", () -> this.isEnabled() && !Packs.disableAllDataPacks && diamondGenerationBackport && !ModList.get().isLoaded("terralith"));
 	}
 }

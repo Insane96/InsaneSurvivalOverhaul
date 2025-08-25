@@ -4,7 +4,7 @@ import com.google.common.collect.Multimap;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -57,7 +57,7 @@ public class MiscStats extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && combatReworkDataPack);
+		InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && combatReworkDataPack);
 	}
 
 	@Override

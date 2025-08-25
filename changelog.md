@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Programmer resource pack
+
 ### Changes
 * Lowered shields slowdown (10% -> 5%)
 

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -16,6 +16,6 @@ public class ShieldsPlus extends Feature {
 
     public ShieldsPlus(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("shieldsplus_integration", "Insane's Survival Overhaul Shields+ Integration", () -> super.isEnabled() && !DataPacks.disableAllDataPacks && dataPack && ModList.get().isLoaded("shieldsplus"));
+        InsaneSO.addServerPack("shieldsplus_integration", "Insane's Survival Overhaul Shields+ Integration", () -> super.isEnabled() && !Packs.disableAllDataPacks && dataPack && ModList.get().isLoaded("shieldsplus"));
     }
 }

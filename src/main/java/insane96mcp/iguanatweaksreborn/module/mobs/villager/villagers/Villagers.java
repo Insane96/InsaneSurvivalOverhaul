@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.mixin.VillagerDataAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -58,7 +58,7 @@ public class Villagers extends Feature {
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && tradesDataPack);
+		InsaneSO.addServerPack("villager_trades", "Insane's Survival Overhaul Villager Trades", () -> this.isEnabled() && !Packs.disableAllDataPacks && tradesDataPack);
 		CURE_DISCOUNT_REMOVED = this.createDataKey("cure_discount_removed");
 		WAS_CONVERTED_ZOMBIE = this.createDataKey("was_converted_zombie");
 	}

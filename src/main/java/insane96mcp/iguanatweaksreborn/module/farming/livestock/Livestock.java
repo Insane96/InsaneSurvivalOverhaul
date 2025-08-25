@@ -5,7 +5,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.modifier.Modifier;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
-import insane96mcp.iguanatweaksreborn.module.misc.DataPacks;
+import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -101,7 +101,7 @@ public class Livestock extends Feature {
 
 	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !DataPacks.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 		AGE = this.createDataKey("age");
 		MAX_AGE = this.createDataKey("max_age");
 		STOP_AGING = this.createDataKey("stop_aging");
