@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.19.10
+### Changes
+* Bone meal can no longer be used directly on crops
+  * Instead, rich farmland is made
+
 ## 4.19.9
 ### Additions
 * Programmer resource pack

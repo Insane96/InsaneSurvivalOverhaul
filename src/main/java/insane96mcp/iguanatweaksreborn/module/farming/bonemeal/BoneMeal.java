@@ -55,6 +55,8 @@ public class BoneMeal extends Feature {
     public static Integer richFarmland$extraTicks = 4;
     @Config(min = 0d, max = 1d, description = "Chance for a Rich farmland to decay back to farmland")
     public static Double richFarmland$chanceToDecay = 0.35d;
+    @Config(description = "Prevents bone meal from working on crops and will just create rich farmland on right-click")
+    public static Boolean richFarmland$disableBoneMeal = true;
 
     @Config(min = 0, max = 25, description = "How many stages will bone meal make stuff grow?")
     public static MinMax stageGrowth = new MinMax(1, 1);
@@ -74,8 +76,8 @@ public class BoneMeal extends Feature {
     @Config(description = "Makes bone meal have a chance to fail on Cave Vines, Saplings and Sweet Berry Bushes.")
     public static Boolean dataPack = true;
 
-    public BoneMeal(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("bone_meal", "Insane's Survival Overhaul Bone Meal", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
     }
 
@@ -120,7 +122,7 @@ public class BoneMeal extends Feature {
         BlockPos farmlandPos = null;
         if (event.getBlock().is(Blocks.FARMLAND))
             farmlandPos = event.getPos();
-        else if (event.getLevel().getBlockState(event.getPos().below()).is(Blocks.FARMLAND) && event.getEntity().isCrouching())
+        else if (event.getLevel().getBlockState(event.getPos().below()).is(Blocks.FARMLAND) && (event.getEntity().isCrouching() || richFarmland$disableBoneMeal))
             farmlandPos = event.getPos().below();
         if (farmlandPos != null) {
             event.getLevel().setBlockAndUpdate(farmlandPos, RICH_FARMLAND.block().get().defaultBlockState().setValue(FarmBlock.MOISTURE, event.getLevel().getBlockState(farmlandPos).getValue(FarmBlock.MOISTURE)));
