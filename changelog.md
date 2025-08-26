@@ -3,7 +3,10 @@
 ## Upcoming
 ### Additions
 * Roofed Forest Vegetation data pack
-  * Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees
+  * Lowers the giant mushrooms generated in a Roofed forests as well as removes the non-dark oak trees
+
+### Changes
+* Chorus Fruits are now fast eating and will cancel fall damage when teleporting
 
 ## 4.19.10
 ### Changes

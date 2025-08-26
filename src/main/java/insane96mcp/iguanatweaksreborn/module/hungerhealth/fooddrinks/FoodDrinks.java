@@ -27,8 +27,10 @@ import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -66,7 +68,8 @@ public class FoodDrinks extends JsonFeature {
 	public static final TagKey<Item> FOOD_BLACKLIST = ISOItemTagsProvider.create("food_drinks_no_hunger_changes");
 
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
+            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:chorus_fruit")).fastEating(true).build(),
+            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).setEatingTime(40).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).nutrition(2).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_beef")).nutrition(6).build(),
@@ -118,14 +121,16 @@ public class FoodDrinks extends JsonFeature {
 	public static Boolean combatSnapshotEatingSaturation = true;
 	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
 	public static Boolean buffCake = true;
-	@Config(description = "Adds a loot table when shearing pumpkins (iguanatweaksreborn:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
-	public static Boolean addPumpkinShearLootTable = true;
+    @Config(description = "Adds a loot table when shearing pumpkins (iguanatweaksreborn:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
+    public static Boolean addPumpkinShearLootTable = true;
+    @Config
+    public static Boolean chorusFruitCancelsFallDamage = true;
 
 	@Config(description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
 
-	public FoodDrinks(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
 		addSyncType(InsaneSO.location("food_properties"), new SyncType(json -> loadAndReadJson(json, customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE)));
 		JSON_CONFIGS.add(new JsonConfig<>("food_properties.json", customFoodProperties, CUSTOM_FOOD_PROPERTIES_DEFAULT, CustomFoodProperties.LIST_TYPE, FoodDrinks::processCustomFoodValues, true, InsaneSO.location("food_properties")));
@@ -220,6 +225,16 @@ public class FoodDrinks extends JsonFeature {
 			break;
 		}
 	}
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onChorusTeleport(EntityTeleportEvent.ChorusFruit event) {
+        if (!this.isEnabled()
+                || !chorusFruitCancelsFallDamage
+                || event.isCanceled())
+            return;
+
+        event.getEntityLiving().resetFallDistance();
+    }
 
 	public static final Map<FoodProperties, FoodProperties> originalFoodProperties = new HashMap<>();
 
