@@ -63,11 +63,14 @@ public class Packs extends Feature {
     public static Boolean lessLootCloserToSpawn = true;
     @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean mobLootChanges = true;
+    @Config(description = "Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees")
+    public static Boolean darkForestVegetation = true;
     @Config(description = """
             Overhauls vanilla advancements:
             * Heavily increases experience reward
             * Removes some advancements (like villagers ones)""")
     public static Boolean advancements = true;
+
     @Config(description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
     public static Boolean supplementaries = false;
     @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
@@ -105,6 +108,7 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("better_loot", "Insane's Survival Overhaul Better Loot", () -> this.isEnabled() && !Packs.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded"));
         InsaneSO.addServerPack("hardcore_loot", "Insane's Survival Overhaul Less Loot Closer to Spawn", () -> this.isEnabled() && !Packs.disableAllDataPacks && lessLootCloserToSpawn);
         InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && mobLootChanges);
+        InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);
         InsaneSO.addServerPack("advancements", "Insane's Survival Overhaul Advancements", () -> this.isEnabled() && !Packs.disableAllDataPacks && advancements);
         InsaneSO.addServerPack("supplementaries_integration", "Insane's Survival Overhaul Supplementaries Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries"));
         InsaneSO.addServerPack("environmental_integration", "Insane's Survival Overhaul Environmental Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && environmental && ModList.get().isLoaded("environmental"));

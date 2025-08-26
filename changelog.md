@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Roofed Forest Vegetation data pack
+  * Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees
+
 ## 4.19.10
 ### Changes
 * Bone meal can no longer be used directly on crops
