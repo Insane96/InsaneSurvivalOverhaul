@@ -4,21 +4,21 @@
         "default": "minecraft:oak_checked",
         "features": [
             {
-                "chance": 0.01,
+                "chance": 0.005,
                 "feature": {
                     "feature": "minecraft:huge_brown_mushroom",
                     "placement": []
                 }
             },
             {
-                "chance": 0.02,
+                "chance": 0.01,
                 "feature": {
                     "feature": "minecraft:huge_red_mushroom",
                     "placement": []
                 }
             },
             {
-                "chance": 0.97,
+                "chance": 0.985,
                 "feature": "minecraft:dark_oak_checked"
             }
         ]
