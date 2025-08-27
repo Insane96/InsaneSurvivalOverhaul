@@ -103,9 +103,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTag(OBSIDIANS);
 
         tag(TALL_GRASS)
-                .add(Blocks.GRASS).add(Blocks.TALL_GRASS).add(Blocks.FERN).add(Blocks.LARGE_FERN).add(Blocks.DEAD_BUSH);
+                .add(Blocks.GRASS).add(Blocks.TALL_GRASS).add(Blocks.FERN).add(Blocks.LARGE_FERN);
         tag(Hoes.CAN_SCYTHE)
-                .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS);
+                .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS).add(Blocks.DEAD_BUSH);
 
         tag(GRASS_BLOCKS)
                 .add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM);

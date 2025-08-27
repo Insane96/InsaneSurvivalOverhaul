@@ -21,7 +21,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -67,7 +69,7 @@ public class BoneMeal extends Feature {
     @Config(description = "Chance for a bone meal to fail to grow something. Empty this string to disable. Accepts a list of seasons and chances separated by a ;")
     public static String seasonFailChance = "WINTER,0.65";
 
-    @Config(description = "If true, you can bone meal dirt that's near a grass block to get grass block.")
+    @Config(description = "If true, you can bone meal dirt that's near a grass block (or below tall grass) to get grass block.")
     public static Boolean boneMealDirtToGrass = true;
 
     @Config(min = 0, description = "How many stages will cactus and sugar canes grow with one bone meal. Set to 0 to disable.")
@@ -212,20 +214,27 @@ public class BoneMeal extends Feature {
 
     private void tryBoneMealDirt(BonemealEvent event, Level level, BlockState state, BlockPos pos) {
         if (!state.is(Blocks.DIRT)
-                || !level.getBlockState(pos.above()).isAir())
+                || (!level.getBlockState(pos.above()).isAir() && !level.getBlockState(pos.above()).is(ISOBlockTagsProvider.TALL_GRASS)))
             return;
 
+        if (level.getBlockState(pos.above()).is(ISOBlockTagsProvider.TALL_GRASS)) {
+            growGrassBlock(level, pos, event.getEntity(), event.getStack(), event);
+            return;
+        }
         for (Direction direction : Direction.values()) {
             if (direction == Direction.UP || direction == Direction.DOWN)
                 continue;
-
             if (level.getBlockState(pos.relative(direction)).is(Blocks.GRASS_BLOCK)) {
-                level.setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
-                event.getEntity().swing(event.getEntity().getMainHandItem().getItem() == event.getStack().getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
-                event.setResult(Event.Result.ALLOW);
+                growGrassBlock(level, pos, event.getEntity(), event.getStack(), event);
                 break;
             }
         }
+    }
+
+    private void growGrassBlock(Level level, BlockPos pos, Player player, ItemStack stack, BonemealEvent event) {
+        level.setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
+        player.swing(player.getMainHandItem().getItem() == stack.getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
+        event.setResult(Event.Result.ALLOW);
     }
 
     private void tryBoneMealCanesAndCactus(BonemealEvent event, Level level, BlockState state, BlockPos pos) {

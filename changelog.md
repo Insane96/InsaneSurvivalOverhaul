@@ -7,7 +7,8 @@
 
 ### Changes
 * Cyan flower no longer generates naturally; instead, it's dug up by the Sniffer
-* horus Fruits are now fast eating and will cancel fall damage when teleporting
+* You can now bone meal a dirt block below tall grass to grow a grass block
+* Chorus Fruits are now fast eating and will cancel fall damage when teleporting
 
 ### Fixes
 * Advancements
