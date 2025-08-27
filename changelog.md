@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.20.0
 ### Additions
 * Roofed Forest Vegetation data pack
   * Lowers the giant mushrooms generated in Roofed forests as well as removes the non-dark oak trees
