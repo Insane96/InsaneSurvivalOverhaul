@@ -8,6 +8,9 @@
 ### Changes
 * Chorus Fruits are now fast eating and will cancel fall damage when teleporting
 
+### Fixes
+* Advancements
+
 ## 4.19.10
 ### Changes
 * Bone meal can no longer be used directly on crops
