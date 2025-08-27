@@ -4,6 +4,9 @@
 ### Additions
 * Roofed Forest Vegetation data pack
   * Lowers the giant mushrooms generated in Roofed forests as well as removes the non-dark oak trees
+* Sapling drop fix data pack
+  * Lowered chance to drop saplings: (flowering) azalea and cherry leaves
+  * Increased chance to drop saplings: dark oak and jungle leaves
 
 ### Changes
 * Cyan flower no longer generates naturally; instead, it's dug up by the Sniffer

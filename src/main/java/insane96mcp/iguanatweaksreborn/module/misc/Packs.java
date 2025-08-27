@@ -63,6 +63,8 @@ public class Packs extends Feature {
     public static Boolean lessLootCloserToSpawn = true;
     @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean mobLootChanges = true;
+    @Config(description = "Fixes the drop rate of some saplings, such as Jungle and Dark oak dropping too rarely")
+    public static Boolean saplingDropFix = true;
     @Config(description = "Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees")
     public static Boolean darkForestVegetation = true;
     @Config(description = """
@@ -95,8 +97,8 @@ public class Packs extends Feature {
     @Config(description = "When you add a new mod the game automatically sets the data pack of the mod at the bottom of all the data packs, making the data packs loaded from this mod not work. If this is set to true the enabled and disabled Data Packs of the world are reset and reloaded. WARNING: you'll lose disabled data packs!")
     public static Boolean forceReloadWorldDataPacks = false;
 
-    public Packs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("hardcore_torches", "Insane's Survival Overhaul Hardcore Torches", () -> this.isEnabled() && !Packs.disableAllDataPacks && hardcoreTorches);
         InsaneSO.addServerPack("cheaper_chains", "Insane's Survival Overhaul Cheaper Chains", () -> this.isEnabled() && !Packs.disableAllDataPacks && cheaperChains);
         InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && miscTweaks);
@@ -108,6 +110,7 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("better_loot", "Insane's Survival Overhaul Better Loot", () -> this.isEnabled() && !Packs.disableAllDataPacks && betterStructureLoot && !ModList.get().isLoaded("iguanatweaksexpanded"));
         InsaneSO.addServerPack("hardcore_loot", "Insane's Survival Overhaul Less Loot Closer to Spawn", () -> this.isEnabled() && !Packs.disableAllDataPacks && lessLootCloserToSpawn);
         InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && mobLootChanges);
+        InsaneSO.addServerPack("sapling_drop_fix", "Insane's Survival Overhaul Sapling Drop Fix", () -> this.isEnabled() && !Packs.disableAllDataPacks && saplingDropFix);
         InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);
         InsaneSO.addServerPack("advancements", "Insane's Survival Overhaul Advancements", () -> this.isEnabled() && !Packs.disableAllDataPacks && advancements);
         InsaneSO.addServerPack("supplementaries_integration", "Insane's Survival Overhaul Supplementaries Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && supplementaries && ModList.get().isLoaded("supplementaries"));
