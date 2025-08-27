@@ -1,0 +1,11 @@
+{
+    "type": "insanelib:inject_loot_table",
+    "amount_to_keep": 0,
+    "conditions": [
+        {
+            "condition": "forge:loot_table_id",
+            "loot_table_id": "minecraft:gameplay/sniffer_digging"
+        }
+    ],
+    "loot_table": "iguanatweaksreborn:injection/cyan_flower"
+}
