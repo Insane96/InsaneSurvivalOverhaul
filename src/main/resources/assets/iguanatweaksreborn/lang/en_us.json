@@ -141,6 +141,9 @@
 	"item.iguanatweaksreborn.repair_kit_material": "Repair Kit (%s)",
 	"emi.info.iguanatweaksreborn.repair_kit": "Can be used in a crafting grid to repair items, like when repairing with an Anvil.",
 
+    "item.iguanatweaksreborn.blinker": "Blinker",
+    "item.iguanatweaksreborn.blinker.empty": "Needs refilling in an anvil with Ender Pearls",
+
 	"iguanatweaksreborn:mining_module": "Mining",
 
 	"iguanatweaksreborn.innate_luck": "Innate Luck",

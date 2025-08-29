@@ -141,6 +141,9 @@
 	"item.iguanatweaksreborn.repair_kit_material": "Kit di riparazione (%s)",
 	"emi.info.iguanatweaksreborn.repair_kit": "Può essere utilizzato per riparare oggetti nella griglia di fabbricazione, come in un incudine.",
 
+    "item.iguanatweaksreborn.blinker": "Flash",
+    "item.iguanatweaksreborn.blinker.empty": "Richiede di essere riempito in un incudine con perle dell'ender",
+
 
 	"iguanatweaksreborn:mining_module": "Estrazione",
 

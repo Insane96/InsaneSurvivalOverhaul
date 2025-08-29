@@ -4,6 +4,7 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
@@ -86,6 +87,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         withExistingParent("golden_powered_rail", ResourceLocation.parse("item/powered_rail"));
 
         basicItem(Cloth.ITEM.get());
+
+        basicItem(BlinkerFeature.ITEM.get());
 
         handHeld(FlintExpansion.AXE.get());
         handHeld(FlintExpansion.PICKAXE.get());

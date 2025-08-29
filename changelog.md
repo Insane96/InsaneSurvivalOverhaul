@@ -1,6 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Addition
+* Blinker
+  * New item that can be used to teleport straight forward where looking
+  * Consumes durability and can be refilled with ender pearls
+
 ### Changes
 * Split Stone tools disabling feature into its own
 * Flint expansion has been split into two data packs, one for tools, and one for the ground flint

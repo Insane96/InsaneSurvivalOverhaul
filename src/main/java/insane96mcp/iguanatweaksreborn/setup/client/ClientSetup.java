@@ -7,6 +7,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StoneToolsGone;
+import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
@@ -122,6 +123,9 @@ public class ClientSetup {
             if (Feature.isEnabled(Minecarts.class)) {
                 addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
                 addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+            }
+            if (Feature.isEnabled(BlinkerFeature.class)) {
+                addBefore(event, Items.ENDER_PEARL, BlinkerFeature.ITEM);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
