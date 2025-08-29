@@ -95,7 +95,7 @@ public class ClientSetup {
                 addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
                 addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get());
             }
-            if (Feature.isEnabled(FlintExpansion.class) && !FlintExpansion.dontEnableFlintTools)
+            if (Feature.isEnabled(FlintExpansion.class) && FlintExpansion.enableGroundFlint)
                 addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
@@ -105,7 +105,7 @@ public class ClientSetup {
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
             }
-            if (Feature.isEnabled(FlintExpansion.class) && !FlintExpansion.dontEnableFlintTools) {
+            if (Feature.isEnabled(FlintExpansion.class) && FlintExpansion.enableTools) {
                 addAfter(event, Items.WOODEN_HOE, FlintExpansion.HOE.get());
                 addAfter(event, Items.WOODEN_HOE, FlintExpansion.AXE.get());
                 addAfter(event, Items.WOODEN_HOE, FlintExpansion.PICKAXE.get());
@@ -135,7 +135,7 @@ public class ClientSetup {
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE.get());
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET.get());
             }
-            if (Feature.isEnabled(FlintExpansion.class) && !FlintExpansion.dontEnableFlintTools) {
+            if (Feature.isEnabled(FlintExpansion.class) && FlintExpansion.enableTools) {
                 addAfter(event, Items.WOODEN_SWORD, FlintExpansion.SWORD.get());
                 addAfter(event, Items.WOODEN_AXE, FlintExpansion.AXE.get());
 
