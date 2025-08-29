@@ -32,20 +32,15 @@ public class FlintExpansion extends Feature {
 	public static final RegistryObject<Item> AXE = ISORegistries.ITEMS.register("flint_axe", () -> new AxeItem(ITEM_TIER, 7.0F, -3.1F, new Item.Properties()));
 	public static final RegistryObject<Item> HOE = ISORegistries.ITEMS.register("flint_hoe", () -> new HoeItem(ITEM_TIER, -1, -2.0F, new Item.Properties()));
 
-	@Config(description = "If true, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with flint ones")
-	public static Boolean disableStoneTools = true;
-
-	@Config(description = "If you want to just disable stone tools")
-	public static Boolean dontEnableFlintTools = true;
+    @Config
+    public static Boolean enableTools = false;
+    @Config
+    public static Boolean enableGroundFlint = true;
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableStoneTools);
-		InsaneSO.addServerPack("flint_expansion", "Insane's Survival Overhaul Flint Expansion", () -> this.isEnabled() && !Packs.disableAllDataPacks && !dontEnableFlintTools);
-	}
-
-	public static boolean areStoneToolsDisabled() {
-		return Feature.isEnabled(FlintExpansion.class) && disableStoneTools;
+        InsaneSO.addServerPack("flint_tools", "Insane's Survival Overhaul Flint Tools", () -> this.isEnabled() && !Packs.disableAllDataPacks && enableTools);
+        InsaneSO.addServerPack("ground_flint", "Insane's Survival Overhaul Ground Flint", () -> this.isEnabled() && !Packs.disableAllDataPacks && enableGroundFlint);
 	}
 
 	public static class ShieldsPlusIntegration {

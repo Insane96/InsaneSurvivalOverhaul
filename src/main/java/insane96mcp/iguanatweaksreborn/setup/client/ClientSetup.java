@@ -6,6 +6,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.enchantments.Enchantment
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.iguanatweaksreborn.module.items.StoneToolsGone;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
@@ -43,7 +44,7 @@ import java.util.function.Supplier;
 public class ClientSetup {
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event)
     {
-        if (FlintExpansion.areStoneToolsDisabled())
+        if (Feature.isEnabled(StoneToolsGone.class))
         {
             event.getEntries().remove(new ItemStack(Items.STONE_SWORD));
             event.getEntries().remove(new ItemStack(Items.STONE_AXE));

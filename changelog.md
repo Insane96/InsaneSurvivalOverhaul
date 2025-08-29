@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Split Stone tools disabling feature into its own
+* Flint expansion has been split into two data packs, one for tools, and one for the ground flint
+  * Tools are still disabled by default, and ground flint is now enabled!
+
 ## 4.20.0
 ### Additions
 * Roofed Forest Vegetation data pack
