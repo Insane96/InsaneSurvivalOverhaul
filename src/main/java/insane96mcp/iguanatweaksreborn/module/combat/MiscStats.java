@@ -15,8 +15,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.effect.AttackDamageMobEffect;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -41,12 +39,6 @@ import java.util.stream.Collectors;
 public class MiscStats extends Feature {
 	@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
 	public static Boolean fixTooltips = true;
-	@Config(description = "Changes Strength and Weakness +/-3 damage per level to +/-20% damage per level. (Requires a Minecraft restart)")
-	public static Boolean betterStrengthAndWeakness = true;
-	@Config(description = "Changes Mining fatigue and haste to no longer affects attack speed. (Requires a Minecraft restart)")
-	public static Boolean betterHasteAndMiningFatigue = true;
-	@Config(description = "Changes Healing potions to work like pre 1.6.1 by healing 3 health per level")
-	public static Boolean betterHealingPotion = true;
 	@Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
 	public static Boolean oneDamageForToolAttacking = true;
 	@Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. Sweeping edge enchantment has been disabled via the enchantments feature disable_enchantments.json")
@@ -63,21 +55,6 @@ public class MiscStats extends Feature {
 	@Override
 	public void readConfig(ModConfigEvent event) {
 		super.readConfig(event);
-		if (betterStrengthAndWeakness) {
-			MobEffects.DAMAGE_BOOST.attributeModifiers.remove(Attributes.ATTACK_DAMAGE);
-			MobEffects.DAMAGE_BOOST.addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.0D, AttributeModifier.Operation.MULTIPLY_BASE);
-			((AttackDamageMobEffect)MobEffects.DAMAGE_BOOST).multiplier = 0.2d;
-		}
-		if (betterStrengthAndWeakness) {
-			MobEffects.WEAKNESS.attributeModifiers.remove(Attributes.ATTACK_DAMAGE);
-			MobEffects.WEAKNESS.addAttributeModifier(Attributes.ATTACK_DAMAGE, "22653B89-116E-49DC-9B6B-9971489B5BE5", 0.0D, AttributeModifier.Operation.MULTIPLY_BASE);
-			((AttackDamageMobEffect)MobEffects.WEAKNESS).multiplier = -0.2d;
-		}
-		if (betterHasteAndMiningFatigue) {
-			MobEffects.DIG_SPEED.attributeModifiers.remove(Attributes.ATTACK_SPEED);
-			MobEffects.DIG_SLOWDOWN.attributeModifiers.remove(Attributes.ATTACK_SPEED);
-		}
-
 		if (sweepingOverhaul) {
 			ToolActions.DEFAULT_SWORD_ACTIONS.remove(ToolActions.SWORD_SWEEP);
 			ToolActions.DEFAULT_HOE_ACTIONS.add(ToolActions.SWORD_SWEEP);

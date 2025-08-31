@@ -96,6 +96,7 @@
         "ThrowablePotionItemMixin",
         "ThrownEggMixin",
         "ThrownExperienceBottleMixin",
+        "ThrownPotionMixin",
         "TieredItemAccessor",
         "TridentImpalerEnchantmentMixin",
         "TridentLoyaltyEnchantmentMixin",

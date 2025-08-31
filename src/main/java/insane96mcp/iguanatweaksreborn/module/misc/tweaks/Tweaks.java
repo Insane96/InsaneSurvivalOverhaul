@@ -30,7 +30,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -79,13 +82,8 @@ public class Tweaks extends Feature {
 
     public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("collide_with_wall"));
 
-    @Config(description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
-    public static Boolean preventFireWithResistance = true;
-
     @Config(description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. iguanatweaksreborn:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
     public static Boolean fallingBreakingGlass = true;
-    @Config(min = 1, description = "Poison will damage the player every this ticks at level I. Vanilla is 25.")
-    public static Integer poisonDamageSpeed = 60;
 
     @Config(description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
     public static Integer sponge$maxSoakBlocks = 256;
@@ -113,9 +111,6 @@ public class Tweaks extends Feature {
     public static Integer turtle$helmetWaterBreathingTime = 900;
     @Config(description = "If true scutes will drop as a block and not as item")
     public static Boolean turtle$scuteDropsAsBlock = true;
-
-    @Config(description = "The strength used to throw splash potions. Vanilla is 0.5")
-    public static Double splashPotionThrowStrength = 0.8d;
 
     @Config(min = 0, description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable. Please note that even if set to 0, might still show up in performance profilers.")
     public static Double collideWithWallsDamage = 3d;
@@ -150,15 +145,6 @@ public class Tweaks extends Feature {
 
     public static boolean doesBlindnessPreventSprint() {
         return Feature.isEnabled(Tweaks.class)  && Tweaks.blindnessNoLongerPreventsSprinting;
-    }
-
-    public static boolean isFireImmune(Entity entity) {
-        if (!isEnabled(Tweaks.class)
-                || !preventFireWithResistance
-                || !(entity instanceof LivingEntity livingEntity))
-            return false;
-
-       return livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE);
     }
 
     public static int changeMaxSpongeSoakBlocks(int soakableBlocks) {
@@ -197,10 +183,6 @@ public class Tweaks extends Feature {
                 level.setBlockAndUpdate(pos, Blocks.SPONGE.defaultBlockState());
         }
     }
-
-	public static int getPoisonDamageSpeed(int original) {
-		return isEnabled(Tweaks.class) ? poisonDamageSpeed : original;
-	}
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerDeath(LivingDeathEvent event) {

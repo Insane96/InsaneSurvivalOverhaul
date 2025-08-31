@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import insane96mcp.iguanatweaksreborn.module.misc.PotionsAndEffects;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.insanelib.base.Feature;
 import net.minecraft.world.item.ThrowablePotionItem;
@@ -14,6 +15,6 @@ public class ThrowablePotionItemMixin {
 		if (!Feature.isEnabled(Tweaks.class))
 			return original;
 
-		return Tweaks.splashPotionThrowStrength.floatValue();
+		return PotionsAndEffects.splashPotionThrowStrength.floatValue();
 	}
 }

@@ -59,8 +59,8 @@ public class Nerfs extends Feature {
 	@Config(min = 0, name = "Prone mining speed multiplier", description = "When prone your mining speed is multiplied by this")
 	public static Double proneMiningSpeedMultiplier = 0.5d;
 
-    public Nerfs(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		LAST_FISHING_POS_TAG = this.createDataKey("last_fishing_pos");
 		LAST_FISHING_COUNT_TAG = this.createDataKey("last_fishing_count");
 	}

@@ -2,7 +2,7 @@ package insane96mcp.iguanatweaksreborn.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
-import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
+import insane96mcp.iguanatweaksreborn.module.misc.PotionsAndEffects;
 import insane96mcp.iguanatweaksreborn.module.movement.BetterClimbable;
 import insane96mcp.iguanatweaksreborn.module.world.Fluids;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
@@ -27,7 +27,7 @@ public abstract class EntityMixin {
 
     @Inject(at = @At(value = "RETURN"), method = "fireImmune", cancellable = true)
     private void onFireImmune(CallbackInfoReturnable<Boolean> cir) {
-        if (Tweaks.isFireImmune((Entity) (Object) this))
+        if (PotionsAndEffects.isFireImmune((Entity) (Object) this))
             cir.setReturnValue(true);
     }
 
