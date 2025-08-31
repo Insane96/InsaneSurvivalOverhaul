@@ -143,6 +143,7 @@
 
     "item.iguanatweaksreborn.blinker": "Blinker",
     "item.iguanatweaksreborn.blinker.empty": "Needs refilling in an anvil with Ender Pearls",
+    "item.iguanatweaksreborn.blinker.charges": "Charges: %d/%d",
 
 	"iguanatweaksreborn:mining_module": "Mining",
 

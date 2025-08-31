@@ -1,7 +1,9 @@
 package insane96mcp.iguanatweaksreborn.module.items.blinker;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,9 +15,13 @@ import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BlinkerItem extends Item {
 
@@ -48,6 +54,8 @@ public class BlinkerItem extends Item {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
+        if (livingEntity.level().isClientSide)
+            return;
         timeCharged = getUseDuration(stack) - timeCharged;
         if (timeCharged < 3)
             return;
@@ -81,11 +89,33 @@ public class BlinkerItem extends Item {
         level.playSound(null, x, y, z, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
         livingEntity.playSound(soundevent, 1.0F, 1.0F);
         if (livingEntity instanceof Player)
-            ((Player) livingEntity).getCooldowns().addCooldown(this, (int) Math.min(20, distance * 2f));
+            ((Player) livingEntity).getCooldowns().addCooldown(this, (int) Math.max(20, distance * 5f));
     }
 
     private boolean isSafePosition(Level level, double x, double y, double z, LivingEntity entity) {
         BlockPos pos = BlockPos.containing(x, y, z);
         return !level.getBlockState(pos).isSuffocating(level, pos);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        int durability = stack.getMaxDamage();
+        int durabilityLeft = durability - stack.getDamageValue();
+        MutableComponent component = null;
+        if (durabilityLeft <= 1)
+            component = Component.translatable(this.getDescriptionId() + ".empty").withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
+        else
+            component = Component.translatable(this.getDescriptionId() + ".charges", durabilityLeft, durability).withStyle(ChatFormatting.DARK_GREEN);
+        tooltipComponents.add(component);
+    }
+
+    @Override
+    public int getBarColor(ItemStack pStack) {
+        return 0x2d8659;
+    }
+
+    @Override
+    public int getBarWidth(ItemStack pStack) {
+        return Math.round(13.0F - (float)pStack.getDamageValue() * 13.0F / (float)this.getMaxDamage(pStack));
     }
 }
