@@ -11,6 +11,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowth;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
+import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
@@ -97,6 +98,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(UnbreakableItems.NOT_UNBREAKABLE)
                 .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
+        tag(UnbreakableItems.NO_DURABILITY_TOOLTIP)
+                .add(BlinkerFeature.ITEM.get());
         tag(FoodDrinks.RAW_FOOD)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
                 .addOptional(ResourceLocation.parse("autumnity:turkey_piece"))

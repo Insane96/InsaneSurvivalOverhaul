@@ -40,8 +40,9 @@ public class UnbreakableItems extends Feature {
 	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
 	public static final TagKey<Item> UNBREAKABLE = ISOItemTagsProvider.create("unbreakable");
 	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
+	public static final TagKey<Item> NO_DURABILITY_TOOLTIP = ISOItemTagsProvider.create("no_durability_tooltip");
 
-	@Config(description = "Items with durability get a durability tooltip")
+	@Config(description = "Items with durability get a durability tooltip. Items in the `iguanatweaksreborn:no_durability_tooltip` item tag will not get the tooltip.")
 	public static Boolean durabilityTooltip = true;
 	@Config(description = "If set to true only enchanted items will no longer break")
 	public static Boolean enchantedItemsOnly = true;
@@ -201,7 +202,8 @@ public class UnbreakableItems extends Feature {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled())
+		if (!this.isEnabled()
+                || event.getItemStack().is(NO_DURABILITY_TOOLTIP))
 			return;
 
 		ItemStack stack = event.getItemStack();
