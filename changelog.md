@@ -1,10 +1,11 @@
 # Changelog
 
-## Upcoming
+## 4.21.0
 ### Addition
 * Blinker
   * New item that can be used to teleport straight forward where looking
   * Consumes durability and can be refilled with ender pearls
+  * Unobtainable (for now) as it's unfinished
 * New Potions and Effects feature
   * Added Streamline Splash Potions: when enabled will make splash potions always be 75% effective compared to drinkable ones but will also apply the full effect duration when thrown
   * Moved all the relative config options here
