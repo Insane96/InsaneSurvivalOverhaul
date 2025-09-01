@@ -10,6 +10,8 @@
   * Moved all the relative config options here
 
 ### Changes
+* Ore generation data pack
+  * Ores are no longer discarded if they are generated exposed to air making caving more rewarding
 * Split Stone tools disabling feature into its own
 * Flint expansion has been split into two data packs, one for tools, and one for the ground flint
   * Tools are still disabled by default, and ground flint is now enabled!
