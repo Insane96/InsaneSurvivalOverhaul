@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Experience bottles can no longer be thrown if experience is disabled
+
 ## 4.21.0
 ### Addition
 * Blinker

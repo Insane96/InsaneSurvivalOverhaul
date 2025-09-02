@@ -21,6 +21,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +33,7 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -202,7 +204,16 @@ public class DroppedExperience extends Feature {
 		return xpBottleDroppedXp;
 	}
 
-	@SubscribeEvent
+    @SubscribeEvent
+    public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        if (!disableExperience
+                || !event.getItemStack().is(Items.EXPERIENCE_BOTTLE))
+            return;
+
+        event.setCanceled(true);
+    }
+
+                                 @SubscribeEvent
 	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 		SyncExperienceFeature.sync(event.getEntity().level().getGameRules().getBoolean(RULE_DISABLEEXPERIENCE), (ServerPlayer) event.getEntity());
 	}
