@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.21.1
 ### Changes
 * Experience bottles can no longer be thrown if experience is disabled
 * Smelting iron in a furnace now takes 2x time (one coal per ingot)
