@@ -43,12 +43,7 @@ import sereneseasons.api.SSItems;
 import java.util.concurrent.CompletableFuture;
 
 public class ISOItemTagsProvider extends ItemTagsProvider {
-
-    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
-    public static final TagKey<Item> STONE_HAND_EQUIPMENT = create("equipment/hand/stone");
-    public static final TagKey<Item> FLINT_HAND_EQUIPMENT = create("equipment/hand/flint");
     public static final TagKey<Item> GOLDEN_HAND_EQUIPMENT = create("equipment/hand/golden");
-    public static final TagKey<Item> LEATHER_ARMOR_EQUIPMENT = create("equipment/armor/leather");
 
     public static final TagKey<Item> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
     public static final TagKey<Item> HUD_SEASON = create("hud/season");

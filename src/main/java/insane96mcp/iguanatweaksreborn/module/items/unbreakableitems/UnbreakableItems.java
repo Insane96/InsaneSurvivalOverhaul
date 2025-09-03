@@ -45,7 +45,7 @@ public class UnbreakableItems extends Feature {
 	@Config(description = "Items with durability get a durability tooltip. Items in the `iguanatweaksreborn:no_durability_tooltip` item tag will not get the tooltip.")
 	public static Boolean durabilityTooltip = true;
 	@Config(description = "If set to true only enchanted items will no longer break")
-	public static Boolean enchantedItemsOnly = true;
+	public static Boolean enchantedItemsOnly = false;
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);

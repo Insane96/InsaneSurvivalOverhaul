@@ -4,6 +4,7 @@
 ### Changes
 * Experience bottles can no longer be thrown if experience is disabled
 * Smelting iron in a furnace now takes 2x time (one coal per ingot)
+* All items are now unbreakable again, not matter if enchanted
 
 ## 4.21.0
 ### Addition
