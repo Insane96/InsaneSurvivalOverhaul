@@ -3,6 +3,26 @@
     {
       "id": "caverns_and_chasms:tmt",
       "required": false
+    },
+    {
+      "id": "specialmobs:dirtcreeper",
+      "required": false
+    },
+    {
+      "id": "specialmobs:drowningcreeper",
+      "required": false
+    },
+    {
+      "id": "specialmobs:gravelcreeper",
+      "required": false
+    },
+    {
+      "id": "specialmobs:jumpingcreeper",
+      "required": false
+    },
+    {
+      "id": "specialmobs:snowcreeper",
+      "required": false
     }
   ]
 }

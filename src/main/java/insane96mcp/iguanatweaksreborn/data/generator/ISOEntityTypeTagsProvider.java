@@ -96,7 +96,12 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "slabfish"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "yak"));
         tag(ExplosionOverhaul.ENTITY_BLACKLIST)
-                .addOptional(ResourceLocation.parse("caverns_and_chasms:tmt"));
+                .addOptional(ResourceLocation.parse("caverns_and_chasms:tmt"))
+                .addOptional(ResourceLocation.parse("specialmobs:dirtcreeper"))
+                .addOptional(ResourceLocation.parse("specialmobs:drowningcreeper"))
+                .addOptional(ResourceLocation.parse("specialmobs:gravelcreeper"))
+                .addOptional(ResourceLocation.parse("specialmobs:jumpingcreeper"))
+                .addOptional(ResourceLocation.parse("specialmobs:snowcreeper"));
         tag(MiscMobs.PASSIVE_REGEN)
                 .addTag(PETS)
                 .add(EntityType.VILLAGER)
