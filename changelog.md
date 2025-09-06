@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.21.3
+### Hotfix
+* Cobblestone replaced with copper blocks with ISE installed
+
 ## 4.21.2
 ### Additions
 * Breaking a spawner now gives an enchanted book and an echo shard
