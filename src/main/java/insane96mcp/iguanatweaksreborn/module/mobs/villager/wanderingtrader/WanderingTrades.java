@@ -84,7 +84,7 @@ public class WanderingTrades extends JsonFeature {
             SerializableTrade.emeraldToItems(Count.ONE, Items.PACKED_ICE, Count.ONE).setMaxUses(6),
 
             SerializableTrade.emeraldToItems(Count.of(3), Items.BOOK, Count.ONE)
-                    .enchantResult(4, 8, false),
+                    .enchantResult(4, 8, true),
 
             new SerializableTrade()
                     .setItemA(Items.EMERALD, Count.of(5), null)

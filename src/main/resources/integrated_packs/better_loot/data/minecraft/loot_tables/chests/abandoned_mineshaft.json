@@ -236,7 +236,7 @@
                         {
                             "function": "minecraft:enchant_randomly",
                             "enchantments": [
-                                "minecraft:fortune"
+                                "iguanatweaksreborn:luck"
                             ]
                         },
                         {

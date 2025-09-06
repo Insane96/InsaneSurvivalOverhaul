@@ -1,5 +1,13 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Breaking a spawner now gives an enchanted book and an echo shard
+
+### Changes
+* Empowered spawners no longer yield echo shards
+* Enchanted books from spawners now yield randoms enchantments at max level ignoring the rarity and will have 2 to 3 enchantments for empowered spawners and 3 to 4 for breaking a spawner
+
 ## 4.21.1
 ### Changes
 * Experience bottles can no longer be thrown if experience is disabled

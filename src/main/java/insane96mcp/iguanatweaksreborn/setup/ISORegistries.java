@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.setup;
 import com.mojang.serialization.Codec;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.condition.*;
+import insane96mcp.iguanatweaksreborn.data.function.EnchantRandomlyWeightlessFunction;
 import insane96mcp.iguanatweaksreborn.data.function.EnchantWithTreasureFunction;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.DisenchantModifier;
 import insane96mcp.iguanatweaksreborn.data.lootmodifier.DropMultiplierModifier;
@@ -82,6 +83,7 @@ public class ISORegistries {
 
 	public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTIONS = createRegistry(Registries.LOOT_FUNCTION_TYPE.location());
 	public static final RegistryObject<LootItemFunctionType> ENCHANT_WITH_TREASURE = LOOT_FUNCTIONS.register("enchant_with_treasure", () -> new LootItemFunctionType(new EnchantWithTreasureFunction.Serializer()));
+	public static final RegistryObject<LootItemFunctionType> ENCHANT_RANDOMLY_WEIGHTLESS = LOOT_FUNCTIONS.register("enchant_randomly_weightless", () -> new LootItemFunctionType(new EnchantRandomlyWeightlessFunction.Serializer()));
 
 	public static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = createRegistry(Registries.RULE_TEST);
 	public static final RegistryObject<RuleTestType<RandomBlockTagMatchTest>> RANDOM_BLOCK_TAG_MATCH = RULE_TEST_TYPES.register("random_block_tag_match", RandomBlockTagMatchTest.Type::new);

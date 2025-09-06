@@ -3,8 +3,8 @@
     "conditions": [
         {
             "condition": "forge:loot_table_id",
-            "loot_table_id": "minecraft:gameplay/sniffer_digging"
+            "loot_table_id": "minecraft:blocks/spawner"
         }
     ],
-    "loot_table": "iguanatweaksreborn:injection/cyan_flower"
+    "loot_table": "iguanatweaksreborn:injection/spawners"
 }

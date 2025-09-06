@@ -5,13 +5,22 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "name": "minecraft:echo_shard"
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
                     "name": "minecraft:book",
                     "functions": [
                         {
                             "function": "iguanatweaksreborn:enchant_randomly_weightless",
                             "count": {
-                                "min": 2,
-                                "max": 3
+                                "min": 3,
+                                "max": 4
                             },
                             "treasure": true,
                             "max_lvl": true
