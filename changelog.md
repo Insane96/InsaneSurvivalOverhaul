@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.21.2
 ### Additions
 * Breaking a spawner now gives an enchanted book and an echo shard
 
