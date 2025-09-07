@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.21.4
 ### Changes
 * Enhanced attributes in tooltip, sorting them by attribute and then by operation, so it's not different on same items
 * Crit, absorption and piercing attributes are now hidden from tooltips if the relative feature is disabled
