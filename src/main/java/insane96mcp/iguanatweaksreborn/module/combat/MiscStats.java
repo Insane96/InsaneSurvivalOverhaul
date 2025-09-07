@@ -29,144 +29,180 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @LoadFeature(module = Modules.Ids.COMBAT)
 public class MiscStats extends Feature {
-	@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
-	public static Boolean fixTooltips = true;
-	@Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
-	public static Boolean oneDamageForToolAttacking = true;
-	@Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. Sweeping edge enchantment has been disabled via the enchantments feature disable_enchantments.json")
-	public static Boolean sweepingOverhaul = true;
+    @Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
+    public static Boolean fixTooltips = true;
+    @Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
+    public static Boolean oneDamageForToolAttacking = true;
+    @Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. Sweeping edge enchantment has been disabled via the enchantments feature disable_enchantments.json")
+    public static Boolean sweepingOverhaul = true;
 
-	@Config(description = "Enables a data pack that reworks armor, weapons and tools.")
-	public static Boolean combatReworkDataPack = true;
+    @Config(description = "Enables a data pack that reworks armor, weapons and tools.")
+    public static Boolean combatReworkDataPack = true;
 
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && combatReworkDataPack);
-	}
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
+        InsaneSO.addServerPack("combat_rework", "Insane's Survival Overhaul Combat Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && combatReworkDataPack);
+    }
 
-	@Override
-	public void readConfig(ModConfigEvent event) {
-		super.readConfig(event);
-		if (sweepingOverhaul) {
-			ToolActions.DEFAULT_SWORD_ACTIONS.remove(ToolActions.SWORD_SWEEP);
-			ToolActions.DEFAULT_HOE_ACTIONS.add(ToolActions.SWORD_SWEEP);
-		}
-		else {
+    @Override
+    public void readConfig(ModConfigEvent event) {
+        super.readConfig(event);
+        if (sweepingOverhaul) {
+            ToolActions.DEFAULT_SWORD_ACTIONS.remove(ToolActions.SWORD_SWEEP);
+            ToolActions.DEFAULT_HOE_ACTIONS.add(ToolActions.SWORD_SWEEP);
+        }
+        else {
             ToolActions.DEFAULT_SWORD_ACTIONS.add(ToolActions.SWORD_SWEEP);
-			ToolActions.DEFAULT_HOE_ACTIONS.remove(ToolActions.SWORD_SWEEP);
-		}
-	}
+            ToolActions.DEFAULT_HOE_ACTIONS.remove(ToolActions.SWORD_SWEEP);
+        }
+    }
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onItemTooltipEvent(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !fixTooltips
-				|| event.getItemStack().getItem() instanceof PotionItem)
-			return;
+    List<EquipmentSlot> ORDERED_SLOTS = Arrays.asList(
+            EquipmentSlot.MAINHAND,
+            EquipmentSlot.OFFHAND,
+            EquipmentSlot.HEAD,
+            EquipmentSlot.CHEST,
+            EquipmentSlot.LEGS,
+            EquipmentSlot.FEET
+    );
 
-		List<Component> toRemove = new ArrayList<>();
-		boolean hasModifiersTooltip = false;
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onItemTooltipEvent(ItemTooltipEvent event) {
+        if (!this.isEnabled()
+                || !fixTooltips
+                || event.getItemStack().getItem() instanceof PotionItem)
+            return;
 
-		Component emptyLine = null;
-		for (Component mutableComponent : event.getToolTip()) {
-			if (emptyLine == null)
-				emptyLine = mutableComponent.getSiblings().isEmpty() && mutableComponent.getContents().equals(ComponentContents.EMPTY) ? mutableComponent : null;
-			if (mutableComponent.getContents() instanceof TranslatableContents t) {
-				if (t.getKey().startsWith("item.modifiers.")) {
-					hasModifiersTooltip = true;
-					toRemove.add(mutableComponent);
-					if (emptyLine != null)
-						toRemove.add(emptyLine);
-					emptyLine = null;
-				}
-				else if (t.getKey().startsWith("attribute.modifier."))
-					toRemove.add(mutableComponent);
-			}
+        List<Component> toRemove = new ArrayList<>();
+        boolean hasModifiersTooltip = false;
 
-			if (!hasModifiersTooltip)
-				continue;
+        Component emptyLine = null;
+        for (Component mutableComponent : event.getToolTip()) {
+            if (emptyLine == null)
+                emptyLine = mutableComponent.getSiblings().isEmpty() && mutableComponent.getContents().equals(ComponentContents.EMPTY) ? mutableComponent : null;
+            if (mutableComponent.getContents() instanceof TranslatableContents t) {
+                if (t.getKey().startsWith("item.modifiers.")) {
+                    hasModifiersTooltip = true;
+                    toRemove.add(mutableComponent);
+                    if (emptyLine != null)
+                        toRemove.add(emptyLine);
+                    emptyLine = null;
+                }
+                else if (t.getKey().startsWith("attribute.modifier."))
+                    toRemove.add(mutableComponent);
+            }
 
-			List<Component> siblings = mutableComponent.getSiblings();
-			for (Component component : siblings) {
-				if (component.getContents() instanceof TranslatableContents translatableContents && translatableContents.getKey().startsWith("attribute.modifier.")) {
-					toRemove.add(mutableComponent);
-				}
-			}
-		}
+            if (!hasModifiersTooltip)
+                continue;
 
-		toRemove.forEach(component -> event.getToolTip().remove(component));
+            List<Component> siblings = mutableComponent.getSiblings();
+            for (Component component : siblings) {
+                if (component.getContents() instanceof TranslatableContents translatableContents && translatableContents.getKey().startsWith("attribute.modifier.")) {
+                    toRemove.add(mutableComponent);
+                }
+            }
+        }
 
-		for(EquipmentSlot equipmentslot : EquipmentSlot.values()) {
-			Multimap<Attribute, AttributeModifier> multimap = event.getItemStack().getAttributeModifiers(equipmentslot);
-			if (!multimap.isEmpty()) {
-				event.getToolTip().add(CommonComponents.EMPTY);
-				event.getToolTip().add(Component.translatable("item.modifiers." + equipmentslot.getName()).withStyle(ChatFormatting.GRAY));
-				multimap.keySet().stream().sorted(Comparator.comparing(attr -> ForgeRegistries.ATTRIBUTES.getKey(attr).getPath())).forEach(
-					attribute -> {
-						Map<AttributeModifier.Operation, List<AttributeModifier>> modifiersByOperation = multimap.get(attribute).stream().collect(Collectors.groupingBy(AttributeModifier::getOperation));
-						modifiersByOperation.forEach((operation, modifier) -> {
-							double amount = modifier.stream().mapToDouble(AttributeModifier::getAmount).sum();
+        toRemove.forEach(component -> event.getToolTip().remove(component));
 
-							boolean isEqualTooltip = false;
-							if (event.getEntity() != null && operation == AttributeModifier.Operation.ADDITION && equipmentslot == EquipmentSlot.MAINHAND) {
-								if (attribute.equals(Attributes.ATTACK_DAMAGE)) {
-									amount += event.getEntity().getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
-									//amount += EnchantmentHelper.getDamageBonus(event.getItemStack(), MobType.UNDEFINED);
-									isEqualTooltip = true;
-								}
-								if (attribute.equals(PiercingDamage.PIERCING_DAMAGE.get())
-										|| attribute.equals(Attributes.ATTACK_SPEED)
-										|| attribute.equals(Attributes.KNOCKBACK_RESISTANCE)
-										|| attribute.equals(ForgeMod.ENTITY_REACH.get())
-										|| attribute.equals(ForgeMod.BLOCK_REACH.get())
-										|| attribute.equals(CriticalRework.CHANCE_ATTRIBUTE.get())
-										|| attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get())) {
-									amount += event.getEntity().getAttributeBaseValue(attribute);
-									isEqualTooltip = true;
-									if (attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get()))
-										amount += 1;
-								}
-							}
-							if (!isEqualTooltip && amount == 0d)
-								return;
+        List<EquipmentSlot> orderedSlots = Arrays.asList(
+                EquipmentSlot.MAINHAND,
+                EquipmentSlot.OFFHAND,
+                EquipmentSlot.HEAD,
+                EquipmentSlot.CHEST,
+                EquipmentSlot.LEGS,
+                EquipmentSlot.FEET
+        );
 
-							MutableComponent component = null;
-							String translationString = "attribute.modifier.plus.";
-							if (isEqualTooltip || operation == AttributeModifier.Operation.MULTIPLY_TOTAL)
-								translationString = "attribute.modifier.equals.";
-							else if (amount < 0)
-								translationString = "attribute.modifier.take.";
-							final MutableComponent attributeComponent = Component.translatable(attribute.getDescriptionId());
-							switch (operation) {
-								case ADDITION -> {
-									if (attribute.equals(Attributes.KNOCKBACK_RESISTANCE) || attribute.equals(CriticalRework.CHANCE_ATTRIBUTE.get()) || attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get()))
-										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount * 100) + "%", attributeComponent);
-									else
-										component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount)), attributeComponent);
-								}
-								case MULTIPLY_BASE -> component = Component.translatable(translationString + operation.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount) * 100), attributeComponent);
-								case MULTIPLY_TOTAL -> component = Component.translatable(translationString + operation.toValue(), "x" + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount > 0 ? Math.abs(amount) + 1f : 1f - Math.abs(amount)), attributeComponent);
-							}
-							if (isEqualTooltip)
-								component = CommonComponents.space().append(component.withStyle(ChatFormatting.DARK_GREEN));
-							else if (amount > 0)
-								component.withStyle(ChatFormatting.BLUE);
-							else
-								component.withStyle(ChatFormatting.RED);
-							event.getToolTip().add(component);
-						});
-					}
-				);
-			}
-		}
-	}
+        for (EquipmentSlot equipmentslot : orderedSlots) {
+            Multimap<Attribute, AttributeModifier> multimap = event.getItemStack().getAttributeModifiers(equipmentslot);
+            if (multimap.isEmpty())
+                continue;
+
+            event.getToolTip().add(CommonComponents.EMPTY);
+            event.getToolTip().add(Component.translatable("item.modifiers." + equipmentslot.getName()).withStyle(ChatFormatting.GRAY));
+
+            multimap.keySet().stream()
+                    .sorted(Comparator.comparing(attr -> ForgeRegistries.ATTRIBUTES.getKey(attr).getPath()))
+                    .forEach(attribute -> {
+                        Map<AttributeModifier.Operation, List<AttributeModifier>> modifiersByOperation =
+                                multimap.get(attribute).stream()
+                                        .collect(Collectors.groupingBy(
+                                                AttributeModifier::getOperation,
+                                                () -> new TreeMap<>(Comparator.comparingInt(Enum::ordinal)),
+                                                Collectors.toList()
+                                        ));
+
+                        modifiersByOperation.forEach((operation, modifiers) -> {
+                            double amount = modifiers.stream().mapToDouble(AttributeModifier::getAmount).sum();
+
+                            boolean isEqualTooltip = false;
+                            if (event.getEntity() != null && operation == AttributeModifier.Operation.ADDITION && equipmentslot == EquipmentSlot.MAINHAND) {
+                                if (attribute.equals(PiercingDamage.PIERCING_DAMAGE.get())
+                                        || attribute.equals(Attributes.ATTACK_SPEED)
+                                        || attribute.equals(Attributes.KNOCKBACK_RESISTANCE)
+                                        || attribute.equals(ForgeMod.ENTITY_REACH.get())
+                                        || attribute.equals(ForgeMod.BLOCK_REACH.get())
+                                        || attribute.equals(CriticalRework.CHANCE_ATTRIBUTE.get())
+                                        || attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get())
+                                        || attribute.equals(Attributes.ATTACK_DAMAGE)) {
+                                    amount += event.getEntity().getAttributeBaseValue(attribute);
+                                    isEqualTooltip = true;
+                                    if (attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get()))
+                                        amount += 1;
+                                }
+                            }
+                            if (!isEqualTooltip && amount == 0d)
+                                return;
+
+                            MutableComponent component;
+                            String translationString = "attribute.modifier.plus.";
+                            if (isEqualTooltip || operation == AttributeModifier.Operation.MULTIPLY_TOTAL)
+                                translationString = "attribute.modifier.equals.";
+                            else if (amount < 0)
+                                translationString = "attribute.modifier.take.";
+
+                            final MutableComponent attributeComponent = Component.translatable(attribute.getDescriptionId());
+                            switch (operation) {
+                                case ADDITION -> {
+                                    if (attribute.equals(Attributes.KNOCKBACK_RESISTANCE)
+                                            || attribute.equals(CriticalRework.CHANCE_ATTRIBUTE.get())
+                                            || attribute.equals(CriticalRework.DAMAGE_ATTRIBUTE.get())) {
+                                        component = Component.translatable(translationString + operation.toValue(),
+                                                ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount * 100) + "%", attributeComponent);
+                                    }
+                                    else {
+                                        component = Component.translatable(translationString + operation.toValue(),
+                                                ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount)), attributeComponent);
+                                    }
+                                }
+                                case MULTIPLY_BASE ->
+                                        component = Component.translatable(translationString + operation.toValue(),
+                                                ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(amount) * 100), attributeComponent);
+                                case MULTIPLY_TOTAL ->
+                                        component = Component.translatable(translationString + operation.toValue(),
+                                                "x" + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(amount > 0 ? Math.abs(amount) + 1f : 1f - Math.abs(amount)),
+                                                attributeComponent);
+                                default -> component = Component.literal("???");
+                            }
+
+                            if (isEqualTooltip)
+                                component = CommonComponents.space().append(component.withStyle(ChatFormatting.DARK_GREEN));
+                            else if (amount > 0)
+                                component.withStyle(ChatFormatting.BLUE);
+                            else
+                                component.withStyle(ChatFormatting.RED);
+
+                            event.getToolTip().add(component);
+                        });
+                    });
+        }
+
+    }
 
 }

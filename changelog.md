@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Enhanced attributes in tooltip, sorting them by attribute and then by operation, so it's not different on same items
+
 ## 4.21.3
 ### Hotfix
 * Cobblestone replaced with copper blocks with ISE installed
