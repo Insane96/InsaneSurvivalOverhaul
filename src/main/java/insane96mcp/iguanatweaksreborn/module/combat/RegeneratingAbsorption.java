@@ -73,8 +73,8 @@ public class RegeneratingAbsorption extends Feature {
     @Config(description = "(Client only) If true, regenerating absorption hearts are rendered on the right instead on top of hearts.")
     public static Boolean renderOnTheRight = false;
 
-    public RegeneratingAbsorption(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         REGEN_ABSORPTION_TAG = this.createDataKey("regen_absorption");
         HURT_COOLDOWN_TAG = this.createDataKey("regen_absorption_hurt_cooldown");
         NO_HURT_SOUND_TAG = this.createDataKey("no_hurt_sound");

@@ -130,6 +130,8 @@ public class MiscStats extends Feature {
             multimap.keySet().stream()
                     .sorted(Comparator.comparing(attr -> ForgeRegistries.ATTRIBUTES.getKey(attr).getPath()))
                     .forEach(attribute -> {
+                        if (!shouldAttributeBeShown(attribute))
+                            return;
                         Map<AttributeModifier.Operation, List<AttributeModifier>> modifiersByOperation =
                                 multimap.get(attribute).stream()
                                         .collect(Collectors.groupingBy(
@@ -203,6 +205,16 @@ public class MiscStats extends Feature {
                     });
         }
 
+    }
+
+    public static boolean shouldAttributeBeShown(Attribute attribute) {
+        if (!Feature.isEnabled(CriticalRework.class) && (attribute == CriticalRework.CHANCE_ATTRIBUTE.get() || attribute == CriticalRework.DAMAGE_ATTRIBUTE.get()))
+            return false;
+        else if (!Feature.isEnabled(PiercingDamage.class) && attribute == PiercingDamage.PIERCING_DAMAGE.get())
+            return false;
+        else if (!Feature.isEnabled(RegeneratingAbsorption.class) && (attribute == RegeneratingAbsorption.ATTRIBUTE.get() || attribute == RegeneratingAbsorption.SPEED_ATTRIBUTE.get()))
+            return false;
+        return true;
     }
 
 }

@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,10 +27,6 @@ public class CriticalRework extends Feature {
 	public static Double enchantmentChance = 0.1d;
 	@Config(min = -1d, max = 1d, description = "iguanatweaksreborn:critical_damage increase per level of Critical enchantment.")
 	public static Double enchantmentBonusDamage = 0.1d;
-
-	public CriticalRework(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
 		for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {
