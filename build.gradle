@@ -184,9 +184,9 @@ dependencies {
 
     implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${minecraft_version}-${apple_skin_version}")
 
-    runtimeOnly fg.deobf("nonamecrackers2:crackerslib-forge:1.20.1-0.4.6")
-    implementation fg.deobf("nonamecrackers2:simpleclouds:0.7.1+1.20.1-forge")
-    implementation fg.deobf("nonamecrackers2:simplecloudsapi-forge:1.3-1.20.1")
+    compileOnly fg.deobf("nonamecrackers2:crackerslib-forge:1.20.1-0.4.6")
+    compileOnly fg.deobf("nonamecrackers2:simpleclouds:0.7.1+1.20.1-forge")
+    compileOnly fg.deobf("nonamecrackers2:simplecloudsapi-forge:1.3-1.20.1")
 
     //implementation fg.deobf("curse.maven:nostalgic-tweaks-592465:5602576")
     //implementation fg.deobf("curse.maven:architectury-api-419699:5137938")

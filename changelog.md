@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.21.5
+### Changes
+* Adjusted wild crops generation
+
 ## 4.21.4
 ### Changes
 * Enhanced attributes in tooltip, sorting them by attribute and then by operation, so it's not different on same items

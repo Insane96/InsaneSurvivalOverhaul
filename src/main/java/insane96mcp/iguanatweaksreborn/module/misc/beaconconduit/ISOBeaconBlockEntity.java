@@ -206,17 +206,17 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         }
         if (beacon.lastCheckY >= ySurface) {
             beacon.lastCheckY = pLevel.getMinBuildHeight() - 1;
-            boolean hasLevels = lvl > 0;
+            boolean hadLevels = lvl > 0;
             beacon.beamSections = beacon.checkingBeamSections;
             if (!pLevel.isClientSide) {
-                boolean flag1 = beacon.layers > 0;
-                if (!hasLevels && flag1) {
+                boolean hasLevels = beacon.layers > 0;
+                if (!hadLevels && hasLevels) {
                     playSound(pLevel, pPos, SoundEvents.BEACON_ACTIVATE);
 
                     pLevel.getEntitiesOfClass(ServerPlayer.class, new AABB(x, y, z, x, y - 4, z).inflate(10.0D, 5.0D, 10.0D))
                             .forEach(serverplayer -> CriteriaTriggers.CONSTRUCT_BEACON.trigger(serverplayer, beacon.layers));
                 }
-                else if (hasLevels && !flag1) {
+                else if (hadLevels && !hasLevels) {
                     playSound(pLevel, pPos, SoundEvents.BEACON_DEACTIVATE);
                 }
             }
