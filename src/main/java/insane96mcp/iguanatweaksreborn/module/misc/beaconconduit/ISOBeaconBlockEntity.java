@@ -46,7 +46,8 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
     public static final int DATA_AMPLIFIER = 1;
     public static final int DATA_TIME_LEFT = 2;
     public static final int DATA_LAYERS = 3;
-    public static final int DATA_COUNT = 4;
+    public static final int DATA_RANGE = 4;
+    public static final int DATA_COUNT = 5;
     public static final int SLOT_COUNT = 1;
     private static final int BLOCKS_CHECK_PER_TICK = 10;
     private static final Component DEFAULT_NAME = Component.translatable("container.beacon");
@@ -75,6 +76,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
     int timeLeft;
     //Increase based off layers (1, 2, 4, 8 hours)
     static final int MAX_TIME_LEFT = 576000; //8 hours
+    int range;
     /**
      * The custom name for this beacon.
      */
@@ -95,6 +97,9 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
                 }
                 case DATA_LAYERS -> {
                     return ISOBeaconBlockEntity.this.layers;
+                }
+                case DATA_RANGE -> {
+                    return ISOBeaconBlockEntity.this.range;
                 }
             }
 
@@ -118,6 +123,9 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
                     break;
                 case DATA_LAYERS:
                     ISOBeaconBlockEntity.this.layers = value;
+                    break;
+                case DATA_RANGE:
+                    ISOBeaconBlockEntity.this.range = value;
                     break;
             }
 
@@ -184,7 +192,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         int lvl = beacon.layers;
         if (!BeaconConduit.isValidEffect(beacon.effect))
             beacon.effect = null;
-        if (lvl > 0 && beacon.effect != null && beacon.timeLeft > 0) {
+        if (lvl > 0 && beacon.effect != null && beacon.timeLeft > 0 && BeaconConduit.beacon$requiresPayment) {
             beacon.timeLeft -= BeaconConduit.getEffectTimeScale(beacon.effect, beacon.amplifier);
         }
         if (pLevel.getGameTime() % 80 == 0) {
@@ -192,12 +200,13 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
                 beacon.layers = updateBase(pLevel, x, y, z);
             }
 
-            if (beacon.timeLeft > 0 && beacon.layers > 0 && !beacon.beamSections.isEmpty()) {
-                applyEffects(pLevel, pPos, beacon.layers, beacon.effect, beacon.amplifier);
+            if (beacon.timeLeft > 0 || !BeaconConduit.beacon$requiresPayment && beacon.layers > 0 && !beacon.beamSections.isEmpty()) {
+                beacon.range = (int) (BeaconConduit.beacon$baseRange + getBeaconRange(pLevel, x, y, z, beacon.layers));
+                applyEffects(pLevel, pPos, beacon.layers, beacon.effect, beacon.amplifier, beacon.range);
                 playSound(pLevel, pPos, SoundEvents.BEACON_AMBIENT);
             }
         }
-        if (beacon.effect != null && pLevel.getGameTime() % 10 == 0 && !beacon.items.get(0).isEmpty()) {
+        if (beacon.effect != null && pLevel.getGameTime() % 10 == 0 && !beacon.items.get(0).isEmpty() && BeaconConduit.beacon$requiresPayment) {
             int timeLeftAmount = BeaconConduit.getPaymentTime(beacon.items.get(0));
             if (beacon.timeLeft <= MAX_TIME_LEFT) {
                 beacon.timeLeft += timeLeftAmount;
@@ -257,13 +266,12 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
         super.setRemoved();
     }
 
-    private static void applyEffects(Level pLevel, BlockPos pPos, int layers, @Nullable MobEffect effect, int amplifier) {
+    private static void applyEffects(Level pLevel, BlockPos pPos, int layers, @Nullable MobEffect effect, int amplifier, int range) {
         if (pLevel.isClientSide
                 || effect == null)
             return;
 
-        double d0 = 10 + getBeaconRange(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), layers);
-        AABB aabb = (new AABB(pPos)).inflate(d0).expandTowards(0.0D, pLevel.getHeight(), 0.0D);
+        AABB aabb = (new AABB(pPos)).inflate(range).expandTowards(0.0D, pLevel.getHeight(), 0.0D);
         List<LivingEntity> list = pLevel.getEntitiesOfClass(LivingEntity.class, aabb,
                 livingEntity -> livingEntity instanceof Player || (livingEntity instanceof OwnableEntity ownableEntity && ownableEntity.getOwner() != null));
         for (LivingEntity livingEntity : list) {

@@ -142,6 +142,7 @@
 	"emi.info.iguanatweaksreborn.repair_kit": "Può essere utilizzato per riparare oggetti nella griglia di fabbricazione, come in un incudine.",
 
     "item.iguanatweaksreborn.blinker": "Flash",
+    "item.iguanatweaksreborn.blinker.charges": "Cariche: %d/%d",
     "item.iguanatweaksreborn.blinker.empty": "Richiede di essere riempito in un incudine con perle dell'ender",
 
 
@@ -154,7 +155,10 @@
 
 	"iguanatweaksreborn.too_much_fishing_in_this_spot": "Non ci sono più pesci in questo punto, forse è il caso di spostarsi un po'...",
 
-	"iguanatweaksreborn.beacon_conduit.requires_higher_pyramid": "Richiede una piramide più alta",
+	"iguanatweaksreborn.beacon.requires_higher_pyramid": "Richiede una piramide più alta",
+    "iguanatweaksreborn.beacon.select_an_effect": "Seleziona un effetto",
+    "iguanatweaksreborn.beacon.time_cost": " (Costo tempo: %sx)",
+    "iguanatweaksreborn.beacon.effect_info": "%s (Raggio: %d blocchi)",
 
 	"death.attack.collideWithWall": "%1$s ha colpito il muro troppo forte",
 	"death.attack.collideWithWall.player": "%1$s è stato spinto contro un muro troppo forte da %2$s",
@@ -319,5 +323,7 @@
 		"advancements.iso.ores.redstone.title": "Correnti cremisi",
 	"advancements.iso.ores.redstone.description": "Grandi quantita di redstone possono essere trovate negli oceani",
 	"advancements.iso.ores.copper.title": "Nato dall'ossidazione",
-	"advancements.iso.ores.copper.description": "Grandi quantità di rame possono essere trovate nelle savane"
+	"advancements.iso.ores.copper.description": "Grandi quantità di rame possono essere trovate nelle savane",
+	"advancements.iso.copper_tools.title": "Non si ossida",
+	"advancements.iso.copper_tools.description": "Ottiene un attrezzo di rame"
 }

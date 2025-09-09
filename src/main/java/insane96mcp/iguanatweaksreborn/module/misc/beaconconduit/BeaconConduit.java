@@ -64,16 +64,16 @@ public class BeaconConduit extends JsonFeature {
 
     public static final ArrayList<IdTagValue> BLOCKS_LIST_DEFAULT = new ArrayList<>(List.of(
             new IdTagValue(IdTagMatcher.Type.ID, "minecraft:iron_block", 1d),
-            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:emerald_block", 3.0d),
-            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:gold_block", 1.8d),
-            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:diamond_block", 2.5d),
+            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:emerald_block", 1d),
+            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:gold_block", 2d),
+            new IdTagValue(IdTagMatcher.Type.ID, "minecraft:diamond_block", 3d),
             new IdTagValue(IdTagMatcher.Type.ID, "minecraft:netherite_block", 4d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:durium_block", 3.0d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:soul_steel_block", 1.5d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:quaron_block", 1.5d),
             new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:sanguine_block", 1.5d),
             new IdTagValue(IdTagMatcher.Type.ID, "iguanatweaksexpanded:keego_block", 3d),
-            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:silver_block", 1.8d),
+            new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:silver_block", 2d),
             new IdTagValue(IdTagMatcher.Type.ID, "caverns_and_chasms:necromium_block", 4d)
     ));
     public static final ArrayList<IdTagValue> blocksList = new ArrayList<>();
@@ -101,7 +101,6 @@ public class BeaconConduit extends JsonFeature {
             new BeaconEffect(MobEffects.FIRE_RESISTANCE, new int[] {3}, 2),
             new BeaconEffect("stamina:vigour", new int[] {2, 5}, 2),
             new BeaconEffect(MobEffects.INVISIBILITY, new int[] {2}, 2),
-            new BeaconEffect(MobEffects.LEVITATION, new int[] {1, 2, 3}, 2),
             new BeaconEffect(MobEffects.DAMAGE_BOOST, new int[] {1, 3, 9}, 3),
             new BeaconEffect(MobEffects.DAMAGE_RESISTANCE, new int[] {1, 3, 9}, 3),
             new BeaconEffect(MobEffects.NIGHT_VISION, new int[] {3}, 3),
@@ -112,6 +111,11 @@ public class BeaconConduit extends JsonFeature {
     ));
     public static final ArrayList<BeaconEffect> effects = new ArrayList<>();
 
+    @Config
+    public static Boolean beacon$requiresPayment = false;
+    @Config
+    public static Integer beacon$baseRange = 16;
+
     @Config(description = "Greatly increases the range and damage of the conduit")
     public static Boolean conduit$betterProtection = true;
     @Config(min = 0d, max = 64d, description = "Distance multiplier (formula is `blocks_around / 7 * this_multiplier`) from the conduit at which it will deal damage to enemies.")
@@ -121,8 +125,8 @@ public class BeaconConduit extends JsonFeature {
     @Config(description = "If true, conduit effect will no longer speed up mining speed.")
     public static Boolean conduit$removeHaste = true;
 
-    public BeaconConduit(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
 
         JSON_CONFIGS.add(new JsonConfig<>("beacon_blocks_ranges.json", blocksList, BLOCKS_LIST_DEFAULT, IdTagValue.LIST_TYPE));
         JSON_CONFIGS.add(new JsonConfig<>("beacon_payment_times.json", paymentTimes, PAYMENT_TIMES_DEFAULT, IdTagValue.LIST_TYPE));

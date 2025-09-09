@@ -148,6 +148,10 @@ public class ISOBeaconMenu extends AbstractContainerMenu {
         return this.beaconData.get(ISOBeaconBlockEntity.DATA_LAYERS);
     }
 
+    public int getRange() {
+        return this.beaconData.get(ISOBeaconBlockEntity.DATA_RANGE);
+    }
+
     public void updateEffect(Optional<MobEffect> mobEffect, int amplifier) {
         this.beaconData.set(ISOBeaconBlockEntity.DATA_EFFECT, mobEffect.map(MobEffect::getId).orElse(-1));
         this.beaconData.set(ISOBeaconBlockEntity.DATA_AMPLIFIER, amplifier);
@@ -168,7 +172,7 @@ public class ISOBeaconMenu extends AbstractContainerMenu {
         }
 
         public boolean mayPlace(ItemStack pStack) {
-            return pStack.is(ItemTags.BEACON_PAYMENT_ITEMS);
+            return pStack.is(ItemTags.BEACON_PAYMENT_ITEMS) && BeaconConduit.beacon$requiresPayment;
         }
 
         @Override

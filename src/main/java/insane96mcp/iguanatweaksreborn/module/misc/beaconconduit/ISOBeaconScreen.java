@@ -59,26 +59,71 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
         this.beaconButtons.add(pBeaconButton);
     }
 
+    @Override
     protected void init() {
         super.init();
         this.beaconButtons.clear();
         int topLeftCornerX = (this.width - this.imageWidth) / 2;
         int topLeftCornerY = (this.height - this.imageHeight) / 2;
-        for (int i = 0; i < 8; i++) {
-            BeaconAmplifierButton amplifierButton = new BeaconAmplifierButton(topLeftCornerX + 17 + i * 25, topLeftCornerY + 78, i);
+
+        int amplifierCount = 8;
+        int amplifierSpacing = 25;
+        int amplifierButtonWidth = 13;
+        int amplifierTotalWidth = (amplifierCount - 1) * amplifierSpacing + amplifierButtonWidth;
+        int amplifierStartX = topLeftCornerX + (this.imageWidth - amplifierTotalWidth) / 2;
+
+        for (int i = 0; i < amplifierCount; i++) {
+            int x = amplifierStartX + i * amplifierSpacing;
+            int y = topLeftCornerY + 78;
+            BeaconAmplifierButton amplifierButton = new BeaconAmplifierButton(x, y, i);
             amplifierButton.active = true;
             amplifierButton.visible = false;
             this.addBeaconButton(amplifierButton);
         }
-        for (int i = 0; i < BeaconConduit.effects.size(); i++) {
-            MobEffect mobeffect = BeaconConduit.effects.get(i).getEffect();
-            int heightRequired = BeaconConduit.effects.get(i).getHeightRequired();
-            BeaconPowerButton beaconEffectButton = new BeaconPowerButton(topLeftCornerX + 17 + (i % 8 * 25), topLeftCornerY + 15 + (i / 8 * 25), mobeffect, heightRequired);
-            beaconEffectButton.active = true;
-            if (Objects.equals(this.effect, mobeffect)) {
-                beaconEffectButton.setSelected(true);
+
+        int effectsCount = BeaconConduit.effects.size();
+        if (effectsCount > 0) {
+            int topRowCount = (effectsCount + 1) / 2;
+            int bottomRowCount = effectsCount / 2;
+            int spacing = 25;
+            int buttonWidth = 22;
+
+            int topTotalWidth = (topRowCount - 1) * spacing + buttonWidth;
+            int topStartX = topLeftCornerX + (this.imageWidth - topTotalWidth) / 2;
+            int topY = topLeftCornerY + 15;
+
+            for (int i = 0; i < topRowCount; i++) {
+                MobEffect effect = BeaconConduit.effects.get(i).getEffect();
+                int heightRequired = BeaconConduit.effects.get(i).getHeightRequired();
+
+                int x = topStartX + i * spacing;
+                BeaconPowerButton button = new BeaconPowerButton(x, topY, effect, heightRequired);
+                button.active = true;
+                if (Objects.equals(this.effect, effect)) {
+                    button.setSelected(true);
+                }
+                this.addBeaconButton(button);
             }
-            this.addBeaconButton(beaconEffectButton);
+
+            if (bottomRowCount > 0) {
+                int bottomTotalWidth = (bottomRowCount - 1) * spacing + buttonWidth;
+                int bottomStartX = topLeftCornerX + (this.imageWidth - bottomTotalWidth) / 2;
+                int bottomY = topLeftCornerY + 15 + spacing;
+
+                for (int i = 0; i < bottomRowCount; i++) {
+                    int effectIndex = topRowCount + i;
+                    MobEffect effect = BeaconConduit.effects.get(effectIndex).getEffect();
+                    int heightRequired = BeaconConduit.effects.get(effectIndex).getHeightRequired();
+
+                    int x = bottomStartX + i * spacing;
+                    BeaconPowerButton button = new BeaconPowerButton(x, bottomY, effect, heightRequired);
+                    button.active = true;
+                    if (Objects.equals(this.effect, effect)) {
+                        button.setSelected(true);
+                    }
+                    this.addBeaconButton(button);
+                }
+            }
         }
     }
 
@@ -91,8 +136,33 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
         this.updateButtons();
     }
 
+    void updateAmplifierButtons() {
+        List<BeaconAmplifierButton> visibleButtons = this.beaconButtons.stream()
+                .filter(b -> b instanceof BeaconAmplifierButton)
+                .map(b -> (BeaconAmplifierButton) b)
+                .filter(bab -> bab.visible)
+                .toList();
+
+        if (visibleButtons.isEmpty())
+            return;
+
+        int spacing = 25;
+        int buttonWidth = 13;
+        int totalWidth = (visibleButtons.size() - 1) * spacing + buttonWidth;
+        int startX = (this.width - this.imageWidth) / 2 + (this.imageWidth - totalWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2 + 78;
+
+        for (int i = 0; i < visibleButtons.size(); i++) {
+            BeaconAmplifierButton btn = visibleButtons.get(i);
+            btn.setX(startX + i * spacing);
+            btn.setY(y);
+        }
+    }
+
+
     void updateButtons() {
         this.beaconButtons.forEach(BeaconButton::updateStatus);
+        updateAmplifierButtons();
     }
 
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
@@ -111,11 +181,26 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         int topLeftCornerX = (this.width - this.imageWidth) / 2;
         int topLeftCornerY = (this.height - this.imageHeight) / 2;
-        pGuiGraphics.drawCenteredString(minecraft.font, Component.literal(StringUtil.formatTickDuration((int) (this.menu.getTimeLeft() / BeaconConduit.getEffectTimeScale(this.effect, this.amplifier)))), topLeftCornerX + 130, topLeftCornerY + 114, 16777215);
-        /*if (this.menu.getTimeLeft() > 0) {
-            pGuiGraphics.blit(BEACON_LOCATION, topLeftCornerX + 59, topLeftCornerY + 112, 89, 220, (int) (142 * ((float) this.menu.getTimeLeft() / ITRBeaconBlockEntity.MAX_TIME_LEFT)), 11);
-        }*/
+        if (BeaconConduit.beacon$requiresPayment)
+            pGuiGraphics.drawCenteredString(minecraft.font, Component.literal(StringUtil.formatTickDuration(this.menu.getTimeLeft() / BeaconConduit.getEffectTimeScale(this.effect, this.amplifier))), topLeftCornerX + 130, topLeftCornerY + 114, 16777215);
+        else if (this.effect == null)
+            pGuiGraphics.drawCenteredString(minecraft.font, Component.translatable("iguanatweaksreborn.beacon.select_an_effect"), topLeftCornerX + 130, topLeftCornerY + 114, 16777215);
+        else
+            pGuiGraphics.drawCenteredString(minecraft.font, Component.translatable("iguanatweaksreborn.beacon.effect_info", createEffectDescription(this.effect, this.amplifier), this.menu.getRange()), topLeftCornerX + 130, topLeftCornerY + 114, 16777215);
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+    }
+
+    protected static MutableComponent createEffectDescription(MobEffect effect, int amplifier) {
+        MutableComponent component = Component.translatable(effect.getDescriptionId()).append(" ").append(getEffectAmplifier(amplifier));
+        if (BeaconConduit.beacon$requiresPayment)
+            component.append(Component.translatable("iguanatweaksreborn.beacon.time_cost", BeaconConduit.getEffectTimeScale(effect, amplifier)));
+        return component;
+    }
+
+    private static Component getEffectAmplifier(int amplifier) {
+        return amplifier == 0
+                ? Component.literal("I")
+                : Component.translatable("potion.potency." + amplifier);
     }
 
     public interface BeaconButton {
@@ -162,7 +247,7 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
             if (this.active)
                 this.setTooltip(Tooltip.create(this.createEffectDescription(this.effect), null));
             else
-                this.setTooltip(Tooltip.create(Component.translatable("iguanatweaksreborn.beacon_conduit.requires_higher_pyramid"), null));
+                this.setTooltip(Tooltip.create(Component.translatable("iguanatweaksreborn.beacon.requires_higher_pyramid"), null));
             this.setSelected(this.effect == ISOBeaconScreen.this.effect);
         }
 
@@ -183,17 +268,6 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
             this.amplifier = amplifier;
         }
 
-        protected MutableComponent createEffectDescription(MobEffect effect) {
-            MutableComponent component = Component.translatable(effect.getDescriptionId()).append(" ");
-            return component.append(getEffectAmplifier()).append(Component.literal(" (Time cost: %s)".formatted(BeaconConduit.getEffectTimeScale(ISOBeaconScreen.this.effect, this.amplifier))));
-        }
-
-        private Component getEffectAmplifier() {
-            return this.amplifier == 0
-                    ? Component.literal("I")
-                    : Component.translatable("potion.potency." + this.amplifier);
-        }
-
         public void onPress() {
             if (!this.isSelected()) {
                 ISOBeaconScreen.this.amplifier = this.amplifier;
@@ -206,13 +280,17 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
             this.visible = this.amplifier <= ISOBeaconScreen.this.maxAmplifier && ISOBeaconScreen.this.effect != null;
             this.active = this.amplifier + 1 <= ISOBeaconScreen.this.menu.getLayers();
             this.setSelected(this.amplifier == ISOBeaconScreen.this.amplifier);
-            if (ISOBeaconScreen.this.effect != null)
-                this.setTooltip(Tooltip.create(this.createEffectDescription(ISOBeaconScreen.this.effect), null));
+            if (ISOBeaconScreen.this.effect != null) {
+                if (this.active)
+                    this.setTooltip(Tooltip.create(createEffectDescription(ISOBeaconScreen.this.effect, this.amplifier), null));
+                else
+                    this.setTooltip(Tooltip.create(Component.translatable("iguanatweaksreborn.beacon.requires_higher_pyramid"), null));
+            }
         }
 
         @Override
         protected void renderIcon(GuiGraphics pGuiGraphics) {
-            pGuiGraphics.drawCenteredString(minecraft.font, this.getEffectAmplifier(), this.getX() + 7, this.getY() + 3, 16777215);
+            pGuiGraphics.drawCenteredString(minecraft.font, getEffectAmplifier(this.amplifier), this.getX() + 7, this.getY() + 3, 16777215);
         }
     }
 

@@ -154,7 +154,10 @@
 
 	"iguanatweaksreborn.too_much_fishing_in_this_spot": "There's no more fish in this spot, maybe move a bit",
 
-	"iguanatweaksreborn.beacon_conduit.requires_higher_pyramid": "Requires Higher Pyramid",
+	"iguanatweaksreborn.beacon.requires_higher_pyramid": "Requires Higher Pyramid",
+	"iguanatweaksreborn.beacon.select_an_effect": "Select an effect",
+	"iguanatweaksreborn.beacon.time_cost": " (Time cost: %sx)",
+	"iguanatweaksreborn.beacon.effect_info": "%s (Range: %d blocks)",
 
 	"death.attack.collideWithWall": "%1$s hit a wall too hard",
 	"death.attack.collideWithWall.player": "%1$s was doomed to hit a wall too hard by %2$s",

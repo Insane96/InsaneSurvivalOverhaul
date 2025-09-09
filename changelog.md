@@ -13,6 +13,7 @@
   * Interface enhanced
     * Show effect range
     * Centered amplifiers and effects
+* Adjusted enchantments dropped from empowered spawners
 
 ## 4.21.5
 ### Changes
