@@ -19,11 +19,10 @@
                         {
                             "function": "iguanatweaksreborn:enchant_randomly_weightless",
                             "count": {
-                                "min": 3,
+                                "min": 2,
                                 "max": 4
                             },
-                            "treasure": true,
-                            "max_lvl": true
+                            "treasure": true
                         }
                     ]
                 }
