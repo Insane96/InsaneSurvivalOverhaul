@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.22.2
+### Changes
+* Increased durability of higher tier armor pieces
+* Rolled back regeneration speed to vanilla
+
+### Fixes
+* Unbreakable items still attacking when broken
+
 ## 4.22.1
 ### Fixes
 * Spawners loot broken
