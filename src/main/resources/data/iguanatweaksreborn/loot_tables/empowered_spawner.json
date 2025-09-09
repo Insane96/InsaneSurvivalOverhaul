@@ -13,8 +13,7 @@
                                 "min": 2,
                                 "max": 3
                             },
-                            "treasure": true,
-                            "max_lvl": true
+                            "treasure": true
                         }
                     ]
                 }

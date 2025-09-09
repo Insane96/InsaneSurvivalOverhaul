@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.22.1
+### Fixes
+* Spawners loot broken
+
 ## 4.22.0
 ### Additions
 * Regeneration effect speed is now halved

@@ -97,7 +97,7 @@ public class EnchantRandomlyWeightlessFunction extends LootItemConditionalFuncti
 
         public EnchantRandomlyWeightlessFunction deserialize(JsonObject jObject, JsonDeserializationContext context, LootItemCondition[] conditions) {
             NumberProvider enchantmentsCount = GsonHelper.getAsObject(jObject, "count", context, NumberProvider.class);
-            boolean maxLvl = GsonHelper.getAsBoolean(jObject, "max_lvl");
+            boolean maxLvl = GsonHelper.getAsBoolean(jObject, "max_lvl", false);
             boolean treasure = GsonHelper.getAsBoolean(jObject, "treasure", false);
             return new EnchantRandomlyWeightlessFunction(conditions, enchantmentsCount, maxLvl, treasure);
         }
