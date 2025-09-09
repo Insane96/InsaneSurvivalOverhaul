@@ -23,6 +23,8 @@ public class PotionsAndEffects extends Feature {
     public static Boolean betterHasteAndMiningFatigue = true;
     @Config(description = "Changes Healing potions to work like pre 1.6.1 by healing 3 health per level")
     public static Boolean betterHealingPotion = true;
+    @Config(description = "Regeneration will regenerate health every this ticks at level I. Vanilla is 50.")
+    public static Integer regenerationBaseSpeed = 100;
     @Config(description = "The strength used to throw splash potions. Vanilla is 0.5")
     public static Double splashPotionThrowStrength = 0.8d;
     @Config(description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
@@ -60,8 +62,12 @@ public class PotionsAndEffects extends Feature {
         return livingEntity.hasEffect(MobEffects.FIRE_RESISTANCE);
     }
 
+    public static int getRegenSpeed(int original) {
+        return isEnabled(PotionsAndEffects.class) ? regenerationBaseSpeed : original;
+    }
+
     public static int getPoisonDamageSpeed(int original) {
-        return isEnabled(Tweaks.class) ? poisonDamageSpeed : original;
+        return isEnabled(PotionsAndEffects.class) ? poisonDamageSpeed : original;
     }
 
     public static boolean streamlineSplashPotions() {

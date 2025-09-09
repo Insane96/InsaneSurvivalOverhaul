@@ -1,5 +1,19 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Regeneration effect speed is now halved
+
+### Changes
+* Beacon no longer requires payment to work
+  * Just select an effect and you're set!
+  * Removed levitation effect
+  * Increased base range
+  * Increased gold and diamond range
+  * Interface enhanced
+    * Show effect range
+    * Centered amplifiers and effects
+
 ## 4.21.5
 ### Changes
 * Adjusted wild crops generation
