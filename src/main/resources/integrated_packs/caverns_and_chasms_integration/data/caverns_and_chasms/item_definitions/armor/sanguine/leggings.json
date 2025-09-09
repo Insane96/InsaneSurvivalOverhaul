@@ -1,15 +1,7 @@
 {
-	"item": "caverns_and_chasms:necromium_leggings",
-	"durability": 90,
-	"armor": 6,
-	"regenerating_absorption": 0.5,
+	"item": "caverns_and_chasms:sanguine_leggings",
+	"durability": 240,
+	"armor": 2,
 	"modifiers": [
-		{
-			"uuid": "9c39adbb-6b9d-4064-88d2-7c3fcbf0ee44",
-			"name": "Material modifier",
-			"attribute": "caverns_and_chasms:weakness_aura",
-			"amount": -0.5,
-			"operation": "addition"
-		}
 	]
 }

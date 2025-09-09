@@ -1,8 +1,15 @@
 {
-	"item": "caverns_and_chasms:sanguine_boots",
-	"durability": 144,
-	"armor": 1,
+	"item": "caverns_and_chasms:necromium_boots",
+	"durability": 96,
+	"armor": 3,
+	"regenerating_absorption": 0.25,
 	"modifiers": [
-
+		{
+			"uuid": "81a7d447-1803-4a8b-84a7-1618ae5110cf",
+			"name": "Material modifier",
+			"attribute": "caverns_and_chasms:weakness_aura",
+			"amount": -0.5,
+			"operation": "addition"
+		}
 	]
 }

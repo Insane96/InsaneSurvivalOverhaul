@@ -1,6 +1,6 @@
 {
 	"item": "minecraft:iron_chestplate",
-	"durability": 112,
+	"durability": 120,
 	"armor": 4,
 	"regenerating_absorption": 1.5,
 	"modifiers": [

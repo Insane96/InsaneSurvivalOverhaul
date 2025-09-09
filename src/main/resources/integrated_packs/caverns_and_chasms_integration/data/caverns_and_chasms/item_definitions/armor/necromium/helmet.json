@@ -1,7 +1,15 @@
 {
-	"item": "caverns_and_chasms:sanguine_helmet",
-	"durability": 156,
-	"armor": 1.5,
+	"item": "caverns_and_chasms:necromium_helmet",
+	"durability": 104,
+	"armor": 4,
+	"regenerating_absorption": 0.5,
 	"modifiers": [
+		{
+			"uuid": "389bac74-aa5e-4967-ab90-4e96e3408976",
+			"name": "Material modifier",
+			"attribute": "caverns_and_chasms:weakness_aura",
+			"amount": -0.5,
+			"operation": "addition"
+		}
 	]
 }
