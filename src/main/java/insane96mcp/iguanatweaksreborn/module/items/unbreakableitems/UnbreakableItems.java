@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -66,7 +66,7 @@ public class UnbreakableItems extends Feature {
 	}
 
 	@SubscribeEvent
-	public void processAttackDamage(LivingHurtEvent event) {
+	public void processAttackDamage(LivingAttackEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getSource().getDirectEntity() instanceof Player player))
 			return;
@@ -75,10 +75,10 @@ public class UnbreakableItems extends Feature {
 
 		if (stack.getMaxDamage() == 0)
 			return;
-		if (isBroken(stack) && event.getAmount() > 1f) {
-			event.setAmount(1);
-			player.displayClientMessage(Component.translatable(BROKEN_ITEM_LANG), true);
-		}
+		if (isBroken(stack)) {
+            event.setCanceled(true);
+            player.displayClientMessage(Component.translatable(BROKEN_ITEM_LANG), true);
+        }
 	}
 
 	@SubscribeEvent
