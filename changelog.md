@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.22.0
 ### Additions
 * Regeneration effect speed is now halved
 
