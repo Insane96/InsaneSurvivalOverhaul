@@ -1,6 +1,10 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Ported Fletching from ISE
+  * Fixed arrows having no tooltip
+
 ### Removed
 * Hellish coal
   * Has no longer a use so there's no reason to keep it around

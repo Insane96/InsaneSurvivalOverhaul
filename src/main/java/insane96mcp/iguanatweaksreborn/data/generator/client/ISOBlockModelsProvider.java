@@ -18,6 +18,7 @@ public class ISOBlockModelsProvider extends BlockModelProvider {
         flowerPotCross("potted_cyan_flower", InsaneSO.location("block/cyan_flower")).renderType("cutout");
         cross("solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
         flowerPotCross("potted_solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
+        cube("fletching_table", ResourceLocation.parse("block/birch_planks"), ResourceLocation.parse("block/fletching_table_top"), ResourceLocation.parse("block/fletching_table_front"), ResourceLocation.parse("block/fletching_table_front"), ResourceLocation.parse("block/fletching_table_side"), ResourceLocation.parse("block/fletching_table_side"));
     }
 
     public BlockModelBuilder flowerPotCross(String name, ResourceLocation plant) {

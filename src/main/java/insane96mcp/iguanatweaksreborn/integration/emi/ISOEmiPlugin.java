@@ -4,10 +4,13 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.crafting.FletchingRecipe;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepair;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
@@ -36,6 +39,10 @@ import java.util.Map;
 
 @EmiEntrypoint
 public class ISOEmiPlugin implements EmiPlugin {
+
+    public static final ResourceLocation FLETCHING_CATEGORY_ID = InsaneSO.location("fletching");
+    public static final EmiStack FLETCHING_WORKSTATION = EmiStack.of(Fletching.FLETCHING_TABLE.item().get());
+    public static final EmiRecipeCategory FLETCHING_RECIPE_CATEGORY = new EmiRecipeCategory(FLETCHING_CATEGORY_ID, FLETCHING_WORKSTATION);
 
 	@Override
 	public void register(EmiRegistry registry) {
@@ -89,6 +96,13 @@ public class ISOEmiPlugin implements EmiPlugin {
 			registry.addEmiStack(EmiStack.of(RepairKits.ITEM.get()));
 			registry.addRecipe(createSimpleInfo(RepairKits.ITEM.get(), "info_repair_kit", Component.translatable("emi.info.iguanatweaksreborn.repair_kit")));
 		}
+        if (Feature.isEnabled(Fletching.class)) {
+            registry.addCategory(FLETCHING_RECIPE_CATEGORY);
+            registry.addWorkstation(FLETCHING_RECIPE_CATEGORY, FLETCHING_WORKSTATION);
+            for (FletchingRecipe fletchingRecipe : manager.getAllRecipesFor(Fletching.FLETCHING_RECIPE_TYPE.get())) {
+                registry.addRecipe(new EmiFletchingRecipe(fletchingRecipe));
+            }
+        }
 	}
 
 	public EmiInfoRecipe createSimpleInfo(Item item, String id, Component component) {

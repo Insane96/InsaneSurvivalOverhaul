@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.data.generator.client;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
@@ -103,6 +104,13 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(CoalFire.FIRESTARTER.get());
 
         basicItem(RepairKits.ITEM.get());
+
+        basicItem(Fletching.QUARTZ_ARROW_ITEM.get());
+        basicItem(Fletching.DIAMOND_ARROW_ITEM.get());
+        basicItem(Fletching.EXPLOSIVE_ARROW_ITEM.get());
+        basicItem(Fletching.TORCH_ARROW_ITEM.get());
+        basicItem(Fletching.ICE_ARROW_ITEM.get());
+        withExistingParent("fletching_table", ResourceLocation.parse("block/fletching_table"));
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)

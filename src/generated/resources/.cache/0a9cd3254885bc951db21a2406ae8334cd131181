@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-10T10:57:22.0987765	Item Models: iguanatweaksreborn
+// 1.20.1	2025-09-10T12:01:36.2300206	Item Models: iguanatweaksreborn
 dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/biome_compass.json
 9c0e31c6fd0f99ff3520a7280afe5f02b5fbcc52 assets/iguanatweaksreborn/models/item/blinker.json
 90f9959998f8ebf6d0d03c09571143d1213ae86f assets/iguanatweaksreborn/models/item/brown_mushroom_stew.json
@@ -56,7 +56,10 @@ bd4460182fdd2617e0dbfc0640823f60aa08e55b assets/iguanatweaksreborn/models/item/c
 c731802d85082610bf9d02a2a6e0227df7a68f20 assets/iguanatweaksreborn/models/item/copper_shovel.json
 de6a4d6a4a2689ae5c410844bb9873df63964991 assets/iguanatweaksreborn/models/item/copper_sword.json
 46baa35f07db9fb51ee3edbd030f8ecae1c557d0 assets/iguanatweaksreborn/models/item/cyan_flower.json
+bdb690c78633d956088d4e8709769471905106f6 assets/iguanatweaksreborn/models/item/diamond_arrow.json
+308bfd702eb4f71cc7f2889e84a20926527798f7 assets/iguanatweaksreborn/models/item/explosive_arrow.json
 46e856074ee538dd8349e25751b930202cf313f0 assets/iguanatweaksreborn/models/item/firestarter.json
+ccb572d42f2347546027eb372e80b12955aa1256 assets/iguanatweaksreborn/models/item/fletching_table.json
 885b964572f382610aefa153bc6dabeefeceedb7 assets/iguanatweaksreborn/models/item/flint_axe.json
 25edac173823f0f91d2a55a3886494108766cdbb assets/iguanatweaksreborn/models/item/flint_hoe.json
 1ed031f3f896edcee033728ca05c9fd13d0264d9 assets/iguanatweaksreborn/models/item/flint_pickaxe.json
@@ -65,9 +68,11 @@ de6a4d6a4a2689ae5c410844bb9873df63964991 assets/iguanatweaksreborn/models/item/c
 1f952dd6d082cd8486701150eb07a4755de4bd23 assets/iguanatweaksreborn/models/item/flint_sword.json
 8f8e524dd9d1a92041b0b63398c2acf3a2a9c503 assets/iguanatweaksreborn/models/item/golden_powered_rail.json
 1d071059e1ef033d5f3857bf332797f4ead60713 assets/iguanatweaksreborn/models/item/half_heart_texture.json
+7b708d6aaaf7ec153cf0b1f81d20b13961cc6029 assets/iguanatweaksreborn/models/item/ice_arrow.json
 25986eb40a61151339122b3d48263ec0d0f44e74 assets/iguanatweaksreborn/models/item/netherized_stew.json
 97c34e29cf65940cee3899c377612701482fa9d3 assets/iguanatweaksreborn/models/item/over_easy_egg.json
 a5ff01560ec18ecc2c7eb1c2b658c3d1c1ecf26b assets/iguanatweaksreborn/models/item/pumpkin_pulp.json
+efa0abf2477098a4a21491299de238e0df119644 assets/iguanatweaksreborn/models/item/quartz_arrow.json
 8d9ea6f098c4ee62b2d0afbba77950bab6fe37c4 assets/iguanatweaksreborn/models/item/red_mushroom_stew.json
 0fed9bbe128a0c387b91a1526d9c67714de931ff assets/iguanatweaksreborn/models/item/repair_kit.json
 844bfb19bc259f918d1eff934fe29f73b6969911 assets/iguanatweaksreborn/models/item/respawn_obelisk.json
@@ -76,3 +81,4 @@ d57fc67746c2fceb90df862d280422d4caec169e assets/iguanatweaksreborn/models/item/r
 4996dbe983a142a00e91e2e1c4b9b89a50ebd80a assets/iguanatweaksreborn/models/item/rooted_potato.json
 ec337e78af2d879488ab787328f6d569b0faa67a assets/iguanatweaksreborn/models/item/solanum_neorossii.json
 92e76f5a607932f6ede80e6d6b428bb9ca91e896 assets/iguanatweaksreborn/models/item/sweet_berry_seeds.json
+33b57b3bfd3f3ef872b3e00706e2e352884ddb45 assets/iguanatweaksreborn/models/item/torch_arrow.json

@@ -16,6 +16,8 @@ import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.combat.UnfairOneShot;
 import insane96mcp.iguanatweaksreborn.module.combat.criticalhits.CriticalRework;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.dispenser.ISOArrowDispenseBehaviour;
 import insane96mcp.iguanatweaksreborn.module.experience.DroppedExperience;
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReloadListener;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
@@ -51,8 +53,10 @@ import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -92,6 +96,8 @@ public class InsaneSO
     //TODO ISO
     public static final String CONFIG_FOLDER = "config/" + NEW_MOD_ID;
 
+    public static final RecipeBookType FLETCHING_RECIPE_BOOK_TYPE = RecipeBookType.create(InsaneSO.RESOURCE_PREFIX + "fletching");
+
     public InsaneSO(FMLJavaModLoadingContext context) {
         //TODO ISO
         context.registerConfig(ModConfig.Type.CLIENT, ISOClientConfig.CONFIG_SPEC,NEW_MOD_ID + "/client.toml");
@@ -130,6 +136,7 @@ public class InsaneSO
             modEventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
             modEventBus.addListener(ClientSetup::registerEntityRenderers);
             modEventBus.addListener(ClientSetup::registerItemColorHandlers);
+            modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
             //modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
             //modEventBus.addListener(ClientSetup::registerParticleFactories);
         }
@@ -236,6 +243,12 @@ public class InsaneSO
         event.enqueueWork(() -> {
             ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
             ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+
+            DispenserBlock.registerBehavior(Fletching.QUARTZ_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            DispenserBlock.registerBehavior(Fletching.DIAMOND_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            DispenserBlock.registerBehavior(Fletching.EXPLOSIVE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            DispenserBlock.registerBehavior(Fletching.TORCH_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            DispenserBlock.registerBehavior(Fletching.ICE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
         });
     }
 

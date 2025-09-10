@@ -1,0 +1,14 @@
+{
+    "type": "iguanatweaksreborn:fletching",
+    "category": "fletching_misc",
+	"group": "diamond_arrow",
+    "ingredient": {
+        "item": "minecraft:arrow",
+        "count": 12
+    },
+    "catalyst1": "minecraft:diamond",
+    "result": {
+        "item": "iguanatweaksreborn:diamond_arrow",
+        "count": 12
+    }
+}

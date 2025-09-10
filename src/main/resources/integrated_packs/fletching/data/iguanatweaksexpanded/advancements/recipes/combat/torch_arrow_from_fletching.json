@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_fletching_table": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "iguanatweaksreborn:fletching_table"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "iguanatweaksexpanded:torch_arrow_from_fletching"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_fletching_table",
+            "has_the_recipe"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "iguanatweaksexpanded:torch_arrow_from_fletching"
+        ]
+    }
+}

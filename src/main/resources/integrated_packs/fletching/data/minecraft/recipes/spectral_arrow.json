@@ -1,0 +1,14 @@
+{
+    "type": "iguanatweaksreborn:fletching",
+    "category": "fletching_misc",
+	"group": "spectral_arrow",
+    "ingredient": {
+        "item": "minecraft:arrow",
+        "count": 1
+    },
+    "catalyst1": "minecraft:glowstone_dust",
+    "result": {
+        "item": "minecraft:spectral_arrow",
+        "count": 1
+    }
+}

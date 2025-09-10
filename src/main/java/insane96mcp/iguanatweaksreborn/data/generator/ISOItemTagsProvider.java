@@ -2,6 +2,7 @@ package insane96mcp.iguanatweaksreborn.data.generator;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.FireAspect;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Knockback;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.enchantment.Luck;
@@ -14,6 +15,7 @@ import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
+import insane96mcp.iguanatweaksreborn.module.items.misc.MiscItem;
 import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableItems;
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader.WanderingTrades;
@@ -71,6 +73,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
                 .add(Crops.CARROT_SEEDS.get(), Crops.ROOTED_POTATO.get(), Crops.RICE_SEEDS.get(), Crops.ROOTED_ONION.get());
+
+        tag(ItemTags.ARROWS).add(Fletching.QUARTZ_ARROW_ITEM.get(), Fletching.DIAMOND_ARROW_ITEM.get(), Fletching.EXPLOSIVE_ARROW_ITEM.get(), Fletching.TORCH_ARROW_ITEM.get(), Fletching.ICE_ARROW_ITEM.get());
 
         //Forge
         tag(Tags.Items.ARMORS_HELMETS).add(CopperEquipment.HELMET.get());
@@ -147,6 +151,13 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(PlantsGrowth.MULBERRY)
                 .addOptional(ResourceLocation.parse("upgrade_aquatic:mulberry"));
+
+        tag(MiscItem.HAS_TOOLTIP)
+                .add(Items.ARROW, Items.SPECTRAL_ARROW, Fletching.QUARTZ_ARROW_ITEM.get(), Fletching.DIAMOND_ARROW_ITEM.get(), Fletching.EXPLOSIVE_ARROW_ITEM.get(), Fletching.ICE_ARROW_ITEM.get(), Fletching.TORCH_ARROW_ITEM.get())
+                .addOptional(ResourceLocation.parse("savage_and_ravage:mischief_arrow"))
+                .addOptional(ResourceLocation.parse("caverns_and_chasms:blunt_arrow"))
+                .addOptional(ResourceLocation.parse("caverns_and_chasms.large_arrow"))
+                .addOptional(ResourceLocation.parse("supplementaries:rope_arrow"));
     }
 
     public static TagKey<Item> create(String tagName) {

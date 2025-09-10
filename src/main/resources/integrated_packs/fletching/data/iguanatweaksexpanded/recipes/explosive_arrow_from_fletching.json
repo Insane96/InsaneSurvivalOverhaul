@@ -1,0 +1,14 @@
+{
+    "type": "iguanatweaksreborn:fletching",
+    "category": "fletching_misc",
+	"group": "explosive_arrow",
+    "ingredient": {
+        "item": "minecraft:arrow",
+        "count": 4
+    },
+    "catalyst1": "minecraft:tnt",
+    "result": {
+        "item": "iguanatweaksreborn:explosive_arrow",
+        "count": 4
+    }
+}

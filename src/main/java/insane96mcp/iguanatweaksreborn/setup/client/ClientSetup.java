@@ -1,7 +1,12 @@
 package insane96mcp.iguanatweaksreborn.setup.client;
 
+import com.google.common.collect.ImmutableList;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.combat.bows.Bows;
 import insane96mcp.iguanatweaksreborn.module.combat.bows.ShortbowItem;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.client.FletchingScreen;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.client.ISOArrowRenderer;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
@@ -25,6 +30,7 @@ import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.shieldsplus.setup.SPItems;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -36,13 +42,20 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ClientSetup {
+
+    static RecipeBookCategories FLETCHING_SEARCH = RecipeBookCategories.create("fletching_search", new ItemStack(Items.COMPASS));
+    static RecipeBookCategories FLETCHING_MISC = RecipeBookCategories.create("fletching_misc", new ItemStack(Items.FLETCHING_TABLE));
+    public static final List<RecipeBookCategories> FLETCHING_CATEGORIES = ImmutableList.of(FLETCHING_SEARCH, FLETCHING_MISC);
+
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event)
     {
         if (Feature.isEnabled(StoneToolsGone.class))
@@ -66,6 +79,10 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(Cloth.class)) {
                 addBefore(event, Items.RESPAWN_ANCHOR, Respawn.RESPAWN_OBELISK.item().get());
+            }
+            if (Feature.isEnabled(Fletching.class)) {
+                addAfter(event, Items.FLETCHING_TABLE, Fletching.FLETCHING_TABLE.item().get());
+                remove(event, new ItemStack(Items.FLETCHING_TABLE));
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
@@ -145,6 +162,13 @@ public class ClientSetup {
 
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());
+            }
+            if (Feature.isEnabled(Fletching.class)) {
+                addAfter(event, Items.ARROW, Fletching.TORCH_ARROW_ITEM.get());
+                addAfter(event, Items.ARROW, Fletching.EXPLOSIVE_ARROW_ITEM.get());
+                addAfter(event, Items.ARROW, Fletching.DIAMOND_ARROW_ITEM.get());
+                addAfter(event, Items.ARROW, Fletching.QUARTZ_ARROW_ITEM.get());
+                addAfter(event, Items.ARROW, Fletching.ICE_ARROW_ITEM.get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
@@ -232,6 +256,7 @@ public class ClientSetup {
                             -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
         });
         MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
+        MenuScreens.register(Fletching.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
     }
 
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
@@ -245,5 +270,16 @@ public class ClientSetup {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ISORegistries.PILABLE_FALLING_LAYER.get(), FallingBlockRenderer::new);
         event.registerBlockEntityRenderer(BeaconConduit.BEACON_BLOCK_ENTITY_TYPE.get(), ISOBeaconRenderer::new);
+        event.registerEntityRenderer(Fletching.QUARTZ_ARROW.get(), ISOArrowRenderer::new);
+        event.registerEntityRenderer(Fletching.DIAMOND_ARROW.get(), ISOArrowRenderer::new);
+        event.registerEntityRenderer(Fletching.EXPLOSIVE_ARROW.get(), ISOArrowRenderer::new);
+        event.registerEntityRenderer(Fletching.TORCH_ARROW.get(), ISOArrowRenderer::new);
+        event.registerEntityRenderer(Fletching.ICE_ARROW.get(), ISOArrowRenderer::new);
+    }
+
+    public static void registerRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
+        event.registerBookCategories(InsaneSO.FLETCHING_RECIPE_BOOK_TYPE, FLETCHING_CATEGORIES);
+        event.registerAggregateCategory(FLETCHING_SEARCH, ImmutableList.of(FLETCHING_MISC));
+        event.registerRecipeCategoryFinder(Fletching.FLETCHING_RECIPE_TYPE.get(), r -> FLETCHING_MISC);
     }
 }

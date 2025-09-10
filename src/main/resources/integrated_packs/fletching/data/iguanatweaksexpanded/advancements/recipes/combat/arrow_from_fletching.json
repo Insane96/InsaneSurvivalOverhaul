@@ -1,0 +1,61 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_feather": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:feather"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_cloth": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "iguanatweaksreborn:cloth"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_flint": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:flint"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "iguanatweaksreborn:arrow_from_fletching"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_feather",
+            "has_cloth",
+            "has_flint",
+            "has_the_recipe"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "iguanatweaksreborn:arrow_from_fletching",
+            "iguanatweaksreborn:arrow_from_fletching_with_cloth"
+        ]
+    }
+}

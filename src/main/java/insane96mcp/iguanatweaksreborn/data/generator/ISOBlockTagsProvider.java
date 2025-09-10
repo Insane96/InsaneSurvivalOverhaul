@@ -1,6 +1,7 @@
 package insane96mcp.iguanatweaksreborn.data.generator;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.module.combat.fletching.Fletching;
 import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.hoes.Hoes;
@@ -74,6 +75,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(CoalFire.CHARCOAL_LAYER.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get());
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(Fletching.FLETCHING_TABLE.block().get());
         tag(BlockTags.RAILS)
                 .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
         tag(BlockTags.REPLACEABLE_BY_TREES)

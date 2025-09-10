@@ -1,0 +1,27 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:mod_loaded",
+                    "modid": "caverns_and_chasms"
+                }
+            ],
+            "recipe": {
+                "type": "iguanatweaksreborn:fletching",
+                "category": "fletching_misc",
+				"group": "large_arrow",
+                "ingredient": {
+                    "item": "minecraft:arrow",
+                    "count": 4
+                },
+                "catalyst1": "caverns_and_chasms:silver_ingot",
+                "result": {
+                    "item": "caverns_and_chasms:large_arrow",
+                    "count": 4
+                }
+            }
+        }
+    ]
+}

@@ -92,6 +92,7 @@
         "SpongeBlockMixin",
         "SpreadingSnowyDirtBlockMixin",
         "SpringFeatureMixin",
+        "StandingAndWallBlockItemAccessor",
         "ThornsEnchantmentMixin",
         "ThrowablePotionItemMixin",
         "ThrownEggMixin",
