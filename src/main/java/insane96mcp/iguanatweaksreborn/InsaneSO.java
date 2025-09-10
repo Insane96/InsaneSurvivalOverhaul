@@ -41,14 +41,17 @@ import insane96mcp.iguanatweaksreborn.setup.ISOCommonConfig;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.client.ClientSetup;
 import insane96mcp.iguanatweaksreborn.setup.client.ISOClientConfig;
+import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.util.IntegratedPack;
 import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
@@ -209,11 +212,16 @@ public class InsaneSO
     }
 
     @SubscribeEvent
-    public void remapFromITE(MissingMappingsEvent event) {
-        /*InsaneLib.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> switch (name) {
-            case "cyan_flower" -> CyanFlower.FLOWER.block().get();
+    public void remap(MissingMappingsEvent event) {
+        InsaneLib.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> switch (name) {
+            case "soul_sand_hellish_coal_ore" -> Blocks.SOUL_SAND;
+            case "soul_soil_hellish_coal_ore" -> Blocks.SOUL_SOIL;
             default -> null;
-        });*/
+        });
+        InsaneLib.handleMissingMappings(event, MOD_ID, Registries.ITEM, name -> switch (name) {
+            case "hellish_coal" -> Items.COAL;
+            default -> null;
+        });
     }
 
     @SubscribeEvent

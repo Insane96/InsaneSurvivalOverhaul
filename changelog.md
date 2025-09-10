@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Removed
+* Hellish coal
+  * Has no longer a use so there's no reason to keep it around
+
 ## 4.22.2
 ### Changes
 * Increased durability of higher tier armor pieces

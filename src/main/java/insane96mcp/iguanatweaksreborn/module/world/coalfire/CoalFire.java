@@ -1,7 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.world.coalfire;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
-import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -15,8 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -39,15 +36,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 @LoadFeature(module = Modules.Ids.WORLD, name = "Coal & Fire")
 public class CoalFire extends Feature {
-    public static final TagKey<Item> ITEM_ORES = ISOItemTagsProvider.create("hellish_coal_ores");
-
     public static final SimpleBlockWithItem CHARCOAL_LAYER = SimpleBlockWithItem.register("charcoal_layer", () -> new PilableLayerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).strength(0.4F).sound(SoundType.MOSS_CARPET).isViewBlocking((state, blockGetter, pos) -> state.getValue(PilableLayerBlock.LAYERS) >= 8), Items.CHARCOAL));
 
     public static final RegistryObject<Item> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).defaultDurability(11)));
-
-    public static final SimpleBlockWithItem SOUL_SAND_HELLISH_COAL_ORE = SimpleBlockWithItem.register("soul_sand_hellish_coal_ore", () -> new HellishCoalOreBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_SAND).strength(2f).sound(SoundType.SOUL_SAND).requiresCorrectToolForDrops(), UniformInt.of(1, 3)));
-    public static final SimpleBlockWithItem SOUL_SOIL_HELLISH_COAL_ORE = SimpleBlockWithItem.register("soul_soil_hellish_coal_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_SOIL).strength(2f).sound(SoundType.SOUL_SOIL).requiresCorrectToolForDrops(), UniformInt.of(1, 3)));
-    public static final RegistryObject<Item> HELLISH_COAL = ISORegistries.ITEMS.register("hellish_coal", () -> new SimpleFuelItem(new Item.Properties().fireResistant(), 3600));
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("iguanatweaks:fireSpeedMultiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
 
@@ -75,8 +66,8 @@ public class CoalFire extends Feature {
     @Config(description = "If true, campfires will be extinguished when it starts to rain")
     public static Boolean campfireTurnOffUnderRain = true;
 
-    public CoalFire(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("coal_fire", "Insane's Survival Overhaul No Charcoal Smelting and Iron Coal", () -> this.isEnabled() && !Packs.disableAllDataPacks && noCharcoalSmeltingAndIronCoal);
     }
 

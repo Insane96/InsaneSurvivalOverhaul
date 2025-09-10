@@ -21,7 +21,6 @@ import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
-import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
@@ -122,9 +121,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
                 .addOptionalTag(InsaneSO.location("equipment/netherite"));
-
-        tag(CoalFire.ITEM_ORES)
-                .add(CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get(), CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
 
         tag(TimberTrees.BLACKLISTED_ITEMS)
                 .addOptional(ResourceLocation.parse("tconstruct:broad_axe"));

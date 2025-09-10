@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-31T16:46:46.8724925	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2025-09-10T10:54:09.1132881	Tags for minecraft:item mod id iguanatweaksreborn
 995391829d61969aa6c4ca0bc5df866e333ce1f7 data/forge/tags/items/armors/boots.json
 c71c91e6cd35b0797ba0b9f3267a45ad9dc72880 data/forge/tags/items/armors/chestplates.json
 ac8aa9bc90f22e6eefe0740dc44b8e63af6d5027 data/forge/tags/items/armors/helmets.json
@@ -11,7 +11,6 @@ c714a3598bc7b25fbf276b461fb8ebc6a6da17c4 data/iguanatweaksreborn/tags/items/ench
 2dc58d62ecda162d85fe941f1c914a275729fb37 data/iguanatweaksreborn/tags/items/enchanting/accepts_luck.json
 1feebc4d4dfb8dd4b39ea79e961a1b31359e0ff3 data/iguanatweaksreborn/tags/items/enchanting/accepts_sweeping_edge.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/iguanatweaksreborn/tags/items/energy_boost.json
-26f2befbc6ee3f5363c35bfdab94b999985b30ad data/iguanatweaksreborn/tags/items/hellish_coal_ores.json
 f8b4a272af30529dd75fc76ae0aaab0b6d86f7b0 data/iguanatweaksreborn/tags/items/hud/biome.json
 0389e0a2b30a501b5229643fd0faa175d4922bc4 data/iguanatweaksreborn/tags/items/hud/cardinal_direction.json
 72cdf12937f22b515afcfd076bfc809e650b5500 data/iguanatweaksreborn/tags/items/hud/depth.json

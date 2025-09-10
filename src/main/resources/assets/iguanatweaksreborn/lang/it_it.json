@@ -221,9 +221,6 @@
 	"item.iguanatweaksreborn.firestarter": "Avviafuochi",
 	"item.iguanatweaksreborn.firestarter.tooltip": "Tieni premuto click destro per utilizzarlo",
 	"block.iguanatweaksreborn.charcoal_layer": "Strato di carbonella",
-	"block.iguanatweaksreborn.soul_sand_hellish_coal_ore": "Minerale di carbone infernale in sabbia delle anime",
-	"block.iguanatweaksreborn.soul_soil_hellish_coal_ore": "Minerale di carbone infernale in terra delle anime",
-	"item.iguanatweaksreborn.hellish_coal": "Carbone infernale",
 
 	"block.iguanatweaksreborn.cyan_flower": "Fiore ciano",
 
@@ -304,9 +301,6 @@
 	"advancements.iso.firestarter.description": "Fabbrica un avviafuochi per creare fuoco senza la casualità delle selci.",
 	"advancements.iso.unfair_oneshot.title": "Successo critico su costituzione",
 	"advancements.iso.unfair_oneshot.description": "Se si viene colpiti con un danno tale da ucciderci quando la salute è superiore a 7,5 cuori, si tratta di un colpo ingiusto e si rimane con mezzo cuore.",
-	"advancements.iso.hellish_coal.title": "Carbone caldo",
-	"advancements.iso.hellish_coal.description": "Ottieni carbone infernale",
-	"advancements.iso.biometer.title": "Diversi ecosistemi",
 	"advancements.iso.biometer.description": "Visto che alcuni minerali sono più abbontanti in certi biomi, il sestante ti aiuterà a tenere traccia del bioma in cui ti trovi.",
 	"advancements.iso.ores.coal.title": "Da piante a combustibile",
 	"advancements.iso.ores.coal.description": "Grandi quantita di carbone possono essere trovate nei deserti",

@@ -1,9 +1,5 @@
-// 1.20.1	2025-01-02T17:07:24.4554043	Block States: iguanatweaksreborn
+// 1.20.1	2025-09-10T10:54:09.1148801	Block States: iguanatweaksreborn
 7091bec923e3beea173d3b23004877c4a86f8dc3 assets/iguanatweaksreborn/blockstates/cyan_flower.json
 b988289b134bc1bac3c9a5e78fd8370220ce9975 assets/iguanatweaksreborn/blockstates/solanum_neorossii.json
-79be53c6b87442348c88c567343a1e08132ddb38 assets/iguanatweaksreborn/blockstates/soul_sand_hellish_coal_ore.json
-127b09412c3385b5a00ee82be8924e562c6c81a9 assets/iguanatweaksreborn/blockstates/soul_soil_hellish_coal_ore.json
 9cb8e38d5a1c2b220ee20aab8e10ae57a192776b assets/iguanatweaksreborn/models/block/cyan_flower.json
 33448c86d3432804aa8062b08a19d2e3744411cf assets/iguanatweaksreborn/models/block/solanum_neorossii.json
-dff0a04aa54f50f4a79c02aac8c92b66c681959d assets/iguanatweaksreborn/models/block/soul_sand_hellish_coal_ore.json
-a17bf61586864d625b781fd6dfbda9921b817624 assets/iguanatweaksreborn/models/block/soul_soil_hellish_coal_ore.json

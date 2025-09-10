@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-29T10:10:32.1690246	Item Models: iguanatweaksreborn
+// 1.20.1	2025-09-10T10:57:22.0987765	Item Models: iguanatweaksreborn
 dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/biome_compass.json
 9c0e31c6fd0f99ff3520a7280afe5f02b5fbcc52 assets/iguanatweaksreborn/models/item/blinker.json
 90f9959998f8ebf6d0d03c09571143d1213ae86f assets/iguanatweaksreborn/models/item/brown_mushroom_stew.json
@@ -65,7 +65,6 @@ de6a4d6a4a2689ae5c410844bb9873df63964991 assets/iguanatweaksreborn/models/item/c
 1f952dd6d082cd8486701150eb07a4755de4bd23 assets/iguanatweaksreborn/models/item/flint_sword.json
 8f8e524dd9d1a92041b0b63398c2acf3a2a9c503 assets/iguanatweaksreborn/models/item/golden_powered_rail.json
 1d071059e1ef033d5f3857bf332797f4ead60713 assets/iguanatweaksreborn/models/item/half_heart_texture.json
-7fb0d70f8c21d34fe3f1d70e6f6f68ae8a82d04a assets/iguanatweaksreborn/models/item/hellish_coal.json
 25986eb40a61151339122b3d48263ec0d0f44e74 assets/iguanatweaksreborn/models/item/netherized_stew.json
 97c34e29cf65940cee3899c377612701482fa9d3 assets/iguanatweaksreborn/models/item/over_easy_egg.json
 a5ff01560ec18ecc2c7eb1c2b658c3d1c1ecf26b assets/iguanatweaksreborn/models/item/pumpkin_pulp.json
@@ -76,6 +75,4 @@ a5ff01560ec18ecc2c7eb1c2b658c3d1c1ecf26b assets/iguanatweaksreborn/models/item/p
 d57fc67746c2fceb90df862d280422d4caec169e assets/iguanatweaksreborn/models/item/rooted_onion.json
 4996dbe983a142a00e91e2e1c4b9b89a50ebd80a assets/iguanatweaksreborn/models/item/rooted_potato.json
 ec337e78af2d879488ab787328f6d569b0faa67a assets/iguanatweaksreborn/models/item/solanum_neorossii.json
-50f8e9d44364f879f82736cdf70f29d876c48f43 assets/iguanatweaksreborn/models/item/soul_sand_hellish_coal_ore.json
-58da3243770b049112d10afd8cf5c633c4f7f41c assets/iguanatweaksreborn/models/item/soul_soil_hellish_coal_ore.json
 92e76f5a607932f6ede80e6d6b428bb9ca91e896 assets/iguanatweaksreborn/models/item/sweet_berry_seeds.json

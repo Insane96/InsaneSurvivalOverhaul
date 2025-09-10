@@ -92,10 +92,6 @@ public class ClientSetup {
             if (Feature.isEnabled(BoneMeal.class)) {
                 addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
             }
-            if (Feature.isEnabled(CoalFire.class)) {
-                addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SOIL_HELLISH_COAL_ORE.item().get());
-                addAfter(event, Items.NETHER_GOLD_ORE, CoalFire.SOUL_SAND_HELLISH_COAL_ORE.item().get());
-            }
             if (Feature.isEnabled(FlintExpansion.class) && FlintExpansion.enableGroundFlint)
                 addAfter(event, Items.CACTUS, FlintExpansion.FLINT_ROCK.item().get());
         }
@@ -183,9 +179,6 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(Cloth.class)) {
                 addBefore(event, Items.LEATHER, Cloth.ITEM.get());
-            }
-            if (Feature.isEnabled(CoalFire.class)) {
-                addAfter(event, Items.CHARCOAL, CoalFire.HELLISH_COAL.get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {

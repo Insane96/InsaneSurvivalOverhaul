@@ -99,12 +99,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("respawn_obelisk", InsaneSO.location("block/respawn_obelisk_disabled"));
 
-        withExistingParent("soul_sand_hellish_coal_ore", InsaneSO.location("block/soul_sand_hellish_coal_ore"));
-        withExistingParent("soul_soil_hellish_coal_ore", InsaneSO.location("block/soul_soil_hellish_coal_ore"));
-
         withExistingParent("charcoal_layer", InsaneSO.location("block/charcoal_layer/height_2"));
         basicItem(CoalFire.FIRESTARTER.get());
-        basicItem(CoalFire.HELLISH_COAL.get());
 
         basicItem(RepairKits.ITEM.get());
     }

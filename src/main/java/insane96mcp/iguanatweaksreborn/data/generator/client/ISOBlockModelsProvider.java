@@ -18,9 +18,6 @@ public class ISOBlockModelsProvider extends BlockModelProvider {
         flowerPotCross("potted_cyan_flower", InsaneSO.location("block/cyan_flower")).renderType("cutout");
         cross("solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
         flowerPotCross("potted_solanum_neorossii", InsaneSO.location("block/solanum_neorossii")).renderType("cutout");
-
-        cubeAll("soul_sand_hellish_coal_ore", "block/soul_sand_hellish_coal_ore");
-        cubeAll("soul_soil_hellish_coal_ore", "block/soul_soil_hellish_coal_ore");
     }
 
     public BlockModelBuilder flowerPotCross(String name, ResourceLocation plant) {
