@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.23.0
 ### Additions
 * Ported Fletching from ISE
   * Fixed arrows having no tooltip
