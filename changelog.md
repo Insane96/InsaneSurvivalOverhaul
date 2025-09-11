@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Splash potions now stack to 4
+
 ## 4.23.0
 ### Additions
 * Ported Fletching from ISE
