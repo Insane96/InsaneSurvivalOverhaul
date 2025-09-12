@@ -9,19 +9,17 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "MCM",
-          " M "
-        ],
-        "key": {
-          "M": {
-            "item": "caverns_and_chasms:silver_ingot"
-          },
-          "C": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
             "item": "minecraft:amethyst_shard"
+          },
+          {
+            "item": {
+              "item": "caverns_and_chasms:silver_ingot"
+            }
           }
-        },
+        ],
         "result": {
           "item": "iguanatweaksreborn:repair_kit",
           "nbt": "{repair_material:\"caverns_and_chasms:silver_ingot\",color:13555173}"

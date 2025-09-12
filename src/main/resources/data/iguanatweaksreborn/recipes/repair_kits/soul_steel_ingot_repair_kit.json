@@ -9,19 +9,17 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "MCM",
-          " M "
-        ],
-        "key": {
-          "M": {
-            "item": "iguanatweaksexpanded:soul_steel_ingot"
-          },
-          "C": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
             "item": "minecraft:amethyst_shard"
+          },
+          {
+            "item": {
+              "item": "iguanatweaksexpanded:soul_steel_ingot"
+            }
           }
-        },
+        ],
         "result": {
           "item": "iguanatweaksreborn:repair_kit",
           "nbt": "{repair_material:\"iguanatweaksexpanded:soul_steel_ingot\",color:4798252}"

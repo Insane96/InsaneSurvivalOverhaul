@@ -1,11 +1,9 @@
 # Changelog
 
-* Shields enchantability
-* repair kit 1 material
-
 ## Upcoming
 ### Changes
 * Splash potions now stack to 4
+* Repair kits now require 1 material instead of 2 but can only repair an item up to 75% durability
 
 ## 4.23.0
 ### Additions

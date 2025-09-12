@@ -1,17 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "MCM",
-    " M "
-  ],
-  "key": {
-    "M": {
-      "item": "minecraft:gold_ingot"
-    },
-    "C": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": {
+        "item": "minecraft:gold_ingot"
+      }
     }
-  },
+  ],
   "result": {
     "item": "iguanatweaksreborn:repair_kit",
     "nbt": "{repair_material:\"minecraft:gold_ingot\",color:16643423}"

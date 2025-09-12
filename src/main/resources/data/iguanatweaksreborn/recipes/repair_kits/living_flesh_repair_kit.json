@@ -9,19 +9,17 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "MCM",
-          " M "
-        ],
-        "key": {
-          "M": {
-            "item": "caverns_and_chasms:living_flesh"
-          },
-          "C": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
             "item": "minecraft:amethyst_shard"
+          },
+          {
+            "item": {
+              "item": "caverns_and_chasms:living_flesh"
+            }
           }
-        },
+        ],
         "result": {
           "item": "iguanatweaksreborn:repair_kit",
           "nbt": "{repair_material:\"caverns_and_chasms:living_flesh\",color:9996427}"

@@ -16,7 +16,7 @@ public class RepairKits extends Feature {
 	public static final RegistryObject<Item> ITEM = ISORegistries.ITEMS.register("repair_kit", () -> new RepairKitItem(new Item.Properties().stacksTo(16)));
 
 	@Config(min = 1, description = "Default how many materials worth does a repair kit repair. Each repair kit can have it's own ratio")
-	public static Integer repairKitMaterialRatio = 2;
+	public static Integer repairKitMaterialRatio = 1;
 	@Config(min = 0, max = 1, name = "Max repair", description = "Default maximum repair percentage of an item. Each repair kit can have it's own max repair")
-	public static Double maxRepair = 1d;
+	public static Double maxRepair = 0.75d;
 }

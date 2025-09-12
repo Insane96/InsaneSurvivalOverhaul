@@ -1,17 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "MCM",
-    " M "
-  ],
-  "key": {
-    "M": {
-      "item": "minecraft:copper_ingot"
-    },
-    "C": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": {
+        "item": "minecraft:copper_ingot"
+      }
     }
-  },
+  ],
   "result": {
     "item": "iguanatweaksreborn:repair_kit",
     "nbt": "{repair_material:\"minecraft:copper_ingot\",color:13723717}"

@@ -55,12 +55,15 @@ def build_recipe_json(key, nbt, requires_mod):
         key_suffix = key.split(":")[-1]
 
     base_recipe = {
-        "type": "minecraft:crafting_shaped",
-        "pattern": ["MCM", " M "],
-        "key": {
-            "M": m_json,
-            "C": { "item": "minecraft:amethyst_shard" }
-        },
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+            {
+                "item": "minecraft:amethyst_shard"
+            },
+            {
+                "item": m_json
+            }
+        ],
         "result": {
             "item": "iguanatweaksreborn:repair_kit",
             "nbt": "{" + ",".join(f"{k}:{v}" for k, v in nbt.items()) + "}"
