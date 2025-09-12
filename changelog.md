@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.23.1
 ### Changes
 * Splash potions now stack to 4
 * Repair kits now require 1 material instead of 2 but can only repair an item up to 75% durability
