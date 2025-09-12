@@ -1,5 +1,8 @@
 # Changelog
 
+* Shields enchantability
+* repair kit 1 material
+
 ## Upcoming
 ### Changes
 * Splash potions now stack to 4
