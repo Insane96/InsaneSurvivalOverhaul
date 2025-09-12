@@ -217,7 +217,7 @@
 	"iguanatweaksreborn.requires_catalyst": "Non può essere attivato. L'Obelisco richiede almeno un blocco catalizzatore",
 	"iguanatweaksreborn.obelisk_disabled": "Obelisco della rinascita disattivato. Il punto di rinascia dei giocatori è stato impostato all'ultimo letto, o reimpostato se non ne avevano uno",
 	"iguanatweaksreborn.fail_respawn_obelisk": "Non è stato possibile rinascere all'obelisco perchè era disattivato.",
-	"iguanatweaksreborn.set_old_respawn": "Il tuo vecchio punto di rinascita è stato impostato. Se il tuo obelisco si esaurisce rinascerai qui.",
+	"iguanatweaksreborn.set_old_respawn": "Il tuo vecchio punto di rinascita è stato impostato. Se il tuo obelisco viene disattivato rinascerai qui.",
 	"iguanatweaksreborn.sneak_to_overwrite": "Puoi sovrascrivere il punto di rinascita dell'obelisco accovacciandoti e utilizzando il letto.",
 	"block.iguanatweaksreborn.respawn_obelisk": "Obelisco della rinascita",
 

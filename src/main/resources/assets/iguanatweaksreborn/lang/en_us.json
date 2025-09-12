@@ -214,7 +214,7 @@
 	"iguanatweaksreborn.requires_catalyst": "Can't activate. The Obelisk requires at least one catalyst block",
 	"iguanatweaksreborn.obelisk_disabled": "Respawn Obelisk disabled. Players' respawn point has been set to their last bed, or reset if they didn't have one",
 	"iguanatweaksreborn.fail_respawn_obelisk": "You couldn't respawn at the obelisk because it was disabled.",
-	"iguanatweaksreborn.set_old_respawn": "Your old respawn point has been set. If your Obelisk runs out you'll respawn here.",
+	"iguanatweaksreborn.set_old_respawn": "Your old respawn point has been set. If your Obelisk is disabled you'll respawn here.",
 	"iguanatweaksreborn.sneak_to_overwrite": "You can overwrite an Obelisk respawn point by sneak-right-click.",
 	"block.iguanatweaksreborn.respawn_obelisk": "Respawn Obelisk",
 
