@@ -11,7 +11,7 @@
 	"hud_info.cardinal_direction.north_east": "North East",
 	"hud_info.cardinal_direction.east": "East",
 	"hud_info.cardinal_direction.south_east": "South East",
-	"hud_info.depth": "Y: %d",
+	"hud_info.depth": "Altitude: %d",
 	"hud_info.time": "%d:%s (Day: %d)",
 
 	"deathScreen.sinceLastDeath": "Since last death",

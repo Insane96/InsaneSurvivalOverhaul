@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Changed Y info to Altitude 
+
 ## 4.23.1
 ### Changes
 * Splash potions now stack to 4
