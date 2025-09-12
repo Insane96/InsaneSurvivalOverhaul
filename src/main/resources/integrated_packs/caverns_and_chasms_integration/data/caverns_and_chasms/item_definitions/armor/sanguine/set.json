@@ -1,6 +1,6 @@
 {
     "item": "#caverns_and_chasms:equipment/armor/sanguine",
-    "enchantability": 3,
+    "enchantability": 6,
     "armor_toughness": 0,
     "movement_speed_penalty": 0.10
 }

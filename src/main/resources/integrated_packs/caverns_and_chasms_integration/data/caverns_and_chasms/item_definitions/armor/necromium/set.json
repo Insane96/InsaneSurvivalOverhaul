@@ -1,6 +1,6 @@
 {
     "item": "#caverns_and_chasms:equipment/armor/necromium",
-    "enchantability": 5,
+    "enchantability": 3,
     "armor_toughness": 0,
     "knockback_resistance": 0.06,
     "movement_speed_penalty": 0.15

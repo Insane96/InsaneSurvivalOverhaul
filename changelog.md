@@ -4,6 +4,7 @@
 ### Changes
 * Splash potions now stack to 4
 * Repair kits now require 1 material instead of 2 but can only repair an item up to 75% durability
+* Increased armor enchantability by 25% (except chainmail, it was already correct, and silver, it was increased from 4 to 12)
 
 ## 4.23.0
 ### Additions
