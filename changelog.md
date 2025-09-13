@@ -2,7 +2,9 @@
 
 ## Upcoming
 ### Changes
-* Changed Y info to Altitude 
+* Changed Y info to Altitude
+* You're now left with 1 hearth instead of half when unfair oneshot is activated
+  * Also now configurable both activation and left health
 
 ## 4.23.1
 ### Changes

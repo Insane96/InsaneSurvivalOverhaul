@@ -9,7 +9,6 @@ import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,7 +38,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-@LoadFeature(module = Modules.Ids.COMBAT, name = "Unfair one-shot", description = "Players be left with half a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
+@LoadFeature(module = Modules.Ids.COMBAT, name = "Unfair one-shot", description = "Players live with a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 public class UnfairOneShot extends Feature {
 	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ISORegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
 
@@ -48,10 +47,10 @@ public class UnfairOneShot extends Feature {
 	private static final List<MobEffectInstance> effects = new ArrayList<>();
 	@Config(description = "If true, an animation is played on activation")
 	public static Boolean animation = true;
-
-	public UnfairOneShot(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
+    @Config(min = 1, max = 20, description = "How much health you need to have for this to activate")
+    public static Double activationHealth = 15d;
+    @Config(min = 1, max = 20, description = "How much heal you're left with when this activates. Must be at least 1 lower than 'Activation health'")
+    public static Double leftoverHealth = 2d;
 
 	@Override
 	public void readConfig(ModConfigEvent event) {
@@ -70,6 +69,9 @@ public class UnfairOneShot extends Feature {
 				effects.add(new MobEffectInstance(mobEffect, duration, amplifier));
 			}
 		}
+
+        if (leftoverHealth >= activationHealth)
+            leftoverHealth = activationHealth - 1;
 	}
 
 	@SubscribeEvent
@@ -79,8 +81,8 @@ public class UnfairOneShot extends Feature {
 				|| !(event.getEntity() instanceof ServerPlayer player))
 			return;
 
-		if (player.getHealth() >= 15 && player.getHealth() - event.getAmount() <= 0) {
-			event.setAmount(player.getHealth() - 1f);
+		if (player.getHealth() >= activationHealth && player.getHealth() - event.getAmount() <= 0) {
+			event.setAmount(player.getHealth() - leftoverHealth.floatValue());
 			player.level().playSound(null, player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 2f, 0.5f);
 			ISOTriggers.UNFAIR_ONESHOT.trigger(player);
 			for (MobEffectInstance effect : effects) {
