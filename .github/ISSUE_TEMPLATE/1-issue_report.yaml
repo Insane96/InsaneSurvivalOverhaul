@@ -34,6 +34,15 @@ body:
         - 'Fabric'
     validations:
       required: true
+  - type: dropdown
+    id: plugins
+    attributes:
+      label: "Are you using servers that accept plugins such as Bukkit or Paper?"
+      options:
+        - 'No'
+        - 'Yes'
+    validations:
+      required: true
   - type: input
     id: forge-version
     attributes:
