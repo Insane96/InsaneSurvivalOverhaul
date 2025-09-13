@@ -201,7 +201,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
             }
 
             if (beacon.timeLeft > 0 || !BeaconConduit.beacon$requiresPayment && beacon.layers > 0 && !beacon.beamSections.isEmpty()) {
-                beacon.range = (int) (BeaconConduit.beacon$baseRange + getBeaconRange(pLevel, x, y, z, beacon.layers));
+                beacon.range = (int) (BeaconConduit.beacon$baseRange + getBeaconRange(pLevel, x, y, z, beacon.layers, beacon.amplifier));
                 applyEffects(pLevel, pPos, beacon.layers, beacon.effect, beacon.amplifier, beacon.range);
                 playSound(pLevel, pPos, SoundEvents.BEACON_AMBIENT);
             }
@@ -280,7 +280,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
 
     }
 
-    private static double getBeaconRange(Level level, int x, int y, int z, int layers) {
+    private static double getBeaconRange(Level level, int x, int y, int z, int layers, int amplifier) {
         Map<Block, Integer> blocksCount = new HashMap<>();
 
         for (int layer = 1; layer <= layers; layer++) {
@@ -306,7 +306,7 @@ public class ISOBeaconBlockEntity extends BaseContainerBlockEntity implements Wo
                 range += optional.get().value * entry.getValue() / layers;
         }
 
-        return range;
+        return range / (amplifier * 0.25f + 1);
     }
 
     public static void playSound(Level pLevel, BlockPos pPos, SoundEvent pSound) {

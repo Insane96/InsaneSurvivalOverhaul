@@ -5,6 +5,8 @@
 * Changed Y info to Altitude
 * You're now left with 1 hearth instead of half when unfair oneshot is activated
   * Also now configurable both activation and left health
+* Beacon range is now affected by amplifier
+  * Higher amplifiers yield less range
 
 ## 4.23.1
 ### Changes

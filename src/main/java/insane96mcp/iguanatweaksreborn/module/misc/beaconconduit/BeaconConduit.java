@@ -1,8 +1,5 @@
 package insane96mcp.iguanatweaksreborn.module.misc.beaconconduit;
 
-import com.google.gson.*;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.reflect.TypeToken;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.Packs;
@@ -15,13 +12,10 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.data.IdTagMatcher;
 import insane96mcp.insanelib.data.IdTagValue;
-import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -53,7 +47,6 @@ public class BeaconConduit extends JsonFeature {
     public static final SimpleBlockWithItem BEACON = SimpleBlockWithItem.register("beacon", () -> new ISOBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)));
     public static final RegistryObject<BlockEntityType<ISOBeaconBlockEntity>> BEACON_BLOCK_ENTITY_TYPE = ISORegistries.BLOCK_ENTITY_TYPES.register("beacon", () -> BlockEntityType.Builder.of(ISOBeaconBlockEntity::new, BEACON.block().get()).build(null));
     public static final RegistryObject<MenuType<ISOBeaconMenu>> BEACON_MENU_TYPE = ISORegistries.MENU_TYPES.register("beacon", () -> new MenuType<>(ISOBeaconMenu::new, FeatureFlags.VANILLA_SET));
-
 
     @SuppressWarnings("unused")
 	public static final RegistryObject<MobEffect> BLOCK_REACH = ISORegistries.MOB_EFFECTS.register("block_reach", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
@@ -212,85 +205,6 @@ public class BeaconConduit extends JsonFeature {
 
     private static double maxRangeRadius() {
         return Math.sqrt(maxRange() * maxRange() + maxRange() * maxRange());
-    }
-
-    @JsonAdapter(BeaconEffect.Serializer.class)
-    public static class BeaconEffect extends IdTagMatcher {
-        int[] timeCost;
-        int heightRequired;
-
-        public BeaconEffect(String location, int[] timeCost, int heightRequired) {
-            super(Type.ID, ResourceLocation.parse(location), null);
-            this.timeCost = timeCost;
-            this.heightRequired = heightRequired;
-        }
-
-        public BeaconEffect(MobEffect mobEffect, int[] timeCost, int heightRequired) {
-            super(Type.ID, Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getKey(mobEffect)), null);
-            this.timeCost = timeCost;
-            this.heightRequired = heightRequired;
-        }
-
-        public BeaconEffect(String location, int[] timeCost) {
-            this(location, timeCost, 1);
-        }
-
-        public BeaconEffect(MobEffect mobEffect, int[] timeCost) {
-            this(mobEffect, timeCost, 1);
-        }
-
-        @Nullable
-        public MobEffect getEffect() {
-            if (!ForgeRegistries.MOB_EFFECTS.containsKey(this.location)) {
-                LogHelper.warn("No mob effect found with id %s", this.location);
-                return null;
-            }
-            return ForgeRegistries.MOB_EFFECTS.getValue(this.location);
-        }
-
-        public int getMaxAmplifier() {
-            return this.timeCost.length - 1;
-        }
-
-        public int getHeightRequired() {
-            return this.heightRequired;
-        }
-
-        public int getTimeCostForAmplifier(int amplifier) {
-            if (this.timeCost.length <= amplifier)
-                return 1;
-            return this.timeCost[amplifier];
-        }
-
-        public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<BeaconEffect>>(){}.getType();
-        private static class Serializer implements JsonSerializer<BeaconEffect>, JsonDeserializer<BeaconEffect> {
-            @Override
-            public BeaconEffect deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                JsonObject jObject = json.getAsJsonObject();
-                int heightRequired = GsonHelper.getAsInt(jObject, "height_required", 1);
-                JsonArray jArray = jObject.getAsJsonArray("time_cost");
-                if (jArray.size() > 8)
-                    throw new JsonParseException("time_cost size cannot be greater than 8");
-                List<Integer> timeCost = new ArrayList<>();
-                jArray.forEach(jsonElement -> timeCost.add(jsonElement.getAsInt()));
-                return new BeaconEffect(GsonHelper.getAsString(jObject, "id"), timeCost.stream().mapToInt(i->i).toArray(), heightRequired);
-            }
-
-            @Override
-            public JsonElement serialize(BeaconEffect src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
-                JsonObject jObject = new JsonObject();
-                jObject.addProperty("id", src.location.toString());
-                if (src.heightRequired > 1)
-                    jObject.addProperty("height_required", src.heightRequired);
-                jObject.addProperty("id", src.location.toString());
-                JsonArray jArray = new JsonArray();
-                for (int i = 0; i < src.timeCost.length; i++) {
-                    jArray.add(src.timeCost[i]);
-                }
-                jObject.add("time_cost", jArray);
-                return jObject;
-            }
-        }
     }
 
     public static boolean shouldRemoveConduitHaste() {

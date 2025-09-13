@@ -159,7 +159,7 @@ public class ISOBeaconMenu extends AbstractContainerMenu {
     }
 
     public int getMaxAmplifier(MobEffect effect) {
-        for (BeaconConduit.BeaconEffect instance : BeaconConduit.effects) {
+        for (BeaconEffect instance : BeaconConduit.effects) {
             if (instance.getEffect().equals(effect))
                 return instance.getMaxAmplifier();
         }
