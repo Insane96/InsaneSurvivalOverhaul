@@ -1,6 +1,6 @@
 name: Issue Report
 description: Report an issue.
-labels: [bug]
+labels: [bug,unreviewed]
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,7 @@ body:
         * **[Pinned Issues](/Insane96/IguanaTweaksReborn/issues)**: Some commonly reported issues are pinned
         * **[The Search Bar](/Insane96/IguanaTweaksReborn/issues)**: See already reported issues.
         
-        Please fill in the following template to report your issue. ISO is Insane's Survival Overhaul.
+        Please fill in the following template to report your issue. ISO is shorthand for Insane's Survival Overhaul.
 
   - type: markdown
     attributes:
@@ -37,7 +37,7 @@ body:
   - type: input
     id: forge-version
     attributes:
-      label: Modloader Version
+      label: "Modloader Version"
       placeholder: "E.g.: 43.4.0"
       description: "'Latest' is not a valid answer, write an exact version number"
     validations:
@@ -45,7 +45,7 @@ body:
   - type: input
     id: lib-version
     attributes:
-      label: InsaneLib Version
+      label: "InsaneLib Version"
       placeholder: "E.g.: 1.21.20"
       description: "'Latest' is not a valid answer, write an exact version number"
     validations:
@@ -85,8 +85,8 @@ body:
   - type: dropdown
     id: just-tinkers
     attributes:
-      label: "Can you reproduce with just IguanaTweaks Reborn?"
-      description: "Test by removing all other mods besides IguanaTweaks Reborn and required dependencies."
+      label: "Can you reproduce with just ISO?"
+      description: "Test by removing all other mods besides ISO and required dependencies."
       options:
         - 'I have not tried'
         - 'No'
