@@ -1,17 +1,12 @@
 package insane96mcp.iguanatweaksreborn.module.misc;
 
-import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.util.ModNBTData;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -20,7 +15,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -45,11 +39,6 @@ public class Nerfs extends Feature {
 	public static Boolean removeFallingBlockDupe = true;
 	@Config(description = "Fixes several piston physics exploits like TNT duping. (If quark is present this is disabled)")
 	public static Boolean removePistonPhysicsExploit = true;
-
-	@Config(min = 0d, max = 1d, name = "Fishing has a chance to fish a guardian")
-	public static Double fishingGuardianChance = 0d;
-	@Config(description = "If enabled after fishing for a few times in the same spot you won't be able to fish again unless you move in another spot")
-	public static Boolean antiFishingFarms = true;
 
 	@Config(min = 0, max = 1, description = "When an entity is hit and on a mount they have this chance to fall")
 	public static Double fallFromMountChance = 0.2d;
@@ -134,57 +123,5 @@ public class Nerfs extends Feature {
 			return;
 
 		event.setBurnTime(3200);
-	}
-
-	@SubscribeEvent
-	public void onRetrieveBobber(ItemFishedEvent event) {
-		if (!this.isEnabled())
-			return;
-
-		trySummonGuardian(event);
-		nerfAutoFishFarm(event);
-	}
-
-	public static void nerfAutoFishFarm(ItemFishedEvent event) {
-		if (!antiFishingFarms
-				|| event.getHookEntity().getPlayerOwner() == null)
-			return;
-		Player owner = event.getHookEntity().getPlayerOwner();
-		int[] aPos = ModNBTData.getPersisted(owner, LAST_FISHING_POS_TAG, int[].class);
-		if (aPos.length == 3) {
-			BlockPos lastFishingPos = new BlockPos(aPos[0], aPos[1], aPos[2]);
-			int distance = lastFishingPos.distManhattan(event.getHookEntity().blockPosition());
-			int lastFishingCount = ModNBTData.getPersisted(owner, LAST_FISHING_COUNT_TAG, Integer.class);
-			if (distance <= 6) {
-				lastFishingCount++;
-				if (lastFishingCount >= 8) {
-					event.setCanceled(true);
-					event.getHookEntity().getPlayerOwner().displayClientMessage(Component.translatable(InsaneSO.lang("too_much_fishing_in_this_spot")), true);
-				}
-				ModNBTData.putPersisted(owner, LAST_FISHING_COUNT_TAG, lastFishingCount);
-			}
-			else {
-				ModNBTData.putPersisted(owner, LAST_FISHING_COUNT_TAG, 0);
-				ModNBTData.putPersisted(owner, LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
-			}
-		}
-		else {
-			ModNBTData.putPersisted(owner, LAST_FISHING_POS_TAG, new int[] {event.getHookEntity().getBlockX(), event.getHookEntity().getBlockY(), event.getHookEntity().getBlockZ()});
-		}
-	}
-
-	public static void trySummonGuardian(ItemFishedEvent event) {
-		if (fishingGuardianChance == 0d
-				|| event.getHookEntity().level().random.nextFloat() > fishingGuardianChance)
-			return;
-		LivingEntity guardian = EntityType.GUARDIAN.create(event.getHookEntity().level());
-		guardian.setPos(event.getHookEntity().position().add(0, guardian.getBbHeight(), 0));
-		Player player = event.getHookEntity().getPlayerOwner();
-		double d0 = player.getX() - event.getHookEntity().getX();
-		double d1 = player.getY() - event.getHookEntity().getY();
-		double d2 = player.getZ() - event.getHookEntity().getZ();
-		guardian.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-		event.getHookEntity().level().addFreshEntity(guardian);
-		event.setCanceled(true);
 	}
 }

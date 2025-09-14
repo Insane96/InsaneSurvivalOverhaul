@@ -1,5 +1,7 @@
 # Changelog
 
+* Bonemeal not behaving correctly
+
 ## Upcoming
 ### Changes
 * Changed Y info to Altitude
