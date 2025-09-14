@@ -172,7 +172,7 @@
 
 	"iguanatweaksreborn:misc_module": "Misc",
 
-	"iguanatweaksreborn.too_much_fishing_in_this_spot": "There's no more fish in this spot, maybe move a bit",
+	"iguanatweaksreborn.fishing.low_fish": "Fish are becoming scarce in this spot, maybe move a bit...",
 
 	"iguanatweaksreborn.beacon.requires_higher_pyramid": "Requires Higher Pyramid",
 	"iguanatweaksreborn.beacon.select_an_effect": "Select an effect",

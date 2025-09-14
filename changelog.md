@@ -1,8 +1,15 @@
 # Changelog
 
 * Bonemeal not behaving correctly
+* Use FlintAndSteel#use for firestarter and flints
 
 ## Upcoming
+### Additions
+* Low Fish feature
+  * Moved and enhanced from Nerfs feature
+  * It's now world bound and no longer player bound
+  * Doesn't prevent fishing, it now slows down fishing
+
 ### Changes
 * Changed Y info to Altitude
 * You're now left with 1 hearth instead of half when unfair oneshot is activated

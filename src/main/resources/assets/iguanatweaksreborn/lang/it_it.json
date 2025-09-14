@@ -175,7 +175,7 @@
 
 	"iguanatweaksreborn:misc_module": "Miscellanea",
 
-	"iguanatweaksreborn.too_much_fishing_in_this_spot": "Non ci sono più pesci in questo punto, forse è il caso di spostarsi un po'...",
+    "iguanatweaksreborn.fishing.low_fish": "I pesci iniziano a scarseggiare in questo punto, meglio spostarsi un po' ...",
 
 	"iguanatweaksreborn.beacon.requires_higher_pyramid": "Richiede una piramide più alta",
     "iguanatweaksreborn.beacon.select_an_effect": "Seleziona un effetto",

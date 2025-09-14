@@ -111,8 +111,8 @@ public class Seasons extends JsonFeature {
 	));
 	public static final ArrayList<GrassTickingData> grassGrowthDecay = new ArrayList<>();
 
-	public Seasons(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("serene_seasons_changes", "Insane's Survival Overhaul Serene Seasons Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && noGreenHouseGlass);
 		InsaneSO.addServerPack("leaves_drops", "Insane's Survival Overhaul Leaves Drops", () -> this.isEnabled() && !Packs.disableAllDataPacks && leavesDrops);
 		if (ModList.get().isLoaded("tide"))
