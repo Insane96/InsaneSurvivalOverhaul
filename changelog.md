@@ -1,6 +1,5 @@
 # Changelog
 
-* Bonemeal not behaving correctly
 * Use FlintAndSteel#use for firestarter and flints
 
 ## Upcoming
@@ -16,6 +15,9 @@
   * Also now configurable both activation and left health
 * Beacon range is now affected by amplifier
   * Higher amplifiers yield less range
+
+### Fixes
+* Bone meal still usable to grow crops
 
 ## 4.23.1
 ### Changes
