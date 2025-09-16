@@ -102,8 +102,6 @@ public class CoalFire extends Feature {
                 || event.getLevel().isClientSide)
             return;
 
-        double breakMain = event.getEntity().getRandom().nextDouble();
-        double breakOff = event.getEntity().getRandom().nextDouble();
         double ignite = event.getEntity().getRandom().nextDouble();
 
         event.getEntity().swing(event.getHand(), true);
@@ -118,10 +116,10 @@ public class CoalFire extends Feature {
             BlockPos blockpos = context.getClickedPos();
             BlockState blockstate = level.getBlockState(blockpos);
             if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
-                BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
-                if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
-                    BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
-                    level.setBlock(blockpos1, blockstate1, 11);
+                BlockPos clickedPos = blockpos.relative(context.getClickedFace());
+                if (BaseFireBlock.canBePlacedAt(level, clickedPos, context.getHorizontalDirection())) {
+                    BlockState state = BaseFireBlock.getState(level, clickedPos);
+                    level.setBlock(clickedPos, state, 11);
                     level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);
                 }
             }
