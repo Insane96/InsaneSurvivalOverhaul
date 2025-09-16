@@ -1,8 +1,6 @@
 # Changelog
 
-* Use FlintAndSteel#use for firestarter and flints
-
-## Upcoming
+## 4.24.0
 ### Additions
 * Low Fish feature
   * Moved and enhanced from Nerfs feature
