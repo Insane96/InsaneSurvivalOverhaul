@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.24.1
+### Fixes
+* Bone meal no longer usable
+
 ## 4.24.0
 ### Additions
 * Low Fish feature

@@ -126,7 +126,7 @@ public class BoneMeal extends Feature {
             farmlandPos = event.getPos();
         else if (event.getLevel().getBlockState(event.getPos().below()).is(Blocks.FARMLAND) && (event.getEntity().isCrouching() || richFarmland$disableBoneMeal))
             farmlandPos = event.getPos().below();
-        else if (richFarmland$disableBoneMeal)
+        else if (richFarmland$disableBoneMeal && event.getLevel().getBlockState(event.getPos().below()).is(RICH_FARMLAND.block().get()))
             event.setCanceled(true);
         if (farmlandPos != null) {
             event.getLevel().setBlockAndUpdate(farmlandPos, RICH_FARMLAND.block().get().defaultBlockState().setValue(FarmBlock.MOISTURE, event.getLevel().getBlockState(farmlandPos).getValue(FarmBlock.MOISTURE)));
