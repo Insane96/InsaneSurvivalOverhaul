@@ -3,7 +3,6 @@
 ## Upcoming
 ### Additions
 * Gunpowder crafting recipe in Misc Tweaks data pack
-  * Made with Blaze Powder, Charcoal and Bone Meal
 
 ## 4.24.1
 ### Fixes
