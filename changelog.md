@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.24.2
 ### Additions
 * Gunpowder crafting recipe in Misc Tweaks data pack
 
