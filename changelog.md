@@ -4,6 +4,9 @@
 ### Additions
 * Gunpowder crafting recipe in Misc Tweaks data pack
 
+### Fixes
+* Yet another fix for bone meal
+
 ## 4.24.1
 ### Fixes
 * Bone meal no longer usable
