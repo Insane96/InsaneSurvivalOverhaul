@@ -5,9 +5,7 @@
       "item": "minecraft:amethyst_shard"
     },
     {
-      "item": {
-        "item": "minecraft:gold_ingot"
-      }
+      "item": "minecraft:gold_ingot"
     }
   ],
   "result": {

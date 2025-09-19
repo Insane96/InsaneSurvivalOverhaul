@@ -60,9 +60,7 @@ def build_recipe_json(key, nbt, requires_mod):
             {
                 "item": "minecraft:amethyst_shard"
             },
-            {
-                "item": m_json
-            }
+            m_json
         ],
         "result": {
             "item": "iguanatweaksreborn:repair_kit",

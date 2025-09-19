@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.24.3
+### Fixes
+* Repair kits recipes not working
+
 ## 4.24.2
 ### Additions
 * Gunpowder crafting recipe in Misc Tweaks data pack

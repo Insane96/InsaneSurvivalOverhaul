@@ -15,9 +15,7 @@
             "item": "minecraft:amethyst_shard"
           },
           {
-            "item": {
-              "item": "caverns_and_chasms:silver_ingot"
-            }
+            "item": "caverns_and_chasms:silver_ingot"
           }
         ],
         "result": {

@@ -5,9 +5,7 @@
       "item": "minecraft:amethyst_shard"
     },
     {
-      "item": {
-        "tag": "minecraft:planks"
-      }
+      "tag": "minecraft:planks"
     }
   ],
   "result": {

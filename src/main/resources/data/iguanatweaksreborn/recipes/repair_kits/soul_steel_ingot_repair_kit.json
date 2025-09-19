@@ -15,9 +15,7 @@
             "item": "minecraft:amethyst_shard"
           },
           {
-            "item": {
-              "item": "iguanatweaksexpanded:soul_steel_ingot"
-            }
+            "item": "iguanatweaksexpanded:soul_steel_ingot"
           }
         ],
         "result": {

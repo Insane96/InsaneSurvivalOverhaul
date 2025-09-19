@@ -15,9 +15,7 @@
             "item": "minecraft:amethyst_shard"
           },
           {
-            "item": {
-              "item": "iguanatweaksexpanded:solarium_ball"
-            }
+            "item": "iguanatweaksexpanded:solarium_ball"
           }
         ],
         "result": {

@@ -15,9 +15,7 @@
             "item": "minecraft:amethyst_shard"
           },
           {
-            "item": {
-              "item": "iguanatweaksexpanded:quaron_ingot"
-            }
+            "item": "iguanatweaksexpanded:quaron_ingot"
           }
         ],
         "result": {
