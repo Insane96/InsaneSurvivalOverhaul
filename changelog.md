@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.24.4
+### Changes
+* Repairs kits are now in the Creative inventory and should show up in EMI
+  * Known bug: recipes show up all together ignoring the material checked
+* Heavily increased food stack sizes (more than doubled)
+  * Basically the worst foods now stack at 64, down to 6/8 for the best
+
 ## 4.24.3
 ### Fixes
 * Repair kits recipes not working

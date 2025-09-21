@@ -34,7 +34,7 @@ public class StackSizes extends Feature {
     public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_stack_size_changes");
 
     @Config(description = "The formula to calculate the stack size of a food item. Variables as hunger, saturation_modifier, effectiveness as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
-    public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(hunger, 1) * 0.4, 1), 0)";
+    public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(hunger, 1), 1), 0)";
     @Config(min = 0.01d, max = 64d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks) will be multiplied by this value. Foods will be overridden by 'Food Stack Reduction' or 'Food Stack Multiplier' if are active. Setting to 1 will disable this feature.")
     public static Double itemStackMultiplier = 1d;
     @Config(min = 0.01d, max = 64d, description = "All the blocks max stack sizes will be multiplied by this value to increase / decrease them.")
@@ -43,8 +43,8 @@ public class StackSizes extends Feature {
     @Config(description = "Enables a data pack that changes some item stacks.")
     public static Boolean dataPack = true;
 
-	public StackSizes(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("item_stacks", "Insane's Survival Overhaul Item Stacks", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
     }
 
