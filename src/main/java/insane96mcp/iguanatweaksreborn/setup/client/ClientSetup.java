@@ -30,12 +30,14 @@ import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.shieldsplus.setup.SPItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -140,6 +142,18 @@ public class ClientSetup {
             if (Feature.isEnabled(BlinkerFeature.class)) {
                 addBefore(event, Items.ENDER_PEARL, BlinkerFeature.ITEM);
             }
+            if (Feature.isEnabled(RepairKits.class)) {
+                if (Minecraft.getInstance().level != null) {
+                    for (Recipe<?> recipe : Minecraft.getInstance().level.getRecipeManager().getRecipes()) {
+                        try {
+                            ItemStack stack = recipe.getResultItem(null);
+                            if (stack.is(RepairKits.ITEM.get()))
+                                addAfter(event, Items.SHEARS, stack);
+                        }
+                        catch (Exception ignored) {}
+                    }
+                }
+            }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
@@ -221,7 +235,11 @@ public class ClientSetup {
     }
 
     public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, ItemLike itemToAdd) {
-        event.getEntries().putAfter(new ItemStack(after), new ItemStack(itemToAdd), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        addAfter(event, after, new ItemStack(itemToAdd));
+    }
+
+    public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, ItemStack stackToAdd) {
+        event.getEntries().putAfter(new ItemStack(after), stackToAdd, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
     }
 
     public static void addBefore(BuildCreativeModeTabContentsEvent event, Item before, Supplier<? extends ItemLike> itemToAdd) {
