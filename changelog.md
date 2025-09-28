@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Composter time to produce is now configurable (and increased from 1s to 2.5s)
+
 ## 4.24.4
 ### Changes
 * Repairs kits are now in the Creative inventory and should show up in EMI

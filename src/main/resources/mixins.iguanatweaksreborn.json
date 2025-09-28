@@ -34,6 +34,7 @@
         "ChunkMap$TrackedEntityMixin",
         "CombatRulesMixin",
         "CombatTrackerAccessor",
+        "ComposterBlockMixin",
         "ConduitBlockEntityMixin",
         "CrossbowItemMixin",
         "DigDurabilityEnchantmentMixin",

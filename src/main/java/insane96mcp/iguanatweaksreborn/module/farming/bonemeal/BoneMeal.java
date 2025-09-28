@@ -65,6 +65,8 @@ public class BoneMeal extends Feature {
 
     @Config
     public static Boolean compostableRottenFlesh = true;
+    @Config(min = 0, description = "Vanilla is 20")
+    public static Integer composterTimeToProduce = 50;
 
     @Config(description = "Chance for a bone meal to fail to grow something. Empty this string to disable. Accepts a list of seasons and chances separated by a ;")
     public static String seasonFailChance = "WINTER,0.65";
@@ -116,6 +118,10 @@ public class BoneMeal extends Feature {
 
             tryBoneMealCanesAndCactus(event, event.getLevel(), event.getBlock(), event.getPos());
         }
+    }
+
+    public static int composterTimeToProduce(int original) {
+        return Feature.isEnabled(BoneMeal.class) ? BoneMeal.composterTimeToProduce : original;
     }
 
     private void tryMakeRichFarmland(BonemealEvent event) {
