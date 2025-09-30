@@ -33,8 +33,10 @@ public class PouchItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide)
+        if (!level.isClientSide) {
+
             openMenu(player, player.getItemInHand(hand));
+        }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
     }
 
@@ -62,29 +64,20 @@ public class PouchItem extends Item {
             return list;
         }
 
-        if (tag.contains("BlockEntityTag", 10)) {
-            CompoundTag bet = tag.getCompound("BlockEntityTag");
-            if (bet.contains("Items", 9)) {
-                ListTag nbtList = bet.getList("Items", 10);
-                nbtList.forEach(t -> {
-                    CompoundTag itemTag = (CompoundTag) t;
-                    int slot = itemTag.getInt("Slot");
-                    if (slot >= 0 && slot < list.size())
-                        list.set(slot, ItemStack.of(itemTag));
-                });
-
-                tag.put("Items", nbtList.copy());
-                tag.remove("BlockEntityTag");
-                stack.setTag(tag);
-            }
-        }
-
         return list;
     }
 
     @Override
-    public void verifyTagAfterLoad(CompoundTag pTag) {
-        super.verifyTagAfterLoad(pTag);
+    public void verifyTagAfterLoad(CompoundTag tag) {
+        super.verifyTagAfterLoad(tag);
+        if (tag.contains("BlockEntityTag", 10)) {
+            CompoundTag bet = tag.getCompound("BlockEntityTag");
+            if (bet.contains("Items", 9)) {
+                ListTag oldList = bet.getList("Items", 10);
+                tag.put("Items", oldList.copy());
+                tag.remove("BlockEntityTag");
+            }
+        }
     }
 
     @Override
