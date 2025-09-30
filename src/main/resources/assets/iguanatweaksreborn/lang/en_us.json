@@ -167,6 +167,7 @@
 
     "item.iguanatweaksreborn.pouch": "Pouch",
     "iguanatweaksreborn.pouch": "Pouch",
+    "iguanatweaksreborn.pouch_weighted": "Slowed down if carried more than %d",
 
 
 	"iguanatweaksreborn:mining_module": "Mining",

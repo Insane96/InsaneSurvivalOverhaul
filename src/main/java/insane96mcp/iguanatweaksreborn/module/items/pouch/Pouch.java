@@ -1,12 +1,14 @@
 package insane96mcp.iguanatweaksreborn.module.items.pouch;
 
 
+import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -41,8 +43,8 @@ public class Pouch extends Feature {
 		if (pouchesInInventory > maxPouchWithoutSlowdown) {
 			double slowness = ((pouchesInInventory - maxPouchWithoutSlowdown) * baseSlownessPerPouchOverMax) * Math.max(1, pouchesInInventory - maxPouchWithoutSlowdown);
 			MCUtils.applyModifier(event.player, Attributes.MOVEMENT_SPEED, CRATE_WEIGHT_UUID, "Crate weight penalty", -slowness, AttributeModifier.Operation.MULTIPLY_BASE, false);
-			//if (event.player.tickCount % 20 == 4 && event.player instanceof ServerPlayer serverPlayer)
-			//	ISETriggers.OVERWEIGHT_CREATE_CARRY.trigger(serverPlayer);
+			 if (event.player.tickCount % 20 == 4 && event.player instanceof ServerPlayer serverPlayer)
+                 ISOTriggers.OVERWEIGHT_POUCH_CARRY.trigger(serverPlayer);
 		}
 	}
 }
