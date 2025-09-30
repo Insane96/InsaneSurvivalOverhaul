@@ -167,6 +167,9 @@
     "item.iguanatweaksreborn.blinker.charges": "Cariche: %d/%d",
     "item.iguanatweaksreborn.blinker.empty": "Richiede di essere riempito in un incudine con perle dell'ender",
 
+    "item.iguanatweaksreborn.pouch": "Sacca",
+    "iguanatweaksreborn.pouch": "Sacca",
+
 
 	"iguanatweaksreborn:mining_module": "Estrazione",
 

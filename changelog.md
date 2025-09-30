@@ -2,6 +2,8 @@
 
 ## Upcoming
 ### Additions
+* Pouch
+  * From the ashes of Portable Crate in ISE
 * Composter time to produce is now configurable (and increased from 1s to 2.5s)
 
 ## 4.24.4

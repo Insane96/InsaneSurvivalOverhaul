@@ -8,6 +8,7 @@ import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.Pouch;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
@@ -104,6 +105,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(CoalFire.FIRESTARTER.get());
 
         basicItem(RepairKits.ITEM.get());
+
+        basicItem(Pouch.ITEM.get());
 
         basicItem(Fletching.QUARTZ_ARROW_ITEM.get());
         basicItem(Fletching.DIAMOND_ARROW_ITEM.get());

@@ -15,6 +15,9 @@ import insane96mcp.iguanatweaksreborn.module.items.StoneToolsGone;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.ClientPouchTooltip;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.Pouch;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.PouchTooltip;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.BeaconConduit;
 import insane96mcp.iguanatweaksreborn.module.misc.beaconconduit.ISOBeaconRenderer;
@@ -43,6 +46,7 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -153,6 +157,9 @@ public class ClientSetup {
                         catch (Exception ignored) {}
                     }
                 }
+            }
+            if (Feature.isEnabled(Pouch.class)) {
+                addAfter(event, Items.LEAD, Pouch.ITEM.get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
@@ -299,5 +306,9 @@ public class ClientSetup {
         event.registerBookCategories(InsaneSO.FLETCHING_RECIPE_BOOK_TYPE, FLETCHING_CATEGORIES);
         event.registerAggregateCategory(FLETCHING_SEARCH, ImmutableList.of(FLETCHING_MISC));
         event.registerRecipeCategoryFinder(Fletching.FLETCHING_RECIPE_TYPE.get(), r -> FLETCHING_MISC);
+    }
+
+    public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(PouchTooltip.class, ClientPouchTooltip::new);
     }
 }

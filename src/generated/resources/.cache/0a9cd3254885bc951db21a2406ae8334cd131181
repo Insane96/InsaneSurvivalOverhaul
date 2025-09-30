@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-10T12:01:36.2300206	Item Models: iguanatweaksreborn
+// 1.20.1	2025-09-30T10:53:30.5665806	Item Models: iguanatweaksreborn
 dae224f080d598370adb5c7635e2982cccd44913 assets/iguanatweaksreborn/models/item/biome_compass.json
 9c0e31c6fd0f99ff3520a7280afe5f02b5fbcc52 assets/iguanatweaksreborn/models/item/blinker.json
 90f9959998f8ebf6d0d03c09571143d1213ae86f assets/iguanatweaksreborn/models/item/brown_mushroom_stew.json
@@ -71,6 +71,7 @@ ccb572d42f2347546027eb372e80b12955aa1256 assets/iguanatweaksreborn/models/item/f
 7b708d6aaaf7ec153cf0b1f81d20b13961cc6029 assets/iguanatweaksreborn/models/item/ice_arrow.json
 25986eb40a61151339122b3d48263ec0d0f44e74 assets/iguanatweaksreborn/models/item/netherized_stew.json
 97c34e29cf65940cee3899c377612701482fa9d3 assets/iguanatweaksreborn/models/item/over_easy_egg.json
+f9a86d27b0443ad71be188452bd501b9c257b1fa assets/iguanatweaksreborn/models/item/pouch.json
 a5ff01560ec18ecc2c7eb1c2b658c3d1c1ecf26b assets/iguanatweaksreborn/models/item/pumpkin_pulp.json
 efa0abf2477098a4a21491299de238e0df119644 assets/iguanatweaksreborn/models/item/quartz_arrow.json
 8d9ea6f098c4ee62b2d0afbba77950bab6fe37c4 assets/iguanatweaksreborn/models/item/red_mushroom_stew.json

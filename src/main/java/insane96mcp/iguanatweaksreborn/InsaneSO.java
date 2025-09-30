@@ -137,6 +137,7 @@ public class InsaneSO
             modEventBus.addListener(ClientSetup::registerEntityRenderers);
             modEventBus.addListener(ClientSetup::registerItemColorHandlers);
             modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
+            modEventBus.addListener(ClientSetup::registerTooltips);
             //modEventBus.addListener(ClientSetup::registerRecipeBookCategories);
             //modEventBus.addListener(ClientSetup::registerParticleFactories);
         }
