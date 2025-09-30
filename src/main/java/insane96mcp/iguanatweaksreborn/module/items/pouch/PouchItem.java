@@ -45,16 +45,46 @@ public class PouchItem extends Item {
 
     private static NonNullList<ItemStack> getContentsList(ItemStack stack) {
         NonNullList<ItemStack> list = NonNullList.withSize(PouchMenu.CONTAINER_SIZE, ItemStack.EMPTY);
-        if (stack.hasTag()) {
-            ListTag nbtList = stack.getTag().getList("Items", 10);
-            nbtList.forEach(tag -> {
-                CompoundTag itemTag = (CompoundTag) tag;
+        if (!stack.hasTag())
+            return list;
+
+        CompoundTag tag = stack.getTag();
+
+        //noinspection DataFlowIssue - already checked with hasTag
+        if (tag.contains("Items", 9)) {
+            ListTag nbtList = tag.getList("Items", 10);
+            nbtList.forEach(t -> {
+                CompoundTag itemTag = (CompoundTag) t;
                 int slot = itemTag.getInt("Slot");
                 if (slot >= 0 && slot < list.size())
                     list.set(slot, ItemStack.of(itemTag));
             });
+            return list;
         }
+
+        if (tag.contains("BlockEntityTag", 10)) {
+            CompoundTag bet = tag.getCompound("BlockEntityTag");
+            if (bet.contains("Items", 9)) {
+                ListTag nbtList = bet.getList("Items", 10);
+                nbtList.forEach(t -> {
+                    CompoundTag itemTag = (CompoundTag) t;
+                    int slot = itemTag.getInt("Slot");
+                    if (slot >= 0 && slot < list.size())
+                        list.set(slot, ItemStack.of(itemTag));
+                });
+
+                tag.put("Items", nbtList.copy());
+                tag.remove("BlockEntityTag");
+                stack.setTag(tag);
+            }
+        }
+
         return list;
+    }
+
+    @Override
+    public void verifyTagAfterLoad(CompoundTag pTag) {
+        super.verifyTagAfterLoad(pTag);
     }
 
     @Override
