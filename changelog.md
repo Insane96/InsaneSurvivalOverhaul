@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.25.0
 ### Additions
 * Pouch
   * From the ashes of Portable Crate in ISE
