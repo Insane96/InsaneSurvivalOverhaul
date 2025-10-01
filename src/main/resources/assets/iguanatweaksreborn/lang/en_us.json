@@ -169,6 +169,8 @@
     "iguanatweaksreborn.pouch": "Pouch",
     "iguanatweaksreborn.pouch_weighted": "Slowed down if carried more than %d",
 
+    "item.iguanatweaksreborn.altimeter": "Altimeter",
+
 
 	"iguanatweaksreborn:mining_module": "Mining",
 
@@ -265,6 +267,7 @@
 
 	"emi.info.iguanatweaksreborn.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Can be found in the wild",
+    "emi.info.iguanatweaksreborn.altimeter": "Shows your current altitude",
 
 	"gamerule.iguanatweaks:deathGrave": "Spawn grave on death",
 	"gamerule.iguanatweaks:deathLoseItemsPercentage": "Percentage items lost on death",
@@ -341,7 +344,7 @@
 	"advancements.iso.ores.coal.title": "From plants to fuel",
 	"advancements.iso.ores.coal.description": "Great amounts of Coal can be found in Desert a few blocks above the sea level",
 	"advancements.iso.ores.iron.title": "In coldness",
-	"advancements.iso.ores.iron.description": "Great amounts of Iron can be found in Taigas and Lush Caves right above Deepslate level",
+	"advancements.iso.ores.iron.description": "Great amounts of Iron can be found in Taigas and Lush Caves right above Deepslate level, or in Mountains",
 	"advancements.iso.ores.gold.title": "Molten Treasure",
 	"advancements.iso.ores.gold.description": "Great amounts of Gold can be found in Badlands, at any altitude",
 	"advancements.iso.ores.diamond.title": "Crystals Under Pressure",
@@ -355,5 +358,7 @@
 	"advancements.iso.ores.copper.title": "Born from Oxidation",
 	"advancements.iso.ores.copper.description": "Great amounts of Copper can be found in Savannas, mostly between sea and deepslate level",
     "advancements.iso.pouch.title": "This is heavy",
-    "advancements.iso.pouch.description": "Get a movement speed penalty by transporting too many Pouches."
+    "advancements.iso.pouch.description": "Get a movement speed penalty by transporting too many Pouches",
+    "advancements.iso.altimeter.title": "Ups and downs",
+    "advancements.iso.altimeter.description": "Craft an Altimeter to know your altitude"
 }

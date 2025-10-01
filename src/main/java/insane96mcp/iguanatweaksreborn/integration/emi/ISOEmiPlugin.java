@@ -16,6 +16,7 @@ import insane96mcp.iguanatweaksreborn.module.experience.anvils.AnvilRepairReload
 import insane96mcp.iguanatweaksreborn.module.experience.anvils.Anvils;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.items.NameTags;
+import insane96mcp.iguanatweaksreborn.module.items.altimeter.Altimeter;
 import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.world.Nether;
@@ -101,6 +102,9 @@ public class ISOEmiPlugin implements EmiPlugin {
             for (FletchingRecipe fletchingRecipe : manager.getAllRecipesFor(Fletching.FLETCHING_RECIPE_TYPE.get())) {
                 registry.addRecipe(new EmiFletchingRecipe(fletchingRecipe));
             }
+        }
+        if (Feature.isEnabled(Altimeter.class)) {
+            registry.addRecipe(createSimpleInfo(Altimeter.ITEM.get(), "info_altimeter", Component.translatable("emi.info.iguanatweaksexpanded.altimeter")));
         }
 	}
 

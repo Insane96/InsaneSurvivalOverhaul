@@ -1,19 +1,32 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " E ",
-    "ESE",
-    " E "
-  ],
-  "key": {
-    "S": {
-      "item": "minecraft:nether_star"
-    },
-    "E": {
-      "item": "minecraft:echo_shard"
-    }
-  },
-  "result": {
-    "item": "iguanatweaksreborn:echo_lantern"
-  }
+    "type": "forge:conditional",
+    "recipes": [
+        {
+            "conditions": [
+                {
+                    "type": "insanelib:feature_enabled",
+                    "feature": "Spawning"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shaped",
+                "pattern": [
+                    " E ",
+                    "ESE",
+                    " E "
+                ],
+                "key": {
+                    "S": {
+                        "item": "minecraft:nether_star"
+                    },
+                    "E": {
+                        "item": "minecraft:echo_shard"
+                    }
+                },
+                "result": {
+                    "item": "iguanatweaksreborn:echo_lantern"
+                }
+            }
+        }
+    ]
 }

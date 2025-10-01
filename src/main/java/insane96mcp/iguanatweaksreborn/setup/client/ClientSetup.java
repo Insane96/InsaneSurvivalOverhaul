@@ -12,6 +12,7 @@ import insane96mcp.iguanatweaksreborn.module.farming.bonemeal.BoneMeal;
 import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StoneToolsGone;
+import insane96mcp.iguanatweaksreborn.module.items.altimeter.Altimeter;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
@@ -161,6 +162,8 @@ public class ClientSetup {
             if (Feature.isEnabled(Pouch.class)) {
                 addAfter(event, Items.LEAD, Pouch.ITEM.get());
             }
+            if (Feature.isEnabled(Altimeter.class))
+                addAfter(event, Items.RECOVERY_COMPASS, Altimeter.ITEM.get());
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
@@ -268,6 +271,12 @@ public class ClientSetup {
     }
 
     public static void init(FMLClientSetupEvent event) {
+        event.enqueueWork(() ->
+                ItemProperties.register(Altimeter.ITEM.get(), InsaneSO.location("y"), (stack, clientLevel, livingEntity, entityId) -> {
+                    if (livingEntity == null)
+                        return 96f;
+                    return (float) livingEntity.getY();
+                }));
         event.enqueueWork(() -> {
             ItemProperties.register(Bows.SHORTBOW.get(), ResourceLocation.parse("pull"), (stack, clientLevel, livingEntity, seed) -> {
                 if (livingEntity == null

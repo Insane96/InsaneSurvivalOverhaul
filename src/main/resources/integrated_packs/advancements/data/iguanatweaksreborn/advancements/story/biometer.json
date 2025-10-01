@@ -14,7 +14,7 @@
         "announce_to_chat": true,
         "hidden": false
     },
-    "parent": "minecraft:story/mine_diamond",
+    "parent": "minecraft:story/iron_tools",
     "criteria": {
         "biome_compass": {
             "trigger": "minecraft:inventory_changed",

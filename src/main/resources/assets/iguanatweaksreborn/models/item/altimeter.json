@@ -1,0 +1,19 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "iguanatweaksexpanded:item/altimeter/altimeter_00"
+    },
+    "overrides": [
+        { "predicate": { "iguanatweaksexpanded:y": -64 }, "model": "iguanatweaksexpanded:item/altimeter_00" },
+        { "predicate": { "iguanatweaksexpanded:y": -32 }, "model": "iguanatweaksexpanded:item/altimeter_01" },
+        { "predicate": { "iguanatweaksexpanded:y": 0 }, "model": "iguanatweaksexpanded:item/altimeter_02" },
+        { "predicate": { "iguanatweaksexpanded:y": 32 }, "model": "iguanatweaksexpanded:item/altimeter_03" },
+        { "predicate": { "iguanatweaksexpanded:y": 64 }, "model": "iguanatweaksexpanded:item/altimeter_04" },
+        { "predicate": { "iguanatweaksexpanded:y": 96 }, "model": "iguanatweaksexpanded:item/altimeter_05" },
+        { "predicate": { "iguanatweaksexpanded:y": 128 }, "model": "iguanatweaksexpanded:item/altimeter_06" },
+        { "predicate": { "iguanatweaksexpanded:y": 160 }, "model": "iguanatweaksexpanded:item/altimeter_07" },
+        { "predicate": { "iguanatweaksexpanded:y": 196 }, "model": "iguanatweaksexpanded:item/altimeter_08" },
+        { "predicate": { "iguanatweaksexpanded:y": 228 }, "model": "iguanatweaksexpanded:item/altimeter_09" },
+        { "predicate": { "iguanatweaksexpanded:y": 256 }, "model": "iguanatweaksexpanded:item/altimeter_10" }
+    ]
+}

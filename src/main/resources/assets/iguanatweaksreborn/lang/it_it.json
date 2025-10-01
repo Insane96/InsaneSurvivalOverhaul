@@ -171,6 +171,8 @@
     "iguanatweaksreborn.pouch": "Sacca",
     "iguanatweaksreborn.pouch_weighted": "Rallenti se ne porti più di %d",
 
+    "item.iguanatweaksreborn.altimeter": "Altimetro",
+
 
 	"iguanatweaksreborn:mining_module": "Estrazione",
 
@@ -267,6 +269,7 @@
 
 	"emi.info.iguanatweaksreborn.items.name_tags": "Se applicato a un'entità con nome, restituisce la targhetta precedente. Se la targetta non è rinominata, rimuove il nome dall'entità.",
 	"emi.info.iguanatweaksreborn.crops.seeds": "Si trovano in natura",
+    "emi.info.iguanatweaksreborn.altimeter": "Mostra la tua altitudine corrente",
 
 	"gamerule.iguanatweaks:deathGrave": "Evoca tomba alla morte",
 	"gamerule.iguanatweaks:deathLoseItemsPercentage": "Percentuale di oggetti persi alla morte",
@@ -339,21 +342,25 @@
 	"advancements.iso.unfair_oneshot.description": "Se si viene colpiti con un danno tale da ucciderci quando la salute è superiore a 7,5 cuori, si tratta di un colpo ingiusto e si rimane con mezzo cuore.",
 	"advancements.iso.biometer.description": "Visto che alcuni minerali sono più abbontanti in certi biomi, il sestante ti aiuterà a tenere traccia del bioma in cui ti trovi.",
 	"advancements.iso.ores.coal.title": "Da piante a combustibile",
-	"advancements.iso.ores.coal.description": "Grandi quantita di carbone possono essere trovate nei deserti",
+	"advancements.iso.ores.coal.description": "Grandi quantita di carbone possono essere trovate nei deserti qualche blocco sopra il livello del mare",
 	"advancements.iso.ores.iron.title": "Al freddo",
-	"advancements.iso.ores.iron.description": "Grandi quantita di ferro possono essere trovate nelle Taiga e caverne rigogliose",
+	"advancements.iso.ores.iron.description": "Grandi quantita di ferro possono essere trovate nelle Taiga e caverne rigogliose subito sopra il livello dell'ardesia profonda, o sulle montagne",
 	"advancements.iso.ores.gold.title": "Tesoro fuso",
-	"advancements.iso.ores.gold.description": "Grandi quantita di oro possono essere trovate nei calanchi",
+	"advancements.iso.ores.gold.description": "Grandi quantita di oro possono essere trovate nei calanchi, a qualunque altezza",
 	"advancements.iso.ores.diamond.title": "Cristalli sotto pressione",
-	"advancements.iso.ores.diamond.description": "Grandi quantita di diamanti possono essere trovate nelle giungle",
+	"advancements.iso.ores.diamond.description": "Grandi quantita di diamanti possono essere trovati nelle giungle, nelle profondità del mondo",
 	"advancements.iso.ores.emerald.title": "Gemme del sollevamento tettonico",
 	"advancements.iso.ores.emerald.description": "Grandi quantita di smeraldi possono essere trovate sulle montagne",
 	"advancements.iso.ores.lapis.title": "Blu metamorfico",
-	"advancements.iso.ores.lapis.description": "Grandi quantita di lapislazzuli possono essere trovate nelle pianure non innevate",
+	"advancements.iso.ores.lapis.description": "Grandi quantita di lapislazzuli possono essere trovate nelle pianure non innevate, per lo più attorno al livello dell'ardesia profonda",
 		"advancements.iso.ores.redstone.title": "Correnti cremisi",
-	"advancements.iso.ores.redstone.description": "Grandi quantita di redstone possono essere trovate negli oceani",
+	"advancements.iso.ores.redstone.description": "Grandi quantita di redstone possono essere trovate negli oceani, per lo più nelle profondità del mondo",
 	"advancements.iso.ores.copper.title": "Nato dall'ossidazione",
-	"advancements.iso.ores.copper.description": "Grandi quantità di rame possono essere trovate nelle savane",
+	"advancements.iso.ores.copper.description": "Grandi quantità di rame possono essere trovate nelle savane, per lo più tra il livello del mare e dell'ardesia profonda",
 	"advancements.iso.copper_tools.title": "Non si ossida",
-	"advancements.iso.copper_tools.description": "Ottiene un attrezzo di rame"
+	"advancements.iso.copper_tools.description": "Ottiene un attrezzo di rame",
+    "advancements.iso.pouch.title": "È pesante",
+    "advancements.iso.pouch.description": "Ottieni una penalità alla velocità di movimento trasportando troppi sacchi",
+    "advancements.iso.altimeter.title": "Alti e bassi",
+    "advancements.iso.altimeter.description": "Fabbrica un altimetro per conoscere la tua altitudine",
 }

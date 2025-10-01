@@ -1,18 +1,31 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "category": "equipment",
-    "ingredients": [
+    "type": "forge:conditional",
+    "recipes": [
         {
-            "item": "minecraft:iron_ingot"
-        },
-        {
-            "item": "minecraft:spyglass"
-        },
-        {
-            "item": "minecraft:gold_nugget"
+            "conditions": [
+                {
+                    "type": "insanelib:feature_enabled",
+                    "feature": "Biome Compass"
+                }
+            ],
+            "recipe": {
+                "type": "minecraft:crafting_shapeless",
+                "category": "equipment",
+                "ingredients": [
+                    {
+                        "item": "minecraft:iron_ingot"
+                    },
+                    {
+                        "item": "minecraft:spyglass"
+                    },
+                    {
+                        "item": "minecraft:gold_nugget"
+                    }
+                ],
+                "result": {
+                    "item": "iguanatweaksreborn:biome_compass"
+                }
+            }
         }
-    ],
-    "result": {
-        "item": "iguanatweaksreborn:biome_compass"
-    }
+    ]
 }
