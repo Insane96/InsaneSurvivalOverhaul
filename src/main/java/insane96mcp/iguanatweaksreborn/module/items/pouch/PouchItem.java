@@ -45,7 +45,7 @@ public class PouchItem extends Item {
         return Optional.of(new PouchTooltip(getContentsList(stack)));
     }
 
-    private static NonNullList<ItemStack> getContentsList(ItemStack stack) {
+    public static NonNullList<ItemStack> getContentsList(ItemStack stack) {
         NonNullList<ItemStack> list = NonNullList.withSize(PouchMenu.CONTAINER_SIZE, ItemStack.EMPTY);
         if (!stack.hasTag())
             return list;

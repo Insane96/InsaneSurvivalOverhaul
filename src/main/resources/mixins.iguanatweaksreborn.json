@@ -29,6 +29,7 @@
         "BreakEventMixin",
         "BreedGoalMixin",
         "BrushableBlockEntityMixin",
+        "BundleItemAccessor",
         "CampfireBlockEntityMixin",
         "CampfireBlockMixin",
         "ChunkMap$TrackedEntityMixin",

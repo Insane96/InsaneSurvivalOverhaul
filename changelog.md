@@ -11,6 +11,7 @@
 * Composter time to produce is now configurable (and increased from 1s to 2.5s)
 
 ### Changes
+* Items from bundles and pouches now work for HUD Infos
 * Added more infos for ores in advancements
 
 ## 4.24.4

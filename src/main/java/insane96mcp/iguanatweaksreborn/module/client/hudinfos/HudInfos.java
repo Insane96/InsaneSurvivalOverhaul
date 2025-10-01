@@ -2,7 +2,10 @@ package insane96mcp.iguanatweaksreborn.module.client.hudinfos;
 
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
+import insane96mcp.iguanatweaksreborn.mixin.BundleItemAccessor;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.Pouch;
+import insane96mcp.iguanatweaksreborn.module.items.pouch.PouchItem;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.config.Config;
@@ -14,6 +17,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -137,7 +142,31 @@ public class HudInfos extends Feature {
 
     @OnlyIn(Dist.CLIENT)
     public boolean shouldRender(Player player, @Nullable HitResult hitResult, TagKey<Item> itemTag, TagKey<Block> blockTagKey) {
-        return player.getInventory().contains(itemTag) || isLookingAtItemFrameWith(hitResult, itemTag) || isLookingAtBlock(hitResult, player.level(), blockTagKey);
+        return player.getInventory().contains(itemTag)
+                || containerContains(player, itemTag)
+                || isLookingAtItemFrameWith(hitResult, itemTag)
+                || isLookingAtBlock(hitResult, player.level(), blockTagKey);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean containerContains(Player player, TagKey<Item> itemTag) {
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() == Items.BUNDLE && bundleContains(stack, itemTag))
+                return true;
+            else if (stack.getItem() == Pouch.ITEM.get() && pouchContains(stack, itemTag))
+                return true;
+        }
+        return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean bundleContains(ItemStack bundle, TagKey<Item> itemTag) {
+        return BundleItemAccessor.invokeGetContents(bundle).anyMatch(s -> s.is(itemTag));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean pouchContains(ItemStack bundle, TagKey<Item> itemTag) {
+        return PouchItem.getContentsList(bundle).stream().anyMatch(s -> s.is(itemTag));
     }
 
     @OnlyIn(Dist.CLIENT)
