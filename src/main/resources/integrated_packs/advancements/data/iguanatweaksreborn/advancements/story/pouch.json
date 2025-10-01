@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"item": "iguanatweaksreborn:pouch"
+		},
+		"title": {
+			"translate": "advancements.iso.pouch.title"
+		},
+		"description": {
+			"translate": "advancements.iso.pouch.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "iguanatweaksreborn:story/campfire",
+	"criteria": {
+		"overweight": {
+			"trigger": "iguanatweaksreborn:overweight_pouch_carry"
+		}
+	},
+	"requirements": [
+		[
+			"overweight"
+		]
+	]
+}

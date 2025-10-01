@@ -5,6 +5,7 @@
 * Pouch
   * From the ashes of Portable Crate in ISE
   * Can be right-clicked to open (both in hand or from inventory)
+  * Carrying more than 2 slows you down (exponentially: 3/12/27/48/75/100+% with 3/4/5/6/7/8 pouches)
 * Composter time to produce is now configurable (and increased from 1s to 2.5s)
 
 ## 4.24.4

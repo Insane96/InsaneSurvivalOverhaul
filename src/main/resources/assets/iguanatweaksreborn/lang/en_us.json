@@ -353,5 +353,7 @@
 	"advancements.iso.ores.redstone.title": "Crimson Currents",
 	"advancements.iso.ores.redstone.description": "Great amounts of Redstone can be found in Oceans",
 	"advancements.iso.ores.copper.title": "Born from Oxidation",
-	"advancements.iso.ores.copper.description": "Great amounts of Copper can be found in Savanas"
+	"advancements.iso.ores.copper.description": "Great amounts of Copper can be found in Savanas",
+    "advancements.iso.pouch.title": "This is heavy",
+    "advancements.iso.pouch.description": "Get a movement speed penalty by transporting too many Pouches."
 }
