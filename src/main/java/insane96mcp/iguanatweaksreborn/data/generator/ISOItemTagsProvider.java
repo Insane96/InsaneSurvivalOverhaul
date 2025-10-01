@@ -12,6 +12,8 @@ import insane96mcp.iguanatweaksreborn.module.farming.crops.Crops;
 import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowth;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
+import insane96mcp.iguanatweaksreborn.module.items.altimeter.Altimeter;
+import insane96mcp.iguanatweaksreborn.module.items.altimeter.AltimeterItem;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
@@ -138,8 +140,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(HUD_SEASON)
                 .addOptional(ForgeRegistries.ITEMS.getKey(SSItems.CALENDAR));
         tag(HUD_DEPTH)
+                .add(Altimeter.ITEM.get())
                 .addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
-                .addOptional(ResourceLocation.parse("iguanatweaksexpanded:altimeter"))
                 .addOptional(ResourceLocation.parse("supplementaries:altimeter"));
         tag(HUD_TIME)
                 .add(Items.CLOCK);

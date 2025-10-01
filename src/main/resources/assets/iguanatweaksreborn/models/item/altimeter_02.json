@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "iguanatweaksexpanded:item/altimeter/altimeter_02"
+    "layer0": "iguanatweaksreborn:item/altimeter/altimeter_02"
   },
   "display": {
     "firstperson_righthand": {

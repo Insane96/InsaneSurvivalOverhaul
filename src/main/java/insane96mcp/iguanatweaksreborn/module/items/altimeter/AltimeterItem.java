@@ -17,7 +17,7 @@ public class AltimeterItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        player.displayClientMessage(Component.translatable("hud_info.depth", player.getBlockY()).withStyle(ChatFormatting.GRAY), true);
+        player.displayClientMessage(Component.translatable("hud_info.depth", player.getBlockY()), true);
         return InteractionResultHolder.success(stack);
     }
 }
