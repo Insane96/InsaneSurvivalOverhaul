@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Player inventory not updated until clicked a slot if opened pouch from inventory
+
 ## 4.25.0
 ### Additions
 * Pouch

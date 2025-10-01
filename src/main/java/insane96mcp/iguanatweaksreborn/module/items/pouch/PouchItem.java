@@ -142,9 +142,11 @@ public class PouchItem extends Item {
     }
 
     public static void openMenu(Player player, ItemStack pouchStack) {
+        player.containerMenu.resumeRemoteUpdates();
         player.openMenu(new SimpleMenuProvider(
                 (id, inv, p) -> new PouchMenu(id, inv, new PouchContainer(pouchStack)),
                 Component.translatable(InsaneSO.lang("pouch"))
         ));
+        player.containerMenu.suppressRemoteUpdates();
     }
 }
