@@ -119,6 +119,18 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: sinytra
+    attributes:
+      label: "Sinytra Connector"
+      description: "Have you tested without Sinytra Connector? If the problem arises with Sinytra please report it to them"
+      multiple: true
+      options:
+        - 'No'
+        - 'Yes'
+    validations:
+      required: true
+
   - type: textarea
     id: other-mods
     attributes:
