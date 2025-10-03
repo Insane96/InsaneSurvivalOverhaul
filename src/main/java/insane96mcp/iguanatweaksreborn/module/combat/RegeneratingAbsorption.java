@@ -18,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -44,6 +45,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 @LoadFeature(module = Modules.Ids.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player. Please note that default mods' regenerating absorption is done through item definitions within the combat_rework data pack, disabling this will only disable the regenerating absorption functionality.")
 public class RegeneratingAbsorption extends Feature {
+    public static final RegistryObject<SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("absorption_hit"), 16f));
 
     public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/absorption.png");
     public static ResourceLocation REGEN_ABSORPTION_TAG;
@@ -153,7 +155,7 @@ public class RegeneratingAbsorption extends Feature {
         event.setAmount(event.getAmount() - toRemove);
         ModNBTData.put(event.getEntity(), REGEN_ABSORPTION_TAG, currentAbsorption);
         if (soundOnAbsorptionHurt)
-            event.getEntity().level().playSound(null, event.getEntity(), ISORegistries.ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
+            event.getEntity().level().playSound(null, event.getEntity(), ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
             RegenAbsorptionSync.sync(player, currentAbsorption);
     }

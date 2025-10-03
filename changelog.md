@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Added attack sounds
+  * Different attack sounds for different items
+
 ## 4.25.1
 ### Fixes
 * Player inventory not updated until clicked a slot if opened pouch from inventory

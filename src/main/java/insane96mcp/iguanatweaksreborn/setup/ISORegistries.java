@@ -63,8 +63,6 @@ public class ISORegistries {
 	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = createRegistry(ForgeRegistries.RECIPE_SERIALIZERS);
 
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(ForgeRegistries.SOUND_EVENTS);
-	public static final RegistryObject<SoundEvent> UNFAIR_ONE_SHOT = SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("unfair_one_shot"), 16f));
-	public static final RegistryObject<SoundEvent> ABSORPTION_HIT = SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("absorption_hit"), 16f));
 
     public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(ForgeRegistries.POI_TYPES);
     /*public static RegistryObject<PoiType> FLETCHER = POI_TYPES.register("fletcher", () -> {

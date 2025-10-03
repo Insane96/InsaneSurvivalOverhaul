@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.combat;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.network.message.UnfairOneShotActivation;
@@ -15,7 +16,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -40,6 +41,7 @@ import java.util.List;
 
 @LoadFeature(module = Modules.Ids.COMBAT, name = "Unfair one-shot", description = "Players live with a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 public class UnfairOneShot extends Feature {
+    public static final RegistryObject<SoundEvent> UNFAIR_ONE_SHOT = ISORegistries.SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("unfair_one_shot"), 16f));
 	public static final RegistryObject<Item> HALF_HEART_TEXTURE = ISORegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
 
 	@Config(description = "A list of effects to give when Unfair One Shot triggers, separated by semi-colons")
@@ -83,7 +85,7 @@ public class UnfairOneShot extends Feature {
 
 		if (player.getHealth() >= activationHealth && player.getHealth() - event.getAmount() <= 0) {
 			event.setAmount(player.getHealth() - leftoverHealth.floatValue());
-			player.level().playSound(null, player.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 2f, 0.5f);
+			player.level().playSound(null, player.blockPosition(), UNFAIR_ONE_SHOT.get(), SoundSource.PLAYERS, 2f, 0.5f);
 			ISOTriggers.UNFAIR_ONESHOT.trigger(player);
 			for (MobEffectInstance effect : effects) {
 				player.addEffect(new MobEffectInstance(effect));
