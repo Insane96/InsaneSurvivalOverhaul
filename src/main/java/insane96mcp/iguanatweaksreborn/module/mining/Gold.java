@@ -6,7 +6,6 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -21,7 +20,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-@LoadFeature(module = Modules.Ids.MINING, description = "Changes Gold tools to have an innate Fortune/Looting I")
+@LoadFeature(module = Modules.Ids.MINING, description = "Changes Gold tools to have an innate Fortune/Looting", enabledByDefault = false)
 public class Gold extends Feature {
 
 	public static final String LUCKY_GOLD_TOOLTIP = InsaneSO.MOD_ID + ".innate_luck";
@@ -30,10 +29,6 @@ public class Gold extends Feature {
 	public static Integer lootingLevel = 1;
 	@Config(min = 0, max = 255, description = "Set the innate fortune level of gold tools.")
 	public static Integer fortuneLevel = 1;
-
-	public Gold(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
-	}
 
 	@Override
 	public void readConfig(ModConfigEvent event) {

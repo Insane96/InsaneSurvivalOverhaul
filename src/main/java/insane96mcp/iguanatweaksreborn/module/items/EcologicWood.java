@@ -25,7 +25,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.UUID;
 
-@LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have bonuses when used in sunlight.")
+@LoadFeature(module = Modules.Ids.ITEMS, description = "Wooden items have bonuses when used in sunlight.", enabledByDefault = false)
 public class EcologicWood extends Feature {
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = ISOItemTagsProvider.create("equipment/hand/wooden");
     public static final TagKey<Item> WOODEN_SHIELD = ISOItemTagsProvider.create("equipment/shield/wooden");

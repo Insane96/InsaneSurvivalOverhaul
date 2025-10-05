@@ -10,6 +10,12 @@
 * Axes and Hoes no longer have lower / higher durability. Instead, when used to attack they have a chance to consume more / less durability
   * This makes axes less of a pain to use as tools
   * Yes, this is a hoe nerf (but as a tool)
+* Wooden tools
+  * Ecologic Wood is disabled by default (No longer have bonuses under the sun) (keep an eye on ISE for a replacing enchantment)
+  * Increased durability and enchantability. Slightly increased efficiency and % attack speed
+* Golden tools
+  * Innate Luck is now disabled by default
+  * Increased enchantability. Slightly increased % attack speed a bit. Efficiency should have been increased but due to a bug was already correct
 
 ### Localization
 * Added Chinese translation
