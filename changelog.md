@@ -11,6 +11,9 @@
   * This makes axes less of a pain to use as tools
   * Yes, this is a hoe nerf (but as a tool)
 
+### Localization
+* Added Chinese translation
+
 ## 4.25.1
 ### Fixes
 * Player inventory not updated until clicked a slot if opened pouch from inventory
