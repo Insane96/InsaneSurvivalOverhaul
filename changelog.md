@@ -4,6 +4,12 @@
 ### Additions
 * Added attack sounds
   * Different attack sounds for different items
+* `chance_to_not_use_durability` and `chance_to_use_double_durability` in Items definitions
+
+### Changes
+* Axes and Hoes no longer have lower / higher durability. Instead, when used to attack they have a chance to consume more / less durability
+  * This makes axes less of a pain to use as tools
+  * Yes, this is a hoe nerf (but as a tool)
 
 ## 4.25.1
 ### Fixes
