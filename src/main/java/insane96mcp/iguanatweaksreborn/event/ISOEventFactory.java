@@ -75,9 +75,9 @@ public class ISOEventFactory {
         return event.getNewMaxDamage();
     }
 
-    public static float getMiningSpeedWithEnchantments(LivingEntity entity, BlockState state, ItemStack stack, float originalMiningSpeed)
+    public static float getMiningSpeedWithEnchantments(LivingEntity entity, BlockState state, ItemStack stack, float originalMiningSpeed, boolean tooltip)
     {
-        EnchantmentBonusMiningSpeedEvent event = new EnchantmentBonusMiningSpeedEvent(entity, state, stack, originalMiningSpeed);
+        EnchantmentBonusMiningSpeedEvent event = new EnchantmentBonusMiningSpeedEvent(entity, state, stack, originalMiningSpeed, tooltip);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getNewMiningSpeed();
     }

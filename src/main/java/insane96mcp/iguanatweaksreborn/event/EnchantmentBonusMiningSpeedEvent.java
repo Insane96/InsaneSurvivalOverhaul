@@ -16,7 +16,9 @@ public class EnchantmentBonusMiningSpeedEvent extends LivingEvent {
     BlockState state;
     float originalMiningSpeed;
     float newMiningSpeed;
-    public EnchantmentBonusMiningSpeedEvent(LivingEntity entity, @Nullable BlockState state, ItemStack stack, float originalMiningSpeed)
+    boolean tooltip;
+
+    public EnchantmentBonusMiningSpeedEvent(LivingEntity entity, @Nullable BlockState state, ItemStack stack, float originalMiningSpeed, boolean tooltip)
     {
         super(entity);
         this.stack = stack;
@@ -44,5 +46,12 @@ public class EnchantmentBonusMiningSpeedEvent extends LivingEvent {
 
     public void setNewMiningSpeed(float newMiningSpeed) {
         this.newMiningSpeed = newMiningSpeed;
+    }
+
+    /**
+     * If true, the event is being called to show efficiency on a tooltip
+     */
+    public boolean isTooltip() {
+        return this.tooltip;
     }
 }

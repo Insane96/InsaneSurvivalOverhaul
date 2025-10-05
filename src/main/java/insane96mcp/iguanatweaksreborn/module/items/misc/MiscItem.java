@@ -52,7 +52,7 @@ public class MiscItem extends Feature {
 
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() instanceof DiggerItem diggerItem){
-			float toolEfficiency = ISOEventFactory.getMiningSpeedWithEnchantments(event.getEntity(), null, stack, diggerItem.speed);
+			float toolEfficiency = ISOEventFactory.getMiningSpeedWithEnchantments(event.getEntity(), null, stack, diggerItem.speed, false);
 			event.getToolTip().add(CommonComponents.space().append(Component.translatable(TOOL_MINING_SPEED_LANG, InsaneLib.ONE_DECIMAL_FORMATTER.format(toolEfficiency))).withStyle(ChatFormatting.DARK_GREEN));
 		}
 	}

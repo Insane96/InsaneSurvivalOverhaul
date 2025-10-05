@@ -455,19 +455,20 @@ public class EnchantmentsFeature extends JsonFeature {
 		return stack.getEnchantmentValue();
 	}
 
-	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, @Nullable LivingEntity entity) {
+	public static float applyMiningSpeedModifiers(float miningSpeed, @Nullable BlockState state, boolean applyEfficiency, @Nullable LivingEntity entity, boolean applyEntityBonuses) {
 		if (entity == null)
 			return miningSpeed;
 		if (applyEfficiency) {
 			int i = EnchantmentHelper.getBlockEfficiency(entity);
 			ItemStack itemstack = entity.getMainHandItem();
 			if (i > 0 && !itemstack.isEmpty())
-				miningSpeed += ISOEventFactory.getMiningSpeedWithEnchantments(entity, state, itemstack, miningSpeed);
+				miningSpeed += ISOEventFactory.getMiningSpeedWithEnchantments(entity, state, itemstack, miningSpeed, false);
 		}
+        if (!applyEntityBonuses)
+            return miningSpeed;
 
-		if (MobEffectUtil.hasDigSpeed(entity)) {
+		if (MobEffectUtil.hasDigSpeed(entity))
 			miningSpeed *= 1.0F + (float)(MobEffectUtil.getDigSpeedAmplification(entity) + 1) * 0.2F;
-		}
 
 		if (entity.hasEffect(MobEffects.DIG_SLOWDOWN)) {
             //noinspection DataFlowIssue
@@ -480,13 +481,11 @@ public class EnchantmentsFeature extends JsonFeature {
 			miningSpeed *= miningFatigueMultiplier;
 		}
 
-		if (entity.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(entity)) {
+		if (entity.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) && !EnchantmentHelper.hasAquaAffinity(entity))
 			miningSpeed /= 5.0F;
-		}
 
-		if (!entity.onGround()) {
+		if (!entity.onGround())
 			miningSpeed /= 5.0F;
-		}
 
 		return miningSpeed;
 	}
