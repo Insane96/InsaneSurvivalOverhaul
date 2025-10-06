@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.26.0
 ### Additions
 * Added attack sounds
   * Different attack sounds for different items
