@@ -8,6 +8,7 @@
   * Bed respawn range has been slightly decreased
 * Lowered mob cap in spring
 * Bonus chest is no longer empty and loot has been enhanced
+* Enhanced ores advancements
 
 ### Fixes
 * Advancements
