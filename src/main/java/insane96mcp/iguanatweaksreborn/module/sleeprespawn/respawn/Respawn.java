@@ -5,31 +5,30 @@ import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.Packs;
+import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
-import insane96mcp.insanelib.base.config.Difficulty;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
-import insane96mcp.insanelib.util.ModNBTData;
+import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,10 +38,11 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -52,41 +52,24 @@ import java.util.Optional;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 public class Respawn extends JsonFeature {
 	public static final TagKey<Block> RESPAWN_OBELISK_BLOCKS_TO_ROT = ISOBlockTagsProvider.create("structures/respawn_obelisk/blocks_to_rot");
+	public static final RegistryObject<MobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	public static final String FAIL_RESPAWN_OBELISK_LANG = InsaneSO.MOD_ID + ".fail_respawn_obelisk";
 
-	public static final String LOOSE_RESPAWN_POINT_SET = InsaneSO.MOD_ID + ".loose_bed_respawn_point_set";
+	public static final String LOOSE_WORLD_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
+	public static final String LOOSE_BED_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
-
-	public static ResourceLocation HUNGER_ON_DEATH_TAG;
-	public static ResourceLocation SATURATION_ON_DEATH_TAG;
 
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
 	@Config(min = 0, description = "The range from world spawn where players will respawn.")
 	public static MinMax looseWorldSpawnRange = new MinMax(128d, 256d);
-	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at world spawn.")
-	//public static Integer despawnMobsOnWorldRespawn = 64;
-
 	@Config(min = 0, description = "The range from beds where players will respawn.")
 	public static MinMax looseBedSpawnRange = new MinMax(80d, 160d);
-	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
-	//public static Integer despawnMobsOnBedRespawn = 32;
+	@Config(min = 0, description = "How many ticks of the Ghostly effect is given to the player on respawn.")
+	public static Integer ghostlyEffect = 120;
 	@Config(description = "If enabled, respawning will try to place you on land and not in fluids")
 	public static Boolean dontRespawnOnFluid = true;
-
-	@Config(min = 0, max = 20, description = "Min Health of respawning players")
-	public static Difficulty statsPenalty$health$minimum = new Difficulty(10, 10, 6);
-	@Config(min = 0, max = 20, description = "How much health respawning players lose on respawn (not max health)")
-	public static Difficulty statsPenalty$health$perDeath = new Difficulty(1, 2, 2);
-	@Config(min = 0, max = 20, description = "Min Hunger of respawning players. If below this value on death will be set to this value")
-	public static Difficulty statsPenalty$hunger$min = new Difficulty(6, 6, 6);
-	@Config(min = 0, max = 20, description = "Max Hunger of respawning players. If above this value on death will be set to this value")
-	public static Difficulty statsPenalty$hunger$maximum = new Difficulty(14, 14, 10);
-	@Config(min = 0, max = 20, description = "Min Saturation of respawning players. If below this value on death will be set to this value")
-	public static Difficulty statsPenalty$saturation$minimum = new Difficulty(6, 6, 6);
-	@Config(min = 0, max = 20, description = "Max Saturation of respawning players. If above this value on death will be set to this value")
-	public static Difficulty statsPenalty$saturation$maximum = new Difficulty(10, 10, 6);
 
 	@Config(description = "Data pack that makes respawn obelisks generate in the world")
 	public static Boolean respawnObelisks = true;
@@ -135,8 +118,6 @@ public class Respawn extends JsonFeature {
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 		InsaneSO.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", () -> this.isEnabled() && !Packs.disableAllDataPacks && respawnObelisks);
-		HUNGER_ON_DEATH_TAG = this.createDataKey("hunger_on_death");
-		SATURATION_ON_DEATH_TAG = this.createDataKey("saturation_on_death");
 	}
 
 	@Override
@@ -144,14 +125,6 @@ public class Respawn extends JsonFeature {
 		return InsaneSO.CONFIG_FOLDER;
 	}
 
-	@SubscribeEvent
-	public void onPlayerDeath(LivingDeathEvent event) {
-		if (!this.isEnabled()
-				|| !(event.getEntity() instanceof Player player))
-			return;
-		ModNBTData.putPersisted(player, HUNGER_ON_DEATH_TAG, player.getFoodData().foodLevel);
-		ModNBTData.putPersisted(player, SATURATION_ON_DEATH_TAG, player.getFoodData().saturationLevel);
-	}
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
@@ -159,35 +132,7 @@ public class Respawn extends JsonFeature {
 				|| event.isEndConquered())
 			return;
 
-		applyStatsPenalty(event.getEntity());
 		tryRespawnObelisk(event);
-	}
-
-	public void applyStatsPenalty(Player player) {
-		ScheduledTasks.schedule(new ScheduledTickTask(2) {
-			@Override
-			public void run() {
-				if (!(player instanceof ServerPlayer serverPlayer))
-					return;
-				int hunger = ModNBTData.getPersisted(player, HUNGER_ON_DEATH_TAG, Integer.class);
-				int maxHunger = (int) statsPenalty$hunger$maximum.getByDifficulty(player.level());
-				int minHunger = (int) statsPenalty$hunger$min.getByDifficulty(player.level());
-				hunger = Mth.clamp(hunger, minHunger, maxHunger);
-				player.getFoodData().foodLevel = hunger;
-				ModNBTData.removePersisted(player, HUNGER_ON_DEATH_TAG);
-
-				float saturation = ModNBTData.getPersisted(player, SATURATION_ON_DEATH_TAG, Float.class);
-				float maxSaturation = (float) statsPenalty$saturation$maximum.getByDifficulty(player.level());
-				float minSaturation = (float) statsPenalty$saturation$minimum.getByDifficulty(player.level());
-				saturation = Mth.clamp(saturation, minSaturation, maxSaturation);
-				player.getFoodData().saturationLevel = saturation;
-				ModNBTData.removePersisted(player, SATURATION_ON_DEATH_TAG);
-
-				double healthOnRespawn = player.getMaxHealth() - (statsPenalty$health$perDeath.getByDifficulty(player.level()) * serverPlayer.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)));
-				double minHealth = statsPenalty$health$minimum.getByDifficulty(player.level());
-				player.setHealth((float) Math.max(healthOnRespawn, minHealth));
-			}
-		});
 	}
 
 	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
@@ -211,11 +156,13 @@ public class Respawn extends JsonFeature {
 		BlockPos respawnPos = getSpawnPositionInRange(level.getSharedSpawnPos(), looseWorldSpawnRange, level, level.random);
 		if (respawnPos == null)
 			return Optional.empty();
-
-		//event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
-		//List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnWorldRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		//ISOLogHelper.info("Despawning %d entities", entities.size());
-		//entities.forEach(Entity::discard);
+		ScheduledTasks.schedule(new ScheduledTickTask(2) {
+			@Override
+			public void run() {
+				player.addEffect(new MobEffectInstance(GHOSTLY.get(), ghostlyEffect * 20, 0, false, false, true));
+				player.sendSystemMessage(Component.translatable(LOOSE_WORLD_RESPAWN_POINT));
+			}
+		});
 		return Optional.of(new Vec3(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d));
 	}
 
@@ -232,10 +179,13 @@ public class Respawn extends JsonFeature {
 		if (respawnPos == null)
 			return Optional.empty();
 
-		//event.getEntity().teleportToWithTicket(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d);
-		//List<Entity> entities = player.level().getEntities(player, new AABB(respawnPos).inflate(despawnMobsOnBedRespawn), entity -> entity instanceof Monster monster && !monster.isPersistenceRequired());
-		//ISOLogHelper.info("Despawning %d entities", entities.size());
-		//entities.forEach(Entity::discard);
+		ScheduledTasks.schedule(new ScheduledTickTask(2) {
+			@Override
+			public void run() {
+				player.addEffect(new MobEffectInstance(GHOSTLY.get(), ghostlyEffect * 20, 0, false, false, true));
+				player.sendSystemMessage(Component.translatable(LOOSE_BED_RESPAWN_POINT));
+			}
+		});
 		return Optional.of(new Vec3(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d));
 	}
 
@@ -319,7 +269,7 @@ public class Respawn extends JsonFeature {
 		ServerPlayer player = (ServerPlayer) event.getEntity();
 		if (event.getNewSpawn().equals(player.getRespawnPosition()))
 			return;
-		player.displayClientMessage(Component.translatable(LOOSE_RESPAWN_POINT_SET), false);
+		player.displayClientMessage(Component.translatable(LOOSE_BED_RESPAWN_POINT), false);
 	}
 
 	/// Returns true if the spawn point was prevented from being overwritten
@@ -343,5 +293,13 @@ public class Respawn extends JsonFeature {
 			player.sendSystemMessage(Component.translatable("iguanatweaksreborn.set_old_respawn"));
 		event.setCanceled(true);
 		return true;
+	}
+
+	@SubscribeEvent
+	public void onFollowRange(LivingEvent.LivingVisibilityEvent event) {
+		if (!event.getEntity().hasEffect(GHOSTLY.get()))
+			return;
+
+		event.modifyVisibility(0d);
 	}
 }

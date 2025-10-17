@@ -1,6 +1,8 @@
 {
 	"effect.iguanatweaksreborn.block_reach": "Block Reach",
+	"effect.iguanatweaksreborn.block_reach.description": "Increased interaction range on blocks",
 	"effect.iguanatweaksreborn.entity_reach": "Entity Reach",
+	"effect.iguanatweaksreborn.entity_reach.description": "Increased interaction range on entities",
 
 	"iguanatweaksreborn:client_module": "Client",
 	"hud_info.cardinal_direction.south": "South",
@@ -59,6 +61,7 @@
 	"attribute.name.piercing_damage": "Piercing Damage",
 
 	"effect.iguanatweaksreborn.regenerating_absorption": "Regen. Absorption",
+	"effect.iguanatweaksreborn.regenerating_absorption.description": "Extra auto-regenerating health when out of combat",
 	"attribute.name.regenerating_absorption": "Regenerating Absorption",
 	"attribute.name.regenerating_absorption_speed": "Absorption Regen Speed",
 	"iguanatweaksreborn.subtitle.absorption_hit": "Absorption damaged",
@@ -217,7 +220,10 @@
 	"iguanatweaksreborn.player_ghost": "%s's Ghost",
 	"iguanatweaksreborn.player_killer": "%s's Killer (%s)",
 
-	"iguanatweaksreborn.loose_bed_respawn_point_set": "Your respawn point is loose, you'll respawn in a radius from your bed.",
+	"iguanatweaksreborn.loose_world_respawn_point": "Your respawn point is loose, you'll respawn in a radius from world spawn.",
+	"iguanatweaksreborn.loose_bed_respawn_point": "Your respawn point is loose, you'll respawn in a radius from your bed.",
+	"effect.iguanatweaksreborn.ghostly": "Ghostly",
+	"effect.iguanatweaksreborn.ghostly.description": "You're undetected by monsters",
 	"iguanatweaksreborn.requires_catalyst": "Can't activate. The Obelisk requires at least one catalyst block",
 	"iguanatweaksreborn.obelisk_disabled": "Respawn Obelisk disabled. Players' respawn point has been set to their last bed, or reset if they didn't have one",
 	"iguanatweaksreborn.fail_respawn_obelisk": "You couldn't respawn at the obelisk because it was disabled.",

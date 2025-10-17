@@ -1,8 +1,14 @@
 # Changelog
 
 ## Upcoming
+### Addition
+* Ghostly effect
+  * Applied to the player on loose respawn for 2 minutes making it undetectable by mobs
+* Loose respawn message on respawn
+
 ### Changes
 * Since mobs from spawners are limited, they no longer drop half the experience by default
+* Respawn feature has been split into Respawn (with loose respawn and respawn obelisk), and Respawn Penalties
 * Changed loose respawn range
   * World respawn range has been slightly increased 
   * Bed respawn range has been slightly decreased
