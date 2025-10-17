@@ -7,6 +7,7 @@
   * World respawn range has been slightly increased 
   * Bed respawn range has been slightly decreased
 * Lowered mob cap in spring
+* Bonus chest is no longer empty and loot has been enhanced
 
 ### Fixes
 * Advancements
