@@ -6,6 +6,7 @@
 * Changed loose respawn range
   * World respawn range has been slightly increased 
   * Bed respawn range has been slightly decreased
+* Lowered mob cap in spring
 
 ## 4.26.0
 ### Additions

@@ -31,7 +31,7 @@ import java.util.Objects;
 public class SeasonSpawning extends JsonFeature {
     public static final ArrayList<SeasonSettings> SEASON_SETTINGS_DEFAULT = new ArrayList<>(List.of(
             new SeasonSettings(List.of(Season.SubSeason.EARLY_WINTER, Season.SubSeason.MID_WINTER, Season.SubSeason.LATE_WINTER), 112, 70, 0, 0),
-            new SeasonSettings(List.of(Season.SubSeason.EARLY_SPRING, Season.SubSeason.MID_SPRING, Season.SubSeason.LATE_SPRING), 128, 70, 30, 20),
+            new SeasonSettings(List.of(Season.SubSeason.EARLY_SPRING, Season.SubSeason.MID_SPRING, Season.SubSeason.LATE_SPRING), 128, 60, 30, 20),
             new SeasonSettings(List.of(Season.SubSeason.EARLY_SUMMER, Season.SubSeason.MID_SUMMER, Season.SubSeason.LATE_SUMMER), 128, 55, 50, 20),
             new SeasonSettings(List.of(Season.SubSeason.EARLY_AUTUMN, Season.SubSeason.MID_AUTUMN, Season.SubSeason.LATE_AUTUMN), 128, 70, 15, 10)
     ));
