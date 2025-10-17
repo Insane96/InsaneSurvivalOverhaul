@@ -4,10 +4,10 @@
 			"item": "minecraft:golden_pickaxe"
 		},
 		"title": {
-			"translate": "advancements.iso.golden_pickaxe.title"
+			"translate": "advancements.iso.golden_equipment.title"
 		},
 		"description": {
-			"translate": "advancements.iso.golden_pickaxe.description"
+			"translate": "advancements.iso.golden_equipment.description"
 		},
 		"frame": "task",
 		"show_toast": true,
@@ -16,13 +16,21 @@
 	},
 	"parent": "minecraft:story/iron_tools",
 	"criteria": {
-		"golden_pickaxe": {
+		"golden_equipment": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
 						"items": [
-							"minecraft:golden_pickaxe"
+							"minecraft:golden_pickaxe",
+							"minecraft:golden_axe",
+							"minecraft:golden_shovel",
+							"minecraft:golden_hoe",
+							"minecraft:golden_sword",
+							"minecraft:golden_helmet",
+							"minecraft:golden_chestplate",
+							"minecraft:golden_leggings",
+							"minecraft:golden_boots"
 						]
 					}
 				]
@@ -31,7 +39,7 @@
 	},
 	"requirements": [
 		[
-			"golden_pickaxe"
+			"golden_equipment"
 		]
 	]
 }
