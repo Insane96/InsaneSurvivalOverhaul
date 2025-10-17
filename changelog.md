@@ -8,6 +8,9 @@
   * Bed respawn range has been slightly decreased
 * Lowered mob cap in spring
 
+### Fixes
+* Advancements
+
 ## 4.26.0
 ### Additions
 * Added attack sounds

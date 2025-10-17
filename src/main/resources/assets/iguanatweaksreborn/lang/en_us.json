@@ -286,8 +286,8 @@
 	"gamerule.iguanatweaks:foggyWeather": "Foggy Weather",
 	"gamerule.iguanatweaks:foggyWeather.description": "Should foggy weather be active?",
 
-	"advancements.iso.wooden_pickaxe.title": "Photosynthesis",
-	"advancements.iso.wooden_pickaxe.description": "Obtain your first Wooden Tool. Lasts a lot under the sunlight.",
+	"advancements.iso.wooden_tools.title": "In the beginning",
+	"advancements.iso.wooden_tools.description": "Obtain your first Wooden Tool.",
     "advancements.iso.seeds.title": "Seedy Business",
     "advancements.iso.seeds.description": "Obtain seeds from wild crops",
     "advancements.iso.copper_tools.title": "Doesn't oxidize",

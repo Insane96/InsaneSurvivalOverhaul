@@ -288,8 +288,8 @@
 	"gamerule.iguanatweaks:foggyWeather": "Meteo nebbioso",
 	"gamerule.iguanatweaks:foggyWeather.description": "Il meteo nebbioso dovrebbe essere attivo?",
 
-	"advancements.iso.wooden_pickaxe.title": "Fotosintesi",
-	"advancements.iso.wooden_pickaxe.description": "Ottieni il tuo primo attrezzo di legna. Dura molto di più sotto la luce del sole.",
+	"advancements.iso.wooden_tools.title": "All'inizio",
+	"advancements.iso.wooden_tools.description": "Ottieni il tuo primo attrezzo di legna.",
 	"advancements.iso.seeds.title": "Affari seminati",
 	"advancements.iso.seeds.description": "Ottieni semi dalle colture selvatiche",
 	"advancements.iso.winter_is_coming.title": "L'inverno sta arrivando",
@@ -362,5 +362,5 @@
     "advancements.iso.pouch.title": "È pesante",
     "advancements.iso.pouch.description": "Ottieni una penalità alla velocità di movimento trasportando troppi sacchi",
     "advancements.iso.altimeter.title": "Alti e bassi",
-    "advancements.iso.altimeter.description": "Fabbrica un altimetro per conoscere la tua altitudine",
+    "advancements.iso.altimeter.description": "Fabbrica un altimetro per conoscere la tua altitudine"
 }
