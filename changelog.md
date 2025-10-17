@@ -3,6 +3,9 @@
 ## Upcoming
 ### Changes
 * Since mobs from spawners are limited, they no longer drop half the experience by default
+* Changed loose respawn range
+  * World respawn range has been slightly increased 
+  * Bed respawn range has been slightly decreased
 
 ## 4.26.0
 ### Additions

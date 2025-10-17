@@ -64,12 +64,12 @@ public class Respawn extends JsonFeature {
 	public static final SimpleBlockWithItem RESPAWN_OBELISK = SimpleBlockWithItem.register("respawn_obelisk", () -> new RespawnObeliskBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(RespawnObeliskBlock::lightLevel)));
 
 	@Config(min = 0, description = "The range from world spawn where players will respawn.")
-	public static MinMax looseWorldSpawnRange = new MinMax(96d, 192d);
+	public static MinMax looseWorldSpawnRange = new MinMax(128d, 256d);
 	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at world spawn.")
 	//public static Integer despawnMobsOnWorldRespawn = 64;
 
 	@Config(min = 0, description = "The range from beds where players will respawn.")
-	public static MinMax looseBedSpawnRange = new MinMax(96d, 192d);
+	public static MinMax looseBedSpawnRange = new MinMax(80d, 160d);
 	//@Config(min = 0, description = "Mobs in this range from the player will be despawned when respawning at bed spawn.")
 	//public static Integer despawnMobsOnBedRespawn = 32;
 	@Config(description = "If enabled, respawning will try to place you on land and not in fluids")
