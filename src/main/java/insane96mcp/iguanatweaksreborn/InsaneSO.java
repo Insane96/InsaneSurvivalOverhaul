@@ -35,6 +35,7 @@ import insane96mcp.iguanatweaksreborn.module.mobs.villager.villagers.VillagerTra
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.Sextant;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
@@ -228,6 +229,7 @@ public class InsaneSO
         });
         InsaneLib.handleMissingMappings(event, MOD_ID, Registries.ITEM, name -> switch (name) {
             case "hellish_coal" -> Items.COAL;
+			case "biome_compass" -> Sextant.ITEM.get();
             default -> null;
         });
     }

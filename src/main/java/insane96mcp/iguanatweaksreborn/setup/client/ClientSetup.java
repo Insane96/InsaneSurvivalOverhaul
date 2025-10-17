@@ -28,8 +28,8 @@ import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
-import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.Sextant;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
@@ -133,8 +133,8 @@ public class ClientSetup {
                 addAfter(event, Items.WOODEN_HOE, FlintExpansion.SHOVEL.get());
             }
 
-            if (Feature.isEnabled(BiomeCompass.class)) {
-                addAfter(event, Items.CLOCK, BiomeCompass.COMPASS);
+            if (Feature.isEnabled(Sextant.class)) {
+                addAfter(event, Items.CLOCK, Sextant.ITEM);
             }
             if (Feature.isEnabled(CoalFire.class)) {
                 addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());

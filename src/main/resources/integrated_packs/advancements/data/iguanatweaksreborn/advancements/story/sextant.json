@@ -1,13 +1,13 @@
 {
     "display": {
         "icon": {
-            "item": "iguanatweaksreborn:biome_compass"
+            "item": "iguanatweaksreborn:sextant"
         },
         "title": {
-            "translate": "advancements.iso.biometer.title"
+            "translate": "advancements.iso.sextant.title"
         },
         "description": {
-            "translate": "advancements.iso.biometer.description"
+            "translate": "advancements.iso.sextant.description"
         },
         "frame": "task",
         "show_toast": true,
@@ -16,13 +16,13 @@
     },
     "parent": "minecraft:story/iron_tools",
     "criteria": {
-        "biome_compass": {
+        "sextant": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
                         "items": [
-                            "iguanatweaksreborn:biome_compass"
+                            "iguanatweaksreborn:sextant"
                         ]
                     }
                 ]
@@ -31,7 +31,7 @@
     },
     "requirements": [
         [
-            "biome_compass"
+            "sextant"
         ]
     ]
 }

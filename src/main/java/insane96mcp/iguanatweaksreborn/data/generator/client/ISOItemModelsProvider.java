@@ -13,8 +13,8 @@ import insane96mcp.iguanatweaksreborn.module.items.repairkit.RepairKits;
 import insane96mcp.iguanatweaksreborn.module.movement.minecarts.Minecarts;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.Cloth;
 import insane96mcp.iguanatweaksreborn.module.world.Berries;
-import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.Sextant;
 import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -76,7 +76,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItemWithTexture(CyanFlower.FLOWER.item().get(), InsaneSO.location("block/cyan_flower"));
         basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
 
-        basicItem(BiomeCompass.COMPASS.get());
+        basicItem(Sextant.ITEM.get());
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
 
         basicItem(FoodDrinks.OVER_EASY_EGG.get());

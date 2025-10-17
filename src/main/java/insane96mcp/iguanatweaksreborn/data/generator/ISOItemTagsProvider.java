@@ -13,7 +13,6 @@ import insane96mcp.iguanatweaksreborn.module.farming.plantsgrowth.PlantsGrowth;
 import insane96mcp.iguanatweaksreborn.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.iguanatweaksreborn.module.items.StackSizes;
 import insane96mcp.iguanatweaksreborn.module.items.altimeter.Altimeter;
-import insane96mcp.iguanatweaksreborn.module.items.altimeter.AltimeterItem;
 import insane96mcp.iguanatweaksreborn.module.items.blinker.BlinkerFeature;
 import insane96mcp.iguanatweaksreborn.module.items.copper.CopperEquipment;
 import insane96mcp.iguanatweaksreborn.module.items.flintexpansion.FlintExpansion;
@@ -23,8 +22,8 @@ import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader.WanderingTrades;
 import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
-import insane96mcp.iguanatweaksreborn.module.world.BiomeCompass;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
+import insane96mcp.iguanatweaksreborn.module.world.Sextant;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.Spawners;
 import insane96mcp.iguanatweaksreborn.module.world.timber.TimberTrees;
 import net.minecraft.core.HolderLookup;
@@ -146,7 +145,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(HUD_TIME)
                 .add(Items.CLOCK);
         tag(HUD_BIOME)
-                .add(BiomeCompass.COMPASS.get());
+                .add(Sextant.ITEM.get());
 
         tag(WanderingTrades.CORAL_BLOCKS)
                 .add(Items.BRAIN_CORAL_BLOCK, Items.BUBBLE_CORAL_BLOCK, Items.FIRE_CORAL_BLOCK, Items.HORN_CORAL_BLOCK, Items.TUBE_CORAL_BLOCK);

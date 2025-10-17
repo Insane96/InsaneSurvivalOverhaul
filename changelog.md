@@ -9,6 +9,7 @@
 * Lowered mob cap in spring
 * Bonus chest is no longer empty and loot has been enhanced
 * Enhanced ores advancements
+* Sextant item id is now sextant and no longer biome_compass
 
 ### Fixes
 * Advancements
