@@ -32,6 +32,8 @@ public class VillagerTradesReloadListener extends SimpleJsonResourceReloadListen
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
         TRADES.clear();
+        if (!Villagers.loadVillagerTradesFromDataPacks)
+            return;
         for (var entry : map.entrySet()) {
             VillagerProfession profession = ForgeRegistries.VILLAGER_PROFESSIONS.getValue(entry.getKey());
             if (profession == null) {

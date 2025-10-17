@@ -7,6 +7,8 @@
 * Loose respawn message on respawn
 * Off-ground speed penalty reduced
   * Vanilla was 5x slower, now is 3x
+* Config option to disable villager trades loading from data packs
+  * Needed for Numismatic Overhaul
 
 ### Changes
 * Since mobs from spawners are limited, they no longer drop half the experience by default
@@ -38,15 +40,6 @@
 * Golden tools
   * Innate Luck is now disabled by default
   * Increased enchantability. Slightly increased % attack speed a bit. Efficiency should have been increased but due to a bug was already correct
-* Added Dwarfing enchantment
-  * Increased mining speed the deeper you mine
-* Added Weathering enchantment
-  * Increased stats when under different weathers
-  * Bonus efficiency when under the sunlight. Effect reduced when raining
-  * Bonus attack speed when under moon light. Effect reduced when raining
-  * 3x Unbreaking when in rain
-* Adrenaline max bonus is now at 35% durability left instead of 0%
-* Mining Speed tooltip no longer takes into account player's mining speed changes (such as effects or being in water / off ground)
 
 ### Localization
 * Added Chinese translation

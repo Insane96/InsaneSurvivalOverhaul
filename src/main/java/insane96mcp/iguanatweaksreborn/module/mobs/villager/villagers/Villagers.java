@@ -55,6 +55,8 @@ public class Villagers extends Feature {
 	public static Double experienceToLevelUpMultiplier = 1.3d;
 	@Config(description = "Enables a data pack that changes villagers trades")
 	public static Boolean tradesDataPack = true;
+	@Config(description = "Disable the loading of villager trades from data packs. This is useful for mods like Numismatic Overhaul that has the same folder structure as ISO")
+	public static Boolean loadVillagerTradesFromDataPacks = true;
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
