@@ -270,7 +270,7 @@ public class Crops extends Feature {
 		event.setCanceled(true);
 	}
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onCropBreaking(PlayerEvent.BreakSpeed event) {
 		if (!this.isEnabled()
 				|| event.getState().destroySpeed == 0f

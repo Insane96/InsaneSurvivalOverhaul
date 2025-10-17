@@ -183,7 +183,6 @@ public class Respawn extends JsonFeature {
 			@Override
 			public void run() {
 				player.addEffect(new MobEffectInstance(GHOSTLY.get(), ghostlyEffect * 20, 0, false, false, true));
-				player.sendSystemMessage(Component.translatable(LOOSE_BED_RESPAWN_POINT));
 			}
 		});
 		return Optional.of(new Vec3(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d));

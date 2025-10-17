@@ -5,6 +5,8 @@
 * Ghostly effect
   * Applied to the player on loose respawn for 2 minutes making it undetectable by mobs
 * Loose respawn message on respawn
+* Off-ground speed penalty reduced
+  * Vanilla was 5x slower, now is 3x
 
 ### Changes
 * Since mobs from spawners are limited, they no longer drop half the experience by default

@@ -127,6 +127,9 @@ public class Tweaks extends Feature {
     @Config
     public static Boolean blindnessNoLongerPreventsSprinting = true;
 
+	@Config(min = 0d, description = "The speed divider when off ground. Vanilla is 5")
+	public static Double offGroundSpeedDivider = 3d;
+
     public static boolean discreteNameTags = true;
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -383,4 +386,14 @@ public class Tweaks extends Feature {
         }
         return originalResult;
     }
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+		if (!this.isEnabled()
+				|| offGroundSpeedDivider == 5d
+				|| event.getEntity().onGround())
+			return;
+
+		event.setNewSpeed(event.getNewSpeed() * 5f / offGroundSpeedDivider.floatValue());
+	}
 }
