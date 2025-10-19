@@ -106,9 +106,12 @@ public class Respawn extends JsonFeature {
 			new ISOMobEffectInstance.Builder(MobEffects.MOVEMENT_SPEED, 60 * 20)
 					.noParticles()
 					.build(),
-			new ISOMobEffectInstance.Builder(MobEffects.SATURATION, 20 * 20)
-					.noParticles()
-					.build()
+            new ISOMobEffectInstance.Builder(MobEffects.SATURATION, 20 * 20)
+                    .noParticles()
+                    .build(),
+            new ISOMobEffectInstance.Builder(GHOSTLY.get(), 60 * 20)
+                    .noParticles()
+                    .build()
 	);
 
 	public static final ArrayList<ISOMobEffectInstance> respawnObeliskEffects = new ArrayList<>();

@@ -4,6 +4,7 @@
 ### Addition
 * Ghostly effect
   * Applied to the player on loose respawn for 2 minutes making it undetectable by mobs
+  * Also applied to the player on obelisk respawn
 * Loose respawn message on respawn
 * Off-ground speed penalty reduced
   * Vanilla was 5x slower, now is 3x
