@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@LoadFeature(module = Modules.Ids.HUNGER_HEALTH, description = "Make the player consume more hunger with different actions. Please note that if hunger is disabled, exhaustion still applies to Tiredness.")
+@LoadFeature(module = Modules.Ids.HUNGER_HEALTH, description = "Make the player consume more hunger with different actions. Please note that even if hunger is disabled, exhaustion will still be user by Tiredness.")
 public class Exhaustion extends Feature {
 	@Config(min = 0d, max = 128d, description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
 	public static Double blockBreakExhaustionMultiplier = 0d;
@@ -91,9 +91,7 @@ public class Exhaustion extends Feature {
 		event.setAmount(event.getAmount() * (amp * 1f + 1));
 	}
 
-	/*
-	 * Sync exhaustion & saturation
-	 */
+	/* Sync exhaustion & saturation */
 	private static final Map<UUID, Float> lastExhaustionLevels = new HashMap<>();
 	private static final Map<UUID, Float> lastSaturationLevels = new HashMap<>();
 
