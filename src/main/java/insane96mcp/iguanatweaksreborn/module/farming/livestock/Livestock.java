@@ -75,8 +75,16 @@ public class Livestock extends Feature {
 	@Config(min = 0,description = "Seconds until you can milk cows (or stew mooshrooms)")
 	public static Integer fluidCooldown = 1200;
 
-	@Config(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
-	public static Boolean preventBreeding = true;
+    @Config(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
+    public static Boolean preventBreeding = true;
+    @Config(description = "If true, mobs can randomly fall in love and possibly breed")
+    public static Boolean autoBreed = true;
+    @Config(min = 0, description = "If true, animals will be 'well fed' for this ticks when fed. During this time they have an higher chance (given by the livestock data) to breed. Set to 0 to disable.")
+    public static Integer wellFed$duration = 60;
+    @Config(min = 0, description = "How much well fed time must be left to the entity to be able to feed it again.")
+    public static Integer wellFed$leftToFeedAgain = 30;
+    @Config(min = 0, description = "How much well fed time is consumed when animals breed.")
+    public static Integer wellFed$consumedOnBreed = 20;
 
 	@Config(description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
 	public static Boolean aging$enable = true;
@@ -93,14 +101,12 @@ public class Livestock extends Feature {
 	@Config(description = "If true, animals will die if not young and haven't been fed in a while.")
 	public static Boolean aging$starvationDeath = false;
 
-	@Config(min = 0, description = "How long (in minutes) will an animal remain marked as fed after eating?")
-	public static Integer aging$lastFedDuration = 60;
 
 	@Config(description = "Enables a data pack that changes animal loot (reduced food drops) and slows down growing, breeding, egging etc")
 	public static Boolean dataPack = true;
 
-	public Livestock(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 		AGE = this.createDataKey("age");
 		MAX_AGE = this.createDataKey("max_age");
@@ -150,7 +156,8 @@ public class Livestock extends Feature {
 	}
 
 	public static void tryAutoBreed(LivingEvent.LivingTickEvent event) {
-		if (!(event.getEntity() instanceof Animal animal)
+		if (!autoBreed
+				|| !(event.getEntity() instanceof Animal animal)
 				|| !animal.canFallInLove()
 				|| animal.getAge() != 0)
 			return;
@@ -317,7 +324,8 @@ public class Livestock extends Feature {
 	}
 
 	public static void feedToBreed(PlayerInteractEvent.EntityInteract event, Animal animal) {
-		if (!animal.isFood(event.getItemStack())
+		if (wellFed$duration <= 0
+                || !animal.isFood(event.getItemStack())
 				|| !animal.getType().is(PREVENT_BREEDING)
 				|| animal.isBaby()
 				|| animal instanceof TamableAnimal tamableAnimal && !tamableAnimal.isTame())
@@ -357,20 +365,20 @@ public class Livestock extends Feature {
 
 	public static boolean hasBeenFedRecently(LivingEntity living) {
 		long lastFed = getLastFed(living);
-		return lastFed > 0 && living.level().getGameTime() - lastFed < (aging$lastFedDuration * 60 * 20);
+		return lastFed > 0 && living.level().getGameTime() - lastFed < (wellFed$duration * 60 * 20);
 	}
 
 	public static boolean canBeFed(LivingEntity living) {
 		long lastFed = getLastFed(living);;
 		if (lastFed == 0)
 			return true;
-		return living.level().getGameTime() - lastFed > (aging$lastFedDuration / 2f * 60 * 20);
+		return living.level().getGameTime() - lastFed > (wellFed$leftToFeedAgain * 60 * 20);
 	}
 
 	public static void consumeFeed(LivingEntity living) {
 		long lastFed = getLastFed(living);;
 		if (lastFed > 0)
-			lastFed -= (long) (aging$lastFedDuration / 3f * 60 * 20);
+			lastFed -= wellFed$consumedOnBreed * 60 * 20;
 		setLastEat(living, lastFed);
 	}
 

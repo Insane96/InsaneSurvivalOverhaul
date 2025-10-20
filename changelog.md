@@ -10,6 +10,8 @@
   * Vanilla was 5x slower, now is 3x
 * Config option to disable villager trades loading from data packs
   * Needed for Numismatic Overhaul
+* Livestock
+  * Added auto breed and well-fed config options
 
 ### Changes
 * Since mobs from spawners are limited, they no longer drop half the experience by default
