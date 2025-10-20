@@ -109,7 +109,7 @@ public class Respawn extends JsonFeature {
             new ISOMobEffectInstance.Builder(MobEffects.SATURATION, 20 * 20)
                     .noParticles()
                     .build(),
-            new ISOMobEffectInstance.Builder(GHOSTLY.get(), 60 * 20)
+            new ISOMobEffectInstance.Builder(GHOSTLY::get, 60 * 20)
                     .noParticles()
                     .build()
 	);
