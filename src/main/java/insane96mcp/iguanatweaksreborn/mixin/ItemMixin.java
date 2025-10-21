@@ -16,15 +16,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
 public class ItemMixin {
-	@Inject(at = @At("HEAD"), method = "getUseDuration", cancellable = true)
-	public void getUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> callbackInfo) {
-		if (!FoodDrinks.eatingSpeedFormula.isEmpty()
-				|| !Feature.isEnabled(FoodDrinks.class))
-			return;
+	@ModifyReturnValue(at = @At("RETURN"), method = "getUseDuration")
+	public int getUseDuration(int original, ItemStack stack) {
+		if (FoodDrinks.eatingSpeedFormula.isEmpty()
+				|| !Feature.isEnabled(FoodDrinks.class)
+                || stack.getItem().getFoodProperties() == null)
+            return original;
 
-		if (stack.getItem().getFoodProperties() != null)
-			callbackInfo.setReturnValue(FoodDrinks.getFoodConsumingTime(stack));
-	}
+		return FoodDrinks.getFoodConsumingTime(stack);
+    }
 
 	@Inject(at = @At("RETURN"), method = "getUseAnimation", cancellable = true)
 	public void getUseAnimation(ItemStack stack, CallbackInfoReturnable<UseAnim> callbackInfo) {

@@ -25,6 +25,7 @@
 * Sextant item id is now `sextant` and no longer `biome_compass`
 
 ### Fixes
+* Item eating speed no longer working
 * Advancements
 
 ## 4.26.0
