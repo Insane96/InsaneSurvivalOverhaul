@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.27.0
 ### Addition
 * Ghostly effect
   * Applied to the player on loose respawn for 2 minutes making it undetectable by mobs
