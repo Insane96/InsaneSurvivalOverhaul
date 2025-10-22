@@ -4,6 +4,7 @@
 ### Fixes
 * Sextant texture missing
 * Melee knockback reduced by projectile knockback reduction after hitting a mob with an arrow
+* Fixed entities in the same chunk as the nether portal disappearing when traveling through it
 
 ## 4.27.1
 ### Fixes

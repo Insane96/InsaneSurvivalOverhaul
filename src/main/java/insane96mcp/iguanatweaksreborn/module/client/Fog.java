@@ -4,7 +4,6 @@ import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.iguanatweaksreborn.module.world.weather.ClientWeather;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
@@ -21,9 +20,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@LoadFeature(module = ClientModules.Ids.CLIENT,
-        name = "Fog",
-        description = "Makes fog less invasive in some contexts")
+@LoadFeature(module = ClientModules.Ids.CLIENT)
 public class Fog extends Feature {
 
     @Config(name = "Better visibility in Lava with Fire Resistance Lava", description = "If true you'll be able to see better in lava when with the Fire Resistance Effect.")
@@ -38,10 +35,6 @@ public class Fog extends Feature {
     public static Double overworld$fogStartRatio = 0.4d;
     @Config(max = 1d, description = "Changes fog ratio when raining. Vanilla is 1. This disables itself if Foggy Weather is enabled.")
     public static Double overworld$fogStartRatioOnRain = -0.2d;
-
-    public Fog(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
-    }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent(priority = EventPriority.LOW)

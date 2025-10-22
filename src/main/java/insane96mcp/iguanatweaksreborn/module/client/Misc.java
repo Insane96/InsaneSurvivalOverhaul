@@ -3,7 +3,6 @@ package insane96mcp.iguanatweaksreborn.module.client;
 import insane96mcp.iguanatweaksreborn.module.ClientModules;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
-import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,9 +13,7 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@LoadFeature(module = ClientModules.Ids.CLIENT,
-        name = "Misc",
-        description = "Misc client side changes")
+@LoadFeature(module = ClientModules.Ids.CLIENT)
 public class Misc extends Feature {
     @Config(description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
     public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
@@ -28,10 +25,6 @@ public class Misc extends Feature {
     public static Integer floatyHotbar = 2;
     @Config(description = "If true, hunger will be rendered even when the player is in riding an entity. Also hides the jump bar unless jumping (showing the XP bar)")
     public static Boolean fixMountsGui = true;
-
-    public Misc(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
-    }
 
     public static boolean shouldDisableTiltingWithNonDirectionalDamageTypes() {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
