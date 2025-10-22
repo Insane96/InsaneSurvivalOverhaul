@@ -1,5 +1,10 @@
 # Changelog
 
+## Upcoming
+### Additions
+* Burnt logs
+  * Replaces charcoal layers
+
 ## 4.27.2
 ### Fixes
 * Sextant texture missing

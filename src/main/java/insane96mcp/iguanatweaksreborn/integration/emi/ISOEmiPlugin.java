@@ -76,18 +76,13 @@ public class ISOEmiPlugin implements EmiPlugin {
 			registry.addRecipe(createSimpleInfo(Minecarts.GOLDEN_POWERED_RAIL.item().get(), "info_golden_powered_rail", Component.translatable("emi.info.iguanatweaksreborn.golden_powered_rail")));
 			registry.removeEmiStacks(emiStack -> emiStack.getItemStack().is(Items.POWERED_RAIL));
 		}
-		if (Feature.isEnabled(CoalFire.class) && CoalFire.charcoalFromBurntLogsChance > 0) {
+		if (Feature.isEnabled(CoalFire.class) && CoalFire.burntLogsChance > 0) {
 			Ingredient fire = Ingredient.of(CoalFire.FIRESTARTER.get(), Items.FLINT_AND_STEEL);
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(InsaneSO.location("charcoal_from_burning_logs"))
+					.id(InsaneSO.location("burnt_log"))
 					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
 					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
-					.output(EmiStack.of(Items.CHARCOAL)).build());
-			registry.addRecipe(EmiWorldInteractionRecipe.builder()
-					.id(InsaneSO.location("charcoal_layer_from_burning_logs"))
-					.leftInput(EmiIngredient.of(ItemTags.LOGS_THAT_BURN))
-					.rightInput(EmiIngredient.of(fire), false, slotWidget -> slotWidget.appendTooltip(Component.literal("Basically fire").withStyle(ChatFormatting.GREEN)))
-					.output(EmiStack.of(CoalFire.CHARCOAL_LAYER.item().get())).build());
+					.output(EmiStack.of(CoalFire.BURNT_LOG.item().get())).build());
 		}
 		if (Feature.isEnabled(Nether.class)) {
 			if (Nether.portalRequiresCryingObsidian)

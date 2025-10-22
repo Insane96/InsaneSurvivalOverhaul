@@ -101,7 +101,6 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         withExistingParent("respawn_obelisk", InsaneSO.location("block/respawn_obelisk_disabled"));
 
-        withExistingParent("charcoal_layer", InsaneSO.location("block/charcoal_layer/height_2"));
         basicItem(CoalFire.FIRESTARTER.get());
 
         basicItem(RepairKits.ITEM.get());
@@ -114,6 +113,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(Fletching.TORCH_ARROW_ITEM.get());
         basicItem(Fletching.ICE_ARROW_ITEM.get());
         withExistingParent("fletching_table", ResourceLocation.parse("block/fletching_table"));
+        withExistingParent("burnt_log", InsaneSO.location("block/burnt_log"));
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)

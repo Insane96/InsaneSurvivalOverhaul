@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,9 +27,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,14 +37,19 @@ import net.minecraftforge.registries.RegistryObject;
 
 @LoadFeature(module = Modules.Ids.WORLD, name = "Coal & Fire")
 public class CoalFire extends Feature {
-    public static final SimpleBlockWithItem CHARCOAL_LAYER = SimpleBlockWithItem.register("charcoal_layer", () -> new PilableLayerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).strength(0.4F).sound(SoundType.MOSS_CARPET).isViewBlocking((state, blockGetter, pos) -> state.getValue(PilableLayerBlock.LAYERS) >= 8), Items.CHARCOAL));
+    public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
+            .mapColor((p_152624_)
+                    -> MapColor.TERRACOTTA_BLACK)
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(1.0F)
+            .sound(SoundType.WOOD)));
 
     public static final RegistryObject<Item> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).defaultDurability(11)));
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("iguanatweaks:fireSpeedMultiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
 
-    @Config(min = 0d, max = 1d, description = "Chance for logs to release charcoal layer when burnt")
-    public static Double charcoalFromBurntLogsChance = 0.8d;
+    @Config(min = 0d, max = 1d, description = "Chance for logs to yield burnt logs when burnt")
+    public static Double burntLogsChance = 0.8d;
 
     @Config(description = """
 			If enabled, a data pack will be enabled that:
@@ -82,12 +88,12 @@ public class CoalFire extends Feature {
     @SubscribeEvent
     public void onBlockBurnt(BlockBurntEvent event) {
         if (!this.isEnabled()
-                || charcoalFromBurntLogsChance == 0d)
+                || burntLogsChance == 0d)
             return;
 
-        if (event.getLevel().getRandom().nextDouble() < charcoalFromBurntLogsChance
+        if (event.getLevel().getRandom().nextDouble() < burntLogsChance
                 && event.getState().is(BlockTags.LOGS_THAT_BURN)) {
-            PilableFallingLayerEntity.fall((Level) event.getLevel(), event.getPos(), CHARCOAL_LAYER.block().get().defaultBlockState());
+            FallingBlockEntity.fall((Level) event.getLevel(), event.getPos(), BURNT_LOG.block().get().defaultBlockState());
         }
     }
 

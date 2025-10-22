@@ -97,7 +97,7 @@ public class ClientSetup {
                 addAfter(event, Items.CHAIN, Death.GRAVE.item());
             }
             if (Feature.isEnabled(CoalFire.class)) {
-                addAfter(event, Items.COAL_BLOCK, CoalFire.CHARCOAL_LAYER.item().get());
+                addAfter(event, Items.COAL_BLOCK, CoalFire.BURNT_LOG.item().get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {

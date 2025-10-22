@@ -219,7 +219,6 @@
 	"iguanatweaksreborn.player_ghost": "Fantasma di %s",
 	"iguanatweaksreborn.player_killer": "Assassino di %s (%s)",
 
-	"iguanatweaksreborn.loose_bed_respawn_point_set": "Il punto di rinascita è ampio, rinascerai in un raggio dal tuo letto.",
 	"iguanatweaksreborn.requires_catalyst": "Non può essere attivato. L'Obelisco richiede almeno un blocco catalizzatore",
 	"iguanatweaksreborn.obelisk_disabled": "Obelisco della rinascita disattivato. Il punto di rinascia dei giocatori è stato impostato all'ultimo letto, o reimpostato se non ne avevano uno",
 	"iguanatweaksreborn.fail_respawn_obelisk": "Non è stato possibile rinascere all'obelisco perchè era disattivato.",
@@ -248,7 +247,7 @@
 
 	"item.iguanatweaksreborn.firestarter": "Avviafuochi",
 	"item.iguanatweaksreborn.firestarter.tooltip": "Tieni premuto click destro per utilizzarlo",
-	"block.iguanatweaksreborn.charcoal_layer": "Strato di carbonella",
+	"block.iguanatweaksreborn.burnt_log": "Tronco bruciato",
 
 	"block.iguanatweaksreborn.cyan_flower": "Fiore ciano",
 

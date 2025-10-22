@@ -36,6 +36,7 @@ import insane96mcp.iguanatweaksreborn.module.sleeprespawn.death.Death;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.Sextant;
+import insane96mcp.iguanatweaksreborn.module.world.coalfire.CoalFire;
 import insane96mcp.iguanatweaksreborn.module.world.seasons.Seasons;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerData;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.capability.SpawnerDataAttacher;
@@ -225,11 +226,13 @@ public class InsaneSO
         InsaneLib.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> switch (name) {
             case "soul_sand_hellish_coal_ore" -> Blocks.SOUL_SAND;
             case "soul_soil_hellish_coal_ore" -> Blocks.SOUL_SOIL;
+            case "charcoal_layer" -> CoalFire.BURNT_LOG.block().get();
             default -> null;
         });
         InsaneLib.handleMissingMappings(event, MOD_ID, Registries.ITEM, name -> switch (name) {
             case "hellish_coal" -> Items.COAL;
 			case "biome_compass" -> Sextant.ITEM.get();
+            case "charcoal_layer" -> CoalFire.BURNT_LOG.item().get();
             default -> null;
         });
     }

@@ -71,12 +71,12 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(Spawning.ECHO_LANTERN.block().get())
                 .add(FlintExpansion.FLINT_ROCK.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(BoneMeal.RICH_FARMLAND.block().get())
-                .add(CoalFire.CHARCOAL_LAYER.block().get());
+                .add(BoneMeal.RICH_FARMLAND.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get());
         tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(Fletching.FLETCHING_TABLE.block().get());
+                .add(Fletching.FLETCHING_TABLE.block().get())
+                .add(CoalFire.BURNT_LOG.block().get());
         tag(BlockTags.RAILS)
                 .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
         tag(BlockTags.REPLACEABLE_BY_TREES)

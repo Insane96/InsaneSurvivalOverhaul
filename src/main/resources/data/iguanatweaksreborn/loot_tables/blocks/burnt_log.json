@@ -10,7 +10,7 @@
                     "children": [
                         {
                             "type": "minecraft:item",
-                            "name": "iguanatweaksreborn:charcoal_layer",
+                            "name": "iguanatweaksreborn:burnt_log",
                             "conditions": [
                                 {
                                     "condition": "minecraft:match_tool",
