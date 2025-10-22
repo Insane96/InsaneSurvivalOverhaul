@@ -3,6 +3,7 @@
 ## Upcoming
 ### Fixes
 * Sextant texture missing
+* Melee knockback reduced by projectile knockback reduction after hitting a mob with an arrow
 
 ## 4.27.1
 ### Fixes

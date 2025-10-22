@@ -29,9 +29,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 @LoadFeature(module = Modules.Ids.COMBAT, description = "Players will deal reduced knockback if attacking with a non-weapon or spamming. Knockback reductions are defined via Data Packs with Item Definitions (the item_stats integrated data pack already does this)")
 public class Knockback extends Feature {
 
-	public final ResourceLocation TIME_SINCE_LAST_SWING;
-	public final ResourceLocation SHOULD_APPLY_NO_KNOCKBACK;
-	public final ResourceLocation PROJECTILE_KNOCKBACK;
+	public ResourceLocation TIME_SINCE_LAST_SWING;
+	public ResourceLocation SHOULD_APPLY_NO_KNOCKBACK;
+	public ResourceLocation PROJECTILE_KNOCKBACK;
 
 	@Config(min = 0d, max = 1d, description = "Percentage knockback dealt if the player is using an item that doesn't have the attack damage attribute. Broken items from the Items module count as No Weapon")
 	public static Double noWeaponPenalty = 0.35d;
@@ -40,8 +40,8 @@ public class Knockback extends Feature {
 	@Config(min = 0d, max = 1d, description = "Percentage knockback dealt by projectiles.")
 	public static Double projectileKnockback = 0.7d;
 
-	public Knockback(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super(module, enabledByDefault, canBeDisabled);
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
 		TIME_SINCE_LAST_SWING = this.createDataKey("ticks_since_last_swing");
 		SHOULD_APPLY_NO_KNOCKBACK = this.createDataKey("should_apply_no_knockback");
 		PROJECTILE_KNOCKBACK = this.createDataKey("projectile_knockback");
@@ -102,8 +102,10 @@ public class Knockback extends Feature {
 			if (cooldown <= 0.9f)
 				knockbackMultiplier = Math.min(knockbackMultiplier, spamPenalty.floatValue());
 		}
-		if (ModNBTData.get(lastHurtByMob, PROJECTILE_KNOCKBACK, Boolean.class) && projectileKnockback < 1d)
-			knockbackMultiplier = Math.min(knockbackMultiplier, projectileKnockback.floatValue());
+		if (ModNBTData.get(lastHurtByMob, PROJECTILE_KNOCKBACK, Boolean.class) && projectileKnockback < 1d) {
+            knockbackMultiplier = Math.min(knockbackMultiplier, projectileKnockback.floatValue());
+            ModNBTData.remove(lastHurtByMob, PROJECTILE_KNOCKBACK);
+        }
 
 		if (knockbackMultiplier < 1f) {
 			if (lastHurtByMob.isSprinting() && lastHurtByMob instanceof Player)
