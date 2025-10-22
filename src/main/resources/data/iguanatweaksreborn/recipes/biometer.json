@@ -5,7 +5,7 @@
             "conditions": [
                 {
                     "type": "insanelib:feature_enabled",
-                    "feature": "Biome Compass"
+                    "feature": "Sextant"
                 }
             ],
             "recipe": {
@@ -23,7 +23,7 @@
                     }
                 ],
                 "result": {
-                    "item": "iguanatweaksreborn:biome_compass"
+                    "item": "iguanatweaksreborn:sextant"
                 }
             }
         }

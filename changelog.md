@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.27.1
+### Fixes
+* Sextant no longer working
+
 ## 4.27.0
 ### Addition
 * Ghostly effect

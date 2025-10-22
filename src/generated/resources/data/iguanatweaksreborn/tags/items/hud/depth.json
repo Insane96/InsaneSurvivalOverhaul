@@ -1,11 +1,8 @@
 {
   "values": [
+    "iguanatweaksreborn:altimeter",
     {
       "id": "caverns_and_chasms:depth_gauge",
-      "required": false
-    },
-    {
-      "id": "iguanatweaksexpanded:altimeter",
       "required": false
     },
     {
