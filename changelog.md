@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Sextant texture missing
+
 ## 4.27.1
 ### Fixes
 * Sextant no longer working
