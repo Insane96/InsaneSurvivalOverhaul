@@ -82,7 +82,7 @@ body:
   - type: input
     id: crash-report
     attributes:
-      label: Crash Report
+      label: Logs / Crash Report
       description: Paste a link to the crash report, if present. Attaching latest.log and debug.log will also help. Use https://mclo.gs
     validations:
       required: false
@@ -92,9 +92,9 @@ body:
       value: "## Minimal Mods"
 
   - type: dropdown
-    id: just-tinkers
+    id: just-iso
     attributes:
-      label: "Can you reproduce with just ISO?"
+      label: "Reproduce the issue with just ISO"
       description: "Test by removing all other mods besides ISO and required dependencies."
       options:
         - 'I have not tried'
@@ -107,7 +107,7 @@ body:
     id: performance-enhancers
     attributes:
       label: "Performance Enchancers"
-      description: "Select the minimal list of performance mods you were using when you reproduced the issue."
+      description: "Test without Performance enhancers. If the mod works properly without them, report the issue to the relative performance enhancer."
       multiple: true
       options:
         - 'Optifine'
@@ -123,7 +123,7 @@ body:
     id: sinytra
     attributes:
       label: "Sinytra Connector"
-      description: "Have you tested without Sinytra Connector? If the problem arises with Sinytra please report it to them"
+      description: "If the problem arises with Sinytra please report it to them. Do you use Sinytra Connector?"
       multiple: true
       options:
         - 'No'
@@ -145,18 +145,16 @@ body:
         
         Please check the following to see if your issue is covered:
         * [Pinned issues](/Insane96/IguanaTweaksReborn/issues)
-        * [The search bar](/Insane96/IguanaTweaksReborn/issues)
+        * [Existing issues](/Insane96/IguanaTweaksReborn/issues)
 
   - type: dropdown
     id: searched
     attributes:
-      label: "Searched for known issues?"
+      label: "Confirm the following"
       description: "Select all that apply."
       multiple: true
       options:
         - 'Checked pinned issues'
-        - 'Searched open issues'
-        - 'Searched closed issues'
-        - 'I did not search'
+        - 'Searched existing issues'
     validations:
       required: true
