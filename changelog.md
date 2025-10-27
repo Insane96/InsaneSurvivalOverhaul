@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.28.0
 ### Additions
 * Burnt logs
   * Replaces charcoal layers
