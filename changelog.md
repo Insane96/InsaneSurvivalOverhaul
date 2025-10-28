@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.28.1
+### Fixes
+* Infinite bone meal
+
 ## 4.28.0
 ### Additions
 * Burnt logs

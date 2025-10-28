@@ -105,10 +105,10 @@ public class BoneMeal extends Feature {
             return;
 
         tryMakeRichFarmland(event);
-        if (event.getResult() == Event.Result.ALLOW)
+        if (event.getResult() != Event.Result.DEFAULT)
             return;
         tryConsumeWithFail(event);
-        if (event.getResult() == Event.Result.ALLOW)
+        if (event.getResult() != Event.Result.DEFAULT)
             return;
         applyNerfedBoneMeal(event);
 
