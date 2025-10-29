@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Unbreakable blocks now show red outline
+
 ## 4.28.1
 ### Fixes
 * Infinite bone meal

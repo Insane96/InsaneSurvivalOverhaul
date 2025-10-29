@@ -33,8 +33,7 @@ public abstract class LevelRendererMixin {
 	private float onHitOutline(float value, PoseStack pPoseStack, VertexConsumer pConsumer, Entity entity, double pCamX, double pCamY, double pCamZ, BlockPos pPos, BlockState state) {
 		if (!(entity instanceof Player player)
 				|| player.getAbilities().instabuild
-				|| !state.requiresCorrectToolForDrops()
-				|| player.hasCorrectToolForDrops(state))
+				|| (player.hasCorrectToolForDrops(state) && state.destroySpeed >= 0f))
 			return value;
 		return Misc.getRedOutlineAmount(value);
 	}
