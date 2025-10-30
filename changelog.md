@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.28.2
 ### Additions
 * Prevent health shake based on max health
 
