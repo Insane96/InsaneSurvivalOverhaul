@@ -56,7 +56,7 @@ public class Respawn extends JsonFeature {
 
 	public static final String FAIL_RESPAWN_OBELISK_LANG = InsaneSO.MOD_ID + ".fail_respawn_obelisk";
 
-	public static final String LOOSE_WORLD_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
+	public static final String LOOSE_WORLD_RESPAWN_POINT = InsaneSO.lang("loose_world_respawn_point");
 	public static final String LOOSE_BED_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register("iguanatweaks:doLooseRespawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true));
 
