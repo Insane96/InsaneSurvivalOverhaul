@@ -1,5 +1,7 @@
 package insane96mcp.iguanatweaksreborn.mixin.client;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.module.client.Misc;
@@ -94,5 +96,16 @@ public class GuiMixin {
         if (!Misc.fixMountsGui())
             return original;
         return (int)(mount.getMaxHealth() + 0.5F) / 2;
+    }
+
+    @Definition(id = "pCurrentHealth", local = @Local(type = int.class, ordinal = 4, argsOnly = true))
+    @Definition(id = "pAbsorptionAmount", local = @Local(type = int.class, ordinal = 6, argsOnly = true))
+    @Expression("pCurrentHealth + pAbsorptionAmount <= 4")
+    @ModifyExpressionValue(method = "renderHearts", at = @At("MIXINEXTRAS:EXPRESSION"))
+    public boolean iguanatweaksreborn$onShakeCheck(boolean original, @Local(argsOnly = true) float pMaxHealth) {
+        if (!Misc.shouldPreventHealthShake()
+                || !original)
+            return original;
+        return pMaxHealth > 4;
     }
 }

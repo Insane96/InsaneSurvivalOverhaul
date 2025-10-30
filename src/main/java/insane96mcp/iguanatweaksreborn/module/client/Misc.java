@@ -26,6 +26,9 @@ public class Misc extends Feature {
     @Config(description = "If true, hunger will be rendered even when the player is in riding an entity. Also hides the jump bar unless jumping (showing the XP bar)")
     public static Boolean fixMountsGui = true;
 
+    @Config(description = "If true, health will not shake if player's max health is below 4")
+    public static Boolean preventShakeBasedOffMaxHealth = true;
+
     public static boolean shouldDisableTiltingWithNonDirectionalDamageTypes() {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;
     }
@@ -55,5 +58,9 @@ public class Misc extends Feature {
 
     public static boolean shouldRaiseHotbar() {
         return Feature.isEnabled(Misc.class) && floatyHotbar > 0;
+    }
+
+    public static boolean shouldPreventHealthShake() {
+        return Feature.isEnabled(Misc.class) && preventShakeBasedOffMaxHealth;
     }
 }

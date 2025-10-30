@@ -1,6 +1,9 @@
 # Changelog
 
 ## Upcoming
+### Additions
+* Prevent health shake based on max health
+
 ### Changes
 * Unbreakable blocks now show red outline
 
