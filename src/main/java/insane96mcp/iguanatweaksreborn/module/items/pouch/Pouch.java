@@ -1,7 +1,7 @@
 package insane96mcp.iguanatweaksreborn.module.items.pouch;
 
-
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.insanelib.base.Feature;
@@ -9,6 +9,7 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,8 +20,9 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.UUID;
 
-@LoadFeature(module = Modules.Ids.ITEMS, description = "A new block that can let you carry more stuff around.")
+@LoadFeature(module = Modules.Ids.ITEMS, description = "A new item that can let you carry more stuff around.")
 public class Pouch extends Feature {
+    public static final TagKey<Item> POUCH_LIKE_WEIGHT = ISOItemTagsProvider.create("pouch_like_weight");
 
 	public static final UUID CRATE_WEIGHT_UUID = UUID.fromString("4ce89c45-a011-43fa-b9a8-7f2bd0ea2fc3");
 
@@ -38,7 +40,7 @@ public class Pouch extends Feature {
 				|| event.phase == TickEvent.Phase.START)
 			return;
 
-		int pouchesInInventory = ContainerHelper.clearOrCountMatchingItems(event.player.getInventory(), stack -> stack.is(ITEM.get()), 0, true);
+		int pouchesInInventory = ContainerHelper.clearOrCountMatchingItems(event.player.getInventory(), stack -> stack.is(ITEM.get()) || stack.is(POUCH_LIKE_WEIGHT), 0, true);
 		event.player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(CRATE_WEIGHT_UUID);
 		if (pouchesInInventory > maxPouchWithoutSlowdown) {
 			double slowness = ((pouchesInInventory - maxPouchWithoutSlowdown) * baseSlownessPerPouchOverMax) * Math.max(1, pouchesInInventory - maxPouchWithoutSlowdown);

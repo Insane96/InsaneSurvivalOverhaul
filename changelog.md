@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Additions
+* `iguanatweaksreborn:pouch_like_weight` item tag. Items in this tag will count towards pouch weight
+
 ## 4.28.2
 ### Additions
 * Prevent health shake based on max health
