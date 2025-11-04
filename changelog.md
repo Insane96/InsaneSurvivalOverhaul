@@ -4,6 +4,12 @@
 ### Additions
 * `iguanatweaksreborn:pouch_like_weight` item tag. Items in this tag will count towards pouch weight
 
+### Fixes
+* Attack sound not played when Attack Sounds feature was disabled
+
+### Removed
+* Fix for Global Game Rules enforcing survival/hardcore
+
 ## 4.28.2
 ### Additions
 * Prevent health shake based on max health

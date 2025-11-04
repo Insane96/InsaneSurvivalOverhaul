@@ -24,7 +24,7 @@ public class AttackSounds extends Feature {
     @Config
     public static Boolean randomizePitch = true;
 
-    public static void playAttackSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
+    public static void playAttackSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original, Player attackingPlayer) {
         if (!Feature.isEnabled(AttackSounds.class)) {
             original.call(level, player, x, y, z, soundEvent, soundSource, volume, pitch);
             return;
@@ -34,32 +34,32 @@ public class AttackSounds extends Feature {
             pitch = (float) (Math.random() * 0.4 + 0.8);
         //If it's the sweep attack, don't play other sounds, just use the possible randomized pitch
         if (soundEvent == SoundEvents.PLAYER_ATTACK_SWEEP) {
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), soundEvent, player.getSoundSource(), 1.0F, pitch);
+            attackingPlayer.level().playSound(null, attackingPlayer.getX(), attackingPlayer.getY(), attackingPlayer.getZ(), soundEvent, attackingPlayer.getSoundSource(), 1.0F, pitch);
             return;
         }
 
         SoundEvent attackSoundEvent = soundEvent;
         boolean changedSound = false;
-        if (player.getMainHandItem().is(ItemTags.AXES)) {
+        if (attackingPlayer.getMainHandItem().is(ItemTags.AXES)) {
             attackSoundEvent = SoundEvents.PLAYER_ATTACK_STRONG;
             changedSound = true;
         }
-        else if (player.getMainHandItem().is(ItemTags.SWORDS)) {
+        else if (attackingPlayer.getMainHandItem().is(ItemTags.SWORDS)) {
             attackSoundEvent = SoundEvents.PLAYER_ATTACK_WEAK;
             changedSound = true;
         }
-        else if (player.getMainHandItem().is(ItemTags.PICKAXES)) {
+        else if (attackingPlayer.getMainHandItem().is(ItemTags.PICKAXES)) {
             attackSoundEvent = PICKAXE_ATTACK.get();
             changedSound = true;
         }
-        else if (player.getMainHandItem().is(ItemTags.SHOVELS)) {
+        else if (attackingPlayer.getMainHandItem().is(ItemTags.SHOVELS)) {
             attackSoundEvent = SHOVEL_ATTACK.get();
             changedSound = true;
         }
 
         //If it's a crit, also reproduce the attack sound
         if (soundEvent == SoundEvents.PLAYER_ATTACK_CRIT)
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), soundEvent, player.getSoundSource(), 1.0F, pitch);
+            attackingPlayer.level().playSound(null, attackingPlayer.getX(), attackingPlayer.getY(), attackingPlayer.getZ(), soundEvent, attackingPlayer.getSoundSource(), 1.0F, pitch);
         if (changedSound)
             original.call(level, null, x, y, z, attackSoundEvent, soundSource, volume, pitch);
     }
