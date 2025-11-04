@@ -115,7 +115,6 @@
         "ZombieVillagerMixin",
         "client.VanillaGuiOverlayMixin",
         "integration.cavernsandchasms.CCEntityTypesMixin",
-        "integration.globalgamerules.WorldEventsMixin",
         "integration.simpleclouds.SimpleCloudsEventsMixin",
         "integration.tide.TideFishingHookMixin",
         "integration.tinkersconstruct.ToolAttackUtilMixin"
