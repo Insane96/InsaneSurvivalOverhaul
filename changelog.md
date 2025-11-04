@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.28.3
 ### Additions
 * `iguanatweaksreborn:pouch_like_weight` item tag. Items in this tag will count towards pouch weight
 
@@ -8,7 +8,7 @@
 * Attack sound not played when Attack Sounds feature was disabled
 
 ### Removed
-* Fix for Global Game Rules enforcing survival/hardcore
+* Fix for Global Game Rules enforcing survival/hardcore. Fixed in the mod
 
 ## 4.28.2
 ### Additions
