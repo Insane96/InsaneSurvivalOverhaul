@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Changes
+* Renamed Force Brightness to Force Darkness and clarified description
+
 ## 4.28.3
 ### Additions
 * `iguanatweaksreborn:pouch_like_weight` item tag. Items in this tag will count towards pouch weight
