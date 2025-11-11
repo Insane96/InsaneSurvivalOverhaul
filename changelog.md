@@ -1,6 +1,6 @@
 # Changelog
 
-## Upcoming
+## 4.28.4
 ### Changes
 * Renamed Force Brightness to Force Darkness and clarified description
 
