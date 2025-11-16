@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Fixes
+* Cutting board unusable due to knives disabled. Swords can now be used as knives 
+
 ## 4.28.5
 ### Changes
 * Added `Force one player sleep` config option
