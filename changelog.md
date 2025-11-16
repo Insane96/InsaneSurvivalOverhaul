@@ -7,6 +7,7 @@
 
 ### Fixes
 * Farmer's Delight's Cutting board unusable due to knives disabled. Swords can now be used as knives 
+* Over easy egg smeltable in furnace
 
 ## 4.28.5
 ### Changes
