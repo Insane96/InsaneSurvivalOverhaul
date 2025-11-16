@@ -117,6 +117,8 @@ public class Tiredness extends JsonFeature {
 	public static Boolean tiredTiedPhantoms = true;
     @Config
     public static Boolean allowSleepingEvenWhenNotTired = false;
+    @Config(description = "If true, sets the playersSleepingPercentage gamerule to 1 so tired players can sleep no matter how many players on a server.")
+    public static Boolean forceOnePlayerSleep = true;
     @Config(description = "If true, Simple Clouds' clouds will speed up when player skips time by sleeping.")
     public static Boolean simpleCloudsIntegration = false;
 
@@ -410,7 +412,8 @@ public class Tiredness extends JsonFeature {
 
 	@SubscribeEvent
 	public void onServerStarted(ServerStartedEvent event) {
-		if (!this.isEnabled())
+		if (!this.isEnabled()
+                || !forceOnePlayerSleep)
 			return;
 
 		event.getServer().getGameRules().getRule(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE).set(1, event.getServer());

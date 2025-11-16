@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.28.5
+### Changes
+* Added `Force one player sleep` config option
+  * To disable the Tiredness feature from setting the gamerule to 1
+
 ## 4.28.4
 ### Changes
 * Renamed Force Brightness to Force Darkness and clarified description
