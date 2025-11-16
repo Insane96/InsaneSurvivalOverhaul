@@ -1,8 +1,11 @@
 # Changelog
 
 ## Upcoming
+### Changes
+* Lowered wild crops generation from Farmer Delight
+
 ### Fixes
-* Cutting board unusable due to knives disabled. Swords can now be used as knives 
+* Farmer's Delight's Cutting board unusable due to knives disabled. Swords can now be used as knives 
 
 ## 4.28.5
 ### Changes
