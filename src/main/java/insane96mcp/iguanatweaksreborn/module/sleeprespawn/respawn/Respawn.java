@@ -302,6 +302,6 @@ public class Respawn extends JsonFeature {
 		if (!event.getEntity().hasEffect(GHOSTLY.get()))
 			return;
 
-		event.modifyVisibility(0d);
+		event.modifyVisibility(-128d);
 	}
 }

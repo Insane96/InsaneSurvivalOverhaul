@@ -7,8 +7,9 @@
 * Lowered wild crops generation from Farmer Delight
 
 ### Fixes
-* Farmer's Delight's Cutting board unusable due to knives disabled. Swords can now be used as knives 
+* Tentative fix mobs seeing you when really close
 * Over easy egg smeltable in furnace
+* Farmer's Delight's Cutting board unusable due to knives disabled. Swords can now be used as knives 
 
 ## 4.28.5
 ### Changes
