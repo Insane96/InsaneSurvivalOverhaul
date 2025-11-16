@@ -2,6 +2,7 @@
 
 ## Upcoming
 ### Changes
+* If your grave is broken, ghostly effect is now removed 
 * Halved wild potatoes generation
 * Lowered wild crops generation from Farmer Delight
 

@@ -66,8 +66,8 @@ public class Respawn extends JsonFeature {
 	public static MinMax looseWorldSpawnRange = new MinMax(128d, 256d);
 	@Config(min = 0, description = "The range from beds where players will respawn.")
 	public static MinMax looseBedSpawnRange = new MinMax(80d, 160d);
-	@Config(min = 0, description = "How many ticks of the Ghostly effect is given to the player on respawn.")
-	public static Integer ghostlyEffect = 120;
+    @Config(min = 0, description = "How many ticks of the Ghostly effect is given to the player on respawn.")
+    public static Integer ghostlyEffect = 120;
 	@Config(description = "If enabled, respawning will try to place you on land and not in fluids")
 	public static Boolean dontRespawnOnFluid = true;
 
@@ -109,7 +109,7 @@ public class Respawn extends JsonFeature {
             new ISOMobEffectInstance.Builder(MobEffects.SATURATION, 20 * 20)
                     .noParticles()
                     .build(),
-            new ISOMobEffectInstance.Builder(GHOSTLY::get, 60 * 20)
+            new ISOMobEffectInstance.Builder(GHOSTLY, 120 * 20)
                     .noParticles()
                     .build()
 	);

@@ -84,6 +84,8 @@ public class Death extends Feature {
 	public static Boolean crouchTakeItems = false;
 	@Config(description = "If true, only players that generated the grave can crouch right-click to take items from graves.")
 	public static Boolean crouchTakeItemsOnlyOwner = false;
+    @Config(min = 0)
+    public static Boolean removeGhostlyOnGraveBreak = true;
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);

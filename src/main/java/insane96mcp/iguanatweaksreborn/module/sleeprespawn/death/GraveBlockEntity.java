@@ -192,7 +192,7 @@ public class GraveBlockEntity extends BlockEntity {
         GraveBlockEntity graveBlockEntity = (GraveBlockEntity) t;
         if (graveBlockEntity.owner == null)
             return;
-        Optional<ServerPlayer> oPlayer = getPlayerOwner((ServerLevel) level, graveBlockEntity.owner);
+        Optional<ServerPlayer> oPlayer = graveBlockEntity.getPlayerOwner();
         oPlayer.ifPresent(player -> {
             if (player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS)) != graveBlockEntity.deathNumber)
                 graveBlockEntity.dropContent(pos);
@@ -259,6 +259,10 @@ public class GraveBlockEntity extends BlockEntity {
         float f1 = level.random.nextFloat() * ((float)Math.PI * 2F);
         itementity.setDeltaMovement((-Mth.sin(f1) * f), 0.1F, (Mth.cos(f1) * f));
         level.addFreshEntity(itementity);
+    }
+
+    public Optional<ServerPlayer> getPlayerOwner() {
+        return getPlayerOwner((ServerLevel) level, this.owner);
     }
 
     public static Optional<ServerPlayer> getPlayerOwner(ServerLevel level, UUID playerUUID) {

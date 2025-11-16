@@ -1,5 +1,6 @@
 package insane96mcp.iguanatweaksreborn.module.sleeprespawn.death;
 
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
@@ -100,8 +101,11 @@ public class GraveBlock extends BaseEntityBlock implements EntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean p_60519_) {
         if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof GraveBlockEntity graveBlockEntity)
+            if (blockEntity instanceof GraveBlockEntity graveBlockEntity) {
                 graveBlockEntity.dropContent(pos);
+                if (Death.removeGhostlyOnGraveBreak)
+                    graveBlockEntity.getPlayerOwner().ifPresent(player -> player.removeEffect(Respawn.GHOSTLY.get()));
+            }
             int chunkX = SectionPos.blockToSectionCoord(pos.getX());
             int chunkZ = SectionPos.blockToSectionCoord(pos.getZ());
             ((ServerLevel) level).setChunkForced(chunkX, chunkZ, false);
