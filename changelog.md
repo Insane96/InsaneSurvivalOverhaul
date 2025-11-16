@@ -2,6 +2,7 @@
 
 ## Upcoming
 ### Changes
+* Halved wild potatoes generation
 * Lowered wild crops generation from Farmer Delight
 
 ### Fixes
