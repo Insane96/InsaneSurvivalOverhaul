@@ -1,13 +1,13 @@
 # Changelog
 
-## Upcoming
+## 4.28.6
 ### Changes
 * If your grave is broken, ghostly effect is now removed 
 * Halved wild potatoes generation
 * Lowered wild crops generation from Farmer Delight
 
 ### Fixes
-* Tentative fix mobs seeing you when really close
+* Tentative fix mobs seeing you when really close with Ghostly
 * Over easy egg smeltable in furnace
 * Farmer's Delight's Cutting board unusable due to knives disabled. Swords can now be used as knives 
 
