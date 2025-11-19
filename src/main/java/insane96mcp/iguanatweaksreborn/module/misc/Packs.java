@@ -77,7 +77,7 @@ public class Packs extends Feature {
     public static Boolean supplementaries = false;
     @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
     public static Boolean farmersDelight = false;
-    @Config(description = "If true, the nourishment effect from Farmers' Delight is replaced with Speed or Vigour if Stamina mod is present")
+    @Config(name = "Replace Farmers' Delight nourishment effect", description = "If true and No Hunger mod is present, the nourishment effect from Farmers' Delight is replaced with Speed, or Vigour if Stamina mod is present")
     public static Boolean replaceFDNourishmentEffect = false;
     @Config(description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
     public static Boolean environmental = false;
