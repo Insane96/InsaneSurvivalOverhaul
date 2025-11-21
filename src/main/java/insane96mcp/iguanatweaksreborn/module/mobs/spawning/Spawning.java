@@ -51,8 +51,8 @@ public class Spawning extends Feature {
     @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
     public static Boolean guardiansInDeepOceans = true;
 
-    public Spawning(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() && !Packs.disableAllDataPacks && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
         InsaneSO.addServerPack("ocean_guardians", "Insane's Survival Overhaul Ocean Guardians", () -> this.isEnabled() && !Packs.disableAllDataPacks && guardiansInDeepOceans);
     }

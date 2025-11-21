@@ -3,13 +3,17 @@ package insane96mcp.iguanatweaksreborn.event;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosion;
 import insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul.ISOExplosionCreatedEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
+
+import java.util.List;
 
 public class ISOEventFactory {
     /**
@@ -80,5 +84,11 @@ public class ISOEventFactory {
         EnchantmentBonusMiningSpeedEvent event = new EnchantmentBonusMiningSpeedEvent(entity, state, stack, originalMiningSpeed, tooltip);
         MinecraftForge.EVENT_BUS.post(event);
         return event.getNewMiningSpeed();
+    }
+
+    public static List<CustomSpawner> onCustomSpawnersInit(ServerLevel serverLevel, List<CustomSpawner> customSpawners) {
+        CustomSpawnersInitEvent event = new CustomSpawnersInitEvent(serverLevel, customSpawners);
+        MinecraftForge.EVENT_BUS.post(event);
+        return event.getCustomSpawners();
     }
 }

@@ -1,5 +1,14 @@
 # Changelog
 
+* Make respawn anchor require an item to be enabled
+
+## Upcoming
+### Additions
+* Zombie Siege
+  * Like with villages, there's 10% chance each night for a zombie siege to start near the player
+  * Many zombies will be spawned and target a player
+  * Only happens if the player has been living in an area for more than 2 hours
+
 ## 4.28.6
 ### Changes
 * If your grave is broken, ghostly effect is now removed 
