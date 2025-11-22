@@ -210,7 +210,10 @@ public class GraveBlockEntity extends BlockEntity {
                 });
         this.items.stream()
                 .filter(slottedStack -> slottedStack.slot == null)
-                .forEach(slottedStack -> player.getInventory().add(slottedStack.stack));
+                .forEach(slottedStack -> {
+                    if (!player.getInventory().add(slottedStack.stack))
+                        dropItem(level, slottedStack.stack, this.worldPosition);
+                });
         this.items.clear();
         player.level().playSound(null, player, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
         this.dropExperience(player.blockPosition());

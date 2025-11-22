@@ -1,6 +1,6 @@
 # Changelog
 
-* Make respawn anchor require an item to be enabled
+* Make respawn anchor -> soul pillar require an item to be enabled
 
 ## Upcoming
 ### Additions
@@ -8,6 +8,9 @@
   * Like with villages, there's 10% chance each night for a zombie siege to start near the player
   * Many zombies will be spawned and target a player
   * Only happens if the player has been living in an area for more than 2 hours
+
+### Fixes
+* Graves 'Crouch take items' deleting items if player had no inventory space
 
 ## 4.28.6
 ### Changes
