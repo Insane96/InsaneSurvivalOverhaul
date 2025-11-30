@@ -2,17 +2,18 @@ package insane96mcp.iguanatweaksreborn.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
-import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.TirednessHandler;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Foggy;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -83,8 +84,7 @@ public class ISOCommand {
                 )
                 .then(Commands.literal("test")
                         .executes(context -> {
-                            ISOFallingBlockEntity fallingBlock = new ISOFallingBlockEntity(context.getSource().getLevel(), context.getSource().getPosition().x, context.getSource().getPosition().y, context.getSource().getPosition().z, Blocks.DIRT.defaultBlockState);
-                            context.getSource().getLevel().addFreshEntity(fallingBlock);
+                            FallingBlockEntity.fall(context.getSource().getLevel(), BlockPos.containing(context.getSource().getPosition()), Blocks.DIRT.defaultBlockState);
                             return 1;
                         })));
     }

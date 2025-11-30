@@ -2,9 +2,9 @@ package insane96mcp.iguanatweaksreborn.module.world.explosionoverhaul;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
-import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
+import insane96mcp.insanelib.module.base.betterfallingblocks.BetterFallingBlockAccessor;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -17,6 +17,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
@@ -135,11 +136,10 @@ public class ISOExplosion extends Explosion {
 			block.wasExploded(this.level, BlockPos.containing(this.getPosition()), this);
 			BlockPos blockpos1 = blockpos.immutable();
 			this.level.setBlockAndUpdate(blockpos1, Blocks.AIR.defaultBlockState());
-			ISOFallingBlockEntity fallingBlockEntity = new ISOFallingBlockEntity(this.level, blockpos1.getX() + 0.5f, blockpos1.getY() + 2.0625f, blockpos1.getZ() + 0.5f, blockstate);
-			fallingBlockEntity.time = 1;
-			fallingBlockEntity.source = this.source;
-			this.level.addFreshEntity(fallingBlockEntity);
+			FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(this.level, blockpos1.above(2), blockstate);
 			this.affectedEntities.add(fallingBlockEntity);
+            fallingBlockEntity.time = 1;
+            ((BetterFallingBlockAccessor)fallingBlockEntity).insanelib$setSource(this.source);
 			toClear.add(blockpos);
 		}
 		this.toBlow.removeAll(toClear);
@@ -148,7 +148,7 @@ public class ISOExplosion extends Explosion {
 	public void processEntities() {
 		float affectedEntitiesRadius = this.radius * 2.0F;
 		for (Entity entity : this.affectedEntities) {
-			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof ISOFallingBlockEntity))
+			if (entity.tickCount == 0 && !(entity instanceof PartEntity<?>)  && !(entity instanceof FallingBlockEntity))
 				continue;
 			if (entity.ignoreExplosion())
 				continue;
@@ -162,7 +162,7 @@ public class ISOExplosion extends Explosion {
 			if (d13 == 0.00)
 				continue;
 			//xDistance = xDistance / d13;
-			if (!(entity instanceof ISOFallingBlockEntity))
+			if (!(entity instanceof FallingBlockEntity))
 				yDistance = yDistance / d13;
 			//zDistance = zDistance / d13;
 			double blockDensity = getSeenPercent(this.getPosition(), entity);
@@ -186,12 +186,12 @@ public class ISOExplosion extends Explosion {
 					if (ExplosionOverhaul.knockbackScalesWithSize)
 						d11 *= this.radius;
 					d11 = Math.max(d11, this.radius * 0.05d);
- 					if (entity instanceof ISOFallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
+ 					if (entity instanceof FallingBlockEntity || ExplosionOverhaul.shouldTakeReducedKnockback(entity))
 						d11 *= 0.2d;
 					d11 *= ExplosionOverhaul.getKnockbackMultiplier(this.source);
 					d11 *= ExplosionOverhaul.knockbackMultiplier;
 					d11 = Math.min(d11, 10f);
-					if (entity instanceof ISOFallingBlockEntity) {
+					if (entity instanceof FallingBlockEntity) {
 						d11 = Math.min(d11, 1f);
 						xDistance += this.level.getRandom().nextFloat() - 0.5f;
 						zDistance += this.level.getRandom().nextFloat() - 0.5f;

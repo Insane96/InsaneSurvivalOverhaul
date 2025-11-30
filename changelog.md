@@ -9,6 +9,9 @@
   * Many zombies will be spawned and target a player
   * Only happens if the player has been living in an area for more than 2 hours
 
+### Changes
+* Requires InsaneLib 1.22.0 due to moving ISOFallingBlockEntity to InsaneLib by changing vanilla falling block
+
 ### Fixes
 * Graves 'Crouch take items' deleting items if player had no inventory space
 

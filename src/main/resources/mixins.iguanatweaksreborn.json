@@ -47,6 +47,7 @@
         "EnderManMixin",
         "EntityMixin",
         "ExplosionMixin",
+        "FallingBlockEntityAccessor",
         "FallingBlockEntityMixin",
         "FarmBlockMixin",
         "FireBlockMixin",

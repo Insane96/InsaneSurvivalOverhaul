@@ -3,7 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.world.timber;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
-import insane96mcp.iguanatweaksreborn.entity.ISOFallingBlockEntity;
+import insane96mcp.iguanatweaksreborn.mixin.FallingBlockEntityAccessor;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
@@ -17,7 +17,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -121,8 +121,10 @@ public class TimberTrees extends JsonFeature {
             else
                 horizontalDistance = relative.getZ();
             horizontalDistance *= direction.getAxisDirection().opposite().getStep();
-            BlockPos fallingBlockPos = pos.relative(direction, verticalDistance + horizontalDistance).above(horizontalDistance);
             BlockState state = level.getBlockState(pos);
+            // Logs fall lower (closer to ground), leaves fall higher
+            int verticalOffset = state.is(TIMBER_TRUNKS) ? 0 : horizontalDistance;
+            BlockPos fallingBlockPos = pos.relative(direction, verticalDistance + horizontalDistance).above(verticalOffset);
             if (state.is(BlockTags.LEAVES) && level.getRandom().nextFloat() < treeInfo.decayPercentage) {
                 BlockEntity blockentity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
                 Block.dropResources(state, level, pos, blockentity, event.getPlayer(), ItemStack.EMPTY);
@@ -135,14 +137,14 @@ public class TimberTrees extends JsonFeature {
             }
             if (state.getBlock() instanceof RotatedPillarBlock)
                 state = rotatePillar(state, direction.getAxis());
-            ISOFallingBlockEntity fallingBlock = new ISOFallingBlockEntity(level, fallingBlockPos, state, direction);
+            //TODO Re-integrate direction?
+            FallingBlockEntity fallingBlock = FallingBlockEntityAccessor.ctor(level, Vec3.atCenterOf(fallingBlockPos).x, Vec3.atCenterOf(fallingBlockPos).y + horizontalDistance, Vec3.atCenterOf(fallingBlockPos).z, state);
             if (state.hasBlockEntity()) {
                 //noinspection DataFlowIssue
                 fallingBlock.blockData = level.getBlockEntity(pos).saveWithoutMetadata();
                 if (level.getBlockEntity(pos) instanceof BeehiveBlockEntity beehiveBlockEntity)
                     beehiveBlockEntity.emptyAllLivingFromHive(event.getPlayer(), state, BeehiveBlockEntity.BeeReleaseStatus.BEE_RELEASED);
             }
-            fallingBlock.move(MoverType.SELF, new Vec3(0, 0.1d * horizontalDistance, 0));
             if (state.is(TIMBER_TRUNKS))
                 fallingBlock.setHurtsEntities(0.5f, 20);
             else
