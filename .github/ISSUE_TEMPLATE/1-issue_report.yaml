@@ -85,7 +85,7 @@ body:
       label: Logs / Crash Report
       description: Paste a link to the crash report, if present. Attaching latest.log and debug.log will also help. Use https://mclo.gs
     validations:
-      required: false
+      required: true
 
   - type: markdown
     attributes:
