@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 
-@LoadFeature(module = Modules.Ids.WORLD, description = "Trees fall when cut.")
+@LoadFeature(module = Modules.Ids.WORLD, description = "Trees fall when cut. This feature uses InsaneLib's Better Falling Blocks feature. Disabling that might result in blocks dropping when falling.")
 public class TimberTrees extends JsonFeature {
 
     public static final TagKey<Block> TIMBER_TRUNKS = ISOBlockTagsProvider.create("timber_trunks");
