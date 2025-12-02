@@ -79,8 +79,8 @@ public class TimberTrees extends JsonFeature {
     @Config(name = "Requires #minecraft:axes", description = "Trees will timber only if an item in the minecraft:axes item tag is used")
     public static Boolean requiresAxe = false;
 
-    public TimberTrees(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super(module, enabledByDefault, canBeDisabled);
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
         JSON_CONFIGS.add(new JsonConfig<>("tree_info.json", treeInfos, TREE_INFOS_DEFAULT, TreeInfo.LIST_TYPE));
     }
 
