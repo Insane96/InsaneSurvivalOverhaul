@@ -13,10 +13,13 @@ import insane96mcp.insanelib.data.IdTagMatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -155,112 +158,183 @@ public class TimberTrees extends JsonFeature {
     }
 
     private static List<BlockPos> getTreeBlocks(BlockPos pos, BlockState state, Level level, TreeInfo treeInfo) {
-        List<BlockPos> blocks = new ArrayList<>();
-        boolean foundLeaves = false;
+        Set<BlockPos> visitedBlocks = new HashSet<>();
+        Queue<BlockPos> posToCheck = new ArrayDeque<>();
+
         int checks = 0;
         int logs = 0;
         int sidewaysLogs = 0;
         int maxY = pos.getY();
-        IdTagMatcher validLogs = Objects.requireNonNullElseGet(treeInfo.log, () -> IdTagMatcher.newId(ForgeRegistries.BLOCKS.getKey(state.getBlock()).toString()));
-        //Set<BlockPos> visited = new HashSet<>();
-        Queue<BlockPos> posToCheck = new ArrayDeque<>(); //Queue seem to be faster than ArrayList
-        //Get the block above
-        posToCheck.add(pos.above());
-        BlockPos.MutableBlockPos blockPos = new BlockPos.MutableBlockPos().set(pos);
-        BlockState stateToCheck = level.getBlockState(pos.above());
-        //If the block above is not the same log, check the blocks around
-        if (!validLogs.matchesBlock(stateToCheck)) {
-            for (Direction dir : XZ_DIRECTIONS) {
-                stateToCheck = level.getBlockState(pos.above().relative(dir));
-                if (validLogs.matchesBlock(stateToCheck)) {
-                    blocks.add(blockPos.immutable());
-                    posToCheck.add(blockPos.immutable());
-                    logs++;
-                    break;
-                }
-            }
+        boolean foundLeaves = false;
+        int debugCounter = 0;
+
+        IdTagMatcher validLogs = Objects.requireNonNullElseGet(treeInfo.log,
+            () -> IdTagMatcher.newId(ForgeRegistries.BLOCKS.getKey(state.getBlock()).toString()));
+        IdTagMatcher validLeaves = treeInfo.leaves;
+
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+        BlockPos startPos = pos.immutable();
+
+        // Initialize: check if there's a log above or around
+        if (!initializeTreeSearch(pos, level, validLogs, visitedBlocks, posToCheck)) {
+            return new ArrayList<>();
         }
-        else
-            logs++;
 
-        if (logs == 0)
-            return blocks;
+        logs++;
+        visitedBlocks.add(startPos);
+        posToCheck.add(startPos);
 
-        blocks.add(blockPos.immutable());
-        posToCheck.add(blockPos.immutable());
-        IdTagMatcher validLeaves = null;
-        if (treeInfo.leaves != null)
-            validLeaves = treeInfo.leaves;
-        int i = 0;
-        while (checks < 1536 && !posToCheck.isEmpty()) {
-            List<BlockPos> posToCheckTmp = new ArrayList<>(posToCheck);
-            posToCheck.clear();
-            for (BlockPos p : posToCheckTmp) {
-                BlockState currState = level.getBlockState(p);
-                Iterable<BlockPos> positionsToLoop = getPositionsToCheck(p, currState);
-                for (BlockPos positionToLoop : positionsToLoop) {
-                    blockPos.set(positionToLoop);
-                    stateToCheck = level.getBlockState(blockPos);
-                    if (stateToCheck.isAir())
-                        continue;
-                    //if (visited.contains(positionToLoop))
-                        //continue;
-                    //visited.add(positionToLoop);
-                    BlockPos posImmutable = blockPos.immutable();
-                    if (blocks.contains(posImmutable))
-                        continue;
-                    boolean isLeaves = stateToCheck.is(BlockTags.LEAVES);
-                    boolean isValidLeaves = validLeaves != null && validLeaves.matchesBlock(stateToCheck.getBlock()) && !stateToCheck.getValue(LeavesBlock.PERSISTENT);
-                    boolean isSameLog = validLogs.matchesBlock(stateToCheck);
-                    boolean isInDistance = xzDistance(posImmutable, pos) <= treeInfo.maxDistanceFromLogs;
-                    boolean isCurrLeaves = currState.is(BlockTags.LEAVES);
-                    boolean isCorrectLeavesDistance = isLeaves && isCurrLeaves && (stateToCheck.getValue(LeavesBlock.DISTANCE) > currState.getValue(LeavesBlock.DISTANCE) || stateToCheck.getValue(LeavesBlock.DISTANCE) == 7);
-                    boolean isAttached = stateToCheck.is(ATTACHED_BLOCKS);
-                    if (isAttached) {
-                        blocks.add(posImmutable);
-                        continue;
+        // Main search loop
+        while (checks < 10000 && !posToCheck.isEmpty()) {
+            BlockPos currentPos = posToCheck.poll();
+            BlockState currentState = level.getBlockState(currentPos);
+
+            for (BlockPos neighbor : getPositionsToCheck(currentPos, currentState)) {
+                if (++checks >= 10000) break;
+
+                mutablePos.set(neighbor);
+                BlockState neighborState = level.getBlockState(mutablePos);
+
+                if (neighborState.isAir()) continue;
+
+                BlockPos neighborImmutable = mutablePos.immutable();
+                if (visitedBlocks.contains(neighborImmutable)) continue;
+
+                // Check if this block should be added to the tree
+                BlockCheckResult result = checkBlock(neighborImmutable, neighborState, currentState,
+                    pos, validLogs, validLeaves, treeInfo);
+
+                if (result.shouldAdd) {
+                    visitedBlocks.add(neighborImmutable);
+
+                    if (!result.isAttached) {
+                        posToCheck.add(neighborImmutable);
                     }
-                    if (isLeaves && validLeaves == null) {
-                        validLeaves = IdTagMatcher.newId(ForgeRegistries.BLOCKS.getKey(stateToCheck.getBlock()).toString());
-                        isValidLeaves = true;
-                    }
-                    if ((isSameLog || isValidLeaves) && isInDistance && (!isLeaves || !isCurrLeaves || isCorrectLeavesDistance)) {
-                        blocks.add(posImmutable);
-                        //level.removeBlock(posImmutable, false);
-                        posToCheck.add(posImmutable);
-                        if (!FMLLoader.isProduction()) {
-                            //Display.TextDisplay display = EntityType.TEXT_DISPLAY.create((Level) level);
-                            //display.setPos(posImmutable.getCenter());
-                            //display.setText(Component.literal(i++ + ""));
-                            //level.addFreshEntity(display);
-                        }
-                        if (isValidLeaves)
-                            foundLeaves = true;
-                        if (isSameLog) {
-                            if (stateToCheck.getValue(BlockStateProperties.AXIS) == Direction.Axis.Y)
-                                logs++;
-                            else
-                                sidewaysLogs++;
 
-                            if (posImmutable.getY() > maxY)
-                                maxY = posImmutable.getY();
+                    if (!FMLLoader.isProduction()) {
+                        Display.TextDisplay display = EntityType.TEXT_DISPLAY.create(level);
+                        if (display != null) {
+                            display.setPos(neighborImmutable.getCenter());
+                            int distance = neighborState.is(BlockTags.LEAVES)
+                                ? neighborState.getValue(LeavesBlock.DISTANCE)
+                                : -1;
+                            display.setText(Component.literal(debugCounter++ + ": " + distance));
+                            level.addFreshEntity(display);
                         }
                     }
+
+                    if (result.isValidLeaves) {
+                        foundLeaves = true;
+                        if (validLeaves == null) {
+                            validLeaves = IdTagMatcher.newId(ForgeRegistries.BLOCKS.getKey(neighborState.getBlock()).toString());
+                        }
+                    }
+
+                    if (result.isSameLog) {
+                        if (neighborState.getValue(BlockStateProperties.AXIS) == Direction.Axis.Y) {
+                            logs++;
+                        } else {
+                            sidewaysLogs++;
+                        }
+                        maxY = Math.max(maxY, neighborImmutable.getY());
+                    }
                 }
-                checks++;
             }
-            float logsSidewaysRatio = sidewaysLogs == 0 ? 999 : (float) logs / sidewaysLogs;
-            if (posToCheck.isEmpty()
-                    && (!foundLeaves
-                        || logs + sidewaysLogs < treeInfo.minLogs
-                        || logsSidewaysRatio < treeInfo.logsSidewaysRatio)) {
-                blocks.clear();
-                break;
+
+            // Check if we should early exit
+            if (posToCheck.isEmpty() && !isValidTree(foundLeaves, logs, sidewaysLogs, treeInfo)) {
+                return new ArrayList<>();
             }
         }
-        if (maxY < pos.getY() + 2)
-            blocks.clear();
-        return blocks;
+
+        // Final validation
+        if (maxY < pos.getY() + 2) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(visitedBlocks);
+    }
+
+    private static boolean initializeTreeSearch(BlockPos pos, Level level, IdTagMatcher validLogs,
+                                                 Set<BlockPos> visitedBlocks, Queue<BlockPos> posToCheck) {
+        BlockPos above = pos.above();
+        BlockState aboveState = level.getBlockState(above);
+
+        // Check block directly above
+        if (validLogs.matchesBlock(aboveState)) {
+            return true;
+        }
+
+        // Check blocks around the one above
+        for (Direction dir : XZ_DIRECTIONS) {
+            BlockPos checkPos = above.relative(dir);
+            if (validLogs.matchesBlock(level.getBlockState(checkPos))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static BlockCheckResult checkBlock(BlockPos pos, BlockState state, BlockState currentState,
+                                                BlockPos originPos, IdTagMatcher validLogs,
+                                                IdTagMatcher validLeaves, TreeInfo treeInfo) {
+        BlockCheckResult result = new BlockCheckResult();
+
+        // Check attached blocks (like vines)
+        if (state.is(ATTACHED_BLOCKS)) {
+            result.shouldAdd = true;
+            result.isAttached = true;
+            return result;
+        }
+
+        boolean isLeaves = state.is(BlockTags.LEAVES);
+        result.isSameLog = validLogs.matchesBlock(state);
+
+        // Check if it's valid leaves
+        if (isLeaves && validLeaves != null) {
+            result.isValidLeaves = validLeaves.matchesBlock(state.getBlock())
+                && !state.getValue(LeavesBlock.PERSISTENT);
+        } else if (isLeaves && validLeaves == null) {
+            result.isValidLeaves = true;
+        }
+
+        // Must be either a valid log or valid leaves
+        if (!result.isSameLog && !result.isValidLeaves) {
+            return result;
+        }
+
+        // Check distance constraint
+        if (xzDistance(pos, originPos) > treeInfo.maxDistanceFromLogs) {
+            return result;
+        }
+
+        // Check leaf distance property
+        if (isLeaves && currentState.is(BlockTags.LEAVES)) {
+            int currentDistance = currentState.getValue(LeavesBlock.DISTANCE);
+            int newDistance = state.getValue(LeavesBlock.DISTANCE);
+            if (newDistance <= currentDistance && newDistance != 7) {
+                return result;
+            }
+        }
+
+        result.shouldAdd = true;
+        return result;
+    }
+
+    private static boolean isValidTree(boolean foundLeaves, int logs, int sidewaysLogs, TreeInfo treeInfo) {
+        if (!foundLeaves) return false;
+        if (logs + sidewaysLogs < treeInfo.minLogs) return false;
+
+        float logsSidewaysRatio = sidewaysLogs == 0 ? 999 : (float) logs / sidewaysLogs;
+        return logsSidewaysRatio >= treeInfo.logsSidewaysRatio;
+    }
+
+    private static class BlockCheckResult {
+        boolean shouldAdd = false;
+        boolean isAttached = false;
+        boolean isValidLeaves = false;
+        boolean isSameLog = false;
     }
 
     public static final List<Direction> XZ_DIRECTIONS = List.of(Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.WEST);
@@ -271,7 +345,7 @@ public class TimberTrees extends JsonFeature {
         else
         {
             List<BlockPos> positions = new ArrayList<>();
-            for (Direction d : DIRECTIONS) {
+            for (Direction d : Direction.values()) {
                 positions.add(pos.relative(d));
             }
             return positions;
