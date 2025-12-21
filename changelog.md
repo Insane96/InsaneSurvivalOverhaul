@@ -2,7 +2,7 @@
 
 * Make respawn anchor -> soul pillar require an item to be enabled
 
-## Upcoming
+## 4.29.0
 ### Additions
 * Zombie Siege
   * Like with villages, there's 10% chance each night for a zombie siege to start near the player
