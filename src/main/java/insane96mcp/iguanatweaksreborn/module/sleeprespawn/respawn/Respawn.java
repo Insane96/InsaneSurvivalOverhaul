@@ -7,6 +7,7 @@ import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.setup.registry.SimpleBlockWithItem;
+import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.JsonFeature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
@@ -139,7 +140,8 @@ public class Respawn extends JsonFeature {
 	}
 
 	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
-		if (!level.getGameRules().getBoolean(RULE_RANGEDRESPAWN))
+		if (!Feature.isEnabled(Respawn.class)
+				|| !level.getGameRules().getBoolean(RULE_RANGEDRESPAWN))
 			return Optional.empty();
 
 		Optional<Vec3> newRespawn = looseWorldSpawn(level, player);

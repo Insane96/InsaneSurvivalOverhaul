@@ -14,6 +14,7 @@
 
 ### Fixes
 * Graves 'Crouch take items' deleting items if player had no inventory space
+* Loose respawn not disabling with feature / module disabled
 
 ## 4.28.6
 ### Changes
