@@ -113,7 +113,7 @@ public class StackSizes extends Feature {
     //Food
     @SuppressWarnings("deprecation")
     public static void processFoodStackSizes(boolean isClientSide) {
-        if (foodStackReductionFormula.isEmpty())
+        if (foodStackReductionFormula.isBlank())
             return;
 
         for (Map.Entry<Item, Integer> entry : originalStackSizes.entrySet()) {

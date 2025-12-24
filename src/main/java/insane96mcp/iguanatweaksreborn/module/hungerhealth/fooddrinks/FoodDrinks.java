@@ -193,7 +193,9 @@ public class FoodDrinks extends JsonFeature {
 		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
 		if (food == lastFoodEatenCache)
 			return lastFoodEatenTime;
-		int ticks = (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
+		int ticks = eatingSpeedFormula.isBlank()
+				? -1
+				: (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
 		lastFoodEatenCache = food;
 		//noinspection DataFlowIssue
 		lastFoodEatenTime = ticks >= 0 ? ticks : (food.isFastFood() ? 16 : 32);
@@ -248,9 +250,9 @@ public class FoodDrinks extends JsonFeature {
 			FoodProperties food = item.getFoodProperties();
 			if (processed.contains(food))
 				continue;
-			if (!foodHungerFormula.isEmpty())
+			if (!foodHungerFormula.isBlank())
 				food.nutrition = (int) MCUtils.computeFoodFormula(food, foodHungerFormula);
-			if (!foodSaturationModifierFormula.isEmpty())
+			if (!foodSaturationModifierFormula.isBlank())
 				food.saturationModifier = MCUtils.computeFoodFormula(food, foodSaturationModifierFormula);
 			if (!FMLLoader.isProduction())
 				ISOLogHelper.debug("Food multiplier applied to item " + item.getDescriptionId() + ": hunger: " + food.nutrition + ", saturationMod: " + food.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(food));

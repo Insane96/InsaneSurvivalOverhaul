@@ -96,7 +96,7 @@ public class MCUtils {
     }
 
     /**
-     * Returns the hp regenerated each second
+     * Returns the result of the food formula with EvalEx given hunger, saturation_modifier, effectiveness and fast_food variables
      */
     public static float computeFoodFormula(FoodProperties food, String formula) {
         Expression expression = new Expression(formula);

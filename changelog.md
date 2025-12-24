@@ -2,6 +2,9 @@
 
 * Make respawn anchor -> soul pillar require an item to be enabled
 
+## Upcoming
+* Fixed log error spam with empty food formula
+
 ## 4.29.0
 ### Additions
 * Zombie Siege
