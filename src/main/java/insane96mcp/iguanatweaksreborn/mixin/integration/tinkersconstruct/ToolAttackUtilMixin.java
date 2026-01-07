@@ -8,12 +8,12 @@ import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 
 @Mixin(ToolAttackUtil.class)
 public class ToolAttackUtilMixin {
-	@ModifyExpressionValue(method = "attackEntity(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/entity/Entity;Ljava/util/function/DoubleSupplier;ZLnet/minecraft/world/entity/EquipmentSlot;)Z", at = @At(value = "CONSTANT", args = "floatValue=0.2"), remap = false)
+	@ModifyExpressionValue(method = "performAttack", at = @At(value = "CONSTANT", args = "floatValue=0.2"), remap = false)
 	private static float iguanatweaksreborn$noDamageWhenSpamming(float value) {
 		return PlayerStats.noDamageWhenSpamming() ? 0f : value;
 	}
 
-	@ModifyExpressionValue(method = "attackEntity(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/entity/Entity;Ljava/util/function/DoubleSupplier;ZLnet/minecraft/world/entity/EquipmentSlot;)Z", at = @At(value = "CONSTANT", args = "floatValue=0.8"), remap = false)
+	@ModifyExpressionValue(method = "performAttack", at = @At(value = "CONSTANT", args = "floatValue=0.8"), remap = false)
 	private static float iguanatweaksreborn$noDamageWhenSpamming2(float value) {
 		return PlayerStats.noDamageWhenSpamming() ? 1f : value;
 	}

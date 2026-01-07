@@ -4,6 +4,7 @@
 
 ## Upcoming
 * Fixed log error spam with empty food formula
+* Fixed crash with latest Tinkers' Construct
 
 ## 4.29.0
 ### Additions
