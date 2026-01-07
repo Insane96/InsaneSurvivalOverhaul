@@ -2,7 +2,7 @@
 
 * Make respawn anchor -> soul pillar require an item to be enabled
 
-## Upcoming
+## 4.29.0.1
 * Fixed log error spam with empty food formula
 * Fixed crash with latest Tinkers' Construct
 
