@@ -177,6 +177,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
     compileOnly fg.deobf("curse.maven:quark-243121:5418252")
 
+    compileOnly fg.deobf("curse.maven:kiwi-303657:7289940")
+    compileOnly fg.deobf("curse.maven:passablefoliage-379887:4869702")
+
     // Compile against only the API artifact
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api"))
     // Use the full Curios API jar at runtime

@@ -3,7 +3,7 @@
     "properties": [
         {
             "property": "attribute_modifier",
-            "attribute": "enhancedai:generic.xray_follow_range",
+            "attribute": "enhancedai:xray_follow_range",
             "modifier_name": "More XRay Range for Mobs",
             "operation": "addition",
             "amount": {

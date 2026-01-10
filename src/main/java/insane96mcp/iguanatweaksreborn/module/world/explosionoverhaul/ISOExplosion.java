@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
-import insane96mcp.insanelib.module.base.betterfallingblocks.BetterFallingBlockAccessor;
+import insane96mcp.insanelib.module.base.betterfallingblocks.BetterFallingBlockExtensor;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -139,7 +139,7 @@ public class ISOExplosion extends Explosion {
 			FallingBlockEntity fallingBlockEntity = FallingBlockEntity.fall(this.level, blockpos1.above(2), blockstate);
 			this.affectedEntities.add(fallingBlockEntity);
             fallingBlockEntity.time = 1;
-            ((BetterFallingBlockAccessor)fallingBlockEntity).insanelib$setSource(this.source);
+            ((BetterFallingBlockExtensor)fallingBlockEntity).insanelib$setSource(this.source);
 			toClear.add(blockpos);
 		}
 		this.toBlow.removeAll(toClear);
