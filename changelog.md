@@ -2,7 +2,7 @@
 
 * Make respawn anchor -> soul pillar require an item to be enabled
 
-## Upcoming
+## 4.29.0.2
 * Fixed compat with Enhanced AI v3
 
 ## 4.29.0.1
