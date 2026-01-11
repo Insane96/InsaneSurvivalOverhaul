@@ -52,7 +52,7 @@ public abstract class PlayerMixinSweepingOverhaul extends LivingEntity {
         return original.inflate(1.5f, 0.15f, 1.5f);
     }
 
-    @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", ordinal = 2), remap = false)
+    @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", ordinal = 2))
     public double iguanatweaksreborn$increaseSweepingReach(double original) {
         if (!MiscStats.sweepingOverhaul
                 || !Feature.isEnabled(MiscStats.class))
