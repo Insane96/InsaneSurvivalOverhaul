@@ -1,0 +1,16 @@
+{
+    "target": "#iguanatweaksreborn:zombies",
+    "properties": [
+        {
+            "property": "set_nbt",
+            "path": "IsBaby",
+            "type": "boolean",
+            "value": 0
+        }
+    ],
+    "conditions": [
+        {
+            "condition": "is_baby"
+        }
+    ]
+}

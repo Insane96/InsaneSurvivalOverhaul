@@ -57,7 +57,7 @@ description='''${mod_description}'''
 [[dependencies.${mod_id}]]
     modId="mobspropertiesrandomness"
     mandatory=false
-    versionRange="[5.0.11-beta,)"
+    versionRange="[${mpr_version},)"
     ordering="NONE"
     side="BOTH"
 

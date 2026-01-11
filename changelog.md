@@ -2,6 +2,11 @@
 
 * Make respawn anchor -> soul pillar require an item to be enabled
 
+## 4.29.1.0
+Now requires latest forge 47.4.13
+### Changes
+* Mobs buffs data pack now disables baby zombies
+
 ## 4.29.0.2
 * Fixed compat with Enhanced AI v3
 
