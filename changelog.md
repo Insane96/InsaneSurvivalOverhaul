@@ -1,9 +1,15 @@
 # Changelog
 
-* Make respawn anchor -> soul pillar require an item to be enabled
+* respawn anchor -> soul pillar
+
+## Upcoming
+### Changes
+* Reworked Respawn Obelisk
+  * Now requires an echo shard to enable (get it from Ancient Cities or by breaking Spawners)  
+    When disabled, you'll get the echo shard back
 
 ## 4.29.1.1
-* Fixed crash with latest forge
+* Fixed crash with latest Forge
 
 ## 4.29.1.0
 Now requires latest forge 47.4.13

@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-22T11:49:14.3615652	Tags for minecraft:item mod id iguanatweaksreborn
+// 1.20.1	2026-01-12T10:11:29.9649477	Tags for minecraft:item mod id iguanatweaksreborn
 995391829d61969aa6c4ca0bc5df866e333ce1f7 data/forge/tags/items/armors/boots.json
 c71c91e6cd35b0797ba0b9f3267a45ad9dc72880 data/forge/tags/items/armors/chestplates.json
 ac8aa9bc90f22e6eefe0740dc44b8e63af6d5027 data/forge/tags/items/armors/helmets.json
@@ -23,6 +23,7 @@ e57bd823111eaa738f578286d8e6707bb66f15c3 data/iguanatweaksreborn/tags/items/hud/
 7886b306d2eafd075ee18ae7a6e005a68b2fb112 data/iguanatweaksreborn/tags/items/no_stack_size_changes.json
 ea8fb5ca2917f2ee2be7d67dcf329402d69d1ec4 data/iguanatweaksreborn/tags/items/no_timber.json
 052ffe27257d03d8d8891be763ddd93bc289c2d4 data/iguanatweaksreborn/tags/items/raw_food.json
+3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/iguanatweaksreborn/tags/items/respawn_obelisk_catalyst.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/iguanatweaksreborn/tags/items/snow_slowdown_ignore.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/iguanatweaksreborn/tags/items/spawner_reactivator.json
 c157cdd5b8874bea4777cb5656df05b50e04785e data/iguanatweaksreborn/tags/items/world_immune.json

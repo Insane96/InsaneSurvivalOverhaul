@@ -21,6 +21,7 @@ import insane96mcp.iguanatweaksreborn.module.items.unbreakableitems.UnbreakableI
 import insane96mcp.iguanatweaksreborn.module.misc.tweaks.Tweaks;
 import insane96mcp.iguanatweaksreborn.module.mobs.villager.wanderingtrader.WanderingTrades;
 import insane96mcp.iguanatweaksreborn.module.movement.TerrainSlowdown;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.Tiredness;
 import insane96mcp.iguanatweaksreborn.module.world.CyanFlower;
 import insane96mcp.iguanatweaksreborn.module.world.Sextant;
@@ -152,6 +153,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(PlantsGrowth.MULBERRY)
                 .addOptional(ResourceLocation.parse("upgrade_aquatic:mulberry"));
+
+        tag(Respawn.RESPAWN_OBELISK_CATALYST)
+                .add(Items.ECHO_SHARD);
 
         tag(MiscItem.HAS_TOOLTIP)
                 .add(Items.ARROW, Items.SPECTRAL_ARROW, Fletching.QUARTZ_ARROW_ITEM.get(), Fletching.DIAMOND_ARROW_ITEM.get(), Fletching.EXPLOSIVE_ARROW_ITEM.get(), Fletching.ICE_ARROW_ITEM.get(), Fletching.TORCH_ARROW_ITEM.get())

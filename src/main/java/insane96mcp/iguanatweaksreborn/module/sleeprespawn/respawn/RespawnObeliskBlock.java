@@ -5,17 +5,14 @@ import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.criterion.ISOTriggers;
 import insane96mcp.iguanatweaksreborn.utils.ISOLogHelper;
-import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.MCUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,8 +21,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.CollisionGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -42,8 +42,8 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class RespawnObeliskBlock extends Block {
-    public static final String REQUIRES_CATALYST_LANG = InsaneSO.MOD_ID + ".requires_catalyst";
-    public static final String OBELISK_DISABLED = InsaneSO.MOD_ID + ".obelisk_disabled";
+    public static final String REQUIRES_CATALYST_LANG = InsaneSO.lang("requires_catalyst");
+    public static final String OBELISK_DISABLED_LANG = InsaneSO.lang("obelisk_disabled");
 
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
@@ -79,29 +79,26 @@ public class RespawnObeliskBlock extends Block {
 
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
         boolean enabled = state.getValue(ENABLED);
-        if (!enabled) {
-            if (hasCatalysts(level, pos) || !Respawn.respawnObelisksRequireCatalystBlocks) {
-                enable(player, level, pos, state);
-                enabled = true;
-            }
-            else if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
-                player.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), true);
-                for (Vec3i catalystPos : CATALYST_RELATIVE_POSITIONS) {
-                    ((ServerLevel) level).sendParticles(ParticleTypes.WAX_ON, (double)pos.getX() + 0.5D + (double)catalystPos.getX(), (double)pos.getY() + 0.5d + (double)catalystPos.getY(), (double)pos.getZ() + 0.5D + (double)catalystPos.getZ(), 10, 0.2D, 0.2D, 0.2D, 0D);
-                }
-            }
-        }
         if (enabled) {
             if (player.isCrouching()) {
                 disable(player, level, pos, state, true);
                 return InteractionResult.SUCCESS;
             }
-            else if (player instanceof ServerPlayer serverPlayer && (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition()))) {
-                trySaveOldSpawn(serverPlayer);
-                serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
-                level.playSound(null, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                ISOTriggers.ACTIVATE_RESPAWN_OBELISK.trigger(serverPlayer);
+        }
+        else {
+            if (player.getItemInHand(hand).is(Respawn.RESPAWN_OBELISK_CATALYST)) {
+                enable(player, level, pos, state);
+                player.getItemInHand(hand).shrink(1);
+                if (player instanceof ServerPlayer serverPlayer && (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition()))) {
+                    trySaveOldSpawn(serverPlayer);
+                    serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
+                    level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    ISOTriggers.ACTIVATE_RESPAWN_OBELISK.trigger(serverPlayer);
+                }
                 return InteractionResult.SUCCESS;
+            }
+            else if (player instanceof  ServerPlayer serverPlayer && hand == InteractionHand.MAIN_HAND) {
+                serverPlayer.displayClientMessage(Component.translatable(REQUIRES_CATALYST_LANG), false);
             }
         }
         return InteractionResult.PASS;
@@ -123,11 +120,13 @@ public class RespawnObeliskBlock extends Block {
         level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         if (entity instanceof ServerPlayer serverPlayer) {
             if (showDisabledMessage)
-                serverPlayer.displayClientMessage(Component.translatable(OBELISK_DISABLED), false);
+                serverPlayer.displayClientMessage(Component.translatable(OBELISK_DISABLED_LANG), false);
             if (!trySetOldSpawn(serverPlayer)) {
                 serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0f, false, false);
             }
         }
+        ItemEntity shard = new ItemEntity(level, pos.getCenter().x, pos.getY() + 1, pos.getCenter().z, new ItemStack(Items.ECHO_SHARD));
+        level.addFreshEntity(shard);
     }
 
     @Override
@@ -159,36 +158,9 @@ public class RespawnObeliskBlock extends Block {
     }
 
     public static void onObeliskRespawn(Player player, Level level, BlockPos respawnPos) {
-        if (Respawn.respawnObelisksRequireCatalystBlocks) {
-            BlockPos.MutableBlockPos relativePos = new BlockPos.MutableBlockPos();
-            for (Vec3i rel : CATALYST_RELATIVE_POSITIONS) {
-                relativePos.set(respawnPos).move(rel);
-                if (!isBlockCatalyst(level.getBlockState(relativePos).getBlock()))
-                    continue;
-                double chance = getCatalystBlockChanceToBreak(level.getBlockState(relativePos).getBlock());
-                if (chance > 0d && level.getRandom().nextDouble() < chance) {
-                    level.destroyBlock(relativePos, false);
-                }
-                //Try to break only one block
-                break;
-            }
-            if (!hasCatalysts(level, respawnPos) && Respawn.respawnObelisksRequireCatalystBlocks)
-                disable(player, level, respawnPos, level.getBlockState(respawnPos), true);
-        }
         for (ISOMobEffectInstance ISOMobEffectInstance : Respawn.respawnObeliskEffects) {
             player.addEffect(ISOMobEffectInstance.getMobEffectInstance());
         }
-    }
-
-    public static boolean hasCatalysts(Level level, BlockPos pos) {
-        BlockPos.MutableBlockPos relativePos = new BlockPos.MutableBlockPos();
-        for (Vec3i rel : CATALYST_RELATIVE_POSITIONS) {
-            relativePos.set(pos).move(rel);
-            if (isBlockCatalyst(level.getBlockState(relativePos).getBlock())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -239,14 +211,5 @@ public class RespawnObeliskBlock extends Block {
 
     public static int lightLevel(BlockState state) {
         return state.getValue(ENABLED) ? 15 : 7;
-    }
-
-    public static boolean isBlockCatalyst(Block block) {
-        return Respawn.respawnObeliskCatalysts.stream().anyMatch(idTagValue -> idTagValue.id.matchesBlock(block));
-    }
-
-    public static double getCatalystBlockChanceToBreak(Block block) {
-        Optional<IdTagValue> catalyst = Respawn.respawnObeliskCatalysts.stream().filter(idTagValue -> idTagValue.id.matchesBlock(block)).findFirst();
-        return catalyst.map(idTagValue -> idTagValue.value).orElse(0d);
     }
 }

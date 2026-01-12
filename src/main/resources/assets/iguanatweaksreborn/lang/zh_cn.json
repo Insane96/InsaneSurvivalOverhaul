@@ -213,7 +213,6 @@
 	"iguanatweaksreborn.player_killer": "%s 的杀手 (%s)",
 
 	"iguanatweaksreborn.loose_bed_respawn_point_set": "你的重生点不精确，你将在以床为中心的半径范围内重生。",
-	"iguanatweaksreborn.requires_catalyst": "无法激活。方尖碑至少需要一个催化剂方块",
 	"iguanatweaksreborn.obelisk_disabled": "重生方尖碑已禁用。玩家的重生点已设置为他们上次的床，如果他们没有床则重置",
 	"iguanatweaksreborn.fail_respawn_obelisk": "你无法在方尖碑重生，因为它已被禁用。",
 	"iguanatweaksreborn.set_old_respawn": "你的旧重生点已设置。如果你的方尖碑被禁用，你将在此重生。",

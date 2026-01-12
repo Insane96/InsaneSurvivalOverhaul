@@ -3,6 +3,7 @@ package insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn;
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.data.ISOMobEffectInstance;
 import insane96mcp.iguanatweaksreborn.data.generator.ISOBlockTagsProvider;
+import insane96mcp.iguanatweaksreborn.data.generator.ISOItemTagsProvider;
 import insane96mcp.iguanatweaksreborn.module.Modules;
 import insane96mcp.iguanatweaksreborn.module.misc.Packs;
 import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
@@ -13,11 +14,11 @@ import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
-import insane96mcp.insanelib.data.IdTagValue;
 import insane96mcp.insanelib.util.LogHelper;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -30,6 +31,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,7 +41,10 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -53,6 +58,8 @@ import java.util.Optional;
 @LoadFeature(module = Modules.Ids.SLEEP_RESPAWN, description = "Changes to respawning. Adds the doLooseRespawn gamerule that can disable the loose spawn range")
 public class Respawn extends JsonFeature {
 	public static final TagKey<Block> RESPAWN_OBELISK_BLOCKS_TO_ROT = ISOBlockTagsProvider.create("structures/respawn_obelisk/blocks_to_rot");
+	public static final TagKey<Item> RESPAWN_OBELISK_CATALYST = ISOItemTagsProvider.create("respawn_obelisk_catalyst");
+	public static final String RESPAWN_OBELISK_CATALYST_LANG = InsaneSO.lang("respawn_obelisk_catalyst");
 	public static final RegistryObject<MobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	public static final String FAIL_RESPAWN_OBELISK_LANG = InsaneSO.MOD_ID + ".fail_respawn_obelisk";
@@ -76,25 +83,6 @@ public class Respawn extends JsonFeature {
 	public static Boolean respawnObelisks = true;
     @Config(description = "If true, sleeping a bed when sneaking will overwrite obelisk spawn point")
     public static Boolean allowObeliskSpawnPointOverwriteWithBedsSneaking = true;
-    @Config(description = "If true, respawn obelisks will require (and consume) precious blocks to let you respawn")
-    public static Boolean respawnObelisksRequireCatalystBlocks = false;
-
-	public static final List<IdTagValue> RESPAWN_OBELISK_CATALYSTS_DEFAULT = List.of(
-			IdTagValue.newId("minecraft:iron_block", 0.75d),
-			IdTagValue.newId("minecraft:gold_block", 0.3d),
-			IdTagValue.newId("caverns_and_chasms:silver_block", 0.3d),
-			IdTagValue.newId("caverns_and_chasms:sanguine_block", 0.25d),
-			IdTagValue.newId("iguanatweaksexpanded:durium_block", 0.075d),
-			IdTagValue.newId("minecraft:diamond_block", 0.05d),
-			IdTagValue.newId("iguanatweaksexpanded:keego_block", 0.05d),
-			IdTagValue.newId("iguanatweaksexpanded:quaron_block", 0.25d),
-			IdTagValue.newId("iguanatweaksexpanded:soul_steel_block", 0.05d),
-			IdTagValue.newId("minecraft:emerald_block", 0.35d),
-			IdTagValue.newId("minecraft:netherite_block", 0d),
-			IdTagValue.newId("caverns_and_chasms:necromium_block", 0d)
-	);
-
-	public static final ArrayList<IdTagValue> respawnObeliskCatalysts = new ArrayList<>();
 
 	public static final List<ISOMobEffectInstance> RESPAWN_OBELISK_EFFECTS_DEFAULT = List.of(
 			new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
@@ -119,7 +107,6 @@ public class Respawn extends JsonFeature {
 
 	public Respawn(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super(module, enabledByDefault, canBeDisabled);
-		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_catalysts.json", respawnObeliskCatalysts, RESPAWN_OBELISK_CATALYSTS_DEFAULT, IdTagValue.LIST_TYPE));
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 		InsaneSO.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", () -> this.isEnabled() && !Packs.disableAllDataPacks && respawnObelisks);
 	}
@@ -305,5 +292,15 @@ public class Respawn extends JsonFeature {
 			return;
 
 		event.modifyVisibility(-128d);
+	}
+
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public void onTooltip(ItemTooltipEvent event) {
+		if (!this.isEnabled()
+				|| !event.getItemStack().is(RESPAWN_OBELISK_CATALYST))
+			return;
+
+		event.getToolTip().add(Component.translatable(RESPAWN_OBELISK_CATALYST_LANG).withStyle(ChatFormatting.DARK_PURPLE));
 	}
 }
