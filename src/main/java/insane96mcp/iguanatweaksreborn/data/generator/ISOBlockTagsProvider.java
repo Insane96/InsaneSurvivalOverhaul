@@ -84,7 +84,7 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         //Mod's tags
         tag(Respawn.RESPAWN_OBELISK_BLOCKS_TO_ROT)
-                .add(Blocks.COBBLESTONE).add(Blocks.MOSSY_COBBLESTONE).add(Blocks.STONE_BRICKS).add(Blocks.STONE_BRICK_SLAB).add(Blocks.SANDSTONE).add(Blocks.SANDSTONE_SLAB).add(Blocks.ORANGE_TERRACOTTA).add(Blocks.COBBLESTONE_SLAB).add(Blocks.SNOW_BLOCK).add(Blocks.SNOW).add(Blocks.BLUE_ICE).add(Blocks.DEEPSLATE_BRICKS).add(Blocks.DEEPSLATE_BRICK_SLAB).add(Blocks.COBBLED_DEEPSLATE).add(Blocks.BIRCH_PLANKS).add(Blocks.BIRCH_SLAB).add(Blocks.BIRCH_LOG).add(Blocks.PRISMARINE).add(Blocks.PRISMARINE_BRICKS).add(Blocks.PRISMARINE_BRICK_SLAB);
+                .add(Blocks.COBBLESTONE).add(Blocks.MOSSY_COBBLESTONE).add(Blocks.COBBLESTONE_SLAB).add(Blocks.MOSSY_COBBLESTONE_SLAB);
 
         tag(OBSIDIANS)
                 .add(Blocks.OBSIDIAN).add(Blocks.CRYING_OBSIDIAN);

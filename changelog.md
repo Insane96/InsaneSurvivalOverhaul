@@ -7,6 +7,7 @@
 * Reworked Respawn Obelisk
   * Now requires an echo shard to enable (get it from Ancient Cities or by breaking Spawners)  
     When disabled, you'll get the echo shard back
+  * Structure has been simplified
 
 ## 4.29.1.1
 * Fixed crash with latest Forge

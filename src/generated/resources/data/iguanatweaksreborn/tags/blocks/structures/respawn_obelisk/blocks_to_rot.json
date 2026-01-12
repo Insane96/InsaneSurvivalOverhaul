@@ -2,23 +2,7 @@
   "values": [
     "minecraft:cobblestone",
     "minecraft:mossy_cobblestone",
-    "minecraft:stone_bricks",
-    "minecraft:stone_brick_slab",
-    "minecraft:sandstone",
-    "minecraft:sandstone_slab",
-    "minecraft:orange_terracotta",
     "minecraft:cobblestone_slab",
-    "minecraft:snow_block",
-    "minecraft:snow",
-    "minecraft:blue_ice",
-    "minecraft:deepslate_bricks",
-    "minecraft:deepslate_brick_slab",
-    "minecraft:cobbled_deepslate",
-    "minecraft:birch_planks",
-    "minecraft:birch_slab",
-    "minecraft:birch_log",
-    "minecraft:prismarine",
-    "minecraft:prismarine_bricks",
-    "minecraft:prismarine_brick_slab"
+    "minecraft:mossy_cobblestone_slab"
   ]
 }

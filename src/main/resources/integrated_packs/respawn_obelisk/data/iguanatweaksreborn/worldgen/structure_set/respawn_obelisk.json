@@ -1,31 +1,7 @@
 {
     "structures": [
         {
-            "structure": "iguanatweaksreborn:respawn_obelisk_stonebrick",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_deepslate",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_birch",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_desert",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_jungle",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_ocean",
-            "weight": 1
-        },
-        {
-            "structure": "iguanatweaksreborn:respawn_obelisk_snow",
+            "structure": "iguanatweaksreborn:respawn_obelisk",
             "weight": 1
         }
     ],
