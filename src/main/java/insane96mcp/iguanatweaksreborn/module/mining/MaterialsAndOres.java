@@ -13,7 +13,7 @@ import net.minecraftforge.fml.ModList;
 public class MaterialsAndOres extends Feature {
 	@Config(description = "https://minecraft.wiki/w/Ore_vein")
 	public static Boolean disableOreVeins = true;
-	@Config(description = "Enables a data pack that changes ore generation to be biome based. Less material generate in all the biomes, more in specific biomes.")
+	@Config(description = "Enables a data pack that changes ore generation to be biome based. Slightly less materials will generate in all the biomes, much more in specific biomes. Also removes the vanilla feature of discarding ores if exposed to air.")
 	public static Boolean oreGenerationOverhaul = true;
 	@Config(description = "Enables a data pack that backports diamonds generation from 1.20.2. Disables itself if Terralith is installed")
 	public static Boolean diamondGenerationBackport = true;

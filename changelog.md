@@ -2,6 +2,11 @@
 
 * respawn anchor -> soul pillar
 
+## Upcoming
+### Changes
+* Ore generation data pack
+  * Increased ores generated in all biomes
+
 ## 4.30.0.0
 ### Changes
 * Reworked Respawn Obelisk
