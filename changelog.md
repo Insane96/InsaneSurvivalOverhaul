@@ -2,7 +2,7 @@
 
 * respawn anchor -> soul pillar
 
-## Upcoming
+## 4.30.0.0
 ### Changes
 * Reworked Respawn Obelisk
   * Now requires an echo shard to enable (get it from Ancient Cities or by breaking Spawners)  
