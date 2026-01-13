@@ -12,10 +12,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.command.EnumArgument;
 
@@ -79,6 +85,59 @@ public class ISOCommand {
                                 });
                                 context.getSource().getEntity().sendSystemMessage(component.get().append("]"));
                             });
+                            return 1;
+                        })
+                )
+                .then(Commands.literal("count_ores_in_chunk")
+                        .executes(context -> {
+                            if (!(context.getSource().getEntity() instanceof ServerPlayer player))
+                                return 0;
+
+                            Level level = player.level();
+                            ChunkPos chunkPos = new ChunkPos(player.blockPosition());
+                            ChunkAccess chunk = level.getChunk(chunkPos.x, chunkPos.z);
+
+                            java.util.Map<net.minecraft.world.level.block.Block, Integer> oreCounts = new java.util.HashMap<>();
+                            int minY = level.getMinBuildHeight();
+                            int maxY = level.getMaxBuildHeight();
+
+                            for (int x = 0; x < 16; x++) {
+                                for (int z = 0; z < 16; z++) {
+                                    for (int y = minY; y < maxY; y++) {
+                                        BlockPos pos = new BlockPos(chunkPos.getMinBlockX() + x, y, chunkPos.getMinBlockZ() + z);
+                                        BlockState state = chunk.getBlockState(pos);
+                                        if (ForgeRegistries.BLOCKS.tags().getTag(net.minecraft.tags.BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores"))).contains(state.getBlock())) {
+                                            oreCounts.put(state.getBlock(), oreCounts.getOrDefault(state.getBlock(), 0) + 1);
+                                        }
+                                    }
+                                }
+                            }
+
+                            double centerX = chunkPos.getMinBlockX() + 8.0;
+                            double centerZ = chunkPos.getMinBlockZ() + 8.0;
+                            double centerY = player.getY() + 2.0;
+
+                            StringBuilder oreList = new StringBuilder("Ores in chunk:\n");
+                            int totalOres = 0;
+
+                            // Sort entries by block ResourceLocation
+                            java.util.List<java.util.Map.Entry<net.minecraft.world.level.block.Block, Integer>> sortedEntries =
+                                    new java.util.ArrayList<>(oreCounts.entrySet());
+                            sortedEntries.sort(java.util.Comparator.comparing(entry ->
+                                    ForgeRegistries.BLOCKS.getKey(entry.getKey()).toString()));
+
+                            for (java.util.Map.Entry<net.minecraft.world.level.block.Block, Integer> entry : sortedEntries) {
+                                oreList.append(ForgeRegistries.BLOCKS.getKey(entry.getKey())).append(": ").append(entry.getValue()).append("\n");
+                                totalOres += entry.getValue();
+                            }
+
+                            Display.TextDisplay textDisplay = new Display.TextDisplay(EntityType.TEXT_DISPLAY, level);
+                            textDisplay.setPos(centerX, centerY, centerZ);
+                            textDisplay.setText(Component.literal(oreList.toString()));
+                            level.addFreshEntity(textDisplay);
+
+                            player.sendSystemMessage(Component.literal("Found " + totalOres + " ore blocks in chunk:\n" + oreList.toString()));
+
                             return 1;
                         })
                 )
