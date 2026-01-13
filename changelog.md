@@ -9,7 +9,8 @@
     When disabled, you'll get the echo shard back
   * Structure has been simplified
 * Minor rework to spawners
-  * Spawners no longer give experience or loot when finished spawning, but they drop more experience when broken and still drop loot
+  * Spawners no longer give experience or loot when finished spawning. 
+    But they drop more experience and loot when broken
 
 ## 4.29.1.1
 * Fixed crash with latest Forge

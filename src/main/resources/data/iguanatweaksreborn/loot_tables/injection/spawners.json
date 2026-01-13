@@ -10,7 +10,11 @@
             ]
         },
         {
-            "rolls": 1,
+            "rolls": {
+                "type": "minecraft:binomial",
+                "n": 3,
+                "p": 0.8
+            },
             "entries": [
                 {
                     "type": "minecraft:item",
