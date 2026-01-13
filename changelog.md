@@ -8,6 +8,8 @@
   * Now requires an echo shard to enable (get it from Ancient Cities or by breaking Spawners)  
     When disabled, you'll get the echo shard back
   * Structure has been simplified
+* Minor rework to spawners
+  * Spawners no longer give experience or loot when finished spawning, but they drop more experience when broken and still drop loot
 
 ## 4.29.1.1
 * Fixed crash with latest Forge

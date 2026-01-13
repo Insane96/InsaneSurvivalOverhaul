@@ -93,9 +93,9 @@ public class Spawners extends JsonFeature {
 	@Config(min = 1, name = "Empowered.Delay", description = "Spawning Delay (in ticks) when the Spawner is empowered.")
 	public static MinMax empoweredDelay = new MinMax(150, 300);
 	@Config(min = 0, name = "Empowered.Experience Reward", description = "When the Spawner stops being empowered, will generate this amount of experience")
-	public static MinMax empoweredExperienceReward = new MinMax(150, 200);
+	public static MinMax empoweredExperienceReward = new MinMax(0);
 	@Config(name = "Empowered.Loot Reward", description = "When the Spawner stops being empowered, will generate loot from the iguanatweaksreborn:empowered_spawner loot table")
-	public static Boolean empoweredLootReward = true;
+	public static Boolean empoweredLootReward = false;
 	@Config(name = "Empowered.Sound effect", description = "When the Spawner stops being empowered, will play a sound effect")
 	public static Boolean empoweredSoundEffect = true;
 
