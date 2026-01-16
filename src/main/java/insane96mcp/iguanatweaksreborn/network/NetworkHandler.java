@@ -1,13 +1,15 @@
 package insane96mcp.iguanatweaksreborn.network;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.RespawnPointSelectedMessage;
+import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.RespawnPointsScreenMessage;
 import insane96mcp.iguanatweaksreborn.module.world.spawners.SpawnerStatusSync;
 import insane96mcp.iguanatweaksreborn.network.message.*;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetworkHandler {
-	private static final String PROTOCOL_VERSION = Integer.toString(5);
+	private static final String PROTOCOL_VERSION = Integer.toString(6);
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
 			InsaneSO.location("network_channel"),
 			() -> PROTOCOL_VERSION,
@@ -39,5 +41,7 @@ public class NetworkHandler {
 		CHANNEL.registerMessage(++index, UnfairOneShotActivation.class, UnfairOneShotActivation::encode, UnfairOneShotActivation::decode, UnfairOneShotActivation::handle);
 		CHANNEL.registerMessage(++index, SyncDiscreteNameTags.class, SyncDiscreteNameTags::encode, SyncDiscreteNameTags::decode, SyncDiscreteNameTags::handle);
 		CHANNEL.registerMessage(++index, FoggyEnabledSync.class, FoggyEnabledSync::encode, FoggyEnabledSync::decode, FoggyEnabledSync::handle);
+		CHANNEL.registerMessage(++index, RespawnPointsScreenMessage.class, RespawnPointsScreenMessage::encode, RespawnPointsScreenMessage::decode, RespawnPointsScreenMessage::handle);
+		CHANNEL.registerMessage(++index, RespawnPointSelectedMessage.class, RespawnPointSelectedMessage::encode, RespawnPointSelectedMessage::decode, RespawnPointSelectedMessage::handle);
 	}
 }

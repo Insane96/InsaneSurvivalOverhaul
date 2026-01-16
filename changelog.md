@@ -1,6 +1,7 @@
 # Changelog
 
-* respawn anchor -> soul pillar
+* respawn obelisk -> soul pillar
+* Percentage items dropped instead of lost + durability penalty
 
 ## Upcoming
 ### Changes
