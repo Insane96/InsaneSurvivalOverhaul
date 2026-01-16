@@ -23,7 +23,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -403,9 +402,8 @@ public class Livestock extends Feature {
 			return;
 
 		Player player = event.getEntity();
-		InteractionHand hand = event.getHand();
-		ItemStack equipped = player.getItemInHand(hand);
-		if (equipped.isEmpty() || equipped.getItem() == Items.AIR)
+		ItemStack equipped = player.getItemInHand(event.getHand());
+		if (equipped.isEmpty())
 			return;
 		Item item = equipped.getItem();
 		if ((!FluidUtil.getFluidHandler(equipped).isPresent() || !FluidStack.loadFluidStackFromNBT(equipped.getTag()).isEmpty()) && (!(living instanceof MushroomCow) || item != Items.BOWL))
