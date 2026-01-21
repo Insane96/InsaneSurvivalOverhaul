@@ -15,16 +15,12 @@ import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import insane96mcp.insanelib.base.config.MinMax;
 import insane96mcp.insanelib.util.LogHelper;
-import insane96mcp.insanelib.util.ModNBTData;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -35,7 +31,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -68,8 +63,6 @@ public class Respawn extends JsonFeature {
 	public static final RegistryObject<MobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	public static final String FAIL_RESPAWN_OBELISK_LANG = InsaneSO.MOD_ID + ".fail_respawn_obelisk";
-
-	public static ResourceLocation RESPAWN_POINTS;
 
 	public static final String LOOSE_WORLD_RESPAWN_POINT = InsaneSO.lang("loose_world_respawn_point");
 	public static final String LOOSE_BED_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
@@ -116,8 +109,6 @@ public class Respawn extends JsonFeature {
 		super(module, enabledByDefault, canBeDisabled);
 		JSON_CONFIGS.add(new JsonFeature.JsonConfig<>("respawn_obelisk_effects.json", respawnObeliskEffects, RESPAWN_OBELISK_EFFECTS_DEFAULT, ISOMobEffectInstance.LIST_TYPE));
 		InsaneSO.addServerPack("respawn_obelisk", "Insane's Survival Overhaul Respawn Obelisk", () -> this.isEnabled() && !Packs.disableAllDataPacks && respawnObelisks);
-
-		RESPAWN_POINTS = this.createDataKey("respawn_points");
 	}
 
 	@Override
@@ -248,11 +239,6 @@ public class Respawn extends JsonFeature {
 		RespawnObeliskBlock.onObeliskRespawn(player, player.level(), pos);
 	}
 
-	public static void respawnAt(ServerPlayer player, BlockPos pos) {
-		player.level().getBlockState(pos).getRespawnPosition(player.getType(), player.level(), pos, 0f, null);
-		RespawnObeliskBlock.onObeliskRespawn(player, player.level(), pos);
-	}
-
 	@SubscribeEvent
 	public void onSetRespawn(PlayerSetSpawnEvent event) {
 		if (!this.isEnabled()
@@ -306,34 +292,6 @@ public class Respawn extends JsonFeature {
 			return;
 
 		event.modifyVisibility(-128d);
-	}
-
-	public static void addRespawnPoint(Player player, Component name, BlockPos pos) {
-		ListTag listTag = ModNBTData.getListPersisted(player, RESPAWN_POINTS, CompoundTag.TAG_COMPOUND);
-		RespawnPoint respawnPoint = new RespawnPoint(name, pos);
-		listTag.add(respawnPoint.writeToNBT());
-		ModNBTData.putPersisted(player, RESPAWN_POINTS, listTag);
-	}
-
-	public static void removeRespawnPoint(Player player, BlockPos pos) {
-		ListTag listTag = ModNBTData.getListPersisted(player, RESPAWN_POINTS, CompoundTag.TAG_COMPOUND);
-		listTag.removeIf(tag
-				-> tag instanceof CompoundTag compoundTag && RespawnPoint.readFromNBT(compoundTag).pos().equals(pos));
-	}
-
-	public static void clearRespawnPoints(Player player) {
-		ListTag listTag = ModNBTData.getListPersisted(player, RESPAWN_POINTS, CompoundTag.TAG_COMPOUND);
-		listTag.clear();
-		ModNBTData.putPersisted(player, RESPAWN_POINTS, listTag);
-	}
-
-	public static List<RespawnPoint> getRespawnPoints(Player player) {
-		ListTag listTag = ModNBTData.getListPersisted(player, RESPAWN_POINTS, CompoundTag.TAG_COMPOUND);
-		return listTag.stream().map(tag -> {
-            if (!(tag instanceof CompoundTag compoundTag))
-				return null;
-			return RespawnPoint.readFromNBT(compoundTag);
-        }).toList();
 	}
 
 	@SubscribeEvent

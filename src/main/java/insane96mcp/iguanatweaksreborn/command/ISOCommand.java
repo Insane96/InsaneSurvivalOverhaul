@@ -2,8 +2,6 @@ package insane96mcp.iguanatweaksreborn.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.Respawn;
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.RespawnPointsScreenMessage;
 import insane96mcp.iguanatweaksreborn.module.sleeprespawn.tiredness.TirednessHandler;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Foggy;
 import insane96mcp.iguanatweaksreborn.module.world.weather.Weather;
@@ -18,8 +16,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -143,14 +143,7 @@ public class ISOCommand {
                 )
                 .then(Commands.literal("test")
                         .executes(context -> {
-                            if (!(context.getSource().getEntity() instanceof ServerPlayer player))
-                                return 0;
-                            Respawn.clearRespawnPoints(player);
-                            for (int i = 0; i < 3; i++) {
-                                Respawn.addRespawnPoint(player, Component.literal("respawn " + i), BlockPos.containing(player.blockPosition().getX() + i, player.blockPosition().getY(), player.blockPosition().getZ() + i));
-                            }
-                            RespawnPointsScreenMessage.send(player);
-                            Respawn.clearRespawnPoints(player);
+                            FallingBlockEntity.fall(context.getSource().getLevel(), BlockPos.containing(context.getSource().getPosition()), Blocks.DIRT.defaultBlockState);
                             return 1;
                         })));
     }

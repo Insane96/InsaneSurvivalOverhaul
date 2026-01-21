@@ -1,7 +1,5 @@
 package insane96mcp.iguanatweaksreborn.network;
 
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.RespawnChooserScreen;
-import insane96mcp.iguanatweaksreborn.module.sleeprespawn.respawn.RespawnPoint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,8 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
-
-import java.util.List;
 
 public class ClientNetworkHandler {
     public static void handleSyncInvulnerableTimeMessage(int entityId, int invulnerableTime) {
@@ -64,9 +60,5 @@ public class ClientNetworkHandler {
         else {
             level.addParticle(ParticleTypes.EXPLOSION_EMITTER, x, y, z, 0.0D, 0.0D, 0.0D);
         }
-    }
-
-    public static void handleRespawnPointsScreenMessage(List<RespawnPoint> respawnPoints) {
-        Minecraft.getInstance().setScreen(new RespawnChooserScreen(respawnPoints));
     }
 }
