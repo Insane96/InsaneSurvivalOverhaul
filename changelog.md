@@ -7,6 +7,9 @@
 * Ore generation data pack
   * Increased ores generated in all biomes
 
+### Fixes
+* Piercing damage killing twice
+
 ## 4.30.0.0
 ### Changes
 * Reworked Respawn Obelisk

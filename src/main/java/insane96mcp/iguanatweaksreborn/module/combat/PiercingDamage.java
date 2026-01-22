@@ -8,8 +8,11 @@ import insane96mcp.iguanatweaksreborn.setup.ISORegistries;
 import insane96mcp.iguanatweaksreborn.utils.MCUtils;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
+import insane96mcp.insanelib.base.Module;
+import insane96mcp.insanelib.util.ModNBTData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -34,6 +37,14 @@ public class PiercingDamage extends Feature {
 
 	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ISODamageTypeTagsProvider.create("piercing_damage_type");
 	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ISODamageTypeTagsProvider.create("doesnt_trigger_piercing");
+
+	public static ResourceLocation SHOULD_STOP_HURT;
+
+	@Override
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
+		SHOULD_STOP_HURT = this.createDataKey("should_stop_hurt");
+	}
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
 		for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {
@@ -67,8 +78,10 @@ public class PiercingDamage extends Feature {
 			amount *= f * f;
 		}
 
-		MCUtils.attackEntityIgnoreInvFrames(piercingDamageSource, amount, event.getEntity(), event.getEntity(), true);
-		if (event.getEntity().isDeadOrDying())
+		boolean ret = MCUtils.attackEntityIgnoreInvFrames(piercingDamageSource, amount, event.getEntity(), event.getEntity(), true);
+		if (event.getEntity().isDeadOrDying()) {
 			event.setCanceled(true);
+			ModNBTData.put(event.getEntity(), SHOULD_STOP_HURT, ret);
+		}
 	}
 }

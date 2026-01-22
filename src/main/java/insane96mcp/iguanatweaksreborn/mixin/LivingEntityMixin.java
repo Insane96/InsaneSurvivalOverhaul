@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.iguanatweaksreborn.event.ISOEventFactory;
+import insane96mcp.iguanatweaksreborn.module.combat.PiercingDamage;
 import insane96mcp.iguanatweaksreborn.module.combat.RegeneratingAbsorption;
 import insane96mcp.iguanatweaksreborn.module.combat.Shields;
 import insane96mcp.iguanatweaksreborn.module.experience.enchantments.EnchantmentsFeature;
@@ -222,5 +223,13 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if (!Feature.isEnabled(Tweaks.class))
             return original;
         return Tweaks.frozenMovementSpeedModifier.floatValue();
+    }
+
+    @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V", shift = At.Shift.AFTER), cancellable = true)
+    public void iguanatweaksreborn$cancelOnDead(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        if (ModNBTData.contains((LivingEntity) (Object) this, PiercingDamage.SHOULD_STOP_HURT)) {
+            cir.setReturnValue(ModNBTData.get((LivingEntity) (Object) this, PiercingDamage.SHOULD_STOP_HURT, Boolean.class));
+            ModNBTData.remove((LivingEntity) (Object) this, PiercingDamage.SHOULD_STOP_HURT);
+        }
     }
 }

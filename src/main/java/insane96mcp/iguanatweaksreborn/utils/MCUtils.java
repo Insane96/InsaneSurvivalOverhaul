@@ -40,30 +40,28 @@ public class MCUtils {
     private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier("Insane's Survival Reimagined Anti-Knockback", 1f, AttributeModifier.Operation.ADDITION);
 
     //Stolen from Tinkers Construct ToolAttackUtil
-    public static void attackEntityIgnoreInvFrames(DamageSource source, float damage, Entity target, @Nullable LivingEntity living, boolean noKnockback) {
+    public static boolean attackEntityIgnoreInvFrames(DamageSource source, float damage, Entity target, @Nullable LivingEntity living, boolean noKnockback) {
         Optional<AttributeInstance> knockbackResistance = getKnockbackAttribute(living);
         // store last damage before secondary attack
         float oldLastDamage = living == null ? 0 : living.lastHurt;
 
         // prevent knockback in secondary attacks, if requested
-        if (noKnockback) {
+        if (noKnockback)
             knockbackResistance.ifPresent(MCUtils::disableKnockback);
-        }
 
         // set hurt resistance time to 0 because we always want to deal damage in traits
         int lastInvulnerableTime = target.invulnerableTime;
         target.invulnerableTime = 0;
-        target.hurt(source, damage);
+        boolean ret = target.hurt(source, damage);
         target.invulnerableTime = lastInvulnerableTime; // reset to the old time so bows work right
         // set total received damage, important for AI and stuff
-        if (living != null) {
+        if (living != null)
             living.lastHurt += oldLastDamage;
-        }
 
         // remove no knockback marker
-        if (noKnockback) {
+        if (noKnockback)
             knockbackResistance.ifPresent(MCUtils::enableKnockback);
-        }
+        return ret;
     }
 
     /** Gets the knockback attribute instance if the modifier is not already present */
