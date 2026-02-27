@@ -1,6 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
-import insane96mcp.insanesurvivaloverhaul.InsaneSurvivalOverhaul;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -15,7 +15,7 @@ public class ISORegistries {
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
 
     private static <R> DeferredRegister<R> createRegistry(Registry<R> registry) {
-        DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSurvivalOverhaul.MOD_ID);
+        DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSO.MOD_ID);
         REGISTRIES.add(register);
         return register;
     }

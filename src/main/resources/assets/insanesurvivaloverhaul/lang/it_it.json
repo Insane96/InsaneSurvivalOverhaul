@@ -1,0 +1,6 @@
+{
+    "attribute.name.critical_chance": "Possibilità di colpo critico",
+    "attribute.name.critical_damage": "Danno da colpo critico",
+
+    "insanesurvivaloverhaul.shield_blocked_damage": "Danno parato: %f"
+}

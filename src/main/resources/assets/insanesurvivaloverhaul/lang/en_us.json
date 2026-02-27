@@ -1,4 +1,6 @@
 {
     "attribute.name.critical_chance": "Critical Chance",
-    "attribute.name.critical_damage": "Critical Damage"
+    "attribute.name.critical_damage": "Critical Damage",
+
+    "insanesurvivaloverhaul.shield_blocked_damage": "Blocked damage: %f"
 }

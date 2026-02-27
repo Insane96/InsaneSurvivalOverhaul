@@ -13,15 +13,15 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
-@Mod(InsaneSurvivalOverhaul.MOD_ID)
-public class InsaneSurvivalOverhaul {
+@Mod(InsaneSO.MOD_ID)
+public class InsaneSO {
     public static final String MOD_ID = "insanesurvivaloverhaul";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ILModConfig CONFIG;
 
-    public InsaneSurvivalOverhaul(IEventBus eventBus, ModContainer modContainer) {
-        CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.COMMON, eventBus, ISOModules::init, InsaneSurvivalOverhaul.class.getClassLoader());
+    public InsaneSO(IEventBus eventBus, ModContainer modContainer) {
+        CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.COMMON, eventBus, ISOModules::init, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec);
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
@@ -33,5 +33,9 @@ public class InsaneSurvivalOverhaul {
 
     public static ResourceLocation location(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static String lang(String path) {
+        return MOD_ID + "." + path;
     }
 }
