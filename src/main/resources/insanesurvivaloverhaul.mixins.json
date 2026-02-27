@@ -3,7 +3,7 @@
     "package": "insane96mcp.insanesurvivaloverhaul.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
-        
+        "accessor.LivingEntityAccessor"
     ],
     "injectors": {
         "defaultRequire": 1
@@ -13,5 +13,5 @@
     },
     "mixinextras": {
         "minVersion": "0.5.3"
-  }
+    }
 }
