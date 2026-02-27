@@ -8,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvid
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
+import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.HolderLookup;
@@ -37,10 +38,12 @@ public class InsaneSO {
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
 
+        eventBus.addListener(InsaneSO::gatherData);
         eventBus.addListener(NetworkHandler::register);
 
         eventBus.addListener(CriticalRework::addAttribute);
-        eventBus.addListener(InsaneSO::gatherData);
+        eventBus.addListener(RegeneratingAbsorption::addAttribute);
+        eventBus.addListener(RegeneratingAbsorption::registerGuiOverlays);
     }
 
     @SubscribeEvent
