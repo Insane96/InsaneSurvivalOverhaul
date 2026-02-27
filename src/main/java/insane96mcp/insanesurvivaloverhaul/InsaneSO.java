@@ -2,16 +2,27 @@ package insane96mcp.insanesurvivaloverhaul;
 
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod(InsaneSO.MOD_ID)
 public class InsaneSO {
@@ -29,6 +40,32 @@ public class InsaneSO {
         eventBus.addListener(NetworkHandler::register);
 
         eventBus.addListener(CriticalRework::addAttribute);
+        eventBus.addListener(InsaneSO::gatherData);
+    }
+
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent event) {
+        PackOutput output = event.getGenerator().getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+        ISOBlockTagsProvider blockTagsProvider = new ISOBlockTagsProvider(output, lookupProvider, MOD_ID, existingFileHelper);
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                blockTagsProvider
+        );
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISODamageTypeTagsProvider(output, lookupProvider, MOD_ID, existingFileHelper)
+        );
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISOEntityTypeTagsProvider(output, lookupProvider, MOD_ID, existingFileHelper)
+        );
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISOItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper)
+        );
     }
 
     public static ResourceLocation location(String path) {
