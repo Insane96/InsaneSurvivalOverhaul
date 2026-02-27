@@ -1,9 +1,0 @@
-{
-    "values": [
-        "minecraft:pig",
-        {
-            "id": "environmental:deer",
-            "required": false
-        }
-    ]
-}

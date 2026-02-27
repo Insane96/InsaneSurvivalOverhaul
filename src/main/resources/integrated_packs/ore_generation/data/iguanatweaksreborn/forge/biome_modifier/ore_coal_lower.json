@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#forge:is_desert",
-    "features": "iguanatweaksreborn:ore_coal_lower",
-    "step": "underground_ores"
-}

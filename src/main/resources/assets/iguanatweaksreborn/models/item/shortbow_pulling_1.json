@@ -1,6 +1,0 @@
-{
-    "parent": "iguanatweaksreborn:item/shortbow",
-    "textures": {
-        "layer0": "iguanatweaksreborn:item/shortbow_pulling_1"
-    }
-}

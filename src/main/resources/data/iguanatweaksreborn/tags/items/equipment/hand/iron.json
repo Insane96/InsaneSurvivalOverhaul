@@ -1,7 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#iguanatweaksreborn:equipment/hand/tools/iron",
-        "minecraft:iron_sword"
-    ]
-}

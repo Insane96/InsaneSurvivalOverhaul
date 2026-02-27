@@ -1,6 +1,0 @@
-{
-    "pack": {
-        "description": "Prevents crops from dropping more than one seed. Also makes carrots and potatoes drop seeds.",
-        "pack_format": 15
-    }
-}

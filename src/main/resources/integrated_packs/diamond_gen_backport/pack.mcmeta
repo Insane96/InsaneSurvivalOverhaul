@@ -1,6 +1,0 @@
-{
-    "pack": {
-        "description": "Backports 1.20.2 diamond ore generation",
-        "pack_format": 15
-    }
-}

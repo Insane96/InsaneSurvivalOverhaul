@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#forge:is_plains",
-    "features": "iguanatweaksreborn:wild_wheat",
-    "step": "vegetal_decoration"
-}

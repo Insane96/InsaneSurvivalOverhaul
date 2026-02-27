@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#forge:is_desert",
-    "features": "iguanatweaksreborn:wild_potatoes",
-    "step": "vegetal_decoration"
-}

@@ -1,6 +1,0 @@
-{
-    "pack": {
-        "description": "Removes the charcoal recipe and makes coal require an Iron pickaxe to extract",
-        "pack_format": 15
-    }
-}

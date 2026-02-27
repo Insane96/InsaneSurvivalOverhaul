@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:leather_boots",
-    {
-      "id": "tconstruct:travelers_boots",
-      "required": false
-    }
-  ]
-}

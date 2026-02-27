@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "iguanatweaksreborn:block/respawn_obelisk_bottom",
-    "side": "iguanatweaksreborn:block/respawn_obelisk_side_disabled",
-    "top": "iguanatweaksreborn:block/respawn_obelisk_bottom"
-  }
-}

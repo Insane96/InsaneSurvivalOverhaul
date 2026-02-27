@@ -1,8 +1,0 @@
-{
-    "block": "farmersdelight:tomatoes",
-    "states": [
-        "age=2",
-        "age=1"
-    ],
-    "state_hardness": 1.5
-}

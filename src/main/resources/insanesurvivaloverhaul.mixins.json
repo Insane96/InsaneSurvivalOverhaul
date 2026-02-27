@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "package": "insane96mcp.insanesurvivaloverhaul.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "overwrites": {
+        "requireAnnotations": true
+    },
+    "mixinextras": {
+        "minVersion": "0.5.3"
+  }
+}

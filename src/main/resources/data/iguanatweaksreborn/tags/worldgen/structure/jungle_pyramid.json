@@ -1,9 +1,0 @@
-{
-    "values": [
-        "minecraft:jungle_pyramid",
-        {
-            "id": "#betterjungletemples:better_jungle_temples",
-            "required": false
-        }
-    ]
-}

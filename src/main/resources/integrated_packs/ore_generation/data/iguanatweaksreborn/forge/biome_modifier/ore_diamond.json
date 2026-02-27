@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#minecraft:is_jungle",
-    "features": "iguanatweaksreborn:ore_diamond",
-    "step": "underground_ores"
-}

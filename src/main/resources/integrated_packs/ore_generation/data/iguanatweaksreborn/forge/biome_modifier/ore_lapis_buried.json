@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#iguanatweaksreborn:is_non_snowy_plains",
-    "features": "iguanatweaksreborn:ore_lapis_buried",
-    "step": "underground_ores"
-}

@@ -1,6 +1,0 @@
-{
-    "pack": {
-        "description": "Changes beds to require Cloth and Wool to be crafted and makes zombies drop cloth",
-        "pack_format": 15
-    }
-}

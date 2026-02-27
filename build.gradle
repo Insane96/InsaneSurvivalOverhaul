@@ -1,259 +1,125 @@
 plugins {
-    id 'eclipse'
-    id 'idea'
+    id 'java-library'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'net.neoforged.moddev' version '2.0.140'
+    id 'idea'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 version = mod_version
 group = mod_group_id
 
+repositories {
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+}
+
 base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+neoForge {
+    version = project.neo_version
 
-jarJar.enable()
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
-
-    copyIdeResources = true
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
 
     runs {
-        configureEach {
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
         client {
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            workingDirectory project.file('run')
-            property 'mixin.debug.export', 'true'
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
-            workingDirectory project.file('run-server')
-            args '--nogui'
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
-            workingDirectory project.file('run-data')
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
 
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
         }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-mixin {
-    add sourceSets.main, "mixins.iguanatweaksreborn.refmap.json"
-    config "mixins.iguanatweaksreborn.json"
-}
-
-repositories {
-    flatDir {
-        dir 'libs'
-    }
-    maven {
-        url 'https://cursemaven.com'
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven {
-        url 'https://www.dogforce-games.com/maven/'
-        content {
-            includeGroup "dev.gigaherz.sewingkit"
-        }
-    }
-    maven {
-        url = "https://jitpack.io"
-        content {
-            includeGroup "com.github.Virtuoel"
-        }
-    }
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
-    maven {
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven { url 'https://maven.blamejared.com' }
-    maven { url 'https://maven.minecraftforge.net/' }
-    maven { url "https://maven.ryanliptak.com/" }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven {
-        name "nonamecrackers2Maven"
-        url "https://maven.nonamecrackers2.dev/releases"
-    }
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation "maven.modrinth:insanelib:${insanelib_version}"
 
-    implementation fg.deobf("blank:insanelib:${lib_version}")
-    implementation fg.deobf("blank:Stamina:1.1.1")
-    runtimeOnly fg.deobf("blank:mobspropertiesrandomness:${mpr_version}")
-    implementation fg.deobf("blank:enhancedai:${enhancedai_version}")
-    implementation fg.deobf("blank:Shields+:${shieldsplus_version}-mc${minecraft_version}")
-    compileOnly fg.deobf("blank:nohunger:1.0.1:slim")
-
-    runtimeOnly fg.deobf("net.darkhax.maxhealthfix:MaxHealthFix-Forge-${minecraft_version}:${max_health_fix_version}")
-
-    implementation fg.deobf("curse.maven:selene-499980:5254462")
-    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5051316")
-    runtimeOnly fg.deobf("curse.maven:better-advancements-272515:4631253")
-    // runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
-    implementation fg.deobf("curse.maven:supplementaries-412082:5225134")
-
-    implementation fg.deobf("com.github.glitchfiend:GlitchCore-forge:${minecraft_version}-${glitchcore_version}")
-    implementation fg.deobf("com.github.glitchfiend:SereneSeasons-forge:${minecraft_version}-${sereneseasons_version}")
-    implementation fg.deobf("curse.maven:time-control-303570:5095704")
-
-    compileOnly fg.deobf("curse.maven:tool-belt-260262:5929061")
-    //Needed for data gen
-    runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-${minecraft_version}:1.8.0")
-
-    compileOnly fg.deobf("curse.maven:global-gamerules-227657:4587490")
-    implementation fg.deobf("curse.maven:villager-comfort-updated-1082700:5622213")
-
-    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
-    runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
-
-    compileOnly fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}-${minecraft_version}-forge")
-
-    compileOnly fg.deobf("slimeknights.mantle:Mantle:${minecraft_version}-${mantle_build}")
-    compileOnly fg.deobf("slimeknights.tconstruct:TConstruct:${minecraft_version}-${ticon_build}")
-    // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-
-    //implementation fg.deobf("curse.maven:puzzles-lib-495476:4660882")
-    //runtimeOnly fg.deobf("curse.maven:easy-magic-456239:4658750")
-    implementation fg.deobf("curse.maven:blueprint-382216:5292242")
-    implementation fg.deobf("curse.maven:caverns-and-chasms-438005:6040957")
-    //implementation fg.deobf("curse.maven:buzzier-bees-355458:6151411")
-    compileOnly fg.deobf("curse.maven:autumnity-365045:5229021")
-    compileOnly fg.deobf("curse.maven:environmental-388992:6060255")
-    compileOnly fg.deobf("curse.maven:berry-good-355589:5228437")
-    compileOnly fg.deobf("curse.maven:allurement-438003:5228059")
-    compileOnly fg.deobf("curse.maven:upgrade-aquatic-326895:6393133")
-    implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
-
-    runtimeOnly fg.deobf("curse.maven:cloth-config-348521:5729105")
-    compileOnly fg.deobf("curse.maven:tide-884685:6513554")
-
-    compileOnly fg.deobf("curse.maven:zeta-968868:5418213")
-    compileOnly fg.deobf("curse.maven:quark-243121:5418252")
-
-    compileOnly fg.deobf("curse.maven:kiwi-303657:7289940")
-    compileOnly fg.deobf("curse.maven:passablefoliage-379887:4869702")
-
-    // Compile against only the API artifact
-    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api"))
-    // Use the full Curios API jar at runtime
-    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}"))
-
-    implementation fg.deobf("squeek.appleskin:appleskin-forge:mc${minecraft_version}-${apple_skin_version}")
-
-    compileOnly fg.deobf("nonamecrackers2:crackerslib-forge:1.20.1-0.4.6")
-    compileOnly fg.deobf("nonamecrackers2:simpleclouds:0.7.1+1.20.1-forge")
-    compileOnly fg.deobf("nonamecrackers2:simplecloudsapi-forge:1.3-1.20.1")
-
-    //implementation fg.deobf("curse.maven:nostalgic-tweaks-592465:5602576")
-    //implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
-
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-
-    minecraftLibrary 'com.ezylang:EvalEx:3.4.0'
-    jarJar(group: 'com.ezylang', name: 'EvalEx', version: '[3.0,4.0)')
-
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
-        jarJar.ranged(it, "[${mixin_extras_version},)")
-    }
+    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.3"))
 }
 
-tasks.named('processResources', ProcessResources).configure {
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
-            lib_version: lib_version, lib_version_range: lib_version_range,
-            mpr_version: mpr_version, enhancedai_version: enhancedai_version, shieldsplus_version: shieldsplus_version,
-            glitchcore_version: glitchcore_version, sereneseasons_version: sereneseasons_version,
-            max_health_fix_version: max_health_fix_version,
-            emi_version: emi_version,
-            pehkui_version: pehkui_version,
-            mantle_build: mantle_build, ticon_build: ticon_build,
-            jei_version: jei_version,
-            curios_version: curios_version,
-            apple_skin_version: apple_skin_version,
-            mixin_version: mixin_version, mixin_extras_version: mixin_extras_version
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            insanelib_version_range: insanelib_version_range,
     ]
     inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
 }
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
 
-
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                "Specification-Title"     : "iguanatweaksreborn",
-                "Specification-Vendor"    : "Insane96MCP",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Insane96MCP",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
     }
-
-    // This is the preferred method to reobfuscate your jar file
-    finalizedBy 'reobfJar'
-    archiveClassifier = 'slim'
-}
-
-tasks.named('jarJar') {
-    archiveClassifier = ''
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }

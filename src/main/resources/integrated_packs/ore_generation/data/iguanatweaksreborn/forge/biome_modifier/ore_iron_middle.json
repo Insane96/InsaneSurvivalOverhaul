@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#iguanatweaksreborn:has_more_iron_ore",
-    "features": "iguanatweaksreborn:ore_iron_middle",
-    "step": "underground_ores"
-}

@@ -1,4 +1,0 @@
-{
-  "parent": "minecraft:block/powered_rail",
-  "render_type": "cutout"
-}

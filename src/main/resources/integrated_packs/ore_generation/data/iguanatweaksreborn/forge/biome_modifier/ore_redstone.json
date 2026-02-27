@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "biomes": "#minecraft:is_ocean",
-    "features": "iguanatweaksreborn:ore_redstone",
-    "step": "underground_ores"
-}
