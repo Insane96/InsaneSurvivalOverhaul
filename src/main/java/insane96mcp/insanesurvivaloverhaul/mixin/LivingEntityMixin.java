@@ -4,7 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.ModNBTData;
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
+import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSpeedBasedInvincibility;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.Shields;
 import net.minecraft.sounds.SoundEvent;
@@ -54,6 +56,29 @@ public class LivingEntityMixin {
         if (RegeneratingAbsorption.canDamageAbsorption(source) && ModNBTData.get(instance, RegeneratingAbsorption.REGEN_ABSORPTION_TAG, Float.class) > 0)
             return;
         original.call(instance, soundEvent, volume, pitch);
+    }
+
+    // --- AttackSpeedBasedInvincibility ---
+
+    @ModifyExpressionValue(method = "hurt", at = @At(value = "CONSTANT", args = "intValue=10"))
+    public int insanelib$reflectInvulnerabilityFrames(int original) {
+        if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
+            return original;
+        return self().invulnerableTime - 10;
+    }
+
+    @ModifyExpressionValue(method = "handleDamageEvent", at = @At(value = "CONSTANT", args = "intValue=20"))
+    public int insanelib$reflectInvulnerabilityFramesInEvent(int original) {
+        if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
+            return original;
+        return self().invulnerableTime > 10 ? self().invulnerableTime : original;
+    }
+
+    @ModifyExpressionValue(method = "handleDamageEvent", at = @At(value = "CONSTANT", args = "intValue=10"))
+    public int insanelib$reflectInvulnerabilityFramesInEvent2(int original) {
+        if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
+            return original;
+        return self().invulnerableTime > 10 ? self().invulnerableTime - 10 : original;
     }
 
     public LivingEntity self() {

@@ -1,5 +1,6 @@
 ## Upcoming
 * Added Absorption Armor, Armor rework and regen absorption
+* Ported Attack Speed Based Invincibility from ISO
 
 ## 5.0.0.0-alpha
 * Ported Knockback and Critical Hits features
