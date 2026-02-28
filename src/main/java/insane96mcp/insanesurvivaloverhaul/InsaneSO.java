@@ -31,10 +31,11 @@ public class InsaneSO {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ILModConfig CONFIG;
+    public static final String CONFIG_FOLDER = "config/" + MOD_ID;
 
     public InsaneSO(IEventBus eventBus, ModContainer modContainer) {
         CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.COMMON, eventBus, ISOModules::init, InsaneSO.class.getClassLoader());
-        modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec);
+        modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec, MOD_ID + "/common.toml");
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
 

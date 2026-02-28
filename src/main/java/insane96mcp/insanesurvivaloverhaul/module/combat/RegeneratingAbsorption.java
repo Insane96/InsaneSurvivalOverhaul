@@ -9,6 +9,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.ClientUtils;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.event.LivingDamageEventPreAbsorp;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.network.message.RegenAbsorptionSyncMessage;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -39,7 +40,6 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -47,7 +47,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class RegeneratingAbsorption extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("absorption_hit"), 16f));
 
-    public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/sprites/hud/regenerating_absorption.png");
+    public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/sprites/hud/regenerating_absorption.png");
     public static ResourceLocation REGEN_ABSORPTION_TAG;
     public static ResourceLocation HURT_COOLDOWN_TAG;
     public static ResourceLocation NO_HURT_SOUND_TAG;
@@ -138,10 +138,10 @@ public class RegeneratingAbsorption extends Feature {
     }
 
     @SubscribeEvent
-    public void onLivingHurtPreAbsorption(LivingIncomingDamageEvent event) {
+    public void onLivingHurtPreAbsorption(LivingDamageEventPreAbsorp event) {
         if (!this.isEnabled()
                 || !canDamageAbsorption(event.getSource())
-                || event.getAmount() <= 0)
+                || event.getNewDamage() <= 0)
             return;
 
         float currentAbsorption = ModNBTData.get(event.getEntity(), REGEN_ABSORPTION_TAG, Float.class);
@@ -151,9 +151,9 @@ public class RegeneratingAbsorption extends Feature {
             //event.getEntity().level().playSound(null, event.getEntity(), SoundEvents.GENERIC_EXPLODE, event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 0.5f, 2f);
         //else
             //event.getEntity().getPersistentData().putBoolean(NO_HURT_SOUND_TAG, true);
-        float toRemove = Math.min(currentAbsorption, event.getAmount());
+        float toRemove = Math.min(currentAbsorption, event.getNewDamage());
         currentAbsorption -= toRemove;
-        event.setAmount(event.getAmount() - toRemove);
+        event.setNewDamage(event.getNewDamage() - toRemove);
         ModNBTData.put(event.getEntity(), REGEN_ABSORPTION_TAG, currentAbsorption);
         if (soundOnAbsorptionHurt)
             event.getEntity().level().playSound(null, event.getEntity(), ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);

@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@LoadFeature(module = ISOModules.COMBAT, enabledByDefault = false, description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness")
+@LoadFeature(module = ISOModules.COMBAT, description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness")
 public class AbsorptionArmor extends Feature {
 
     @Config(min = 0, description = "If > 0, only Armor Toughness on items will be converted to absorption, multiplying it by this.")

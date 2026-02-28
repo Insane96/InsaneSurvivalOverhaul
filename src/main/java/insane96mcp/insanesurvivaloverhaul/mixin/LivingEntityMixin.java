@@ -4,16 +4,34 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.ModNBTData;
+import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.Shields;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+import javax.annotation.Nullable;
+import java.util.Stack;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
+
+    // --- Events ---
+
+    @Shadow
+    @Nullable
+    protected Stack<DamageContainer> damageContainers;
+
+    @ModifyArg(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/common/damagesource/DamageContainer;setNewDamage(F)V"))
+    private float insanesurvivaloverhaul$onPreAbsorpHurt(float damage) {
+        return ISOEventHook.onPreAbsorpDamage(self(), this.damageContainers.peek());
+    }
 
     // --- Shields ---
 
@@ -36,5 +54,9 @@ public class LivingEntityMixin {
         if (RegeneratingAbsorption.canDamageAbsorption(source) && ModNBTData.get(instance, RegeneratingAbsorption.REGEN_ABSORPTION_TAG, Float.class) > 0)
             return;
         original.call(instance, soundEvent, volume, pitch);
+    }
+
+    public LivingEntity self() {
+        return (LivingEntity) (Object) this;
     }
 }
