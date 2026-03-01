@@ -8,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvid
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
+import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
@@ -22,6 +23,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
@@ -50,10 +52,12 @@ public class InsaneSO {
         eventBus.addListener(CriticalRework::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::registerGuiOverlays);
+        eventBus.addListener(PiercingDamage::addAttribute);
 
-        if (FMLLoader.getDist().isClient()) {
+        if (FMLLoader.getDist().isClient())
             eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
-        }
+
+        NeoForgeMod.enableMergedAttributeTooltips();
     }
 
     @SubscribeEvent

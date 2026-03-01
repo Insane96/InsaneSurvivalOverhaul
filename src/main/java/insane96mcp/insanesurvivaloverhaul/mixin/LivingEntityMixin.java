@@ -7,6 +7,7 @@ import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
 import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSpeedBasedInvincibility;
+import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.Shields;
 import net.minecraft.sounds.SoundEvent;
@@ -16,7 +17,9 @@ import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
 import java.util.Stack;
@@ -61,24 +64,34 @@ public class LivingEntityMixin {
     // --- AttackSpeedBasedInvincibility ---
 
     @ModifyExpressionValue(method = "hurt", at = @At(value = "CONSTANT", args = "intValue=10"))
-    public int insanelib$reflectInvulnerabilityFrames(int original) {
+    public int insanesurvivaloverhaul$reflectInvulnerabilityFrames(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
         return self().invulnerableTime - 10;
     }
 
     @ModifyExpressionValue(method = "handleDamageEvent", at = @At(value = "CONSTANT", args = "intValue=20"))
-    public int insanelib$reflectInvulnerabilityFramesInEvent(int original) {
+    public int insanesurvivaloverhaul$reflectInvulnerabilityFramesInEvent(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
         return self().invulnerableTime > 10 ? self().invulnerableTime : original;
     }
 
     @ModifyExpressionValue(method = "handleDamageEvent", at = @At(value = "CONSTANT", args = "intValue=10"))
-    public int insanelib$reflectInvulnerabilityFramesInEvent2(int original) {
+    public int insanesurvivaloverhaul$reflectInvulnerabilityFramesInEvent2(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
         return self().invulnerableTime > 10 ? self().invulnerableTime - 10 : original;
+    }
+
+    // --- Piercing Damage ---
+
+    @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V", shift = At.Shift.AFTER), cancellable = true)
+    public void insanesurvivaloverhaul$cancelOnDead(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        if (ModNBTData.contains(self(), PiercingDamage.SHOULD_STOP_HURT)) {
+            cir.setReturnValue(ModNBTData.get(self(), PiercingDamage.SHOULD_STOP_HURT, Boolean.class));
+            ModNBTData.remove(self(), PiercingDamage.SHOULD_STOP_HURT);
+        }
     }
 
     public LivingEntity self() {

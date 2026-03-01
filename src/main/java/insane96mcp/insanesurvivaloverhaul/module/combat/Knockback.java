@@ -35,6 +35,7 @@ public class Knockback extends Feature {
 	public static Double spamPenalty = 0.35d;
 	@Config(min = 0d, max = 1d, description = "Percentage knockback dealt by projectiles.")
 	public static Double projectileKnockback = 0.7d;
+	//TODO Knockback on sprint
 
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
