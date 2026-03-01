@@ -43,7 +43,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player. Please note that default mods' regenerating absorption is done through item definitions within the combat_rework data pack and via Absorption Armor feature, disabling this will only disable the regenerating absorption functionality.")
+@LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player. Please note that default mods' regenerating absorption is done through item definitions within the combat_rework data pack and via Absorption Armor feature.", canBeDisabled = false)
 public class RegeneratingAbsorption extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("absorption_hit"), 16f));
 

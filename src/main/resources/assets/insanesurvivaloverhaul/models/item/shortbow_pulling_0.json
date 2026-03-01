@@ -1,0 +1,6 @@
+{
+    "parent": "insanesurvivaloverhaul:item/shortbow",
+    "textures": {
+        "layer0": "insanesurvivaloverhaul:item/shortbow_pulling_0"
+    }
+}

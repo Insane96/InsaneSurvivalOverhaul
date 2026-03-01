@@ -3,9 +3,13 @@
     "package": "insane96mcp.insanesurvivaloverhaul.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "AbstractArrowMixin",
+        "BowItemMixin",
         "CombatRulesMixin",
+        "CrossbowItemMixin",
         "LivingEntityMixin",
         "PlayerMixin",
+        "accessor.AbstractArrowAccessor",
         "accessor.LivingEntityAccessor"
     ],
     "injectors": {

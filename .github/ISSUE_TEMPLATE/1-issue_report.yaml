@@ -7,8 +7,8 @@ body:
       value: |
         Before submitting an issue, please search the following links to make sure your issue is not covered:
         
-        * **[Pinned Issues](/Insane96/IguanaTweaksReborn/issues)**: Some commonly reported issues are pinned
-        * **[The Search Bar](/Insane96/IguanaTweaksReborn/issues)**: See already reported issues.
+        * **[Pinned Issues](/Insane96/InsaneSurvivalOverhaul/issues)**: Some commonly reported issues are pinned
+        * **[The Search Bar](/Insane96/InsaneSurvivalOverhaul/issues)**: See already reported issues.
         
         Please fill in the following template to report your issue. ISO is shorthand for Insane's Survival Overhaul.
 
@@ -144,8 +144,8 @@ body:
         ## Confirm the following
         
         Please check the following to see if your issue is covered:
-        * [Pinned issues](/Insane96/IguanaTweaksReborn/issues)
-        * [Existing issues](/Insane96/IguanaTweaksReborn/issues)
+        * [Pinned issues](/Insane96/InsaneSurvivalOverhaul/issues)
+        * [Existing issues](/Insane96/InsaneSurvivalOverhaul/issues)
 
   - type: dropdown
     id: searched

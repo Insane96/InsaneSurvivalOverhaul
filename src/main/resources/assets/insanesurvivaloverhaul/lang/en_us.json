@@ -2,5 +2,7 @@
     "attribute.name.critical_chance": "Critical Chance",
     "attribute.name.critical_damage": "Critical Damage",
 
-    "insanesurvivaloverhaul.shield_blocked_damage": "Blocked damage: %f"
+    "insanesurvivaloverhaul.shield_blocked_damage": "Blocked damage: %f",
+
+    "item.insanesurvivaloverhaul.shortbow": "Shortbow"
 }

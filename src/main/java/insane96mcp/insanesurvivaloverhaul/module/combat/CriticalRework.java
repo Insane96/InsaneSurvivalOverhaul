@@ -20,9 +20,9 @@ public class CriticalRework extends Feature {
 
 	//public static final DeferredHolder<Enchantment> CRITICAL_ENCHANTMENT = ISORegistries.ENCHANTMENTS.register("critical", CriticalEnchantment::new);
 
-	//@Config(min = -1d, max = 1d, description = "iguanatweaksreborn:critical_chance increase per level of Critical enchantment.")
+	//@Config(min = -1d, max = 1d, description = "insanesurvivaloverhaul:critical_chance increase per level of Critical enchantment.")
 	//public static Double enchantmentChance = 0.1d;
-	//@Config(min = -1d, max = 1d, description = "iguanatweaksreborn:critical_damage increase per level of Critical enchantment.")
+	//@Config(min = -1d, max = 1d, description = "insanesurvivaloverhaul:critical_damage increase per level of Critical enchantment.")
 	//public static Double enchantmentBonusDamage = 0.1d;
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {

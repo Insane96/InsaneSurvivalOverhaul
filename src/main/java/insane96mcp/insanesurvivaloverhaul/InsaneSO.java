@@ -10,6 +10,7 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
+import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -19,6 +20,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
@@ -39,12 +42,18 @@ public class InsaneSO {
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
 
+        eventBus.addListener(this::clientSetup);
+
         eventBus.addListener(InsaneSO::gatherData);
         eventBus.addListener(NetworkHandler::register);
 
         eventBus.addListener(CriticalRework::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::registerGuiOverlays);
+
+        if (FMLLoader.getDist().isClient()) {
+            eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
+        }
     }
 
     @SubscribeEvent
@@ -70,6 +79,10 @@ public class InsaneSO {
                 event.includeServer(),
                 new ISOItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper)
         );
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        ClientSetup.init(event);
     }
 
     public static ResourceLocation location(String path) {
