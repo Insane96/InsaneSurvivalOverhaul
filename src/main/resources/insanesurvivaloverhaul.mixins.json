@@ -11,6 +11,7 @@
         "LivingEntityMixin",
         "PlayerMixin",
         "accessor.AbstractArrowAccessor",
+        "accessor.BlockStateBaseAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.MusicsAccessor"
     ],
@@ -26,6 +27,7 @@
     "client": [
         "client.DeathScreenMixin",
         "client.GameRendererMixin",
+        "client.LevelRendererMixin",
         "client.LightTextureMixin"
     ]
 }
