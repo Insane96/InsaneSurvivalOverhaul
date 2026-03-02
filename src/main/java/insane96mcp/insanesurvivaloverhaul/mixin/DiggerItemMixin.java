@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.combat.MiscStats;
+import insane96mcp.insanesurvivaloverhaul.module.combat.MiscCombat;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class DiggerItemMixin {
 	@ModifyExpressionValue(method = "postHurtEnemy", at = @At(value = "CONSTANT", args = "intValue=2"))
 	public int onHurtEnemy(int hurtAmount, ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        int amount = Feature.isEnabled(MiscStats.class) && MiscStats.oneDamageForToolAttacking ? 1 : hurtAmount;
+        int amount = Feature.isEnabled(MiscCombat.class) && MiscCombat.oneDamageForToolAttacking ? 1 : hurtAmount;
         /*for (ItemDefinition itemDefinition : ItemDefinitionsReloadListener.DEFINITIONS)
             amount = itemDefinition.getDurabilityConsumed(amount, stack, attacker.getRandom());*/
 		return amount;

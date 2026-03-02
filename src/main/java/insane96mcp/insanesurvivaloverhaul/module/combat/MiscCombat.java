@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 @LoadFeature(module = ISOModules.COMBAT)
-public class MiscStats extends Feature {
+public class MiscCombat extends Feature {
     /*@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
     public static Boolean fixTooltips = true;*/
     @Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")

@@ -7,7 +7,9 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvid
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
+import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
@@ -38,11 +40,14 @@ public class InsaneSO {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ILModConfig CONFIG;
+    public static ILModConfig CLIENT_CONFIG;
     public static final String CONFIG_FOLDER = "config/" + MOD_ID;
 
     public InsaneSO(IEventBus eventBus, ModContainer modContainer) {
         CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.COMMON, eventBus, ISOModules::init, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec, MOD_ID + "/common.toml");
+        CLIENT_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.CLIENT, eventBus, ISOClientModules::init, InsaneSO.class.getClassLoader());
+        modContainer.registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.spec, MOD_ID + "/client.toml");
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
 
@@ -57,8 +62,10 @@ public class InsaneSO {
         eventBus.addListener(PiercingDamage::addAttribute);
         eventBus.addListener(UnfairOneShot::registerGuiLayers);
 
-        if (FMLLoader.getDist().isClient())
+        if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
+            eventBus.addListener(HudInfos::registerGuiLayers);
+        }
 
         NeoForgeMod.enableMergedAttributeTooltips();
     }

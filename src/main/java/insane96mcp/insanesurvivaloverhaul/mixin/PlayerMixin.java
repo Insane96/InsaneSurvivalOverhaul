@@ -9,7 +9,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSounds;
-import insane96mcp.insanesurvivaloverhaul.module.combat.MiscStats;
+import insane96mcp.insanesurvivaloverhaul.module.combat.MiscCombat;
 import insane96mcp.insanesurvivaloverhaul.module.combat.Shields;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -70,32 +70,32 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V", ordinal = 1, shift = At.Shift.AFTER))
     public void iguanatweaksreborn$changeSweepingDamage(Entity pTarget, CallbackInfo ci, @Local(ordinal = 0) float f, @Local(ordinal = 5) LocalFloatRef f3) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return;
         f3.set(f);
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getSweepHitBox(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;"))
     public AABB iguanatweaksreborn$changeSweepingHitbox(AABB original) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return original.inflate(1.5f, 0.15f, 1.5f);
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;entityInteractionRange()D"))
     public double iguanatweaksreborn$increaseSweepingReach(double original) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return original + 1f;
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;onGround()Z", ordinal = 1))
     public boolean iguanatweaksreborn$allowSweepOffGround(boolean original) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return true;
     }
@@ -104,8 +104,8 @@ public abstract class PlayerMixin extends LivingEntity {
     @Expression("flag")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
     public boolean iguanatweaksreborn$allowSweepWhenSprinting(boolean original) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return false;
     }
@@ -115,8 +115,8 @@ public abstract class PlayerMixin extends LivingEntity {
     @Expression("d0 < (double) this.getSpeed()")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public boolean iguanatweaksreborn$allowSweepWhenTooFast(boolean original) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return true;
     }
@@ -164,8 +164,8 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "CONSTANT", args = "doubleValue=0.4000000059604645"))
     public double onSweepKnockbackStrength(double original, @Local(name = "f4") float knockbackStrength) {
-        if (!MiscStats.sweepingOverhaul
-                || !Feature.isEnabled(MiscStats.class))
+        if (!MiscCombat.sweepingOverhaul
+                || !Feature.isEnabled(MiscCombat.class))
             return original;
         return knockbackStrength * 0.5F;
     }
