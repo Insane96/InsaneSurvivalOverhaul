@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.network.message.InvulnerableTimeSyncMessage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-@LoadFeature(description = "Invincibility frames based off attack speed, so faster attacks will give less invincibility frames and viceversa.")
+@LoadFeature(module = ISOModules.COMBAT, description = "Invincibility frames based off attack speed, so faster attacks will give less invincibility frames and viceversa.")
 public class AttackSpeedBasedInvincibility extends Feature {
 
 	@Config(description = "If true, invincibility frames will not be increased for slower attacks.")

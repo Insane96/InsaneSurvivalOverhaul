@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul;
 
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
+import insane96mcp.insanelib.util.IntegratedPack;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvider;
@@ -34,6 +35,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BooleanSupplier;
 
 @Mod(InsaneSO.MOD_ID)
 public class InsaneSO {
@@ -102,6 +104,22 @@ public class InsaneSO {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ClientSetup.init(event);
+    }
+
+    public static void addServerPack(String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addServerPack(MOD_ID, path, description, enabled);
+    }
+
+    public static void addServerPack(int priority, String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addServerPack(priority, MOD_ID, path, description, enabled);
+    }
+
+    public static void addClientPack(String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addClientPack(MOD_ID, path, description, enabled);
+    }
+
+    public static void addClientPack(int priority, String path, String description, BooleanSupplier enabled) {
+        IntegratedPack.addClientPack(priority, MOD_ID, path, description, enabled);
     }
 
     public static ResourceLocation location(String path) {

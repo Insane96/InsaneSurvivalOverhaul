@@ -7,7 +7,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
@@ -18,9 +20,11 @@ public class ISORegistries {
     public static final List<DeferredRegister<?>> REGISTRIES = new ArrayList<>();
 
     public static final DeferredRegister<Item> ITEMS = createRegistry(BuiltInRegistries.ITEM);
+    public static final DeferredRegister<Block> BLOCKS = createRegistry(BuiltInRegistries.BLOCK);
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(BuiltInRegistries.SOUND_EVENT);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = createRegistry(BuiltInRegistries.MOB_EFFECT);
+    public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(BuiltInRegistries.POINT_OF_INTEREST_TYPE);
     @SuppressWarnings("rawtypes")
     private static final DeferredRegister CRITERION_TRIGGERS = createRegistry(BuiltInRegistries.TRIGGER_TYPES);
 
