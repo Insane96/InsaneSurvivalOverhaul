@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.module.combat.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;

@@ -2,9 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.network.message;
 
 import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.core.ModNBTData;
-import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
+import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -29,9 +28,8 @@ public record RegenAbsorptionSyncMessage(float regenAbsorption) implements Custo
 
     public static void handle(final RegenAbsorptionSyncMessage payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            Player player = Minecraft.getInstance().player;
-            if (player != null)
-                ModNBTData.put(player, RegeneratingAbsorption.REGEN_ABSORPTION_TAG, payload.regenAbsorption);
+            Player player = context.player();
+            ModNBTData.put(player, RegeneratingAbsorption.REGEN_ABSORPTION_TAG, payload.regenAbsorption);
         });
     }
 

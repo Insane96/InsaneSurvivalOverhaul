@@ -2,7 +2,6 @@ package insane96mcp.insanesurvivaloverhaul.network.message;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -30,9 +29,7 @@ public record InvulnerableTimeSyncMessage(int entityId, int invulnerableTime) im
 
     public static void handle(final InvulnerableTimeSyncMessage payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            var level = Minecraft.getInstance().level;
-            if (level == null) return;
-            Entity entity = level.getEntity(payload.entityId());
+            Entity entity = context.player().level().getEntity(payload.entityId());
             if (!(entity instanceof LivingEntity living)) return;
             living.invulnerableTime = payload.invulnerableTime() + 10;
             living.hurtTime = payload.invulnerableTime();

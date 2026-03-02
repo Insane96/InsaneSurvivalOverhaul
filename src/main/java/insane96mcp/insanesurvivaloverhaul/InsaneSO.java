@@ -12,8 +12,9 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
-import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
-import insane96mcp.insanesurvivaloverhaul.module.combat.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
+import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
+import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -58,11 +59,11 @@ public class InsaneSO {
 
         eventBus.addListener(CriticalRework::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::addAttribute);
-        eventBus.addListener(RegeneratingAbsorption::registerGuiOverlays);
         eventBus.addListener(PiercingDamage::addAttribute);
-        eventBus.addListener(UnfairOneShot::registerGuiLayers);
 
         if (FMLLoader.getDist().isClient()) {
+            eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
+            eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
             eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
             eventBus.addListener(HudInfos::registerGuiLayers);
         }

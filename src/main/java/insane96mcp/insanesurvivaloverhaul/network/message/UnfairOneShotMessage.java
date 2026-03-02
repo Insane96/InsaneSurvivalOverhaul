@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.network.message;
 
 import insane96mcp.insanelib.InsaneLib;
-import insane96mcp.insanesurvivaloverhaul.module.combat.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -24,7 +24,7 @@ public record UnfairOneShotMessage() implements CustomPacketPayload {
 
     public static void handle(final UnfairOneShotMessage payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            UnfairOneShot.activationTicks = 30;
+            UnfairOneShotClient.activationTicks = 30;
         });
     }
 
