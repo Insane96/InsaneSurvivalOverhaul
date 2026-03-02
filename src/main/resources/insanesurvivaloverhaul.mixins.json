@@ -11,7 +11,8 @@
         "LivingEntityMixin",
         "PlayerMixin",
         "accessor.AbstractArrowAccessor",
-        "accessor.LivingEntityAccessor"
+        "accessor.LivingEntityAccessor",
+        "accessor.MusicsAccessor"
     ],
     "injectors": {
         "defaultRequire": 1
