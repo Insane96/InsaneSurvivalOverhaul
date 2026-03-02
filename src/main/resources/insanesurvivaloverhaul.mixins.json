@@ -13,7 +13,8 @@
         "accessor.AbstractArrowAccessor",
         "accessor.BlockStateBaseAccessor",
         "accessor.LivingEntityAccessor",
-        "accessor.MusicsAccessor"
+        "accessor.MusicsAccessor",
+        "client.GuiMixin"
     ],
     "injectors": {
         "defaultRequire": 1
