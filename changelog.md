@@ -1,12 +1,13 @@
 ## Upcoming
-* Added back Absorption Armor, Armor rework, regen absorption, Bows, Snowballs, Piercing Damage and Misc Stats
+* Added back Absorption Armor, Armor rework, regen absorption, Bows, Snowballs, Piercing Damage, Unfair oneshot and Misc Stats
   * Absorption armor is now enabled by default (for now)
   * Bows feature now includes No Arrow Invincibility Frames 
   * Snowballs
     * Slightly increased freeze time
     * Added 4 ticks cooldown
     * Now stack up to 64 with an integrated data pack thanks to InsaneLib's Item Components feature
-  * Misc Stats is not complete yet
+  * Increased Resistance II duration after Unfair oneshot
+  * Misc Stats is not complete yet, missing combat data pack and attribute tooltips
 * Ported Attack Speed Based Invincibility from ISO
 
 ## 5.0.0.0-alpha

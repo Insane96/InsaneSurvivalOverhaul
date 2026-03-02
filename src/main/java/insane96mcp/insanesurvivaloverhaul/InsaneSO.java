@@ -6,10 +6,12 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.RegeneratingAbsorption;
+import insane96mcp.insanesurvivaloverhaul.module.combat.UnfairOneShot;
 import insane96mcp.insanesurvivaloverhaul.network.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -53,6 +55,7 @@ public class InsaneSO {
         eventBus.addListener(RegeneratingAbsorption::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::registerGuiOverlays);
         eventBus.addListener(PiercingDamage::addAttribute);
+        eventBus.addListener(UnfairOneShot::registerGuiLayers);
 
         if (FMLLoader.getDist().isClient())
             eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
@@ -82,6 +85,10 @@ public class InsaneSO {
         event.getGenerator().addProvider(
                 event.includeServer(),
                 new ISOItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper)
+        );
+        event.getGenerator().addProvider(
+                event.includeClient(),
+                new ISOItemModelsProvider(output, MOD_ID, existingFileHelper)
         );
     }
 

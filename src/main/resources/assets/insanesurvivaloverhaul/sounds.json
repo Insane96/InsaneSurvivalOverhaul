@@ -1,0 +1,22 @@
+{
+    "unfair_one_shot": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.unfair_one_shot",
+        "sounds": [ "insanesurvivaloverhaul:unfair_one_shot" ]
+    },
+    "absorption_hit": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.absorption_hit",
+        "sounds": [ "insanesurvivaloverhaul:absorption_hit1", "insanesurvivaloverhaul:absorption_hit2" ]
+    },
+    "pickaxe_attack": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.pickaxe_attack",
+        "sounds": [ "insanesurvivaloverhaul:pickaxe_attack" ]
+    },
+    "shovel_attack": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.shovel_attack",
+        "sounds": [ "insanesurvivaloverhaul:shovel_attack" ]
+    },
+    "axe_attack": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.axe_attack",
+        "sounds": [ "insanesurvivaloverhaul:axe_attack" ]
+    }
+}

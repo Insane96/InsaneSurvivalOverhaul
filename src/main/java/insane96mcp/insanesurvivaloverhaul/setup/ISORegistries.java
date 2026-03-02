@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
@@ -11,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ISORegistries {
     public static final List<DeferredRegister<?>> REGISTRIES = new ArrayList<>();
@@ -19,10 +21,17 @@ public class ISORegistries {
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(BuiltInRegistries.SOUND_EVENT);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = createRegistry(BuiltInRegistries.MOB_EFFECT);
+    @SuppressWarnings("rawtypes")
+    private static final DeferredRegister CRITERION_TRIGGERS = createRegistry(BuiltInRegistries.TRIGGER_TYPES);
 
     private static <R> DeferredRegister<R> createRegistry(Registry<R> registry) {
         DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSO.MOD_ID);
         REGISTRIES.add(register);
         return register;
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public static <T extends CriterionTrigger<?>> Supplier<T> registerTrigger(String name, Supplier<T> factory) {
+        return CRITERION_TRIGGERS.register(name, factory);
     }
 }
