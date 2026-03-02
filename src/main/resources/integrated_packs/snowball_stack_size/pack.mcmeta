@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Increases snowball stack size to 64.",
+        "pack_format": 48
+    }
+}
