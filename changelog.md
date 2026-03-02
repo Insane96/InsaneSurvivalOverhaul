@@ -8,7 +8,7 @@
     * Now stack up to 64 with an integrated data pack thanks to InsaneLib's Item Components feature
   * Increased Resistance II duration after Unfair oneshot
   * Misc Stats is not complete yet, missing combat data pack and attribute tooltips
-* Added back Client features: Hud Infos, Death, Fog, Light, Sounds & Music
+* Added back Client features: Hud Infos, Death, Fog, Light, Sounds & Music, Misc and World Border
   * Removed Third person death
 * Ported Attack Speed Based Invincibility from ISO
 
