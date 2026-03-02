@@ -23,6 +23,8 @@
         "minVersion": "0.5.3"
     },
     "client": [
-        "client.DeathScreenMixin"
+        "client.DeathScreenMixin",
+        "client.GameRendererMixin",
+        "client.LightTextureMixin"
     ]
 }
