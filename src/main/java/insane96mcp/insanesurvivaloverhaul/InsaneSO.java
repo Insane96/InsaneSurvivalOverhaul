@@ -18,6 +18,7 @@ import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -129,5 +130,9 @@ public class InsaneSO {
 
     public static String lang(String path) {
         return MOD_ID + "." + path;
+    }
+
+    public static Component translatableLang(String path) {
+        return Component.translatable(lang(path));
     }
 }

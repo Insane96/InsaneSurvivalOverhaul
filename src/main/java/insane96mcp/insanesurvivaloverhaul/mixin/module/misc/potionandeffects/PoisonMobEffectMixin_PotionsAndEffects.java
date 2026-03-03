@@ -7,8 +7,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(targets = "net.minecraft.world.effect.PoisonMobEffect")
 public class PoisonMobEffectMixin_PotionsAndEffects {
+    /**
+     * Replaces the hardcoded poison tick interval (25 ticks at level I) with the value
+     * from {@link PotionsAndEffects#poisonDamageSpeed}, allowing the poison damage rate
+     * to be configured independently of vanilla.
+     */
     @ModifyExpressionValue(method = "shouldApplyEffectTickThisTick", at = @At(value = "CONSTANT", args = "intValue=25"))
-    public int onPoisonTickDamage(int poisonFactor) {
+    public int insanesurvivaloverhaul$onPoisonTickDamage(int poisonFactor) {
         return PotionsAndEffects.getPoisonDamageSpeed(poisonFactor);
     }
 }

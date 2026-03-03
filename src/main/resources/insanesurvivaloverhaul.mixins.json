@@ -8,6 +8,7 @@
         "CombatRulesMixin",
         "CrossbowItemMixin",
         "DiggerItemMixin",
+        "FishingHookMixin",
         "GuardianAttackGoalMixin",
         "IronGolemMixin",
         "LivingEntityMixin",

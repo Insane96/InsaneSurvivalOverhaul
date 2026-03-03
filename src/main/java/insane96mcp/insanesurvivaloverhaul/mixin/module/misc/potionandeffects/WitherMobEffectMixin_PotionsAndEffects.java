@@ -7,8 +7,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(targets = "net.minecraft.world.effect.WitherMobEffect")
 public class WitherMobEffectMixin_PotionsAndEffects {
+    /**
+     * Replaces the hardcoded Wither tick interval (40 ticks at level I) with the value
+     * from {@link PotionsAndEffects#poisonDamageSpeed}, tying the Wither damage rate
+     * to the same configurable speed as Poison.
+     */
     @ModifyExpressionValue(method = "shouldApplyEffectTickThisTick", at = @At(value = "CONSTANT", args = "intValue=40"))
-    public int onPoisonTickDamage(int poisonFactor) {
-        return PotionsAndEffects.getPoisonDamageSpeed(poisonFactor);
+    public int insanesurvivaloverhaul$onWitherTickDamage(int witherFactor) {
+        return PotionsAndEffects.getPoisonDamageSpeed(witherFactor);
     }
 }
