@@ -1,5 +1,6 @@
 ## Upcoming
 * Added back Mobs feature: Equipment, Misc Mobs, Spawning and Zombie Siege
+* Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 
 ## 5.1.0.0-alpha
 * Added back Absorption Armor, Armor rework, regen absorption, Bows, Snowballs, Piercing Damage, Unfair oneshot and Misc Stats
