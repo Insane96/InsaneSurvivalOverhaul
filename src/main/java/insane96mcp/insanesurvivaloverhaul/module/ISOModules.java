@@ -11,11 +11,13 @@ public class ISOModules {
 	public static final String COMBAT = InsaneSO.MOD_ID + ":combat";
 	public static final String MISC = InsaneSO.MOD_ID + ":misc";
 	public static final String MOBS = InsaneSO.MOD_ID + ":mobs";
+	public static final String WORLD = InsaneSO.MOD_ID + ":world";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
 		create(COMBAT, "Combat", eventBus, builder);
 		create(MISC, "Misc", eventBus, builder);
 		create(MOBS, "Mobs", eventBus, builder);
+		create(WORLD, "World", eventBus, builder);
 	}
 
 	public static void create(String id, String name, IEventBus eventBus, ModConfigSpec.Builder builder) {

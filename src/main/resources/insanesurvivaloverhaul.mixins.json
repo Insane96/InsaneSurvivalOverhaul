@@ -18,7 +18,14 @@
         "accessor.BlockStateBaseAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.MusicsAccessor",
-        "client.GuiMixin"
+        "client.GuiMixin",
+        "module.misc.nerfs.PistonBaseBlockMixin_Fluid",
+        "module.misc.nerfs.PistonMovingBlockEntityMixin_Fluid",
+        "module.world.fluids.EntityMixin_Fluid",
+        "module.world.fluids.FlowingFluidMixin_Fluid",
+        "module.world.fluids.FluidTypeMixin_Fluid",
+        "module.world.fluids.LavaFluidMixin_Fluid",
+        "module.world.fluids.WaterFluidMixin_Fluid"
     ],
     "injectors": {
         "defaultRequire": 1

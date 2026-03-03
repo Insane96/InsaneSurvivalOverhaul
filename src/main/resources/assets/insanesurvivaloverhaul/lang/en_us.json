@@ -27,5 +27,10 @@
 
     "insanesurvivaloverhaul:mobs_module": "Mobs",
 
-    "block.insanesurvivaloverhaul.echo_lantern": "Echo Lantern"
+    "block.insanesurvivaloverhaul.echo_lantern": "Echo Lantern",
+
+
+    "insanesurvivaloverhaul:world_module": "World",
+
+    "death.fell.accident.water": "%s thought could drop in shallow water safely"
 }
