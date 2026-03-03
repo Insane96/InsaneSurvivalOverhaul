@@ -15,12 +15,22 @@
         "NaturalSpawnerMixin",
         "PlayerMixin",
         "accessor.AbstractArrowAccessor",
+        "accessor.BlockBehaviourAccessor",
         "accessor.BlockStateBaseAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.MusicsAccessor",
         "client.GuiMixin",
         "module.misc.nerfs.PistonBaseBlockMixin_Fluid",
         "module.misc.nerfs.PistonMovingBlockEntityMixin_Fluid",
+        "module.misc.tweaks.AbstractArrowMixin_Tweaks",
+        "module.misc.tweaks.BlockBehaviourMixin_Tweaks",
+        "module.misc.tweaks.ItemEntityMixin_Tweaks",
+        "module.misc.tweaks.LeashableMixin_Tweaks",
+        "module.misc.tweaks.LivingEntityMixin_Tweaks",
+        "module.misc.tweaks.PlayerMixin_Tweaks",
+        "module.misc.tweaks.SpongeBlockMixin_Tweaks",
+        "module.misc.tweaks.ThrowablePotionItemMixin_Tweaks",
+        "module.misc.tweaks.TurtleMixin_Tweaks",
         "module.world.fluids.EntityMixin_Fluid",
         "module.world.fluids.FlowingFluidMixin_Fluid",
         "module.world.fluids.FluidTypeMixin_Fluid",
@@ -40,6 +50,8 @@
         "client.DeathScreenMixin",
         "client.GameRendererMixin",
         "client.LevelRendererMixin",
-        "client.LightTextureMixin"
+        "client.LightTextureMixin",
+        "module.misc.tweaks.client.EntityRendererMixin_Tweaks",
+        "module.misc.tweaks.client.LocalPlayerMixin_Tweaks"
     ]
 }

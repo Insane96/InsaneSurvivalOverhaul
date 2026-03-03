@@ -11,8 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FluidType.class)
 public class FluidTypeMixin_Fluid {
+	/**
+	 * Overrides the motion scale of the water fluid type with the configured push force value
+	 * from {@link Fluids#waterPushForce}, controlling how strongly water currents move entities.
+	 */
 	@Inject(at = @At("RETURN"), method = "motionScale", cancellable = true, remap = false)
-	public void onMotionScale(Entity entity, CallbackInfoReturnable<Double> cir) {
+	public void insanesurvivaloverhaul$onWaterMotionScale(Entity entity, CallbackInfoReturnable<Double> cir) {
 		if ((Object) this == NeoForgeMod.WATER_TYPE.value())
 			cir.setReturnValue(Fluids.waterPushForce);
 	}

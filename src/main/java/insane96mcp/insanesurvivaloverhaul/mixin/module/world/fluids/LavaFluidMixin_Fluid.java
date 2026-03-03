@@ -10,8 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(LavaFluid.class)
 public abstract class LavaFluidMixin_Fluid extends FlowingFluid {
 
+	/**
+	 * Reduces lava's explosion resistance to 0 when fluid explosion resistance changes are
+	 * enabled, allowing explosions to propagate through lava.
+	 */
 	@ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
-	private float onWaterExplosionResistance(float original) {
+	private float insanesurvivaloverhaul$onLavaExplosionResistance(float original) {
 		if (!Fluids.shouldChangeFluidsExplosionResistance())
 			return original;
 		return 0f;

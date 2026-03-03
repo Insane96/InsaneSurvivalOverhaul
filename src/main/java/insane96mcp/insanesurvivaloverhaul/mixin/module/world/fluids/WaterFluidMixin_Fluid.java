@@ -10,8 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(WaterFluid.class)
 public abstract class WaterFluidMixin_Fluid extends FlowingFluid {
 
+	/**
+	 * Reduces water's explosion resistance to 0 when fluid explosion resistance changes are
+	 * enabled, allowing explosions to propagate through water.
+	 */
 	@ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
-	private float onWaterExplosionResistance(float original) {
+	private float insanesurvivaloverhaul$onWaterExplosionResistance(float original) {
 		if (!Fluids.shouldChangeFluidsExplosionResistance())
 			return original;
 		return 0f;

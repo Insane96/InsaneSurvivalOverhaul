@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -30,6 +31,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         //Vanilla
+
+        //Mod's
         tag(HUD_CARDINAL_DIRECTION)
                 .add(Items.COMPASS);
         tag(HUD_SEASON);
@@ -42,6 +45,10 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.CLOCK);
         tag(HUD_BIOME);
                 //.add(Sextant.ITEM.get());
+
+        tag(Tweaks.WORLD_IMMUNE)
+                .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
+                .addOptionalTag(InsaneSO.location("equipment/netherite"));
     }
 
     public static TagKey<Item> create(String tagName) {
