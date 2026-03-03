@@ -97,7 +97,7 @@ public abstract class GuiMixin {
     }
 
     @ModifyVariable(method = "renderVehicleHealth", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-    public int iguanatweaksreborn$onGetVehicleHealth(int original, @Local LivingEntity mount) {
+    public int insanesurvivaloverhaul$onGetVehicleHealth(int original, @Local LivingEntity mount) {
         if (!Misc.fixMountsGui())
             return original;
         return (int)(mount.getMaxHealth() + 0.5F) / 2;
@@ -106,7 +106,7 @@ public abstract class GuiMixin {
     @Definition(id = "l2", local = @Local(type = int.class))
     @Expression("l2 == 0")
     @WrapOperation(method = "renderFoodLevel", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$onTryRenderFood(int left, int right, Operation<Boolean> original, @Local LivingEntity mount) {
+    public boolean insanesurvivaloverhaul$onTryRenderFood(int left, int right, Operation<Boolean> original, @Local LivingEntity mount) {
         if (!Misc.fixMountsGui())
             return original.call(left, right);
         return true;
@@ -115,7 +115,7 @@ public abstract class GuiMixin {
     @Definition(id = "playerrideablejumping", local = @Local(type = PlayerRideableJumping.class))
     @Expression("playerrideablejumping != null")
     @WrapOperation(method = "maybeRenderJumpMeter", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$onGetVehicleHealth(Object left, Object right, Operation<Boolean> original) {
+    public boolean insanesurvivaloverhaul$onGetVehicleHealth(Object left, Object right, Operation<Boolean> original) {
         if (!Misc.fixMountsGui())
             return original.call(left, right);
         //noinspection DataFlowIssue
@@ -123,12 +123,12 @@ public abstract class GuiMixin {
     }
 
     @Inject(method = "maybeRenderExperienceBar", at = @At(value = "HEAD"), cancellable = true)
-    public void iguanatweaksreborn$onTryRenderXpBar(GuiGraphics guiGraphics, DeltaTracker p_348543_, CallbackInfo ci) {
+    public void insanesurvivaloverhaul$onTryRenderXpBar(GuiGraphics guiGraphics, DeltaTracker p_348543_, CallbackInfo ci) {
         if (!Misc.fixMountsGui())
             return;
         ci.cancel();
         int i = guiGraphics.guiWidth() / 2 - 91;
-        if ((this.minecraft.player.jumpableVehicle() == null && this.isExperienceBarVisible()) || minecraft.player.getJumpRidingScale() == 0) {
+        if ((this.minecraft.player.jumpableVehicle() == null || minecraft.player.getJumpRidingScale() == 0) && this.minecraft.gameMode.hasExperience()) {
             this.renderExperienceBar(guiGraphics, i);
         }
     }
@@ -137,7 +137,7 @@ public abstract class GuiMixin {
     @Definition(id = "pAbsorptionAmount", local = @Local(type = int.class, ordinal = 6, argsOnly = true))
     @Expression("pCurrentHealth + pAbsorptionAmount <= 4")
     @ModifyExpressionValue(method = "renderHearts", at = @At("MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$onShakeCheck(boolean original, @Local(argsOnly = true) float pMaxHealth) {
+    public boolean insanesurvivaloverhaul$onShakeCheck(boolean original, @Local(argsOnly = true) float pMaxHealth) {
         if (!Misc.shouldPreventHealthShake()
                 || !original)
             return original;

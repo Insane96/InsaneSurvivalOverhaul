@@ -38,15 +38,15 @@ import java.util.List;
         name = "HUD Infos",
         description = "Adds various infos on top left of the screen")
 public class HudInfos extends Feature {
-    @Config(description = "If true, items in the iguanatweaksreborn:hud/cardinal_direction will display the cardinal direction.")
+    @Config(description = "If true, items in the insanesurvivaloverhaul:hud/cardinal_direction will display the cardinal direction.")
     public static Boolean cardinalDirection = true;
-    @Config(description = "If true, items in the iguanatweaksreborn:hud/season will display the current season. Only available if Serene Seasons is installed")
+    @Config(description = "If true, items in the insanesurvivaloverhaul:hud/season will display the current season. Only available if Serene Seasons is installed")
     public static Boolean season = true;
-    @Config(description = "If true, items in the iguanatweaksreborn:hud/depth will display the current Y level")
+    @Config(description = "If true, items in the insanesurvivaloverhaul:hud/depth will display the current Y level")
     public static Boolean depth = true;
-    @Config(description = "If true, items in the iguanatweaksreborn:hud/time will display the time of day")
+    @Config(description = "If true, items in the insanesurvivaloverhaul:hud/time will display the time of day")
     public static Boolean time = true;
-    @Config(description = "If true, items in the iguanatweaksreborn:hud/biome will display the current biome")
+    @Config(description = "If true, items in the insanesurvivaloverhaul:hud/biome will display the current biome")
     public static Boolean biome = true;
 
     @OnlyIn(Dist.CLIENT)

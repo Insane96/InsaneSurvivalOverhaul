@@ -1,11 +1,13 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobs;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -43,5 +45,9 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(WOLVES)
                 .addTag(CATS)
                 .addTag(PARROTS);
+        tag(MiscMobs.PASSIVE_REGEN)
+                .addTag(PETS)
+                .add(EntityType.VILLAGER)
+                .addTag(EntityTypeTags.RAIDERS);
     }
 }

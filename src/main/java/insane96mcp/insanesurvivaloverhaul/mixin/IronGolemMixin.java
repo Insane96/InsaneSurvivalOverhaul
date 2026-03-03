@@ -13,7 +13,7 @@ public abstract class IronGolemMixin {
 	@Shadow protected abstract float getAttackDamage();
 
 	@ModifyArg(method = "doHurtTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-	public float iguanatweaksreborn$onDamageAmount(float original) {
+	public float insanesurvivaloverhaul$onDamageAmount(float original) {
 		if (!Feature.isEnabled(MiscMobs.class)
 				|| !MiscMobs.fixedIronGolemDamage)
 			return original;

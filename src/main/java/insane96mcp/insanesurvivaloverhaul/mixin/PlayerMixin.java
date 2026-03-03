@@ -47,29 +47,29 @@ public abstract class PlayerMixin extends LivingEntity {
     // --- Attack Sounds ---
 
     @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 1))
-    public void iguanatweaksreborn$playSweepSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
+    public void insanesurvivaloverhaul$playSweepSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
         AttackSounds.playAttackSound(level, player, x, y, z, soundEvent, soundSource, volume, pitch, original, (Player) (Object) this);
     }
 
     @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 2))
-    public void iguanatweaksreborn$playCritSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
+    public void insanesurvivaloverhaul$playCritSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
         AttackSounds.playAttackSound(level, player, x, y, z, soundEvent, soundSource, volume, pitch, original, (Player) (Object) this);
     }
 
     @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 3))
-    public void iguanatweaksreborn$playStrongSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
+    public void insanesurvivaloverhaul$playStrongSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
         AttackSounds.playAttackSound(level, player, x, y, z, soundEvent, soundSource, volume, pitch, original, (Player) (Object) this);
     }
 
     @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 4))
-    public void iguanatweaksreborn$playWeakSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
+    public void insanesurvivaloverhaul$playWeakSound(Level level, Player player, double x, double y, double z, SoundEvent soundEvent, SoundSource soundSource, float volume, float pitch, Operation<SoundEvent> original) {
         AttackSounds.playAttackSound(level, player, x, y, z, soundEvent, soundSource, volume, pitch, original, (Player) (Object) this);
     }
 
     // --- Misc Stats' Sweeping Overhaul ---
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V", ordinal = 1, shift = At.Shift.AFTER))
-    public void iguanatweaksreborn$changeSweepingDamage(Entity pTarget, CallbackInfo ci, @Local(ordinal = 0) float f, @Local(ordinal = 5) LocalFloatRef f3) {
+    public void insanesurvivaloverhaul$changeSweepingDamage(Entity pTarget, CallbackInfo ci, @Local(ordinal = 0) float f, @Local(ordinal = 5) LocalFloatRef f3) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return;
@@ -77,7 +77,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getSweepHitBox(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;"))
-    public AABB iguanatweaksreborn$changeSweepingHitbox(AABB original) {
+    public AABB insanesurvivaloverhaul$changeSweepingHitbox(AABB original) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return original;
@@ -85,7 +85,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;entityInteractionRange()D"))
-    public double iguanatweaksreborn$increaseSweepingReach(double original) {
+    public double insanesurvivaloverhaul$increaseSweepingReach(double original) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return original;
@@ -93,7 +93,7 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;onGround()Z", ordinal = 1))
-    public boolean iguanatweaksreborn$allowSweepOffGround(boolean original) {
+    public boolean insanesurvivaloverhaul$allowSweepOffGround(boolean original) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return original;
@@ -103,7 +103,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @Definition(id = "flag", local = @Local(type = boolean.class, ordinal = 1))
     @Expression("flag")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
-    public boolean iguanatweaksreborn$allowSweepWhenSprinting(boolean original) {
+    public boolean insanesurvivaloverhaul$allowSweepWhenSprinting(boolean original) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return original;
@@ -114,7 +114,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @Definition(id = "getSpeed", method = "Lnet/minecraft/world/entity/player/Player;getSpeed()F")
     @Expression("d0 < (double) this.getSpeed()")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$allowSweepWhenTooFast(boolean original) {
+    public boolean insanesurvivaloverhaul$allowSweepWhenTooFast(boolean original) {
         if (!MiscCombat.sweepingOverhaul
                 || !Feature.isEnabled(MiscCombat.class))
             return original;
@@ -124,7 +124,7 @@ public abstract class PlayerMixin extends LivingEntity {
     //TODO Full damage
 
     /*@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", shift = At.Shift.AFTER))
-    public void iguanatweaksreborn$onSweepHurt(Entity pTarget, CallbackInfo ci, @Local Vec3 vec3, @Local(name = "flag1") boolean flag1, @Local(name = "flag2") boolean flag2, @Local(name = "flag4") boolean flag4, @Local(name = "f1") float f1, @Local LivingEntity sweepTarget, @Local DamageSource damageSource) {
+    public void insanesurvivaloverhaul$onSweepHurt(Entity pTarget, CallbackInfo ci, @Local Vec3 vec3, @Local(name = "flag1") boolean flag1, @Local(name = "flag2") boolean flag2, @Local(name = "flag4") boolean flag4, @Local(name = "f1") float f1, @Local LivingEntity sweepTarget, @Local DamageSource damageSource) {
         if (sweepTarget instanceof ServerPlayer && sweepTarget.hurtMarked) {
             ((ServerPlayer)sweepTarget).connection.send(new ClientboundSetEntityMotionPacket(sweepTarget));
             sweepTarget.hurtMarked = false;

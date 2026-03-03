@@ -26,7 +26,7 @@ public class GuardianAttackGoalMixin {
     @Definition(id = "getAttackDuration", method = "Lnet/minecraft/world/entity/monster/Guardian;getAttackDuration()I")
     @Expression("this.attackTime >= this.guardian.getAttackDuration()")
     @WrapOperation(method = "tick", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$onTryAttack(int left, int right, Operation<Boolean> original, @Local LivingEntity livingEntity) {
+    public boolean insanesurvivaloverhaul$onTryAttack(int left, int right, Operation<Boolean> original, @Local LivingEntity livingEntity) {
         boolean originalResult = original.call(left, right);
         if (!Feature.isEnabled(MiscMobs.class)
                 || !MiscMobs.guardianMagicDamageOnly

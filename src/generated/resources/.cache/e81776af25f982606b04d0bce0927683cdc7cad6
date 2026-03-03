@@ -1,5 +1,6 @@
-// 1.21.1	2026-02-27T22:08:33.2465134	Tags for minecraft:entity_type mod id insanesurvivaloverhaul
+// 1.21.1	2026-03-03T09:37:32.4691127	Tags for minecraft:entity_type mod id insanesurvivaloverhaul
 7b340ec9bb077e697791c2df49c07cd5c24eb38b data/insanesurvivaloverhaul/tags/entity_type/cats.json
 f1eb465c10b7200ac943367340c90bd349afa085 data/insanesurvivaloverhaul/tags/entity_type/parrots.json
+a73cc7629b559c0bfdd929f04551ac0443aab6c5 data/insanesurvivaloverhaul/tags/entity_type/passive_regen.json
 98edbee9138a3349dd958a73bb6e4c177c20c47e data/insanesurvivaloverhaul/tags/entity_type/pets.json
 3ea79639851217a8aabdbf1b11581141c7643c85 data/insanesurvivaloverhaul/tags/entity_type/wolves.json

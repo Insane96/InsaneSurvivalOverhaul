@@ -17,7 +17,7 @@ public class MiscMobs extends Feature {
     public static final TagKey<EntityType<?>> PASSIVE_REGEN = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("passive_regen"));
 
     //TODO JsonFeature
-    @Config(min = 0, description = "1 in X chance each tick for mobs in the `iguanatweaksreborn:passive_regen` entity type tag to regain 1 health. Set to 0 to disable")
+    @Config(min = 0, description = "1 in X chance each tick for mobs in the `insanesurvivaloverhaul:passive_regen` entity type tag to regain 1 health. Set to 0 to disable")
     public static Integer passiveRegenChance = 200;
 
     @Config(description = "Instead of dealing magic and melee damage, guardians now only deal magic damage equal to their attack_damage attribute")

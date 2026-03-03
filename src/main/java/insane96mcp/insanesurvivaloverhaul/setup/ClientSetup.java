@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -15,6 +16,11 @@ import java.util.function.Supplier;
 public class ClientSetup {
 
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            if (Feature.isEnabled(Spawning.class)) {
+                addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
+            }
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());

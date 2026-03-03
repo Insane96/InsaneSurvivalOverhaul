@@ -12,6 +12,7 @@
         "IronGolemMixin",
         "LivingEntityMixin",
         "MobMixin",
+        "NaturalSpawnerMixin",
         "PlayerMixin",
         "accessor.AbstractArrowAccessor",
         "accessor.BlockStateBaseAccessor",

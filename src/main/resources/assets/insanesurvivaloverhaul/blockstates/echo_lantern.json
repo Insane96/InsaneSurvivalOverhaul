@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "hanging=false": {
+            "model": "insanesurvivaloverhaul:block/echo_lantern"
+        },
+        "hanging=true": {
+            "model": "insanesurvivaloverhaul:block/echo_lantern_hanging"
+        }
+    }
+}

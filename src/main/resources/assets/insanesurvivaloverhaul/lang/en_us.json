@@ -22,5 +22,10 @@
 
     "insanesurvivaloverhaul.shield_blocked_damage": "Blocked damage: %f",
 
-    "item.insanesurvivaloverhaul.shortbow": "Shortbow"
+    "item.insanesurvivaloverhaul.shortbow": "Shortbow",
+
+
+    "insanesurvivaloverhaul:mobs_module": "Mobs",
+
+    "block.insanesurvivaloverhaul.echo_lantern": "Echo Lantern"
 }

@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Spawning"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WS",
+    "WS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "insanesurvivaloverhaul:shortbow"
+  }
+}
