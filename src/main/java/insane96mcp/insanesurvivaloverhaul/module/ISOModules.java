@@ -9,10 +9,12 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ISOModules {
 	public static final String COMBAT = InsaneSO.MOD_ID + ":combat";
+	public static final String MISC = InsaneSO.MOD_ID + ":misc";
 	public static final String MOBS = InsaneSO.MOD_ID + ":mobs";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
 		create(COMBAT, "Combat", eventBus, builder);
+		create(MISC, "Misc", eventBus, builder);
 		create(MOBS, "Mobs", eventBus, builder);
 	}
 

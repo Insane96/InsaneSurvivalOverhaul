@@ -1,5 +1,7 @@
 ## Upcoming
-* Added back Mobs feature: Equipment, Misc Mobs, Spawning and Zombie Siege
+* Added back Mobs features: Equipment, Misc Mobs, Spawning and Zombie Siege
+  * Not sure if and when Villager feature will come back.
+* Added back Misc features: Packs
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 
 ## 5.1.0.0-alpha
