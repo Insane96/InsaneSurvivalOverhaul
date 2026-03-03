@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:splash_potion",
+    "components": {
+        "minecraft:max_stack_size": 4
+    }
+}

@@ -1,8 +1,9 @@
 ## Upcoming
-* Added back Mobs features: Equipment, Misc Mobs, Spawning and Zombie Siege
+* Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
-* Added back Misc features: Packs
-* Added back World features: Fluids, Nerfs
+* Added back Misc features: Packs, Nerfs, Tweaks, Potions and Effects
+  * Potion and Effects now enables a data pack that changes potions stack sizes
+* Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 
 ## 5.1.0.0-alpha

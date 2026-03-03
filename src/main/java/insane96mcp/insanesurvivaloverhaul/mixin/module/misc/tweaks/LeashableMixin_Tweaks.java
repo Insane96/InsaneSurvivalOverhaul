@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Leashable.class)
-public abstract class LeashableMixin_Tweaks {
+public interface LeashableMixin_Tweaks {
     /**
      * Replaces the hardcoded maximum leash distance (10.0 blocks) with the configured value
      * from {@link Tweaks#leashMaxDistance} when the Tweaks feature is enabled.
