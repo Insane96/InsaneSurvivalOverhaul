@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Spawning"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "S": {
+      "item": "minecraft:echo_shard"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SNS",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "insanesurvivaloverhaul:echo_lantern"
+  }
+}

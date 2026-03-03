@@ -3,10 +3,7 @@ package insane96mcp.insanesurvivaloverhaul;
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.insanelib.util.IntegratedPack;
-import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
-import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
-import insane96mcp.insanesurvivaloverhaul.data.generator.ISOEntityTypeTagsProvider;
-import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.generator.*;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
@@ -95,6 +92,10 @@ public class InsaneSO {
         event.getGenerator().addProvider(
                 event.includeServer(),
                 new ISOItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper)
+        );
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISORecipeProvider(output, lookupProvider)
         );
         event.getGenerator().addProvider(
                 event.includeClient(),
