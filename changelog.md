@@ -3,7 +3,7 @@
   * Not sure if and when Villager feature will come back.
 * Added back Misc features: Packs, Nerfs, Tweaks, Potions and Effects, Low Fish
   * Potion and Effects now enables a data pack that changes potions stack sizes
-* Added back Items features: Stack Sizes
+* Added back Items features: Stack Sizes, Name Tags, Disabled Items and Ecologic Wood
   * Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
 * Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack

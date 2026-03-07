@@ -26,6 +26,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
     public static final TagKey<Item> HORSE_ARMORS = create("horse_armors");
     public static final TagKey<Item> MINECARTS = create("minecarts");
+    public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
 
     public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
@@ -57,6 +58,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
                 .addOptionalTag(InsaneSO.location("equipment/netherite"));
+
+        tag(WOODEN_HAND_EQUIPMENT)
+                .add(Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);
     }
 
     public static TagKey<Item> create(String tagName) {

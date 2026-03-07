@@ -31,7 +31,7 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] CriticalRework
 - [ ] Fletching
 
-## Experience
+## ~~Experience~~ Moving to new mod
 
 - [ ] DroppedExperience
 - [ ] PlayerExperience
@@ -54,9 +54,9 @@ Features to port from IguanaTweaksReborn to ISO.
 
 ## Items
 
-- [ ] DisabledItems
-- [ ] EcologicWood
-- [ ] NameTags
+- [x] DisabledItems
+- [x] EcologicWood
+- [x] NameTags
 - [x] StackSizes
 - [ ] StoneToolsGone
 - [ ] Altimeter

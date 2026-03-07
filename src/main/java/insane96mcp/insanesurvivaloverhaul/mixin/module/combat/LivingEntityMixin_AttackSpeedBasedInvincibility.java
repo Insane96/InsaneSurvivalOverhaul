@@ -18,7 +18,7 @@ public class LivingEntityMixin_AttackSpeedBasedInvincibility {
     public int insanesurvivaloverhaul$scaledInvincibilityFramesHurt(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
-        return self().invulnerableTime - 10;
+        return ((LivingEntity) (Object) this).invulnerableTime - 10;
     }
 
     /**
@@ -29,7 +29,8 @@ public class LivingEntityMixin_AttackSpeedBasedInvincibility {
     public int insanesurvivaloverhaul$scaledInvincibilityFramesEvent(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
-        return self().invulnerableTime > 10 ? self().invulnerableTime : original;
+        LivingEntity self = (LivingEntity) (Object) this;
+        return self.invulnerableTime > 10 ? self.invulnerableTime : original;
     }
 
     /**
@@ -40,10 +41,7 @@ public class LivingEntityMixin_AttackSpeedBasedInvincibility {
     public int insanesurvivaloverhaul$scaledInvincibilityFramesEventOffset(int original) {
         if (!Feature.isEnabled(AttackSpeedBasedInvincibility.class))
             return original;
-        return self().invulnerableTime > 10 ? self().invulnerableTime - 10 : original;
-    }
-
-    private LivingEntity self() {
-        return (LivingEntity) (Object) this;
+        LivingEntity self = (LivingEntity) (Object) this;
+        return self.invulnerableTime > 10 ? self.invulnerableTime - 10 : original;
     }
 }

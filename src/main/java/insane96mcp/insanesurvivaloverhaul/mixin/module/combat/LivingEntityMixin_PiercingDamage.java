@@ -20,13 +20,10 @@ public class LivingEntityMixin_PiercingDamage {
      */
     @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V", shift = At.Shift.AFTER), cancellable = true)
     public void insanesurvivaloverhaul$cancelOnPiercingDead(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        if (ModNBTData.contains(self(), PiercingDamage.SHOULD_STOP_HURT)) {
-            cir.setReturnValue(ModNBTData.get(self(), PiercingDamage.SHOULD_STOP_HURT, Boolean.class));
-            ModNBTData.remove(self(), PiercingDamage.SHOULD_STOP_HURT);
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (ModNBTData.contains(self, PiercingDamage.SHOULD_STOP_HURT)) {
+            cir.setReturnValue(ModNBTData.get(self, PiercingDamage.SHOULD_STOP_HURT, Boolean.class));
+            ModNBTData.remove(self, PiercingDamage.SHOULD_STOP_HURT);
         }
-    }
-
-    private LivingEntity self() {
-        return (LivingEntity) (Object) this;
     }
 }

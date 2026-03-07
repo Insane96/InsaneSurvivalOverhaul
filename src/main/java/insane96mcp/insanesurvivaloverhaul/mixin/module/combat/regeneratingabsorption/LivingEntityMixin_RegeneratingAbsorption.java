@@ -30,7 +30,7 @@ public class LivingEntityMixin_RegeneratingAbsorption {
      */
     @ModifyArg(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/common/damagesource/DamageContainer;setNewDamage(F)V"))
     private float insanesurvivaloverhaul$firePreAbsorpEvent(float damage) {
-        return ISOEventHook.onPreAbsorpDamage(self(), this.damageContainers.peek());
+        return ISOEventHook.onPreAbsorpDamage((LivingEntity) (Object) this, this.damageContainers.peek());
     }
 
     /**
@@ -54,7 +54,4 @@ public class LivingEntityMixin_RegeneratingAbsorption {
         original.call(instance, soundEvent, volume, pitch);
     }
 
-    private LivingEntity self() {
-        return (LivingEntity) (Object) this;
-    }
 }
