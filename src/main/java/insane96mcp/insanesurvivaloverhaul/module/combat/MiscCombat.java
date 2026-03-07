@@ -18,6 +18,8 @@ public class MiscCombat extends Feature {
     public static Boolean oneDamageForToolAttacking = true;
     @Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. A data pack is enabled that removes the sweeping enchantment.")
     public static Boolean sweepingOverhaul = true;
+    @Config(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%.")
+    public static Boolean noDamageWhenSpamming = true;
 
     /*@Config(description = "Enables a data pack that reworks armor, weapons and tools.")
     public static Boolean combatReworkDataPack = true;*/
@@ -48,5 +50,9 @@ public class MiscCombat extends Feature {
             return;
 
         event.setDisableSweep(false);
+    }
+
+    public static boolean noDamageWhenSpamming() {
+        return isEnabled(MiscCombat.class) && noDamageWhenSpamming;
     }
 }
