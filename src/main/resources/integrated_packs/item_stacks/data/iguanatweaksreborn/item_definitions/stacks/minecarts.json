@@ -1,0 +1,6 @@
+{
+	"item": "#insanesurvivaloverhaul:minecarts",
+	"components": {
+		"minecraft:max_stack_size": 12
+	}
+}

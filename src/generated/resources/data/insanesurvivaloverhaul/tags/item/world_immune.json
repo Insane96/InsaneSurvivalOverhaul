@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:netherite_block",
+    "minecraft:netherite_ingot",
+    {
+      "id": "#insanesurvivaloverhaul:equipment/netherite",
+      "required": false
+    }
+  ]
+}

@@ -1,6 +1,9 @@
-// 1.21.1	2026-02-27T22:08:33.2425127	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-03-07T10:29:19.2513244	Tags for minecraft:item mod id insanesurvivaloverhaul
+af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/horse_armors.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/biome.json
 0389e0a2b30a501b5229643fd0faa175d4922bc4 data/insanesurvivaloverhaul/tags/item/hud/cardinal_direction.json
 9a7333cf15aa39d43ab4349a868312b7f04ab506 data/insanesurvivaloverhaul/tags/item/hud/depth.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/season.json
 8180207eb4d779d1e1250798d7cdcd341751b533 data/insanesurvivaloverhaul/tags/item/hud/time.json
+56ef1cfeb0e39ed60991c36aa1fa78c763c703cd data/insanesurvivaloverhaul/tags/item/minecarts.json
+e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json

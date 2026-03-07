@@ -78,6 +78,8 @@ configurations {
 dependencies {
     implementation "maven.modrinth:insanelib:${insanelib_version}"
 
+    compileOnly "com.ezylang:EvalEx:3.6.0"
+
     implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.3"))
 }
 
