@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.combat.bows;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(AbstractArrow.class)
-public abstract class AbstractArrowMixin extends Projectile {
+public abstract class AbstractArrowMixin_Bows extends Projectile {
 
     @Shadow
     public abstract boolean isCritArrow();
@@ -29,11 +29,9 @@ public abstract class AbstractArrowMixin extends Projectile {
     @Shadow
     private ItemStack pickupItemStack;
 
-    protected AbstractArrowMixin(EntityType<? extends Projectile> entityType, Level level) {
+    protected AbstractArrowMixin_Bows(EntityType<? extends Projectile> entityType, Level level) {
         super(entityType, level);
     }
-
-    // --- Bows ---
 
     /**
      * Cancels the crit arrow bonus damage check so fully-charged arrows don't deal extra damage.
@@ -81,9 +79,8 @@ public abstract class AbstractArrowMixin extends Projectile {
         if (this.getOwner() instanceof Mob)
             damageMultiplier = 1f;
         float newDamage = (float) Mth.clamp(l * this.baseDamage * damageMultiplier, 0.0D, Integer.MAX_VALUE);
-        if (this.isCritArrow() && !Bows.disableCritArrowsBonusDamage) {
+        if (this.isCritArrow() && !Bows.disableCritArrowsBonusDamage)
             newDamage += this.random.nextFloat() * (newDamage / 2 + 2);
-        }
         return newDamage;
     }
 
@@ -92,7 +89,7 @@ public abstract class AbstractArrowMixin extends Projectile {
      * @see Bows#piercingCrossbow
      */
     @WrapOperation(method = "<init>(Lnet/minecraft/world/entity/EntityType;DDDLnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getPiercingCount(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)I"))
-    public int insanesurvivaloverhaul$onPiercingCount(ServerLevel level, ItemStack firedFromWeapon, ItemStack pickupItemStack, Operation<Integer> original) {
+    public int insanesurvivaloverhaul$piercingCrossbow(ServerLevel level, ItemStack firedFromWeapon, ItemStack pickupItemStack, Operation<Integer> original) {
         return Bows.piercingCrossbows(original.call(level, firedFromWeapon, this.pickupItemStack), firedFromWeapon);
     }
 }

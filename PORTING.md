@@ -21,7 +21,7 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] Knockback
 - [x] MiscStats
 - [x] PiercingDamage
-- [ ] PlayerStats
+- [x] ~~PlayerStats~~ Split into PlayerAttributes (in InsaneLib) and no damage when spamming has been moved to Misc Combat
 - [x] RegeneratingAbsorption
 - [x] Shields
 - [ ] ShieldsPlus

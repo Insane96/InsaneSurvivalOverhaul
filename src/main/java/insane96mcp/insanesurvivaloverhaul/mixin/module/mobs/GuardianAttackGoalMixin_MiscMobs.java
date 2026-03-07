@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
@@ -16,17 +16,23 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(targets = "net.minecraft.world.entity.monster.Guardian.GuardianAttackGoal")
-public class GuardianAttackGoalMixin {
+public class GuardianAttackGoalMixin_MiscMobs {
+
     @Shadow
     @Final
     private Guardian guardian;
 
+    /**
+     * When {@link MiscMobs#guardianMagicDamageOnly} is enabled, replaces the guardian's beam attack
+     * with direct {@code indirectMagic} damage and clears its target, so the beam deals magic damage
+     * instead of the vanilla direct damage type.
+     */
     @Definition(id = "attackTime", field = "Lnet/minecraft/world/entity/monster/Guardian$GuardianAttackGoal;attackTime:I")
     @Definition(id = "guardian", field = "Lnet/minecraft/world/entity/monster/Guardian$GuardianAttackGoal;guardian:Lnet/minecraft/world/entity/monster/Guardian;")
     @Definition(id = "getAttackDuration", method = "Lnet/minecraft/world/entity/monster/Guardian;getAttackDuration()I")
     @Expression("this.attackTime >= this.guardian.getAttackDuration()")
     @WrapOperation(method = "tick", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean insanesurvivaloverhaul$onTryAttack(int left, int right, Operation<Boolean> original, @Local LivingEntity livingEntity) {
+    public boolean insanesurvivaloverhaul$guardianMagicDamage(int left, int right, Operation<Boolean> original, @Local LivingEntity livingEntity) {
         boolean originalResult = original.call(left, right);
         if (!Feature.isEnabled(MiscMobs.class)
                 || !MiscMobs.guardianMagicDamageOnly
