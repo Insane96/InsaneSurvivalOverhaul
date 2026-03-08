@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -41,6 +42,17 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        trimmedArmorItem(CopperEquipment.BOOTS);
+        trimmedArmorItem(CopperEquipment.LEGGINGS);
+        trimmedArmorItem(CopperEquipment.CHESTPLATE);
+        trimmedArmorItem(CopperEquipment.HELMET);
+
+        handHeld(CopperEquipment.AXE.get());
+        handHeld(CopperEquipment.PICKAXE.get());
+        handHeld(CopperEquipment.SHOVEL.get());
+        handHeld(CopperEquipment.HOE.get());
+        handHeld(CopperEquipment.SWORD.get());
+
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
     }
 
@@ -79,7 +91,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
     }
 
     // Shoutout to El_Redstoniano for making this
-    private void trimmedArmorItem(DeferredHolder<Item, Item> itemRegistryObject) {
+    private void trimmedArmorItem(DeferredHolder<Item, ArmorItem> itemRegistryObject) {
         if (itemRegistryObject.get() instanceof ArmorItem armorItem) {
             trimMaterials.forEach((trimMaterial, value) -> {
                 float trimValue = value;
@@ -92,10 +104,10 @@ public class ISOItemModelsProvider extends ItemModelProvider {
                     default -> "";
                 };
 
-                String armorItemPath = "item/" + armorItem;
+                String armorItemPath = "item/" + itemRegistryObject.getId().getPath();
                 String trimPath = "trims/items/" + armorType + "_trim_" + trimMaterial.location().getPath();
                 String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
-                ResourceLocation armorItemResLoc = InsaneSO.location(armorItemPath);
+                ResourceLocation armorItemResLoc = ResourceLocation.fromNamespaceAndPath(itemRegistryObject.getId().getNamespace(), armorItemPath);
                 ResourceLocation trimResLoc = ResourceLocation.parse(trimPath); // minecraft namespace
                 ResourceLocation trimNameResLoc = InsaneSO.location(currentTrimName);
 
@@ -110,12 +122,12 @@ public class ISOItemModelsProvider extends ItemModelProvider {
                         .texture("layer1", trimResLoc);
 
                 // Non-trimmed armorItem file (normal variant)
-                this.withExistingParent(itemRegistryObject.getId().getPath(),
+                this.withExistingParent(itemRegistryObject.getId().toString(),
                                 mcLoc("item/generated"))
                         .override()
                         .model(new ModelFile.UncheckedModelFile(trimNameResLoc))
                         .predicate(mcLoc("trim_type"), trimValue).end()
-                        .texture("layer0", InsaneSO.location("item/" + itemRegistryObject.getId().getPath()));
+                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemRegistryObject.getId().getNamespace(), "item/" + itemRegistryObject.getId().getPath()));
             });
         }
     }

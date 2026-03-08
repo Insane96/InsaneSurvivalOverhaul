@@ -1,0 +1,36 @@
+{
+	"parent": "minecraft:story/mine_stone",
+	"criteria": {
+		"hoe": {
+			"conditions": {
+				"items": [
+					{
+						"tag": "minecraft:hoes"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"announce_to_chat": true,
+		"description": {
+			"translate": "advancements.story.upgrade_tools.description"
+		},
+		"frame": "task",
+		"hidden": false,
+		"icon": {
+			"item": "minecraft:wooden_hoe",
+			"nbt": "{Damage:0}"
+		},
+		"show_toast": true,
+		"title": {
+			"translate": "advancements.story.upgrade_tools.title"
+		}
+	},
+	"requirements": [
+		[
+			"hoe"
+		]
+	]
+}

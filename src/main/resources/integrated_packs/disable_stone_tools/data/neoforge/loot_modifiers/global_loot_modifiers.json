@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "entries": [
+        "insanesurvivaloverhaul:replace_stone_pickaxe_with_copper",
+        "insanesurvivaloverhaul:replace_stone_axe_with_copper",
+        "insanesurvivaloverhaul:replace_stone_shovel_with_copper",
+        "insanesurvivaloverhaul:replace_stone_sword_with_copper",
+        "insanesurvivaloverhaul:replace_stone_hoe_with_copper"
+    ]
+}

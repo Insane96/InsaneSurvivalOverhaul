@@ -1,12 +1,14 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -35,6 +37,17 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         //Vanilla
+        tag(ItemTags.PICKAXES).add(CopperEquipment.PICKAXE.get());
+        tag(ItemTags.AXES).add(CopperEquipment.AXE.get());
+        tag(ItemTags.SHOVELS).add(CopperEquipment.SHOVEL.get());
+        tag(ItemTags.SWORDS).add(CopperEquipment.SWORD.get());
+        tag(ItemTags.HOES).add(CopperEquipment.HOE.get());
+
+        tag(ItemTags.HEAD_ARMOR).add(CopperEquipment.HELMET.get());
+        tag(ItemTags.CHEST_ARMOR).add(CopperEquipment.CHESTPLATE.get());
+        tag(ItemTags.LEG_ARMOR).add(CopperEquipment.LEGGINGS.get());
+        tag(ItemTags.FOOT_ARMOR).add(CopperEquipment.BOOTS.get());
+
 
         //Mod's
         tag(HUD_CARDINAL_DIRECTION)

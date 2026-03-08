@@ -3,6 +3,8 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
+import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -16,12 +18,36 @@ import java.util.function.Supplier;
 public class ClientSetup {
 
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event) {
+        if (Feature.isEnabled(StoneToolsGone.class))
+        {
+            remove(event, Items.STONE_SWORD);
+            remove(event, Items.STONE_AXE);
+            remove(event, Items.STONE_SHOVEL);
+            remove(event, Items.STONE_PICKAXE);
+            remove(event, Items.STONE_HOE);
+        }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             if (Feature.isEnabled(Spawning.class)) {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
             }
         }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            if (Feature.isEnabled(CopperEquipment.class)) {
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
+            }
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            if (Feature.isEnabled(CopperEquipment.class)) {
+                addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD.get());
+                addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.BOOTS.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE.get());
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET.get());
+            }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());
             }
@@ -48,8 +74,8 @@ public class ClientSetup {
         addAfter(event, after, itemToAdd.get());
     }
 
-    public static void remove(BuildCreativeModeTabContentsEvent event, ItemStack itemToRemove) {
-        event.remove(itemToRemove, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+    public static void remove(BuildCreativeModeTabContentsEvent event, Item itemToRemove) {
+        event.remove(new ItemStack(itemToRemove), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
     }
 
     public static void init(FMLClientSetupEvent event) {

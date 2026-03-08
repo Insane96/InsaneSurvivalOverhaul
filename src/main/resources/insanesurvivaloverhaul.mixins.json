@@ -4,6 +4,7 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "accessor.AbstractArrowAccessor",
+        "accessor.ArmorMaterialsAccessor",
         "accessor.BlockBehaviourAccessor",
         "accessor.BlockStateBaseAccessor",
         "accessor.LivingEntityAccessor",

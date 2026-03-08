@@ -1,0 +1,6 @@
+{
+    "type": "insanelib:replace_loot",
+    "conditions": [],
+    "item_to_replace": "minecraft:stone_axe",
+    "new_item": "minecraft:copper_axe"
+}

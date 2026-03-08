@@ -1,0 +1,21 @@
+{
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "f": {
+            "item": "minecraft:copper_ingot"
+          },
+          "s": {
+            "item": "minecraft:stick"
+          }
+        },
+        "pattern": [
+          "f",
+          "s",
+          "s"
+        ],
+        "result": {
+          "item": "minecraft:copper_shovel"
+        },
+        "show_notification": true
+      }

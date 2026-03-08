@@ -58,10 +58,10 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] EcologicWood
 - [x] NameTags
 - [x] StackSizes
-- [ ] StoneToolsGone
+- [x] StoneToolsGone
 - [ ] Altimeter
 - [ ] Blinker
-- [ ] CopperEquipment
+- [x] CopperEquipment
 - [ ] FlintExpansion
 - [ ] MiscItem
 - [ ] Pouch

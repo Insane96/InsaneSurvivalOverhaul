@@ -35,5 +35,7 @@ public class ISORecipeProvider extends RecipeProvider {
                 .define('N', Items.NETHER_STAR)
                 .unlockedBy("has_echo_shard", has(Items.ECHO_SHARD))
                 .save(recipeOutput.withConditions(new FeatureEnabledCondition("Spawning")));
+
+
     }
 }
