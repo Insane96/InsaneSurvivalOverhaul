@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:iron_nugget"
+		},
+		"title": {
+			"translate": "advancements.iso.iron_nugget.title"
+		},
+		"description": {
+			"translate": "advancements.iso.iron_nugget.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:story/mine_stone",
+	"criteria": {
+		"iron_nugget": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:iron_nugget"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"iron_nugget"
+		]
+	]
+}

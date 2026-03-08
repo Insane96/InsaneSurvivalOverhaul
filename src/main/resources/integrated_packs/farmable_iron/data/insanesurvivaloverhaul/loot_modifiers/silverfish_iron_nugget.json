@@ -1,0 +1,10 @@
+{
+    "type": "insanelib:inject_loot_table",
+    "conditions": [
+        {
+            "condition": "neoforge:loot_table_id",
+            "loot_table_id": "minecraft:entities/silverfish"
+        }
+    ],
+    "loot_table": "insanesurvivaloverhaul:inject/silverfish_iron_nugget"
+}

@@ -1,6 +1,6 @@
 # ISO Porting Checklist
 
-Features to port from IguanaTweaksReborn to ISO.
+Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to ISO.
 
 ## Client
 
@@ -25,6 +25,7 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] RegeneratingAbsorption
 - [x] Shields
 - [ ] ShieldsPlus
+- [ ] ShieldsPlus (ITE)
 - [x] Snowballs
 - [x] UnfairOneShot
 - [x] Bows
@@ -33,10 +34,11 @@ Features to port from IguanaTweaksReborn to ISO.
 
 ## ~~Experience~~ Moving to new mod
 
-- [ ] DroppedExperience
-- [ ] PlayerExperience
-- [ ] Anvils
-- [ ] EnchantmentsFeature
+- [x] ~~DroppedExperience~~
+- [x] ~~PlayerExperience~~
+- [x] ~~Anvils~~
+- [x] ~~EnchantmentsFeature~~
+- [x] ~~NewEnchantmentsFeature~~ (ITE)
 
 ## Farming
 
@@ -62,19 +64,30 @@ Features to port from IguanaTweaksReborn to ISO.
 - [ ] Altimeter
 - [ ] Blinker
 - [x] CopperEquipment
-- [ ] FlintExpansion
+- [ ] ~~FlintExpansion~~ Equipment is no longer needed and gravel can be _easily_ found for flint, so ...
 - [ ] MiscItem
 - [ ] Pouch
 - [ ] RepairKits
 - [ ] UnbreakableItems
+- [ ] ExplosiveBarrel (ITE)
+- [ ] Recall (ITE)
+- [x] ~~Solarium~~ (ITE) No longer needed
 
 ## Mining
 
-- [ ] Gold
+- [x] ~~Gold~~
 - [ ] MaterialsAndOres
 - [ ] MiningMisc
 - [ ] BlockDefinition
 - [ ] BlockHardness
+- [ ] BeegOreVeins (ITE)
+- [x] ~~Durium~~ (ITE) Not needed
+- [ ] Forging (ITE)
+- [x] ~~Keego~~ (ITE) Not needed
+- [ ] MiningCharge (ITE)
+- [ ] MultiBlockFurnaces (ITE)
+- [x] ~~Quaron~~ (ITE) Not needed
+- [x] ~~SoulSteel~~ (ITE) Not needed
 
 ## Misc
 
@@ -93,8 +106,8 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] ZombieSiege
 - [x] Equipment
 - [x] Spawning
-- [ ] Villagers
-- [ ] WanderingTrades
+- [x] ~~Villagers~~ Data Packable Villager trades are painful to port, and I will 100% just remove villagers from the modpack
+- [x] ~~WanderingTrades~~ Same as above
 
 ## Movement
 
@@ -127,8 +140,8 @@ Features to port from IguanaTweaksReborn to ISO.
 - [ ] Nether
 - [ ] Sextant
 - [ ] CoalFire
-- [ ] ExplosionOverhaul
-- [ ] FasterDecayLeaves
+- [x] ~~ExplosionOverhaul~~ Standalone mod
+- [x] ~~FasterDecayLeaves~~ Other mods do the same (and probably better)
 - [ ] Seasons
 - [ ] Spawners
 - [ ] TimberTrees
