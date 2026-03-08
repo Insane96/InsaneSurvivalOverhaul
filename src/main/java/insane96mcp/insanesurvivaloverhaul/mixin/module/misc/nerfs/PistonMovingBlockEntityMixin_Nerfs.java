@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(PistonMovingBlockEntity.class)
-public class PistonMovingBlockEntityMixin_Fluid {
+public class PistonMovingBlockEntityMixin_Nerfs {
     /**
      * Adds the notify flag (2) to the block-set call during piston retraction, ensuring
      * neighbors are updated and preventing ghost fluids from persisting after the piston retracts.

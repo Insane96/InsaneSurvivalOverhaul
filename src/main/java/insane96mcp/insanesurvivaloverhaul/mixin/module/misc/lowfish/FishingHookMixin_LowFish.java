@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.fishing;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.lowfish;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;

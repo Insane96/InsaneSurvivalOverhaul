@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 
 @Mixin(PistonBaseBlock.class)
-public class PistonBaseBlockMixin_Fluid {
+public class PistonBaseBlockMixin_Nerfs {
     @Unique
     private BlockPos insanesurvivaloverhaul$oldPos;
 
