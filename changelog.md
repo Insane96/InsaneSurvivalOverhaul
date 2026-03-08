@@ -3,6 +3,7 @@
   * Not sure if and when Villager feature will come back.
 * Added back Misc features: Packs, Nerfs, Tweaks, Potions and Effects, Low Fish
   * Potion and Effects now enables a data pack that changes potions stack sizes
+  * Turtle Scute can now be placed by players on the ground and pick-block can be used on it
 * Added back Items features: Stack Sizes, Name Tags, Disabled Items, Stone Tools, Copper equipment gone and Ecologic Wood
   * Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
   * Stone tools gone now also replaces items in entities equipment slots

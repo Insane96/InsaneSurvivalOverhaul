@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -37,6 +38,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
@@ -57,6 +59,7 @@ import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various stuff that doesn't fit in any other Feature.")
@@ -73,14 +76,14 @@ public class Tweaks extends Feature {
         }
     }));
 
-    public static final DeferredHolder<Block, ScuteBlock> SCUTE = ISORegistries.BLOCKS.register("scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
+    public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
 
     public static final TagKey<Block> BREAK_ON_FALL = ISOBlockTagsProvider.create("break_on_fall");
     public static final TagKey<Item> WORLD_IMMUNE = ISOItemTagsProvider.create("world_immune");
 
     public static ResourceKey<DamageType> COLLIDE_WITH_WALL = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("collide_with_wall"));
 
-    @Config(description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. iguanatweaksreborn:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
+    @Config(description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. insanesurvivaloverhaul:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
     public static Boolean fallingBreakingGlass = true;
 
     @Config(description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")
@@ -107,7 +110,7 @@ public class Tweaks extends Feature {
 
     @Config(description = "The ticks of Water Breathing given by the Turtle Helmet. Vanilla is 200")
     public static Integer turtle$helmetWaterBreathingTime = 900;
-    @Config(description = "If true scutes will drop as a block and not as item")
+    @Config(description = "If true, scute will drop as a block and not as item")
     public static Boolean turtle$scuteDropsAsBlock = true;
 
     @Config(min = 0, description = "If set higher than 0 it will enable damage when colliding with walls at a high speed (e.g. with explosions or knockback). Higher = more damage. Set to 0 to disable. Please note that even if set to 0, might still show up in performance profilers.")
@@ -385,6 +388,48 @@ public class Tweaks extends Feature {
         }
         return originalResult;
     }
+
+	@SubscribeEvent
+	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		if (!this.isEnabled()
+				|| !turtle$scuteDropsAsBlock
+				|| !event.getItemStack().is(Items.TURTLE_SCUTE))
+			return;
+
+		BlockPos clickedPos = event.getPos();
+		BlockState clickedState = event.getLevel().getBlockState(clickedPos);
+
+		BlockPos placePos;
+		BlockState newState;
+
+		// Stack on an existing scute block by clicking its top face
+		if (clickedState.is(TURTLE_SCUTE.get()) && event.getFace() == Direction.UP) {
+			int height = clickedState.getValue(ScuteBlock.HEIGHT);
+			if (height >= 15)
+				return;
+			placePos = clickedPos;
+			newState = clickedState.setValue(ScuteBlock.HEIGHT, height + 1);
+		} else {
+			placePos = clickedPos.relative(event.getFace());
+			if (!event.getLevel().getWorldBorder().isWithinBounds(placePos))
+				return;
+			if (!event.getLevel().getBlockState(placePos).canBeReplaced())
+				return;
+			newState = TURTLE_SCUTE.get().defaultBlockState().setValue(ScuteBlock.HEIGHT, 0);
+			if (!newState.canSurvive(event.getLevel(), placePos))
+				return;
+		}
+
+		if (!event.getLevel().isClientSide()) {
+			event.getLevel().setBlock(placePos, newState, Block.UPDATE_ALL);
+			SoundType soundType = newState.getSoundType();
+			event.getLevel().playSound(null, placePos, soundType.getPlaceSound(), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
+			if (!event.getEntity().getAbilities().instabuild)
+				event.getItemStack().shrink(1);
+		}
+		event.getEntity().swing(event.getHand());
+		event.setCanceled(true);
+	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onBreakSpeed(PlayerEvent.BreakSpeed event) {

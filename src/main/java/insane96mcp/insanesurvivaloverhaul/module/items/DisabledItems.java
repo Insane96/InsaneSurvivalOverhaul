@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.module.items;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.ChatFormatting;
@@ -30,14 +31,14 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public class DisabledItems extends Feature {
 
 	public static final TagKey<Item> NO_DAMAGE = ISOItemTagsProvider.create("no_damage");
-	public static final String NO_DAMAGE_ITEM_LANG = "iguanatweaksreborn.no_damage_item";
+	public static final String NO_DAMAGE_ITEM_LANG = InsaneSO.lang("no_damage_item");
 	public static final TagKey<Item> NO_MINING = ISOItemTagsProvider.create("no_mining");
-	public static final String NO_MINING_ITEM_LANG = "iguanatweaksreborn.no_mining_item";
+	public static final String NO_MINING_ITEM_LANG = InsaneSO.lang("no_mining_item");
 	public static final TagKey<Item> NO_EQUIP = ISOItemTagsProvider.create("no_equip");
-	public static final String NO_EQUIP_ITEM_LANG = "iguanatweaksreborn.no_equip_item";
+	public static final String NO_EQUIP_ITEM_LANG = InsaneSO.lang("no_equip_item");
 
 	public static final TagKey<Item> DISABLED = ISOItemTagsProvider.create("disabled");
-	public static final String DISABLED_ITEM_LANG = "iguanatweaksreborn.disabled_item";
+	public static final String DISABLED_ITEM_LANG = InsaneSO.lang("disabled_item");
 
 	@Config(description = "If set to true items in the 'no_damage', 'no_efficiency', 'no_equip' and 'disabled' item tags will get a tooltip.")
 	public static Boolean addTooltip = true;

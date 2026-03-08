@@ -35,8 +35,8 @@ public abstract class TurtleMixin_Tweaks extends Animal {
 
         BlockState blockState = this.level().getBlockState(this.blockPosition());
         if (blockState.canBeReplaced())
-            this.level().setBlock(this.blockPosition(), Tweaks.SCUTE.get().defaultBlockState(), 3);
-        else if (blockState.getBlock() == Tweaks.SCUTE.get()) {
+            this.level().setBlock(this.blockPosition(), Tweaks.TURTLE_SCUTE.get().defaultBlockState(), 3);
+        else if (blockState.getBlock() == Tweaks.TURTLE_SCUTE.get()) {
             int height = blockState.getValue(ScuteBlock.HEIGHT) + 1;
             if (height > 15)
                 return original.call(instance, itemLike, i);

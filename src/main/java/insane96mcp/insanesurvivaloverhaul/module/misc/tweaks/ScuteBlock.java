@@ -2,6 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.misc.tweaks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -22,7 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class ScuteBlock extends Block implements SimpleWaterloggedBlock {
-    protected static final VoxelShape[] SHAPE_BY_SIZE = new VoxelShape[]
+    protected static final VoxelShape[] SHAPE_BY_STACK = new VoxelShape[]
     {
             Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D),
             Block.box(3.0D, 0.0D, 3.0D, 13.0D, 2.0D, 13.0D),
@@ -50,9 +52,14 @@ public class ScuteBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return new ItemStack(Items.TURTLE_SCUTE);
+    }
+
+    @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = blockState.getOffset(blockGetter, pos);
-        return SHAPE_BY_SIZE[blockState.getValue(HEIGHT)].move(vec3.x, vec3.y, vec3.z);
+        return SHAPE_BY_STACK[blockState.getValue(HEIGHT)].move(vec3.x, vec3.y, vec3.z);
     }
 
     public boolean canSurvive(BlockState p_49395_, LevelReader p_49396_, BlockPos p_49397_) {

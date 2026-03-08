@@ -82,18 +82,17 @@ Features to port from IguanaTweaksReborn to ISO.
 - [x] Packs
 - [x] PotionsAndEffects
 - [ ] BeaconConduit
-- [ ] DeBuffs
+- [x] ~~DeBuffs~~ Don't like how it works. Will be remade from scratch if someone needs it
 - [x] LowFish
 - [x] Tweaks
 
 ## Mobs
 
 - [x] MiscMobs
-- [ ] StatsBuffs
+- [x] ~~StatsBuffs~~ Moved to Enhanced AI
 - [x] ZombieSiege
 - [x] Equipment
 - [x] Spawning
-- [x] EchoLanternBlock
 - [ ] Villagers
 - [ ] WanderingTrades
 
