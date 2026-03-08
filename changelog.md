@@ -8,7 +8,7 @@
   * Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
   * Stone tools gone now also replaces items in entities equipment slots
   * Copper items are now registered in the minecraft namespace to be able to (maybe) update a modded world to newer versions
-* Added back Mining features: Materials and Ores
+* Added back Mining features: Materials and Ores,
   * Ore generation data pack changed to: removes the vanilla feature of discarding ores that are exposed to air. This applies to coal, diamond, gold and lapis
   * Ore Smelting data pack changed to: 
     * Blast furnace now yields 2x materials from minerals (further increased for stuff like lapis or quartz), and yields 3x raw minerals for iron, gold and copper
