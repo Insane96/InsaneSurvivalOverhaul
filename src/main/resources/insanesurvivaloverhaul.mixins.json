@@ -69,6 +69,7 @@
         "module.client.LevelRendererMixin_Misc",
         "module.client.LevelRendererMixin_WorldBorder",
         "module.client.LightTextureMixin_Light",
+        "module.mining.MultiplayerGameModeMixin_MiningMisc",
         "module.misc.tweaks.client.EntityRendererMixin_Tweaks",
         "module.misc.tweaks.client.LocalPlayerMixin_Tweaks"
     ]
