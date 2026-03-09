@@ -11,7 +11,7 @@
           "c c"
         ],
         "result": {
-          "item": "minecraft:copper_boots"
+          "id": "minecraft:copper_boots"
         },
         "show_notification": true
       }

@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -50,6 +51,15 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());
+            }
+        }
+        else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            if (Feature.isEnabled(FoodDrinks.class)) {
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.NETHERIZED_STEW.get());
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.BROWN_MUSHROOM_STEW.get());
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
+                addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());
+                addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP.get());
             }
         }
     }

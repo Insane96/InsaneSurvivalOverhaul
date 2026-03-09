@@ -12,7 +12,7 @@
           "ccc"
         ],
         "result": {
-          "item": "minecraft:copper_chestplate"
+          "id": "minecraft:copper_chestplate"
         },
         "show_notification": true
       }

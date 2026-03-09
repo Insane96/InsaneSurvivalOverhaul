@@ -1,6 +1,6 @@
 {
     "type": "insanelib:inject_loot_table",
-    "conditions": [
+    "neoforge:conditions": [
         {
             "condition": "neoforge:loot_table_id",
             "loot_table_id": "minecraft:blocks/stone"

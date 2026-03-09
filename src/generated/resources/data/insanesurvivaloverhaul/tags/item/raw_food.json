@@ -1,0 +1,27 @@
+{
+  "values": [
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish",
+    "minecraft:pufferfish",
+    "minecraft:porkchop",
+    "minecraft:mutton",
+    "minecraft:beef",
+    "minecraft:chicken",
+    "minecraft:rabbit",
+    "minecraft:rotten_flesh",
+    "minecraft:golden_carrot",
+    {
+      "id": "autumnity:turkey_piece",
+      "required": false
+    },
+    {
+      "id": "berry_good:sweet_berry_mince",
+      "required": false
+    },
+    {
+      "id": "environmental:venison",
+      "required": false
+    }
+  ]
+}

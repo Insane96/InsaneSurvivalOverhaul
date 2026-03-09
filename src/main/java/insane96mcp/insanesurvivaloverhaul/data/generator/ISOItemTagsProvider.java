@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.core.HolderLookup;
@@ -74,6 +75,16 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(WOODEN_HAND_EQUIPMENT)
                 .add(Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);
+
+        tag(FoodDrinks.RAW_FOOD)
+                .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
+                .addOptional(ResourceLocation.parse("autumnity:turkey_piece"))
+                .addOptional(ResourceLocation.parse("berry_good:sweet_berry_mince"))
+                .addOptional(ResourceLocation.parse("environmental:venison"));
+
+        tag(FoodDrinks.DRINKING_FOODS)
+                .add(Items.SUSPICIOUS_STEW, Items.MUSHROOM_STEW, Items.RABBIT_STEW)
+                .add(FoodDrinks.BROWN_MUSHROOM_STEW.value(), FoodDrinks.RED_MUSHROOM_STEW.value(), FoodDrinks.NETHERIZED_STEW.value());
     }
 
     public static TagKey<Item> create(String tagName) {

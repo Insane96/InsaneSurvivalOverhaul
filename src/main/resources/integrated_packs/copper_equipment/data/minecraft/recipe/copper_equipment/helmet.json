@@ -11,7 +11,7 @@
           "c c"
         ],
         "result": {
-          "item": "minecraft:copper_helmet"
+          "id": "minecraft:copper_helmet"
         },
         "show_notification": true
       }

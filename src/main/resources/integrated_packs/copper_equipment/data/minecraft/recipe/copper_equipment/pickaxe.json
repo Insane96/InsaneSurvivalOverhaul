@@ -15,7 +15,7 @@
           " s "
         ],
         "result": {
-          "item": "minecraft:copper_pickaxe"
+          "id": "minecraft:copper_pickaxe"
         },
         "show_notification": true
       }

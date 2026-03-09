@@ -18,7 +18,7 @@
 	"criteria": {
 		"iron_nugget": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions": {
+			"neoforge:conditions": {
 				"items": [
 					{
 						"items": [

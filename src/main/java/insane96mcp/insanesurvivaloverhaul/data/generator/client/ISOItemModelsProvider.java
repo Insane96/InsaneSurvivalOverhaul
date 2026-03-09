@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -54,6 +55,12 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(CopperEquipment.SWORD.get());
 
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
+
+        basicItem(FoodDrinks.OVER_EASY_EGG.get());
+        basicItem(FoodDrinks.BROWN_MUSHROOM_STEW.get());
+        basicItem(FoodDrinks.RED_MUSHROOM_STEW.get());
+        basicItem(FoodDrinks.NETHERIZED_STEW.get());
+        basicItem(FoodDrinks.PUMPKIN_PULP.get());
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)

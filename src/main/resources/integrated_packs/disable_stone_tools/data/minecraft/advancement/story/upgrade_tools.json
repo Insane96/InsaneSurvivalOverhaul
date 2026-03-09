@@ -2,7 +2,7 @@
 	"parent": "minecraft:story/mine_stone",
 	"criteria": {
 		"hoe": {
-			"conditions": {
+			"neoforge:conditions": {
 				"items": [
 					{
 						"tag": "minecraft:hoes"

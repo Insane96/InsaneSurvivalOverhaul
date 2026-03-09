@@ -15,7 +15,7 @@
           "s"
         ],
         "result": {
-          "item": "minecraft:copper_shovel"
+          "id": "minecraft:copper_shovel"
         },
         "show_notification": true
       }

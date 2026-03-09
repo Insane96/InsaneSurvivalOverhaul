@@ -1,6 +1,6 @@
 {
     "type": "insanelib:replace_loot",
-    "conditions": [],
+    "neoforge:conditions": [],
     "item_to_replace": "minecraft:stone_hoe",
     "new_item": "minecraft:copper_hoe"
 }

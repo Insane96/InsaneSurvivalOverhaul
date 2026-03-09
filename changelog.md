@@ -16,6 +16,7 @@
     * Blasting minerals (raw or ores) takes 2x time
     * You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
     * Heavily increased experience from smelting ores
+* Added back Hunger & Health features: Foods Drinks
 * Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 

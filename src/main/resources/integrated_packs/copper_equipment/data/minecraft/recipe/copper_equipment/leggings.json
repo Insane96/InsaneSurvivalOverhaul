@@ -12,7 +12,7 @@
           "c c"
         ],
         "result": {
-          "item": "minecraft:copper_leggings"
+          "id": "minecraft:copper_leggings"
         },
         "show_notification": true
       }

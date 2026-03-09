@@ -25,6 +25,15 @@
     "item.insanesurvivaloverhaul.shortbow": "Shortbow",
 
 
+    "insanesurvivaloverhaul:hunger_health_module": "Hunger & Health",
+
+    "item.insanesurvivaloverhaul.brown_mushroom_stew": "Brown Mushroom Stew",
+    "item.insanesurvivaloverhaul.red_mushroom_stew": "Red Mushroom Stew",
+    "item.insanesurvivaloverhaul.netherized_stew": "Netherized Stew",
+    "item.insanesurvivaloverhaul.over_easy_egg": "Over Easy Egg",
+    "item.insanesurvivaloverhaul.pumpkin_pulp": "Pumpkin Pulp",
+
+
     "insanesurvivaloverhaul:misc_module": "Misc",
 
     "insanesurvivaloverhaul.fishing.low_fish": "Fish are becoming scarce in this spot, maybe move a bit...",

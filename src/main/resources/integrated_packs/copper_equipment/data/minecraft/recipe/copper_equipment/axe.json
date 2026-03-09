@@ -15,7 +15,7 @@
           " s"
         ],
         "result": {
-          "item": "minecraft:copper_axe"
+          "id": "minecraft:copper_axe"
         },
         "show_notification": true
       }

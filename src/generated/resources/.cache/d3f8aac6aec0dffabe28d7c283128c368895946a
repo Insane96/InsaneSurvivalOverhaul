@@ -1,4 +1,5 @@
-// 1.21.1	2026-03-08T10:33:29.8410017	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-03-09T13:14:21.303961	Tags for minecraft:item mod id insanesurvivaloverhaul
+b8c57283fcfa3f505c00b400c25033af898cb5ea data/insanesurvivaloverhaul/tags/item/drinking_foods.json
 75c2367ef53ee74f77ac0b8a919163edff282904 data/insanesurvivaloverhaul/tags/item/equipment/hand/wooden.json
 af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/horse_armors.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/biome.json
@@ -7,6 +8,7 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/season.json
 8180207eb4d779d1e1250798d7cdcd341751b533 data/insanesurvivaloverhaul/tags/item/hud/time.json
 56ef1cfeb0e39ed60991c36aa1fa78c763c703cd data/insanesurvivaloverhaul/tags/item/minecarts.json
+052ffe27257d03d8d8891be763ddd93bc289c2d4 data/insanesurvivaloverhaul/tags/item/raw_food.json
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json
 ed22a6aa713f2e727863db9e057a12586f9e6e06 data/minecraft/tags/item/chest_armor.json

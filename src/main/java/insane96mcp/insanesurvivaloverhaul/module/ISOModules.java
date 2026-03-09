@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ISOModules {
 	public static final String COMBAT = InsaneSO.MOD_ID + ":combat";
+	public static final String HUNGER_HEALTH = InsaneSO.MOD_ID + ":hunger_health";
 	public static final String ITEMS = InsaneSO.MOD_ID + ":items";
 	public static final String MINING = InsaneSO.MOD_ID + ":mining";
 	public static final String MISC = InsaneSO.MOD_ID + ":misc";
@@ -17,6 +18,7 @@ public class ISOModules {
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
 		create(COMBAT, "Combat", eventBus, builder);
+		create(HUNGER_HEALTH, "Hunger & Health", eventBus, builder);
 		create(ITEMS, "Items", eventBus, builder);
 		create(MINING, "Mining", eventBus, builder);
 		create(MISC, "Misc", eventBus, builder);

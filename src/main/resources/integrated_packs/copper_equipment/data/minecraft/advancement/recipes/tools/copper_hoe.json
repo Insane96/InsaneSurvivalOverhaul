@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_copper_ingot": {
-      "conditions": {
+      "neoforge:conditions": {
         "items": [
           {
             "items": [
@@ -14,7 +14,7 @@
       "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "conditions": {
+      "neoforge:conditions": {
         "recipe": "minecraft:copper_equipment/hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
