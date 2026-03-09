@@ -1,10 +1,9 @@
-package insane96mcp.insanesurvivaloverhaul.module.combat;
+package insane96mcp.insanesurvivaloverhaul.module.combat.attackspeedbasedinvincibility;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.network.message.InvulnerableTimeSyncMessage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,6 +29,6 @@ public class AttackSpeedBasedInvincibility extends Feature {
 
 		int time = (int) ((1f / livingEntity.getAttribute(Attributes.ATTACK_SPEED).getValue()) * 20 * 0.9f);
 		event.setInvulnerabilityTicks(time + 10);
-		InvulnerableTimeSyncMessage.sync((ServerLevel) event.getEntity().level(), event.getEntity(), time);
+		ClientboundInvulnerableTimePacket.sync((ServerLevel) event.getEntity().level(), event.getEntity(), time);
 	}
 }

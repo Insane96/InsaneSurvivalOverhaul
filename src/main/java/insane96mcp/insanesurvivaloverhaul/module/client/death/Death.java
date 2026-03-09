@@ -1,10 +1,9 @@
-package insane96mcp.insanesurvivaloverhaul.module.client;
+package insane96mcp.insanesurvivaloverhaul.module.client.death;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
-import insane96mcp.insanesurvivaloverhaul.network.message.DeathStatsMessage;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -29,6 +28,6 @@ public class Death extends Feature {
                 || !replaceScoreWithTimeSinceLastDeath
                 || !(event.getEntity() instanceof ServerPlayer player))
             return;
-        DeathStatsMessage.send(player);
+        ClientboundDeathStatsPacket.send(player);
     }
 }

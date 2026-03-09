@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.network.message;
+package insane96mcp.insanesurvivaloverhaul.module.combat.attackspeedbasedinvincibility;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
@@ -12,14 +12,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record InvulnerableTimeSyncMessage(int entityId, int invulnerableTime) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<InvulnerableTimeSyncMessage> TYPE =
-            new CustomPacketPayload.Type<>(InsaneSO.location("invulnerable_time_sync"));
+public record ClientboundInvulnerableTimePacket(int entityId, int invulnerableTime) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<ClientboundInvulnerableTimePacket> TYPE =
+            new CustomPacketPayload.Type<>(InsaneSO.location("invulnerable_time"));
 
-    public static final StreamCodec<ByteBuf, InvulnerableTimeSyncMessage> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.VAR_INT, InvulnerableTimeSyncMessage::entityId,
-            ByteBufCodecs.VAR_INT, InvulnerableTimeSyncMessage::invulnerableTime,
-            InvulnerableTimeSyncMessage::new
+    public static final StreamCodec<ByteBuf, ClientboundInvulnerableTimePacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_INT, ClientboundInvulnerableTimePacket::entityId,
+            ByteBufCodecs.VAR_INT, ClientboundInvulnerableTimePacket::invulnerableTime,
+            ClientboundInvulnerableTimePacket::new
     );
 
     @Override
@@ -27,7 +27,7 @@ public record InvulnerableTimeSyncMessage(int entityId, int invulnerableTime) im
         return TYPE;
     }
 
-    public static void handle(final InvulnerableTimeSyncMessage payload, final IPayloadContext context) {
+    public static void handle(final ClientboundInvulnerableTimePacket payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
             Entity entity = context.player().level().getEntity(payload.entityId());
             if (!(entity instanceof LivingEntity living)) return;
@@ -38,7 +38,7 @@ public record InvulnerableTimeSyncMessage(int entityId, int invulnerableTime) im
     }
 
     public static void sync(ServerLevel level, Entity entity, int invincibilityFrames) {
-        var msg = new InvulnerableTimeSyncMessage(entity.getId(), invincibilityFrames);
+        var msg = new ClientboundInvulnerableTimePacket(entity.getId(), invincibilityFrames);
         for (ServerPlayer player : level.players()) {
             PacketDistributor.sendToPlayer(player, msg);
         }

@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.combat;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSpeedBasedInvincibility;
+import insane96mcp.insanesurvivaloverhaul.module.combat.attackspeedbasedinvincibility.AttackSpeedBasedInvincibility;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

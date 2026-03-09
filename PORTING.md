@@ -50,7 +50,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 ## Hunger & Health
 
-- [ ] Exhaustion
+- [x] Exhaustion
 - [x] FoodDrinks
 - [ ] HealthRegenHunger
 
@@ -81,13 +81,13 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] BlockDefinition
 - [ ] BlockHardness
 - [ ] BeegOreVeins (ITE)
-- [x] ~~Durium~~ (ITE) Not needed
+- [x] ~~Durium~~ (ITE)
 - [ ] Forging (ITE)
-- [x] ~~Keego~~ (ITE) Not needed
+- [x] ~~Keego~~ (ITE)
 - [ ] MiningCharge (ITE)
 - [ ] MultiBlockFurnaces (ITE)
-- [x] ~~Quaron~~ (ITE) Not needed
-- [x] ~~SoulSteel~~ (ITE) Not needed
+- [x] ~~Quaron~~ (ITE)
+- [x] ~~SoulSteel~~ (ITE)
 
 ## Misc
 

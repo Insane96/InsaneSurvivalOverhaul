@@ -6,7 +6,6 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.UnfairOneShotTrigger;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.network.message.UnfairOneShotMessage;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -86,7 +85,7 @@ public class UnfairOneShot extends Feature {
 			if (playSound)
 				player.level().playSound(null, player.blockPosition(), UNFAIR_ONE_SHOT.get(), SoundSource.PLAYERS, 2f, 0.8f);
 			if (animation)
-				UnfairOneShotMessage.send(player);
+				UnfairOneShotPacket.send(player);
 		}
 	}
 }

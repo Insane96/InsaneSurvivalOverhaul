@@ -13,7 +13,6 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BlockBehaviourAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.network.message.DiscreteNameTagsMessage;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -72,7 +71,7 @@ public class Tweaks extends Feature {
     public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("insanesurvivaloverhaul:painful_world_border", GameRules.Category.MISC, GameRules.IntegerValue.create(0));
     public static final GameRules.Key<GameRules.BooleanValue> RULE_DISCRETE_NAME_TAGS = GameRules.register("insanesurvivaloverhaul:discrete_name_tags", GameRules.Category.PLAYER, GameRules.BooleanValue.create(true, (server, booleanValue) -> {
         for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
-            DiscreteNameTagsMessage.sync(booleanValue.get(), serverPlayer);
+            ClientboundDiscreteNameTagsPacket.sync(booleanValue.get(), serverPlayer);
         }
     }));
 
@@ -290,7 +289,7 @@ public class Tweaks extends Feature {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        DiscreteNameTagsMessage.sync(event.getEntity().level().getGameRules().getBoolean(RULE_DISCRETE_NAME_TAGS), (ServerPlayer) event.getEntity());
+        ClientboundDiscreteNameTagsPacket.sync(event.getEntity().level().getGameRules().getBoolean(RULE_DISCRETE_NAME_TAGS), (ServerPlayer) event.getEntity());
     }
 
     @SubscribeEvent

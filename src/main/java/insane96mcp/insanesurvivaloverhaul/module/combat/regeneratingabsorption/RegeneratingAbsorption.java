@@ -9,7 +9,6 @@ import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.event.LivingDamageEventPreAbsorp;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.network.message.RegenAbsorptionSyncMessage;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -109,7 +108,7 @@ public class RegeneratingAbsorption extends Feature {
             currentAbsorption = Math.min(currentAbsorption + regenSpeed, maxAbsorption);
 
         if (livingEntity instanceof ServerPlayer player)
-            RegenAbsorptionSyncMessage.sync(player, currentAbsorption);
+            ClientboundRegenAbsorptionPacket.sync(player, currentAbsorption);
         ModNBTData.put(livingEntity, REGEN_ABSORPTION_TAG, currentAbsorption);
     }
 
@@ -146,7 +145,7 @@ public class RegeneratingAbsorption extends Feature {
         if (soundOnAbsorptionHurt)
             event.getEntity().level().playSound(null, event.getEntity(), ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
-            RegenAbsorptionSyncMessage.sync(player, currentAbsorption);
+            ClientboundRegenAbsorptionPacket.sync(player, currentAbsorption);
     }
 
     public static boolean canDamageAbsorption(DamageSource source) {

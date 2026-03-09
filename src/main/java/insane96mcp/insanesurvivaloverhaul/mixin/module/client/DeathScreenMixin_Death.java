@@ -3,7 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.client.Death;
+import insane96mcp.insanesurvivaloverhaul.module.client.death.Death;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
