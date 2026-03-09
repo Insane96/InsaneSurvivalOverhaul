@@ -1,7 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.mixin.accessor.FoodDataAccessor;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -25,7 +24,7 @@ public record ClientboundExhaustionPacket(float exhaustionLevel) implements Cust
     }
 
     public static void handle(final ClientboundExhaustionPacket payload, final IPayloadContext context) {
-        context.enqueueWork(() -> ((FoodDataAccessor) context.player().getFoodData()).setExhaustionLevel(payload.exhaustionLevel()));
+        context.enqueueWork(() -> context.player().getFoodData().setExhaustion(payload.exhaustionLevel()));
     }
 
     public static void sync(ServerPlayer player, float exhaustionLevel) {

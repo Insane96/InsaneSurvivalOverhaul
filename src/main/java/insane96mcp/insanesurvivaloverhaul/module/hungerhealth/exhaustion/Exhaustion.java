@@ -93,7 +93,7 @@ public class Exhaustion extends Feature {
 	private static final Map<UUID, Float> lastSaturationLevels = new HashMap<>();
 
 	@SubscribeEvent
-	public void onLivingTickEvent(EntityTickEvent event) {
+	public void onLivingTickEvent(EntityTickEvent.Post event) {
 		if (!(event.getEntity() instanceof ServerPlayer player))
 			return;
 
