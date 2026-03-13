@@ -76,9 +76,9 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 ## Mining
 
 - [x] ~~Gold~~
-- [ ] MaterialsAndOres
+- [x] MaterialsAndOres
 - [x] MiningMisc
-- [ ] BlockDefinition
+- [x] BlockDefinition
 - [ ] BlockHardness
 - [ ] BeegOreVeins (ITE)
 - [x] ~~Durium~~ (ITE)
@@ -106,7 +106,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] ZombieSiege
 - [x] Equipment
 - [x] Spawning
-- [x] ~~Villagers~~ Data Packable Villager trades are painful to port, and I will 100% just remove villagers from the modpack
+- [x] ~~Villagers~~ Data Packable Villager trades are painful to port, and they're coming in 26.1 anyway, and I will 100% just remove villagers from the modpack
 - [x] ~~WanderingTrades~~ Same as above
 
 ## Movement
@@ -115,7 +115,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] BetterClimbable
 - [ ] Boats
 - [ ] ElytraNerf
-- [ ] NoPillaring
+- [x] ~~NoPillaring~~ No really liked
 - [ ] Swimming
 - [ ] Tagging
 - [ ] TerrainSlowdown

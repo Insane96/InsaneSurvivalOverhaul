@@ -1,0 +1,7 @@
+{
+    "block_tag": "minecraft:iron_ores",
+    "state_experience_dropped": {
+        "min": 1,
+        "max": 2
+    }
+}

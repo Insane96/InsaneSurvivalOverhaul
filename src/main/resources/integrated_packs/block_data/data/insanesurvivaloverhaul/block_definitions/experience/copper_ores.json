@@ -1,0 +1,7 @@
+{
+    "block_tag": "minecraft:copper_ores",
+    "state_experience_dropped": {
+        "min": 0,
+        "max": 2
+    }
+}

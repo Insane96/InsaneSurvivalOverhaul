@@ -1,0 +1,7 @@
+{
+    "block": "minecraft:sculk_catalyst",
+    "state_experience_dropped": {
+        "min": 40,
+        "max": 40
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "block_tag": "minecraft:gold_ores",
+    "state_experience_dropped": {
+        "min": 2,
+        "max": 3
+    }
+}

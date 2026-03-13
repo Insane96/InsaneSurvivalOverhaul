@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -17,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ISOBlockTagsProvider extends BlockTagsProvider {
-    //public static final TagKey<Block> OBSIDIANS = create("obsidians");
+    public static final TagKey<Block> OBSIDIANS = create("obsidians");
     //public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
     //public static final TagKey<Block> TALL_GRASS = create("tall_grass");
     //public static final TagKey<Block> AZALEA_LEAVES = create("azalea_leaves");
@@ -45,6 +46,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Spawning.ECHO_LANTERN.block().get());
+
+        tag(OBSIDIANS)
+                .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
 
         //noinspection unchecked
         tag(Tweaks.BREAK_ON_FALL)

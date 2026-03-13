@@ -13,6 +13,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
+import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
@@ -27,9 +28,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import org.slf4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
@@ -69,6 +72,11 @@ public class InsaneSO {
         }
 
         NeoForgeMod.enableMergedAttributeTooltips();
+        NeoForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+    }
+
+    private void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(BlockDefinitionReloadListener.INSTANCE);
     }
 
     @SubscribeEvent

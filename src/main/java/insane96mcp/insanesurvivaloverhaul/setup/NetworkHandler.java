@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.C
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundExhaustionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
+import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -22,5 +23,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundDiscreteNameTagsPacket.TYPE, ClientboundDiscreteNameTagsPacket.STREAM_CODEC, ClientboundDiscreteNameTagsPacket::handle);
         registrar.playToClient(ClientboundSaturationPacket.TYPE, ClientboundSaturationPacket.STREAM_CODEC, ClientboundSaturationPacket::handle);
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
+        registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
     }
 }

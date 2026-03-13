@@ -1,0 +1,7 @@
+{
+    "block": "minecraft:amethyst_cluster",
+    "state_experience_dropped": {
+        "min": 1,
+        "max": 2
+    }
+}
