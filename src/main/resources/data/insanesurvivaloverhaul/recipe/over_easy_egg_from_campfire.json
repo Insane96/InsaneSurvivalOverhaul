@@ -15,5 +15,5 @@
   "ingredient": {
     "item": "minecraft:egg"
   },
-  "result": "insanesurvivaloverhaul:over_easy_egg"
+  "result": {"id": "insanesurvivaloverhaul:over_easy_egg"}
 }
