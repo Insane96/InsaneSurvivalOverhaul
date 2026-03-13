@@ -145,7 +145,7 @@ public class HealthRegenHunger extends Feature {
 		Difficulty difficulty = player.level().getDifficulty();
 		((FoodDataAccessor) foodStats).setLastFoodLevel(foodStats.getFoodLevel());
 		if (foodStats.getExhaustionLevel() > maxExhaustion) {
-			foodStats.setExhaustion(maxExhaustion.floatValue());
+			foodStats.setExhaustion(foodStats.getExhaustionLevel() - maxExhaustion.floatValue());
 			if (foodStats.getSaturationLevel() > 0.0F) {
 				foodStats.setSaturation(Math.max(foodStats.getSaturationLevel() - 1.0F, 0.0F));
 			}
