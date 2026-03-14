@@ -31,7 +31,7 @@ public abstract class BoatMixin_Boats extends Entity {
 	 */
 	@ModifyExpressionValue(method = "checkFallDamage", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/vehicle/Boat$Status;ON_LAND:Lnet/minecraft/world/entity/vehicle/Boat$Status;", opcode = Opcodes.GETSTATIC))
 	public Boat.Status insanesurvivaloverhaul$onCheckStatus(Boat.Status original) {
-		if (!Feature.isEnabled(Boats.class))
+		if (Feature.isEnabled(Boats.class))
 			return original;
 		return Boat.Status.IN_AIR;
 	}
@@ -41,7 +41,7 @@ public abstract class BoatMixin_Boats extends Entity {
 	 */
 	@ModifyExpressionValue(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/Boat;isRemoved()Z"))
 	public boolean insanesurvivaloverhaul$onCheckRemoved(boolean original) {
-		if (!Feature.isEnabled(Boats.class))
+		if (Feature.isEnabled(Boats.class))
 			return original;
 		return original && this.fallDistance >= Boats.breakHeight;
 	}
