@@ -65,6 +65,7 @@ public class FoodDrinks extends JsonFeature {
 	public static final TagKey<Item> DRINKING_FOODS = ISOItemTagsProvider.create("drinking_foods");
 	/*public static final TagKey<Item> FOOD_BLACKLIST = ISOItemTagsProvider.create("food_drinks_no_hunger_changes");
 
+	//TODO
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
             new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:chorus_fruit")).fastEating(true).build(),
             new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
