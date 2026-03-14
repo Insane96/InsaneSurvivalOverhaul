@@ -1,5 +1,6 @@
-// 1.21.1	2026-03-13T21:42:21.8254793	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-03-14T18:39:53.3925473	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
 980fb382e4e43127ab4f203ad91112e667aa2582 data/insanesurvivaloverhaul/tags/block/infested.json
 858b4736f63a64046a40e9dbd025c709c79d7cb2 data/insanesurvivaloverhaul/tags/block/obsidians.json
+63fede5e6a8e994ddd505d6664d5af45e6beb06a data/insanesurvivaloverhaul/tags/block/skulls.json
 21695ea571cf30719aed84249b6ee4f25a1b339f data/minecraft/tags/block/mineable/pickaxe.json
