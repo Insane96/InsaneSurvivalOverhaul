@@ -1,8 +1,9 @@
 ## Upcoming
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
-* Added back Movement features: Boats
+* Added back Movement features: Boats, Better climbable
   * The feature (that wasn't configurable) to make boats easier to break has been moved to Tweaks
+  * Better climbing features no longer disable themselves if quark is present
 * Added back Misc features: Packs, Nerfs, Tweaks, Potions and Effects, Low Fish
   * Potion and Effects now enables a data pack that changes potions stack sizes
   * Turtle Scute can now be placed by players on the ground and pick-block can be used on it

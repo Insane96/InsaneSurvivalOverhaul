@@ -60,6 +60,7 @@
         "module.mobs.miscmobs.GuardianAttackGoalMixin_MiscMobs",
         "module.mobs.miscmobs.IronGolemMixin_MiscMobs",
         "module.movement.BoatMixin_Boats",
+        "module.movement.LivingEntityMixin_BetterClimbable",
         "module.world.fluids.EntityMixin_Fluid",
         "module.world.fluids.FlowingFluidMixin_Fluid",
         "module.world.fluids.FluidTypeMixin_Fluid",
