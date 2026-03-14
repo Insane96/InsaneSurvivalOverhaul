@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs.miscmobs;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobs;

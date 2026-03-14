@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.client.misc;
 
 import insane96mcp.insanesurvivaloverhaul.module.client.Misc;
 import net.minecraft.client.Minecraft;

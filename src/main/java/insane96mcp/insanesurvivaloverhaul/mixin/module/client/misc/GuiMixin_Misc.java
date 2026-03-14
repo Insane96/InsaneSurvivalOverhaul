@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.client.misc;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;

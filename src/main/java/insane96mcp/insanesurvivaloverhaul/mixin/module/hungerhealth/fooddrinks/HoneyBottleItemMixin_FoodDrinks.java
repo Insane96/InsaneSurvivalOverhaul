@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.fooddrinks;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;

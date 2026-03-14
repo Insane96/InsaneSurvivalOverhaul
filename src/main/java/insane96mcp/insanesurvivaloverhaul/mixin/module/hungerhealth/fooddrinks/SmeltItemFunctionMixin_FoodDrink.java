@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.fooddrinks;
 
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.healthregenhunger;
 
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HealthRegenHunger;
 import net.minecraft.world.entity.player.Player;

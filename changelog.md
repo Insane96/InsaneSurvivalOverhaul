@@ -8,7 +8,7 @@
   * Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
   * Stone tools gone now also replaces items in entities equipment slots
   * Copper items are now registered in the minecraft namespace to be able to (hopefully) update a modded world to newer versions
-* Added back Mining features: Materials and Ores,
+* Added back Mining features: Materials and Ores, Misc
   * Ore generation data pack changed to: removes the vanilla feature of discarding ores that are exposed to air. This applies to coal, diamond, gold and lapis.
     Biome based ore gen has been removed.
   * Ore Smelting data pack changed to:
@@ -17,6 +17,7 @@
     * Blasting ores now takes 4x time but yields 2x materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
     * You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
     * Heavily increased experience from smelting ores
+  * Insta-break heads and silverfish blocks are now part of the `block_data` data pack
 * Added back Hunger & Health features: Foods Drinks
 * Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack

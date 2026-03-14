@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.healthregenhunger;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.insanelib.core.feature.Feature;

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.fooddrinks;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;

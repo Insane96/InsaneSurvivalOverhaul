@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.combat;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.combat.misccombat;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanelib.core.feature.Feature;

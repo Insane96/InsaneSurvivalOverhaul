@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> OBSIDIANS = create("obsidians");
+    public static final TagKey<Block> INFESTED = create("infested");
     //public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
     //public static final TagKey<Block> TALL_GRASS = create("tall_grass");
     //public static final TagKey<Block> AZALEA_LEAVES = create("azalea_leaves");
@@ -49,6 +50,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         tag(OBSIDIANS)
                 .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
+        tag(INFESTED)
+                .add(Blocks.INFESTED_DEEPSLATE, Blocks.INFESTED_STONE, Blocks.INFESTED_COBBLESTONE, Blocks.INFESTED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_MOSSY_STONE_BRICKS);
 
         //noinspection unchecked
         tag(Tweaks.BREAK_ON_FALL)
