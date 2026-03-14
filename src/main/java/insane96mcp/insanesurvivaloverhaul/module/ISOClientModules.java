@@ -11,7 +11,7 @@ public class ISOClientModules {
 	public static final String CLIENT = InsaneSO.MOD_ID + ":client";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
-		create(CLIENT, "Combat", eventBus, builder);
+		create(CLIENT, "Client", eventBus, builder);
 	}
 
 	public static void create(String id, String name, IEventBus eventBus, ModConfigSpec.Builder builder) {

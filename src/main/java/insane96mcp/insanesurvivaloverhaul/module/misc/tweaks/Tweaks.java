@@ -130,6 +130,9 @@ public class Tweaks extends Feature {
 	@Config(min = 0d, description = "The speed divider when off ground. Vanilla is 5")
 	public static Double offGroundSpeedDivider = 3d;
 
+    @Config(description = "How much damage vehicles require to be broken, vanilla is 4")
+    public static Integer damageToBreakVehicles = 2;
+
     public static boolean discreteNameTags = true;
 
     @Override

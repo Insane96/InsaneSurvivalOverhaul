@@ -14,6 +14,7 @@ public class ISOModules {
 	public static final String MINING = InsaneSO.MOD_ID + ":mining";
 	public static final String MISC = InsaneSO.MOD_ID + ":misc";
 	public static final String MOBS = InsaneSO.MOD_ID + ":mobs";
+	public static final String MOVEMENT = InsaneSO.MOD_ID + ":movement";
 	public static final String WORLD = InsaneSO.MOD_ID + ":world";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
@@ -23,6 +24,7 @@ public class ISOModules {
 		create(MINING, "Mining", eventBus, builder);
 		create(MISC, "Misc", eventBus, builder);
 		create(MOBS, "Mobs", eventBus, builder);
+		create(MOVEMENT, "Movement", eventBus, builder);
 		create(WORLD, "World", eventBus, builder);
 	}
 

@@ -1,9 +1,12 @@
 ## Upcoming
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
+* Added back Movement features: Boats
+  * The feature (that wasn't configurable) to make boats easier to break has been moved to Tweaks
 * Added back Misc features: Packs, Nerfs, Tweaks, Potions and Effects, Low Fish
   * Potion and Effects now enables a data pack that changes potions stack sizes
   * Turtle Scute can now be placed by players on the ground and pick-block can be used on it
+  * Vehicles now require less damage to break (configurable, default is 2, vanilla is 4)
 * Added back Items features: Stack Sizes, Name Tags, Disabled Items, Stone Tools, Copper equipment gone and Ecologic Wood
   * Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
   * Stone tools gone now also replaces items in entities equipment slots
@@ -18,7 +21,7 @@
     * You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
     * Heavily increased experience from smelting ores
   * Insta-break heads and silverfish blocks are now part of the `block_data` data pack
-* Added back Hunger & Health features: Foods Drinks
+* Added back Hunger & Health features: Foods Drinks, Health Regen & Hunger, Exhaustion
 * Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 
