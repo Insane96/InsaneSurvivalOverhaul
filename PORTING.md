@@ -115,7 +115,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] BetterClimbable
 - [ ] Boats
 - [ ] ElytraNerf
-- [x] ~~NoPillaring~~ No really liked
+- [x] ~~NoPillaring~~ Not really liked
 - [ ] Swimming
 - [ ] Tagging
 - [ ] TerrainSlowdown

@@ -19,7 +19,7 @@ public class ItemMixin_FoodDrinks {
 				|| !Feature.isEnabled(FoodDrinks.class))
             return original;
 
-		return FoodDrinks.getFoodConsumingTime(stack);
+		return FoodDrinks.getFoodConsumingTime(original, stack);
     }
 
 	@Inject(at = @At("RETURN"), method = "getUseAnimation", cancellable = true)

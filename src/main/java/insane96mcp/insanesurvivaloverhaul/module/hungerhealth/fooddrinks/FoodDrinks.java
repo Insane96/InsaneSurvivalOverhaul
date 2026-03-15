@@ -162,15 +162,16 @@ public class FoodDrinks extends JsonFeature {
 	private static FoodProperties lastFoodEatenCache;
 	private static int lastFoodEatenTime;
 
-	public static int getFoodConsumingTime(ItemStack stack) {
+	public static int getFoodConsumingTime(int original, ItemStack stack) {
 		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
+		if (food == null)
+			return original;
 		if (food == lastFoodEatenCache)
 			return lastFoodEatenTime;
 		int ticks = eatingSpeedFormula.isBlank()
 				? -1
 				: (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
 		lastFoodEatenCache = food;
-		//noinspection DataFlowIssue
 		lastFoodEatenTime = ticks >= 0 ? ticks : (int) (food.eatSeconds() * 20f);
 		return lastFoodEatenTime;
 	}

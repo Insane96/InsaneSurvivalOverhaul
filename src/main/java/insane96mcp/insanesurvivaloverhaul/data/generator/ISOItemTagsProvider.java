@@ -4,6 +4,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -85,6 +86,10 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(FoodDrinks.DRINKING_FOODS)
                 .add(Items.SUSPICIOUS_STEW, Items.MUSHROOM_STEW, Items.RABBIT_STEW)
                 .add(FoodDrinks.BROWN_MUSHROOM_STEW.value(), FoodDrinks.RED_MUSHROOM_STEW.value(), FoodDrinks.NETHERIZED_STEW.value());
+
+        tag(TerrainSlowdown.SNOW_SLOWDOWN_IGNORE)
+                .add(Items.LEATHER_BOOTS)
+                .addOptional(ResourceLocation.parse("tconstruct:travelers_boots"));
     }
 
     public static TagKey<Item> create(String tagName) {
