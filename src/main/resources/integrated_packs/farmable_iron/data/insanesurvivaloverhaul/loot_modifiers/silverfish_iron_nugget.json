@@ -1,6 +1,6 @@
 {
     "type": "insanelib:inject_loot_table",
-    "neoforge:conditions": [
+    "conditions": [
         {
             "condition": "neoforge:loot_table_id",
             "loot_table_id": "minecraft:entities/silverfish"

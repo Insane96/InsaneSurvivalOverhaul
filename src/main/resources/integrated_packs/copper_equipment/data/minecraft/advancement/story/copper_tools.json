@@ -18,7 +18,7 @@
     "criteria": {
         "copper_tools": {
             "trigger": "minecraft:inventory_changed",
-            "neoforge:conditions": {
+            "conditions": {
                 "items": [
                     {
                         "items": [
