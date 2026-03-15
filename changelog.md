@@ -1,7 +1,7 @@
 ## Upcoming
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
-* Added back Movement features: Boats, Better climbable, Tagging, Swimming, Terrain Slowdown, Elytra (renamed from Elytra Nerf), Backwards slowdown
+* Added back Movement features: Boats, Better climbable, Tagging, Swimming, Terrain Slowdown, Elytra (renamed from Elytra Nerf), Backwards slowdown, Weighted Armor
   * The feature (that wasn't configurable) to make boats easier to break has been moved to Tweaks as it affects vehicles in general
   * Better climbing features no longer disable themselves if quark is present
   * Expanded Elytra Nerf to reduce Firework Rockets strength and allow to take off from ground with fireworks

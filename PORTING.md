@@ -111,16 +111,16 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 ## Movement
 
-- [ ] BackwardsSlowdown
-- [ ] BetterClimbable
-- [ ] Boats
-- [ ] ElytraNerf
+- [x] BackwardsSlowdown
+- [x] BetterClimbable
+- [x] Boats
+- [x] ElytraNerf
 - [x] ~~NoPillaring~~ Not really liked
-- [ ] Swimming
-- [ ] Tagging
-- [ ] TerrainSlowdown
+- [x] Swimming
+- [x] Tagging
+- [x] TerrainSlowdown
 - [ ] Minecarts
-- [ ] WeightedArmor
+- [x] WeightedArmor
 
 ## Sleep & Respawn
 
