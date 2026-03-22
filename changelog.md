@@ -1,4 +1,4 @@
-## Upcoming
+## 5.2.0.0-alpha
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
 * Added back Movement features: Boats, Better climbable, Tagging, Swimming, Terrain Slowdown, Elytra (renamed from Elytra Nerf), Backwards slowdown, Weighted Armor
@@ -15,11 +15,11 @@
   * Copper items are now registered in the minecraft namespace to be able to (hopefully) update a modded world to newer versions
 * Added back Mining features: Materials and Ores, Misc
   * Ore generation data pack changed to: removes the vanilla feature of discarding ores that are exposed to air. This applies to coal, diamond, gold and lapis.
-    Biome based ore gen has been removed.
+    Biome based ore gen has been removed. _Might_ come back in the future
   * Ore Smelting data pack changed to:
     * Smelting Raw Copper and Raw Iron takes 2x time
     * Blasting raw minerals takes 2x time
-    * Blasting ores now takes 4x time but yields 2x materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
+    * Blasting ores now takes 4x time but yields more materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
     * You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
     * Heavily increased experience from smelting ores
   * Insta-break heads and silverfish blocks are now part of the `block_data` data pack
