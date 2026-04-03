@@ -2,6 +2,10 @@
 
 * respawn anchor -> soul pillar
 
+## 4.30.1.1
+### Fixes
+* Startup crash with Caverns and Chasms
+
 ## 4.30.1.0
 ### Changes
 * Ore generation data pack
