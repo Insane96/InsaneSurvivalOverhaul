@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "tag": "neoforge:pumpkins"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "minecraft:pumpkin_seeds"
+    }
+}

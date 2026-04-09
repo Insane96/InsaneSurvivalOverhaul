@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,6 +62,10 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.RED_MUSHROOM_STEW.get());
         basicItem(FoodDrinks.NETHERIZED_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
+
+        basicItem(Crops.CARROT_SEEDS.get());
+        basicItem(Crops.ROOTED_POTATO.get());
+        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)

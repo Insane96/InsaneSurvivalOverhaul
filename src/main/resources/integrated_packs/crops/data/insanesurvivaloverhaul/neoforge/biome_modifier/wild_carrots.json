@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:add_features",
+    "biomes": "#minecraft:is_savanna",
+    "features": "insanesurvivaloverhaul:wild_carrots",
+    "step": "vegetal_decoration"
+}

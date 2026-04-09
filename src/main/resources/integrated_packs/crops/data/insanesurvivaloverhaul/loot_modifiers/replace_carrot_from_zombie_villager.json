@@ -1,0 +1,14 @@
+{
+  "type": "insanelib:replace_loot",
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "minecraft:zombie_villager"
+      }
+    }
+  ],
+  "item_to_replace": "minecraft:carrot",
+  "new_item": "minecraft:emerald"
+}

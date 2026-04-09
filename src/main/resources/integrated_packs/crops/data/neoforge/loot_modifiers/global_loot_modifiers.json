@@ -1,0 +1,20 @@
+{
+	"replace": false,
+	"entries": [
+		"insanesurvivaloverhaul:no_seeds_from_fern",
+		"insanesurvivaloverhaul:no_seeds_from_grass",
+		"insanesurvivaloverhaul:no_seeds_from_large_fern",
+		"insanesurvivaloverhaul:no_seeds_from_tall_grass",
+		"insanesurvivaloverhaul:replace_baked_potato_from_husk",
+		"insanesurvivaloverhaul:replace_baked_potato_from_zombie",
+		"insanesurvivaloverhaul:replace_baked_potato_from_zombie_villager",
+		"insanesurvivaloverhaul:replace_carrot_from_husk",
+		"insanesurvivaloverhaul:replace_carrot_from_zombie",
+		"insanesurvivaloverhaul:replace_carrot_from_zombie_villager",
+		"insanesurvivaloverhaul:replace_iron_ingot_from_husk",
+		"insanesurvivaloverhaul:replace_iron_ingot_from_zombie_villager",
+		"insanesurvivaloverhaul:replace_potato_from_husk",
+		"insanesurvivaloverhaul:replace_potato_from_zombie",
+		"insanesurvivaloverhaul:replace_potato_from_zombie_villager"
+	]
+}

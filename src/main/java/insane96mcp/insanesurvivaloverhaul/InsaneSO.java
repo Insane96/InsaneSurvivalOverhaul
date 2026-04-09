@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.insanelib.util.IntegratedPack;
 import insane96mcp.insanesurvivaloverhaul.data.generator.*;
+import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOBlockStatesProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
@@ -13,6 +14,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
+import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -21,12 +23,15 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -56,6 +61,7 @@ public class InsaneSO {
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));
 
         eventBus.addListener(this::clientSetup);
+        eventBus.addListener(this::commonSetup);
 
         eventBus.addListener(InsaneSO::gatherData);
         eventBus.addListener(NetworkHandler::register);
@@ -73,6 +79,19 @@ public class InsaneSO {
 
         NeoForgeMod.enableMergedAttributeTooltips();
         NeoForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+
+            //DispenserBlock.registerBehavior(Fletching.QUARTZ_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            //DispenserBlock.registerBehavior(Fletching.DIAMOND_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            //DispenserBlock.registerBehavior(Fletching.EXPLOSIVE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            //DispenserBlock.registerBehavior(Fletching.TORCH_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            //DispenserBlock.registerBehavior(Fletching.ICE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+        });
     }
 
     private void onAddReloadListeners(AddReloadListenerEvent event) {
@@ -105,6 +124,10 @@ public class InsaneSO {
         event.getGenerator().addProvider(
                 event.includeServer(),
                 new ISORecipeProvider(output, lookupProvider)
+        );
+        event.getGenerator().addProvider(
+                event.includeClient(),
+                new ISOBlockStatesProvider(output, MOD_ID, existingFileHelper)
         );
         event.getGenerator().addProvider(
                 event.includeClient(),

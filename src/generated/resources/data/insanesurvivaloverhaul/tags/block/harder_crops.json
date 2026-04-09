@@ -1,0 +1,44 @@
+{
+  "values": [
+    "minecraft:wheat",
+    "minecraft:carrots",
+    "minecraft:potatoes",
+    "minecraft:beetroots",
+    "insanesurvivaloverhaul:wild_wheat",
+    "insanesurvivaloverhaul:wild_carrots",
+    "insanesurvivaloverhaul:wild_potatoes",
+    "insanesurvivaloverhaul:wild_beetroots",
+    {
+      "id": "supplementaries:flax",
+      "required": false
+    },
+    {
+      "id": "supplementaries:wild_flax",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomatoes",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:budding_tomatoes",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rice_panicles",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbages",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:onions",
+      "required": false
+    }
+  ]
+}

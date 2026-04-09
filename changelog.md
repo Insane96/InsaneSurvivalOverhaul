@@ -1,3 +1,6 @@
+## Upcoming
+* Added back Farming features: Crops
+
 ## 5.2.0.0-alpha
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.

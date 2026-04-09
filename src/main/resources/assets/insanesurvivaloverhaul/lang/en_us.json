@@ -62,6 +62,18 @@
     "block.insanesurvivaloverhaul.echo_lantern": "Echo Lantern",
 
 
+    "insanesurvivaloverhaul:farming_module": "Farming",
+
+    "item.insanesurvivaloverhaul.carrot_seeds": "Carrot Seeds",
+    "item.insanesurvivaloverhaul.rooted_potato": "Rooted Potato",
+    "block.insanesurvivaloverhaul.wild_wheat": "Wild Wheat",
+    "block.insanesurvivaloverhaul.wild_carrots": "Wild Carrots",
+    "block.insanesurvivaloverhaul.wild_potatoes": "Wild Potatoes",
+    "block.insanesurvivaloverhaul.wild_beetroots": "Wild Beetroots",
+    "block.insanesurvivaloverhaul.solanum_neorossii": "Solanum Neorossii",
+    "block.insanesurvivaloverhaul.potted_solanum_neorossii": "Potted Solanum Neorossii",
+
+
     "insanesurvivaloverhaul:world_module": "World",
 
     "death.fell.accident.water": "%s thought could drop in shallow water safely"

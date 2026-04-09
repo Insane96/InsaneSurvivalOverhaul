@@ -1,0 +1,11 @@
+{
+    "block": "minecraft:wheat",
+    "states": [
+        "age=7"
+    ],
+    "state_hardness": 1.5,
+    "state_experience_dropped": {
+        "min": 1,
+        "max": 2
+    }
+}

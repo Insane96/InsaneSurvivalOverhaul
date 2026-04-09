@@ -52,7 +52,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 - [x] Exhaustion
 - [x] FoodDrinks
-- [ ] HealthRegenHunger
+- [x] HealthRegenHunger
 
 ## Items
 

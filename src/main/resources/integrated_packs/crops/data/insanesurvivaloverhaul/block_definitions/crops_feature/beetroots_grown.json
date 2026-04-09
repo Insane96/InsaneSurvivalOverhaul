@@ -1,0 +1,11 @@
+{
+    "block": "minecraft:beetroots",
+    "states": [
+        "age=3"
+    ],
+    "state_hardness": 1.5,
+    "state_experience_dropped": {
+        "min": 1,
+        "max": 2
+    }
+}

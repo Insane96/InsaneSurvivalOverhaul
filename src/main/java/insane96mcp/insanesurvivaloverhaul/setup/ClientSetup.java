@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
@@ -32,7 +33,7 @@ public class ClientSetup {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
             }
         }
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+        else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             if (Feature.isEnabled(CopperEquipment.class)) {
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE.get());
@@ -40,7 +41,7 @@ public class ClientSetup {
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
             }
         }
-        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+        else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
                 addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD.get());
                 addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE.get());
@@ -51,6 +52,13 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());
+            }
+        }
+        else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            if (Feature.isEnabled(Crops.class)) {
+                addAfter(event, Items.POPPY, Crops.SOLANUM_NEOROSSII.item());
+                addAfter(event, Items.WHEAT_SEEDS, Crops.CARROT_SEEDS);
+                addAfter(event, Items.BEETROOT_SEEDS, Crops.ROOTED_POTATO);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
