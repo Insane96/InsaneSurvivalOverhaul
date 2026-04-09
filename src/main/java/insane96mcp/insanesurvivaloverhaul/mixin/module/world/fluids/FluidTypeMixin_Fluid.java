@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = FluidType.class)
+@Mixin(FluidType.class)
 public class FluidTypeMixin_Fluid {
 	/**
 	 * Overrides the motion scale of the water fluid type with the configured push force value

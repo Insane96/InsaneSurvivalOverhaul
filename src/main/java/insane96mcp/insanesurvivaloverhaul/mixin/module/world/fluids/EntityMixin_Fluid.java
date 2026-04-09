@@ -24,7 +24,7 @@ public class EntityMixin_Fluid {
      */
     @ModifyConstant(method = "updateInWaterStateAndDoFluidPushing", constant = @Constant(floatValue = 1f))
     private float insanesurvivaloverhaul$onFluidFallModifier(float waterFallDamageModifier) {
-        return Fluids.shouldOverrideWaterFallDamageModifier() && this.forgeFluidTypeHeight.object2DoubleEntrySet().stream().anyMatch(e -> e.getKey().equals(NeoForgeMod.WATER_TYPE)) ? 0.75f : waterFallDamageModifier;
+        return Fluids.shouldOverrideWaterFallDamageModifier() && this.forgeFluidTypeHeight.object2DoubleEntrySet().stream().anyMatch(e -> e.getKey().equals(NeoForgeMod.WATER_TYPE.value())) ? 0.75f : waterFallDamageModifier;
     }
 
     /**
@@ -33,8 +33,7 @@ public class EntityMixin_Fluid {
      */
     @WrapOperation(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;resetFallDistance()V"))
     private void insanesurvivaloverhaul$onResetFallDistanceInMove(Entity instance, Operation<Void> original) {
-        if (Fluids.shouldOverrideWaterFallDamageModifier() /*
-                || BetterClimbable.fallDamageOnClimbable*/)
+        if (Fluids.shouldOverrideWaterFallDamageModifier())
             return;
         original.call(instance);
     }
