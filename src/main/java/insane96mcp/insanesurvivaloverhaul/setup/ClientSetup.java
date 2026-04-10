@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
@@ -59,6 +60,9 @@ public class ClientSetup {
                 addAfter(event, Items.POPPY, Crops.SOLANUM_NEOROSSII.item());
                 addAfter(event, Items.WHEAT_SEEDS, Crops.CARROT_SEEDS);
                 addAfter(event, Items.BEETROOT_SEEDS, Crops.ROOTED_POTATO);
+            }
+            if (Feature.isEnabled(BoneMeal.class)) {
+                addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {

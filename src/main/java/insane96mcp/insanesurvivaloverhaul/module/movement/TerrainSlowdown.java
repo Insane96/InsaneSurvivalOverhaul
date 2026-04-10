@@ -53,7 +53,7 @@ public class TerrainSlowdown extends JsonFeature {
 	@Config
 	public static Boolean frostWalkerReducesIceSlowdown = true;
 
-	@Config(description = "If true, snow slowdown is ignored if wearing leather boots (or any item in iguanatweaksreborn:snow_slowdown_ignore item tag)")
+	@Config(description = "If true, snow slowdown is ignored if wearing leather boots (or any item in insanesurvivaloverhaul:snow_slowdown_ignore item tag)")
 	public static Boolean snowSlowdownIgnoredWithLeatherBoots = true;
 
 	@Override

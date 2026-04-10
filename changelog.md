@@ -1,5 +1,5 @@
 ## Upcoming
-* Added back Farming features: Crops
+* Added back Farming features: Crops, Bone Meal
 * Fixed Water Fall Damage feature not working properly
 
 ## 5.2.0.0-alpha

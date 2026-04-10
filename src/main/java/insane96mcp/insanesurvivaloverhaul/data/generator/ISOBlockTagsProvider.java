@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -24,7 +25,7 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> SKULLS = create("skulls");
     public static final TagKey<Block> INFESTED = create("infested");
     //public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
-    //public static final TagKey<Block> TALL_GRASS = create("tall_grass");
+    public static final TagKey<Block> TALL_GRASS = create("tall_grass");
     //public static final TagKey<Block> AZALEA_LEAVES = create("azalea_leaves");
     //public static final TagKey<Block> OAK_LOG_LEAVES = create("oak_log_leaves");
     //public static final TagKey<Block> MAPLE_LEAVES = create("maple_leaves");
@@ -50,6 +51,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Spawning.ECHO_LANTERN.block().get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(BoneMeal.RICH_FARMLAND.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get());
 
@@ -65,6 +68,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTags(Tags.Blocks.GLASS_BLOCKS, BlockTags.LEAVES);
         //tag(HUD_TIME)
                 //.addOptional(ForgeRegistries.BLOCKS.getKey(ModRegistry.CLOCK_BLOCK.get()));
+        tag(TALL_GRASS)
+                .add(Blocks.SHORT_GRASS).add(Blocks.TALL_GRASS).add(Blocks.FERN).add(Blocks.LARGE_FERN);
 
         tag(Crops.HARDER_CROPS_TAG)
                 .add(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS)

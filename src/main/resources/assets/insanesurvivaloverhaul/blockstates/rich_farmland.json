@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    }
+  }
+}
