@@ -1,6 +1,7 @@
 {
   "values": [
     "insanesurvivaloverhaul:collide_with_wall",
-    "#insanesurvivaloverhaul:piercing_damage_type"
+    "#insanesurvivaloverhaul:piercing_damage_type",
+    "insanesurvivaloverhaul:old_age"
   ]
 }

@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobs;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -49,5 +50,39 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(PETS)
                 .add(EntityType.VILLAGER)
                 .addTag(EntityTypeTags.RAIDERS);
+        tag(Livestock.MILKABLE)
+                .add(EntityType.COW)
+                .add(EntityType.MOOSHROOM)
+                .add(EntityType.GOAT)
+                .addOptional(ResourceLocation.fromNamespaceAndPath("buzzier_bees", "moobloom"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "yak"));
+        tag(Livestock.PREVENT_BREEDING)
+                .add(EntityType.COW)
+                .add(EntityType.MOOSHROOM)
+                .add(EntityType.PIG)
+                .add(EntityType.HORSE)
+                .add(EntityType.DONKEY)
+                .add(EntityType.GOAT)
+                .add(EntityType.SHEEP)
+                .add(EntityType.WOLF)
+                .add(EntityType.CAT)
+                .add(EntityType.OCELOT)
+                .add(EntityType.AXOLOTL)
+                .add(EntityType.LLAMA)
+                .add(EntityType.RABBIT)
+                .add(EntityType.TURTLE)
+                .add(EntityType.PANDA)
+                .add(EntityType.FOX)
+                .add(EntityType.STRIDER)
+                .add(EntityType.HOGLIN)
+                .add(EntityType.FROG)
+                .addOptional(ResourceLocation.fromNamespaceAndPath("quark", "crab"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("autumnity", "snail"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("autumnity", "turkey"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "duck"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "deer"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "reindeer"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "slabfish"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "yak"));
     }
 }

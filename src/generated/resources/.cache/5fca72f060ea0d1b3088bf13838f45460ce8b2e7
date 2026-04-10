@@ -1,7 +1,11 @@
-// 1.21.1	2026-03-07T10:29:19.2533243	Tags for minecraft:damage_type mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-10T14:53:40.988147	Tags for minecraft:damage_type mod id insanesurvivaloverhaul
 1fc32dab1a44d44de4825f1c6ffdb291878593a9 data/insanesurvivaloverhaul/tags/damage_type/doesnt_trigger_piercing.json
 2f934d0569b43815cd8f4185c085561b377936c5 data/insanesurvivaloverhaul/tags/damage_type/piercing_damage_type.json
-18eb34e4f89182aae66e111de9514ae7446eaa5e data/minecraft/tags/damage_type/bypasses_armor.json
-18eb34e4f89182aae66e111de9514ae7446eaa5e data/minecraft/tags/damage_type/bypasses_cooldown.json
-18eb34e4f89182aae66e111de9514ae7446eaa5e data/minecraft/tags/damage_type/bypasses_shield.json
-9573c8dad994163c1bb693ee07c01fc980c501b5 data/minecraft/tags/damage_type/no_impact.json
+852557cf39691be9de5e0dea1c0f4034bcc90f6a data/minecraft/tags/damage_type/bypasses_armor.json
+852557cf39691be9de5e0dea1c0f4034bcc90f6a data/minecraft/tags/damage_type/bypasses_cooldown.json
+144f1f51bcb027161d180eadb7109cdf64efcb2c data/minecraft/tags/damage_type/bypasses_effects.json
+144f1f51bcb027161d180eadb7109cdf64efcb2c data/minecraft/tags/damage_type/bypasses_enchantments.json
+144f1f51bcb027161d180eadb7109cdf64efcb2c data/minecraft/tags/damage_type/bypasses_invulnerability.json
+144f1f51bcb027161d180eadb7109cdf64efcb2c data/minecraft/tags/damage_type/bypasses_resistance.json
+852557cf39691be9de5e0dea1c0f4034bcc90f6a data/minecraft/tags/damage_type/bypasses_shield.json
+ff69e86dcca997b1a103d9f41a0b05414f19661c data/minecraft/tags/damage_type/no_impact.json

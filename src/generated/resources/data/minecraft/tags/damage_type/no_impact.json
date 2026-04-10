@@ -2,6 +2,7 @@
   "values": [
     "insanesurvivaloverhaul:collide_with_wall",
     "#insanesurvivaloverhaul:piercing_damage_type",
-    "minecraft:wither"
+    "minecraft:wither",
+    "insanesurvivaloverhaul:old_age"
   ]
 }

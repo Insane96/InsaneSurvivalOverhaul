@@ -1,6 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.data.condition.FedCondition;
+import insane96mcp.insanesurvivaloverhaul.data.condition.LivestockAgeCondition;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +13,8 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
@@ -30,6 +34,12 @@ public class ISORegistries {
     public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(BuiltInRegistries.POINT_OF_INTEREST_TYPE);
     @SuppressWarnings("rawtypes")
     private static final DeferredRegister CRITERION_TRIGGERS = createRegistry(BuiltInRegistries.TRIGGER_TYPES);
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITIONS = createRegistry(BuiltInRegistries.LOOT_CONDITION_TYPE);
+
+    public static final DeferredHolder<LootItemConditionType, LootItemConditionType> HAS_BEEN_FED_RECENTLY =
+            LOOT_CONDITIONS.register("has_been_fed_recently", () -> new LootItemConditionType(FedCondition.CODEC));
+    public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
+            LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
 
     private static <R> DeferredRegister<R> createRegistry(Registry<R> registry) {
         DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSO.MOD_ID);

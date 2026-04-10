@@ -4,6 +4,7 @@ import insane96mcp.insanesurvivaloverhaul.module.client.death.ClientboundDeathSt
 import insane96mcp.insanesurvivaloverhaul.module.combat.attackspeedbasedinvincibility.ClientboundInvulnerableTimePacket;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.ClientboundRegenAbsorptionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotPacket;
+import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.ClientboundMilkCooldownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundExhaustionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
@@ -24,5 +25,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundSaturationPacket.TYPE, ClientboundSaturationPacket.STREAM_CODEC, ClientboundSaturationPacket::handle);
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
         registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
+        registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
     }
 }
