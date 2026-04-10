@@ -29,15 +29,15 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-@LoadFeature(module = ISOModules.ITEMS, description = "Items no longer break, will sit at one durability and can't be used. Items in the item tag `insanesurvivaloverhaul:not_unbreakable` are not affected and items in the item tag `insanesurvivaloverhaul:unbreakable` are always unbreakable.")
+@LoadFeature(module = ISOModules.ITEMS, description = "Items no longer break, will sit at one durability and can't be used. Items in the item tag `insanesurvivaloverhaul:not_unvanishable` are not affected and items in the item tag `insanesurvivaloverhaul:unvanishable` are always unvanishable.")
 public class UnvanishableItems extends Feature {
 
 	public static final String TOOL_DURABILITY_LANG = InsaneSO.lang("tool_durability");
 	public static final String BROKEN_DURABILITY_LANG = InsaneSO.lang("broken_durability");
 	public static final String BROKEN_ITEM_LANG = InsaneSO.lang("broken_item");
-	public static final TagKey<Item> NOT_UNBREAKABLE = ISOItemTagsProvider.create("not_unbreakable");
-	public static final TagKey<Item> UNBREAKABLE = ISOItemTagsProvider.create("unbreakable");
-	public static final TagKey<Item> REMOVE_ORIGINAL_MODIFIERS_TAG = ISOItemTagsProvider.create("remove_original_modifiers");
+	public static final String HEAVILY_BROKEN_DURABILITY = InsaneSO.lang("heavily_broken_durability");
+	public static final TagKey<Item> NOT_UNVANISHABLE = ISOItemTagsProvider.create("not_unvanishable");
+	public static final TagKey<Item> UNVANISHABLE = ISOItemTagsProvider.create("unvanishable");
 	public static final TagKey<Item> NO_DURABILITY_TOOLTIP = ISOItemTagsProvider.create("no_durability_tooltip");
 
 	@Config(description = "Items with durability get a durability tooltip. Items in the `insanesurvivaloverhaul:no_durability_tooltip` item tag will not get the tooltip.")
@@ -51,9 +51,9 @@ public class UnvanishableItems extends Feature {
 	}
 
 	public static boolean isUnbreakable(ItemStack stack) {
-		if (stack.is(NOT_UNBREAKABLE))
+		if (stack.is(NOT_UNVANISHABLE))
 			return false;
-		else if (stack.is(UNBREAKABLE))
+		else if (stack.is(UNVANISHABLE))
 			return true;
         return !enchantedItemsOnly || stack.isEnchanted();
     }
@@ -212,7 +212,7 @@ public class UnvanishableItems extends Feature {
 			MutableComponent component = null;
             if (isBroken(stack)) {
 				if (durabilityLeft < -stack.getDamageValue() * 0.05f)
-					component = Component.translatable("insanesurvivaloverhaul.heavily_broken_durability").withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
+					component = Component.translatable(HEAVILY_BROKEN_DURABILITY).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
 				else
 					component = Component.translatable(BROKEN_DURABILITY_LANG).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.BOLD);
 			}

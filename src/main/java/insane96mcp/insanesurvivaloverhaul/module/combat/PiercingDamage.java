@@ -7,6 +7,7 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.util.MCUtils;
 import net.minecraft.core.registries.Registries;
@@ -63,7 +64,7 @@ public class PiercingDamage extends Feature {
 				|| event.getEntity().isDeadOrDying()
 				|| event.getSource().is(DOESNT_TRIGGER_PIERCING)
 				|| attacker.getAttribute(PIERCING_DAMAGE) == null
-				/*|| (Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(attacker.getMainHandItem()))*/)
+				|| (Feature.isEnabled(UnvanishableItems.class) && UnvanishableItems.isBroken(attacker.getMainHandItem())))
 			return;
 
 		AttributeInstance piercingInstance = attacker.getAttribute(PIERCING_DAMAGE);

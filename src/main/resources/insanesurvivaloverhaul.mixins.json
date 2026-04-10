@@ -42,6 +42,7 @@
         "module.hungerhealth.healthregenhunger.FoodDataMixin_HealthRegenHunger",
         "module.hungerhealth.healthregenhunger.LivingEntityMixin_HealthRegenHunger",
         "module.hungerhealth.healthregenhunger.PlayerMixin_HealthRegenHunger",
+        "module.item.unvanishable.ItemMixin_UnvanishableItems",
         "module.mining.OreVeinifierMixin_MaterialsAndOres",
         "module.misc.lowfish.FishingHookMixin_LowFish",
         "module.misc.nerfs.PistonBaseBlockMixin_Nerfs",

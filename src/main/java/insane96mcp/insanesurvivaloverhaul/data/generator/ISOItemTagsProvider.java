@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
@@ -94,6 +95,12 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(Crops.CHICKEN_FOOD_ITEMS)
                 .add(Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.TORCHFLOWER_SEEDS);
+
+
+        tag(UnvanishableItems.NOT_UNVANISHABLE)
+                .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
+        //tag(UnvanishableItems.NO_DURABILITY_TOOLTIP)
+        //        .add(BlinkerFeature.ITEM.get());
     }
 
     public static TagKey<Item> create(String tagName) {

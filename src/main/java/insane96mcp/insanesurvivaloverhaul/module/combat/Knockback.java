@@ -7,6 +7,7 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.LivingEntityAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -85,7 +86,7 @@ public class Knockback extends Feature {
 		float knockbackMultiplier = 1f;
 		if (lastHurtByMob instanceof Player player && ModNBTData.get(lastHurtByMob, SHOULD_APPLY_NO_KNOCKBACK, Boolean.class)) {
 			if ((itemStack.getAttributeModifiers().modifiers().stream().noneMatch(e -> (e.slot() == EquipmentSlotGroup.MAINHAND || e.slot() == EquipmentSlotGroup.HAND) && e.attribute() == Attributes.ATTACK_DAMAGE)
-					/*|| (isEnabled(UnbreakableItems.class) && Feature.isEnabled(UnbreakableItems.class) && UnbreakableItems.isBroken(itemStack))*/)
+					|| (isEnabled(UnvanishableItems.class) && Feature.isEnabled(UnvanishableItems.class) && UnvanishableItems.isBroken(itemStack)))
 					&& noWeaponPenalty < 1d)
 				knockbackMultiplier = Math.min(knockbackMultiplier, noWeaponPenalty.floatValue());
 

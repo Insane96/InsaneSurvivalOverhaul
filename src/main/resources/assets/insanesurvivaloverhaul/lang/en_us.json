@@ -28,6 +28,29 @@
     "item.insanesurvivaloverhaul.shortbow": "Shortbow",
 
 
+    "insanesurvivaloverhaul:farming_module": "Farming",
+
+    "insanesurvivaloverhaul.weak_hoe": "This hoe is too weak to till soil",
+    "insanesurvivaloverhaul.till_cooldown": "%.1fs Till Cooldown",
+    "insanesurvivaloverhaul.scythe_radius": "%d Scythe Radius",
+
+    "insanesurvivaloverhaul.milk_cooldown": "This %s's fluid is not yet ready",
+    "death.attack.oldAge": "%1$s died of old age",
+
+    "block.insanesurvivaloverhaul.rich_farmland": "Rich Farmland",
+
+    "block.insanesurvivaloverhaul.wild_wheat": "Wild Wheat",
+    "block.insanesurvivaloverhaul.wild_potatoes": "Wild Potatoes",
+    "block.insanesurvivaloverhaul.wild_carrots": "Wild Carrots",
+    "block.insanesurvivaloverhaul.wild_beetroots": "Wild Beetroots",
+
+    "block.minecraft.carrots.seeds": "Carrot Seeds",
+    "block.minecraft.potatoes.seeds": "Rooted Potato",
+    "block.farmersdelight.onions.seeds": "Rooted Onion",
+    "block.farmersdelight.rice.seeds": "Rice Seeds",
+    "block.insanesurvivaloverhaul.solanum_neorossii": "Solanum Nerossii",
+
+
     "insanesurvivaloverhaul:hunger_health_module": "Hunger & Health",
 
     "item.insanesurvivaloverhaul.brown_mushroom_stew": "Brown Mushroom Stew",
@@ -43,6 +66,16 @@
 
 
     "insanesurvivaloverhaul:items_module": "Items",
+
+    "insanesurvivaloverhaul.no_damage_item": "This item is not sharp, hits like a fist",
+    "insanesurvivaloverhaul.no_mining_item": "This item is old and rusty, can't mine anything",
+    "insanesurvivaloverhaul.no_equip_item": "This item doesn't fit you",
+    "insanesurvivaloverhaul.disabled_item": "This item is disabled and cannot be used/equipped",
+    "insanesurvivaloverhaul.broken_item": "This item is broken, must be repaired",
+    "insanesurvivaloverhaul.tool_mining_speed": "%.1f Mining Speed",
+    "insanesurvivaloverhaul.tool_durability": "Durability: %d/%d",
+    "insanesurvivaloverhaul.broken_durability": "Broken",
+    "insanesurvivaloverhaul.heavily_broken_durability": "Heavily Broken",
 
     "item.minecraft.copper_helmet": "Copper Helmet",
     "item.minecraft.copper_chestplate": "Copper Chestplate",
@@ -60,18 +93,6 @@
     "insanesurvivaloverhaul:mobs_module": "Mobs",
 
     "block.insanesurvivaloverhaul.echo_lantern": "Echo Lantern",
-
-
-    "insanesurvivaloverhaul:farming_module": "Farming",
-
-    "item.insanesurvivaloverhaul.carrot_seeds": "Carrot Seeds",
-    "item.insanesurvivaloverhaul.rooted_potato": "Rooted Potato",
-    "block.insanesurvivaloverhaul.wild_wheat": "Wild Wheat",
-    "block.insanesurvivaloverhaul.wild_carrots": "Wild Carrots",
-    "block.insanesurvivaloverhaul.wild_potatoes": "Wild Potatoes",
-    "block.insanesurvivaloverhaul.wild_beetroots": "Wild Beetroots",
-    "block.insanesurvivaloverhaul.solanum_neorossii": "Solanum Neorossii",
-    "block.insanesurvivaloverhaul.potted_solanum_neorossii": "Potted Solanum Neorossii",
 
 
     "insanesurvivaloverhaul:world_module": "World",
