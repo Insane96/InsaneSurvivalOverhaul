@@ -1,0 +1,57 @@
+{
+    "replace": false,
+    "values": [
+        "#insanesurvivaloverhaul:cows",
+        "#insanesurvivaloverhaul:chickens",
+        "minecraft:pig",
+        "minecraft:horse",
+        "minecraft:donkey",
+        "minecraft:goat",
+        "minecraft:sheep",
+        "minecraft:wolf",
+        "minecraft:cat",
+        "minecraft:ocelot",
+        "minecraft:axolotl",
+        "minecraft:llama",
+        "minecraft:rabbit",
+        "minecraft:turtle",
+        "minecraft:panda",
+        "minecraft:fox",
+        "minecraft:bee",
+        "minecraft:strider",
+        "minecraft:hoglin",
+        "minecraft:frog",
+        {
+            "id": "quark:crab",
+            "required": false
+        },
+        {
+            "id": "autumnity:snail",
+            "required": false
+        },
+        {
+            "id": "autumnity:turkey",
+            "required": false
+        },
+        {
+            "id": "environmental:duck",
+            "required": false
+        },
+        {
+            "id": "environmental:deer",
+            "required": false
+        },
+        {
+            "id": "environmental:reindeer",
+            "required": false
+        },
+        {
+            "id": "environmental:slabfish",
+            "required": false
+        },
+        {
+            "id": "environmental:yak",
+            "required": false
+        }
+    ]
+}

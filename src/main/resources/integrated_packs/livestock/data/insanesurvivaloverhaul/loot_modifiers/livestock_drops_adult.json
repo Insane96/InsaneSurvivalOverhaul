@@ -1,0 +1,11 @@
+{
+    "type": "insanelib:drop_multiplier",
+    "conditions": [
+        {
+            "condition": "insanesurvivaloverhaul:livestock_age",
+            "entity": "this",
+            "age": "adult"
+        }
+    ],
+    "multiplier": 2
+}

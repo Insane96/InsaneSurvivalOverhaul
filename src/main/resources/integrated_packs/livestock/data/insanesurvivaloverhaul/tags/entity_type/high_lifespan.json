@@ -1,0 +1,10 @@
+{
+    "values": [
+        "#insanesurvivaloverhaul:cows",
+        "#insanesurvivaloverhaul:sheep",
+        {
+            "id": "environmental:reindeer",
+            "required": false
+        }
+    ]
+}

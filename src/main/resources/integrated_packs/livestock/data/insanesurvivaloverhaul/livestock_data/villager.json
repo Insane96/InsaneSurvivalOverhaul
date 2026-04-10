@@ -1,0 +1,24 @@
+{
+    "entity": "minecraft:villager",
+    "growth_speed_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:true",
+            "modifier": 3,
+            "operation": "add"
+        }
+    ],
+    "breeding_cooldown_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:true",
+            "modifier": 6,
+            "operation": "add"
+        }
+    ],
+    "breeding_fail_chance_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:true",
+            "modifier": 0.5,
+            "operation": "add"
+        }
+    ]
+}

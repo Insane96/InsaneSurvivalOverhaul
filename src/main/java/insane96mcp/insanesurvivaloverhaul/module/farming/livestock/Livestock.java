@@ -108,7 +108,7 @@ public class Livestock extends Feature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("livestock_changes", "Livestock Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("livestock", "Livestock", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 		AGE = this.createDataKey("age");
 		MAX_AGE = this.createDataKey("max_age");
 		STOP_AGING = this.createDataKey("stop_aging");
@@ -122,7 +122,7 @@ public class Livestock extends Feature {
 				|| !(event.getEntity() instanceof Sheep sheep))
 			return;
 
-		SheepAccessor sheepAccessor = (SheepAccessor)(Object) sheep;
+		SheepAccessor sheepAccessor = (SheepAccessor) sheep;
 		sheep.goalSelector.removeGoal(sheepAccessor.getEatBlockGoal());
 		sheepAccessor.setEatBlockGoal(new ISOEatBlock(sheep));
 		sheep.goalSelector.addGoal(5, sheepAccessor.getEatBlockGoal());

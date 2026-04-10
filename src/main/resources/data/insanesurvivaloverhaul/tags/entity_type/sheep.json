@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:sheep",
+        {
+            "id": "environmental:yak",
+            "required": false
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "entity": "#insanesurvivaloverhaul:milkable",
+    "cow_fluid_cooldown_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:age",
+            "modifier": 600,
+            "age": "elder",
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:has_been_fed_recently",
+            "modifier": -600,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:season",
+            "seasons": [
+                "WINTER"
+            ],
+            "modifier": 1200,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:season",
+            "seasons": [
+                "SPRING"
+            ],
+            "modifier": -150,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:season",
+            "seasons": [
+                "SUMMER"
+            ],
+            "modifier": -300,
+            "operation": "add"
+        }
+    ]
+}
