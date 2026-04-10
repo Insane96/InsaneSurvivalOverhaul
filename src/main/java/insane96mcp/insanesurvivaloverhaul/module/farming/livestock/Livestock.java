@@ -75,7 +75,7 @@ public class Livestock extends Feature {
 	@Config(min = 0,description = "Seconds until you can milk cows (or stew mooshrooms)")
 	public static Integer fluidCooldown = 1200;
 
-    @Config(description = "If true, animals will no longer be able to be bred manually. Only animals in iguanatweaksreborn:prevent_breeding will be affected by this.")
+    @Config(description = "If true, animals will no longer be able to be bred manually. Only animals in insanesurvivaloverhaul:prevent_breeding will be affected by this.")
     public static Boolean preventBreeding = true;
     @Config(description = "If true, mobs can randomly fall in love and possibly breed")
     public static Boolean autoBreed = true;
