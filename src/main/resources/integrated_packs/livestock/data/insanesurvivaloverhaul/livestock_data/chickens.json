@@ -16,30 +16,6 @@
             "modifier": 0.5,
             "operation": "add",
             "age": "elder"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "WINTER"
-            ],
-            "modifier": 2.5,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SPRING"
-            ],
-            "modifier": -0.2,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SUMMER"
-            ],
-            "modifier": -0.4,
-            "operation": "add"
         }
     ]
 }

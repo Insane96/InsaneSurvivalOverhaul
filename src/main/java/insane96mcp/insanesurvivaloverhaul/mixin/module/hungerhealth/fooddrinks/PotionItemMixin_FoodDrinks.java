@@ -24,7 +24,7 @@ public class PotionItemMixin_FoodDrinks {
 	}
 
     @ModifyExpressionValue(method = "appendHoverText", at = @At(value = "CONSTANT", args = "floatValue=1.0"))
-    public float iguanatweaksreborn$appendHoverText(float original) {
+    public float insanesurvivaloverhaulappendHoverText(float original) {
         return (Object) this instanceof SplashPotionItem && PotionsAndEffects.streamlineSplashPotions() ? PotionsAndEffects.STREAMLINE_SPLASH_POTION_MULTIPLIER : original;
     }
 }

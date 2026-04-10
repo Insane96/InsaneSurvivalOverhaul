@@ -10,22 +10,6 @@
             "id": "insanesurvivaloverhaul:has_been_fed_recently",
             "modifier": 0.2,
             "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "AUTUMN"
-            ],
-            "modifier": -0.1,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "WINTER"
-            ],
-            "modifier": -0.2,
-            "operation": "add"
         }
     ]
 }

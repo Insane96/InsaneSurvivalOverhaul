@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class OreVeinifierMixin_MaterialsAndOres {
 
 	@Inject(method = "create", at = @At(value = "HEAD"), cancellable = true)
-	private static void iguanatweaksreborn$onCreate(CallbackInfoReturnable<NoiseChunk.BlockStateFiller> cir) {
+	private static void insanesurvivaloverhaulonCreate(CallbackInfoReturnable<NoiseChunk.BlockStateFiller> cir) {
 		if (Feature.isEnabled(MaterialsAndOres.class) && MaterialsAndOres.disableOreVeins)
 			cir.setReturnValue(context -> null);
 	}

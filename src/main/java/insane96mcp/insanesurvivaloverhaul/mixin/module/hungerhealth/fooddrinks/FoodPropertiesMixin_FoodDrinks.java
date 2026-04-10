@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(FoodProperties.class)
 public class FoodPropertiesMixin_FoodDrinks {
 	@ModifyReturnValue(method = "canAlwaysEat", at = @At(value = "RETURN"))
-	public boolean iguanatweaksreborn$canAlwaysEat(boolean original) {
+	public boolean insanesurvivaloverhaulcanAlwaysEat(boolean original) {
 		if (!Feature.isEnabled(FoodDrinks.class)
 				|| !FoodDrinks.alwaysEat)
 			return original;

@@ -19,30 +19,6 @@
             "id": "insanesurvivaloverhaul:true",
             "modifier": 2,
             "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "WINTER"
-            ],
-            "modifier": 2,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SPRING"
-            ],
-            "modifier": -0.15,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SUMMER"
-            ],
-            "modifier": -0.3,
-            "operation": "add"
         }
     ],
     "breeding_fail_chance_modifiers": [
@@ -55,30 +31,6 @@
             "id": "insanesurvivaloverhaul:age",
             "modifier": 0.2,
             "age": "elder",
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "WINTER"
-            ],
-            "modifier": 0.2,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SPRING"
-            ],
-            "modifier": -0.1,
-            "operation": "add"
-        },
-        {
-            "id": "insanesurvivaloverhaul:season",
-            "seasons": [
-                "SUMMER"
-            ],
-            "modifier": -0.2,
             "operation": "add"
         }
     ],

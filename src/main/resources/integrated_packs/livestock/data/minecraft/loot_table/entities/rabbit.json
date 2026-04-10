@@ -19,7 +19,8 @@
                             "add": false
                         },
                         {
-                            "function": "minecraft:looting_enchant",
+                            "enchantment": "minecraft:looting",
+                            "function": "minecraft:enchanted_count_increase",
                             "count": {
                                 "type": "minecraft:uniform",
                                 "min": 0,
@@ -39,25 +40,46 @@
                     "name": "minecraft:rabbit",
                     "functions": [
                         {
-                            "function": "minecraft:furnace_smelt",
                             "conditions": [
                                 {
-                                    "condition": "minecraft:entity_properties",
-                                    "entity": "this",
-                                    "predicate": {
-                                        "flags": {
-                                            "is_on_fire": true
+                                    "condition": "minecraft:any_of",
+                                    "terms": [
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "this",
+                                            "predicate": {
+                                                "flags": {
+                                                    "is_on_fire": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "direct_attacker",
+                                            "predicate": {
+                                                "equipment": {
+                                                    "mainhand": {
+                                                        "predicates": {
+                                                            "minecraft:enchantments": [
+                                                                {
+                                                                    "enchantments": "#minecraft:smelts_loot"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
+                                    ]
                                 }
-                            ]
+                            ],
+                            "function": "minecraft:furnace_smelt"
                         }
                     ],
                     "conditions": [
                         {
-                            "condition": "minecraft:random_chance_with_looting",
-                            "chance": 0.6,
-                            "looting_multiplier": 0.3
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.6
                         }
                     ]
                 }
@@ -72,25 +94,46 @@
                     "name": "minecraft:rabbit",
                     "functions": [
                         {
-                            "function": "minecraft:furnace_smelt",
                             "conditions": [
                                 {
-                                    "condition": "minecraft:entity_properties",
-                                    "entity": "this",
-                                    "predicate": {
-                                        "flags": {
-                                            "is_on_fire": true
+                                    "condition": "minecraft:any_of",
+                                    "terms": [
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "this",
+                                            "predicate": {
+                                                "flags": {
+                                                    "is_on_fire": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "direct_attacker",
+                                            "predicate": {
+                                                "equipment": {
+                                                    "mainhand": {
+                                                        "predicates": {
+                                                            "minecraft:enchantments": [
+                                                                {
+                                                                    "enchantments": "#minecraft:smelts_loot"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
+                                    ]
                                 }
-                            ]
+                            ],
+                            "function": "minecraft:furnace_smelt"
                         }
                     ],
                     "conditions": [
                         {
-                            "condition": "minecraft:random_chance_with_looting",
-                            "chance": -0.2,
-                            "looting_multiplier": 0.2
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.0
                         }
                     ]
                 }
@@ -110,11 +153,11 @@
                     "condition": "minecraft:killed_by_player"
                 },
                 {
-                    "condition": "minecraft:random_chance_with_looting",
-                    "chance": 0.1,
-                    "looting_multiplier": 0.03
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.1
                 }
             ]
         }
-    ]
+    ],
+    "random_sequence": "minecraft:entities/rabbit"
 }

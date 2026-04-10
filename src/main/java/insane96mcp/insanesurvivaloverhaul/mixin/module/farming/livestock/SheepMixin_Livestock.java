@@ -23,7 +23,7 @@ public abstract class SheepMixin_Livestock extends Animal {
 	@Definition(id = "nextInt", method = "Lnet/minecraft/util/RandomSource;nextInt(I)I")
 	@Expression("1 + this.random.nextInt(?)")
 	@ModifyExpressionValue(method = "shear", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-	private int iguanatweaksreborn$onWoolAmount(int amount) {
+	private int insanesurvivaloverhaulonWoolAmount(int amount) {
 		if (!Feature.isEnabled(Livestock.class))
 			return amount;
 

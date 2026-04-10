@@ -1,5 +1,6 @@
-// 1.21.1	2026-04-10T09:45:56.3943437	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-10T17:59:32.5736257	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
+6dfa83db3fbbf26eed43a02c76785ea559daca31 data/insanesurvivaloverhaul/tags/block/can_scythe.json
 8487d7b397b851933e60859c4adbe8d15830e94f data/insanesurvivaloverhaul/tags/block/harder_crops.json
 980fb382e4e43127ab4f203ad91112e667aa2582 data/insanesurvivaloverhaul/tags/block/infested.json
 858b4736f63a64046a40e9dbd025c709c79d7cb2 data/insanesurvivaloverhaul/tags/block/obsidians.json

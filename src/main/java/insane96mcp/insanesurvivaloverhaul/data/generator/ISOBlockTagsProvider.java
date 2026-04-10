@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
+import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import net.minecraft.core.HolderLookup;
@@ -76,6 +77,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get())
                 .addOptional(ResourceLocation.parse("supplementaries:flax")).addOptional(ResourceLocation.parse("supplementaries:wild_flax"))
                 .addOptional(ResourceLocation.parse("farmersdelight:tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:budding_tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:rice")).addOptional(ResourceLocation.parse("farmersdelight:rice_panicles")).addOptional(ResourceLocation.parse("farmersdelight:cabbages")).addOptional(ResourceLocation.parse("farmersdelight:onions"));
+        tag(Hoes.CAN_SCYTHE)
+                .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS).add(Blocks.DEAD_BUSH);
     }
 
     public static TagKey<Block> create(String tagName) {

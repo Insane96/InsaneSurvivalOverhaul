@@ -23,14 +23,14 @@ public abstract class LivingEntityMixin_BetterClimbable extends Entity {
     }
 
     @WrapOperation(method = "handleOnClimbable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;resetFallDistance()V"))
-    public void iguanatweaksreborn$onResetFallDamageOnClimbable(LivingEntity instance, Operation<Void> original) {
+    public void insanesurvivaloverhaulonResetFallDamageOnClimbable(LivingEntity instance, Operation<Void> original) {
         if (Feature.isEnabled(BetterClimbable.class) && BetterClimbable.fallDamageOnClimbable && instance.fallDistance > 0f)
             instance.causeFallDamage(instance.fallDistance, 0.75f, instance.damageSources().fall());
         original.call(instance);
     }
 
     @Inject(method = "onClimbable", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    public void iguanatweaksreborn$onCheckIfOnClimbable(CallbackInfoReturnable<Boolean> cir) {
+    public void insanesurvivaloverhaulonCheckIfOnClimbable(CallbackInfoReturnable<Boolean> cir) {
         if (!Feature.isEnabled(BetterClimbable.class)
                 || !BetterClimbable.notOnClimbableWhenOnGround)
             return;
@@ -38,7 +38,7 @@ public abstract class LivingEntityMixin_BetterClimbable extends Entity {
     }
 
     @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;horizontalCollision:Z", opcode = Opcodes.GETFIELD))
-    public boolean iguanatweaksreborn$onCheckIfOnClimbable(boolean original) {
+    public boolean insanesurvivaloverhaulonCheckIfOnClimbable(boolean original) {
         if (!Feature.isEnabled(BetterClimbable.class)
                 || !BetterClimbable.onlyClimbWithJump
                 || !((Object) this instanceof Player))
@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin_BetterClimbable extends Entity {
     }
 
     @ModifyExpressionValue(method = "handleRelativeFrictionAndCalculateMovement", at = @At(value = "CONSTANT", args = "doubleValue=0.2"))
-    public double iguanatweaksreborn$climbSpeed(double original) {
+    public double insanesurvivaloverhaulclimbSpeed(double original) {
         if (!Feature.isEnabled(BetterClimbable.class))
             return original;
         return BetterClimbable.climbSpeed;

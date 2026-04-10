@@ -6,6 +6,7 @@ import insane96mcp.insanelib.util.IntegratedPack;
 import insane96mcp.insanesurvivaloverhaul.data.generator.*;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOBlockStatesProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
+import insane96mcp.insanesurvivaloverhaul.data.modifier.Modifiers;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
@@ -83,6 +84,8 @@ public class InsaneSO {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        Modifiers.init();
+
         event.enqueueWork(() -> {
             //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
             ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);

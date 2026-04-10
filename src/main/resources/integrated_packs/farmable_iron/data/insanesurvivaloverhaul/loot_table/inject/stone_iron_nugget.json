@@ -10,7 +10,7 @@
                         {
                             "type": "minecraft:item",
                             "name": "minecraft:air",
-                            "neoforge:conditions": [
+                            "conditions": [
                                 {
                                     "condition": "minecraft:match_tool",
                                     "predicate": {
@@ -27,7 +27,7 @@
                         {
                             "type": "minecraft:item",
                             "name": "minecraft:iron_nugget",
-                            "neoforge:conditions": [
+                            "conditions": [
                                 {
                                     "condition": "minecraft:table_bonus",
                                     "enchantment": "minecraft:fortune",

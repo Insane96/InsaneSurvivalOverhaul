@@ -30,7 +30,7 @@ import java.util.List;
 @Mixin(PumpkinBlock.class)
 public abstract class PumpkinBlockMixin_FoodDrinks {
     @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
-    public boolean iguanatweaksreborn$replacePumpkinShearWithLootTable(Level instance, Entity entity, Operation<Boolean> original, ItemStack usedStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult, @Local(ordinal = 1) Direction direction) {
+    public boolean insanesurvivaloverhaulreplacePumpkinShearWithLootTable(Level instance, Entity entity, Operation<Boolean> original, ItemStack usedStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult, @Local(ordinal = 1) Direction direction) {
         if (!Feature.isEnabled(FoodDrinks.class)
                 || !FoodDrinks.addPumpkinShearLootTable)
             return original.call(instance, entity);

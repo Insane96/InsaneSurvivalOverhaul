@@ -28,7 +28,7 @@
                         },
                         {
                             "function": "minecraft:enchanted_count_increase",
-                            "enchantment": "minecraft:looting",
+                            "enchantment": "minecraft:fortune",
                             "count": {
                                 "type": "minecraft:uniform",
                                 "min": -1,

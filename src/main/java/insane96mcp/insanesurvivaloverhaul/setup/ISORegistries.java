@@ -1,11 +1,15 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
+import com.mojang.serialization.Codec;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.condition.FedCondition;
 import insane96mcp.insanesurvivaloverhaul.data.condition.LivestockAgeCondition;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -40,6 +44,19 @@ public class ISORegistries {
             LOOT_CONDITIONS.register("has_been_fed_recently", () -> new LootItemConditionType(FedCondition.CODEC));
     public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
             LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
+
+    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = createDataComponentsRegistry();
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> SCYTHE_RADIUS =
+            DATA_COMPONENTS.register("scythe_radius", () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT)
+                    .build());
+
+    private static DeferredRegister<DataComponentType<?>> createDataComponentsRegistry() {
+        DeferredRegister<DataComponentType<?>> register = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, InsaneSO.MOD_ID);
+        REGISTRIES.add(register);
+        return register;
+    }
 
     private static <R> DeferredRegister<R> createRegistry(Registry<R> registry) {
         DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSO.MOD_ID);

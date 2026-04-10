@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin_BoneMeal {
     @ModifyExpressionValue(method = "addItem", at = @At(value = "CONSTANT", args = "intValue=20"))
-    private static int iguanatweaksreborn$composterTimeToProduce(int original) {
+    private static int insanesurvivaloverhaulcomposterTimeToProduce(int original) {
         return BoneMeal.composterTimeToProduce(original);
     }
     @ModifyExpressionValue(method = "onPlace", at = @At(value = "CONSTANT", args = "intValue=20"))
-    private static int iguanatweaksreborn$composterTimeToProduceOnPlace(int original) {
+    private static int insanesurvivaloverhaulcomposterTimeToProduceOnPlace(int original) {
         return BoneMeal.composterTimeToProduce(original);
     }
 }

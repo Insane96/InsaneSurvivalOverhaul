@@ -19,7 +19,7 @@ public abstract class BreedGoalMixin_Livestock {
     @Definition(id = "isInLove", method = "Lnet/minecraft/world/entity/animal/Animal;isInLove()Z")
     @Expression("this.animal.isInLove()")
     @ModifyExpressionValue(method = "canUse", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    public boolean iguanatweaksreborn$preventBreedingIfPlayerTriggered(boolean original) {
+    public boolean insanesurvivaloverhaulpreventBreedingIfPlayerTriggered(boolean original) {
         if (!Livestock.isBreedingDisabled(this.animal)
                 || !original)
             return original;

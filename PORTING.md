@@ -44,8 +44,8 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 - [x] BoneMeal
 - [x] Crops
-- [ ] Hoes
-- [ ] Livestock
+- [x] Hoes
+- [x] Livestock
 - [ ] PlantsGrowth
 
 ## Hunger & Health
