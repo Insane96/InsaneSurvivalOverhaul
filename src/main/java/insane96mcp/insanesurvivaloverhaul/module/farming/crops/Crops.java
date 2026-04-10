@@ -73,7 +73,7 @@ public class Crops extends Feature {
 						NO: Crops will not require water to grow
 						BONE_MEAL_ONLY: Crops will grow on dry farmland by only using bone meal
 						ANY_CASE: Will make Crops not grow in any case when on dry farmland""")
-	public static CropsRequireWater cropsRequireWater = CropsRequireWater.ANY_CASE;
+	public static CropsRequireWater cropsRequireWater = CropsRequireWater.BONE_MEAL_ONLY;
 
 	@Config(min = 1, description = "Radius where water hydrates farmland, vanilla is 4.")
 	public static Integer waterHydrationRadius = 2;

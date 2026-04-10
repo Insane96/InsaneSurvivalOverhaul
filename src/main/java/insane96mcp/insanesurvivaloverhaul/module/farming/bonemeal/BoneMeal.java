@@ -50,7 +50,7 @@ public class BoneMeal extends Feature {
     public static final TagKey<Block> BLOCK_BLACKLIST = ISOBlockTagsProvider.create("bone_meal_blacklist");
 
     @Config(description = "Bone meal used on Farmland (or crouch right clicked on crops) transforms it into Rich Farmland.")
-    public static Boolean richFarmland$enable = true;
+    public static Boolean richFarmland$enable = false;
     @Config(min = 1, description = "How many extra random ticks does Rich Farmland give to the crop sitting on top?")
     public static Integer richFarmland$extraTicks = 4;
     @Config(min = 0d, max = 1d, description = "Chance for a Rich farmland to decay back to farmland")
@@ -147,6 +147,7 @@ public class BoneMeal extends Feature {
                     || blockDefinition.boneMealFailChance == null)
                 continue;
             if (event.getLevel().random.nextFloat() < blockDefinition.boneMealFailChance) {
+                event.getStack().shrink(1);
                 event.setSuccessful(true);
                 return;
             }
@@ -170,6 +171,7 @@ public class BoneMeal extends Feature {
             event.getLevel().setBlockAndUpdate(event.getPos(), state.setValue(oAgeProperty.get(), age));
             if (state.getBlock() instanceof StemBlock && age == maxAge)
                 state.randomTick((ServerLevel) event.getLevel(), event.getPos(), event.getLevel().random);
+            event.getStack().shrink(1);
             event.setSuccessful(true);
         }
     }
@@ -197,6 +199,7 @@ public class BoneMeal extends Feature {
         level.setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
         if (player != null)
             player.swing(player.getMainHandItem().getItem() == stack.getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
+        stack.shrink(1);
         event.setSuccessful(true);
     }
 
@@ -227,6 +230,7 @@ public class BoneMeal extends Feature {
         }
         if (event.getPlayer() != null)
             event.getPlayer().swing(event.getPlayer().getMainHandItem().getItem() == event.getStack().getItem() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, true);
+        event.getStack().shrink(1);
         event.setSuccessful(true);
     }
 
