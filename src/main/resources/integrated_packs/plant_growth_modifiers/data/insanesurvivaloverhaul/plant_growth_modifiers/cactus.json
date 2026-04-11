@@ -1,0 +1,20 @@
+{
+    "block": "minecraft:cactus",
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 1.5,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:matches_biome",
+            "biomes": [
+                "#c:is_hot/overworld"
+            ],
+            "inverse": true,
+            "modifier": 3,
+            "operation": "add"
+        }
+    ]
+}

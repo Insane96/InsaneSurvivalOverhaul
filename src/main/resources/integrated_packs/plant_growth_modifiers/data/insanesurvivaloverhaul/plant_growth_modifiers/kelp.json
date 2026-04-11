@@ -1,0 +1,16 @@
+{
+    "block": "minecraft:kelp",
+    "growth_multiplier": 3,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:matches_biome",
+            "biomes": [
+                "#minecraft:is_ocean",
+                "#minecraft:is_river"
+            ],
+            "inverse": true,
+            "modifier": 3,
+            "operation": "add"
+        }
+    ]
+}

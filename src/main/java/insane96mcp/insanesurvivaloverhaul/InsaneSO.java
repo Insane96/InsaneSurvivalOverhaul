@@ -17,6 +17,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.R
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.LivestockDataReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -101,6 +102,7 @@ public class InsaneSO {
     private void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(BlockDefinitionReloadListener.INSTANCE);
         event.addListener(LivestockDataReloadListener.INSTANCE);
+        event.addListener(PlantsGrowthReloadListener.INSTANCE);
     }
 
     @SubscribeEvent

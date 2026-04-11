@@ -1,0 +1,26 @@
+{
+    "block": "minecraft:sweet_berry_bush",
+    "growth_multiplier": 3,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 2,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:night_time",
+            "modifier": 1.5,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:matches_biome",
+            "biomes": [
+                "#c:is_taiga"
+            ],
+            "inverse": true,
+            "modifier": 3,
+            "operation": "add"
+        }
+    ]
+}

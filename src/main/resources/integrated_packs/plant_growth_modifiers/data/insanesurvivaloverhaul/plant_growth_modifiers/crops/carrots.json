@@ -1,0 +1,20 @@
+{
+    "block": "minecraft:carrots",
+    "growth_multiplier": 4,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 2,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:matches_biome",
+            "biomes": [
+                "#c:is_cold/overworld"
+            ],
+            "modifier": 1.5,
+            "operation": "add"
+        }
+    ]
+}

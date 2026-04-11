@@ -1,0 +1,15 @@
+{
+    "block": "minecraft:chorus_flower",
+    "growth_multiplier": 3,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:matches_biome",
+            "biomes": [
+                "#c:is_end"
+            ],
+            "inverse": true,
+            "modifier": -1,
+            "operation": "multiply"
+        }
+    ]
+}

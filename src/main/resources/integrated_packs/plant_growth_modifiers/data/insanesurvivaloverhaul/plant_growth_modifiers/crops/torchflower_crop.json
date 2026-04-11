@@ -1,0 +1,12 @@
+{
+    "block": "minecraft:torchflower_crop",
+    "growth_multiplier": 2,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 2,
+            "operation": "add"
+        }
+    ]
+}

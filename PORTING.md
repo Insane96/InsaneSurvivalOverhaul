@@ -46,7 +46,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] Crops
 - [x] Hoes
 - [x] Livestock
-- [ ] PlantsGrowth
+- [x] PlantsGrowth
 
 ## Hunger & Health
 
@@ -68,7 +68,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] MiscItem
 - [ ] Pouch
 - [ ] RepairKits
-- [ ] UnbreakableItems
+- [x] UnbreakableItems (Renamed to UnvanishableItems)
 - [ ] ExplosiveBarrel (ITE)
 - [ ] Recall (ITE)
 - [x] ~~Solarium~~ (ITE) No longer needed

@@ -1,0 +1,17 @@
+{
+    "block": "minecraft:melon_stem",
+    "growth_multiplier": 2,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 2.5,
+            "operation": "add"
+        },
+        {
+            "id": "insanesurvivaloverhaul:night_time",
+            "modifier": 1.5,
+            "operation": "add"
+        }
+    ]
+}

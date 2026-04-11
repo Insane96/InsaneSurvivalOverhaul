@@ -1,0 +1,12 @@
+{
+    "block": "minecraft:sugar_cane",
+    "growth_multiplier": 2,
+    "modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:sunlight",
+            "min_sunlight": 10,
+            "modifier": 1.75,
+            "operation": "add"
+        }
+    ]
+}
