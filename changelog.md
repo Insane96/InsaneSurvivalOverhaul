@@ -4,7 +4,7 @@
   * Crops can now grow with bone meal when farmland is not moist
 * Added back Sleep features: Cloth, Tiredness
 * Added back Death features: Death Penalty (renamed from Death), Player killer bounty (split from Death)
-  * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items
+  * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items. Will also drop 30% of their experience
   * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
