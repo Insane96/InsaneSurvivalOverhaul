@@ -50,7 +50,7 @@ public class UnvanishableItems extends Feature {
 		super.init(module, enabledByDefault, canBeDisabled);
 	}
 
-	public static boolean isUnbreakable(ItemStack stack) {
+	public static boolean isUnvanishable(ItemStack stack) {
 		if (stack.is(NOT_UNVANISHABLE))
 			return false;
 		else if (stack.is(UNVANISHABLE))
@@ -59,7 +59,7 @@ public class UnvanishableItems extends Feature {
     }
 
 	public static boolean isBroken(ItemStack stack) {
-		return stack.isDamageableItem() && (isUnbreakable(stack) && stack.getDamageValue() >= stack.getMaxDamage() - 1);
+		return stack.isDamageableItem() && (isUnvanishable(stack) && stack.getDamageValue() >= stack.getMaxDamage() - 1);
 	}
 
 	@SubscribeEvent
@@ -82,7 +82,7 @@ public class UnvanishableItems extends Feature {
 	public void onPlayerTick(PlayerTickEvent.Post event) {
 		if (!this.isEnabled()
 				|| event.getEntity().level().isClientSide
-				|| event.getEntity().tickCount % 20 != event.getEntity().getId() % 20)
+				|| (event.getEntity().tickCount + event.getEntity().getId()) % 10 != 0)
 			return;
 
 		for (ItemStack stack : event.getEntity().getArmorSlots()) {
@@ -176,7 +176,7 @@ public class UnvanishableItems extends Feature {
 			return;
 
 		ItemStack stack = event.getStack();
-		if (!isUnbreakable(stack))
+		if (!isUnvanishable(stack))
 			return;
 		if (isBroken(stack)) {
 			event.setAmount(0);
@@ -206,7 +206,7 @@ public class UnvanishableItems extends Feature {
 
 		if (stack.isDamageableItem()) {
 			int durability = stack.getMaxDamage();
-			if (isUnbreakable(stack))
+			if (isUnvanishable(stack))
 				durability--;
 			int durabilityLeft = durability - stack.getDamageValue();
 			MutableComponent component = null;
