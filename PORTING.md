@@ -124,7 +124,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 ## Sleep & Respawn
 
-- [ ] Cloth
+- [x] Cloth
 - [ ] Sleeping
 - [ ] SleepingEffects
 - [ ] Death
@@ -145,4 +145,4 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] Seasons
 - [ ] Spawners
 - [ ] ~~TimberTrees~~ (HC's TreeChop is good enough)
-- [ ] Weather
+- [ ] ~~Weather~~

@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -81,6 +82,11 @@ public class ClientSetup {
                 addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
                 addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());
                 addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP.get());
+            }
+        }
+        else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            if (Feature.isEnabled(Cloth.class)) {
+                addBefore(event, Items.LEATHER, Cloth.ITEM.get());
             }
         }
     }

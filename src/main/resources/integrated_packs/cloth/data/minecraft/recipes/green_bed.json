@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bed",
+  "key": {
+    "#": {
+      "item": "minecraft:green_wool"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "insanesurvivaloverhaul:cloth"
+    }
+  },
+  "pattern": [
+    "C#C",
+    "XXX"
+  ],
+  "result": {
+    "id": "minecraft:green_bed"
+  }
+}

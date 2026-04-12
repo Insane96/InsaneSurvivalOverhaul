@@ -1,0 +1,11 @@
+{
+    "replace": false,
+    "entries": [
+        "insanesurvivaloverhaul:cloth_from_zombie",
+        "insanesurvivaloverhaul:cloth_from_husk",
+        "insanesurvivaloverhaul:cloth_from_drowned",
+        "insanesurvivaloverhaul:cloth_from_zombie_villager",
+        "insanesurvivaloverhaul:cloth_from_zombified_piglin",
+        "insanesurvivaloverhaul:replace_rotten_flesh"
+    ]
+}

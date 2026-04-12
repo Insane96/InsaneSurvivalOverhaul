@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:bundle"
+		},
+		"title": {
+			"translate": "advancements.iso.bundle.title"
+		},
+		"description": {
+			"translate": "advancements.iso.bundle.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:adventure/cloth",
+	"criteria": {
+		"bundle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:bundle"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"bundle"
+		]
+	]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "insanesurvivaloverhaul:cloth"
+    },
+    "c": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "c c",
+    "c c"
+  ],
+  "result": {
+    "id": "minecraft:chainmail_leggings"
+  },
+  "show_notification": true
+}

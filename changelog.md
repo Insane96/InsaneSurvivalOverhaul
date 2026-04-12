@@ -2,6 +2,7 @@
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Rich farmland has been disabled by default
   * Crops can now grow with bone meal when farmland is not moist
+* Added back Sleep features: Cloth
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
 * Added back World features: Coal & Fire
 * Fixed Water Fall Damage feature not working properly

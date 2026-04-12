@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -74,6 +75,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         blockItem(BoneMeal.RICH_FARMLAND);
 
         basicItem(Spawning.ECHO_LANTERN.item().get());
+
+        basicItem(Cloth.ITEM.get());
 
         basicItem(CoalFire.FIRESTARTER.get());
         blockItem(CoalFire.BURNT_LOG);

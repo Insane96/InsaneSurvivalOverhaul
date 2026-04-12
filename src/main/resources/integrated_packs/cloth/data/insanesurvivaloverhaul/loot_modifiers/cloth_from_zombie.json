@@ -1,0 +1,10 @@
+{
+    "type": "insanelib:inject_loot_table",
+    "conditions": [
+        {
+            "condition": "neoforge:loot_table_id",
+            "loot_table_id": "minecraft:entities/zombie"
+        }
+    ],
+    "loot_table": "insanesurvivaloverhaul:entities/cloth_from_zombies"
+}
