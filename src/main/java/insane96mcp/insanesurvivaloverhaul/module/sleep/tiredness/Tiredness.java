@@ -78,7 +78,7 @@ public class Tiredness extends JsonFeature {
 	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISOItemTagsProvider.create("energy_boost");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
-			new EnergyBoostItem(ObjTag.of("#iguanatweaksreborn:energy_boost", Registries.ITEM), 0, 0),
+			new EnergyBoostItem(ObjTag.of("#insanesurvivaloverhaul:energy_boost", Registries.ITEM), 0, 0),
 			new EnergyBoostItem(ObjTag.of("#atmospheric:orange_pudding", Registries.ITEM), 0, 0),
 			new EnergyBoostItem(ObjTag.of("farmersdelight:hot_cocoa", Registries.ITEM), 80, 0)
 	));

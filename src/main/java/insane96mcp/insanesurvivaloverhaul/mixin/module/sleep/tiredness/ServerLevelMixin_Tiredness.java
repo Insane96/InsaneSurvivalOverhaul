@@ -22,7 +22,7 @@ public abstract class ServerLevelMixin_Tiredness extends Level {
     }
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;isRaining()Z"))
-    private boolean iguanatweaksreborn$preventRainClear(boolean original) {
+    private boolean insanesurvivaloverhaul$preventRainClear(boolean original) {
         return Tiredness.onSleepFinished((ServerLevel) (Object) this, original);
     }
 }

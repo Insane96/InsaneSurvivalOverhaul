@@ -24,16 +24,20 @@ import java.util.UUID;
 
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, description = "Make the player consume more hunger with different actions. Please note that even if hunger is disabled, exhaustion will still be user by Tiredness.")
 public class Exhaustion extends Feature {
-	@Config(min = 0d, max = 128d, description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
+	@Config(min = 0d, description = "When you break a block you'll get exhaustion equal to the block hardness multiplied by this value. Setting this to 0 will default to the vanilla exhaustion (0.005). (It's not affected by the Global Hardness Features)")
 	public static Double blockBreakExhaustionMultiplier = 0d;
-	@Config(min = 0d, max = 128d, description = "When breaking block you'll get exhaustion every tick during the breaking.")
+	@Config(min = 0d, description = "When breaking block you'll get exhaustion every tick during the breaking.")
 	public static Double exhaustionOnBlockBreaking = 0.005d;
-	@Config(min = 0d, max = 128d, description = "Every second the player will get this exhaustion.")
+	@Config(min = 0d, description = "Every second the player will get this exhaustion.")
 	public static Double passiveExhaustion = 0.005d;
-	@Config(min = 0d, max = 128d, description = "Every tick of the player's rowing will get this exhaustion.")
+	@Config(min = 0d, description = "Every tick of the player's rowing will get this exhaustion.")
 	public static Double rowingExhaustion = 0.005d;
-	@Config(min = 0d, max = 128d, description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
+	@Config(min = 0d, description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
 	public static Double bowChargeExhaustion = 0.005d;
+	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's not sprinting. Vanilla is 0.05")
+	public static Double jumpExhaustion = 0.05d;
+	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's sprinting. Vanilla is 0.2")
+	public static Double jumpExhaustionSprint = 0.5d;
 	@Config(description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
 	public static Boolean effectiveHunger = true;
 
