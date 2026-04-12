@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.TirednessHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -38,6 +39,61 @@ public class ISOCommand {
                                                 .executes(context -> TirednessHandler.setFromCommand(context.getSource(), EntityArgument.getPlayers(context, "players"), FloatArgumentType.getFloat(context, "amount")))))
                                 .then(Commands.literal("reset")
                                         .executes(context -> TirednessHandler.setFromCommand(context.getSource(), EntityArgument.getPlayers(context, "players"), 0)))))
+                .then(Commands.literal("food")
+                        .then(Commands.argument("players", EntityArgument.players())
+                                .then(Commands.literal("get")
+                                        .then(Commands.literal("nutrition")
+                                                .executes(context -> {
+                                                    for (ServerPlayer player : EntityArgument.getPlayers(context, "players"))
+                                                        context.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " nutrition: " + player.getFoodData().getFoodLevel()), false);
+                                                    return 1;
+                                                }))
+                                        .then(Commands.literal("saturation")
+                                                .executes(context -> {
+                                                    for (ServerPlayer player : EntityArgument.getPlayers(context, "players"))
+                                                        context.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " saturation: " + player.getFoodData().getSaturationLevel()), false);
+                                                    return 1;
+                                                }))
+                                        .then(Commands.literal("exhaustion")
+                                                .executes(context -> {
+                                                    for (ServerPlayer player : EntityArgument.getPlayers(context, "players"))
+                                                        context.getSource().sendSuccess(() -> Component.literal(player.getName().getString() + " exhaustion: " + player.getFoodData().getExhaustionLevel()), false);
+                                                    return 1;
+                                                })))
+                                .then(Commands.literal("set")
+                                        .then(Commands.literal("nutrition")
+                                                .then(Commands.argument("amount", IntegerArgumentType.integer(0, 20))
+                                                        .executes(context -> {
+                                                            int amount = IntegerArgumentType.getInteger(context, "amount");
+                                                            int set = 0;
+                                                            for (ServerPlayer player : EntityArgument.getPlayers(context, "players")) {
+                                                                player.getFoodData().setFoodLevel(amount);
+                                                                set++;
+                                                            }
+                                                            return set;
+                                                        })))
+                                        .then(Commands.literal("saturation")
+                                                .then(Commands.argument("amount", FloatArgumentType.floatArg(0, 20))
+                                                        .executes(context -> {
+                                                            float amount = FloatArgumentType.getFloat(context, "amount");
+                                                            int set = 0;
+                                                            for (ServerPlayer player : EntityArgument.getPlayers(context, "players")) {
+                                                                player.getFoodData().setSaturation(amount);
+                                                                set++;
+                                                            }
+                                                            return set;
+                                                        })))
+                                        .then(Commands.literal("exhaustion")
+                                                .then(Commands.argument("amount", FloatArgumentType.floatArg(0))
+                                                        .executes(context -> {
+                                                            float amount = FloatArgumentType.getFloat(context, "amount");
+                                                            int set = 0;
+                                                            for (ServerPlayer player : EntityArgument.getPlayers(context, "players")) {
+                                                                player.getFoodData().setExhaustion(amount);
+                                                                set++;
+                                                            }
+                                                            return set;
+                                                        }))))))
                 .then(Commands.literal("count_ores_in_chunk")
                         .executes(context -> {
                             if (!(context.getSource().getEntity() instanceof ServerPlayer player))

@@ -5,6 +5,9 @@
 * Added back Sleep features: Cloth, Tiredness
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
 * Added back World features: Coal & Fire
+* Exhaustion when jumping is now configurable
+  * Jumping while sprinting now consumes much more hunger (2.5x)
+* Added command to get and set food stats (nutrition, saturation and exhaustion)
 * Fixed Water Fall Damage feature not working properly
 
 ## 5.2.0.0-alpha
