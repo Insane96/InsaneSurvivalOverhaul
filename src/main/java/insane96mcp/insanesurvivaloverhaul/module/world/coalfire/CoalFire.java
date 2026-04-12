@@ -39,7 +39,7 @@ import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire")
+@LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire", description = "Control fire speed with insanesurvivaloverhaul:fire_speed_multiplier game rule")
 public class CoalFire extends Feature {
     public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
             .mapColor((p_152624_)
@@ -50,7 +50,7 @@ public class CoalFire extends Feature {
 
     public static final DeferredHolder<Item, FirestarterItem> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).durability(11)));
 
-    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("iguanatweaks:fireSpeedMultiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
+    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("insanesurvivaloverhaul:fire_speed_multiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
 
     @Config(min = 0d, max = 1d, description = "Chance for logs to yield burnt logs when burnt")
     public static Double burntLogsChance = 0.8d;
