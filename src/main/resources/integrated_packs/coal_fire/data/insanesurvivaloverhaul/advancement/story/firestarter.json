@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "insanesurvivaloverhaul:firestarter"
+		},
+		"title": {
+			"translate": "advancements.iso.firestarter.title"
+		},
+		"description": {
+			"translate": "advancements.iso.firestarter.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:story/charcoal",
+	"criteria": {
+		"firestarter": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"insanesurvivaloverhaul:firestarter"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"firestarter"
+		]
+	]
+}

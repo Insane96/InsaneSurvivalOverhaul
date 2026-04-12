@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"item": "minecraft:charcoal"
+		},
+		"title": {
+			"translate": "advancements.iso.charcoal.title"
+		},
+		"description": {
+			"translate": "advancements.iso.charcoal.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:story/mine_stone",
+	"criteria": {
+		"charcoal": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:charcoal"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"charcoal"
+		]
+	]
+}

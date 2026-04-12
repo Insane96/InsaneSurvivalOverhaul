@@ -1,0 +1,8 @@
+{
+  "neoforge:conditions": [{"type": "neoforge:false"}],
+  "type": "minecraft:smelting",
+  "ingredient": {"item": "minecraft:oak_log"},
+  "result": {"id": "minecraft:charcoal"},
+  "experience": 0.0,
+  "cookingtime": 200
+}

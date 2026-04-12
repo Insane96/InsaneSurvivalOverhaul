@@ -8,7 +8,6 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
-import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BlockStateBaseAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.VillagerAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
@@ -19,12 +18,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -35,13 +36,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
-import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
@@ -266,27 +264,6 @@ public class Crops extends Feature {
 				mc.gameMode.handlePickItem(i);
 		}
 		event.setCanceled(true);
-	}
-
-	@SubscribeEvent(priority = EventPriority.HIGH)
-	public void onCropBreaking(PlayerEvent.BreakSpeed event) {
-		if (!this.isEnabled()
-				|| ((BlockStateBaseAccessor) event.getState()).getDestroySpeed() == 0f
-				|| !event.getState().is(HARDER_CROPS_TAG))
-			return;
-		ItemStack heldStack = event.getEntity().getMainHandItem();
-		if (!(heldStack.getItem() instanceof DiggerItem diggerItem))
-			return;
-		if (!diggerItem.canPerformAction(heldStack, ItemAbilities.HOE_DIG) && !diggerItem.canPerformAction(heldStack, ItemAbilities.AXE_DIG))
-			return;
-		float miningSpeed = diggerItem.getTier().getSpeed();
-		if (miningSpeed > 1.0F)
-			miningSpeed += (float) event.getEntity().getAttributeValue(Attributes.MINING_EFFICIENCY);
-
-		if (diggerItem.canPerformAction(heldStack, ItemAbilities.HOE_DIG))
-			event.setNewSpeed(event.getNewSpeed() * miningSpeed);
-		else
-			event.setNewSpeed(event.getNewSpeed() / miningSpeed);
 	}
 
 	public static int getWaterHydrationRadius() {

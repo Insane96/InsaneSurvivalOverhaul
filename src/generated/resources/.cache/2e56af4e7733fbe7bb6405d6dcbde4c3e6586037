@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-12T10:01:00.6429776	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-12T10:55:01.8997667	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
 6dfa83db3fbbf26eed43a02c76785ea559daca31 data/insanesurvivaloverhaul/tags/block/can_scythe.json
 8487d7b397b851933e60859c4adbe8d15830e94f data/insanesurvivaloverhaul/tags/block/harder_crops.json
@@ -6,6 +6,7 @@
 858b4736f63a64046a40e9dbd025c709c79d7cb2 data/insanesurvivaloverhaul/tags/block/obsidians.json
 63fede5e6a8e994ddd505d6664d5af45e6beb06a data/insanesurvivaloverhaul/tags/block/skulls.json
 aa3f45a2b63092c7414f468979a4e4080571be8b data/insanesurvivaloverhaul/tags/block/tall_grass.json
-8d804a184632d90c453f9192c4366bfea1115a09 data/minecraft/tags/block/mineable/hoe.json
+ad260010fc84b304164515d8d07515005c75f9ab data/minecraft/tags/block/mineable/axe.json
+0b939d1998c8d563ad99cd72d7506cb91190ce81 data/minecraft/tags/block/mineable/hoe.json
 21695ea571cf30719aed84249b6ee4f25a1b339f data/minecraft/tags/block/mineable/pickaxe.json
 5d3685fc812649e2fd932a526614542f4431af84 data/minecraft/tags/block/mineable/shovel.json

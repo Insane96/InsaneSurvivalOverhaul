@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:mod_loaded",
+        "modid": "iguanatweaksexpanded"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:iron_ingot"},
+    {"item": "minecraft:flint"},
+    {"item": "minecraft:blaze_powder"}
+  ],
+  "result": {
+    "id": "minecraft:flint_and_steel",
+    "count": 1
+  }
+}
