@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul;
 import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.insanelib.util.IntegratedPack;
+import insane96mcp.insanesurvivaloverhaul.command.ISOCommand;
 import insane96mcp.insanesurvivaloverhaul.data.generator.*;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOBlockStatesProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
@@ -82,6 +83,7 @@ public class InsaneSO {
 
         NeoForgeMod.enableMergedAttributeTooltips();
         NeoForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+        NeoForge.EVENT_BUS.addListener(ISOCommand::register);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

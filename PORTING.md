@@ -125,12 +125,12 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 ## Sleep & Respawn
 
 - [x] Cloth
-- [ ] Sleeping
-- [ ] SleepingEffects
+- [x] ~~Sleeping~~ (unused)
+- [x] ~~SleepingEffects~~ (unused)
 - [ ] Death
 - [ ] Respawn
 - [ ] RespawnPenalties
-- [ ] Tiredness
+- [x] Tiredness
 
 ## World
 

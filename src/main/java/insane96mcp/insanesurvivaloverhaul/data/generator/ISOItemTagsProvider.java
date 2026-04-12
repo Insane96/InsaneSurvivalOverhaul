@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -99,6 +100,10 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(UnvanishableItems.NOT_UNVANISHABLE)
                 .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
+
+        tag(Tiredness.ENERGY_BOOST_ITEM_TAG)
+                .add(Items.COOKIE)
+                .addOptional(ResourceLocation.parse("farmersdelight:chocolate_pie_slice")).addOptional(ResourceLocation.parse("create:bar_of_chocolate")).addOptional(ResourceLocation.parse("create:chocolate_glazed_berries"));
         //tag(UnvanishableItems.NO_DURABILITY_TOOLTIP)
         //        .add(BlinkerFeature.ITEM.get());
     }

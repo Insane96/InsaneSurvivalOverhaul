@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Clientb
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.ClientboundTirednessPacket;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -26,5 +27,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
         registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
         registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
+        registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);
     }
 }

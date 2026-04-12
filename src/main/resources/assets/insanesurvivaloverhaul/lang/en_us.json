@@ -94,6 +94,14 @@
 
     "item.insanesurvivaloverhaul.cloth": "Cloth",
 
+    "effect.insanesurvivaloverhaul.tired": "Tired",
+    "effect.insanesurvivaloverhaul.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",
+    "effect.insanesurvivaloverhaul.energy_boost": "Energy Boost",
+    "effect.insanesurvivaloverhaul.energy_boost.description": "Lowers tiredness",
+    "insanesurvivaloverhaul.not_tired": "You're not tired enough to sleep",
+    "insanesurvivaloverhaul.tired_enough": "You start feeling tired",
+    "insanesurvivaloverhaul.too_tired": "You should really get some sleep",
+
 
     "insanesurvivaloverhaul:mobs_module": "Mobs",
 
