@@ -97,5 +97,9 @@
 
     "insanesurvivaloverhaul:world_module": "World",
 
+    "item.insanesurvivaloverhaul.firestarter": "Firestarter",
+    "item.insanesurvivaloverhaul.firestarter.tooltip": "Hold right click to use",
+    "block.insanesurvivaloverhaul.burnt_log": "Burnt Log",
+
     "death.fell.accident.water": "%s thought could drop in shallow water safely"
 }

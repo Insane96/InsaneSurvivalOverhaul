@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "insanesurvivaloverhaul:block/burnt_log_top",
+    "side": "insanesurvivaloverhaul:block/burnt_log"
+  }
+}

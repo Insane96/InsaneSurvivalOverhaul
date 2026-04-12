@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "insanesurvivaloverhaul:block/burnt_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "insanesurvivaloverhaul:block/burnt_log"
+    },
+    "axis=z": {
+      "model": "insanesurvivaloverhaul:block/burnt_log_horizontal",
+      "x": 90
+    }
+  }
+}

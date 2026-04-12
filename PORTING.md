@@ -139,10 +139,10 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] Fluids
 - [ ] Nether
 - [ ] Sextant
-- [ ] CoalFire
+- [x] CoalFire
 - [x] ~~ExplosionOverhaul~~ Standalone mod
 - [x] ~~FasterDecayLeaves~~ Other mods do the same (and probably better)
 - [ ] Seasons
 - [ ] Spawners
-- [ ] TimberTrees
+- [ ] ~~TimberTrees~~ (HC's TreeChop is good enough)
 - [ ] Weather
