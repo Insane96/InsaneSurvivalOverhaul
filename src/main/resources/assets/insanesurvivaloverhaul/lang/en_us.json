@@ -102,6 +102,10 @@
     "insanesurvivaloverhaul.tired_enough": "You start feeling tired",
     "insanesurvivaloverhaul.too_tired": "You should really get some sleep",
 
+    "insanesurvivaloverhaul.player_killer": "%s's Killer (%s)",
+    "insanesurvivaloverhaul.players_killer": "Player's Bane (%s)",
+    "insanesurvivaloverhaul.vindicated": "Vindicated: %s",
+
 
     "insanesurvivaloverhaul:mobs_module": "Mobs",
 
