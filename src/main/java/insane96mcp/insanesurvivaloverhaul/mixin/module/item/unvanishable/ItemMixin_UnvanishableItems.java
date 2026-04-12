@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Item.class)
 public class ItemMixin_UnvanishableItems {
 	@ModifyReturnValue(method = "getBarWidth", at = @At("RETURN"))
-	public int iguanatweaksreborn$onGetBarWidth(int original, ItemStack stack) {
+	public int insanesurvivaloverhaul$onGetBarWidth(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnvanishableItems.class)
 				|| (!UnvanishableItems.isBroken(stack) && stack.getDamageValue() <= stack.getMaxDamage()))
 			return original;
@@ -20,7 +20,7 @@ public class ItemMixin_UnvanishableItems {
 	}
 
 	@ModifyReturnValue(method = "getBarColor", at = @At("RETURN"))
-	public int iguanatweaksreborn$onGetBarColor(int original, ItemStack stack) {
+	public int insanesurvivaloverhaul$onGetBarColor(int original, ItemStack stack) {
 		if (!Feature.isEnabled(UnvanishableItems.class)
 				|| (!UnvanishableItems.isBroken(stack) && stack.getDamageValue() <= stack.getMaxDamage()))
 			return original;

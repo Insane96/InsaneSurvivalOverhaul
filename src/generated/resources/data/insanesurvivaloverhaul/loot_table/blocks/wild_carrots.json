@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "insanesurvivaloverhaul:carrot_seeds"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.75,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "name": "minecraft:carrot"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:azure_bluet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "insanesurvivaloverhaul:blocks/wild_carrots"
+}

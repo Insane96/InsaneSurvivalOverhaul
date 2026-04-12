@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-09T21:06:06.2972762	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-12T10:01:00.639982	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 b8c57283fcfa3f505c00b400c25033af898cb5ea data/insanesurvivaloverhaul/tags/item/drinking_foods.json
 75c2367ef53ee74f77ac0b8a919163edff282904 data/insanesurvivaloverhaul/tags/item/equipment/hand/wooden.json
@@ -9,6 +9,7 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/season.json
 8180207eb4d779d1e1250798d7cdcd341751b533 data/insanesurvivaloverhaul/tags/item/hud/time.json
 56ef1cfeb0e39ed60991c36aa1fa78c763c703cd data/insanesurvivaloverhaul/tags/item/minecarts.json
+58f6b2b983fdc37fee51dcfcb9a3b6f15ad722ac data/insanesurvivaloverhaul/tags/item/not_unvanishable.json
 052ffe27257d03d8d8891be763ddd93bc289c2d4 data/insanesurvivaloverhaul/tags/item/raw_food.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/snow_slowdown_ignore.json
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json

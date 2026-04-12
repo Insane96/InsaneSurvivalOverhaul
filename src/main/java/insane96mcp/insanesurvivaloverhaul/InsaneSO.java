@@ -133,6 +133,10 @@ public class InsaneSO {
                 new ISORecipeProvider(output, lookupProvider)
         );
         event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISOLootTableProvider(output, lookupProvider)
+        );
+        event.getGenerator().addProvider(
                 event.includeClient(),
                 new ISOBlockStatesProvider(output, MOD_ID, existingFileHelper)
         );

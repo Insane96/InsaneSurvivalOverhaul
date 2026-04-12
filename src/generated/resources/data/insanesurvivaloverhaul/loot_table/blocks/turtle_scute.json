@@ -1,0 +1,242 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "0"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "1"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "2"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "3"
+                  }
+                }
+              ],
+              "count": 4.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "4"
+                  }
+                }
+              ],
+              "count": 5.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "5"
+                  }
+                }
+              ],
+              "count": 6.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "6"
+                  }
+                }
+              ],
+              "count": 7.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "7"
+                  }
+                }
+              ],
+              "count": 8.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "8"
+                  }
+                }
+              ],
+              "count": 9.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "9"
+                  }
+                }
+              ],
+              "count": 10.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "10"
+                  }
+                }
+              ],
+              "count": 11.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "11"
+                  }
+                }
+              ],
+              "count": 12.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "12"
+                  }
+                }
+              ],
+              "count": 13.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "13"
+                  }
+                }
+              ],
+              "count": 14.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "14"
+                  }
+                }
+              ],
+              "count": 15.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "insanesurvivaloverhaul:turtle_scute",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "height": "15"
+                  }
+                }
+              ],
+              "count": 16.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:turtle_scute"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "insanesurvivaloverhaul:blocks/turtle_scute"
+}

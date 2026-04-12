@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -41,6 +42,9 @@ public class ClientSetup {
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
                 addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
             }
+            if (Feature.isEnabled(CoalFire.class)) {
+                addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());
+            }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
@@ -53,6 +57,11 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW.get());
+            }
+        }
+        else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            if (Feature.isEnabled(CoalFire.class)) {
+                addAfter(event, Items.COAL_BLOCK, CoalFire.BURNT_LOG.item().get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {

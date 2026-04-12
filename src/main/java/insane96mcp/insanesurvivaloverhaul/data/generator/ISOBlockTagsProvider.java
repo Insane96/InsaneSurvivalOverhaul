@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -27,16 +28,6 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     public static final TagKey<Block> INFESTED = create("infested");
     //public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
     public static final TagKey<Block> TALL_GRASS = create("tall_grass");
-    //public static final TagKey<Block> AZALEA_LEAVES = create("azalea_leaves");
-    //public static final TagKey<Block> OAK_LOG_LEAVES = create("oak_log_leaves");
-    //public static final TagKey<Block> MAPLE_LEAVES = create("maple_leaves");
-    //public static final TagKey<Block> TRUMPET_LEAVES = create("trumpet_leaves");
-    //public static final TagKey<Block> LAUREL_LEAVES = create("laurel_leaves");
-    //public static final TagKey<Block> MORADO_LEAVES = create("morado_leaves");
-    //public static final TagKey<Block> WISTERIA_LEAVES = create("wisteria_leaves");
-    //public static final TagKey<Block> ASPEN_LOGS = create("aspen_logs");
-    //public static final TagKey<Block> ASPEN_LEAVES = create("aspen_leaves");
-    //public static final TagKey<Block> PLUM_LEAVES = create("plum_leaves");
 
     public static final TagKey<Block> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
     public static final TagKey<Block> HUD_SEASON = create("hud/season");
@@ -53,7 +44,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Spawning.ECHO_LANTERN.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(BoneMeal.RICH_FARMLAND.block().get());
+                .add(BoneMeal.RICH_FARMLAND.block().get())
+                .add(CoalFire.BURNT_LOG.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get());
 

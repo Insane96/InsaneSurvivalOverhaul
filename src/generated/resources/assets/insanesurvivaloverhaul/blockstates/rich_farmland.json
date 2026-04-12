@@ -1,0 +1,196 @@
+{
+  "variants": {
+    "moisture=0,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=0,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=1,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=2,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=3,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=4,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=5,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=6,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland"
+    },
+    "moisture=7,richness=0": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=1": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=2": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=3": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=4": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=5": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=6": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    },
+    "moisture=7,richness=7": {
+      "model": "insanesurvivaloverhaul:block/rich_farmland_moist"
+    }
+  }
+}

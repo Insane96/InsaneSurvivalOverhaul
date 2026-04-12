@@ -2,9 +2,13 @@ package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
+import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -66,6 +70,18 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(Crops.CARROT_SEEDS.get());
         basicItem(Crops.ROOTED_POTATO.get());
         basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
+
+        blockItem(BoneMeal.RICH_FARMLAND);
+
+        basicItem(Spawning.ECHO_LANTERN.item().get());
+
+        basicItem(CoalFire.FIRESTARTER.get());
+        blockItem(CoalFire.BURNT_LOG);
+    }
+
+    private ItemModelBuilder blockItem(SimpleBlockWithItem block) {
+        String id = block.block().getId().getPath();
+        return withExistingParent(InsaneSO.MOD_ID + ":item/" + id, InsaneSO.MOD_ID + ":block/" + id);
     }
 
     public ItemModelBuilder basicItemWithTexture(Item item, ResourceLocation texture)
