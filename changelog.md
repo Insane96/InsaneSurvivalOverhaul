@@ -3,6 +3,9 @@
   * Rich farmland has been disabled by default
   * Crops can now grow with bone meal when farmland is not moist
 * Added back Sleep features: Cloth, Tiredness
+* Added back Death features: Death
+  * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items 
+  * Removed Grave
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
 * Added back World features: Coal & Fire
 * Exhaustion when jumping is now configurable
