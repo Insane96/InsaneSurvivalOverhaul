@@ -37,7 +37,7 @@ public class AttackInvincibility extends Feature {
 				|| !serverPlayer.getMainHandItem().getAttributeModifiers(EquipmentSlot.MAINHAND).containsKey(Attributes.ATTACK_SPEED))
 			return;
 
-		int time = (int) ((1f / serverPlayer.getAttribute(Attributes.ATTACK_SPEED).getValue()) * 20);
+		int time = (int) ((1f / serverPlayer.getAttribute(Attributes.ATTACK_SPEED).getValue()) * 20 + 10);
 		event.getEntity().invulnerableTime = time;
 		event.getEntity().hurtTime = time;
 		InvulnerableTimeMessageSync.sync((ServerLevel) event.getEntity().level(), event.getEntity(), time);
