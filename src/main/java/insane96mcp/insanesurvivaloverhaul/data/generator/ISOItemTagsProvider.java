@@ -8,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -42,6 +43,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         //Vanilla
+        tag(ItemTags.FLOWERS)
+                .add(CyanFlower.FLOWER.item().get());
         tag(ItemTags.PICKAXES).add(CopperEquipment.PICKAXE.get());
         tag(ItemTags.AXES).add(CopperEquipment.AXE.get());
         tag(ItemTags.SHOVELS).add(CopperEquipment.SHOVEL.get());

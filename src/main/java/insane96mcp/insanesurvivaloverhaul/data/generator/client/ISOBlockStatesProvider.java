@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -27,14 +28,8 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //simpleBlock(CyanFlower.FLOWER.block().get());
-        simpleBlock(Crops.POTTED_SOLANUM_NEOROSSII.get(),
-                models().withExistingParent("potted_solanum_neorossii", mcLoc("block/flower_pot_cross"))
-                        .texture("plant", modLoc("block/solanum_neorossii")));
-        simpleBlock(Crops.SOLANUM_NEOROSSII.block().get(),
-                models().withExistingParent("solanum_neorossii", mcLoc("block/cross"))
-                        .renderType("cutout")
-                        .texture("cross", modLoc("block/solanum_neorossii")));
+        flower("cyan_flower", CyanFlower.FLOWER.block().get(), CyanFlower.POTTED_FLOWER.get());
+        flower("solanum_neorossii", Crops.SOLANUM_NEOROSSII.block().get(), Crops.POTTED_SOLANUM_NEOROSSII.get());
         wildCrop(Crops.WILD_WHEAT);
         wildCrop(Crops.WILD_CARROTS);
         wildCrop(Crops.WILD_POTATOES);
@@ -44,7 +39,6 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         richFarmland();
         turtleScute();
 
-        //logBlock((RotatedPillarBlock) CoalFire.BURNT_LOG.block().get());
         logBlock((RotatedPillarBlock) CoalFire.BURNT_LOG.block().get());
     }
 
@@ -88,6 +82,16 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
                     .condition(ScuteBlock.HEIGHT, heights);
             }
         }
+    }
+
+    private void flower(String name, Block flower, Block potted) {
+        simpleBlock(flower,
+                models().withExistingParent(name, mcLoc("block/cross"))
+                        .renderType("cutout")
+                        .texture("cross", modLoc("block/" + name)));
+        simpleBlock(potted,
+                models().withExistingParent("potted_" + name, mcLoc("block/flower_pot_cross"))
+                        .texture("plant", modLoc("block/" + name)));
     }
 
     private void wildCrop(DeferredHolder<Block, ?> block) {

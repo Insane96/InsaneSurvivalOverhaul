@@ -134,8 +134,8 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 ## World
 
-- [ ] Berries
-- [ ] CyanFlower
+- [x] Berries
+- [x] CyanFlower
 - [x] Fluids
 - [ ] Nether
 - [ ] Sextant

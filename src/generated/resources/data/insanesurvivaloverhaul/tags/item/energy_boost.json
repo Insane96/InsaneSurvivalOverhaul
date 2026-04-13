@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:cookie",
+    {
+      "id": "farmersdelight:chocolate_pie_slice",
+      "required": false
+    },
+    {
+      "id": "create:bar_of_chocolate",
+      "required": false
+    },
+    {
+      "id": "create:chocolate_glazed_berries",
+      "required": false
+    }
+  ]
+}

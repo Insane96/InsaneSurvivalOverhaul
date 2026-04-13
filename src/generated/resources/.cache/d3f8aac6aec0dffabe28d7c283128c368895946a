@@ -1,6 +1,7 @@
-// 1.21.1	2026-04-12T10:01:00.639982	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-13T09:48:15.3235663	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 b8c57283fcfa3f505c00b400c25033af898cb5ea data/insanesurvivaloverhaul/tags/item/drinking_foods.json
+b1eaa8c6251363a43fec48d3a61979cccb61a40a data/insanesurvivaloverhaul/tags/item/energy_boost.json
 75c2367ef53ee74f77ac0b8a919163edff282904 data/insanesurvivaloverhaul/tags/item/equipment/hand/wooden.json
 af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/horse_armors.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/biome.json
@@ -15,6 +16,7 @@ a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/s
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json
 ed22a6aa713f2e727863db9e057a12586f9e6e06 data/minecraft/tags/item/chest_armor.json
+a13f9b819773737709da6158672b74d01bd060bb data/minecraft/tags/item/flowers.json
 929ed8908e30d0d53d1dd4542cd73887433195b2 data/minecraft/tags/item/foot_armor.json
 7fdf76d2e13f74295b81702eb48b15a84c291887 data/minecraft/tags/item/head_armor.json
 7f343861c324cd67cde223e703019c0050e2f32c data/minecraft/tags/item/hoes.json

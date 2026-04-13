@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -72,6 +73,7 @@ public class ISOLootTableProvider extends LootTableProvider {
             add(BoneMeal.RICH_FARMLAND.block().get(), createSingleItemTable(Items.DIRT));
 
             add(Crops.SOLANUM_NEOROSSII.block().get(), createSingleItemTable(Crops.SOLANUM_NEOROSSII.item().get()));
+            add(CyanFlower.FLOWER.block().get(), createSingleItemTable(CyanFlower.FLOWER.item().get()));
 
             turtleScute();
 
@@ -122,6 +124,7 @@ public class ISOLootTableProvider extends LootTableProvider {
                 Spawning.ECHO_LANTERN.block().get(),
                 BoneMeal.RICH_FARMLAND.block().get(),
                 Crops.SOLANUM_NEOROSSII.block().get(),
+                CyanFlower.FLOWER.block().get(),
                 Tweaks.TURTLE_SCUTE.get(),
                 Crops.WILD_WHEAT.get(),
                 Crops.WILD_BEETROOTS.get(),

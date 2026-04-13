@@ -10,6 +10,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -73,6 +74,9 @@ public class ClientSetup {
             }
             if (Feature.isEnabled(BoneMeal.class)) {
                 addAfter(event, Items.FARMLAND, BoneMeal.RICH_FARMLAND.item());
+            }
+            if (Feature.isEnabled(CyanFlower.class)) {
+                addAfter(event, Items.POPPY, CyanFlower.FLOWER.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {

@@ -8,6 +8,8 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
+import insane96mcp.insanesurvivaloverhaul.module.world.Berries;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -71,6 +73,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(Crops.CARROT_SEEDS.get());
         basicItem(Crops.ROOTED_POTATO.get());
         basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
+        basicItemWithTexture(CyanFlower.FLOWER.item().get(), InsaneSO.location("block/cyan_flower"));
 
         blockItem(BoneMeal.RICH_FARMLAND);
 
@@ -80,6 +83,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(CoalFire.FIRESTARTER.get());
         blockItem(CoalFire.BURNT_LOG);
+
+        basicItem(Berries.SWEET_BERRY_SEEDS.get());
     }
 
     private ItemModelBuilder blockItem(SimpleBlockWithItem block) {

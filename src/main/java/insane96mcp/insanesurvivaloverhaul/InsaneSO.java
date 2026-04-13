@@ -20,6 +20,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
@@ -90,7 +91,7 @@ public class InsaneSO {
         Modifiers.init();
 
         event.enqueueWork(() -> {
-            //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
             ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
 
             //DispenserBlock.registerBehavior(Fletching.QUARTZ_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
