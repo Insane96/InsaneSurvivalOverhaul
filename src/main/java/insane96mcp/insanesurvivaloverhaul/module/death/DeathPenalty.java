@@ -50,15 +50,15 @@ public class DeathPenalty extends Feature {
 		DeathPenaltyEvent deathEvent = ISOEventHook.onDeathPenalty(player, lostItemsPercentage, lostDurabilityPercentage, destroyItems, lostXpPercentage, destroyXp);
 		if (deathEvent == null)
 			return;
-		int itemPct = deathEvent.getLostItemsPercentage();
-		int durPct = deathEvent.getLostDurabilityPercentage();
-		boolean destroyItemsFinal = deathEvent.isDestroyItems();
+		lostItemsPercentage = deathEvent.getLostItemsPercentage();
+		lostDurabilityPercentage = deathEvent.getLostDurabilityPercentage();
+		destroyItems = deathEvent.isDestroyItems();
 		Consumer<ItemStack> handler = deathEvent.getItemDropHandler();
 		Predicate<ItemStack> filter = deathEvent.getItemFilter();
 		for (List<ItemStack> compartment : ((InventoryAccessor) player.getInventory()).getCompartments())
-			tryDropItems(player, compartment, player.getRandom(), itemPct, durPct, destroyItemsFinal, handler, filter);
+			tryDropItems(player, compartment, player.getRandom(), lostItemsPercentage, lostDurabilityPercentage, destroyItems, handler, filter);
 		for (List<ItemStack> extra : deathEvent.getAdditionalItemLists())
-			tryDropItems(player, extra, player.getRandom(), itemPct, durPct, destroyItemsFinal, handler, filter);
+			tryDropItems(player, extra, player.getRandom(), lostItemsPercentage, lostDurabilityPercentage, destroyItems, handler, filter);
 		tryDropExperience(player, deathEvent.getLostXpPercentage(), deathEvent.isDestroyXp());
 	}
 
