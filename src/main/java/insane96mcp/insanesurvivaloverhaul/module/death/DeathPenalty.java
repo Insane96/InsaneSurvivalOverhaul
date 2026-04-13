@@ -5,13 +5,13 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.util.MathHelper;
 import insane96mcp.insanesurvivaloverhaul.event.DeathPenaltyEvent;
 import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.InventoryAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.EventPriority;
@@ -21,6 +21,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 @LoadFeature(module = ISOModules.DEATH,
 		description = "Makes you lose a percentage of items and durability on death. Controlled via game rules. Items percentage lost can be configured with the insanesurvivaloverhaul:death_lose_items_percentage, insanesurvivaloverhaul:death_durability_penalty and insanesurvivaloverhaul:death_destroy_items game rules. Please note that this feature controls the vanilla keep_inventory game rule.")
@@ -49,15 +50,21 @@ public class DeathPenalty extends Feature {
 		DeathPenaltyEvent deathEvent = ISOEventHook.onDeathPenalty(player, lostItemsPercentage, lostDurabilityPercentage, destroyItems, lostXpPercentage, destroyXp);
 		if (deathEvent == null)
 			return;
-		tryDropItems(player, player.getInventory(), player.getInventory().items, player.getRandom(), deathEvent.getLostItemsPercentage(), deathEvent.getLostDurabilityPercentage(), deathEvent.isDestroyItems(), deathEvent.getItemDropHandler());
-		tryDropItems(player, player.getInventory(), player.getInventory().armor, player.getRandom(), deathEvent.getLostItemsPercentage(), deathEvent.getLostDurabilityPercentage(), deathEvent.isDestroyItems(), deathEvent.getItemDropHandler());
-		tryDropItems(player, player.getInventory(), player.getInventory().offhand, player.getRandom(), deathEvent.getLostItemsPercentage(), deathEvent.getLostDurabilityPercentage(), deathEvent.isDestroyItems(), deathEvent.getItemDropHandler());
+		int itemPct = deathEvent.getLostItemsPercentage();
+		int durPct = deathEvent.getLostDurabilityPercentage();
+		boolean destroyItemsFinal = deathEvent.isDestroyItems();
+		Consumer<ItemStack> handler = deathEvent.getItemDropHandler();
+		Predicate<ItemStack> filter = deathEvent.getItemFilter();
+		for (List<ItemStack> compartment : ((InventoryAccessor) player.getInventory()).getCompartments())
+			tryDropItems(player, compartment, player.getRandom(), itemPct, durPct, destroyItemsFinal, handler, filter);
+		for (List<ItemStack> extra : deathEvent.getAdditionalItemLists())
+			tryDropItems(player, extra, player.getRandom(), itemPct, durPct, destroyItemsFinal, handler, filter);
 		tryDropExperience(player, deathEvent.getLostXpPercentage(), deathEvent.isDestroyXp());
 	}
 
-	private static void tryDropItems(ServerPlayer player, Inventory inventory, List<ItemStack> items, RandomSource random, int amount, int lostDurabilityPercentage, boolean destroyItems, @Nullable Consumer<ItemStack> itemDropHandler) {
+	private static void tryDropItems(ServerPlayer player, List<ItemStack> items, RandomSource random, int amount, int lostDurabilityPercentage, boolean destroyItems, @Nullable Consumer<ItemStack> itemDropHandler, Predicate<ItemStack> itemFilter) {
 		items.forEach(stack -> {
-            if (stack.isEmpty())
+            if (stack.isEmpty() || !itemFilter.test(stack))
                 return;
 
             if (stack.getItem().isDamageable(stack)) {
@@ -66,7 +73,7 @@ public class DeathPenalty extends Feature {
                 if (newDamage >= stack.getMaxDamage()) {
                     player.onEquippedItemBroken(stack.getItem(), player.getEquipmentSlotForItem(stack));
                     if (!Feature.isEnabled(UnvanishableItems.class) || !UnvanishableItems.isUnvanishable(stack)) {
-                        inventory.removeItem(stack);
+                        stack.shrink(stack.getCount());
                     }
                 }
             }
