@@ -2,8 +2,8 @@
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Rich farmland has been disabled by default
   * Crops can now grow with bone meal when farmland is not moist
-* Added back Sleep features: Cloth, Tiredness
-* Added back Death features: Death Penalty (renamed from Death), Player killer bounty (split from Death)
+* Added back Sleep (split from Sleep & Respawn) features: Cloth, Tiredness
+* Added back Death (split from Sleep & Respawn) features: Death Penalty (renamed from Death), Player killer bounty (split from Death), Respawn Penalties
   * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items. Will also drop 30% of their experience
   * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
