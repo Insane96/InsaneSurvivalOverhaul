@@ -21,7 +21,7 @@
                     "name": "minecraft:book",
                     "functions": [
                         {
-                            "function": "iguanatweaksreborn:enchant_randomly_weightless",
+                            "function": "insanesurvivaloverhaul:enchant_randomly_weightless",
                             "count": {
                                 "min": 2,
                                 "max": 4

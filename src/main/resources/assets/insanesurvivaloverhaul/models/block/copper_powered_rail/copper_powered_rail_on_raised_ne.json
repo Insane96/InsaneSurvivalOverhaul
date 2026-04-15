@@ -2,6 +2,6 @@
   "parent": "minecraft:block/template_rail_raised_ne",
   "render_type": "cutout",
   "textures": {
-    "rail": "iguanatweaksreborn:block/copper_powered_rail_on"
+    "rail": "insanesurvivaloverhaul:block/copper_powered_rail_on"
   }
 }

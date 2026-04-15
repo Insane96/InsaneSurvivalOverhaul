@@ -51,6 +51,7 @@ public class ClientSetup {
             if (Feature.isEnabled(Minecarts.class)) {
                 addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
                 addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+                remove(event, Items.POWERED_RAIL);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
@@ -75,6 +76,7 @@ public class ClientSetup {
             if (Feature.isEnabled(Minecarts.class)) {
                 addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
                 addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+                remove(event, Items.POWERED_RAIL);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {

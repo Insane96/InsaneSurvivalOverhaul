@@ -36,7 +36,7 @@ public class Nether extends Feature {
     public static Boolean removeLavaPockets = true;
     @Config(description = "If true you cannot lit nether portals")
     public static Boolean disableNether = false;
-    @Config(description = "The portal requires Crying Obsidian in the corners to turn it on (in the overworld). The block tag 'iguanatweaksreborn:portal_corners' can be used to change the required blocks for the corners")
+    @Config(description = "The portal requires Crying Obsidian in the corners to turn it on (in the overworld). The block tag 'insanesurvivaloverhaul:portal_corners' can be used to change the required blocks for the corners")
     public static Boolean portalRequiresCryingObsidian = true;
 
     @Override

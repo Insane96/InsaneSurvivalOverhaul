@@ -65,6 +65,12 @@
     "insanesurvivaloverhaul.fishing.low_fish": "Fish are becoming scarce in this spot, maybe move a bit...",
 
 
+    "insanesurvivaloverhaul:movement_module": "Movement",
+
+    "block.insanesurvivaloverhaul.copper_powered_rail": "Copper Powered Rail",
+    "block.insanesurvivaloverhaul.golden_powered_rail": "Golden Powered Rail",
+
+
     "insanesurvivaloverhaul:items_module": "Items",
 
     "insanesurvivaloverhaul.no_damage_item": "This item is not sharp, hits like a fist",
