@@ -137,12 +137,12 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] Berries
 - [x] CyanFlower
 - [x] Fluids
-- [ ] Nether
-- [ ] Sextant
+- [x] Nether
+- [x] ~~Sextant~~ (Maybe in the future)
 - [x] CoalFire
 - [x] ~~ExplosionOverhaul~~ Standalone mod
 - [x] ~~FasterDecayLeaves~~ Other mods do the same (and probably better)
-- [ ] Seasons
+- [x] ~~Seasons~~ No more Seasons
 - [ ] Spawners
 - [ ] ~~TimberTrees~~ (HC's TreeChop is good enough)
 - [ ] ~~Weather~~

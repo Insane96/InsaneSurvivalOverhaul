@@ -8,7 +8,7 @@
   * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
-* Added back World features: Coal & Fire, Cyan Flower, Berries
+* Added back World features: Coal & Fire, Cyan Flower, Berries, Nether
 * Exhaustion when jumping is now configurable
   * Jumping while sprinting now consumes much more hunger (2.5x)
 * Added command to get and set food stats (nutrition, saturation and exhaustion)

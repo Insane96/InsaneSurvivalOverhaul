@@ -13,6 +13,7 @@
         "accessor.MobAccessor",
         "accessor.MobEffectAccessor",
         "accessor.MusicsAccessor",
+        "accessor.PortalShapeAccessor",
         "accessor.ServerLevelAccessor",
         "accessor.SheepAccessor",
         "accessor.TextDisplayAccessor",
@@ -88,7 +89,8 @@
         "module.world.fluids.FlowingFluidMixin_Fluid",
         "module.world.fluids.FluidTypeMixin_Fluid",
         "module.world.fluids.LavaFluidMixin_Fluid",
-        "module.world.fluids.WaterFluidMixin_Fluid"
+        "module.world.fluids.WaterFluidMixin_Fluid",
+        "module.world.nether.SpringFeatureMixin_Nether"
     ],
     "injectors": {
         "defaultRequire": 1
