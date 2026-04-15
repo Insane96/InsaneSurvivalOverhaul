@@ -12,6 +12,7 @@
   * Removed Grave
 * Added back Item features: Unvanishable Items (aka Unbreakable Items)
 * Added back Movement features: Minecarts
+  * Minecarts with passengers and chests now forceload chunks they are in, allowing them to travel through unloaded chunks
 * Added back World features: Coal & Fire, Cyan Flower, Berries, Nether
 * Exhaustion when jumping is now configurable
   * Jumping while sprinting now consumes much more hunger (2.5x)

@@ -32,7 +32,7 @@ public class Minecarts extends Feature {
 	public static final SimpleBlockWithItem GOLDEN_POWERED_RAIL = SimpleBlockWithItem.register("golden_powered_rail", () -> new ISOPoweredRail(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL), 1f, 0.18f));
 	public static final SimpleBlockWithItem COPPER_POWERED_RAIL = SimpleBlockWithItem.register("copper_powered_rail", () -> new ISOPoweredRail(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL).sound(SoundType.COPPER), 0.4f, 0.05f));
 
-	@Config(description = "If true, minecarts with entities in them and chest minecarts will force load chunks, allowing them to travel in unloaded chunks.")
+	@Config(description = "If true, minecarts with entities in them and chest minecarts will force load chunks, allowing them to travel in unloaded chunks. It's advised to not leave too many minecarts with entities and with chests lying around, as they will keep chunks loaded.")
 	public static Boolean entityAndChestMinecartsForceLoadChunks = true;
 
 	@Config(description = "If true, enables a data pack that makes rails cheaper and adds recipes for new rail. Also adds a global loot modifier that replaces vanilla rails with golden powered rails")
