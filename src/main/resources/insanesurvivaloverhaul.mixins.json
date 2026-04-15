@@ -80,6 +80,7 @@
         "module.movement.elytranerf.FireworkRocketEntityMixin_ElytraNerf",
         "module.movement.elytranerf.FireworkRocketItemMixin_ElytraNerf",
         "module.movement.elytranerf.LivingEntityMixin_ElytraNerf",
+        "module.movement.minecarts.AbstractMinecartMixin_Minecarts",
         "module.sleep.tiredness.LivingEntityMixin_Tiredness",
         "module.sleep.tiredness.ServerLevelMixin_Tiredness",
         "module.world.coalfire.CampfireBlockEntityMixin_CoalFire",

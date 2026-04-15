@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -75,6 +76,9 @@ public class ISOLootTableProvider extends LootTableProvider {
             add(Crops.SOLANUM_NEOROSSII.block().get(), createSingleItemTable(Crops.SOLANUM_NEOROSSII.item().get()));
             add(CyanFlower.FLOWER.block().get(), createSingleItemTable(CyanFlower.FLOWER.item().get()));
 
+            add(Minecarts.COPPER_POWERED_RAIL.block().get(), createSingleItemTable(Minecarts.COPPER_POWERED_RAIL.item().get()));
+            add(Minecarts.GOLDEN_POWERED_RAIL.block().get(), createSingleItemTable(Minecarts.GOLDEN_POWERED_RAIL.item().get()));
+
             turtleScute();
 
             add(Crops.WILD_WHEAT.get(), wildCropTable(Items.WHEAT_SEEDS, Items.WHEAT, null, null));
@@ -129,7 +133,9 @@ public class ISOLootTableProvider extends LootTableProvider {
                 Crops.WILD_WHEAT.get(),
                 Crops.WILD_BEETROOTS.get(),
                 Crops.WILD_CARROTS.get(),
-                Crops.WILD_POTATOES.get()
+                Crops.WILD_POTATOES.get(),
+                Minecarts.COPPER_POWERED_RAIL.block().get(),
+                Minecarts.GOLDEN_POWERED_RAIL.block().get()
             );
         }
     }

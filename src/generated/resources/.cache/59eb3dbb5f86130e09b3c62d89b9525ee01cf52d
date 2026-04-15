@@ -1,7 +1,9 @@
-// 1.21.1	2026-04-13T09:48:15.3260837	Loot Tables
+// 1.21.1	2026-04-15T16:58:09.4605152	Loot Tables
 5b508089348599c194986bc2f9dbd4f48aafb8f9 data/insanesurvivaloverhaul/loot_table/blocks/burnt_log.json
+d77c3629ad737951fe4cee3d1c86371f1db2ca57 data/insanesurvivaloverhaul/loot_table/blocks/copper_powered_rail.json
 ed3a225d422fe2a22523e0a06d3a766f40fc0834 data/insanesurvivaloverhaul/loot_table/blocks/cyan_flower.json
 e3005cf78ca8ef42491cdc26c9e83e57dbe2568b data/insanesurvivaloverhaul/loot_table/blocks/echo_lantern.json
+808694218efee259d65c658863969263c35d25d1 data/insanesurvivaloverhaul/loot_table/blocks/golden_powered_rail.json
 2165834f18009453d1e2c8d9ff541ccc6e5925ea data/insanesurvivaloverhaul/loot_table/blocks/rich_farmland.json
 97b0a9547b1ebabab9c3699bcba20b5d71053964 data/insanesurvivaloverhaul/loot_table/blocks/solanum_neorossii.json
 769e4034e9097e6791ba469ad4d48cc6da6215f2 data/insanesurvivaloverhaul/loot_table/blocks/turtle_scute.json

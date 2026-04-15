@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.core.HolderLookup;
@@ -70,6 +71,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         tag(Nether.PORTAL_CORNERS)
                 .add(Blocks.CRYING_OBSIDIAN);
+        tag(BlockTags.RAILS)
+                .add(Minecarts.COPPER_POWERED_RAIL.block().get(), Minecarts.GOLDEN_POWERED_RAIL.block().get());
 
         tag(Crops.HARDER_CROPS_TAG)
                 .add(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS)

@@ -119,7 +119,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] Swimming
 - [x] Tagging
 - [x] TerrainSlowdown
-- [ ] Minecarts
+- [x] Minecarts
 - [x] WeightedArmor
 
 ## Sleep & Respawn
