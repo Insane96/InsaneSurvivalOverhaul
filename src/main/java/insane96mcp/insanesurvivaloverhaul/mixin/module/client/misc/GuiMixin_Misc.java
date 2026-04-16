@@ -92,6 +92,13 @@ public abstract class GuiMixin_Misc {
         return original + Misc.floatyHotbar;
     }
 
+    /** Shifts the experience bar and level number upward by {@link Misc#floatyHotbar} pixels. */
+    @ModifyExpressionValue(method = "renderExperienceLevel", at = @At(value = "CONSTANT", args = "intValue=31", ordinal = 0))
+    public int insanesurvivaloverhaul$experienceLevelShift(int original) {
+        if (!Misc.shouldRaiseHotbar()) return original;
+        return original + Misc.floatyHotbar;
+    }
+
     /** Shifts the jump meter upward by {@link Misc#floatyHotbar} pixels. */
     @ModifyExpressionValue(method = "renderJumpMeter", at = @At(value = "CONSTANT", args = "intValue=32", ordinal = 0))
     public int insanesurvivaloverhaul$jumpMeterShift(int original) {
