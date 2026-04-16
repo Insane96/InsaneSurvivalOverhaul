@@ -5,6 +5,7 @@
     "mixins": [
         "accessor.AbstractArrowAccessor",
         "accessor.ArmorMaterialsAccessor",
+        "accessor.BaseSpawnerAccessor",
         "accessor.BlockBehaviourAccessor",
         "accessor.BlockStateBaseAccessor",
         "accessor.FoodDataAccessor",
@@ -83,6 +84,7 @@
         "module.movement.minecarts.AbstractMinecartMixin_Minecarts",
         "module.sleep.tiredness.LivingEntityMixin_Tiredness",
         "module.sleep.tiredness.ServerLevelMixin_Tiredness",
+        "module.world.BaseSpawnerMixin_Spawners",
         "module.world.coalfire.CampfireBlockEntityMixin_CoalFire",
         "module.world.coalfire.CampfireBlockMixin_CoalFire",
         "module.world.coalfire.FireBlockMixin_CoalFire",

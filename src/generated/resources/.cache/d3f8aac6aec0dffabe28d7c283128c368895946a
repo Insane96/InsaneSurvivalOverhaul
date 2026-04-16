@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-13T09:48:15.3235663	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-16T12:11:07.3819717	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 b8c57283fcfa3f505c00b400c25033af898cb5ea data/insanesurvivaloverhaul/tags/item/drinking_foods.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/insanesurvivaloverhaul/tags/item/energy_boost.json
@@ -13,6 +13,7 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 58f6b2b983fdc37fee51dcfcb9a3b6f15ad722ac data/insanesurvivaloverhaul/tags/item/not_unvanishable.json
 052ffe27257d03d8d8891be763ddd93bc289c2d4 data/insanesurvivaloverhaul/tags/item/raw_food.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/snow_slowdown_ignore.json
+3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/spawner_reactivator.json
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json
 ed22a6aa713f2e727863db9e057a12586f9e6e06 data/minecraft/tags/item/chest_armor.json

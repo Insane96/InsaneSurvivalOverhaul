@@ -18,8 +18,10 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +47,20 @@ public class ISORegistries {
     public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
             LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
 
+    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = createAttachmentTypesRegistry();
+
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = createDataComponentsRegistry();
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> SCYTHE_RADIUS =
             DATA_COMPONENTS.register("scythe_radius", () -> DataComponentType.<Integer>builder()
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
                     .build());
+
+    private static DeferredRegister<AttachmentType<?>> createAttachmentTypesRegistry() {
+        DeferredRegister<AttachmentType<?>> register = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, InsaneSO.MOD_ID);
+        REGISTRIES.add(register);
+        return register;
+    }
 
     private static DeferredRegister<DataComponentType<?>> createDataComponentsRegistry() {
         DeferredRegister<DataComponentType<?>> register = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, InsaneSO.MOD_ID);
