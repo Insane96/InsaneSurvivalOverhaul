@@ -1,3 +1,41 @@
+## From 1.20.1
+* The feature (that wasn't configurable) to make boats easier to break has been moved to Tweaks as it affects vehicles in general
+* Better climbing features no longer disable themselves if quark is present
+* Expanded Elytra Nerf to reduce Firework Rockets strength and allow to take off from ground with fireworks
+* Potion and Effects now enables a data pack that changes potions stack sizes
+* Turtle Scute can now be placed by players on the ground and pick-block can be used on it
+* Vehicles now require less damage to break (configurable, default is 2, vanilla is 4)
+* Items and blocks (not food) now stack up to 99 (max stack size is increased by ~54.7%)
+* Stone tools gone now also replaces items in entities equipment slots
+* Bone meal
+  * Rich farmland has been disabled by default
+  * Crops can now grow with bone meal when farmland is not moist
+* Copper items are now registered in the minecraft namespace to be able to (hopefully) update a modded world to newer versions
+* Ore generation data pack changed to: removes the vanilla feature of discarding ores that are exposed to air. This applies to coal, diamond, gold and lapis.
+  Biome based ore gen has been removed. _Might_ come back in the future
+* Ore Smelting data pack changed to:
+  * Smelting Raw Copper and Raw Iron takes 2x time
+  * Blasting raw minerals takes 2x time
+  * Blasting ores now takes 4x time but yields more materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
+  * You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
+  * Heavily increased experience from smelting ores
+* Exhaustion when jumping is now configurable
+* Minecarts with passengers and chests now forceload chunks they are in, allowing them to travel through unloaded chunks
+* Jumping while sprinting now consumes much more hunger (2.5x)
+* Insta-break heads and silverfish blocks are now part of the `block_data` data pack
+* Bows feature now includes No Arrow Invincibility Frames
+* Death Penalty
+  * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items. Will also drop 30% of their experience
+* Player killer bounty
+  * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
+* Snowballs
+  * Slightly increased freeze time
+  * Added 4 ticks cooldown
+  * Now stack up to 64 with an integrated data pack thanks to InsaneLib's Item Components feature
+* Increased Resistance II duration after Unfair oneshot
+* Removed Third person death
+* Crit damage attribute is now 0 by default instead of 50%
+
 ## Upcoming
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Bone meal
