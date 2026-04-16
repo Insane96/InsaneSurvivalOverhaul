@@ -84,7 +84,16 @@
   * Solarium, Durium, etc.: Already disabled in 1.20.1, these only added further clunckyness to the system. I think something like Caverns and Chasms with Silver, Necormium and the other is enough. Will not be supported by the mod tho.
   * Debuffs: don't like how it works and I don't think it's used. If anyone needs it I will re-add it remaking it from scratch
   * Stats Buffs: Merged the MPR data pack to Enhanced AI
-  * 
+  * Villagers: Data Packable Villager trades are painful to port, and they're coming in 26.1 anyway, and I will 100% just remove villagers from the modpack I'm making
+  * Wandering traders: same as above
+  * No Pillaring: not liked and unused
+  * Sleeping and sleeping effects: unused
+  * Sextant: not needed anymore as was made for biome based ores
+  * Explosion Overhaul: moved to standalone mod
+  * Fast leaf decay: many mods already do it, probably better
+  * Seasons: as much as I like seasons, I'm trying to keep the mod as vanilla and as other mods dependency free as possible
+  * Timber trees: HC's TreeChop is good enough with a few config changes
+  * Weather: the only feature in this list I don't know if I want to keep it, but for now, now porting
 
 ## Upcoming
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
