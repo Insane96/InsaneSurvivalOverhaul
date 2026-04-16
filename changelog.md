@@ -75,6 +75,16 @@
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
+* What happened to the other features?
+  * Graves: there are a sh*t ton of mods that do graves, corpses and more, so there's really no need. Plus the death penalties have been changed so it's really no longer needed.
+  * Player Stats: No damage when spamming has been moved into Misc Combat. Player attributes instead have been moved to InsaneLib as they can work server-side only.
+  * Experience module: moved to Insane's Experience Overhaul. Not sure about the future of that mod if I find some other mod that satisfies me in terms of Enchanting overhaul.
+  * Flint expansion: flint tools weren't used anymore so have been discarded and gravel isn't that hard to find so ground flint has also been discarded
+  * Gold: not really needed anymore. The good thing about gold equipment is the high enchantability. No need for fortune. Still need to change the mining level via data packs.
+  * Solarium, Durium, etc.: Already disabled in 1.20.1, these only added further clunckyness to the system. I think something like Caverns and Chasms with Silver, Necormium and the other is enough. Will not be supported by the mod tho.
+  * Debuffs: don't like how it works and I don't think it's used. If anyone needs it I will re-add it remaking it from scratch
+  * Stats Buffs: Merged the MPR data pack to Enhanced AI
+  * 
 
 ## Upcoming
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
