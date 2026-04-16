@@ -143,6 +143,6 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] ~~ExplosionOverhaul~~ Standalone mod
 - [x] ~~FasterDecayLeaves~~ Other mods do the same (and probably better)
 - [x] ~~Seasons~~ No more Seasons
-- [ ] Spawners
+- [x] Spawners
 - [ ] ~~TimberTrees~~ (HC's TreeChop is good enough)
 - [ ] ~~Weather~~

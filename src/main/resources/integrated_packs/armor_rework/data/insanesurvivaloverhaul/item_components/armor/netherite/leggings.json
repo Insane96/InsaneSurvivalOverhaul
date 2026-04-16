@@ -1,0 +1,24 @@
+{
+    "item": "minecraft:netherite_leggings",
+    "components": {
+        "minecraft:max_damage": 225,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.armor",
+                    "id": "minecraft:armor.leggings",
+                    "amount": 6.0,
+                    "operation": "add_value",
+                    "slot": "legs"
+                },
+                {
+                    "type": "minecraft:generic.movement_speed",
+                    "id": "minecraft:armor.leggings",
+                    "amount": -0.036,
+                    "operation": "add_multiplied_base",
+                    "slot": "legs"
+                }
+            ]
+        }
+    }
+}

@@ -8,8 +8,6 @@
   * Critical Rework
     * Crit damage attribute (bonus damage with crit) is now 0 by default instead of 50%
     * Enchantment is still missing
-  * Absorption armor
-    * Now enabled by default (until Combat Rework data pack will be ported)
   * Bows
     * Now includes No Arrow Invincibility Frames
   * Snowballs
@@ -75,7 +73,7 @@
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
-* What happened to the other features?
+* What happened to the other features? If a feature is not listed here, it's still in the "do I want to keep it or not" limbo
   * Graves: there are a sh*t ton of mods that do graves, corpses and more, so there's really no need. Plus the death penalties have been changed so it's really no longer needed.
   * Player Stats: No damage when spamming has been moved into Misc Combat. Player attributes instead have been moved to InsaneLib as they can work server-side only.
   * Experience module: moved to Insane's Experience Overhaul. Not sure about the future of that mod if I find some other mod that satisfies me in terms of Enchanting overhaul.
@@ -114,6 +112,9 @@
 * Exhaustion when jumping is now configurable
   * Jumping while sprinting now consumes much more hunger (2.5x)
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
+* Added back Armor Rework (split from Combat rework)
+* Absorption armor is disabled by default
+* Re-added Armor Rework formula
 * Fixed Water Fall Damage feature not working properly
 
 ## 5.2.0.0-alpha

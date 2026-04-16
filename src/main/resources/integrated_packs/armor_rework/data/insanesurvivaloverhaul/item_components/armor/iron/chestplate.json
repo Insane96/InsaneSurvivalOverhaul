@@ -1,0 +1,38 @@
+{
+    "item": "minecraft:iron_chestplate",
+    "components": {
+        "minecraft:max_damage": 120,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.armor",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 4.0,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "insanesurvivaloverhaul:regenerating_absorption",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 0.06,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "minecraft:generic.movement_speed",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": -0.0175,
+                    "operation": "add_multiplied_base",
+                    "slot": "chest"
+                }
+            ]
+        }
+    }
+}

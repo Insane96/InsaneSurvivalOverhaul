@@ -1,0 +1,24 @@
+{
+    "item": "minecraft:copper_chestplate",
+    "components": {
+        "minecraft:max_damage": 48,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.armor",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 3.0,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "insanesurvivaloverhaul:regenerating_absorption",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 0.5,
+                    "operation": "add_value",
+                    "slot": "chest"
+                }
+            ]
+        }
+    }
+}
