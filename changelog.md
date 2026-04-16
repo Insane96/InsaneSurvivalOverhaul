@@ -33,6 +33,7 @@
     * Now also replaces items in entities equipment slots
   * Copper equipment
     * The items now registered in the minecraft namespace to be able to (hopefully) update a modded world to newer versions
+  * Unvanishable Items (renamed from Unbreakable Items)
 * Mining
   * Materials and Ores
     * Ore generation data pack changed to
