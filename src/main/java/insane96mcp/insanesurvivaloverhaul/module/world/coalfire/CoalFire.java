@@ -11,9 +11,12 @@ import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -24,9 +27,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -41,12 +43,12 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire", description = "Control fire speed with insanesurvivaloverhaul:fire_speed_multiplier game rule")
 public class CoalFire extends Feature {
-    public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
+    public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new BurntLogBlock(BlockBehaviour.Properties.of()
             .mapColor((p_152624_)
                     -> MapColor.TERRACOTTA_BLACK)
             .instrument(NoteBlockInstrument.BASS)
             .strength(1.0F)
-            .sound(SoundType.WOOD)));
+            .sound(SoundType.GRAVEL)));
 
     public static final DeferredHolder<Item, FirestarterItem> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).durability(11)));
 
@@ -156,5 +158,29 @@ public class CoalFire extends Feature {
         stack.shrink(1);
         player.onEquippedItemBroken(stack.getItem(), LivingEntity.getSlotForHand(hand));
         EventHooks.onPlayerDestroyItem(player, stack, hand);
+    }
+
+    public static class BurntLogBlock extends RotatedPillarBlock implements Fallable {
+        public BurntLogBlock(Properties properties) {
+            super(properties);
+        }
+
+        @Override
+        protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+            level.scheduleTick(pos, this, 2);
+        }
+
+        @Override
+        protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+            level.scheduleTick(currentPos, this, 2);
+            return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+        }
+
+        @Override
+        protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+            if (FallingBlock.isFree(level.getBlockState(pos.below())) && pos.getY() >= level.getMinBuildHeight()) {
+                FallingBlockEntity.fall(level, pos, state);
+            }
+        }
     }
 }

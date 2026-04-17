@@ -1,7 +1,4 @@
 ## From 1.20.1
-* Client
-  * Death
-    * Removed "Third-person death"
 * Combat
   * Unfair one-shot
     * Increased Resistance II duration after Unfair oneshot
@@ -71,7 +68,9 @@
     * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items. Will also drop 30% of their experience
   * Player killer bounty
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
-  * Removed Grave
+* World
+  * Coal & Fire
+    * Burnt Logs now correctly fall like gravel and sand
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
 * What happened to the other features? If a feature is not listed here, it's still in the "do I want to keep it or not" limbo
   * Graves: there are a sh*t ton of mods that do graves, corpses and more, so there's really no need. Plus the death penalties have been changed so it's really no longer needed.
@@ -92,6 +91,7 @@
   * Seasons: as much as I like seasons, I'm trying to keep the mod as vanilla and as other mods dependency free as possible
   * Timber trees: HC's TreeChop is good enough with a few config changes
   * Weather: the only feature in this list I don't know if I want to keep it, but for now, now porting
+  * Third-person death: was buggy and not that cool
 
 ## Upcoming
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
@@ -113,6 +113,7 @@
   * Jumping while sprinting now consumes much more hunger (2.5x)
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
 * Added back Armor Rework (split from Combat rework)
+* Burnt Logs now correctly fall like gravel and sand
 * Absorption armor is disabled by default
 * Re-added Armor Rework formula
 * Fixed Water Fall Damage feature not working properly
