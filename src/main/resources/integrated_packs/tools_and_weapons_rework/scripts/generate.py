@@ -84,7 +84,7 @@ def build_tool_component(tool, mat):
 def build_modifiers(tool, mat):
     mods = []
 
-    atk_dmg = fv(tool["atk_dmg_base"]) + fv(mat["atk_dmg_add"])
+    atk_dmg = fv(tool["atk_dmg_base"]) + fv(mat["atk_dmg_add"]) + fv(mat["tier_atk_dmg_bonus"])
     if atk_dmg:
         mods.append(modifier(ATTR["atk_dmg"], MOD_ID["atk_dmg"], atk_dmg, "add_value"))
 
