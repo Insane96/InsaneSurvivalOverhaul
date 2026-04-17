@@ -20,21 +20,23 @@ OUTPUT_DIR = SCRIPT_DIR / "../data/insanesurvivaloverhaul/item_components/weapon
 
 # 1.21.1 NeoForge attribute ids
 ATTR = {
-    "atk_dmg":       "minecraft:generic.attack_damage",
-    "atk_spd":       "minecraft:generic.attack_speed",
-    "entity_reach":  "minecraft:player.entity_interaction_range",
-    "atk_knockback": "minecraft:generic.attack_knockback",
-    "crit_chance":   "insanesurvivaloverhaul:critical_chance",
-    "crit_damage":   "insanesurvivaloverhaul:critical_damage",
+    "atk_dmg":        "minecraft:generic.attack_damage",
+    "atk_spd":        "minecraft:generic.attack_speed",
+    "entity_reach":   "minecraft:player.entity_interaction_range",
+    "atk_knockback":  "minecraft:generic.attack_knockback",
+    "crit_chance":    "insanesurvivaloverhaul:critical_chance",
+    "crit_damage":    "insanesurvivaloverhaul:critical_damage",
+    "piercing_dmg":   "insanesurvivaloverhaul:piercing_damage",
 }
 
 MOD_ID = {
-    "atk_dmg":       "minecraft:base_attack_damage",
-    "atk_spd":       "minecraft:base_attack_speed",
-    "entity_reach":  "minecraft:base_entity_reach",
-    "atk_knockback": "insanesurvivaloverhaul:weapon_attack_knockback",
-    "crit_chance":   "insanesurvivaloverhaul:base_critical_chance",
-    "crit_damage":   "insanesurvivaloverhaul:base_critical_damage",
+    "atk_dmg":        "minecraft:base_attack_damage",
+    "atk_spd":        "minecraft:base_attack_speed",
+    "entity_reach":   "minecraft:base_entity_reach",
+    "atk_knockback":  "insanesurvivaloverhaul:weapon_attack_knockback",
+    "crit_chance":    "insanesurvivaloverhaul:base_critical_chance",
+    "crit_damage":    "insanesurvivaloverhaul:base_critical_damage",
+    "piercing_dmg":   "insanesurvivaloverhaul:base_piercing_damage",
 }
 
 
@@ -107,6 +109,11 @@ def build_modifiers(tool, mat):
     crit_dmg = fv(tool["crit_dmg_add"])
     if crit_dmg:
         mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
+
+    if tool["tool_type"] == "pickaxe":
+        piercing = fv(mat.get("pickaxe_piercing_dmg", ""))
+        if piercing:
+            mods.append(modifier(ATTR["piercing_dmg"], MOD_ID["piercing_dmg"], piercing, "add_value"))
 
     return mods
 

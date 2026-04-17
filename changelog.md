@@ -112,7 +112,7 @@
 * Exhaustion when jumping is now configurable
   * Jumping while sprinting now consumes much more hunger (2.5x)
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
-* Added back Armor Rework (split from Combat rework)
+* Added back Armor Rework and Tools and Weapons Rework (split from Combat rework)
 * Burnt Logs now correctly fall like gravel and sand
 * Absorption armor is disabled by default
 * Re-added Armor Rework formula
