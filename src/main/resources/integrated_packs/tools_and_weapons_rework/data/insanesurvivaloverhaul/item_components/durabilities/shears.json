@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:shears",
+    "components": {
+        "minecraft:max_damage": 138
+    }
+}

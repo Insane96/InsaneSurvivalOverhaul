@@ -14,8 +14,6 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 @LoadFeature(module = ISOModules.COMBAT)
 public class MiscCombat extends Feature {
-    /*@Config(description = "Vanilla tooltips on gear don't sum up multiple modifiers (e.g. a sword would have \"4 Attack Damage\" and \"-2 Attack Damage\" instead of \"2 Attack Damage\". This might break other mods messing with these Tooltips (e.g. Quark's improved tooltips)")
-    public static Boolean fixTooltips = true;*/
     @Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
     public static Boolean oneDamageForToolAttacking = true;
     @Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. A data pack is enabled that removes the sweeping enchantment.")
@@ -23,18 +21,16 @@ public class MiscCombat extends Feature {
     @Config(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%.")
     public static Boolean noDamageWhenSpamming = true;
 
-    /*@Config(description = "Enables a data pack that reworks armor, weapons and tools.")
-    public static Boolean combatReworkDataPack = true;*/
     @Config(description = "Enables a data pack that reworks armor.")
     public static Boolean armorReworkDataPack = true;
-    @Config(description = "Enables a data pack that adds piercing damage to pickaxes.")
-    public static Boolean piercingPickaxesDataPack = true;
+    @Config(description = "Enables a data pack that reworks tools and weapons.")
+    public static Boolean toolsAndWeaponsDataPack = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("armor_rework", "Insane's Survival Overhaul Armor Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && armorReworkDataPack);
-        InsaneSO.addServerPack("piercing_pickaxes", "Insane's Survival Overhaul Piercing Pickaxes", () -> Feature.isEnabled(PiercingDamage.class) && !Packs.disableAllDataPacks && piercingPickaxesDataPack);
+        InsaneSO.addServerPack("tools_and_weapons_rework", "Insane's Survival Overhaul Tools and Weapons Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && toolsAndWeaponsDataPack);
     }
 
     @Override

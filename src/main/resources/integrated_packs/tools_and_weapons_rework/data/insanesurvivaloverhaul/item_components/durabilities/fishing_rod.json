@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:fishing_rod",
+    "components": {
+        "minecraft:max_damage": 33
+    }
+}

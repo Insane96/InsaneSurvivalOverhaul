@@ -1,12 +1,12 @@
 {
-    "item": "minecraft:diamond_pickaxe",
+    "item": "minecraft:iron_pickaxe",
     "merge_components": {
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "insanesurvivaloverhaul:piercing_damage",
-                    "id": "insanesurvivaloverhaul:piercing_damage",
-                    "amount": 1.5,
+                    "id": "insanesurvivaloverhaul:base_piercing_damage",
+                    "amount": 1.0,
                     "operation": "add_value",
                     "slot": "mainhand"
                 }

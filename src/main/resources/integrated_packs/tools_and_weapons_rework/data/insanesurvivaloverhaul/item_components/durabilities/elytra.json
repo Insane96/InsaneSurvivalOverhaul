@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:elytra",
+    "components": {
+        "minecraft:max_damage": 144
+    }
+}

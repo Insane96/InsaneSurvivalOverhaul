@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:bow",
+    "components": {
+        "minecraft:max_damage": 192
+    }
+}

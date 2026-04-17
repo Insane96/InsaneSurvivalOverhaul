@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:carrot_on_a_stick",
+    "components": {
+        "minecraft:max_damage": 49
+    }
+}

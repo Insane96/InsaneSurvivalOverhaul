@@ -1,0 +1,24 @@
+{
+    "item": "minecraft:shield",
+    "components": {
+        "minecraft:max_damage": 187,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.movement_speed",
+                    "id": "insanesurvivaloverhaul:shield_movement_speed_mainhand",
+                    "amount": -0.05,
+                    "operation": "add_multiplied_base",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.movement_speed",
+                    "id": "insanesurvivaloverhaul:shield_movement_speed_offhand",
+                    "amount": -0.05,
+                    "operation": "add_multiplied_base",
+                    "slot": "offhand"
+                }
+            ]
+        }
+    }
+}
