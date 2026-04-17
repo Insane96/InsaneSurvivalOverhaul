@@ -26,6 +26,20 @@
                     "slot": "mainhand"
                 }
             ]
-        }
+        },
+        "minecraft:tool": {
+            "rules": [
+                {
+                    "blocks": "#minecraft:incorrect_for_diamond_tool",
+                    "correct_for_drops": false
+                },
+                {
+                    "blocks": "#minecraft:mineable/shovel",
+                    "speed": 10.0,
+                    "correct_for_drops": true
+                }
+            ]
+        },
+        "insanelib:enchantability": 6
     }
 }

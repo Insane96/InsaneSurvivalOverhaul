@@ -12,6 +12,7 @@
                     "slot": "chest"
                 }
             ]
-        }
+        },
+        "insanelib:enchantability": 15
     }
 }

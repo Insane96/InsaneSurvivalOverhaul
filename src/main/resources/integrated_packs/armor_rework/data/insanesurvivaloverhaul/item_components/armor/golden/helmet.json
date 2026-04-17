@@ -12,6 +12,7 @@
                     "slot": "head"
                 }
             ]
-        }
+        },
+        "insanelib:enchantability": 15
     }
 }

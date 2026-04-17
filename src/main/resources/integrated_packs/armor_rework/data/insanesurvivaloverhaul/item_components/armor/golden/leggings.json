@@ -12,6 +12,7 @@
                     "slot": "legs"
                 }
             ]
-        }
+        },
+        "insanelib:enchantability": 15
     }
 }

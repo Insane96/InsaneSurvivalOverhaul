@@ -26,6 +26,20 @@
                     "slot": "mainhand"
                 }
             ]
-        }
+        },
+        "minecraft:tool": {
+            "rules": [
+                {
+                    "blocks": "#minecraft:incorrect_for_stone_tool",
+                    "correct_for_drops": false
+                },
+                {
+                    "blocks": "#minecraft:mineable/pickaxe",
+                    "speed": 5.0,
+                    "correct_for_drops": true
+                }
+            ]
+        },
+        "insanelib:enchantability": 9
     }
 }

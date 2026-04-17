@@ -33,6 +33,20 @@
                     "slot": "mainhand"
                 }
             ]
-        }
+        },
+        "minecraft:tool": {
+            "rules": [
+                {
+                    "blocks": "#minecraft:incorrect_for_iron_tool",
+                    "correct_for_drops": false
+                },
+                {
+                    "blocks": "#minecraft:mineable/shovel",
+                    "speed": 6.5,
+                    "correct_for_drops": true
+                }
+            ]
+        },
+        "insanelib:enchantability": 9
     }
 }

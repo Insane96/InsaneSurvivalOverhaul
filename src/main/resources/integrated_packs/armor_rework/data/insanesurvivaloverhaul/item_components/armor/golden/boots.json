@@ -12,6 +12,7 @@
                     "slot": "feet"
                 }
             ]
-        }
+        },
+        "insanelib:enchantability": 15
     }
 }

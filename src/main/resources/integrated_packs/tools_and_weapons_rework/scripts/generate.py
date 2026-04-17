@@ -67,6 +67,20 @@ def modifier(type_id, mod_id, amount, operation, slot="mainhand"):
     }
 
 
+def build_tool_component(tool, mat):
+    tool_tag = tool.get("tool_tag", "").strip()
+    harvest_level_tag = mat.get("harvest_level_tag", "").strip()
+    efficiency = mat.get("efficiency", "").strip()
+    if not tool_tag or not harvest_level_tag or not efficiency:
+        return None
+    return {
+        "rules": [
+            {"blocks": f"#minecraft:incorrect_for_{harvest_level_tag}_tool", "correct_for_drops": False},
+            {"blocks": f"#minecraft:{tool_tag}", "speed": float(efficiency), "correct_for_drops": True},
+        ]
+    }
+
+
 def build_modifiers(tool, mat):
     mods = []
 
@@ -115,15 +129,22 @@ def generate():
             dur_mult = fv(tool.get("durability_multiplier", "")) or 1.0
             max_damage = int(max_dmg_override) if max_dmg_override else int(round(fv(mat["max_damage"]) * dur_mult))
             mods = build_modifiers(tool, mat)
+            tool_component = build_tool_component(tool, mat)
+
+            enchantability = mat.get("enchantability", "").strip()
+
+            components = {
+                "minecraft:max_damage": max_damage,
+                "minecraft:attribute_modifiers": {"modifiers": mods},
+            }
+            if tool_component:
+                components["minecraft:tool"] = tool_component
+            if enchantability:
+                components["insanelib:enchantability"] = int(enchantability)
 
             data = {
                 "item": item,
-                "components": {
-                    "minecraft:max_damage": max_damage,
-                    "minecraft:attribute_modifiers": {
-                        "modifiers": mods
-                    }
-                }
+                "components": components,
             }
 
             filename = item.split(":")[-1] + ".json"
