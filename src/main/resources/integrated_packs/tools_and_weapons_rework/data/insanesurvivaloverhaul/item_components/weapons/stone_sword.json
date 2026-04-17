@@ -1,0 +1,45 @@
+{
+    "item": "minecraft:stone_sword",
+    "components": {
+        "minecraft:max_damage": 63,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.attack_damage",
+                    "id": "minecraft:base_attack_damage",
+                    "amount": 1.15,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "minecraft:base_attack_speed",
+                    "amount": -2.6,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:player.entity_interaction_range",
+                    "id": "minecraft:base_entity_reach",
+                    "amount": -0.25,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "insanesurvivaloverhaul:critical_chance",
+                    "id": "insanesurvivaloverhaul:base_critical_chance",
+                    "amount": 0.2,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "insanesurvivaloverhaul:critical_damage",
+                    "id": "insanesurvivaloverhaul:base_critical_damage",
+                    "amount": -0.25,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                }
+            ]
+        }
+    }
+}

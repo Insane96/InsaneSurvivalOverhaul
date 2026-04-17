@@ -1,0 +1,31 @@
+{
+    "item": "minecraft:golden_pickaxe",
+    "components": {
+        "minecraft:max_damage": 64,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.attack_damage",
+                    "id": "minecraft:base_attack_damage",
+                    "amount": 1.7,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "minecraft:base_attack_speed",
+                    "amount": -1.7999999999999998,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:player.entity_interaction_range",
+                    "id": "minecraft:base_entity_reach",
+                    "amount": -0.5,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                }
+            ]
+        }
+    }
+}

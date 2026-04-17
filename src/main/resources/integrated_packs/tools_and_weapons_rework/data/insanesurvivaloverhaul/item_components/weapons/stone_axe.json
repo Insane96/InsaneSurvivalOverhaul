@@ -1,0 +1,31 @@
+{
+    "item": "minecraft:stone_axe",
+    "components": {
+        "minecraft:max_damage": 63,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.attack_damage",
+                    "id": "minecraft:base_attack_damage",
+                    "amount": 3.25,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "minecraft:base_attack_speed",
+                    "amount": -3.4000000000000004,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:player.entity_interaction_range",
+                    "id": "minecraft:base_entity_reach",
+                    "amount": -0.5,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                }
+            ]
+        }
+    }
+}

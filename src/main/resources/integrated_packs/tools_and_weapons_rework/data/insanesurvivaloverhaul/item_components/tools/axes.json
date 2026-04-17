@@ -1,0 +1,5 @@
+{
+	"item": "#minecraft:axes",
+	"chance_to_use_double_durability": 0.25,
+	"knockback_multiplier": 0.9
+}

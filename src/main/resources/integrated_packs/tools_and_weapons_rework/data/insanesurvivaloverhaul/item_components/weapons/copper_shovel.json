@@ -1,0 +1,31 @@
+{
+    "item": "minecraft:copper_shovel",
+    "components": {
+        "minecraft:max_damage": 191,
+        "minecraft:attribute_modifiers": {
+            "modifiers": [
+                {
+                    "type": "minecraft:generic.attack_damage",
+                    "id": "minecraft:base_attack_damage",
+                    "amount": 2.35,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "minecraft:base_attack_speed",
+                    "amount": -3.0,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_knockback",
+                    "id": "insanesurvivaloverhaul:weapon_attack_knockback",
+                    "amount": 1.0,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                }
+            ]
+        }
+    }
+}
