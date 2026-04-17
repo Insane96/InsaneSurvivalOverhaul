@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Clientb
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
+import insane96mcp.insanesurvivaloverhaul.module.movement.backwardsslowdown.ServerboundBackwardsSlowdownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.ClientboundTirednessPacket;
 import insane96mcp.insanesurvivaloverhaul.module.world.spawners.SpawnerStatusSync;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -30,5 +31,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
         registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);
         registrar.playToClient(SpawnerStatusSync.TYPE, SpawnerStatusSync.STREAM_CODEC, SpawnerStatusSync::handle);
+        registrar.playToServer(ServerboundBackwardsSlowdownPacket.TYPE, ServerboundBackwardsSlowdownPacket.STREAM_CODEC, ServerboundBackwardsSlowdownPacket::handle);
     }
 }
