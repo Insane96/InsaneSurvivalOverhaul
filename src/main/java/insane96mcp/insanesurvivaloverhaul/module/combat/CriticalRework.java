@@ -5,20 +5,23 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.NeoForgeConfig;
 import net.neoforged.neoforge.common.PercentageAttribute;
-import net.neoforged.neoforge.common.extensions.IAttributeExtension;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import java.util.Locale;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Rework critical hits to be a chance to happen instead of damage on jump. Also the chance and bonus damage are now an attribute. By default critical_chance is 0 and can increase with the Critical enchantment and critical_damage is 0.5 (+50%).")
 public class CriticalRework extends Feature {
@@ -75,11 +78,21 @@ public class CriticalRework extends Feature {
 		}
 
 		@Override
-		public MutableComponent toValueComponent(AttributeModifier.Operation op, double value, TooltipFlag flag) {
-			if (IAttributeExtension.isNullOrAddition(op) && this.equals(DAMAGE_ATTRIBUTE.value()))
-				return Component.translatable("neoforge.value.percent", FORMAT.format((value + 1f) * this.scaleFactor));
+		public MutableComponent toBaseComponent(double value, double entityBase, boolean merged, TooltipFlag flag) {
+			if (this.equals(DAMAGE_ATTRIBUTE.value()))
+				value += 1f;
+			MutableComponent comp = Component.translatable("attribute.modifier.equals.0", FORMAT.format(value * this.scaleFactor) + "%", Component.translatable(this.getDescriptionId()));
 
-			return super.toValueComponent(op, value, flag);
+			// Emit both the value of the modifier, and the entity's base value as debug information, since both are flattened into the modifier.
+			// Skip showing debug information here when displaying a merged modifier, since it will be shown if the user holds shift to display the un-merged modifier.
+			if (flag.isAdvanced() && !merged && NeoForgeConfig.COMMON.attributeAdvancedTooltipDebugInfo.get()) {
+				double baseBonus = value - entityBase;
+				String baseBonusText = String.format(Locale.ROOT, baseBonus > 0 ? " + %s" : " - %s", FORMAT.format(Math.abs(baseBonus * this.scaleFactor)));
+				Component debugInfo = Component.translatable("neoforge.attribute.debug.base", FORMAT.format(entityBase), baseBonusText).withStyle(ChatFormatting.GRAY);
+				comp.append(CommonComponents.SPACE).append(debugInfo);
+			}
+
+			return comp;
 		}
 	}
 }
