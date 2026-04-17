@@ -112,7 +112,8 @@ def generate():
         for material in tool_materials:
             mat = materials[material]
             item = item_override if item_override else f"minecraft:{material}_{tool_type}"
-            max_damage = int(max_dmg_override) if max_dmg_override else int(fv(mat["max_damage"]))
+            dur_mult = fv(tool.get("durability_multiplier", "")) or 1.0
+            max_damage = int(max_dmg_override) if max_dmg_override else int(round(fv(mat["max_damage"]) * dur_mult))
             mods = build_modifiers(tool, mat)
 
             data = {
