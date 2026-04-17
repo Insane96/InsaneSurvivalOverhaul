@@ -27,13 +27,18 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.Nullable;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute that deals bonus damage that bypasses armor")
 public class PiercingDamage extends Feature {
 	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_mob_attack"));
 	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_player_attack"));
 
-	public static final DeferredHolder<Attribute, Attribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new RangedAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
+	public static final DeferredHolder<Attribute, PiercingDamageAttribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new PiercingDamageAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
+	/**
+	 * ID of the base modifier for Piercing Damage.
+	 */
+	public static final ResourceLocation BASE_PIERCING_DAMAGE_ID = InsaneSO.location("base_piercing_damage");
 
 	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ISODamageTypeTagsProvider.create("piercing_damage_type");
 	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ISODamageTypeTagsProvider.create("doesnt_trigger_piercing");
@@ -81,5 +86,16 @@ public class PiercingDamage extends Feature {
 		boolean ret = MCUtils.attackEntityIgnoreInvFrames(piercingDamageSource, amount, event.getEntity(), event.getEntity(), true);
 		if (event.getEntity().isDeadOrDying())
 			ModNBTData.put(event.getEntity(), SHOULD_STOP_HURT, ret);
+	}
+
+	public static class PiercingDamageAttribute extends RangedAttribute {
+		public PiercingDamageAttribute(String descriptionId, double defaultValue, double min, double max) {
+			super(descriptionId, defaultValue, min, max);
+		}
+
+		@Override
+		public @Nullable ResourceLocation getBaseId() {
+			return BASE_PIERCING_DAMAGE_ID;
+		}
 	}
 }

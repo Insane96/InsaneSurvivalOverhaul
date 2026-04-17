@@ -2,8 +2,10 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -15,8 +17,16 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Rework critical hits to be a chance to happen instead of damage on jump. Also the chance and bonus damage are now an attribute. By default critical_chance is 0 and can increase with the Critical enchantment and critical_damage is 0.5 (+50%).")
 public class CriticalRework extends Feature {
-	public static final DeferredHolder<Attribute, Attribute> CHANCE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_chance", () -> new RangedAttribute("attribute.name.critical_chance", 0d, 0d, 1d));
-	public static final DeferredHolder<Attribute, Attribute> DAMAGE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_damage", () -> new RangedAttribute("attribute.name.critical_damage", 0d, 0d, Double.MAX_VALUE));
+	public static final DeferredHolder<Attribute, CritAttribute> CHANCE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_chance", () -> new CritAttribute("attribute.name.critical_chance", 0d, 0d, 1d));
+	public static final DeferredHolder<Attribute, CritAttribute> DAMAGE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_damage", () -> new CritAttribute("attribute.name.critical_damage", 0d, 0d, Double.MAX_VALUE));
+	/**
+	 * ID of the base modifier for Crit Chance.
+	 */
+	public static final ResourceLocation BASE_CHANCE_ATTRIBUTE_ID = InsaneSO.location("base_critical_chance");
+	/**
+	 * ID of the base modifier for Crit bonus damage.
+	 */
+	public static final ResourceLocation BASE_DAMAGE_ATTRIBUTE_ID = InsaneSO.location("base_critical_damage");
 
 	//public static final DeferredHolder<Enchantment> CRITICAL_ENCHANTMENT = ISORegistries.ENCHANTMENTS.register("critical", CriticalEnchantment::new);
 
@@ -45,6 +55,18 @@ public class CriticalRework extends Feature {
 				event.setDamageMultiplier((float) (event.getEntity().getAttributeValue(DAMAGE_ATTRIBUTE) + 1f));
 				event.setCriticalHit(true);
 			}
+		}
+	}
+
+	public static class CritAttribute extends RangedAttribute {
+		public CritAttribute(String descriptionId, double defaultValue, double min, double max) {
+			super(descriptionId, defaultValue, min, max);
+		}
+
+		public @Override ResourceLocation getBaseId() {
+			if (this.equals(CHANCE_ATTRIBUTE.value())) return BASE_CHANCE_ATTRIBUTE_ID;
+			else if (this.equals(DAMAGE_ATTRIBUTE.value())) return BASE_DAMAGE_ATTRIBUTE_ID;
+			return null;
 		}
 	}
 }
