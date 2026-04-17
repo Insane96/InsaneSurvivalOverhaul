@@ -97,6 +97,10 @@
     "item.minecraft.copper_hoe": "Copper Hoe",
     "item.minecraft.copper_shield": "Copper Shield",
 
+    "item.insanesurvivaloverhaul.pouch": "Pouch",
+    "insanesurvivaloverhaul.pouch": "Pouch",
+    "insanesurvivaloverhaul.pouch_weighted": "Slowed down if carried more than %d",
+
 
     "insanesurvivaloverhaul:sleep_module": "Sleep",
 

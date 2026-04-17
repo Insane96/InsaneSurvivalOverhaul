@@ -1,3 +1,5 @@
+* Pouch, coal & fire advancements
+
 ## From 1.20.1
 * Combat
   * Unfair one-shot

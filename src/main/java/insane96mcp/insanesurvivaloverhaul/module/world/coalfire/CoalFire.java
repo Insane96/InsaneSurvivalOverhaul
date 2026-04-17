@@ -41,7 +41,7 @@ import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire", description = "Control fire speed with insanesurvivaloverhaul:fire_speed_multiplier game rule")
+@LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire", description = "Control fire speed with insanesurvivaloverhaul:fire_speed_multiplier game rule. This feature also enables a recipe to get a flint from 3 gravel.")
 public class CoalFire extends Feature {
     public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new BurntLogBlock(BlockBehaviour.Properties.of()
             .mapColor((p_152624_)

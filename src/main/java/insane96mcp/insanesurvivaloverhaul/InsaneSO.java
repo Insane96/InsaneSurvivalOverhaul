@@ -79,6 +79,7 @@ public class InsaneSO {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
             eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
             eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
+            eventBus.addListener(ClientSetup::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
         }
 

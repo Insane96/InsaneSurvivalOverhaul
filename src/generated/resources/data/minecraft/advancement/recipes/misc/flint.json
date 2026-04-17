@@ -2,26 +2,16 @@
   "neoforge:conditions": [
     {
       "type": "insanelib:feature_enabled",
-      "feature": "Spawning"
+      "feature": "Coal & Fire"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_echo_shard": {
+    "has_gravel": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:echo_shard"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_nether_star": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:nether_star"
+            "items": "minecraft:gravel"
           }
         ]
       },
@@ -29,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "insanesurvivaloverhaul:echo_lantern"
+        "recipe": "minecraft:flint"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,13 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_echo_shard",
-      "has_nether_star"
+      "has_gravel"
     ]
   ],
   "rewards": {
     "recipes": [
-      "insanesurvivaloverhaul:echo_lantern"
+      "minecraft:flint"
     ]
   }
 }

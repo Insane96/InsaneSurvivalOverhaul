@@ -66,7 +66,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] CopperEquipment
 - [ ] ~~FlintExpansion~~ Equipment is no longer needed and gravel can be _easily_ found for flint, so ...
 - [ ] MiscItem
-- [ ] Pouch
+- [x] Pouch
 - [ ] RepairKits
 - [x] UnbreakableItems (Renamed to UnvanishableItems)
 - [ ] ExplosiveBarrel (ITE)

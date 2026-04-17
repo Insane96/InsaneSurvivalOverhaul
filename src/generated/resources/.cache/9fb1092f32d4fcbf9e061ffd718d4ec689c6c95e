@@ -1,5 +1,13 @@
-// 1.21.1	2026-03-03T10:57:18.3567815	Recipes
-c0b52aa4ec07429970ed3ecf6d4b1260e537e0a0 data/insanesurvivaloverhaul/advancement/recipes/building_blocks/echo_lantern.json
+// 1.21.1	2026-04-17T21:13:16.8851281	Recipes
+a4aa37b336a115ebf9e918651c2f84361f73daac data/insanesurvivaloverhaul/advancement/recipes/building_blocks/echo_lantern.json
 97121e10415a8adfc96111b5191d741b51919b1f data/insanesurvivaloverhaul/advancement/recipes/combat/shortbow.json
+44e699c972d772c3ac449b24de94d0d157bd27cc data/insanesurvivaloverhaul/advancement/recipes/tools/pouch.json
 8ad00ab750adef60d17436ab4fe23e7c7c7418ca data/insanesurvivaloverhaul/recipe/echo_lantern.json
+0bed1e359709c7206a7a67ffdf7c90ae5bf26ab6 data/insanesurvivaloverhaul/recipe/pouch.json
 3d425a4d04a6620d7d74b511d659add60e6e6758 data/insanesurvivaloverhaul/recipe/shortbow.json
+dcbcc9dc8590528d3bce1df2d859ad8f8f89a031 data/minecraft/advancement/recipes/misc/cyan_dye.json
+a5a4a0c3c3f0b9afe8b3119218227bdc600e109e data/minecraft/advancement/recipes/misc/flint.json
+4e2cc1d4dc41263acd99547a939e52d7b76cd3fa data/minecraft/advancement/recipes/misc/purple_dye.json
+5a90902bfb45f49078fd7c3dd54f3019d7ffaa46 data/minecraft/recipe/cyan_dye.json
+d1d0bd04750d778b80b4e539b6c132018d8b8ea4 data/minecraft/recipe/flint.json
+4e9c0caf568f9567b58f00e89e8262452d869368 data/minecraft/recipe/purple_dye.json

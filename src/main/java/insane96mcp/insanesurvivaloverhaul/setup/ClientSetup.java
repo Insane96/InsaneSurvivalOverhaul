@@ -8,6 +8,9 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
@@ -18,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 import java.util.function.Supplier;
@@ -52,6 +56,9 @@ public class ClientSetup {
                 addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
                 addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
                 remove(event, Items.POWERED_RAIL);
+            }
+            if (Feature.isEnabled(Pouch.class)) {
+                addAfter(event, Items.LEAD, Pouch.ITEM.get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
@@ -153,5 +160,9 @@ public class ClientSetup {
         });
         //MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
         //MenuScreens.register(Fletching.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
+    }
+
+    public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(PouchTooltip.class, ClientPouchTooltip::new);
     }
 }

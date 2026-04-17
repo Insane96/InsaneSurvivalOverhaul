@@ -7,6 +7,8 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -156,8 +158,8 @@ public class HudInfos extends Feature {
         for (ItemStack stack : player.getInventory().items) {
             if (stack.getItem() == Items.BUNDLE && bundleContains(stack, itemTag))
                 return true;
-            //else if (stack.getItem() == Pouch.ITEM.get() && pouchContains(stack, itemTag))
-            //    return true;
+            else if (stack.getItem() == Pouch.ITEM.get() && pouchContains(stack, itemTag))
+                return true;
         }
         return false;
     }
@@ -174,10 +176,10 @@ public class HudInfos extends Feature {
         return false;
     }
 
-    /*@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     private static boolean pouchContains(ItemStack bundle, TagKey<Item> itemTag) {
         return PouchItem.getContentsList(bundle).stream().anyMatch(s -> s.is(itemTag));
-    }*/
+    }
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isLookingAtItemFrameWith(@Nullable HitResult hitResult, TagKey<Item> itemTag) {

@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
@@ -89,6 +90,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         
         basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), InsaneSO.location("block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", ResourceLocation.parse("item/powered_rail"));
+
+        basicItem(Pouch.ITEM.get());
     }
 
     private ItemModelBuilder blockItem(SimpleBlockWithItem block) {

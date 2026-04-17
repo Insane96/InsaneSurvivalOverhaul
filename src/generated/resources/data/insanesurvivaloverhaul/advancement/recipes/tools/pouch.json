@@ -2,26 +2,36 @@
   "neoforge:conditions": [
     {
       "type": "insanelib:feature_enabled",
-      "feature": "Spawning"
+      "feature": "Pouch"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_echo_shard": {
+    "has_iron_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:echo_shard"
+            "items": "minecraft:iron_ingot"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_nether_star": {
+    "has_leather": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:nether_star"
+            "items": "minecraft:leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:string"
           }
         ]
       },
@@ -29,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "insanesurvivaloverhaul:echo_lantern"
+        "recipe": "insanesurvivaloverhaul:pouch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,13 +47,14 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_echo_shard",
-      "has_nether_star"
+      "has_leather",
+      "has_string",
+      "has_iron_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "insanesurvivaloverhaul:echo_lantern"
+      "insanesurvivaloverhaul:pouch"
     ]
   }
 }
