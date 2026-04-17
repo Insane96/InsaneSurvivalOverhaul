@@ -1,0 +1,6 @@
+{
+	"item": "#minecraft:axes",
+	"components": {
+		"insanelib:knockback_multiplier": 0.9
+	}
+}

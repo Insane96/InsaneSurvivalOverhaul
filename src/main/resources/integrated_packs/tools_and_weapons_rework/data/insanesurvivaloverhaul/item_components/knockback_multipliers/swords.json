@@ -1,0 +1,6 @@
+{
+	"item": "#minecraft:swords",
+	"components": {
+		"insanelib:knockback_multiplier": 0.95
+	}
+}

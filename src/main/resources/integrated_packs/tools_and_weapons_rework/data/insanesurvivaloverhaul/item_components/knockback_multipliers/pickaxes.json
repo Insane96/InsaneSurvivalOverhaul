@@ -1,0 +1,6 @@
+{
+	"item": "#minecraft:pickaxes",
+	"components": {
+		"insanelib:knockback_multiplier": 0.8
+	}
+}
