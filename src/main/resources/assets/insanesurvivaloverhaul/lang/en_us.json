@@ -100,6 +100,10 @@
     "item.insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch_weighted": "Slowed down if carried more than %d",
+    "advancements.insanesurvivaloverhaul.obtain_pouch.title": "3 by 3",
+    "advancements.insanesurvivaloverhaul.obtain_pouch.description": "Obtain a Pouch",
+    "advancements.insanesurvivaloverhaul.overweight_pouch.title": "This is heavy",
+    "advancements.insanesurvivaloverhaul.overweight_pouch.description": "Get a movement speed penalty by carrying too many Pouches",
 
 
     "insanesurvivaloverhaul:sleep_module": "Sleep",

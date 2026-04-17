@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Pouch"
+    }
+  ],
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_pouch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "insanesurvivaloverhaul:pouch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_pouch.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:pouch"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_pouch.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_pouch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

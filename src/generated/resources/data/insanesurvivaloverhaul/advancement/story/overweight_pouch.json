@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Pouch"
+    }
+  ],
+  "parent": "insanesurvivaloverhaul:story/obtain_pouch",
+  "criteria": {
+    "overweight_pouch_carry": {
+      "trigger": "insanesurvivaloverhaul:overweight_pouch_carry"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.overweight_pouch.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:pouch"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.overweight_pouch.title"
+    }
+  },
+  "requirements": [
+    [
+      "overweight_pouch_carry"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

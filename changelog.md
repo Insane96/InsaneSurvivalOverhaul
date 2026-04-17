@@ -107,7 +107,7 @@
   * Player killer bounty
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Removed Grave
-* Added back Item features: Unvanishable Items (aka Unbreakable Items)
+* Added back Item features: Unvanishable Items (aka Unbreakable Items), Pouch, Item tooltips (renamed from Misc items)
 * Added back Movement features: Minecarts
   * Minecarts with passengers and chests now forceload chunks they are in, allowing them to travel through unloaded chunks
 * Added back World features: Coal & Fire, Cyan Flower, Berries, Nether
