@@ -5,12 +5,17 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.PercentageAttribute;
+import net.neoforged.neoforge.common.extensions.IAttributeExtension;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -58,7 +63,7 @@ public class CriticalRework extends Feature {
 		}
 	}
 
-	public static class CritAttribute extends RangedAttribute {
+	public static class CritAttribute extends PercentageAttribute {
 		public CritAttribute(String descriptionId, double defaultValue, double min, double max) {
 			super(descriptionId, defaultValue, min, max);
 		}
@@ -67,6 +72,14 @@ public class CriticalRework extends Feature {
 			if (this.equals(CHANCE_ATTRIBUTE.value())) return BASE_CHANCE_ATTRIBUTE_ID;
 			else if (this.equals(DAMAGE_ATTRIBUTE.value())) return BASE_DAMAGE_ATTRIBUTE_ID;
 			return null;
+		}
+
+		@Override
+		public MutableComponent toValueComponent(AttributeModifier.Operation op, double value, TooltipFlag flag) {
+			if (IAttributeExtension.isNullOrAddition(op) && this.equals(DAMAGE_ATTRIBUTE.value()))
+				return Component.translatable("neoforge.value.percent", FORMAT.format((value + 1f) * this.scaleFactor));
+
+			return super.toValueComponent(op, value, flag);
 		}
 	}
 }
