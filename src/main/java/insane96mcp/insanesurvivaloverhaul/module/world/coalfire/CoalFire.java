@@ -48,7 +48,7 @@ public class CoalFire extends Feature {
                     -> MapColor.TERRACOTTA_BLACK)
             .instrument(NoteBlockInstrument.BASS)
             .strength(1.0F)
-            .sound(SoundType.GRAVEL)));
+            .sound(SoundType.WOOD)));
 
     public static final DeferredHolder<Item, FirestarterItem> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).durability(11)));
 
