@@ -27,11 +27,14 @@ public class MiscCombat extends Feature {
     public static Boolean combatReworkDataPack = true;*/
     @Config(description = "Enables a data pack that reworks armor.")
     public static Boolean armorReworkDataPack = true;
+    @Config(description = "Enables a data pack that adds piercing damage to pickaxes.")
+    public static Boolean piercingPickaxesDataPack = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("armor_rework", "Insane's Survival Overhaul Armor Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && armorReworkDataPack);
+        InsaneSO.addServerPack("piercing_pickaxes", "Insane's Survival Overhaul Piercing Pickaxes", () -> Feature.isEnabled(PiercingDamage.class) && !Packs.disableAllDataPacks && piercingPickaxesDataPack);
     }
 
     @Override
