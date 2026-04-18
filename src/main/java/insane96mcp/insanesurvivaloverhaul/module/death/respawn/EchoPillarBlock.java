@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -104,6 +105,10 @@ public class EchoPillarBlock extends Block {
                 level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
                 level.levelEvent(player, 2001, otherPos, Block.getId(otherState));
             }
+            if (state.getValue(ENABLED) && level instanceof ServerLevel serverLevel) {
+                BlockPos lowerPos = half == DoubleBlockHalf.UPPER ? pos.below() : pos;
+                serverLevel.setChunkForced(lowerPos.getX() >> 4, lowerPos.getZ() >> 4, false);
+            }
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
@@ -162,6 +167,8 @@ public class EchoPillarBlock extends Block {
             level.setBlock(pos.above(), upperState.setValue(ENABLED, true), 3);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, state));
         level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (level instanceof ServerLevel serverLevel)
+            serverLevel.setChunkForced(pos.getX() >> 4, pos.getZ() >> 4, true);
     }
 
     public static void disable(@Nullable Entity entity, Level level, BlockPos pos, BlockState state, boolean showDisabledMessage) {
@@ -175,6 +182,8 @@ public class EchoPillarBlock extends Block {
                 serverPlayer.displayClientMessage(PILLAR_DISABLED_MESSAGE, false);
             serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0f, false, false);
         }
+        if (level instanceof ServerLevel serverLevel)
+            serverLevel.setChunkForced(pos.getX() >> 4, pos.getZ() >> 4, false);
         ItemEntity shard = new ItemEntity(level, pos.getCenter().x, pos.getY() + 1, pos.getCenter().z, new ItemStack(Items.ECHO_SHARD));
         level.addFreshEntity(shard);
     }

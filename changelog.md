@@ -71,7 +71,9 @@
   * Loose Respawn (Split from Respawn)
   * Echo Pillar (Split from Respawn, renamed from Respawn Obelisk)
     * Now 2 block tall
-    * No longer stores 
+    * No longer stores the bed spawn point, so it works similarly to Respawn Anchors.
+    * Prevents item loss when respawning.
+    * Force loads the chunk it's activated in
 * World
   * Coal & Fire
     * Burnt Logs now correctly fall like gravel and sand

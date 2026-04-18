@@ -33,20 +33,21 @@ public class DeathPenalty extends Feature {
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHDESTROYEXPERIENCE = GameRules.register("insanesurvivaloverhaul:death_destroy_experience", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void onPlayerDeathEarly(LivingDeathEvent event) {
+	public void onPlayerDeath(LivingDeathEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getEntity() instanceof ServerPlayer player))
 			return;
-		int lostItemsPercentage = player.level().getGameRules().getInt(RULE_DEATHLOSEITEMSPERCENTAGE);
-		int lostDurabilityPercentage = player.level().getGameRules().getInt(RULE_DEATHDURABILITYPENALTY);
-		int lostXpPercentage = player.level().getGameRules().getInt(RULE_DEATHEXPERIENCEDROPPED);
+		GameRules gameRules = player.level().getGameRules();
+		int lostItemsPercentage = gameRules.getInt(RULE_DEATHLOSEITEMSPERCENTAGE);
+		int lostDurabilityPercentage = gameRules.getInt(RULE_DEATHDURABILITYPENALTY);
+		int lostXpPercentage = gameRules.getInt(RULE_DEATHEXPERIENCEDROPPED);
 		if (lostItemsPercentage == 0 && lostDurabilityPercentage == 0 && lostXpPercentage == 0) {
-			player.level().getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(false, player.server);
+			gameRules.getRule(GameRules.RULE_KEEPINVENTORY).set(false, player.server);
 			return;
 		}
-		player.level().getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(true, player.server);
-		boolean destroyItems = player.level().getGameRules().getBoolean(RULE_DEATHDESTROYITEMS);
-		boolean destroyXp = player.level().getGameRules().getBoolean(RULE_DEATHDESTROYEXPERIENCE);
+		gameRules.getRule(GameRules.RULE_KEEPINVENTORY).set(true, player.server);
+		boolean destroyItems = gameRules.getBoolean(RULE_DEATHDESTROYITEMS);
+		boolean destroyXp = gameRules.getBoolean(RULE_DEATHDESTROYEXPERIENCE);
 		DeathPenaltyEvent deathEvent = ISOEventHook.onDeathPenalty(player, lostItemsPercentage, lostDurabilityPercentage, destroyItems, lostXpPercentage, destroyXp);
 		if (deathEvent == null)
 			return;

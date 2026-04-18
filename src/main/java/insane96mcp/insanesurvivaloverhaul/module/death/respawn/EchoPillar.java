@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.ActivateEchoPillarTrigger;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.event.DeathPenaltyEvent;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -17,6 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
@@ -82,6 +84,23 @@ public class EchoPillar extends JsonFeature {
 	@Override
 	public String getModConfigFolder() {
 		return InsaneSO.CONFIG_FOLDER;
+	}
+
+	@SubscribeEvent
+	public void onDeathPenalty(DeathPenaltyEvent event) {
+		if (!this.isEnabled())
+			return;
+		ServerPlayer player = event.getPlayer();
+		BlockPos pos = player.getRespawnPosition();
+		if (pos == null)
+			return;
+		ResourceKey<Level> respawnDim = player.getRespawnDimension();
+		Level respawnLevel = player.getServer().getLevel(respawnDim);
+		if (respawnLevel == null
+				|| !respawnLevel.getBlockState(pos).is(ECHO_PILLAR.block().get())
+				|| !respawnLevel.getBlockState(pos).getValue(EchoPillarBlock.ENABLED))
+			return;
+		event.setCanceled(true);
 	}
 
 	@SubscribeEvent
