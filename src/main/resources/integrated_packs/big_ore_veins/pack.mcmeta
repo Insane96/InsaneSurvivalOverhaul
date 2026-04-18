@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Generates large ore veins underground with surface ore rocks as indicators",
+        "pack_format": 48
+    }
+}

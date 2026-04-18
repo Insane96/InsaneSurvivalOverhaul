@@ -3,17 +3,13 @@
     "config": {
         "width": {
             "type": "minecraft:uniform",
-            "value": {
-                "max_inclusive": 17,
-                "min_inclusive": 12
-            }
+            "min_inclusive": 12,
+            "max_inclusive": 17
         },
         "height": {
             "type": "minecraft:uniform",
-            "value": {
-                "max_inclusive": 17,
-                "min_inclusive": 12
-            }
+            "min_inclusive": 12,
+            "max_inclusive": 17
         },
         "discard_chance_on_air_exposure": 0.5,
         "targets": [
@@ -21,7 +17,7 @@
                 "target": {
                     "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
                     "tag": "minecraft:stone_ore_replaceables",
-                    "probability": 0.12
+                    "probability": 0.40
                 },
                 "state": {
                     "Name": "minecraft:copper_ore"
@@ -31,7 +27,7 @@
                 "target": {
                     "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
                     "tag": "minecraft:deepslate_ore_replaceables",
-                    "probability": 0.12
+                    "probability": 0.40
                 },
                 "state": {
                     "Name": "minecraft:deepslate_copper_ore"

@@ -3,17 +3,13 @@
     "config": {
         "width": {
             "type": "minecraft:uniform",
-            "value": {
-                "max_inclusive": 20,
-                "min_inclusive": 15
-            }
+            "min_inclusive": 15,
+            "max_inclusive": 20
         },
         "height": {
             "type": "minecraft:uniform",
-            "value": {
-                "max_inclusive": 12,
-                "min_inclusive": 7
-            }
+            "min_inclusive": 7,
+            "max_inclusive": 12
         },
         "discard_chance_on_air_exposure": 0.5,
         "targets": [
@@ -21,7 +17,7 @@
                 "target": {
                     "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
                     "tag": "minecraft:stone_ore_replaceables",
-                    "probability": 0.12
+                    "probability": 0.40
                 },
                 "state": {
                     "Name": "minecraft:gold_ore"
@@ -31,7 +27,7 @@
                 "target": {
                     "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
                     "tag": "minecraft:deepslate_ore_replaceables",
-                    "probability": 0.12
+                    "probability": 0.40
                 },
                 "state": {
                     "Name": "minecraft:deepslate_gold_ore"
