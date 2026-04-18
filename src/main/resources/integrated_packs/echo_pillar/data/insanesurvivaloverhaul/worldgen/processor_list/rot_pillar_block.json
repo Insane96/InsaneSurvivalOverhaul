@@ -1,0 +1,40 @@
+[
+    {
+        "processor_type": "minecraft:rule",
+        "rules": [
+            {
+                "location_predicate": {
+                    "predicate_type": "minecraft:always_true"
+                },
+                "input_predicate": {
+                    "predicate_type": "minecraft:random_block_match",
+                    "block": "minecraft:cobblestone",
+                    "probability": 0.6
+                },
+                "output_state": {
+                    "Name": "minecraft:mossy_cobblestone"
+                }
+            },
+            {
+                "location_predicate": {
+                    "predicate_type": "minecraft:always_true"
+                },
+                "input_predicate": {
+                    "predicate_type": "minecraft:random_blockstate_match",
+                    "block_state": {
+                        "Name": "minecraft:cobblestone_slab"
+                    },
+                    "probability": 0.6
+                },
+                "output_state": {
+                    "Name": "minecraft:mossy_cobblestone_slab"
+                }
+            }
+        ]
+    },
+    {
+        "processor_type": "minecraft:block_rot",
+        "integrity": 0.75,
+        "rottable_blocks": "#iguanatweaksreborn:structures/respawn_obelisk/blocks_to_rot"
+    }
+]

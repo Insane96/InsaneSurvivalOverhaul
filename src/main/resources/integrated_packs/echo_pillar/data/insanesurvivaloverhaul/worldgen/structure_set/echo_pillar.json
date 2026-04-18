@@ -1,0 +1,14 @@
+{
+    "structures": [
+        {
+            "structure": "iguanatweaksreborn:respawn_obelisk",
+            "weight": 1
+        }
+    ],
+    "placement": {
+        "type": "minecraft:random_spread",
+        "salt": 1488222918,
+        "spacing": 23,
+        "separation": 13
+    }
+}

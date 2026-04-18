@@ -1,5 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillarBlock;
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -40,6 +42,8 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         turtleScute();
 
         logBlock((RotatedPillarBlock) CoalFire.BURNT_LOG.block().get());
+
+        echoPillar();
     }
 
     private void echoLantern() {
@@ -92,6 +96,20 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         simpleBlock(potted,
                 models().withExistingParent("potted_" + name, mcLoc("block/flower_pot_cross"))
                         .texture("plant", modLoc("block/" + name)));
+    }
+
+    private void echoPillar() {
+        ModelFile disabled = models().cubeBottomTop("echo_pillar_disabled",
+            modLoc("block/echo_pillar_side_disabled"),
+            modLoc("block/echo_pillar_bottom"),
+            modLoc("block/echo_pillar_bottom"));
+        ModelFile enabled = models().cubeBottomTop("echo_pillar_enabled",
+            modLoc("block/echo_pillar_side_enabled"),
+            modLoc("block/echo_pillar_bottom"),
+            modLoc("block/echo_pillar_bottom"));
+        getVariantBuilder(Respawn.ECHO_PILLAR.block().get())
+            .partialState().with(EchoPillarBlock.ENABLED, false).modelForState().modelFile(disabled).addModel()
+            .partialState().with(EchoPillarBlock.ENABLED, true).modelForState().modelFile(enabled).addModel();
     }
 
     private void wildCrop(DeferredHolder<Block, ?> block) {

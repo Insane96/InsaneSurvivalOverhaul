@@ -2,21 +2,27 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanelib.data.FeatureEnabledCondition;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.data.criterion.ActivateEchoPillarTrigger;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.OverweightPouchCarryTrigger;
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.util.ArrayList;
@@ -72,6 +78,39 @@ public class ISOAdvancementProvider implements DataProvider {
                         new OverweightPouchCarryTrigger.TriggerInstance(Optional.empty())))
                 .build(InsaneSO.location("story/overweight_pouch"));
         save(output, registries, futures, overweightPouch, pouchEnabled);
+
+        FeatureEnabledCondition respawnEnabled = new FeatureEnabledCondition("Respawn");
+        ResourceKey<Structure> echoPillarStructureKey = ResourceKey.create(Registries.STRUCTURE, InsaneSO.location("respawn_obelisk"));
+
+        @SuppressWarnings("removal")
+        AdvancementHolder echoPillar = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        new ItemStack(Respawn.ECHO_PILLAR.item().get()),
+                        Component.translatable("advancements.insanesurvivaloverhaul.echo_pillar.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.echo_pillar.description"),
+                        Optional.empty(),
+                        AdvancementType.TASK,
+                        true, true, false))
+                .parent(ResourceLocation.withDefaultNamespace("adventure/root"))
+                .addCriterion("echo_pillar", PlayerTrigger.TriggerInstance.located(
+                        LocationPredicate.Builder.inStructure(registries.lookupOrThrow(Registries.STRUCTURE).getOrThrow(echoPillarStructureKey))))
+                .build(InsaneSO.location("adventure/echo_pillar"));
+        save(output, registries, futures, echoPillar, respawnEnabled);
+
+        @SuppressWarnings("removal")
+        AdvancementHolder activateEchoPillar = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        new ItemStack(Respawn.ECHO_PILLAR.item().get()),
+                        Component.translatable("advancements.insanesurvivaloverhaul.activate_echo_pillar.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.activate_echo_pillar.description"),
+                        Optional.empty(),
+                        AdvancementType.GOAL,
+                        true, true, false))
+                .parent(echoPillar)
+                .addCriterion("activate_echo_pillar", Respawn.ACTIVATE_ECHO_PILLAR.get().createCriterion(
+                        new ActivateEchoPillarTrigger.TriggerInstance(Optional.empty())))
+                .build(InsaneSO.location("adventure/activate_echo_pillar"));
+        save(output, registries, futures, activateEchoPillar, respawnEnabled);
     }
 
     private void save(CachedOutput output, HolderLookup.Provider registries, List<CompletableFuture<?>> futures,

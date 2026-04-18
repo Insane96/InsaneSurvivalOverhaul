@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
@@ -81,6 +82,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addOptional(ResourceLocation.parse("farmersdelight:tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:budding_tomatoes")).addOptional(ResourceLocation.parse("farmersdelight:rice")).addOptional(ResourceLocation.parse("farmersdelight:rice_panicles")).addOptional(ResourceLocation.parse("farmersdelight:cabbages")).addOptional(ResourceLocation.parse("farmersdelight:onions"));
         tag(Hoes.CAN_SCYTHE)
                 .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS).add(Blocks.DEAD_BUSH);
+        tag(Respawn.ECHO_PILLAR_BLOCKS_TO_ROT)
+                .add(Blocks.COBBLESTONE).add(Blocks.MOSSY_COBBLESTONE).add(Blocks.COBBLESTONE_SLAB).add(Blocks.MOSSY_COBBLESTONE_SLAB);
     }
 
     public static TagKey<Block> create(String tagName) {

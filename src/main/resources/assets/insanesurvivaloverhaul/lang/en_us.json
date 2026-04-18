@@ -30,6 +30,22 @@
     "item.insanesurvivaloverhaul.shortbow": "Shortbow",
 
 
+    "insanesurvivaloverhaul:death_module": "Death",
+
+    "insanesurvivaloverhaul.loose_world_respawn_point": "Your respawn point is loose, you'll respawn in a radius from world spawn.",
+    "insanesurvivaloverhaul.loose_bed_respawn_point": "Your respawn point is loose, you'll respawn in a radius from your bed.",
+    "effect.insanesurvivaloverhaul.ghostly": "Ghostly",
+    "effect.insanesurvivaloverhaul.ghostly.description": "You're undetected by monsters",
+    "insanesurvivaloverhaul.echo_pillar_catalyst": "Use on a Echo Pillar to activate it.",
+    "insanesurvivaloverhaul.requires_catalyst": "Can't activate. The Pillar requires a catalyst.",
+    "insanesurvivaloverhaul.obelisk_disabled": "Echo Pillar disabled. Players' respawn point has been reset.",
+    "insanesurvivaloverhaul.fail_echo_pillar": "You couldn't respawn at the Pillar because it was disabled.",
+    "block.insanesurvivaloverhaul.echo_pillar": "Echo Pillar",
+    "advancements.insanesurvivaloverhaul.echo_pillar.title": "The ancients respawned here",
+    "advancements.insanesurvivaloverhaul.echo_pillar.description": "Find an Echo Pillar.",
+    "advancements.insanesurvivaloverhaul.activate_echo_pillar.title": "Keep Inventory",
+    "advancements.insanesurvivaloverhaul.activate_echo_pillar.description": "Activate an Echo Pillar with an Echo Shard. Respawning here will give some effects and will prevent inventory loss.",
+
     "insanesurvivaloverhaul:farming_module": "Farming",
 
     "insanesurvivaloverhaul.weak_hoe": "This hoe is too weak to till soil",
