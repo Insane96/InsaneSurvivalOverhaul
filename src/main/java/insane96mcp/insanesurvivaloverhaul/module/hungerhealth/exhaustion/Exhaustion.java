@@ -35,7 +35,7 @@ public class Exhaustion extends Feature {
 	@Config(min = 0d, description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion.")
 	public static Double bowChargeExhaustion = 0.005d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's not sprinting. Vanilla is 0.05")
-	public static Double jumpExhaustion = 0.05d;
+	public static Double jumpExhaustion = 0.10d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's sprinting. Vanilla is 0.2")
 	public static Double jumpExhaustionSprint = 0.5d;
 	@Config(description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect")
