@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "waterlogged=false": [
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock"
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 90
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 180
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 270
+      }
+    ],
+    "waterlogged=true": [
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock"
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 90
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 180
+      },
+      {
+        "model": "insanesurvivaloverhaul:block/gold_ore_rock",
+        "y": 270
+      }
+    ]
+  }
+}

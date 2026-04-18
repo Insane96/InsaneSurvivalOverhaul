@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:add_features",
+    "biomes": "#neoforge:is_hot/overworld",
+    "features": "insanesurvivaloverhaul:gold_ore_big_vein",
+    "step": "underground_ores"
+}

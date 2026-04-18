@@ -4,6 +4,9 @@ import com.mojang.serialization.Codec;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.condition.FedCondition;
 import insane96mcp.insanesurvivaloverhaul.data.condition.LivestockAgeCondition;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeinFeature;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.OreWithRandomPatchConfiguration;
+import insane96mcp.insanesurvivaloverhaul.world.level.levelgen.structure.templatesystem.RandomBlockTagMatchTest;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -17,6 +20,8 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -46,6 +51,14 @@ public class ISORegistries {
             LOOT_CONDITIONS.register("has_been_fed_recently", () -> new LootItemConditionType(FedCondition.CODEC));
     public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
             LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
+
+    public static final DeferredRegister<Feature<?>> FEATURES = createRegistry(BuiltInRegistries.FEATURE);
+    public static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = createRegistry(BuiltInRegistries.RULE_TEST);
+
+    public static final DeferredHolder<RuleTestType<?>, RuleTestType<RandomBlockTagMatchTest>> RANDOM_BLOCK_TAG_MATCH =
+            RULE_TEST_TYPES.register("random_block_tag_match", RandomBlockTagMatchTest.Type::new);
+    public static final DeferredHolder<Feature<?>, BigOreVeinFeature> BIG_ORE_VEIN_FEATURE =
+            FEATURES.register("ore_with_surface_feature", () -> new BigOreVeinFeature(OreWithRandomPatchConfiguration.CODEC));
 
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = createAttachmentTypesRegistry();
 

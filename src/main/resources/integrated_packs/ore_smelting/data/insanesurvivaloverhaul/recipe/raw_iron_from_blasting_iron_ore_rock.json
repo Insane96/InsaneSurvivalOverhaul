@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 400,
+  "experience": 2.0,
+  "group": "iron_ingot",
+  "ingredient": {
+    "item": "insanesurvivaloverhaul:iron_ore_rock"
+  },
+  "result": {
+    "id": "minecraft:raw_iron"
+  }
+}

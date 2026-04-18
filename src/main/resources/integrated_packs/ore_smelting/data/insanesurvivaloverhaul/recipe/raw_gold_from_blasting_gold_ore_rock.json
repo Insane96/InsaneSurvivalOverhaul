@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 400,
+  "experience": 4.0,
+  "group": "gold_ingot",
+  "ingredient": {
+    "item": "insanesurvivaloverhaul:gold_ore_rock"
+  },
+  "result": {
+    "id": "minecraft:raw_gold"
+  }
+}

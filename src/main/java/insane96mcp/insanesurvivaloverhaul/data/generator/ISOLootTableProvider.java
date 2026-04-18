@@ -4,6 +4,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -81,6 +82,16 @@ public class ISOLootTableProvider extends LootTableProvider {
 
             turtleScute();
 
+            add(BigOreVeins.IRON_ORE_ROCK.block().get(), createSelfDropDispatchTable(
+                BigOreVeins.IRON_ORE_ROCK.block().get(), hasSilkTouch(),
+                applyExplosionDecay(BigOreVeins.IRON_ORE_ROCK.block().get(), LootItem.lootTableItem(Items.RAW_IRON))));
+            add(BigOreVeins.GOLD_ORE_ROCK.block().get(), createSelfDropDispatchTable(
+                BigOreVeins.GOLD_ORE_ROCK.block().get(), hasSilkTouch(),
+                applyExplosionDecay(BigOreVeins.GOLD_ORE_ROCK.block().get(), LootItem.lootTableItem(Items.RAW_GOLD))));
+            add(BigOreVeins.COPPER_ORE_ROCK.block().get(), createSelfDropDispatchTable(
+                BigOreVeins.COPPER_ORE_ROCK.block().get(), hasSilkTouch(),
+                applyExplosionDecay(BigOreVeins.COPPER_ORE_ROCK.block().get(), LootItem.lootTableItem(Items.RAW_COPPER))));
+
             add(Crops.WILD_WHEAT.get(), wildCropTable(Items.WHEAT_SEEDS, Items.WHEAT, null, null));
             add(Crops.WILD_BEETROOTS.get(), wildCropTable(Items.BEETROOT_SEEDS, Items.BEETROOT, null, null));
             add(Crops.WILD_CARROTS.get(), wildCropTable(Crops.CARROT_SEEDS.get(), Items.CARROT, Items.AZURE_BLUET, null));
@@ -135,7 +146,10 @@ public class ISOLootTableProvider extends LootTableProvider {
                 Crops.WILD_CARROTS.get(),
                 Crops.WILD_POTATOES.get(),
                 Minecarts.COPPER_POWERED_RAIL.block().get(),
-                Minecarts.GOLDEN_POWERED_RAIL.block().get()
+                Minecarts.GOLDEN_POWERED_RAIL.block().get(),
+                BigOreVeins.IRON_ORE_ROCK.block().get(),
+                BigOreVeins.GOLD_ORE_ROCK.block().get(),
+                BigOreVeins.COPPER_ORE_ROCK.block().get()
             );
         }
     }

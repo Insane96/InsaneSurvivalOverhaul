@@ -1,0 +1,7 @@
+{
+  "parent": "insanesurvivaloverhaul:block/ore_rock",
+  "textures": {
+    "particle": "minecraft:block/iron_ore",
+    "texture": "minecraft:block/iron_ore"
+  }
+}

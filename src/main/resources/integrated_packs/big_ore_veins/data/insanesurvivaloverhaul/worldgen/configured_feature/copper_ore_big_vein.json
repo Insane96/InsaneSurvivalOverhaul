@@ -1,0 +1,66 @@
+{
+    "type": "insanesurvivaloverhaul:ore_with_surface_feature",
+    "config": {
+        "width": {
+            "type": "minecraft:uniform",
+            "value": {
+                "max_inclusive": 17,
+                "min_inclusive": 12
+            }
+        },
+        "height": {
+            "type": "minecraft:uniform",
+            "value": {
+                "max_inclusive": 17,
+                "min_inclusive": 12
+            }
+        },
+        "discard_chance_on_air_exposure": 0.5,
+        "targets": [
+            {
+                "target": {
+                    "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
+                    "tag": "minecraft:stone_ore_replaceables",
+                    "probability": 0.12
+                },
+                "state": {
+                    "Name": "minecraft:copper_ore"
+                }
+            },
+            {
+                "target": {
+                    "predicate_type": "insanesurvivaloverhaul:random_block_tag_match",
+                    "tag": "minecraft:deepslate_ore_replaceables",
+                    "probability": 0.12
+                },
+                "state": {
+                    "Name": "minecraft:deepslate_copper_ore"
+                }
+            }
+        ],
+        "surface_patch_config": {
+            "tries": 25,
+            "xz_spread": 8,
+            "y_spread": 5,
+            "feature": {
+                "feature": {
+                    "type": "minecraft:simple_block",
+                    "config": {
+                        "to_place": {
+                            "type": "minecraft:simple_state_provider",
+                            "state": {
+                                "Name": "insanesurvivaloverhaul:copper_ore_rock"
+                            }
+                        }
+                    }
+                },
+                "placement": [
+                    {
+                        "type": "minecraft:heightmap",
+                        "heightmap": "OCEAN_FLOOR_WG"
+                    }
+                ]
+            }
+        }
+    }
+}

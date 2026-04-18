@@ -5,20 +5,20 @@ import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillarBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
+import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -43,6 +43,10 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         turtleScute();
 
         logBlock((RotatedPillarBlock) CoalFire.BURNT_LOG.block().get());
+
+        oreRock(BigOreVeins.IRON_ORE_ROCK, "iron_ore");
+        oreRock(BigOreVeins.GOLD_ORE_ROCK, "gold_ore");
+        oreRock(BigOreVeins.COPPER_ORE_ROCK, "copper_ore");
 
         echoPillar();
     }
@@ -121,6 +125,22 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
             .partialState().with(EchoPillarBlock.ENABLED, true).with(EchoPillarBlock.HALF, DoubleBlockHalf.LOWER).modelForState().modelFile(lowerEnabled).addModel()
             .partialState().with(EchoPillarBlock.ENABLED, false).with(EchoPillarBlock.HALF, DoubleBlockHalf.UPPER).modelForState().modelFile(upperDisabled).addModel()
             .partialState().with(EchoPillarBlock.ENABLED, true).with(EchoPillarBlock.HALF, DoubleBlockHalf.UPPER).modelForState().modelFile(upperEnabled).addModel();
+    }
+
+    private void oreRock(SimpleBlockWithItem rock, String oreTextureName) {
+        String name = rock.block().getId().getPath();
+        ModelFile model = models().withExistingParent(name, modLoc("block/ore_rock"))
+                .texture("particle", mcLoc("block/" + oreTextureName))
+                .texture("texture", mcLoc("block/" + oreTextureName));
+        VariantBlockStateBuilder builder = getVariantBuilder((Block) rock.block().get());
+        for (Boolean waterlogged : new Boolean[]{false, true}) {
+            builder.partialState().with(GroundRockBlock.WATERLOGGED, waterlogged).setModels(
+                new ConfiguredModel(model, 0, 0, false),
+                new ConfiguredModel(model, 0, 90, false),
+                new ConfiguredModel(model, 0, 180, false),
+                new ConfiguredModel(model, 0, 270, false)
+            );
+        }
     }
 
     private void wildCrop(DeferredHolder<Block, ?> block) {
