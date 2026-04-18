@@ -27,29 +27,29 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
         WorldGenLevel worldgenlevel = context.level();
         OreWithRandomPatchConfiguration configuration = context.config();
 
-        int widthX = configuration.width.sample(context.random());
-        int height = configuration.height.sample(context.random());
-        int widthZ = configuration.width.sample(context.random());
-        int minX = blockpos.getX() - widthX / 2;
-        int maxX = blockpos.getX() + widthX / 2;
-        int minY = blockpos.getY() - height / 2;
-        int maxY = blockpos.getY() + height / 2;
-        int minZ = blockpos.getZ() - widthZ / 2;
-        int maxZ = blockpos.getZ() + widthZ / 2;
+        int radius = configuration.radius.sample(randomsource);
+        int radiusSq = radius * radius;
 
         int placed = 0;
         try (BulkSectionAccess bulksectionaccess = new BulkSectionAccess(worldgenlevel)) {
             BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-            for (int x = minX; x < maxX; x++) {
-                for (int y = minY; y < maxY; y++) {
-                    for (int z = minZ; z < maxZ; z++) {
-                        mutableBlockPos.set(x, y, z);
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dy = -radius; dy <= radius; dy++) {
+                    for (int dz = -radius; dz <= radius; dz++) {
+                        if (dx * dx + dy * dy + dz * dz > radiusSq)
+                            continue;
+                        if (configuration.centerFalloff > 0.0F) {
+                            float normDist = (float) Math.sqrt(dx * dx + dy * dy + dz * dz) / radius;
+                            if (randomsource.nextFloat() < normDist * configuration.centerFalloff)
+                                continue;
+                        }
+                        mutableBlockPos.set(blockpos.getX() + dx, blockpos.getY() + dy, blockpos.getZ() + dz);
                         if (worldgenlevel.ensureCanWrite(mutableBlockPos)) {
                             LevelChunkSection levelchunksection = bulksectionaccess.getSection(mutableBlockPos);
                             if (levelchunksection != null) {
-                                int i3 = SectionPos.sectionRelative(x);
-                                int j3 = SectionPos.sectionRelative(y);
-                                int k3 = SectionPos.sectionRelative(z);
+                                int i3 = SectionPos.sectionRelative(mutableBlockPos.getX());
+                                int j3 = SectionPos.sectionRelative(mutableBlockPos.getY());
+                                int k3 = SectionPos.sectionRelative(mutableBlockPos.getZ());
                                 BlockState blockstate = levelchunksection.getBlockState(i3, j3, k3);
 
                                 for (OreConfiguration.TargetBlockState oreconfiguration$targetblockstate : configuration.targetStates) {

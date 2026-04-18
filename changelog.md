@@ -42,6 +42,10 @@
       * Heavily increased experience from smelting ores
   * Misc
     * Insta-break heads and silverfish blocks are now part of the `block_data` data pack
+  * Big Ore Veins
+    * Ported from ISE
+    * Now generate in a sphere, with more ores closer to the center
+    * No poor or rich ores
 * Misc
   * Potion and Effects
     * Potion and Effects now enables a data pack that changes potions stack sizes
