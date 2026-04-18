@@ -15,6 +15,7 @@ import insane96mcp.insanesurvivaloverhaul.mixin.accessor.LivingEntityAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.ServerLevelAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.world.thunderstorms.Thunderstorms;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -355,6 +356,7 @@ public class Tiredness extends JsonFeature {
 		});
 
 		skipTime(event, highestTired.get());
+		Thunderstorms.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
 	}
 
 	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
@@ -371,22 +373,12 @@ public class Tiredness extends JsonFeature {
 		int rainTime = ((ServerLevelAccessor)level).getServerLevelData().getRainTime();
 		int thunderTime = ((ServerLevelAccessor)level).getServerLevelData().getThunderTime();
 		int clearWeatherTime = ((ServerLevelAccessor)level).getServerLevelData().getClearWeatherTime();
-		if (rainTime > 0) {
-			rainTime -= timeSkipped;
-			((ServerLevelAccessor) level).getServerLevelData().setRainTime(Math.max(rainTime, 0));
-			if (rainTime <= 0)
-				((ServerLevelAccessor) level).getServerLevelData().setRaining(false);
-		}
-		if (thunderTime > 0) {
-			thunderTime -= timeSkipped;
-			((ServerLevelAccessor) level).getServerLevelData().setThunderTime(Math.max(thunderTime, 0));
-			if (thunderTime <= 0)
-				((ServerLevelAccessor) level).getServerLevelData().setThundering(false);
-		}
-		if (clearWeatherTime > 0) {
-			clearWeatherTime -= timeSkipped;
-            ((ServerLevelAccessor) level).getServerLevelData().setClearWeatherTime(Math.max(clearWeatherTime, 0));
-		}
+		if (rainTime > 0)
+			((ServerLevelAccessor) level).getServerLevelData().setRainTime(Math.max(rainTime - timeSkipped, 1));
+		if (thunderTime > 0)
+			((ServerLevelAccessor) level).getServerLevelData().setThunderTime(Math.max(thunderTime - timeSkipped, 1));
+		if (clearWeatherTime > 0)
+			((ServerLevelAccessor) level).getServerLevelData().setClearWeatherTime(Math.max(clearWeatherTime - timeSkipped, 1));
 		//Return false to cancel the vanilla method of resetting the weather
 		return false;
 	}

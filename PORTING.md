@@ -80,7 +80,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] MiningMisc
 - [x] BlockDefinition
 - [ ] BlockHardness
-- [ ] BeegOreVeins (ITE)
+- [x] BeegOreVeins (ITE)
 - [x] ~~Durium~~ (ITE)
 - [ ] Forging (ITE)
 - [x] ~~Keego~~ (ITE)

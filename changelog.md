@@ -96,7 +96,7 @@
   * Fast leaf decay: many mods already do it, probably better
   * Seasons: as much as I like seasons, I'm trying to keep the mod as vanilla and as other mods dependency free as possible
   * Timber trees: HC's TreeChop is good enough with a few config changes
-  * Weather: the only feature in this list I don't know if I want to keep it, but for now, now porting
+  * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
 ## Upcoming
@@ -114,7 +114,8 @@
 * Added back Item features: Unvanishable Items (aka Unbreakable Items), Pouch, Item tooltips (renamed from Misc items)
 * Added back Movement features: Minecarts
   * Minecarts with passengers and chests now forceload chunks they are in, allowing them to travel through unloaded chunks
-* Added back World features: Coal & Fire, Cyan Flower, Berries, Nether
+* Added back Mining features: Big Ore Veins (from ISE)
+* Added back World features: Coal & Fire, Cyan Flower, Berries, Nether, Thunderstorm Intensity
 * Exhaustion when jumping is now configurable
   * Jumping while sprinting now consumes much more hunger (2.5x)
 * Added command to get and set food stats (nutrition, saturation and exhaustion)
