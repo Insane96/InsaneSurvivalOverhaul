@@ -35,6 +35,6 @@
     {
         "processor_type": "minecraft:block_rot",
         "integrity": 0.75,
-        "rottable_blocks": "#iguanatweaksreborn:structures/respawn_obelisk/blocks_to_rot"
+        "rottable_blocks": "#insanesurvivaloverhaul:structures/echo_pillar/blocks_to_rot"
     }
 ]

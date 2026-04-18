@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillarBlock;
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -107,7 +107,7 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
             modLoc("block/echo_pillar_side_enabled"),
             modLoc("block/echo_pillar_bottom"),
             modLoc("block/echo_pillar_bottom"));
-        getVariantBuilder(Respawn.ECHO_PILLAR.block().get())
+        getVariantBuilder(EchoPillar.ECHO_PILLAR.block().get())
             .partialState().with(EchoPillarBlock.ENABLED, false).modelForState().modelFile(disabled).addModel()
             .partialState().with(EchoPillarBlock.ENABLED, true).modelForState().modelFile(enabled).addModel();
     }

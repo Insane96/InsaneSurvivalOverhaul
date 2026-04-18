@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
@@ -112,7 +112,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(Spawners.SPAWNER_REACTIVATOR_TAG)
                 .add(Items.ECHO_SHARD);
-        tag(Respawn.ECHO_PILLAR_CATALYST)
+        tag(EchoPillar.ECHO_PILLAR_CATALYST)
                 .add(Items.ECHO_SHARD);
     }
 

@@ -15,7 +15,7 @@ import java.util.function.Predicate;
  * Fired on NeoForge's event bus before {@link insane96mcp.insanesurvivaloverhaul.module.death.DeathPenalty}
  * processes item and experience loss on player death.
  * <p>
- * <b>Cancel</b> to skip all penalties entirely (e.g. player respawning at an obelisk).
+ * <b>Cancel</b> to skip all penalties entirely (e.g. player respawning at a Pillar).
  * <p>
  * <b>Mutable penalty fields</b> ({@code lostItemsPercentage}, {@code lostDurabilityPercentage},
  * {@code destroyItems}, {@code lostXpPercentage}, {@code destroyXp}) can be adjusted before processing runs.

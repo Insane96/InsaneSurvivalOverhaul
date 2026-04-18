@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "echo_pillar": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "structure": "insanesurvivaloverhaul:echo_pillar"
+        }
+      }
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.echo_pillar.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:echo_pillar"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.echo_pillar.title"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "echo_pillar"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

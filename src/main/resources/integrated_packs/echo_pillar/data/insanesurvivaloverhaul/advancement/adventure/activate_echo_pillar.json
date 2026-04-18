@@ -1,0 +1,29 @@
+{
+  "parent": "insanesurvivaloverhaul:adventure/echo_pillar",
+  "criteria": {
+    "activate_echo_pillar": {
+      "trigger": "insanesurvivaloverhaul:activate_echo_pillar"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.activate_echo_pillar.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:echo_pillar"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.activate_echo_pillar.title"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "activate_echo_pillar"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

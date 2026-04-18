@@ -70,6 +70,8 @@
     * On death the player will now lose 15% of durability on the items in the inventory and will drop 30% of their inventory items. Will also drop 30% of their experience
   * Player killer bounty
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
+  * Loose Respawn (Split from Respawn)
+  * Echo Pillar (Split from Respawn, renamed from Respawn Obelisk)
 * World
   * Coal & Fire
     * Burnt Logs now correctly fall like gravel and sand

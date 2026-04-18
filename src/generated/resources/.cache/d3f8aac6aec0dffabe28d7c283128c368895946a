@@ -1,6 +1,7 @@
-// 1.21.1	2026-04-16T12:11:07.3819717	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-04-18T10:56:14.3068583	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 b8c57283fcfa3f505c00b400c25033af898cb5ea data/insanesurvivaloverhaul/tags/item/drinking_foods.json
+3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/echo_pillar_catalyst.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/insanesurvivaloverhaul/tags/item/energy_boost.json
 75c2367ef53ee74f77ac0b8a919163edff282904 data/insanesurvivaloverhaul/tags/item/equipment/hand/wooden.json
 af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/horse_armors.json

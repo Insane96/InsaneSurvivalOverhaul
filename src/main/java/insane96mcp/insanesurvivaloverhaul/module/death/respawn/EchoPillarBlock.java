@@ -36,7 +36,7 @@ import java.util.Optional;
 
 public class EchoPillarBlock extends Block {
     public static final MutableComponent REQUIRES_CATALYST_MESSAGE = Component.translatable(InsaneSO.lang("requires_catalyst"));
-    public static final MutableComponent OBELISK_DISABLED_MESSAGE = Component.translatable(InsaneSO.lang("obelisk_disabled"));
+    public static final MutableComponent PILLAR_DISABLED_MESSAGE = Component.translatable(InsaneSO.lang("pillar_disabled"));
 
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
@@ -72,13 +72,13 @@ public class EchoPillarBlock extends Block {
             }
         }
         else {
-            if (player.getItemInHand(hand).is(Respawn.ECHO_PILLAR_CATALYST)) {
+            if (player.getItemInHand(hand).is(EchoPillar.ECHO_PILLAR_CATALYST)) {
                 enable(player, level, pos, state);
                 player.getItemInHand(hand).shrink(1);
                 if (player instanceof ServerPlayer serverPlayer && (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition()))) {
                     serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
                     level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    Respawn.ACTIVATE_ECHO_PILLAR.get().trigger(serverPlayer);
+                    EchoPillar.ACTIVATE_ECHO_PILLAR.get().trigger(serverPlayer);
                 }
                 return InteractionResult.SUCCESS;
             }
@@ -105,7 +105,7 @@ public class EchoPillarBlock extends Block {
         level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
         if (entity instanceof ServerPlayer serverPlayer) {
             if (showDisabledMessage)
-                serverPlayer.displayClientMessage(OBELISK_DISABLED_MESSAGE, false);
+                serverPlayer.displayClientMessage(PILLAR_DISABLED_MESSAGE, false);
             serverPlayer.setRespawnPosition(Level.OVERWORLD, null, 0f, false, false);
         }
         ItemEntity shard = new ItemEntity(level, pos.getCenter().x, pos.getY() + 1, pos.getCenter().z, new ItemStack(Items.ECHO_SHARD));
@@ -141,7 +141,7 @@ public class EchoPillarBlock extends Block {
     }
 
     public static void onPillarRespawn(Player player, Level level, BlockPos respawnPos) {
-        for (SerializableMobEffectInstance ISOMobEffectInstance : Respawn.echoPillarEffects) {
+        for (SerializableMobEffectInstance ISOMobEffectInstance : EchoPillar.echoPillarEffects) {
             player.addEffect(ISOMobEffectInstance.getMobEffectInstance());
         }
     }

@@ -128,7 +128,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] ~~Sleeping~~ (unused)
 - [x] ~~SleepingEffects~~ (unused)
 - [x] Death
-- [ ] Respawn
+- [x] Respawn (Split into Echo Pillar and Loose Respawn)
 - [x] RespawnPenalties
 - [x] Tiredness
 

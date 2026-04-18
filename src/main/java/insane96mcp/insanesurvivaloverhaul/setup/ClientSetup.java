@@ -3,7 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.Respawn;
+import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -42,8 +42,8 @@ public class ClientSetup {
             if (Feature.isEnabled(Spawning.class)) {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
             }
-            if (Feature.isEnabled(Respawn.class)) {
-                addBefore(event, Items.RESPAWN_ANCHOR, Respawn.ECHO_PILLAR.item().get());
+            if (Feature.isEnabled(EchoPillar.class)) {
+                addBefore(event, Items.RESPAWN_ANCHOR, EchoPillar.ECHO_PILLAR.item().get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {

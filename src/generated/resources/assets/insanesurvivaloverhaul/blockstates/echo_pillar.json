@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "enabled=false": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_disabled"
+    },
+    "enabled=true": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_enabled"
+    }
+  }
+}

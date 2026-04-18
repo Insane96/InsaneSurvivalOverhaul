@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-17T20:48:10.0410838	Item Models: insanesurvivaloverhaul
+// 1.21.1	2026-04-18T10:56:14.3108577	Item Models: insanesurvivaloverhaul
 af95c36299e7bcb67f10284892fa8527abee8467 assets/insanesurvivaloverhaul/models/item/brown_mushroom_stew.json
 0b7b3934507ba3180fc1b13b5f466fec26172397 assets/insanesurvivaloverhaul/models/item/burnt_log.json
 92a1f1b3c5712f08d8ce52182c55d106f387a021 assets/insanesurvivaloverhaul/models/item/carrot_seeds.json
@@ -46,6 +46,7 @@ ef155835adad12cdfc9be73c00ad613ffb3dc0df assets/insanesurvivaloverhaul/models/it
 f5117d8df3eca4925464b58b02cbdf75e0fa0593 assets/insanesurvivaloverhaul/models/item/copper_powered_rail.json
 f25cdd5c56e8776122963dc1cbc9d07caeab35a9 assets/insanesurvivaloverhaul/models/item/cyan_flower.json
 3c6f8d100638e5854d7295831161d96bbababb6e assets/insanesurvivaloverhaul/models/item/echo_lantern.json
+6c69bb3fab61b141e62636dd4aa47d437f97ced9 assets/insanesurvivaloverhaul/models/item/echo_pillar.json
 97ae78e112bee2325081706d3ee9b7947fa8470b assets/insanesurvivaloverhaul/models/item/firestarter.json
 8f8e524dd9d1a92041b0b63398c2acf3a2a9c503 assets/insanesurvivaloverhaul/models/item/golden_powered_rail.json
 6ef7503ecb12c213d23714c97b7bbdcf7fcc4120 assets/insanesurvivaloverhaul/models/item/half_heart_texture.json

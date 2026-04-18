@@ -6,8 +6,8 @@
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
-                "location": "iguanatweaksreborn:respawn_obelisk",
-                "processors": "iguanatweaksreborn:rot_obelisk_block"
+                "location": "insanesurvivaloverhaul:echo_pillar",
+                "processors": "insanesurvivaloverhaul:rot_pillar_block"
             }
         }
     ]
