@@ -1,5 +1,3 @@
-* Pouch, coal & fire advancements
-
 ## From 1.20.1
 * Combat
   * Unfair one-shot
@@ -72,6 +70,8 @@
     * Player killer bounty now accounts for multiple unique players killed, increasing the experience multiplier
   * Loose Respawn (Split from Respawn)
   * Echo Pillar (Split from Respawn, renamed from Respawn Obelisk)
+    * Now 2 block tall
+    * No longer stores 
 * World
   * Coal & Fire
     * Burnt Logs now correctly fall like gravel and sand

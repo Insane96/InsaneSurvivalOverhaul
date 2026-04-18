@@ -14,6 +14,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
@@ -99,17 +100,27 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
     }
 
     private void echoPillar() {
-        ModelFile disabled = models().cubeBottomTop("echo_pillar_disabled",
+        ModelFile upperDisabled = models().cubeBottomTop("echo_pillar_upper_disabled",
             modLoc("block/echo_pillar_side_disabled"),
             modLoc("block/echo_pillar_bottom"),
             modLoc("block/echo_pillar_bottom"));
-        ModelFile enabled = models().cubeBottomTop("echo_pillar_enabled",
+        ModelFile upperEnabled = models().cubeBottomTop("echo_pillar_upper_enabled",
             modLoc("block/echo_pillar_side_enabled"),
             modLoc("block/echo_pillar_bottom"),
             modLoc("block/echo_pillar_bottom"));
+        ModelFile lowerDisabled = models().cubeBottomTop("echo_pillar_lower_disabled",
+            modLoc("block/echo_pillar_side_lower_disabled"),
+            modLoc("block/echo_pillar_bottom"),
+            modLoc("block/echo_pillar_bottom"));
+        ModelFile lowerEnabled = models().cubeBottomTop("echo_pillar_lower_enabled",
+            modLoc("block/echo_pillar_side_lower_enabled"),
+            modLoc("block/echo_pillar_bottom"),
+            modLoc("block/echo_pillar_bottom"));
         getVariantBuilder(EchoPillar.ECHO_PILLAR.block().get())
-            .partialState().with(EchoPillarBlock.ENABLED, false).modelForState().modelFile(disabled).addModel()
-            .partialState().with(EchoPillarBlock.ENABLED, true).modelForState().modelFile(enabled).addModel();
+            .partialState().with(EchoPillarBlock.ENABLED, false).with(EchoPillarBlock.HALF, DoubleBlockHalf.LOWER).modelForState().modelFile(lowerDisabled).addModel()
+            .partialState().with(EchoPillarBlock.ENABLED, true).with(EchoPillarBlock.HALF, DoubleBlockHalf.LOWER).modelForState().modelFile(lowerEnabled).addModel()
+            .partialState().with(EchoPillarBlock.ENABLED, false).with(EchoPillarBlock.HALF, DoubleBlockHalf.UPPER).modelForState().modelFile(upperDisabled).addModel()
+            .partialState().with(EchoPillarBlock.ENABLED, true).with(EchoPillarBlock.HALF, DoubleBlockHalf.UPPER).modelForState().modelFile(upperEnabled).addModel();
     }
 
     private void wildCrop(DeferredHolder<Block, ?> block) {

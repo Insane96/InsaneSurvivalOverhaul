@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "insanesurvivaloverhaul:block/echo_pillar_bottom",
+    "side": "insanesurvivaloverhaul:block/echo_pillar_side_lower_disabled",
+    "top": "insanesurvivaloverhaul:block/echo_pillar_bottom"
+  }
+}

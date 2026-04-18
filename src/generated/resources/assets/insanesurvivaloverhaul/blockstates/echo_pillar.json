@@ -1,10 +1,16 @@
 {
   "variants": {
-    "enabled=false": {
-      "model": "insanesurvivaloverhaul:block/echo_pillar_disabled"
+    "enabled=false,half=lower": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_lower_disabled"
     },
-    "enabled=true": {
-      "model": "insanesurvivaloverhaul:block/echo_pillar_enabled"
+    "enabled=false,half=upper": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_upper_disabled"
+    },
+    "enabled=true,half=lower": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_lower_enabled"
+    },
+    "enabled=true,half=upper": {
+      "model": "insanesurvivaloverhaul:block/echo_pillar_upper_enabled"
     }
   }
 }

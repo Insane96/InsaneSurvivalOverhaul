@@ -91,7 +91,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), InsaneSO.location("block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", ResourceLocation.parse("item/powered_rail"));
 
-        withExistingParent("echo_pillar", InsaneSO.location("block/echo_pillar_disabled"));
+        withExistingParent("echo_pillar", InsaneSO.location("block/echo_pillar_upper_disabled"));
 
         basicItem(Pouch.ITEM.get());
     }
