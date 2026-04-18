@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.module.mobs;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.core.BlockPos;
@@ -23,6 +24,9 @@ import javax.annotation.Nullable;
 
 @LoadFeature(module = ISOModules.MOBS, description = "Makes zombie siege happen to the player without the need of a village")
 public class ZombieSiege extends Feature {
+
+    @Config(min = 0)
+    public static Integer zombiesToSpawn = 20;
 
     @SubscribeEvent
     public void onCustomSpawnersInit(ModifyCustomSpawnersEvent event) {
@@ -97,7 +101,7 @@ public class ZombieSiege extends Feature {
                     Vec3 siegeLocation = this.findRandomSpawnPos(level, new BlockPos(this.spawnX, this.spawnY, this.spawnZ));
                     if (siegeLocation != null) {
                         this.nextSpawnTime = 0;
-                        this.zombiesToSpawn = 20;
+                        this.zombiesToSpawn = ZombieSiege.zombiesToSpawn;
                         this.targetPlayer = player;
                         InsaneSO.LOGGER.debug("Starting siege at {}", siegeLocation);
                         break;
