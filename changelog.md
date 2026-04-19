@@ -104,7 +104,7 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
-## Upcoming
+## 5.3.0.0-alpha
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Bone meal
     * Rich farmland has been disabled by default
