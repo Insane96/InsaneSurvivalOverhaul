@@ -43,21 +43,18 @@
                                 }
                             ],
                             "function": "minecraft:furnace_smelt"
-                        },
-                        {
-                            "enchantment": "minecraft:looting",
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1,
-                                "min": 0
-                            },
-                            "function": "minecraft:enchanted_count_increase"
                         }
                     ],
                     "conditions": [
                         {
-                            "condition": "minecraft:random_chance",
-                            "chance": 0.3
+                            "condition": "minecraft:random_chance_with_enchanted_bonus",
+                            "unenchanted_chance": 0.3,
+                            "enchanted_chance": {
+                                "type": "minecraft:linear",
+                                "base": 0.1,
+                                "per_level_above_first": 0.1
+                            },
+                            "enchantment": "minecraft:looting"
                         }
                     ]
                 }
