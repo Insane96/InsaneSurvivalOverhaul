@@ -45,6 +45,7 @@
   * Big Ore Veins
     * Ported from ISE
     * Now generate in a sphere, with more ores closer to the center
+    * Gold, Copper and Iron now generate respectively in hot, temperate and cold biomes
     * No poor or rich ores
 * Misc
   * Potion and Effects

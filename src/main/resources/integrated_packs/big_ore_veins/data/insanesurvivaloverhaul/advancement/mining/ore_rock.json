@@ -1,0 +1,20 @@
+{
+    "parent": "minecraft:story/mine_stone",
+    "display": {
+        "icon": {
+            "id": "insanesurvivaloverhaul:iron_ore_rock"
+        },
+        "title": {"translate": "advancements.insanesurvivaloverhaul.mining.ore_rock.title"},
+        "description": {"translate": "advancements.insanesurvivaloverhaul.mining.ore_rock.description"},
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "break_ore_rock": {
+            "trigger": "insanelib:block_broken",
+            "conditions": {"tag": "insanesurvivaloverhaul:ore_rocks"}
+        }
+    }
+}

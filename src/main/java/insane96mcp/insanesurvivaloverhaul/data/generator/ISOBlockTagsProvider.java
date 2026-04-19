@@ -5,6 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
@@ -45,7 +46,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(Spawning.ECHO_LANTERN.block().get());
+                .add(Spawning.ECHO_LANTERN.block().get())
+                .add(BigOreVeins.COPPER_ORE_ROCK.block().get(), BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.GOLD_ORE_ROCK.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(BoneMeal.RICH_FARMLAND.block().get())
                 .add(CoalFire.BURNT_LOG.block().get());
@@ -84,6 +86,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTag(TALL_GRASS).addTag(BlockTags.FLOWERS).add(Blocks.DEAD_BUSH);
         tag(EchoPillar.ECHO_PILLAR_BLOCKS_TO_ROT)
                 .add(Blocks.COBBLESTONE).add(Blocks.MOSSY_COBBLESTONE).add(Blocks.COBBLESTONE_SLAB).add(Blocks.MOSSY_COBBLESTONE_SLAB);
+
+        tag(BigOreVeins.ORE_ROCKS)
+                .add(BigOreVeins.COPPER_ORE_ROCK.block().get(), BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.GOLD_ORE_ROCK.block().get());
     }
 
     public static TagKey<Block> create(String tagName) {

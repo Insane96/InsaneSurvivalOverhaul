@@ -78,6 +78,16 @@
     "item.insanesurvivaloverhaul.pumpkin_pulp": "Pumpkin Pulp",
 
 
+    "insanesurvivaloverhaul:mining_module": "Mining",
+
+    "block.insanesurvivaloverhaul.iron_ore_rock": "Iron Ore Rock",
+    "block.insanesurvivaloverhaul.gold_ore_rock": "Gold Ore Rock",
+    "block.insanesurvivaloverhaul.copper_ore_rock": "Copper Ore Rock",
+
+    "advancements.insanesurvivaloverhaul.mining.ore_rock.title": "Ore Seeker",
+    "advancements.insanesurvivaloverhaul.mining.ore_rock.description": "Mine an ore rock. They indicate a large ore vein below.",
+
+
     "insanesurvivaloverhaul:misc_module": "Misc",
 
     "insanesurvivaloverhaul.fishing.low_fish": "Fish are becoming scarce in this spot, maybe move a bit...",

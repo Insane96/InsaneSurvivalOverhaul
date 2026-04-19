@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
@@ -114,6 +115,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.ECHO_SHARD);
         tag(EchoPillar.ECHO_PILLAR_CATALYST)
                 .add(Items.ECHO_SHARD);
+
+        tag(BigOreVeins.ORE_ROCKS_ITEM)
+                .add(BigOreVeins.COPPER_ORE_ROCK.item().get(), BigOreVeins.IRON_ORE_ROCK.item().get(), BigOreVeins.GOLD_ORE_ROCK.item().get());
     }
 
     public static TagKey<Item> create(String tagName) {
