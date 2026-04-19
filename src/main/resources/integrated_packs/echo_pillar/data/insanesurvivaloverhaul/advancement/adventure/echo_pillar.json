@@ -5,7 +5,7 @@
       "trigger": "minecraft:location",
       "conditions": {
         "location": {
-          "structure": "insanesurvivaloverhaul:echo_pillar"
+          "structures": "insanesurvivaloverhaul:echo_pillar"
         }
       }
     }

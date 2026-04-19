@@ -104,6 +104,9 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
+## 5.3.0.1-alpha
+* Fixed Echo Pillar advancement
+
 ## 5.3.0.0-alpha
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Bone meal
