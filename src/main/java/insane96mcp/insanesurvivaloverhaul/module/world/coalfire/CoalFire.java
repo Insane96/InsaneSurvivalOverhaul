@@ -31,6 +31,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.MapColor;
@@ -128,6 +129,9 @@ public class CoalFire extends Feature {
             BlockPos blockpos = context.getClickedPos();
             BlockState blockstate = level.getBlockState(blockpos);
             BlockState blockstate2 = blockstate.getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false);
+            if (blockstate2 == null && blockstate.hasProperty(BlockStateProperties.LIT) && !blockstate.getValue(BlockStateProperties.LIT)) {
+                blockstate2 = blockstate.setValue(BlockStateProperties.LIT, true);
+            }
             if (blockstate2 == null) {
                 BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
                 if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
