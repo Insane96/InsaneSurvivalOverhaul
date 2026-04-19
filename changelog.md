@@ -109,6 +109,7 @@
 * Fixed Echo Pillar advancement
 * Fixed unable to turn on campfires with two flints
 * Fixed livestock loot tables
+* Fixed many recipes and advancements having wrong folders thus not working
 
 ## 5.3.0.0-alpha
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
