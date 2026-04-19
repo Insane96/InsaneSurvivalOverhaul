@@ -27,6 +27,7 @@ import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -182,7 +183,7 @@ public class InsaneSO {
         return MOD_ID + "." + path;
     }
 
-    public static Component translatableLang(String path) {
+    public static MutableComponent translatableLang(String path) {
         return Component.translatable(lang(path));
     }
 }

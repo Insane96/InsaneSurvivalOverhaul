@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc.fishing;
+package insane96mcp.insanesurvivaloverhaul.module.misc.lowfish;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

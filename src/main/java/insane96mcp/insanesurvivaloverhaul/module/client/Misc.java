@@ -13,14 +13,16 @@ import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 @LoadFeature(module = ISOClientModules.CLIENT)
 public class Misc extends Feature {
-    @Config(description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
-    public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
 
     @Config(description = "If true, the outline around blocks will be red if the tool in hand will make drops not ... drop.")
     public static Boolean redBlockOutlineWithWrongTool = true;
 
+    @Config(description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
+    public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
+
     @Config(min = 0, description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flawlessly if using the correct Forge GUI fields")
     public static Integer floatyHotbar = 2;
+
     @Config(description = "If true, hunger will be rendered even when the player is in riding an entity. Also hides the jump bar unless jumping (showing the XP bar)")
     public static Boolean fixMountsGui = true;
 

@@ -12,7 +12,6 @@
     * Added 4 ticks cooldown
     * Now stack up to 64 with an integrated data pack thanks to InsaneLib's Item Components feature
   * Misc Combat
-    * Missing combat data pack and attribute tooltips
     * Renamed from "Misc Stats"
 * Farming
   * Bone meal
@@ -105,6 +104,8 @@
   * Third-person death: was buggy and not that cool
 
 ## Upcoming
+* Removed Sweeping Edge enchantment
+* Snowballs now stack to 99
 * Fixed Echo Pillar advancement
 * Fixed unable to turn on campfires with two flints
 * Fixed livestock loot tables

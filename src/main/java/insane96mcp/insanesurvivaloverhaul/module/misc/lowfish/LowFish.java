@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc.fishing;
+package insane96mcp.insanesurvivaloverhaul.module.misc.lowfish;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;

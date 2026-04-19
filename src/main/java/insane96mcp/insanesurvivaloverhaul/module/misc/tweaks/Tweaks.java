@@ -104,6 +104,7 @@ public class Tweaks extends Feature {
     public static MinMaxConfig breathe$airTicksRefilled = new MinMaxConfig(1, 2.5);
     @Config
     public static Boolean breathe$increaseDrownDamageTheMoreDrowning = true;
+    
     @Config(description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
     public static Boolean totemResistance = true;
 

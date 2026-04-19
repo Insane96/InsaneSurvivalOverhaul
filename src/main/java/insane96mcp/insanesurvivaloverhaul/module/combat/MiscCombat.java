@@ -31,6 +31,7 @@ public class MiscCombat extends Feature {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("armor_rework", "Insane's Survival Overhaul Armor Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && armorReworkDataPack);
         InsaneSO.addServerPack("tools_and_weapons_rework", "Insane's Survival Overhaul Tools and Weapons Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && toolsAndWeaponsDataPack);
+        InsaneSO.addServerPack("sweeping_overhaul", "Insane's Survival Overhaul Sweeping Overhaul", () -> this.isEnabled() && !Packs.disableAllDataPacks && sweepingOverhaul);
     }
 
     @Override
