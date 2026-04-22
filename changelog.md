@@ -103,6 +103,9 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
+## Upcoming
+* Fixed ore rocks not broken faster with pickaxes and added advancement
+
 ## 5.3.0.1-alpha
 * Removed Sweeping Edge enchantment
 * Snowballs now stack to 99
