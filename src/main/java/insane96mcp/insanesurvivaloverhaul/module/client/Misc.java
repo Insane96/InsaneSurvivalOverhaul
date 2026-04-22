@@ -2,7 +2,9 @@ package insane96mcp.insanesurvivaloverhaul.module.client;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -20,14 +22,22 @@ public class Misc extends Feature {
     @Config(description = "If true, camera will not tilt when taking magic, wither, on fire, cramming, drowning and thorns damage.")
     public static Boolean noTiltingWithNonDirectionalDamageTypes = true;
 
-    @Config(min = 0, description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flawlessly if using the correct Forge GUI fields")
+    @Config(min = 0, description = "Moves the hotbar this amount of pixels up (like bedrock edition). Other mods' GUI elements should work flawlessly if registered correctly and using the correct fields")
     public static Integer floatyHotbar = 2;
+    @Config(description = "Vanilla has cut the selected-slot highlight texture for ... reasons. This fixes the size of the slot selected highlight and enables a resource pack that fixes the texture.")
+    public static Boolean slotSelectionResourcePack = true;
 
     @Config(description = "If true, hunger will be rendered even when the player is in riding an entity. Also hides the jump bar unless jumping (showing the XP bar)")
     public static Boolean fixMountsGui = true;
 
     @Config(description = "If true, health will not shake if player's max health is below 4")
     public static Boolean preventShakeBasedOffMaxHealth = true;
+
+    @Override
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
+        InsaneSO.addClientPack("fix_selected_slot_highlight", "Insane's Survival Overhaul Fix Selected Slot Highlight", () -> this.isEnabled() && slotSelectionResourcePack);
+    }
 
     public static boolean shouldDisableTiltingWithNonDirectionalDamageTypes() {
         return isEnabled(Misc.class) && noTiltingWithNonDirectionalDamageTypes;

@@ -50,6 +50,14 @@ public abstract class GuiMixin_Misc {
         return original + Misc.floatyHotbar;
     }
 
+    /** Vanilla has cut the selected-slot highlight texture for ... reasons. This increases back the size. Also requires the resource pack. */
+    @ModifyExpressionValue(method = "renderItemHotbar", at = @At(value = "CONSTANT", args = "intValue=23", ordinal = 0))
+    public int insanesurvivaloverhaul$selectedHotBarHeight(int original) {
+        if (!Misc.shouldRaiseHotbar()
+                || !Misc.slotSelectionResourcePack) return original;
+        return original + 1;
+    }
+
     /** Shifts the off-hand slot (left) upward by {@link Misc#floatyHotbar} pixels. */
     @ModifyExpressionValue(method = "renderItemHotbar", at = @At(value = "CONSTANT", args = "intValue=23", ordinal = 1))
     public int insanesurvivaloverhaul$offHandShiftLeft(int original) {

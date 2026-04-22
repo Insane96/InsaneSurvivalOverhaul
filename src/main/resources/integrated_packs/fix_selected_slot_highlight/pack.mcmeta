@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Fixes the selected slot highlight texture being 1 pixel cut off.",
+        "pack_format": 34
+    }
+}
