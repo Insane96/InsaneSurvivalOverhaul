@@ -105,6 +105,7 @@
 
 ## Upcoming
 * Fixed ore rocks not broken faster with pickaxes and added advancement
+* Fixed Echo Pillar advancement
 
 ## 5.3.0.1-alpha
 * Removed Sweeping Edge enchantment

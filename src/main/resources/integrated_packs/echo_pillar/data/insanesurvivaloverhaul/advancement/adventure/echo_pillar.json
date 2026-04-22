@@ -4,9 +4,17 @@
     "echo_pillar": {
       "trigger": "minecraft:location",
       "conditions": {
-        "location": {
-          "structures": "insanesurvivaloverhaul:echo_pillar"
-        }
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "insanesurvivaloverhaul:echo_pillar"
+              }
+            }
+          }
+        ]
       }
     }
   },
