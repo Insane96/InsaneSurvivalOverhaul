@@ -163,5 +163,7 @@
     "death.fell.accident.water": "%s thought could drop in shallow water safely",
 
     "insanesurvivaloverhaul.requires_corners": "The portal needs Crying Obsidian in the corners to be activated",
-    "insanesurvivaloverhaul.no_nether": "The nether is disabled"
+    "insanesurvivaloverhaul.no_nether": "The nether is disabled",
+
+    "item.insanesurvivaloverhaul.sweet_berry_seeds": "Sweet Berry Seeds"
 }
