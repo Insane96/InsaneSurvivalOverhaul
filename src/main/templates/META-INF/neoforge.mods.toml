@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-issueTrackerURL="https://github.com/Insane96/ExperienceOverhaul/issues"
+issueTrackerURL="https://github.com/Insane96/InsaneSurvivalOverhaul/issues"
 
 [[mods]]
 modId="${mod_id}"
