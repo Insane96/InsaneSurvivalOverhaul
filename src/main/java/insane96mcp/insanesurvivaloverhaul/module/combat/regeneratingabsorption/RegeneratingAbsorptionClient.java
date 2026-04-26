@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 public class RegeneratingAbsorptionClient {
-    public static final ResourceLocation GUI_ICONS = InsaneSO.location("textures/gui/sprites/hud/regenerating_absorption.png");
+    public static final ResourceLocation GUI_ICONS = InsaneSO.id("textures/gui/sprites/hud/regenerating_absorption.png");
 
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
         ResourceLocation aboveOverlay = VanillaGuiLayers.PLAYER_HEALTH;
@@ -31,7 +31,7 @@ public class RegeneratingAbsorptionClient {
         }
         Minecraft mc = Minecraft.getInstance();
         Gui gui = mc.gui;
-        event.registerAbove(aboveOverlay, InsaneSO.location("regenerating_absorption"), (guiGraphics, partialTicks) -> {
+        event.registerAbove(aboveOverlay, InsaneSO.id("regenerating_absorption"), (guiGraphics, partialTicks) -> {
             if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.gameMode != null && mc.gameMode.canHurtPlayer())
                 renderAbsorption(gui, guiGraphics, guiGraphics.guiWidth(), guiGraphics.guiHeight());
         });

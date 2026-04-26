@@ -93,8 +93,8 @@ public class InsaneSO {
         Modifiers.init();
 
         event.enqueueWork(() -> {
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(location("cyan_flower"), CyanFlower.POTTED_FLOWER);
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(location("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(id("cyan_flower"), CyanFlower.POTTED_FLOWER);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(id("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
 
             //DispenserBlock.registerBehavior(Fletching.QUARTZ_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
             //DispenserBlock.registerBehavior(Fletching.DIAMOND_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
@@ -175,7 +175,7 @@ public class InsaneSO {
         IntegratedPack.addClientPack(priority, MOD_ID, path, description, enabled);
     }
 
-    public static ResourceLocation location(String path) {
+    public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 

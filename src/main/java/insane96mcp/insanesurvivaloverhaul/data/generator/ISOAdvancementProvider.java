@@ -56,7 +56,7 @@ public class ISOAdvancementProvider implements DataProvider {
                         true, true, false))
                 .parent(ResourceLocation.withDefaultNamespace("adventure/root"))
                 .addCriterion("has_pouch", InventoryChangeTrigger.TriggerInstance.hasItems(Pouch.ITEM.get()))
-                .build(InsaneSO.location("story/obtain_pouch"));
+                .build(InsaneSO.id("story/obtain_pouch"));
         save(output, registries, futures, obtainPouch, pouchEnabled);
 
         AdvancementHolder overweightPouch = Advancement.Builder.advancement()
@@ -70,7 +70,7 @@ public class ISOAdvancementProvider implements DataProvider {
                 .parent(obtainPouch)
                 .addCriterion("overweight_pouch_carry", Pouch.OVERWEIGHT_POUCH_CARRY.get().createCriterion(
                         new OverweightPouchCarryTrigger.TriggerInstance(Optional.empty())))
-                .build(InsaneSO.location("story/overweight_pouch"));
+                .build(InsaneSO.id("story/overweight_pouch"));
         save(output, registries, futures, overweightPouch, pouchEnabled);
 
     }

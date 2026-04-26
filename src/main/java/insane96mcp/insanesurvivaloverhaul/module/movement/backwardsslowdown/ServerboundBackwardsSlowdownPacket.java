@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ServerboundBackwardsSlowdownPacket(float zza) implements CustomPacketPayload {
     public static final Type<ServerboundBackwardsSlowdownPacket> TYPE =
-            new Type<>(InsaneSO.location("backwards_slowdown"));
+            new Type<>(InsaneSO.id("backwards_slowdown"));
 
     public static final StreamCodec<ByteBuf, ServerboundBackwardsSlowdownPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ServerboundBackwardsSlowdownPacket::zza,

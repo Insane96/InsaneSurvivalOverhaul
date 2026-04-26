@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 public class Pouch extends Feature {
     public static final TagKey<Item> POUCH_LIKE_WEIGHT = ISOItemTagsProvider.create("pouch_like_weight");
 
-	public static final ResourceLocation POUCH_WEIGHT_PENALTY_ID = InsaneSO.location("pouch_weight_penalty");
+	public static final ResourceLocation POUCH_WEIGHT_PENALTY_ID = InsaneSO.id("pouch_weight_penalty");
 
 	public static final DeferredHolder<Item, PouchItem> ITEM = ISORegistries.ITEMS.register("pouch", () -> new PouchItem(new Item.Properties().stacksTo(1)));
 	public static final Supplier<OverweightPouchCarryTrigger> OVERWEIGHT_POUCH_CARRY =

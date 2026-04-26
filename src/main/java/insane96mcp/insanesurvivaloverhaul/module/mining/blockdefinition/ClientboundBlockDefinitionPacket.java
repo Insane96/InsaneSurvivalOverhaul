@@ -13,7 +13,7 @@ import java.util.List;
 
 public record ClientboundBlockDefinitionPacket(List<BlockDefinition> definitions) implements CustomPacketPayload {
     public static final Type<ClientboundBlockDefinitionPacket> TYPE =
-            new Type<>(InsaneSO.location("block_definition_sync"));
+            new Type<>(InsaneSO.id("block_definition_sync"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundBlockDefinitionPacket> STREAM_CODEC = StreamCodec.of(
             (buf, payload) -> {

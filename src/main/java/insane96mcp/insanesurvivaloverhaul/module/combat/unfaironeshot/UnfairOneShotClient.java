@@ -24,7 +24,7 @@ public class UnfairOneShotClient {
 	public static int activationTicks = 0;
 	@OnlyIn(Dist.CLIENT)
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
-		event.registerBelowAll(InsaneSO.location("unfair_oneshot_animation"), (guiGraphics, deltaTracker) -> {
+		event.registerBelowAll(InsaneSO.id("unfair_oneshot_animation"), (guiGraphics, deltaTracker) -> {
             if (!Feature.isEnabled(UnfairOneShot.class)
 					|| activationTicks == 0)
                 return;

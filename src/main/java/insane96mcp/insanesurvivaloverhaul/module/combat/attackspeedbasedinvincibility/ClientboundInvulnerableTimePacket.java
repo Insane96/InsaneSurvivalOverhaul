@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundInvulnerableTimePacket(int entityId, int invulnerableTime) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ClientboundInvulnerableTimePacket> TYPE =
-            new CustomPacketPayload.Type<>(InsaneSO.location("invulnerable_time"));
+            new CustomPacketPayload.Type<>(InsaneSO.id("invulnerable_time"));
 
     public static final StreamCodec<ByteBuf, ClientboundInvulnerableTimePacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT, ClientboundInvulnerableTimePacket::entityId,

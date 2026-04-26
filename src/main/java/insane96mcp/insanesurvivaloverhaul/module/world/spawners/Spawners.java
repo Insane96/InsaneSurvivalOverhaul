@@ -65,9 +65,9 @@ public class Spawners extends JsonFeature {
 			ISORegistries.ATTACHMENT_TYPES.register("spawner_data", () -> AttachmentType.builder(SpawnerDataImpl::new)
 					.serialize(SpawnerDataImpl.CODEC)
 					.build());
-	public static final ResourceKey<LootTable> EMPOWERED_SPAWNER_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.location("empowered_spawner"));
+	public static final ResourceKey<LootTable> EMPOWERED_SPAWNER_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("empowered_spawner"));
 
-	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("blacklisted_spawners"));
+	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("blacklisted_spawners"));
 	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISOItemTagsProvider.create("spawner_reactivator");
 	public static final MutableComponent SPAWNER_REACTIVATOR_MESSAGE = Component.translatable(InsaneSO.lang("spawner_reactivator")).withStyle(ChatFormatting.LIGHT_PURPLE);
 

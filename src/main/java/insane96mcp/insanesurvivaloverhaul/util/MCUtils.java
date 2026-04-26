@@ -37,7 +37,7 @@ public class MCUtils {
         return r;
     }
 
-    public static final ResourceLocation ANTI_KNOCKBACK_MODIFIER_ID = InsaneSO.location("anti_knockback_modifier");
+    public static final ResourceLocation ANTI_KNOCKBACK_MODIFIER_ID = InsaneSO.id("anti_knockback_modifier");
     private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER = new AttributeModifier(ANTI_KNOCKBACK_MODIFIER_ID, 1f, AttributeModifier.Operation.ADD_VALUE);
 
     //Stolen from Tinkers Construct ToolAttackUtil

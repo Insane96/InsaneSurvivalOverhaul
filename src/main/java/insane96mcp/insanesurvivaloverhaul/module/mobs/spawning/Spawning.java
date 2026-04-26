@@ -35,7 +35,7 @@ import java.util.List;
 
 @LoadFeature(module = ISOModules.MOBS, description = "Add a brand new Echo Torch and some changes to mob spawn")
 public class Spawning extends Feature {
-    public static final ResourceLocation GUARDIAN_MODIFIER_ID = InsaneSO.location("naturally_spawned_guardian");
+    public static final ResourceLocation GUARDIAN_MODIFIER_ID = InsaneSO.id("naturally_spawned_guardian");
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7)));
     public static final DeferredHolder<PoiType, PoiType> ECHO_LANTERN_POI = ISORegistries.POI_TYPES.register("echo_lantern", () -> new PoiType(ImmutableSet.copyOf(ECHO_LANTERN.block().get().getStateDefinition().getPossibleStates()), 1, 64));

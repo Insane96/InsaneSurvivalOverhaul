@@ -31,14 +31,14 @@ import org.jetbrains.annotations.Nullable;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute that deals bonus damage that bypasses armor")
 public class PiercingDamage extends Feature {
-	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_mob_attack"));
-	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("piercing_player_attack"));
+	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("piercing_mob_attack"));
+	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("piercing_player_attack"));
 
 	public static final DeferredHolder<Attribute, PiercingDamageAttribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new PiercingDamageAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
 	/**
 	 * ID of the base modifier for Piercing Damage.
 	 */
-	public static final ResourceLocation BASE_PIERCING_DAMAGE_ID = InsaneSO.location("base_piercing_damage");
+	public static final ResourceLocation BASE_PIERCING_DAMAGE_ID = InsaneSO.id("base_piercing_damage");
 
 	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ISODamageTypeTagsProvider.create("piercing_damage_type");
 	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ISODamageTypeTagsProvider.create("doesnt_trigger_piercing");

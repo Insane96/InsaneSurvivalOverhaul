@@ -35,7 +35,7 @@ import java.util.List;
 
 @LoadFeature(module = ISOModules.MOVEMENT, description = "Slowdown based off the terrain entities walking on. Custom Terrain Slowdown are controlled via json in this feature's folder")
 public class TerrainSlowdown extends JsonFeature {
-	private static final ResourceLocation TERRAIN_SLOWDOWN_ID = InsaneSO.location("terrain_slowdown");
+	private static final ResourceLocation TERRAIN_SLOWDOWN_ID = InsaneSO.id("terrain_slowdown");
 	public static final TagKey<Item> SNOW_SLOWDOWN_IGNORE = ISOItemTagsProvider.create("snow_slowdown_ignore");
 
 	public static final ArrayList<ObjTagValue<Block>> CUSTOM_TERRAIN_SLOWDOWN_DEFAULT = new ArrayList<>(List.of(
@@ -47,8 +47,8 @@ public class TerrainSlowdown extends JsonFeature {
 			ObjTagValue.of("minecraft:powder_snow", 0.5d, Registries.BLOCK)
 	));
 	public static final ArrayList<ObjTagValue<Block>> customInTerrainSlowdown = new ArrayList<>();
-	public static final ResourceLocation CUSTOM_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.location("custom_terrain_slowdown");
-	public static final ResourceLocation CUSTOM_IN_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.location("custom_in_terrain_slowdown");
+	public static final ResourceLocation CUSTOM_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.id("custom_terrain_slowdown");
+	public static final ResourceLocation CUSTOM_IN_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.id("custom_in_terrain_slowdown");
 
 	@Config
 	public static Boolean frostWalkerReducesIceSlowdown = true;

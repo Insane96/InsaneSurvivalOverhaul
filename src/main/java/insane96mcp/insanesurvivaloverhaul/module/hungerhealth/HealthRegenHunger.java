@@ -28,7 +28,7 @@ import java.text.DecimalFormat;
 
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, name = "Health Regen & Hunger", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
 public class HealthRegenHunger extends Feature {
-	public static final ResourceLocation SPRINT_PENALTY_ID = InsaneSO.location("hungry_sprint_penalty");
+	public static final ResourceLocation SPRINT_PENALTY_ID = InsaneSO.id("hungry_sprint_penalty");
 
 	public static ResourceLocation PASSIVE_REGEN_TICK;
 	private static final int PASSIVE_REGEN_TICK_RATE = 10;

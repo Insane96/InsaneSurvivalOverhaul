@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundDiscreteNameTagsPacket(boolean discreteNameTags) implements CustomPacketPayload {
 	public static final Type<ClientboundDiscreteNameTagsPacket> TYPE =
-			new Type<>(InsaneSO.location("discrete_name_tags"));
+			new Type<>(InsaneSO.id("discrete_name_tags"));
 
 	public static final StreamCodec<ByteBuf, ClientboundDiscreteNameTagsPacket> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.BOOL, ClientboundDiscreteNameTagsPacket::discreteNameTags,

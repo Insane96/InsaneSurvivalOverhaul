@@ -30,11 +30,11 @@ import java.util.List;
 
 @LoadFeature(module = ISOModules.MOVEMENT, enabledByDefault = false, description = "Armor slows down the player. Enchantment Weights are controlled via json in this feature's folder. Please note that default mods' armor slowdown is done through item definitions within the combat_rework data pack")
 public class WeightedArmor extends JsonFeature {
-    public static final ResourceLocation ARMOR_SLOWDOWN_ID = InsaneSO.location("armor_slowdown");
+    public static final ResourceLocation ARMOR_SLOWDOWN_ID = InsaneSO.id("armor_slowdown");
 
     public static final ArrayList<ArmorEnchantmentWeight> ENCHANTMENTS_LIST_DEFAULT = new ArrayList<>();
     public static final ArrayList<ArmorEnchantmentWeight> enchantmentsList = new ArrayList<>();
-    public static final ResourceLocation ENCHANTMENTS_WEIGHTS_SYNC_ID = InsaneSO.location("enchantments_weights");
+    public static final ResourceLocation ENCHANTMENTS_WEIGHTS_SYNC_ID = InsaneSO.id("enchantments_weights");
 
     @Config(description = "Formula to calculate the slowdown of a piece of armor. Variables available are: armor, armor_toughness. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Please note that 1 means 100% slowdown. Regenerating Absorption counts as Toughness")
     public static String slowdownFormula = "(armor * 0.01) * (1 + (armor_toughness * 0.05))";

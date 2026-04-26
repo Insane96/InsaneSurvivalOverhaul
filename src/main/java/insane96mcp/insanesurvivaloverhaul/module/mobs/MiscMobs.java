@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 @LoadFeature(module = ISOModules.MOBS)
 public class MiscMobs extends Feature {
-    public static final TagKey<EntityType<?>> PASSIVE_REGEN = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("passive_regen"));
+    public static final TagKey<EntityType<?>> PASSIVE_REGEN = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("passive_regen"));
 
     //TODO JsonFeature
     @Config(min = 0, description = "1 in X chance each tick for mobs in the `insanesurvivaloverhaul:passive_regen` entity type tag to regain 1 health. Set to 0 to disable")

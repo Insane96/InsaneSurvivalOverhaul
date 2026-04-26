@@ -13,7 +13,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record SpawnerStatusSync(BlockPos pos, SpawnerDataImpl spawnerData, int delay, int requiredPlayerRange) implements CustomPacketPayload {
 	public static final Type<SpawnerStatusSync> TYPE =
-			new Type<>(InsaneSO.location("spawner_status_sync"));
+			new Type<>(InsaneSO.id("spawner_status_sync"));
 
 	public static final StreamCodec<ByteBuf, SpawnerStatusSync> STREAM_CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, SpawnerStatusSync::pos,

@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundMilkCooldownPacket(int entityId, int cooldown) implements CustomPacketPayload {
     public static final Type<ClientboundMilkCooldownPacket> TYPE =
-            new Type<>(InsaneSO.location("milk_cooldown"));
+            new Type<>(InsaneSO.id("milk_cooldown"));
 
     public static final StreamCodec<ByteBuf, ClientboundMilkCooldownPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, ClientboundMilkCooldownPacket::entityId,

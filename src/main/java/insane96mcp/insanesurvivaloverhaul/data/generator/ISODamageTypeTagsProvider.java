@@ -39,6 +39,6 @@ public class ISODamageTypeTagsProvider extends DamageTypeTagsProvider {
     }
 
     public static TagKey<DamageType> create(String tagName) {
-        return TagKey.create(Registries.DAMAGE_TYPE, InsaneSO.location(tagName));
+        return TagKey.create(Registries.DAMAGE_TYPE, InsaneSO.id(tagName));
     }
 }

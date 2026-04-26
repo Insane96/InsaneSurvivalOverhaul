@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundExhaustionPacket(float exhaustionLevel) implements CustomPacketPayload {
     public static final Type<ClientboundExhaustionPacket> TYPE =
-            new Type<>(InsaneSO.location("exhaustion"));
+            new Type<>(InsaneSO.id("exhaustion"));
 
     public static final StreamCodec<ByteBuf, ClientboundExhaustionPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ClientboundExhaustionPacket::exhaustionLevel,

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundTirednessPacket(float tiredness) implements CustomPacketPayload {
     public static final Type<ClientboundTirednessPacket> TYPE =
-            new Type<>(InsaneSO.location("tiredness_sync"));
+            new Type<>(InsaneSO.id("tiredness_sync"));
 
     public static final StreamCodec<ByteBuf, ClientboundTirednessPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ClientboundTirednessPacket::tiredness,

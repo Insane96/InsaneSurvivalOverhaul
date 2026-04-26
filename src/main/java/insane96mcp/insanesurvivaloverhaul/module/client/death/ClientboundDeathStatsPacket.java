@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundDeathStatsPacket(int timeSinceDeath, int deaths) implements CustomPacketPayload {
     public static final Type<ClientboundDeathStatsPacket> TYPE =
-            new Type<>(InsaneSO.location("death_stats"));
+            new Type<>(InsaneSO.id("death_stats"));
 
     public static final StreamCodec<ByteBuf, ClientboundDeathStatsPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT, ClientboundDeathStatsPacket::timeSinceDeath,

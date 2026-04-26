@@ -11,12 +11,12 @@ public class Modifiers {
     public static final Map<ResourceLocation, Type> MODIFIERS = new HashMap<>();
 
     public static void init() {
-        registerModifier(InsaneSO.location("true"), Modifier.class);
-        registerModifier(InsaneSO.location("sunlight"), SunlightModifier.class);
-        registerModifier(InsaneSO.location("night_time"), NightTimeModifier.class);
-        registerModifier(InsaneSO.location("matches_biome"), BiomeModifier.class);
-        registerModifier(InsaneSO.location("age"), AgeModifier.class);
-        registerModifier(InsaneSO.location("has_been_fed_recently"), FedModifier.class);
+        registerModifier(InsaneSO.id("true"), Modifier.class);
+        registerModifier(InsaneSO.id("sunlight"), SunlightModifier.class);
+        registerModifier(InsaneSO.id("night_time"), NightTimeModifier.class);
+        registerModifier(InsaneSO.id("matches_biome"), BiomeModifier.class);
+        registerModifier(InsaneSO.id("age"), AgeModifier.class);
+        registerModifier(InsaneSO.id("has_been_fed_recently"), FedModifier.class);
     }
 
     public static void registerModifier(ResourceLocation id, Type modifier) {

@@ -55,10 +55,10 @@ import java.util.Optional;
 
 @LoadFeature(module = ISOModules.FARMING, description = "Slower breeding, Growing, Egging and Milking. Lower yield.")
 public class Livestock extends Feature {
-	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("milkable"));
-	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("prevent_breeding"));
+	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("milkable"));
+	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("prevent_breeding"));
 
-	public static final ResourceLocation OLD_AGE_MODIFIER = InsaneSO.location("livestock/old_age_modifier");
+	public static final ResourceLocation OLD_AGE_MODIFIER = InsaneSO.id("livestock/old_age_modifier");
 	public static final String MILK_COOLDOWN_LANG = InsaneSO.lang("milk_cooldown");
 
 	public static ResourceLocation AGE;
@@ -67,7 +67,7 @@ public class Livestock extends Feature {
 	public static ResourceLocation LAST_FED;
 	public static ResourceLocation MILK_COOLDOWN;
 
-	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.location("old_age"));
+	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("old_age"));
 
 	@Config(description = "Changes the chance for a chicken to come out from an egg (1 in this value). Vanilla is 8")
 	public static Integer chickenFromEggChance = 8;
@@ -526,7 +526,7 @@ public class Livestock extends Feature {
 		return Feature.isEnabled(Livestock.class) && preventBreeding && animal.getType().is(PREVENT_BREEDING);
 	}
 
-	public static final ResourceLocation SCALE_MODIFIER_ID = InsaneSO.location("livestock/age_scale");
+	public static final ResourceLocation SCALE_MODIFIER_ID = InsaneSO.id("livestock/age_scale");
 
 	public static void setSize(LivingEntity entity, Age age) {
 		AttributeInstance scaleAttr = entity.getAttribute(Attributes.SCALE);

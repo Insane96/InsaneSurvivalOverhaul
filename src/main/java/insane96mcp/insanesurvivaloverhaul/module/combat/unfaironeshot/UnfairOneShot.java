@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 
 @LoadFeature(module = ISOModules.COMBAT, name = "Unfair one-shot", description = "Players live with a heart when too much damage that would kill them is dealt (only works for damage taken from mobs)")
 public class UnfairOneShot extends Feature {
-    public static final DeferredHolder<SoundEvent, SoundEvent> UNFAIR_ONE_SHOT = ISORegistries.SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("unfair_one_shot"), 16f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> UNFAIR_ONE_SHOT = ISORegistries.SOUND_EVENTS.register("unfair_one_shot", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("unfair_one_shot"), 16f));
 	public static final DeferredHolder<Item, Item> HALF_HEART_TEXTURE = ISORegistries.ITEMS.register("half_heart_texture", () -> new Item(new Item.Properties()));
 
 	public static final Supplier<UnfairOneShotTrigger> UNFAIR_ONESHOT =

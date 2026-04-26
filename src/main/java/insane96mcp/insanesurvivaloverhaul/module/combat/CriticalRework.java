@@ -30,11 +30,11 @@ public class CriticalRework extends Feature {
 	/**
 	 * ID of the base modifier for Crit Chance.
 	 */
-	public static final ResourceLocation BASE_CHANCE_ATTRIBUTE_ID = InsaneSO.location("base_critical_chance");
+	public static final ResourceLocation BASE_CHANCE_ATTRIBUTE_ID = InsaneSO.id("base_critical_chance");
 	/**
 	 * ID of the base modifier for Crit bonus damage.
 	 */
-	public static final ResourceLocation BASE_DAMAGE_ATTRIBUTE_ID = InsaneSO.location("base_critical_damage");
+	public static final ResourceLocation BASE_DAMAGE_ATTRIBUTE_ID = InsaneSO.id("base_critical_damage");
 
 	//public static final DeferredHolder<Enchantment> CRITICAL_ENCHANTMENT = ISORegistries.ENCHANTMENTS.register("critical", CriticalEnchantment::new);
 

@@ -33,7 +33,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute to add regenerating absorption hearts to the player. Please note that default mods' regenerating absorption is done through item definitions within the combat_rework data pack and via Absorption Armor feature.", canBeDisabled = false)
 public class RegeneratingAbsorption extends Feature {
-    public static final DeferredHolder<SoundEvent, SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("absorption_hit"), 16f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("absorption_hit"), 16f));
 
     public static ResourceLocation REGEN_ABSORPTION_TAG;
     public static ResourceLocation HURT_COOLDOWN_TAG;
@@ -44,8 +44,8 @@ public class RegeneratingAbsorption extends Feature {
     public static final DeferredHolder<Attribute, Attribute> SPEED_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption_speed", () -> new RangedAttribute("attribute.name.regenerating_absorption_speed", 0.250d, 0d, 20d));
 
     public static final DeferredHolder<MobEffect, MobEffect> EFFECT = ISORegistries.MOB_EFFECTS.register("regenerating_absorption", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x818894)
-            .addAttributeModifier(ATTRIBUTE, InsaneSO.location("regenerating_absorption_effect"), 4, AttributeModifier.Operation.ADD_VALUE)
-            .addAttributeModifier(SPEED_ATTRIBUTE, InsaneSO.location("regenerating_absorption_effect"), 0.125d, AttributeModifier.Operation.ADD_VALUE));
+            .addAttributeModifier(ATTRIBUTE, InsaneSO.id("regenerating_absorption_effect"), 4, AttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(SPEED_ATTRIBUTE, InsaneSO.id("regenerating_absorption_effect"), 0.125d, AttributeModifier.Operation.ADD_VALUE));
 
     @Config(min = 0, name = "Un-damaged time to regen", description = "Ticks that must pass from the last hit to regen absorption hearts. This is affected by regenerating absorption speed (absorp regen speed * this)")
     public static Integer unDamagedTimeToRegen = 150;

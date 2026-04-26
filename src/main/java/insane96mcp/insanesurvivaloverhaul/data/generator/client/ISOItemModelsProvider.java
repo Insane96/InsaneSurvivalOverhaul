@@ -75,8 +75,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(Crops.CARROT_SEEDS.get());
         basicItem(Crops.ROOTED_POTATO.get());
-        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.location("block/solanum_neorossii"));
-        basicItemWithTexture(CyanFlower.FLOWER.item().get(), InsaneSO.location("block/cyan_flower"));
+        basicItemWithTexture(Crops.SOLANUM_NEOROSSII.item().get(), InsaneSO.id("block/solanum_neorossii"));
+        basicItemWithTexture(CyanFlower.FLOWER.item().get(), InsaneSO.id("block/cyan_flower"));
 
         blockItem(BoneMeal.RICH_FARMLAND);
 
@@ -89,10 +89,10 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(Berries.SWEET_BERRY_SEEDS.get());
         
-        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), InsaneSO.location("block/copper_powered_rail"));
+        basicItemWithTexture(Minecarts.COPPER_POWERED_RAIL.item().get(), InsaneSO.id("block/copper_powered_rail"));
         withExistingParent("golden_powered_rail", ResourceLocation.parse("item/powered_rail"));
 
-        withExistingParent("echo_pillar", InsaneSO.location("block/echo_pillar_upper_disabled"));
+        withExistingParent("echo_pillar", InsaneSO.id("block/echo_pillar_upper_disabled"));
 
         basicItem(Pouch.ITEM.get());
 
@@ -159,7 +159,7 @@ public class ISOItemModelsProvider extends ItemModelProvider {
                 String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
                 ResourceLocation armorItemResLoc = ResourceLocation.fromNamespaceAndPath(itemRegistryObject.getId().getNamespace(), armorItemPath);
                 ResourceLocation trimResLoc = ResourceLocation.parse(trimPath); // minecraft namespace
-                ResourceLocation trimNameResLoc = InsaneSO.location(currentTrimName);
+                ResourceLocation trimNameResLoc = InsaneSO.id(currentTrimName);
 
                 // This is used for making the ExistingFileHelper acknowledge that this texture exist, so this will
                 // avoid an IllegalArgumentException

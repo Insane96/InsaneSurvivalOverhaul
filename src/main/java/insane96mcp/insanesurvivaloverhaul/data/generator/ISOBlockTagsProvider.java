@@ -92,6 +92,6 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     }
 
     public static TagKey<Block> create(String tagName) {
-        return TagKey.create(Registries.BLOCK, InsaneSO.location(tagName));
+        return TagKey.create(Registries.BLOCK, InsaneSO.id(tagName));
     }
 }

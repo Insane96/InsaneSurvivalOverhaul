@@ -165,7 +165,7 @@ public class ISOLootTableProvider extends LootTableProvider {
         @Override
         public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
             output.accept(
-                ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.location("gameplay/pumpkin_shear")),
+                ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("gameplay/pumpkin_shear")),
                 LootTable.lootTable()
                     .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1))

@@ -30,7 +30,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 @LoadFeature(module = ISOModules.ITEMS, description = "Wooden items have bonuses when used in sunlight.", enabledByDefault = false)
 public class EcologicWood extends Feature {
     public static final TagKey<Item> WOODEN_SHIELD = ISOItemTagsProvider.create("equipment/shield/wooden");
-    public static final ResourceLocation ATTACK_SPEED_MODIFIER_ID = InsaneSO.location("ecologic_wood_boost");
+    public static final ResourceLocation ATTACK_SPEED_MODIFIER_ID = InsaneSO.id("ecologic_wood_boost");
 
     @Config(min = 0, max = 1, description = "Chance for the wooden item to not consume durability when >= 'Max sunlight'.")
     public static Double chanceAtMaxSunlight = 0.5d;

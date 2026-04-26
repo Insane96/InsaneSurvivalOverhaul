@@ -23,7 +23,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Retrieve name tags from name tagged entities.")
 public class NameTags extends Feature {
-    public static final TagKey<EntityType<?>> SHOULDNT_DROP_NAMETAG = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("shouldnt_drop_nametag"));
+    public static final TagKey<EntityType<?>> SHOULDNT_DROP_NAMETAG = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("shouldnt_drop_nametag"));
 
     public static ResourceLocation HAS_NAME_TAG;
 

@@ -53,7 +53,7 @@ public class HudInfos extends Feature {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(InsaneSO.location("hud_infos"), (guiGraphics, deltaTracker) -> {
+        event.registerAboveAll(InsaneSO.id("hud_infos"), (guiGraphics, deltaTracker) -> {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
             if (player == null || mc.getDebugOverlay().showDebugScreen() || !Feature.isEnabled(HudInfos.class))

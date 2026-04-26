@@ -18,8 +18,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 @LoadFeature(module = ISOModules.COMBAT,
         description = "Changes attack sound based off tool used. Axes use vanilla strong attack, swords use vanilla weak attack, pickaxes and shovels use new sounds.")
 public class AttackSounds extends Feature {
-    public static final DeferredHolder<SoundEvent, SoundEvent> PICKAXE_ATTACK = ISORegistries.SOUND_EVENTS.register("pickaxe_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("pickaxe_attack"), 16f));
-    public static final DeferredHolder<SoundEvent, SoundEvent> SHOVEL_ATTACK = ISORegistries.SOUND_EVENTS.register("shovel_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.location("shovel_attack"), 16f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> PICKAXE_ATTACK = ISORegistries.SOUND_EVENTS.register("pickaxe_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("pickaxe_attack"), 16f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHOVEL_ATTACK = ISORegistries.SOUND_EVENTS.register("shovel_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("shovel_attack"), 16f));
 
     @Config
     public static Boolean randomizePitch = true;

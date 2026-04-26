@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundSaturationPacket(float saturationLevel) implements CustomPacketPayload {
     public static final Type<ClientboundSaturationPacket> TYPE =
-            new Type<>(InsaneSO.location("saturation"));
+            new Type<>(InsaneSO.id("saturation"));
 
     public static final StreamCodec<ByteBuf, ClientboundSaturationPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ClientboundSaturationPacket::saturationLevel,

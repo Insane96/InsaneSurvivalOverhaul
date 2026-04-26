@@ -18,10 +18,10 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
-    public static final TagKey<EntityType<?>> WOLVES = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("wolves"));
-    public static final TagKey<EntityType<?>> CATS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("cats"));
-    public static final TagKey<EntityType<?>> PARROTS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("parrots"));
-    public static final TagKey<EntityType<?>> PETS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.location("pets"));
+    public static final TagKey<EntityType<?>> WOLVES = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("wolves"));
+    public static final TagKey<EntityType<?>> CATS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("cats"));
+    public static final TagKey<EntityType<?>> PARROTS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("parrots"));
+    public static final TagKey<EntityType<?>> PETS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("pets"));
 
     public ISOEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, modId, existingFileHelper);
