@@ -26,7 +26,7 @@ import java.util.Locale;
 @LoadFeature(module = ISOModules.COMBAT, description = "Rework critical hits to be a chance to happen instead of damage on jump. Also the chance and bonus damage are now an attribute. By default critical_chance is 0 and can increase with the Critical enchantment and critical_damage is 0.5 (+50%).")
 public class CriticalRework extends Feature {
 	public static final DeferredHolder<Attribute, CritAttribute> CHANCE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_chance", () -> new CritAttribute("attribute.name.critical_chance", 0d, 0d, 1d));
-	public static final DeferredHolder<Attribute, CritAttribute> DAMAGE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_damage", () -> new CritAttribute("attribute.name.critical_damage", 0d, 0d, Double.MAX_VALUE));
+	public static final DeferredHolder<Attribute, CritAttribute> DAMAGE_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("critical_damage", () -> new CritAttribute("attribute.name.critical_damage", 0.5d, 0d, Double.MAX_VALUE));
 	/**
 	 * ID of the base modifier for Crit Chance.
 	 */

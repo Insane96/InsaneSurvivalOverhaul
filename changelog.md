@@ -3,7 +3,6 @@
   * Unfair one-shot
     * Increased Resistance II duration after Unfair oneshot
   * Critical Rework
-    * Crit damage attribute (bonus damage with crit) is now 0 by default instead of 50%
     * Enchantment is still missing
   * Bows
     * Now includes No Arrow Invincibility Frames
@@ -104,6 +103,7 @@
   * Third-person death: was buggy and not that cool
 
 ## Upcoming
+* Critical damage now once again defaults to 50%
 * Fixed ore rocks not broken faster with pickaxes and added advancement
 * Fixed Echo Pillar advancement
 * Fixed sweet berries loot table

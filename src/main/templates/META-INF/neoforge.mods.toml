@@ -10,7 +10,7 @@ displayName="${mod_name}"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/iguanatweaks-reborn"
 authors="Insane96MCP"
 description='''
-Many many many changes to vanilla experience
+Many many changes to vanilla gameplay
 '''
 
 [[mixins]]

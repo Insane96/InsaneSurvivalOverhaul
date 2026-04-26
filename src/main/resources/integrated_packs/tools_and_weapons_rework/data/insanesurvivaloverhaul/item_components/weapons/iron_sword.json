@@ -35,7 +35,7 @@
                 {
                     "type": "insanesurvivaloverhaul:critical_damage",
                     "id": "insanesurvivaloverhaul:base_critical_damage",
-                    "amount": 0.25,
+                    "amount": -0.25,
                     "operation": "add_value",
                     "slot": "mainhand"
                 }
