@@ -34,6 +34,7 @@ public class Bows extends Feature {
 	public static Double crossbowInaccuracy = 0.2d;
 	@Config(description = "If true, arrows will not trigger invincibility frames, like Combat Test Snapshots")
 	public static Boolean noArrowInvincibilityFrames = true;
+	//TODO Reduce arrow knockback when bow spamming
 
 	public static final DeferredHolder<Item, ShortbowItem> SHORTBOW = ISORegistries.ITEMS.register("shortbow", () -> new ShortbowItem(new Item.Properties().durability(127)));
 

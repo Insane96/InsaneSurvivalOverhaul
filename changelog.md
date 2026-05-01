@@ -104,6 +104,7 @@
 
 ## Upcoming
 * Critical damage now once again defaults to 50%
+* Updated burnt log texture
 * Fixed ore rocks not broken faster with pickaxes and added advancement
 * Fixed Echo Pillar advancement
 * Fixed sweet berries loot table
