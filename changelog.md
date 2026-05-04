@@ -102,7 +102,7 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
-## Upcoming
+## 5.3.0.2-alpha
 * Critical damage now once again defaults to 50%
 * Updated burnt log texture
 * Fixed ore rocks not broken faster with pickaxes and added advancement
