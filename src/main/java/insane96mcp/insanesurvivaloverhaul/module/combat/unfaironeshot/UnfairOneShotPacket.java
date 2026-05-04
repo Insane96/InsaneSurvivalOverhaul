@@ -1,6 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot;
 
-import insane96mcp.insanelib.InsaneLib;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record UnfairOneShotPacket() implements CustomPacketPayload {
     public static final Type<UnfairOneShotPacket> TYPE =
-            new Type<>(InsaneLib.location("unfair_one_shot"));
+            new Type<>(InsaneSO.id("unfair_one_shot"));
 
     public static final StreamCodec<ByteBuf, UnfairOneShotPacket> STREAM_CODEC = StreamCodec.unit(
             new UnfairOneShotPacket()

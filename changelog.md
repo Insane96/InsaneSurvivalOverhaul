@@ -109,6 +109,7 @@
 * Fixed Echo Pillar advancement
 * Fixed sweet berries loot table
 * Fixed vanilla cutting the selected-slot highlight texture for ... reasons 
+* Crash fix with latest InsaneLib
 
 ## 5.3.0.1-alpha
 * Removed Sweeping Edge enchantment

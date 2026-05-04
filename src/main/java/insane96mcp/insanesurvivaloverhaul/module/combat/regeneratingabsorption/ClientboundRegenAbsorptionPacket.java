@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption;
 
-import insane96mcp.insanelib.InsaneLib;
 import insane96mcp.insanelib.core.ModNBTData;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundRegenAbsorptionPacket(float regenAbsorption) implements CustomPacketPayload {
     public static final Type<ClientboundRegenAbsorptionPacket> TYPE =
-            new Type<>(InsaneLib.location("regen_absorption"));
+            new Type<>(InsaneSO.id("regen_absorption"));
 
     public static final StreamCodec<ByteBuf, ClientboundRegenAbsorptionPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ClientboundRegenAbsorptionPacket::regenAbsorption,
