@@ -1,6 +1,7 @@
 # Changelog
 
-* respawn anchor -> soul pillar
+## 4.30.1.2
+* Hopefully fixed a crash with VS Clockwork
 
 ## 4.30.1.1
 ### Fixes

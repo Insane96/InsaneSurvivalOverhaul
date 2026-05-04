@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 
 public class ModLoadedPlugin implements IMixinConfigPlugin {
     private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.<String, Supplier<Boolean>>builder()
+            .put("insane96mcp.iguanatweaksreborn.mixin.ComposterBlocMixin", () -> LoadingModList.get().getModFileById("vs_clockwork") == null)
             .put("insane96mcp.iguanatweaksreborn.mixin.SpongeBlockMixin", () -> LoadingModList.get().getModFileById("quark") == null)
             .put("insane96mcp.iguanatweaksreborn.mixin.SpringFeatureMixin", () -> LoadingModList.get().getModFileById("quark") == null)
             .put("insane96mcp.iguanatweaksreborn.mixin.PistonMovingBlockEntityMixin", () -> LoadingModList.get().getModFileById("quark") == null)

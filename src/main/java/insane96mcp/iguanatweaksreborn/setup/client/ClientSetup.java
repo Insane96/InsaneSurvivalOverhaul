@@ -84,7 +84,7 @@ public class ClientSetup {
             if (Feature.isEnabled(Spawning.class)) {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
             }
-            if (Feature.isEnabled(Cloth.class)) {
+            if (Feature.isEnabled(Respawn.class)) {
                 addBefore(event, Items.RESPAWN_ANCHOR, Respawn.RESPAWN_OBELISK.item().get());
             }
             if (Feature.isEnabled(Fletching.class)) {
