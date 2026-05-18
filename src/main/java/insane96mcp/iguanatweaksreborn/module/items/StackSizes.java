@@ -37,7 +37,7 @@ public class StackSizes extends Feature {
     public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(hunger, 1), 1), 0)";
     @Config(min = 0.01d, max = 1d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks) will be multiplied by this value. Foods will be overridden by 'Food Stack Reduction' or 'Food Stack Multiplier' if are active. Setting to 1 will disable this feature. Stack sizes are limited to 64.")
     public static Double itemStackMultiplier = 1d;
-    @Config(min = 0.01d, max = 1d, description = "All the blocks max stack sizes will be multiplied by this value to increase / decrease them. Stack sizes are limited to 64.")
+    @Config(min = 0.01d, max = 1d, description = "All the blocks max stack sizes will be multiplied by this value to decrease them. Stack sizes are limited to 64.")
     public static Double blockStackMultiplier = 1.0d;
 
     @Config(description = "Enables a data pack that changes some item stacks.")

@@ -2,19 +2,12 @@ package insane96mcp.iguanatweaksreborn.module.misc;
 
 import insane96mcp.iguanatweaksreborn.InsaneSO;
 import insane96mcp.iguanatweaksreborn.module.Modules;
-import insane96mcp.iguanatweaksreborn.module.farming.crops.integration.FarmersDelightIntegration;
 import insane96mcp.insanelib.base.Feature;
 import insane96mcp.insanelib.base.LoadFeature;
 import insane96mcp.insanelib.base.Module;
 import insane96mcp.insanelib.base.config.Config;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import vectorwing.farmersdelight.common.Configuration;
 
 @LoadFeature(module = Modules.Ids.MISC, name = "Data / Resource Packs & Integration", description = "Various packs that can be enabled/disabled")
 public class Packs extends Feature {
@@ -75,10 +68,6 @@ public class Packs extends Feature {
 
     @Config(description = "Integrates the mod with Supplementaries. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Supplementaries-integration")
     public static Boolean supplementaries = false;
-    @Config(description = "Integrates the mod with Farmer's delight. Some config options are changed along with a data pack installed. Check here for changes: https://github.com/Insane96/IguanaTweaksReborn/wiki/Farmer%27s-Delight-integration")
-    public static Boolean farmersDelight = false;
-    @Config(name = "Replace Farmers' Delight nourishment effect", description = "If true and No Hunger mod is present, the nourishment effect from Farmers' Delight is replaced with Speed, or Vigour if Stamina mod is present")
-    public static Boolean replaceFDNourishmentEffect = false;
     @Config(description = "Integrates the mod with Environmental. Changes animals loot to match the livestock changes")
     public static Boolean environmental = false;
     @Config(description = "Integrates the mod with Quark. Changes animals loot to match the livestock changes.")
@@ -117,7 +106,6 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("environmental_integration", "Insane's Survival Overhaul Environmental Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && environmental && ModList.get().isLoaded("environmental"));
         InsaneSO.addServerPack("quark_integration", "Insane's Survival Overhaul Quark Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && quark && ModList.get().isLoaded("quark"));
         InsaneSO.addServerPack("autumnity_integration", "Insane's Survival Overhaul Autumnity Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && autumnity && ModList.get().isLoaded("autumnity"));
-        InsaneSO.addServerPack("farmers_delight_integration", "Insane's Survival Overhaul Farmer's Delight Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && farmersDelight && ModList.get().isLoaded("farmersdelight"));
         InsaneSO.addServerPack(1, "caverns_and_chasms_integration", "Insane's Survival Overhaul Caverns & Chasms Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && cavernsAndChasms && ModList.get().isLoaded("caverns_and_chasms"));
         InsaneSO.addServerPack(1, "tide_integration", "Insane's Survival Overhaul Tide Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && tide && ModList.get().isLoaded("tide"));
         InsaneSO.addServerPack(1, "create_integration", "Insane's Survival Overhaul Create Integration", () -> this.isEnabled() && !Packs.disableAllDataPacks && create && ModList.get().isLoaded("create"));
@@ -125,39 +113,6 @@ public class Packs extends Feature {
 
         InsaneSO.addClientPack("assets_override", "ISO Assets Override", () -> true);
         InsaneSO.addClientPack("programmer_art", "ISO Programmer Art", () -> true);
-    }
-
-    @Override
-    public void readConfig(ModConfigEvent event) {
-        super.readConfig(event);
-        if (this.isEnabled() && ModList.get().isLoaded("farmersdelight") && farmersDelight) {
-            Configuration.ENABLE_STACKABLE_SOUP_ITEMS.set(false);
-            Configuration.CHANCE_WILD_BEETROOTS.set(Integer.MAX_VALUE);
-            Configuration.CHANCE_WILD_CARROTS.set(Integer.MAX_VALUE);
-            Configuration.CHANCE_WILD_POTATOES.set(Integer.MAX_VALUE);
-        }
-    }
-
-    @SubscribeEvent
-    public void onTryRichSoilFarmland(PlayerInteractEvent.RightClickBlock event) {
-        if (!ModList.get().isLoaded("farmersdelight")
-                || !this.isEnabled()
-                || !farmersDelight
-                || !event.getItemStack().canPerformAction(ToolActions.HOE_TILL))
-            return;
-
-        if (FarmersDelightIntegration.preventRichSoilFarmland(event.getLevel().getBlockState(event.getHitVec().getBlockPos())))
-            event.setCanceled(true);
-    }
-
-    @SubscribeEvent
-    public void onEffectApplicable(MobEffectEvent.Applicable event) {
-        if (!ModList.get().isLoaded("farmersdelight")
-                || !this.isEnabled()
-                || !replaceFDNourishmentEffect)
-            return;
-
-        FarmersDelightIntegration.onEffectApplicable(event);
     }
 
     public static CompoundTag forceReloadWorldDataPacks(CompoundTag levelTag) {

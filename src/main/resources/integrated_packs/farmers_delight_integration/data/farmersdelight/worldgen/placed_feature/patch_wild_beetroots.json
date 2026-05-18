@@ -1,9 +1,0 @@
-{
-  "feature": "farmersdelight:patch_wild_beetroots",
-  "placement": [
-    {
-      "type": "minecraft:count",
-      "count": 0
-    }
-  ]
-}
