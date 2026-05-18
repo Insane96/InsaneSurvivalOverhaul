@@ -25,11 +25,11 @@ import java.util.Map;
 public class StackSizes extends Feature {
     public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_stack_size_changes");
 
-    @Config(description = "The formula to calculate the stack size of a food item. Variables as nutrition, saturation, eat_seconds as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
+    @Config(description = "The formula to calculate the stack size of a food item. Variables as nutrition, saturation, eat_seconds as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Stack sizes are limited to 99 by the game.")
     public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(nutrition, 1), 1), 0)";
-    @Config(min = 0.01d, max = 99d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks and foods) will be multiplied by this value. Setting to 1 will disable this.")
+    @Config(min = 0.01d, max = 1.546875d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks and foods) will be multiplied by this value. Setting to 1 will disable this. Stack sizes are limited to 99 by the game.")
     public static Double itemStackMultiplier = 1.546875;
-    @Config(min = 0.01d, max = 99d, description = "All the blocks max stack sizes will be multiplied by this value. Setting to 1 will disable this.")
+    @Config(min = 0.01d, max = 1.546875d, description = "All the blocks max stack sizes will be multiplied by this value. Setting to 1 will disable this. Stack sizes are limited to 99 by the game.")
     public static Double blockStackMultiplier = 1.546875;
 
     @Config(description = "Enables a data pack that increases item stacks of Horse Armors, Minecarts and Saddles")
