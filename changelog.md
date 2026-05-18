@@ -103,6 +103,12 @@
   * Third-person death: was buggy and not that cool
 
 ## Upcoming
+* Added back data packs 
+  * Copper furnace
+  * Hardcore torches
+  * Cheaper chains
+  * Misc Tweaks
+  * Actual Redstone Components
 * Fixed crossbows having no base attack damage and speed
 * Fixed items keeping components when dropped on death
 

@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "cinchsbetterdeepslate"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "A": {
+      "item": "minecraft:polished_deepslate"
+    }
+  },
+  "pattern": [
+    " r",
+    "AA"
+  ],
+  "result": {
+    "id": "cinchsbetterdeepslate:polished_deepslate_pressure_plate",
+    "count": 2
+  }
+}

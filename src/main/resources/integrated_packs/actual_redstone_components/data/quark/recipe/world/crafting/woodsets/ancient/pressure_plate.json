@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "quark"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    " r",
+    "##"
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "#": {
+      "item": "quark:ancient_planks"
+    }
+  },
+  "result": {
+    "id": "quark:ancient_pressure_plate",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "quark:flag",
+      "flag": "ancient_wood"
+    }
+  ]
+}

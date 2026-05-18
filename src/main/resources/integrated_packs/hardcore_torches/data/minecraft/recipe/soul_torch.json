@@ -1,0 +1,45 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CG",
+    "SE"
+  ],
+  "key": {
+    "C": [
+      {
+        "item": "minecraft:coal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ],
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "G": [
+      {
+        "item": "minecraft:short_grass"
+      },
+      {
+        "item": "minecraft:fern"
+      },
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "minecraft:seagrass"
+      },
+      {
+        "item": "minecraft:glow_lichen"
+      }
+    ],
+    "E": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
+  },
+  "result": {
+    "id": "minecraft:soul_torch",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "wooden_button",
+    "ingredients": [
+        {
+            "item": "minecraft:mangrove_planks"
+        },
+        {
+            "item": "minecraft:redstone"
+        }
+    ],
+    "result": {
+        "id": "minecraft:mangrove_button",
+        "count": 2
+    }
+}

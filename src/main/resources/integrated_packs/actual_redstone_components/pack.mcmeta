@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Makes some redstone components (like levers) require redstone in the recipe",
+        "pack_format": 48
+    }
+}

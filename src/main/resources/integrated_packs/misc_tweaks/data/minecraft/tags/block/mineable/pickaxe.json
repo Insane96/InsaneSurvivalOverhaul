@@ -1,0 +1,11 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:lever",
+        "#c:glass_blocks",
+        "#c:glass_panes",
+        "minecraft:glowstone",
+        "minecraft:sea_lantern",
+        "minecraft:redstone_lamp"
+    ]
+}
