@@ -64,9 +64,10 @@ public class DeathPenalty extends Feature {
 	}
 
 	private static void tryDropItems(ServerPlayer player, List<ItemStack> items, RandomSource random, int amount, int lostDurabilityPercentage, boolean destroyItems, @Nullable Consumer<ItemStack> itemDropHandler, Predicate<ItemStack> itemFilter) {
-		items.forEach(stack -> {
+		for (int i = 0; i < items.size(); i++) {
+			ItemStack stack = items.get(i);
             if (stack.isEmpty() || !itemFilter.test(stack))
-                return;
+                continue;
 
             if (stack.getItem().isDamageable(stack)) {
                 int newDamage = Math.min(stack.getDamageValue() + stack.getMaxDamage() * lostDurabilityPercentage / 100, stack.getMaxDamage());
@@ -74,7 +75,8 @@ public class DeathPenalty extends Feature {
                 if (newDamage >= stack.getMaxDamage()) {
                     player.onEquippedItemBroken(stack.getItem(), player.getEquipmentSlotForItem(stack));
                     if (!Feature.isEnabled(UnvanishableItems.class) || !UnvanishableItems.isUnvanishable(stack)) {
-                        stack.shrink(stack.getCount());
+                        items.set(i, ItemStack.EMPTY);
+                        continue;
                     }
                 }
             }
@@ -89,7 +91,7 @@ public class DeathPenalty extends Feature {
 					stack.shrink(roundedAmount);
 				}
 			}
-        });
+		}
 	}
 
 	private static void dropOrDestroy(ServerPlayer player, ItemStack stack, boolean destroyItems, @Nullable Consumer<ItemStack> itemDropHandler) {

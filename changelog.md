@@ -104,6 +104,7 @@
 
 ## Upcoming
 * Fixed crossbows having no base attack damage and speed
+* Fixed items keeping components when dropped on death
 
 ## 5.3.0.2-alpha
 * Critical damage now once again defaults to 50%
