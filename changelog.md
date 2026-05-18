@@ -1,5 +1,8 @@
 # Changelog
 
+## Upcoming
+* Clarified that items and blocks max stack size is 64
+
 ## 4.30.1.2
 * Hopefully fixed a crash with VS Clockwork
 
