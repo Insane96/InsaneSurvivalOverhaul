@@ -23,7 +23,7 @@ import java.util.List;
 import static insane96mcp.insanesurvivaloverhaul.InsaneSO.LOGGER;
 import static insane96mcp.insanesurvivaloverhaul.InsaneSO.addServerPack;
 
-@LoadFeature(module = ISOModules.ITEMS, description = "If enabled, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with copper ones.")
+@LoadFeature(module = ISOModules.ITEMS, description = "If enabled, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with copper ones. Also makes copper ore minable with wooden pickaxe")
 public class StoneToolsGone extends Feature {
 
     @Config

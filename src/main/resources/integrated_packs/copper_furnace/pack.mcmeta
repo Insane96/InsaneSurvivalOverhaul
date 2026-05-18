@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Makes Furnace require Copper. Copper can be slowly smelted on campfires",
+        "pack_format": 15
+    }
+}

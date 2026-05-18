@@ -1,0 +1,50 @@
+{
+    "type": "forge:conditional",
+    "advancements": [
+        {
+            "conditions": [
+                {
+                    "type": "forge:not",
+                    "value": {
+                        "type": "forge:mod_loaded",
+                        "modid": "caverns_and_chasms"
+                    }
+                }
+            ],
+            "advancement": {
+                "parent": "minecraft:recipes/root",
+                "criteria": {
+                    "has_raw_copper": {
+                        "trigger": "minecraft:inventory_changed",
+                        "conditions": {
+                            "items": [
+                                {
+                                    "items": [
+                                        "minecraft:raw_copper"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "has_the_recipe": {
+                        "trigger": "minecraft:recipe_unlocked",
+                        "conditions": {
+                            "recipe": "iguanatweaksreborn:copper_ingot_from_campfire"
+                        }
+                    }
+                },
+                "requirements": [
+                    [
+                        "has_raw_copper",
+                        "has_the_recipe"
+                    ]
+                ],
+                "rewards": {
+                    "recipes": [
+                        "iguanatweaksreborn:copper_ingot_from_campfire"
+                    ]
+                }
+            }
+        }
+    ]
+}
