@@ -6,21 +6,14 @@
             "modifiers": [
                 {
                     "type": "minecraft:generic.attack_damage",
-                    "id": "insanesurvivaloverhaul:crossbow_attack_damage",
-                    "amount": 3.0,
+                    "id": "minecraft:base_attack_damage",
+                    "amount": 3.5,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },
                 {
-                    "type": "minecraft:generic.attack_damage",
-                    "id": "insanesurvivaloverhaul:crossbow_attack_damage_multiplier",
-                    "amount": -0.4,
-                    "operation": "add_multiplied_base",
-                    "slot": "mainhand"
-                },
-                {
                     "type": "minecraft:generic.attack_speed",
-                    "id": "insanesurvivaloverhaul:crossbow_attack_speed",
+                    "id": "minecraft:base_attack_speed",
                     "amount": -3.0,
                     "operation": "add_value",
                     "slot": "mainhand"

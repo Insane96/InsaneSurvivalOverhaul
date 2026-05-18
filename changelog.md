@@ -102,6 +102,9 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
+## Upcoming
+* Fixed crossbows having no base attack damage and speed
+
 ## 5.3.0.2-alpha
 * Critical damage now once again defaults to 50%
 * Updated burnt log texture
