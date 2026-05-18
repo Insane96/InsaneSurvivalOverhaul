@@ -106,8 +106,8 @@
 * Added back data packs 
   * Copper furnace
   * Hardcore torches
-  * Cheaper chains
   * Misc Tweaks
+    * Merged Cheaper chains in it
   * Actual Redstone Components
 * Fixed crossbows having no base attack damage and speed
 * Fixed items keeping components when dropped on death

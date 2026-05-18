@@ -25,9 +25,6 @@ public class Packs extends Feature {
             * With Fire Charges you can make them later in the game.""")
     public static Boolean hardcoreTorches = true;
 
-    @Config(description = "Changes vanilla chains recipe. Makes chains easily craftable with nuggets only.")
-    public static Boolean cheaperChains = true;
-
     @Config(description = """
             Minor changes:
             * Cakes now drop when broken and not eaten
@@ -36,7 +33,8 @@ public class Packs extends Feature {
             * Leads and Sticky Pistons can also be made with Honey
             * Iron Doors can be blasted back to Iron Ingots
             * Dispensers can be made from droppers
-            * Levers and glass can now be broken faster with pickaxes, cactus with hoes""")
+            * Levers and glass can now be broken faster with pickaxes, cactus with hoes
+            * Chains are easier to craft with just nuggets""")
     public static Boolean miscTweaks = true;
 
     @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
@@ -46,7 +44,6 @@ public class Packs extends Feature {
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("hardcore_torches", "Insane's Survival Overhaul Hardcore Torches", () -> this.isEnabled() && !Packs.disableAllDataPacks && hardcoreTorches);
-        InsaneSO.addServerPack("cheaper_chains", "Insane's Survival Overhaul Cheaper Chains", () -> this.isEnabled() && !Packs.disableAllDataPacks && cheaperChains);
         InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && miscTweaks);
         InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !Packs.disableAllDataPacks && actualRedstoneComponents);
         InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableLongNosesStructures);
