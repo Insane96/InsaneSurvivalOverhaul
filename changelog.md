@@ -104,7 +104,7 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
-## Upcoming
+## 5.3.1.0-beta
 * Added back data packs 
   * Copper furnace
   * Hardcore torches
@@ -113,6 +113,10 @@
   * Actual Redstone Components
   * Mob loot changes
     * Looting is now less impactful
+  * Sapling drop fix
+  * Dark forest vegetation
+  * Increase end cities
+* Cake buffs now stack with diminishing returns, up to 2 minutes
 * Fixed crossbows having no base attack damage and speed
 * Fixed items keeping components when dropped on death
 
