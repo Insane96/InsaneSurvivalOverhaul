@@ -39,6 +39,12 @@ public class Packs extends Feature {
 
     @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
     public static Boolean actualRedstoneComponents = true;
+    @Config(description = "Fixes the drop rate of some saplings, such as Jungle and Dark oak dropping too rarely")
+    public static Boolean saplingDropFix = true;
+    @Config(description = "Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees")
+    public static Boolean darkForestVegetation = true;
+    @Config(description = "If true, a data pack will be enabled that makes End Cities more common.")
+    public static Boolean increaseEndCities = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -48,5 +54,8 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !Packs.disableAllDataPacks && actualRedstoneComponents);
         InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableLongNosesStructures);
         InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && copperFurnace);
+        InsaneSO.addServerPack("sapling_drop_fix", "Insane's Survival Overhaul Sapling Drop Fix", () -> this.isEnabled() && !Packs.disableAllDataPacks && saplingDropFix);
+        InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);
+        InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !Packs.disableAllDataPacks && increaseEndCities);
     }
 }
