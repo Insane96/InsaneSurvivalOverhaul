@@ -1,5 +1,5 @@
 {
-  "type": "insanesurvivaloverhaul:replace_loot",
+  "type": "insanelib:replace_loot",
   "chests_only": true,
   "conditions": [],
   "item_to_replace": "minecraft:saddle",

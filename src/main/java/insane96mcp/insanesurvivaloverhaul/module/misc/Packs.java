@@ -21,8 +21,8 @@ public class Packs extends Feature {
     @Config(description = """
             Changes vanilla torch recipes.
             * Torches can be only made on Campfires early on in the game
-            * With shears you can make 3 torches out of coal
-            * With Fire Charges you can make them later in the game.""")
+            * With shears you can make 4 torches out of coal
+            * With Fire Charges you can make more of them later in the game without needing grass.""")
     public static Boolean hardcoreTorches = true;
 
     @Config(description = """

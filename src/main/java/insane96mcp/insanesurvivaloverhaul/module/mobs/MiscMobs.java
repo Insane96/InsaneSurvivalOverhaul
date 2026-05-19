@@ -2,9 +2,11 @@ package insane96mcp.insanesurvivaloverhaul.module.mobs;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -25,6 +27,15 @@ public class MiscMobs extends Feature {
 
     @Config(description = "Iron golems no longer deal randomized damage, but fixed attack_damage attribute damage instead")
     public static Boolean fixedIronGolemDamage = true;
+
+    @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
+    public static Boolean lootChanges = true;
+
+    @Override
+    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+        super.init(module, enabledByDefault, canBeDisabled);
+        InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && lootChanges);
+    }
 
     @SubscribeEvent
     public void onLivingTick(EntityTickEvent.Pre event) {

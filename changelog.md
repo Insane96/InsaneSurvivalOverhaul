@@ -54,6 +54,8 @@
 * Mobs
   * Mobs Buffs
     * MPR Integration data pack has been merged in Enhanced AI's MPR Integration data pack
+  * Mob loot changes
+    * Looting extra drops have been reduced (+50% -> +33% per level)
 * Movement
   * Minecarts
     * Minecarts with passengers and chests now force load chunks they are in, allowing them to travel through unloaded chunks
@@ -109,6 +111,8 @@
   * Misc Tweaks
     * Merged Cheaper chains in it
   * Actual Redstone Components
+  * Mob loot changes
+    * Looting is now less impactful
 * Fixed crossbows having no base attack damage and speed
 * Fixed items keeping components when dropped on death
 
