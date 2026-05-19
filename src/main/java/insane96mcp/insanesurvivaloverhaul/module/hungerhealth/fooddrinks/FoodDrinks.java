@@ -12,12 +12,14 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -155,8 +157,16 @@ public class FoodDrinks extends JsonFeature {
 				|| !buffCake)
 			return;
 
-		event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false, true));
-		event.getEntity().addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 600, 0, false, false, true));
+		LivingEntity entity = event.getEntity();
+		entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, stackedCakeDuration(entity, MobEffects.MOVEMENT_SPEED), 0, false, false, true));
+		entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, stackedCakeDuration(entity, MobEffects.DIG_SPEED), 0, false, false, true));
+	}
+
+	private static int stackedCakeDuration(LivingEntity entity, Holder<MobEffect> effect) {
+		MobEffectInstance existing = entity.getEffect(effect);
+		int current = existing != null ? existing.getDuration() : 0;
+		// Diminishing returns: each slice adds less the closer to the cap (1200t = 60s)
+		return Math.min(1200, (int) (current + 600 * (1.0 - (double) current / 2400)));
 	}
 
 	private static FoodProperties lastFoodEatenCache;
