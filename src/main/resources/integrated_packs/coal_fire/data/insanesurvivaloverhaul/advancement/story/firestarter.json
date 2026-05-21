@@ -4,10 +4,10 @@
 			"id": "insanesurvivaloverhaul:firestarter"
 		},
 		"title": {
-			"translate": "advancements.iso.firestarter.title"
+			"translate": "advancements.insanesurvivaloverhaul.firestarter.title"
 		},
 		"description": {
-			"translate": "advancements.iso.firestarter.description"
+			"translate": "advancements.insanesurvivaloverhaul.firestarter.description"
 		},
 		"frame": "task",
 		"show_toast": true,

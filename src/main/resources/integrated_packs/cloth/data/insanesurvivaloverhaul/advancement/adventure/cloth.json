@@ -4,10 +4,10 @@
 			"id": "insanesurvivaloverhaul:cloth"
 		},
 		"title": {
-			"translate": "advancements.iso.cloth.title"
+			"translate": "advancements.insanesurvivaloverhaul.cloth.title"
 		},
 		"description": {
-			"translate": "advancements.iso.cloth.description"
+			"translate": "advancements.insanesurvivaloverhaul.cloth.description"
 		},
 		"frame": "task",
 		"show_toast": true,

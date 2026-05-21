@@ -4,10 +4,10 @@
 			"id": "minecraft:bundle"
 		},
 		"title": {
-			"translate": "advancements.iso.bundle.title"
+			"translate": "advancements.insanesurvivaloverhaul.bundle.title"
 		},
 		"description": {
-			"translate": "advancements.iso.bundle.description"
+			"translate": "advancements.insanesurvivaloverhaul.bundle.description"
 		},
 		"frame": "task",
 		"show_toast": true,

@@ -4,10 +4,10 @@
 			"item": "minecraft:iron_nugget"
 		},
 		"title": {
-			"translate": "advancements.iso.iron_nugget.title"
+			"translate": "advancements.insanesurvivaloverhaul.iron_nugget.title"
 		},
 		"description": {
-			"translate": "advancements.iso.iron_nugget.description"
+			"translate": "advancements.insanesurvivaloverhaul.iron_nugget.description"
 		},
 		"frame": "task",
 		"show_toast": true,

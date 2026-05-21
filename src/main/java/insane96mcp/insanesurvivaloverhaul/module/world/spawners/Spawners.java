@@ -79,7 +79,7 @@ public class Spawners extends JsonFeature {
 	public static int requiredPlayerRange = 24;
 	@Config(description = "If true, monsters from spawners will spawn no matter the light level.")
 	public static Boolean ignoreLight = true;
-	@Config(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `iguanatweaksreborn:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
+	@Config(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `insanesurvivaloverhaul:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
 	public static Boolean reEnableWithSpawnerReactivator = true;
 	@Config(description = "If enabled, spawner will play a sound effect when spawning mobs")
 	public static Boolean spawningSoundEffect = true;
@@ -101,7 +101,7 @@ public class Spawners extends JsonFeature {
 	public static MinMaxConfig empoweredDelay = new MinMaxConfig(150, 300);
 	@Config(min = 0, name = "Empowered.Experience Reward", description = "When the Spawner stops being empowered, will generate this amount of experience")
 	public static MinMaxConfig empoweredExperienceReward = new MinMaxConfig(0);
-	@Config(name = "Empowered.Loot Reward", description = "When the Spawner stops being empowered, will generate loot from the iguanatweaksreborn:empowered_spawner loot table")
+	@Config(name = "Empowered.Loot Reward", description = "When the Spawner stops being empowered, will generate loot from the insanesurvivaloverhaul:empowered_spawner loot table")
 	public static Boolean empoweredLootReward = false;
 	@Config(name = "Empowered.Sound effect", description = "When the Spawner stops being empowered, will play a sound effect")
 	public static Boolean empoweredSoundEffect = true;

@@ -4,10 +4,10 @@
 			"item": "minecraft:charcoal"
 		},
 		"title": {
-			"translate": "advancements.iso.charcoal.title"
+			"translate": "advancements.insanesurvivaloverhaul.charcoal.title"
 		},
 		"description": {
-			"translate": "advancements.iso.charcoal.description"
+			"translate": "advancements.insanesurvivaloverhaul.charcoal.description"
 		},
 		"frame": "task",
 		"show_toast": true,

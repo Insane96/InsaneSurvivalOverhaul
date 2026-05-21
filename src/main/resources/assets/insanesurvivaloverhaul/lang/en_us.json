@@ -86,11 +86,16 @@
 
     "advancements.insanesurvivaloverhaul.mining.ore_rock.title": "Ore Seeker",
     "advancements.insanesurvivaloverhaul.mining.ore_rock.description": "Mine an ore rock. They indicate a large ore vein below.",
+    "advancements.insanesurvivaloverhaul.iron_nugget.title": "Small traces in stone",
+    "advancements.insanesurvivaloverhaul.iron_nugget.description": "Obtain an Iron Nugget by mining Stone",
 
 
     "insanesurvivaloverhaul:misc_module": "Misc",
 
     "insanesurvivaloverhaul.fishing.low_fish": "Fish are becoming scarce in this spot, maybe move a bit...",
+
+    "death.attack.collideWithWall": "%1$s hit a wall too hard",
+    "death.attack.collideWithWall.player": "%1$s was doomed to hit a wall too hard by %2$s",
 
 
     "insanesurvivaloverhaul:movement_module": "Movement",
@@ -135,6 +140,12 @@
     "insanesurvivaloverhaul:sleep_module": "Sleep",
 
     "item.insanesurvivaloverhaul.cloth": "Cloth",
+    "advancements.insanesurvivaloverhaul.cloth.title": "Give me your dress",
+    "advancements.insanesurvivaloverhaul.cloth.description": "Obtain Cloth from Zombies",
+    "advancements.insanesurvivaloverhaul.chainmail.title": "Forged from fire",
+    "advancements.insanesurvivaloverhaul.chainmail.description": "Obtain a Chainmail piece of armor",
+    "advancements.insanesurvivaloverhaul.bundle.title": "That one item",
+    "advancements.insanesurvivaloverhaul.bundle.description": "Make a bundle with Cloth",
 
     "effect.insanesurvivaloverhaul.tired": "Tired",
     "effect.insanesurvivaloverhaul.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",
@@ -155,6 +166,11 @@
 
 
     "insanesurvivaloverhaul:world_module": "World",
+
+    "advancements.insanesurvivaloverhaul.charcoal.title": "Improvise and Ignite",
+    "advancements.insanesurvivaloverhaul.charcoal.description": "Coal can only be obtained with an Iron pickaxe or higher. Obtain Charcoal by burning logs. A flint in both hands seems to do the job.",
+    "advancements.insanesurvivaloverhaul.firestarter.title": "Starting Fires",
+    "advancements.insanesurvivaloverhaul.firestarter.description": "Craft a Firestarter to create fire more consistently.",
 
     "item.insanesurvivaloverhaul.firestarter": "Firestarter",
     "item.insanesurvivaloverhaul.firestarter.tooltip": "Hold right click to use",
