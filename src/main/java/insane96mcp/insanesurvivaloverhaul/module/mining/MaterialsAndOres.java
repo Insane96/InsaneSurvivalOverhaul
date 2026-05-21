@@ -15,10 +15,10 @@ public class MaterialsAndOres extends Feature {
 	@Config(description = "Enables a data pack that removes the vanilla feature of discarding ores if exposed to air. This applies to: coal, diamonds, gold and lapis")
 	public static Boolean oreGenerationOverhaul = true;
 	@Config(description = """
-			Enables the following changes to vanilla data pack:
+			Enables a data pack with the following changes:
 			* Stone (Broken with a non Silk-Touch tool) can drop Iron Nuggets
 			* Silverfish can drop Iron Nuggets""")
-	public static Boolean farmableIronDataPack = true;
+	public static Boolean farmableIronDataPack = false;
 
 	@Config(description = """
 			Enables the following changes to vanilla data pack:

@@ -1,4 +1,5 @@
 ## Upcoming
+* Farmable iron data pack is now disabled by default
 * Fixed missing some lang entries
 
 ## From 1.20.1
