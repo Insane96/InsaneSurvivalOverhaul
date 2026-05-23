@@ -62,27 +62,6 @@ public class FoodDrinks extends JsonFeature {
 
 	public static final TagKey<Item> RAW_FOODS = ISOItemTagsProvider.create("raw_foods");
 	public static final TagKey<Item> DRINKING_FOODS = ISOItemTagsProvider.create("drinking_foods");
-/*
-	//TODO
-	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
-            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).nutrition(2).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_beef")).nutrition(6).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_porkchop")).nutrition(7).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).nutrition(6).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).nutrition(12).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cookie")).nutrition(1).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
-					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
-					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).build()).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:enchanted_golden_apple"))
-					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 400).setAmplifier(1).build())
-					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.DAMAGE_RESISTANCE, 6000).build())
-					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.FIRE_RESISTANCE, 6000).build())
-					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build()
-	));
-	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();*/
 
 	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
 	public static String foodHungerFormula = "ROUND(nutrition * 1.2, 0)";
@@ -162,21 +141,6 @@ public class FoodDrinks extends JsonFeature {
 		player.stopUsingItem();
 	}
 
-	/*@SubscribeEvent
-	public void onEffectApply(AddEatEffectEvent event) {
-		for (CustomFoodProperties foodValue : customFoodProperties) {
-			if (foodValue.effects == null || !foodValue.food.matchesItem(event.getStack().getItem()))
-				continue;
-			foodValue.getEffects().forEach(pair -> {
-				if (!event.getLevel().isClientSide && pair.getFirst() != null && event.getLevel().random.nextFloat() < pair.getSecond()) {
-					event.getEntity().addEffect(new MobEffectInstance(pair.getFirst().getMobEffectInstance()));
-				}
-			});
-			event.setCanceled(true);
-			break;
-		}
-	}*/
-
 	private static void processFoodMultipliers(Map<Item, DataComponentPatch> patches) {
 		if (foodHungerFormula.isBlank() && foodSaturationFormula.isBlank() && foodEatSecondsFormula.isBlank())
 			return;
@@ -190,10 +154,10 @@ public class FoodDrinks extends JsonFeature {
 					? (int) MCUtils.computeFoodFormula(food, foodHungerFormula)
 					: food.nutrition();
 			float newSaturation = !foodSaturationFormula.isBlank()
-					? (float) MCUtils.computeFoodFormula(food, foodSaturationFormula)
+					? MCUtils.computeFoodFormula(food, foodSaturationFormula)
 					: food.saturation();
 			float newEatSeconds = !foodEatSecondsFormula.isBlank()
-					? (float) MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
+					? MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
 					: food.eatSeconds();
 
 			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds())
@@ -203,34 +167,4 @@ public class FoodDrinks extends JsonFeature {
 			patches.put(item, DataComponentPatch.builder().set(DataComponents.FOOD, modified).build());
 		}
 	}
-
-	/*@SuppressWarnings("ConstantConditions")
-	public static void processCustomFoodValues(List<CustomFoodProperties> list, boolean isClientSide) {
-		if (!originalFoodProperties.isEmpty()) {
-			originalFoodProperties.forEach((foodProperty, originalFoodProperty) -> {
-				foodProperty.nutrition = originalFoodProperty.nutrition;
-				foodProperty.saturationModifier = originalFoodProperty.saturationModifier;
-			});
-		}
-		else {
-			ForgeRegistries.ITEMS.getValues()
-					.stream().filter(item -> item.getFoodProperties() != null)
-					.forEach(item -> {
-						if (originalFoodProperties.containsKey(item.getFoodProperties()))
-							return;
-						FoodProperties properties = item.getFoodProperties();
-						if (!FMLLoader.isProduction())
-							ISOLogHelper.debug("Storing original food properties for item " + item.getDescriptionId() + ": hunger: " + properties.nutrition + ", saturationMod: " + properties.saturationModifier + ", saturation: " + insane96mcp.insanelib.util.MCUtils.getFoodSaturationRestored(properties));
-						originalFoodProperties.put(properties, new FoodProperties.Builder().nutrition(properties.nutrition).saturationMod(properties.saturationModifier).build());
-					});
-		}
-		if (!list.isEmpty()) {
-			for (CustomFoodProperties foodValue : list)
-				foodValue.apply();
-		}
-		//reset cache when reloading
-		customFoodPropertiesCache = null;
-		processFoodMultipliers(isClientSide);
-	}*/
-
 }

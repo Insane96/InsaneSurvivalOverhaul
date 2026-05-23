@@ -5,6 +5,9 @@
 * Foods
   * Now restores 20% more hunger (for foods that have enough to be increased, so e.g. berries have not been increased)
   * Now take more time to be eaten, and lower effectiveness foods take less
+  * Eating speed now uses item components
+  * Raw foods have been moved to a data pack with item components
+    * The data pack also includes minor adjustments to foods, such as cookies, honey, pumpkin pie, rotten flesh and spider eyes. Also makes golden apples give regenerating absorption instead of absorption
 * Farmable iron data pack is now disabled by default
 * Fixed missing some lang entries
 
