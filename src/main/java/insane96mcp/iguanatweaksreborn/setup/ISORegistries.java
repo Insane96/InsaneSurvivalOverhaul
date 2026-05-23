@@ -23,7 +23,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -64,17 +63,6 @@ public class ISORegistries {
 
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(ForgeRegistries.SOUND_EVENTS);
 
-    public static final DeferredRegister<PoiType> POI_TYPES = createRegistry(ForgeRegistries.POI_TYPES);
-    /*public static RegistryObject<PoiType> FLETCHER = POI_TYPES.register("fletcher", () -> {
-        HashSet<BlockState> states = new HashSet<>(ForgeRegistries.POI_TYPES.getDelegateOrThrow(PoiTypes.FLETCHER).get().matchingStates());
-        RegistryObject<Block>[] registryObjects = new RegistryObject[]{
-                Fletching.FLETCHING_TABLE.block()
-        };
-        for (RegistryObject<Block> registryObject : registryObjects) {
-            states.addAll(registryObject.get().getStateDefinition().getPossibleStates());
-        }
-        return new PoiType(states, 1, 1);
-    });*/
 
 	public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = createRegistry(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
 	public static final RegistryObject<Codec<? extends IGlobalLootModifier>> LOOT_PURGER_MODIFIER = GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("loot_purger", LootPurgerModifier.CODEC);

@@ -1,8 +1,9 @@
 # Changelog
 
-## Upcoming
+## 4.30.1.3
 * Clarified that items and blocks max stack size is 64
 * Removed farmers' delight integration data pack
+* Fixed possible lag caused by Echo Lanterns feature
 
 ## 4.30.1.2
 * Hopefully fixed a crash with VS Clockwork
