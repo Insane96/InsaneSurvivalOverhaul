@@ -86,7 +86,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(WOODEN_HAND_EQUIPMENT)
                 .add(Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);
 
-        tag(FoodDrinks.RAW_FOOD)
+        tag(FoodDrinks.RAW_FOODS)
                 .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
                 .addOptional(ResourceLocation.parse("autumnity:turkey_piece"))
                 .addOptional(ResourceLocation.parse("berry_good:sweet_berry_mince"))

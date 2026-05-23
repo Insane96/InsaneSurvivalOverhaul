@@ -33,8 +33,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
@@ -62,21 +60,18 @@ public class FoodDrinks extends JsonFeature {
 			.food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build())
 	));
 
-	public static final TagKey<Item> RAW_FOOD = ISOItemTagsProvider.create("raw_food");
+	public static final TagKey<Item> RAW_FOODS = ISOItemTagsProvider.create("raw_foods");
 	public static final TagKey<Item> DRINKING_FOODS = ISOItemTagsProvider.create("drinking_foods");
-	/*public static final TagKey<Item> FOOD_BLACKLIST = ISOItemTagsProvider.create("food_drinks_no_hunger_changes");
-
+/*
 	//TODO
 	public static final ArrayList<CustomFoodProperties> CUSTOM_FOOD_PROPERTIES_DEFAULT = new ArrayList<>(List.of(
-            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:chorus_fruit")).fastEating(true).build(),
-            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).setEatingTime(55).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).setEatingTime(40).build(),
+            new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rotten_flesh")).nutrition(2).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:spider_eye")).nutrition(1).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:honey_bottle")).nutrition(2).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_beef")).nutrition(6).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cooked_porkchop")).nutrition(7).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).nutrition(6).setEatingTime(40).build(),
+			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:pumpkin_pie")).nutrition(6).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:rabbit_stew")).nutrition(12).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:glow_berries")).alwaysEat(true).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:cookie")).nutrition(1).build(),
 			new CustomFoodProperties.Builder(IdTagMatcher.newId("minecraft:golden_apple"))
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 100).setAmplifier(1).build())
@@ -102,13 +97,6 @@ public class FoodDrinks extends JsonFeature {
 	public static Boolean stopConsumingOnHit = true;
 	@Config(description = "If true, eating will always be possible, even with full hunger.")
 	public static Boolean alwaysEat = false;
-	//TODO Item properties
-	@Config(min = 0d, max = 1f, description = "Raw food has this chance to poison the player. Raw food is defined in the insanesurvivaloverhaul:raw_food tag")
-	public static Double rawFoodPoisonChance = 0.7d;
-	@Config(min = 0d, max = 255, description = "Raw food will give this level of poison to the player.")
-	public static Integer rawFoodPoisonAmplifier = 1;
-	@Config(min = 0d, description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
-	public static Double rawFoodPoisonDurationMultiplier = 2d;
 	@Config(description = "If enabled, when eating food, the saturation will not sum, instead will just be set to the food's saturation (if higher than the current).")
 	public static Boolean combatSnapshotEatingSaturation = true;
 	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
@@ -116,13 +104,16 @@ public class FoodDrinks extends JsonFeature {
     @Config(description = "Adds a loot table when shearing pumpkins (insanesurvivaloverhaul:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
     public static Boolean addPumpkinShearLootTable = true;
 
-	@Config(description = "Food can no longer be smelted in furnaces and change smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
+	@Config(description = "Enables a data pack that makes food no longer smeltable in furnaces and changes smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
+	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous.")
+	public static Boolean foodChanges = true;
 
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
+		InsaneSO.addServerPack("food_changes", "Insane's Survival Overhaul Food Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && foodChanges);
 		ItemComponentsReloadListener.PROGRAMMATIC_PROVIDERS.add((registryAccess, patches) -> {
 			if (!this.isEnabled()) return;
 			processFoodMultipliers(patches);
@@ -187,9 +178,7 @@ public class FoodDrinks extends JsonFeature {
 	}*/
 
 	private static void processFoodMultipliers(Map<Item, DataComponentPatch> patches) {
-		boolean applyFormulas = !foodHungerFormula.isBlank() || !foodSaturationFormula.isBlank() || !foodEatSecondsFormula.isBlank();
-		boolean applyRawPoison = rawFoodPoisonChance > 0;
-		if (!applyFormulas && !applyRawPoison)
+		if (foodHungerFormula.isBlank() && foodSaturationFormula.isBlank() && foodEatSecondsFormula.isBlank())
 			return;
 
 		for (Item item : BuiltInRegistries.ITEM) {
@@ -207,17 +196,10 @@ public class FoodDrinks extends JsonFeature {
 					? (float) MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
 					: food.eatSeconds();
 
-			List<FoodProperties.PossibleEffect> newEffects = food.effects();
-			if (applyRawPoison && isRawFood(item)) {
-				int duration = (int) ((newNutrition + newSaturation) * 20 * rawFoodPoisonDurationMultiplier);
-				newEffects = new ArrayList<>(food.effects());
-				newEffects.add(new FoodProperties.PossibleEffect(() -> new MobEffectInstance(MobEffects.POISON, duration, rawFoodPoisonAmplifier), rawFoodPoisonChance.floatValue()));
-			}
-
-			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds() && newEffects == food.effects())
+			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds())
 				continue;
 
-			FoodProperties modified = new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), newEatSeconds, food.usingConvertsTo(), newEffects);
+			FoodProperties modified = new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), newEatSeconds, food.usingConvertsTo(), food.effects());
 			patches.put(item, DataComponentPatch.builder().set(DataComponents.FOOD, modified).build());
 		}
 	}
@@ -251,7 +233,4 @@ public class FoodDrinks extends JsonFeature {
 		processFoodMultipliers(isClientSide);
 	}*/
 
-	public static boolean isRawFood(Item item) {
-		return item.builtInRegistryHolder().is(RAW_FOOD);
-	}
 }
