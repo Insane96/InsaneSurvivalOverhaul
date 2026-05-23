@@ -26,7 +26,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -86,27 +85,19 @@ public class FoodDrinks extends JsonFeature {
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.REGENERATION, 400).setAmplifier(1).build())
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.DAMAGE_RESISTANCE, 6000).build())
 					.addEffect(new ISOMobEffectInstance.Builder(MobEffects.FIRE_RESISTANCE, 6000).build())
-					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:sweet_berry_meatballs")).nutrition(9).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("berry_good:glowgurt")).nutrition(8).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:bone_broth")).nutrition(6).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("autumnity:pumpkin_bread")).nutrition(5).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("buzzier_bees:honey_bread")).nutrition(5).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("farmersdelight:pumpkin_slice")).nutrition(2).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("tide:cooked_fish")).nutrition(5).build(),
-			new CustomFoodProperties.Builder(IdTagMatcher.newId("environmental:plum")).nutrition(3).build()
+					.addEffect(new ISOMobEffectInstance.Builder(RegeneratingAbsorption.EFFECT, 2400).setAmplifier(3).build()).build()
 	));
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();*/
 
-	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
+	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
 	public static String foodHungerFormula = "ROUND(nutrition * 1.2, 0)";
-	@Config(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
-	public static String foodSaturationFormula = "saturation * 1.2";
+	@Config(description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
+	public static String foodSaturationFormula = "saturation * 1.4";
+	@Config(description = "The formula to calculate the seconds required to eat a food. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. Empty to disable. Can be re-applied with /reload.")
+	public static String foodEatSecondsFormula = "MIN(MAX((1.6 * (nutrition + saturation)) * 0.125, 0.8), 5)";
 
 	@Config(description = "Makes potions and milk faster to drink, 1 second instead of 1.6.")
 	public static Boolean fasterDrinkConsuming = true;
-	@Config(description = "The formula to calculate the seconds required to eat a food. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. The default formula increases the time to eat exponentially when higher effectiveness. Empty to disable")
-	public static String eatingSpeedFormula = "MIN(MAX((32 * (nutrition + saturation)) * 0.085, 15), 100)";
 	@Config(description = "If true, eating/drinking stops when the player's hit.")
 	public static Boolean stopConsumingOnHit = true;
 	@Config(description = "If true, eating will always be possible, even with full hunger.")
@@ -118,7 +109,7 @@ public class FoodDrinks extends JsonFeature {
 	public static Integer rawFoodPoisonAmplifier = 1;
 	@Config(min = 0d, description = "Raw food's poison duration will be multiplied by this value. With this set to 1, raw food will give 1 second of poison per nutrition + saturation given.")
 	public static Double rawFoodPoisonDurationMultiplier = 2d;
-	@Config(description = "If enabled, when eating food, the saturation will not sum, instead will just be set to the food's saturation (if higher than the current). If AppleSkin is installed it also adds compatibility for saturation restored overlay")
+	@Config(description = "If enabled, when eating food, the saturation will not sum, instead will just be set to the food's saturation (if higher than the current).")
 	public static Boolean combatSnapshotEatingSaturation = true;
 	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
 	public static Boolean buffCake = true;
@@ -169,23 +160,6 @@ public class FoodDrinks extends JsonFeature {
 		return Math.min(1200, (int) (current + 600 * (1.0 - (double) current / 2400)));
 	}
 
-	private static Item lastFoodEatenCache;
-	private static int lastFoodEatenTime;
-
-	public static int getFoodConsumingTime(int original, ItemStack stack) {
-		if (stack.getItem() == lastFoodEatenCache)
-			return lastFoodEatenTime;
-		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
-		if (food == null)
-			return original;
-		int ticks = eatingSpeedFormula.isBlank()
-				? -1
-				: (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
-		lastFoodEatenCache = stack.getItem();
-		lastFoodEatenTime = ticks >= 0 ? ticks : (int) (food.eatSeconds() * 20f);
-		return lastFoodEatenTime;
-	}
-
 	@SubscribeEvent
 	public void onPlayerHit(LivingDamageEvent.Pre event) {
 		if (!this.isEnabled()
@@ -213,7 +187,7 @@ public class FoodDrinks extends JsonFeature {
 	}*/
 
 	private static void processFoodMultipliers(Map<Item, DataComponentPatch> patches) {
-		boolean applyFormulas = !foodHungerFormula.isBlank() || !foodSaturationFormula.isBlank();
+		boolean applyFormulas = !foodHungerFormula.isBlank() || !foodSaturationFormula.isBlank() || !foodEatSecondsFormula.isBlank();
 		boolean applyRawPoison = rawFoodPoisonChance > 0;
 		if (!applyFormulas && !applyRawPoison)
 			return;
@@ -229,6 +203,9 @@ public class FoodDrinks extends JsonFeature {
 			float newSaturation = !foodSaturationFormula.isBlank()
 					? (float) MCUtils.computeFoodFormula(food, foodSaturationFormula)
 					: food.saturation();
+			float newEatSeconds = !foodEatSecondsFormula.isBlank()
+					? (float) MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
+					: food.eatSeconds();
 
 			List<FoodProperties.PossibleEffect> newEffects = food.effects();
 			if (applyRawPoison && isRawFood(item)) {
@@ -237,10 +214,10 @@ public class FoodDrinks extends JsonFeature {
 				newEffects.add(new FoodProperties.PossibleEffect(() -> new MobEffectInstance(MobEffects.POISON, duration, rawFoodPoisonAmplifier), rawFoodPoisonChance.floatValue()));
 			}
 
-			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEffects == food.effects())
+			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds() && newEffects == food.effects())
 				continue;
 
-			FoodProperties modified = new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), food.eatSeconds(), food.usingConvertsTo(), newEffects);
+			FoodProperties modified = new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), newEatSeconds, food.usingConvertsTo(), newEffects);
 			patches.put(item, DataComponentPatch.builder().set(DataComponents.FOOD, modified).build());
 		}
 	}
