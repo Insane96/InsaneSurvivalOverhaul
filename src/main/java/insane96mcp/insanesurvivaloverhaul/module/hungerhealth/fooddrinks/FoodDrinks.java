@@ -99,7 +99,7 @@ public class FoodDrinks extends JsonFeature {
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();*/
 
 	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
-	public static String foodHungerFormula = "ROUND(hunger * 1.2, 0)";
+	public static String foodHungerFormula = "ROUND(nutrition * 1.2, 0)";
 	@Config(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
 	public static String foodSaturationFormula = "saturation * 1.2";
 
@@ -169,19 +169,19 @@ public class FoodDrinks extends JsonFeature {
 		return Math.min(1200, (int) (current + 600 * (1.0 - (double) current / 2400)));
 	}
 
-	private static FoodProperties lastFoodEatenCache;
+	private static Item lastFoodEatenCache;
 	private static int lastFoodEatenTime;
 
 	public static int getFoodConsumingTime(int original, ItemStack stack) {
+		if (stack.getItem() == lastFoodEatenCache)
+			return lastFoodEatenTime;
 		FoodProperties food = stack.getItem().getFoodProperties(stack, null);
 		if (food == null)
 			return original;
-		if (food == lastFoodEatenCache)
-			return lastFoodEatenTime;
 		int ticks = eatingSpeedFormula.isBlank()
 				? -1
 				: (int) MCUtils.computeFoodFormula(food, eatingSpeedFormula);
-		lastFoodEatenCache = food;
+		lastFoodEatenCache = stack.getItem();
 		lastFoodEatenTime = ticks >= 0 ? ticks : (int) (food.eatSeconds() * 20f);
 		return lastFoodEatenTime;
 	}
