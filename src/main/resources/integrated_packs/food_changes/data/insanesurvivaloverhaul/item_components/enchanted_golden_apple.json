@@ -1,0 +1,45 @@
+{
+	"item": "minecraft:enchanted_golden_apple",
+	"components": {
+		"minecraft:food": {
+			"nutrition": 5,
+			"saturation": 13.44,
+			"can_always_eat": true,
+			"eat_seconds": 2.72,
+			"effects": [
+				{
+					"effect": {
+						"id": "minecraft:regeneration",
+						"duration": 400,
+						"amplifier": 1
+					},
+					"probability": 1.0
+				},
+				{
+					"effect": {
+						"id": "minecraft:resistance",
+						"duration": 6000,
+						"amplifier": 0
+					},
+					"probability": 1.0
+				},
+				{
+					"effect": {
+						"id": "minecraft:fire_resistance",
+						"duration": 6000,
+						"amplifier": 0
+					},
+					"probability": 1.0
+				},
+				{
+					"effect": {
+						"id": "insanesurvivaloverhaul:regenerating_absorption",
+						"duration": 2400,
+						"amplifier": 3
+					},
+					"probability": 1.0
+				}
+			]
+		}
+	}
+}

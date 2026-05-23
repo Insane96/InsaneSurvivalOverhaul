@@ -1,0 +1,8 @@
+{
+	"item": "minecraft:spider_eye",
+	"merge_components": {
+		"minecraft:food": {
+			"nutrition": 1
+		}
+	}
+}

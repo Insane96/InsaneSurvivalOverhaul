@@ -1,0 +1,8 @@
+{
+	"item": "minecraft:cookie",
+	"merge_components": {
+		"minecraft:food": {
+			"nutrition": 1
+		}
+	}
+}

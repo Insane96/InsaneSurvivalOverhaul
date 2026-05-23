@@ -1,0 +1,17 @@
+{
+	"item": "#insanesurvivaloverhaul:raw_foods",
+	"merge_components": {
+		"minecraft:food": {
+			"effects": [
+				{
+					"effect": {
+						"id": "minecraft:poison",
+						"duration": 600,
+						"amplifier": 0
+					},
+					"probability": 0.7
+				}
+			]
+		}
+	}
+}

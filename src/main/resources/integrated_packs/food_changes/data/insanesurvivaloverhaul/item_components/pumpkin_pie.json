@@ -1,0 +1,8 @@
+{
+	"item": "minecraft:pumpkin_pie",
+	"merge_components": {
+		"minecraft:food": {
+			"nutrition": 7
+		}
+	}
+}
