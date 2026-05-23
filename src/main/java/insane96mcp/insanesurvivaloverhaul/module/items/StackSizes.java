@@ -92,25 +92,4 @@ public class StackSizes extends Feature {
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
-
-    /**
-     * Fixes soups, potions, etc. consuming that don't work properly when stacked
-     */
-    /*@SubscribeEvent
-    public void fixUnstackableItemsEat(LivingEntityUseItemEvent.Finish event) {
-        if (!this.isEnabled())
-            return;
-        if (!(event.getEntity() instanceof Player player) || player.level().isClientSide())
-            return;
-
-        ItemStack original = event.getItem();
-        ItemStack result = event.getResultStack();
-        if (original.getCount() <= 1
-                || (result.getItem() != Items.BOWL && result.getItem() != Items.BUCKET && result.getItem() != Items.GLASS_BOTTLE))
-            return;
-
-        event.setResultStack(original.copyWithCount(original.getCount() - result.getCount()));
-        if (!player.addItem(result))
-            player.drop(result, true);
-    }*/
 }
