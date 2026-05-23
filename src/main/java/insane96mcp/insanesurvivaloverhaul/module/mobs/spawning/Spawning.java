@@ -1,6 +1,5 @@
 package insane96mcp.insanesurvivaloverhaul.module.mobs.spawning;
 
-import com.google.common.collect.ImmutableSet;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
@@ -8,7 +7,6 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -18,8 +16,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.village.poi.PoiManager;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -28,8 +24,8 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 
@@ -37,8 +33,7 @@ import java.util.List;
 public class Spawning extends Feature {
     public static final ResourceLocation GUARDIAN_MODIFIER_ID = InsaneSO.id("naturally_spawned_guardian");
 
-    public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7)));
-    public static final DeferredHolder<PoiType, PoiType> ECHO_LANTERN_POI = ISORegistries.POI_TYPES.register("echo_lantern", () -> new PoiType(ImmutableSet.copyOf(ECHO_LANTERN.block().get().getStateDefinition().getPossibleStates()), 1, 64));
+    public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7).explosionResistance(120)));
 
     @Config(description = "Disables Zombie Villagers")
     public static Boolean noZombieVillagers = true;
@@ -48,6 +43,8 @@ public class Spawning extends Feature {
     public static Boolean removeSkeletonsFromFortresses = true;
     @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
     public static Boolean guardiansInDeepOceans = true;
+    @Config(description = "Radius (in blocks) around an Echo Lantern in which monsters cannot spawn.", min = 1, max = 128)
+    public static Integer echoLanternRadius = 64;
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
@@ -105,8 +102,27 @@ public class Spawning extends Feature {
                 || event.getEntityType().getCategory() != MobCategory.MONSTER)
             return;
 
-        boolean theresTorch = serverLevel.getPoiManager().findAll(poiTypeHolder -> poiTypeHolder.is(ECHO_LANTERN_POI.getKey()), blockPos -> true, event.getPos(), 64, PoiManager.Occupancy.ANY).findAny().isPresent();
-        if (theresTorch)
+        if (EchoLanternSavedData.get(serverLevel).isNearLantern(event.getPos(), echoLanternRadius))
             event.setResult(MobSpawnEvent.SpawnPlacementCheck.Result.FAIL);
+    }
+
+    @SubscribeEvent
+    public void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        if (!this.isEnabled()
+                || !(event.getLevel() instanceof ServerLevel serverLevel)
+                || !event.getState().is(ECHO_LANTERN.block().get()))
+            return;
+
+        EchoLanternSavedData.get(serverLevel).addPosition(event.getPos());
+    }
+
+    @SubscribeEvent
+    public void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (!this.isEnabled()
+                || !(event.getLevel() instanceof ServerLevel serverLevel)
+                || !event.getState().is(ECHO_LANTERN.block().get()))
+            return;
+
+        EchoLanternSavedData.get(serverLevel).removePosition(event.getPos());
     }
 }

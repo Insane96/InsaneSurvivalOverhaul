@@ -35,7 +35,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
 public class FoodDrinks extends JsonFeature {
 	public static final ResourceKey<LootTable> PUMPKIN_SHEAR_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("gameplay/pumpkin_shear"));

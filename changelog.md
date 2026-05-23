@@ -10,6 +10,7 @@
     * The data pack also includes minor adjustments to foods, such as cookies, honey, pumpkin pie, rotten flesh and spider eyes. Also makes golden apples give regenerating absorption instead of absorption
 * Farmable iron data pack is now disabled by default
 * Fixed missing some lang entries
+* Fixed possible lag caused by Echo Lanterns feature
 
 ## From 1.20.1
 * Combat
