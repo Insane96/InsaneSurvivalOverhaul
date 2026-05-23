@@ -6,7 +6,6 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.core.feature.config.MinMaxConfig;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.FoodDataAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.client.Minecraft;
@@ -26,10 +25,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.text.DecimalFormat;
 
-@LoadFeature(module = ISOModules.HUNGER_HEALTH, name = "Health Regen & Hunger", description = "Makes Health regen work differently, similar to Combat Test snapshots. Can be customized. Hunger related stuff doesn't work (for obvious reasons) if No Hunger feature is enabled")
-public class HealthRegenHunger extends Feature {
-	public static final ResourceLocation SPRINT_PENALTY_ID = InsaneSO.id("hungry_sprint_penalty");
-
+@LoadFeature(module = ISOModules.HUNGER_HEALTH, description = "Makes natural regeneration work differently, similar to Combat Test snapshots. Can be customized.")
+public class NaturalRegen extends Feature {
 	public static ResourceLocation PASSIVE_REGEN_TICK;
 	private static final int PASSIVE_REGEN_TICK_RATE = 10;
 	private static final int FOOD_REGEN_TICK_RATE = 10;
@@ -41,8 +38,6 @@ public class HealthRegenHunger extends Feature {
 
 	@Config(min = 0, description = "Sets how many ticks between the health regeneration happens (vanilla is 80).")
 	public static Integer healthRegenSpeed = 40;
-	@Config(min = 0, description = "Sets how much hunger the player must have to regen health (vanilla is 17).")
-	public static Integer regenWhenFoodAbove = 6;
 	@Config(description = "Set to true to disable the health regen boost given when max hunger and saturation (false in Vanilla).")
 	public static Boolean disableSaturationRegenBoost = true;
 	@Config(description = "Set to true to consume Hunger only (and not saturation) when regenerating health (false for Vanilla).")
@@ -59,12 +54,8 @@ public class HealthRegenHunger extends Feature {
 	public static Integer starve$atHunger = 1;
 	@Config(description = "If below 'Starve at Hunger' player will starve 2x faster for each hunger point below 'Starve at Hunger'.")
 	public static Boolean starve$fasterWhenReallyHungry = true;
-	@Config(min = 0, max = 20, description = "Player can only sprint when have at least this much hunger. Vanilla is 7")
-	public static Integer sprint$minHunger = 1;
-	@Config(min = 0, max = 20, description = "Movement speed penalty when below this hunger")
-	public static Integer sprint$speedPenaltyBelowHunger = 7;
-	@Config(min = 0, description = "How much less movement speed per hunger below 'Speed Penalty below hunger' sprinting players have")
-	public static Double sprint$speedReductionEachHunger = 0.025;
+	@Config(min = 0, description = "Sets how much hunger the player must have to regeneration health (vanilla is 17).")
+	public static Integer regenWhenFoodAbove = 6;
 	@Config(description = "If enabled, peaceful difficulty no longer heals and fulfills the player")
 	public static Boolean peacefulHunger = true;
 
@@ -84,7 +75,7 @@ public class HealthRegenHunger extends Feature {
 				|| player.level().isClientSide)
 			return;
 
-		if (player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && HealthRegenHunger.passiveHealthRegen$enable && player.isHurt()) {
+		if (player.tickCount % PASSIVE_REGEN_TICK_RATE == 1 && NaturalRegen.passiveHealthRegen$enable && player.isHurt()) {
 			incrementPassiveRegenTick(player);
 			int passiveRegen = getPassiveRegenSpeed(player);
 
@@ -98,7 +89,7 @@ public class HealthRegenHunger extends Feature {
 
 	private static int getPassiveRegenSpeed(Player player) {
 		float healthPerc = 1f - (player.getHealth() / player.getMaxHealth());
-		float ticks = (float) ((HealthRegenHunger.passiveHealthRegen$speed.max - HealthRegenHunger.passiveHealthRegen$speed.min) * healthPerc + HealthRegenHunger.passiveHealthRegen$speed.min);
+		float ticks = (float) ((NaturalRegen.passiveHealthRegen$speed.max - NaturalRegen.passiveHealthRegen$speed.min) * healthPerc + NaturalRegen.passiveHealthRegen$speed.min);
 		if (player.level().getDifficulty().equals(Difficulty.HARD))
 			ticks *= 1.5f;
 		return (int) ticks;
@@ -140,7 +131,7 @@ public class HealthRegenHunger extends Feature {
 	 * Returns true if overrides the vanilla tick, otherwise false
 	 */
 	public static boolean tickFoodStats(FoodData foodStats, Player player) {
-		if (!Feature.isEnabled(HealthRegenHunger.class))
+		if (!Feature.isEnabled(NaturalRegen.class))
 			return false;
 		Difficulty difficulty = player.level().getDifficulty();
 		((FoodDataAccessor) foodStats).setLastFoodLevel(foodStats.getFoodLevel());

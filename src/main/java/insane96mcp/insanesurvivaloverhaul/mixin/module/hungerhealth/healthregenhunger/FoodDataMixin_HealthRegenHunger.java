@@ -1,6 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.healthregenhunger;
 
-import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HealthRegenHunger;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.NaturalRegen;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FoodDataMixin_HealthRegenHunger {
     @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
     public void onTick(Player player, CallbackInfo callbackInfo) {
-        if (HealthRegenHunger.tickFoodStats((FoodData) (Object) this, player))
+        if (NaturalRegen.tickFoodStats((FoodData) (Object) this, player))
             callbackInfo.cancel();
     }
 }
