@@ -1,4 +1,7 @@
 ## Upcoming
+* Foods
+  * Now restores 20% more hunger (for foods that have enough to be increased, so e.g. berries have not been increased)
+  * Now take more time to be eaten, and lower effectiveness foods take less
 * Farmable iron data pack is now disabled by default
 * Fixed missing some lang entries
 

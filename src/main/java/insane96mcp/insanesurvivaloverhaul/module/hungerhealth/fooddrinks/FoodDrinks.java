@@ -99,14 +99,14 @@ public class FoodDrinks extends JsonFeature {
 	public static final ArrayList<CustomFoodProperties> customFoodProperties = new ArrayList<>();*/
 
 	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
-	public static String foodHungerFormula = "";
+	public static String foodHungerFormula = "ROUND(hunger * 1.2, 0)";
 	@Config(name = "Food Saturation Modifier Formula", description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Setting this to an empty string disables the feature. Can be re-applied with /reload")
 	public static String foodSaturationFormula = "saturation * 1.2";
 
-	@Config(description = "Makes potions and, milk faster to drink, 1 second instead of 1.6.")
+	@Config(description = "Makes potions and milk faster to drink, 1 second instead of 1.6.")
 	public static Boolean fasterDrinkConsuming = true;
 	@Config(description = "The formula to calculate the seconds required to eat a food. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. The default formula increases the time to eat exponentially when higher effectiveness. Empty to disable")
-	public static String eatingSpeedFormula = "MIN(MAX((32 * (nutrition + saturation)) * 0.075, 20), 75)";
+	public static String eatingSpeedFormula = "MIN(MAX((32 * (nutrition + saturation)) * 0.085, 15), 100)";
 	@Config(description = "If true, eating/drinking stops when the player's hit.")
 	public static Boolean stopConsumingOnHit = true;
 	@Config(description = "If true, eating will always be possible, even with full hunger.")
