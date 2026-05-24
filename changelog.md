@@ -1,5 +1,9 @@
+* No flint and steel sound when igniting
+
 ## Upcoming
 * Added bundle to creative inventory when cloth is enabled
+* Fixed copper anvil repairs not working
+* Fixed no ignite sound with two flints
 
 ## 5.4.0.0
 * "New" feature: Sprinting
