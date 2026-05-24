@@ -4,9 +4,12 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.ILRangedAttribute;
+import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanelib.util.MathHelper;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.FoodDataAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.misc.InCombat;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -16,6 +19,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
@@ -39,17 +43,14 @@ public class HungerAndHealthRegen extends Feature {
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_CONSUMED = ISORegistries.ATTRIBUTES.register("hunger_consumed", () -> new ILRangedAttribute(0d, 0d, 40d));
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_REQUIRED_TO_REGEN = ISORegistries.ATTRIBUTES.register("hunger_required_to_regen", () -> new ILRangedAttribute(0d, 0d, 20d));
 
-	/*@Config(description = "If true, Passive Regeneration is enabled")
-	public static Boolean passiveHealthRegen$enable = false;
-	@Config(description = "Min represents how many ticks the regeneration of 1 HP takes when health is 100%, Max how many ticks when health is 0%")
-	public static MinMaxConfig passiveHealthRegen$speed = new MinMaxConfig(120, 3600);
-
-	@Config(min = 0, description = "Sets how many ticks between the health regeneration happens (vanilla is 80).")
-	public static Integer healthRegenSpeed = 40;*/
 	@Config(description = "How much health do players heal overtime each second without consuming hunger? This value is applied to the insanesurvivaloverhaul:passive_regen_per_second attribute on player join.")
 	public static Double passiveRegenPerSecond = 0d;
 	@Config(description = "How much health do players heal overtime each second by consuming hunger? This value is applied to the insanesurvivaloverhaul:regen_per_second attribute on player join.")
 	public static Double regenPerSecond = 0.5d;
+	@Config(min = 0, max = 1, description = "How much health regen is reduced by when in combat.")
+	public static Double regenReductionInCombat = 0.8d;
+	@Config(min = 0, description = "Time in seconds in which the health regen is reduced after entering combat.")
+	public static Double regenReductionInCombatTime = 10d;
 	@Config(description = "Set to true to disable the health regen boost given when max hunger and saturation (false in Vanilla).")
 	public static Boolean disableSaturationRegenBoost = true;
 	@Config(min = 0d, max = 40d, description = "Vanilla consumes 1 saturation or hunger whenever Exhaustion reaches 4.0. You can change that value with this config option. This value is applied to the insanesurvivaloverhaul:max_exhaustion attribute on player join. NOTE that Minecraft (for ... reasons) caps this value to 40.")
@@ -116,13 +117,27 @@ public class HungerAndHealthRegen extends Feature {
 	public void onPlayerTick(PlayerTickEvent.Post event) {
 		Player player = event.getEntity();
 		if (!this.isEnabled()
-				|| player.level().isClientSide
-				|| !player.isHurt())
+				|| player.level().isClientSide)
 			return;
 
+		passiveRegen(player);
+		regenInCombat(player);
+	}
+
+	public static void passiveRegen(Player player) {
 		float passiveRegenPerSecond = (float) player.getAttributeValue(PASSIVE_REGEN_PER_SECOND);
 		if (passiveRegenPerSecond > 0)
 			player.heal(passiveRegenPerSecond / 20f);
+	}
+
+	public static void regenInCombat(Player player) {
+		if (regenReductionInCombatTime == 0 || regenReductionInCombat == 0)
+			return;
+		AttributeModifier IN_COMBAT_MODIFIER = new AttributeModifier(InsaneSO.id("in_combat"), -regenReductionInCombat, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+		if (InCombat.isInCombat(player, regenReductionInCombat))
+			MCUtils.applyModifier(player, REGEN_PER_SECOND, IN_COMBAT_MODIFIER, false);
+		else
+			MCUtils.removeModifier(player, REGEN_PER_SECOND, IN_COMBAT_MODIFIER.id());
 	}
 
 	/*@SubscribeEvent
