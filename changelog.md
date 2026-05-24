@@ -1,7 +1,7 @@
 ## Upcoming
 * "New" feature: Sprinting
   * Split from 'Health Regen & Hunger'
-* Renamed 'Health Regen & Hunger' to 'Natural Regen'
+* Renamed 'Health Regen & Hunger' to 'Hunger and health regen'
 * Foods
   * Now restores 20% more hunger (for foods that have enough to be increased, so e.g. berries have not been increased)
   * Now take more time to be eaten, and lower effectiveness foods take less
