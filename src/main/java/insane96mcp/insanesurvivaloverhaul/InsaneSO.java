@@ -19,6 +19,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneS
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthRegen;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
@@ -75,6 +76,7 @@ public class InsaneSO {
         eventBus.addListener(CriticalRework::addAttribute);
         eventBus.addListener(RegeneratingAbsorption::addAttribute);
         eventBus.addListener(PiercingDamage::addAttribute);
+        eventBus.addListener(HungerAndHealthRegen::addAttribute);
 
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
