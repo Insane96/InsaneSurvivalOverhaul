@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.0.0
 * "New" feature: Sprinting
   * Split from 'Health Regen & Hunger'
 * Renamed 'Health Regen & Hunger' to 'Hunger and health regen'
