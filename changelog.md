@@ -1,3 +1,6 @@
+## Upcoming
+* Added bundle to creative inventory when cloth is enabled
+
 ## 5.4.0.0
 * "New" feature: Sprinting
   * Split from 'Health Regen & Hunger'

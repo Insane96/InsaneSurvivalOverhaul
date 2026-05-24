@@ -19,6 +19,7 @@ import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -64,6 +65,9 @@ public class ClientSetup {
             if (Feature.isEnabled(Pouch.class)) {
                 addAfter(event, Items.LEAD, Pouch.ITEM.get());
             }
+            if (Feature.isEnabled(Cloth.class)
+                    && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
+                    addAfter(event, Items.LEAD, Items.BUNDLE);
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
