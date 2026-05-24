@@ -135,12 +135,12 @@ public class CoalFire extends Feature {
             if (blockstate2 == null) {
                 BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
                 if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
-                    level.playSound(player, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                    level.playSound(null, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                     level.setBlock(blockpos1, BaseFireBlock.getState(level, blockpos1), 11);
                     level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);
                 }
             } else {
-                level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                level.playSound(null, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                 level.setBlock(blockpos, blockstate2, 11);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockpos);
             }
