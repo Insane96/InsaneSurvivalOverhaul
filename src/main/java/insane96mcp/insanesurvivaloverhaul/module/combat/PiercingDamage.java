@@ -4,6 +4,7 @@ import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
+import insane96mcp.insanelib.util.ILRangedAttribute;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
@@ -20,25 +21,23 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import org.jetbrains.annotations.Nullable;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Adds a new attribute that deals bonus damage that bypasses armor")
 public class PiercingDamage extends Feature {
 	public static ResourceKey<DamageType> PIERCING_MOB_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("piercing_mob_attack"));
 	public static ResourceKey<DamageType> PIERCING_PLAYER_ATTACK = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("piercing_player_attack"));
 
-	public static final DeferredHolder<Attribute, PiercingDamageAttribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new PiercingDamageAttribute("attribute.name.piercing_damage", 0d, 0d, 1024d));
 	/**
-	 * ID of the base modifier for Piercing Damage.
+	 * ID of the base modifier (green) for Piercing Damage.
 	 */
 	public static final ResourceLocation BASE_PIERCING_DAMAGE_ID = InsaneSO.id("base_piercing_damage");
+	public static final DeferredHolder<Attribute, Attribute> PIERCING_DAMAGE = ISORegistries.ATTRIBUTES.register("piercing_damage", () -> new ILRangedAttribute(0d, 0d, 1024d, BASE_PIERCING_DAMAGE_ID));
 
 	public static final TagKey<DamageType> PIERCING_DAMAGE_TYPE = ISODamageTypeTagsProvider.create("piercing_damage_type");
 	public static final TagKey<DamageType> DOESNT_TRIGGER_PIERCING = ISODamageTypeTagsProvider.create("doesnt_trigger_piercing");
@@ -86,16 +85,5 @@ public class PiercingDamage extends Feature {
 		boolean ret = MCUtils.attackEntityIgnoreInvFrames(piercingDamageSource, amount, event.getEntity(), event.getEntity(), true);
 		if (event.getEntity().isDeadOrDying())
 			ModNBTData.put(event.getEntity(), SHOULD_STOP_HURT, ret);
-	}
-
-	public static class PiercingDamageAttribute extends RangedAttribute {
-		public PiercingDamageAttribute(String descriptionId, double defaultValue, double min, double max) {
-			super(descriptionId, defaultValue, min, max);
-		}
-
-		@Override
-		public @Nullable ResourceLocation getBaseId() {
-			return BASE_PIERCING_DAMAGE_ID;
-		}
 	}
 }
