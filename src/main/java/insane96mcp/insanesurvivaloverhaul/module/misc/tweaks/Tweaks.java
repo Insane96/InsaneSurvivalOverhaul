@@ -16,6 +16,7 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +24,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -35,6 +37,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -94,6 +97,11 @@ public class Tweaks extends Feature {
 
     @Config(description = "When you die in hardcore, your spawn point is set to where you died and a lightning strike is summoned")
     public static Boolean betterHardcoreDeath = true;
+
+    @Config(description = "Eating while nauseous will cause hunger effect")
+    public static Boolean nausea$hungerWhenEatingAndNauseous = true;
+    @Config(min = 0, max = 1, description = "Hitting a mob has this % chance (per level of Nausea) to fail when nauseated")
+    public static Double nausea$chanceToFailToHit = 0.15d;
 
     @Config(min = 0, max = 100, description = "The amount of ticks the entities consumes when underwater. In vanilla it's 1 without Respiration enchantment. For non integer numbers the decimal part will count as a chance to have a +1")
     public static Double breathe$airTicksConsumed = 1.5d;
@@ -217,6 +225,34 @@ public class Tweaks extends Feature {
             Component component = player.getCombatTracker().getDeathMessage();
             player.server.getPlayerList().broadcastSystemMessage(component, false);
         }*/
+    }
+
+    @SubscribeEvent
+    public void onEat(LivingEntityUseItemEvent.Finish event) {
+        if (!this.isEnabled()
+                || !nausea$hungerWhenEatingAndNauseous
+                || !event.getEntity().hasEffect(MobEffects.CONFUSION))
+            return;
+        FoodProperties foodProperties = event.getItem().get(DataComponents.FOOD);
+        if (foodProperties == null)
+            return;
+        event.getEntity().addEffect(new MobEffectInstance(MobEffects.HUNGER, foodProperties.nutrition() * 100, event.getEntity().getEffect(MobEffects.CONFUSION).getAmplifier()));
+    }
+
+    @SubscribeEvent
+    public void onAttack(LivingIncomingDamageEvent event) {
+        if (!this.isEnabled()
+                || nausea$chanceToFailToHit <= 0
+                || event.getEntity().level().isClientSide
+                || !(event.getSource().getDirectEntity() instanceof LivingEntity attacker)
+                || !attacker.hasEffect(MobEffects.CONFUSION))
+            return;
+
+        int lvl = attacker.getEffect(MobEffects.CONFUSION).getAmplifier() + 1;
+        if (attacker.getRandom().nextFloat() < nausea$chanceToFailToHit * lvl) {
+            event.setCanceled(true);
+            attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ALLAY_AMBIENT_WITH_ITEM, attacker.getSoundSource(), 1f, 2f);
+        }
     }
 
     boolean appliedResistance = false;
