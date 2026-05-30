@@ -3,6 +3,7 @@
   * Added two Nausea features:
     * Hunger when eating: if nauseous, eating will apply hunger
     * Chance to fail to hit: if nauseous, there's a chance for an attack to miss
+* Big ore veins are now twice as rare
 
 ## 5.4.0.1
 * Added bundle to creative inventory when cloth is enabled
