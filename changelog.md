@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.1.0
 * Tweaks
   * Added two Nausea features:
     * Hunger when eating: if nauseous, eating will apply hunger
