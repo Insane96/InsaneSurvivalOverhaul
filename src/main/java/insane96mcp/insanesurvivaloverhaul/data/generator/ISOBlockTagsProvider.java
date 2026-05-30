@@ -56,6 +56,10 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTag(Crops.HARDER_CROPS_TAG);
         tag(BlockTags.MINEABLE_WITH_AXE)
                 .remove(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS);
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.COPPER_ORE_ROCK.block().get());
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(BigOreVeins.GOLD_ORE_ROCK.block().get());
 
         tag(OBSIDIANS)
                 .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);

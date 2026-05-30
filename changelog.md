@@ -1,4 +1,5 @@
 ## Upcoming
+* Ore rock now require the correct pickaxe tier to be mined
 * Fixed setting insanesurvivaloverhaul:fire_speed_multiplier gamerule to 0 crashing the game
 * Fixed melon dropping block without silk touch
 
