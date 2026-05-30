@@ -1,8 +1,11 @@
 package insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins;
 
 import com.mojang.serialization.Codec;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.ChunkStepAccessor;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.WorldGenRegionAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
+import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,29 +25,35 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
 
     @Override
     public boolean place(FeaturePlaceContext<OreWithRandomPatchConfiguration> context) {
-        RandomSource randomsource = context.random();
-        BlockPos blockpos = context.origin();
-        WorldGenLevel worldgenlevel = context.level();
+        RandomSource randomSource = context.random();
+        BlockPos blockPos = context.origin();
+        WorldGenLevel worldGenLevel = context.level();
+        int originalBlockStateWriteRadius = -1;
+        if (worldGenLevel instanceof WorldGenRegion worldGenRegion) {
+            originalBlockStateWriteRadius = ((WorldGenRegionAccessor) worldGenRegion).getGeneratingStep().blockStateWriteRadius();
+            setBlockStateWriteRadius(worldGenRegion, 3);
+        }
         OreWithRandomPatchConfiguration configuration = context.config();
 
-        int radius = configuration.radius.sample(randomsource);
+        int radius = configuration.radius.sample(randomSource);
         int radiusSq = radius * radius;
 
         int placed = 0;
-        try (BulkSectionAccess bulksectionaccess = new BulkSectionAccess(worldgenlevel)) {
+        try (BulkSectionAccess bulksectionaccess = new BulkSectionAccess(worldGenLevel)) {
             BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
             for (int dx = -radius; dx <= radius; dx++) {
                 for (int dy = -radius; dy <= radius; dy++) {
                     for (int dz = -radius; dz <= radius; dz++) {
-                        if (dx * dx + dy * dy + dz * dz > radiusSq)
+                        int distanceSquared = dx * dx + dy * dy + dz * dz;
+                        if (distanceSquared > radiusSq)
                             continue;
                         if (configuration.centerFalloff > 0.0F) {
-                            float normDist = (float) Math.sqrt(dx * dx + dy * dy + dz * dz) / radius;
-                            if (randomsource.nextFloat() < normDist * configuration.centerFalloff)
+                            float normDist = (float) Math.sqrt(distanceSquared) / radius;
+                            if (randomSource.nextFloat() < normDist * configuration.centerFalloff)
                                 continue;
                         }
-                        mutableBlockPos.set(blockpos.getX() + dx, blockpos.getY() + dy, blockpos.getZ() + dz);
-                        if (worldgenlevel.ensureCanWrite(mutableBlockPos)) {
+                        mutableBlockPos.set(blockPos.getX() + dx, blockPos.getY() + dy, blockPos.getZ() + dz);
+                        if (worldGenLevel.ensureCanWrite(mutableBlockPos)) {
                             LevelChunkSection levelchunksection = bulksectionaccess.getSection(mutableBlockPos);
                             if (levelchunksection != null) {
                                 int i3 = SectionPos.sectionRelative(mutableBlockPos.getX());
@@ -53,7 +62,7 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
                                 BlockState blockstate = levelchunksection.getBlockState(i3, j3, k3);
 
                                 for (OreConfiguration.TargetBlockState oreconfiguration$targetblockstate : configuration.targetStates) {
-                                    if (canPlaceOre(blockstate, bulksectionaccess::getBlockState, randomsource, configuration, oreconfiguration$targetblockstate, mutableBlockPos)) {
+                                    if (canPlaceOre(blockstate, bulksectionaccess::getBlockState, randomSource, configuration, oreconfiguration$targetblockstate, mutableBlockPos)) {
                                         levelchunksection.setBlockState(i3, j3, k3, oreconfiguration$targetblockstate.state, false);
                                         placed++;
                                         break;
@@ -66,8 +75,11 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
             }
         }
 
-        if (placed == 0)
+        if (placed == 0) {
+            if (originalBlockStateWriteRadius > -1)
+                setBlockStateWriteRadius((WorldGenRegion) worldGenLevel, originalBlockStateWriteRadius);
             return false;
+        }
         int randomPatchToPlace = placed / configuration.patchConfiguration.tries();
         int placedRandomPatch = 0;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
@@ -75,12 +87,14 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
         int ySpread = configuration.patchConfiguration.ySpread() + 1;
 
         for (int m = 0; m < randomPatchToPlace; ++m) {
-            blockpos$mutableblockpos.setWithOffset(blockpos, randomsource.nextInt(xzSpread) - randomsource.nextInt(xzSpread), randomsource.nextInt(ySpread) - randomsource.nextInt(ySpread), randomsource.nextInt(xzSpread) - randomsource.nextInt(xzSpread));
-            if (configuration.patchConfiguration.feature().value().place(worldgenlevel, context.chunkGenerator(), randomsource, blockpos$mutableblockpos)) {
+            blockpos$mutableblockpos.setWithOffset(blockPos, randomSource.nextInt(xzSpread) - randomSource.nextInt(xzSpread), randomSource.nextInt(ySpread) - randomSource.nextInt(ySpread), randomSource.nextInt(xzSpread) - randomSource.nextInt(xzSpread));
+            if (configuration.patchConfiguration.feature().value().place(worldGenLevel, context.chunkGenerator(), randomSource, blockpos$mutableblockpos)) {
                 ++placedRandomPatch;
             }
         }
 
+        if (originalBlockStateWriteRadius > -1)
+            setBlockStateWriteRadius((WorldGenRegion) worldGenLevel, originalBlockStateWriteRadius);
         return placedRandomPatch > 0;
     }
 
@@ -102,5 +116,9 @@ public class BigOreVeinFeature extends Feature<OreWithRandomPatchConfiguration> 
         } else {
             return random.nextFloat() >= discardChance;
         }
+    }
+
+    private static void setBlockStateWriteRadius(WorldGenRegion worldGenRegion, int blockStateWriteRadius) {
+        ((ChunkStepAccessor) (Object) ((WorldGenRegionAccessor) worldGenRegion).getGeneratingStep()).setBlockStateWriteRadius(blockStateWriteRadius);
     }
 }
