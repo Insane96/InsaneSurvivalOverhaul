@@ -53,7 +53,7 @@ public class CoalFire extends Feature {
 
     public static final DeferredHolder<Item, FirestarterItem> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).durability(11)));
 
-    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("insanesurvivaloverhaul:fire_speed_multiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4));
+    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("insanesurvivaloverhaul:fire_speed_multiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4, 1, 128, (server, value) -> {}));
 
     @Config(min = 0d, max = 1d, description = "Chance for logs to yield burnt logs when burnt")
     public static Double burntLogsChance = 0.8d;

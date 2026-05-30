@@ -1,3 +1,6 @@
+## Upcoming
+* Fixed setting insanesurvivaloverhaul:fire_speed_multiplier gamerule to 0 crashing the game
+
 ## 5.4.1.0
 * Tweaks
   * Added two Nausea features:
