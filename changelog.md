@@ -1,5 +1,6 @@
 ## Upcoming
 * Fixed setting insanesurvivaloverhaul:fire_speed_multiplier gamerule to 0 crashing the game
+* Fixed melon dropping block without silk touch
 
 ## 5.4.1.0
 * Tweaks
