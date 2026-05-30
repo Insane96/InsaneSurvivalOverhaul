@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.event.BlockBurntEvent;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GameRulesIntegerValueAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -53,7 +54,7 @@ public class CoalFire extends Feature {
 
     public static final DeferredHolder<Item, FirestarterItem> FIRESTARTER = ISORegistries.ITEMS.register("firestarter", () -> new FirestarterItem(new Item.Properties().stacksTo(1).durability(11)));
 
-    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("insanesurvivaloverhaul:fire_speed_multiplier", GameRules.Category.UPDATES, GameRules.IntegerValue.create(4, 1, 128, (server, value) -> {}));
+    public static final GameRules.Key<GameRules.IntegerValue> RULE_FIRESPEEDMULTIPLIER = GameRules.register("insanesurvivaloverhaul:fire_speed_multiplier", GameRules.Category.UPDATES, GameRulesIntegerValueAccessor.invokeCreate(4, 1, 128, (server, value) -> {}));
 
     @Config(min = 0d, max = 1d, description = "Chance for logs to yield burnt logs when burnt")
     public static Double burntLogsChance = 0.8d;

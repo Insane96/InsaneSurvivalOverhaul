@@ -94,3 +94,4 @@ Run `./gradlew runData` to regenerate files into `src/generated/resources/`. Dat
 Don't write code unless prompted or confirmed to do.
 The 1.20.1 version of the mod is in C:\Users\delvi\source\repos\Insane96\IguanaTweaksReborn\, whilest other mods, such as InsaneLib are in C:\Users\delvi\source\repos\Insane96\
 If you need Minecraft/Neo code ask instead of going into a rabbit hole try to read it, so I can provide it.
+Don't worry about imports, the IDE will sort them out.
