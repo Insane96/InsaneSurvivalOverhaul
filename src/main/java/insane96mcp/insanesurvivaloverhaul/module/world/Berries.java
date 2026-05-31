@@ -32,6 +32,7 @@ public class Berries extends Feature {
     @Config(description = """
 		Makes sweet berries not plantable, requiring seeds, and also enables a data pack that makes the following changes:
 		* Makes sweet berry bushes drop seeds
+		* Makes sweet berry patches rarer
 		* Makes sweet berry patches have less plants and plants will not be all grown up
 	""")
     public static Boolean dataPack = true;

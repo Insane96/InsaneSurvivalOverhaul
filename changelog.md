@@ -1,4 +1,5 @@
 ## Upcoming
+* Sweet Berries Patches are now 3x rarer
 * Fixed Nether Fog changes not working
 
 ## 5.4.1.1
