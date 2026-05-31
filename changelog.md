@@ -1,3 +1,6 @@
+## Upcoming
+* Fixed Nether Fog changes not working
+
 ## 5.4.1.1
 * Ore rock now require the correct pickaxe tier to be mined
 * Fixed setting insanesurvivaloverhaul:fire_speed_multiplier gamerule to 0 crashing the game

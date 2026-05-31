@@ -17,7 +17,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ViewportEvent;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 @LoadFeature(module = ISOClientModules.CLIENT)
 public class Fog extends Feature {
@@ -92,7 +91,7 @@ public class Fog extends Feature {
             return;
 
         Entity entity = event.getCamera().getEntity();
-        if (entity.getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE && entity.level().dimension() == Level.NETHER) {
+        if (entity.getEyeInFluidType().isAir() && entity.level().dimension() == Level.NETHER) {
             float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
             event.setNearPlaneDistance((float) (renderDistance * netherFogRatio / 10f));
             event.setFarPlaneDistance((float) (renderDistance * netherFogRatio));
