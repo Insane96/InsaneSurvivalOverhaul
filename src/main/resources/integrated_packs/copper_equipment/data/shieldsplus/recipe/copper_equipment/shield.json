@@ -1,0 +1,25 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "shieldsplus"
+        }
+    ],
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " M ",
+        "MBM",
+        " M "
+    ],
+    "key": {
+        "M": {
+            "item": "minecraft:copper_ingot"
+        },
+        "B": {
+            "tag": "minecraft:logs"
+        }
+    },
+    "result": {
+        "id": "shieldsplus:copper_shield"
+    }
+}
