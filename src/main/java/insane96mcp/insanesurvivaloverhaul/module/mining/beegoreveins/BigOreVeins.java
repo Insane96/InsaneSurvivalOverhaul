@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+//TODO Move to noise generator (I have no idea how to) or change OreVenifier
 @LoadFeature(module = ISOModules.MINING, description = "Enables a Data Pack that generates large ore veins underground. On the surface you can find ore rocks indicating a huge vein below.")
 public class BigOreVeins extends Feature {
     public static TagKey<Block> ORE_ROCKS = ISOBlockTagsProvider.create("ore_rocks");
