@@ -5,6 +5,7 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.util.MathHelper;
 import insane96mcp.insanesurvivaloverhaul.event.DeathPenaltyEvent;
 import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GameRulesIntegerValueAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.InventoryAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
@@ -26,10 +27,10 @@ import java.util.function.Predicate;
 @LoadFeature(module = ISOModules.DEATH,
 		description = "Makes you lose a percentage of items and durability on death. Controlled via game rules. Items percentage lost can be configured with the insanesurvivaloverhaul:death_lose_items_percentage, insanesurvivaloverhaul:death_durability_penalty and insanesurvivaloverhaul:death_destroy_items game rules. insanesurvivaloverhaul:death_experience_lost for the percentage of experience dropped and insanesurvivaloverhaul:death_destroy_experience if the experience should be dropped or destroyed. Please note that this feature controls the vanilla keep_inventory game rule.")
 public class DeathPenalty extends Feature {
-	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHLOSEITEMSPERCENTAGE = GameRules.register("insanesurvivaloverhaul:death_lose_items_percentage", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
-	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHDURABILITYPENALTY = GameRules.register("insanesurvivaloverhaul:death_durability_penalty", GameRules.Category.PLAYER, GameRules.IntegerValue.create(15));
+	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHLOSEITEMSPERCENTAGE = GameRules.register("insanesurvivaloverhaul:death_lose_items_percentage", GameRules.Category.PLAYER, GameRulesIntegerValueAccessor.invokeCreate(30, 0, 100, (server, value) -> {}));
+	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHDURABILITYPENALTY = GameRules.register("insanesurvivaloverhaul:death_durability_penalty", GameRules.Category.PLAYER, GameRulesIntegerValueAccessor.invokeCreate(15, 0, 100, (server, value) -> {}));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHDESTROYITEMS = GameRules.register("insanesurvivaloverhaul:death_destroy_items", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
-	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHEXPERIENCEDROPPED = GameRules.register("insanesurvivaloverhaul:death_experience_lost", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
+	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHEXPERIENCEDROPPED = GameRules.register("insanesurvivaloverhaul:death_experience_lost", GameRules.Category.PLAYER, GameRulesIntegerValueAccessor.invokeCreate(30, 0, 100, (server, value) -> {}));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHDESTROYEXPERIENCE = GameRules.register("insanesurvivaloverhaul:death_destroy_experience", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
