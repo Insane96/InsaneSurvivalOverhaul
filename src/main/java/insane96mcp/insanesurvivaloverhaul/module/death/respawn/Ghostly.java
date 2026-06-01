@@ -19,7 +19,7 @@ public class Ghostly extends Feature {
 	public static final DeferredHolder<MobEffect, ILMobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
 	@Config(min = 0, description = "How many seconds of the Ghostly effect is given to the player on respawn.")
-	public static Integer timeOnRespawn = 120;
+	public static Integer timeOnRespawn = 150;
 
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {

@@ -116,6 +116,8 @@
         "module.client.misc.GameRendererMixin_Misc",
         "module.client.misc.GuiMixin_Misc",
         "module.client.misc.LevelRendererMixin_Misc",
+        "module.death.respawn.client.LivingEntityRendererMixin_GhostlyEffect",
+        "module.death.respawn.client.PlayerRendererMixin_GhostlyEffect",
         "module.hungerhealth.client.LocalPlayerMixin_HealthRegenHunger",
         "module.mining.MultiplayerGameModeMixin_MiningMisc",
         "module.misc.tweaks.client.EntityRendererMixin_Tweaks",

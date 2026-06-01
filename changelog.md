@@ -1,5 +1,8 @@
 ## Upcoming
-* Moved Ghostly effect to it's own feature
+* Ghostly
+  * Moved to its own feature
+  * Players now render translucent
+  * Increased duration by 30 seconds
 * Disable stone tools feature now also disables stone shields from Shields+
 
 ## 5.4.1.2
