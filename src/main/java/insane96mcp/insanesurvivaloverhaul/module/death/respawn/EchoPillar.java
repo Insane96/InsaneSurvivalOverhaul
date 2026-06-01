@@ -67,7 +67,7 @@ public class EchoPillar extends JsonFeature {
 			new SerializableMobEffectInstance.Builder(MobEffects.SATURATION, 20 * 20)
 					.noParticles()
 					.build(),
-			new SerializableMobEffectInstance.Builder(LooseRespawn.GHOSTLY, 120 * 20)
+			new SerializableMobEffectInstance.Builder(Ghostly.GHOSTLY, 120 * 20)
 					.noParticles()
 					.build()
 	);
