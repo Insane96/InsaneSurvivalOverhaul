@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.2.0
 * Ghostly
   * Moved to its own feature
   * Players now render translucent
