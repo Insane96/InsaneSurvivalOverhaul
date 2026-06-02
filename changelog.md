@@ -1,3 +1,7 @@
+## Upcoming
+* Tiredness
+  * Fixed not being able to sleep during the day
+
 ## 5.4.2.1
 * Fixed iron taking not enough time to smelt
 

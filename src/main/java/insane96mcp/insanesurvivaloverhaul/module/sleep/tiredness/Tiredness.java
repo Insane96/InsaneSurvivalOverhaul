@@ -314,26 +314,24 @@ public class Tiredness extends JsonFeature {
 
 	@SubscribeEvent
 	public void notTiredToSleep(CanPlayerSleepEvent event) {
-		if (!this.isEnabled()
-				|| event.getProblem() != null)
+		if (!this.isEnabled())
 			return;
 
 		ServerPlayer player = event.getEntity();
 
-		if (!player.hasEffect(TIRED) && !allowSleepingEvenWhenNotTired && !player.getAbilities().instabuild) {
+		if (player.getAbilities().instabuild)
+			return;
+
+		if (!player.hasEffect(TIRED) && !allowSleepingEvenWhenNotTired) {
 			event.setProblem(Player.BedSleepingProblem.OTHER_PROBLEM);
 			player.displayClientMessage(Component.translatable(NOT_TIRED), true);
-			if (!shouldPreventSpawnPoint)
-				player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
-		}
+        }
 		else {
-			event.setProblem(Player.BedSleepingProblem.OTHER_PROBLEM);
-			player.startSleeping(event.getPos());
-			((ServerLevel)player.level()).updateSleepingPlayerList();
-			if (!shouldPreventSpawnPoint)
-				player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
-		}
-	}
+			event.setProblem(null);
+        }
+        if (!shouldPreventSpawnPoint)
+            player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
+    }
 
 	static int timeSkipped;
 
