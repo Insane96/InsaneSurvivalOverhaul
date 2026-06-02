@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.DEATH, description = "Gives the player the Ghostly effect on respawn, preventing mob aggro.")
+@LoadFeature(module = ISOModules.DEATH, description = "Gives the player the Ghostly effect on respawn, making you really hard to see for mobs.")
 public class Ghostly extends Feature {
 	public static final DeferredHolder<MobEffect, ILMobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
