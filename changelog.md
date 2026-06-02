@@ -1,3 +1,6 @@
+## 5.4.2.1
+* Fixed iron taking not enough time to smelt
+
 ## 5.4.2.0
 * Ghostly
   * Moved to its own feature
