@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.core.HolderLookup;
@@ -93,6 +94,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         tag(BigOreVeins.ORE_ROCKS)
                 .add(BigOreVeins.COPPER_ORE_ROCK.block().get(), BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.GOLD_ORE_ROCK.block().get());
+
+        tag(Tiredness.SLEEPING_BLOCKS)
+                .addTag(BlockTags.BEDS);
     }
 
     public static TagKey<Block> create(String tagName) {

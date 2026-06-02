@@ -10,6 +10,7 @@ import insane96mcp.insanelib.data.ObjTag;
 import insane96mcp.insanelib.event.PlayerExhaustionEvent;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.LivingEntityAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobAccessor;
@@ -42,6 +43,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
@@ -77,6 +79,7 @@ public class Tiredness extends JsonFeature {
 	public static final String TIRED_ENOUGH = InsaneSO.lang("tired_enough");
 	public static final String TOO_TIRED = InsaneSO.lang("too_tired");
 	public static final TagKey<Item> ENERGY_BOOST_ITEM_TAG = ISOItemTagsProvider.create("energy_boost");
+	public static final TagKey<Block> SLEEPING_BLOCKS = ISOBlockTagsProvider.create("sleeping_blocks");
 
 	public static final List<EnergyBoostItem> ENERGY_BOOST_ITEMS_DEFAULT = new ArrayList<>(List.of(
 			new EnergyBoostItem(ObjTag.of("#insanesurvivaloverhaul:energy_boost", Registries.ITEM), 0, 0),
@@ -348,15 +351,13 @@ public class Tiredness extends JsonFeature {
 			player.removeEffect(TIRED);
 		});
 
-		skipTime(event, highestTired.get());
+		event.setTimeAddition(event.getLevel().dayTime() + getTimeSkipped(highestTired.get()));
 		Thunderstorms.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
 	}
 
-	private static void skipTime(SleepFinishedTimeEvent event, int highestTiredAmplifier) {
-		timeSkipped = 12000;
+	public static int getTimeSkipped(int amplifier) {
 		//If above Tired I increase the time skipped by 2.5 minutes per level
-		timeSkipped += 3000 * highestTiredAmplifier;
-		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
+		return 12000 + 3000 * amplifier;
 	}
 
 	public static boolean onSleepFinished(ServerLevel level, boolean original) {
@@ -456,7 +457,7 @@ public class Tiredness extends JsonFeature {
 		LocalPlayer playerEntity = mc.player;
 		if (playerEntity == null)
 			return;
-		if (mc.getDebugOverlay().showDebugScreen() && !mc.showOnlyReducedInfo()) {
+		if (!mc.showOnlyReducedInfo()) {
 			event.getLeft().add(String.format("Tiredness: %s", new DecimalFormat("#.#").format(TirednessHandler.get(playerEntity))));
 		}
 	}
