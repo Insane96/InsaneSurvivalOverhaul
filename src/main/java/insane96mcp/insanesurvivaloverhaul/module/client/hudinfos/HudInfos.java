@@ -132,7 +132,14 @@ public class HudInfos extends Feature {
 
     @OnlyIn(Dist.CLIENT)
     public static void renderTime(Player player, List<String> toDraw) {
-        toDraw.add(Component.translatable("hud_info.time", (int)((player.level().getDayTime() + 6000) % 24000 / 1000), String.format("%02d",player.level().getDayTime() % 1000 / 20), player.level().getGameTime() / 24000).getString());
+        long dayTime = player.level().getDayTime();
+        toDraw.add(Component.translatable("hud_info.time", ticksToTimeString(dayTime), player.level().getGameTime() / 24000).getString());
+    }
+
+    public static String ticksToTimeString(long ticks) {
+        int hours = (int) ((ticks + 6000) % 24000 / 1000);
+        String minutes = String.format("%02d", ticks % 1000 / 20);
+        return hours + ":" + minutes;
     }
 
     /*@OnlyIn(Dist.CLIENT)
