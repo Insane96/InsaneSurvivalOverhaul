@@ -86,8 +86,6 @@ public class Tiredness extends JsonFeature {
 
 	@Config(min = 0d, max = 128d, description = "Multiply the tiredness gained by this value. Normally you gain tiredness equal to the exhaustion gained. 'Effective Hunger' doesn't affect the exhaustion gained.")
 	public static Double tirednessGainMultiplier = 1d;
-	@Config(description = "If true the player will not set the spawn point if can't sleep.")
-	public static Boolean shouldPreventSpawnPoint = false;
 	@Config(min = 0d, description = "Tiredness required to get the Tired effect and be able to sleep.")
 	public static Double tirednessToEffect = 400d;
 	@Config(min = 0d, description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
@@ -329,8 +327,6 @@ public class Tiredness extends JsonFeature {
 		else {
 			event.setProblem(null);
         }
-        if (!shouldPreventSpawnPoint)
-            player.setRespawnPosition(player.level().dimension(), event.getPos(), player.getYRot(), false, true);
     }
 
 	static int timeSkipped;
