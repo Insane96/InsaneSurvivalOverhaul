@@ -2,7 +2,7 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "tag": "neoforge:pumpkins"
+            "tag": "c:pumpkins"
         }
     ],
     "result": {
