@@ -38,7 +38,7 @@ import java.text.DecimalFormat;
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, description = "Makes natural regeneration and hunger work differently, similar to Combat Test snapshots. Can be customized. Also allows to add passive regen")
 public class HungerAndHealthRegen extends Feature {
 	public static final DeferredHolder<Attribute, Attribute> PASSIVE_REGEN_PER_SECOND = ISORegistries.ATTRIBUTES.register("passive_regen_per_second", () -> new ILRangedAttribute(0d, 0d, Double.MAX_VALUE));
-	public static final DeferredHolder<Attribute, Attribute> REGEN_PER_SECOND = ISORegistries.ATTRIBUTES.register("natural_regen_per_second", () -> new ILRangedAttribute(0.5d, 0d, Double.MAX_VALUE));
+	public static final DeferredHolder<Attribute, Attribute> REGEN_PER_SECOND = ISORegistries.ATTRIBUTES.register("natural_regen_per_second", () -> new ILRangedAttribute(0.35d, 0d, Double.MAX_VALUE));
 	public static final DeferredHolder<Attribute, Attribute> MAX_EXHAUSTION = ISORegistries.ATTRIBUTES.register("max_exhaustion", () -> new ILRangedAttribute(0d, 0d, 40d));
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_CONSUMED = ISORegistries.ATTRIBUTES.register("hunger_consumed", () -> new ILRangedAttribute(0d, 0d, 40d));
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_REQUIRED_TO_REGEN = ISORegistries.ATTRIBUTES.register("hunger_required_to_regen", () -> new ILRangedAttribute(0d, 0d, 20d));
@@ -46,7 +46,7 @@ public class HungerAndHealthRegen extends Feature {
 	@Config(description = "How much health do players heal overtime each second without consuming hunger? This value is applied to the insanesurvivaloverhaul:passive_regen_per_second attribute on player join.")
 	public static Double passiveRegenPerSecond = 0d;
 	@Config(description = "How much health do players heal overtime each second by consuming hunger? This value is applied to the insanesurvivaloverhaul:regen_per_second attribute on player join.")
-	public static Double regenPerSecond = 0.5d;
+	public static Double regenPerSecond = 0.35d;
 	@Config(min = 0, max = 1, description = "How much health regen is reduced by when in combat.")
 	public static Double regenReductionInCombat = 0.8d;
 	@Config(min = 0, description = "Time in seconds in which the health regen is reduced after entering combat.")

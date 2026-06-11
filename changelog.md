@@ -1,3 +1,6 @@
+## Upcoming
+* Slowed down default health regen (2/s -> 3/s)
+
 ## 5.4.2.2
 * Tiredness
   * Fixed not being able to sleep during the day
