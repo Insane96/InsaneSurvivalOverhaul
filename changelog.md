@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.2.2
 * Tiredness
   * Fixed not being able to sleep during the day
   * Removed 'Should prevent spawn point' config option
