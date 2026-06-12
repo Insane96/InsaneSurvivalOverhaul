@@ -14,7 +14,7 @@ public class ClientPouchTooltip implements ClientTooltipComponent {
     private static final int MARGIN_Y = 4;
     private static final int BORDER_WIDTH = 1;
     private static final int SLOT_SIZE_X = 18;
-    private static final int SLOT_SIZE_Y = 20;
+    private static final int SLOT_SIZE_Y = 18;
     private final NonNullList<ItemStack> items;
 
     public ClientPouchTooltip(PouchTooltip pBundleTooltip) {
@@ -54,8 +54,8 @@ public class ClientPouchTooltip implements ClientTooltipComponent {
 
         for (int l = 0; l < j; l++) {
             for (int i1 = 0; i1 < i; i1++) {
-                int j1 = x + i1 * 18 + BORDER_WIDTH;
-                int k1 = y + l * 20 + BORDER_WIDTH;
+                int j1 = x + i1 * SLOT_SIZE_X + BORDER_WIDTH;
+                int k1 = y + l * SLOT_SIZE_Y + BORDER_WIDTH;
                 this.renderSlot(j1, k1, k++, guiGraphics, font);
             }
         }

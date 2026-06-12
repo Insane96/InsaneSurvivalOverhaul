@@ -5,6 +5,7 @@
 * Added a new attribute for Exhaustion
   * `insanesurvivaloverhaul:exhaustion_multiplier`: Multiplies the exhaustion applied to the player. Defaults to 1.
   * Effective hunger now uses this attribute
+* Fixed pouch tooltip being too high
 
 ## 5.4.2.2
 * Tiredness
