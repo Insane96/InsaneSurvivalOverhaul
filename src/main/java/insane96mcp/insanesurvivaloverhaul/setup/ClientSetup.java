@@ -20,13 +20,13 @@ import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-import java.util.function.Supplier;
+import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
 
 public class ClientSetup {
 
@@ -121,30 +121,6 @@ public class ClientSetup {
                 addBefore(event, Items.LEATHER, Cloth.ITEM.get());
             }
         }
-    }
-
-    public static void addBefore(BuildCreativeModeTabContentsEvent event, Item before, ItemLike itemToAdd) {
-        event.insertBefore(new ItemStack(before), new ItemStack(itemToAdd), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-    }
-
-    public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, ItemLike itemToAdd) {
-        addAfter(event, after, new ItemStack(itemToAdd));
-    }
-
-    public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, ItemStack stackToAdd) {
-        event.insertAfter(new ItemStack(after), stackToAdd, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-    }
-
-    public static void addBefore(BuildCreativeModeTabContentsEvent event, Item before, Supplier<? extends ItemLike> itemToAdd) {
-        addBefore(event, before, itemToAdd.get());
-    }
-
-    public static void addAfter(BuildCreativeModeTabContentsEvent event, Item after, Supplier<? extends ItemLike> itemToAdd) {
-        addAfter(event, after, itemToAdd.get());
-    }
-
-    public static void remove(BuildCreativeModeTabContentsEvent event, Item itemToRemove) {
-        event.remove(new ItemStack(itemToRemove), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
     }
 
     public static void init(FMLClientSetupEvent event) {
