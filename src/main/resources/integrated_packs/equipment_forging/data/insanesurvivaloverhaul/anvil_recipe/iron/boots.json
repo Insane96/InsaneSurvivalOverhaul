@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:copper_boots",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 4
+	},
+	"experience": 16,
+	"result": {
+		"id": "minecraft:iron_boots"
+	}
+}

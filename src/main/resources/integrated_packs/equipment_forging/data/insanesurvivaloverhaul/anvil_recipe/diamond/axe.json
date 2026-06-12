@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_axe",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 3
+	},
+	"experience": 21,
+	"result": {
+		"id": "minecraft:diamond_axe"
+	}
+}

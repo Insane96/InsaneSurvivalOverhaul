@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:leather_leggings",
+	"right_ingredient": {
+		"id": "minecraft:gold_ingot",
+		"count": 7
+	},
+	"experience": 70,
+	"result": {
+		"id": "minecraft:golden_leggings"
+	}
+}

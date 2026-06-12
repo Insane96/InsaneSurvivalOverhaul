@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:copper_sword",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 2
+	},
+	"experience": 8,
+	"result": {
+		"id": "minecraft:iron_sword"
+	}
+}

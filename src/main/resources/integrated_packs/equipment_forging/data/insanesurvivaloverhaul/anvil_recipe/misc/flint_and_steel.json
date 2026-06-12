@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "insanesurvivaloverhaul:firestarter",
+	"right_ingredient": {
+		"id": "minecraft:blaze_powder",
+		"count": 1
+	},
+	"experience": 15,
+	"result": {
+		"id": "minecraft:flint_and_steel"
+	}
+}

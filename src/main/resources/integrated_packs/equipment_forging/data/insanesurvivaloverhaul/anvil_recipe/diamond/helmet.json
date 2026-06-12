@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_helmet",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 5
+	},
+	"experience": 35,
+	"result": {
+		"id": "minecraft:diamond_helmet"
+	}
+}

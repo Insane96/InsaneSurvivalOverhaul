@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:copper_ingot",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 2
+	},
+	"experience": 8,
+	"result": {
+		"id": "minecraft:shears"
+	}
+}

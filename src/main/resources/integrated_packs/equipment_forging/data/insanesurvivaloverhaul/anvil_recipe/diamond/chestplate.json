@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_chestplate",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 8
+	},
+	"experience": 56,
+	"result": {
+		"id": "minecraft:diamond_chestplate"
+	}
+}

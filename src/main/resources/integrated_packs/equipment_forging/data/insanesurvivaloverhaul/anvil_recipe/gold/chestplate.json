@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:leather_chestplate",
+	"right_ingredient": {
+		"id": "minecraft:gold_ingot",
+		"count": 8
+	},
+	"experience": 80,
+	"result": {
+		"id": "minecraft:golden_chestplate"
+	}
+}

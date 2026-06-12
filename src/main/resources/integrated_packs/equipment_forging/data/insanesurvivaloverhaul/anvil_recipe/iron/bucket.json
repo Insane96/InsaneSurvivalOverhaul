@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:gold_ingot",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 3
+	},
+	"experience": 12,
+	"result": {
+		"id": "minecraft:bucket"
+	}
+}

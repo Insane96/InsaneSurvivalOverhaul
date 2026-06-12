@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:wooden_hoe",
+	"right_ingredient": {
+		"id": "minecraft:gold_ingot",
+		"count": 2
+	},
+	"experience": 20,
+	"result": {
+		"id": "minecraft:golden_hoe"
+	}
+}

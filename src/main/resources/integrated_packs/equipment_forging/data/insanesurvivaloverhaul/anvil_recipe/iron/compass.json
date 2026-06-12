@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:redstone",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 4
+	},
+	"experience": 16,
+	"result": {
+		"id": "minecraft:compass"
+	}
+}

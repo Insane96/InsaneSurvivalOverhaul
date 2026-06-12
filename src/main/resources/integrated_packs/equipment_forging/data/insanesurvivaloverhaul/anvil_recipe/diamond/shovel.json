@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_shovel",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 1
+	},
+	"experience": 7,
+	"result": {
+		"id": "minecraft:diamond_shovel"
+	}
+}

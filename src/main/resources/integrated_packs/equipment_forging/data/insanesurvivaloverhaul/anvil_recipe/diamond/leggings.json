@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_leggings",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 7
+	},
+	"experience": 49,
+	"result": {
+		"id": "minecraft:diamond_leggings"
+	}
+}

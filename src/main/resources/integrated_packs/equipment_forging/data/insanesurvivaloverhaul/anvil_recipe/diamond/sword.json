@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:golden_sword",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 2
+	},
+	"experience": 14,
+	"result": {
+		"id": "minecraft:diamond_sword"
+	}
+}

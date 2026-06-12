@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "minecraft:copper_chestplate",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 8
+	},
+	"experience": 32,
+	"result": {
+		"id": "minecraft:iron_chestplate"
+	}
+}
