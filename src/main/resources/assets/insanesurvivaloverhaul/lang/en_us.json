@@ -181,5 +181,7 @@
     "insanesurvivaloverhaul.requires_corners": "The portal needs Crying Obsidian in the corners to be activated",
     "insanesurvivaloverhaul.no_nether": "The nether is disabled",
 
-    "item.insanesurvivaloverhaul.sweet_berry_seeds": "Sweet Berry Seeds"
+    "item.insanesurvivaloverhaul.sweet_berry_seeds": "Sweet Berry Seeds",
+
+    "emi.category.insanesurvivaloverhaul.anvil": "Anvil Crafting"
 }

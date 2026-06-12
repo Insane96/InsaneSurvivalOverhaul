@@ -2,6 +2,8 @@
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack
   * Adds a data pack that makes so iron, gold and diamond equipment must be forged in an anvil, from copper, wood/leather and gold respectively
+  * Includes EMI integration
+    * Yes, EMI good, I will support it only
 * Added a new attribute for Exhaustion
   * `insanesurvivaloverhaul:exhaustion_multiplier`: Multiplies the exhaustion applied to the player. Defaults to 1.
   * Effective hunger now uses this attribute
