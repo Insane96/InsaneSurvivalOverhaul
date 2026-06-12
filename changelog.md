@@ -1,3 +1,8 @@
+## Upcoming
+* Added a new attribute for Exhaustion
+  * `insanesurvivaloverhaul:exhaustion_multiplier`: Multiplies the exhaustion applied to the player. Defaults to 1.
+  * Effective hunger now uses this attribute
+
 ## 5.4.2.2
 * Tiredness
   * Fixed not being able to sleep during the day
