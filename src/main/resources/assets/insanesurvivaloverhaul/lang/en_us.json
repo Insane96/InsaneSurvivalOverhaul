@@ -183,5 +183,11 @@
 
     "item.insanesurvivaloverhaul.sweet_berry_seeds": "Sweet Berry Seeds",
 
-    "emi.category.insanesurvivaloverhaul.anvil": "Anvil Crafting"
+    "emi.category.insanesurvivaloverhaul.anvil": "Anvil Crafting",
+
+    "emi.info.insanesurvivaloverhaul.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
+    "emi.info.insanesurvivaloverhaul.crops.seeds": "Can be found in the wild",
+    "emi.info.insanesurvivaloverhaul.copper_powered_rail": "Medium speed powered rail",
+    "emi.info.insanesurvivaloverhaul.golden_powered_rail": "Fastest speed powered rail, should not be used for slopes due to Minecarts being wonky",
+    "emi.info.insanesurvivaloverhaul.portal_corners": "To activate a nether portal, this block is required in the corners"
 }
