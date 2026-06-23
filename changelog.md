@@ -1,3 +1,5 @@
+* Experience from anvil crafting
+
 ## Upcoming
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack
@@ -6,8 +8,9 @@
 * Added a new attribute for Exhaustion
   * `insanesurvivaloverhaul:exhaustion_multiplier`: Multiplies the exhaustion applied to the player. Defaults to 1.
   * Effective hunger now uses this attribute
+* Lowered single mushroom stews saturation modifier
 * Added back EMI integration
-  * Yes, EMI good, I will support it only2
+  * Yes, EMI good, I will support it only
 * Fixed pouch tooltip being too high
 
 ## 5.4.2.2

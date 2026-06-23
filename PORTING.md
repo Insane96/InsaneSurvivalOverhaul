@@ -85,7 +85,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [ ] Forging (ITE)
 - [x] ~~Keego~~ (ITE)
 - [ ] MiningCharge (ITE)
-- [ ] MultiBlockFurnaces (ITE)
+- [x] ~~MultiBlockFurnaces~~ (ITE)
 - [x] ~~Quaron~~ (ITE)
 - [x] ~~SoulSteel~~ (ITE)
 
