@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.3.0
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack
   * Adds a data pack that makes so iron, gold and diamond equipment must be forged in an anvil, from copper, wood/leather and gold respectively
