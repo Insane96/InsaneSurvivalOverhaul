@@ -1,5 +1,3 @@
-* Experience from anvil crafting
-
 ## Upcoming
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack
