@@ -1,3 +1,6 @@
+## Upcoming
+* Sprinting consumes much more hunger (5x)
+
 ## 5.4.3.0
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack

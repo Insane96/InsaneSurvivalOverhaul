@@ -47,6 +47,8 @@ public class Exhaustion extends Feature {
 	public static Double rowingExhaustion = 0.005d;
 	@Config(min = 0d, description = "Every tick of the player's charging an arrow on a bow/crossbow will get this exhaustion. Vanilla is 0")
 	public static Double bowChargeExhaustion = 0.005d;
+	@Config(min = 0d, description = "How much exhaustion is given to the player when sprinting per block traveled. Vanilla is 0.1")
+	public static Double sprintExhaustion = 0.5d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's not sprinting. Vanilla is 0.05")
 	public static Double jumpExhaustion = 0.10d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's sprinting. Vanilla is 0.2")
