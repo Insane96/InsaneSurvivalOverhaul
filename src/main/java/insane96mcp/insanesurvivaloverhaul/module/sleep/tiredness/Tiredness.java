@@ -419,7 +419,6 @@ public class Tiredness extends JsonFeature {
 			return;
 		}
 		event.setResult(PlayerSpawnPhantomsEvent.Result.ALLOW);
-		event.setPhantomsToSpawn(event.getPhantomsToSpawn());
 	}
 
 	@SubscribeEvent
