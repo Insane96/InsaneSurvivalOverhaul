@@ -50,9 +50,9 @@ public class Exhaustion extends Feature {
 	@Config(min = 0d, description = "How much exhaustion is given to the player when sprinting per block traveled. Vanilla is 0.1")
 	public static Double sprintExhaustion = 0.5d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's not sprinting. Vanilla is 0.05")
-	public static Double jumpExhaustion = 0.10d;
+	public static Double jumpExhaustion = 0.05d;
 	@Config(min = 0d, description = "How much exhaustion is given to the player when jumps and it's sprinting. Vanilla is 0.2")
-	public static Double jumpExhaustionSprint = 0.5d;
+	public static Double jumpExhaustionSprint = 2d;
 	@Config(description = "When affected by the hunger effect, exhaustion will be doubled per level of the effect. Requires Minecraft restart.")
 	public static Boolean effectiveHunger = true;
 
