@@ -3,7 +3,9 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.movement.minecarts;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.ISOPoweredRail;
+import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -25,6 +27,8 @@ public abstract class AbstractMinecartMixin_Minecarts extends Entity implements 
 
     @ModifyExpressionValue(method = "moveAlongTrack", at = @At(value = "CONSTANT", args = "doubleValue=0.06"))
     private double insanesurvivaloverhaul$preventAcceleration(double acceleration, BlockPos pos, BlockState state) {
+        if (!Feature.isEnabled(Minecarts.class))
+            return acceleration;
         BaseRailBlock baserailblock = (BaseRailBlock) state.getBlock();
         float railMaxSpeed = baserailblock.getRailMaxSpeed(state, this.level(), pos, (AbstractMinecart) (Object) this);
         if (this.getDeltaMovement().horizontalDistance() >= railMaxSpeed)
@@ -36,10 +40,12 @@ public abstract class AbstractMinecartMixin_Minecarts extends Entity implements 
 
     @WrapOperation(method = "getMaxSpeedWithRail", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BaseRailBlock;getRailMaxSpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/vehicle/AbstractMinecart;)F"), remap = false)
     public float insanesurvivaloverhaul$railMaxSpeed(BaseRailBlock instance, BlockState blockState, Level level, BlockPos blockPos, AbstractMinecart abstractMinecart, Operation<Float> original) {
+        if (!Feature.isEnabled(Minecarts.class))
+            return original.call(instance, blockState, level, blockPos, abstractMinecart);
         BlockPos pos = this.getCurrentRailPosition();
         BlockState state = this.level().getBlockState(pos);
-        if (state.is(Blocks.RAIL))
-            return 0.7f;
-        return original.call(instance, blockState, level, blockPos, abstractMinecart);
+        if (!state.is(Blocks.RAIL))
+            return original.call(instance, blockState, level, blockPos, abstractMinecart);
+        return 0.7f;
     }
 }

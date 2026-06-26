@@ -2,6 +2,7 @@
 * Sprinting consumes much more hunger (5x)
   * Also heavily increased sprint jumping exhaustion
   * Reduced non-sprint jumping exhaustion
+* Fixed disabling the Minecart feature still breaking other mods changes to minecarts
 
 ## 5.4.3.0
 * Added Anvil Crafting
