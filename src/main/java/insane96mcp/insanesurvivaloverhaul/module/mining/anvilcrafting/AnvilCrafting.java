@@ -22,6 +22,9 @@ import net.neoforged.neoforge.event.entity.player.AnvilRepairEvent;
 public class AnvilCrafting extends Feature {
 	public static final ResourceLocation EXPERIENCE_YIELD = InsaneSO.id("experience_yield");
 
+	@Config
+	public static Boolean allowEnchantedItems = false;
+
 	@Config(description = "Enables a data pack that replaces vanilla metal equipment recipes requiring an anvil")
 	public static Boolean metalEquipmentInAnvil = true;
 
@@ -35,6 +38,8 @@ public class AnvilCrafting extends Feature {
 	public void onAnvilUpdate(AnvilUpdateEvent event) {
 		for (AnvilRecipe anvilRecipe : AnvilRecipeReloadListener.RECIPES) {
 			if (anvilRecipe.leftIngredient.test(event.getLeft()) && anvilRecipe.rightIngredient.test(event.getRight())) {
+				if (!allowEnchantedItems && event.getLeft().isEnchanted())
+					return;
 				event.setCost(0);
 				event.setMaterialCost(anvilRecipe.rightIngredient.count());
 				ItemStack result = anvilRecipe.result.copy();

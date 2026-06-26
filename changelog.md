@@ -1,3 +1,6 @@
+## Upcoming
+* Enchanted items can no longer be used for anvil crafting
+
 ## 5.4.3.1
 * Sprinting consumes much more hunger (5x)
   * Also heavily increased sprint jumping exhaustion
