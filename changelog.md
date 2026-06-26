@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.30.1.4
+* Fixed disabling Minecarts feature still affecting them
+
 ## 4.30.1.3
 * Clarified that items and blocks max stack size is 64
 * Removed farmers' delight integration data pack
