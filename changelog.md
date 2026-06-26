@@ -1,4 +1,4 @@
-## Upcoming
+## 5.4.3.1
 * Sprinting consumes much more hunger (5x)
   * Also heavily increased sprint jumping exhaustion
   * Reduced non-sprint jumping exhaustion
