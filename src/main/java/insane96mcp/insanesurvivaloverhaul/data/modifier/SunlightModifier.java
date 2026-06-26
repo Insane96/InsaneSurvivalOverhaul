@@ -20,7 +20,7 @@ public class SunlightModifier extends Modifier {
     @Override
     public boolean shouldApply(Level level, BlockPos pos, @Nullable LivingEntity entity) {
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
-        return skyLight < this.minSunlight;
+        return skyLight < this.minSunlight && level.isDay();
     }
 
     public static class Serializer implements JsonDeserializer<SunlightModifier> {
