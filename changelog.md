@@ -1,4 +1,6 @@
 ## Upcoming
+* Added a new Creative Removal feature
+  * The `insanesurvivaloverhaul:creative_removal` item tag can be used to remove items from the creative inventory
 * Enchanted items can no longer be used for anvil crafting
 
 ## 5.4.3.1

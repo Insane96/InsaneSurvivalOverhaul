@@ -12,15 +12,19 @@ import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
+import insane96mcp.insanesurvivaloverhaul.module.misc.CreativeRemoval;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
@@ -121,6 +125,11 @@ public class ClientSetup {
                 addBefore(event, Items.LEATHER, Cloth.ITEM.get());
             }
         }
+        BuiltInRegistries.ITEM.getTag(CreativeRemoval.CREATIVE_REMOVAL).ifPresent(holders -> {
+            for (Holder<Item> holder : holders) {
+                remove(event, holder.value());
+            }
+        });
     }
 
     public static void init(FMLClientSetupEvent event) {
