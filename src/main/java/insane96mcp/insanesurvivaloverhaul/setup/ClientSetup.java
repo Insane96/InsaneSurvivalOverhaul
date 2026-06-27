@@ -125,7 +125,7 @@ public class ClientSetup {
                 addBefore(event, Items.LEATHER, Cloth.ITEM.get());
             }
         }
-        BuiltInRegistries.ITEM.getTag(CreativeRemoval.CREATIVE_REMOVAL).ifPresent(holders -> {
+        BuiltInRegistries.ITEM.getTag(CreativeRemoval.ITEM_TAG).ifPresent(holders -> {
             for (Holder<Item> holder : holders) {
                 remove(event, holder.value());
             }
