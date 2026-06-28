@@ -64,11 +64,11 @@ public class HungerAndHealthRegen extends Feature {
 	@Config(min = 0, description = "Sets how much hunger the player must have to regeneration health (vanilla is 18). This value is applied to the insanesurvivaloverhaul:hunger_required_to_regen attribute on player join.")
 	public static Integer hungerRequiredToRegen = 7;
 	@Config(min = 0, description = "Sets how many ticks between starve damage happens (vanilla is 80).")
-	public static Integer starve$speed = 160;
+	public static Integer starve$speed = 100;
 	@Config(min = 0, description = "Set how much damage is dealt when starving (vanilla is 1).")
 	public static Integer starve$damage = 1;
 	@Config(min = 0, max = 20, description = "The player will start starving at this hunger (Vanilla is 0)")
-	public static Integer starve$atHunger = 1;
+	public static Integer starve$atHunger = 0;
 	@Config(description = "If below 'Starve at Hunger' player will starve 2x faster for each hunger point below 'Starve at Hunger'.")
 	public static Boolean starve$fasterWhenReallyHungry = true;
 	@Config(description = "If enabled, peaceful difficulty no longer heals and fulfills the player")

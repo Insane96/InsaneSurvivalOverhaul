@@ -1,6 +1,7 @@
 ## Upcoming
 * Golden carrots are no longer edible
 * Reduced single mushroom stews and over easy eggs saturation
+* Players now starve again at (~~1~~ -> 0) hunger, taking damage every (~~8~~ -> 5) seconds
 
 ## 5.4.4.0
 * Added a new Creative Removal feature
