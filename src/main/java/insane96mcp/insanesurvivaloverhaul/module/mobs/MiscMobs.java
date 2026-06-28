@@ -31,6 +31,9 @@ public class MiscMobs extends Feature {
     @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean lootChanges = true;
 
+    @Config(description = "If true, mobs will burn even if there's a block above them in daylight")
+    public static Boolean burnInSkyLight = true;
+
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
@@ -47,5 +50,9 @@ public class MiscMobs extends Feature {
 
         if (livingEntity.getRandom().nextInt(passiveRegenChance) == 0)
             livingEntity.heal(1f);
+    }
+
+    public static boolean isBurnInSkyLight() {
+        return Feature.isEnabled(MiscMobs.class) && burnInSkyLight;
     }
 }
