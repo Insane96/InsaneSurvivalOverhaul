@@ -21,6 +21,12 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 base {
@@ -89,7 +95,8 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
 
-    implementation "maven.modrinth:rune-enchanting:1.0.0-beta"
+    //implementation "maven.modrinth:rune-enchanting:1.0.0-beta"
+    compileOnly "curse.maven:rune-enchanting-1587441:8317392"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
