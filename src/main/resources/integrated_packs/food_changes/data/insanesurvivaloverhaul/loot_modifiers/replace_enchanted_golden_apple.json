@@ -1,0 +1,6 @@
+{
+  "type": "insanelib:replace_loot",
+  "conditions": [],
+  "item_to_replace": "minecraft:enchanted_golden_apple",
+  "new_item": "minecraft:gold_block"
+}

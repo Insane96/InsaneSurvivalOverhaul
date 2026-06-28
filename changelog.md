@@ -1,5 +1,7 @@
 ## Upcoming
 * Food & Drinks
+  * Added Apple Pie, Cod Chowder and Pufferfish chowder
+  * Removed Golden Apples
   * Golden carrots are no longer edible
   * Reduced single mushroom stews and over easy eggs saturation
   * Netherized stews (renamed to Fungi Stew) now give more nutrition and effect has been changed (~~80% chance for 30s of poison~~ -> 45s of slowness and mining fatigue)

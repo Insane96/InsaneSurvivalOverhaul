@@ -72,6 +72,9 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(FoodDrinks.RED_MUSHROOM_STEW.get());
         basicItem(FoodDrinks.FUNGI_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
+        basicItem(FoodDrinks.APPLE_PIE.get());
+        basicItem(FoodDrinks.COD_CHOWDER.get());
+        basicItem(FoodDrinks.PUFFERFISH_CHOWDER.get());
 
         basicItem(Crops.CARROT_SEEDS.get());
         basicItem(Crops.ROOTED_POTATO.get());

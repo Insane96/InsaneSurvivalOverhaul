@@ -62,6 +62,22 @@ public class FoodDrinks extends JsonFeature {
 			.food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build())
 	));
 
+	public static final DeferredHolder<Item, Item> APPLE_PIE = ISORegistries.ITEMS.register("apple_pie", () -> new Item(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.3F).build())
+	));
+
+	public static final DeferredHolder<Item, Item> COD_CHOWDER = ISORegistries.ITEMS.register("cod_chowder", () -> new Item(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.6F).usingConvertsTo(Items.BOWL).build())
+	));
+
+	public static final DeferredHolder<Item, Item> PUFFERFISH_CHOWDER = ISORegistries.ITEMS.register("pufferfish_chowder", () -> new Item(new Item.Properties()
+			.food(new FoodProperties.Builder().nutrition(11).saturationModifier(0.6F)
+					.effect(() -> new MobEffectInstance(MobEffects.POISON, 120, 0), 0.45f)
+					.effect(() -> new MobEffectInstance(MobEffects.HUNGER, 300, 0), 0.50f)
+					.usingConvertsTo(Items.BOWL)
+					.build())
+	));
+
 	public static final TagKey<Item> RAW_FOODS = ISOItemTagsProvider.create("raw_foods");
 	public static final TagKey<Item> DRINKING_FOODS = ISOItemTagsProvider.create("drinking_foods");
 

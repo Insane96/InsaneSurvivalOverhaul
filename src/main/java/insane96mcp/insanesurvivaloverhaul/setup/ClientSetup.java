@@ -118,6 +118,9 @@ public class ClientSetup {
                 addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
                 addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());
                 addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP.get());
+                addAfter(event, Items.PUMPKIN_PIE, FoodDrinks.APPLE_PIE.get());
+                addAfter(event, Items.COOKED_COD, FoodDrinks.COD_CHOWDER.get());
+                addAfter(event, Items.COOKED_COD, FoodDrinks.PUFFERFISH_CHOWDER.get());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {

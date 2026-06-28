@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {"item": "minecraft:pufferfish"},
+    {"item": "minecraft:baked_potato"},
+    {"item": "minecraft:milk_bucket"},
+    {"item": "minecraft:bowl"}
+  ],
+  "result": {"id": "insanesurvivaloverhaul:pufferfish_chowder"}
+}

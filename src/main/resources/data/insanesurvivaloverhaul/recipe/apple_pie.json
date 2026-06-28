@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {"item": "minecraft:apple"},
+    {"item": "minecraft:sugar"},
+    {"item": "minecraft:egg"}
+  ],
+  "result": {"id": "insanesurvivaloverhaul:apple_pie"}
+}

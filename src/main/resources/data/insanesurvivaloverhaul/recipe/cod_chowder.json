@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {"item": "minecraft:cooked_cod"},
+    {"item": "minecraft:baked_potato"},
+    {"item": "minecraft:bowl"}
+  ],
+  "result": {"id": "insanesurvivaloverhaul:cod_chowder"}
+}
