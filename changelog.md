@@ -1,8 +1,8 @@
-## Upcoming
+## 5.4.4.0
 * Added a new Creative Removal feature
   * The `insanesurvivaloverhaul:creative_removal` item tag can be used to remove items from the creative inventory
 * Undead now burn in daylight even if there's a block above them
-* Enchanted items can no longer be used for anvil crafting
+* Enchanted items (and Runed items with Rune Enchanting mod) can no longer be used for anvil crafting
 * Fixed Sunlight modifier not taking into account the day time (it only checked for sky light)
 
 ## 5.4.3.1
