@@ -47,7 +47,7 @@ public class FoodDrinks extends JsonFeature {
 	public static final DeferredHolder<Item, Item> RED_MUSHROOM_STEW = ISORegistries.ITEMS.register("red_mushroom_stew", () -> new Item(new Item.Properties()
 			.food(SINGLE_MUSHROOM_STEW)
 	));
-	public static final DeferredHolder<Item, Item> NETHERIZED_STEW = ISORegistries.ITEMS.register("netherized_stew", () -> new Item(new Item.Properties()
+	public static final DeferredHolder<Item, Item> FUNGI_STEW = ISORegistries.ITEMS.register("fungi_stew", () -> new Item(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(15).saturationModifier(0.6F)
 					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 45 * 20, 0), 1f)
 					.effect(() -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 45 * 20, 0), 1f)

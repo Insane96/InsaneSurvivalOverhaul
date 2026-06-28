@@ -95,7 +95,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(FoodDrinks.DRINKING_FOODS)
                 .add(Items.SUSPICIOUS_STEW, Items.MUSHROOM_STEW, Items.RABBIT_STEW)
-                .add(FoodDrinks.BROWN_MUSHROOM_STEW.value(), FoodDrinks.RED_MUSHROOM_STEW.value(), FoodDrinks.NETHERIZED_STEW.value());
+                .add(FoodDrinks.BROWN_MUSHROOM_STEW.value(), FoodDrinks.RED_MUSHROOM_STEW.value(), FoodDrinks.FUNGI_STEW.value());
 
         tag(TerrainSlowdown.SNOW_SLOWDOWN_IGNORE)
                 .add(Items.LEATHER_BOOTS)

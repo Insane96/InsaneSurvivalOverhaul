@@ -113,7 +113,7 @@ public class ClientSetup {
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             if (Feature.isEnabled(FoodDrinks.class)) {
-                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.NETHERIZED_STEW.get());
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.FUNGI_STEW.get());
                 addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.BROWN_MUSHROOM_STEW.get());
                 addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
                 addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());

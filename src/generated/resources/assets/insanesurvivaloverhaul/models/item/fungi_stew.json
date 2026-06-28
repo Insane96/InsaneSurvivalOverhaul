@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "insanesurvivaloverhaul:item/netherized_stew"
+    "layer0": "insanesurvivaloverhaul:item/fungi_stew"
   }
 }
