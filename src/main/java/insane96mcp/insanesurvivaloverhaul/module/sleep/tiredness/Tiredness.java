@@ -90,7 +90,7 @@ public class Tiredness extends JsonFeature {
 	@Config(min = 0d, max = 128d, description = "Multiply the tiredness gained by this value. Normally you gain tiredness equal to the exhaustion gained. 'Effective Hunger' doesn't affect the exhaustion gained.")
 	public static Double tirednessGainMultiplier = 1d;
 	@Config(min = 0d, description = "Tiredness required to get the Tired effect and be able to sleep.")
-	public static Double tirednessToEffect = 400d;
+	public static Double tirednessToEffect = 500d;
 	@Config(min = 0d, description = "Every this Tiredness above 'Tiredness for effect' will add a new level of Tired.")
 	public static Double tirednessPerLevel = 250d;
 	@Config(min = 0d, description = "If the player has energy boost, reduce tiredness by this value (multiplied by the effect level) each tick.")
