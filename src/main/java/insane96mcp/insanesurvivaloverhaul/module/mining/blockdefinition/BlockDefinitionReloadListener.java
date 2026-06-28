@@ -48,7 +48,7 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 				BlockDefinition blockDefinition = GSON.fromJson(entry.getValue(), BlockDefinition.class);
 				//Serializer can return null in case the block doesn't exist (e.g. from other optional mods)
 				if (blockDefinition == null)
-					return;
+					continue;
 				//blockData.apply(false);
 				DEFINITIONS.add(blockDefinition);
 			}
