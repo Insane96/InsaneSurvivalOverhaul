@@ -39,7 +39,7 @@ import java.util.Map;
 public class FoodDrinks extends JsonFeature {
 	public static final ResourceKey<LootTable> PUMPKIN_SHEAR_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("gameplay/pumpkin_shear"));
 
-	private static final FoodProperties SINGLE_MUSHROOM_STEW = new FoodProperties.Builder().nutrition(3).saturationModifier(0.4F).usingConvertsTo(Items.BOWL).build();
+	private static final FoodProperties SINGLE_MUSHROOM_STEW = new FoodProperties.Builder().nutrition(3).saturationModifier(0.3F).usingConvertsTo(Items.BOWL).build();
 
 	public static final DeferredHolder<Item, Item> BROWN_MUSHROOM_STEW = ISORegistries.ITEMS.register("brown_mushroom_stew", () -> new Item(new Item.Properties()
 			.food(SINGLE_MUSHROOM_STEW)
@@ -52,7 +52,7 @@ public class FoodDrinks extends JsonFeature {
 	));
 
 	public static final DeferredHolder<Item, Item> OVER_EASY_EGG = ISORegistries.ITEMS.register("over_easy_egg", () -> new Item(new Item.Properties()
-			.food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.6F).build())
+			.food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.3F).build())
 	));
 
 	public static final DeferredHolder<Item, Item> PUMPKIN_PULP = ISORegistries.ITEMS.register("pumpkin_pulp", () -> new Item(new Item.Properties()

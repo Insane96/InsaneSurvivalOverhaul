@@ -1,5 +1,6 @@
 ## Upcoming
 * Golden carrots are no longer edible
+* Reduced single mushroom stews and over easy eggs saturation
 
 ## 5.4.4.0
 * Added a new Creative Removal feature
