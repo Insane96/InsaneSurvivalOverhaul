@@ -48,7 +48,10 @@ public class FoodDrinks extends JsonFeature {
 			.food(SINGLE_MUSHROOM_STEW)
 	));
 	public static final DeferredHolder<Item, Item> NETHERIZED_STEW = ISORegistries.ITEMS.register("netherized_stew", () -> new Item(new Item.Properties()
-			.food(new FoodProperties.Builder().nutrition(12).saturationModifier(1.2F).effect(() -> new MobEffectInstance(MobEffects.POISON, 30 * 20, 0), 0.8f).build())
+			.food(new FoodProperties.Builder().nutrition(15).saturationModifier(0.6F)
+					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60 * 20, 0), 0.85f)
+					.effect(() -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60 * 20, 0), 0.85f)
+					.build())
 	));
 
 	public static final DeferredHolder<Item, Item> OVER_EASY_EGG = ISORegistries.ITEMS.register("over_easy_egg", () -> new Item(new Item.Properties()

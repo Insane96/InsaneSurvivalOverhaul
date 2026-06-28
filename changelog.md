@@ -1,6 +1,8 @@
 ## Upcoming
-* Golden carrots are no longer edible
-* Reduced single mushroom stews and over easy eggs saturation
+* Food & Drinks
+  * Golden carrots are no longer edible
+  * Reduced single mushroom stews and over easy eggs saturation
+  * Netherized stews now give more nutrition and effect has been changed (~~30s of poison~~ -> 1m of slowness and mining fatigue)
 * Players now starve again at (~~1~~ -> 0) hunger, taking damage every (~~8~~ -> 5) seconds
 
 ## 5.4.4.0
