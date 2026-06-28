@@ -1,0 +1,6 @@
+{
+	"item": "minecraft:golden_carrot",
+	"remove_components": [
+		"minecraft:food"
+	]
+}
