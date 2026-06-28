@@ -40,6 +40,7 @@ public record ClientboundBlockDefinitionPacket(List<BlockDefinition> definitions
             BlockDefinitionReloadListener.restoreOriginalDefinitionsAndClear();
             BlockDefinitionReloadListener.DEFINITIONS.clear();
             BlockDefinitionReloadListener.DEFINITIONS.addAll(payload.definitions());
+            BlockDefinitionReloadListener.DEFINITIONS.forEach(def -> def.apply(false));
         });
     }
 
