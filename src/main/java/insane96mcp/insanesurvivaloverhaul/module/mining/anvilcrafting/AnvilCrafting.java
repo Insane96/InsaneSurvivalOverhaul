@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.entity.player.AnvilRepairEvent;
 
@@ -22,7 +23,7 @@ import net.neoforged.neoforge.event.entity.player.AnvilRepairEvent;
 public class AnvilCrafting extends Feature {
 	public static final ResourceLocation EXPERIENCE_YIELD = InsaneSO.id("experience_yield");
 
-	@Config
+	@Config(description = "If true, enchanted items can be used to craft in the anvil. If false, only non-enchanted items can be used in an anvil. If Rune Enchanting is installed, runed items count as enchanted.")
 	public static Boolean allowEnchantedItems = false;
 
 	@Config(description = "Enables a data pack that replaces vanilla metal equipment recipes requiring an anvil")
@@ -38,7 +39,7 @@ public class AnvilCrafting extends Feature {
 	public void onAnvilUpdate(AnvilUpdateEvent event) {
 		for (AnvilRecipe anvilRecipe : AnvilRecipeReloadListener.RECIPES) {
 			if (anvilRecipe.leftIngredient.test(event.getLeft()) && anvilRecipe.rightIngredient.test(event.getRight())) {
-				if (!allowEnchantedItems && event.getLeft().isEnchanted())
+				if (!allowEnchantedItems && (event.getLeft().isEnchanted() || (ModList.get().isLoaded("runeenchanting") && RuneEnchantingIntegration.hasRunes(event.getLeft()))))
 					return;
 				event.setCost(0);
 				event.setMaterialCost(anvilRecipe.rightIngredient.count());
