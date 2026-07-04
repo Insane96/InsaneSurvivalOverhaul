@@ -281,7 +281,7 @@ public class Tiredness extends JsonFeature {
 				player.addEffect(new MobEffectInstance(TIRED, -1, wantedAmplifier, true, false, true));
 				if (wantedAmplifier == 0)
 					player.displayClientMessage(Component.translatable(TIRED_ENOUGH), false);
-				else if (wantedAmplifier == 4)
+				else if (wantedAmplifier == 2)
 					player.displayClientMessage(Component.translatable(TOO_TIRED), false);
 			}
 		}
