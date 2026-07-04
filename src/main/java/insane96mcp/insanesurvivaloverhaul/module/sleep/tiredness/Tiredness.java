@@ -351,7 +351,8 @@ public class Tiredness extends JsonFeature {
 			player.removeEffect(TIRED);
 		});
 
-		event.setTimeAddition(event.getLevel().dayTime() + getTimeSkipped(highestTired.get()));
+		timeSkipped = getTimeSkipped(highestTired.get());
+		event.setTimeAddition(event.getLevel().dayTime() + timeSkipped);
 		Thunderstorms.onSkipNight(timeSkipped, (ServerLevel) event.getLevel());
 	}
 

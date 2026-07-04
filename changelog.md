@@ -1,3 +1,10 @@
+* Anvil crafting not synced to clients
+* tiuredness message spam
+* Item repair doens't work
+* Sleeping doesn't skip rain cycle
+* shield recipes not from anvil
+* ghostly not synced in multiplayer
+
 ## Upcoming
 * Food & Drinks
   * Added Apple Pie, Cod Chowder and Pufferfish chowder
@@ -6,6 +13,7 @@
   * Reduced single mushroom stews and over easy eggs saturation
   * Netherized stews (renamed to Fungi Stew) now give more nutrition and effect has been changed (~~80% chance for 30s of poison~~ -> 45s of slowness and mining fatigue)
 * Players now starve again at (~~1~~ -> 0) hunger, taking damage every (~~8~~ -> 5) seconds
+* Fixed rain not advancing on sleeping
 
 ## 5.4.4.0
 * Added a new Creative Removal feature
