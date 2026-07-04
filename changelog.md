@@ -1,4 +1,3 @@
-* tiuredness message spam
 * item definitions not synced to clients
 * shield recipes not from anvil
 
@@ -14,6 +13,7 @@
 * Fixed ghostly not synced in multiplayer
 * Fixed anvil crafting not synced in multiplayer
 * Fixed too tired message not showing anymore
+* Hopefully fixed tired message spam
 
 ## 5.4.4.0
 * Added a new Creative Removal feature
