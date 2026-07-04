@@ -4,6 +4,9 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +29,15 @@ public class AnvilRecipe {
 		this.experience = experience;
 		this.result = result;
 	}
+
+	public static final StreamCodec<RegistryFriendlyByteBuf, AnvilRecipe> STREAM_CODEC = StreamCodec.composite(
+			IngredientWithCount.STREAM_CODEC, recipe -> recipe.leftIngredient,
+			IngredientWithCount.STREAM_CODEC, recipe -> recipe.rightIngredient,
+			ByteBufCodecs.BOOL, recipe -> recipe.keepDurability,
+			ByteBufCodecs.DOUBLE, recipe -> recipe.experience,
+			ItemStack.STREAM_CODEC, recipe -> recipe.result,
+			AnvilRecipe::new
+	);
 
 	public static final Type LIST_TYPE = new TypeToken<ArrayList<AnvilRecipe>>(){}.getType();
 	public static class Serializer implements JsonDeserializer<AnvilRecipe> {

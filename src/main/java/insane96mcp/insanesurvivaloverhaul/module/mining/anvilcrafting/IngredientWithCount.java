@@ -5,6 +5,9 @@ import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
@@ -20,6 +23,12 @@ public record IngredientWithCount(Ingredient ingredient, int count) {
 	public boolean test(ItemStack stack) {
 		return stack.getCount() >= count && ingredient.test(stack);
 	}
+
+	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientWithCount> STREAM_CODEC = StreamCodec.composite(
+			Ingredient.CONTENTS_STREAM_CODEC, IngredientWithCount::ingredient,
+			ByteBufCodecs.VAR_INT, IngredientWithCount::count,
+			IngredientWithCount::new
+	);
 
 	public static final Type LIST_TYPE = new TypeToken<ArrayList<IngredientWithCount>>() {
 	}.getType();

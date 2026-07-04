@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneS
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.ClientboundMilkCooldownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundExhaustionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
+import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.ClientboundAnvilRecipeSyncPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.movement.backwardsslowdown.ServerboundBackwardsSlowdownPacket;
@@ -28,6 +29,7 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundSaturationPacket.TYPE, ClientboundSaturationPacket.STREAM_CODEC, ClientboundSaturationPacket::handle);
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
         registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
+        registrar.playToClient(ClientboundAnvilRecipeSyncPacket.TYPE, ClientboundAnvilRecipeSyncPacket.STREAM_CODEC, ClientboundAnvilRecipeSyncPacket::handle);
         registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
         registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);
         registrar.playToClient(SpawnerStatusSync.TYPE, SpawnerStatusSync.STREAM_CODEC, SpawnerStatusSync::handle);

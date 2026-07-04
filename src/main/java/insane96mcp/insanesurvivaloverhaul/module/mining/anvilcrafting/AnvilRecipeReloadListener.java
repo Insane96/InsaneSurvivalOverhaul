@@ -9,14 +9,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@EventBusSubscriber(modid = InsaneSO.MOD_ID)
 public class AnvilRecipeReloadListener extends SimpleJsonResourceReloadListener {
-	public static List<AnvilRecipe> RECIPES;
+	public static List<AnvilRecipe> RECIPES = new ArrayList<>();
 	public static final AnvilRecipeReloadListener INSTANCE;
 	private static final Gson GSON = new GsonBuilder().create();
 	public AnvilRecipeReloadListener() {
@@ -48,6 +52,14 @@ public class AnvilRecipeReloadListener extends SimpleJsonResourceReloadListener 
 		RECIPES = list;
 
 		InsaneSO.LOGGER.info("Loaded {} Anvil Recipe", RECIPES.size());
+	}
+
+	@SubscribeEvent
+	public static void onDataPackSync(OnDatapackSyncEvent event) {
+		if (event.getPlayer() == null)
+			event.getPlayerList().getPlayers().forEach(player -> ClientboundAnvilRecipeSyncPacket.sync(RECIPES, player));
+		else
+			ClientboundAnvilRecipeSyncPacket.sync(RECIPES, event.getPlayer());
 	}
 
 	@Override
