@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "shieldsplus:golden_shield",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 4
+	},
+	"experience": 28,
+	"result": {
+		"id": "shieldsplus:diamond_shield"
+	}
+}

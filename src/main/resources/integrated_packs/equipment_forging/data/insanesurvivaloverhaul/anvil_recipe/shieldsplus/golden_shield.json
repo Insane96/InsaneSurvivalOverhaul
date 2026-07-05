@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "shieldsplus:wooden_shield",
+	"right_ingredient": {
+		"id": "minecraft:gold_ingot",
+		"count": 4
+	},
+	"experience": 40,
+	"result": {
+		"id": "shieldsplus:golden_shield"
+	}
+}

@@ -1,6 +1,3 @@
-* item definitions not synced to clients
-* shield recipes not from anvil
-
 ## Upcoming
 * Food & Drinks
   * Added Apple Pie, Cod Chowder and Pufferfish chowder
@@ -9,6 +6,7 @@
   * Reduced single mushroom stews and over easy eggs saturation
   * Netherized stews (renamed to Fungi Stew) now give more nutrition and effect has been changed (~~80% chance for 30s of poison~~ -> 45s of slowness and mining fatigue)
 * Players now starve again at (~~1~~ -> 0) hunger, taking damage every (~~8~~ -> 5) seconds
+* Shields+ recipes are now changed with equipment forging enabled
 * Fixed rain not advancing on sleeping
 * Fixed ghostly not synced in multiplayer
 * Fixed anvil crafting not synced in multiplayer

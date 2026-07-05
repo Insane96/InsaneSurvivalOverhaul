@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "shieldsplus:copper_shield",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 4
+	},
+	"experience": 16,
+	"result": {
+		"id": "shieldsplus:iron_shield"
+	}
+}
