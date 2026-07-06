@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.JsonOps;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -11,6 +12,7 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +41,9 @@ public class AnvilRecipeReloadListener extends SimpleJsonResourceReloadListener 
 				ResourceLocation name = entry.getKey();
 				String[] split = name.getPath().split("/");
 				if (split[split.length - 1].startsWith("_"))
+					continue;
+
+				if (!ICondition.conditionsMatched(JsonOps.INSTANCE, entry.getValue()))
 					continue;
 
 				AnvilRecipe anvilRecipe = GSON.fromJson(entry.getValue(), AnvilRecipe.class);

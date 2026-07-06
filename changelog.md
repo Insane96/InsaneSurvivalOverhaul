@@ -1,3 +1,6 @@
+## 5.5.0.1-alpha
+* Fixed crash if items in anvil recipes are not registered
+
 ## 5.5.0.0-alpha - The Food update
 * Food & Drinks
   * Added Apple Pie, Cod Chowder and Pufferfish chowder

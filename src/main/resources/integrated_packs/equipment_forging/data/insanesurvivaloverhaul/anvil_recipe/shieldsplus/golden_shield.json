@@ -1,4 +1,10 @@
 {
+	"neoforge:conditions": [
+		{
+			"type": "neoforge:mod_loaded",
+			"modid": "shieldsplus"
+		}
+	],
 	"left_ingredient": "shieldsplus:wooden_shield",
 	"right_ingredient": {
 		"id": "minecraft:gold_ingot",
