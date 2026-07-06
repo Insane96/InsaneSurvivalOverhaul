@@ -49,8 +49,12 @@ public record IngredientWithCount(Ingredient ingredient, int count) {
 		Ingredient ingredient;
 		if (s.startsWith("#"))
 			ingredient = Ingredient.of(TagKey.create(Registries.ITEM, ResourceLocation.parse(s.substring(1))));
-		else
-			ingredient = Ingredient.of(BuiltInRegistries.ITEM.get(ResourceLocation.parse(s)));
+		else {
+			ResourceLocation itemId = ResourceLocation.parse(s);
+			if (!BuiltInRegistries.ITEM.containsKey(itemId))
+				throw new JsonParseException("Unknown item '" + itemId + "' for anvil recipe ingredient");
+			ingredient = Ingredient.of(BuiltInRegistries.ITEM.get(itemId));
+		}
 		return ingredient;
 	}
 }

@@ -45,11 +45,14 @@ public class AnvilRecipe {
 		public AnvilRecipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			JsonObject jObject = json.getAsJsonObject();
 			JsonObject jObjectResult = GsonHelper.getAsJsonObject(jObject, "result");
+			ResourceLocation resultId = ResourceLocation.parse(GsonHelper.getAsString(jObjectResult, "id"));
+			if (!BuiltInRegistries.ITEM.containsKey(resultId))
+				throw new JsonParseException("Unknown item '" + resultId + "' for anvil recipe result");
 			return new AnvilRecipe(GsonHelper.getAsObject(jObject, "left_ingredient", context, IngredientWithCount.class),
 					GsonHelper.getAsObject(jObject, "right_ingredient", context, IngredientWithCount.class),
 					GsonHelper.getAsBoolean(jObject, "keep_durability", false),
 					GsonHelper.getAsDouble(jObject, "experience", 0f),
-					new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(GsonHelper.getAsString(jObjectResult, "id"))), GsonHelper.getAsInt(jObjectResult, "count", 1)));
+					new ItemStack(BuiltInRegistries.ITEM.get(resultId), GsonHelper.getAsInt(jObjectResult, "count", 1)));
 		}
 	}
 }
