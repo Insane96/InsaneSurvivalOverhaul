@@ -1,5 +1,6 @@
-## Upcoming
+## 5.5.0.2-alpha
 * Fixed crash if items in anvil recipes are not registered
+* Fixed crash with latest InsaneLib
 
 ## 5.5.0.1-alpha
 * Fixed crash if items in anvil recipes are not registered

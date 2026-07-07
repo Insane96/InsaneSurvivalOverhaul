@@ -5,7 +5,7 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanelib.module.base.TagsFeature;
+import insane96mcp.insanelib.module.base.NbtTags;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
@@ -68,12 +68,12 @@ public class PlayerKillerBounty extends Feature {
 				if (firstKill) {
 					killer.setPersistenceRequired();
 					double xpMult = experienceMultiplier;
-					if (ModNBTData.contains(killer, TagsFeature.EXPERIENCE_MULTIPLIER))
-						xpMult *= ModNBTData.get(killer, TagsFeature.EXPERIENCE_MULTIPLIER, Double.class);
-					TagsFeature.setExperienceMultiplier(xpMult, killer);
+					if (ModNBTData.contains(killer, NbtTags.EXPERIENCE_MULTIPLIER))
+						xpMult *= ModNBTData.get(killer, NbtTags.EXPERIENCE_MULTIPLIER, Double.class);
+					NbtTags.setExperienceMultiplier(xpMult, killer);
 				} else {
-					double xpMult = ModNBTData.get(killer, TagsFeature.EXPERIENCE_MULTIPLIER, Double.class);
-					TagsFeature.setExperienceMultiplier(xpMult + experienceMultiplier, killer);
+					double xpMult = ModNBTData.get(killer, NbtTags.EXPERIENCE_MULTIPLIER, Double.class);
+					NbtTags.setExperienceMultiplier(xpMult + experienceMultiplier, killer);
 				}
 				addPlayerToKilledList(killer, player.getUUID());
 				Component mobName = killer.getType().getDescription();
