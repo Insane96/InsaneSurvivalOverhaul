@@ -1,3 +1,6 @@
+## Upcoming
+* Removed Quark's actual redstone components integration
+
 ## 5.5.0.2-alpha
 * Fixed crash if items in anvil recipes are not registered
 * Fixed crash with latest InsaneLib
