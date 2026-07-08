@@ -1,3 +1,6 @@
+## Upcoming
+* Sweeping edge rune is now disabled with Sweeping Overhaul enabled
+
 ## 5.5.1.0-alpha
 * Added Copper Nugget
 * Added placeholder texture for new foods
