@@ -1,6 +1,7 @@
 ## 5.5.1.0-alpha
 * Added Copper Nugget
 * Added placeholder texture for new foods
+* Tools and Weapons data pack now allow weapon runes (from Rune Enchanting mod) to be applied to pickaxes, shovels and hoes
 * Saplings now grow slower
 * Players can no longer place more than the items required to craft a recipe in the anvil
 * Removed Quark's actual redstone components integration

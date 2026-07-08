@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "#minecraft:pickaxes",
+        "#minecraft:shovels",
+        "#minecraft:hoes"
+    ]
+}
