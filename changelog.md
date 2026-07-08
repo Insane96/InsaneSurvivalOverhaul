@@ -1,4 +1,6 @@
-## Upcoming
+## 5.5.1.0-alpha
+* Added Copper Nugget
+* Added placeholder texture for new foods
 * Saplings now grow slower
 * Players can no longer place more than the items required to craft a recipe in the anvil
 * Removed Quark's actual redstone components integration

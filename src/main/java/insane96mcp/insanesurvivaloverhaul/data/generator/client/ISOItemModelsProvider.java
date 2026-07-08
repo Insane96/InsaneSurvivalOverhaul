@@ -65,6 +65,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(CopperEquipment.HOE.get());
         handHeld(CopperEquipment.SWORD.get());
 
+        basicItem(CopperEquipment.NUGGET.get());
+
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
 
         basicItem(FoodDrinks.OVER_EASY_EGG.get());

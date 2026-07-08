@@ -69,6 +69,10 @@ public class CopperEquipment extends Feature {
 			"copper_boots", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(11)))
 	);
 
+	public static final DeferredHolder<Item, Item> NUGGET = ISORegistries.MINECRAFT_ITEMS.register(
+			"copper_nugget", () -> new Item(new Item.Properties())
+	);
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
