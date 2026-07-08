@@ -1,6 +1,7 @@
 ## Upcoming
-* Removed Quark's actual redstone components integration
+* Saplings now grow slower
 * Players can no longer place more than the items required to craft a recipe in the anvil
+* Removed Quark's actual redstone components integration
 
 ## 5.5.0.2-alpha
 * Fixed crash if items in anvil recipes are not registered
