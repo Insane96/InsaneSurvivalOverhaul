@@ -1,5 +1,6 @@
 ## Upcoming
 * Removed Quark's actual redstone components integration
+* Players can no longer place more than the items required to craft a recipe in the anvil
 
 ## 5.5.0.2-alpha
 * Fixed crash if items in anvil recipes are not registered

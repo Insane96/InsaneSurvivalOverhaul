@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public record IngredientWithCount(Ingredient ingredient, int count) {
 
 	public boolean test(ItemStack stack) {
-		return stack.getCount() >= count && ingredient.test(stack);
+		return stack.getCount() == count && ingredient.test(stack);
 	}
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientWithCount> STREAM_CODEC = StreamCodec.composite(
