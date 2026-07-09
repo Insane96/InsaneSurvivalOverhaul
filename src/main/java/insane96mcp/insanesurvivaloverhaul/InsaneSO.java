@@ -24,7 +24,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaust
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
-import insane96mcp.insanesurvivaloverhaul.setup.ClientSetup;
+import insane96mcp.insanesurvivaloverhaul.setup.Client;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
 import net.minecraft.core.HolderLookup;
@@ -84,8 +84,8 @@ public class InsaneSO {
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
             eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
-            eventBus.addListener(ClientSetup::onBuildCreativeModeTabContents);
-            eventBus.addListener(ClientSetup::registerTooltips);
+            eventBus.addListener(Client::onBuildCreativeModeTabContents);
+            eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
         }
 
@@ -162,7 +162,7 @@ public class InsaneSO {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        ClientSetup.init(event);
+        Client.init(event);
     }
 
     public static void addServerPack(String path, String description, BooleanSupplier enabled) {

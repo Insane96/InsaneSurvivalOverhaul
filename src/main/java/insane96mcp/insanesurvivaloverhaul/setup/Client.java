@@ -32,7 +32,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
 
-public class ClientSetup {
+public class Client {
 
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event) {
         if (Feature.isEnabled(StoneToolsGone.class))
@@ -48,26 +48,26 @@ public class ClientSetup {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
             }
             if (Feature.isEnabled(EchoPillar.class)) {
-                addBefore(event, Items.RESPAWN_ANCHOR, EchoPillar.ECHO_PILLAR.item().get());
+                addBefore(event, Items.RESPAWN_ANCHOR, EchoPillar.ECHO_PILLAR.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             if (Feature.isEnabled(CopperEquipment.class)) {
-                addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE.get());
-                addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE.get());
-                addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE.get());
-                addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL.get());
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.HOE);
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.AXE);
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.PICKAXE);
+                addAfter(event, Items.WOODEN_HOE, CopperEquipment.SHOVEL);
             }
             if (Feature.isEnabled(CoalFire.class)) {
-                addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER.get());
+                addBefore(event, Items.FLINT_AND_STEEL, CoalFire.FIRESTARTER);
             }
             if (Feature.isEnabled(Minecarts.class)) {
-                addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
-                addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+                addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item());
+                addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item());
                 remove(event, Items.POWERED_RAIL);
             }
             if (Feature.isEnabled(Pouch.class)) {
-                addAfter(event, Items.LEAD, Pouch.ITEM.get());
+                addAfter(event, Items.LEAD, Pouch.ITEM);
             }
             if (Feature.isEnabled(Cloth.class)
                     && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
@@ -75,26 +75,26 @@ public class ClientSetup {
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {
-                addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD.get());
-                addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE.get());
-                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.BOOTS.get());
-                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS.get());
-                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE.get());
-                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET.get());
+                addAfter(event, Items.WOODEN_SWORD, CopperEquipment.SWORD);
+                addAfter(event, Items.WOODEN_AXE, CopperEquipment.AXE);
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.BOOTS);
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS);
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE);
+                addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET);
             }
             if (Feature.isEnabled(Bows.class)) {
-                addAfter(event, Items.BOW, Bows.SHORTBOW.get());
+                addAfter(event, Items.BOW, Bows.SHORTBOW);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             if (Feature.isEnabled(CoalFire.class)) {
-                addAfter(event, Items.COAL_BLOCK, CoalFire.BURNT_LOG.item().get());
+                addAfter(event, Items.COAL_BLOCK, CoalFire.BURNT_LOG.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             if (Feature.isEnabled(Minecarts.class)) {
-                addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item().get());
-                addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item().get());
+                addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item());
+                addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item());
                 remove(event, Items.POWERED_RAIL);
             }
         }
@@ -113,19 +113,22 @@ public class ClientSetup {
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             if (Feature.isEnabled(FoodDrinks.class)) {
-                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.FUNGI_STEW.get());
-                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.BROWN_MUSHROOM_STEW.get());
-                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW.get());
-                addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG.get());
-                addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP.get());
-                addAfter(event, Items.PUMPKIN_PIE, FoodDrinks.APPLE_PIE.get());
-                addAfter(event, Items.COOKED_COD, FoodDrinks.COD_CHOWDER.get());
-                addAfter(event, Items.COOKED_COD, FoodDrinks.PUFFERFISH_CHOWDER.get());
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.FUNGI_STEW);
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.BROWN_MUSHROOM_STEW);
+                addAfter(event, Items.MUSHROOM_STEW, FoodDrinks.RED_MUSHROOM_STEW);
+                addAfter(event, Items.COOKIE, FoodDrinks.OVER_EASY_EGG);
+                addBefore(event, Items.PUMPKIN_PIE, FoodDrinks.PUMPKIN_PULP);
+                addAfter(event, Items.PUMPKIN_PIE, FoodDrinks.APPLE_PIE);
+                addAfter(event, Items.COOKED_COD, FoodDrinks.COD_CHOWDER);
+                addAfter(event, Items.COOKED_COD, FoodDrinks.PUFFERFISH_CHOWDER);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             if (Feature.isEnabled(Cloth.class)) {
-                addBefore(event, Items.LEATHER, Cloth.ITEM.get());
+                addBefore(event, Items.LEATHER, Cloth.ITEM);
+            }
+            if (Feature.isEnabled(CopperEquipment.class)) {
+                addAfter(event, Items.GOLD_NUGGET, CopperEquipment.NUGGET);
             }
         }
         BuiltInRegistries.ITEM.getTag(CreativeRemoval.ITEM_TAG).ifPresent(holders -> {
@@ -137,7 +140,7 @@ public class ClientSetup {
 
     public static void init(FMLClientSetupEvent event) {
         /*event.enqueueWork(() ->
-                ItemProperties.register(Altimeter.ITEM.get(), InsaneSO.location("y"), (stack, clientLevel, livingEntity, entityId) -> {
+                ItemProperties.register(Altimeter.ITEM, InsaneSO.location("y"), (stack, clientLevel, livingEntity, entityId) -> {
                     if (livingEntity == null)
                         return 96f;
                     return (float) livingEntity.getY();
@@ -154,8 +157,8 @@ public class ClientSetup {
                     (stack, clientLevel, livingEntity, seed)
                             -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
         });
-        //MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
-        //MenuScreens.register(Fletching.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
+        //MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE, ISOBeaconScreen::new);
+        //MenuScreens.register(Fletching.FLETCHING_MENU_TYPE, FletchingScreen::new);
     }
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {

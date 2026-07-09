@@ -1,3 +1,6 @@
+## Upcoming
+* Fixed missing copper nugget in creative inventory
+
 ## 5.5.1.1-alpha
 * Added name tag recipe to Misc Tweaks data pack
 * Sweeping edge rune is now disabled with Sweeping Overhaul enabled
