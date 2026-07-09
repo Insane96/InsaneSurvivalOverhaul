@@ -71,6 +71,13 @@
 
     "insanesurvivaloverhaul:hunger_health_module": "Hunger & Health",
 
+    "attribute.name.passive_regen_per_second": "Passive Regen per Second",
+    "attribute.name.natural_regen_per_second": "Natural Regen per Second",
+    "attribute.name.max_exhaustion": "Max Exhaustion",
+    "attribute.name.hunger_consumed": "Hunger Consumed",
+    "attribute.name.hunger_required_to_regen": "Hunger Required to Regen",
+    "attribute.name.exhaustion_multiplier": "Exhaustion Multiplier",
+
     "item.insanesurvivaloverhaul.brown_mushroom_stew": "Brown Mushroom Stew",
     "item.insanesurvivaloverhaul.red_mushroom_stew": "Red Mushroom Stew",
     "item.insanesurvivaloverhaul.fungi_stew": "Fungi Stew",
