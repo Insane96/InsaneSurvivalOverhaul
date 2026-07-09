@@ -2,15 +2,19 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.combat.bows;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -71,14 +75,18 @@ public abstract class AbstractArrowMixin_Bows extends Projectile {
      * @see Bows#decimalDamage
      */
     @ModifyArg(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private float insanesurvivaloverhaul$decimalDamage(float damage) {
+    private float insanesurvivaloverhaul$decimalDamage(float damage, @Local(ordinal = 0) Entity entity, @Local DamageSource damagesource) {
         if (!Bows.decimalDamage)
             return damage;
         double l = this.getDeltaMovement().length();
         double damageMultiplier = Bows.damageMultiplier;
+        double baseDamage = this.baseDamage;
         if (this.getOwner() instanceof Mob)
             damageMultiplier = 1f;
-        float newDamage = (float) Mth.clamp(l * this.baseDamage * damageMultiplier, 0.0D, Integer.MAX_VALUE);
+        if (this.getWeaponItem() != null && this.level() instanceof ServerLevel serverlevel) {
+            baseDamage = EnchantmentHelper.modifyDamage(serverlevel, this.getWeaponItem(), entity, damagesource, (float)baseDamage);
+        }
+        float newDamage = (float) Mth.clamp(l * baseDamage * damageMultiplier, 0.0D, Integer.MAX_VALUE);
         if (this.isCritArrow() && !Bows.disableCritArrowsBonusDamage)
             newDamage += this.random.nextFloat() * (newDamage / 2 + 2);
         return newDamage;

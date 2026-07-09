@@ -1,5 +1,6 @@
 ## Upcoming
 * Sweeping edge rune is now disabled with Sweeping Overhaul enabled
+* Fixed power enchantment not working
 
 ## 5.5.1.0-alpha
 * Added Copper Nugget
