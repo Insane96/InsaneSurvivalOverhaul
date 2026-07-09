@@ -1,4 +1,4 @@
-## Upcoming
+## 5.5.1.1-alpha
 * Added name tag recipe to Misc Tweaks data pack
 * Sweeping edge rune is now disabled with Sweeping Overhaul enabled
 * Fixed power enchantment not working
