@@ -1,5 +1,6 @@
 ## Upcoming
 * Fixed missing copper nugget in creative inventory
+* Fixed copper powered rail recipes
 
 ## 5.5.1.1-alpha
 * Added name tag recipe to Misc Tweaks data pack
