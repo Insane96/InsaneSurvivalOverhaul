@@ -23,7 +23,7 @@ public class Bows extends Feature {
 	@Config(description = "If true, arrows will deal decimal instead of being rounded up.")
 	public static Boolean decimalDamage = true;
 	@Config(min = 0d, max = 10d, description = "Multiplies arrow's damage by this value. (this doesn't affect mobs arrows)")
-	public static Double damageMultiplier = 0.65d;
+	public static Double damageMultiplier = 0.70d;
 	@Config(min = 0d, max = 10d, description = "Changes bows accuracy. Vanilla is 1.0")
 	public static Double bowInaccuracy = 1.0d;
 	@Config(min = 0d, max = 10d, description = "Speed at which arrows are shot from crossbows. Vanilla is 3.15")
