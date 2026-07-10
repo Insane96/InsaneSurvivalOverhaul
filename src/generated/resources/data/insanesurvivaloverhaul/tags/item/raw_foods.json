@@ -10,7 +10,6 @@
     "minecraft:chicken",
     "minecraft:rabbit",
     "minecraft:rotten_flesh",
-    "minecraft:golden_carrot",
     {
       "id": "autumnity:turkey_piece",
       "required": false

@@ -3,6 +3,7 @@
 * `insanesurvivaloverhaul:no_stack_size_changes` has been split into `insanesurvivaloverhaul:no_block_stack_size_changes`, `insanesurvivaloverhaul:no_item_stack_size_changes` and `insanesurvivaloverhaul:no_food_stack_size_changes`
 * Fixed missing copper nugget in creative inventory
 * Fixed copper powered rail recipes
+* Fixed golden carrots still edible
 
 ## 5.5.1.1-alpha
 * Added name tag recipe to Misc Tweaks data pack

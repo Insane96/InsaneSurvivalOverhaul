@@ -89,7 +89,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);
 
         tag(FoodDrinks.RAW_FOODS)
-                .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH, Items.GOLDEN_CARROT)
+                .add(Items.COD, Items.SALMON, Items.TROPICAL_FISH, Items.PUFFERFISH, Items.PORKCHOP, Items.MUTTON, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.ROTTEN_FLESH)
                 .addOptional(ResourceLocation.parse("autumnity:turkey_piece"))
                 .addOptional(ResourceLocation.parse("berry_good:sweet_berry_mince"))
                 .addOptional(ResourceLocation.parse("environmental:venison"));
@@ -108,7 +108,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(Crops.CHICKEN_FOOD_ITEMS)
                 .add(Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.TORCHFLOWER_SEEDS);
-
 
         tag(UnvanishableItems.NOT_UNVANISHABLE)
                 .addOptionalTag(ResourceLocation.parse("chalk:chalks"));
