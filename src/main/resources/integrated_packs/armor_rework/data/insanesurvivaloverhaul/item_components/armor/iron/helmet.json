@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.helmet",
-                    "amount": 0.75,
+                    "amount": 0.5,
                     "operation": "add_value",
                     "slot": "head"
                 },

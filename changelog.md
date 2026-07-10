@@ -1,4 +1,5 @@
 ## Upcoming
+* Lowered iron armor regenerating absorption
 * Fixed missing copper nugget in creative inventory
 * Fixed copper powered rail recipes
 

@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.chestplate",
-                    "amount": 1.5,
+                    "amount": 1,
                     "operation": "add_value",
                     "slot": "chest"
                 },

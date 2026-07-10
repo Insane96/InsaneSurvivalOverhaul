@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.leggings",
-                    "amount": 1.25,
+                    "amount": 0.75,
                     "operation": "add_value",
                     "slot": "legs"
                 },
