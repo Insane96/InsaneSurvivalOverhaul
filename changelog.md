@@ -1,5 +1,6 @@
 ## Upcoming
 * Lowered iron armor regenerating absorption
+* `insanesurvivaloverhaul:no_stack_size_changes` has been split into `insanesurvivaloverhaul:no_block_stack_size_changes`, `insanesurvivaloverhaul:no_item_stack_size_changes` and `insanesurvivaloverhaul:no_food_stack_size_changes`
 * Fixed missing copper nugget in creative inventory
 * Fixed copper powered rail recipes
 

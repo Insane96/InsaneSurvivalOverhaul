@@ -23,7 +23,9 @@ import java.util.Map;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Make food, items and blocks less stackable. Items and Blocks are disabled by default. Changing stuff requires a /reload, but might require a Minecraft restart.")
 public class StackSizes extends Feature {
-    public static final TagKey<Item> NO_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_stack_size_changes");
+    public static final TagKey<Item> NO_ITEM_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_item_stack_size_changes");
+    public static final TagKey<Item> NO_BLOCK_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_block_stack_size_changes");
+    public static final TagKey<Item> NO_FOOD_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_food_stack_size_changes");
 
     @Config(description = "The formula to calculate the stack size of a food item. Variables as nutrition, saturation, eat_seconds as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Stack sizes are limited to 99 by the game.")
     public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(nutrition, 1), 1), 0)";
@@ -55,7 +57,7 @@ public class StackSizes extends Feature {
             if (item instanceof BlockItem
                     || base == 1
                     || item.components().has(DataComponents.FOOD)
-                    || item.builtInRegistryHolder().is(NO_STACK_SIZE_CHANGES))
+                    || item.builtInRegistryHolder().is(NO_ITEM_STACK_SIZE_CHANGES))
                 continue;
 
             int stackSize = Mth.clamp((int) Math.round(base * itemStackMultiplier), 1, 99);
@@ -71,7 +73,7 @@ public class StackSizes extends Feature {
             int base = item.components().getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
             if (!(item instanceof BlockItem)
                     || base == 1
-                    || item.builtInRegistryHolder().is(NO_STACK_SIZE_CHANGES))
+                    || item.builtInRegistryHolder().is(NO_BLOCK_STACK_SIZE_CHANGES))
                 continue;
 
             int stackSize = Mth.clamp((int) Math.round(base * blockStackMultiplier), 1, 99);
@@ -85,7 +87,7 @@ public class StackSizes extends Feature {
 
         for (Item item : BuiltInRegistries.ITEM) {
             FoodProperties food = item.components().get(DataComponents.FOOD);
-            if (food == null || item.builtInRegistryHolder().is(NO_STACK_SIZE_CHANGES))
+            if (food == null || item.builtInRegistryHolder().is(NO_FOOD_STACK_SIZE_CHANGES))
                 continue;
 
             int stackSize = Mth.clamp((int) MCUtils.computeFoodFormula(food, foodStackReductionFormula), 1, 99);

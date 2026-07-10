@@ -35,7 +35,7 @@ public class Hoes extends Feature {
 
 	@Config(min = 1)
 	public static Integer durabilityOnRightClick = 4;
-	@Config(description = "'Durability used on right-click' is only applied for farmland, and not e.g. when using hoes on rooted or coarse dirt")
+	@Config(description = "'Durability on right click' is only applied for farmland, and not e.g. when using hoes on rooted or coarse dirt")
 	public static Boolean extraDurabilityOnlyForTilling = true;
 
 	@SubscribeEvent
