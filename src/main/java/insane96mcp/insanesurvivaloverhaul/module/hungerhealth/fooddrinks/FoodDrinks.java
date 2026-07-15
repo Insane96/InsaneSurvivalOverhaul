@@ -39,14 +39,6 @@ import java.util.Map;
 public class FoodDrinks extends JsonFeature {
 	public static final ResourceKey<LootTable> PUMPKIN_SHEAR_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("gameplay/pumpkin_shear"));
 
-	private static final FoodProperties SINGLE_MUSHROOM_STEW = new FoodProperties.Builder().nutrition(3).saturationModifier(0.3F).usingConvertsTo(Items.BOWL).build();
-
-	public static final DeferredHolder<Item, Item> BROWN_MUSHROOM_STEW = ISORegistries.ITEMS.register("brown_mushroom_stew", () -> new Item(new Item.Properties()
-			.food(SINGLE_MUSHROOM_STEW)
-	));
-	public static final DeferredHolder<Item, Item> RED_MUSHROOM_STEW = ISORegistries.ITEMS.register("red_mushroom_stew", () -> new Item(new Item.Properties()
-			.food(SINGLE_MUSHROOM_STEW)
-	));
 	public static final DeferredHolder<Item, Item> FUNGI_STEW = ISORegistries.ITEMS.register("fungi_stew", () -> new Item(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(15).saturationModifier(0.6F)
 					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 45 * 20, 0), 1f)
@@ -103,7 +95,7 @@ public class FoodDrinks extends JsonFeature {
 
 	@Config(description = "Enables a data pack that makes food no longer smeltable in furnaces and changes smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
-	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous.")
+	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous. Also allows mushroom stews to be crafted with any mushroom.")
 	public static Boolean foodChanges = true;
 
 	@Override

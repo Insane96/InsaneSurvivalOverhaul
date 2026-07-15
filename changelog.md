@@ -1,3 +1,7 @@
+## Upcoming
+* Removed red and brown mushroom stews
+  * You can craft normal mushroom stew with any mushroom
+
 ## 5.5.1.2-alpha
 * Lowered iron armor regenerating absorption
 * `insanesurvivaloverhaul:no_stack_size_changes` has been split into `insanesurvivaloverhaul:no_block_stack_size_changes`, `insanesurvivaloverhaul:no_item_stack_size_changes` and `insanesurvivaloverhaul:no_food_stack_size_changes`

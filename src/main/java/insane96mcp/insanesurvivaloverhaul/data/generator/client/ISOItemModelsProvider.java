@@ -70,8 +70,6 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
 
         basicItem(FoodDrinks.OVER_EASY_EGG.get());
-        basicItem(FoodDrinks.BROWN_MUSHROOM_STEW.get());
-        basicItem(FoodDrinks.RED_MUSHROOM_STEW.get());
         basicItem(FoodDrinks.FUNGI_STEW.get());
         basicItem(FoodDrinks.PUMPKIN_PULP.get());
         basicItem(FoodDrinks.APPLE_PIE.get());

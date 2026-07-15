@@ -96,7 +96,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(FoodDrinks.DRINKING_FOODS)
                 .add(Items.SUSPICIOUS_STEW, Items.MUSHROOM_STEW, Items.RABBIT_STEW)
-                .add(FoodDrinks.BROWN_MUSHROOM_STEW.value(), FoodDrinks.RED_MUSHROOM_STEW.value(), FoodDrinks.FUNGI_STEW.value())
+                .add(FoodDrinks.FUNGI_STEW.value())
                 .add(FoodDrinks.COD_CHOWDER.value(), FoodDrinks.PUFFERFISH_CHOWDER.value());
 
         tag(CreativeRemoval.ITEM_TAG)
