@@ -57,7 +57,7 @@ public class UnfairOneShotClient {
 	}
 
 	@SubscribeEvent
-	public void onRenderTick(LevelTickEvent.Post event) {
+	public static void onRenderTick(LevelTickEvent.Post event) {
 		if (activationTicks > 0 && event.getLevel().isClientSide && event.getLevel().dimension() == Level.OVERWORLD)
 			activationTicks--;
 	}
