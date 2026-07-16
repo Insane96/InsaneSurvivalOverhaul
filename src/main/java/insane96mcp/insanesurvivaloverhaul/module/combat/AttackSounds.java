@@ -23,10 +23,10 @@ public class AttackSounds extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> PICKAXE_ATTACK = ISORegistries.SOUND_EVENTS.register("pickaxe_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("pickaxe_attack"), 16f));
     public static final DeferredHolder<SoundEvent, SoundEvent> SHOVEL_ATTACK = ISORegistries.SOUND_EVENTS.register("shovel_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("shovel_attack"), 16f));
 
-    public static final TagKey<Item> AXE_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/axe");
-    public static final TagKey<Item> SWORD_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/sword");
-    public static final TagKey<Item> PICKAXE_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/pickaxe");
-    public static final TagKey<Item> SHOVEL_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/shovel");
+    public static final TagKey<Item> AXE_ATTACK_SOUND = ISOItemTagsProvider.create("combat/attack_sounds/axe");
+    public static final TagKey<Item> SWORD_ATTACK_SOUND = ISOItemTagsProvider.create("combat/attack_sounds/sword");
+    public static final TagKey<Item> PICKAXE_ATTACK_SOUND = ISOItemTagsProvider.create("combat/attack_sounds/pickaxe");
+    public static final TagKey<Item> SHOVEL_ATTACK_SOUND = ISOItemTagsProvider.create("combat/attack_sounds/shovel");
 
     @Config
     public static Boolean randomizePitch = true;
