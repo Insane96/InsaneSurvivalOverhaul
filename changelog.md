@@ -4,6 +4,7 @@
 * Removed red and brown mushroom stews
   * You can craft normal mushroom stew with any mushroom (also quark's glow shrooms)
 * Increased poison duration from Pufferfish Chowder
+* Added item tags for attack sounds
 * Item stacks are no longer limited to 99, thanks to InsaneLib, so now item stacks go up to 128
 * Naturally spawning guardians no longer spawn above a certain Y level and have less health and are smaller
 * Fixed unfair one-shot animation

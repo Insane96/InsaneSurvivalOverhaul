@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T14:04:16.5077488	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-07-16T22:10:24.6424861	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 931ba10af6728e02f926cfe614e01450102703e8 data/insanesurvivaloverhaul/tags/item/creative_removal.json
 2b25e503a245198165b5f80ed0e325dddcb23959 data/insanesurvivaloverhaul/tags/item/drinking_foods.json
@@ -12,11 +12,16 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/insanesurvivaloverhaul/tags/item/hud/season.json
 8180207eb4d779d1e1250798d7cdcd341751b533 data/insanesurvivaloverhaul/tags/item/hud/time.json
 56ef1cfeb0e39ed60991c36aa1fa78c763c703cd data/insanesurvivaloverhaul/tags/item/minecarts.json
+05920f06e35beb0fb6a48e28112d42f53d19511c data/insanesurvivaloverhaul/tags/item/mushrooms.json
 58f6b2b983fdc37fee51dcfcb9a3b6f15ad722ac data/insanesurvivaloverhaul/tags/item/not_unvanishable.json
 cd5800ed49fc5b0c8ea29ea2ef55dc7b98f3808b data/insanesurvivaloverhaul/tags/item/no_food_stack_size_changes.json
 548833ed56d6bcdbb5ec3020a94bfba7c8d47310 data/insanesurvivaloverhaul/tags/item/ore_rocks.json
 3c8bbaa5724395d3312a54ee02176c97b9a202f3 data/insanesurvivaloverhaul/tags/item/raw_foods.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/snow_slowdown_ignore.json
+ba9125aa546790a0582445879c658b228dbb763c data/insanesurvivaloverhaul/tags/item/sounds/attack/axe.json
+bdb4053d28def340c591bb6cd77b677cfe510db6 data/insanesurvivaloverhaul/tags/item/sounds/attack/pickaxe.json
+5e7c760621586934c47d721d06be94fdb2693f4e data/insanesurvivaloverhaul/tags/item/sounds/attack/shovel.json
+e6756cdd6fb03cf772eba210ae3f93335e83dcd6 data/insanesurvivaloverhaul/tags/item/sounds/attack/sword.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/spawner_reactivator.json
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json

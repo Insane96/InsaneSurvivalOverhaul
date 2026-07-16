@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSounds;
 import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -126,6 +127,15 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(StackSizes.NO_FOOD_STACK_SIZE_CHANGES)
                 .add(Items.GOLDEN_CARROT);
+
+        tag(AttackSounds.AXE_ATTACK_SOUND)
+                .addTag(ItemTags.AXES);
+        tag(AttackSounds.SWORD_ATTACK_SOUND)
+                .addTag(ItemTags.SWORDS);
+        tag(AttackSounds.PICKAXE_ATTACK_SOUND)
+                .addTag(ItemTags.PICKAXES);
+        tag(AttackSounds.SHOVEL_ATTACK_SOUND)
+                .addTag(ItemTags.SHOVELS);
     }
 
     public static TagKey<Item> create(String tagName) {

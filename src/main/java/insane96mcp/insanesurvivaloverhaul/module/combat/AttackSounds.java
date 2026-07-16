@@ -5,13 +5,15 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -20,6 +22,11 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class AttackSounds extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> PICKAXE_ATTACK = ISORegistries.SOUND_EVENTS.register("pickaxe_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("pickaxe_attack"), 16f));
     public static final DeferredHolder<SoundEvent, SoundEvent> SHOVEL_ATTACK = ISORegistries.SOUND_EVENTS.register("shovel_attack", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("shovel_attack"), 16f));
+
+    public static final TagKey<Item> AXE_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/axe");
+    public static final TagKey<Item> SWORD_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/sword");
+    public static final TagKey<Item> PICKAXE_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/pickaxe");
+    public static final TagKey<Item> SHOVEL_ATTACK_SOUND = ISOItemTagsProvider.create("sounds/attack/shovel");
 
     @Config
     public static Boolean randomizePitch = true;
@@ -40,19 +47,19 @@ public class AttackSounds extends Feature {
 
         SoundEvent attackSoundEvent = soundEvent;
         boolean changedSound = false;
-        if (attackingPlayer.getMainHandItem().is(ItemTags.AXES)) {
+        if (attackingPlayer.getMainHandItem().is(AXE_ATTACK_SOUND)) {
             attackSoundEvent = SoundEvents.PLAYER_ATTACK_STRONG;
             changedSound = true;
         }
-        else if (attackingPlayer.getMainHandItem().is(ItemTags.SWORDS)) {
+        else if (attackingPlayer.getMainHandItem().is(SWORD_ATTACK_SOUND)) {
             attackSoundEvent = SoundEvents.PLAYER_ATTACK_WEAK;
             changedSound = true;
         }
-        else if (attackingPlayer.getMainHandItem().is(ItemTags.PICKAXES)) {
+        else if (attackingPlayer.getMainHandItem().is(PICKAXE_ATTACK_SOUND)) {
             attackSoundEvent = PICKAXE_ATTACK.get();
             changedSound = true;
         }
-        else if (attackingPlayer.getMainHandItem().is(ItemTags.SHOVELS)) {
+        else if (attackingPlayer.getMainHandItem().is(SHOVEL_ATTACK_SOUND)) {
             attackSoundEvent = SHOVEL_ATTACK.get();
             changedSound = true;
         }
