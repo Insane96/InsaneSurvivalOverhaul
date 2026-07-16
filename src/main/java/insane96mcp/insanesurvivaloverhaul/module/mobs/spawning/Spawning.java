@@ -32,6 +32,7 @@ import java.util.List;
 @LoadFeature(module = ISOModules.MOBS, description = "Add a brand new Echo Torch and some changes to mob spawn")
 public class Spawning extends Feature {
     public static final ResourceLocation GUARDIAN_MODIFIER_ID = InsaneSO.id("naturally_spawned_guardian");
+    public static final ResourceLocation GUARDIAN_SCALE_MODIFIER_ID = InsaneSO.id("naturally_spawned_guardian_scale");
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7).explosionResistance(120)));
 
@@ -41,7 +42,7 @@ public class Spawning extends Feature {
     public static Boolean allowWorldSpawnSpawn = true;
     @Config(description = "Disables normal skeletons from spawning in Fortresses.")
     public static Boolean removeSkeletonsFromFortresses = true;
-    @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
+    @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have much less health compared to monument guardians and are smaller.")
     public static Boolean guardiansInDeepOceans = true;
     @Config(description = "Guardians naturally spawned in deep oceans (from \"Guardians in deep oceans\") won't spawn above this Y level.")
     public static Integer maxGuardiansInDeepOceansSpawnY = 32;
@@ -103,7 +104,8 @@ public class Spawning extends Feature {
                 || event.getEntity().isAddedToLevel())
             return;
 
-        MCUtils.applyModifier(event.getEntity(), Attributes.MAX_HEALTH, GUARDIAN_MODIFIER_ID, -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        MCUtils.applyModifier(event.getEntity(), Attributes.MAX_HEALTH, GUARDIAN_MODIFIER_ID, -0.75f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        MCUtils.applyModifier(event.getEntity(), Attributes.SCALE, GUARDIAN_SCALE_MODIFIER_ID, -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
     public static final List<MobSpawnType> BLOCKED_SPAWN_TYPES = List.of(MobSpawnType.JOCKEY, MobSpawnType.NATURAL);

@@ -3,6 +3,7 @@
 * Removed red and brown mushroom stews
   * You can craft normal mushroom stew with any mushroom
 * Increased poison duration from Pufferfish Chowder
+* Naturally spawning guardians no longer spawn above a certain Y level and have less health and are smaller
 
 ## 5.5.1.2-alpha
 * Lowered iron armor regenerating absorption
