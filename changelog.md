@@ -1,4 +1,5 @@
 ## Upcoming
+* Added textures for new foods
 * Removed red and brown mushroom stews
   * You can craft normal mushroom stew with any mushroom
 * Increased poison duration from Pufferfish Chowder
@@ -31,7 +32,7 @@
 ## 5.5.0.1-alpha
 * Fixed crash if items in anvil recipes are not registered
 
-## 5.5.0.0-alpha - The Food update
+## 5.5.0.0-alpha - The Food update Part 1
 * Food & Drinks
   * Added Apple Pie, Cod Chowder and Pufferfish chowder
   * Removed Golden Apples
