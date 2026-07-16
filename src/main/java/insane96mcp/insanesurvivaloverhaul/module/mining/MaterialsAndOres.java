@@ -23,8 +23,8 @@ public class MaterialsAndOres extends Feature {
 	@Config(description = """
 			Enables the following changes to vanilla data pack:
 			* Smelting Raw Copper and Raw Iron takes 2x time
-			* Blasting raw minerals takes 2x time
-			* Blasting ores now takes 4x time but yields 2x materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
+			* Blasting raw minerals takes 1x time
+			* Blasting ores now takes 2x time but yields 2x materials from minerals (2x the normal drops without Fortune), and yields 3x raw minerals for iron, gold and copper
 			* You can no longer smelt anything other than Raw Copper and Raw Iron. A Blast Furnace is required
 			* Heavily increased experience from smelting ores
 			""")
