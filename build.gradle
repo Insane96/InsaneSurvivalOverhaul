@@ -19,7 +19,7 @@ repositories {
     }
     maven {
         name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
+        url = "https://maven.terraformersmc.com/releases"
     }
     maven {
         url "https://cursemaven.com"
