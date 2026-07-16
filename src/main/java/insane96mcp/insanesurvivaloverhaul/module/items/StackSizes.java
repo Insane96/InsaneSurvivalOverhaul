@@ -4,6 +4,7 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanelib.module.base.items.ItemComponentsFeature;
 import insane96mcp.insanelib.module.base.items.ItemComponentsReloadListener;
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
@@ -27,12 +28,12 @@ public class StackSizes extends Feature {
     public static final TagKey<Item> NO_BLOCK_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_block_stack_size_changes");
     public static final TagKey<Item> NO_FOOD_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_food_stack_size_changes");
 
-    @Config(description = "The formula to calculate the stack size of a food item. Variables as nutrition, saturation, eat_seconds as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Stack sizes are limited to 99 by the game.")
+    @Config(description = "The formula to calculate the stack size of a food item. Variables as nutrition, saturation, eat_seconds as numbers and fast_food as boolean can be used. Set to empty to disable this. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html.")
     public static String foodStackReductionFormula = "ROUND(MAX(64 / MAX(nutrition, 1), 1), 0)";
-    @Config(min = 0.01d, max = 1.546875d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks and foods) will be multiplied by this value. Setting to 1 will disable this. Stack sizes are limited to 99 by the game.")
-    public static Double itemStackMultiplier = 1.546875;
-    @Config(min = 0.01d, max = 1.546875d, description = "All the blocks max stack sizes will be multiplied by this value. Setting to 1 will disable this. Stack sizes are limited to 99 by the game.")
-    public static Double blockStackMultiplier = 1.546875;
+    @Config(min = 0.01d, name = "Item Stack Multiplier", description = "Items max stack sizes (excluding blocks and foods) will be multiplied by this value. Setting to 1 will disable this.")
+    public static Double itemStackMultiplier = 2d;
+    @Config(min = 0.01d, description = "All the blocks max stack sizes will be multiplied by this value. Setting to 1 will disable this.")
+    public static Double blockStackMultiplier = 2d;
 
     @Config(description = "Enables a data pack that increases item stacks of Horse Armors, Minecarts and Saddles")
     public static Boolean dataPack = true;
@@ -60,7 +61,7 @@ public class StackSizes extends Feature {
                     || item.builtInRegistryHolder().is(NO_ITEM_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) Math.round(base * itemStackMultiplier), 1, 99);
+            int stackSize = Mth.clamp((int) Math.round(base * itemStackMultiplier), 1, ItemComponentsFeature.stackLimit);
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
@@ -76,7 +77,7 @@ public class StackSizes extends Feature {
                     || item.builtInRegistryHolder().is(NO_BLOCK_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) Math.round(base * blockStackMultiplier), 1, 99);
+            int stackSize = Mth.clamp((int) Math.round(base * blockStackMultiplier), 1, ItemComponentsFeature.stackLimit);
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
@@ -90,7 +91,7 @@ public class StackSizes extends Feature {
             if (food == null || item.builtInRegistryHolder().is(NO_FOOD_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) MCUtils.computeFoodFormula(food, foodStackReductionFormula), 1, 99);
+            int stackSize = Mth.clamp((int) MCUtils.computeFoodFormula(food, foodStackReductionFormula), 1, ItemComponentsFeature.stackLimit);
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
