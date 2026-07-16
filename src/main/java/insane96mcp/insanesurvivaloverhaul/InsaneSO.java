@@ -84,6 +84,7 @@ public class InsaneSO {
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
             eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
+            NeoForge.EVENT_BUS.addListener(UnfairOneShotClient::onRenderTick);
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
