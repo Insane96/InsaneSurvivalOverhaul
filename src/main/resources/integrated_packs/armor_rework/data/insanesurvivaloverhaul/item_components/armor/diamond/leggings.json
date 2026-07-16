@@ -12,10 +12,10 @@
                     "slot": "legs"
                 },
                 {
-                    "type": "minecraft:generic.movement_speed",
+                    "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.leggings",
                     "amount": -0.024,
-                    "operation": "add_multiplied_base",
+                    "operation": "add_value",
                     "slot": "legs"
                 }
             ]

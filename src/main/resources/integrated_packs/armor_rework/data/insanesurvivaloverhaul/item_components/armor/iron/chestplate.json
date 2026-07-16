@@ -26,10 +26,10 @@
                     "slot": "chest"
                 },
                 {
-                    "type": "minecraft:generic.movement_speed",
+                    "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.chestplate",
                     "amount": -0.0175,
-                    "operation": "add_multiplied_base",
+                    "operation": "add_value",
                     "slot": "chest"
                 }
             ]

@@ -12,10 +12,10 @@
                     "slot": "head"
                 },
                 {
-                    "type": "minecraft:generic.movement_speed",
+                    "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.helmet",
                     "amount": -0.024,
-                    "operation": "add_multiplied_base",
+                    "operation": "add_value",
                     "slot": "head"
                 }
             ]

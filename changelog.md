@@ -1,4 +1,5 @@
 ## Upcoming
+* Armor Rework's movement speed penalty now only applies while sprinting, via the new `insanesurvivaloverhaul:sprint_slowdown` attribute
 * Parrots now only dismount if falling more than 4 blocks
 * Added textures for new foods
 * Removed red and brown mushroom stews

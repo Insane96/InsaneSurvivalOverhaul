@@ -26,10 +26,10 @@
                     "slot": "feet"
                 },
                 {
-                    "type": "minecraft:generic.movement_speed",
+                    "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.boots",
                     "amount": -0.0075,
-                    "operation": "add_multiplied_base",
+                    "operation": "add_value",
                     "slot": "feet"
                 }
             ]

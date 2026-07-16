@@ -12,6 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
+import insane96mcp.insanesurvivaloverhaul.module.combat.MiscCombat;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
@@ -80,6 +81,7 @@ public class InsaneSO {
         eventBus.addListener(PiercingDamage::addAttribute);
         eventBus.addListener(HungerAndHealthRegen::addAttribute);
         eventBus.addListener(Exhaustion::addAttribute);
+        eventBus.addListener(MiscCombat::addAttribute);
 
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
