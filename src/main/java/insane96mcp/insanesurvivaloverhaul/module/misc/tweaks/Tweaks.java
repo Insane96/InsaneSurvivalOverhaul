@@ -142,6 +142,9 @@ public class Tweaks extends Feature {
     @Config(description = "How much damage vehicles require to be broken, vanilla is 4")
     public static Integer damageToBreakVehicles = 2;
 
+    @Config(min = 0d, description = "The fall distance (in blocks) needed before parrots (and other shoulder entities) get knocked off the player's shoulder. Vanilla is 0.5")
+    public static Double parrot$shoulderDismountFallDistance = 4d;
+
     public static boolean discreteNameTags = true;
 
     @Override

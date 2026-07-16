@@ -1,4 +1,5 @@
 ## Upcoming
+* Parrots now only dismount if falling more than 4 blocks
 * Added textures for new foods
 * Removed red and brown mushroom stews
   * You can craft normal mushroom stew with any mushroom (also quark's glow shrooms)
