@@ -64,7 +64,7 @@ public class FoodDrinks extends JsonFeature {
 
 	public static final DeferredHolder<Item, Item> PUFFERFISH_CHOWDER = ISORegistries.ITEMS.register("pufferfish_chowder", () -> new Item(new Item.Properties()
 			.food(new FoodProperties.Builder().nutrition(11).saturationModifier(0.6F)
-					.effect(() -> new MobEffectInstance(MobEffects.POISON, 120, 0), 0.45f)
+					.effect(() -> new MobEffectInstance(MobEffects.POISON, 240, 0), 0.45f)
 					.effect(() -> new MobEffectInstance(MobEffects.HUNGER, 300, 0), 0.50f)
 					.usingConvertsTo(Items.BOWL)
 					.build())
