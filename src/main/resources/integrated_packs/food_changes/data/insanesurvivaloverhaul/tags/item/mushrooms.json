@@ -1,6 +1,10 @@
 {
     "values": [
         "minecraft:brown_mushroom",
-        "minecraft:red_mushroom"
+        "minecraft:red_mushroom",
+        {
+            "required": false,
+            "id": "quark:glow_shroom"
+        }
     ]
 }
