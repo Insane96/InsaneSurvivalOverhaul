@@ -41,6 +41,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> HORSE_ARMORS = create("horse_armors");
     public static final TagKey<Item> MINECARTS = create("minecarts");
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
+    public static final TagKey<Item> MUSHROOMS = create("mushrooms");
 
     public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
@@ -81,6 +82,10 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.LEATHER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR, Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR);
         tag(MINECARTS)
                 .add(Items.MINECART, Items.CHEST_MINECART, Items.FURNACE_MINECART, Items.HOPPER_MINECART, Items.TNT_MINECART, Items.COMMAND_BLOCK_MINECART);
+
+        tag(MUSHROOMS)
+                .add(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM)
+                .addOptional(ResourceLocation.parse("quark:glow_shroom"));
 
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
