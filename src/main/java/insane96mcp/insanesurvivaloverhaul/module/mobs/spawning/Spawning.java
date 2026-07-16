@@ -43,6 +43,8 @@ public class Spawning extends Feature {
     public static Boolean removeSkeletonsFromFortresses = true;
     @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have half health compared to monument guardians.")
     public static Boolean guardiansInDeepOceans = true;
+    @Config(description = "Guardians naturally spawned in deep oceans (from \"Guardians in deep oceans\") won't spawn above this Y level.")
+    public static Integer maxGuardiansInDeepOceansSpawnY = 32;
     @Config(description = "Radius (in blocks) around an Echo Lantern in which monsters cannot spawn.", min = 1, max = 128)
     public static Integer echoLanternRadius = 64;
 
@@ -78,6 +80,18 @@ public class Spawning extends Feature {
 
         event.setSpawnCancelled(true);
         event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public void onGuardianSpawnPlacement(MobSpawnEvent.SpawnPlacementCheck event) {
+        if (!this.isEnabled()
+                || !guardiansInDeepOceans
+                || event.getEntityType() != EntityType.GUARDIAN
+                || event.getSpawnType() != MobSpawnType.NATURAL)
+            return;
+
+        if (event.getPos().getY() > maxGuardiansInDeepOceansSpawnY)
+            event.setResult(MobSpawnEvent.SpawnPlacementCheck.Result.FAIL);
     }
 
     @SubscribeEvent
