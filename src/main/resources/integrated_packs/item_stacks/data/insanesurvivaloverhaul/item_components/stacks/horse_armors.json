@@ -1,6 +1,6 @@
 {
 	"item": "#insanesurvivaloverhaul:horse_armors",
 	"components": {
-		"minecraft:max_stack_size": 12
+		"minecraft:max_stack_size": 16
 	}
 }

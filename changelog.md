@@ -12,6 +12,7 @@
 * Saturation is no longer capped to hunger
 * Added item tags for attack sounds
 * Naturally spawning guardians no longer spawn above a certain Y level and have less health and are smaller
+* Fixed horse armors, minecarts and saddles not stacking
 * Fixed unfair one-shot animation
 
 ## 5.5.1.2-alpha
