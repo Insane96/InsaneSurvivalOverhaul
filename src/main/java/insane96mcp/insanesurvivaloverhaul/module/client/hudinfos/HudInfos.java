@@ -56,7 +56,7 @@ public class HudInfos extends Feature {
         event.registerAboveAll(InsaneSO.id("hud_infos"), (guiGraphics, deltaTracker) -> {
             Minecraft mc = Minecraft.getInstance();
             Player player = mc.player;
-            if (player == null || mc.getDebugOverlay().showDebugScreen() || !Feature.isEnabled(HudInfos.class))
+            if (player == null || mc.getDebugOverlay().showDebugScreen() || !Feature.isEnabled(HudInfos.class) || mc.options.hideGui)
                 return;
 
             ArrayList<String> toDraw = new ArrayList<>();
