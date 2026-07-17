@@ -1,3 +1,6 @@
+## Upcoming
+* Fixed Regenerating absorption rendering with hidden UI
+
 ## 5.6.0.0-beta
 * Added Recycling: damaged metal items can now be recycled in the Blast Furnace, giving back raw material proportional to their remaining durability
   * Also works with Shields+'s shields if installed

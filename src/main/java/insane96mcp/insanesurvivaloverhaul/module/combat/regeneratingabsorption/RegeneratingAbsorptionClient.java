@@ -32,7 +32,7 @@ public class RegeneratingAbsorptionClient {
         Minecraft mc = Minecraft.getInstance();
         Gui gui = mc.gui;
         event.registerAbove(aboveOverlay, InsaneSO.id("regenerating_absorption"), (guiGraphics, partialTicks) -> {
-            if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.gameMode != null && mc.gameMode.canHurtPlayer())
+            if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.gameMode != null && mc.gameMode.canHurtPlayer() && !mc.options.hideGui)
                 renderAbsorption(gui, guiGraphics, guiGraphics.guiWidth(), guiGraphics.guiHeight());
         });
     }
