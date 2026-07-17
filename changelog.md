@@ -1,4 +1,4 @@
-## Upcoming
+## 5.6.0.0-beta
 * Added Recycling: damaged metal items can now be recycled in the Blast Furnace, giving back raw material proportional to their remaining durability
   * Also works with Shields+'s shields if installed
 * Armor Rework's movement speed penalty now only applies while sprinting, via the new `insanesurvivaloverhaul:sprint_slowdown` attribute
