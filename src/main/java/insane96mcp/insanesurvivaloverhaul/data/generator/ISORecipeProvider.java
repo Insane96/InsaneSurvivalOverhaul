@@ -64,6 +64,5 @@ public class ISORecipeProvider extends RecipeProvider {
                 .requires(Crops.SOLANUM_NEOROSSII.item().get(), 1)
                 .unlockedBy("has_flower", has(Crops.SOLANUM_NEOROSSII.item().get()))
                 .save(recipeOutput);
-
     }
 }

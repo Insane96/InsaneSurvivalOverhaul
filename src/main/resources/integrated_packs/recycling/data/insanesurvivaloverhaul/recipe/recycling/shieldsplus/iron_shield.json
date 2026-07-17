@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "shieldsplus"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:recycling",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "recycling_iron",
+  "ingredient": {
+    "item": "shieldsplus:iron_shield"
+  },
+  "result": {
+    "count": 36,
+    "id": "minecraft:iron_nugget"
+  }
+}

@@ -1,13 +1,16 @@
 ## Upcoming
+* Added Recycling: damaged metal items can now be recycled in the Blast Furnace, giving back raw material proportional to their remaining durability
+  * Also works with Shields+'s shields if installed
 * Armor Rework's movement speed penalty now only applies while sprinting, via the new `insanesurvivaloverhaul:sprint_slowdown` attribute
 * Parrots now only dismount if falling more than 4 blocks
+* Item stacks are no longer limited to 99, thanks to InsaneLib, so now item stacks go up to 128
 * Added textures for new foods
 * Removed red and brown mushroom stews
   * You can craft normal mushroom stew with any mushroom (also quark's glow shrooms)
 * Increased poison duration from Pufferfish Chowder
 * Halved time it takes for blasting items
+* Saturation is no longer capped to hunger
 * Added item tags for attack sounds
-* Item stacks are no longer limited to 99, thanks to InsaneLib, so now item stacks go up to 128
 * Naturally spawning guardians no longer spawn above a certain Y level and have less health and are smaller
 * Fixed unfair one-shot animation
 

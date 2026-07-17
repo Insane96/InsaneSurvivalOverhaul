@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "shieldsplus"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:recycling",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "recycling_diamond",
+  "ingredient": {
+    "item": "shieldsplus:diamond_shield"
+  },
+  "result": {
+    "count": 4,
+    "id": "minecraft:diamond"
+  }
+}

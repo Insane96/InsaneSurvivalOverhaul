@@ -18,6 +18,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
@@ -49,6 +50,8 @@ public class ISORegistries {
             LOOT_CONDITIONS.register("has_been_fed_recently", () -> new LootItemConditionType(FedCondition.CODEC));
     public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
             LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
+
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = createRegistry(BuiltInRegistries.RECIPE_SERIALIZER);
 
     public static final DeferredRegister<Feature<?>> FEATURES = createRegistry(BuiltInRegistries.FEATURE);
     public static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = createRegistry(BuiltInRegistries.RULE_TEST);

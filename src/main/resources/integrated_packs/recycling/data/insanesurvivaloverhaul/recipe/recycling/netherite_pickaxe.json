@@ -1,0 +1,14 @@
+{
+  "type": "insanesurvivaloverhaul:recycling",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "recycling_netherite",
+  "ingredient": {
+    "item": "minecraft:netherite_pickaxe"
+  },
+  "result": {
+    "count": 3,
+    "id": "minecraft:diamond"
+  }
+}

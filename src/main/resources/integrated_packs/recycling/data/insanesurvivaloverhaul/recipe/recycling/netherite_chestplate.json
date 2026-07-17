@@ -1,0 +1,14 @@
+{
+  "type": "insanesurvivaloverhaul:recycling",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "recycling_netherite",
+  "ingredient": {
+    "item": "minecraft:netherite_chestplate"
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:diamond"
+  }
+}
