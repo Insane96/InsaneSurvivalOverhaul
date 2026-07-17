@@ -13,6 +13,7 @@ import insane96mcp.insanesurvivaloverhaul.module.misc.InCombat;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
@@ -42,6 +43,7 @@ public class HungerAndHealthRegen extends Feature {
 	public static final DeferredHolder<Attribute, Attribute> MAX_EXHAUSTION = ISORegistries.ATTRIBUTES.register("max_exhaustion", () -> new ILRangedAttribute(0d, 0d, 40d));
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_CONSUMED = ISORegistries.ATTRIBUTES.register("hunger_consumed", () -> new ILRangedAttribute(0d, 0d, 40d));
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_REQUIRED_TO_REGEN = ISORegistries.ATTRIBUTES.register("hunger_required_to_regen", () -> new ILRangedAttribute(0d, 0d, 20d));
+	public static final ResourceLocation IN_COMBAT = InsaneSO.id("in_combat");
 
 	@Config(description = "How much health do players heal overtime each second without consuming hunger? This value is applied to the insanesurvivaloverhaul:passive_regen_per_second attribute on player join.")
 	public static Double passiveRegenPerSecond = 0d;
@@ -133,7 +135,7 @@ public class HungerAndHealthRegen extends Feature {
 	public static void regenInCombat(Player player) {
 		if (regenReductionInCombatTime == 0 || regenReductionInCombat == 0)
 			return;
-		AttributeModifier IN_COMBAT_MODIFIER = new AttributeModifier(InsaneSO.id("in_combat"), -regenReductionInCombat, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+		AttributeModifier IN_COMBAT_MODIFIER = new AttributeModifier(IN_COMBAT, -regenReductionInCombat, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		if (InCombat.isInCombat(player, regenReductionInCombat))
 			MCUtils.applyModifier(player, REGEN_PER_SECOND, IN_COMBAT_MODIFIER, false);
 		else

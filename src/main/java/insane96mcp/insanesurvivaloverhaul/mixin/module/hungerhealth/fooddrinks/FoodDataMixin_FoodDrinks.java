@@ -19,6 +19,9 @@ public class FoodDataMixin_FoodDrinks {
         if (!Feature.isEnabled(FoodDrinks.class)
                 || !FoodDrinks.combatSnapshotEatingSaturation)
             return original.call(value, min, max);
+        //max is set to this.foodLevel
+        if (!FoodDrinks.capSaturationToHunger)
+            max = 20;
         return original.call(Math.max(this.saturationLevel, saturationLevel), min, max);
     }
 }

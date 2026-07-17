@@ -88,6 +88,8 @@ public class FoodDrinks extends JsonFeature {
 	public static Boolean alwaysEat = false;
 	@Config(description = "If enabled, when eating food, the saturation will not sum, instead will just be set to the food's saturation (if higher than the current).")
 	public static Boolean combatSnapshotEatingSaturation = true;
+	@Config(description = "If true, saturation will never exceed hunger level. Only works if \"Combat snapshot eating saturation\". True in Vanilla")
+	public static Boolean capSaturationToHunger = false;
 	@Config(description = "If enabled, eating cakes will give 30 seconds of Speed and Haste")
 	public static Boolean buffCake = true;
     @Config(description = "Adds a loot table when shearing pumpkins (insanesurvivaloverhaul:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
