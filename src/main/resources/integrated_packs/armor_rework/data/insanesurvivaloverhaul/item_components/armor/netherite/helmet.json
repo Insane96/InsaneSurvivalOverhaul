@@ -1,13 +1,20 @@
 {
     "item": "minecraft:netherite_helmet",
     "components": {
-        "minecraft:max_damage": 195,
+        "minecraft:max_damage": 204,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.helmet",
                     "amount": 4.0,
+                    "operation": "add_value",
+                    "slot": "head"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.helmet",
+                    "amount": 0.1,
                     "operation": "add_value",
                     "slot": "head"
                 },

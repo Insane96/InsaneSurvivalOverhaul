@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_boots",
     "components": {
-        "minecraft:max_damage": 90,
+        "minecraft:max_damage": 143,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,14 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.boots",
-                    "amount": 0.25,
-                    "operation": "add_value",
-                    "slot": "feet"
-                },
-                {
-                    "type": "minecraft:generic.knockback_resistance",
-                    "id": "minecraft:armor.boots",
-                    "amount": 0.06,
+                    "amount": 0.2,
                     "operation": "add_value",
                     "slot": "feet"
                 },

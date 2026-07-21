@@ -1,7 +1,12 @@
-## Upcoming
+## 5.6.1.0
 * Sprinting slowdown is now percentage based 0~1
   * With this, heavily increased the armor_reworks sprint slowdown
 * Fixed Regenerating absorption and Hud Infos rendering with hidden UI
+* Armor Rework
+  * Knockback resistance reworked: removed from Iron and Chainmail, added to Diamond (5%) and Netherite (10%) per piece
+  * Chainmail no longer grants knockback resistance; it now gives Regenerating Absorption instead
+  * Retuned Regenerating Absorption on Leather, Iron and Chainmail; Copper's now matches Iron's
+  * Significantly increased armor durability on all materials, with weaker materials gaining proportionally more durability than stronger ones
 
 ## 5.6.0.0-beta
 * Added Recycling: damaged metal items can now be recycled in the Blast Furnace, giving back raw material proportional to their remaining durability

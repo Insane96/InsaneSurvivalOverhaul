@@ -1,13 +1,20 @@
 {
     "item": "minecraft:diamond_helmet",
     "components": {
-        "minecraft:max_damage": 208,
+        "minecraft:max_damage": 209,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.helmet",
                     "amount": 3.0,
+                    "operation": "add_value",
+                    "slot": "head"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.helmet",
+                    "amount": 0.05,
                     "operation": "add_value",
                     "slot": "head"
                 },

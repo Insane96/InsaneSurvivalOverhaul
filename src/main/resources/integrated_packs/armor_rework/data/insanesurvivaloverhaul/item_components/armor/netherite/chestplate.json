@@ -1,13 +1,20 @@
 {
     "item": "minecraft:netherite_chestplate",
     "components": {
-        "minecraft:max_damage": 240,
+        "minecraft:max_damage": 296,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.chestplate",
                     "amount": 7.0,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 0.1,
                     "operation": "add_value",
                     "slot": "chest"
                 },

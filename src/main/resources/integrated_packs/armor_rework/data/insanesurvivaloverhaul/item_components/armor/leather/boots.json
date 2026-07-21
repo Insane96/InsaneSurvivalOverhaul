@@ -1,7 +1,7 @@
 {
     "item": "minecraft:leather_boots",
     "components": {
-        "minecraft:max_damage": 54,
+        "minecraft:max_damage": 98,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.boots",
-                    "amount": 1.0,
+                    "amount": 0.5,
                     "operation": "add_value",
                     "slot": "feet"
                 }

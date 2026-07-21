@@ -1,7 +1,7 @@
 {
     "item": "minecraft:chainmail_helmet",
     "components": {
-        "minecraft:max_damage": 46,
+        "minecraft:max_damage": 66,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -12,9 +12,9 @@
                     "slot": "head"
                 },
                 {
-                    "type": "minecraft:generic.knockback_resistance",
+                    "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.helmet",
-                    "amount": 0.04,
+                    "amount": 1.25,
                     "operation": "add_value",
                     "slot": "head"
                 }

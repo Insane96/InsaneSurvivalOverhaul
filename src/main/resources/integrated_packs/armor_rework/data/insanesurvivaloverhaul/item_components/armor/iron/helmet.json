@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_helmet",
     "components": {
-        "minecraft:max_damage": 98,
+        "minecraft:max_damage": 121,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,14 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.helmet",
-                    "amount": 0.5,
-                    "operation": "add_value",
-                    "slot": "head"
-                },
-                {
-                    "type": "minecraft:generic.knockback_resistance",
-                    "id": "minecraft:armor.helmet",
-                    "amount": 0.06,
+                    "amount": 0.4,
                     "operation": "add_value",
                     "slot": "head"
                 },

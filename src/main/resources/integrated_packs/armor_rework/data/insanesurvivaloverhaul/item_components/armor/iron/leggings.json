@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_leggings",
     "components": {
-        "minecraft:max_damage": 113,
+        "minecraft:max_damage": 165,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,14 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.leggings",
-                    "amount": 0.75,
-                    "operation": "add_value",
-                    "slot": "legs"
-                },
-                {
-                    "type": "minecraft:generic.knockback_resistance",
-                    "id": "minecraft:armor.leggings",
-                    "amount": 0.06,
+                    "amount": 0.6,
                     "operation": "add_value",
                     "slot": "legs"
                 },

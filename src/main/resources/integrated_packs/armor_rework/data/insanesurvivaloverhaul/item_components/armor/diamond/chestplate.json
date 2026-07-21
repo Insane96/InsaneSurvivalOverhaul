@@ -1,13 +1,20 @@
 {
     "item": "minecraft:diamond_chestplate",
     "components": {
-        "minecraft:max_damage": 256,
+        "minecraft:max_damage": 304,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.chestplate",
                     "amount": 5.5,
+                    "operation": "add_value",
+                    "slot": "chest"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.chestplate",
+                    "amount": 0.05,
                     "operation": "add_value",
                     "slot": "chest"
                 },

@@ -1,7 +1,7 @@
 {
     "item": "minecraft:copper_leggings",
     "components": {
-        "minecraft:max_damage": 45,
+        "minecraft:max_damage": 75,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.leggings",
-                    "amount": 0.5,
+                    "amount": 0.6,
                     "operation": "add_value",
                     "slot": "legs"
                 }

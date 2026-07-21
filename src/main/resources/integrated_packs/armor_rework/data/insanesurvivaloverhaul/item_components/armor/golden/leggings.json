@@ -1,7 +1,7 @@
 {
     "item": "minecraft:golden_leggings",
     "components": {
-        "minecraft:max_damage": 60,
+        "minecraft:max_damage": 98,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

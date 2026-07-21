@@ -1,7 +1,7 @@
 {
     "item": "minecraft:chainmail_boots",
     "components": {
-        "minecraft:max_damage": 42,
+        "minecraft:max_damage": 78,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -12,9 +12,9 @@
                     "slot": "feet"
                 },
                 {
-                    "type": "minecraft:generic.knockback_resistance",
+                    "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.boots",
-                    "amount": 0.04,
+                    "amount": 1.0,
                     "operation": "add_value",
                     "slot": "feet"
                 }

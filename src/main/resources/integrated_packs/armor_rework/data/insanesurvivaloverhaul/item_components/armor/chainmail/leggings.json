@@ -1,7 +1,7 @@
 {
     "item": "minecraft:chainmail_leggings",
     "components": {
-        "minecraft:max_damage": 53,
+        "minecraft:max_damage": 90,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -12,9 +12,9 @@
                     "slot": "legs"
                 },
                 {
-                    "type": "minecraft:generic.knockback_resistance",
+                    "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.leggings",
-                    "amount": 0.04,
+                    "amount": 1.75,
                     "operation": "add_value",
                     "slot": "legs"
                 }

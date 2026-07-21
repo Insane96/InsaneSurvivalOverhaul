@@ -1,13 +1,20 @@
 {
     "item": "minecraft:diamond_boots",
     "components": {
-        "minecraft:max_damage": 192,
+        "minecraft:max_damage": 247,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.boots",
                     "amount": 2.5,
+                    "operation": "add_value",
+                    "slot": "feet"
+                },
+                {
+                    "type": "minecraft:generic.knockback_resistance",
+                    "id": "minecraft:armor.boots",
+                    "amount": 0.05,
                     "operation": "add_value",
                     "slot": "feet"
                 },

@@ -1,7 +1,7 @@
 {
     "item": "minecraft:copper_helmet",
     "components": {
-        "minecraft:max_damage": 39,
+        "minecraft:max_damage": 55,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.helmet",
-                    "amount": 0.25,
+                    "amount": 0.4,
                     "operation": "add_value",
                     "slot": "head"
                 }

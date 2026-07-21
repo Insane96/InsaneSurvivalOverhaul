@@ -1,7 +1,7 @@
 {
     "item": "minecraft:copper_boots",
     "components": {
-        "minecraft:max_damage": 36,
+        "minecraft:max_damage": 65,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:regenerating_absorption",
                     "id": "minecraft:armor.boots",
-                    "amount": 0.25,
+                    "amount": 0.2,
                     "operation": "add_value",
                     "slot": "feet"
                 }
