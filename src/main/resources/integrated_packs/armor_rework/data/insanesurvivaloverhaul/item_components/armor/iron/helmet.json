@@ -28,7 +28,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.helmet",
-                    "amount": -0.01,
+                    "amount": 0.03,
                     "operation": "add_value",
                     "slot": "head"
                 }

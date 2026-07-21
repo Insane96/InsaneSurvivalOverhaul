@@ -1,4 +1,6 @@
 ## Upcoming
+* Sprinting slowdown is now percentage based 0~1
+  * With this, heavily increased the armor_reworks sprint slowdown
 * Fixed Regenerating absorption and Hud Infos rendering with hidden UI
 
 ## 5.6.0.0-beta

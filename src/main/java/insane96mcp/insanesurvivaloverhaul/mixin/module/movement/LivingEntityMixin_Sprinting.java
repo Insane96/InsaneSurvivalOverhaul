@@ -52,9 +52,10 @@ public class LivingEntityMixin_Sprinting {
         if (!Feature.isEnabled(Sprinting.class))
             return;
         LivingEntity self = (LivingEntity)(Object) this;
-        double slowdown = self.getAttributeValue(Sprinting.SPRINT_SLOWDOWN_ATTRIBUTE);
-        if (slowdown == 0d)
+        double slowdownPercent = self.getAttributeValue(Sprinting.SPRINT_SLOWDOWN_ATTRIBUTE);
+        if (slowdownPercent == 0d)
             return;
+        double slowdown = -slowdownPercent;
         double sprintMovementSpeed = attributeinstance.getValue();
         if (sprintMovementSpeed <= 0d)
             return;

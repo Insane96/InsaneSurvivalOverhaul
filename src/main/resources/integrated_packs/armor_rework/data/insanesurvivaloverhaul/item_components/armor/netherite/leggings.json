@@ -14,7 +14,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_slowdown",
                     "id": "minecraft:armor.leggings",
-                    "amount": -0.036,
+                    "amount": 0.15,
                     "operation": "add_value",
                     "slot": "legs"
                 }
