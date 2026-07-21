@@ -7,28 +7,13 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
-import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.COMBAT)
 public class MiscCombat extends Feature {
-    /**
-     * Holds the armor_rework movement speed penalty (a negative value). Kept off the real movement_speed
-     * attribute so it can be applied to it only while sprinting, see LivingEntityMixin_MiscCombat.
-     */
-    public static final DeferredHolder<Attribute, Attribute> SPRINT_SLOWDOWN_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("sprint_slowdown", () -> new RangedAttribute("attribute.name.sprint_slowdown", 0d, -1024d, 1024d));
-    public static final ResourceLocation SPRINT_SLOWDOWN_ID = InsaneSO.id("sprint_slowdown");
-
     @Config(description = "If enabled, tools will not take 2 damage when used to hurt entities")
     public static Boolean oneDamageForToolAttacking = true;
     @Config(description = "Rework Sweeping attack. Sweeping is no longer on swords, instead it's on hoes. Also, the sweeping attack deals full damage and the range is increased. A data pack is enabled that removes the sweeping enchantment.")
@@ -73,12 +58,5 @@ public class MiscCombat extends Feature {
 
     public static boolean noDamageWhenSpamming() {
         return isEnabled(MiscCombat.class) && noDamageWhenSpamming;
-    }
-
-    public static void addAttribute(EntityAttributeModificationEvent event) {
-        for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {
-            if (!event.has(entityType, SPRINT_SLOWDOWN_ATTRIBUTE))
-                event.add(entityType, SPRINT_SLOWDOWN_ATTRIBUTE);
-        }
     }
 }

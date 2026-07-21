@@ -12,7 +12,6 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
-import insane96mcp.insanesurvivaloverhaul.module.combat.MiscCombat;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
@@ -24,6 +23,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthReg
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.Client;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -81,7 +81,7 @@ public class InsaneSO {
         eventBus.addListener(PiercingDamage::addAttribute);
         eventBus.addListener(HungerAndHealthRegen::addAttribute);
         eventBus.addListener(Exhaustion::addAttribute);
-        eventBus.addListener(MiscCombat::addAttribute);
+        eventBus.addListener(Sprinting::addAttribute);
 
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
