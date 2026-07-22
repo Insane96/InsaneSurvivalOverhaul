@@ -28,7 +28,7 @@ public final class Sprinting extends Feature {
 	 * this feature's hunger penalty and armor_rework's armor penalty. Kept off the real movement_speed
 	 * attribute so it can be applied to it only while sprinting, see LivingEntityMixin_Sprinting.
 	 */
-	public static final DeferredHolder<Attribute, Attribute> SPRINT_SLOWDOWN_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("sprint_slowdown", () -> new PercentageAttribute("attribute.name.sprint_slowdown", 0d, 0d, 1d));
+	public static final DeferredHolder<Attribute, Attribute> SPRINT_SLOWDOWN_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("sprint_slowdown", () -> new PercentageAttribute("attribute.name.sprint_slowdown", 0d, -1d, 0d));
 	public static final ResourceLocation SPRINT_SLOWDOWN_ID = InsaneSO.id("sprint_slowdown");
 
 	@Config(min = 0, max = 20, description = "Player can only sprint when have at least this much hunger. Vanilla is 7")

@@ -1,4 +1,7 @@
 ## Upcoming
+* Sprinting slowdown
+  * Is now a -1\~0 value instead of 0\~1 value
+  * Fixed not working as intended
 * Lowered fungi stew nutrition
 
 ## 5.6.1.0

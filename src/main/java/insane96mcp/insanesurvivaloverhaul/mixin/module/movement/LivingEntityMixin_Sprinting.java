@@ -43,8 +43,7 @@ public class LivingEntityMixin_Sprinting {
 
     /**
      * Applies the combined sprint slowdown penalty (from armor_rework and/or low hunger) to movement_speed
-     * only while sprinting, instead of at all times. The penalty is clamped so that sprinting can never end
-     * up slower than walking, using the walk speed captured by {@link #insanesurvivaloverhaul$capturePreSprintMovementSpeed}.
+     * only while sprinting.
      * @see Sprinting#SPRINT_SLOWDOWN_ATTRIBUTE
      */
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V", shift = At.Shift.AFTER))
@@ -55,12 +54,15 @@ public class LivingEntityMixin_Sprinting {
         double slowdownPercent = self.getAttributeValue(Sprinting.SPRINT_SLOWDOWN_ATTRIBUTE);
         if (slowdownPercent == 0d)
             return;
-        double slowdown = -slowdownPercent;
-        double sprintMovementSpeed = attributeinstance.getValue();
-        if (sprintMovementSpeed <= 0d)
+        double speedWithSprint = attributeinstance.getValue();
+        if (speedWithSprint <= 0d)
             return;
-        double minSlowdown = this.insanesurvivaloverhaul$preSprintMovementSpeed / sprintMovementSpeed - 1d;
-        double clampedSlowdown = Math.max(slowdown, minSlowdown);
-        attributeinstance.addTransientModifier(new AttributeModifier(Sprinting.SPRINT_SLOWDOWN_ID, clampedSlowdown, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        double sprintSpeed = speedWithSprint - this.insanesurvivaloverhaul$preSprintMovementSpeed;
+        double sprintSpeedPercentage = sprintSpeed / this.insanesurvivaloverhaul$preSprintMovementSpeed;
+        // ADD_MULTIPLIED_TOTAL modifiers multiply together onto the pre-total value, not onto each other's
+        // results, so the slowdown factor must be divided by (1 + sprintSpeedPercentage) to correctly scale
+        // down just the sprint bonus rather than the whole speed.
+        double slowdown = sprintSpeedPercentage * slowdownPercent / (1d + sprintSpeedPercentage);
+        attributeinstance.addTransientModifier(new AttributeModifier(Sprinting.SPRINT_SLOWDOWN_ID, slowdown, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }
