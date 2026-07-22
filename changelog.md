@@ -1,4 +1,4 @@
-# Upcoming
+# 5.6.2.0
 * Sprinting slowdown
   * Is now a -1\~0 value instead of 0\~1 value
   * Fixed not working as intended
