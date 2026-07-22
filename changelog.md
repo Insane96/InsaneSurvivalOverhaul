@@ -1,10 +1,10 @@
-## Upcoming
+# Upcoming
 * Sprinting slowdown
   * Is now a -1\~0 value instead of 0\~1 value
   * Fixed not working as intended
 * Lowered fungi stew nutrition
 
-## 5.6.1.0
+# 5.6.1.0
 * Sprinting slowdown is now percentage based 0~1
   * With this, heavily increased the armor_reworks sprint slowdown
 * Fixed Regenerating absorption and Hud Infos rendering with hidden UI
@@ -14,7 +14,7 @@
   * Retuned Regenerating Absorption on Leather, Iron and Chainmail; Copper's now matches Iron's
   * Significantly increased armor durability on all materials, with weaker materials gaining proportionally more durability than stronger ones
 
-## 5.6.0.0-beta
+# 5.6.0.0-beta
 * Added Recycling: damaged metal items can now be recycled in the Blast Furnace, giving back raw material proportional to their remaining durability
   * Also works with Shields+'s shields if installed
 * Armor Rework's movement speed penalty now only applies while sprinting, via the new `insanesurvivaloverhaul:sprint_slowdown` attribute
@@ -31,20 +31,20 @@
 * Fixed horse armors, minecarts and saddles not stacking
 * Fixed unfair one-shot animation
 
-## 5.5.1.2-alpha
+# 5.5.1.2-alpha
 * Lowered iron armor regenerating absorption
 * `insanesurvivaloverhaul:no_stack_size_changes` has been split into `insanesurvivaloverhaul:no_block_stack_size_changes`, `insanesurvivaloverhaul:no_item_stack_size_changes` and `insanesurvivaloverhaul:no_food_stack_size_changes`
 * Fixed missing copper nugget in creative inventory
 * Fixed copper powered rail recipes
 * Fixed golden carrots still edible
 
-## 5.5.1.1-alpha
+# 5.5.1.1-alpha
 * Added name tag recipe to Misc Tweaks data pack
 * Sweeping edge rune is now disabled with Sweeping Overhaul enabled
 * Fixed power enchantment not working
 * Fixed missing lang entries for new attributes
 
-## 5.5.1.0-alpha
+# 5.5.1.0-alpha
 * Added Copper Nugget
 * Added placeholder texture for new foods
 * Tools and Weapons data pack now allow weapon runes (from Rune Enchanting mod) to be applied to pickaxes, shovels and hoes
@@ -52,14 +52,14 @@
 * Players can no longer place more than the items required to craft a recipe in the anvil
 * Removed Quark's actual redstone components integration
 
-## 5.5.0.2-alpha
+# 5.5.0.2-alpha
 * Fixed crash if items in anvil recipes are not registered
 * Fixed crash with latest InsaneLib
 
-## 5.5.0.1-alpha
+# 5.5.0.1-alpha
 * Fixed crash if items in anvil recipes are not registered
 
-## 5.5.0.0-alpha - The Food update Part 1
+# 5.5.0.0-alpha - The Food update Part 1
 * Food & Drinks
   * Added Apple Pie, Cod Chowder and Pufferfish chowder
   * Removed Golden Apples
@@ -74,20 +74,20 @@
 * Fixed too tired message not showing anymore
 * Hopefully fixed tired message spam
 
-## 5.4.4.0
+# 5.4.4.0
 * Added a new Creative Removal feature
   * The `insanesurvivaloverhaul:creative_removal` item tag can be used to remove items from the creative inventory
 * Undead now burn in daylight even if there's a block above them
 * Enchanted items (and Runed items with Rune Enchanting mod) can no longer be used for anvil crafting
 * Fixed Sunlight modifier not taking into account the day time (it only checked for sky light)
 
-## 5.4.3.1
+# 5.4.3.1
 * Sprinting consumes much more hunger (5x)
   * Also heavily increased sprint jumping exhaustion
   * Reduced non-sprint jumping exhaustion
 * Fixed disabling the Minecart feature still breaking other mods changes to minecarts
 
-## 5.4.3.0
+# 5.4.3.0
 * Added Anvil Crafting
   * Allows adding crafting recipes to the anvil via data pack
   * Adds a data pack that makes so iron, gold and diamond equipment must be forged in an anvil, from copper, wood/leather and gold respectively
@@ -100,32 +100,32 @@
   * Yes, EMI good, I will support it only
 * Fixed pouch tooltip being too high
 
-## 5.4.2.2
+# 5.4.2.2
 * Tiredness
   * Fixed not being able to sleep during the day
   * Removed 'Should prevent spawn point' config option
 * Fixed pumpkins not being able to be crafted to seeds
 
-## 5.4.2.1
+# 5.4.2.1
 * Fixed iron taking not enough time to smelt
 
-## 5.4.2.0
+# 5.4.2.0
 * Ghostly
   * Moved to its own feature
   * Players now render translucent
   * Increased duration by 30 seconds
 * Disable stone tools feature now also disables stone shields from Shields+
 
-## 5.4.1.2
+# 5.4.1.2
 * Sweet Berries Patches are now 3x rarer
 * Fixed Nether Fog changes not working
 
-## 5.4.1.1
+# 5.4.1.1
 * Ore rock now require the correct pickaxe tier to be mined
 * Fixed setting insanesurvivaloverhaul:fire_speed_multiplier gamerule to 0 crashing the game
 * Fixed melon dropping block without silk touch
 
-## 5.4.1.0
+# 5.4.1.0
 * Tweaks
   * Added two Nausea features:
     * Hunger when eating: if nauseous, eating will apply hunger
@@ -133,12 +133,12 @@
 * Big ore veins are now twice as rare
 * Fixed log spam when generating big ore veins
 
-## 5.4.0.1
+# 5.4.0.1
 * Added bundle to creative inventory when cloth is enabled
 * Fixed copper anvil repairs not working
 * Fixed no ignite sound with two flints
 
-## 5.4.0.0
+# 5.4.0.0
 * "New" feature: Sprinting
   * Split from 'Health Regen & Hunger'
 * Renamed 'Health Regen & Hunger' to 'Hunger and health regen'
@@ -159,7 +159,7 @@
 * Fixed missing some lang entries
 * Fixed possible lag caused by Echo Lanterns feature
 
-## From 1.20.1
+# From 1.20.1
 * Combat
   * Unfair one-shot
     * Increased Resistance II duration after Unfair oneshot
@@ -265,7 +265,7 @@
   * Foggy Weather: foggy weather was quite neat, but not a fan of it anymore
   * Third-person death: was buggy and not that cool
 
-## 5.3.1.0-beta
+# 5.3.1.0-beta
 * Added back data packs 
   * Copper furnace
   * Hardcore torches
@@ -281,7 +281,7 @@
 * Fixed crossbows having no base attack damage and speed
 * Fixed items keeping components when dropped on death
 
-## 5.3.0.2-alpha
+# 5.3.0.2-alpha
 * Critical damage now once again defaults to 50%
 * Updated burnt log texture
 * Fixed ore rocks not broken faster with pickaxes and added advancement
@@ -290,7 +290,7 @@
 * Fixed vanilla cutting the selected-slot highlight texture for ... reasons 
 * Crash fix with latest InsaneLib
 
-## 5.3.0.1-alpha
+# 5.3.0.1-alpha
 * Removed Sweeping Edge enchantment
 * Snowballs now stack to 99
 * Fixed Echo Pillar advancement
@@ -298,7 +298,7 @@
 * Fixed livestock loot tables
 * Fixed many recipes and advancements having wrong folders thus not working
 
-## 5.3.0.0-alpha
+# 5.3.0.0-alpha
 * Added back Farming features: Crops, Bone Meal, Livestock, Hoes, Plants Growth
   * Bone meal
     * Rich farmland has been disabled by default
@@ -324,7 +324,7 @@
 * Re-added Armor Rework formula
 * Fixed Water Fall Damage feature not working properly
 
-## 5.2.0.0-alpha
+# 5.2.0.0-alpha
 * Added back Mobs features: Equipment, Misc Mobs, Spawning, Zombie Siege
   * Not sure if and when Villager feature will come back.
 * Added back Movement features: Boats, Better climbable, Tagging, Swimming, Terrain Slowdown, Elytra (renamed from Elytra Nerf), Backwards slowdown, Weighted Armor
@@ -353,7 +353,7 @@
 * Added back World features: Fluids
 * Mobs buffs data pack has been merged in Enhanced AI's MPR Integration data pack
 
-## 5.1.0.0-alpha
+# 5.1.0.0-alpha
 * Added back Absorption Armor, Armor rework, regen absorption, Bows, Snowballs, Piercing Damage, Unfair oneshot and Misc Stats
   * Absorption armor is now enabled by default (for now)
   * Bows feature now includes No Arrow Invincibility Frames 
@@ -367,6 +367,6 @@
   * Removed Third person death
 * Ported Attack Speed Based Invincibility from InsaneLib
 
-## 5.0.0.0-alpha
+# 5.0.0.0-alpha
 * Ported Knockback and Critical Hits features
   * Crit damage attribute is now 0 by default instead of 50%
