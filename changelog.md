@@ -1,3 +1,6 @@
+## Upcoming
+* Lowered fungi stew nutrition
+
 ## 5.6.1.0
 * Sprinting slowdown is now percentage based 0~1
   * With this, heavily increased the armor_reworks sprint slowdown

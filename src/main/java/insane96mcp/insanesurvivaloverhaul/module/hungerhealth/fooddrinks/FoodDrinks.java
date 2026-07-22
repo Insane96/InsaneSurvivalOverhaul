@@ -40,7 +40,7 @@ public class FoodDrinks extends JsonFeature {
 	public static final ResourceKey<LootTable> PUMPKIN_SHEAR_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE, InsaneSO.id("gameplay/pumpkin_shear"));
 
 	public static final DeferredHolder<Item, Item> FUNGI_STEW = ISORegistries.ITEMS.register("fungi_stew", () -> new Item(new Item.Properties()
-			.food(new FoodProperties.Builder().nutrition(15).saturationModifier(0.6F)
+			.food(new FoodProperties.Builder().nutrition(12).saturationModifier(0.6F)
 					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 45 * 20, 0), 1f)
 					.effect(() -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 45 * 20, 0), 1f)
 					.build())
