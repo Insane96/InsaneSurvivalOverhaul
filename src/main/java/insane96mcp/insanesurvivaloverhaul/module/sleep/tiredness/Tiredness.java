@@ -120,7 +120,11 @@ public class Tiredness extends JsonFeature {
 	public static Boolean tiredTiedPhantoms = true;
     @Config
     public static Boolean allowSleepingEvenWhenNotTired = false;
-    @Config(description = "If true, sets the playersSleepingPercentage gamerule to 1 so tired players can sleep no matter how many players on a server.")
+	@Config(min = 0, description = "Time skipped in ticks on sleep with Tired I. Vanilla day lasts 24000 ticks.")
+	public static Integer timeSkippedOnSleep$base = 9000;
+	@Config(min = 0, description = "Time skipped in ticks on sleep added with higher levels of Tired. Vanilla day lasts 24000 ticks.")
+	public static Integer timeSkippedOnSleep$perLevelPastOne = 3000;
+    @Config(description = "If true, sets the playersSleepingPercentage game rule to 1 so tired players can sleep no matter how many players on a server.")
     public static Boolean forceOnePlayerSleep = true;
 
 	@Override
@@ -356,8 +360,7 @@ public class Tiredness extends JsonFeature {
 	}
 
 	public static int getTimeSkipped(int amplifier) {
-		//If above Tired I increase the time skipped by 2.5 minutes per level
-		return 12000 + 3000 * amplifier;
+		return timeSkippedOnSleep$base + timeSkippedOnSleep$perLevelPastOne * amplifier;
 	}
 
 	public static boolean onSleepFinished(ServerLevel level, boolean original) {

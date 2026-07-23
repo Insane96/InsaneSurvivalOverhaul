@@ -1,3 +1,8 @@
+# Upcoming
+* Tiredness
+  * Time skipped on sleep with Tired I is now 9h instead of 12h (still +3h per higher level of Tired)
+    * Now configurable!
+
 # 5.6.2.0
 * Sprinting slowdown
   * Is now a -1\~0 value instead of 0\~1 value
