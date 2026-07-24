@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -108,7 +109,7 @@ public class Exhaustion extends Feature {
 				&& player.tickCount % 20 == 0)
 			player.causeFoodExhaustion(passiveExhaustion.floatValue());
 
-		if (rowingExhaustion > 0d && player.getVehicle() != null && player.zza != 0)
+		if (rowingExhaustion > 0d && player.getVehicle() != null && player.getVehicle() instanceof Boat && player.zza != 0)
 			player.causeFoodExhaustion(rowingExhaustion.floatValue());
 
 		if (bowChargeExhaustion > 0d && (player.getUseItem().is(Items.BOW) || player.getUseItem().is(Items.CROSSBOW) || player.getUseItem().is(Bows.SHORTBOW.get())))

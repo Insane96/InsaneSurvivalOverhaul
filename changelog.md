@@ -1,5 +1,6 @@
 # Upcoming
 * Fixed Respiration (oxygen_bonus attribute) not working
+* Fixed horse riding consuming hunger
 
 # 5.6.3.0
 * Tiredness
