@@ -349,10 +349,10 @@ public class Tweaks extends Feature {
             ModNBTData.put(event.getEntity(), TICK_SINCE_OUT_OF_WATER, event.getEntity().level().getGameTime());
         }
         double airConsumed = breathe$airTicksConsumed;
+        airConsumed += event.getEntity().getAttributeValue(Attributes.OXYGEN_BONUS);
         //If drowning, drown at vanilla speed
         if (event.getEntity().getAirSupply() <= 0)
             airConsumed = 1;
-        airConsumed += event.getEntity().getAttributeValue(Attributes.OXYGEN_BONUS);
         event.setConsumeAirAmount(MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), airConsumed));
 
         int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksRefilled.min);
