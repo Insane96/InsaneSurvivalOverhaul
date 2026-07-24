@@ -36,6 +36,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -347,12 +348,12 @@ public class Tweaks extends Feature {
             ticksSinceOutOfWater = 0;
             ModNBTData.put(event.getEntity(), TICK_SINCE_OUT_OF_WATER, event.getEntity().level().getGameTime());
         }
-        int airConsumed = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksConsumed);
-        //int respiration = EnchantmentHelper.getRespiration(event.getEntity());
-        //airConsumed = respiration > 0 && event.getEntity().getRandom().nextInt(respiration + 1) > 0 ? 0 : airConsumed;
+        double airConsumed = breathe$airTicksConsumed;
+        //If drowning, drown at vanilla speed
         if (event.getEntity().getAirSupply() <= 0)
             airConsumed = 1;
-        event.setConsumeAirAmount(airConsumed);
+        airConsumed += event.getEntity().getAttributeValue(Attributes.OXYGEN_BONUS);
+        event.setConsumeAirAmount(MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), airConsumed));
 
         int refillAmount = MathHelper.getAmountWithDecimalChance(event.getEntity().getRandom(), breathe$airTicksRefilled.min);
         if (ticksSinceOutOfWater > 75) {
