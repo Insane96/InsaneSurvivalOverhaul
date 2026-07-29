@@ -1,4 +1,5 @@
 # Upcoming
+* Lowered Honey Nutrition
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
 * Fixed snowballs still stacking to 99 instead of 128
 
