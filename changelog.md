@@ -1,5 +1,6 @@
 # Upcoming
 * Lowered Honey Nutrition
+* Entities are no longer affected by descrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
 * Fixed snowballs still stacking to 99 instead of 128
 

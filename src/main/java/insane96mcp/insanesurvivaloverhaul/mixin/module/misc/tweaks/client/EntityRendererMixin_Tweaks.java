@@ -1,8 +1,11 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.tweaks.client;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -15,7 +18,9 @@ public abstract class EntityRendererMixin_Tweaks {
 	 * rather than through walls.
 	 */
 	@ModifyArg(method = "renderNameTag", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)I", ordinal = 0), index = 7)
-    public Font.DisplayMode insanesurvivaloverhaul$modifyNameTagDisplayMode(Font.DisplayMode pDisplayMode) {
-        return Tweaks.discreteNameTags ? Font.DisplayMode.NORMAL : pDisplayMode;
+    public Font.DisplayMode insanesurvivaloverhaul$modifyNameTagDisplayMode(Font.DisplayMode original, @Local(argsOnly = true) Entity entity) {
+		if (!(entity instanceof Player))
+			return original;
+        return Tweaks.discreteNameTags ? Font.DisplayMode.NORMAL : original;
     }
 }
