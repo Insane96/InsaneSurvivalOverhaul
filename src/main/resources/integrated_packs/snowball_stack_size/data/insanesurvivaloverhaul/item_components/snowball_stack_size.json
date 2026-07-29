@@ -1,6 +1,6 @@
 {
     "item": "minecraft:snowball",
     "components": {
-        "minecraft:max_stack_size": 99
+        "minecraft:max_stack_size": 128
     }
 }

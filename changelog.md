@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed snowballs still stacking to 99 instead of 128
+
 # 5.6.3.1
 * Lowered default equipment drop chance for mobs spawned from spawners
 * Fixed Respiration (oxygen_bonus attribute) not working
