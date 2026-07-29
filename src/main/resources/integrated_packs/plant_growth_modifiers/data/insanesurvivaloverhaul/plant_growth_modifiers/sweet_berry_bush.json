@@ -16,7 +16,7 @@
         {
             "id": "insanesurvivaloverhaul:matches_biome",
             "biomes": [
-                "#c:is_taiga"
+                "#c:is_cold/overworld"
             ],
             "inverse": true,
             "modifier": 3,
