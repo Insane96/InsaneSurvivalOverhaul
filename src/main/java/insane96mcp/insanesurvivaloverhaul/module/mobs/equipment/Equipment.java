@@ -38,10 +38,10 @@ public class Equipment extends JsonFeature {
             new EquipmentDropChance(ObjTag.objOf(ResourceLocation.parse("progressivebosses:wither_minion"), Registries.ENTITY_TYPE), EquipmentSlot.MAINHAND)
     ));
     public static final ArrayList<EquipmentDropChance> equipmentDropChances = new ArrayList<>();
-    @Config(description = "Set the drop chance for mobs equipment.")
+    @Config(min = 0, max = 2, description = "Set the drop chance for mobs equipment.")
     public static Double dropChance = 0.5d;
-    @Config(description = "Set the drop chance for mobs equipment when spawned from spawners.")
-    public static Double dropChanceFromSpawners = 0.2d;
+    @Config(min = 0, max = 2, description = "Set the drop chance for mobs equipment when spawned from spawners.")
+    public static Double dropChanceFromSpawners = 0.05d;
     @Config(min = 0, max = 1, description = "Max durability of items dropped by mobs. This also fixes https://bugs.mojang.com/browse/MC-136374. Setting to 0 will disable this feature.")
     public static Double maxDurability = 0.6d;
     @Config(description = "All drops from mobs will be disenchanted.")
