@@ -111,6 +111,7 @@
 		"minVersion": "0.5.3"
 	},
 	"client": [
+		"accessor.GuiAccessor",
 		"module.client.DeathScreenMixin_Death",
 		"module.client.LevelRendererMixin_WorldBorder",
 		"module.client.light.GameRendererMixin_Light",

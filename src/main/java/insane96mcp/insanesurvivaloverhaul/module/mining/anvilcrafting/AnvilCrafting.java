@@ -9,6 +9,7 @@ import insane96mcp.insanelib.util.MathHelper;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
+import insane96mcp.insanesurvivaloverhaul.setup.ModIds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -39,7 +40,7 @@ public class AnvilCrafting extends Feature {
 	public void onAnvilUpdate(AnvilUpdateEvent event) {
 		for (AnvilRecipe anvilRecipe : AnvilRecipeReloadListener.RECIPES) {
 			if (anvilRecipe.leftIngredient.test(event.getLeft()) && anvilRecipe.rightIngredient.test(event.getRight())) {
-				if (!allowEnchantedItems && (event.getLeft().isEnchanted() || (ModList.get().isLoaded("runeenchanting") && RuneEnchantingIntegration.hasRunes(event.getLeft()))))
+				if (!allowEnchantedItems && (event.getLeft().isEnchanted() || (ModList.get().isLoaded(ModIds.RUNE_ENCHANTING) && RuneEnchantingIntegration.hasRunes(event.getLeft()))))
 					return;
 				event.setCost(0);
 				event.setMaterialCost(anvilRecipe.rightIngredient.count());

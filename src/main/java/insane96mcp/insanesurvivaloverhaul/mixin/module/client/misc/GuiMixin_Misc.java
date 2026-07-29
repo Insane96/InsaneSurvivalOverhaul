@@ -7,19 +7,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.insanesurvivaloverhaul.module.client.Misc;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PlayerRideableJumping;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin_Misc {
@@ -27,12 +22,6 @@ public abstract class GuiMixin_Misc {
     @Shadow
     @Final
     private Minecraft minecraft;
-
-    @Shadow
-    protected abstract boolean isExperienceBarVisible();
-
-    @Shadow
-    protected abstract void renderExperienceBar(GuiGraphics guiGraphics, int x);
 
     // --- Floaty Hotbar ---
 
@@ -117,14 +106,15 @@ public abstract class GuiMixin_Misc {
     // --- Fix Mounts GUI ---
 
     /**
-     * Replaces the vehicle health bar heart count with the actual mount max health
-     * so large-health mounts render correctly.
+     * Fixes vehicle health being capped to 30
      */
-    @ModifyVariable(method = "renderVehicleHealth", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-    public int insanesurvivaloverhaul$fixMountHealthBar(int original, @Local LivingEntity mount) {
+    @Definition(id = "i", local = @Local(type = int.class))
+    @Expression("i > 30")
+    @ModifyExpressionValue(method = "getVehicleMaxHearts", at = @At("MIXINEXTRAS:EXPRESSION"))
+    public boolean insanesurvivaloverhaul$onMaxHealthCheck(boolean original) {
         if (!Misc.fixMountsGui())
             return original;
-        return (int) (mount.getMaxHealth() + 0.5F) / 2;
+        return false;
     }
 
     /**
@@ -152,20 +142,6 @@ public abstract class GuiMixin_Misc {
             return original.call(left, right);
         //noinspection DataFlowIssue
         return original.call(left, right) && (minecraft.player.getJumpRidingScale() > 0);
-    }
-
-    /**
-     * Replaces the vanilla experience bar render check to also show XP while riding a mount
-     * that has no active jump charge, so the XP bar is visible when the jump meter is hidden.
-     */
-    @Inject(method = "maybeRenderExperienceBar", at = @At(value = "HEAD"), cancellable = true)
-    public void insanesurvivaloverhaul$showXpBarWhileMounted(GuiGraphics guiGraphics, DeltaTracker p_348543_, CallbackInfo ci) {
-        if (!Misc.fixMountsGui())
-            return;
-        ci.cancel();
-        int i = guiGraphics.guiWidth() / 2 - 91;
-        if ((this.minecraft.player.jumpableVehicle() == null || minecraft.player.getJumpRidingScale() == 0) && this.minecraft.gameMode.hasExperience())
-            this.renderExperienceBar(guiGraphics, i);
     }
 
     /**

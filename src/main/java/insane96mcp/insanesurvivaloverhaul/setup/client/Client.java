@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.setup;
+package insane96mcp.insanesurvivaloverhaul.setup.client;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;

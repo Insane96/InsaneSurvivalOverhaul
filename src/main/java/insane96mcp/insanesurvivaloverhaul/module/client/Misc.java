@@ -5,13 +5,15 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GuiAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import net.minecraft.client.Minecraft;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @LoadFeature(module = ISOClientModules.CLIENT)
 public class Misc extends Feature {
@@ -54,7 +56,6 @@ public class Misc extends Feature {
     }
 
     //Render before Regenerating absorption
-    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void riseLeftAndRightHeight(final RenderGuiEvent.Pre event) {
         if (!shouldRaiseHotbar())
@@ -66,6 +67,27 @@ public class Misc extends Feature {
 
     public static boolean shouldRaiseHotbar() {
         return Feature.isEnabled(Misc.class) && floatyHotbar > 0;
+    }
+
+    /**
+     * Replaces the vanilla experience bar layer to also show XP while riding a mount
+     * that has no active jump charge, so the XP bar is visible when the jump meter is hidden.
+     * Runs at NORMAL priority so mods that cancel this layer at HIGHER priority (e.g. RuneEnchanting
+     * disabling XP entirely) are respected automatically, since a cancelled event isn't delivered here.
+     */
+    @SubscribeEvent
+    public void showXpBarWhileMounted(final RenderGuiLayerEvent.Pre event) {
+        if (!fixMountsGui() || !event.getName().equals(VanillaGuiLayers.EXPERIENCE_BAR))
+            return;
+
+        event.setCanceled(true);
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null
+                && (player.jumpableVehicle() == null || player.getJumpRidingScale() == 0)
+                && Minecraft.getInstance().gameMode.hasExperience()) {
+            int x = event.getGuiGraphics().guiWidth() / 2 - 91;
+            ((GuiAccessor) Minecraft.getInstance().gui).callRenderExperienceBar(event.getGuiGraphics(), x);
+        }
     }
 
     public static boolean shouldPreventHealthShake() {

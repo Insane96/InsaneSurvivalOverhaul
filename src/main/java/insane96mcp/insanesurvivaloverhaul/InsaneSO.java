@@ -25,9 +25,9 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecip
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
-import insane96mcp.insanesurvivaloverhaul.setup.Client;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
+import insane96mcp.insanesurvivaloverhaul.setup.client.Client;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
