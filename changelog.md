@@ -1,4 +1,5 @@
 # Upcoming
+* Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
 * Lowered Honey Nutrition

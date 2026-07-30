@@ -1,0 +1,18 @@
+{
+	"item": "minecraft:glow_berries",
+	"merge_components": {
+		"minecraft:food": {
+			"can_always_eat": true,
+			"effects": [
+				{
+					"effect": {
+						"id": "minecraft:glowing",
+						"duration": 100,
+						"amplifier": 0
+					},
+					"probability": 1.0
+				}
+			]
+		}
+	}
+}
