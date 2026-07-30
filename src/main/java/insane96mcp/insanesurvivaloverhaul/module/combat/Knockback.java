@@ -5,6 +5,7 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanelib.util.CurrentAttacker;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.LivingEntityAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
@@ -71,20 +72,25 @@ public class Knockback extends Feature {
 		if (!this.isEnabled())
 			return;
 
-		if (event.getEntity().getLastHurtByMobTimestamp() != event.getEntity().tickCount)
+		// Prefer the live attacker tracked by InsaneLib (correct even for sweep hits, where knockback
+		// fires before the hurt call updates getLastHurtByMob()); otherwise fall back to the old
+		// same-tick check for knockback not caused by a tracked Player#attack call.
+		LivingEntity attacker = CurrentAttacker.get();
+		if (attacker == null) {
+			if (event.getEntity().getLastHurtByMobTimestamp() != event.getEntity().tickCount)
+				return;
+			attacker = event.getEntity().getLastHurtByMob();
+		}
+		if (attacker == null)
 			return;
 
-		LivingEntity lastHurtByMob = event.getEntity().getLastHurtByMob();
-		if (lastHurtByMob == null)
+		if (attacker instanceof ServerPlayer player && !player.gameMode.isSurvival())
 			return;
 
-		if (lastHurtByMob instanceof ServerPlayer player && !player.gameMode.isSurvival())
-			return;
-
-		ItemStack itemStack = lastHurtByMob.getMainHandItem();
+		ItemStack itemStack = attacker.getMainHandItem();
 
 		float knockbackMultiplier = 1f;
-		if (lastHurtByMob instanceof Player player && ModNBTData.get(lastHurtByMob, SHOULD_APPLY_NO_KNOCKBACK, Boolean.class)) {
+		if (attacker instanceof Player player && ModNBTData.get(attacker, SHOULD_APPLY_NO_KNOCKBACK, Boolean.class)) {
 			if ((itemStack.getAttributeModifiers().modifiers().stream().noneMatch(e -> (e.slot() == EquipmentSlotGroup.MAINHAND || e.slot() == EquipmentSlotGroup.HAND) && e.attribute() == Attributes.ATTACK_DAMAGE)
 					|| (isEnabled(UnvanishableItems.class) && Feature.isEnabled(UnvanishableItems.class) && UnvanishableItems.isBroken(itemStack)))
 					&& noWeaponPenalty < 1d)
@@ -95,16 +101,16 @@ public class Knockback extends Feature {
 			if (cooldown <= 0.9f)
 				knockbackMultiplier = Math.min(knockbackMultiplier, spamPenalty.floatValue());
 		}
-		if (ModNBTData.get(lastHurtByMob, PROJECTILE_KNOCKBACK, Boolean.class)) {
+		if (ModNBTData.get(attacker, PROJECTILE_KNOCKBACK, Boolean.class)) {
 			knockbackMultiplier = Math.min(knockbackMultiplier, projectileKnockback.floatValue());
-			ModNBTData.remove(lastHurtByMob, PROJECTILE_KNOCKBACK);
+			ModNBTData.remove(attacker, PROJECTILE_KNOCKBACK);
 		}
 
 		if (knockbackMultiplier < 1f) {
-			if (lastHurtByMob.isSprinting() && lastHurtByMob instanceof Player)
+			if (attacker.isSprinting() && attacker instanceof Player)
 				event.setStrength(event.getStrength() - 0.5f);
 			event.setStrength(event.getStrength() * knockbackMultiplier);
 		}
-		ModNBTData.put(lastHurtByMob, SHOULD_APPLY_NO_KNOCKBACK, false);
+		ModNBTData.put(attacker, SHOULD_APPLY_NO_KNOCKBACK, false);
 	}
 }
