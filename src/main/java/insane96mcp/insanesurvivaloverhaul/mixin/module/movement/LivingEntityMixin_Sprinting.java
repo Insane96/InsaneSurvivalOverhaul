@@ -20,13 +20,13 @@ public class LivingEntityMixin_Sprinting {
 
     /**
      * Removes the sprint slowdown penalty alongside vanilla's own sprint speed modifier.
-     * @see Sprinting#SPRINT_SLOWDOWN_ATTRIBUTE
+     * @see Sprinting#SPRINT_SPEED_ATTRIBUTE
      */
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;removeModifier(Lnet/minecraft/resources/ResourceLocation;)Z"))
     private void insanesurvivaloverhaul$removeSprintSlowdown(boolean sprinting, CallbackInfo ci, @Local(name = "attributeinstance") AttributeInstance attributeinstance) {
         if (!Feature.isEnabled(Sprinting.class))
             return;
-        attributeinstance.removeModifier(Sprinting.SPRINT_SLOWDOWN_ID);
+        attributeinstance.removeModifier(Sprinting.SPRINT_SPEED_ID);
     }
 
     /**
@@ -44,14 +44,14 @@ public class LivingEntityMixin_Sprinting {
     /**
      * Applies the combined sprint slowdown penalty (from armor_rework and/or low hunger) to movement_speed
      * only while sprinting.
-     * @see Sprinting#SPRINT_SLOWDOWN_ATTRIBUTE
+     * @see Sprinting#SPRINT_SPEED_ATTRIBUTE
      */
     @Inject(method = "setSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V", shift = At.Shift.AFTER))
     private void insanesurvivaloverhaul$addSprintSlowdown(boolean sprinting, CallbackInfo ci, @Local(name = "attributeinstance") AttributeInstance attributeinstance) {
         if (!Feature.isEnabled(Sprinting.class))
             return;
         LivingEntity self = (LivingEntity)(Object) this;
-        double slowdownPercent = self.getAttributeValue(Sprinting.SPRINT_SLOWDOWN_ATTRIBUTE);
+        double slowdownPercent = self.getAttributeValue(Sprinting.SPRINT_SPEED_ATTRIBUTE);
         if (slowdownPercent == 0d)
             return;
         double speedWithSprint = attributeinstance.getValue();
@@ -63,6 +63,6 @@ public class LivingEntityMixin_Sprinting {
         // results, so the slowdown factor must be divided by (1 + sprintSpeedPercentage) to correctly scale
         // down just the sprint bonus rather than the whole speed.
         double slowdown = sprintSpeedPercentage * slowdownPercent / (1d + sprintSpeedPercentage);
-        attributeinstance.addTransientModifier(new AttributeModifier(Sprinting.SPRINT_SLOWDOWN_ID, slowdown, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        attributeinstance.addTransientModifier(new AttributeModifier(Sprinting.SPRINT_SPEED_ID, slowdown, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }

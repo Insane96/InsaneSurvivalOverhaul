@@ -2,6 +2,7 @@
 * Lowered Honey Nutrition
 * Entities are no longer affected by descrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
+* Renamed Sprint Slowdown attribute to Sprint Speed
 * Fixed snowballs still stacking to 99 instead of 128
 
 # 5.6.3.1

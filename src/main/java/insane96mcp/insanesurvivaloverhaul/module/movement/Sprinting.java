@@ -28,8 +28,8 @@ public final class Sprinting extends Feature {
 	 * this feature's hunger penalty and armor_rework's armor penalty. Kept off the real movement_speed
 	 * attribute so it can be applied to it only while sprinting, see LivingEntityMixin_Sprinting.
 	 */
-	public static final DeferredHolder<Attribute, Attribute> SPRINT_SLOWDOWN_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("sprint_slowdown", () -> new PercentageAttribute("attribute.name.sprint_slowdown", 0d, -1d, 0d));
-	public static final ResourceLocation SPRINT_SLOWDOWN_ID = InsaneSO.id("sprint_slowdown");
+	public static final DeferredHolder<Attribute, Attribute> SPRINT_SPEED_ATTRIBUTE = ISORegistries.ATTRIBUTES.register("sprint_speed", () -> new PercentageAttribute("attribute.name.sprint_speed", 0d, -1d, 0d));
+	public static final ResourceLocation SPRINT_SPEED_ID = InsaneSO.id("sprint_speed");
 
 	@Config(min = 0, max = 20, description = "Player can only sprint when have at least this much hunger. Vanilla is 7")
 	public static Integer minHunger = 1;
@@ -40,8 +40,8 @@ public final class Sprinting extends Feature {
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
 		for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {
-			if (!event.has(entityType, SPRINT_SLOWDOWN_ATTRIBUTE))
-				event.add(entityType, SPRINT_SLOWDOWN_ATTRIBUTE);
+			if (!event.has(entityType, SPRINT_SPEED_ATTRIBUTE))
+				event.add(entityType, SPRINT_SPEED_ATTRIBUTE);
 		}
 	}
 
@@ -52,12 +52,12 @@ public final class Sprinting extends Feature {
 				|| player.level().isClientSide)
 			return;
 
-		MCUtils.removeModifier(player, SPRINT_SLOWDOWN_ATTRIBUTE, SPRINT_PENALTY_ID);
+		MCUtils.removeModifier(player, SPRINT_SPEED_ATTRIBUTE, SPRINT_PENALTY_ID);
 		if (speedPenaltyBelowHunger == 0)
 			return;
 		double penalty = (speedPenaltyBelowHunger - player.getFoodData().getFoodLevel()) * speedReductionEachHunger;
 		if (penalty <= 0d)
 			return;
-		MCUtils.applyModifier(player, SPRINT_SLOWDOWN_ATTRIBUTE, SPRINT_PENALTY_ID, penalty, AttributeModifier.Operation.ADD_VALUE, false);
+		MCUtils.applyModifier(player, SPRINT_SPEED_ATTRIBUTE, SPRINT_PENALTY_ID, penalty, AttributeModifier.Operation.ADD_VALUE, false);
 	}
 }
