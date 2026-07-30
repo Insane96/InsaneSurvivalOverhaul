@@ -3,6 +3,7 @@
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
 * Lowered Honey Nutrition
+* Dried kelp no longer gives nutrition
 * Entities are no longer affected by discrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
 * Renamed Sprint Slowdown attribute to Sprint Speed

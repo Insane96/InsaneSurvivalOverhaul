@@ -1,0 +1,10 @@
+{
+	"item": "minecraft:dried_kelp",
+	"merge_components": {
+		"minecraft:food": {
+			"nutrition": 0,
+			"can_always_eat": true,
+			"eat_seconds": 0.4
+		}
+	}
+}
