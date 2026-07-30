@@ -21,6 +21,9 @@ public class MiscCombat extends Feature {
     @Config(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%.")
     public static Boolean noDamageWhenSpamming = true;
 
+    @Config(description = "If true, tridents damage will be calculated based off the item thrown, instead of a fixed 8")
+    public static Boolean thrownTridentItemBasedDamage = true;
+
     @Config(description = "Enables a data pack that reworks armor.")
     public static Boolean armorReworkDataPack = true;
     @Config(description = "Enables a data pack that reworks tools and weapons.")

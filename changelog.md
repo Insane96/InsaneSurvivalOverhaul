@@ -1,6 +1,7 @@
 # Upcoming
+* Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered Honey Nutrition
-* Entities are no longer affected by descrete name tags
+* Entities are no longer affected by discrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
 * Renamed Sprint Slowdown attribute to Sprint Speed
 * Fixed snowballs still stacking to 99 instead of 128
