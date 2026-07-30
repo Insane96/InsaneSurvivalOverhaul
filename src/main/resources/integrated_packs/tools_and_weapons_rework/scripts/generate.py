@@ -107,6 +107,8 @@ def build_modifiers(tool, mat):
         mods.append(modifier(ATTR["crit_chance"], MOD_ID["crit_chance"], crit_chance, "add_value"))
 
     crit_dmg = fv(tool["crit_dmg_add"])
+    if tool["tool_type"] != "sword":
+        crit_dmg += fv(mat.get("crit_dmg_add", ""))
     if crit_dmg:
         mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
 
