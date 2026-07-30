@@ -3,5 +3,5 @@
     "conditions": [],
     "item_to_replace": "minecraft:rotten_flesh",
     "new_item": "insanesurvivaloverhaul:cloth",
-    "multipliers": [0.25]
+    "multipliers": [0.35]
 }
