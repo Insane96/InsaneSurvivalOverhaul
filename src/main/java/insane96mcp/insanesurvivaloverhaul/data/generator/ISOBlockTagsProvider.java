@@ -50,13 +50,13 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .add(Spawning.ECHO_LANTERN.block().get())
                 .add(BigOreVeins.COPPER_ORE_ROCK.block().get(), BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.GOLD_ORE_ROCK.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(BoneMeal.RICH_FARMLAND.block().get())
-                .add(CoalFire.BURNT_LOG.block().get());
+                .add(BoneMeal.RICH_FARMLAND.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(Crops.WILD_WHEAT.get(), Crops.WILD_CARROTS.get(), Crops.WILD_POTATOES.get(), Crops.WILD_BEETROOTS.get())
                 .addTag(Crops.HARDER_CROPS_TAG);
         tag(BlockTags.MINEABLE_WITH_AXE)
-                .remove(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS);
+                .remove(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS)
+                .add(CoalFire.BURNT_LOG.block().get());
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.COPPER_ORE_ROCK.block().get());
         tag(BlockTags.NEEDS_IRON_TOOL)

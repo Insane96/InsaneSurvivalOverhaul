@@ -5,5 +5,7 @@
     "minecraft:potatoes",
     "minecraft:beetroots"
   ],
-  "values": []
+  "values": [
+    "insanesurvivaloverhaul:burnt_log"
+  ]
 }
