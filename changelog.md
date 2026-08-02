@@ -1,6 +1,10 @@
 # Upcoming - The Matcha Flavored update
+Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving the Matcha Flavored data pack with CC license. This update implements many ideas from the data pack, adapted to ISO.
+
+* New feature 'Max Health Death Penalty'
+  * Players now lose 1 max hearth on death
 * Death Penalty
-  * Players no longer lose part of the inventory, xp or durability. Instead, they now lose 1 heart of max health.
+  * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
 * Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
