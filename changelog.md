@@ -1,4 +1,6 @@
-# Upcoming
+# Upcoming - The Matcha Flavored update
+* Death Penalty
+  * Players no longer lose part of the inventory, xp or durability. Instead, they now lose 1 heart of max health.
 * Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
@@ -7,6 +9,7 @@
 * Entities are no longer affected by discrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
 * Renamed Sprint Slowdown attribute to Sprint Speed
+* Fixed burnt log minable with shovel instead of axe
 * Fixed snowballs still stacking to 99 instead of 128
 * Fixed iron tools (axe, pickaxe, shovel, hoe) missing their base critical damage reduction (-0.25), like swords already had
 * Fixed Knockback's no-weapon/spam/projectile penalties not applying correctly on sweep attack hits (relies on InsaneLib's new `CurrentAttacker` fix)
