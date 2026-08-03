@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.setup.client;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.death.MaxHealthDeathPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -72,6 +73,9 @@ public class Client {
             if (Feature.isEnabled(Cloth.class)
                     && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
                     addAfter(event, Items.LEAD, Items.BUNDLE);
+            if (Feature.isEnabled(MaxHealthDeathPenalty.class)) {
+                addAfter(event, Items.ELYTRA, MaxHealthDeathPenalty.CRYSTAL_HEART);
+            }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             if (Feature.isEnabled(CopperEquipment.class)) {

@@ -46,7 +46,13 @@
     "advancements.insanesurvivaloverhaul.echo_pillar.title": "The ancients respawned here",
     "advancements.insanesurvivaloverhaul.echo_pillar.description": "Find an Echo Pillar.",
     "advancements.insanesurvivaloverhaul.activate_echo_pillar.title": "Keep Inventory",
-    "advancements.insanesurvivaloverhaul.activate_echo_pillar.description": "Activate an Echo Pillar with an Echo Shard. Respawning here will give some effects and will prevent inventory loss.",
+    "advancements.insanesurvivaloverhaul.activate_echo_pillar.description": "Activate an Echo Pillar with an Echo Shard. Respawning here will give some effects.",
+
+    "item.insanesurvivaloverhaul.crystal_heart": "Crystal Heart",
+    "insanesurvivaloverhaul.crystal_heart.use": "You gained back 1 heart",
+    "insanesurvivaloverhaul.crystal_heart.max_health": "You can't gain more health",
+    "advancements.insanesurvivaloverhaul.crystal_heart.title": "Bring back the Heart",
+    "advancements.insanesurvivaloverhaul.crystal_heart.description": "Craft a Crystal Heart to regain lost health.",
 
     "insanesurvivaloverhaul:farming_module": "Farming",
 

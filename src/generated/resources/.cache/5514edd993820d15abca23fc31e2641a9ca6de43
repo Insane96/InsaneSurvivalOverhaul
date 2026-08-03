@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T14:04:16.5107479	Item Models: insanesurvivaloverhaul
+// 1.21.1	2026-08-03T11:04:05.9336719	Item Models: insanesurvivaloverhaul
 4de87cd756d603f823dd5d0569307e01db018c9a assets/insanesurvivaloverhaul/models/item/apple_pie.json
 0b7b3934507ba3180fc1b13b5f466fec26172397 assets/insanesurvivaloverhaul/models/item/burnt_log.json
 92a1f1b3c5712f08d8ce52182c55d106f387a021 assets/insanesurvivaloverhaul/models/item/carrot_seeds.json
@@ -46,6 +46,7 @@ b9b3d8e225c929f4d8ba9e69827b7e34a8aab17d assets/insanesurvivaloverhaul/models/it
 ef155835adad12cdfc9be73c00ad613ffb3dc0df assets/insanesurvivaloverhaul/models/item/copper_leggings_redstone_trim.json
 75ebc98cd4e044aa5f088c4e3659e2c17693e817 assets/insanesurvivaloverhaul/models/item/copper_ore_rock.json
 f5117d8df3eca4925464b58b02cbdf75e0fa0593 assets/insanesurvivaloverhaul/models/item/copper_powered_rail.json
+31f798a07880076f2d48af6c95c6395d986ceb44 assets/insanesurvivaloverhaul/models/item/crystal_heart.json
 f25cdd5c56e8776122963dc1cbc9d07caeab35a9 assets/insanesurvivaloverhaul/models/item/cyan_flower.json
 3c6f8d100638e5854d7295831161d96bbababb6e assets/insanesurvivaloverhaul/models/item/echo_lantern.json
 8e57e5eebb5df89b2ff85e7e3f3cb8091c4d7e58 assets/insanesurvivaloverhaul/models/item/echo_pillar.json

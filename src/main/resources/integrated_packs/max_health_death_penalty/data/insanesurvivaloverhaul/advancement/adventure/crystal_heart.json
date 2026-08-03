@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "insanesurvivaloverhaul:crystal_heart"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.crystal_heart.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.crystal_heart.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:adventure/root",
+	"criteria": {
+		"crystal_heart": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"insanesurvivaloverhaul:crystal_heart"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"crystal_heart"
+		]
+	]
+}

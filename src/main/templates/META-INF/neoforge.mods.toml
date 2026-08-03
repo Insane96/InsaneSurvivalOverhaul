@@ -12,6 +12,7 @@ authors="Insane96MCP"
 description='''
 Many many changes to vanilla gameplay
 '''
+credits = "Klei_Wright for the awesome Matcha Flavored data pack"
 
 [[mixins]]
 config="${mod_id}.mixins.json"

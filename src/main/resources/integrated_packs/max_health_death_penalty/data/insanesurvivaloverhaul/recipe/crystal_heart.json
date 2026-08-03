@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond_block"
+    },
+    "c": {
+      "item": "minecraft:heart_of_the_sea"
+    }
+  },
+  "pattern": [
+    " d ",
+    "dcd"
+  ],
+  "result": {
+    "id": "insanesurvivaloverhaul:crystal_heart"
+  },
+  "show_notification": true
+}

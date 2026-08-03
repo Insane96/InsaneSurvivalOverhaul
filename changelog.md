@@ -3,8 +3,11 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 
 * New feature 'Max Health Death Penalty'
   * Players now lose 1 max hearth on death
+  * With a Heart of the Sea and 3 Diamond Blocks, craft a Crystal Heart, to gain back lost health.
 * Death Penalty
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
+* Echo Pillar
+  * Now disabled by default
 * Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage

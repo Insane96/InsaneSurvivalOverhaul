@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.death.MaxHealthDeathPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -102,6 +103,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         blockItem(BigOreVeins.IRON_ORE_ROCK);
         blockItem(BigOreVeins.GOLD_ORE_ROCK);
         blockItem(BigOreVeins.COPPER_ORE_ROCK);
+
+        basicItem(MaxHealthDeathPenalty.CRYSTAL_HEART.get());
     }
 
     private ItemModelBuilder blockItem(SimpleBlockWithItem block) {

@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-@LoadFeature(module = ISOModules.DEATH, description = "Adds Echo Pillars: ancient structures that act as spawn anchors and grant effects on respawn.")
+@LoadFeature(module = ISOModules.DEATH, description = "Adds Echo Pillars: ancient structures that act as spawn anchors and grant effects on respawn.", enabledByDefault = false)
 public class EchoPillar extends JsonFeature {
 	public static final TagKey<Block> ECHO_PILLAR_BLOCKS_TO_ROT = ISOBlockTagsProvider.create("structures/echo_pillar/blocks_to_rot");
 	public static final TagKey<Item> ECHO_PILLAR_CATALYST = ISOItemTagsProvider.create("echo_pillar_catalyst");
