@@ -28,7 +28,6 @@ public class Packs extends Feature {
     @Config(description = """
             Minor changes:
             * Cakes now drop when broken and not eaten
-            * Dark Prismarine is made easier
             * Clay balls can be crafted from blocks
             * Leads and Sticky Pistons can also be made with Honey
             * Iron Doors can be blasted back to Iron Ingots
@@ -38,9 +37,17 @@ public class Packs extends Feature {
             * Wool can be crafted back to strings
             * Carpets, Bricks, Banners, Targets and Tnt recipes now outputs more
             * Tnt recipe now also accepts paper instead of sand
-            * Prismarine is made different (copper and calcite)
             * Moss carpets can be crafted back to moss blocks""")
     public static Boolean miscTweaks = true;
+
+    @Config(description = """
+            Reworks Prismarine, Dark Prismarine and Sea Lantern recipes to no longer need Prismarine Shards/Crystals:
+            * Prismarine is now made with Copper and Calcite
+            * Dark Prismarine is made easier, out of Prismarine blocks instead of shards
+            * Sea Lantern is now made out of Prismarine and Glowstone Dust
+            Guardians no longer drop Prismarine Shards/Crystals (they drop Wet Sponge and (Cooked) Cod instead), Elder Guardians roll the fishing loot table instead, and Sea Lanterns always drop themselves when broken.
+            Any leftover Prismarine Shard drop from other sources is replaced with 40% as many Turtle Scutes, and any leftover Prismarine Crystals drop is replaced with 40% as many Nautilus Shells.""")
+    public static Boolean prismarineRework = true;
 
     @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
     public static Boolean actualRedstoneComponents = true;
@@ -56,6 +63,7 @@ public class Packs extends Feature {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("hardcore_torches", "Insane's Survival Overhaul Hardcore Torches", () -> this.isEnabled() && !Packs.disableAllDataPacks && hardcoreTorches);
         InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && miscTweaks);
+        InsaneSO.addServerPack("prismarine_rework", "Insane's Survival Overhaul Prismarine Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && prismarineRework);
         InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !Packs.disableAllDataPacks && actualRedstoneComponents);
         InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableLongNosesStructures);
         InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && copperFurnace);
