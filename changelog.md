@@ -8,6 +8,17 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
 * Echo Pillar
   * Now disabled by default
+* Misc Tweaks data pack
+  * Added Wool to String, Moss Carpet to Moss Block and Prismarine recipes
+  * Moss Block to Carpet recipe now outputs 8 instead of 3
+  * Banner recipes now output 3 instead of 1
+  * Carpet recipes now output 8 instead of 3
+  * Bricks recipe now outputs 2 instead of 1
+  * TNT recipe now outputs 2 instead of 1 and also accepts Paper as an alternative to Sand/Red Sand
+  * Target recipe now outputs 2 instead of 1
+* Mob loot changes data pack
+  * Guardians no longer drop Prismarine Shards/Crystals, they now drop Wet Sponge (if killed by a player) and (Cooked) Cod instead
+  * Elder Guardians no longer drop Prismarine Shards/Crystals, they now roll the fishing loot table 3 times instead, still on top of the Tide Armor Trim Smithing Template (if killed by a player)
 * Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
