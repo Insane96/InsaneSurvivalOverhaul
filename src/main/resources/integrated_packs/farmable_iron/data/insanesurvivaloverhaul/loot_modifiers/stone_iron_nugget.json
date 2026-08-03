@@ -1,10 +1,10 @@
 {
-    "type": "insanelib:inject_loot_table",
+    "type": "neoforge:add_table",
     "conditions": [
         {
             "condition": "neoforge:loot_table_id",
             "loot_table_id": "minecraft:blocks/stone"
         }
     ],
-    "loot_table": "insanesurvivaloverhaul:inject/stone_iron_nugget"
+    "table": "insanesurvivaloverhaul:inject/stone_iron_nugget"
 }

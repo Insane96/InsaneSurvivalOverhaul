@@ -1,10 +1,10 @@
 {
-    "type": "insanelib:inject_loot_table",
+    "type": "neoforge:add_table",
     "conditions": [
         {
             "condition": "neoforge:loot_table_id",
             "loot_table_id": "minecraft:entities/elder_guardian"
         }
     ],
-    "loot_table": "insanesurvivaloverhaul:inject/elder_guardian_heart_of_the_sea"
+    "table": "insanesurvivaloverhaul:inject/elder_guardian_heart_of_the_sea"
 }

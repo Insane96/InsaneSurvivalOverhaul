@@ -2,7 +2,7 @@
 Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving the Matcha Flavored data pack with CC license. This update implements many ideas from the data pack, adapted to ISO.
 
 * New feature 'Max Health Death Penalty'
-  * Players now lose 1 max hearth on death, down to min 3 hearts.
+  * Players now lose 1 max heart on death, down to min 3 hearts.
   * With a Heart of the Sea and 3 Diamond Blocks, craft a Crystal Heart (or find them by breaking spawners), to gain back lost health.
 * Death Penalty
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
