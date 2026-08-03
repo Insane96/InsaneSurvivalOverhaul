@@ -165,6 +165,8 @@
     "advancements.insanesurvivaloverhaul.chainmail.description": "Obtain a Chainmail piece of armor",
     "advancements.insanesurvivaloverhaul.bundle.title": "That one item",
     "advancements.insanesurvivaloverhaul.bundle.description": "Make a bundle with Cloth",
+    "advancements.insanesurvivaloverhaul.sack.title": "Not a Shulker Box",
+    "advancements.insanesurvivaloverhaul.sack.description": "Obtain a Sack with Cloth and a Chest",
 
     "effect.insanesurvivaloverhaul.tired": "Tired",
     "effect.insanesurvivaloverhaul.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",

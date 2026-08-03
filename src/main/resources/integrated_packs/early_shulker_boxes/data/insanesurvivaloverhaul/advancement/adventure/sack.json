@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:shulker_box"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.sack.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.sack.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:adventure/cloth",
+	"criteria": {
+		"sack": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:shulker_box"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"sack"
+		]
+	]
+}

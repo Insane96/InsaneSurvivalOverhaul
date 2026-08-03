@@ -28,10 +28,14 @@ public class Cloth extends Feature {
 	@Config(description = "Enables a data pack that changes Shulker Boxes recipe to use cloth and chests instead of shulker shells, and shulkers will drop Shulker Boxes directly instead of shells.")
 	public static Boolean earlyGameShulkerBoxes = true;
 
+	@Config(description = "Enables a resource pack that renames Shulker Boxes to Sack")
+	public static Boolean renameShulkerBoxToSack = true;
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 		InsaneSO.addServerPack("early_shulker_boxes", "Insane's Survival Overhaul Early Shulker Box", () -> this.isEnabled() && !Packs.disableAllDataPacks && earlyGameShulkerBoxes);
+		InsaneSO.addClientPack("sack", "Insane's Survival Overhaul Sack", () -> this.isEnabled() && earlyGameShulkerBoxes && renameShulkerBoxToSack);
 	}
 }
