@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Changes the Shulker Box recipe to use Cloth and a Chest instead of Shulker Shells",
+        "pack_format": 48
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "type": "insanelib:replace_loot",
+    "conditions": [],
+    "item_to_replace": "minecraft:shulker_shell",
+    "new_item": "minecraft:shulker_box",
+    "multipliers": [0.5]
+}

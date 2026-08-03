@@ -1,4 +1,4 @@
-# Upcoming - The Matcha Flavored update
+# 5.7.0.0 - The Matcha Flavored update
 Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving the Matcha Flavored data pack with CC license. This update implements many ideas from the data pack, adapted to ISO.
 
 * New feature 'Max Health Death Penalty'
@@ -7,6 +7,11 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 * Death Penalty
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
 * Echo Pillar
+  * Now disabled by default
+* New Early Shulker Boxes data pack
+  * Shulker Box recipe now uses Cloth instead of Shulker Shells
+  * Shulkers now drop Shulker Boxes instead of Shulker Shells, 50% less often
+* Pouch
   * Now disabled by default
 * Misc Tweaks data pack
   * Added Wool to String and Moss Carpet to Moss Block recipes

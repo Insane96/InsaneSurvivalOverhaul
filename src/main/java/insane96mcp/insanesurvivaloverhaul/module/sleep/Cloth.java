@@ -25,9 +25,13 @@ public class Cloth extends Feature {
 			* Adds advancements for this feature and moves vanilla beds advancements to cloth advancement""")
 	public static Boolean dataPack = true;
 
+	@Config(description = "Enables a data pack that changes Shulker Boxes recipe to use cloth and chests instead of shulker shells, and shulkers will drop Shulker Boxes directly instead of shells.")
+	public static Boolean earlyGameShulkerBoxes = true;
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
+		InsaneSO.addServerPack("early_shulker_boxes", "Insane's Survival Overhaul Early Shulker Box", () -> this.isEnabled() && !Packs.disableAllDataPacks && earlyGameShulkerBoxes);
 	}
 }

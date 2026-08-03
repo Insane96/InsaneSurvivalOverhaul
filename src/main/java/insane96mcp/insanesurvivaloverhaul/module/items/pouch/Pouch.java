@@ -22,7 +22,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Supplier;
 
-@LoadFeature(module = ISOModules.ITEMS, description = "A new item that can let you carry more stuff around.")
+@LoadFeature(module = ISOModules.ITEMS, description = "A new item that can let you carry more stuff around.", enabledByDefault = false)
 public class Pouch extends Feature {
     public static final TagKey<Item> POUCH_LIKE_WEIGHT = ISOItemTagsProvider.create("pouch_like_weight");
 
