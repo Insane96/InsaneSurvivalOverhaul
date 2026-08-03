@@ -11,7 +11,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 * New Early Shulker Boxes data pack
   * Shulker Box recipe now uses Cloth instead of Shulker Shells
   * Shulkers now drop Shulker Boxes instead of Shulker Shells, 50% less often
-  * Shulker Boxes are now renamed to Sack (resource pack, can be disabled)
+  * Shulker Boxes are now renamed to Sack and retextured accordingly (resource pack, can be disabled)
   * Added an advancement after Cloth, awarded for obtaining a Sack
   * Removed Shulker Shell from the creative inventory
 * Pouch

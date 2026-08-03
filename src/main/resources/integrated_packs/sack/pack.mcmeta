@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Renames Shulker Boxes to Sack",
+        "description": "Renames Shulker Boxes to Sack and retextures them accordingly",
         "pack_format": 34
     }
 }
