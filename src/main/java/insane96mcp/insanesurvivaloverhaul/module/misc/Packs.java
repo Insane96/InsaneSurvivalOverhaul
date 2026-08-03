@@ -34,7 +34,12 @@ public class Packs extends Feature {
             * Iron Doors can be blasted back to Iron Ingots
             * Dispensers can be made from droppers
             * Levers and glass can now be broken faster with pickaxes, cactus with hoes
-            * Chains are easier to craft with just nuggets""")
+            * Chains are easier to craft with just nuggets
+            * Wool can be crafted back to strings
+            * Carpets, Bricks, Banners, Targets and Tnt recipes now outputs more
+            * Tnt recipe now also accepts paper instead of sand
+            * Prismarine is made different (copper and calcite)
+            * Moss carpets can be crafted back to moss blocks""")
     public static Boolean miscTweaks = true;
 
     @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
