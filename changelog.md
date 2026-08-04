@@ -43,6 +43,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 * Fixed snowballs still stacking to 99 instead of 128
 * Fixed iron tools (axe, pickaxe, shovel, hoe) missing their base critical damage reduction (-0.25), like swords already had
 * Fixed Knockback's no-weapon/spam/projectile penalties not applying correctly on sweep attack hits (relies on InsaneLib's new `CurrentAttacker` fix)
+* Fixed Ore Rocks showing flat/edge-on in the inventory instead of their normal angled view
 
 # 5.6.3.1
 * Lowered default equipment drop chance for mobs spawned from spawners

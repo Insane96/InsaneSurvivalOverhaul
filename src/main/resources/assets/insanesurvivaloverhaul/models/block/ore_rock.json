@@ -1,5 +1,6 @@
 {
     "credit": "Made with Blockbench",
+    "parent": "minecraft:block/block",
     "textures": {
         "particle": "block/stone",
         "texture": "block/stone"
