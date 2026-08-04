@@ -70,7 +70,7 @@ public class CoalFire extends Feature {
     @Config(description = "If true, two flints (on per hand) can start a fire")
     public static Boolean twoFlintFireStarter$enabled = true;
     @Config(min = 0d, max = 1d, description = "Chance to ignite a block when using two flints")
-    public static Double twoFlintFireStarter$igniteChance = 0.35d;
+    public static Double twoFlintFireStarter$igniteChance = 0.4d;
     @Config(min = 0d, max = 1d, description = "Chance for the flint to break when using two flints")
     public static Double twoFlintFireStarter$breakChance = 0.3d;
 
