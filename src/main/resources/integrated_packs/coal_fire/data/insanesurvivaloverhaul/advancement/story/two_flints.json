@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:flint"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.two_flints.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.two_flints.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:story/mine_stone",
+	"criteria": {
+		"charcoal": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:charcoal"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"charcoal"
+		]
+	]
+}

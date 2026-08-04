@@ -1,0 +1,49 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:torch"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.torch.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.torch.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:story/campfire",
+	"criteria": {
+		"torch": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"location": [
+					{
+						"condition": "minecraft:location_check",
+						"predicate": {
+							"block": {
+								"blocks": "minecraft:campfire",
+								"state": {
+									"lit": "true"
+								}
+							}
+						}
+					},
+					{
+						"condition": "minecraft:match_tool",
+						"predicate": {
+							"items": "minecraft:stick"
+						}
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"torch"
+		]
+	]
+}

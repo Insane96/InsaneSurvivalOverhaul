@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"id": "insanesurvivaloverhaul:half_heart_texture"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.unfair_oneshot.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.unfair_oneshot.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": true
+	},
+	"parent": "minecraft:adventure/root",
+	"criteria": {
+		"unfair_oneshot": {
+			"trigger": "insanesurvivaloverhaul:unfair_oneshot"
+		}
+	},
+	"requirements": [
+		[
+			"unfair_oneshot"
+		]
+	]
+}

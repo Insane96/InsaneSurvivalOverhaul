@@ -1,0 +1,40 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:wheat_seeds"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.seeds.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.seeds.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:husbandry/root",
+	"criteria": {
+		"seeds": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:wheat_seeds",
+							"minecraft:beetroot_seeds",
+							"minecraft:carrot",
+							"minecraft:potato"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"seeds"
+		]
+	]
+}

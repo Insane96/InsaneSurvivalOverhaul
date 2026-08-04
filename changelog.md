@@ -30,6 +30,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
   * Elder Guardians no longer drop Prismarine Shards/Crystals, they now roll the fishing loot table 3 times instead, still on top of the Tide Armor Trim Smithing Template (if killed by a player)
   * Sea Lantern no longer drops Prismarine Crystals when broken, it now always drops itself
   * Any remaining Prismarine Shard drop is now replaced with 40% as many Turtle Scutes, and any remaining Prismarine Crystals drop is now replaced with 40% as many Nautilus Shells
+* Added back most advancements
 * Mob spawners can no longer be reactivated with Echo Shards
 * Glow berries now give Glowing effect for 5 seconds and can always be eaten
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
@@ -45,6 +46,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 * Fixed iron tools (axe, pickaxe, shovel, hoe) missing their base critical damage reduction (-0.25), like swords already had
 * Fixed Knockback's no-weapon/spam/projectile penalties not applying correctly on sweep attack hits (relies on InsaneLib's new `CurrentAttacker` fix)
 * Fixed Ore Rocks showing flat/edge-on in the inventory instead of their normal angled view
+* Probably more fixes I forgot to note
 
 # 5.6.3.1
 * Lowered default equipment drop chance for mobs spawned from spawners

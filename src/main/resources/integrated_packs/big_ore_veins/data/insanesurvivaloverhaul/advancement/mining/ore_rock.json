@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:story/mine_stone",
+    "parent": "minecraft:adventure/root",
     "display": {
         "icon": {
             "id": "insanesurvivaloverhaul:iron_ore_rock"

@@ -31,6 +31,9 @@
 
     "item.insanesurvivaloverhaul.shortbow": "Shortbow",
 
+    "advancements.insanesurvivaloverhaul.unfair_oneshot.title": "Critical Success on Constitution",
+    "advancements.insanesurvivaloverhaul.unfair_oneshot.description": "Take a hit that would've killed you while well above half health, and walk away with a sliver of life instead.",
+
 
     "insanesurvivaloverhaul:death_module": "Death",
 
@@ -188,10 +191,22 @@
 
     "insanesurvivaloverhaul:world_module": "World",
 
+    "advancements.insanesurvivaloverhaul.two_flints.title": "Spark of Genius",
+    "advancements.insanesurvivaloverhaul.two_flints.description": "Hold a Flint in each hand and right click a block to try and ignite it. Burn a tree down to get Charcoal.",
     "advancements.insanesurvivaloverhaul.charcoal.title": "Improvise and Ignite",
     "advancements.insanesurvivaloverhaul.charcoal.description": "Coal can only be obtained with an Iron pickaxe or higher. Obtain Charcoal by burning logs. A flint in both hands seems to do the job.",
     "advancements.insanesurvivaloverhaul.firestarter.title": "Starting Fires",
     "advancements.insanesurvivaloverhaul.firestarter.description": "Craft a Firestarter to create fire more consistently.",
+    "advancements.insanesurvivaloverhaul.campfire.title": "Early Game Furnace",
+    "advancements.insanesurvivaloverhaul.campfire.description": "Furnaces require Copper now. Burn a tree to get Charcoal and craft a Campfire to smelt some basic materials in the meantime.",
+    "advancements.insanesurvivaloverhaul.torch.title": "Shed Some Light",
+    "advancements.insanesurvivaloverhaul.torch.description": "Obtain a Torch, the Campfire and some Sticks might come in handy",
+    "advancements.insanesurvivaloverhaul.anvil_fix.title": "Fix the Fixer",
+    "advancements.insanesurvivaloverhaul.anvil_fix.description": "Repair an Anvil with an Iron Block",
+    "advancements.insanesurvivaloverhaul.copper_tools.title": "Doesn't Oxidize",
+    "advancements.insanesurvivaloverhaul.copper_tools.description": "Obtain a Copper tool",
+    "advancements.insanesurvivaloverhaul.seeds.title": "Seedy Business",
+    "advancements.insanesurvivaloverhaul.seeds.description": "Obtain seeds from wild crops",
 
     "item.insanesurvivaloverhaul.firestarter": "Firestarter",
     "item.insanesurvivaloverhaul.firestarter.tooltip": "Hold right click to use",

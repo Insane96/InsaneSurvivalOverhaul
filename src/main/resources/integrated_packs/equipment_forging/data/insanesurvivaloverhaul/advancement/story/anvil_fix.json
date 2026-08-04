@@ -1,0 +1,49 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:damaged_anvil"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.anvil_fix.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.anvil_fix.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:story/smelt_iron",
+	"criteria": {
+		"anvil_fix": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"location": [
+					{
+						"condition": "minecraft:location_check",
+						"predicate": {
+							"block": {
+								"blocks": [
+									"minecraft:chipped_anvil",
+									"minecraft:damaged_anvil"
+								]
+							}
+						}
+					},
+					{
+						"condition": "minecraft:match_tool",
+						"predicate": {
+							"items": "minecraft:iron_block"
+						}
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"anvil_fix"
+		]
+	]
+}

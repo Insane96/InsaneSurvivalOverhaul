@@ -1,0 +1,37 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:campfire"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.campfire.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.campfire.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "insanesurvivaloverhaul:story/two_flints",
+	"criteria": {
+		"campfire": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:campfire"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"campfire"
+		]
+	]
+}
