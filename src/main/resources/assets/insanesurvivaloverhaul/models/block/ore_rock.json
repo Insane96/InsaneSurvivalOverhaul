@@ -1,6 +1,13 @@
 {
     "credit": "Made with Blockbench",
     "parent": "minecraft:block/block",
+    "display": {
+        "gui": {
+            "rotation": [30, 225, 0],
+            "translation": [0, 2, 0],
+            "scale": [2.2, 2.2, 2.2]
+        }
+    },
     "textures": {
         "particle": "block/stone",
         "texture": "block/stone"
