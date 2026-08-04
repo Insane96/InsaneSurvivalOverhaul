@@ -13,6 +13,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
+import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.CreativeRemoval;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
@@ -113,6 +114,11 @@ public class Client {
             }
             if (Feature.isEnabled(CyanFlower.class)) {
                 addAfter(event, Items.POPPY, CyanFlower.FLOWER.item());
+            }
+            if (Feature.isEnabled(BigOreVeins.class)) {
+                addAfter(event, Items.IRON_ORE, BigOreVeins.IRON_ORE_ROCK.item());
+                addAfter(event, Items.GOLD_ORE, BigOreVeins.GOLD_ORE_ROCK.item());
+                addAfter(event, Items.COPPER_ORE, BigOreVeins.COPPER_ORE_ROCK.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
