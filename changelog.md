@@ -35,6 +35,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
 * Thrown tridents damage is now calculated based off the item thrown, instead of a fixed 8 (configurable)
 * Lowered tridents damage
 * Lowered Honey Nutrition
+* Increased Wither Skeletons Head Drop chance (~~4% + 1%~~ -> 15% + 5% per looting)
 * Dried kelp no longer gives nutrition
 * Entities are no longer affected by discrete name tags
 * Sweet berry bushes now grow faster in any cold biome, not only taigas
