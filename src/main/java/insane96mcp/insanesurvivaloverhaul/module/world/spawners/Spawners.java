@@ -80,7 +80,7 @@ public class Spawners extends JsonFeature {
 	@Config(description = "If true, monsters from spawners will spawn no matter the light level.")
 	public static Boolean ignoreLight = true;
 	@Config(name = "Re-enable with Spawner Reactivator", description = "If true, disabled spawners can be re-enabled with a spawner reactivator item defined in the `insanesurvivaloverhaul:spawner_reactivator` item tag. These items get a new tooltip mentioning that they can be used to re-enable spawners.")
-	public static Boolean reEnableWithSpawnerReactivator = true;
+	public static Boolean reEnableWithSpawnerReactivator = false;
 	@Config(description = "If enabled, spawner will play a sound effect when spawning mobs")
 	public static Boolean spawningSoundEffect = true;
 
