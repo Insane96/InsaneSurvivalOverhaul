@@ -36,6 +36,6 @@ public class Cloth extends Feature {
 		super.init(module, enabledByDefault, canBeDisabled);
 		InsaneSO.addServerPack("cloth", "Insane's Survival Overhaul Cloth", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 		InsaneSO.addServerPack("early_shulker_boxes", "Insane's Survival Overhaul Early Shulker Box", () -> this.isEnabled() && !Packs.disableAllDataPacks && earlyGameShulkerBoxes);
-		InsaneSO.addClientPack("sack", "Insane's Survival Overhaul Sack", () -> this.isEnabled() && earlyGameShulkerBoxes && renameShulkerBoxToSack);
+		InsaneSO.addClientPack("early_shulker_boxes_rp", "Insane's Survival Overhaul Sack", () -> this.isEnabled() && earlyGameShulkerBoxes && renameShulkerBoxToSack);
 	}
 }
