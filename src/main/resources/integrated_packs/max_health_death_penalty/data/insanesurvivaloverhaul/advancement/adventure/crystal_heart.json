@@ -14,7 +14,7 @@
 		"announce_to_chat": true,
 		"hidden": false
 	},
-	"parent": "insanesurvivaloverhaul:adventure/root",
+	"parent": "minecraft:adventure/root",
 	"criteria": {
 		"crystal_heart": {
 			"trigger": "minecraft:inventory_changed",
