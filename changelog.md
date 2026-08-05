@@ -1,3 +1,6 @@
+# Upcoming
+* Removed 'Render on Right' in Regenerating Absorption
+
 # 5.7.0.0-beta - The Matcha Flavored update
 Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving the Matcha Flavored data pack with CC license. This update implements many ideas from the data pack, adapted to ISO.
 

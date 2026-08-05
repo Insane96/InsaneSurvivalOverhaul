@@ -60,8 +60,6 @@ public class RegeneratingAbsorption extends Feature {
     @Config(description = "If true, a sound is played when the absorption is damaged.")
     public static Boolean soundOnAbsorptionHurt = true;
     //TODO Config option to replace vanilla absorption with this
-    @Config(description = "(Client only) If true, regenerating absorption hearts are rendered on the right instead on top of hearts.")
-    public static Boolean renderOnTheRight = false;
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
