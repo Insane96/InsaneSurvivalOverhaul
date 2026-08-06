@@ -1,0 +1,56 @@
+{
+    "type": "minecraft:entity",
+    "pools": [
+        {
+            "rolls": 1,
+            "bonus_rolls": 0,
+            "conditions": [
+                {
+                    "condition": "minecraft:killed_by_player"
+                },
+                {
+                    "condition": "minecraft:random_chance_with_enchanted_bonus",
+                    "unenchanted_chance": 0.65,
+                    "enchanted_chance": {
+                        "type": "minecraft:linear",
+                        "base": 0.75,
+                        "per_level_above_first": 0.08
+                    },
+                    "enchantment": "minecraft:looting"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:netherite_scrap"
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "bonus_rolls": 0,
+            "conditions": [
+                {
+                    "condition": "minecraft:killed_by_player"
+                },
+                {
+                    "condition": "minecraft:random_chance_with_enchanted_bonus",
+                    "unenchanted_chance": 0.25,
+                    "enchanted_chance": {
+                        "type": "minecraft:linear",
+                        "base": 0.35,
+                        "per_level_above_first": 0.1
+                    },
+                    "enchantment": "minecraft:looting"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:heart_of_the_sea"
+                }
+            ]
+        }
+    ],
+    "random_sequence": "minecraft:entities/piglin_brute"
+}

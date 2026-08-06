@@ -1,6 +1,7 @@
 {
     "replace": false,
     "entries": [
-        "insanesurvivaloverhaul:reduced_no_player_kill_drop"
+        "insanesurvivaloverhaul:reduced_no_player_kill_drop",
+        "insanesurvivaloverhaul:bogged_extra_drops"
     ]
 }
