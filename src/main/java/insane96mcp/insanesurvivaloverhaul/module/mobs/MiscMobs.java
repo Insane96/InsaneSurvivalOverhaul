@@ -30,6 +30,8 @@ public class MiscMobs extends Feature {
 
     @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
     public static Boolean lootChanges = true;
+    @Config(description = "If true, renames Heart of the Sea to Divine Fragment and retextures it accordingly")
+    public static Boolean renameHeartOfTheSeaToDivineFragment = true;
 
     @Config(description = "If true, mobs will burn even if there's a block above them in daylight")
     public static Boolean burnInSkyLight = true;
@@ -38,6 +40,7 @@ public class MiscMobs extends Feature {
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
         InsaneSO.addServerPack("mob_loot_changes", "Insane's Survival Overhaul Mob Loot Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && lootChanges);
+        InsaneSO.addClientPack("divine_fragment_rp", "Insane's Survival Overhaul Divine Fragment", () -> this.isEnabled() && lootChanges && renameHeartOfTheSeaToDivineFragment);
     }
 
     @SubscribeEvent
