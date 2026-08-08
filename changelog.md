@@ -6,6 +6,7 @@
   * Endermen now always drop an Ender Pearl instead of a 50% chance
   * Bogged now also have a chance to drop Glowstone Dust and/or a Mushroom
 * Spawners no longer drop the Crystal Heart, instead they always drop the Heart of the Sea (Divine Fragment)
+* You can now reach 15 hearts with Crystal Hearts instead of 10
 * Fixed Quark's chests not working to craft Shulker Box (Sack)
 
 # 5.7.0.0-beta - The Matcha Flavored update

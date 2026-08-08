@@ -33,7 +33,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 		description = "Makes players lose max health on death and adds a new item to gain them back.\nControlled via the insanesurvivaloverhaul:death_health_lost game rule.")
 public class MaxHealthDeathPenalty extends Feature {
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHHEALTHLOST = GameRules.register("insanesurvivaloverhaul:death_health_lost", GameRules.Category.PLAYER, GameRules.IntegerValue.create(2));
-	public static final GameRules.Key<GameRules.IntegerValue> RULE_MAXHEALTHFROMCRYSTAL = GameRules.register("insanesurvivaloverhaul:max_health_from_crystal", GameRules.Category.PLAYER, GameRules.IntegerValue.create(20));
+	public static final GameRules.Key<GameRules.IntegerValue> RULE_MAXHEALTHFROMCRYSTAL = GameRules.register("insanesurvivaloverhaul:max_health_from_crystal", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHMINHEALTH = GameRules.register("insanesurvivaloverhaul:death_min_health", GameRules.Category.PLAYER, GameRules.IntegerValue.create(6));
 
 	public static final DeferredHolder<Item, CrystalHeartItem> CRYSTAL_HEART = ISORegistries.ITEMS.register("crystal_heart", () -> new CrystalHeartItem(new Item.Properties().rarity(Rarity.RARE)));
@@ -74,13 +74,11 @@ public class MaxHealthDeathPenalty extends Feature {
 	}
 
 	@SubscribeEvent
-	public void onPlayerRespawn(EntityJoinLevelEvent event) {
+	public void onPlayerJoinLevel(EntityJoinLevelEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getEntity() instanceof Player player))
 			return;
 		double healthPenalty = ModNBTData.getPersisted(player, DEATH_PENALTY_ID, Double.class);
-		if (healthPenalty >= 0)
-			return;
 		AttributeInstance instance = player.getAttribute(Attributes.MAX_HEALTH);
 		if (instance == null)
 			return;
