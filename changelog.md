@@ -5,6 +5,7 @@
   * Piglin Brutes now drop Netherite Scrap (65% + Looting) and a Divine Fragment (Heart of the Sea, 25% + Looting)
   * Endermen now always drop an Ender Pearl instead of a 50% chance
   * Bogged now also have a chance to drop Glowstone Dust and/or a Mushroom
+* Fixed Quark's chests not working to craft Shulker Box (Sack)
 
 # 5.7.0.0-beta - The Matcha Flavored update
 Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving the Matcha Flavored data pack with CC license. This update implements many ideas from the data pack, adapted to ISO.

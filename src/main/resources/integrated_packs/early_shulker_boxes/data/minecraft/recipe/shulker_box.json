@@ -6,7 +6,7 @@
       "item": "insanesurvivaloverhaul:cloth"
     },
     "X": {
-      "item": "minecraft:chest"
+      "tag": "c:chests/wooden"
     }
   },
   "pattern": [
