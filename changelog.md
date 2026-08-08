@@ -1,4 +1,4 @@
-# Upcoming
+# 5.7.1.0
 * Removed 'Render on Right' in Regenerating Absorption
 * Heart of the Sea is now renamed to Divine Fragment and retextured accordingly (resource pack, can be disabled)
 * Mob loot changes data pack
