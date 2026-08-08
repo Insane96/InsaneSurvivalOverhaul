@@ -5,6 +5,7 @@
   * Piglin Brutes now drop Netherite Scrap (65% + Looting) and a Divine Fragment (Heart of the Sea, 25% + Looting)
   * Endermen now always drop an Ender Pearl instead of a 50% chance
   * Bogged now also have a chance to drop Glowstone Dust and/or a Mushroom
+* Spawners no longer drop the Crystal Heart, instead they always drop the Heart of the Sea (Divine Fragment)
 * Fixed Quark's chests not working to craft Shulker Box (Sack)
 
 # 5.7.0.0-beta - The Matcha Flavored update
@@ -15,7 +16,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
   * With a Heart of the Sea and 3 Diamond Blocks, craft a Crystal Heart (or find them by breaking spawners), to gain back lost health.
 * Death Penalty
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
-* Echo Pillar
+* Echo PillarLet me
   * Now disabled by default
 * New Early Shulker Boxes data pack
   * Shulker Box recipe now uses Cloth instead of Shulker Shells

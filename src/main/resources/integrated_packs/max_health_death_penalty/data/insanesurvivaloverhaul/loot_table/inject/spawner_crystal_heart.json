@@ -7,13 +7,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "insanesurvivaloverhaul:crystal_heart",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:random_chance",
-                            "chance": 0.5
-                        }
-                    ]
+                    "name": "insanesurvivaloverhaul:heart_of_the_sea"
                 }
             ]
         }
