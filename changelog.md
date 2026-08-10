@@ -1,4 +1,5 @@
 # 5.7.2.0
+* Increased tool and sword durability, with weaker materials gaining proportionally more (Golden excluded, remains fragile)
 * Increased Trident durability to 912
 * Fixed Respiration enchantment increasing air consumption instead of reducing it
 * Ominous Trial Vaults now have a chance to drop a Divine Fragment (Heart of the Sea)

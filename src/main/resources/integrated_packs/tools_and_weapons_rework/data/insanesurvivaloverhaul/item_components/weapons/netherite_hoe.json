@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_hoe",
     "components": {
-        "minecraft:max_damage": 2307,
+        "minecraft:max_damage": 3249,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

@@ -1,7 +1,7 @@
 {
     "item": "minecraft:diamond_hoe",
     "components": {
-        "minecraft:max_damage": 2081,
+        "minecraft:max_damage": 2562,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

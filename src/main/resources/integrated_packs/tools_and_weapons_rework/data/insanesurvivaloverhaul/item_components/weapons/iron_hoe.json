@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_hoe",
     "components": {
-        "minecraft:max_damage": 513,
+        "minecraft:max_damage": 784,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

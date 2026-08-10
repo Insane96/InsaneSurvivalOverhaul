@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_pickaxe",
     "components": {
-        "minecraft:max_damage": 1731,
+        "minecraft:max_damage": 2437,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

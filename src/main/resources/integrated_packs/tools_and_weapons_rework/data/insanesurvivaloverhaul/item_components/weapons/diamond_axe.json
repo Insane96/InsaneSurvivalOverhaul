@@ -1,7 +1,7 @@
 {
     "item": "minecraft:diamond_axe",
     "components": {
-        "minecraft:max_damage": 1249,
+        "minecraft:max_damage": 1538,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_axe",
     "components": {
-        "minecraft:max_damage": 308,
+        "minecraft:max_damage": 470,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

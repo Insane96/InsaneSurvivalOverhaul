@@ -1,7 +1,7 @@
 {
     "item": "minecraft:stone_pickaxe",
     "components": {
-        "minecraft:max_damage": 63,
+        "minecraft:max_damage": 107,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
