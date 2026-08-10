@@ -33,7 +33,7 @@ public class PotionsAndEffects extends Feature {
     public static Double splashPotionThrowStrength = 0.8d;
     @Config(description = "If true, entities will no longer be set on fire if have Fire Resistance (like bedrock edition)")
     public static Boolean preventFireWithResistance = false;
-    @Config(description = "Splash potions will always be 2/3 effective compared to drinkable ones but will also apply the full effect duration when thrown")
+    @Config(description = "Splash potions will always be 2/3 effective compared to drinkable ones but will also apply the full effect duration when thrown regardless of the distance.")
     public static Boolean streamlineSplashPotions = true;
     @Config(description = "Enables a data pack that increases potions stack sizes")
     public static Boolean potionStackSize = true;
