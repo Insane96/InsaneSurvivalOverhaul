@@ -2,6 +2,7 @@
     "replace": false,
     "entries": [
         "insanesurvivaloverhaul:elder_guardian_divine_fragment",
-        "insanesurvivaloverhaul:spawner_divine_fragment"
+        "insanesurvivaloverhaul:spawner_divine_fragment",
+        "insanesurvivaloverhaul:trial_vault_divine_fragment"
     ]
 }

@@ -1,6 +1,8 @@
 # Upcoming
 * Increased Trident durability to 912
 * Fixed Respiration enchantment increasing air consumption instead of reducing it
+* Ominous Trial Vaults now have a chance to drop a Divine Fragment (Heart of the Sea)
+* Fixed Elder Guardian and Spawner Divine Fragment drops not working due to a mismatched loot modifier reference
 
 # 5.7.1.0
 * Removed 'Render on Right' in Regenerating Absorption
