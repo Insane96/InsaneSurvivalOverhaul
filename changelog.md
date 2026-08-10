@@ -1,4 +1,5 @@
 # Upcoming
+* Increased Trident durability to 912
 * Fixed Respiration enchantment increasing air consumption instead of reducing it
 
 # 5.7.1.0
