@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Disable Villages and Pillager towers",
+        "description": "Disable Villages, Pillager towers and Woodland Mansions",
         "pack_format": 48
     }
 }

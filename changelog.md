@@ -1,3 +1,6 @@
+# Upcoming
+* Disable Long Noses data pack now also disables Woodland Mansions
+
 # 5.7.2.0
 * Increased tool and sword durability, with weaker materials gaining proportionally more (Golden excluded, remains fragile)
 * Increased Trident durability to 912
@@ -25,7 +28,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
   * With a Heart of the Sea and 3 Diamond Blocks, craft a Crystal Heart (or find them by breaking spawners), to gain back lost health.
 * Death Penalty
   * Players no longer lose part of the inventory, xp or durability. This feature is now disabled by default.
-* Echo PillarLet me
+* Echo Pillar
   * Now disabled by default
 * New Early Shulker Boxes data pack
   * Shulker Box recipe now uses Cloth instead of Shulker Shells
