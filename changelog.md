@@ -1,7 +1,8 @@
 # Upcoming
-* Potions duration is now doubled
+* Potions' duration is now doubled
   * Configurable!
 * Disable Long Noses data pack now also disables Woodland Mansions
+* Fix rare possible crash on world join
 
 # 5.7.2.0
 * Increased tool and sword durability, with weaker materials gaining proportionally more (Golden excluded, remains fragile)

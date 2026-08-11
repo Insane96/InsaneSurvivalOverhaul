@@ -32,6 +32,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @LoadFeature(module = ISOModules.MOVEMENT, description = "Slowdown based off the terrain entities walking on. Custom Terrain Slowdown are controlled via json in this feature's folder")
 public class TerrainSlowdown extends JsonFeature {
@@ -41,12 +42,12 @@ public class TerrainSlowdown extends JsonFeature {
 	public static final ArrayList<ObjTagValue<Block>> CUSTOM_TERRAIN_SLOWDOWN_DEFAULT = new ArrayList<>(List.of(
 			ObjTagValue.of("#minecraft:ice", 0.55d, Registries.BLOCK)
 	));
-	public static final ArrayList<ObjTagValue<Block>> customTerrainSlowdown = new ArrayList<>();
+	public static final CopyOnWriteArrayList<ObjTagValue<Block>> customTerrainSlowdown = new CopyOnWriteArrayList<>();
 	public static final ArrayList<ObjTagValue<Block>> CUSTOM_IN_TERRAIN_SLOWDOWN_DEFAULT = new ArrayList<>(List.of(
 			ObjTagValue.of("minecraft:snow", 0.075d, Registries.BLOCK),
 			ObjTagValue.of("minecraft:powder_snow", 0.5d, Registries.BLOCK)
 	));
-	public static final ArrayList<ObjTagValue<Block>> customInTerrainSlowdown = new ArrayList<>();
+	public static final CopyOnWriteArrayList<ObjTagValue<Block>> customInTerrainSlowdown = new CopyOnWriteArrayList<>();
 	public static final ResourceLocation CUSTOM_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.id("custom_terrain_slowdown");
 	public static final ResourceLocation CUSTOM_IN_TERRAIN_SLOWDOWN_SYNC_ID = InsaneSO.id("custom_in_terrain_slowdown");
 
