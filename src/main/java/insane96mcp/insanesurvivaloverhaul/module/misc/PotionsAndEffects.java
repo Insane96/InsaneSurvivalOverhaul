@@ -9,12 +9,15 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.runeenchanting.mixin.MobEffectInstanceAccessor;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.alchemy.Potion;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various changes to potions and effects")
@@ -37,6 +40,8 @@ public class PotionsAndEffects extends Feature {
     public static Boolean streamlineSplashPotions = true;
     @Config(description = "Enables a data pack that increases potions stack sizes")
     public static Boolean potionStackSize = true;
+    @Config(min = 0, description = "Multiplier for the duration of potions. Doesn't affect instantaneous effects. Requires a Minecraft restart")
+    public static Double potionDurationMultiplier = 2d;
 
     public static float STREAMLINE_SPLASH_POTION_MULTIPLIER = 0.667f;
 
@@ -56,6 +61,15 @@ public class PotionsAndEffects extends Feature {
         if (betterHasteAndMiningFatigue) {
             ((MobEffectAccessor) MobEffects.DIG_SPEED.value()).getAttributeModifiers().remove(Attributes.ATTACK_SPEED);
             ((MobEffectAccessor) MobEffects.DIG_SLOWDOWN.value()).getAttributeModifiers().remove(Attributes.ATTACK_SPEED);
+        }
+        if (potionDurationMultiplier != 1d) {
+            for (Potion potion : BuiltInRegistries.POTION) {
+                potion.getEffects().forEach(mobEffectInstance -> {
+                    if (mobEffectInstance.getEffect().value().isInstantenous())
+                        return;
+                    ((MobEffectInstanceAccessor) mobEffectInstance).setDuration((int) (mobEffectInstance.getDuration() * potionDurationMultiplier));
+                });
+            }
         }
     }
 

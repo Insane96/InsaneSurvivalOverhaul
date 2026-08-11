@@ -1,4 +1,6 @@
 # Upcoming
+* Potions duration is now doubled
+  * Configurable!
 * Disable Long Noses data pack now also disables Woodland Mansions
 
 # 5.7.2.0

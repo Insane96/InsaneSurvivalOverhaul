@@ -16,6 +16,7 @@
 		"accessor.LivingEntityAccessor",
 		"accessor.MobAccessor",
 		"accessor.MobEffectAccessor",
+		"accessor.MobEffectInstanceAccessor",
 		"accessor.MusicsAccessor",
 		"accessor.PortalShapeAccessor",
 		"accessor.ServerLevelAccessor",
