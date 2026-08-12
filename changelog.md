@@ -1,3 +1,7 @@
+# Upcoming
+* Nerfed hoes to the ground
+  * They were way too powerful, DPS only were twice as powerful as the other tools.
+
 # 5.7.3.0
 * Potions' duration is now doubled
   * Configurable!
@@ -37,7 +41,7 @@ Thanks [Klei_Wright](https://www.youtube.com/watch?v=zyRH8W58fRI) for leaving th
   * Shulker Box recipe now uses Cloth instead of Shulker Shells
   * Shulkers now drop Shulker Boxes instead of Shulker Shells, 50% less often
   * Shulker Boxes are now renamed to Sack and retextured accordingly (resource pack, can be disabled)
-  * Added an advancement after Cloth, awarded for obtaining a Sack
+  * Added an advancement after Cloth, awarded for getting a Sack
   * Removed Shulker Shell from the creative inventory
 * Pouch
   * Now disabled by default

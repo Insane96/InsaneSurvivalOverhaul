@@ -7,14 +7,14 @@
                 {
                     "type": "minecraft:generic.attack_damage",
                     "id": "minecraft:base_attack_damage",
-                    "amount": 1.9500000000000002,
+                    "amount": 0.15000000000000002,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },
                 {
                     "type": "minecraft:generic.attack_speed",
                     "id": "minecraft:base_attack_speed",
-                    "amount": -1.0,
+                    "amount": -1.7,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },

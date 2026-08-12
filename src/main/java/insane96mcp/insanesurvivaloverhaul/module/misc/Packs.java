@@ -13,7 +13,7 @@ public class Packs extends Feature {
     @Config(description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
 
-    @Config(description = "If true a data pack will be enabled that disables villages and pillagers outpost generation.")
+    @Config(description = "If true a data pack will be enabled that disables villages, pillagers outpost and mansions generation.")
     public static Boolean disableLongNosesStructures = true;
     @Config(description = "If true a data pack will be enabled that makes furnaces require copper. Copper ingots can be obtained from raw copper on campfires.")
     public static Boolean copperFurnace = true;
