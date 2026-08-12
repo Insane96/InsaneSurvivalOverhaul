@@ -1,6 +1,6 @@
-# Upcoming
+# 5.7.4.0
 * Nerfed hoes to the ground
-  * They were way too powerful, DPS only were twice as powerful as the other tools.
+  * They were way too powerful, DPS only was twice as powerful as the other tools.
 * Increased Trident damage per hit to 6
 * Reduced Pickaxe and Shovel attack range by 0.25
 * Removed Trident's extra attack range bonus
