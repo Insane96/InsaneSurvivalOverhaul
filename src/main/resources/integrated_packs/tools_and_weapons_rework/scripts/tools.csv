@@ -1,7 +1,7 @@
 tool_type,materials,item_override,max_damage_override,atk_dmg_base,atk_spd_modifier,entity_reach_add,atk_knockback_add,crit_chance_add,crit_dmg_add,durability_multiplier,tool_tag
 axe,wooden;stone;iron;golden;diamond;netherite;copper,,,3.1,-3.2,-0.5,0.0,0.0,0.0,0.8,mineable/axe
-pickaxe,wooden;stone;iron;golden;diamond;netherite;copper,,,0.2,-2.8,-0.5,0.0,0.0,0.0,,mineable/pickaxe
-shovel,wooden;stone;iron;golden;diamond;netherite;copper,,,1.3,-3.0,0.0,1.0,0.0,0.0,,mineable/shovel
+pickaxe,wooden;stone;iron;golden;diamond;netherite;copper,,,0.2,-2.8,-0.25,0.0,0.0,0.0,,mineable/pickaxe
+shovel,wooden;stone;iron;golden;diamond;netherite;copper,,,1.3,-3.0,-0.25,1.0,0.0,0.0,,mineable/shovel
 sword,wooden;stone;iron;golden;diamond;netherite;copper,,,1.0,-2.4,-0.25,0.0,0.2,-0.25,,
 hoe,wooden;stone;iron;golden;diamond;netherite;copper,,,-1.0,-1.5,-0.5,0.0,0.0,0.0,1.333,mineable/hoe
-trident,none,minecraft:trident,912,5.0,-3.0,0.5,0.0,0.0,0.0,,
+trident,none,minecraft:trident,912,5.0,-3.0,0.0,0.0,0.0,0.0,,

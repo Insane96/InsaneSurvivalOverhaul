@@ -19,6 +19,13 @@
                     "slot": "mainhand"
                 },
                 {
+                    "type": "minecraft:player.entity_interaction_range",
+                    "id": "minecraft:base_entity_reach",
+                    "amount": -0.25,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
                     "type": "minecraft:generic.attack_knockback",
                     "id": "insanesurvivaloverhaul:weapon_attack_knockback",
                     "amount": 1.0,

@@ -95,8 +95,7 @@ def build_modifiers(tool, mat):
         mods.append(modifier(ATTR["atk_spd"], MOD_ID["atk_spd"], atk_spd, "add_value"))
 
     entity_reach = fv(tool["entity_reach_add"])
-    if entity_reach:
-        mods.append(modifier(ATTR["entity_reach"], MOD_ID["entity_reach"], entity_reach, "add_value"))
+    mods.append(modifier(ATTR["entity_reach"], MOD_ID["entity_reach"], entity_reach, "add_value"))
 
     atk_kb = fv(tool["atk_knockback_add"])
     if atk_kb:
