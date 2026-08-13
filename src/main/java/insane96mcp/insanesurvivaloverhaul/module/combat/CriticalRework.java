@@ -2,8 +2,11 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.Module;
+import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
@@ -36,12 +39,14 @@ public class CriticalRework extends Feature {
 	 */
 	public static final ResourceLocation BASE_DAMAGE_ATTRIBUTE_ID = InsaneSO.id("base_critical_damage");
 
-	//public static final DeferredHolder<Enchantment> CRITICAL_ENCHANTMENT = ISORegistries.ENCHANTMENTS.register("critical", CriticalEnchantment::new);
+	@Config(description = "Enables a data pack that adds the Critical enchantment (max level V). Each level increases critical chance by 10% and critical damage by 5%. It's incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach).")
+	public static Boolean criticalEnchantmentDataPack = true;
 
-	//@Config(min = -1d, max = 1d, description = "insanesurvivaloverhaul:critical_chance increase per level of Critical enchantment.")
-	//public static Double enchantmentChance = 0.1d;
-	//@Config(min = -1d, max = 1d, description = "insanesurvivaloverhaul:critical_damage increase per level of Critical enchantment.")
-	//public static Double enchantmentBonusDamage = 0.1d;
+	@Override
+	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
+		super.init(module, enabledByDefault, canBeDisabled);
+		InsaneSO.addServerPack("critical_enchantment", "Insane's Survival Overhaul Critical Enchantment", () -> this.isEnabled() && !Packs.disableAllDataPacks && criticalEnchantmentDataPack);
+	}
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
 		for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {

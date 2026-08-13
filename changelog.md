@@ -1,6 +1,9 @@
-# Upcoming
+# 5.7.5.0
 * Tweaks
   * Added 'Ocelots to Cats'
+* Added Critical enchantment (max level V) data pack: +10% critical chance and +5% critical damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach)
+  * All tools, swords and the Trident now always show their Critical Chance/Damage in the tooltip (even at 0%/base), so the Critical enchantment's bonus merges into a single total instead of a separate line
+* Duplicated anvil recipes are now logged and skipped
 * Fixed crash without Rune enchanting installed
 
 # 5.7.4.0

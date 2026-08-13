@@ -101,15 +101,15 @@ def build_modifiers(tool, mat):
     if atk_kb:
         mods.append(modifier(ATTR["atk_knockback"], MOD_ID["atk_knockback"], atk_kb, "add_value"))
 
+    # Always emitted (even at 0.0) so every weapon has a base modifier for the Critical
+    # enchantment's bonus to merge into in the tooltip, instead of showing as a separate line.
     crit_chance = fv(tool["crit_chance_add"]) + fv(mat["crit_chance_add"])
-    if crit_chance:
-        mods.append(modifier(ATTR["crit_chance"], MOD_ID["crit_chance"], crit_chance, "add_value"))
+    mods.append(modifier(ATTR["crit_chance"], MOD_ID["crit_chance"], crit_chance, "add_value"))
 
     crit_dmg = fv(tool["crit_dmg_add"])
     if tool["tool_type"] != "sword":
         crit_dmg += fv(mat.get("crit_dmg_add", ""))
-    if crit_dmg:
-        mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
+    mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
 
     if tool["tool_type"] == "pickaxe":
         piercing = fv(mat.get("pickaxe_piercing_dmg", ""))
