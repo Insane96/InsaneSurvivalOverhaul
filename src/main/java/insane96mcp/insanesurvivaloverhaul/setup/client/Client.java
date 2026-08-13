@@ -1,6 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.setup.client;
 
 import insane96mcp.insanelib.core.feature.Feature;
+import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
+import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
 import insane96mcp.insanesurvivaloverhaul.module.death.MaxHealthDeathPenalty;
@@ -24,12 +26,17 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
@@ -171,5 +178,32 @@ public class Client {
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(PouchTooltip.class, ClientPouchTooltip::new);
+    }
+
+    public static void onGatherSkippedAttributeTooltips(GatherSkippedAttributeTooltipsEvent event) {
+        if (isUnchangedFromDefault(event, CriticalRework.CHANCE_ATTRIBUTE)) {
+            event.skipId(CriticalRework.BASE_CHANCE_ATTRIBUTE_ID);
+            // Critical Damage is meaningless without any Critical Chance, so hide it too regardless of its own value.
+            event.skipId(CriticalRework.BASE_DAMAGE_ATTRIBUTE_ID);
+        }
+        if (isUnchangedFromDefault(event, PiercingDamage.PIERCING_DAMAGE))
+            event.skipId(PiercingDamage.BASE_PIERCING_DAMAGE_ID);
+    }
+
+    /**
+     * Checks whether the item's and enchantments' bonuses for {@code attribute} merge into the same value
+     * as the attribute's own default (i.e. nothing is actually being changed).
+     */
+    private static boolean isUnchangedFromDefault(GatherSkippedAttributeTooltipsEvent event, Holder<Attribute> attribute) {
+        double defaultValue = attribute.value().getDefaultValue();
+        double amt = defaultValue;
+        for (AttributeModifier modifier : AttributeUtil.getSortedModifiers(event.getStack(), EquipmentSlotGroup.MAINHAND).get(attribute)) {
+            switch (modifier.operation()) {
+                case ADD_VALUE -> amt += modifier.amount();
+                case ADD_MULTIPLIED_BASE -> amt += modifier.amount() * defaultValue;
+                case ADD_MULTIPLIED_TOTAL -> amt *= 1 + modifier.amount();
+            }
+        }
+        return amt == defaultValue;
     }
 }

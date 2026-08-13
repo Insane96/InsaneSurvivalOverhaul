@@ -90,6 +90,7 @@ public class InsaneSO {
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
+            NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
         }
 
         NeoForgeMod.enableMergedAttributeTooltips();
