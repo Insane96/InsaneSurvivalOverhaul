@@ -4,11 +4,13 @@ import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
+import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.ILRangedAttribute;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.util.MCUtils;
 import net.minecraft.core.registries.Registries;
@@ -44,10 +46,14 @@ public class PiercingDamage extends Feature {
 
 	public static ResourceLocation SHOULD_STOP_HURT;
 
+	@Config(description = "Enables a data pack that adds the Armor Piercer enchantment (max level V). Each level increases piercing damage by 0.3. It's incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical).")
+	public static Boolean armorPiercerEnchantmentDataPack = true;
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		SHOULD_STOP_HURT = this.createDataKey("should_stop_hurt");
+		InsaneSO.addServerPack("armor_piercer_enchantment", "Insane's Survival Overhaul Armor Piercer Enchantment", () -> this.isEnabled() && !Packs.disableAllDataPacks && armorPiercerEnchantmentDataPack);
 	}
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
