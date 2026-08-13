@@ -111,10 +111,10 @@ def build_modifiers(tool, mat):
         crit_dmg += fv(mat.get("crit_dmg_add", ""))
     mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
 
-    if tool["tool_type"] == "pickaxe":
-        piercing = fv(mat.get("pickaxe_piercing_dmg", ""))
-        if piercing:
-            mods.append(modifier(ATTR["piercing_dmg"], MOD_ID["piercing_dmg"], piercing, "add_value"))
+    # Always emitted (even at 0.0) so every weapon has a base modifier for the Armor Piercer
+    # enchantment's bonus to merge into in the tooltip, instead of showing as a separate line.
+    piercing = fv(mat.get("pickaxe_piercing_dmg", "")) if tool["tool_type"] == "pickaxe" else 0.0
+    mods.append(modifier(ATTR["piercing_dmg"], MOD_ID["piercing_dmg"], piercing, "add_value"))
 
     return mods
 
