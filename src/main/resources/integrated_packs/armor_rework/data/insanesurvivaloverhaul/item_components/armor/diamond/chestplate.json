@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.chestplate",
-                    "amount": -0.105,
+                    "amount": -0.1575,
                     "operation": "add_value",
                     "slot": "chest"
                 }

@@ -1,8 +1,10 @@
 # 5.7.5.0
 * Tweaks
   * Added 'Ocelots to Cats'
+  * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%
 * Added Critical enchantment (max level V) data pack: +10% critical chance and +5% critical damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach)
-  * All tools, swords and the Trident now always show their Critical Chance/Damage in the tooltip (even at 0%/base), so the Critical enchantment's bonus merges into a single total instead of a separate line
+* Added Armor Piercer enchantment (max level V) data pack: +0.3 piercing damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical)
+* All tools, swords and the Trident now always show their Critical Chance/Damage and Piercing Damage in the tooltip (if different than the default value)
 * Duplicated anvil recipes are now logged and skipped
 * Fixed crash without Rune enchanting installed
 
