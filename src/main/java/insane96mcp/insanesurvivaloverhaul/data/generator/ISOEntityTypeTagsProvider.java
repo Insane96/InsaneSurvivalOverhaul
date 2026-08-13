@@ -66,7 +66,6 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.SHEEP)
                 .add(EntityType.WOLF)
                 .add(EntityType.CAT)
-                .add(EntityType.OCELOT)
                 .add(EntityType.AXOLOTL)
                 .add(EntityType.LLAMA)
                 .add(EntityType.RABBIT)
