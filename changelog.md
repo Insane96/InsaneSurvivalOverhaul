@@ -1,3 +1,8 @@
+# Upcoming
+* Tweaks
+  * Added 'Ocelots to Cats'
+* Fixed crash without Rune enchanting installed
+
 # 5.7.4.0
 * Nerfed hoes to the ground
   * They were way too powerful, DPS only was twice as powerful as the other tools.

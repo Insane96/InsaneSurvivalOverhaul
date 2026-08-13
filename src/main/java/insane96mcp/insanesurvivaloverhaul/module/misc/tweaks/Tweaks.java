@@ -19,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.CatVariantTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -37,6 +39,8 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -146,6 +150,9 @@ public class Tweaks extends Feature {
     @Config(min = 0d, description = "The fall distance (in blocks) needed before parrots (and other shoulder entities) get knocked off the player's shoulder. Vanilla is 0.5")
     public static Double parrot$shoulderDismountFallDistance = 4d;
 
+    @Config(description = "If true, makes ocelots transform into cats when tamed. Like pre ocelot-cat split.")
+    public static Boolean ocelotToCat = true;
+
     public static boolean discreteNameTags = true;
 
     @Override
@@ -164,7 +171,7 @@ public class Tweaks extends Feature {
     }
 
     public static boolean doesBlindnessPreventSprint() {
-        return Feature.isEnabled(Tweaks.class)  && Tweaks.blindnessNoLongerPreventsSprinting;
+        return Feature.isEnabled(Tweaks.class) && Tweaks.blindnessNoLongerPreventsSprinting;
     }
 
     public static int changeMaxSpongeSoakBlocks(int soakableBlocks) {
@@ -294,6 +301,28 @@ public class Tweaks extends Feature {
             return;
         event.setCanceled(true);
         appliedResistance = false;
+    }
+
+    @SubscribeEvent
+    public void onAnimalTame(AnimalTameEvent event) {
+        if (!this.isEnabled()
+                || !ocelotToCat
+                || !(event.getAnimal() instanceof Ocelot ocelot)
+                || ocelot.level().isClientSide)
+            return;
+
+        event.setCanceled(true);
+
+        Cat cat = ocelot.convertTo(EntityType.CAT, true);
+        if (cat == null)
+            return;
+
+        BuiltInRegistries.CAT_VARIANT.getRandomElementOf(CatVariantTags.DEFAULT_SPAWNS, cat.getRandom()).ifPresent(cat::setVariant);
+        cat.tame(event.getTamer());
+
+        ServerLevel level = (ServerLevel) cat.level();
+        level.sendParticles(ParticleTypes.HEART, cat.getX(), cat.getY() + cat.getBbHeight() / 2d, cat.getZ(), 7, 0.3, 0.3, 0.3, 0.0);
+        level.playSound(null, cat.blockPosition(), SoundEvents.CAT_PURR, SoundSource.NEUTRAL, 1f, 1f);
     }
 
     //Lowest priority so other mods can change/cancel fall damage

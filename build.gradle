@@ -96,7 +96,7 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
 
-    implementation "maven.modrinth:rune-enchanting:1.1.0.0"
+    compileOnly "maven.modrinth:rune-enchanting:1.1.0.0"
     implementation "maven.modrinth:no-hunger:2.0.0.3"
 }
 
