@@ -17,6 +17,7 @@ import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class AnvilRecipeReloadListener extends SimpleJsonResourceReloadListener 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
 		List<AnvilRecipe> list = new ArrayList<>();
+		Map<List<IngredientWithCount>, ResourceLocation> seenIngredientPairs = new HashMap<>();
 		for (var entry : map.entrySet()) {
 			try {
 				ResourceLocation name = entry.getKey();
@@ -47,6 +49,14 @@ public class AnvilRecipeReloadListener extends SimpleJsonResourceReloadListener 
 					continue;
 
 				AnvilRecipe anvilRecipe = GSON.fromJson(entry.getValue(), AnvilRecipe.class);
+
+				List<IngredientWithCount> ingredientPair = List.of(anvilRecipe.leftIngredient, anvilRecipe.rightIngredient);
+				ResourceLocation conflictingRecipe = seenIngredientPairs.putIfAbsent(ingredientPair, name);
+				if (conflictingRecipe != null) {
+					InsaneSO.LOGGER.warn("Anvil Recipe {} conflicts with {}: both use the same left and right ingredients. Skipping {}", name, conflictingRecipe, name);
+					continue;
+				}
+
 				list.add(anvilRecipe);
 			} catch (JsonSyntaxException e) {
 				InsaneSO.LOGGER.error("Parsing error loading Anvil Recipe {}: {}", entry.getKey(), e.getMessage());
