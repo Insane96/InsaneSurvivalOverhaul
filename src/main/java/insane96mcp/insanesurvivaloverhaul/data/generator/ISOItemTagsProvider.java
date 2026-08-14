@@ -141,6 +141,12 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(ItemTags.PICKAXES);
         tag(AttackSounds.SHOVEL_ATTACK_SOUND)
                 .addTag(ItemTags.SHOVELS);
+
+        //Rune Enchanting integration (only relevant if the mod is installed, harmless otherwise)
+        tag(create("rune_applicable_to/critical"))
+                .addTag(TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("enchantable/weapon")));
+        tag(create("rune_applicable_to/armor_piercer"))
+                .addTag(TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("enchantable/weapon")));
     }
 
     public static TagKey<Item> create(String tagName) {

@@ -42,6 +42,13 @@ public class CriticalRework extends Feature {
 	@Config(description = "Enables a data pack that adds the Critical enchantment (max level V). Each level increases critical chance by 10% and critical damage by 5%. It's incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach).")
 	public static Boolean criticalEnchantmentDataPack = true;
 
+	@Config(description = "If Rune Enchanting is installed, enables the Critical rune.")
+	public static Boolean criticalRuneEnabled = true;
+	@Config(description = "Bonus critical chance granted by the Critical rune.")
+	public static Double criticalRuneBonusChance = 0.1d;
+	@Config(description = "Bonus critical damage granted by the Critical rune.")
+	public static Double criticalRuneBonusDamage = 0.05d;
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);

@@ -4,6 +4,7 @@
 * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%
 * Added Critical enchantment (max level V) data pack: +10% critical chance and +5% critical damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach)
 * Added Armor Piercer enchantment (max level V) data pack: +0.3 piercing damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical)
+* Added Critical and Armor Piercer runes for Rune Enchanting (if installed), matching the bonuses of one level of the respective enchantments
 * All tools, swords and the Trident now always show their Critical Chance/Damage and Piercing Damage in the tooltip (if different from the default value)
 * Duplicated anvil recipes are now logged and skipped
 * Fixed crash without Rune enchanting installed

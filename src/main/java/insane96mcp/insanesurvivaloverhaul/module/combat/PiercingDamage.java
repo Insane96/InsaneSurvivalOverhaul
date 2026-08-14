@@ -49,6 +49,11 @@ public class PiercingDamage extends Feature {
 	@Config(description = "Enables a data pack that adds the Armor Piercer enchantment (max level V). Each level increases piercing damage by 0.3. It's incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical).")
 	public static Boolean armorPiercerEnchantmentDataPack = true;
 
+	@Config(description = "If Rune Enchanting is installed, enables the Armor Piercer rune.")
+	public static Boolean armorPiercerRuneEnabled = true;
+	@Config(description = "Bonus piercing damage granted by the Armor Piercer rune.")
+	public static Double armorPiercerRuneBonusDamage = 0.3d;
+
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);

@@ -22,9 +22,15 @@
 
     "enchantment.insanesurvivaloverhaul.critical": "Critical",
 
+    "rune.insanesurvivaloverhaul.critical": "Critical",
+    "rune.insanesurvivaloverhaul.critical.description": "Increases critical chance and critical damage",
+
     "attribute.name.piercing_damage": "Piercing Damage",
 
     "enchantment.insanesurvivaloverhaul.armor_piercer": "Armor Piercer",
+
+    "rune.insanesurvivaloverhaul.armor_piercer": "Armor Piercer",
+    "rune.insanesurvivaloverhaul.armor_piercer.description": "Increases piercing damage",
 
     "attribute.name.regenerating_absorption": "Regenerating Absorption",
     "attribute.name.regenerating_absorption_speed": "Regen. Absorption Speed",

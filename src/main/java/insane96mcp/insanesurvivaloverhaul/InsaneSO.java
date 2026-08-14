@@ -12,6 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
+import insane96mcp.insanesurvivaloverhaul.module.combat.ISORunes;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
@@ -26,6 +27,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDef
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import insane96mcp.insanesurvivaloverhaul.setup.ModIds;
 import insane96mcp.insanesurvivaloverhaul.setup.NetworkHandler;
 import insane96mcp.insanesurvivaloverhaul.setup.client.Client;
 import net.minecraft.core.HolderLookup;
@@ -38,6 +40,7 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -82,6 +85,10 @@ public class InsaneSO {
         eventBus.addListener(HungerAndHealthRegen::addAttribute);
         eventBus.addListener(Exhaustion::addAttribute);
         eventBus.addListener(Sprinting::addAttribute);
+
+        if (ModList.get().isLoaded(ModIds.RUNE_ENCHANTING)) {
+            new ISORunes(eventBus);
+        }
 
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
