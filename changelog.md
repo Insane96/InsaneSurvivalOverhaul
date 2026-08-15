@@ -1,4 +1,4 @@
-# 5.7.5.0
+# Upcoming
 * Tweaks
   * Added 'Ocelots to Cats'
 * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%
