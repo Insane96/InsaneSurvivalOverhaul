@@ -7,6 +7,7 @@
 * Added Critical and Armor Piercer runes for Rune Enchanting (if installed), matching the bonuses of one level of the respective enchantments
 * All tools, swords and the Trident now always show their Critical Chance/Damage and Piercing Damage in the tooltip (if different from the default value)
 * Changed Crystal Heart's recipe to require 8 diamonds instead of 27
+* Increased TnT output from 2 to 4
 * Duplicated anvil recipes are now logged and skipped
 * Fixed crash without Rune enchanting installed
 
