@@ -3,15 +3,16 @@
   "category": "misc",
   "key": {
     "d": {
-      "item": "minecraft:diamond_block"
+      "item": "minecraft:diamond"
     },
     "c": {
       "item": "minecraft:heart_of_the_sea"
     }
   },
   "pattern": [
-    " d ",
-    "dcd"
+    "ddd",
+    "dcd",
+    "ddd"
   ],
   "result": {
     "id": "insanesurvivaloverhaul:crystal_heart"
