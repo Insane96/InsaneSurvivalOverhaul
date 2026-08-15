@@ -3,20 +3,6 @@
   "description": {
     "translate": "enchantment.insanesurvivaloverhaul.armor_piercer"
   },
-  "effects": {
-    "minecraft:attributes": [
-      {
-        "amount": {
-          "type": "minecraft:linear",
-          "base": 0.3,
-          "per_level_above_first": 0.3
-        },
-        "attribute": "insanesurvivaloverhaul:piercing_damage",
-        "id": "insanesurvivaloverhaul:enchantment.piercing_damage",
-        "operation": "add_value"
-      }
-    ]
-  },
   "exclusive_set": "#minecraft:exclusive_set/damage",
   "max_cost": {
     "base": 21,
