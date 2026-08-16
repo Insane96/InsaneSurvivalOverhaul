@@ -24,6 +24,7 @@
 
     "rune.insanesurvivaloverhaul.critical": "Critical",
     "rune.insanesurvivaloverhaul.critical.description": "Increases critical chance and critical damage",
+    "rune.insanesurvivaloverhaul.critical.info": "Critical chance: +%s%%, Critical damage: +%s%%",
 
     "attribute.name.piercing_damage": "Piercing Damage",
 
@@ -31,6 +32,7 @@
 
     "rune.insanesurvivaloverhaul.armor_piercer": "Armor Piercer",
     "rune.insanesurvivaloverhaul.armor_piercer.description": "Increases piercing damage",
+    "rune.insanesurvivaloverhaul.armor_piercer.info": "Piercing damage: +%s per point of Attack Damage",
 
     "attribute.name.regenerating_absorption": "Regenerating Absorption",
     "attribute.name.regenerating_absorption_speed": "Regen. Absorption Speed",

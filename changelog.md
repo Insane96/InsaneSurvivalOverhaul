@@ -1,6 +1,7 @@
 # Upcoming
 * Nerfed apple pie
 * Fixed Max Health Death Penalty resetting on world join
+* Fixed missing infos from runes
 * Fixed Runes using wrong item tag
 
 # 5.8.0.0-beta
