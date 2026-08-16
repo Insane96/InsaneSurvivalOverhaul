@@ -1,0 +1,8 @@
+{
+	"item": "insanesurvivaloverhaul:apple_pie",
+	"merge_components": {
+		"minecraft:food": {
+			"nutrition": 7
+		}
+	}
+}

@@ -1,4 +1,5 @@
 # Upcoming
+* Nerfed apple pie
 * Fixed Max Health Death Penalty resetting on world join
 * Fixed Runes using wrong item tag
 
