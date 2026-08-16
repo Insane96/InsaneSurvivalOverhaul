@@ -1,4 +1,4 @@
-# Upcoming
+# 5.8.0.1-beta
 * Nerfed apple pie
 * Fixed bone meal on dirt near grass not working with non light-blocking blocks above
 * Bone meal on dirt now checks in the same range as grass spreading
