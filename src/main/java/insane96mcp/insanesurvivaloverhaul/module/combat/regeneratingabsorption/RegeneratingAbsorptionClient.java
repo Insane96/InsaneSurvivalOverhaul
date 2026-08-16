@@ -86,7 +86,7 @@ public class RegeneratingAbsorptionClient {
                 gui.leftHeight += 10;
             }
             else if (i % 2 == 0)
-                left -= 8;
+                left += 8;
             if (i > absorption)
                 ClientUtils.resetRenderColor();
         }
