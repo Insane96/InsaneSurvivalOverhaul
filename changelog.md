@@ -1,4 +1,4 @@
-# Upcoming
+# 5.8.0.0-beta
 * Tweaks
   * Added 'Ocelots to Cats'
   * Split into six standalone features, each individually toggleable/configurable: Sponges, Nausea, Breathing, Turtles, Collide With Walls and Painful World Border. Some have been moved to other modules
