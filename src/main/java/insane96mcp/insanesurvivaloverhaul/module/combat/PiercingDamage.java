@@ -65,9 +65,9 @@ public class PiercingDamage extends Feature {
 	public static Double armorPiercerDamagePerAttackDamage = 0.05d;
 
 	@Config(description = "If Rune Enchanting is installed, enables the Armor Piercer rune.")
-	public static Boolean armorPiercerRuneEnabled = true;
-	@Config(description = "Bonus piercing damage granted by the Armor Piercer rune.")
-	public static Double armorPiercerRuneBonusDamage = 0.3d;
+	public static Boolean rune$enabled = true;
+	@Config(description = "Which level of enchantment the Armor Piercer rune is equivalent to.")
+	public static Integer rune$enchantmentLevelEquivalent = 4;
 
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -120,15 +120,22 @@ public class PiercingDamage extends Feature {
 		int level = getArmorPiercerLevel(event.getItemStack());
 		if (level <= 0)
 			return;
+		float bonus = getPiercingDamageBonus(event, level);
+		if (bonus <= 0f)
+			return;
+		event.addModifier(PIERCING_DAMAGE, new AttributeModifier(InsaneSO.id("armor_piercer_enchantment"), bonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+	}
+
+	/**
+	 * Computes the Piercing Damage bonus for a given level (or rune level equivalent), scaled by the weapon's Attack Damage, as per armorPiercerDamagePerAttackDamage.
+	 */
+	public static float getPiercingDamageBonus(ItemAttributeModifierEvent event, int levelEquivalent) {
 		float attackDamage = 0f;
 		for (ItemAttributeModifiers.Entry entry : event.getModifiers()) {
 			if (entry.attribute().is(Attributes.ATTACK_DAMAGE) && entry.modifier().operation() == AttributeModifier.Operation.ADD_VALUE)
 				attackDamage += (float) entry.modifier().amount();
 		}
-		float bonus = level * attackDamage * armorPiercerDamagePerAttackDamage.floatValue();
-		if (bonus <= 0f)
-			return;
-		event.addModifier(PIERCING_DAMAGE, new AttributeModifier(InsaneSO.id("armor_piercer_enchantment"), bonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+		return levelEquivalent * attackDamage * armorPiercerDamagePerAttackDamage.floatValue();
 	}
 
 	private static int getArmorPiercerLevel(ItemStack stack) {

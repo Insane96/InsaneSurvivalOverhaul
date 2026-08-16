@@ -44,10 +44,10 @@ public class ISORunes {
 
 		@Override
 		public void addAttributeModifiers(ItemAttributeModifierEvent event) {
-			if (!CriticalRework.criticalRuneEnabled)
+			if (!CriticalRework.rune$enabled)
 				return;
-			event.addModifier(CriticalRework.CHANCE_ATTRIBUTE, new AttributeModifier(InsaneSO.id("rune_critical_chance"), CriticalRework.criticalRuneBonusChance, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-			event.addModifier(CriticalRework.DAMAGE_ATTRIBUTE, new AttributeModifier(InsaneSO.id("rune_critical_damage"), CriticalRework.criticalRuneBonusDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+			event.addModifier(CriticalRework.CHANCE_ATTRIBUTE, new AttributeModifier(InsaneSO.id("rune_critical_chance"), CriticalRework.criticalRuneBonusChance * CriticalRework.rune$enchantmentLevelEquivalent, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+			event.addModifier(CriticalRework.DAMAGE_ATTRIBUTE, new AttributeModifier(InsaneSO.id("rune_critical_damage"), CriticalRework.criticalRuneBonusDamage * CriticalRework.rune$enchantmentLevelEquivalent, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
 		}
 	}
 
@@ -67,9 +67,12 @@ public class ISORunes {
 
 		@Override
 		public void addAttributeModifiers(ItemAttributeModifierEvent event) {
-			if (!PiercingDamage.armorPiercerRuneEnabled)
+			if (!PiercingDamage.rune$enabled)
 				return;
-			event.addModifier(PiercingDamage.PIERCING_DAMAGE, new AttributeModifier(InsaneSO.id("rune_armor_piercer"), PiercingDamage.armorPiercerRuneBonusDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+			float bonus = PiercingDamage.getPiercingDamageBonus(event, PiercingDamage.rune$enchantmentLevelEquivalent);
+			if (bonus <= 0f)
+				return;
+			event.addModifier(PiercingDamage.PIERCING_DAMAGE, new AttributeModifier(InsaneSO.id("rune_armor_piercer"), bonus, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
 		}
 	}
 }

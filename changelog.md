@@ -8,9 +8,9 @@
 * Moved the Item Tooltips feature to InsaneLib: the `has_tooltip` item tag is now `insanelib:has_tooltip` (was `insanesurvivaloverhaul:has_tooltip`), and it gained a companion `insanelib:has_hidden_tooltip` tag whose tooltip only shows while holding SHIFT
 * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%
 * Added Critical enchantment (max level V) data pack: +10% critical chance and +5% critical damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach)
-  * Also Rune Enchanting's Rune version
+  * Includes Rune Enchanting's Rune version
 * Added Armor Piercer enchantment (max level V) data pack: per level, grants bonus piercing damage scaled by the weapon's Attack Damage (0.2 every 5 points, configurable), so weaker/faster weapons like hoes get less bonus than swords or axes. Incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical)
-  * Also Rune Enchanting's Rune version
+  * Includes Rune Enchanting's Rune version
 * All tools, swords and the Trident now always show their Critical Chance/Damage and Piercing Damage in the tooltip (if different from the default value)
 * Changed Crystal Heart's recipe to require 8 diamonds instead of 27
 * Increased TnT output from 2 to 4
