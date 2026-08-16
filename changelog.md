@@ -1,6 +1,7 @@
 # Upcoming
 * Tweaks
   * Added 'Ocelots to Cats'
+* Added back Conduit feature: greatly increases the conduit's protection range and damage against nearby enemies, and can optionally remove Conduit Power's haste effect
 * Moved the Item Tooltips feature to InsaneLib: the `has_tooltip` item tag is now `insanelib:has_tooltip` (was `insanesurvivaloverhaul:has_tooltip`), and it gained a companion `insanelib:has_hidden_tooltip` tag whose tooltip only shows while holding SHIFT
 * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%
 * Added Critical enchantment (max level V) data pack: +10% critical chance and +5% critical damage per level, incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach)

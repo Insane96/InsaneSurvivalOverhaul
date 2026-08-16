@@ -94,7 +94,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] Nerfs
 - [x] Packs
 - [x] PotionsAndEffects
-- [ ] BeaconConduit
+- [x] ~~BeaconConduit~~ Split into Conduit; Beacon part not ported
 - [x] ~~DeBuffs~~ Don't like how it works. Will be remade from scratch if someone needs it
 - [x] LowFish
 - [x] Tweaks
