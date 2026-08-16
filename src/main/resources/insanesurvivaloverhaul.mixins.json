@@ -21,6 +21,7 @@
 		"accessor.PortalShapeAccessor",
 		"accessor.ServerLevelAccessor",
 		"accessor.SheepAccessor",
+		"accessor.SpreadingSnowyDirtBlockAccessor",
 		"accessor.TextDisplayAccessor",
 		"accessor.VillagerAccessor",
 		"accessor.WorldGenRegionAccessor",

@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.MakeRichFarmlandTrigger;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.SpreadingSnowyDirtBlockAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
@@ -177,20 +178,25 @@ public class BoneMeal extends Feature {
     }
 
     private void tryBoneMealDirt(BonemealEvent event, Level level, BlockState state, BlockPos pos) {
-        if (!state.is(Blocks.DIRT)
-                || (!level.getBlockState(pos.above()).isAir() && !level.getBlockState(pos.above()).is(ISOBlockTagsProvider.TALL_GRASS)))
+		//noinspection ConstantValue
+		if (!state.is(Blocks.DIRT)
+                || !SpreadingSnowyDirtBlockAccessor.callCanBeGrass(state, level, pos))
             return;
 
         if (level.getBlockState(pos.above()).is(ISOBlockTagsProvider.TALL_GRASS)) {
             growGrassBlock(level, pos, event.getPlayer(), event.getStack(), event);
             return;
         }
-        for (Direction direction : Direction.values()) {
-            if (direction == Direction.UP || direction == Direction.DOWN)
-                continue;
-            if (level.getBlockState(pos.relative(direction)).is(Blocks.GRASS_BLOCK)) {
-                growGrassBlock(level, pos, event.getPlayer(), event.getStack(), event);
-                break;
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 3; dy++) {
+                for (int dz = -1; dz <= 1; dz++) {
+                    if (dx == 0 && dy == 0 && dz == 0)
+                        continue;
+                    if (level.getBlockState(pos.offset(dx, dy, dz)).is(Blocks.GRASS_BLOCK)) {
+                        growGrassBlock(level, pos, event.getPlayer(), event.getStack(), event);
+                        return;
+                    }
+                }
             }
         }
     }

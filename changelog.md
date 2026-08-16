@@ -1,5 +1,7 @@
 # Upcoming
 * Nerfed apple pie
+* Fixed bone meal on dirt near grass not working with non light-blocking blocks above
+* Bone meal on dirt now checks in the same range as grass spreading
 * Fixed Max Health Death Penalty resetting on world join
 * Fixed missing infos from runes
 * Fixed Runes using wrong item tag
