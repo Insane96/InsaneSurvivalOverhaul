@@ -10,17 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Player.class)
 public class PlayerMixin_Tweaks {
     /**
-     * Replaces the hardcoded turtle helmet water-breathing duration (200 ticks) with the
-     * configured value from {@link Tweaks#turtle$helmetWaterBreathingTime} when the Tweaks feature is enabled.
-     */
-    @ModifyExpressionValue(method = "turtleHelmetTick", at = @At(value = "CONSTANT", args = "intValue=200"))
-    public int insanesurvivaloverhaul$onTurtleHelmetTick(int original) {
-        if (!Feature.isEnabled(Tweaks.class))
-            return original;
-        return Tweaks.turtle$helmetWaterBreathingTime;
-    }
-
-    /**
      * Replaces the hardcoded fall distance (0.5 blocks) that knocks shoulder entities (e.g. parrots)
      * off the player with the configured value from {@link Tweaks#parrot$shoulderDismountFallDistance}
      * when the Tweaks feature is enabled.

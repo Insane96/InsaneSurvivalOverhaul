@@ -1,6 +1,7 @@
 # Upcoming
 * Tweaks
   * Added 'Ocelots to Cats'
+  * Split into six standalone features, each individually toggleable/configurable: Sponges, Nausea, Breathing, Turtles, Collide With Walls and Painful World Border
 * Added back Conduit feature: greatly increases the conduit's protection range and damage against nearby enemies, and can optionally remove Conduit Power's haste effect
 * Moved the Item Tooltips feature to InsaneLib: the `has_tooltip` item tag is now `insanelib:has_tooltip` (was `insanesurvivaloverhaul:has_tooltip`), and it gained a companion `insanelib:has_hidden_tooltip` tag whose tooltip only shows while holding SHIFT
 * Increased armor sprint slowdown in the Armor Rework data pack: Iron 15% -> 25%, Diamond 30% -> 45%, Netherite 50% -> 70%

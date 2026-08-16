@@ -5,8 +5,8 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.Turtles;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
@@ -102,11 +102,11 @@ public class ISOLootTableProvider extends LootTableProvider {
             LootItem.Builder<?> entry = LootItem.lootTableItem(Items.TURTLE_SCUTE);
             for (int h = 0; h <= 15; h++) {
                 entry.apply(SetItemCountFunction.setCount(ConstantValue.exactly(h + 1))
-                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Tweaks.TURTLE_SCUTE.get())
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Turtles.TURTLE_SCUTE.get())
                         .setProperties(StatePropertiesPredicate.Builder.properties()
                             .hasProperty(ScuteBlock.HEIGHT, h))));
             }
-            add(Tweaks.TURTLE_SCUTE.get(), LootTable.lootTable()
+            add(Turtles.TURTLE_SCUTE.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))
                     .add(entry)));
@@ -140,7 +140,7 @@ public class ISOLootTableProvider extends LootTableProvider {
                 BoneMeal.RICH_FARMLAND.block().get(),
                 Crops.SOLANUM_NEOROSSII.block().get(),
                 CyanFlower.FLOWER.block().get(),
-                Tweaks.TURTLE_SCUTE.get(),
+                Turtles.TURTLE_SCUTE.get(),
                 Crops.WILD_WHEAT.get(),
                 Crops.WILD_BEETROOTS.get(),
                 Crops.WILD_CARROTS.get(),

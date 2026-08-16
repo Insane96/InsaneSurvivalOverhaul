@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.tweaks;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.sponges;
 
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Sponges;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -12,14 +12,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BlockBehaviour.class)
-public class BlockBehaviourMixin_Tweaks {
+public class BlockBehaviourMixin_Sponges {
     /**
-     * Delegates block tick events to {@link Tweaks#onSpongeTick} to handle weather-based
+     * Delegates block tick events to {@link Sponges#onSpongeTick} to handle weather-based
      * sponge state changes: dry sponges become wet when rained on (with sky access), and
      * wet sponges dry out during daytime without rain.
      */
     @Inject(method = "tick", at = @At("HEAD"))
     public void insanesurvivaloverhaul$onBlockTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        Tweaks.onSpongeTick(state, level, pos, random);
+        Sponges.onSpongeTick(state, level, pos, random);
     }
 }

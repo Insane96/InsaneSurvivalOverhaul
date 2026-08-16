@@ -1,10 +1,10 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.tweaks;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.turtles;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.Turtles;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Turtle;
@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Turtle.class)
-public abstract class TurtleMixin_Tweaks extends Animal {
-    protected TurtleMixin_Tweaks(EntityType<? extends Animal> pEntityType, Level pLevel) {
+public abstract class TurtleMixin_Turtles extends Animal {
+    protected TurtleMixin_Turtles(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -29,14 +29,14 @@ public abstract class TurtleMixin_Tweaks extends Animal {
      */
     @WrapOperation(method = "ageBoundaryReached", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Turtle;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;I)Lnet/minecraft/world/entity/item/ItemEntity;"))
     public ItemEntity insanesurvivaloverhaul$onSpawnScute(Turtle instance, ItemLike itemLike, int i, Operation<ItemEntity> original) {
-        if (!Feature.isEnabled(Tweaks.class)
-                || !Tweaks.turtle$scuteDropsAsBlock)
+        if (!Feature.isEnabled(Turtles.class)
+                || !Turtles.scuteDropsAsBlock)
             return original.call(instance, itemLike, i);
 
         BlockState blockState = this.level().getBlockState(this.blockPosition());
         if (blockState.canBeReplaced())
-            this.level().setBlock(this.blockPosition(), Tweaks.TURTLE_SCUTE.get().defaultBlockState(), 3);
-        else if (blockState.getBlock() == Tweaks.TURTLE_SCUTE.get()) {
+            this.level().setBlock(this.blockPosition(), Turtles.TURTLE_SCUTE.get().defaultBlockState(), 3);
+        else if (blockState.getBlock() == Turtles.TURTLE_SCUTE.get()) {
             int height = blockState.getValue(ScuteBlock.HEIGHT) + 1;
             if (height > 15)
                 return original.call(instance, itemLike, i);
