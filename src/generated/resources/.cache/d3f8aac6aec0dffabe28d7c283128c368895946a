@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-14T09:39:32.0094024	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-08-16T21:44:44.9801071	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 ba9125aa546790a0582445879c658b228dbb763c data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/axe.json
 bdb4053d28def340c591bb6cd77b677cfe510db6 data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/pickaxe.json
@@ -21,8 +21,8 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 cd5800ed49fc5b0c8ea29ea2ef55dc7b98f3808b data/insanesurvivaloverhaul/tags/item/no_food_stack_size_changes.json
 548833ed56d6bcdbb5ec3020a94bfba7c8d47310 data/insanesurvivaloverhaul/tags/item/ore_rocks.json
 3c8bbaa5724395d3312a54ee02176c97b9a202f3 data/insanesurvivaloverhaul/tags/item/raw_foods.json
-c922e9c39d9c9f2a645e213682320f6bec0590ad data/insanesurvivaloverhaul/tags/item/rune_applicable_to/armor_piercer.json
-c922e9c39d9c9f2a645e213682320f6bec0590ad data/insanesurvivaloverhaul/tags/item/rune_applicable_to/critical.json
+1def892d994dc5571ca273887e393729f7f74f0a data/insanesurvivaloverhaul/tags/item/rune_applicable_to/armor_piercer.json
+1def892d994dc5571ca273887e393729f7f74f0a data/insanesurvivaloverhaul/tags/item/rune_applicable_to/critical.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/snow_slowdown_ignore.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/spawner_reactivator.json
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json

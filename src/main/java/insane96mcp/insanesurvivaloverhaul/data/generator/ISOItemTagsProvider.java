@@ -15,6 +15,7 @@ import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.spawners.Spawners;
+import insane96mcp.runeenchanting.data.provider.REItemTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -144,9 +145,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         //Rune Enchanting integration (only relevant if the mod is installed, harmless otherwise)
         tag(create("rune_applicable_to/critical"))
-                .addTag(TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("enchantable/weapon")));
+                .addTag(REItemTagProvider.WEAPONS);
         tag(create("rune_applicable_to/armor_piercer"))
-                .addTag(TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("enchantable/weapon")));
+                .addTag(REItemTagProvider.WEAPONS);
     }
 
     public static TagKey<Item> create(String tagName) {

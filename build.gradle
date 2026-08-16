@@ -64,7 +64,7 @@ neoForge {
 
         data {
             data()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing-mod', 'runeenchanting'
         }
 
         configureEach {
@@ -96,7 +96,7 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
 
-    compileOnly "maven.modrinth:rune-enchanting:1.1.0.0"
+    implementation "maven.modrinth:rune-enchanting:1.2.0.0-alpha"
     implementation "maven.modrinth:no-hunger:2.0.0.3"
 }
 
