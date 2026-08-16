@@ -1,0 +1,6 @@
+{
+    "item": "minecraft:wolf_armor",
+    "components": {
+        "minecraft:max_damage": 192
+    }
+}
