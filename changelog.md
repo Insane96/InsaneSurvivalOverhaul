@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed Max Health Death Penalty resetting on world join
+
 # 5.8.0.0-beta
 * Tweaks
   * Added 'Ocelots to Cats'
