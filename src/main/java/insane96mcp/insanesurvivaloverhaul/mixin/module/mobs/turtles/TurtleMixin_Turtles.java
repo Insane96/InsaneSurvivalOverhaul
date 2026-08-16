@@ -1,10 +1,10 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.turtles;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs.turtles;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.Turtles;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Turtle;

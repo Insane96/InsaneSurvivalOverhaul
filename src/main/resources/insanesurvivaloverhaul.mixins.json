@@ -71,10 +71,6 @@
 		"module.misc.potionandeffects.ThrowablePotionItemMixin_PotionsAndEffects",
 		"module.misc.potionandeffects.ThrownPotionMixin_PotionsAndEffects",
 		"module.misc.potionandeffects.WitherMobEffectMixin_PotionsAndEffects",
-		"module.misc.sponges.BlockBehaviourMixin_Sponges",
-		"module.misc.sponges.SpongeBlockMixin_Sponges",
-		"module.misc.turtles.PlayerMixin_Turtles",
-		"module.misc.turtles.TurtleMixin_Turtles",
 		"module.misc.tweaks.AbstractArrowMixin_Tweaks",
 		"module.misc.tweaks.ItemEntityMixin_Tweaks",
 		"module.misc.tweaks.LeashableMixin_Tweaks",
@@ -86,6 +82,8 @@
 		"module.mobs.miscmobs.GuardianAttackGoalMixin_MiscMobs",
 		"module.mobs.miscmobs.IronGolemMixin_MiscMobs",
 		"module.mobs.miscmobs.MobMixin_MiscMobs",
+		"module.mobs.turtles.PlayerMixin_Turtles",
+		"module.mobs.turtles.TurtleMixin_Turtles",
 		"module.movement.BoatMixin_Boats",
 		"module.movement.LivingEntityMixin_BetterClimbable",
 		"module.movement.LivingEntityMixin_Sprinting",
@@ -106,6 +104,8 @@
 		"module.world.fluids.LavaFluidMixin_Fluid",
 		"module.world.fluids.WaterFluidMixin_Fluid",
 		"module.world.nether.SpringFeatureMixin_Nether",
+		"module.world.sponges.BlockBehaviourMixin_Sponges",
+		"module.world.sponges.SpongeBlockMixin_Sponges",
 		"module.world.thunderstorms.ServerLevelMixin_Thunderstorms"
 	],
 	"injectors": {

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc.turtles;
+package insane96mcp.insanesurvivaloverhaul.module.mobs.turtles;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -18,7 +18,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.MISC, description = "Turtle helmet water breathing duration and stackable scute blocks.")
+@LoadFeature(module = ISOModules.MOBS, description = "Turtle helmet water breathing duration and stackable scute blocks.")
 public class Turtles extends Feature {
 
     public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));

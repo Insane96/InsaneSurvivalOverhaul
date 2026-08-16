@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc;
+package insane96mcp.insanesurvivaloverhaul.module.world;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.border.WorldBorder;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
-@LoadFeature(module = ISOModules.MISC, description = "The insanesurvivaloverhaul:painful_world_border game rule grows the world border every time a player takes damage.")
+@LoadFeature(module = ISOModules.WORLD, description = "The insanesurvivaloverhaul:painful_world_border game rule grows the world border every time a player takes damage.")
 public class PainfulWorldBorder extends Feature {
 
     public static final GameRules.Key<GameRules.IntegerValue> RULE_PAINFUL_WORLD_BORDER = GameRules.register("insanesurvivaloverhaul:painful_world_border", GameRules.Category.MISC, GameRules.IntegerValue.create(0));

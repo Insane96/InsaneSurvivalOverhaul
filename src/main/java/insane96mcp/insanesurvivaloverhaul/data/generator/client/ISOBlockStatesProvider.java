@@ -7,9 +7,9 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBl
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockBlock;
-import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.Turtles;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;

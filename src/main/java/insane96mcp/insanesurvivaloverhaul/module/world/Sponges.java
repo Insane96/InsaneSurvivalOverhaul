@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc;
+package insane96mcp.insanesurvivaloverhaul.module.world;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
-@LoadFeature(module = ISOModules.MISC, description = "Sponges soak up more water and can dry/wet with the weather.")
+@LoadFeature(module = ISOModules.WORLD, description = "Sponges soak up more water and can dry/wet with the weather.")
 public class Sponges extends Feature {
 
     @Config(description = "The maximum amount of blocks a sponge can soak. (Vanilla is 64, disabled if quark is installed)")

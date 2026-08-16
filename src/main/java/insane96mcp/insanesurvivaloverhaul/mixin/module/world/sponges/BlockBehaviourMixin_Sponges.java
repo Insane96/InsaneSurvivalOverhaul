@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.sponges;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.world.sponges;
 
-import insane96mcp.insanesurvivaloverhaul.module.misc.Sponges;
+import insane96mcp.insanesurvivaloverhaul.module.world.Sponges;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

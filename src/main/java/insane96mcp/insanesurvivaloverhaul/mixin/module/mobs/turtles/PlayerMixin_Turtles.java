@@ -1,8 +1,8 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.turtles;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs.turtles;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.misc.turtles.Turtles;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

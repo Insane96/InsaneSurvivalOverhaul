@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.sponges;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.world.sponges;
 
-import insane96mcp.insanesurvivaloverhaul.module.misc.Sponges;
+import insane96mcp.insanesurvivaloverhaul.module.world.Sponges;
 import net.minecraft.world.level.block.SpongeBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

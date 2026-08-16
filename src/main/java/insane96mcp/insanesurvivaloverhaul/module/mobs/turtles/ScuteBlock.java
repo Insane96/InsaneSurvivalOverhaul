@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.misc.turtles;
+package insane96mcp.insanesurvivaloverhaul.module.mobs.turtles;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
