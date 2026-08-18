@@ -31,7 +31,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.DEATH,
 		description = "Makes players lose max health on death and adds a new item to gain them back.\nControlled via the insanesurvivaloverhaul:death_health_lost game rule.")
-public class MaxHealthDeathPenalty extends Feature {
+public class DeathMaxHealthPenalty extends Feature {
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHHEALTHLOST = GameRules.register("insanesurvivaloverhaul:death_health_lost", GameRules.Category.PLAYER, GameRules.IntegerValue.create(2));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_MAXHEALTHFROMCRYSTAL = GameRules.register("insanesurvivaloverhaul:max_health_from_crystal", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHMINHEALTH = GameRules.register("insanesurvivaloverhaul:death_min_health", GameRules.Category.PLAYER, GameRules.IntegerValue.create(10));

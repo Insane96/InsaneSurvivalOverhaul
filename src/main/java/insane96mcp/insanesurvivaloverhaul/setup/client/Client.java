@@ -5,7 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
-import insane96mcp.insanesurvivaloverhaul.module.death.MaxHealthDeathPenalty;
+import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -81,8 +81,8 @@ public class Client {
             if (Feature.isEnabled(Cloth.class)
                     && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
                     addAfter(event, Items.LEAD, Items.BUNDLE);
-            if (Feature.isEnabled(MaxHealthDeathPenalty.class)) {
-                addAfter(event, Items.ELYTRA, MaxHealthDeathPenalty.CRYSTAL_HEART);
+            if (Feature.isEnabled(DeathMaxHealthPenalty.class)) {
+                addAfter(event, Items.ELYTRA, DeathMaxHealthPenalty.CRYSTAL_HEART);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.COMBAT) {

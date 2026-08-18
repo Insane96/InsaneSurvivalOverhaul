@@ -3,6 +3,7 @@
   * A new Data Pack that removes sapling drops from tree and makes them craftable from leaves
   * Removed Sapling Drop Fix data pack
 * Increased default Max Health Death Penalty min health
+* Renamed Max Health Death Penalty to Death Max Health Penalty
 * Renamed Death Penalty to Death Inventory Penalty
 
 # 5.8.0.1-beta
