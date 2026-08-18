@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ore_rock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "insanesurvivaloverhaul:copper_ore_rock"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:raw_copper_from_blasting_copper_ore_rock"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_ore_rock",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:raw_copper_from_blasting_copper_ore_rock"
+    ]
+  }
+}
