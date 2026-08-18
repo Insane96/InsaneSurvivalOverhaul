@@ -26,7 +26,7 @@ import java.util.function.Predicate;
 
 @LoadFeature(module = ISOModules.DEATH,
 		description = "Makes you lose a percentage of items and durability and xp on death. By default the game rules are all set to 0. Controlled via game rules.\nItems percentage lost can be configured with the insanesurvivaloverhaul:death_lose_items_percentage, insanesurvivaloverhaul:death_durability_penalty and insanesurvivaloverhaul:death_destroy_items game rules.\n insanesurvivaloverhaul:death_experience_lost for the percentage of experience dropped and insanesurvivaloverhaul:death_destroy_experience if the experience should be dropped or destroyed.\nPlease note that this feature controls the vanilla keep_inventory game rule.", enabledByDefault = false)
-public class DeathPenalty extends Feature {
+public class DeathInventoryPenalty extends Feature {
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHLOSEITEMSPERCENTAGE = GameRules.register("insanesurvivaloverhaul:death_lose_items_percentage", GameRules.Category.PLAYER, GameRulesIntegerValueAccessor.invokeCreate(0, 0, 100, (server, value) -> {}));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHDURABILITYPENALTY = GameRules.register("insanesurvivaloverhaul:death_durability_penalty", GameRules.Category.PLAYER, GameRulesIntegerValueAccessor.invokeCreate(0, 0, 100, (server, value) -> {}));
 	public static final GameRules.Key<GameRules.BooleanValue> RULE_DEATHDESTROYITEMS = GameRules.register("insanesurvivaloverhaul:death_destroy_items", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));

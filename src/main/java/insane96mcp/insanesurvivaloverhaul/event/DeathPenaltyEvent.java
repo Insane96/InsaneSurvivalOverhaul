@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.event;
 
+import insane96mcp.insanesurvivaloverhaul.module.death.DeathInventoryPenalty;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.Event;
@@ -12,7 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * Fired on NeoForge's event bus before {@link insane96mcp.insanesurvivaloverhaul.module.death.DeathPenalty}
+ * Fired on NeoForge's event bus before {@link DeathInventoryPenalty}
  * processes item and experience loss on player death.
  * <p>
  * <b>Cancel</b> to skip all penalties entirely (e.g. player respawning at a Pillar).
