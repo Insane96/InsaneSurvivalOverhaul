@@ -1,3 +1,9 @@
+# Upcoming
+* Craftable Saplings
+  * A new Data Pack that removes sapling drops from tree and makes them craftable from leaves
+  * Removed Sapling Drop Fix data pack
+* Renamed Death Penalty to Death Inventory Penalty
+
 # 5.8.0.1-beta
 * Nerfed apple pie
 * Fixed bone meal on dirt near grass not working with non light-blocking blocks above
