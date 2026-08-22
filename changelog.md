@@ -5,6 +5,7 @@
 * Increased default Max Health Death Penalty min health
 * Renamed Max Health Death Penalty to Death Max Health Penalty
 * Renamed Death Penalty to Death Inventory Penalty
+* Possibly fixed game crashing when other mods try to add items to creative inventory which were removed with Creative Removal
 
 # 5.8.0.1-beta
 * Nerfed apple pie

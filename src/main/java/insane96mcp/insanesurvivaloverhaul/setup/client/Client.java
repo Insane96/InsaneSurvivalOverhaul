@@ -80,7 +80,7 @@ public class Client {
             }
             if (Feature.isEnabled(Cloth.class)
                     && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
-                    addAfter(event, Items.LEAD, Items.BUNDLE);
+                addAfter(event, Items.LEAD, Items.BUNDLE);
             if (Feature.isEnabled(DeathMaxHealthPenalty.class)) {
                 addAfter(event, Items.ELYTRA, DeathMaxHealthPenalty.CRYSTAL_HEART);
             }
@@ -146,6 +146,9 @@ public class Client {
                 addAfter(event, Items.GOLD_NUGGET, CopperEquipment.NUGGET);
             }
         }
+    }
+
+    public static void onBuildCreativeModeTabContentsLowest(final BuildCreativeModeTabContentsEvent event) {
         BuiltInRegistries.ITEM.getTag(CreativeRemoval.ITEM_TAG).ifPresent(holders -> {
             for (Holder<Item> holder : holders) {
                 remove(event, holder.value());
