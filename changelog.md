@@ -2,10 +2,12 @@
 * Craftable Saplings
   * A new Data Pack that removes sapling drops from tree and makes them craftable from leaves
   * Removed Sapling Drop Fix data pack
-* Increased default Max Health Death Penalty min health
+* Death Max Health penalty now only works on extra hearts past 10
 * Renamed Max Health Death Penalty to Death Max Health Penalty
 * Renamed Death Penalty to Death Inventory Penalty
 * Possibly fixed game crashing when other mods try to add items to creative inventory which were removed with Creative Removal
+* Fixed Golden Apple removal not in the food_changes data pack
+* Moved Creative Removal to InsaneLib
 
 # 5.8.0.1-beta
 * Nerfed apple pie

@@ -37,7 +37,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -96,7 +95,6 @@ public class InsaneSO {
             eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(UnfairOneShotClient::onRenderTick);
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
-            eventBus.addListener(EventPriority.LOWEST, Client::onBuildCreativeModeTabContentsLowest);
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);

@@ -34,7 +34,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class DeathMaxHealthPenalty extends Feature {
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHHEALTHLOST = GameRules.register("insanesurvivaloverhaul:death_health_lost", GameRules.Category.PLAYER, GameRules.IntegerValue.create(2));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_MAXHEALTHFROMCRYSTAL = GameRules.register("insanesurvivaloverhaul:max_health_from_crystal", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
-	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHMINHEALTH = GameRules.register("insanesurvivaloverhaul:death_min_health", GameRules.Category.PLAYER, GameRules.IntegerValue.create(10));
+	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHMINHEALTH = GameRules.register("insanesurvivaloverhaul:death_min_health", GameRules.Category.PLAYER, GameRules.IntegerValue.create(20));
 
 	public static final DeferredHolder<Item, CrystalHeartItem> CRYSTAL_HEART = ISORegistries.ITEMS.register("crystal_heart", () -> new CrystalHeartItem(new Item.Properties().rarity(Rarity.RARE)));
 

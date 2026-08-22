@@ -9,7 +9,6 @@ import insane96mcp.insanesurvivaloverhaul.module.items.StackSizes;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
-import insane96mcp.insanesurvivaloverhaul.module.misc.CreativeRemoval;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
@@ -105,9 +104,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.SUSPICIOUS_STEW, Items.MUSHROOM_STEW, Items.RABBIT_STEW)
                 .add(FoodDrinks.FUNGI_STEW.value())
                 .add(FoodDrinks.COD_CHOWDER.value(), FoodDrinks.PUFFERFISH_CHOWDER.value());
-
-        tag(CreativeRemoval.ITEM_TAG)
-                .add(Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
 
         tag(TerrainSlowdown.SNOW_SLOWDOWN_IGNORE)
                 .add(Items.LEATHER_BOOTS)

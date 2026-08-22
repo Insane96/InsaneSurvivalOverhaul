@@ -97,7 +97,7 @@ public class FoodDrinks extends JsonFeature {
 
 	@Config(description = "Enables a data pack that makes food no longer smeltable in furnaces and changes smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
 	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
-	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous. Also allows mushroom stews to be crafted with any mushroom.")
+	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous. Also allows mushroom stews to be crafted with any mushroom and removes golden apples.")
 	public static Boolean foodChanges = true;
 
 	@Override
