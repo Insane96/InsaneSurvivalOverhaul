@@ -1,21 +1,32 @@
-name: Publish on CurseForge & Modrinth    #The name of your GitHub Action on github.com
+name: Publish to GitHub Release
 
-on: [ workflow_dispatch ]                 #When your GitHub Action will be executed ('pull_request' -> on every Merge(/Pull) Request; 'workflow_dispatch' -> allows manual execution through github.com
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release 标签（例如 v1.2.3）'
+        required: true
+        default: 'v1.0.0'
+      release_name:
+        description: 'Release 名称（留空则自动使用标签名）'
+        required: false
+        default: ''
+      draft:
+        description: '是否为草稿（true / false）'
+        required: false
+        default: false
+      prerelease:
+        description: '是否为预发布（true / false）'
+        required: false
+        default: false
 
-env:                                      #Environment variables that can later be referenced using ${{ env.MINECRAFT_VERSION }}. These are useful for repeating information and allow for quick changes for new mod updates
-  MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-  CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 必须授予写入权限，才能创建 Release 和上传附件
 
-permissions:
-  contents: write
-
-jobs:                                     #The place where you actually tell the GitHub server what to do.
-  build:                                  #To publish your mod you only need one 'job', here it is called 'build'.
-    runs-on: ubuntu-latest                #'runs-on' specifies the operating system (linux).
-    steps:                                #Under 'steps' you will list all the individual commands, such as MC-Publish by Kir-Antipov.
-      - name: Check Environment Variables
-        run: env
-
+    steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
@@ -31,19 +42,22 @@ jobs:                                     #The place where you actually tell the
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
 
-      - name: Build
+      - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: Publish (CurseForge+Modrinth)
-        uses: Kir-Antipov/mc-publish@v3.3
+      # 删除可能存在的 slim 版本（避免上传多余文件）
+      - name: Remove slim variant
+        run: rm -f build/libs/*-slim.jar
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          curseforge-id: 285690
-          curseforge-token: "${{env.CURSEFORGE_TOKEN}}"
-
-          modrinth-id: 72JfV3Be
-          modrinth-token: "${{env.MODRINTH_TOKEN}}"
-
+          tag_name: ${{ github.event.inputs.tag_name }}
+          name: ${{ github.event.inputs.release_name }}
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: ${{ github.event.inputs.prerelease }}
+          generate_release_notes: true   # 自动生成 Release 说明（基于 commit 历史）
           files: |
-            build/libs/!(*-@(slim)).jar
-
-          changelog: https://github.com/Insane96/IguanaTweaksReborn/blob/1.20.1/changelog.md
+            build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
