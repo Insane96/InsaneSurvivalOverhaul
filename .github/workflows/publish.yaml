@@ -1,30 +1,29 @@
-name: Publish to GitHub Release
+name: Build and Release to GitHub
 
 on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Release 标签（例如 v1.2.3）'
+        description: 'Release tag (e.g. v1.2.3)'
         required: true
         default: 'v1.0.0'
       release_name:
-        description: 'Release 名称（留空则自动使用标签名）'
+        description: 'Release name (optional)'
         required: false
-        default: ''
       draft:
-        description: '是否为草稿（true / false）'
+        description: 'Draft?'
         required: false
-        default: false
+        default: 'false'
       prerelease:
-        description: '是否为预发布（true / false）'
+        description: 'Pre-release?'
         required: false
-        default: false
+        default: 'false'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # 创建 Release 需要写入权限
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -35,10 +34,12 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          distribution: "temurin"
+          distribution: 'temurin'
           java-version: 17
 
-      # 缓存 Gradle 依赖（包括下载的 jar 包），加速后续运行
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+
       - name: Cache Gradle Dependencies
         uses: actions/cache@v4
         with:
@@ -49,64 +50,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # 生成 init.gradle 脚本，添加备用仓库，以应对原仓库不可用的情况
-      - name: Create Gradle Init Script
-        run: |
-          cat > init.gradle << 'EOF'
-          allprojects {
-            repositories {
-              // 添加多个备用仓库，提高解析成功率
-              mavenCentral()
-              maven {
-                name = "MinecraftForge"
-                url = "https://maven.minecraftforge.net/"
-              }
-              maven {
-                name = "CurseForge"
-                url = "https://cursemaven.com/"
-              }
-              maven {
-                name = "SpongePowered"
-                url = "https://repo.spongepowered.org/maven/"
-              }
-              // 原有仓库保留，但放在后面作为 fallback
-              maven {
-                name = "Progwml6"
-                url = "https://dvs1.progwml6.com/files/maven/"
-              }
-              // 如果项目还有其他自定义仓库，它们会在 build.gradle 中定义，这里只是添加额外备选
-            }
-          }
-          EOF
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-daemon
 
-      # 尝试构建，如果失败则重试一次（因为网络问题可能短暂）
-      - name: Build with Gradle (with retry)
-        run: |
-          for i in {1..2}; do
-            echo "Attempt $i of 2"
-            if ./gradlew clean build --no-daemon --refresh-dependencies --init-script init.gradle; then
-              echo "Build succeeded!"
-              exit 0
-            else
-              echo "Build failed, retrying..."
-              sleep 5
-            fi
-          done
-          echo "Build failed after 2 attempts."
-          exit 1
-
-      # 删除可能存在的 slim 版本（避免上传多余文件）
-      - name: Remove slim variant
+      - name: Remove slim variants (if any)
         run: rm -f build/libs/*-slim.jar || true
 
-      # 上传构建产物到 GitHub Release
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.event.inputs.tag_name }}
           name: ${{ github.event.inputs.release_name }}
-          draft: ${{ github.event.inputs.draft }}
-          prerelease: ${{ github.event.inputs.prerelease }}
+          draft: ${{ github.event.inputs.draft == 'true' }}
+          prerelease: ${{ github.event.inputs.prerelease == 'true' }}
           generate_release_notes: true
           files: |
             build/libs/*.jar
