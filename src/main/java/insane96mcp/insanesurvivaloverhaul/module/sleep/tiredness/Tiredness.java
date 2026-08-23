@@ -44,6 +44,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
@@ -116,6 +118,12 @@ public class Tiredness extends JsonFeature {
 	public static MinMaxConfig fakeSound$cooldownBetweenMobs = new MinMaxConfig(12000, 24000);
 	@Config(min = 0, description = "How many times will a fake sound of a mob play before going into cooldown")
 	public static MinMaxConfig fakeSound$times = new MinMaxConfig(2, 6);
+	@Config(description = "Whether fake footstep sounds should also play near the player while a fake mob sound is active")
+	public static Boolean fakeSound$steps = true;
+	@Config(min = 0, description = "Ticks between fake footstep sounds while a fake mob is active. This is reduced with higher Tired effect levels")
+	public static MinMaxConfig fakeSound$stepInterval = new MinMaxConfig(8, 15);
+	@Config(min = 0d, description = "Max horizontal distance (in blocks) the fake mob is allowed to wander from the player while playing footsteps")
+	public static Double fakeSound$wanderRadius = 16d;
 	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
 	public static Boolean tiredTiedPhantoms = true;
     @Config
@@ -170,6 +178,7 @@ public class Tiredness extends JsonFeature {
 	private static long fakeSoundCooldown = 1200;
 	private static long fakeSoundTimesToPlay = 0;
 	private static long ambientSoundTime = 0;
+	private static long fakeStepCooldown = 0;
 	private static Mob mobFakeSound;
 	private static BlockPos fakeMobPos;
 
@@ -210,6 +219,21 @@ public class Tiredness extends JsonFeature {
 			mobFakeSound = (Mob) entity;
 			fakeSoundTimesToPlay = (int) (random.triangle(fakeSound$times.min, fakeSound$times.max + 1));
 			fakeMobPos = event.getEntity().blockPosition();
+			fakeStepCooldown = fakeSound$stepInterval.getIntRandBetween(random);
+		}
+		if (mobFakeSound != null && fakeSound$steps && --fakeStepCooldown <= 0) {
+			fakeMobPos = wanderFakeMobPos(event.getEntity(), random);
+			BlockPos groundPos = fakeMobPos.below();
+			SoundType soundType = event.getEntity().level().getBlockState(groundPos).getSoundType(event.getEntity().level(), groundPos, mobFakeSound);
+			event.getEntity().level().playSound(event.getEntity(),
+					fakeMobPos.getX() + getRandomRange(random),
+					fakeMobPos.getY() + getRandomRange(random),
+					fakeMobPos.getZ() + getRandomRange(random),
+					soundType.getStepSound(),
+					mobFakeSound.getSoundSource(),
+					soundType.getVolume() * 0.15F,
+					soundType.getPitch());
+			fakeStepCooldown = (long) (fakeSound$stepInterval.getIntRandBetween(random) * (1f - 0.15f * amplifier));
 		}
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
 			SoundEvent soundEvent = ((MobAccessor)mobFakeSound).ambientSound();
@@ -228,6 +252,25 @@ public class Tiredness extends JsonFeature {
 		}
 	}
 
+	private static BlockPos wanderFakeMobPos(Player player, RandomSource random) {
+		int dx = random.nextInt(3) - 1;
+		int dz = random.nextInt(3) - 1;
+		BlockPos wandered = fakeMobPos.offset(dx, 0, dz);
+
+		BlockPos playerPos = player.blockPosition();
+		double distX = wandered.getX() - playerPos.getX();
+		double distZ = wandered.getZ() - playerPos.getZ();
+		if (distX * distX + distZ * distZ > fakeSound$wanderRadius * fakeSound$wanderRadius) {
+			//Too far from the player, step back towards them instead
+			dx = Integer.compare(playerPos.getX(), fakeMobPos.getX());
+			dz = Integer.compare(playerPos.getZ(), fakeMobPos.getZ());
+			wandered = fakeMobPos.offset(dx, 0, dz);
+		}
+
+		int groundY = player.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, wandered.getX(), wandered.getZ());
+		return new BlockPos(wandered.getX(), groundY, wandered.getZ());
+	}
+
 	private static double getRandomRange(RandomSource random) {
 		double randomRange = random.nextFloat() * 24d - 12d;
 		if (randomRange > -6 && randomRange < 0)
@@ -240,6 +283,7 @@ public class Tiredness extends JsonFeature {
 	private void resetMobFakeSound(RandomSource random, int reduction) {
 		fakeSoundTimesToPlay = 0;
 		fakeSoundCooldown = (long) (fakeSound$cooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.15f * reduction));
+		fakeStepCooldown = 0;
 		mobFakeSound = null;
 	}
 
