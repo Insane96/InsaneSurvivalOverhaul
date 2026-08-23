@@ -5,6 +5,7 @@
 * Death Max Health penalty now only works on extra hearts past 10
 * Renamed Max Health Death Penalty to Death Max Health Penalty
 * Renamed Death Penalty to Death Inventory Penalty
+* Moved some features to new Module: Respawn
 * Possibly fixed game crashing when other mods try to add items to creative inventory which were removed with Creative Removal
 * Fixed Golden Apple removal not in the food_changes data pack
 * Moved Creative Removal to InsaneLib

@@ -1,7 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
@@ -9,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
+import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;

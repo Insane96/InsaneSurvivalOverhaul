@@ -1,7 +1,5 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillar;
-import insane96mcp.insanesurvivaloverhaul.module.death.respawn.EchoPillarBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -10,6 +8,8 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockB
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
+import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
+import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillarBlock;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;

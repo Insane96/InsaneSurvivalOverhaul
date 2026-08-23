@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.death;
+package insane96mcp.insanesurvivaloverhaul.module.respawn;
 
 import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
@@ -18,8 +18,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-@LoadFeature(module = ISOModules.DEATH, description = "Health and hunger penalties on respawn")
-public class RespawnPenalties extends Feature {
+@LoadFeature(module = ISOModules.RESPAWN, description = "Health and hunger penalties on respawn")
+public class Penalties extends Feature {
 	
 	public static ResourceLocation HUNGER_ON_DEATH_TAG;
 	public static ResourceLocation SATURATION_ON_DEATH_TAG;

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.death.respawn;
+package insane96mcp.insanesurvivaloverhaul.module.respawn;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -26,11 +26,11 @@ import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-@LoadFeature(module = ISOModules.DEATH, description = "Adds loose respawning: players respawn at a random offset from world spawn or bed. Disabled by default via insanesurvivaloverhaul:do_loose_respawn game rule.")
-public class LooseRespawn extends Feature {
+@LoadFeature(module = ISOModules.RESPAWN, description = "Adds loose respawning: players respawn at a random offset from world spawn or bed. Disabled by default via insanesurvivaloverhaul:ranged_respawn game rule.")
+public class RangedRespawn extends Feature {
 	public static final String LOOSE_WORLD_RESPAWN_POINT = InsaneSO.lang("loose_world_respawn_point");
 	public static final String LOOSE_BED_RESPAWN_POINT = InsaneSO.lang("loose_bed_respawn_point");
-	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register(InsaneSO.MOD_ID + ":do_loose_respawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
+	public static final GameRules.Key<GameRules.BooleanValue> RULE_RANGEDRESPAWN = GameRules.register(InsaneSO.MOD_ID + ":ranged_respawn", GameRules.Category.PLAYER, GameRules.BooleanValue.create(false));
 
 	@Config(min = 0, description = "The range from world spawn where players will respawn.")
 	public static MinMaxConfig looseWorldSpawnRange = new MinMaxConfig(128d, 256d);
@@ -51,7 +51,7 @@ public class LooseRespawn extends Feature {
 	}
 
 	public static Optional<Vec3> tryLooseRespawn(ServerLevel level, ServerPlayer player) {
-		if (!Feature.isEnabled(LooseRespawn.class)
+		if (!Feature.isEnabled(RangedRespawn.class)
 				|| !level.getGameRules().getBoolean(RULE_RANGEDRESPAWN))
 			return Optional.empty();
 

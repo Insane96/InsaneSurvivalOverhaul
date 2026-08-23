@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.death.respawn;
+package insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar;
 
 import com.google.common.collect.ImmutableList;
 import insane96mcp.insanelib.data.SerializableMobEffectInstance;

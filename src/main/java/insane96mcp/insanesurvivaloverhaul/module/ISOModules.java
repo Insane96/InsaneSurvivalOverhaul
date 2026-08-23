@@ -17,6 +17,7 @@ public class ISOModules {
 	public static final String MISC = InsaneSO.MOD_ID + ":misc";
 	public static final String MOBS = InsaneSO.MOD_ID + ":mobs";
 	public static final String MOVEMENT = InsaneSO.MOD_ID + ":movement";
+	public static final String RESPAWN = InsaneSO.MOD_ID + ":respawn";
 	public static final String SLEEP = InsaneSO.MOD_ID + ":sleep";
 	public static final String WORLD = InsaneSO.MOD_ID + ":world";
 
@@ -30,6 +31,7 @@ public class ISOModules {
 		create(MISC, "Misc", eventBus, builder);
 		create(MOBS, "Mobs", eventBus, builder);
 		create(MOVEMENT, "Movement", eventBus, builder);
+		create(RESPAWN, "Respawn", eventBus, builder);
 		create(SLEEP, "Sleep", eventBus, builder);
 		create(WORLD, "World", eventBus, builder);
 	}

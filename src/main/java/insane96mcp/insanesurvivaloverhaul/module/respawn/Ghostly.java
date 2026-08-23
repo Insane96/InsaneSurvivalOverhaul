@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.death.respawn;
+package insane96mcp.insanesurvivaloverhaul.module.respawn;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.DEATH, description = "Gives the player the Ghostly effect on respawn, making you really hard to see for mobs.")
+@LoadFeature(module = ISOModules.RESPAWN, description = "Gives the player the Ghostly effect on respawn, making you really hard to see for mobs.")
 public class Ghostly extends Feature {
 	public static final DeferredHolder<MobEffect, ILMobEffect> GHOSTLY = ISORegistries.MOB_EFFECTS.register("ghostly", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x857965, true));
 
