@@ -6,7 +6,7 @@
 * Craftable Saplings
   * A new Data Pack that removes sapling drops from tree and makes them craftable from leaves
   * Removed Sapling Drop Fix data pack
-* Death Max Health penalty now only works on extra hearts past 10
+* Death Max Health penalty now only works on extra hearts past 10, and reverted crafting recipe to 27 diamonds
 * Renamed Max Health Death Penalty to Death Max Health Penalty
 * Renamed Death Penalty to Death Inventory Penalty
 * Moved some features to new Module: Respawn
