@@ -1,4 +1,4 @@
-# Upcoming
+# 5.9.0.0
 * Added Main Bed feature
   * You can crouch-right-click on a bed with an empty hand to set it as your main bed. If you lose the respawn point of another bed, your spawn point will be set to your main bed.  
     This is useful if you set your respawn point far away and then break the bed and when home you forget to set your respawn point there.
