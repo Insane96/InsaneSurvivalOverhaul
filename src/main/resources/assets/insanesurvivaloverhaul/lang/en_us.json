@@ -171,6 +171,12 @@
     "advancements.insanesurvivaloverhaul.overweight_pouch.description": "Get a movement speed penalty by carrying too many Pouches",
 
 
+    "insanesurvivaloverhaul:respawn_module": "Respawn",
+    "insanesurvivaloverhaul.set_main_bed_with_crouch": "Crouch right-click with an empty hand on the bed to set it as your main respawn bed. A main respawn bed will automatically be set as your respawn point if you lose another bed's respawn point.",
+    "insanesurvivaloverhaul.main_bed_set": "Main bed set",
+    "insanesurvivaloverhaul.main_bed_set_as_respawn_point": "Respawn point set at your main bed",
+
+
     "insanesurvivaloverhaul:sleep_module": "Sleep",
 
     "item.insanesurvivaloverhaul.cloth": "Cloth",
