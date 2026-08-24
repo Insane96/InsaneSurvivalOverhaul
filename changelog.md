@@ -1,4 +1,6 @@
 # Upcoming
+* Added Stuck Arrows
+  * Mobs hit with arrows will now have a chance to drop on death
 * Snow golems now drop the pumpkin on their head on death
 
 # 5.9.0.0
