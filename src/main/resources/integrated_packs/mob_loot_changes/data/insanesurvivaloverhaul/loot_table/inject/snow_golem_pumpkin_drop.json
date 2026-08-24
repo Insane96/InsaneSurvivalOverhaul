@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:entity",
+    "pools": [
+        {
+            "rolls": 1,
+            "bonus_rolls": 0,
+            "conditions": [
+                {
+                    "condition": "minecraft:entity_properties",
+                    "entity": "this",
+                    "predicate": {
+                        "nbt": "{Pumpkin:1b}"
+                    }
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:carved_pumpkin"
+                }
+            ]
+        }
+    ],
+    "random_sequence": "insanesurvivaloverhaul:entities/snow_golem_pumpkin_drop"
+}

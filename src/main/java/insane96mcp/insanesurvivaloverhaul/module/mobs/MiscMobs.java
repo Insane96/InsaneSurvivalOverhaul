@@ -28,7 +28,7 @@ public class MiscMobs extends Feature {
     @Config(description = "Iron golems no longer deal randomized damage, but fixed attack_damage attribute damage instead")
     public static Boolean fixedIronGolemDamage = true;
 
-    @Config(description = "Changes mobs loot and makes mobs drop reduced loot if not killed by a player")
+    @Config(description = "Reworks the loot tables of several mobs (blaze, cave spider, creeper, enderman, ghast, magma cube, phantom, piglin brute, pillager, skeleton, slime, spider, stray, witch, wither skeleton, zombified piglin), gives bogged extra drops (glowstone dust, mushrooms), makes snow golems drop their carved pumpkin on death if they still have it, and makes mobs drop reduced loot if not killed by a player")
     public static Boolean lootChanges = true;
     @Config(description = "If true, renames Heart of the Sea to Divine Fragment and retextures it accordingly")
     public static Boolean renameHeartOfTheSeaToDivineFragment = true;

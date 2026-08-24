@@ -1,0 +1,10 @@
+{
+    "type": "neoforge:add_table",
+    "conditions": [
+        {
+            "condition": "neoforge:loot_table_id",
+            "loot_table_id": "minecraft:entities/snow_golem"
+        }
+    ],
+    "table": "insanesurvivaloverhaul:inject/snow_golem_pumpkin_drop"
+}
