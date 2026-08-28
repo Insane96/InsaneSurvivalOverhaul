@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "minecraft:spruce_leaves"
+        }
+    ],
+    "result": {
+        "id": "minecraft:spruce_sapling"
+    }
+}
