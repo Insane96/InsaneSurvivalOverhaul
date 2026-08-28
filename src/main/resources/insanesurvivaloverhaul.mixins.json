@@ -38,6 +38,7 @@
 		"module.combat.regeneratingabsorption.LivingEntityMixin_RegeneratingAbsorption",
 		"module.combat.shields.LivingEntityMixin_Shields",
 		"module.combat.shields.PlayerMixin_Shields",
+		"module.combat.sweepingoverhaul.PlayerMixin_SweepingOverhaul",
 		"module.farming.ComposterBlockMixin_BoneMeal",
 		"module.farming.FarmBlockMixin_Crops",
 		"module.farming.livestock.AnimalMixin_Livestock",
