@@ -5,6 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
@@ -92,6 +93,8 @@ public class ISOLootTableProvider extends LootTableProvider {
                 BigOreVeins.COPPER_ORE_ROCK.block().get(), hasSilkTouch(),
                 applyExplosionDecay(BigOreVeins.COPPER_ORE_ROCK.block().get(), LootItem.lootTableItem(Items.RAW_COPPER))));
 
+            add(GlowBlockFeature.GLOW_BLOCK.block().get(), createSingleItemTable(GlowBlockFeature.GLOW_BLOCK.item().get()));
+
             add(Crops.WILD_WHEAT.get(), wildCropTable(Items.WHEAT_SEEDS, Items.WHEAT, null, null));
             add(Crops.WILD_BEETROOTS.get(), wildCropTable(Items.BEETROOT_SEEDS, Items.BEETROOT, null, null));
             add(Crops.WILD_CARROTS.get(), wildCropTable(Crops.CARROT_SEEDS.get(), Items.CARROT, Items.AZURE_BLUET, null));
@@ -149,7 +152,8 @@ public class ISOLootTableProvider extends LootTableProvider {
                 Minecarts.GOLDEN_POWERED_RAIL.block().get(),
                 BigOreVeins.IRON_ORE_ROCK.block().get(),
                 BigOreVeins.GOLD_ORE_ROCK.block().get(),
-                BigOreVeins.COPPER_ORE_ROCK.block().get()
+                BigOreVeins.COPPER_ORE_ROCK.block().get(),
+                GlowBlockFeature.GLOW_BLOCK.block().get()
             );
         }
     }

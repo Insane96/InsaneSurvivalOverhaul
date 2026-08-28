@@ -20,6 +20,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
@@ -39,6 +40,7 @@ public class ISORegistries {
     public static final DeferredRegister<Item> MINECRAFT_ITEMS = createRegistryForNamespace(BuiltInRegistries.ITEM, "minecraft");
     public static final DeferredRegister<ArmorMaterial> MINECRAFT_ARMOR_MATERIALS = createRegistryForNamespace(BuiltInRegistries.ARMOR_MATERIAL, "minecraft");
     public static final DeferredRegister<Block> BLOCKS = createRegistry(BuiltInRegistries.BLOCK);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = createRegistry(BuiltInRegistries.BLOCK_ENTITY_TYPE);
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(BuiltInRegistries.SOUND_EVENT);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = createRegistry(BuiltInRegistries.MOB_EFFECT);

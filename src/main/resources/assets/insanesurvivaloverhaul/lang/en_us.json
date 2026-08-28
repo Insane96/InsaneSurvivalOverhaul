@@ -229,6 +229,9 @@
     "item.insanesurvivaloverhaul.firestarter": "Firestarter",
     "item.insanesurvivaloverhaul.firestarter.tooltip": "Hold right click to use",
     "block.insanesurvivaloverhaul.burnt_log": "Burnt Log",
+    "block.insanesurvivaloverhaul.glow_block": "Glow Block",
+    "hud_info.glow_block_aligned": "%s Aligned",
+    "hud_info.glow_block_not_aligned": "Not aligned",
 
     "death.fell.accident.water": "%s thought could drop in shallow water safely",
 

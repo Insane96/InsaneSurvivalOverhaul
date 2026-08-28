@@ -5,6 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBl
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockBlock;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
@@ -49,6 +50,10 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         oreRock(BigOreVeins.COPPER_ORE_ROCK, "copper_ore");
 
         echoPillar();
+
+        simpleBlock(GlowBlockFeature.GLOW_BLOCK.block().get(),
+            models().cubeAll("glow_block", modLoc("block/glow_block"))
+                .renderType("translucent"));
     }
 
     private void echoLantern() {

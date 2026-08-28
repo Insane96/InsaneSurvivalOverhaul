@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T11:04:05.9336719	Item Models: insanesurvivaloverhaul
+// 1.21.1	2026-08-28T13:10:33.6581561	Item Models: insanesurvivaloverhaul
 4de87cd756d603f823dd5d0569307e01db018c9a assets/insanesurvivaloverhaul/models/item/apple_pie.json
 0b7b3934507ba3180fc1b13b5f466fec26172397 assets/insanesurvivaloverhaul/models/item/burnt_log.json
 92a1f1b3c5712f08d8ce52182c55d106f387a021 assets/insanesurvivaloverhaul/models/item/carrot_seeds.json
@@ -52,6 +52,7 @@ f25cdd5c56e8776122963dc1cbc9d07caeab35a9 assets/insanesurvivaloverhaul/models/it
 8e57e5eebb5df89b2ff85e7e3f3cb8091c4d7e58 assets/insanesurvivaloverhaul/models/item/echo_pillar.json
 97ae78e112bee2325081706d3ee9b7947fa8470b assets/insanesurvivaloverhaul/models/item/firestarter.json
 da13b18428ab3a29ebc71851f621cdb02efce03f assets/insanesurvivaloverhaul/models/item/fungi_stew.json
+a919d2105fffe82a4b32f3253e6a6d362d065a8a assets/insanesurvivaloverhaul/models/item/glow_block.json
 8f8e524dd9d1a92041b0b63398c2acf3a2a9c503 assets/insanesurvivaloverhaul/models/item/golden_powered_rail.json
 bd2f94a47fe36a93f12a84e2d272683099ad077c assets/insanesurvivaloverhaul/models/item/gold_ore_rock.json
 6ef7503ecb12c213d23714c97b7bbdcf7fcc4120 assets/insanesurvivaloverhaul/models/item/half_heart_texture.json

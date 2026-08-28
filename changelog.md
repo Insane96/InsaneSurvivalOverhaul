@@ -2,6 +2,8 @@
 * Added Stuck Arrows
   * Mobs hit with arrows will now have a chance to drop on death (only normal arrows)
   * I recommend adding a mod that shows stuck arrows on the mob
+* Added Glow Block
+  * A block crafted with amethyst, glow berries and a block of copper that can be seen through walls. Useful to align yourself with the world without coordinates.
 * Snow golems now drop the pumpkin on their head on death
 * Split Sweep Overhaul to its own feature with many config options
 * Fixed missing trees to craftable saplings

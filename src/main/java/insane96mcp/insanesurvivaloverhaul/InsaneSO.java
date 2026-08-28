@@ -24,6 +24,8 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthReg
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockClient;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockEntityRenderer;
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -97,6 +99,9 @@ public class InsaneSO {
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(HudInfos::registerGuiLayers);
+            eventBus.addListener(GlowBlockEntityRenderer::register);
+            eventBus.addListener(GlowBlockClient::registerGuiLayers);
+            NeoForge.EVENT_BUS.addListener(GlowBlockClient::onRenderLevelStage);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
         }
 

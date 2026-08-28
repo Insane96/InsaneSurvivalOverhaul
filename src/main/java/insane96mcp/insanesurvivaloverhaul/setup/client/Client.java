@@ -15,6 +15,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
@@ -98,6 +99,9 @@ public class Client {
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             if (Feature.isEnabled(CoalFire.class)) {
                 addAfter(event, Items.COAL_BLOCK, CoalFire.BURNT_LOG.item());
+            }
+            if (Feature.isEnabled(GlowBlockFeature.class)) {
+                addAfter(event, Items.SEA_LANTERN, GlowBlockFeature.GLOW_BLOCK.item());
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
