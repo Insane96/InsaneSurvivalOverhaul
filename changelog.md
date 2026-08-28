@@ -3,6 +3,7 @@
   * Mobs hit with arrows will now have a chance to drop on death (only normal arrows)
   * I recommend adding a mod that shows stuck arrows on the mob
 * Snow golems now drop the pumpkin on their head on death
+* Split Sweep Overhaul to its own feature with many config options
 * Fixed missing trees to craftable saplings
 
 # 5.9.0.0

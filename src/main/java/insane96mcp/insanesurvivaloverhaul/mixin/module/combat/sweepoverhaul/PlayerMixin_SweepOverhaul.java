@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.combat.sweepingoverhaul;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.combat.sweepoverhaul;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.combat.SweepingOverhaul;
+import insane96mcp.insanesurvivaloverhaul.module.combat.SweepOverhaul;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -15,8 +15,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static insane96mcp.insanesurvivaloverhaul.module.combat.SweepOverhaul.*;
+
 @Mixin(Player.class)
-public class PlayerMixin_SweepingOverhaul {
+public class PlayerMixin_SweepOverhaul {
 
     /**
      * When sweeping overhaul is enabled, sets the sweep damage equal to the full attack damage
@@ -24,7 +26,8 @@ public class PlayerMixin_SweepingOverhaul {
      */
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V", ordinal = 1, shift = At.Shift.AFTER))
     public void insanesurvivaloverhaul$sweepingFullDamage(Entity pTarget, CallbackInfo ci, @Local(ordinal = 0) float f, @Local(ordinal = 5) LocalFloatRef f3) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class)
+                || !fullSweepDamage)
             return;
         f3.set(f);
     }
@@ -35,9 +38,9 @@ public class PlayerMixin_SweepingOverhaul {
      */
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getSweepHitBox(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;"))
     public AABB insanesurvivaloverhaul$sweepingHitbox(AABB original) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class))
             return original;
-        return original.inflate(1.5f, 0.15f, 1.5f);
+        return original.inflate(horizontalSweepInflation, verticalSweepInflation, horizontalSweepInflation);
     }
 
     /**
@@ -45,9 +48,9 @@ public class PlayerMixin_SweepingOverhaul {
      */
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;entityInteractionRange()D"))
     public double insanesurvivaloverhaul$sweepingReach(double original) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class))
             return original;
-        return original + 1f;
+        return original + sweepRangeInflation;
     }
 
     /**
@@ -55,7 +58,8 @@ public class PlayerMixin_SweepingOverhaul {
      */
     @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;onGround()Z", ordinal = 1))
     public boolean insanesurvivaloverhaul$sweepingOffGround(boolean original) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class)
+                || !allowSweepWhenAirborne)
             return original;
         return true;
     }
@@ -67,7 +71,8 @@ public class PlayerMixin_SweepingOverhaul {
     @Expression("flag")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION", ordinal = 0))
     public boolean insanesurvivaloverhaul$sweepingWhileSprinting(boolean original) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class)
+                || !allowSweepWhenSprinting)
             return original;
         return false;
     }
@@ -80,7 +85,8 @@ public class PlayerMixin_SweepingOverhaul {
     @Expression("d0 < (double) this.getSpeed()")
     @ModifyExpressionValue(method = "attack", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     public boolean insanesurvivaloverhaul$sweepingWhileFast(boolean original) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class)
+                || !allowSweepWhenMovingFast)
             return original;
         return true;
     }
@@ -91,7 +97,8 @@ public class PlayerMixin_SweepingOverhaul {
      */
     @ModifyExpressionValue(method = "attack", at = @At(value = "CONSTANT", args = "doubleValue=0.4000000059604645"))
     public double insanesurvivaloverhaul$sweepingKnockbackStrength(double original, @Local(name = "f4") float knockbackStrength) {
-        if (!Feature.isEnabled(SweepingOverhaul.class))
+        if (!Feature.isEnabled(SweepOverhaul.class)
+                || !scaleKnockback)
             return original;
         return knockbackStrength * 0.5F;
     }
