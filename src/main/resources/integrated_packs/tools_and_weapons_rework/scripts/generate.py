@@ -32,6 +32,7 @@ ATTR = {
 MOD_ID = {
     "atk_dmg":        "minecraft:base_attack_damage",
     "atk_spd":        "minecraft:base_attack_speed",
+    "atk_spd_pct":    "insanesurvivaloverhaul:material_attack_speed",
     "entity_reach":   "minecraft:base_entity_reach",
     "atk_knockback":  "insanesurvivaloverhaul:weapon_attack_knockback",
     "crit_chance":    "insanesurvivaloverhaul:base_critical_chance",
@@ -86,13 +87,18 @@ def build_tool_component(tool, mat):
 def build_modifiers(tool, mat):
     mods = []
 
-    atk_dmg = fv(tool["atk_dmg_base"]) + fv(mat["atk_dmg_add"]) + fv(mat["tier_atk_dmg_bonus"])
+    tier_bonus_mult = fv(tool.get("tier_bonus_multiplier", "")) or 1.0
+    atk_dmg = fv(tool["atk_dmg_base"]) + fv(mat["atk_dmg_add"]) + fv(mat["tier_atk_dmg_bonus"]) * tier_bonus_mult
     if atk_dmg:
         mods.append(modifier(ATTR["atk_dmg"], MOD_ID["atk_dmg"], atk_dmg, "add_value"))
 
-    atk_spd = fv(tool["atk_spd_modifier"]) + fv(mat["atk_spd_add"])
+    atk_spd = fv(tool["atk_spd_modifier"])
     if atk_spd:
         mods.append(modifier(ATTR["atk_spd"], MOD_ID["atk_spd"], atk_spd, "add_value"))
+
+    atk_spd_pct = fv(mat["atk_spd_add"])
+    if atk_spd_pct:
+        mods.append(modifier(ATTR["atk_spd"], MOD_ID["atk_spd_pct"], atk_spd_pct, "add_multiplied_base"))
 
     entity_reach = fv(tool["entity_reach_add"])
     mods.append(modifier(ATTR["entity_reach"], MOD_ID["entity_reach"], entity_reach, "add_value"))

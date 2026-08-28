@@ -14,8 +14,15 @@
                 {
                     "type": "minecraft:generic.attack_speed",
                     "id": "minecraft:base_attack_speed",
-                    "amount": -2.6,
+                    "amount": -3.2,
                     "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "insanesurvivaloverhaul:material_attack_speed",
+                    "amount": 0.375,
+                    "operation": "add_multiplied_base",
                     "slot": "mainhand"
                 },
                 {

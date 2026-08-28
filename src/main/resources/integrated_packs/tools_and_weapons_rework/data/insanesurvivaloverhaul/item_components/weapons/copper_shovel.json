@@ -7,7 +7,7 @@
                 {
                     "type": "minecraft:generic.attack_damage",
                     "id": "minecraft:base_attack_damage",
-                    "amount": 3.35,
+                    "amount": 3.6500000000000004,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },

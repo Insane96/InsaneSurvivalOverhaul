@@ -7,15 +7,22 @@
                 {
                     "type": "minecraft:generic.attack_damage",
                     "id": "minecraft:base_attack_damage",
-                    "amount": 4.95,
+                    "amount": 3.95,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },
                 {
                     "type": "minecraft:generic.attack_speed",
                     "id": "minecraft:base_attack_speed",
-                    "amount": -2.6,
+                    "amount": -2.4,
                     "operation": "add_value",
+                    "slot": "mainhand"
+                },
+                {
+                    "type": "minecraft:generic.attack_speed",
+                    "id": "insanesurvivaloverhaul:material_attack_speed",
+                    "amount": -0.125,
+                    "operation": "add_multiplied_base",
                     "slot": "mainhand"
                 },
                 {

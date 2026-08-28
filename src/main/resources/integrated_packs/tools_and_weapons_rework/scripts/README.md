@@ -12,7 +12,7 @@ python scripts/generate.py
 | `material` | Material name, used to build item id (`minecraft:{material}_{tool_type}`) |
 | `max_damage` | `minecraft:max_damage` value |
 | `atk_dmg_add` | `add_value` contribution to `attack_damage` from the material |
-| `atk_spd_add` | `add_value` contribution to `attack_speed` from the material (player base = 4.0) |
+| `atk_spd_add` | `add_multiplied_base` percentage contribution to `attack_speed` from the material, applied to the tool type's post-`atk_spd_modifier` speed (e.g. 0.375 = +37.5%) |
 | `crit_chance_add` | `add_value` modifier for `insanesurvivaloverhaul:critical_chance` |
 
 ## tools.csv columns
