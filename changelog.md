@@ -6,6 +6,7 @@
   * A block crafted with amethyst, glow berries and a block of copper that can be seen through walls. Useful to align yourself with the world without coordinates.
 * Snow golems now drop the pumpkin on their head on death
 * Split Sweep Overhaul to its own feature with many config options
+* Repair merging in the crafting grid can now combine more than 2 items at once (up to 9, configurable via Tweaks)
 * Fixed missing trees to craftable saplings
 
 # 5.9.0.0

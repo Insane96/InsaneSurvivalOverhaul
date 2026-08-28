@@ -87,6 +87,9 @@ public class Tweaks extends Feature {
     @Config(description = "If true, makes ocelots transform into cats when tamed. Like pre ocelot-cat split.")
     public static Boolean ocelotToCat = true;
 
+    @Config(min = 2, max = 9, description = "Max amount of matching, repairable items that can be merged together in a crafting grid to combine their durability (vanilla's repair recipe). Vanilla is 2.")
+    public static Integer repairMergeMaxItems = 9;
+
     public static boolean discreteNameTags = true;
 
     public static boolean doesBlindnessPreventSprint() {

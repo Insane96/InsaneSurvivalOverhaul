@@ -78,6 +78,7 @@
 		"module.misc.tweaks.LeashableMixin_Tweaks",
 		"module.misc.tweaks.LivingEntityMixin_Tweaks",
 		"module.misc.tweaks.PlayerMixin_Tweaks",
+		"module.misc.tweaks.RepairItemRecipeMixin_Tweaks",
 		"module.misc.tweaks.VehicleEntityMixin_Tweaks",
 		"module.mobs.MobMixin_Equipment",
 		"module.mobs.NaturalSpawnerMixin_Spawning",
