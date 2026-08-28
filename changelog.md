@@ -1,6 +1,7 @@
 # Upcoming
 * Added Stuck Arrows
-  * Mobs hit with arrows will now have a chance to drop on death
+  * Mobs hit with arrows will now have a chance to drop on death (only normal arrows)
+  * I recommend adding a mod that shows stuck arrows on the mob
 * Snow golems now drop the pumpkin on their head on death
 
 # 5.9.0.0

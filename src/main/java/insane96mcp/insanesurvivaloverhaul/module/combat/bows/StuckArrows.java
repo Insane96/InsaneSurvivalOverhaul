@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -44,6 +45,9 @@ public class StuckArrows extends Feature {
 
 		AbstractArrowAccessor accessor = (AbstractArrowAccessor) arrow;
 		if (accessor.getPickup() != AbstractArrow.Pickup.ALLOWED)
+			return;
+
+		if (accessor.invokeGetPickupItem().getItem() != Items.ARROW)
 			return;
 
 		ListTag stuckArrows = ModNBTData.getList(mob, STUCK_ARROWS, Tag.TAG_COMPOUND);
