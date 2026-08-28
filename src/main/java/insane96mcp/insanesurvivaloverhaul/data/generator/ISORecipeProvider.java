@@ -4,6 +4,7 @@ import insane96mcp.insanelib.data.FeatureEnabledCondition;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import net.minecraft.core.HolderLookup;
@@ -64,5 +65,17 @@ public class ISORecipeProvider extends RecipeProvider {
                 .requires(Crops.SOLANUM_NEOROSSII.item().get(), 1)
                 .unlockedBy("has_flower", has(Crops.SOLANUM_NEOROSSII.item().get()))
                 .save(recipeOutput);
+
+        new ShapedRecipeBuilder(RecipeCategory.BUILDING_BLOCKS, GlowBlockFeature.GLOW_BLOCK.item().get(), 1)
+                .pattern("ASA")
+                .pattern("SCS")
+                .pattern("ASA")
+                .define('A', Items.AMETHYST_SHARD)
+                .define('S', Items.GLOW_BERRIES)
+                .define('C', Items.COPPER_BLOCK)
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
+                .unlockedBy("has_glow_berries", has(Items.GLOW_BERRIES))
+                .unlockedBy("has_copper_block", has(Items.COPPER_BLOCK))
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Glow through walls")));
     }
 }

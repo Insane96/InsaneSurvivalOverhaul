@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Glow through walls"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "S": {
+      "item": "minecraft:glow_berries"
+    }
+  },
+  "pattern": [
+    "ASA",
+    "SCS",
+    "ASA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "insanesurvivaloverhaul:glow_block"
+  }
+}

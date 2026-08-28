@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
@@ -105,6 +106,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         blockItem(BigOreVeins.COPPER_ORE_ROCK);
 
         basicItem(DeathMaxHealthPenalty.CRYSTAL_HEART.get());
+
+        blockItem(GlowBlockFeature.GLOW_BLOCK);
     }
 
     private ItemModelBuilder blockItem(SimpleBlockWithItem block) {
