@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-28T18:12:51.578846	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-08-29T09:36:57.3160633	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 ba9125aa546790a0582445879c658b228dbb763c data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/axe.json
 bdb4053d28def340c591bb6cd77b677cfe510db6 data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/pickaxe.json
@@ -28,7 +28,10 @@ a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/s
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json
 ed22a6aa713f2e727863db9e057a12586f9e6e06 data/minecraft/tags/item/chest_armor.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/durability.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/fire_aspect.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/sharp_weapon.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/sword.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/weapon.json
 a13f9b819773737709da6158672b74d01bd060bb data/minecraft/tags/item/flowers.json
 929ed8908e30d0d53d1dd4542cd73887433195b2 data/minecraft/tags/item/foot_armor.json
@@ -38,3 +41,4 @@ e28f50746e4e9e4cae772a8b9dbe02ec99154db1 data/minecraft/tags/item/leg_armor.json
 095ea6afdff82bb3443964ea8bc44df449a5a598 data/minecraft/tags/item/pickaxes.json
 b2728fd9af2736b3f41ace66cef4238777832991 data/minecraft/tags/item/shovels.json
 7071a29b9ae8cbf63effca275c2b26c0ce2f9048 data/minecraft/tags/item/swords.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/runeenchanting/tags/item/weapons.json

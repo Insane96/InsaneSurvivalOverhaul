@@ -69,6 +69,14 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(DaggerEquipment.WOODEN_DAGGER.get(), DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER.get());
         tag(ItemTags.WEAPON_ENCHANTABLE).addTag(DAGGERS);
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(DAGGERS);
+        //Daggers aren't in #minecraft:swords (that'd drag in unrelated sword-only behavior), so the enchantments
+        //that key off enchantable/sword or enchantable/durability instead of enchantable/weapon need daggers
+        //added explicitly: Looting/Knockback/Sweeping Edge (all supported_items: enchantable/sword), Fire Aspect
+        //(enchantable/fire_aspect), and Unbreaking/Mending (enchantable/durability, which also cascades into
+        //enchantable/vanishing for Curse of Vanishing).
+        tag(ItemTags.SWORD_ENCHANTABLE).addTag(DAGGERS);
+        tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(DAGGERS);
+        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).addTag(DAGGERS);
 
 
         //Mod's
@@ -148,6 +156,11 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(ItemTags.SHOVELS);
 
         //Rune Enchanting integration (only relevant if the mod is installed, harmless otherwise)
+        //REItemTagProvider.WEAPONS is keyed off #minecraft:swords/#minecraft:axes, which daggers deliberately
+        //aren't part of, so extend it directly here instead - this covers every rune that uses it as its
+        //applicable-to tag (Sharpness, Knockback, Smite, Impaling, Flame, curses, etc.), not just Critical/Armor Piercer.
+        tag(REItemTagProvider.WEAPONS)
+                .addTag(DAGGERS);
         tag(create("rune_applicable_to/critical"))
                 .addTag(REItemTagProvider.WEAPONS);
         tag(create("rune_applicable_to/armor_piercer"))
