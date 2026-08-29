@@ -245,6 +245,8 @@
     "advancements.insanesurvivaloverhaul.weapon_shovel.description": "Below average speed. Extra knockback.",
     "advancements.insanesurvivaloverhaul.weapon_trident.title": "Is this a fork?",
     "advancements.insanesurvivaloverhaul.weapon_trident.description": "Below average speed. Can be thrown for ranged damage.",
+    "advancements.insanesurvivaloverhaul.empowered_spawner_deactivated.title": "Overloaded",
+    "advancements.insanesurvivaloverhaul.empowered_spawner_deactivated.description": "Witness an Empowered Spawner shut itself down after unleashing a flurry of mobs.",
 
     "item.insanesurvivaloverhaul.firestarter": "Firestarter",
     "item.insanesurvivaloverhaul.firestarter.tooltip": "Hold right click to use",

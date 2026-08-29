@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "empowered_spawner_deactivate": {
+      "trigger": "insanesurvivaloverhaul:empowered_spawner_deactivate"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.empowered_spawner_deactivated.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:spawner"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.empowered_spawner_deactivated.title"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "empowered_spawner_deactivate"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

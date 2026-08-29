@@ -8,9 +8,11 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.core.feature.config.MinMaxConfig;
 import insane96mcp.insanelib.data.ObjTagValue;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.data.criterion.EmpoweredSpawnerDeactivateTrigger;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BaseSpawnerAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.module.world.spawners.capability.SpawnerDataImpl;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
@@ -57,6 +59,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @LoadFeature(module = ISOModules.WORLD, description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
 public class Spawners extends JsonFeature {
@@ -70,6 +73,9 @@ public class Spawners extends JsonFeature {
 	public static final TagKey<EntityType<?>> BLACKLISTED_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("blacklisted_spawners"));
 	public static final TagKey<Item> SPAWNER_REACTIVATOR_TAG = ISOItemTagsProvider.create("spawner_reactivator");
 	public static final MutableComponent SPAWNER_REACTIVATOR_MESSAGE = Component.translatable(InsaneSO.lang("spawner_reactivator")).withStyle(ChatFormatting.LIGHT_PURPLE);
+
+	public static final Supplier<EmpoweredSpawnerDeactivateTrigger> EMPOWERED_SPAWNER_DEACTIVATE =
+			ISORegistries.registerTrigger("empowered_spawner_deactivate", EmpoweredSpawnerDeactivateTrigger::new);
 
 	@Config(min = 1, description = "If true, the spawner delay is set to 'Delay' instead of using MinSpawnDelay and MaxSpawnDelay")
 	public static Boolean overrideSpawnDelay = true;
@@ -120,6 +126,7 @@ public class Spawners extends JsonFeature {
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		getJsonConfigs().add(new JsonConfig<>("fixed_spawners_spawnable.json", fixedSpawnerSpawnable, FIXED_SPAWNER_SPAWNABLE_DEFAULT, ObjTagValue.LIST_TYPE).withRegistryFor(Registries.ENTITY_TYPE));
+		InsaneSO.addServerPack("empowered_spawners", "Insane's Survival Overhaul Empowered Spawners", () -> this.isEnabled() && !Packs.disableAllDataPacks && empowered$enabled);
 	}
 
 	@Override
@@ -184,8 +191,13 @@ public class Spawners extends JsonFeature {
 				loottable.getRandomItems(lootParams).forEach(stack ->
 						level.addFreshEntity(new ItemEntity(level, spawnerPos.getX() + 0.5f, spawnerPos.getY() + 1.1f, spawnerPos.getZ() + 0.5f, stack)));
 			}
-			if (empowered$disableOnEnd)
+			if (empowered$disableOnEnd) {
 				setSpawnerDisabled(spawnerBlockEntity, true);
+				for (Player player : level.players()) {
+					if (player instanceof ServerPlayer serverPlayer && spawnerPos.closerToCenterThan(player.position(), requiredPlayerRange))
+						EMPOWERED_SPAWNER_DEACTIVATE.get().trigger(serverPlayer);
+				}
+			}
 			if (empoweredSoundEffect)
 				level.playSound(null, spawnerPos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 3.0f, 1.5f);
 		}

@@ -1,4 +1,6 @@
 # Upcoming
+* Added Daggers
+  * A new fast, low-damage weapon type, available in every material tier (including Copper)
 * Added Stuck Arrows
   * Mobs hit with arrows will now have a chance to drop on death (only normal arrows)
   * I recommend adding a mod that shows stuck arrows on the mob
@@ -11,6 +13,7 @@
   * Axes hit harder at higher tiers, keeping them ahead of Swords all the way to Netherite instead of falling behind
   * Pickaxes and Shovels now hit harder at higher tiers, so Netherite feels like a real upgrade over Wooden instead of a marginal one
   * Material attack speed bonuses/penalties are now percentage-based instead of a flat value, so they scale fairly regardless of a weapon's base speed
+* Added an advancement for when an Empowered Spawner deactivates near a player
 * Snow golems now drop the pumpkin on their head on death
 * Split Sweep Overhaul to its own feature with many config options
 * Repair merging in the crafting grid can now combine more than 2 items at once (up to 9, configurable via Tweaks)
