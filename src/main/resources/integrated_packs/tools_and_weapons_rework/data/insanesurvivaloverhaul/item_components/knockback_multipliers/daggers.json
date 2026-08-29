@@ -1,0 +1,6 @@
+{
+	"item": "#insanesurvivaloverhaul:daggers",
+	"components": {
+		"insanelib:knockback_multiplier": 0.5
+	}
+}

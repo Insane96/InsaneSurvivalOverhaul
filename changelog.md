@@ -8,10 +8,12 @@
   * A block crafted with amethyst, glow berries and a block of copper that can be seen through walls. Useful to align yourself with the world without coordinates.
 * Tools and Weapons Rework
   * Added advancements giving infos on the weapon
-  * Hoes are now slower but hit much harder per swing but are slower. Also durability has been decreased to match swords, pickaxes etc. Also increased knockback
+  * Hoes are now slower but hit much harder per swingOra +. Also durability has been decreased to match swords, pickaxes etc. Also increased knockback
   * Swords and Pickaxes now have similar DPS
   * Axes hit harder at higher tiers, keeping them ahead of Swords all the way to Netherite instead of falling behind
   * Pickaxes and Shovels now hit harder at higher tiers, so Netherite feels like a real upgrade over Wooden instead of a marginal one
+  * Daggers are now balanced within the same DPS table as the other weapons: very fast, low single-hit damage, no critical hits, reduced knockback and shorter reach
+  * Various minor balancements
   * Material attack speed bonuses/penalties are now percentage-based instead of a flat value, so they scale fairly regardless of a weapon's base speed
 * Added an advancement for when an Empowered Spawner deactivates near a player
 * Snow golems now drop the pumpkin on their head on death

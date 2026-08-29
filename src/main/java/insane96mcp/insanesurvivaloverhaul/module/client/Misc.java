@@ -35,6 +35,9 @@ public class Misc extends Feature {
     @Config(description = "If true, health will not shake if player's max health is below 4")
     public static Boolean preventShakeBasedOffMaxHealth = true;
 
+    @Config(description = "If true, the crosshair's 'ready to attack' indicator is shown based on whether the held item actually has bonus attack damage, instead of vanilla's attack-speed threshold (which never shows it for weapons faster than 4 attacks/sec, e.g. some Daggers).")
+    public static Boolean attackIndicatorBasedOnDamage = true;
+
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
@@ -92,5 +95,9 @@ public class Misc extends Feature {
 
     public static boolean shouldPreventHealthShake() {
         return Feature.isEnabled(Misc.class) && preventShakeBasedOffMaxHealth;
+    }
+
+    public static boolean shouldShowAttackIndicatorBasedOnDamage() {
+        return Feature.isEnabled(Misc.class) && attackIndicatorBasedOnDamage;
     }
 }

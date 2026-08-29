@@ -9,8 +9,12 @@ import com.llamalad7.mixinextras.sugar.Local;
 import insane96mcp.insanesurvivaloverhaul.module.client.Misc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PlayerRideableJumping;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -156,5 +160,24 @@ public abstract class GuiMixin_Misc {
         if (!Misc.shouldPreventHealthShake() || !original)
             return original;
         return pMaxHealth > 4;
+    }
+
+    // --- Attack Indicator ---
+
+    /**
+     * Shows the crosshair's "ready to attack" icon based on whether the held item actually has a
+     * base_attack_damage modifier (i.e. is a weapon), instead of vanilla's attack-speed threshold, which
+     * never shows the icon for weapons faster than 4 attacks/sec (e.g. Wooden/Golden Daggers).
+     */
+    @Definition(id = "getDelay", method = "Lnet/minecraft/world/entity/player/Player;getCurrentItemAttackStrengthDelay()F")
+    @Expression("this.minecraft.player.getDelay() > 5.0")
+    @WrapOperation(method = "renderCrosshair", at = @At("MIXINEXTRAS:EXPRESSION"))
+    public boolean insanesurvivaloverhaul$attackIndicatorForWeaponsOnly(float left, float right, Operation<Boolean> original) {
+        if (!Misc.shouldShowAttackIndicatorBasedOnDamage())
+            return original.call(left, right);
+
+        ItemStack stack = this.minecraft.player.getMainHandItem();
+        ItemAttributeModifiers modifiers = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        return modifiers.modifiers().stream().anyMatch(entry -> entry.modifier().id().equals(Item.BASE_ATTACK_DAMAGE_ID));
     }
 }

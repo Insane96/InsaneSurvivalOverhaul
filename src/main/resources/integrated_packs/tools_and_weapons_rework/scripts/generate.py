@@ -109,11 +109,13 @@ def build_modifiers(tool, mat):
 
     # Always emitted (even at 0.0) so every weapon has a base modifier for the Critical
     # enchantment's bonus to merge into in the tooltip, instead of showing as a separate line.
-    crit_chance = fv(tool["crit_chance_add"]) + fv(mat["crit_chance_add"])
+    crit_chance = fv(tool["crit_chance_add"])
+    if tool["tool_type"] != "dagger":
+        crit_chance += fv(mat["crit_chance_add"])
     mods.append(modifier(ATTR["crit_chance"], MOD_ID["crit_chance"], crit_chance, "add_value"))
 
     crit_dmg = fv(tool["crit_dmg_add"])
-    if tool["tool_type"] != "sword":
+    if tool["tool_type"] not in ("sword", "dagger"):
         crit_dmg += fv(mat.get("crit_dmg_add", ""))
     mods.append(modifier(ATTR["crit_damage"], MOD_ID["crit_damage"], crit_dmg, "add_value"))
 
@@ -139,7 +141,7 @@ def generate():
 
         for material in tool_materials:
             mat = materials[material]
-            item = item_override if item_override else f"minecraft:{material}_{tool_type}"
+            item = item_override.format(material=material) if item_override else f"minecraft:{material}_{tool_type}"
             dur_mult = fv(tool.get("durability_multiplier", "")) or 1.0
             max_damage = int(max_dmg_override) if max_dmg_override else int(round(fv(mat["max_damage"]) * dur_mult))
             mods = build_modifiers(tool, mat)
