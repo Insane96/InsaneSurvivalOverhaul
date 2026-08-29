@@ -1,6 +1,6 @@
 {
 	"item": "#minecraft:hoes",
 	"components": {
-		"insanelib:knockback_multiplier": 0.5
+		"insanelib:knockback_multiplier": 0.65
 	}
 }
