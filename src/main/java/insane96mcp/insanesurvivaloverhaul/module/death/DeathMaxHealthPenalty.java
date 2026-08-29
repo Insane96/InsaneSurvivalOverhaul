@@ -104,14 +104,13 @@ public class DeathMaxHealthPenalty extends Feature {
 			if (instance == null)
 				return InteractionResultHolder.pass(stackInHand);
 			AttributeModifier modifier = instance.getModifier(DEATH_PENALTY_ID);
-			if (modifier == null)
-				return InteractionResultHolder.pass(stackInHand);
-			int playerMaxHealth = (int) (20 + modifier.amount());
+			double modifierAmount = modifier != null ? modifier.amount() : 0d;
+			int playerMaxHealth = (int) (20 + modifierAmount);
 			if (playerMaxHealth >= maxHealth) {
 				player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.max_health"), true);
 				return InteractionResultHolder.pass(stackInHand);
 			}
-			instance.addOrReplacePermanentModifier(new AttributeModifier(DEATH_PENALTY_ID, modifier.amount() + 2, AttributeModifier.Operation.ADD_VALUE));
+			instance.addOrReplacePermanentModifier(new AttributeModifier(DEATH_PENALTY_ID, modifierAmount + 2, AttributeModifier.Operation.ADD_VALUE));
 			stackInHand.shrink(1);
 			player.playSound(SoundEvents.CONDUIT_ACTIVATE, 1f, 0.5f);
 			player.swing(usedHand);
