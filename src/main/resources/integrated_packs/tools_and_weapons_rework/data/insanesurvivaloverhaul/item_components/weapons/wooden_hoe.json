@@ -1,7 +1,7 @@
 {
     "item": "minecraft:wooden_hoe",
     "components": {
-        "minecraft:max_damage": 348,
+        "minecraft:max_damage": 261,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
