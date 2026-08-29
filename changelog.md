@@ -5,12 +5,11 @@
 * Added Glow Block
   * A block crafted with amethyst, glow berries and a block of copper that can be seen through walls. Useful to align yourself with the world without coordinates.
 * Tools and Weapons Rework
-  * Hoes are now slower but hit much harder per swing; overall DPS is intentionally kept well below Swords since they get full damage on their sweep attack instead
+  * Hoes are now slower but hit much harder per swing but are slower. Also durability has been decreased to match swords, pickaxes etc. Also increased knockback
   * Swords and Pickaxes now have similar DPS
   * Axes hit harder at higher tiers, keeping them ahead of Swords all the way to Netherite instead of falling behind
   * Pickaxes and Shovels now hit harder at higher tiers, so Netherite feels like a real upgrade over Wooden instead of a marginal one
   * Material attack speed bonuses/penalties are now percentage-based instead of a flat value, so they scale fairly regardless of a weapon's base speed
-  * Lowered back Hoes durability to be the same as Swords, Pickaxes etc. Axes still retain -20% durability reduction due to hitting harder
 * Snow golems now drop the pumpkin on their head on death
 * Split Sweep Overhaul to its own feature with many config options
 * Repair merging in the crafting grid can now combine more than 2 items at once (up to 9, configurable via Tweaks)

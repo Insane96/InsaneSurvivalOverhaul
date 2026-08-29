@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.items.dagger;
 
+import com.google.common.collect.Sets;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -9,9 +10,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class DaggerItem extends SwordItem {
+	public static final Set<ItemAbility> DEFAULT_ACTIONS = of(ItemAbilities.SWORD_DIG);
+
 	public DaggerItem(Tier tier, Item.Properties properties) {
 		super(tier, properties);
 	}
@@ -23,7 +31,7 @@ public class DaggerItem extends SwordItem {
 	 */
 	@Override
 	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-		return false;
+		return DEFAULT_ACTIONS.contains(DEFAULT_ACTIONS);
 	}
 
 	/**
@@ -50,4 +58,9 @@ public class DaggerItem extends SwordItem {
 				)
 				.build();
 	}
+
+	private static Set<ItemAbility> of(ItemAbility... actions) {
+		return Stream.of(actions).collect(Collectors.toCollection(Sets::newIdentityHashSet));
+	}
+
 }
