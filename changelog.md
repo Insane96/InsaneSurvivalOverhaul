@@ -10,6 +10,7 @@
   * Axes hit harder at higher tiers, keeping them ahead of Swords all the way to Netherite instead of falling behind
   * Pickaxes and Shovels now hit harder at higher tiers, so Netherite feels like a real upgrade over Wooden instead of a marginal one
   * Material attack speed bonuses/penalties are now percentage-based instead of a flat value, so they scale fairly regardless of a weapon's base speed
+  * Lowered back Hoes durability to be the same as Swords, Pickaxes etc. Axes still retain -20% durability reduction due to hitting harder
 * Snow golems now drop the pumpkin on their head on death
 * Split Sweep Overhaul to its own feature with many config options
 * Repair merging in the crafting grid can now combine more than 2 items at once (up to 9, configurable via Tweaks)

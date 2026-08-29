@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "insanesurvivaloverhaul:wooden_dagger",
+	"right_ingredient": {
+		"id": "minecraft:gold_ingot",
+		"count": 1
+	},
+	"experience": 10,
+	"result": {
+		"id": "insanesurvivaloverhaul:golden_dagger"
+	}
+}

@@ -1,0 +1,14 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:iron_dagger",
+  "repair": [
+    {
+      "repair_material": "minecraft:iron_ingot",
+      "amount": 0.75
+    },
+    {
+      "repair_material": "minecraft:iron_nugget",
+      "amount": 6.5,
+      "cost_multiplier": 9
+    }
+  ]
+}

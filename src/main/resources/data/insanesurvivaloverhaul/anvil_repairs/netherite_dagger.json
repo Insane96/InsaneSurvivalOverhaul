@@ -1,0 +1,15 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:netherite_dagger",
+  "repair": [
+    {
+      "repair_material": "minecraft:diamond",
+      "amount": 0.75,
+      "max_repair": 0.5
+    },
+    {
+      "repair_material": "minecraft:netherite_ingot",
+      "amount": 1,
+      "cost_multiplier": 0.01
+    }
+  ]
+}

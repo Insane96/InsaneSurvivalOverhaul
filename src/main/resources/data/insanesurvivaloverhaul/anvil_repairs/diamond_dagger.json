@@ -1,0 +1,9 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:diamond_dagger",
+  "repair": [
+    {
+      "repair_material": "minecraft:diamond",
+      "amount": 0.75
+    }
+  ]
+}

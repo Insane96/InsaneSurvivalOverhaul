@@ -1,0 +1,9 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:stone_dagger",
+  "repair": [
+    {
+      "repair_material": "#minecraft:stone_tool_materials",
+      "amount": 0.75
+    }
+  ]
+}

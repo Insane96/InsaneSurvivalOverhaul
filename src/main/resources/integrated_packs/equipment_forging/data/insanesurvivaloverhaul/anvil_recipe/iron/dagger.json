@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "insanesurvivaloverhaul:copper_dagger",
+	"right_ingredient": {
+		"id": "minecraft:iron_ingot",
+		"count": 1
+	},
+	"experience": 4,
+	"result": {
+		"id": "insanesurvivaloverhaul:iron_dagger"
+	}
+}

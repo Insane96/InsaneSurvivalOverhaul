@@ -1,0 +1,9 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:wooden_dagger",
+  "repair": [
+    {
+      "repair_material": "#minecraft:planks",
+      "amount": 0.75
+    }
+  ]
+}

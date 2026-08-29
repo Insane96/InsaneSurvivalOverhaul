@@ -94,7 +94,7 @@ public class Client {
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET);
             }
             if (Feature.isEnabled(DaggerEquipment.class)) {
-                addAfter(event, Items.WOODEN_SWORD, DaggerEquipment.WOODEN_DAGGER);
+                addAfter(event, Items.NETHERITE_SWORD, DaggerEquipment.WOODEN_DAGGER);
                 addAfter(event, DaggerEquipment.WOODEN_DAGGER.get(), DaggerEquipment.STONE_DAGGER);
                 addAfter(event, DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.IRON_DAGGER);
                 addAfter(event, DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER);

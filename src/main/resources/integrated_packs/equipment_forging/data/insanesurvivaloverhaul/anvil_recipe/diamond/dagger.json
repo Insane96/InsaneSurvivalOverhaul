@@ -1,0 +1,11 @@
+{
+	"left_ingredient": "insanesurvivaloverhaul:golden_dagger",
+	"right_ingredient": {
+		"id": "minecraft:diamond",
+		"count": 1
+	},
+	"experience": 7,
+	"result": {
+		"id": "insanesurvivaloverhaul:diamond_dagger"
+	}
+}

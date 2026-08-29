@@ -1,0 +1,14 @@
+{
+  "item_to_repair": "insanesurvivaloverhaul:copper_dagger",
+  "repair": [
+    {
+      "repair_material": "minecraft:copper_ingot",
+      "amount": 0.75
+    },
+    {
+      "repair_material": "minecraft:copper_nugget",
+      "amount": 6.5,
+      "cost_multiplier": 9
+    }
+  ]
+}
