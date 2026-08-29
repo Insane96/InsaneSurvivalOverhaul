@@ -1,4 +1,4 @@
-# Upcoming
+# 5.10.0.0-beta
 * Added Daggers
   * A new fast, low-damage weapon type, available in every material tier (including Copper)
 * Added Stuck Arrows
