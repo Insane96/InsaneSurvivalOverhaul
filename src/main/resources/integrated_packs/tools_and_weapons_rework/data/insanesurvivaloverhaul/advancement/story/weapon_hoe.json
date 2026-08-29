@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:iron_hoe"
+        },
+        "title": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_hoe.title"
+        },
+        "description": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_hoe.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/upgrade_tools",
+    "criteria": {
+        "hoe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#minecraft:hoes"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "hoe"
+        ]
+    ]
+}

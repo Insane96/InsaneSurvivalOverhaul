@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:iron_sword"
+        },
+        "title": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_sword.title"
+        },
+        "description": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_sword.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/upgrade_tools",
+    "criteria": {
+        "sword": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#minecraft:swords"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "sword"
+        ]
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:iron_shovel"
+        },
+        "title": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_shovel.title"
+        },
+        "description": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_shovel.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/upgrade_tools",
+    "criteria": {
+        "shovel": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#minecraft:shovels"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "shovel"
+        ]
+    ]
+}

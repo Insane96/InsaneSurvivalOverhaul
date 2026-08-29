@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:trident"
+        },
+        "title": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_trident.title"
+        },
+        "description": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_trident.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/upgrade_tools",
+    "criteria": {
+        "trident": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "minecraft:trident"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "trident"
+        ]
+    ]
+}

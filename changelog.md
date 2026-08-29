@@ -5,6 +5,7 @@
 * Added Glow Block
   * A block crafted with amethyst, glow berries and a block of copper that can be seen through walls. Useful to align yourself with the world without coordinates.
 * Tools and Weapons Rework
+  * Added advancements giving infos on the weapon
   * Hoes are now slower but hit much harder per swing but are slower. Also durability has been decreased to match swords, pickaxes etc. Also increased knockback
   * Swords and Pickaxes now have similar DPS
   * Axes hit harder at higher tiers, keeping them ahead of Swords all the way to Netherite instead of falling behind

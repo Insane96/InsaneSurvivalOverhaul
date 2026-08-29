@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:iron_axe"
+        },
+        "title": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_axe.title"
+        },
+        "description": {
+            "translate": "advancements.insanesurvivaloverhaul.weapon_axe.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:story/upgrade_tools",
+    "criteria": {
+        "axe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#minecraft:axes"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "axe"
+        ]
+    ]
+}
