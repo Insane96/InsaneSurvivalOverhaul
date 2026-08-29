@@ -169,7 +169,9 @@ public abstract class GuiMixin_Misc {
      * base_attack_damage modifier (i.e. is a weapon), instead of vanilla's attack-speed threshold, which
      * never shows the icon for weapons faster than 4 attacks/sec (e.g. Wooden/Golden Daggers).
      */
-    @Definition(id = "getDelay", method = "Lnet/minecraft/world/entity/player/Player;getCurrentItemAttackStrengthDelay()F")
+    @Definition(id = "minecraft", field = "Lnet/minecraft/client/gui/Gui;minecraft:Lnet/minecraft/client/Minecraft;")
+    @Definition(id = "player", field = "Lnet/minecraft/client/Minecraft;player:Lnet/minecraft/client/player/LocalPlayer;")
+    @Definition(id = "getDelay", method = "Lnet/minecraft/client/player/LocalPlayer;getCurrentItemAttackStrengthDelay()F")
     @Expression("this.minecraft.player.getDelay() > 5.0")
     @WrapOperation(method = "renderCrosshair", at = @At("MIXINEXTRAS:EXPRESSION"))
     public boolean insanesurvivaloverhaul$attackIndicatorForWeaponsOnly(float left, float right, Operation<Boolean> original) {
