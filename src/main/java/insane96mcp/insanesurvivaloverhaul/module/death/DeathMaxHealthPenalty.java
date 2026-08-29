@@ -95,26 +95,27 @@ public class DeathMaxHealthPenalty extends Feature {
 
 		@Override
 		public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+			ItemStack stackInHand = player.getItemInHand(usedHand);
+			if (level.isClientSide)
+				return InteractionResultHolder.pass(stackInHand);
+
 			int maxHealth = level.getGameRules().getInt(RULE_MAXHEALTHFROMCRYSTAL);
 			AttributeInstance instance = player.getAttribute(Attributes.MAX_HEALTH);
 			if (instance == null)
-				return super.use(level, player, usedHand);
+				return InteractionResultHolder.pass(stackInHand);
 			AttributeModifier modifier = instance.getModifier(DEATH_PENALTY_ID);
 			if (modifier == null)
-				return super.use(level, player, usedHand);
+				return InteractionResultHolder.pass(stackInHand);
 			int playerMaxHealth = (int) (20 + modifier.amount());
 			if (playerMaxHealth >= maxHealth) {
-				if (!level.isClientSide)
-					player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.max_health"), true);
-				return super.use(level, player, usedHand);
+				player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.max_health"), true);
+				return InteractionResultHolder.pass(stackInHand);
 			}
 			instance.addOrReplacePermanentModifier(new AttributeModifier(DEATH_PENALTY_ID, modifier.amount() + 2, AttributeModifier.Operation.ADD_VALUE));
-			ItemStack stackInHand = player.getItemInHand(usedHand);
 			stackInHand.shrink(1);
 			player.playSound(SoundEvents.CONDUIT_ACTIVATE, 1f, 0.5f);
 			player.swing(usedHand);
-			if (!level.isClientSide)
-				player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.use"), true);
+			player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.use"), true);
 			return InteractionResultHolder.consume(stackInHand);
 		}
 	}
