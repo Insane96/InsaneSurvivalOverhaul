@@ -162,6 +162,14 @@
     "item.minecraft.copper_shield": "Copper Shield",
     "item.minecraft.copper_nugget": "Copper Nugget",
 
+    "item.insanesurvivaloverhaul.wooden_dagger": "Wooden Dagger",
+    "item.insanesurvivaloverhaul.stone_dagger": "Stone Dagger",
+    "item.insanesurvivaloverhaul.iron_dagger": "Iron Dagger",
+    "item.insanesurvivaloverhaul.golden_dagger": "Golden Dagger",
+    "item.insanesurvivaloverhaul.diamond_dagger": "Diamond Dagger",
+    "item.insanesurvivaloverhaul.netherite_dagger": "Netherite Dagger",
+    "item.insanesurvivaloverhaul.copper_dagger": "Copper Dagger",
+
     "item.insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch_weighted": "Slowed down if carried more than %d",

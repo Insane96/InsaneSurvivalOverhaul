@@ -26,7 +26,7 @@ import static insane96mcp.insanesurvivaloverhaul.InsaneSO.*;
 public class StoneToolsGone extends Feature {
 
     @Config
-    public static List<String> itemsToReplace = List.of("minecraft:stone_axe, minecraft:copper_axe", "minecraft:stone_pickaxe, minecraft:copper_pickaxe", "minecraft:stone_shovel, minecraft:copper_shovel", "minecraft:stone_hoe, minecraft:copper_hoe", "minecraft:stone_sword, minecraft:copper_sword");
+    public static List<String> itemsToReplace = List.of("minecraft:stone_axe, minecraft:copper_axe", "minecraft:stone_pickaxe, minecraft:copper_pickaxe", "minecraft:stone_shovel, minecraft:copper_shovel", "minecraft:stone_hoe, minecraft:copper_hoe", "minecraft:stone_sword, minecraft:copper_sword", "insanesurvivaloverhaul:stone_dagger, insanesurvivaloverhaul:copper_dagger");
     private static final ArrayList<ToReplace> itemsToReplaceList = new ArrayList<>();
 
     @Config

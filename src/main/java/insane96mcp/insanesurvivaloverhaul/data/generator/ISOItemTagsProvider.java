@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.StackSizes;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
@@ -42,6 +43,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> MINECARTS = create("minecarts");
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
     public static final TagKey<Item> MUSHROOMS = create("mushrooms");
+    public static final TagKey<Item> DAGGERS = create("daggers");
 
     public ISOItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
@@ -62,6 +64,11 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.CHEST_ARMOR).add(CopperEquipment.CHESTPLATE.get());
         tag(ItemTags.LEG_ARMOR).add(CopperEquipment.LEGGINGS.get());
         tag(ItemTags.FOOT_ARMOR).add(CopperEquipment.BOOTS.get());
+
+        tag(DAGGERS)
+                .add(DaggerEquipment.WOODEN_DAGGER.get(), DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).addTag(DAGGERS);
+        tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(DAGGERS);
 
 
         //Mod's
@@ -133,7 +140,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(AttackSounds.AXE_ATTACK_SOUND)
                 .addTag(ItemTags.AXES);
         tag(AttackSounds.SWORD_ATTACK_SOUND)
-                .addTag(ItemTags.SWORDS);
+                .addTag(ItemTags.SWORDS)
+                .addTag(DAGGERS);
         tag(AttackSounds.PICKAXE_ATTACK_SOUND)
                 .addTag(ItemTags.PICKAXES);
         tag(AttackSounds.SHOVEL_ATTACK_SOUND)

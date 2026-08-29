@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Daggers"
+    }
+  ],
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "insanesurvivaloverhaul:diamond_dagger"
+  },
+  "result": {
+    "count": 1,
+    "id": "insanesurvivaloverhaul:netherite_dagger"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

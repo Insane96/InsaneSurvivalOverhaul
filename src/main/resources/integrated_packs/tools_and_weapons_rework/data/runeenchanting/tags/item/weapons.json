@@ -3,6 +3,7 @@
     "values": [
         "#minecraft:pickaxes",
         "#minecraft:shovels",
-        "#minecraft:hoes"
+        "#minecraft:hoes",
+        "#insanesurvivaloverhaul:daggers"
     ]
 }

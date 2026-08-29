@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Daggers"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "I ",
+    " S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "insanesurvivaloverhaul:stone_dagger"
+  }
+}

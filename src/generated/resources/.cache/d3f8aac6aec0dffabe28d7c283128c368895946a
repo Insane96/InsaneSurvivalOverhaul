@@ -1,9 +1,10 @@
-// 1.21.1	2026-08-22T16:06:53.2182631	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-08-28T18:12:51.578846	Tags for minecraft:item mod id insanesurvivaloverhaul
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 ba9125aa546790a0582445879c658b228dbb763c data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/axe.json
 bdb4053d28def340c591bb6cd77b677cfe510db6 data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/pickaxe.json
 5e7c760621586934c47d721d06be94fdb2693f4e data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/shovel.json
-e6756cdd6fb03cf772eba210ae3f93335e83dcd6 data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/sword.json
+aeabafca98d6ae16593ea4a6d2db5775e7c8dcca data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/sword.json
+da53fa4f7b47eeabbffbf165c6da17e2ddf4cb02 data/insanesurvivaloverhaul/tags/item/daggers.json
 2b25e503a245198165b5f80ed0e325dddcb23959 data/insanesurvivaloverhaul/tags/item/drinking_foods.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/echo_pillar_catalyst.json
 b1eaa8c6251363a43fec48d3a61979cccb61a40a data/insanesurvivaloverhaul/tags/item/energy_boost.json
@@ -27,6 +28,8 @@ a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/s
 e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/world_immune.json
 b0e410b5e7ae38b7973e594c16284eb9f842b1bb data/minecraft/tags/item/axes.json
 ed22a6aa713f2e727863db9e057a12586f9e6e06 data/minecraft/tags/item/chest_armor.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/sharp_weapon.json
+f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/weapon.json
 a13f9b819773737709da6158672b74d01bd060bb data/minecraft/tags/item/flowers.json
 929ed8908e30d0d53d1dd4542cd73887433195b2 data/minecraft/tags/item/foot_armor.json
 7fdf76d2e13f74295b81702eb48b15a84c291887 data/minecraft/tags/item/head_armor.json

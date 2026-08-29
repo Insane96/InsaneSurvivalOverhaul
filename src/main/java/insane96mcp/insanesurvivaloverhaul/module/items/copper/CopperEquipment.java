@@ -21,7 +21,7 @@ import java.util.List;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Basically backports copper equipment from latest MC versions.")
 public class CopperEquipment extends Feature {
-	public static final SimpleTier ITEM_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 191, 5f, 1f, 8, () -> Ingredient.of(Items.COPPER_INGOT));
+	public static final SimpleTier ITEM_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 190, 5f, 1f, 13, () -> Ingredient.of(Items.COPPER_INGOT));
 
 	public static final DeferredHolder<Item, SwordItem> SWORD = ISORegistries.MINECRAFT_ITEMS.register(
 			"copper_sword", () -> new SwordItem(ITEM_TIER, new Item.Properties().attributes(SwordItem.createAttributes(ITEM_TIER, 3, -2.4F)))
@@ -33,10 +33,10 @@ public class CopperEquipment extends Feature {
 			"copper_pickaxe", () -> new PickaxeItem(ITEM_TIER, new Item.Properties().attributes(PickaxeItem.createAttributes(ITEM_TIER, 1.0F, -2.8F)))
 	);
 	public static final DeferredHolder<Item, AxeItem> AXE = ISORegistries.MINECRAFT_ITEMS.register(
-			"copper_axe", () -> new AxeItem(ITEM_TIER, new Item.Properties().attributes(AxeItem.createAttributes(ITEM_TIER, 6.0F, -3.1F)))
+			"copper_axe", () -> new AxeItem(ITEM_TIER, new Item.Properties().attributes(AxeItem.createAttributes(ITEM_TIER, 7.0F, -3.2F)))
 	);
 	public static final DeferredHolder<Item, HoeItem> HOE = ISORegistries.MINECRAFT_ITEMS.register(
-			"copper_hoe", () -> new HoeItem(ITEM_TIER, new Item.Properties().attributes(HoeItem.createAttributes(ITEM_TIER, -2.0F, -1.0F)))
+			"copper_hoe", () -> new HoeItem(ITEM_TIER, new Item.Properties().attributes(HoeItem.createAttributes(ITEM_TIER, -1.0F, -2.0F)))
 	);
 	public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ARMOR_MATERIAL = ISORegistries.MINECRAFT_ARMOR_MATERIALS.register(
 			"copper", () -> new ArmorMaterial(
@@ -45,7 +45,7 @@ public class CopperEquipment extends Feature {
 						m.put(ArmorItem.Type.LEGGINGS, 3);
 						m.put(ArmorItem.Type.CHESTPLATE, 4);
 						m.put(ArmorItem.Type.HELMET, 2);
-						m.put(ArmorItem.Type.BODY, 5);
+						m.put(ArmorItem.Type.BODY, 4);
 					}),
 					8,
 					SoundEvents.ARMOR_EQUIP_IRON,

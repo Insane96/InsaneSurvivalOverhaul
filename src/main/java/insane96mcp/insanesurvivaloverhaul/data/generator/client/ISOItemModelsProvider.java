@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
@@ -68,6 +69,14 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         handHeld(CopperEquipment.SWORD.get());
 
         basicItem(CopperEquipment.NUGGET.get());
+
+        handHeld(DaggerEquipment.WOODEN_DAGGER.get());
+        handHeld(DaggerEquipment.STONE_DAGGER.get());
+        handHeld(DaggerEquipment.IRON_DAGGER.get());
+        handHeld(DaggerEquipment.GOLDEN_DAGGER.get());
+        handHeld(DaggerEquipment.DIAMOND_DAGGER.get());
+        handHeld(DaggerEquipment.NETHERITE_DAGGER.get());
+        handHeld(DaggerEquipment.COPPER_DAGGER.get());
 
         basicItem(UnfairOneShot.HALF_HEART_TEXTURE.get());
 

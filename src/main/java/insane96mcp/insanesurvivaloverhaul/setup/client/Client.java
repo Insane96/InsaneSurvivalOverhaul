@@ -11,6 +11,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
@@ -91,6 +92,15 @@ public class Client {
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.LEGGINGS);
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.CHESTPLATE);
                 addAfter(event, Items.LEATHER_BOOTS, CopperEquipment.HELMET);
+            }
+            if (Feature.isEnabled(DaggerEquipment.class)) {
+                addAfter(event, Items.WOODEN_SWORD, DaggerEquipment.WOODEN_DAGGER);
+                addAfter(event, DaggerEquipment.WOODEN_DAGGER.get(), DaggerEquipment.STONE_DAGGER);
+                addAfter(event, DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.IRON_DAGGER);
+                addAfter(event, DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER);
+                addAfter(event, DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER);
+                addAfter(event, DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER);
+                addAfter(event, DaggerEquipment.NETHERITE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER);
             }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW);
