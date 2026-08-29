@@ -7,7 +7,7 @@
                 {
                     "type": "minecraft:generic.attack_damage",
                     "id": "minecraft:base_attack_damage",
-                    "amount": 4.93,
+                    "amount": 4.8999999999999995,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },
@@ -21,7 +21,7 @@
                 {
                     "type": "minecraft:player.entity_interaction_range",
                     "id": "minecraft:base_entity_reach",
-                    "amount": -0.25,
+                    "amount": -0.5,
                     "operation": "add_value",
                     "slot": "mainhand"
                 },
@@ -42,7 +42,7 @@
                 {
                     "type": "insanesurvivaloverhaul:piercing_damage",
                     "id": "insanesurvivaloverhaul:base_piercing_damage",
-                    "amount": 1.5,
+                    "amount": 1.13,
                     "operation": "add_value",
                     "slot": "mainhand"
                 }
