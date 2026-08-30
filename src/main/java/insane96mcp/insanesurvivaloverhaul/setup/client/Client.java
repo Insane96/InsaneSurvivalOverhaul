@@ -9,7 +9,6 @@ import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
-import insane96mcp.insanesurvivaloverhaul.module.items.StoneToolsGone;
 import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
@@ -43,14 +42,6 @@ import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
 public class Client {
 
     public static void onBuildCreativeModeTabContents(final BuildCreativeModeTabContentsEvent event) {
-        if (Feature.isEnabled(StoneToolsGone.class))
-        {
-            remove(event, Items.STONE_SWORD);
-            remove(event, Items.STONE_AXE);
-            remove(event, Items.STONE_SHOVEL);
-            remove(event, Items.STONE_PICKAXE);
-            remove(event, Items.STONE_HOE);
-        }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             if (Feature.isEnabled(Spawning.class)) {
                 addAfter(event, Items.SOUL_TORCH, Spawning.ECHO_LANTERN.item());
