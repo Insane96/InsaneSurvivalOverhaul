@@ -100,7 +100,7 @@ public class Client {
                 addAfter(event, DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER);
                 addAfter(event, DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER);
                 addAfter(event, DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER);
-                addAfter(event, DaggerEquipment.NETHERITE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER);
+                addAfter(event, DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER);
             }
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW);
