@@ -1,3 +1,6 @@
+# 5.10.0.1
+* Minor fixes
+
 # 5.10.0.0-beta
 * Added Daggers
   * A new fast, low-damage weapon type, available in every material tier (including Copper)
