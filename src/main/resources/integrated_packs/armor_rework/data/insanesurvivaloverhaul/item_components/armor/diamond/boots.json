@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.boots",
-                    "amount": -0.0675,
+                    "amount": -0.07,
                     "operation": "add_value",
                     "slot": "feet"
                 }

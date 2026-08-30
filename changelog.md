@@ -1,3 +1,6 @@
+# Upcoming
+* Rounded sprint speed on armor
+
 # 5.10.0.1
 * Minor fixes
 
