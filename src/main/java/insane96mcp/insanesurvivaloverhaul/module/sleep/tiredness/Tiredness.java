@@ -318,7 +318,7 @@ public class Tiredness extends JsonFeature {
 	private static void tryApplyTired(float tiredness, ServerPlayer player) {
 		int wantedAmplifier = -1;
 		if (tiredness >= tirednessToEffect)
-			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 2);
+			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 9);
 		if (wantedAmplifier >= 0) {
 			int currAmplifier = -1;
 			if (player.hasEffect(TIRED)) {
@@ -473,6 +473,10 @@ public class Tiredness extends JsonFeature {
 				return;
 			}
 			int phantomsToSpawn = MathHelper.getAmountWithDecimalChance(level.getRandom(), event.getPhantomsToSpawn() / 2f);
+			event.setPhantomsToSpawn(phantomsToSpawn);
+		}
+		else {
+			int phantomsToSpawn = event.getPhantomsToSpawn() * (amplifier - 1);
 			event.setPhantomsToSpawn(phantomsToSpawn);
 		}
 		event.setResult(PlayerSpawnPhantomsEvent.Result.ALLOW);

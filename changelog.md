@@ -1,6 +1,8 @@
 # Upcoming
 * Tiredness
   * Phantoms can now spawn even at Tired II, but much less often
+  * Tired effect is now unbound (actually is at Tired X)
+    * Tired above III will spawn more Phantoms
 * Rounded sprint speed on armor
 * Moved Copper items out of Minecraft namespace
   * This should fix incompatiblities with other mods that add Copper items
