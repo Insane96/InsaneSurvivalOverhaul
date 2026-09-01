@@ -1,4 +1,4 @@
-# Upcoming
+# 5.10.1.0
 * Tiredness
   * Phantoms can now spawn even at Tired II, but much less often
   * Tired effect is now unbound (actually is at Tired X)
@@ -8,7 +8,7 @@
   * This should fix incompatiblities with other mods that add Copper items
 * Fixed Glow Block missing recipe and added an advancement
 
-# 5.10.0.1
+# 5.10.0.1-beta
 * Minor fixes
 
 # 5.10.0.0-beta
