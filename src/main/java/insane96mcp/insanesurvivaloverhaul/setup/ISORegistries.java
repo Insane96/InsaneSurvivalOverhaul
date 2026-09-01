@@ -37,8 +37,7 @@ public class ISORegistries {
     public static final List<DeferredRegister<?>> REGISTRIES = new ArrayList<>();
 
     public static final DeferredRegister<Item> ITEMS = createRegistry(BuiltInRegistries.ITEM);
-    public static final DeferredRegister<Item> MINECRAFT_ITEMS = createRegistryForNamespace(BuiltInRegistries.ITEM, "minecraft");
-    public static final DeferredRegister<ArmorMaterial> MINECRAFT_ARMOR_MATERIALS = createRegistryForNamespace(BuiltInRegistries.ARMOR_MATERIAL, "minecraft");
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = createRegistry(BuiltInRegistries.ARMOR_MATERIAL);
     public static final DeferredRegister<Block> BLOCKS = createRegistry(BuiltInRegistries.BLOCK);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = createRegistry(BuiltInRegistries.BLOCK_ENTITY_TYPE);
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
@@ -86,12 +85,6 @@ public class ISORegistries {
 
     private static <R> DeferredRegister<R> createRegistry(Registry<R> registry) {
         DeferredRegister<R> register = DeferredRegister.create(registry, InsaneSO.MOD_ID);
-        REGISTRIES.add(register);
-        return register;
-    }
-
-    private static <R> DeferredRegister<R> createRegistryForNamespace(Registry<R> registry, String namespace) {
-        DeferredRegister<R> register = DeferredRegister.create(registry, namespace);
         REGISTRIES.add(register);
         return register;
     }

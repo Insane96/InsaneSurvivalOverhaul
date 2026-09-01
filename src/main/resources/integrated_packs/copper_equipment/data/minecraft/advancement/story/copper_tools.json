@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:copper_pickaxe"
+            "item": "insanesurvivaloverhaul:copper_pickaxe"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.copper_tools.title"
@@ -22,10 +22,10 @@
                 "items": [
                     {
                         "items": [
-                            "minecraft:copper_pickaxe",
-                            "minecraft:copper_axe",
-                            "minecraft:copper_shovel",
-                            "minecraft:copper_hoe"
+                            "insanesurvivaloverhaul:copper_pickaxe",
+                            "insanesurvivaloverhaul:copper_axe",
+                            "insanesurvivaloverhaul:copper_shovel",
+                            "insanesurvivaloverhaul:copper_hoe"
                         ]
                     }
                 ]

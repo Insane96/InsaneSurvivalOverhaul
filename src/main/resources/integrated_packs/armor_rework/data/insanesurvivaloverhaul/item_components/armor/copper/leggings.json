@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_leggings",
+    "item": "insanesurvivaloverhaul:copper_leggings",
     "components": {
         "minecraft:max_damage": 75,
         "minecraft:attribute_modifiers": {

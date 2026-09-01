@@ -1,5 +1,5 @@
 {
-	"left_ingredient": "minecraft:copper_axe",
+	"left_ingredient": "insanesurvivaloverhaul:copper_axe",
 	"right_ingredient": {
 		"id": "minecraft:iron_ingot",
 		"count": 3

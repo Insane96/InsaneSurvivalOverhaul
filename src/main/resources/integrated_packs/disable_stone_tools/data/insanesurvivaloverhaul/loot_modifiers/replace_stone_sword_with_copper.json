@@ -2,5 +2,5 @@
     "type": "insanelib:replace_loot",
     "conditions": [],
     "item_to_replace": "minecraft:stone_sword",
-    "new_item": "minecraft:copper_sword"
+    "new_item": "insanesurvivaloverhaul:copper_sword"
 }

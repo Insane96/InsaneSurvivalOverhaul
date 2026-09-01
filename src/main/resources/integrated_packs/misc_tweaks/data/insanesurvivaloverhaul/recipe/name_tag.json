@@ -6,7 +6,7 @@
             "item": "minecraft:paper"
         },
         "X": {
-            "item": "minecraft:copper_nugget"
+            "item": "insanesurvivaloverhaul:copper_nugget"
         }
     },
     "pattern": [

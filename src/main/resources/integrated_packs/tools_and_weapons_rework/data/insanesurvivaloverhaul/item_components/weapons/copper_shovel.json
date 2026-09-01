@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_shovel",
+    "item": "insanesurvivaloverhaul:copper_shovel",
     "components": {
         "minecraft:max_damage": 308,
         "minecraft:attribute_modifiers": {

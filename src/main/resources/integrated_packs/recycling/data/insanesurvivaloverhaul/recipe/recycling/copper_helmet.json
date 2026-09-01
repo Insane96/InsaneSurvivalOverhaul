@@ -5,10 +5,10 @@
   "experience": 0.0,
   "group": "recycling_copper",
   "ingredient": {
-    "item": "minecraft:copper_helmet"
+    "item": "insanesurvivaloverhaul:copper_helmet"
   },
   "result": {
     "count": 45,
-    "id": "minecraft:copper_nugget"
+    "id": "insanesurvivaloverhaul:copper_nugget"
   }
 }

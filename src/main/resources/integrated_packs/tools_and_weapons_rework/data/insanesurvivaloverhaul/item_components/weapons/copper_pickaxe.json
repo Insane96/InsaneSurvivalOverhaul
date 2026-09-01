@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_pickaxe",
+    "item": "insanesurvivaloverhaul:copper_pickaxe",
     "components": {
         "minecraft:max_damage": 308,
         "minecraft:attribute_modifiers": {

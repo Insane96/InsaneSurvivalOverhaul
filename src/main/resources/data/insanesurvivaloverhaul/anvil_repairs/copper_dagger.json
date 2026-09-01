@@ -6,7 +6,7 @@
       "amount": 0.75
     },
     {
-      "repair_material": "minecraft:copper_nugget",
+      "repair_material": "insanesurvivaloverhaul:copper_nugget",
       "amount": 6.5,
       "cost_multiplier": 9
     }

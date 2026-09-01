@@ -2,5 +2,5 @@
     "type": "insanelib:replace_loot",
     "conditions": [],
     "item_to_replace": "minecraft:stone_hoe",
-    "new_item": "minecraft:copper_hoe"
+    "new_item": "insanesurvivaloverhaul:copper_hoe"
 }

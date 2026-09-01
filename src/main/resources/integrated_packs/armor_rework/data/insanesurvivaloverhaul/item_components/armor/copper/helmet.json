@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_helmet",
+    "item": "insanesurvivaloverhaul:copper_helmet",
     "components": {
         "minecraft:max_damage": 55,
         "minecraft:attribute_modifiers": {

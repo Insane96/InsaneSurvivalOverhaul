@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_sword",
+    "item": "insanesurvivaloverhaul:copper_sword",
     "components": {
         "minecraft:max_damage": 308,
         "minecraft:attribute_modifiers": {

@@ -1,5 +1,5 @@
 {
-	"left_ingredient": "minecraft:copper_helmet",
+	"left_ingredient": "insanesurvivaloverhaul:copper_helmet",
 	"right_ingredient": {
 		"id": "minecraft:iron_ingot",
 		"count": 5

@@ -1,5 +1,5 @@
 {
-	"left_ingredient": "minecraft:copper_shovel",
+	"left_ingredient": "insanesurvivaloverhaul:copper_shovel",
 	"right_ingredient": {
 		"id": "minecraft:iron_ingot",
 		"count": 1

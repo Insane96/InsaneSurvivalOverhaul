@@ -1,5 +1,5 @@
 {
-    "item": "minecraft:copper_axe",
+    "item": "insanesurvivaloverhaul:copper_axe",
     "components": {
         "minecraft:max_damage": 246,
         "minecraft:attribute_modifiers": {

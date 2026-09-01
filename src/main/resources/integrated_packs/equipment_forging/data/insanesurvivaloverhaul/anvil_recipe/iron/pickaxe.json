@@ -1,5 +1,5 @@
 {
-	"left_ingredient": "minecraft:copper_pickaxe",
+	"left_ingredient": "insanesurvivaloverhaul:copper_pickaxe",
 	"right_ingredient": {
 		"id": "minecraft:iron_ingot",
 		"count": 3

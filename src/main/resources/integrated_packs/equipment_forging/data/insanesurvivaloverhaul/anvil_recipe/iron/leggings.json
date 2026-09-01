@@ -1,5 +1,5 @@
 {
-	"left_ingredient": "minecraft:copper_leggings",
+	"left_ingredient": "insanesurvivaloverhaul:copper_leggings",
 	"right_ingredient": {
 		"id": "minecraft:iron_ingot",
 		"count": 7

@@ -23,22 +23,22 @@ import java.util.List;
 public class CopperEquipment extends Feature {
 	public static final SimpleTier ITEM_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 190, 5f, 1f, 13, () -> Ingredient.of(Items.COPPER_INGOT));
 
-	public static final DeferredHolder<Item, SwordItem> SWORD = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, SwordItem> SWORD = ISORegistries.ITEMS.register(
 			"copper_sword", () -> new SwordItem(ITEM_TIER, new Item.Properties().attributes(SwordItem.createAttributes(ITEM_TIER, 3, -2.4F)))
 	);
-	public static final DeferredHolder<Item, ShovelItem> SHOVEL = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, ShovelItem> SHOVEL = ISORegistries.ITEMS.register(
 			"copper_shovel", () -> new ShovelItem(ITEM_TIER, new Item.Properties().attributes(ShovelItem.createAttributes(ITEM_TIER, 1.5F, -3.0F)))
 	);
-	public static final DeferredHolder<Item, PickaxeItem> PICKAXE = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, PickaxeItem> PICKAXE = ISORegistries.ITEMS.register(
 			"copper_pickaxe", () -> new PickaxeItem(ITEM_TIER, new Item.Properties().attributes(PickaxeItem.createAttributes(ITEM_TIER, 1.0F, -2.8F)))
 	);
-	public static final DeferredHolder<Item, AxeItem> AXE = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, AxeItem> AXE = ISORegistries.ITEMS.register(
 			"copper_axe", () -> new AxeItem(ITEM_TIER, new Item.Properties().attributes(AxeItem.createAttributes(ITEM_TIER, 7.0F, -3.2F)))
 	);
-	public static final DeferredHolder<Item, HoeItem> HOE = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, HoeItem> HOE = ISORegistries.ITEMS.register(
 			"copper_hoe", () -> new HoeItem(ITEM_TIER, new Item.Properties().attributes(HoeItem.createAttributes(ITEM_TIER, -1.0F, -2.0F)))
 	);
-	public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ARMOR_MATERIAL = ISORegistries.MINECRAFT_ARMOR_MATERIALS.register(
+	public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ARMOR_MATERIAL = ISORegistries.ARMOR_MATERIALS.register(
 			"copper", () -> new ArmorMaterial(
 					Util.make(new EnumMap<>(ArmorItem.Type.class), m -> {
 						m.put(ArmorItem.Type.BOOTS, 1);
@@ -50,28 +50,35 @@ public class CopperEquipment extends Feature {
 					8,
 					SoundEvents.ARMOR_EQUIP_IRON,
 					() -> Ingredient.of(Items.COPPER_INGOT),
-					List.of(new ArmorMaterial.Layer(ResourceLocation.withDefaultNamespace("copper"))),
+					List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(InsaneSO.MOD_ID, "copper"))),
 					0.0F,
 					0.0F
 			)
 	);
 
-	public static final DeferredHolder<Item, ArmorItem> HELMET = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, ArmorItem> HELMET = ISORegistries.ITEMS.register(
 			"copper_helmet", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(11)))
 	);
-	public static final DeferredHolder<Item, ArmorItem> CHESTPLATE = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, ArmorItem> CHESTPLATE = ISORegistries.ITEMS.register(
 			"copper_chestplate", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(11)))
 	);
-	public static final DeferredHolder<Item, ArmorItem> LEGGINGS = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, ArmorItem> LEGGINGS = ISORegistries.ITEMS.register(
 			"copper_leggings", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(11)))
 	);
-	public static final DeferredHolder<Item, ArmorItem> BOOTS = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, ArmorItem> BOOTS = ISORegistries.ITEMS.register(
 			"copper_boots", () -> new ArmorItem(ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(11)))
 	);
 
-	public static final DeferredHolder<Item, Item> NUGGET = ISORegistries.MINECRAFT_ITEMS.register(
+	public static final DeferredHolder<Item, Item> NUGGET = ISORegistries.ITEMS.register(
 			"copper_nugget", () -> new Item(new Item.Properties())
 	);
+
+	static {
+		// Copper equipment used to be registered under the "minecraft" namespace; alias the old ids so existing worlds/configs still resolve them.
+		for (String path : new String[] {"copper_sword", "copper_shovel", "copper_pickaxe", "copper_axe", "copper_hoe", "copper_helmet", "copper_chestplate", "copper_leggings", "copper_boots", "copper_nugget"})
+			ISORegistries.ITEMS.addAlias(ResourceLocation.withDefaultNamespace(path), ResourceLocation.fromNamespaceAndPath(InsaneSO.MOD_ID, path));
+		ISORegistries.ARMOR_MATERIALS.addAlias(ResourceLocation.withDefaultNamespace("copper"), ResourceLocation.fromNamespaceAndPath(InsaneSO.MOD_ID, "copper"));
+	}
 
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
