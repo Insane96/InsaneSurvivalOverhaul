@@ -78,7 +78,7 @@ public class ISORecipeProvider extends RecipeProvider {
                 .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
                 .unlockedBy("has_glow_berries", has(Items.GLOW_BERRIES))
                 .unlockedBy("has_copper_block", has(Items.COPPER_BLOCK))
-                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Glow through walls")));
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Glow block")));
 
         RecipeOutput daggerOutput = recipeOutput.withConditions(new FeatureEnabledCondition("Daggers"));
         new ShapedRecipeBuilder(RecipeCategory.COMBAT, DaggerEquipment.WOODEN_DAGGER.get(), 1)

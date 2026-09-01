@@ -4,6 +4,7 @@ import insane96mcp.insanelib.data.FeatureEnabledCondition;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.OverweightPouchCarryTrigger;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
@@ -72,6 +73,21 @@ public class ISOAdvancementProvider implements DataProvider {
                         new OverweightPouchCarryTrigger.TriggerInstance(Optional.empty())))
                 .build(InsaneSO.id("story/overweight_pouch"));
         save(output, registries, futures, overweightPouch, pouchEnabled);
+
+        FeatureEnabledCondition glowBlockEnabled = new FeatureEnabledCondition("Glow block");
+
+        AdvancementHolder obtainGlowBlock = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        new ItemStack(GlowBlockFeature.GLOW_BLOCK.item().get()),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_glow_block.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_glow_block.description"),
+                        Optional.empty(),
+                        AdvancementType.TASK,
+                        true, true, false))
+                .parent(ResourceLocation.withDefaultNamespace("adventure/root"))
+                .addCriterion("has_glow_block", InventoryChangeTrigger.TriggerInstance.hasItems(GlowBlockFeature.GLOW_BLOCK.item().get()))
+                .build(InsaneSO.id("story/obtain_glow_block"));
+        save(output, registries, futures, obtainGlowBlock, glowBlockEnabled);
 
     }
 

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Glow block"
+    }
+  ],
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_glow_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "insanesurvivaloverhaul:glow_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_glow_block.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:glow_block"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_glow_block.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_glow_block"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

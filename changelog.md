@@ -1,5 +1,6 @@
 # Upcoming
 * Rounded sprint speed on armor
+* Fixed Glow Block missing recipe and added an advancement
 
 # 5.10.0.1
 * Minor fixes

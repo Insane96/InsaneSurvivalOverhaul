@@ -177,6 +177,8 @@
     "advancements.insanesurvivaloverhaul.obtain_pouch.description": "Obtain a Pouch",
     "advancements.insanesurvivaloverhaul.overweight_pouch.title": "This is heavy",
     "advancements.insanesurvivaloverhaul.overweight_pouch.description": "Get a movement speed penalty by carrying too many Pouches",
+    "advancements.insanesurvivaloverhaul.obtain_glow_block.title": "Through the Wall",
+    "advancements.insanesurvivaloverhaul.obtain_glow_block.description": "Obtain a Glow Block",
 
 
     "insanesurvivaloverhaul:respawn_module": "Respawn",
