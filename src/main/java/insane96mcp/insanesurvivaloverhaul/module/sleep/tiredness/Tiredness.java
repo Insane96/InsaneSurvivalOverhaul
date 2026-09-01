@@ -8,6 +8,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.core.feature.config.MinMaxConfig;
 import insane96mcp.insanelib.data.ObjTag;
 import insane96mcp.insanelib.event.PlayerExhaustionEvent;
+import insane96mcp.insanelib.util.MathHelper;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
@@ -124,7 +125,7 @@ public class Tiredness extends JsonFeature {
 	public static MinMaxConfig fakeSound$stepInterval = new MinMaxConfig(8, 15);
 	@Config(min = 0d, description = "Max horizontal distance (in blocks) the fake mob is allowed to wander from the player while playing footsteps")
 	public static Double fakeSound$wanderRadius = 16d;
-	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired III.")
+	@Config(description = "Phantoms will no longer spawn based on insomnia, but instead based off tiredness. Will spawn with Tired II+.")
 	public static Boolean tiredTiedPhantoms = true;
     @Config
     public static Boolean allowSleepingEvenWhenNotTired = false;
@@ -328,8 +329,8 @@ public class Tiredness extends JsonFeature {
 				player.addEffect(new MobEffectInstance(TIRED, -1, wantedAmplifier, true, false, true));
 				if (wantedAmplifier == 0)
 					player.displayClientMessage(Component.translatable(TIRED_ENOUGH), false);
-				else if (wantedAmplifier == 2)
-					player.displayClientMessage(Component.translatable(TOO_TIRED), false);
+				//else if (wantedAmplifier == 2)
+					//player.displayClientMessage(Component.translatable(TOO_TIRED), false);
 			}
 		}
 		else if (!player.hasEffect(ENERGY_BOOST)) {
@@ -451,19 +452,28 @@ public class Tiredness extends JsonFeature {
 		if (!this.isEnabled()
 				|| !tiredTiedPhantoms)
 			return;
-		if (event.getEntity().getEffect(TIRED) == null) {
+		Player player = event.getEntity();
+		if (player.getEffect(TIRED) == null) {
 			event.setResult(PlayerSpawnPhantomsEvent.Result.DENY);
 			return;
 		}
-		Level level = event.getEntity().level();
+		Level level = player.level();
 		//noinspection DataFlowIssue
-		int amplifier = event.getEntity().getEffect(TIRED).getAmplifier();
-		//Only summon them at Tired III
-		if (amplifier < 2
+		int amplifier = player.getEffect(TIRED).getAmplifier();
+		//Only summon them at Tired II+
+		if (amplifier < 1
 				|| !level.dimensionType().hasSkyLight()
-				|| !level.canSeeSky(event.getEntity().blockPosition())) {
+				|| !level.canSeeSky(player.blockPosition())) {
 			event.setResult(PlayerSpawnPhantomsEvent.Result.DENY);
 			return;
+		}
+		if (amplifier == 1) {
+			if (level.random.nextDouble() < 0.75d) {
+				event.setResult(PlayerSpawnPhantomsEvent.Result.DENY);
+				return;
+			}
+			int phantomsToSpawn = MathHelper.getAmountWithDecimalChance(level.getRandom(), event.getPhantomsToSpawn() / 2f);
+			event.setPhantomsToSpawn(phantomsToSpawn);
 		}
 		event.setResult(PlayerSpawnPhantomsEvent.Result.ALLOW);
 	}
