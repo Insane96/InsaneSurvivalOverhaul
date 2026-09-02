@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed daggers not accepting runes
+
 # 5.10.1.0
 * Tiredness
   * Phantoms can now spawn even at Tired II, but much less often
