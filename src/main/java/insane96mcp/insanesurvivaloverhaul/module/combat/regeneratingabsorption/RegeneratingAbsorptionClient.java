@@ -12,7 +12,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
@@ -21,8 +20,6 @@ public class RegeneratingAbsorptionClient {
 
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
         ResourceLocation aboveOverlay = VanillaGuiLayers.PLAYER_HEALTH;
-        if (ModList.get().isLoaded("stamina"))
-            aboveOverlay = ResourceLocation.parse("stamina:stamina_overlay");
         Minecraft mc = Minecraft.getInstance();
         Gui gui = mc.gui;
         event.registerAbove(aboveOverlay, InsaneSO.id("regenerating_absorption"), (guiGraphics, partialTicks) -> {

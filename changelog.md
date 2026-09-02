@@ -1,6 +1,7 @@
 # Upcoming
 * Main bed info message is now displayed only once ... unless you die
 * Fixed daggers not accepting runes
+* Fixed crash with Stamina mod
 
 # 5.10.1.0
 * Tiredness
