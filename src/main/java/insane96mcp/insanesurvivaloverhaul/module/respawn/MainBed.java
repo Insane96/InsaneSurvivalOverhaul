@@ -25,6 +25,7 @@ import java.util.Optional;
 
 @LoadFeature(module = ISOModules.RESPAWN, description = "Allows players to have a main bed where they will always respawn in if they lose a current bed.")
 public class MainBed extends Feature {
+	public static ResourceLocation SHOWED_INFO_MESSAGE;
 	public static ResourceLocation MAIN_BED_POS;
 
 	public static String SET_MAIN_BED_WITH_CROUCH = InsaneSO.lang("set_main_bed_with_crouch");
@@ -35,6 +36,7 @@ public class MainBed extends Feature {
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		MAIN_BED_POS = this.createDataKey("main_bed_pos");
+		SHOWED_INFO_MESSAGE = this.createDataKey("showed_info_message");
 	}
 
 	@SubscribeEvent
@@ -45,14 +47,16 @@ public class MainBed extends Feature {
 				|| event.getLevel().isClientSide)
 			return;
 
-		if (event.getEntity().isCrouching()) {
+		Player player = event.getEntity();
+		if (player.isCrouching()) {
 			if (!event.getItemStack().isEmpty())
 				return;
-			setMainBedPos(event.getEntity(), event.getPos());
-			event.getEntity().sendSystemMessage(Component.translatable(MAIN_BED_SET));
+			setMainBedPos(player, event.getPos());
+			player.sendSystemMessage(Component.translatable(MAIN_BED_SET));
 		}
-		else {
-			event.getEntity().sendSystemMessage(Component.translatable(SET_MAIN_BED_WITH_CROUCH));
+		else if (!ModNBTData.get(player, SHOWED_INFO_MESSAGE, Boolean.class)) {
+			player.sendSystemMessage(Component.translatable(SET_MAIN_BED_WITH_CROUCH));
+			ModNBTData.put(player, SHOWED_INFO_MESSAGE, true);
 		}
 	}
 

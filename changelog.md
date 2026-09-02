@@ -1,4 +1,5 @@
 # Upcoming
+* Main bed info message is now displayed only once ... unless you die
 * Fixed daggers not accepting runes
 
 # 5.10.1.0
