@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Repair Kits"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:crafting_special_repair_kit",
+  "category": "misc"
+}

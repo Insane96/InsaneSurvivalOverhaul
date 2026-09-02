@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Repair Kits"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "tag": "minecraft:planks"
+    }
+  ],
+  "result": {
+    "components": {
+      "insanesurvivaloverhaul:repair_kit_color": 12096607,
+      "insanesurvivaloverhaul:repair_kit_material": "minecraft:oak_planks"
+    },
+    "count": 1,
+    "id": "insanesurvivaloverhaul:repair_kit"
+  }
+}

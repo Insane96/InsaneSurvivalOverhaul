@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Repair Kits"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "result": {
+    "components": {
+      "insanesurvivaloverhaul:repair_kit_color": 13723717,
+      "insanesurvivaloverhaul:repair_kit_material": "minecraft:copper_ingot"
+    },
+    "count": 1,
+    "id": "insanesurvivaloverhaul:repair_kit"
+  }
+}

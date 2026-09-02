@@ -5,12 +5,14 @@ import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
+import dev.emi.emi.api.stack.Comparison;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
+import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilCrafting;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
@@ -63,6 +65,12 @@ public class ISOEmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(Nether.class)) {
 			if (Nether.portalRequiresCryingObsidian)
 				registry.addRecipe(createSimpleInfo(EmiIngredient.of(Nether.PORTAL_CORNERS), "info_portal_corners", Component.translatable("emi.info.insanesurvivaloverhaul.portal_corners")));
+		}
+		if (Feature.isEnabled(RepairKits.class)) {
+			// Every repair kit variant is the same Item with different components (material/color); without this,
+			// looking up "how to craft" any one variant shows every crafting recipe for repair_kit, since EMI's
+			// default recipe lookup only keys by item type.
+			registry.setDefaultComparison(RepairKits.ITEM.get(), Comparison.compareComponents());
 		}
 	}
 

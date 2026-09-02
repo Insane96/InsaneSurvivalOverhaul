@@ -1,18 +1,26 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanelib.data.FeatureEnabledCondition;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
+import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
+import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -124,5 +132,38 @@ public class ISORecipeProvider extends RecipeProvider {
                 .unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
                 .save(daggerOutput);
         netheriteSmithing(daggerOutput, DaggerEquipment.DIAMOND_DAGGER.get(), RecipeCategory.COMBAT, DaggerEquipment.NETHERITE_DAGGER.get());
+
+        RecipeOutput repairKitOutput = recipeOutput.withConditions(new FeatureEnabledCondition("Repair Kits"));
+        SpecialRecipeBuilder.special(RepairKitRepairRecipe::new)
+                .save(repairKitOutput, InsaneSO.id("repair_kit_repairing"));
+
+        for (Item material : RepairKits.DEFAULT_MATERIALS) {
+            int color = RepairKits.DEFAULT_COLORS.getOrDefault(material, 0xFFFFFF);
+            if (material == Items.OAK_PLANKS)
+                repairKit(repairKitOutput, "oak_planks", ItemTags.PLANKS, Items.OAK_PLANKS, color);
+            else
+                repairKit(repairKitOutput, BuiltInRegistries.ITEM.getKey(material).getPath(), material, material, color);
+        }
+    }
+
+    /**
+     * A repair kit is crafted from an amethyst shard plus its target material; the resulting stack carries
+     * the material's id in its {@link ISORegistries#REPAIR_KIT_MATERIAL} component and a tint color in its
+     * {@link ISORegistries#REPAIR_KIT_COLOR} component.
+     */
+    private static void repairKit(RecipeOutput recipeOutput, String materialName, ItemLike ingredient, Item material, int color) {
+        new ShapelessRecipeBuilder(RecipeCategory.TOOLS, RepairKits.of(material, color))
+                .requires(Items.AMETHYST_SHARD)
+                .requires(ingredient)
+                .unlockedBy("has_" + materialName, has(ingredient))
+                .save(recipeOutput, InsaneSO.id("repair_kit/from_" + materialName));
+    }
+
+    private static void repairKit(RecipeOutput recipeOutput, String materialName, TagKey<Item> ingredient, Item material, int color) {
+        new ShapelessRecipeBuilder(RecipeCategory.TOOLS, RepairKits.of(material, color))
+                .requires(Items.AMETHYST_SHARD)
+                .requires(ingredient)
+                .unlockedBy("has_" + materialName, has(ingredient))
+                .save(recipeOutput, InsaneSO.id("repair_kit/from_" + materialName));
     }
 }

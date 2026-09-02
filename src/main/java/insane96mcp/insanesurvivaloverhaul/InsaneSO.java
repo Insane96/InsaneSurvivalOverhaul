@@ -98,6 +98,7 @@ public class InsaneSO {
             NeoForge.EVENT_BUS.addListener(UnfairOneShotClient::onRenderTick);
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
+            eventBus.addListener(Client::registerItemColors);
             eventBus.addListener(HudInfos::registerGuiLayers);
             eventBus.addListener(GlowBlockEntityRenderer::register);
             eventBus.addListener(GlowBlockClient::registerGuiLayers);

@@ -170,6 +170,9 @@
     "item.insanesurvivaloverhaul.netherite_dagger": "Netherite Dagger",
     "item.insanesurvivaloverhaul.copper_dagger": "Copper Dagger",
 
+    "item.insanesurvivaloverhaul.repair_kit": "Repair Kit",
+    "item.insanesurvivaloverhaul.repair_kit.material": "%s Repair Kit",
+
     "item.insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch": "Pouch",
     "insanesurvivaloverhaul.pouch_weighted": "Slowed down if carried more than %d",

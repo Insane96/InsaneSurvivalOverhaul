@@ -13,6 +13,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -67,6 +68,16 @@ public class ISORegistries {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = createDataComponentsRegistry();
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> SCYTHE_RADIUS =
             DATA_COMPONENTS.register("scythe_radius", () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT)
+                    .build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> REPAIR_KIT_MATERIAL =
+            DATA_COMPONENTS.register("repair_kit_material", () -> DataComponentType.<ResourceLocation>builder()
+                    .persistent(ResourceLocation.CODEC)
+                    .networkSynchronized(ResourceLocation.STREAM_CODEC)
+                    .build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> REPAIR_KIT_COLOR =
+            DATA_COMPONENTS.register("repair_kit_color", () -> DataComponentType.<Integer>builder()
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
                     .build());

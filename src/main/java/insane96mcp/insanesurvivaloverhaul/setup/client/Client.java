@@ -14,6 +14,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
+import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -22,6 +23,8 @@ import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -30,12 +33,18 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static insane96mcp.insanelib.util.CreativeTabsUtils.*;
 
@@ -67,6 +76,22 @@ public class Client {
             }
             if (Feature.isEnabled(Pouch.class)) {
                 addAfter(event, Items.LEAD, Pouch.ITEM);
+            }
+            if (Feature.isEnabled(RepairKits.class) && Minecraft.getInstance().level != null) {
+                // Discover every crafted repair kit variant (any material, from any recipe - including ones
+                // added by other data packs) instead of hardcoding a material list, mirroring 1.20.1's approach.
+                List<ItemStack> variants = new ArrayList<>();
+                for (RecipeHolder<?> recipeHolder : Minecraft.getInstance().level.getRecipeManager().getRecipes()) {
+                    ItemStack stack = recipeHolder.value().getResultItem(event.getParameters().holders());
+                    if (stack.is(RepairKits.ITEM.get()))
+                        variants.add(stack);
+                }
+                // Every variant is inserted right after Shears, so add them back to front to end up in the
+                // intended order (each insertAfter's target must already exist in the tab, and our
+                // component-bearing stacks never match each other, only the plain Shears anchor).
+                for (int i = variants.size() - 1; i >= 0; i--) {
+                    addAfter(event, Items.SHEARS, variants.get(i));
+                }
             }
             if (Feature.isEnabled(Cloth.class)
                     && !event.getParameters().enabledFeatures().contains(FeatureFlags.BUNDLE))
@@ -175,6 +200,12 @@ public class Client {
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(PouchTooltip.class, ClientPouchTooltip::new);
+    }
+
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        // The alpha byte of the returned color is used as-is for the quad's render alpha (see
+        // ItemRenderer#renderQuadList), so it must be forced fully opaque or the item renders invisible.
+        event.register((stack, tintIndex) -> 0xFF000000 | stack.getOrDefault(ISORegistries.REPAIR_KIT_COLOR.get(), 0xFFFFFF), RepairKits.ITEM.get());
     }
 
     public static void onGatherSkippedAttributeTooltips(GatherSkippedAttributeTooltipsEvent event) {

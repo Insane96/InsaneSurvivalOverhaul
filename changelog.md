@@ -1,4 +1,6 @@
 # Upcoming
+* Repair Kits are back!
+  * Crafted with 1 material and an amethyst shard, repair your items directly from the crafting grid.
 * Main bed info message is now displayed only once ... unless you die
 * Fixed daggers not accepting runes
 * Fixed crash with Stamina mod
