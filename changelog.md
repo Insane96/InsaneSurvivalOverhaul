@@ -1,4 +1,4 @@
-# Upcoming
+# 5.11.0.0-beta
 * The Fletching Table is back!
   * Craft Quartz, Diamond, Explosive, Torch and Ice arrows from vanilla arrows and a catalyst
   * EMI support
