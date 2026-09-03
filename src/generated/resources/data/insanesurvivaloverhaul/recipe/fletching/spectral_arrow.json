@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Fletching"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:fletching",
+  "catalyst1": {
+    "count": 1,
+    "item": "minecraft:glowstone_dust"
+  },
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:arrow"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:spectral_arrow"
+  }
+}

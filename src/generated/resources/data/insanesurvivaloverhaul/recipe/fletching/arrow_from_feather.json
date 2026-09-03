@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Fletching"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:fletching",
+  "catalyst1": {
+    "count": 1,
+    "item": "minecraft:feather"
+  },
+  "catalyst2": {
+    "count": 1,
+    "item": "minecraft:flint"
+  },
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "count": 6,
+    "id": "minecraft:arrow"
+  }
+}

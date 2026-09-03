@@ -1,4 +1,7 @@
 # Upcoming
+* The Fletching Table is back!
+  * Craft Quartz, Diamond, Explosive, Torch and Ice arrows from vanilla arrows and a catalyst
+  * EMI support
 * Repair Kits are back!
   * Crafted with 1 material and an amethyst shard, repair your items directly from the crafting grid.
 * Main bed info message is now displayed only once ... unless you die

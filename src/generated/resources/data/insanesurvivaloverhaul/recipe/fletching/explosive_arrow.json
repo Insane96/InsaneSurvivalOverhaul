@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Fletching"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:fletching",
+  "catalyst1": {
+    "count": 1,
+    "item": "minecraft:tnt"
+  },
+  "ingredient": {
+    "count": 4,
+    "item": "minecraft:arrow"
+  },
+  "result": {
+    "count": 4,
+    "id": "insanesurvivaloverhaul:explosive_arrow"
+  }
+}

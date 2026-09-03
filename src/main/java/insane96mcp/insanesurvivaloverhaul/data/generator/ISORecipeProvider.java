@@ -3,6 +3,8 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 import insane96mcp.insanelib.data.FeatureEnabledCondition;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
@@ -10,18 +12,27 @@ import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepair
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
+import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ISORecipeProvider extends RecipeProvider {
@@ -144,6 +155,51 @@ public class ISORecipeProvider extends RecipeProvider {
             else
                 repairKit(repairKitOutput, BuiltInRegistries.ITEM.getKey(material).getPath(), material, material, color);
         }
+
+        RecipeOutput fletchingOutput = recipeOutput.withConditions(new FeatureEnabledCondition("Fletching"));
+        fletchingRecipe(fletchingOutput, "quartz_arrow", Items.ARROW, 2, Items.QUARTZ,
+                new ItemStack(FletchingFeature.QUARTZ_ARROW_ITEM.get(), 2));
+        fletchingRecipe(fletchingOutput, "diamond_arrow", Items.ARROW, 12, Items.DIAMOND,
+                new ItemStack(FletchingFeature.DIAMOND_ARROW_ITEM.get(), 12));
+        fletchingRecipe(fletchingOutput, "explosive_arrow", Items.ARROW, 4, Items.TNT,
+                new ItemStack(FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), 4));
+        fletchingRecipe(fletchingOutput, "torch_arrow", Items.ARROW, 1, Items.TORCH,
+                new ItemStack(FletchingFeature.TORCH_ARROW_ITEM.get(), 1));
+        fletchingRecipe(fletchingOutput, "ice_arrow", Items.ARROW, 4, Items.BLUE_ICE,
+                new ItemStack(FletchingFeature.ICE_ARROW_ITEM.get(), 4));
+
+        // Additional (non-overriding) ways to make vanilla arrows and spectral arrows via the fletching table,
+        // on top of their normal crafting table recipes.
+        fletchingRecipe(fletchingOutput, "arrow_from_feather", Items.STICK, 1, Items.FEATHER, Items.FLINT,
+                new ItemStack(Items.ARROW, 6));
+        fletchingRecipe(fletchingOutput, "spectral_arrow", Items.ARROW, 1, Items.GLOWSTONE_DUST,
+                new ItemStack(Items.SPECTRAL_ARROW, 1));
+
+        fletchingRecipe(fletchingOutput.withConditions(new FeatureEnabledCondition("Cloth")), "arrow_from_cloth", Items.STICK, 1, Cloth.ITEM.get(), Items.FLINT,
+                new ItemStack(Items.ARROW, 3));
+    }
+
+    /**
+     * A fletching recipe upgrading {@code ingredientCount} vanilla arrows into an equal count of one of the
+     * mod's arrows, using one of {@code catalyst} as the second ingredient. Quantities are carried over from
+     * the 1.20.1 port.
+     */
+    private static void fletchingRecipe(RecipeOutput recipeOutput, String name, Item ingredient, int ingredientCount, Item catalyst, ItemStack result) {
+        fletchingRecipe(recipeOutput, name, ingredient, ingredientCount, catalyst, null, result);
+    }
+
+    private static void fletchingRecipe(RecipeOutput recipeOutput, String name, Item ingredient, int ingredientCount, Item catalyst1, @Nullable Item catalyst2, ItemStack result) {
+        ResourceLocation id = InsaneSO.id("fletching/" + name);
+        FletchingRecipe recipe = new FletchingRecipe(
+                SizedIngredient.of(ingredient, ingredientCount),
+                SizedIngredient.of(catalyst1, 1),
+                Optional.ofNullable(catalyst2).map(item -> SizedIngredient.of(item, 1)),
+                result);
+        Advancement.Builder advancement = recipeOutput.advancement()
+                .addCriterion("has_ingredient", has(ingredient))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR);
+        recipeOutput.accept(id, recipe, advancement.build(id.withPrefix("recipes/combat/")));
     }
 
     /**

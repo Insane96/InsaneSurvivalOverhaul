@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Fletching"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:fletching",
+  "catalyst1": {
+    "count": 1,
+    "item": "minecraft:quartz"
+  },
+  "ingredient": {
+    "count": 2,
+    "item": "minecraft:arrow"
+  },
+  "result": {
+    "count": 2,
+    "id": "insanesurvivaloverhaul:quartz_arrow"
+  }
+}

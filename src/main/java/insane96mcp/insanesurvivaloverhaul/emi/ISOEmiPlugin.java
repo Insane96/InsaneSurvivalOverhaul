@@ -10,6 +10,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
@@ -65,6 +66,13 @@ public class ISOEmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(Nether.class)) {
 			if (Nether.portalRequiresCryingObsidian)
 				registry.addRecipe(createSimpleInfo(EmiIngredient.of(Nether.PORTAL_CORNERS), "info_portal_corners", Component.translatable("emi.info.insanesurvivaloverhaul.portal_corners")));
+		}
+		if (Feature.isEnabled(FletchingFeature.class)) {
+			registry.addCategory(EmiFletchingRecipe.CATEGORY);
+			registry.addWorkstation(EmiFletchingRecipe.CATEGORY, EmiStack.of(Items.FLETCHING_TABLE));
+			for (var recipe : registry.getRecipeManager().getAllRecipesFor(FletchingFeature.FLETCHING_RECIPE_TYPE.get())) {
+				registry.addRecipe(new EmiFletchingRecipe(recipe.id(), recipe.value()));
+			}
 		}
 		if (Feature.isEnabled(RepairKits.class)) {
 			// Every repair kit variant is the same Item with different components (material/color); without this,

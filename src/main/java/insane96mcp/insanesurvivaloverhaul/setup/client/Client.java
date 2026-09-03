@@ -5,6 +5,8 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.ShortbowItem;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingScreen;
 import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -40,6 +42,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
@@ -121,6 +124,13 @@ public class Client {
             if (Feature.isEnabled(Bows.class)) {
                 addAfter(event, Items.BOW, Bows.SHORTBOW);
             }
+            if (Feature.isEnabled(FletchingFeature.class)) {
+                addAfter(event, Items.ARROW, FletchingFeature.QUARTZ_ARROW_ITEM);
+                addAfter(event, FletchingFeature.QUARTZ_ARROW_ITEM.get(), FletchingFeature.DIAMOND_ARROW_ITEM);
+                addAfter(event, FletchingFeature.DIAMOND_ARROW_ITEM.get(), FletchingFeature.EXPLOSIVE_ARROW_ITEM);
+                addAfter(event, FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), FletchingFeature.TORCH_ARROW_ITEM);
+                addAfter(event, FletchingFeature.TORCH_ARROW_ITEM.get(), FletchingFeature.ICE_ARROW_ITEM);
+            }
         }
         else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             if (Feature.isEnabled(CoalFire.class)) {
@@ -195,7 +205,10 @@ public class Client {
                             -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
         });
         //MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE, ISOBeaconScreen::new);
-        //MenuScreens.register(Fletching.FLETCHING_MENU_TYPE, FletchingScreen::new);
+    }
+
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(FletchingFeature.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
     }
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {

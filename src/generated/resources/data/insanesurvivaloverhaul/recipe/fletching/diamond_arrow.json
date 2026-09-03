@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Fletching"
+    }
+  ],
+  "type": "insanesurvivaloverhaul:fletching",
+  "catalyst1": {
+    "count": 1,
+    "item": "minecraft:diamond"
+  },
+  "ingredient": {
+    "count": 12,
+    "item": "minecraft:arrow"
+  },
+  "result": {
+    "count": 12,
+    "id": "insanesurvivaloverhaul:diamond_arrow"
+  }
+}

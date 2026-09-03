@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
 import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenalty;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
@@ -120,6 +121,12 @@ public class ISOItemModelsProvider extends ItemModelProvider {
         basicItem(DeathMaxHealthPenalty.CRYSTAL_HEART.get());
 
         blockItem(GlowBlockFeature.GLOW_BLOCK);
+
+        basicItem(FletchingFeature.QUARTZ_ARROW_ITEM.get());
+        basicItem(FletchingFeature.DIAMOND_ARROW_ITEM.get());
+        basicItem(FletchingFeature.EXPLOSIVE_ARROW_ITEM.get());
+        basicItem(FletchingFeature.TORCH_ARROW_ITEM.get());
+        basicItem(FletchingFeature.ICE_ARROW_ITEM.get());
     }
 
     private ItemModelBuilder blockItem(SimpleBlockWithItem block) {

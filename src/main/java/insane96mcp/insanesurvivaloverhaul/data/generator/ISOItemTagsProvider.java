@@ -1,7 +1,9 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
+import insane96mcp.insanelib.module.base.items.ItemTooltips;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSounds;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.StackSizes;
@@ -165,6 +167,15 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(REItemTagProvider.WEAPONS);
         tag(create("rune_applicable_to/armor_piercer"))
                 .addTag(REItemTagProvider.WEAPONS);
+
+        tag(ItemTooltips.HAS_TOOLTIP)
+                .add(Items.ARROW, Items.SPECTRAL_ARROW, FletchingFeature.QUARTZ_ARROW_ITEM.get(), FletchingFeature.DIAMOND_ARROW_ITEM.get(),
+                        FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), FletchingFeature.TORCH_ARROW_ITEM.get(), FletchingFeature.ICE_ARROW_ITEM.get());
+
+        //Bows/crossbows only accept ammo in this tag as valid projectiles.
+        tag(ItemTags.ARROWS)
+                .add(FletchingFeature.QUARTZ_ARROW_ITEM.get(), FletchingFeature.DIAMOND_ARROW_ITEM.get(),
+                        FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), FletchingFeature.TORCH_ARROW_ITEM.get(), FletchingFeature.ICE_ARROW_ITEM.get());
     }
 
     public static TagKey<Item> create(String tagName) {

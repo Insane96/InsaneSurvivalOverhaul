@@ -30,7 +30,7 @@ Features to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 - [x] UnfairOneShot
 - [x] Bows
 - [x] CriticalRework
-- [ ] Fletching
+- [x] Fletching
 
 ## ~~Experience~~ Moving to new mod
 

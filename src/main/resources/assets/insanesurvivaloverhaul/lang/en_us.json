@@ -267,7 +267,27 @@
 
     "item.insanesurvivaloverhaul.sweet_berry_seeds": "Sweet Berry Seeds",
 
+    "item.insanesurvivaloverhaul.quartz_arrow": "Quartz Arrow",
+    "item.insanesurvivaloverhaul.diamond_arrow": "Diamond Arrow",
+    "item.insanesurvivaloverhaul.explosive_arrow": "Explosive Arrow",
+    "item.insanesurvivaloverhaul.torch_arrow": "Torch Arrow",
+    "item.insanesurvivaloverhaul.ice_arrow": "Ice Arrow",
+    "entity.insanesurvivaloverhaul.quartz_arrow": "Quartz Arrow",
+    "entity.insanesurvivaloverhaul.diamond_arrow": "Diamond Arrow",
+    "entity.insanesurvivaloverhaul.explosive_arrow": "Explosive Arrow",
+    "entity.insanesurvivaloverhaul.torch_arrow": "Torch Arrow",
+    "entity.insanesurvivaloverhaul.ice_arrow": "Ice Arrow",
+
+    "item.minecraft.arrow.tooltip": "Basic arrow with average damage",
+    "item.minecraft.spectral_arrow.tooltip": "Same as normal arrows but make your enemies glow",
+    "item.insanesurvivaloverhaul.quartz_arrow.tooltip": "Deals bonus piercing damage (ignores armor)",
+    "item.insanesurvivaloverhaul.diamond_arrow.tooltip": "Deals more damage than flint arrows but it's heavier",
+    "item.insanesurvivaloverhaul.explosive_arrow.tooltip": "Blows up on impact",
+    "item.insanesurvivaloverhaul.torch_arrow.tooltip": "Places a torch or sets an entity on fire",
+    "item.insanesurvivaloverhaul.ice_arrow.tooltip": "Applies freezing to hit entities",
+
     "emi.category.insanesurvivaloverhaul.anvil": "Anvil Crafting",
+    "emi.category.insanesurvivaloverhaul.fletching": "Fletching Table",
 
     "emi.info.insanesurvivaloverhaul.items.name_tags": "When applied to a named entity will drop the previous name tag. If the item is not renamed will remove the name from the entity.",
     "emi.info.insanesurvivaloverhaul.crops.seeds": "Can be found in the wild",

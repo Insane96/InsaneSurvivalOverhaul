@@ -14,6 +14,8 @@ import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.ISORunes;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
+import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.ISOArrowRenderer;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorption;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
@@ -38,6 +40,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -98,9 +101,11 @@ public class InsaneSO {
             NeoForge.EVENT_BUS.addListener(UnfairOneShotClient::onRenderTick);
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
+            eventBus.addListener(Client::registerMenuScreens);
             eventBus.addListener(Client::registerItemColors);
             eventBus.addListener(HudInfos::registerGuiLayers);
             eventBus.addListener(GlowBlockEntityRenderer::register);
+            eventBus.addListener(ISOArrowRenderer::register);
             eventBus.addListener(GlowBlockClient::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(GlowBlockClient::onRenderLevelStage);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
@@ -118,11 +123,11 @@ public class InsaneSO {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(id("cyan_flower"), CyanFlower.POTTED_FLOWER);
             ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(id("solanum_neorossii"), Crops.POTTED_SOLANUM_NEOROSSII);
 
-            //DispenserBlock.registerBehavior(Fletching.QUARTZ_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
-            //DispenserBlock.registerBehavior(Fletching.DIAMOND_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
-            //DispenserBlock.registerBehavior(Fletching.EXPLOSIVE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
-            //DispenserBlock.registerBehavior(Fletching.TORCH_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
-            //DispenserBlock.registerBehavior(Fletching.ICE_ARROW_ITEM.get(), new ISOArrowDispenseBehaviour());
+            DispenserBlock.registerProjectileBehavior(FletchingFeature.QUARTZ_ARROW_ITEM.get());
+            DispenserBlock.registerProjectileBehavior(FletchingFeature.DIAMOND_ARROW_ITEM.get());
+            DispenserBlock.registerProjectileBehavior(FletchingFeature.EXPLOSIVE_ARROW_ITEM.get());
+            DispenserBlock.registerProjectileBehavior(FletchingFeature.TORCH_ARROW_ITEM.get());
+            DispenserBlock.registerProjectileBehavior(FletchingFeature.ICE_ARROW_ITEM.get());
         });
     }
 

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:arrow",
+    "minecraft:spectral_arrow",
+    "insanesurvivaloverhaul:quartz_arrow",
+    "insanesurvivaloverhaul:diamond_arrow",
+    "insanesurvivaloverhaul:explosive_arrow",
+    "insanesurvivaloverhaul:torch_arrow",
+    "insanesurvivaloverhaul:ice_arrow"
+  ]
+}
