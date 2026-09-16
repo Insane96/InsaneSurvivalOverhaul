@@ -90,6 +90,9 @@ public class Tweaks extends Feature {
     @Config(min = 2, max = 9, description = "Max amount of matching, repairable items that can be merged together in a crafting grid to combine their durability (vanilla's repair recipe). Vanilla is 2.")
     public static Integer repairMergeMaxItems = 9;
 
+    @Config(description = "Dragon Egg will no longer port on left-click")
+    public static Boolean teleportDragonEggOnlyOnRightClick = true;
+
     public static boolean discreteNameTags = true;
 
     public static boolean doesBlindnessPreventSprint() {

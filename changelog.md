@@ -1,4 +1,6 @@
 # Upcoming
+* Tweaks
+  * Added Teleport Dragon Egg Only On Right Click
 * Halved Tired penalties
 * New Tiredness hidden advancement
 * Regenerating absorption
