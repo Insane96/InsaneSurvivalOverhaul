@@ -1,6 +1,10 @@
 # Upcoming
 * Tweaks
   * Added Teleport Dragon Egg Only On Right Click
+* Bone Meal
+  * Crafting Bones now yields less Bone Meal. Bone Blocks are cheaper
+  * Lowered chance to fail on crops and cave vines. Increased chance on sweet berry bushes. Heavily increased chance on Saplings.
+  * Bone Meal can now fail on Cactus and Sugar Canes too
 * Halved Tired penalties
 * New Tiredness hidden advancement
 * Regenerating absorption

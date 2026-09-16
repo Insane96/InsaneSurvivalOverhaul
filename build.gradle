@@ -100,6 +100,8 @@ dependencies {
     implementation "maven.modrinth:no-hunger:2.0.0.3"
     implementation "maven.modrinth:insane-experience-tweaks:1.1.3.1"
     implementation "maven.modrinth:jade:15.10.6+neoforge"
+    implementation "maven.modrinth:puzzles-lib:21.1.60"
+    implementation "maven.modrinth:universal-bone-meal:v21.1.0-1.21.1-NeoForge"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

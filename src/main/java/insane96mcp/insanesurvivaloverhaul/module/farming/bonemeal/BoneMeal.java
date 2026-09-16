@@ -17,7 +17,6 @@ import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -71,7 +70,7 @@ public class BoneMeal extends Feature {
     @Config(min = 0, description = "How many stages will cactus and sugar canes grow with one bone meal. Set to 0 to disable.")
     public static MinMaxConfig boneMealCanesAndCactus = new MinMaxConfig(1, 4);
 
-    @Config(description = "Makes bone meal have a chance to fail on Cave Vines, Saplings and Sweet Berry Bushes. Also makes rotten flesh compostable.")
+    @Config(description = "Makes Cave Vines, Saplings, Sweet Berry Bushes and Crops requiring more bone meal. Makes rotten flesh compostable. Makes crafting Bones yield less Bone Meal and Bone Blocks cheaper.")
     public static Boolean dataPack = true;
 
     @Override
