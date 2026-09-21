@@ -1,4 +1,6 @@
 # Upcoming
+* Added Scarce Copper
+  * Makes copper ores drop 1\~2 copper instead of 2\~5 (about 58% less)
 * Tweaks
   * Added Teleport Dragon Egg Only On Right Click
 * Bone Meal

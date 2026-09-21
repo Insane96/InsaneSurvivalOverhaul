@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items.copper;
+package insane96mcp.insanesurvivaloverhaul.module.items;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -83,6 +83,6 @@ public class CopperEquipment extends Feature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("copper_equipment", "Insane's Survival Extra Copper Expansion", () -> this.isEnabled() && !Packs.disableAllDataPacks);
+		InsaneSO.addServerPack("copper_equipment", "Insane's Survival Overhaul Copper Expansion", () -> this.isEnabled() && !Packs.disableAllDataPacks);
 	}
 }

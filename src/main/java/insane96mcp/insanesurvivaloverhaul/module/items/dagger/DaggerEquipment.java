@@ -3,7 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.module.items.dagger;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.items.copper.CopperEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
