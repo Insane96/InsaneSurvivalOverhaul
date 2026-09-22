@@ -31,7 +31,7 @@ public class DaggerItem extends SwordItem {
 	 */
 	@Override
 	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
-		return DEFAULT_ACTIONS.contains(DEFAULT_ACTIONS);
+		return DEFAULT_ACTIONS.contains(itemAbility);
 	}
 
 	/**
