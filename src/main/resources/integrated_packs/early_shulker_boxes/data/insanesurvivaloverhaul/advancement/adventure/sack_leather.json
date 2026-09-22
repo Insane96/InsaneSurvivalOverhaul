@@ -1,8 +1,11 @@
 {
 	"neoforge:conditions": [
 		{
-			"type": "insanelib:feature_enabled",
-			"feature": "Cloth"
+			"type": "neoforge:not",
+			"value": {
+				"type": "insanelib:feature_enabled",
+				"feature": "Cloth"
+			}
 		}
 	],
 	"display": {
@@ -20,7 +23,7 @@
 		"announce_to_chat": true,
 		"hidden": false
 	},
-	"parent": "insanesurvivaloverhaul:adventure/cloth",
+	"parent": "minecraft:adventure/kill_a_mob",
 	"criteria": {
 		"sack": {
 			"trigger": "minecraft:inventory_changed",

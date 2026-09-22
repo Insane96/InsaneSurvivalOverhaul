@@ -1,17 +1,20 @@
 {
   "neoforge:conditions": [
     {
-      "type": "insanelib:feature_enabled",
-      "feature": "Cloth"
+      "type": "neoforge:not",
+      "value": {
+        "type": "insanelib:feature_enabled",
+        "feature": "Cloth"
+      }
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cloth": {
+    "has_leather": {
       "conditions": {
         "items": [
           {
-            "items": "insanesurvivaloverhaul:cloth"
+            "items": "minecraft:leather"
           }
         ]
       },
@@ -19,7 +22,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:shulker_box"
+        "recipe": "insanesurvivaloverhaul:shulker_box_from_leather"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -27,12 +30,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cloth"
+      "has_leather"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:shulker_box"
+      "insanesurvivaloverhaul:shulker_box_from_leather"
     ]
   }
 }

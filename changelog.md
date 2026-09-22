@@ -1,7 +1,13 @@
 # Upcoming
 * Increased daggers reach (2.25 -> 2.5)
+* Glow Block is now easier to look at: it counts as looked at when within 5° of the crosshair (configurable), instead of requiring the crosshair to be exactly on it
+* New Shulker Boxes Feature
+  * Early Shulker Boxes (Sacks) have been moved from Cloth
+    * If Cloth is disabled, Sacks are crafted with Leather instead of Cloth
+* Removed Cloth's "Data Pack" config option, the data pack is now enabled with the feature
 * Fixed daggers not usable as furnace fuel
 * Fixed daggers not breaking some blocks faster like sword
+* Fixed daggers not repairable with amethysts (Experience Tweaks)
 
 # 5.12.1.0
 * Added missing sockets (Rune enchanting) to Shortbows

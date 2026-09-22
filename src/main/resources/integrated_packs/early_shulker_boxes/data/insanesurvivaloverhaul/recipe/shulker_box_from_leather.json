@@ -1,15 +1,18 @@
 {
   "neoforge:conditions": [
     {
-      "type": "insanelib:feature_enabled",
-      "feature": "Cloth"
+      "type": "neoforge:not",
+      "value": {
+        "type": "insanelib:feature_enabled",
+        "feature": "Cloth"
+      }
     }
   ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
     "#": {
-      "item": "insanesurvivaloverhaul:cloth"
+      "item": "minecraft:leather"
     },
     "X": {
       "tag": "c:chests/wooden"
