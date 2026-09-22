@@ -11,8 +11,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-import java.util.Optional;
-
 public class GlowBlockClient {
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         // Fires once per frame, right before block entities (and thus GlowBlockEntityRenderer) render:
@@ -39,25 +37,28 @@ public class GlowBlockClient {
     }
 
     /**
-     * The closest glow block (by hit distance) whose AABB the player's eye-to-view-vector ray crosses,
-     * even through walls since it's not a real clip against level collision. Null if none.
+     * The glow block closest to the crosshair (smallest angle between the view vector and the direction
+     * to its center), among those within {@link GlowBlockFeature#lookAngle} degrees or whose AABB the view
+     * ray crosses directly (so close blocks still count when looking at their edges). Works through walls
+     * since it's not a real clip against level collision. Null if none.
      */
     private static BlockPos getLookedAtGlowBlock(Player player, float partialTick) {
         if (GlowBlockEntityRenderer.VISIBLE_THIS_FRAME.isEmpty())
             return null;
 
         Vec3 eye = player.getEyePosition(partialTick);
-        Vec3 end = eye.add(player.getViewVector(partialTick).scale(256));
+        Vec3 look = player.getViewVector(partialTick);
+        Vec3 end = eye.add(look.scale(256));
+        double minCos = Math.cos(Math.toRadians(GlowBlockFeature.lookAngle));
 
         BlockPos closest = null;
-        double closestDistSq = Double.MAX_VALUE;
+        double bestCos = -1;
         for (BlockPos pos : GlowBlockEntityRenderer.VISIBLE_THIS_FRAME) {
-            Optional<Vec3> hit = new AABB(pos).clip(eye, end);
-            if (hit.isEmpty())
+            double cos = pos.getCenter().subtract(eye).normalize().dot(look);
+            if (cos < minCos && new AABB(pos).clip(eye, end).isEmpty())
                 continue;
-            double distSq = hit.get().distanceToSqr(eye);
-            if (distSq < closestDistSq) {
-                closestDistSq = distSq;
+            if (cos > bestCos) {
+                bestCos = cos;
                 closest = pos;
             }
         }

@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.module.misc.glowblock;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
@@ -17,4 +18,7 @@ public class GlowBlockFeature extends Feature {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GlowBlockEntity>> GLOW_BLOCK_ENTITY =
             ISORegistries.BLOCK_ENTITIES.register("glow_block",
                     () -> BlockEntityType.Builder.of(GlowBlockEntity::new, GLOW_BLOCK.block().get()).build(null));
+
+    @Config(min = 0, max = 90, description = "Max angle (in degrees) between the crosshair and a glow block's center for it to count as looked at. Looking directly at the block always counts.")
+    public static Double lookAngle = 5d;
 }
