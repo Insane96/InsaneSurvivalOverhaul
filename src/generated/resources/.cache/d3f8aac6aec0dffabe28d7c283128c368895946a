@@ -1,4 +1,5 @@
-// 1.21.1	2026-09-03T10:33:32.7765853	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-09-22T21:39:33.9398099	Tags for minecraft:item mod id insanesurvivaloverhaul
+eafef6758f2e2535828471f2be608627913b243e data/experiencetweaks/tags/item/repairable_with_amethyst.json
 6c819db7033f1b53aba70574bfc5dd88d4076475 data/insanelib/tags/item/has_tooltip.json
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
 ba9125aa546790a0582445879c658b228dbb763c data/insanesurvivaloverhaul/tags/item/combat/attack_sounds/axe.json

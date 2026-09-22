@@ -168,6 +168,11 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(create("rune_applicable_to/armor_piercer"))
                 .addTag(REItemTagProvider.WEAPONS);
 
+        //Experience Tweaks integration (only relevant if the mod is installed, harmless otherwise)
+        //The Amethyst Repair pack's tag is an explicit list of metal equipment, so the metal daggers must be added here.
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("experiencetweaks", "repairable_with_amethyst")))
+                .add(DaggerEquipment.COPPER_DAGGER.get(), DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER.get());
+
         tag(ItemTooltips.HAS_TOOLTIP)
                 .add(Items.ARROW, Items.SPECTRAL_ARROW, FletchingFeature.QUARTZ_ARROW_ITEM.get(), FletchingFeature.DIAMOND_ARROW_ITEM.get(),
                         FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), FletchingFeature.TORCH_ARROW_ITEM.get(), FletchingFeature.ICE_ARROW_ITEM.get());
