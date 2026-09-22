@@ -204,7 +204,7 @@ public class ISORecipeProvider extends RecipeProvider {
      * the material's id in its {@link ISORegistries#REPAIR_KIT_MATERIAL} component and a tint color in its
      * {@link ISORegistries#REPAIR_KIT_COLOR} component.
      */
-    private static void repairKit(RecipeOutput recipeOutput, String materialName, ItemLike ingredient, ObjTag<Item> material, int color, @Nullable Integer materialRatio, @Nullable Double maxRepair) {
+    private static void repairKit(RecipeOutput recipeOutput, String materialName, ItemLike ingredient, ObjTag<Item> material, int color, @Nullable Double materialRatio, @Nullable Double maxRepair) {
         new ShapelessRecipeBuilder(RecipeCategory.TOOLS, RepairKits.of(material, color, materialRatio, maxRepair))
                 .requires(Items.AMETHYST_SHARD)
                 .requires(ingredient)
@@ -212,7 +212,7 @@ public class ISORecipeProvider extends RecipeProvider {
                 .save(recipeOutput, InsaneSO.id("repair_kit/from_" + materialName));
     }
 
-    private static void repairKit(RecipeOutput recipeOutput, String materialName, TagKey<Item> ingredient, ObjTag<Item> material, int color, @Nullable Integer materialRatio, @Nullable Double maxRepair) {
+    private static void repairKit(RecipeOutput recipeOutput, String materialName, TagKey<Item> ingredient, ObjTag<Item> material, int color, @Nullable Double materialRatio, @Nullable Double maxRepair) {
         new ShapelessRecipeBuilder(RecipeCategory.TOOLS, RepairKits.of(material, color, materialRatio, maxRepair))
                 .requires(Items.AMETHYST_SHARD)
                 .requires(ingredient)

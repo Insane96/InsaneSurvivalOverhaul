@@ -1,6 +1,7 @@
 # Upcoming
 * Added missing sockets (Rune enchanting) to Shortbows
 * Added chains repair kits
+* Increased Repair Kits' material ratio (each repair kit now repairs 20% more)
 * Fixed ISO's arrows not affected by Enchantments/Runes
 * Fixed Repair Kits still using vanilla repair method if experience tweaks is installed
 

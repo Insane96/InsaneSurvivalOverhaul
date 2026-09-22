@@ -92,10 +92,10 @@ public class ISORegistries {
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
                     .build());
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> REPAIR_KIT_AMOUNT =
-            DATA_COMPONENTS.register("repair_kit_amount", () -> DataComponentType.<Integer>builder()
-                    .persistent(Codec.INT)
-                    .networkSynchronized(ByteBufCodecs.INT)
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Double>> REPAIR_KIT_AMOUNT =
+            DATA_COMPONENTS.register("repair_kit_amount", () -> DataComponentType.<Double>builder()
+                    .persistent(Codec.DOUBLE)
+                    .networkSynchronized(ByteBufCodecs.DOUBLE)
                     .build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Double>> REPAIR_KIT_MAX_REPAIR =
             DATA_COMPONENTS.register("repair_kit_max_repair", () -> DataComponentType.<Double>builder()

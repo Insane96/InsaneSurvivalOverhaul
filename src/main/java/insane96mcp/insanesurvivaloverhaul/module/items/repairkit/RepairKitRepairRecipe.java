@@ -104,9 +104,9 @@ public class RepairKitRepairRecipe extends CustomRecipe {
         if (!vanillaValid && oRepairData.isEmpty())
             return ItemStack.EMPTY;
 
-        int materialRatio = repairKit.getOrDefault(ISORegistries.REPAIR_KIT_AMOUNT.get(), RepairKits.repairKitMaterialRatio);
+        double materialRatio = repairKit.getOrDefault(ISORegistries.REPAIR_KIT_AMOUNT.get(), RepairKits.repairKitMaterialRatio);
         double kitMaxRepair = repairKit.getOrDefault(ISORegistries.REPAIR_KIT_MAX_REPAIR.get(), RepairKits.maxRepair);
-        int repairCount = materialRatio * kitAmount;
+        int repairCount = kitAmount;
         int repairItemCountCost;
         int maxPartialRepairDmg = Mth.ceil(resultStack.getMaxDamage() * (1f - kitMaxRepair));
         float amountRequired = 4f;
@@ -140,7 +140,7 @@ public class RepairKitRepairRecipe extends CustomRecipe {
 
         float damageValue = resultStack.getDamageValue();
         for (repairItemCountCost = 0; repairSteps > 0 && repairItemCountCost < repairCount && damageValue > maxPartialRepairDmg; ++repairItemCountCost) {
-            damageValue -= repairSteps;
+            damageValue -= (float) (repairSteps * materialRatio);
             repairSteps = Math.min(damageValue, resultStack.getMaxDamage() / amountRequired);
         }
         resultStack.setDamageValue((int) Math.max(maxPartialRepairDmg, damageValue));

@@ -37,7 +37,7 @@ public class RepairKits extends Feature {
      * NeoForge's common convention tags so items from other mods (e.g. another mod's iron ingot) work too.
      */
     public record RepairKitMaterial(String name, Either<Item, TagKey<Item>> ingredient, ObjTag<Item> material, int color,
-                                     @Nullable Integer materialRatio, @Nullable Double maxRepair) {
+                                     @Nullable Double materialRatio, @Nullable Double maxRepair) {
         public static RepairKitMaterial of(String name, TagKey<Item> ingredient, TagKey<Item> material, int color) {
             return new RepairKitMaterial(name, Either.right(ingredient), ObjTag.tagOf(material, BuiltInRegistries.ITEM), color, null, null);
         }
@@ -57,8 +57,8 @@ public class RepairKits extends Feature {
             RepairKitMaterial.of("chain", Items.CHAIN, 10395294)
     );
 
-    @Config(min = 1, description = "Default how many materials worth does a repair kit repair. Each repair kit repairs based on the material it was crafted with, up to Max repair. Can be overridden by item component.")
-    public static Integer repairKitMaterialRatio = 1;
+    @Config(min = 0, description = "Default repair bonus multiplier applied to the durability a repair kit restores per material used. Each repair kit repairs based on the material it was crafted with, up to Max repair. Can be overridden by item component.")
+    public static Double repairKitMaterialRatio = 1.2d;
     @Config(min = 0, max = 1, name = "Max repair", description = "Maximum repair percentage of an item that repair kits can reach. Can be overridden by item component.")
     public static Double maxRepair = 1d;
 
@@ -70,7 +70,7 @@ public class RepairKits extends Feature {
      * @param materialRatio override of {@link #repairKitMaterialRatio} for this specific kit, or null to use the (live-configurable) default
      * @param maxRepairOverride override of {@link #maxRepair} for this specific kit, or null to use the (live-configurable) default
      */
-    public static ItemStack of(ObjTag<Item> material, int color, @Nullable Integer materialRatio, @Nullable Double maxRepairOverride) {
+    public static ItemStack of(ObjTag<Item> material, int color, @Nullable Double materialRatio, @Nullable Double maxRepairOverride) {
         ItemStack stack = new ItemStack(ITEM.get());
         stack.set(ISORegistries.REPAIR_KIT_MATERIAL.get(), material.toSerializedString());
         stack.set(ISORegistries.REPAIR_KIT_COLOR.get(), color);
