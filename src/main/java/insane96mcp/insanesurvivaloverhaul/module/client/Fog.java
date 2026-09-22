@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,7 +59,7 @@ public class Fog extends Feature {
         float rainLevel = entity.level().getRainLevel(1f);
         float ratio = overworld$fogStartRatio.floatValue();
         if (rainLevel > 0f) {
-            float skyLight = entity.level().getBrightness(LightLayer.SKY, entity.blockPosition());
+            float skyLight = entity.level().getBrightness(LightLayer.SKY, BlockPos.containing(entity.getEyePosition()));
             float skyLightRatio = skyLight / 12f;
             if (skyLightRatio > 1f)
                 skyLightRatio = 1f;

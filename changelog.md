@@ -9,6 +9,7 @@
 * Fixed daggers not usable as furnace fuel
 * Fixed daggers not breaking some blocks faster like sword
 * Fixed daggers not repairable with amethysts (Experience Tweaks)
+* Fixed rain fog disappearing when inside a block (e.g. mud or when riding a minecart uphill)
 
 # 5.12.1.0
 * Added missing sockets (Rune enchanting) to Shortbows
