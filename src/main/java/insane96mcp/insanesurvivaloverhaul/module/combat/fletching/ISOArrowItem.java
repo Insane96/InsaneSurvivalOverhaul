@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.module.combat.fletching;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.AbstractArrowAccessor;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -42,6 +44,13 @@ public class ISOArrowItem extends ArrowItem {
         arrow.setBaseDamage(this.baseDamage);
         if (weapon != null)
             ((AbstractArrowAccessor) arrow).setFiredFromWeapon(weapon.copy());
+        if (weapon != null && !weapon.isEmpty() && level instanceof ServerLevel serverLevel) {
+            AbstractArrowAccessor accessor = (AbstractArrowAccessor) arrow;
+            int piercingCount = EnchantmentHelper.getPiercingCount(serverLevel, weapon, accessor.invokeGetPickupItem());
+            if (piercingCount > 0)
+                accessor.invokeSetPierceLevel((byte) piercingCount);
+            EnchantmentHelper.onProjectileSpawned(serverLevel, weapon, arrow, item -> accessor.setFiredFromWeapon(null));
+        }
         return arrow;
     }
 
