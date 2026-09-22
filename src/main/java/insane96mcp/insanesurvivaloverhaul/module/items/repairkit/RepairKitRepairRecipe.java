@@ -85,18 +85,20 @@ public class RepairKitRepairRecipe extends CustomRecipe {
         boolean experienceTweaksLoaded = ModList.get().isLoaded(ModIds.EXPERIENCE_TWEAKS);
         // The material can be a tag (e.g. one kit valid for iron, gold and diamond tools): try every item it
         // covers and use the first one this specific item is repairable with, either vanilla or via Experience Tweaks.
+        // Experience Tweaks' custom data is checked first so its per-material overrides (amount, max repair, cost
+        // multiplier) still apply even when the candidate is also a valid vanilla repair item.
         Optional<ExperienceTweaksIntegration.RepairData> oRepairData = Optional.empty();
         boolean vanillaValid = false;
         for (Item candidate : material.getAllObjects()) {
             ItemStack candidateStack = new ItemStack(candidate);
-            if (resultStack.getItem().isValidRepairItem(resultStack, candidateStack)) {
-                vanillaValid = true;
-                break;
-            }
             if (experienceTweaksLoaded) {
                 oRepairData = ExperienceTweaksIntegration.getCustomRepairData(repairableItem, candidateStack);
                 if (oRepairData.isPresent())
                     break;
+            }
+            if (resultStack.getItem().isValidRepairItem(resultStack, candidateStack)) {
+                vanillaValid = true;
+                break;
             }
         }
         if (!vanillaValid && oRepairData.isEmpty())

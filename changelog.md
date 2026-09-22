@@ -2,6 +2,7 @@
 * Added missing sockets (Rune enchanting) to Shortbows
 * Added chains repair kits
 * Fixed ISO's arrows not affected by Enchantments/Runes
+* Fixed Repair Kits still using vanilla repair method if experience tweaks is installed
 
 # 5.12.0.0
 * Added Scarce Copper
