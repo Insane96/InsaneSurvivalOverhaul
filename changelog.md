@@ -1,4 +1,5 @@
 # Upcoming
+* Increased daggers reach (2.25 -> 2.5)
 * Fixed daggers not usable as furnace fuel
 * Fixed daggers not breaking some blocks faster like sword
 
