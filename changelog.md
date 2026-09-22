@@ -1,4 +1,4 @@
-# Upcoming
+# 5.12.1.0
 * Added missing sockets (Rune enchanting) to Shortbows
 * Added chains repair kits
 * Increased Repair Kits' material ratio (each repair kit now repairs 20% more)
