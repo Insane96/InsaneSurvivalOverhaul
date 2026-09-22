@@ -2,6 +2,7 @@
 * Increased daggers reach (2.25 -> 2.5)
 * Glow Block is now easier to look at: it counts as looked at when within 5° of the crosshair (configurable), instead of requiring the crosshair to be exactly on it
 * New Shulker Boxes Feature
+  * Picked up items now go directly in Shulker Boxes in the inventory that already contain that item
   * Early Shulker Boxes (Sacks) have been moved from Cloth
     * If Cloth is disabled, Sacks are crafted with Leather instead of Cloth
 * Removed Cloth's "Data Pack" config option, the data pack is now enabled with the feature
