@@ -1,5 +1,6 @@
 # Upcoming
 * Added missing sockets (Rune enchanting) to Shortbows
+* Added chains repair kits
 * Fixed ISO's arrows not affected by Enchantments/Runes
 
 # 5.12.0.0

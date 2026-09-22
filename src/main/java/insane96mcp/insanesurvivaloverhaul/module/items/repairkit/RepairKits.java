@@ -12,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.neoforge.common.Tags;
@@ -40,6 +41,10 @@ public class RepairKits extends Feature {
         public static RepairKitMaterial of(String name, TagKey<Item> ingredient, TagKey<Item> material, int color) {
             return new RepairKitMaterial(name, Either.right(ingredient), ObjTag.tagOf(material, BuiltInRegistries.ITEM), color, null, null);
         }
+
+        public static RepairKitMaterial of(String name, Item ingredient, int color) {
+            return new RepairKitMaterial(name, Either.left(ingredient), ObjTag.objOf(ingredient, BuiltInRegistries.ITEM), color, null, null);
+        }
     }
 
     public static final List<RepairKitMaterial> DEFAULT_MATERIALS = List.of(
@@ -48,7 +53,8 @@ public class RepairKits extends Feature {
             RepairKitMaterial.of("gold_ingot", Tags.Items.INGOTS_GOLD, Tags.Items.INGOTS_GOLD, 16643423),
             RepairKitMaterial.of("diamond", Tags.Items.GEMS_DIAMOND, Tags.Items.GEMS_DIAMOND, 10615784),
             RepairKitMaterial.of("netherite_ingot", Tags.Items.INGOTS_NETHERITE, Tags.Items.INGOTS_NETHERITE, 4997443),
-            RepairKitMaterial.of("copper_ingot", Tags.Items.INGOTS_COPPER, Tags.Items.INGOTS_COPPER, 13723717)
+            RepairKitMaterial.of("copper_ingot", Tags.Items.INGOTS_COPPER, Tags.Items.INGOTS_COPPER, 13723717),
+            RepairKitMaterial.of("chain", Items.CHAIN, 10395294)
     );
 
     @Config(min = 1, description = "Default how many materials worth does a repair kit repair. Each repair kit repairs based on the material it was crafted with, up to Max repair. Can be overridden by item component.")
