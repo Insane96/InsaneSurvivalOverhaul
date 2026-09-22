@@ -1,0 +1,10 @@
+{
+  "values": {
+    "#minecraft:logs_that_burn": {
+      "burn_time": 800
+    },
+    "minecraft:dried_kelp_block": {
+      "burn_time": 3200
+    }
+  }
+}

@@ -5,6 +5,9 @@
   * Picked up items now go directly in Shulker Boxes in the inventory that already contain that item
   * Early Shulker Boxes (Sacks) have been moved from Cloth
     * If Cloth is disabled, Sacks are crafted with Leather instead of Cloth
+* Misc Tweaks data pack
+  * Logs now smelt 4 items instead of 1.5
+  * Moved "Less burn time for Kelp Block" from Nerfs to the data pack (Dried Kelp Blocks still smelt 16 items instead of 20)
 * Removed Cloth's "Data Pack" config option, the data pack is now enabled with the feature
 * Fixed daggers not usable as furnace fuel
 * Fixed daggers not breaking some blocks faster like sword

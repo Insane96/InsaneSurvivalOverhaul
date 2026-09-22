@@ -37,7 +37,9 @@ public class Packs extends Feature {
             * Wool can be crafted back to strings
             * Carpets, Bricks, Banners, Targets and Tnt recipes now outputs more
             * Tnt recipe now also accepts paper instead of sand
-            * Moss carpets can be crafted back to moss blocks""")
+            * Moss carpets can be crafted back to moss blocks
+            * Logs smelt 4 items instead of 1.5 when used as furnace fuel
+            * Dried Kelp Blocks smelt 16 items instead of 20 when used as furnace fuel""")
     public static Boolean miscTweaks = true;
 
     @Config(description = """

@@ -17,7 +17,6 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various Nerfs")
@@ -28,8 +27,6 @@ public class Nerfs extends Feature {
 	public static Boolean noCoordinates = true;
 	@Config(description = "If true, maxEntityCramming game rule is set to 6 from 24")
 	public static Boolean reducedMobCramming = true;
-	@Config(description = "Kelp blocks smelt 16 items instead of 20")
-	public static Boolean lessBurnTimeForKelpBlock = true;
 
 	@Config(description = "Fixes several piston physics exploits like TNT duping. (If quark is present this is disabled)")
 	public static Boolean removePistonPhysicsExploit = true;
@@ -92,15 +89,5 @@ public class Nerfs extends Feature {
 			event.getServer().getGameRules().getRule(GameRules.RULE_REDUCEDDEBUGINFO).set(true, event.getServer());
 		if (reducedMobCramming)
 			event.getServer().getGameRules().getRule(GameRules.RULE_MAX_ENTITY_CRAMMING).set(6, event.getServer());
-	}
-
-	@SubscribeEvent
-	public void onFuelBurnTime(FurnaceFuelBurnTimeEvent event) {
-		if (!this.isEnabled()
-				|| !lessBurnTimeForKelpBlock
-				|| !event.getItemStack().is(Items.DRIED_KELP_BLOCK))
-			return;
-
-		event.setBurnTime(3200);
 	}
 }
