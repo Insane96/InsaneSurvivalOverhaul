@@ -1,3 +1,6 @@
+# Upcoming
+* Added missing sockets (Rune enchanting) to Shortbows
+
 # 5.12.0.0
 * Added Scarce Copper
   * Makes copper ores drop 1\~2 copper instead of 2\~5 (about 58% less)
