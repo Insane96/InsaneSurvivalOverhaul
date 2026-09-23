@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneS
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.ClientboundMilkCooldownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundExhaustionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;
+import insane96mcp.insanesurvivaloverhaul.module.items.ServerboundToggleShulkerAutoPickupPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.ClientboundAnvilRecipeSyncPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
@@ -34,5 +35,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);
         registrar.playToClient(SpawnerStatusSync.TYPE, SpawnerStatusSync.STREAM_CODEC, SpawnerStatusSync::handle);
         registrar.playToServer(ServerboundBackwardsSlowdownPacket.TYPE, ServerboundBackwardsSlowdownPacket.STREAM_CODEC, ServerboundBackwardsSlowdownPacket::handle);
+        registrar.playToServer(ServerboundToggleShulkerAutoPickupPacket.TYPE, ServerboundToggleShulkerAutoPickupPacket.STREAM_CODEC, ServerboundToggleShulkerAutoPickupPacket::handle);
     }
 }

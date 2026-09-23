@@ -222,6 +222,11 @@
     "advancements.insanesurvivaloverhaul.bundle.description": "Make a bundle with Cloth",
     "advancements.insanesurvivaloverhaul.sack.title": "Not a Shulker Box",
     "advancements.insanesurvivaloverhaul.sack.description": "Obtain a Sack with Cloth and a Chest",
+    "insanesurvivaloverhaul.shulker_auto_pickup.enabled": "Auto pickup: Enabled",
+    "insanesurvivaloverhaul.shulker_auto_pickup.disabled": "Auto pickup: Disabled",
+    "insanesurvivaloverhaul.shulker_auto_pickup.toggle": "Press [%s] in the inventory to toggle",
+    "key.insanesurvivaloverhaul.toggle_shulker_auto_pickup": "Toggle Shulker Box Auto Pickup",
+    "key.categories.insanesurvivaloverhaul": "Insane's Survival Overhaul",
 
     "effect.insanesurvivaloverhaul.tired": "Tired",
     "effect.insanesurvivaloverhaul.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",

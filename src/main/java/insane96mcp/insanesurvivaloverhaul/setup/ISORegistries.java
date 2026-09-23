@@ -102,6 +102,14 @@ public class ISORegistries {
                     .persistent(Codec.DOUBLE)
                     .networkSynchronized(ByteBufCodecs.DOUBLE)
                     .build());
+    /**
+     * Present (true) on Shulker Boxes that have auto pickup enabled. Removed, not set to false, when disabled.
+     */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> SHULKER_AUTO_PICKUP =
+            DATA_COMPONENTS.register("shulker_auto_pickup", () -> DataComponentType.<Boolean>builder()
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .build());
 
     private static DeferredRegister<AttachmentType<?>> createAttachmentTypesRegistry() {
         DeferredRegister<AttachmentType<?>> register = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, InsaneSO.MOD_ID);

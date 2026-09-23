@@ -7,20 +7,28 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;
 
@@ -33,7 +41,7 @@ public class ShulkerBoxes extends Feature {
 	@Config(description = "Enables a resource pack that renames Shulker Boxes to Sack")
 	public static Boolean renameShulkerBoxToSack = true;
 
-	@Config(description = "When picking up an item, if a Shulker Box in the inventory already contains that item, the item is put in the Shulker Box instead of the inventory.")
+	@Config(description = "When picking up an item, if a Shulker Box in the inventory already contains that item, the item is put in the Shulker Box instead of the inventory. Auto pickup must be enabled on each Shulker Box by pressing the toggle key (S by default) while hovering it in the inventory.")
 	public static Boolean autoPickupIntoShulkerBoxes = true;
 
 	@Override
@@ -90,7 +98,8 @@ public class ShulkerBoxes extends Feature {
 	 */
 	private static void tryInsertIntoShulkerBox(ItemStack shulkerBox, ItemStack stack) {
 		ItemContainerContents contents = shulkerBox.get(DataComponents.CONTAINER);
-		if (contents == null
+		if (!hasAutoPickup(shulkerBox)
+				|| contents == null
 				|| contents.nonEmptyStream().noneMatch(s -> ItemStack.isSameItemSameComponents(s, stack)))
 			return;
 
@@ -115,5 +124,55 @@ public class ShulkerBoxes extends Feature {
 			stack.shrink(toMove);
 		}
 		shulkerBox.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
+	}
+
+	public static boolean hasAutoPickup(ItemStack stack) {
+		return stack.getOrDefault(ISORegistries.SHULKER_AUTO_PICKUP, false);
+	}
+
+	/**
+	 * Toggles auto pickup on the Shulker Box in the given slot of the player's open menu.
+	 * Only Shulker Boxes in the player's own inventory can be toggled. Enabled Shulker Boxes also get the enchantment glint.
+	 */
+	public static void toggleAutoPickup(Player player, int containerId, int slotIndex) {
+		if (!Feature.isEnabled(ShulkerBoxes.class)
+				|| !autoPickupIntoShulkerBoxes)
+			return;
+		AbstractContainerMenu menu = player.containerMenu;
+		if (menu.containerId != containerId
+				|| slotIndex < 0
+				|| slotIndex >= menu.slots.size())
+			return;
+		Slot slot = menu.getSlot(slotIndex);
+		ItemStack stack = slot.getItem();
+		if (slot.container != player.getInventory()
+				|| !stack.is(Tags.Items.SHULKER_BOXES))
+			return;
+
+		if (hasAutoPickup(stack)) {
+			stack.remove(ISORegistries.SHULKER_AUTO_PICKUP);
+			stack.remove(DataComponents.ENCHANTMENT_GLINT_OVERRIDE);
+		}
+		else {
+			stack.set(ISORegistries.SHULKER_AUTO_PICKUP, true);
+			stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+		}
+		slot.setChanged();
+		menu.broadcastChanges();
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public void onTooltip(ItemTooltipEvent event) {
+		if (!this.isEnabled()
+				|| !autoPickupIntoShulkerBoxes
+				|| !event.getItemStack().is(Tags.Items.SHULKER_BOXES))
+			return;
+
+		if (hasAutoPickup(event.getItemStack()))
+			event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.enabled").withStyle(ChatFormatting.GREEN));
+		else
+			event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.disabled").withStyle(ChatFormatting.GRAY));
+		event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.toggle", ShulkerBoxesClient.TOGGLE_AUTO_PICKUP.get().getTranslatedKeyMessage()).withStyle(ChatFormatting.DARK_GRAY));
 	}
 }

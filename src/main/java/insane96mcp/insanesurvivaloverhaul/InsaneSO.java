@@ -24,6 +24,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.LivestockData
 import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthRegen;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
+import insane96mcp.insanesurvivaloverhaul.module.items.ShulkerBoxesClient;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockClient;
@@ -109,6 +110,8 @@ public class InsaneSO {
             eventBus.addListener(GlowBlockClient::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(GlowBlockClient::onRenderLevelStage);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
+            eventBus.addListener(ShulkerBoxesClient::registerKeyMappings);
+            NeoForge.EVENT_BUS.addListener(ShulkerBoxesClient::onKeyPressed);
         }
 
         NeoForgeMod.enableMergedAttributeTooltips();

@@ -1,3 +1,6 @@
+# 5.12.3.0
+* Shulker Boxes auto pick-up must now be enabled by pressing 'S' on the Shulker in the inventory
+
 # 5.12.2.0
 * Glow Block is now easier to look at: it counts as looked at when within 5° of the crosshair (configurable), instead of requiring the crosshair to be exactly on it
 * New Shulker Boxes Feature
