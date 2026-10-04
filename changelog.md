@@ -1,3 +1,7 @@
+# 5.12.4.0
+* Hud Infos have been moved to a standalone mod: Item & Block Info Hud
+  * Tags have been moved from `insanesurvivaloverhaul:hud/*` to `itemblockinfohud:*`
+
 # 5.12.3.0
 * Shulker Boxes auto pick-up must now be enabled by pressing 'S' on the Shulker in the inventory
 

@@ -35,12 +35,6 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ISOItemTagsProvider extends ItemTagsProvider {
-    public static final TagKey<Item> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
-    public static final TagKey<Item> HUD_SEASON = create("hud/season");
-    public static final TagKey<Item> HUD_DEPTH = create("hud/depth");
-    public static final TagKey<Item> HUD_TIME = create("hud/time");
-    public static final TagKey<Item> HUD_BIOME = create("hud/biome");
-
     public static final TagKey<Item> HORSE_ARMORS = create("horse_armors");
     public static final TagKey<Item> MINECARTS = create("minecarts");
     public static final TagKey<Item> WOODEN_HAND_EQUIPMENT = create("equipment/hand/wooden");
@@ -82,19 +76,6 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
 
         //Mod's
-        tag(HUD_CARDINAL_DIRECTION)
-                .add(Items.COMPASS);
-        tag(HUD_SEASON);
-                //.addOptional(BuiltInRegistries.ITEM.getKey(SSItems.CALENDAR));
-        tag(HUD_DEPTH)
-                //.add(Altimeter.ITEM.get())
-                .addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
-                .addOptional(ResourceLocation.parse("supplementaries:altimeter"));
-        tag(HUD_TIME)
-                .add(Items.CLOCK);
-        tag(HUD_BIOME);
-                //.add(Sextant.ITEM.get());
-
         tag(HORSE_ARMORS)
                 .add(Items.LEATHER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR, Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR);
         tag(MINECARTS)

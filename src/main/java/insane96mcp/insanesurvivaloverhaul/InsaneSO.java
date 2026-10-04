@@ -10,7 +10,6 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsPro
 import insane96mcp.insanesurvivaloverhaul.data.modifier.Modifiers;
 import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.client.hudinfos.HudInfos;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.ISORunes;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
@@ -104,7 +103,6 @@ public class InsaneSO {
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(Client::registerMenuScreens);
             eventBus.addListener(Client::registerItemColors);
-            eventBus.addListener(HudInfos::registerGuiLayers);
             eventBus.addListener(GlowBlockEntityRenderer::register);
             eventBus.addListener(ISOArrowRenderer::register);
             eventBus.addListener(GlowBlockClient::registerGuiLayers);

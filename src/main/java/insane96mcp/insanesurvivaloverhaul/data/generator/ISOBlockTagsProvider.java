@@ -35,12 +35,6 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
     //public static final TagKey<Block> GRASS_BLOCKS = create("grass_blocks");
     public static final TagKey<Block> TALL_GRASS = create("tall_grass");
 
-    public static final TagKey<Block> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
-    public static final TagKey<Block> HUD_SEASON = create("hud/season");
-    public static final TagKey<Block> HUD_DEPTH = create("hud/depth");
-    public static final TagKey<Block> HUD_TIME = create("hud/time");
-    public static final TagKey<Block> HUD_BIOME = create("hud/biome");
-
     public ISOBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper){
         super(output, lookupProvider, modId, existingFileHelper);
     }
@@ -74,8 +68,6 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         //noinspection unchecked
         tag(Tweaks.BREAK_ON_FALL)
                 .addTags(Tags.Blocks.GLASS_BLOCKS, BlockTags.LEAVES);
-        //tag(HUD_TIME)
-                //.addOptional(ForgeRegistries.BLOCKS.getKey(ModRegistry.CLOCK_BLOCK.get()));
         tag(TALL_GRASS)
                 .add(Blocks.SHORT_GRASS).add(Blocks.TALL_GRASS).add(Blocks.FERN).add(Blocks.LARGE_FERN);
 
