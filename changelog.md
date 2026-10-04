@@ -1,4 +1,4 @@
-# 5.12.4.0
+# 5.12.4.0-alpha
 * Hud Infos have been moved to a standalone mod: Item & Block Info Hud
   * Tags have been moved from `insanesurvivaloverhaul:hud/*` to `itemblockinfohud:*`
 
