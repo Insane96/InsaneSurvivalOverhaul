@@ -1,3 +1,8 @@
+# Upcoming
+* Death screen changes have been moved out of the client module
+  * It requires statistics from the server, so it's required server side too
+  * Has been simplified and renamed to "Time since last death"
+
 # 5.12.4.0-alpha
 * Hud Infos have been moved to a standalone mod: Item & Block Info Hud
   * Tags have been moved from `insanesurvivaloverhaul:hud/*` to `itemblockinfohud:*`
@@ -31,6 +36,7 @@
 # 5.12.0.0
 * Added Scarce Copper
   * Makes copper ores drop 1\~2 copper instead of 2\~5 (about 58% less)
+  * Copper blocks recipes have been adjusted accordingly
 * Tweaks
   * Added Teleport Dragon Egg Only On Right Click
 * Bone Meal

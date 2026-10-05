@@ -1,31 +1,22 @@
-package insane96mcp.insanesurvivaloverhaul.module.client.death;
+package insane96mcp.insanesurvivaloverhaul.module.death;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
-@LoadFeature(module = ISOClientModules.CLIENT,
-        name = "Death",
-        description = "Changes to death")
-public class Death extends Feature {
-    @Config(description = "Why is that still a thing?")
-    public static Boolean removeScore = true;
-    @Config
-    public static Boolean replaceScoreWithTimeSinceLastDeath = true;
-
+@LoadFeature(module = ISOModules.DEATH, description = "Replace score in the death screen with time since last death")
+public class TimeSinceLastDeath extends Feature {
     /** Synced from the server on death. Stores ticks since last death. */
-    public static int syncedTimeSinceDeath = 0;
+    public static int syncedTimeSinceDeath = -1;
     /** Synced from the server on death. Stores total death count. */
-    public static int syncedDeaths = 0;
+    public static int syncedDeaths = -1;
 
     @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent event) {
         if (!this.isEnabled()
-                || !replaceScoreWithTimeSinceLastDeath
                 || !(event.getEntity() instanceof ServerPlayer player))
             return;
         ClientboundDeathStatsPacket.send(player);

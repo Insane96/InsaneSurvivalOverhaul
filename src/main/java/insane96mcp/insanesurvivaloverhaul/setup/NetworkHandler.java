@@ -1,9 +1,9 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
-import insane96mcp.insanesurvivaloverhaul.module.client.death.ClientboundDeathStatsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.combat.attackspeedbasedinvincibility.ClientboundInvulnerableTimePacket;
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.ClientboundRegenAbsorptionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotPacket;
+import insane96mcp.insanesurvivaloverhaul.module.death.ClientboundDeathStatsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.ClientboundMilkCooldownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundExhaustionPacket;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.ClientboundSaturationPacket;

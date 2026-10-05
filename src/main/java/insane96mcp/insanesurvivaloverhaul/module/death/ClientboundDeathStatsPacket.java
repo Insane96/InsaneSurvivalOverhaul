@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.client.death;
+package insane96mcp.insanesurvivaloverhaul.module.death;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
@@ -27,8 +27,8 @@ public record ClientboundDeathStatsPacket(int timeSinceDeath, int deaths) implem
 
     public static void handle(final ClientboundDeathStatsPacket payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            Death.syncedTimeSinceDeath = payload.timeSinceDeath();
-            Death.syncedDeaths = payload.deaths();
+            TimeSinceLastDeath.syncedTimeSinceDeath = payload.timeSinceDeath();
+            TimeSinceLastDeath.syncedDeaths = payload.deaths();
         });
     }
 
