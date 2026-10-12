@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @LoadFeature(module = ISOModules.COMBAT,
-        description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness",
+        description = "Armor gives regenerating absorption and regen absorption speed instead of armor and toughness. Please note this is not compatible with the 'Armor rework' data pack",
         enabledByDefault = false)
 public class AbsorptionArmor extends Feature {
 
