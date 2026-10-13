@@ -2,6 +2,8 @@
 * Death screen changes have been moved out of the client module
   * It requires statistics from the server, so it's required server side too
   * Has been simplified and renamed to "Time since last death"
+* Spawning
+  * Changed 'No zombie villager' to 'Replace zombie villagers with normal zombies'
 
 # 5.12.4.0-alpha
 * Hud Infos have been moved to a standalone mod: Item & Block Info Hud

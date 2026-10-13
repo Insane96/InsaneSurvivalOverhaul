@@ -10,18 +10,24 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -36,8 +42,8 @@ public class Spawning extends Feature {
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7).explosionResistance(120)));
 
-    @Config(description = "Disables Zombie Villagers")
-    public static Boolean noZombieVillagers = true;
+    @Config
+    public static Boolean replaceZombieVillagersWithNormalZombies = true;
     @Config(description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
     @Config(description = "Disables normal skeletons from spawning in Fortresses.")
@@ -72,15 +78,23 @@ public class Spawning extends Feature {
     }
 
     @SubscribeEvent
-    public void onZombieVillagerSpawn(FinalizeSpawnEvent event) {
+    public void onZombieVillagerJoin(EntityJoinLevelEvent event) {
         if (!this.isEnabled()
-                || !noZombieVillagers
+                || !replaceZombieVillagersWithNormalZombies
                 || event.getEntity().getType() != EntityType.ZOMBIE_VILLAGER
-                || event.getEntity().isAddedToLevel())
+                || !(event.getLevel() instanceof ServerLevel level))
             return;
 
-        event.setSpawnCancelled(true);
+        ZombieVillager zombieVillager = (ZombieVillager) event.getEntity();
         event.setCanceled(true);
+        MinecraftServer server = level.getServer();
+        //The event can fire while the chunk is still loading, so the conversion is delayed to avoid deadlocks
+        server.tell(new TickTask(server.getTickCount(), () -> {
+            //convertTo already adds the zombie to the level and discards the zombie villager
+            Zombie zombie = zombieVillager.convertTo(EntityType.ZOMBIE, false);
+            if (zombie != null)
+                EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(false, true));
+        }));
     }
 
     @SubscribeEvent
