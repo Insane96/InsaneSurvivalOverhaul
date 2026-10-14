@@ -1,4 +1,4 @@
-# Upcoming
+# 5.12.6.0
 * Name Tags
   * Mobs named with a Name Tag now show a death message in chat when they die (configurable)
   * Renamed `insanesurvivaloverhaul:shouldnt_drop_nametag` entity type tag to `insanesurvivaloverhaul:no_name_tag_drop`
