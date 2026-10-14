@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed Chainmail armor not recyclable like other metal armors
+
 # 5.12.5.0-beta
 * Death screen changes have been moved out of the client module
   * It requires statistics from the server, so it's required server side too

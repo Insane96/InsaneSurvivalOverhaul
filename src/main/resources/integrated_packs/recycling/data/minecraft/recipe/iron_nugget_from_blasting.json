@@ -6,18 +6,6 @@
   "ingredient": [
     {
       "item": "minecraft:iron_horse_armor"
-    },
-    {
-      "item": "minecraft:chainmail_helmet"
-    },
-    {
-      "item": "minecraft:chainmail_chestplate"
-    },
-    {
-      "item": "minecraft:chainmail_leggings"
-    },
-    {
-      "item": "minecraft:chainmail_boots"
     }
   ],
   "result": {
