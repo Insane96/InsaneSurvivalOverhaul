@@ -21,6 +21,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -128,6 +129,21 @@ public class ShulkerBoxes extends Feature {
 
 	public static boolean hasAutoPickup(ItemStack stack) {
 		return stack.getOrDefault(ISORegistries.SHULKER_AUTO_PICKUP, false);
+	}
+
+	/**
+	 * Copies auto pickup (and its glint) from the placed Shulker Box block entity to the dropped Shulker Boxes.
+	 * The block entity keeps the components it doesn't handle itself, but the vanilla loot table doesn't copy them back.
+	 */
+	public static void copyAutoPickupToDrops(BlockEntity blockEntity, List<ItemStack> drops) {
+		if (!blockEntity.components().getOrDefault(ISORegistries.SHULKER_AUTO_PICKUP.get(), false))
+			return;
+		for (ItemStack drop : drops) {
+			if (!drop.is(Tags.Items.SHULKER_BOXES))
+				continue;
+			drop.set(ISORegistries.SHULKER_AUTO_PICKUP, true);
+			drop.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+		}
 	}
 
 	/**

@@ -59,6 +59,7 @@
         "module.hungerhealth.fooddrinks.SmeltItemFunctionMixin_FoodDrink",
         "module.hungerhealth.healthregenhunger.FoodDataMixin_HealthRegenHunger",
         "module.hungerhealth.healthregenhunger.PlayerMixin_HealthRegenHunger",
+        "module.item.ShulkerBoxBlockMixin_ShulkerBoxes",
         "module.item.unvanishable.ItemMixin_UnvanishableItems",
         "module.mining.OreVeinifierMixin_MaterialsAndOres",
         "module.misc.collidewithwalls.LivingEntityMixin_CollideWithWalls",

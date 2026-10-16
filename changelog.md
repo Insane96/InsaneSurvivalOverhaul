@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed Shulker Boxes losing auto pick-up when placed and broken
+
 # 5.12.6.0
 * Name Tags
   * Mobs named with a Name Tag now show a death message in chat when they die (configurable)
