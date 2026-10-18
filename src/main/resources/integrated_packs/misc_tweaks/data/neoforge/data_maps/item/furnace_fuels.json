@@ -5,6 +5,9 @@
     },
     "minecraft:dried_kelp_block": {
       "burn_time": 3200
+    },
+    "minecraft:lava_bucket": {
+      "burn_time": 51200
     }
   }
 }

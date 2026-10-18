@@ -39,7 +39,8 @@ public class Packs extends Feature {
             * Tnt recipe now also accepts paper instead of sand
             * Moss carpets can be crafted back to moss blocks
             * Logs smelt 4 items instead of 1.5 when used as furnace fuel
-            * Dried Kelp Blocks smelt 16 items instead of 20 when used as furnace fuel""")
+            * Dried Kelp Blocks smelt 16 items instead of 20 when used as furnace fuel
+            * Lava smelts 256 items instead of 100""")
     public static Boolean miscTweaks = true;
 
     @Config(description = """
