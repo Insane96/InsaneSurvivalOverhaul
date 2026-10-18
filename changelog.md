@@ -1,6 +1,11 @@
 # Upcoming
 * Misc Tweaks Data Pack
   * Lava now smelts 256 items instead of 100
+* New Fireworks feature (with integrated data pack)
+  * Firework Rockets recipes now output 5 instead of 3 and Firework Stars 2 instead of 1
+  * Firework Stars can now be added to already crafted Firework Rockets
+  * Added `insanesurvivaloverhaul:crafting_special_firework_rocket` and `insanesurvivaloverhaul:crafting_special_firework_star` recipe types, like vanilla ones but with a `count` field to set the output count
+  * Added `insanesurvivaloverhaul:firework_star_shape`, `insanesurvivaloverhaul:firework_star_trail` and `insanesurvivaloverhaul:firework_star_twinkle` item tags, listing the ingredients usable in Firework Stars (informative only, e.g. for EMI)
 * Chickens can no longer auto breed
 * Fixed Shulker Boxes losing auto pick-up when placed and broken
 * Fixed zombies replacing zombie villagers getting their equipment after joining the world, bypassing mods that process mob equipment on spawn (e.g. Rune Enchanting not converting enchantments to runes)

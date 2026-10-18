@@ -309,5 +309,8 @@
     "emi.info.insanesurvivaloverhaul.crops.seeds": "Can be found in the wild",
     "emi.info.insanesurvivaloverhaul.copper_powered_rail": "Medium speed powered rail",
     "emi.info.insanesurvivaloverhaul.golden_powered_rail": "Fastest speed powered rail, should not be used for slopes due to Minecarts being wonky",
-    "emi.info.insanesurvivaloverhaul.portal_corners": "To activate a nether portal, this block is required in the corners"
+    "emi.info.insanesurvivaloverhaul.portal_corners": "To activate a nether portal, this block is required in the corners",
+    "tag.item.insanesurvivaloverhaul.firework_star_shape": "Firework Star Shapes",
+    "tag.item.insanesurvivaloverhaul.firework_star_trail": "Firework Star Trails",
+    "tag.item.insanesurvivaloverhaul.firework_star_twinkle": "Firework Star Twinkles"
 }

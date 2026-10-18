@@ -22,7 +22,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.Map;
 
-@LoadFeature(module = ISOModules.ITEMS, description = "Make food, items and blocks less stackable. Items and Blocks are disabled by default. Changing stuff requires a /reload, but might require a Minecraft restart.")
+@LoadFeature(module = ISOModules.ITEMS, description = "Make food, items and blocks less stackable. Changing stuff requires a /reload, but might require a Minecraft restart.")
 public class StackSizes extends Feature {
     public static final TagKey<Item> NO_ITEM_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_item_stack_size_changes");
     public static final TagKey<Item> NO_BLOCK_STACK_SIZE_CHANGES = ISOItemTagsProvider.create("no_block_stack_size_changes");

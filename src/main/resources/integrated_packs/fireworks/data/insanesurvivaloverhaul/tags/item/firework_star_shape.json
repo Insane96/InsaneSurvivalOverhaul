@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:fire_charge",
+    "minecraft:feather",
+    "minecraft:gold_nugget",
+    "minecraft:skeleton_skull",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:creeper_head",
+    "minecraft:player_head",
+    "minecraft:dragon_head",
+    "minecraft:zombie_head",
+    "minecraft:piglin_head"
+  ]
+}
