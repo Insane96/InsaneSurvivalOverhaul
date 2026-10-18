@@ -17,5 +17,12 @@
             "operation": "add",
             "age": "elder"
         }
+    ],
+    "auto_breed_chance_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:true",
+            "modifier": -1,
+            "operation": "multiply"
+        }
     ]
 }
