@@ -1,5 +1,6 @@
 # Upcoming
 * Fixed Shulker Boxes losing auto pick-up when placed and broken
+* Fixed zombies replacing zombie villagers getting their equipment after joining the world, bypassing mods that process mob equipment on spawn (e.g. Rune Enchanting not converting enchantments to runes)
 
 # 5.12.6.0
 * Name Tags

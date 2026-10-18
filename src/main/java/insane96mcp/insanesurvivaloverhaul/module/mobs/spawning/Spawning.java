@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -77,7 +78,7 @@ public class Spawning extends Feature {
             event.getSpawnerDataList().stream().filter(data -> data.type == EntityType.SKELETON).findFirst().ifPresent(event::removeSpawnerData);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onZombieVillagerJoin(EntityJoinLevelEvent event) {
         if (!this.isEnabled()
                 || !replaceZombieVillagersWithNormalZombies
@@ -90,10 +91,19 @@ public class Spawning extends Feature {
         MinecraftServer server = level.getServer();
         //The event can fire while the chunk is still loading, so the conversion is delayed to avoid deadlocks
         server.tell(new TickTask(server.getTickCount(), () -> {
-            //convertTo already adds the zombie to the level and discards the zombie villager
-            Zombie zombie = zombieVillager.convertTo(EntityType.ZOMBIE, false);
-            if (zombie != null)
-                EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(false, true));
+            //The zombie is finalized before being added to the level, so equipment changes from finalizeSpawn go through EntityJoinLevelEvent
+            Zombie zombie = EntityType.ZOMBIE.create(level);
+            if (zombie == null)
+                return;
+            zombie.moveTo(zombieVillager.getX(), zombieVillager.getY(), zombieVillager.getZ(), zombieVillager.getYRot(), zombieVillager.getXRot());
+            if (zombieVillager.hasCustomName()) {
+                zombie.setCustomName(zombieVillager.getCustomName());
+                zombie.setCustomNameVisible(zombieVillager.isCustomNameVisible());
+            }
+            if (zombieVillager.isPersistenceRequired())
+                zombie.setPersistenceRequired();
+            EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(zombieVillager.isBaby(), true));
+            level.addFreshEntityWithPassengers(zombie);
         }));
     }
 
