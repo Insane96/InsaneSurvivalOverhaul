@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed regenReductionInCombatTime not working properly
+
 # 5.13.0.0
 * Misc Tweaks Data Pack
   * Lava now smelts 256 items instead of 100

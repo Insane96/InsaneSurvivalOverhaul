@@ -26,3 +26,6 @@ run-server
 
 repo
 .claude/
+
+# Claude reports
+report_*.md

@@ -136,7 +136,7 @@ public class HungerAndHealthRegen extends Feature {
 		if (regenReductionInCombatTime == 0 || regenReductionInCombat == 0)
 			return;
 		AttributeModifier IN_COMBAT_MODIFIER = new AttributeModifier(IN_COMBAT, -regenReductionInCombat, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-		if (InCombat.isInCombat(player, regenReductionInCombat))
+		if (InCombat.isInCombat(player, regenReductionInCombatTime))
 			MCUtils.applyModifier(player, REGEN_PER_SECOND, IN_COMBAT_MODIFIER, false);
 		else
 			MCUtils.removeModifier(player, REGEN_PER_SECOND, IN_COMBAT_MODIFIER.id());
