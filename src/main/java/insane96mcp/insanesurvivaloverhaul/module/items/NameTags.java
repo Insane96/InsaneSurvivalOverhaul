@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -27,6 +28,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+
+import javax.annotation.Nullable;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Retrieve name tags from name tagged entities. Name tagged entities show a death message when they die.")
 public class NameTags extends Feature {
@@ -45,7 +48,8 @@ public class NameTags extends Feature {
 
     @SubscribeEvent
     public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-        if (!this.isEnabled()
+        if (event.isCanceled()
+                || !this.isEnabled()
                 || !event.getItemStack().is(Items.NAME_TAG)
                 || !(event.getTarget() instanceof LivingEntity target)
                 || target instanceof Player
@@ -53,15 +57,28 @@ public class NameTags extends Feature {
                 || target.isDeadOrDying())
             return;
 
-        if (ModNBTData.get(target, HAS_NAME_TAG, Boolean.class))
-            dropNameTag(target.level(), target);
-        if (event.getItemStack().get(DataComponents.CUSTOM_NAME) != null)
+        boolean hadNameTag = ModNBTData.get(target, HAS_NAME_TAG, Boolean.class);
+        if (event.getItemStack().get(DataComponents.CUSTOM_NAME) != null) {
+            //Apply the name tag here, so the old one is dropped only if the new one is actually applied
+            Component oldName = target.getCustomName();
+            //Like vanilla, in creative the name tag isn't consumed
+            ItemStack nameTag = event.getEntity().getAbilities().instabuild ? event.getItemStack().copy() : event.getItemStack();
+            InteractionResult result = nameTag.interactLivingEntity(event.getEntity(), target, event.getHand());
+            if (!result.consumesAction())
+                return;
+            if (hadNameTag)
+                dropNameTag(target.level(), target, oldName);
             ModNBTData.put(target, HAS_NAME_TAG, true);
+            event.setCanceled(true);
+            event.setCancellationResult(result);
+        }
+        //A name tag without a name removes the name, giving back the name tag
         else {
+            if (hadNameTag)
+                dropNameTag(target.level(), target);
             ModNBTData.put(target, HAS_NAME_TAG, false);
             target.setCustomName(null);
         }
-
     }
 
     @SubscribeEvent
@@ -94,8 +111,12 @@ public class NameTags extends Feature {
     }
 
     public static void dropNameTag(Level level, LivingEntity entity) {
+        dropNameTag(level, entity, entity.getCustomName());
+    }
+
+    public static void dropNameTag(Level level, LivingEntity entity, @Nullable Component name) {
         ItemStack stack = new ItemStack(Items.NAME_TAG);
-        stack.set(DataComponents.CUSTOM_NAME, entity.getCustomName());
+        stack.set(DataComponents.CUSTOM_NAME, name);
         ItemEntity item = new ItemEntity(level, entity.getX(), entity.getY(), entity.getZ(), stack);
         item.setDefaultPickUpDelay();
         level.addFreshEntity(item);
