@@ -36,11 +36,13 @@ public record ClientboundBlockDefinitionPacket(List<BlockDefinition> definitions
     }
 
     public static void handle(final ClientboundBlockDefinitionPacket payload, final IPayloadContext context) {
+        //In single player (or LAN host) the payload is not serialized and blocks are shared with the server, which already applied the definitions
+        if (context.connection().isMemoryConnection())
+            return;
         context.enqueueWork(() -> {
-            BlockDefinitionReloadListener.restoreOriginalDefinitionsAndClear();
             BlockDefinitionReloadListener.DEFINITIONS.clear();
             BlockDefinitionReloadListener.DEFINITIONS.addAll(payload.definitions());
-            BlockDefinitionReloadListener.DEFINITIONS.forEach(def -> def.apply(false));
+            BlockDefinitionReloadListener.reapplyDefinitions();
         });
     }
 

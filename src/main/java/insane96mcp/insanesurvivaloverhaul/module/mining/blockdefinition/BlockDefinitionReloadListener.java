@@ -21,7 +21,6 @@ import java.util.Map;
 @EventBusSubscriber(modid = InsaneSO.MOD_ID)
 public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListener {
 	public static final List<BlockDefinition> DEFINITIONS = new ArrayList<>();
-	public static final List<BlockDefinition> ORIGINAL_DEFINITIONS = new ArrayList<>();
 	public static final BlockDefinitionReloadListener INSTANCE;
 	private static final Gson GSON = new GsonBuilder().create();
 	public BlockDefinitionReloadListener() {
@@ -34,9 +33,7 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-		//Restore original data
-		restoreOriginalDefinitionsAndClear();
-		//Load new data
+		//Definitions are applied in onTagsUpdatedEvent, as tags are not bound yet
 		DEFINITIONS.clear();
 		for (var entry : map.entrySet()) {
 			try {
@@ -63,11 +60,13 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 		InsaneSO.LOGGER.info("Loaded {} Block Definitions", DEFINITIONS.size());
 	}
 
-	public static void restoreOriginalDefinitionsAndClear() {
-		for (BlockDefinition definition : ORIGINAL_DEFINITIONS)
-			definition.apply(true);
-		InsaneSO.LOGGER.info("Restored {} Block Definitions", ORIGINAL_DEFINITIONS.size());
-		ORIGINAL_DEFINITIONS.clear();
+	/**
+	 * Restores the original block values and applies the current definitions
+	 */
+	public static void reapplyDefinitions() {
+		BlockDefinition.restoreOriginals();
+		for (BlockDefinition definition : DEFINITIONS)
+			definition.apply();
 	}
 
 	@SubscribeEvent
@@ -82,9 +81,11 @@ public class BlockDefinitionReloadListener extends SimpleJsonResourceReloadListe
 
 	@SubscribeEvent
 	public static void onTagsUpdatedEvent(TagsUpdatedEvent event) {
-		for (BlockDefinition definition : BlockDefinitionReloadListener.DEFINITIONS) {
-			definition.apply(false);
-		}
+		//In single player blocks are shared between client and server, so only the server updates them
+		if (!event.shouldUpdateStaticData())
+			return;
+		//On a dedicated client this re-applies the definitions received from the server, as tag based ones might have changed
+		reapplyDefinitions();
 	}
 
 	@Override

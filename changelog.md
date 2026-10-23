@@ -2,13 +2,18 @@
 * Mining Misc
   * The delay between breaking blocks is now based on the actual mining speed against the broken block (Efficiency, Haste, etc. included) instead of the tool tier, and works with any item, not just tools
   * Creative now has its own fixed delay between breaking blocks (configurable, 2 ticks by default, vanilla is 5)
-  * Fixed faster slabs, stairs and walls ignoring other mining speed modifiers (e.g. off-ground and prone)
+  * Fixed faster slabs, stairs and walls ignoring other mining speed modifiers (e.g., off-ground and prone)
 * Ecologic Wood
   * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
   * Fixed mining speed bonus ignoring other mining speed modifiers
 * Death Inventory Penalty
   * Fixed items being duplicated (dropped and kept) when `death_lose_items_percentage` is 100, and not destroyed when `death_destroy_items` is true
   * Fixed total experience being miscalculated from level 17 onwards, dropping less experience than expected between levels 17 and 26 and more than the player had from level 28 onwards
+* Block Definitions
+  * Fixed original block values not being restored properly on `/reload` and when changing world/server, leaving blocks with modified (or other server's) values
+  * Fixed tag based definitions restoring every block in the tag to the same values
+  * Fixed definitions possibly being lost in single player when synced
+  * Fixed sync failing for definitions with more than 127 block states
 * Pouch
   * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
   * Right-clicking a full pouch with an item no longer consumes the click

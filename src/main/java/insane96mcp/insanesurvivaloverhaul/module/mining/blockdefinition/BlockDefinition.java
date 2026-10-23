@@ -23,9 +23,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.apache.commons.lang3.NotImplementedException;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @JsonAdapter(BlockDefinition.Serializer.class)
 public class BlockDefinition {
@@ -108,87 +106,66 @@ public class BlockDefinition {
 		return this.stateExperienceDropped == null ? -1 : this.stateExperienceDropped.getIntRandBetween(random);
 	}
 
-	public void apply(boolean applyingOriginal) {
-        BlockDefinition originalDefinition;
-        if (this.block != null) {
-            originalDefinition = new BlockDefinition(block);
-			BlockBehaviourAccessor blockAccessor = (BlockBehaviourAccessor) this.block;
-			this.block.getStateDefinition().getPossibleStates().forEach(blockState -> {
-				if (this.blockStates.isEmpty() || this.blockStates.contains(blockState)) {
-					originalDefinition.blockStates.add(blockState);
-					BlockStateBaseAccessor stateAccessor = (BlockStateBaseAccessor) blockState;
-					if (this.stateHardness != null) {
-						originalDefinition.stateHardness = stateAccessor.getDestroySpeed();
-						stateAccessor.setDestroySpeed(this.stateHardness);
-					}
-					if (this.stateRequiresCorrectToolForDrops != null) {
-						originalDefinition.stateRequiresCorrectToolForDrops = stateAccessor.getRequiresCorrectToolForDrops();
-						stateAccessor.setRequiresCorrectToolForDrops(this.stateRequiresCorrectToolForDrops);
-					}
-					if (this.stateNoteBlockInstrument != null) {
-						originalDefinition.stateNoteBlockInstrument = stateAccessor.getInstrument();
-						stateAccessor.setInstrument(this.stateNoteBlockInstrument);
-					}
-				}
-			});
-			if (this.explosionResistance != null) {
-				originalDefinition.explosionResistance = blockAccessor.getExplosionResistance();
-				blockAccessor.setExplosionResistance(this.explosionResistance);
-			}
-			if (this.friction != null) {
-				originalDefinition.friction = blockAccessor.getFriction();
-				blockAccessor.setFriction(this.friction);
-			}
-			if (this.speedFactor != null) {
-				originalDefinition.speedFactor = blockAccessor.getSpeedFactor();
-				blockAccessor.setSpeedFactor(this.speedFactor);
-			}
-			if (this.jumpFactor != null) {
-				originalDefinition.jumpFactor = blockAccessor.getJumpFactor();
-				blockAccessor.setJumpFactor(this.jumpFactor);
-			}
-        }
-		else {
-            originalDefinition = new BlockDefinition(this.blockTag);
-			BuiltInRegistries.BLOCK.getTag(this.blockTag).ifPresent(tag -> tag.forEach(holder -> {
-				Block block = holder.value();
-				BlockBehaviourAccessor blockAccessor = (BlockBehaviourAccessor) block;
-				block.getStateDefinition().getPossibleStates().forEach(blockState -> {
-					BlockStateBaseAccessor stateAccessor = (BlockStateBaseAccessor) blockState;
-					if (this.stateHardness != null) {
-						originalDefinition.stateHardness = stateAccessor.getDestroySpeed();
-						stateAccessor.setDestroySpeed(this.stateHardness);
-					}
-					if (this.stateRequiresCorrectToolForDrops != null) {
-						originalDefinition.stateRequiresCorrectToolForDrops = stateAccessor.getRequiresCorrectToolForDrops();
-						stateAccessor.setRequiresCorrectToolForDrops(this.stateRequiresCorrectToolForDrops);
-					}
-					if (this.stateNoteBlockInstrument != null) {
-						originalDefinition.stateNoteBlockInstrument = stateAccessor.getInstrument();
-						stateAccessor.setInstrument(this.stateNoteBlockInstrument);
-					}
-				});
-				if (this.explosionResistance != null) {
-					originalDefinition.explosionResistance = blockAccessor.getExplosionResistance();
-					blockAccessor.setExplosionResistance(this.explosionResistance);
-				}
-				if (this.friction != null) {
-					originalDefinition.friction = blockAccessor.getFriction();
-					blockAccessor.setFriction(this.friction);
-				}
-				if (this.speedFactor != null) {
-					originalDefinition.speedFactor = blockAccessor.getSpeedFactor();
-					blockAccessor.setSpeedFactor(this.speedFactor);
-				}
-				if (this.jumpFactor != null) {
-					originalDefinition.jumpFactor = blockAccessor.getJumpFactor();
-					blockAccessor.setJumpFactor(this.jumpFactor);
-				}
-			}));
-        }
-        if (!applyingOriginal)
-            BlockDefinitionReloadListener.ORIGINAL_DEFINITIONS.add(originalDefinition);
-    }
+	public void apply() {
+		if (this.block != null)
+			this.applyToBlock(this.block, this.blockStates);
+		else
+			BuiltInRegistries.BLOCK.getTag(this.blockTag).ifPresent(tag -> tag.forEach(holder -> this.applyToBlock(holder.value(), List.of())));
+	}
+
+	private void applyToBlock(Block block, List<BlockState> states) {
+		for (BlockState blockState : block.getStateDefinition().getPossibleStates()) {
+			if (!states.isEmpty() && !states.contains(blockState))
+				continue;
+			BlockStateBaseAccessor stateAccessor = (BlockStateBaseAccessor) blockState;
+			ORIGINAL_STATES.computeIfAbsent(blockState, s -> new OriginalStateValues(stateAccessor.getDestroySpeed(), stateAccessor.getRequiresCorrectToolForDrops(), stateAccessor.getInstrument()));
+			if (this.stateHardness != null)
+				stateAccessor.setDestroySpeed(this.stateHardness);
+			if (this.stateRequiresCorrectToolForDrops != null)
+				stateAccessor.setRequiresCorrectToolForDrops(this.stateRequiresCorrectToolForDrops);
+			if (this.stateNoteBlockInstrument != null)
+				stateAccessor.setInstrument(this.stateNoteBlockInstrument);
+		}
+		BlockBehaviourAccessor blockAccessor = (BlockBehaviourAccessor) block;
+		ORIGINAL_BLOCKS.computeIfAbsent(block, b -> new OriginalBlockValues(blockAccessor.getExplosionResistance(), blockAccessor.getFriction(), blockAccessor.getSpeedFactor(), blockAccessor.getJumpFactor()));
+		if (this.explosionResistance != null)
+			blockAccessor.setExplosionResistance(this.explosionResistance);
+		if (this.friction != null)
+			blockAccessor.setFriction(this.friction);
+		if (this.speedFactor != null)
+			blockAccessor.setSpeedFactor(this.speedFactor);
+		if (this.jumpFactor != null)
+			blockAccessor.setJumpFactor(this.jumpFactor);
+	}
+
+	/**
+	 * Restores the values of every block and block state changed by any definition to the ones they had before the first change
+	 */
+	public static void restoreOriginals() {
+		ORIGINAL_STATES.forEach((blockState, original) -> {
+			BlockStateBaseAccessor stateAccessor = (BlockStateBaseAccessor) blockState;
+			stateAccessor.setDestroySpeed(original.destroySpeed());
+			stateAccessor.setRequiresCorrectToolForDrops(original.requiresCorrectToolForDrops());
+			stateAccessor.setInstrument(original.instrument());
+		});
+		ORIGINAL_BLOCKS.forEach((block, original) -> {
+			BlockBehaviourAccessor blockAccessor = (BlockBehaviourAccessor) block;
+			blockAccessor.setExplosionResistance(original.explosionResistance());
+			blockAccessor.setFriction(original.friction());
+			blockAccessor.setSpeedFactor(original.speedFactor());
+			blockAccessor.setJumpFactor(original.jumpFactor());
+		});
+		ORIGINAL_STATES.clear();
+		ORIGINAL_BLOCKS.clear();
+	}
+
+	//Values captured the first time a block (state) is changed, so applying definitions multiple times never overwrites them with already changed values
+	private static final Map<BlockState, OriginalStateValues> ORIGINAL_STATES = new IdentityHashMap<>();
+	private static final Map<Block, OriginalBlockValues> ORIGINAL_BLOCKS = new IdentityHashMap<>();
+
+	private record OriginalStateValues(float destroySpeed, boolean requiresCorrectToolForDrops, NoteBlockInstrument instrument) {}
+
+	private record OriginalBlockValues(float explosionResistance, float friction, float speedFactor, float jumpFactor) {}
 
 	public static final java.lang.reflect.Type LIST_TYPE = new TypeToken<ArrayList<BlockDefinition>>(){}.getType();
 
@@ -276,7 +253,7 @@ public class BlockDefinition {
 		List<BlockState> blockStates = new ArrayList<>();
 		TagKey<Block> blockTag = null;
 		if (block != null) {
-			byte stateCount = byteBuf.readByte();
+			int stateCount = byteBuf.readVarInt();
 			for (int i = 0; i < stateCount; i++) {
 				PropertiesAndValues propertiesAndValues = PropertiesAndValues.of(block.getStateDefinition(), byteBuf.readUtf());
 				block.getStateDefinition().getPossibleStates().forEach(blockState -> {
@@ -307,7 +284,7 @@ public class BlockDefinition {
 		byteBuf.writeNullable(this.block, (b, value) -> b.writeById(BuiltInRegistries.BLOCK::getId, value));
 		byteBuf.writeNullable(this.blockTag, (b, value) -> b.writeResourceLocation(value.location()));
 		if (this.block != null) {
-			byteBuf.writeByte(this.blockStates.size());
+			byteBuf.writeVarInt(this.blockStates.size());
 			for (BlockState state : this.blockStates) {
 				StringBuilder stringBuilder = new StringBuilder();
 				for (Property<?> property : state.getProperties()) {
