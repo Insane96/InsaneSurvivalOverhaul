@@ -12,6 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +20,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.alchemy.Potion;
 import net.neoforged.fml.event.config.ModConfigEvent;
+
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various changes to potions and effects")
 public class PotionsAndEffects extends Feature {
@@ -40,7 +44,7 @@ public class PotionsAndEffects extends Feature {
     public static Boolean streamlineSplashPotions = true;
     @Config(description = "Enables a data pack that increases potions stack sizes")
     public static Boolean potionStackSize = true;
-    @Config(min = 0, description = "Multiplier for the duration of potions. Doesn't affect instantaneous effects. Requires a Minecraft restart")
+    @Config(min = 0, description = "Multiplier for the duration of potions. Doesn't affect instantaneous effects.")
     public static Double potionDurationMultiplier = 2d;
 
     public static float STREAMLINE_SPLASH_POTION_MULTIPLIER = 0.667f;
@@ -62,16 +66,19 @@ public class PotionsAndEffects extends Feature {
             ((MobEffectAccessor) MobEffects.DIG_SPEED.value()).getAttributeModifiers().remove(Attributes.ATTACK_SPEED);
             ((MobEffectAccessor) MobEffects.DIG_SLOWDOWN.value()).getAttributeModifiers().remove(Attributes.ATTACK_SPEED);
         }
-        if (potionDurationMultiplier != 1d) {
-            for (Potion potion : BuiltInRegistries.POTION) {
-                potion.getEffects().forEach(mobEffectInstance -> {
-                    if (mobEffectInstance.getEffect().value().isInstantenous())
-                        return;
-                    ((MobEffectInstanceAccessor) mobEffectInstance).setDuration((int) (mobEffectInstance.getDuration() * potionDurationMultiplier));
-                });
-            }
+        for (Potion potion : BuiltInRegistries.POTION) {
+            potion.getEffects().forEach(mobEffectInstance -> {
+                if (mobEffectInstance.getEffect().value().isInstantenous())
+                    return;
+                int originalDuration = ORIGINAL_POTION_DURATIONS.computeIfAbsent(mobEffectInstance, MobEffectInstance::getDuration);
+                int duration = this.isEnabled() ? (int) (originalDuration * potionDurationMultiplier) : originalDuration;
+                ((MobEffectInstanceAccessor) mobEffectInstance).setDuration(duration);
+            });
         }
     }
+
+    //Durations are always computed from the original ones, as readConfig is called again on each config reload
+    private static final Map<MobEffectInstance, Integer> ORIGINAL_POTION_DURATIONS = new IdentityHashMap<>();
 
     public static boolean isFireImmune(Entity entity) {
         if (!isEnabled(Tweaks.class)

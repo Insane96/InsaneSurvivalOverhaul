@@ -15,6 +15,9 @@
   * Fixed definitions possibly being lost in single player when synced
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
+* Potions and Effects
+  * Fixed potions duration being multiplied again each time the config is reloaded
+  * Changing the potion duration multiplier no longer requires a restart
 * Pouch
   * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
   * Right-clicking a full pouch with an item no longer consumes the click
