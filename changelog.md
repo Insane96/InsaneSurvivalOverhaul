@@ -9,6 +9,10 @@
 * Death Inventory Penalty
   * Fixed items being duplicated (dropped and kept) when `death_lose_items_percentage` is 100, and not destroyed when `death_destroy_items` is true
   * Fixed total experience being miscalculated from level 17 onwards, dropping less experience than expected between levels 17 and 26 and more than the player had from level 28 onwards
+* Anvil Crafting
+  * Fixed anvil recipes still working with the feature disabled
+  * Fixed items crafted in the anvil not stacking with normal ones and giving experience again each time they were used in an anvil
+  * Anvil recipes now work with more than the required amount of material in the right slot
 * Block Definitions
   * Fixed original block values not being restored properly on `/reload` and when changing world/server, leaving blocks with modified (or other server's) values
   * Fixed tag based definitions restoring every block in the tag to the same values

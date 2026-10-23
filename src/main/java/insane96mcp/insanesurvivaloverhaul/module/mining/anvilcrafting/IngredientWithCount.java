@@ -20,8 +20,18 @@ import java.util.ArrayList;
 @JsonAdapter(IngredientWithCount.Serializer.class)
 public record IngredientWithCount(Ingredient ingredient, int count) {
 
+	/**
+	 * Requires the exact count, for slots that the anvil consumes entirely (left)
+	 */
 	public boolean test(ItemStack stack) {
 		return stack.getCount() == count && ingredient.test(stack);
+	}
+
+	/**
+	 * Requires at least the count, for slots where the anvil consumes only the material cost (right)
+	 */
+	public boolean testAtLeast(ItemStack stack) {
+		return stack.getCount() >= count && ingredient.test(stack);
 	}
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientWithCount> STREAM_CODEC = StreamCodec.composite(
