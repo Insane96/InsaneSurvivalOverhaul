@@ -41,6 +41,7 @@
 * Potions and Effects
   * Fixed potions duration being multiplied again each time the config is reloaded
   * Changing the potion duration multiplier no longer requires a restart
+  * Fixed "Prevent fire with resistance" depending on the Misc Tweaks feature being enabled instead of Potions and Effects
 * Pouch
   * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
   * Right-clicking a full pouch with an item no longer consumes the click

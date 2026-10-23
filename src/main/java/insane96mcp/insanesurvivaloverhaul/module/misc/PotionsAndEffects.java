@@ -9,7 +9,6 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectInstanceAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -81,7 +80,7 @@ public class PotionsAndEffects extends Feature {
     private static final Map<MobEffectInstance, Integer> ORIGINAL_POTION_DURATIONS = new IdentityHashMap<>();
 
     public static boolean isFireImmune(Entity entity) {
-        if (!isEnabled(Tweaks.class)
+        if (!isEnabled(PotionsAndEffects.class)
                 || !preventFireWithResistance
                 || !(entity instanceof LivingEntity livingEntity))
             return false;
