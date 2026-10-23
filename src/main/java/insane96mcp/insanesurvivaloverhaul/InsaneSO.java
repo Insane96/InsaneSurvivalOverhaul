@@ -29,6 +29,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDef
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockClient;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockEntityRenderer;
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
+import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.ModIds;
@@ -90,6 +91,7 @@ public class InsaneSO {
         eventBus.addListener(HungerAndHealthRegen::addAttribute);
         eventBus.addListener(Exhaustion::addAttribute);
         eventBus.addListener(Sprinting::addAttribute);
+        eventBus.addListener(Minecarts::registerTicketControllers);
 
         if (ModList.get().isLoaded(ModIds.RUNE_ENCHANTING)) {
             new ISORunes(eventBus);

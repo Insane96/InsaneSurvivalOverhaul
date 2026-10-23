@@ -18,10 +18,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.world.chunk.RegisterTicketControllersEvent;
+import net.neoforged.neoforge.common.world.chunk.TicketController;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -39,12 +42,16 @@ public class Minecarts extends Feature {
 	public static Boolean dataPack = true;
 
 	/**
-	 * Tracks minecarts that are currently keeping a chunk force-loaded.
-	 * Value is {@code true} if we called setChunkForced(true) ourselves,
-	 * {@code false} if the chunk was already forced by something else (e.g. /forceload).
-	 * We only call setChunkForced(false) when the value is {@code true}.
+	 * Tickets are owned by the minecart's UUID, so they never interfere with vanilla's forced chunks (e.g. /forceload).
+	 * NeoForge saves them, but the tracking map below is in memory only, so all of them are removed when the level loads.
 	 */
-	private static final Map<ResourceKey<Level>, Map<UUID, Boolean>> forcingMinecarts = new HashMap<>();
+	private static final TicketController TICKET_CONTROLLER = new TicketController(InsaneSO.id("minecarts"),
+			(level, ticketHelper) -> new ArrayList<>(ticketHelper.getEntityTickets().keySet()).forEach(ticketHelper::removeAllTickets));
+
+	/**
+	 * Tracks minecarts that are currently keeping a chunk force-loaded, and the chunk they're forcing.
+	 */
+	private static final Map<ResourceKey<Level>, Map<UUID, Long>> forcingMinecarts = new HashMap<>();
 
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -52,58 +59,47 @@ public class Minecarts extends Feature {
 		InsaneSO.addServerPack("better_rails", "Insane's Survival Overhaul Better Rails", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
 	}
 
-	private static boolean qualifies(AbstractMinecart minecart) {
-		return entityAndChestMinecartsForceLoadChunks
+	public static void registerTicketControllers(RegisterTicketControllersEvent event) {
+		event.register(TICKET_CONTROLLER);
+	}
+
+	private boolean qualifies(AbstractMinecart minecart) {
+		return this.isEnabled()
+				&& entityAndChestMinecartsForceLoadChunks
 				&& (minecart.getFirstPassenger() != null || minecart instanceof AbstractMinecartContainer);
 	}
 
 	/**
-	 * Before the minecart ticks (moves), unforce the chunk it was in (if we forced it)
-	 * so the forced state can be refreshed at the new position in Post.
-	 */
-	@SubscribeEvent
-	public void onMinecartTickPre(EntityTickEvent.Pre event) {
-		if (!this.isEnabled()
-				|| !(event.getEntity().level() instanceof ServerLevel serverLevel)
-				|| !(event.getEntity() instanceof AbstractMinecart minecart))
-			return;
-
-		Map<UUID, Boolean> dimMap = forcingMinecarts.get(serverLevel.dimension());
-		if (dimMap == null)
-			return;
-
-		Boolean weForced = dimMap.remove(minecart.getUUID());
-		if (weForced == null)
-			return;
-
-		if (weForced) {
-			ChunkPos chunk = minecart.chunkPosition();
-			serverLevel.setChunkForced(chunk.x, chunk.z, false);
-		}
-	}
-
-	/**
-	 * After the minecart ticks (moves), force the chunk it is now in if it qualifies.
-	 * Records whether we actually forced it or if it was already forced (e.g. /forceload).
+	 * After the minecart ticks (moves), force the chunk it is now in if it qualifies, releasing the previous one.
+	 * Tickets are only changed when the minecart changes chunk or stops qualifying.
 	 */
 	@SubscribeEvent
 	public void onMinecartTickPost(EntityTickEvent.Post event) {
-		if (!this.isEnabled()
-				|| !(event.getEntity().level() instanceof ServerLevel serverLevel)
-				|| !(event.getEntity() instanceof AbstractMinecart minecart)
-				|| !qualifies(minecart))
+		if (!(event.getEntity().level() instanceof ServerLevel serverLevel)
+				|| !(event.getEntity() instanceof AbstractMinecart minecart))
 			return;
 
+		Map<UUID, Long> dimMap = forcingMinecarts.computeIfAbsent(serverLevel.dimension(), k -> new HashMap<>());
+		Long forcedChunk = dimMap.get(minecart.getUUID());
+		if (!qualifies(minecart)) {
+			if (forcedChunk != null) {
+				unforceChunk(serverLevel, minecart, forcedChunk);
+				dimMap.remove(minecart.getUUID());
+			}
+			return;
+		}
+
 		ChunkPos chunk = minecart.chunkPosition();
-		boolean alreadyForced = serverLevel.getForcedChunks().contains(chunk.toLong());
-		if (!alreadyForced)
-			serverLevel.setChunkForced(chunk.x, chunk.z, true);
-		forcingMinecarts.computeIfAbsent(serverLevel.dimension(), k -> new HashMap<>()).put(minecart.getUUID(), !alreadyForced);
+		if (forcedChunk != null && forcedChunk == chunk.toLong())
+			return;
+		if (forcedChunk != null)
+			unforceChunk(serverLevel, minecart, forcedChunk);
+		TICKET_CONTROLLER.forceChunk(serverLevel, minecart, chunk.x, chunk.z, true, true);
+		dimMap.put(minecart.getUUID(), chunk.toLong());
 	}
 
 	/**
-	 * When a minecart leaves the level (removed/killed/dimension change), unforce
-	 * the chunk it was occupying if we were the one who forced it.
+	 * When a minecart leaves the level (removed/killed/dimension change/unloaded), unforce the chunk it was forcing.
 	 */
 	@SubscribeEvent
 	public void onMinecartLeaveLevel(EntityLeaveLevelEvent event) {
@@ -111,15 +107,17 @@ public class Minecarts extends Feature {
 				|| !(event.getEntity() instanceof AbstractMinecart minecart))
 			return;
 
-		Map<UUID, Boolean> dimMap = forcingMinecarts.get(serverLevel.dimension());
+		Map<UUID, Long> dimMap = forcingMinecarts.get(serverLevel.dimension());
 		if (dimMap == null)
 			return;
 
-		Boolean weForced = dimMap.remove(minecart.getUUID());
-		if (weForced != null && weForced) {
-			ChunkPos chunk = minecart.chunkPosition();
-			serverLevel.setChunkForced(chunk.x, chunk.z, false);
-		}
+		Long forcedChunk = dimMap.remove(minecart.getUUID());
+		if (forcedChunk != null)
+			unforceChunk(serverLevel, minecart, forcedChunk);
+	}
+
+	private static void unforceChunk(ServerLevel level, AbstractMinecart minecart, long chunk) {
+		TICKET_CONTROLLER.forceChunk(level, minecart, ChunkPos.getX(chunk), ChunkPos.getZ(chunk), false, true);
 	}
 
 	/**
