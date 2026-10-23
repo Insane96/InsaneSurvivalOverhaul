@@ -80,11 +80,14 @@ public class MainBed extends Feature {
 		Optional<BlockPos> mainBedPos = getMainBedPos(event.getEntity());
 		if (mainBedPos.isEmpty())
 			return;
-		event.setCopyOriginalSpawnPosition(true);
 		BlockPos pos = mainBedPos.get();
-		Optional<Vec3> oRespawnPos = BedBlock.findStandUpPosition(EntityType.PLAYER, originalDT.newLevel(), pos, originalDT.newLevel().getBlockState(pos).getValue(BedBlock.FACING), 0);
+		BlockState state = originalDT.newLevel().getBlockState(pos);
+		if (!state.is(BlockTags.BEDS) || !state.hasProperty(BedBlock.FACING))
+			return;
+		event.setCopyOriginalSpawnPosition(true);
+		Optional<Vec3> oRespawnPos = BedBlock.findStandUpPosition(EntityType.PLAYER, originalDT.newLevel(), pos, state.getValue(BedBlock.FACING), 0);
 		Vec3 respawnPos = oRespawnPos.orElse(pos.getBottomCenter());
-		event.setDimensionTransition(new DimensionTransition(originalDT.newLevel(), respawnPos, originalDT.speed(), originalDT.xRot(), originalDT.yRot(), false, DimensionTransition.DO_NOTHING));
+		event.setDimensionTransition(new DimensionTransition(originalDT.newLevel(), respawnPos, originalDT.speed(), originalDT.yRot(), originalDT.xRot(), false, DimensionTransition.DO_NOTHING));
 		event.getEntity().sendSystemMessage(Component.translatable(MAIN_BED_SET_AS_RESPAWN_POINT));
 	}
 
