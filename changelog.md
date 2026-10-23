@@ -16,6 +16,12 @@
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
+* Livestock
+  * Fixed milk cooldown often being wrong client side
+  * Fixed age stage changes (size, elder slowness, starvation) being applied one aging cycle late
+  * Fixed adult animals never fed dying right away with starvation death enabled
+  * Fixed twins triggering breeding again (possibly chaining into triplets and more), consuming well fed time and giving breeding stats, advancements and experience twice
+  * Fixed well fed config descriptions saying ticks instead of minutes
 * Minecarts
   * Fixed chunks force loaded by minecarts staying loaded forever after a server restart or crash. Chunks already stuck in existing worlds can be released with `/forceload remove all`
   * Minecarts no longer interfere with chunks force loaded with `/forceload`

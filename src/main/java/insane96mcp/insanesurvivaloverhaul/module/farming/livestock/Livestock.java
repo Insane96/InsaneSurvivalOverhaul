@@ -79,11 +79,11 @@ public class Livestock extends Feature {
     public static Boolean preventBreeding = true;
     @Config(description = "If true, mobs can randomly fall in love and possibly breed")
     public static Boolean autoBreed = true;
-    @Config(min = 0, description = "If true, animals will be 'well fed' for this ticks when fed. During this time they have an higher chance (given by the livestock data) to breed. Set to 0 to disable.")
+    @Config(min = 0, description = "Animals will be 'well fed' for this minutes when fed. During this time they have an higher chance (given by the livestock data) to breed. Set to 0 to disable.")
     public static Integer wellFed$duration = 60;
-    @Config(min = 0, description = "How much well fed time must be left to the entity to be able to feed it again.")
+    @Config(min = 0, description = "How many minutes of well fed time must be left to the entity to be able to feed it again.")
     public static Integer wellFed$leftToFeedAgain = 30;
-    @Config(min = 0, description = "How much well fed time is consumed when animals breed.")
+    @Config(min = 0, description = "How many minutes of well fed time are consumed when animals breed.")
     public static Integer wellFed$consumedOnBreed = 20;
 
 	@Config(description = "If true, animals will age and die of old age. Configurable via data packs. With the data pack enabled, adult will drop more goodies. With pehkui installed, animals will also be smaller/bigger.")
@@ -221,9 +221,15 @@ public class Livestock extends Feature {
 		if (currAge == aging$stopAt && !aging$dieOfOldAge)
 			return;
 		age++;
+		ModNBTData.put(ageableMob, AGE, age);
 		Age newAge = getAge(ageableMob);
-		if (aging$starvationDeath && newAge != Age.YOUNG && !hasBeenFedRecently(ageableMob))
-			ageableMob.hurt(ageableMob.damageSources().starve(), Float.MAX_VALUE);
+		if (aging$starvationDeath && newAge != Age.YOUNG) {
+			//Animals never fed start being "fed" now, instead of starving right away
+			if (getLastFed(ageableMob) == 0)
+				setLastEat(ageableMob);
+			else if (!hasBeenFedRecently(ageableMob))
+				ageableMob.hurt(ageableMob.damageSources().starve(), Float.MAX_VALUE);
+		}
 		if (newAge == Age.ELDER)
 			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, OLD_AGE_MODIFIER, -0.35d, AttributeModifier.Operation.ADD_MULTIPLIED_BASE, false);
 		if (age >= maxAge) {
@@ -234,7 +240,6 @@ public class Livestock extends Feature {
         //noinspection DataFlowIssue - isClientSide is checked in caller method
         if ((ageableMob.level().getServer().getTickCount() + ageableMob.getId()) % 100 == 0 || forceUpdateScale)
 			setSize(ageableMob, newAge);
-		ModNBTData.put(ageableMob, AGE, age);
     }
 
 	public static float getAgeRatio(AgeableMob mob) {
@@ -440,32 +445,25 @@ public class Livestock extends Feature {
 		}
 	}
 
+	/**
+	 * Syncs the milk cooldown when the entity starts being tracked by a player, as the client has the entity only from then on
+	 */
 	@SubscribeEvent
-	public void onEntityLoad(EntityJoinLevelEvent event) {
+	public void onStartTracking(PlayerEvent.StartTracking event) {
 		if (!this.isEnabled()
-				|| event.getLevel().isClientSide
-				|| !(event.getEntity() instanceof LivingEntity livingEntity)
-				|| ModNBTData.contains(livingEntity, MILK_COOLDOWN))
+				|| !(event.getEntity() instanceof ServerPlayer player)
+				|| !(event.getTarget() instanceof LivingEntity livingEntity)
+				|| !livingEntity.getType().is(MILKABLE)
+				|| !ModNBTData.contains(livingEntity, MILK_COOLDOWN))
 			return;
 
-		ClientboundMilkCooldownPacket.sync(livingEntity, ModNBTData.get(livingEntity, MILK_COOLDOWN, Integer.class));
-	}
-
-	@SubscribeEvent
-	public void onPlayerJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
-		if (!this.isEnabled()
-				|| event.getEntity().level().isClientSide)
-			return;
-
-		for (Entity entity : ((ServerLevel) event.getEntity().level()).getEntities().getAll()) {
-			if (entity instanceof LivingEntity livingEntity && ModNBTData.contains(livingEntity, MILK_COOLDOWN))
-				ClientboundMilkCooldownPacket.syncToPlayer((ServerPlayer) event.getEntity(), livingEntity);
-		}
+		ClientboundMilkCooldownPacket.syncToPlayer(player, livingEntity);
 	}
 
 	@SubscribeEvent
 	public void onBreed(BabyEntitySpawnEvent event) {
-		if (!this.isEnabled()
+		if (event.isCanceled()
+				|| !this.isEnabled()
 				|| !(event.getParentA() instanceof Animal parentA))
 			return;
 
@@ -498,8 +496,19 @@ public class Livestock extends Feature {
 				.forEach(data -> modifiersToApplyTwins.addAll(data.twinsChanceModifiers));
 		float twinsChance = Modifier.applyModifiers(0f, modifiersToApplyTwins, parentA.level(), parentA.blockPosition(), parentA);
 
-		if (parentA.getRandom().nextFloat() < twinsChance && event.getParentB() instanceof Animal)
-			parentA.spawnChildFromBreeding((ServerLevel) parentA.level(), (Animal) event.getParentB());
+		if (event.getChild() == null
+				|| !(event.getParentB() instanceof Animal parentB)
+				|| parentA.getRandom().nextFloat() >= twinsChance)
+			return;
+
+		//Spawned manually instead of with spawnChildFromBreeding, so BabyEntitySpawnEvent isn't fired again, and stats, advancements and xp aren't given twice
+		ServerLevel level = (ServerLevel) parentA.level();
+		AgeableMob twin = parentA.getBreedOffspring(level, parentB);
+		if (twin == null)
+			return;
+		twin.setBaby(true);
+		twin.moveTo(parentA.getX(), parentA.getY(), parentA.getZ(), 0.0F, 0.0F);
+		level.addFreshEntityWithPassengers(twin);
 	}
 
 	public enum Age implements net.minecraft.util.StringRepresentable {

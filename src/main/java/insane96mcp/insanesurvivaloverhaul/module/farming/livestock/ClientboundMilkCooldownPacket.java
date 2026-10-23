@@ -6,7 +6,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,13 +37,12 @@ public record ClientboundMilkCooldownPacket(int entityId, int cooldown) implemen
     }
 
     /**
-     * Syncs the current milk cooldown of the given entity to all players in its level.
+     * Syncs the current milk cooldown of the given entity to all players tracking it.
      */
     public static void sync(LivingEntity entity, int cooldown) {
-        if (!(entity.level() instanceof ServerLevel serverLevel))
+        if (entity.level().isClientSide)
             return;
-        serverLevel.players().forEach(player ->
-                PacketDistributor.sendToPlayer(player, new ClientboundMilkCooldownPacket(entity.getId(), cooldown)));
+        PacketDistributor.sendToPlayersTrackingEntity(entity, new ClientboundMilkCooldownPacket(entity.getId(), cooldown));
     }
 
     /**
