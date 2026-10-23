@@ -20,6 +20,7 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class PouchItem extends Item {
     public PouchItem(Properties pProperties) {
@@ -39,8 +40,8 @@ public class PouchItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide) {
-
-            openMenu(player, player.getItemInHand(hand));
+            ItemStack pouchStack = player.getItemInHand(hand);
+            openMenu(player, pouchStack, p -> p.getItemInHand(hand) == pouchStack);
         }
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
     }
@@ -73,7 +74,7 @@ public class PouchItem extends Item {
 
         PouchContainer pouch = new PouchContainer(pouchStack);
         if (otherStack.isEmpty()) {
-            openMenu(player, pouchStack);
+            openMenu(player, pouchStack, p -> slot.getItem() == pouchStack && slot.container.stillValid(p));
             return true;
         }
         return insertIntoPouch(pouch, otherStack, player, true);
@@ -83,6 +84,7 @@ public class PouchItem extends Item {
         if (stack.isEmpty() || !stack.getItem().canFitInsideContainerItems())
             return false;
 
+        boolean inserted = false;
         for (int i = 0; i < pouch.getContainerSize(); i++) {
             ItemStack inside = pouch.getItem(i);
             if (!inside.isEmpty() && ItemStack.isSameItemSameComponents(inside, stack)) {
@@ -93,6 +95,7 @@ public class PouchItem extends Item {
                     stack.shrink(toMove);
                     pouch.setChanged();
                     playInsertSound(player);
+                    inserted = true;
                     if (stack.isEmpty())
                         return true;
                 }
@@ -105,22 +108,23 @@ public class PouchItem extends Item {
                 int toMove = Math.min(stack.getCount(), stack.getMaxStackSize());
                 pouch.setItem(i, stack.split(toMove));
                 playInsertSound(player);
+                inserted = true;
                 if (stack.isEmpty())
                     return true;
             }
         }
 
-        return !stack.isEmpty();
+        return inserted;
     }
 
     private void playInsertSound(Entity pEntity) {
         pEntity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + pEntity.level().getRandom().nextFloat() * 0.4F);
     }
 
-    public static void openMenu(Player player, ItemStack pouchStack) {
+    public static void openMenu(Player player, ItemStack pouchStack, Predicate<Player> sourceValid) {
         player.containerMenu.resumeRemoteUpdates();
         player.openMenu(new SimpleMenuProvider(
-                (id, inv, p) -> new PouchMenu(id, inv, new PouchContainer(pouchStack)),
+                (id, inv, p) -> new PouchMenu(id, inv, new PouchContainer(pouchStack, sourceValid)),
                 Component.translatable(InsaneSO.lang("pouch"))
         ));
         player.containerMenu.suppressRemoteUpdates();

@@ -9,6 +9,9 @@
 * Death Inventory Penalty
   * Fixed items being duplicated (dropped and kept) when `death_lose_items_percentage` is 100, and not destroyed when `death_destroy_items` is true
   * Fixed total experience being miscalculated from level 17 onwards, dropping less experience than expected between levels 17 and 26 and more than the player had from level 28 onwards
+* Pouch
+  * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
+  * Right-clicking a full pouch with an item no longer consumes the click
 * Fixed crash on respawn when the main bed has been destroyed
 * Fixed respawning on the main bed swapping the original pitch and yaw
 * Fixed main bed message appearing when setting the main bed in the same spot as before

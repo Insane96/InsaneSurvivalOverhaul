@@ -8,12 +8,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 
+import java.util.function.Predicate;
+
 public class PouchContainer implements Container {
     private final ItemStack stack;
     private final NonNullList<ItemStack> items;
+    /** Checks that the pouch stack is still where the menu was opened from (e.g. hand or container slot) */
+    private final Predicate<Player> sourceValid;
 
     public PouchContainer(ItemStack stack) {
+        this(stack, player -> true);
+    }
+
+    public PouchContainer(ItemStack stack, Predicate<Player> sourceValid) {
         this.stack = stack;
+        this.sourceValid = sourceValid;
         this.items = NonNullList.withSize(9, ItemStack.EMPTY);
         load();
     }
@@ -67,7 +76,7 @@ public class PouchContainer implements Container {
     public void setChanged() { save(); }
 
     @Override
-    public boolean stillValid(Player player) { return true; }
+    public boolean stillValid(Player player) { return !stack.isEmpty() && sourceValid.test(player); }
 
     @Override
     public void clearContent() {
