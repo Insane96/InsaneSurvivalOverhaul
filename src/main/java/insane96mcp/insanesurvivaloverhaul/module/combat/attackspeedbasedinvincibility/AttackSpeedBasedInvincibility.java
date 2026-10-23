@@ -21,6 +21,8 @@ public class AttackSpeedBasedInvincibility extends Feature {
 	public void onAttack(LivingIncomingDamageEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getSource().getEntity() instanceof LivingEntity livingEntity)
+				//Only direct (melee) attacks, projectiles shouldn't use the shooter's held weapon attack speed
+				|| !event.getSource().isDirect()
 				|| event.getEntity().invulnerableTime > 10
 				|| livingEntity.getAttribute(Attributes.ATTACK_SPEED) == null
 				|| (onlyFasterAttackSpeed && livingEntity.getAttribute(Attributes.ATTACK_SPEED).getValue() < 2f)
