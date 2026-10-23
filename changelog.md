@@ -1,5 +1,3 @@
-Fix main bed message appearing when setting main bed in the same spot as before
-
 # Upcoming
 * Mining Misc
   * The delay between breaking blocks is now based on the actual mining speed against the broken block (Efficiency, Haste, etc. included) instead of the tool tier, and works with any item, not just tools
@@ -8,6 +6,7 @@ Fix main bed message appearing when setting main bed in the same spot as before
 * Ecologic Wood
   * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
   * Fixed mining speed bonus ignoring other mining speed modifiers
+* Fixed main bed message appearing when setting the main bed in the same spot as before
 
 # 5.13.0.1
 * Fixed regenReductionInCombatTime not working properly

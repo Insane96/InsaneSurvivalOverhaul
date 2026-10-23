@@ -15,6 +15,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -51,7 +53,13 @@ public class MainBed extends Feature {
 		if (player.isCrouching()) {
 			if (!event.getItemStack().isEmpty())
 				return;
-			setMainBedPos(player, event.getPos());
+			BlockPos pos = event.getPos();
+			BlockState state = event.getLevel().getBlockState(pos);
+			if (state.hasProperty(BedBlock.PART) && state.getValue(BedBlock.PART) == BedPart.FOOT)
+				pos = pos.relative(state.getValue(BedBlock.FACING));
+			if (getMainBedPos(player).filter(pos::equals).isPresent())
+				return;
+			setMainBedPos(player, pos);
 			player.sendSystemMessage(Component.translatable(MAIN_BED_SET));
 		}
 		else if (!ModNBTData.get(player, SHOWED_INFO_MESSAGE, Boolean.class)) {
