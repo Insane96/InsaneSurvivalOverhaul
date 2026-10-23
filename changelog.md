@@ -31,6 +31,9 @@
   * Fixed fishing spots being shared between dimensions (e.g. fishing in the Nether slowing down fishing at the same coordinates in the Overworld)
   * Fixed fishing slowdown still applying with the feature disabled
   * Fixed a fishing spot expiring while waiting for a fish keeping its old count instead of starting over
+* Backwards Slowdown
+  * Fixed the slowdown staying if starting to fly or riding a vehicle while walking backwards
+  * Improved performance: a packet is sent to the server only when starting or stopping walking backwards instead of every tick
 * Fixed thunderstorm intensity sometimes getting stuck at minimum intensity for a long time
 * Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
 * Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
