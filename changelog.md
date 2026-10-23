@@ -31,6 +31,7 @@
   * Fixed fishing spots being shared between dimensions (e.g. fishing in the Nether slowing down fishing at the same coordinates in the Overworld)
   * Fixed fishing slowdown still applying with the feature disabled
   * Fixed a fishing spot expiring while waiting for a fish keeping its old count instead of starting over
+* Fixed thunderstorm intensity sometimes getting stuck at minimum intensity for a long time
 * Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
 * Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
 * Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json

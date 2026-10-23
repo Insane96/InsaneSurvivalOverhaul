@@ -46,7 +46,8 @@ public class Thunderstorms extends Feature {
         tid.timer -= ticks;
         while (tid.timer <= 0) {
             tid.timer += (int) ((thunderstormIntensityBaseDuration * 60 * 20) + level.random.nextFloat() * (thunderstormIntensityBaseDuration * 60 * 20)) / tid.getIntensity();
-            int delta = tid.targetIntensity > tid.getIntensity() ? 1 : -1;
+            //0 when the new target is the same as the current intensity, so it stays there for one more step
+            int delta = Integer.compare(tid.targetIntensity, tid.getIntensity());
             tid.addIntensity(delta);
             if (tid.getIntensity() == tid.targetIntensity)
                 tid.targetIntensity = getNewTargetIntensity(level.random);

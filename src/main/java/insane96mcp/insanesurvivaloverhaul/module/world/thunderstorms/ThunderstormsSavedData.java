@@ -66,7 +66,8 @@ public class ThunderstormsSavedData extends SavedData {
         }
 
         public void addIntensity(int amount) {
-            this.intensity += amount;
+            //Starts from getIntensity() so values saved below 1 by older versions are fixed
+            this.intensity = Math.max(1, this.getIntensity() + amount);
         }
 
         @Override
