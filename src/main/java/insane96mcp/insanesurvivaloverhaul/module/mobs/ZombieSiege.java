@@ -18,6 +18,7 @@ import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.level.ModifyCustomSpawnersEvent;
 
 import javax.annotation.Nullable;
@@ -30,7 +31,9 @@ public class ZombieSiege extends Feature {
 
     @SubscribeEvent
     public void onCustomSpawnersInit(ModifyCustomSpawnersEvent event) {
-        if (!this.isEnabled())
+        //Dimensions with fixed time (e.g. Nether, End) have no nights, the siege would roll every tick
+        if (!this.isEnabled()
+                || event.getLevel().dimensionType().hasFixedTime())
             return;
 
         event.addCustomSpawner(new ZombieSiegeSpawner());
@@ -122,13 +125,18 @@ public class ZombieSiege extends Feature {
             Zombie zombie;
             try {
                 zombie = EntityType.ZOMBIE.create(pLevel);
-                zombie.finalizeSpawn(pLevel, pLevel.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.EVENT, null);
+                //Moved before finalizing the spawn so difficulty and equipment are based on the spawn position
+                zombie.moveTo(vec3.x, vec3.y, vec3.z, pLevel.random.nextFloat() * 360.0F, 0.0F);
+                //Fires FinalizeSpawnEvent so other listeners can process the zombie
+                EventHooks.finalizeMobSpawn(zombie, pLevel, pLevel.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.EVENT, null);
             } catch (Exception exception) {
                 InsaneSO.LOGGER.warn("Failed to create zombie for siege at {}", vec3, exception);
                 return;
             }
 
-            zombie.moveTo(vec3.x, vec3.y, vec3.z, pLevel.random.nextFloat() * 360.0F, 0.0F);
+            if (zombie.isSpawnCancelled())
+                return;
+
             zombie.setTarget(this.targetPlayer);
             pLevel.addFreshEntityWithPassengers(zombie);
         }

@@ -19,6 +19,10 @@
   * Fixed definitions possibly being lost in single player when synced
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed Echo Lanterns not removed by a player (e.g. explosions, pistons) still preventing monsters from spawning, and Echo Lanterns not placed by an entity not working
+* Zombie Siege
+  * Fixed zombies difficulty and equipment being calculated at world origin instead of where they spawn
+  * Siege zombies are now processed by other mods' spawn events
+  * Sieges no longer try to start every tick in dimensions without a day/night cycle
 * Fixed mobs equipment drop chance being reset each time their chunk was loaded, making items picked up by mobs (e.g. lost by players) no longer guaranteed to drop
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
