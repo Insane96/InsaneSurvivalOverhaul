@@ -23,6 +23,10 @@
   * Fixed zombies difficulty and equipment being calculated at world origin instead of where they spawn
   * Siege zombies are now processed by other mods' spawn events
   * Sieges no longer try to start every tick in dimensions without a day/night cycle
+* Better Hardcore Death has been moved from Misc Tweaks to its own feature in the Death module (the old config option is gone, use the feature toggle)
+  * Fixed it deleting whatever block was at the player's feet (doors, rails, containers, etc.); now only liquids at the player's feet and head are removed
+  * Fixed respawn facing direction using the pitch instead of the yaw
+* Fixed Totem of Undying Resistance (Misc Tweaks) possibly preventing the removal of Resistance from other entities, especially if another mod cancelled the totem use
 * Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
 * Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
 * Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json
