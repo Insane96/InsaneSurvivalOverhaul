@@ -158,7 +158,7 @@ public class FoodDrinks extends JsonFeature {
 			return;
 
 		for (Item item : BuiltInRegistries.ITEM) {
-			FoodProperties food = item.components().get(DataComponents.FOOD);
+			FoodProperties food = ItemComponentsReloadListener.getUnpatchedComponents(item).get(DataComponents.FOOD);
 			if (food == null)
 				continue;
 

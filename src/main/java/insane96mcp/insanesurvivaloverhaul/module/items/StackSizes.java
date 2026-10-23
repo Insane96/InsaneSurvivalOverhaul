@@ -11,6 +11,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -54,10 +55,11 @@ public class StackSizes extends Feature {
             return;
 
         for (Item item : BuiltInRegistries.ITEM) {
-            int base = item.components().getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
+            DataComponentMap components = ItemComponentsReloadListener.getUnpatchedComponents(item);
+            int base = components.getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
             if (item instanceof BlockItem
                     || base == 1
-                    || item.components().has(DataComponents.FOOD)
+                    || components.has(DataComponents.FOOD)
                     || item.builtInRegistryHolder().is(NO_ITEM_STACK_SIZE_CHANGES))
                 continue;
 
@@ -71,7 +73,7 @@ public class StackSizes extends Feature {
             return;
 
         for (Item item : BuiltInRegistries.ITEM) {
-            int base = item.components().getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
+            int base = ItemComponentsReloadListener.getUnpatchedComponents(item).getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
             if (!(item instanceof BlockItem)
                     || base == 1
                     || item.builtInRegistryHolder().is(NO_BLOCK_STACK_SIZE_CHANGES))
@@ -87,7 +89,7 @@ public class StackSizes extends Feature {
             return;
 
         for (Item item : BuiltInRegistries.ITEM) {
-            FoodProperties food = item.components().get(DataComponents.FOOD);
+            FoodProperties food = ItemComponentsReloadListener.getUnpatchedComponents(item).get(DataComponents.FOOD);
             if (food == null || item.builtInRegistryHolder().is(NO_FOOD_STACK_SIZE_CHANGES))
                 continue;
 
