@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.data.ObjTag;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -60,11 +61,16 @@ public class Equipment extends JsonFeature {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onMobSpawn(EntityJoinLevelEvent event) {
+        //Drop chances are saved with the entity, so they're set only when first spawned and not each time the chunk is loaded
         if (!this.isEnabled()
+                || event.loadedFromDisk()
                 || !(event.getEntity() instanceof Mob entity))
             return;
 
         for (EquipmentSlot slot : EquipmentSlot.values()) {
+            //Items picked up have a guaranteed drop (2.0), keep it (e.g. mobs converted or changing dimension)
+            if (((MobAccessor) entity).invokeGetEquipmentDropChance(slot) > 1f)
+                continue;
             boolean customDropChance = false;
             for (EquipmentDropChance edc : equipmentDropChances) {
                 if (edc.entity.matches(entity.getType()) && edc.slot.equals(slot)) {
