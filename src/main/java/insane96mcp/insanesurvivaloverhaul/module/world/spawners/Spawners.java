@@ -27,6 +27,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
@@ -49,7 +50,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -205,7 +205,10 @@ public class Spawners extends JsonFeature {
 
 	@SubscribeEvent
 	public void onItemUse(PlayerInteractEvent.RightClickBlock event) {
-		if (!reEnableWithSpawnerReactivator
+		//Server only: the spawner disabled state isn't reliably known client side
+		if (!this.isEnabled()
+				|| !reEnableWithSpawnerReactivator
+				|| event.getLevel().isClientSide
 				|| !event.getItemStack().is(SPAWNER_REACTIVATOR_TAG)
 				|| event.getLevel().getBlockState(event.getHitVec().getBlockPos()).getBlock() != Blocks.SPAWNER)
 			return;
@@ -215,7 +218,9 @@ public class Spawners extends JsonFeature {
 				|| !isDisabled(spawner))
 			return;
 
-		event.setUseItem(TriState.TRUE);
+		//Consume the interaction so the item isn't also used normally
+		event.setCanceled(true);
+		event.setCancellationResult(InteractionResult.SUCCESS);
 		if (!event.getEntity().getAbilities().instabuild)
 			event.getItemStack().shrink(1);
 		event.getEntity().swing(event.getHand(), true);
