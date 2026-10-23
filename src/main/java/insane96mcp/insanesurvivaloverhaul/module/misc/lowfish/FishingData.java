@@ -18,22 +18,28 @@ public class FishingData extends SavedData {
         this.entries = new ArrayList<>();
     }
 
+    private static final long EXPIRE_TIME = 36000; //30 minutes
+
+    /**
+     * Removes all the fishing spots not fished in a while, so they're never found (and incremented) again
+     */
+    private void removeExpired(long gameTime) {
+        if (this.entries.removeIf(entry -> gameTime - entry.lastFished > EXPIRE_TIME))
+            this.setDirty();
+    }
+
     public int getCountForPos(BlockPos pos, long gameTime) {
-        List<Entry> toRemove = new ArrayList<>();
+        this.removeExpired(gameTime);
         int range = LowFish.fishingSpotRange * LowFish.fishingSpotRange;
         for (Entry entry : this.entries) {
-            if (gameTime - entry.lastFished > 36000) {//30 minutes
-                toRemove.add(entry);
-                continue;
-            }
             if (entry.pos.distSqr(pos) <= range)
                 return entry.count;
         }
-        toRemove.forEach(this.entries::remove);
         return 0;
     }
 
     public void addOrIncrementPos(BlockPos pos, long gameTime) {
+        this.removeExpired(gameTime);
         int range = LowFish.fishingSpotRange * LowFish.fishingSpotRange;
         for (Entry entry : this.entries) {
             if (entry.pos.distSqr(pos) <= range) {

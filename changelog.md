@@ -27,6 +27,10 @@
   * Fixed it deleting whatever block was at the player's feet (doors, rails, containers, etc.); now only liquids at the player's feet and head are removed
   * Fixed respawn facing direction using the pitch instead of the yaw
 * Fixed Totem of Undying Resistance (Misc Tweaks) possibly preventing the removal of Resistance from other entities, especially if another mod cancelled the totem use
+* Low Fish
+  * Fixed fishing spots being shared between dimensions (e.g. fishing in the Nether slowing down fishing at the same coordinates in the Overworld)
+  * Fixed fishing slowdown still applying with the feature disabled
+  * Fixed a fishing spot expiring while waiting for a fish keeping its old count instead of starting over
 * Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
 * Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
 * Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json

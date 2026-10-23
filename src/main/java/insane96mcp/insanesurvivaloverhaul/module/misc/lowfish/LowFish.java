@@ -9,7 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.event.HookTickToHookLureEvent;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,21 +41,24 @@ public class LowFish extends Feature {
             return;
 
         Player owner = event.getHookEntity().getPlayerOwner();
-        MinecraftServer server = event.getEntity().level().getServer();
         if (owner == null
-                || server == null)
+                || !(event.getHookEntity().level() instanceof ServerLevel level))
             return;
 
-        FishingData data = server.overworld().getDataStorage()
-                .computeIfAbsent(new SavedData.Factory<>(FishingData::create, FishingData::load), "fishing_data");
-        data.addOrIncrementPos(event.getHookEntity().blockPosition(), event.getHookEntity().level().getGameTime());
+        FishingData data = getFishingData(level);
+        data.addOrIncrementPos(event.getHookEntity().blockPosition(), level.getGameTime());
         data.setDirty();
     }
 
-    public static int getSlowdownFishing(MinecraftServer server, BlockPos pos, long gameTime) {
-        int count = server.overworld().getDataStorage()
-                .computeIfAbsent(new SavedData.Factory<>(FishingData::create, FishingData::load), "fishing_data")
-                .getCountForPos(pos, gameTime);
+    /**
+     * Each dimension has its own fishing data, so the same coordinates in different dimensions are different spots
+     */
+    private static FishingData getFishingData(ServerLevel level) {
+        return level.getDataStorage().computeIfAbsent(new SavedData.Factory<>(FishingData::create, FishingData::load), "fishing_data");
+    }
+
+    public static int getSlowdownFishing(ServerLevel level, BlockPos pos, long gameTime) {
+        int count = getFishingData(level).getCountForPos(pos, gameTime);
         if (count <= fishedBeforeSlowdown)
             return 0;
         return (count - fishedBeforeSlowdown) * slowdownPerOnePastFished;
@@ -63,12 +66,11 @@ public class LowFish extends Feature {
 
     @SubscribeEvent
     public void onLureTick(HookTickToHookLureEvent event) {
-        if (event.getType() != HookTickToHookLureEvent.Type.LURE)
+        if (!this.isEnabled()
+                || event.getType() != HookTickToHookLureEvent.Type.LURE
+                || !(event.getHookEntity().level() instanceof ServerLevel level))
             return;
-        MinecraftServer server = event.getHookEntity().level().getServer();
-        if (server == null)
-            return;
-        int slowdown = getSlowdownFishing(server, event.getHookEntity().blockPosition(), event.getHookEntity().level().getGameTime());
+        int slowdown = getSlowdownFishing(level, event.getHookEntity().blockPosition(), level.getGameTime());
         event.setTick(event.getTick() + slowdown);
         if (slowdown >= slowdownMessage && event.getHookEntity().getPlayerOwner() != null)
             event.getHookEntity().getPlayerOwner().displayClientMessage(LOW_FISH_LANG, true);
