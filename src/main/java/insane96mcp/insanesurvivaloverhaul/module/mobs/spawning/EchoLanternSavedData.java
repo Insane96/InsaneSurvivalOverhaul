@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class EchoLanternSavedData extends SavedData {
@@ -27,11 +28,20 @@ public class EchoLanternSavedData extends SavedData {
         return level.getDataStorage().computeIfAbsent(FACTORY, ID);
     }
 
-    public boolean isNearLantern(BlockPos pos, double radius) {
+    public boolean isNearLantern(ServerLevel level, BlockPos pos, double radius) {
         double radiusSq = radius * radius;
-        for (BlockPos lanternPos : positions) {
-            if (lanternPos.distSqr(pos) <= radiusSq)
-                return true;
+        Iterator<BlockPos> iterator = positions.iterator();
+        while (iterator.hasNext()) {
+            BlockPos lanternPos = iterator.next();
+            if (lanternPos.distSqr(pos) > radiusSq)
+                continue;
+            //Clean up lanterns that are no longer there (e.g. removed before they were tracked properly)
+            if (level.isLoaded(lanternPos) && !level.getBlockState(lanternPos).is(Spawning.ECHO_LANTERN.block().get())) {
+                iterator.remove();
+                setDirty();
+                continue;
+            }
+            return true;
         }
         return false;
     }

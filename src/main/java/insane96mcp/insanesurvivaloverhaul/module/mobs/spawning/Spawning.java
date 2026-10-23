@@ -31,7 +31,6 @@ import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 
 import java.util.List;
@@ -142,27 +141,7 @@ public class Spawning extends Feature {
                 || event.getEntityType().getCategory() != MobCategory.MONSTER)
             return;
 
-        if (EchoLanternSavedData.get(serverLevel).isNearLantern(event.getPos(), echoLanternRadius))
+        if (EchoLanternSavedData.get(serverLevel).isNearLantern(serverLevel, event.getPos(), echoLanternRadius))
             event.setResult(MobSpawnEvent.SpawnPlacementCheck.Result.FAIL);
-    }
-
-    @SubscribeEvent
-    public void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
-        if (!this.isEnabled()
-                || !(event.getLevel() instanceof ServerLevel serverLevel)
-                || !event.getState().is(ECHO_LANTERN.block().get()))
-            return;
-
-        EchoLanternSavedData.get(serverLevel).addPosition(event.getPos());
-    }
-
-    @SubscribeEvent
-    public void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (!this.isEnabled()
-                || !(event.getLevel() instanceof ServerLevel serverLevel)
-                || !event.getState().is(ECHO_LANTERN.block().get()))
-            return;
-
-        EchoLanternSavedData.get(serverLevel).removePosition(event.getPos());
     }
 }
