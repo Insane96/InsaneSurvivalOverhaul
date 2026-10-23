@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -94,7 +95,7 @@ public class EcologicWood extends Feature {
         float efficiencyMult = bonusEfficiency.floatValue() * calculatedSkyLightRatio;
         if (efficiencyMult == 0f)
             return;
-        event.setNewSpeed(event.getOriginalSpeed() * (1f + efficiencyMult));
+        event.setNewSpeed(event.getNewSpeed() * (1f + efficiencyMult));
     }
 
     /*@SubscribeEvent
@@ -112,13 +113,26 @@ public class EcologicWood extends Feature {
     }
 
     public static float getCalculatedSkyLight(Level level, BlockPos pos) {
-        if (!level.isDay()
+        int skyDarken = getSkyDarken(level);
+        //Same as level.isDay()
+        if (level.dimensionType().hasFixedTime()
+                || skyDarken >= 4
                 || level.isThundering())
             return 0f;
-        float skyLight = level.getBrightness(LightLayer.SKY, pos) - level.getSkyDarken();
+        float skyLight = level.getBrightness(LightLayer.SKY, pos) - skyDarken;
         if (level.isRaining())
             skyLight /= 3f;
         return skyLight;
+    }
+
+    /**
+     * Same as Level#updateSkyBrightness. Client side levels only update skyDarken when created, so level.getSkyDarken() and level.isDay() can't be used
+     */
+    public static int getSkyDarken(Level level) {
+        double rain = 1.0 - (double)(level.getRainLevel(1.0F) * 5.0F) / 16.0;
+        double thunder = 1.0 - (double)(level.getThunderLevel(1.0F) * 5.0F) / 16.0;
+        double time = 0.5 + 2.0 * Mth.clamp((double)Mth.cos(level.getTimeOfDay(1.0F) * (float) (Math.PI * 2)), -0.25, 0.25);
+        return (int)((1.0 - time * rain * thunder) * 11.0);
     }
 
     /**

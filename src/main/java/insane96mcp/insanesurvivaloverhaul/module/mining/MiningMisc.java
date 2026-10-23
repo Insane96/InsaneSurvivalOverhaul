@@ -9,8 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -28,8 +27,10 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 public class MiningMisc extends Feature {
 	@Config(name = "Faster slabs, stairs and walls", description = "Makes slabs, stairs and walls take less time to break")
 	public static Boolean fastSlabsStairsWalls = true;
-	@Config(description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks. The tick delay is reduced by 1 tick every 2.5 tool mining speed.")
+	@Config(description = "In vanilla there's a 5 tick delay (0.25 secs) between breaking blocks (non-instantly broken in survival). The tick delay is reduced by 1 tick every 2.5 mining speed against the broken block (efficiency, haste, etc. included). Doesn't apply to creative.")
 	public static Boolean miningSpeedBasedDestroyDelay = true;
+	@Config(min = 0, max = 10, description = "Delay in ticks between breaking blocks in creative. Vanilla is 5.")
+	public static Integer creativeDestroyDelay = 2;
 	@Config(description = "Tools with a mining speed set via the minecraft:tool component show it as a tooltip.")
 	public static Boolean miningSpeedTooltip = true;
 
@@ -50,11 +51,11 @@ public class MiningMisc extends Feature {
 			return;
 
 		if (event.getState().getBlock() instanceof SlabBlock && (event.getState().getValue(SlabBlock.TYPE) == SlabType.TOP || event.getState().getValue(SlabBlock.TYPE) == SlabType.BOTTOM))
-			event.setNewSpeed(event.getOriginalSpeed() * 2f);
+			event.setNewSpeed(event.getNewSpeed() * 2f);
 		if (event.getState().getBlock() instanceof StairBlock)
-			event.setNewSpeed(event.getOriginalSpeed() * 1.3333333f);
+			event.setNewSpeed(event.getNewSpeed() * 1.3333333f);
 		if (event.getState().getBlock() instanceof WallBlock)
-			event.setNewSpeed(event.getOriginalSpeed() * 1.5f);
+			event.setNewSpeed(event.getNewSpeed() * 1.5f);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -87,14 +88,20 @@ public class MiningMisc extends Feature {
 				});
 	}
 
-	public static int destroyDelay(ItemStack stack, DiggerItem item, BlockState state) {
+	/**
+	 * Returns the delay before starting to break the next block, based on the mining speed against the block just broken.
+	 */
+	public static int destroyDelay(Player player, BlockState state) {
 		if (!isEnabled(MiningMisc.class)
 				|| !miningSpeedBasedDestroyDelay)
 			return 5;
-		float delay = 5f - (int) (item.getTier().getSpeed() / 2.5f);
-		//int efficiency = stack.getEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY);
-		//if (efficiency > 0)
-		//	delay -= efficiency / 2f;
+		float delay = 5f - (int) (player.getDestroySpeed(state) / 2.5f);
 		return (int) Math.max(delay, 1);
+	}
+
+	public static int creativeDestroyDelay() {
+		if (!isEnabled(MiningMisc.class))
+			return 5;
+		return creativeDestroyDelay;
 	}
 }

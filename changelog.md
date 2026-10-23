@@ -1,3 +1,14 @@
+Fix main bed message appearing when setting main bed in the same spot as before
+
+# Upcoming
+* Mining Misc
+  * The delay between breaking blocks is now based on the actual mining speed against the broken block (Efficiency, Haste, etc. included) instead of the tool tier, and works with any item, not just tools
+  * Creative now has its own fixed delay between breaking blocks (configurable, 2 ticks by default, vanilla is 5)
+  * Fixed faster slabs, stairs and walls ignoring other mining speed modifiers (e.g. off-ground and prone)
+* Ecologic Wood
+  * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
+  * Fixed mining speed bonus ignoring other mining speed modifiers
+
 # 5.13.0.1
 * Fixed regenReductionInCombatTime not working properly
 * Fixed compatibility with latest InsaneLib
