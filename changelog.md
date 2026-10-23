@@ -26,6 +26,9 @@
 * Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
 * Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json
 * Fixed mobs equipment drop chance being reset each time their chunk was loaded, making items picked up by mobs (e.g. lost by players) no longer guaranteed to drop
+* Bone Meal
+  * Fixed bone mealing a stem to full growth never trying to grow its fruit
+  * Fixed nerfed bone meal working on Nether Wart and other plants that can't be bone mealed in vanilla
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
 * Repair Kits

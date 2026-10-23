@@ -156,7 +156,10 @@ public class BoneMeal extends Feature {
 
     private void applyNerfedBoneMeal(BonemealEvent event) {
         BlockState state = event.getState();
-        if (state.getBlock() instanceof BushBlock) {
+        //Only blocks that can be bone mealed in vanilla (e.g. not Nether Wart)
+        if (state.getBlock() instanceof BushBlock
+                && state.getBlock() instanceof BonemealableBlock bonemealableBlock
+                && bonemealableBlock.isValidBonemealTarget(event.getLevel(), event.getPos(), state)) {
             Optional<IntegerProperty> oAgeProperty = getAgeProperty(state);
             if (oAgeProperty.isEmpty()) {
                 InsaneSO.LOGGER.debug("No vanilla age property found for state {}}", state);
@@ -168,9 +171,11 @@ public class BoneMeal extends Feature {
                 return;
 
             age = Mth.clamp(age + stageGrowth.getIntRandBetween(event.getLevel().random), 0, maxAge);
-            event.getLevel().setBlockAndUpdate(event.getPos(), state.setValue(oAgeProperty.get(), age));
+            BlockState newState = state.setValue(oAgeProperty.get(), age);
+            event.getLevel().setBlockAndUpdate(event.getPos(), newState);
+            //Like vanilla, try to grow the fruit when the stem is fully grown. Must be done on the new state, as the old one would just increase the age
             if (state.getBlock() instanceof StemBlock && age == maxAge)
-                state.randomTick((ServerLevel) event.getLevel(), event.getPos(), event.getLevel().random);
+                newState.randomTick((ServerLevel) event.getLevel(), event.getPos(), event.getLevel().random);
             event.getStack().shrink(1);
             event.setSuccessful(true);
         }
