@@ -6,6 +6,9 @@
 * Ecologic Wood
   * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
   * Fixed mining speed bonus ignoring other mining speed modifiers
+* Death Inventory Penalty
+  * Fixed items being duplicated (dropped and kept) when `death_lose_items_percentage` is 100, and not destroyed when `death_destroy_items` is true
+  * Fixed total experience being miscalculated from level 17 onwards, dropping less experience than expected between levels 17 and 26 and more than the player had from level 28 onwards
 * Fixed main bed message appearing when setting the main bed in the same spot as before
 
 # 5.13.0.1

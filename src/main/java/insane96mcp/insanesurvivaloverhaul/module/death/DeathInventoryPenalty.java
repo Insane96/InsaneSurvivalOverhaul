@@ -82,6 +82,7 @@ public class DeathInventoryPenalty extends Feature {
                 }
             }
 			if (amount >= 100) {
+				items.set(i, ItemStack.EMPTY);
 				dropOrDestroy(player, stack, destroyItems, itemDropHandler);
 			}
 			else {
@@ -133,7 +134,7 @@ public class DeathInventoryPenalty extends Feature {
 	private static int getTotalXpForLevel(int level) {
 		int total = 0;
 		for (int i = 0; i < level; i++)
-			total += i >= 30 ? 112 + (i - 30) * 9 : i >= 16 ? 37 + (i - 16) * 6 : 7 + i * 2;
+			total += i >= 30 ? 112 + (i - 30) * 9 : i >= 15 ? 37 + (i - 15) * 5 : 7 + i * 2;
 		return total;
 	}
 }
