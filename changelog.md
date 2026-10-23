@@ -16,6 +16,10 @@
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
+* Stuck Arrows
+  * Fixed arrows drop chance being 100 times lower than configured (0.5% instead of 50%)
+  * Any arrow type (custom, tipped, spectral) now counts, dropping back as a normal arrow
+  * Arrows with Piercing are no longer counted, as they go through the mob and can still be picked up
 * Tiredness
   * Fixed tired players being able to sleep with monsters nearby, too far from the bed or with the bed obstructed
   * Fixed Tired levels being gained halfway through the required tiredness (e.g. Tired II at 625 tiredness instead of 750 with default config)

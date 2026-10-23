@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -22,7 +23,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 @LoadFeature(module = ISOModules.COMBAT,
-		description = "Mobs hit by pickupable arrows remember them, and drop a percentage of those arrows on death.")
+		description = "Mobs hit by pickupable arrows remember them, and drop a percentage of those arrows on death. Any arrow type is dropped back as a normal arrow.")
 public class StuckArrows extends Feature {
 	public static ResourceLocation STUCK_ARROWS;
 
@@ -44,14 +45,18 @@ public class StuckArrows extends Feature {
 			return;
 
 		AbstractArrowAccessor accessor = (AbstractArrowAccessor) arrow;
-		if (accessor.getPickup() != AbstractArrow.Pickup.ALLOWED)
+		//Piercing arrows go through the mob and can still be picked up
+		if (accessor.getPickup() != AbstractArrow.Pickup.ALLOWED
+				|| arrow.getPierceLevel() > 0)
 			return;
 
-		if (accessor.invokeGetPickupItem().getItem() != Items.ARROW)
+		//Any arrow (custom, tipped, spectral, etc.) but not other projectiles like tridents
+		if (!(accessor.invokeGetPickupItem().getItem() instanceof ArrowItem))
 			return;
 
+		//Every arrow type drops back as a normal arrow
 		ListTag stuckArrows = ModNBTData.getList(mob, STUCK_ARROWS, Tag.TAG_COMPOUND);
-		stuckArrows.add(accessor.invokeGetPickupItem().save(mob.level().registryAccess(), new CompoundTag()));
+		stuckArrows.add(new ItemStack(Items.ARROW).save(mob.level().registryAccess(), new CompoundTag()));
 		ModNBTData.put(mob, STUCK_ARROWS, stuckArrows);
 	}
 
@@ -68,7 +73,7 @@ public class StuckArrows extends Feature {
 			return;
 
 		Level level = mob.level();
-		float chance = dropAmount.floatValue() / 100f;
+		float chance = dropAmount.floatValue();
 		for (Tag arrowTag : stuckArrows) {
 			if (mob.getRandom().nextFloat() >= chance)
 				continue;
