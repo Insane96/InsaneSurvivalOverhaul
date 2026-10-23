@@ -16,6 +16,10 @@
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
+* Repair Kits
+  * Fixed any other item in the crafting grid being consumed when repairing
+  * Fixed undamaged items in the grid possibly being picked as the item to repair
+  * Repair kits not needed for the repair are no longer consumed
 * Stuck Arrows
   * Fixed arrows drop chance being 100 times lower than configured (0.5% instead of 50%)
   * Any arrow type (custom, tipped, spectral) now counts, dropping back as a normal arrow

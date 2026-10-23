@@ -5,6 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.ModIds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
@@ -35,18 +36,21 @@ public class RepairKitRepairRecipe extends CustomRecipe {
             if (stack.isEmpty())
                 continue;
 
-            if (stack.isDamageableItem() && stack.isDamaged()) {
-                //Don't go further if there's more than 1 repairable item
-                if (repairableItem != null)
-                    return false;
-                repairableItem = stack;
-            }
             if (stack.is(RepairKits.ITEM.get())) {
                 String material = stack.get(ISORegistries.REPAIR_KIT_MATERIAL.get());
                 if (repairKit != null && !Objects.equals(repairKit.get(ISORegistries.REPAIR_KIT_MATERIAL.get()), material))
                     return false;
                 repairKit = stack;
             }
+            else if (stack.isDamageableItem() && stack.isDamaged()) {
+                //Don't go further if there's more than 1 repairable item
+                if (repairableItem != null)
+                    return false;
+                repairableItem = stack;
+            }
+            //Any other item (including undamaged ones) prevents the recipe from matching, so it doesn't get consumed
+            else
+                return false;
         }
 
         return repairableItem != null && repairKit != null;
@@ -54,6 +58,33 @@ public class RepairKitRepairRecipe extends CustomRecipe {
 
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+        return this.repair(input).result();
+    }
+
+    /**
+     * Leaves in the grid the repair kits that weren't needed for the repair
+     */
+    @Override
+    public NonNullList<ItemStack> getRemainingItems(CraftingInput input) {
+        NonNullList<ItemStack> remainingItems = super.getRemainingItems(input);
+        int kitsToConsume = this.repair(input).kitsUsed();
+        for (int i = 0; i < input.size(); i++) {
+            ItemStack stack = input.getItem(i);
+            if (!stack.is(RepairKits.ITEM.get()))
+                continue;
+            if (kitsToConsume > 0)
+                kitsToConsume--;
+            else
+                remainingItems.set(i, stack.copyWithCount(1));
+        }
+        return remainingItems;
+    }
+
+    private record RepairResult(ItemStack result, int kitsUsed) {
+        static final RepairResult EMPTY = new RepairResult(ItemStack.EMPTY, 0);
+    }
+
+    private RepairResult repair(CraftingInput input) {
         ItemStack repairableItem = null;
         ItemStack repairKit = null;
         int kitAmount = 0;
@@ -62,20 +93,20 @@ public class RepairKitRepairRecipe extends CustomRecipe {
             if (stack.isEmpty())
                 continue;
 
-            if (stack.isDamageableItem())
-                repairableItem = stack;
             if (stack.is(RepairKits.ITEM.get())) {
                 if (repairKit == null)
                     repairKit = stack;
                 kitAmount++;
             }
+            else if (stack.isDamageableItem() && stack.isDamaged())
+                repairableItem = stack;
         }
         if (repairableItem == null || repairKit == null)
-            return ItemStack.EMPTY;
+            return RepairResult.EMPTY;
 
         String materialId = repairKit.get(ISORegistries.REPAIR_KIT_MATERIAL.get());
         if (materialId == null)
-            return ItemStack.EMPTY;
+            return RepairResult.EMPTY;
         ObjTag<Item> material = ObjTag.of(materialId, Registries.ITEM);
 
         // Copy every component of the item being repaired (enchantments, custom name, other mods' data, ...) and
@@ -102,7 +133,7 @@ public class RepairKitRepairRecipe extends CustomRecipe {
             }
         }
         if (!vanillaValid && oRepairData.isEmpty())
-            return ItemStack.EMPTY;
+            return RepairResult.EMPTY;
 
         double materialRatio = repairKit.getOrDefault(ISORegistries.REPAIR_KIT_AMOUNT.get(), RepairKits.repairKitMaterialRatio);
         double kitMaxRepair = repairKit.getOrDefault(ISORegistries.REPAIR_KIT_MAX_REPAIR.get(), RepairKits.maxRepair);
@@ -136,7 +167,7 @@ public class RepairKitRepairRecipe extends CustomRecipe {
 
         float repairSteps = Math.min(resultStack.getDamageValue(), resultStack.getMaxDamage() / amountRequired);
         if (repairSteps <= 0 || resultStack.getDamageValue() <= maxPartialRepairDmg)
-            return ItemStack.EMPTY;
+            return RepairResult.EMPTY;
 
         float damageValue = resultStack.getDamageValue();
         for (repairItemCountCost = 0; repairSteps > 0 && repairItemCountCost < repairCount && damageValue > maxPartialRepairDmg; ++repairItemCountCost) {
@@ -145,7 +176,7 @@ public class RepairKitRepairRecipe extends CustomRecipe {
         }
         resultStack.setDamageValue((int) Math.max(maxPartialRepairDmg, damageValue));
 
-        return resultStack;
+        return new RepairResult(resultStack, repairItemCountCost);
     }
 
     /**
