@@ -19,7 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
@@ -27,9 +26,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -38,8 +35,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.common.EffectCures;
+import net.neoforged.neoforge.event.entity.living.AnimalTameEvent;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various stuff that doesn't fit in any other Feature.")
@@ -56,9 +55,6 @@ public class Tweaks extends Feature {
 
     @Config(description = "Falling on glass has a chance of breaking it. The higher the fall, the higher the chance. insanesurvivaloverhaul:fall_on_break block tag can be used to add more blocks that break when falling onto them.")
     public static Boolean fallingBreakingGlass = true;
-
-    @Config(description = "When you die in hardcore, your spawn point is set to where you died and a lightning strike is summoned")
-    public static Boolean betterHardcoreDeath = true;
 
     @Config(description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
     public static Boolean totemResistance = true;
@@ -99,52 +95,20 @@ public class Tweaks extends Feature {
         return Feature.isEnabled(Tweaks.class) && Tweaks.blindnessNoLongerPreventsSprinting;
     }
 
+    //Lowest priority so it runs only if no other mod cancelled the totem use
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onPlayerDeath(LivingDeathEvent event) {
-        if (!this.isEnabled()
-                || !betterHardcoreDeath
-                || event.getEntity().level().isClientSide
-                || !(event.getEntity() instanceof ServerPlayer player)
-                || event.getEntity() instanceof FakePlayer
-                || !event.getEntity().level().getLevelData().isHardcore()
-                || player.gameMode.getGameModeForPlayer() == GameType.CREATIVE
-                || player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR)
-            return;
-
-        //player.serverLevel().getGameRules().getRule(GameRules.RULE_DO_IMMEDIATE_RESPAWN).set(true, player.server);
-        player.setRespawnPosition(player.level().dimension(), player.blockPosition(), player.getXRot(), true, false);
-        LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, player.level());
-        lightningBolt.setVisualOnly(true);
-        lightningBolt.setPos(player.position());
-        player.level().addFreshEntity(lightningBolt);
-        player.level().setBlock(player.blockPosition(), Blocks.AIR.defaultBlockState(), 2);
-        /*if (player.serverLevel().getGameRules().getRule(GameRules.RULE_DO_IMMEDIATE_RESPAWN).get()) {
-            event.setCanceled(true);
-            player.setHealth(player.getMaxHealth());
-            Component component = player.getCombatTracker().getDeathMessage();
-            player.server.getPlayerList().broadcastSystemMessage(component, false);
-        }*/
-    }
-
-    boolean appliedResistance = false;
-    @SubscribeEvent
     public void onTotemUse(LivingUseTotemEvent event) {
-        if (!this.isEnabled()
+        if (event.isCanceled()
+                || !this.isEnabled()
                 || !totemResistance)
             return;
 
-        event.getEntity().addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 110, 3));
-        appliedResistance = true;
-    }
-
-    @SubscribeEvent
-    public void onEffectRemoved(MobEffectEvent.Remove event) {
-        if (!this.isEnabled()
-                || !appliedResistance
-                || !event.getEffect().equals(MobEffects.DAMAGE_RESISTANCE))
-            return;
-        event.setCanceled(true);
-        appliedResistance = false;
+        //Right after this event vanilla removes the effects cured by the totem, so the Resistance is given without that cure.
+        //Any existing Resistance is removed first, as it would be removed by the totem anyway and addEffect would keep its cures
+        MobEffectInstance resistance = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 110, 3);
+        resistance.getCures().remove(EffectCures.PROTECTED_BY_TOTEM);
+        event.getEntity().removeEffect(MobEffects.DAMAGE_RESISTANCE);
+        event.getEntity().addEffect(resistance);
     }
 
     @SubscribeEvent
