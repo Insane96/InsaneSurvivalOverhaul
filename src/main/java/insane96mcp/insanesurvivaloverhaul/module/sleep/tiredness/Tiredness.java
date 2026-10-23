@@ -40,6 +40,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
@@ -47,6 +48,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
@@ -189,8 +192,14 @@ public class Tiredness extends JsonFeature {
 				|| fakeSoundMobs.isEmpty()
 				//|| event.player.tickCount % 20 != 13
 				|| !event.getEntity().level().isClientSide
+				//Only for the local player, not other players ticked on the client
+				|| !event.getEntity().isLocalPlayer()
 				|| !event.getEntity().hasEffect(TIRED))
 			return;
+
+		//Don't keep a fake mob from a previous level (dimension or world change)
+		if (mobFakeSound != null && mobFakeSound.level() != event.getEntity().level())
+			mobFakeSound = null;
 
         if (--fakeSoundCooldown > 0)
             return;
@@ -234,7 +243,7 @@ public class Tiredness extends JsonFeature {
 					mobFakeSound.getSoundSource(),
 					soundType.getVolume() * 0.15F,
 					soundType.getPitch());
-			fakeStepCooldown = (long) (fakeSound$stepInterval.getIntRandBetween(random) * (1f - 0.15f * amplifier));
+			fakeStepCooldown = (long) (fakeSound$stepInterval.getIntRandBetween(random) * getFakeSoundCooldownMultiplier(amplifier));
 		}
 		if (mobFakeSound != null && random.nextInt(1000) < ambientSoundTime++) {
 			SoundEvent soundEvent = ((MobAccessor)mobFakeSound).ambientSound();
@@ -283,9 +292,16 @@ public class Tiredness extends JsonFeature {
 
 	private void resetMobFakeSound(RandomSource random, int reduction) {
 		fakeSoundTimesToPlay = 0;
-		fakeSoundCooldown = (long) (fakeSound$cooldownBetweenMobs.getIntRandBetween(random) * (1f - 0.15f * reduction));
+		fakeSoundCooldown = (long) (fakeSound$cooldownBetweenMobs.getIntRandBetween(random) * getFakeSoundCooldownMultiplier(reduction));
 		fakeStepCooldown = 0;
 		mobFakeSound = null;
+	}
+
+	/**
+	 * -15% cooldown per level of Tired, capped so it never goes to 0 or negative at high levels
+	 */
+	private static float getFakeSoundCooldownMultiplier(int tiredLevel) {
+		return Math.max(0.25f, 1f - 0.15f * tiredLevel);
 	}
 
 	private void tickEnergyBoostEffect(ServerPlayer player) {
@@ -318,7 +334,7 @@ public class Tiredness extends JsonFeature {
 	private static void tryApplyTired(float tiredness, ServerPlayer player) {
 		int wantedAmplifier = -1;
 		if (tiredness >= tirednessToEffect)
-			wantedAmplifier = (int) Math.min(Math.round((tiredness - tirednessToEffect) / tirednessPerLevel), 9);
+			wantedAmplifier = (int) Math.min(Math.floor((tiredness - tirednessToEffect) / tirednessPerLevel), 9);
 		if (wantedAmplifier >= 0) {
 			int currAmplifier = -1;
 			if (player.hasEffect(TIRED)) {
@@ -326,8 +342,11 @@ public class Tiredness extends JsonFeature {
 				currAmplifier = player.getEffect(TIRED).getAmplifier();
 			}
 			if (wantedAmplifier != currAmplifier) {
+				//addEffect ignores lower amplifiers when the current effect is infinite, so it must be removed first
+				if (wantedAmplifier < currAmplifier)
+					player.removeEffect(TIRED);
 				player.addEffect(new MobEffectInstance(TIRED, -1, wantedAmplifier, true, false, true));
-				if (wantedAmplifier == 0)
+				if (currAmplifier == -1)
 					player.displayClientMessage(Component.translatable(TIRED_ENOUGH), false);
 				//else if (wantedAmplifier == 2)
 					//player.displayClientMessage(Component.translatable(TOO_TIRED), false);
@@ -375,10 +394,24 @@ public class Tiredness extends JsonFeature {
 			event.setProblem(Player.BedSleepingProblem.OTHER_PROBLEM);
 			player.displayClientMessage(Component.translatable(NOT_TIRED), true);
         }
-		else {
-			event.setProblem(null);
+		//Only allow sleeping during day, keeping the other vanilla problems (too far, obstructed, monsters nearby, etc.)
+		else if (event.getProblem() == Player.BedSleepingProblem.NOT_POSSIBLE_NOW) {
+			//Vanilla checks for monsters only at night, so check them here
+			event.setProblem(isMonsterPreventingRest(player, event.getPos()) ? Player.BedSleepingProblem.NOT_SAFE : null);
         }
     }
+
+	/**
+	 * Same check vanilla does in ServerPlayer#startSleepInBed
+	 */
+	private static boolean isMonsterPreventingRest(ServerPlayer player, BlockPos bedPos) {
+		if (player.isCreative())
+			return false;
+		Vec3 vec3 = Vec3.atBottomCenterOf(bedPos);
+		return !player.level().getEntitiesOfClass(Monster.class,
+				new AABB(vec3.x() - 8.0, vec3.y() - 5.0, vec3.z() - 8.0, vec3.x() + 8.0, vec3.y() + 5.0, vec3.z() + 8.0),
+				monster -> monster.isPreventingPlayerRest(player)).isEmpty();
+	}
 
 	static int timeSkipped;
 
@@ -493,8 +526,8 @@ public class Tiredness extends JsonFeature {
 			case RESET -> tiredness = 0;
 			case KEEP -> { }
 			case SET_AT_EFFECT -> {
-				if (tiredness > tirednessToEffect.floatValue() + tirednessPerLevel.floatValue())
-					tiredness = tirednessToEffect.floatValue() + tirednessPerLevel.floatValue();
+				if (tiredness > tirednessToEffect.floatValue())
+					tiredness = tirednessToEffect.floatValue();
 			}
 			case REMOVE_ONE_LEVEL -> {
 				if (tiredness > tirednessToEffect) {
@@ -506,6 +539,27 @@ public class Tiredness extends JsonFeature {
 		}
 
 		TirednessHandler.set(event.getEntity(), tiredness);
+	}
+
+	/**
+	 * The client player is recreated on login, respawn and dimension change, losing the synced tiredness
+	 */
+	@SubscribeEvent
+	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
+			TirednessHandler.syncToClient(player);
+	}
+
+	@SubscribeEvent
+	public void onPlayerRespawned(PlayerEvent.PlayerRespawnEvent event) {
+		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
+			TirednessHandler.syncToClient(player);
+	}
+
+	@SubscribeEvent
+	public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
+			TirednessHandler.syncToClient(player);
 	}
 
 	@OnlyIn(Dist.CLIENT)

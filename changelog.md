@@ -16,6 +16,14 @@
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
 * Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
+* Tiredness
+  * Fixed tired players being able to sleep with monsters nearby, too far from the bed or with the bed obstructed
+  * Fixed Tired levels being gained halfway through the required tiredness (e.g. Tired II at 625 tiredness instead of 750 with default config)
+  * Fixed Tired level never decreasing and "tired enough" message being spammed in chat when tiredness is reduced by Energy Boost
+  * Fixed fake mob and footstep sounds having no cooldown at Tired VII and higher
+  * "Set at effect" on death behaviour now sets tiredness to Tired I, as described
+  * Fixed fake sounds also being processed for other players in multiplayer
+  * Fixed tiredness showing 0 client side after logging in, respawning or changing dimension
 * Livestock
   * Fixed milk cooldown often being wrong client side
   * Fixed age stage changes (size, elder slowness, starvation) being applied one aging cycle late
