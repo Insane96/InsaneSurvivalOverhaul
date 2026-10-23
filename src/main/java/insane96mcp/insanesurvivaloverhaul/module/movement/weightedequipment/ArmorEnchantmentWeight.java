@@ -30,7 +30,7 @@ public class ArmorEnchantmentWeight {
 		}
 
 		public Builder setPercentageSlownessPerLevel(float percentageSlownessPerLevel) {
-			this.armorEnchantmentWeight.percentageSlowness = percentageSlownessPerLevel;
+			this.armorEnchantmentWeight.percentageSlownessPerLevel = percentageSlownessPerLevel;
 			return this;
 		}
 
