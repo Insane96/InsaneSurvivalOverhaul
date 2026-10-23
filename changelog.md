@@ -15,6 +15,7 @@
   * Fixed definitions possibly being lost in single player when synced
   * Fixed sync failing for definitions with more than 127 block states
 * Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
+* Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
 * Potions and Effects
   * Fixed potions duration being multiplied again each time the config is reloaded
   * Changing the potion duration multiplier no longer requires a restart

@@ -3,10 +3,10 @@ package insane96mcp.insanesurvivaloverhaul.module.combat.fletching;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.AbstractArrowAccessor;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -38,9 +38,11 @@ public class ISOArrowItem extends ArrowItem {
         if (arrow == null)
             return super.createArrow(level, ammo, shooter, weapon);
         arrow.setPos(shooter.getX(), shooter.getEyeY() - 0.1, shooter.getZ());
+        //Like vanilla, arrows shot in creative/with Infinity and Multishot's extra arrows can't be picked up
+        if (ammo.has(DataComponents.INTANGIBLE_PROJECTILE))
+            arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+        //Sets pickup to ALLOWED if the shooter is a player and the arrow isn't intangible
         arrow.setOwner(shooter);
-        if (shooter instanceof Player)
-            arrow.pickup = AbstractArrow.Pickup.ALLOWED;
         arrow.setBaseDamage(this.baseDamage);
         if (weapon != null)
             ((AbstractArrowAccessor) arrow).setFiredFromWeapon(weapon.copy());
