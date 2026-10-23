@@ -21,6 +21,8 @@
 * Fixed crash on respawn when the main bed has been destroyed
 * Fixed respawning on the main bed swapping the original pitch and yaw
 * Fixed main bed message appearing when setting the main bed in the same spot as before
+* Armor Rework Data Pack
+  * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)
 
 # 5.13.0.1
 * Fixed regenReductionInCombatTime not working properly
