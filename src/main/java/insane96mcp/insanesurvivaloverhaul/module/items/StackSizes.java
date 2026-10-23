@@ -61,7 +61,7 @@ public class StackSizes extends Feature {
                     || item.builtInRegistryHolder().is(NO_ITEM_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) Math.round(base * itemStackMultiplier), 1, ItemComponentsFeature.stackLimit);
+            int stackSize = Mth.clamp((int) Math.round(base * itemStackMultiplier), 1, ItemComponentsFeature.getStackLimit());
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
@@ -77,7 +77,7 @@ public class StackSizes extends Feature {
                     || item.builtInRegistryHolder().is(NO_BLOCK_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) Math.round(base * blockStackMultiplier), 1, ItemComponentsFeature.stackLimit);
+            int stackSize = Mth.clamp((int) Math.round(base * blockStackMultiplier), 1, ItemComponentsFeature.getStackLimit());
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }
@@ -91,7 +91,7 @@ public class StackSizes extends Feature {
             if (food == null || item.builtInRegistryHolder().is(NO_FOOD_STACK_SIZE_CHANGES))
                 continue;
 
-            int stackSize = Mth.clamp((int) MCUtils.computeFoodFormula(food, foodStackReductionFormula), 1, ItemComponentsFeature.stackLimit);
+            int stackSize = Mth.clamp((int) MCUtils.computeFoodFormula(food, foodStackReductionFormula), 1, ItemComponentsFeature.getStackLimit());
             patches.put(item, DataComponentPatch.builder().set(DataComponents.MAX_STACK_SIZE, stackSize).build());
         }
     }

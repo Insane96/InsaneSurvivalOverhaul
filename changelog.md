@@ -1,5 +1,6 @@
-# Upcoming
+# 5.13.0.1
 * Fixed regenReductionInCombatTime not working properly
+* Fixed compatibility with latest InsaneLib
 
 # 5.13.0.0
 * Misc Tweaks Data Pack
