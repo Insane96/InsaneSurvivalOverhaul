@@ -60,11 +60,13 @@ public class PlayerKillerBounty extends Feature {
 				|| killer.getType().is(KILLER_BLACKLIST))
 			return;
 
-		boolean firstKill = !ModNBTData.contains(killer, KILLED_PLAYERS);
-
 		ScheduledTasks.schedule(new ScheduledTickTask(1) {
 			@Override
 			public void run() {
+				//Checked when the task runs, so multiple players killed in the same tick don't all count as the first kill
+				if (isPlayerInKilledList(killer, player.getUUID()))
+					return;
+				boolean firstKill = !ModNBTData.contains(killer, KILLED_PLAYERS);
 				if (firstKill) {
 					killer.setPersistenceRequired();
 					double xpMult = experienceMultiplier;
@@ -108,7 +110,7 @@ public class PlayerKillerBounty extends Feature {
 			//noinspection DataFlowIssue
 			server.getProfileCache().get(uuid).ifPresent(profile -> names.add(profile.getName()));
 		}
-		if (names.size() > 1) {
+		if (!names.isEmpty()) {
 			Component vindicatedMessage = Component.translatable(VINDICATED_LANG, String.join(", ", names));
 			server.getPlayerList().broadcastSystemMessage(vindicatedMessage, false);
 		}

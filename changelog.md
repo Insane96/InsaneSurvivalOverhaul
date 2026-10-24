@@ -83,6 +83,24 @@
 * Fixed crash on respawn when the main bed has been destroyed
 * Fixed respawning on the main bed swapping the original pitch and yaw
 * Fixed main bed message appearing when setting the main bed in the same spot as before
+* Armor Rework
+  * Fixed the armor formula possibly dealing negative damage (e.g. with more than 40 armor)
+  * Improved performance: the armor formula (and Weighted Armor slowdown formula) is no longer parsed again on each hit
+* Fixed Critical damage advanced tooltip debug info showing a base bonus 100% higher than the actual one
+* Exhaustion
+  * Fixed exhaustion when breaking blocks also being given when other mods (or the game) check the mining speed, e.g. in HUDs
+  * Fixed a small memory leak on servers when players log out
+* Fixed Pouch slowdown still applying with the feature disabled (e.g. with items in `pouch_like_weight` tag)
+* Fixed short bow use slowdown still applying with the Bows feature disabled
+* Fixed snowballs freezing entities that can't freeze (e.g. players wearing leather armor, strays)
+* Fixed Hoes scythe ignoring protections (spawn protection, claims, adventure mode) and dropping items in creative
+* Torch Arrows
+  * Fixed torch arrows placing torches in protected areas (spawn protection, claims, adventure mode)
+  * Torch arrows that place a torch no longer also trigger the block hit effects (sound, target blocks, bells, etc.)
+* Fixed Quartz Arrows shot by players dealing the mob piercing damage type
+* Player Killer Bounty
+  * Fixed the "vindicated" message not appearing when the mob killed just one player
+  * Fixed experience multiplier being applied multiple times when the mob killed multiple players in the same tick
 * Armor Rework Data Pack
   * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)
   * Chainmail Armor total armor decreased from 15.5 to 13 (3 / 4.5 / 3.5 / 2)

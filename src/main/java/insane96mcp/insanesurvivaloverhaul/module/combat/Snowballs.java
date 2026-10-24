@@ -58,7 +58,8 @@ public class Snowballs extends Feature {
 	public void onLivingHurt(LivingDamageEvent.Pre event) {
 		if (!this.isEnabled()
 				|| freezingTicks == 0
-				|| !(event.getSource().getDirectEntity() instanceof Snowball))
+				|| !(event.getSource().getDirectEntity() instanceof Snowball)
+				|| !event.getEntity().canFreeze())
 			return;
 
 		if (freezingStacks)

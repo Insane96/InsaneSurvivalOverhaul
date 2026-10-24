@@ -104,12 +104,21 @@ public class WeightedArmor extends JsonFeature {
         return max;
     }
 
+	//Parsed once and copied on each evaluation (copies share the syntax tree), re-parsed when the formula in the config changes
+	private static Expression cachedSlowdownExpression;
+
 	private float evaluateWeight(double armor, double armorToughness) {
-		Expression expression = new Expression(slowdownFormula)
-				.with("armor", armor)
-				.with("armor_toughness", armorToughness);
 		try {
-			return expression.evaluate().getNumberValue().floatValue();
+			Expression expression = cachedSlowdownExpression;
+			if (expression == null || !expression.getExpressionString().equals(slowdownFormula)) {
+				expression = new Expression(slowdownFormula);
+				expression.validate();
+				cachedSlowdownExpression = expression;
+			}
+			return expression.copy()
+					.with("armor", armor)
+					.and("armor_toughness", armorToughness)
+					.evaluate().getNumberValue().floatValue();
 		}
 		catch (Exception ex) {
 			InsaneSO.LOGGER.error("Failed to evaluate armor formula: {}\n{}", slowdownFormula, ex);

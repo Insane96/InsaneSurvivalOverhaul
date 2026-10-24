@@ -12,6 +12,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
@@ -57,28 +59,39 @@ public class Hoes extends Feature {
 		}
 	}
 
+	//Prevents scything again when breaking the blocks around, since breaking them fires BreakEvent too
+	private static boolean scything = false;
+
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onBlockBreak(BlockEvent.BreakEvent event) {
 		if (!this.isEnabled()
+				|| scything
+				|| event.isCanceled()
+				|| !(event.getPlayer() instanceof ServerPlayer player)
 				|| ((BlockStateBaseAccessor) event.getState()).getDestroySpeed() > 0f
 				|| !event.getState().is(CAN_SCYTHE))
 			return;
-		Integer radius = event.getPlayer().getMainHandItem().get(ISORegistries.SCYTHE_RADIUS.get());
+		Integer radius = player.getMainHandItem().get(ISORegistries.SCYTHE_RADIUS.get());
 		if (radius == null || radius == 0)
 			return;
-		BlockPos.betweenClosedStream(event.getPos().offset(-radius, -(radius - 1), -radius), event.getPos().offset(radius, radius - 1, radius))
-				.forEach(pos -> {
-					BlockState state = event.getPlayer().level().getBlockState(pos);
-					if (!state.is(CAN_SCYTHE)
-							|| ((BlockStateBaseAccessor) state).getDestroySpeed() > 0f
-							|| pos.equals(event.getPos()))
-						return;
-					state.getBlock().playerWillDestroy(event.getPlayer().level(), pos, state, event.getPlayer());
-					if (state.getBlock().canHarvestBlock(state, event.getPlayer().level(), pos, event.getPlayer()))
-						state.getBlock().playerDestroy(event.getPlayer().level(), event.getPlayer(), pos, state, null, event.getPlayer().getMainHandItem());
-					event.getLevel().destroyBlock(pos, false);
-					event.getLevel().levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
-				});
+		scything = true;
+		try {
+			BlockPos.betweenClosedStream(event.getPos().offset(-radius, -(radius - 1), -radius), event.getPos().offset(radius, radius - 1, radius))
+					.forEach(pos -> {
+						BlockState state = player.level().getBlockState(pos);
+						if (!state.is(CAN_SCYTHE)
+								|| ((BlockStateBaseAccessor) state).getDestroySpeed() > 0f
+								|| pos.equals(event.getPos()))
+							return;
+						//Breaks the block as if the player broke it: fires BreakEvent (so protections are respected), no drops in creative
+						if (player.gameMode.destroyBlock(pos.immutable()))
+							//The player's client doesn't predict the break of these blocks, so it doesn't get the particles from playerWillDestroy
+							player.connection.send(new ClientboundLevelEventPacket(LevelEvent.PARTICLES_DESTROY_BLOCK, pos.immutable(), Block.getId(state), false));
+					});
+		}
+		finally {
+			scything = false;
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)

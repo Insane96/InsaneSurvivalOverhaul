@@ -7,6 +7,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -33,7 +34,7 @@ public class QuartzArrow extends ISOArrow {
         if (owner == null) {
             damageSource = this.damageSources().source(PiercingDamage.PIERCING_MOB_ATTACK, this);
         } else {
-            damageSource = this.damageSources().source(PiercingDamage.PIERCING_MOB_ATTACK, owner);
+            damageSource = this.damageSources().source(owner instanceof Player ? PiercingDamage.PIERCING_PLAYER_ATTACK : PiercingDamage.PIERCING_MOB_ATTACK, owner);
             if (owner instanceof LivingEntity livingOwner)
                 livingOwner.setLastHurtMob(living);
         }

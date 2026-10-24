@@ -94,9 +94,9 @@ public class CriticalRework extends Feature {
 
 		@Override
 		public MutableComponent toBaseComponent(double value, double entityBase, boolean merged, TooltipFlag flag) {
-			if (this.equals(DAMAGE_ATTRIBUTE.value()))
-				value += 1f;
-			MutableComponent comp = Component.translatable("attribute.modifier.equals.0", FORMAT.format(value * this.scaleFactor) + "%", Component.translatable(this.getDescriptionId()));
+			//Crit damage is shown as the total damage dealt (e.g. +50% bonus is shown as 150%)
+			double displayValue = this.equals(DAMAGE_ATTRIBUTE.value()) ? value + 1f : value;
+			MutableComponent comp = Component.translatable("attribute.modifier.equals.0", FORMAT.format(displayValue * this.scaleFactor) + "%", Component.translatable(this.getDescriptionId()));
 
 			// Emit both the value of the modifier, and the entity's base value as debug information, since both are flattened into the modifier.
 			// Skip showing debug information here when displaying a merged modifier, since it will be shown if the user holds shift to display the un-merged modifier.

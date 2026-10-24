@@ -20,6 +20,7 @@
         "accessor.MusicsAccessor",
         "accessor.PortalShapeAccessor",
         "accessor.ServerLevelAccessor",
+        "accessor.ServerPlayerGameModeAccessor",
         "accessor.SheepAccessor",
         "accessor.SpreadingSnowyDirtBlockAccessor",
         "accessor.StandingAndWallBlockItemAccessor",

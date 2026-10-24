@@ -15,8 +15,8 @@ public class CombatRulesMixin_ArmorRework {
 
     /**
      * Replaces the vanilla armor damage reduction formula with the ISO reworked one.
-     * Returns early (no override) when the reworked formula returns -1, which signals
-     * the vanilla formula should be used instead.
+     * Returns early (no override) when the reworked formula returns NaN, which signals
+     * the formula failed to evaluate and the vanilla formula should be used instead.
      * @see ArmorRework#getCalculatedDamage(float, float, float)
      */
     @Inject(method = "getDamageAfterAbsorb", at = @At("HEAD"), cancellable = true)
@@ -24,7 +24,7 @@ public class CombatRulesMixin_ArmorRework {
         if (!Feature.isEnabled(ArmorRework.class))
             return;
         float calculatedDamage = ArmorRework.getCalculatedDamage(damage, armorValue, armorToughness);
-        if (calculatedDamage == -1)
+        if (Float.isNaN(calculatedDamage))
             return;
         cir.setReturnValue(calculatedDamage);
     }

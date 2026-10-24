@@ -13,8 +13,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -40,16 +42,27 @@ public class Pouch extends Feature {
 
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent.Post event) {
-		if (baseSlownessPerPouchOverMax == 0d)
+		Player player = event.getEntity();
+		AttributeInstance movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
+		if (!this.isEnabled()
+				|| baseSlownessPerPouchOverMax == 0d) {
+			movementSpeed.removeModifier(POUCH_WEIGHT_PENALTY_ID);
 			return;
-
-		int pouchesInInventory = ContainerHelper.clearOrCountMatchingItems(event.getEntity().getInventory(), stack -> stack.is(ITEM.get()) || stack.is(POUCH_LIKE_WEIGHT), 0, true);
-		event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(POUCH_WEIGHT_PENALTY_ID);
-		if (pouchesInInventory > maxPouchWithoutSlowdown) {
-			double slowness = ((pouchesInInventory - maxPouchWithoutSlowdown) * baseSlownessPerPouchOverMax) * Math.max(1, pouchesInInventory - maxPouchWithoutSlowdown);
-			MCUtils.applyModifier(event.getEntity(), Attributes.MOVEMENT_SPEED, POUCH_WEIGHT_PENALTY_ID, -slowness, AttributeModifier.Operation.ADD_MULTIPLIED_BASE, false);
-			 if (event.getEntity().tickCount % 20 == 4 && event.getEntity() instanceof ServerPlayer serverPlayer)
-                 OVERWEIGHT_POUCH_CARRY.get().trigger(serverPlayer);
 		}
+
+		int pouchesInInventory = ContainerHelper.clearOrCountMatchingItems(player.getInventory(), stack -> stack.is(ITEM.get()) || stack.is(POUCH_LIKE_WEIGHT), 0, true);
+		double slowness = 0d;
+		if (pouchesInInventory > maxPouchWithoutSlowdown)
+			slowness = ((pouchesInInventory - maxPouchWithoutSlowdown) * baseSlownessPerPouchOverMax) * Math.max(1, pouchesInInventory - maxPouchWithoutSlowdown);
+		//Only touch the modifier when the slowness changes
+		AttributeModifier currentModifier = movementSpeed.getModifier(POUCH_WEIGHT_PENALTY_ID);
+		double currentSlowness = currentModifier == null ? 0d : -currentModifier.amount();
+		if (currentSlowness != slowness) {
+			movementSpeed.removeModifier(POUCH_WEIGHT_PENALTY_ID);
+			if (slowness > 0d)
+				MCUtils.applyModifier(player, Attributes.MOVEMENT_SPEED, POUCH_WEIGHT_PENALTY_ID, -slowness, AttributeModifier.Operation.ADD_MULTIPLIED_BASE, false);
+		}
+		if (slowness > 0d && player.tickCount % 20 == 4 && player instanceof ServerPlayer serverPlayer)
+			OVERWEIGHT_POUCH_CARRY.get().trigger(serverPlayer);
 	}
 }

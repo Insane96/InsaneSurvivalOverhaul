@@ -15,6 +15,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.util.BlockSnapshot;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class TorchArrow extends Arrow {
     public TorchArrow(EntityType<? extends Arrow> entityType, Level level) {
@@ -39,10 +41,20 @@ public class TorchArrow extends Arrow {
         BlockPlaceContext context = new BlockPlaceContext(this.level(), player, InteractionHand.MAIN_HAND, this.getPickupItem(), result);
         BlockState stateToPlace = ((StandingAndWallBlockItemAccessor) Items.TORCH).invokeGetPlacementState(context);
 
-        if (stateToPlace != null && this.level().getBlockState(pos).canBeReplaced()) {
+        if (stateToPlace != null
+                && this.level().getBlockState(pos).canBeReplaced()
+                && (player == null || (player.mayUseItemAt(pos, direction, this.getPickupItem()) && this.level().mayInteract(player, pos)))) {
+            BlockSnapshot snapshot = BlockSnapshot.create(this.level().dimension(), this.level(), pos);
             this.level().setBlock(pos, stateToPlace, 3);
-            this.playSound(stateToPlace.getSoundType().getPlaceSound());
-            this.discard();
+            //Lets protection mods prevent the placement
+            if (EventHooks.onBlockPlace(this.getOwner() != null ? this.getOwner() : this, snapshot, direction)) {
+                snapshot.restore();
+            }
+            else {
+                this.playSound(stateToPlace.getSoundType().getPlaceSound());
+                this.discard();
+                return;
+            }
         }
         super.onHitBlock(result);
     }

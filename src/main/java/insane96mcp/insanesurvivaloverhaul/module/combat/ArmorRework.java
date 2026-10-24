@@ -14,24 +14,35 @@ public class ArmorRework extends Feature {
     @Config(description = "Vanilla formula is 'damage * (1 - ((MIN(20, MAX(armor / 5, armor - ((4 * damage) / (toughness + 8)))))) / 25))'")
     public static String formula = "damage * (1 - 1.5 * (armor / (armor + 20)))";
 
+    //Parsed once and copied on each evaluation (copies share the syntax tree), re-parsed when the formula in the config changes
+    private static Expression cachedExpression;
+
     //public static float getCalculatedDamage(float damage, float armor, float toughness) {
     //    return damage * (1 - 1.5f * (armor / (armor + 20)));
     //}
 
+    /**
+     * Returns the damage after armor, never below 0, or NaN if the formula fails to evaluate (vanilla formula should be used instead)
+     */
     public static float getCalculatedDamage(float damage, float armor, float toughness) {
-        Expression expression = new Expression(formula);
         try {
+            Expression expression = cachedExpression;
+            if (expression == null || !expression.getExpressionString().equals(formula)) {
+                expression = new Expression(formula);
+                expression.validate();
+                cachedExpression = expression;
+            }
             //noinspection ConstantConditions
-            EvaluationValue result = expression
+            EvaluationValue result = expression.copy()
                     .with("damage", damage)
                     .and("armor", armor)
                     .and("toughness", toughness)
                     .evaluate();
-            return result.getNumberValue().floatValue();
+            return Math.max(0f, result.getNumberValue().floatValue());
         }
         catch (Exception ex) {
             InsaneSO.LOGGER.error("Failed to evaluate armor formula: {}\n{}", formula, ex);
-            return -1f;
+            return Float.NaN;
         }
     }
 }

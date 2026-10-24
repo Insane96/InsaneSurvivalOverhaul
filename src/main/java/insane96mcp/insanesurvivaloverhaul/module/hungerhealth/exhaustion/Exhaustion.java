@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.event.PlayerExhaustionEvent;
 import insane96mcp.insanelib.util.ILRangedAttribute;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.ServerPlayerGameModeAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -91,19 +92,17 @@ public class Exhaustion extends Feature {
 	}
 
 	@SubscribeEvent
-	public void onBreakingBlock(PlayerEvent.BreakSpeed event) {
-		if (!this.isEnabled()
-				|| exhaustionOnBlockBreaking == 0d)
-			return;
-		event.getEntity().causeFoodExhaustion(exhaustionOnBlockBreaking.floatValue());
-	}
-
-	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent.Post event) {
 		Player player = event.getEntity();
 		if (!this.isEnabled()
 				|| player.level().isClientSide)
 			return;
+
+		//Checks the server's mining state instead of BreakSpeed, since BreakSpeed is also fired by getDestroySpeed calls that aren't related to mining
+		if (exhaustionOnBlockBreaking > 0d
+				&& player instanceof ServerPlayer serverPlayer
+				&& (((ServerPlayerGameModeAccessor) serverPlayer.gameMode).isDestroyingBlock() || ((ServerPlayerGameModeAccessor) serverPlayer.gameMode).hasDelayedDestroy()))
+			player.causeFoodExhaustion(exhaustionOnBlockBreaking.floatValue());
 
 		if (passiveExhaustion > 0d
 				&& player.tickCount % 20 == 0)
@@ -151,6 +150,12 @@ public class Exhaustion extends Feature {
 	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		if (!(event.getEntity() instanceof ServerPlayer))
 			return;
+		lastExhaustionLevels.remove(event.getEntity().getUUID());
+		lastSaturationLevels.remove(event.getEntity().getUUID());
+	}
+
+	@SubscribeEvent
+	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
 		lastExhaustionLevels.remove(event.getEntity().getUUID());
 		lastSaturationLevels.remove(event.getEntity().getUUID());
 	}

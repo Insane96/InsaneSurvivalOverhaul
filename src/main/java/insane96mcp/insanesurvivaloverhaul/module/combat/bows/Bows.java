@@ -70,7 +70,8 @@ public class Bows extends Feature {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onPlayerUseItemSpeedModifier(PlayerUseItemMovSpeedEvent event) {
-		if (!event.getUseItem().is(SHORTBOW.get()))
+		if (!this.isEnabled()
+				|| !event.getUseItem().is(SHORTBOW.get()))
 			return;
 
 		event.setSpeedModifier(0.75f);
