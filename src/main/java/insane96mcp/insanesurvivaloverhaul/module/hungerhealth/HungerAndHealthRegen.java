@@ -13,7 +13,9 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
@@ -28,11 +30,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
 
@@ -45,9 +50,9 @@ public class HungerAndHealthRegen extends Feature {
 	public static final DeferredHolder<Attribute, Attribute> HUNGER_REQUIRED_TO_REGEN = ISORegistries.ATTRIBUTES.register("hunger_required_to_regen", () -> new ILRangedAttribute(0d, 0d, 20d));
 	public static final ResourceLocation IN_COMBAT = InsaneSO.id("in_combat");
 
-	@Config(description = "How much health do players heal overtime each second without consuming hunger? This value is applied to the insanesurvivaloverhaul:passive_regen_per_second attribute on player join.")
+	@Config(description = "How much health do players heal overtime each second without consuming hunger? This value is applied to the insanesurvivaloverhaul:passive_regen_per_second attribute base value.")
 	public static Double passiveRegenPerSecond = 0d;
-	@Config(description = "How much health do players heal overtime each second by consuming hunger? This value is applied to the insanesurvivaloverhaul:regen_per_second attribute on player join.")
+	@Config(description = "How much health do players heal overtime each second by consuming hunger? This value is applied to the insanesurvivaloverhaul:regen_per_second attribute base value.")
 	public static Double regenPerSecond = 0.5d;
 	@Config(min = 0, max = 1, description = "How much health regen is reduced by when in combat.")
 	public static Double regenReductionInCombat = 0.8d;
@@ -55,15 +60,15 @@ public class HungerAndHealthRegen extends Feature {
 	public static Double regenReductionInCombatTime = 10d;
 	@Config(description = "Set to true to disable the health regen boost given when max hunger and saturation (false in Vanilla).")
 	public static Boolean disableSaturationRegenBoost = true;
-	@Config(min = 0d, max = 40d, description = "Vanilla consumes 1 saturation or hunger whenever Exhaustion reaches 4.0. You can change that value with this config option. This value is applied to the insanesurvivaloverhaul:max_exhaustion attribute on player join. NOTE that Minecraft (for ... reasons) caps this value to 40.")
+	@Config(min = 0d, max = 40d, description = "Vanilla consumes 1 saturation or hunger whenever Exhaustion reaches 4.0. You can change that value with this config option. This value is applied to the insanesurvivaloverhaul:max_exhaustion attribute base value. NOTE that Minecraft (for ... reasons) caps this value to 40.")
 	public static Double maxExhaustion = 6.0d;
 	@Config(min = 0d, description = "Exhaustion applied per half heart healed, only applies if 'Consume hunger only' is false. (vanilla is 6; Combat Test doesn't use this).")
 	public static Double exhaustionOnHeal = 6d;
-	@Config(min = 0d, max = 40d, description = "Hunger consumed per half heart healed, only applies if 'Consume hunger only' is true. Decimal values are treated as chances to consume one more (e.g. this set to 0.5 means that there's 50% chance to consume one hunger). This value is applied to the insanesurvivaloverhaul:hunger_consumed attribute on player join. (vanilla ignores this; Combat Test has this set to 0.5).")
+	@Config(min = 0d, max = 40d, description = "Hunger consumed per half heart healed, only applies if 'Consume hunger only' is true. Decimal values are treated as chances to consume one more (e.g. this set to 0.5 means that there's 50% chance to consume one hunger). This value is applied to the insanesurvivaloverhaul:hunger_consumed attribute base value. (vanilla ignores this; Combat Test has this set to 0.5).")
 	public static Double hungerConsumptionOnHeal = 0.5d;
 	@Config(description = "Set to true to consume Hunger only (and not saturation) when regenerating health (false for Vanilla).")
 	public static Boolean consumeHungerOnly = true;
-	@Config(min = 0, description = "Sets how much hunger the player must have to regeneration health (vanilla is 18). This value is applied to the insanesurvivaloverhaul:hunger_required_to_regen attribute on player join.")
+	@Config(min = 0, description = "Sets how much hunger the player must have to regeneration health (vanilla is 18). This value is applied to the insanesurvivaloverhaul:hunger_required_to_regen attribute base value.")
 	public static Integer hungerRequiredToRegen = 7;
 	@Config(min = 0, description = "Sets how many ticks between starve damage happens (vanilla is 80).")
 	public static Integer starve$speed = 100;
@@ -96,23 +101,41 @@ public class HungerAndHealthRegen extends Feature {
 		}
 	}
 
+	@Override
+	public void readConfig(ModConfigEvent event) {
+		super.readConfig(event);
+		//Apply the new values to online players. Config events may be fired off the server thread
+		MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+		if (server != null)
+			server.execute(() -> server.getPlayerList().getPlayers().forEach(this::applyBaseValues));
+	}
+
 	@SubscribeEvent
 	public void onPlayerJoinLevel(PlayerEvent.PlayerLoggedInEvent event) {
-		AttributeInstance attribute = event.getEntity().getAttribute(PASSIVE_REGEN_PER_SECOND);
-		if (attribute != null)
-			attribute.setBaseValue(passiveRegenPerSecond);
-		attribute = event.getEntity().getAttribute(REGEN_PER_SECOND);
-		if (attribute != null)
-			attribute.setBaseValue(regenPerSecond);
-		attribute = event.getEntity().getAttribute(MAX_EXHAUSTION);
-		if (attribute != null)
-			attribute.setBaseValue(maxExhaustion);
-		attribute = event.getEntity().getAttribute(HUNGER_CONSUMED);
-		if (attribute != null)
-			attribute.setBaseValue(hungerConsumptionOnHeal);
-		attribute = event.getEntity().getAttribute(HUNGER_REQUIRED_TO_REGEN);
-		if (attribute != null)
-			attribute.setBaseValue(hungerRequiredToRegen);
+		this.applyBaseValues(event.getEntity());
+	}
+
+	@SubscribeEvent
+	public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+		this.applyBaseValues(event.getEntity());
+	}
+
+	/**
+	 * Sets the attributes base values from the config, or back to the attributes defaults if the feature is disabled
+	 */
+	private void applyBaseValues(Player player) {
+		boolean enabled = this.isEnabled();
+		setBaseValue(player, PASSIVE_REGEN_PER_SECOND, enabled ? passiveRegenPerSecond : null);
+		setBaseValue(player, REGEN_PER_SECOND, enabled ? regenPerSecond : null);
+		setBaseValue(player, MAX_EXHAUSTION, enabled ? maxExhaustion : null);
+		setBaseValue(player, HUNGER_CONSUMED, enabled ? hungerConsumptionOnHeal : null);
+		setBaseValue(player, HUNGER_REQUIRED_TO_REGEN, enabled ? (double) hungerRequiredToRegen : null);
+	}
+
+	private static void setBaseValue(Player player, Holder<Attribute> attribute, @Nullable Double value) {
+		AttributeInstance attributeInstance = player.getAttribute(attribute);
+		if (attributeInstance != null)
+			attributeInstance.setBaseValue(value != null ? value : attribute.value().getDefaultValue());
 	}
 
 	@SubscribeEvent

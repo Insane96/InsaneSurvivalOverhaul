@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.Registries;
@@ -14,12 +15,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -101,7 +104,17 @@ public class Spawning extends Feature {
             }
             if (zombieVillager.isPersistenceRequired())
                 zombie.setPersistenceRequired();
-            EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(zombieVillager.isBaby(), true));
+            EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(zombieVillager.isBaby(), false));
+            //Keep the zombie villager's equipment (e.g. items picked up from players) over the newly generated one
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                ItemStack stack = zombieVillager.getItemBySlot(slot);
+                if (stack.isEmpty())
+                    continue;
+                zombie.setItemSlot(slot, stack.copy());
+                zombie.setDropChance(slot, ((MobAccessor) zombieVillager).invokeGetEquipmentDropChance(slot));
+            }
+            if (zombieVillager.canPickUpLoot())
+                zombie.setCanPickUpLoot(true);
             level.addFreshEntityWithPassengers(zombie);
         }));
     }

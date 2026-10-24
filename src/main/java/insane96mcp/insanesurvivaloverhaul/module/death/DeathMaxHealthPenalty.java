@@ -77,9 +77,9 @@ public class DeathMaxHealthPenalty extends Feature {
 	public void onPlayerJoinLevel(EntityJoinLevelEvent event) {
 		if (!this.isEnabled()
 				|| !(event.getEntity() instanceof Player player)
-				|| ModNBTData.getPersisted(player, DEATH_PENALTY_ID, Double.class) == 0)
+				|| ModNBTData.getPersisted(player, DEATH_PENALTY_ID, Integer.class) == 0)
 			return;
-		double healthPenalty = ModNBTData.getPersisted(player, DEATH_PENALTY_ID, Double.class);
+		int healthPenalty = ModNBTData.getPersisted(player, DEATH_PENALTY_ID, Integer.class);
 		AttributeInstance instance = player.getAttribute(Attributes.MAX_HEALTH);
 		if (instance == null)
 			return;

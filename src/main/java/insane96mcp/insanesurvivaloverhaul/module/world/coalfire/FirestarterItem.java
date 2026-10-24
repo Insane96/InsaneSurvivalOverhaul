@@ -52,6 +52,10 @@ public class FirestarterItem extends FlintAndSteelItem {
             return stack;
         BlockHitResult blockHitResult = getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.NONE);
         BlockPos blockpos = blockHitResult.getBlockPos();
+        //The block looked at might have changed since the use started
+        if (!level.mayInteract(player, blockpos)
+                || !player.mayUseItemAt(blockpos, blockHitResult.getDirection(), stack))
+            return stack;
         BlockState blockstate = level.getBlockState(blockpos);
         if (blockstate.is(Blocks.TNT)) {
             Blocks.TNT.onCaughtFire(blockstate, level, blockpos, blockHitResult.getDirection(), player);
@@ -62,7 +66,8 @@ public class FirestarterItem extends FlintAndSteelItem {
         BlockState blockstate2 = blockstate.getToolModifiedState(new UseOnContext(player, player.getUsedItemHand(), blockHitResult), ItemAbilities.FIRESTARTER_LIGHT, false);
         if (blockstate2 == null) {
             BlockPos blockpos1 = blockpos.relative(blockHitResult.getDirection());
-            if (BaseFireBlock.canBePlacedAt(level, blockpos1, player.getDirection())) {
+            if (BaseFireBlock.canBePlacedAt(level, blockpos1, player.getDirection())
+                    && player.mayUseItemAt(blockpos1, blockHitResult.getDirection(), stack)) {
                 level.playSound(player, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                 level.setBlock(blockpos1, BaseFireBlock.getState(level, blockpos1), 11);
                 level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);

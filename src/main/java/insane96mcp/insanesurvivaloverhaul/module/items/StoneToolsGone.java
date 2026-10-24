@@ -45,6 +45,10 @@ public class StoneToolsGone extends Feature {
         itemsToReplaceList.clear();
         for (String entry : itemsToReplace) {
             String[] split = entry.trim().split("\\s*,\\s*");
+            if (split.length < 2) {
+                LOGGER.warn("Invalid entry for Stone Tools Gone, expected 'item_to_replace, new_item[, keep_components]': {}", entry);
+                continue;
+            }
             ResourceLocation itemToReplaceId = ResourceLocation.tryParse(split[0]);
             if (itemToReplaceId == null) {
                 LOGGER.warn("Unable to parse item ID for Stone Tools Gone: {}", split[0]);

@@ -114,7 +114,8 @@ public class CoalFire extends Feature {
                 || !event.getItemStack().is(Items.FLINT)
                 || !event.getEntity().getOffhandItem().is(Items.FLINT)
                 || event.getEntity().getCooldowns().isOnCooldown(Items.FLINT)
-                || event.getLevel().isClientSide)
+                || event.getLevel().isClientSide
+                || !event.getEntity().mayUseItemAt(event.getPos(), event.getHitVec().getDirection(), event.getItemStack()))
             return;
 
         double ignite = event.getEntity().getRandom().nextDouble();
@@ -135,7 +136,8 @@ public class CoalFire extends Feature {
             }
             if (blockstate2 == null) {
                 BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
-                if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
+                if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())
+                        && player.mayUseItemAt(blockpos1, context.getClickedFace(), context.getItemInHand())) {
                     level.playSound(null, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                     level.setBlock(blockpos1, BaseFireBlock.getState(level, blockpos1), 11);
                     level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);
@@ -160,9 +162,12 @@ public class CoalFire extends Feature {
     private static void tryBreakFlint(Player player, InteractionHand hand, ItemStack stack) {
         if (player.getRandom().nextDouble() >= twoFlintFireStarter$breakChance)
             return;
+        ItemStack original = stack.copy();
         stack.shrink(1);
-        player.onEquippedItemBroken(stack.getItem(), LivingEntity.getSlotForHand(hand));
-        EventHooks.onPlayerDestroyItem(player, stack, hand);
+        player.onEquippedItemBroken(original.getItem(), LivingEntity.getSlotForHand(hand));
+        //Only fire the destroy event when the whole stack is gone
+        if (stack.isEmpty())
+            EventHooks.onPlayerDestroyItem(player, original, hand);
     }
 
     public static class BurntLogBlock extends RotatedPillarBlock implements Fallable {

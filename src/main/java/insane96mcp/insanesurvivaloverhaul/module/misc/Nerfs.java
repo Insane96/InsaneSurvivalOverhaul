@@ -66,8 +66,8 @@ public class Nerfs extends Feature {
 	public void onPlayerHit(LivingDamageEvent.Pre event) {
 		if (!this.isEnabled()
 				|| !event.getEntity().isPassenger()
-				|| !(event.getSource().getEntity() instanceof LivingEntity
-				|| event.getEntity().level().isClientSide)
+				|| !(event.getSource().getEntity() instanceof LivingEntity)
+				|| event.getEntity().level().isClientSide
 				|| fallFromMountChance == 0)
 			return;
 

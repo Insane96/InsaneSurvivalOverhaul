@@ -1,60 +1,40 @@
 # Upcoming
+* Armor Rework Data Pack
+  * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)
+  * Chainmail Armor total armor decreased from 15.5 to 13 (3 / 4.5 / 3.5 / 2)
 * Mining Misc
   * The delay between breaking blocks is now based on the actual mining speed against the broken block (Efficiency, Haste, etc. included) instead of the tool tier, and works with any item, not just tools
   * Creative now has its own fixed delay between breaking blocks (configurable, 2 ticks by default, vanilla is 5)
   * Fixed faster slabs, stairs and walls ignoring other mining speed modifiers (e.g., off-ground and prone)
-* Ecologic Wood
-  * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
-  * Fixed mining speed bonus ignoring other mining speed modifiers
+* Better Hardcore Death has been moved from Misc Tweaks to its own feature in the Death module (the old config option is gone, use the feature toggle)
+  * Fixed it deleting whatever block was at the player's feet (doors, rails, containers, etc.); now only liquids at the player's feet and head are removed
+  * Fixed respawn facing direction using the pitch instead of the yaw
 * Death Inventory Penalty
   * Fixed items being duplicated (dropped and kept) when `death_lose_items_percentage` is 100, and not destroyed when `death_destroy_items` is true
   * Fixed total experience being miscalculated from level 17 onwards, dropping less experience than expected between levels 17 and 26 and more than the player had from level 28 onwards
-* Anvil Crafting
-  * Fixed anvil recipes still working with the feature disabled
-  * Fixed items crafted in the anvil not stacking with normal ones and giving experience again each time they were used in an anvil
-  * Anvil recipes now work with more than the required amount of material in the right slot
+* Pouch
+  * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
+  * Right-clicking a full pouch with an item no longer consumes the click
+  * Fixed Pouch slowdown still applying with the feature disabled (e.g. with items in `pouch_like_weight` tag)
+* Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
+* Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
+* Fixed crash on respawn when the main bed has been destroyed
+* Fixed respawning on the main bed swapping the original pitch and yaw
+* Fixed main bed message appearing when setting the main bed in the same spot as before
+* Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
+* Potions and Effects
+  * Fixed potions duration being multiplied again each time the config is reloaded
+  * Changing the potion duration multiplier no longer requires a restart
+  * Fixed "Prevent fire with resistance" depending on the Misc Tweaks feature being enabled instead of Potions and Effects
 * Block Definitions
   * Fixed original block values not being restored properly on `/reload` and when changing world/server, leaving blocks with modified (or other server's) values
   * Fixed tag based definitions restoring every block in the tag to the same values
   * Fixed definitions possibly being lost in single player when synced
   * Fixed sync failing for definitions with more than 127 block states
-* Fixed Echo Lanterns not removed by a player (e.g. explosions, pistons) still preventing monsters from spawning, and Echo Lanterns not placed by an entity not working
-* Zombie Siege
-  * Fixed zombies difficulty and equipment being calculated at world origin instead of where they spawn
-  * Siege zombies are now processed by other mods' spawn events
-  * Sieges no longer try to start every tick in dimensions without a day/night cycle
-* Better Hardcore Death has been moved from Misc Tweaks to its own feature in the Death module (the old config option is gone, use the feature toggle)
-  * Fixed it deleting whatever block was at the player's feet (doors, rails, containers, etc.); now only liquids at the player's feet and head are removed
-  * Fixed respawn facing direction using the pitch instead of the yaw
-* Fixed Totem of Undying Resistance (Misc Tweaks) possibly preventing the removal of Resistance from other entities, especially if another mod cancelled the totem use
-* Low Fish
-  * Fixed fishing spots being shared between dimensions (e.g. fishing in the Nether slowing down fishing at the same coordinates in the Overworld)
-  * Fixed fishing slowdown still applying with the feature disabled
-  * Fixed a fishing spot expiring while waiting for a fish keeping its old count instead of starting over
-* Backwards Slowdown
-  * Fixed the slowdown staying if starting to fly or riding a vehicle while walking backwards
-  * Improved performance: a packet is sent to the server only when starting or stopping walking backwards instead of every tick
-* Fixed thunderstorm intensity sometimes getting stuck at minimum intensity for a long time
-* Fixed name tags possibly being duplicated when renaming a mob failed or was cancelled by another mod
-* Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
-* Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json
-* Fixed mobs equipment drop chance being reset each time their chunk was loaded, making items picked up by mobs (e.g. lost by players) no longer guaranteed to drop
-* Bone Meal
-  * Fixed bone mealing a stem to full growth never trying to grow its fruit
-  * Fixed nerfed bone meal working on Nether Wart and other plants that can't be bone mealed in vanilla
-* Fixed food values (Food & Drinks) and stack sizes (Stack Sizes) being multiplied again on each `/reload`
-* Fixed custom arrows (Fletching) shot with Multishot, Infinity or in creative being able to be picked up, multiplying arrows
-* Repair Kits
-  * Fixed any other item in the crafting grid being consumed when repairing
-  * Fixed undamaged items in the grid possibly being picked as the item to repair
-  * Repair kits not needed for the repair are no longer consumed
-* Spawners
-  * Fixed the spawner reactivator working with the feature disabled
-  * Fixed the spawner reactivator also being used normally and consumed client side when reactivating a spawner
-* Stuck Arrows
-  * Fixed arrows drop chance being 100 times lower than configured (0.5% instead of 50%)
-  * Any arrow type (custom, tipped, spectral) now counts, dropping back as a normal arrow
-  * Arrows with Piercing are no longer counted, as they go through the mob and can still be picked up
+* Minecarts
+  * Fixed chunks force loaded by minecarts staying loaded forever after a server restart or crash. Chunks already stuck in existing worlds can be released with `/forceload remove all`
+  * Minecarts no longer interfere with chunks force loaded with `/forceload`
+  * Improved performance of minecarts force loading chunks
 * Tiredness
   * Fixed tired players being able to sleep with monsters nearby, too far from the bed or with the bed obstructed
   * Fixed Tired levels being gained halfway through the required tiredness (e.g. Tired II at 625 tiredness instead of 750 with default config)
@@ -64,46 +44,76 @@
   * Fixed fake sounds also being processed for other players in multiplayer
   * Fixed tiredness showing 0 client side after logging in, respawning or changing dimension
 * Livestock
-  * Fixed milk cooldown often being wrong client side
   * Fixed age stage changes (size, elder slowness, starvation) being applied one aging cycle late
   * Fixed adult animals never fed dying right away with starvation death enabled
   * Fixed twins triggering breeding again (possibly chaining into triplets and more), consuming well fed time and giving breeding stats, advancements and experience twice
+  * Fixed milk cooldown often being wrong client side
   * Fixed well fed config descriptions saying ticks instead of minutes
-* Minecarts
-  * Fixed chunks force loaded by minecarts staying loaded forever after a server restart or crash. Chunks already stuck in existing worlds can be released with `/forceload remove all`
-  * Minecarts no longer interfere with chunks force loaded with `/forceload`
-  * Improved performance of minecarts force loading chunks
-* Potions and Effects
-  * Fixed potions duration being multiplied again each time the config is reloaded
-  * Changing the potion duration multiplier no longer requires a restart
-  * Fixed "Prevent fire with resistance" depending on the Misc Tweaks feature being enabled instead of Potions and Effects
-* Pouch
-  * Fixed items duplication when the pouch was moved (e.g. by a hopper or another player) while its menu was open
-  * Right-clicking a full pouch with an item no longer consumes the click
-* Fixed crash on respawn when the main bed has been destroyed
-* Fixed respawning on the main bed swapping the original pitch and yaw
-* Fixed main bed message appearing when setting the main bed in the same spot as before
+* Anvil Crafting
+  * Fixed anvil recipes still working with the feature disabled
+  * Fixed items crafted in the anvil not stacking with normal ones and giving experience again each time they were used in an anvil
+  * Anvil recipes now work with more than the required amount of material in the right slot
+* Repair Kits
+  * Fixed any other item in the crafting grid being consumed when repairing
+  * Fixed undamaged items in the grid possibly being picked as the item to repair
+  * Repair kits not needed for the repair are no longer consumed
+* Stuck Arrows
+  * Fixed arrows drop chance being 100 times lower than configured (0.5% instead of 50%)
+  * Any arrow type (custom, tipped, spectral) now counts, dropping back as a normal arrow
+  * Arrows with Piercing are no longer counted, as they go through the mob and can still be picked up
+* Fixed mobs equipment drop chance being reset each time their chunk was loaded, making items picked up by mobs (e.g. lost by players) no longer guaranteed to drop
+* Spawning
+  * Fixed zombie villagers replaced by normal zombies losing their equipment, including items picked up from players
+  * Fixed zombies replacing zombie villagers possibly spawning as chicken jockeys
+* Fixed Echo Lanterns not removed by a player (e.g. explosions, pistons) still preventing monsters from spawning, and Echo Lanterns not placed by an entity not working
+* Zombie Siege
+  * Fixed zombies difficulty and equipment being calculated at world origin instead of where they spawn
+  * Siege zombies are now processed by other mods' spawn events
+  * Sieges no longer try to start every tick in dimensions without a day/night cycle
 * Armor Rework
   * Fixed the armor formula possibly dealing negative damage (e.g. with more than 40 armor)
   * Improved performance: the armor formula (and Weighted Armor slowdown formula) is no longer parsed again on each hit
-* Fixed Critical damage advanced tooltip debug info showing a base bonus 100% higher than the actual one
+* Fixed Attack Speed Based Invincibility also applying to projectiles, based on the weapon held by the shooter
+* Fixed Totem of Undying Resistance (Misc Tweaks) possibly preventing the removal of Resistance from other entities, especially if another mod cancelled the totem use
+* Player Killer Bounty
+  * Fixed experience multiplier being applied multiple times when the mob killed multiple players in the same tick
+  * Fixed the "vindicated" message not appearing when the mob killed just one player
+* Hunger and Health Regen
+  * Config changes are now applied right away instead of requiring players to log in again
+  * Fixed config values being applied to players with the feature disabled
+* Fixed "Drown speed" (Breathing) being ignored when "Increase drown damage the more drowning" is disabled
 * Exhaustion
   * Fixed exhaustion when breaking blocks also being given when other mods (or the game) check the mining speed, e.g. in HUDs
   * Fixed a small memory leak on servers when players log out
-* Fixed Pouch slowdown still applying with the feature disabled (e.g. with items in `pouch_like_weight` tag)
-* Fixed short bow use slowdown still applying with the Bows feature disabled
+* Bone Meal
+  * Fixed bone mealing a stem to full growth never trying to grow its fruit
+  * Fixed nerfed bone meal working on Nether Wart and other plants that can't be bone mealed in vanilla
+* Low Fish
+  * Fixed fishing spots being shared between dimensions (e.g. fishing in the Nether slowing down fishing at the same coordinates in the Overworld)
+  * Fixed fishing slowdown still applying with the feature disabled
+  * Fixed a fishing spot expiring while waiting for a fish keeping its old count instead of starting over
+* Fixed thunderstorm intensity sometimes getting stuck at minimum intensity for a long time
+* Backwards Slowdown
+  * Fixed the slowdown staying if starting to fly or riding a vehicle while walking backwards
+  * Improved performance: a packet is sent to the server only when starting or stopping walking backwards instead of every tick
 * Fixed snowballs freezing entities that can't freeze (e.g. players wearing leather armor, strays)
-* Fixed Hoes scythe ignoring protections (spawn protection, claims, adventure mode) and dropping items in creative
+* Fixed short bow use slowdown still applying with the Bows feature disabled
+* Fixed Quartz Arrows shot by players dealing the mob piercing damage type
 * Torch Arrows
   * Fixed torch arrows placing torches in protected areas (spawn protection, claims, adventure mode)
   * Torch arrows that place a torch no longer also trigger the block hit effects (sound, target blocks, bells, etc.)
-* Fixed Quartz Arrows shot by players dealing the mob piercing damage type
-* Player Killer Bounty
-  * Fixed the "vindicated" message not appearing when the mob killed just one player
-  * Fixed experience multiplier being applied multiple times when the mob killed multiple players in the same tick
-* Armor Rework Data Pack
-  * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)
-  * Chainmail Armor total armor decreased from 15.5 to 13 (3 / 4.5 / 3.5 / 2)
+* Fixed Hoes scythe ignoring protections (spawn protection, claims, adventure mode) and dropping items in creative
+* Fixed Two Flint Fire Starter and Firestarter placing fire in protected areas and in adventure mode
+* Fixed `percentage_slowness_per_level` being ignored in Weighted Armor enchantments weights json
+* Spawners
+  * Fixed the spawner reactivator working with the feature disabled
+  * Fixed the spawner reactivator also being used normally and consumed client side when reactivating a spawner
+* Ecologic Wood
+  * Fixed sunlight-based mining speed bonus being desynced between client and server, making broken blocks reappear
+  * Fixed mining speed bonus ignoring other mining speed modifiers
+* Fixed regenerating absorption showing 0 client side after logging in, respawning or changing dimension
+* Fixed Critical damage advanced tooltip debug info showing a base bonus 100% higher than the actual one
+* Fixed malformed entries in Unfair One Shot effects and Stone Tools Gone config crashing the game; they're now skipped with a warning in the log
 
 # 5.13.0.1
 * Fixed regenReductionInCombatTime not working properly

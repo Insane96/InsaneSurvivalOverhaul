@@ -54,14 +54,26 @@ public class UnfairOneShot extends Feature {
 		effects.clear();
 		String[] effectsArray = effectsConfig.split(";");
 		for (String effect : effectsArray) {
-			if (!effect.isEmpty()) {
-				String[] effectArray = effect.split(",");
-				Optional<Holder.Reference<MobEffect>> mobEffect = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.parse(effectArray[0]));
-				if (mobEffect.isEmpty())
-					continue;
+			if (effect.isBlank())
+				continue;
+			String[] effectArray = effect.trim().split("\\s*,\\s*");
+			ResourceLocation effectId = effectArray.length == 3 ? ResourceLocation.tryParse(effectArray[0]) : null;
+			if (effectId == null) {
+				InsaneSO.LOGGER.warn("Invalid effect for Unfair One Shot, expected 'effect_id,duration,amplifier': {}", effect);
+				continue;
+			}
+			Optional<Holder.Reference<MobEffect>> mobEffect = BuiltInRegistries.MOB_EFFECT.getHolder(effectId);
+			if (mobEffect.isEmpty()) {
+				InsaneSO.LOGGER.warn("Non-existent effect for Unfair One Shot: {}", effectArray[0]);
+				continue;
+			}
+			try {
 				int duration = Integer.parseInt(effectArray[1]);
 				int amplifier = Integer.parseInt(effectArray[2]);
 				effects.add(new MobEffectInstance(mobEffect.get(), duration, amplifier));
+			}
+			catch (NumberFormatException e) {
+				InsaneSO.LOGGER.warn("Invalid duration or amplifier for Unfair One Shot effect: {}", effect);
 			}
 		}
 

@@ -27,6 +27,7 @@ import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -122,6 +123,30 @@ public class RegeneratingAbsorption extends Feature {
             event.getEntity().level().playSound(null, event.getEntity(), ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
         if (event.getEntity() instanceof ServerPlayer player)
             ClientboundRegenAbsorptionPacket.sync(player, currentAbsorption);
+    }
+
+    @SubscribeEvent
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        syncToClient(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        syncToClient(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        syncToClient(event.getEntity());
+    }
+
+    /**
+     * The absorption is synced only when it changes, so it has to be sent when the client player is (re)created
+     */
+    private void syncToClient(Player player) {
+        if (this.isEnabled()
+                && player instanceof ServerPlayer serverPlayer)
+            ClientboundRegenAbsorptionPacket.sync(serverPlayer, getCurrentAbsorption(serverPlayer));
     }
 
     public static boolean canDamageAbsorption(DamageSource source) {

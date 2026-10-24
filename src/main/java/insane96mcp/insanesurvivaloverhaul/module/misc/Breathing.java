@@ -71,12 +71,11 @@ public class Breathing extends Feature {
     @SubscribeEvent
     public void onDrown(LivingDrownEvent event) {
         if (!this.isEnabled()
-                || !increaseDrownDamageTheMoreDrowning
                 || !event.getEntity().canDrownInFluidType(event.getEntity().getEyeInFluidType()))
             return;
 
         event.setDrowning(event.getEntity().getAirSupply() <= -drownSpeed);
-        if (event.isDrowning()) {
+        if (increaseDrownDamageTheMoreDrowning && event.isDrowning()) {
             int timesDrowned = getTimesDrowned(event.getEntity());
             setTimesDrowned(event.getEntity(), ++timesDrowned);
 
