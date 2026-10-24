@@ -1,4 +1,4 @@
-# Upcoming
+# 5.13.1.0
 * Armor Rework Data Pack
   * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)
   * Chainmail Armor total armor decreased from 15.5 to 13 (3 / 4.5 / 3.5 / 2)
