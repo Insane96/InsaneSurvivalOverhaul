@@ -1,3 +1,6 @@
+# 5.13.2.0
+* Thrown tridents item based damage has been moved to InsaneLib (now always enabled and also takes into account multiplied attack damage modifiers), the `thrownTridentItemBasedDamage` config option has been removed
+
 # 5.13.1.0
 * Armor Rework Data Pack
   * Golden Armor total armor increased from 5 to 9 (2 / 3 / 2.5 / 1.5)

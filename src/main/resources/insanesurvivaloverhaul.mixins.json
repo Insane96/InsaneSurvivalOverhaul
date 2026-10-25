@@ -37,7 +37,6 @@
         "module.combat.fletching.FletchingTableBlockMixin_Fletching",
         "module.combat.misccombat.DiggerItemMixin_MiscCombat",
         "module.combat.misccombat.PlayerMixin_MiscCombat",
-        "module.combat.misccombat.ThrownTridentMixin_MiscCombat",
         "module.combat.regeneratingabsorption.LivingEntityMixin_RegeneratingAbsorption",
         "module.combat.shields.LivingEntityMixin_Shields",
         "module.combat.shields.PlayerMixin_Shields",
