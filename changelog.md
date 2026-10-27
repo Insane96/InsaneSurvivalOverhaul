@@ -1,3 +1,10 @@
+# Upcoming
+* Ported Block Hardness (Mining module) from older versions
+  * `hardnessMultiplier` config option to make all blocks harder (or easier) to break, e.g. 2.0 makes blocks take twice as long to break
+  * `dimension_hardness.json` to override the multiplier per dimension (by default blocks in the Nether are 1.5x harder)
+  * `depth_multipliers.json` to make blocks harder the deeper they are (empty by default)
+  * Blocks in `insanesurvivaloverhaul:hardness_blacklist` and `insanesurvivaloverhaul:depth_multiplier_blacklist` block tags are not affected (Ender Chests and Obsidians by default)
+
 # 5.13.2.0
 * Thrown tridents item based damage has been moved to InsaneLib (now always enabled and also takes into account multiplied attack damage modifiers), the `thrownTridentItemBasedDamage` config option has been removed
 

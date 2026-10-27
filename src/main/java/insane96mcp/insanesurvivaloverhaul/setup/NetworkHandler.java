@@ -10,6 +10,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Clientb
 import insane96mcp.insanesurvivaloverhaul.module.items.ServerboundToggleShulkerAutoPickupPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.ClientboundAnvilRecipeSyncPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
+import insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness.ClientboundGlobalHardnessPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.movement.backwardsslowdown.ServerboundBackwardsSlowdownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.ClientboundTirednessPacket;
@@ -30,6 +31,7 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundSaturationPacket.TYPE, ClientboundSaturationPacket.STREAM_CODEC, ClientboundSaturationPacket::handle);
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
         registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
+        registrar.playToClient(ClientboundGlobalHardnessPacket.TYPE, ClientboundGlobalHardnessPacket.STREAM_CODEC, ClientboundGlobalHardnessPacket::handle);
         registrar.playToClient(ClientboundAnvilRecipeSyncPacket.TYPE, ClientboundAnvilRecipeSyncPacket.STREAM_CODEC, ClientboundAnvilRecipeSyncPacket::handle);
         registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
         registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);

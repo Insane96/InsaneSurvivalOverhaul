@@ -5,6 +5,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness.BlockHardness;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -60,6 +61,12 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
 
         tag(OBSIDIANS)
                 .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
+        tag(BlockHardness.HARDNESS_BLACKLIST)
+                .add(Blocks.ENDER_CHEST)
+                .addTag(OBSIDIANS);
+        tag(BlockHardness.DEPTH_MULTIPLIER_BLACKLIST)
+                .add(Blocks.ENDER_CHEST)
+                .addTag(OBSIDIANS);
         tag(INFESTED)
                 .add(Blocks.INFESTED_DEEPSLATE, Blocks.INFESTED_STONE, Blocks.INFESTED_COBBLESTONE, Blocks.INFESTED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS, Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_MOSSY_STONE_BRICKS);
         tag(SKULLS)
