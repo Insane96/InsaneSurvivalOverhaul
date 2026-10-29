@@ -1,11 +1,14 @@
-package insane96mcp.insanesurvivaloverhaul.module.client;
+package insane96mcp.insanesurvivaloverhaul.module.world;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import net.neoforged.fml.config.ModConfig;
 
-@LoadFeature(module = ISOClientModules.CLIENT,
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.WORLD,
         name = "World Border", description = "World border changes")
 public class WorldBorder extends Feature {
 

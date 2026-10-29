@@ -1,21 +1,24 @@
-package insane96mcp.insanesurvivaloverhaul.module.client;
+package insane96mcp.insanesurvivaloverhaul.module.misc;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GuiAccessor;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-@LoadFeature(module = ISOClientModules.CLIENT)
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.MISC)
 public class Misc extends Feature {
 
     @Config(description = "If true, the outline around blocks will be red if the tool in hand will make drops not ... drop.")

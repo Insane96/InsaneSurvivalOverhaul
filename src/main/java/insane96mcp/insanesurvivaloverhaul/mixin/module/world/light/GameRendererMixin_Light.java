@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client.light;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.world.light;
 
-import insane96mcp.insanesurvivaloverhaul.module.client.Light;
+import insane96mcp.insanesurvivaloverhaul.module.world.Light;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;

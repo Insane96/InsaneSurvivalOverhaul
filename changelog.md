@@ -1,9 +1,14 @@
 # Upcoming
+Requires InsaneLib 2.5.0.2-alpha or newer
 * Ported Block Hardness (Mining module) from older versions
   * `hardnessMultiplier` config option to make all blocks harder (or easier) to break, e.g. 2.0 makes blocks take twice as long to break
   * `dimension_hardness.json` to override the multiplier per dimension (by default blocks in the Nether are 1.5x harder)
   * `depth_multipliers.json` to make blocks harder the deeper they are (empty by default)
   * Blocks in `insanesurvivaloverhaul:hardness_blacklist` and `insanesurvivaloverhaul:depth_multiplier_blacklist` block tags are not affected (Ender Chests and Obsidians by default)
+* Added a server config (`config/insanesurvivaloverhaul/server.toml`), synced to clients and overridable per world in `<world>/serverconfig/insanesurvivaloverhaul/server.toml`
+* The Client module has been removed, client features have been moved to their thematic modules (still in `client.toml`, old values must be set again)
+  * Fog, Light and World Border are now in the World module
+  * Sounds & Music and Misc are now in the Misc module
 
 # 5.13.2.0
 * Thrown tridents item based damage has been moved to InsaneLib (now always enabled and also takes into account multiplied attack damage modifiers), the `thrownTridentItemBasedDamage` config option has been removed

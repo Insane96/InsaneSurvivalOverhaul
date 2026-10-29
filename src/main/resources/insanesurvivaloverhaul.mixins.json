@@ -126,18 +126,18 @@
     },
     "client": [
         "accessor.GuiAccessor",
-        "module.client.LevelRendererMixin_WorldBorder",
-        "module.client.light.GameRendererMixin_Light",
-        "module.client.light.LightTextureMixin_Light",
-        "module.client.misc.GameRendererMixin_Misc",
-        "module.client.misc.GuiMixin_Misc",
-        "module.client.misc.LevelRendererMixin_Misc",
         "module.death.client.DeathScreenMixin_TimeSinceLastDeath",
         "module.death.respawn.client.LivingEntityRendererMixin_GhostlyEffect",
         "module.death.respawn.client.PlayerRendererMixin_GhostlyEffect",
         "module.hungerhealth.client.LocalPlayerMixin_HealthRegenHunger",
         "module.mining.MultiplayerGameModeMixin_MiningMisc",
+        "module.misc.misc.GameRendererMixin_Misc",
+        "module.misc.misc.GuiMixin_Misc",
+        "module.misc.misc.LevelRendererMixin_Misc",
         "module.misc.tweaks.client.EntityRendererMixin_Tweaks",
-        "module.misc.tweaks.client.LocalPlayerMixin_Tweaks"
-	]
+        "module.misc.tweaks.client.LocalPlayerMixin_Tweaks",
+        "module.world.light.GameRendererMixin_Light",
+        "module.world.light.LightTextureMixin_Light",
+        "module.world.worldborder.LevelRendererMixin_WorldBorder"
+    ]
 }

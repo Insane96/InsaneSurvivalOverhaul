@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client.misc;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.misc;
 
-import insane96mcp.insanesurvivaloverhaul.module.client.Misc;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Misc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.damagesource.DamageSource;

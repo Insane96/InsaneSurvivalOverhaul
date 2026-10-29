@@ -37,7 +37,7 @@ There are no unit tests — testing is done by running the game.
 
 All gameplay changes are implemented as **Features** inside **Modules**. This is the core pattern:
 
-- **Modules** (`ISOModules.java`) — top-level groupings registered in TOML config: `combat`, `death`, `farming`, `hunger_health`, `items`, `mining`, `misc`, `mobs`, `movement`, `sleep`, `world`. Client-side modules live in `ISOClientModules` (`client`).
+- **Modules** (`ISOModules.java`) — top-level groupings registered in TOML config: `combat`, `death`, `farming`, `hunger_health`, `items`, `mining`, `misc`, `mobs`, `movement`, `sleep`, `world`. There is no separate client module: client-only features live in their thematic module and are marked with `@ConfigType(ModConfig.Type.CLIENT)` (same for `SERVER`); features without `@ConfigType` use the module's type (COMMON).
 - **Features** — classes annotated with `@LoadFeature(module = ISOModules.X)` that extend `Feature` or `JsonFeature`. Each feature auto-registers itself and its `@Config`-annotated fields into the config file. Features subscribe to NeoForge events via `@SubscribeEvent` methods on the class itself.
 - **JsonFeature** — features that load additional configuration from JSON files in the config folder (e.g., `WeightedArmor` loads `enchantments_weights.json`). These can sync data to clients.
 
@@ -47,7 +47,6 @@ Feature check pattern: `Feature.isEnabled(MyFeature.class)` or `this.isEnabled()
 
 ```
 module/
-  client/       — client-only features (fog, light, sound, world border, HUD)
   combat/       — armor, crits, knockback, piercing, shields, bows, etc.
   death/        — death-related tweaks
   farming/      — crops, bone meal, livestock, etc.
@@ -92,6 +91,7 @@ Run `./gradlew runData` to regenerate files into `src/generated/resources/`. Dat
 
 - Common config: `config/insanesurvivaloverhaul/common.toml`
 - Client config: `config/insanesurvivaloverhaul/client.toml`
+- Server config: `config/insanesurvivaloverhaul/server.toml` (per-world override in `<world>/serverconfig/insanesurvivaloverhaul/server.toml`, synced to clients)
 - JSON configs (per JsonFeature): `config/insanesurvivaloverhaul/<feature>/`
 
 Don't write code unless prompted or confirmed to do.

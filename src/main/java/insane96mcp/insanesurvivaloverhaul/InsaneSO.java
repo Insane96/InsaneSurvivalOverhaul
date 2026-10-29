@@ -8,7 +8,6 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.*;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOBlockStatesProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.modifier.Modifiers;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.ISORunes;
@@ -77,7 +76,7 @@ public class InsaneSO {
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec, MOD_ID + "/common.toml");
         SERVER_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.SERVER, eventBus, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.SERVER, SERVER_CONFIG.spec, MOD_ID + "/server.toml");
-        CLIENT_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.CLIENT, eventBus, ISOClientModules::init, InsaneSO.class.getClassLoader());
+        CLIENT_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.CLIENT, eventBus, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.spec, MOD_ID + "/client.toml");
 
         ISORegistries.REGISTRIES.forEach(r -> r.register(eventBus));

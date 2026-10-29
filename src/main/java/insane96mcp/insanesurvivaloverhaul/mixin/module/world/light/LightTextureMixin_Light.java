@@ -1,8 +1,8 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client.light;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.world.light;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.client.Light;
+import insane96mcp.insanesurvivaloverhaul.module.world.Light;
 import net.minecraft.client.renderer.LightTexture;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,9 +1,10 @@
-package insane96mcp.insanesurvivaloverhaul.module.client;
+package insane96mcp.insanesurvivaloverhaul.module.world;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
@@ -17,9 +18,11 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.ViewportEvent;
 
-@LoadFeature(module = ISOClientModules.CLIENT)
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.WORLD)
 public class Fog extends Feature {
 
     @Config(name = "Better visibility in Lava with Fire Resistance Lava", description = "If true you'll be able to see better in lava when with the Fire Resistance Effect.")

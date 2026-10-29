@@ -1,15 +1,18 @@
-package insane96mcp.insanesurvivaloverhaul.module.client;
+package insane96mcp.insanesurvivaloverhaul.module.misc;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MusicsAccessor;
-import insane96mcp.insanesurvivaloverhaul.module.ISOClientModules;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvents;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
-@LoadFeature(module = ISOClientModules.CLIENT,
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.MISC,
         name = "Sounds & Music",
         description = "Changes to sounds and music. Disabling this feature requires a Minecraft restart.")
 public class Sound extends Feature {

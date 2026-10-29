@@ -1,10 +1,10 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client.misc;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.misc;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BlockStateBaseAccessor;
-import insane96mcp.insanesurvivaloverhaul.module.client.Misc;
+import insane96mcp.insanesurvivaloverhaul.module.misc.Misc;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;

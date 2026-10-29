@@ -1,6 +1,6 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.client;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.world.worldborder;
 
-import insane96mcp.insanesurvivaloverhaul.module.client.WorldBorder;
+import insane96mcp.insanesurvivaloverhaul.module.world.WorldBorder;
 import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
