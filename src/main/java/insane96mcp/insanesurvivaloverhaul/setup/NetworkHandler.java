@@ -10,7 +10,6 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Clientb
 import insane96mcp.insanesurvivaloverhaul.module.items.ServerboundToggleShulkerAutoPickupPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.ClientboundAnvilRecipeSyncPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
-import insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness.ClientboundGlobalHardnessPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.movement.backwardsslowdown.ServerboundBackwardsSlowdownPacket;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.ClientboundTirednessPacket;
@@ -22,7 +21,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 public class NetworkHandler {
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1");
+        final PayloadRegistrar registrar = event.registrar("5.14.0.0");
         registrar.playToClient(ClientboundDeathStatsPacket.TYPE, ClientboundDeathStatsPacket.STREAM_CODEC, ClientboundDeathStatsPacket::handle);
         registrar.playToClient(ClientboundRegenAbsorptionPacket.TYPE, ClientboundRegenAbsorptionPacket.STREAM_CODEC, ClientboundRegenAbsorptionPacket::handle);
         registrar.playToClient(ClientboundInvulnerableTimePacket.TYPE, ClientboundInvulnerableTimePacket.STREAM_CODEC, ClientboundInvulnerableTimePacket::handle);
@@ -31,7 +30,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundSaturationPacket.TYPE, ClientboundSaturationPacket.STREAM_CODEC, ClientboundSaturationPacket::handle);
         registrar.playToClient(ClientboundExhaustionPacket.TYPE, ClientboundExhaustionPacket.STREAM_CODEC, ClientboundExhaustionPacket::handle);
         registrar.playToClient(ClientboundBlockDefinitionPacket.TYPE, ClientboundBlockDefinitionPacket.STREAM_CODEC, ClientboundBlockDefinitionPacket::handle);
-        registrar.playToClient(ClientboundGlobalHardnessPacket.TYPE, ClientboundGlobalHardnessPacket.STREAM_CODEC, ClientboundGlobalHardnessPacket::handle);
         registrar.playToClient(ClientboundAnvilRecipeSyncPacket.TYPE, ClientboundAnvilRecipeSyncPacket.STREAM_CODEC, ClientboundAnvilRecipeSyncPacket::handle);
         registrar.playToClient(ClientboundMilkCooldownPacket.TYPE, ClientboundMilkCooldownPacket.STREAM_CODEC, ClientboundMilkCooldownPacket::handle);
         registrar.playToClient(ClientboundTirednessPacket.TYPE, ClientboundTirednessPacket.STREAM_CODEC, ClientboundTirednessPacket::handle);

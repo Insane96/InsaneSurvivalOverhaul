@@ -68,12 +68,15 @@ public class InsaneSO {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ILModConfig CONFIG;
+    public static ILModConfig SERVER_CONFIG;
     public static ILModConfig CLIENT_CONFIG;
     public static final String CONFIG_FOLDER = "config/" + MOD_ID;
 
     public InsaneSO(IEventBus eventBus, ModContainer modContainer) {
         CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.COMMON, eventBus, ISOModules::init, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.COMMON, CONFIG.spec, MOD_ID + "/common.toml");
+        SERVER_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.SERVER, eventBus, InsaneSO.class.getClassLoader());
+        modContainer.registerConfig(ModConfig.Type.SERVER, SERVER_CONFIG.spec, MOD_ID + "/server.toml");
         CLIENT_CONFIG = new ILModConfig(MOD_ID, ModConfig.Type.CLIENT, eventBus, ISOClientModules::init, InsaneSO.class.getClassLoader());
         modContainer.registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.spec, MOD_ID + "/client.toml");
 
