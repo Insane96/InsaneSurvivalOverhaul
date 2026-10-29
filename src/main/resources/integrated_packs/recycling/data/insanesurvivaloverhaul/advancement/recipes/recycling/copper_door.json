@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_door": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:copper_door",
+              "minecraft:exposed_copper_door",
+              "minecraft:weathered_copper_door",
+              "minecraft:oxidized_copper_door",
+              "minecraft:waxed_copper_door",
+              "minecraft:waxed_exposed_copper_door",
+              "minecraft:waxed_weathered_copper_door",
+              "minecraft:waxed_oxidized_copper_door"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/copper_door"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_door",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/copper_door"
+    ]
+  }
+}

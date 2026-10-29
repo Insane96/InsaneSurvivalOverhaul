@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_trapdoor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:copper_trapdoor",
+              "minecraft:exposed_copper_trapdoor",
+              "minecraft:weathered_copper_trapdoor",
+              "minecraft:oxidized_copper_trapdoor",
+              "minecraft:waxed_copper_trapdoor",
+              "minecraft:waxed_exposed_copper_trapdoor",
+              "minecraft:waxed_weathered_copper_trapdoor",
+              "minecraft:waxed_oxidized_copper_trapdoor"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/copper_trapdoor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_trapdoor",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/copper_trapdoor"
+    ]
+  }
+}

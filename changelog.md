@@ -12,8 +12,9 @@ Requires InsaneLib 2.5.0.2-alpha or newer
 * Tiredness, Regenerating Absorption and Livestock milk cooldown are now stored in NeoForge data attachments and synced automatically to clients (existing tiredness and regenerating absorption are migrated, milk cooldowns in progress are reset)
 * Recycling Data Pack
   * Added recycling for iron items without durability, giving back 75% of the iron used to craft them (rounded down): Iron Bars, Chain, Lantern, Soul Lantern, Bucket, Iron Door, Iron Trapdoor, Cauldron, Hopper, Minecarts (all variants), Heavy Weighted Pressure Plate, Tripwire Hook, Compass, Smithing Table, Blast Furnace, Stonecutter, Pistons, Lodestone, Anvils and Rails
-  * Added recycling for Light Weighted Pressure Plate, Clock, Golden Powered Rail and Enchanting Table, with the same 75% rule
+  * Added recycling for Light Weighted Pressure Plate, Clock, Golden Powered Rail, Enchanting Table, Lightning Rod, Copper Doors, Copper Trapdoors (all oxidation and waxed variants), Spyglass and Copper Powered Rail, with the same 75% rule
   * Horse Armors can now be recycled into 5 Ingots (5 Diamonds for Diamond Horse Armor) instead of 1 Nugget
+  * Vanilla smelting and blasting recipes that turn iron, golden and chainmail equipment into 1 nugget are now disabled, use recycling in the Blast Furnace instead
   * Iron Door recycling has been moved here from Misc Tweaks Data Pack (now gives 13 Iron Nuggets instead of 1 Iron Ingot)
 * Spawners
   * Spawner status is now synced only to players that have the spawner's chunk loaded
