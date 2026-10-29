@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption;
 
+import com.mojang.serialization.Codec;
 import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -11,8 +12,8 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.event.LivingDamageEventPreAbsorp;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -26,8 +27,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -35,8 +37,20 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class RegeneratingAbsorption extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> ABSORPTION_HIT = ISORegistries.SOUND_EVENTS.register("absorption_hit", () -> SoundEvent.createFixedRangeEvent(InsaneSO.id("absorption_hit"), 16f));
 
-    public static ResourceLocation REGEN_ABSORPTION_TAG;
+    /**
+     * Where the regenerating absorption was saved before being moved to {@link #REGEN_ABSORPTION}. Used only to migrate old data.
+     */
+    public static ResourceLocation LEGACY_REGEN_ABSORPTION_TAG;
     public static ResourceLocation NO_HURT_SOUND_TAG;
+
+    /**
+     * Synced only to the player itself
+     */
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Float>> REGEN_ABSORPTION =
+            ISORegistries.ATTACHMENT_TYPES.register("regen_absorption", () -> AttachmentType.builder(() -> 0f)
+                    .serialize(Codec.FLOAT, absorption -> absorption > 0f)
+                    .sync((holder, player) -> holder == player, ByteBufCodecs.FLOAT)
+                    .build());
 
     public static final DeferredHolder<Attribute, Attribute> ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d).setSyncable(true));
 
@@ -61,7 +75,7 @@ public class RegeneratingAbsorption extends Feature {
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
-        REGEN_ABSORPTION_TAG = this.createDataKey("regen_absorption");
+        LEGACY_REGEN_ABSORPTION_TAG = this.createDataKey("regen_absorption");
         NO_HURT_SOUND_TAG = this.createDataKey("no_hurt_sound");
     }
 
@@ -96,9 +110,7 @@ public class RegeneratingAbsorption extends Feature {
         else
             currentAbsorption = Math.min(currentAbsorption + regenSpeed, maxAbsorption);
 
-        if (livingEntity instanceof ServerPlayer player)
-            ClientboundRegenAbsorptionPacket.sync(player, currentAbsorption);
-        ModNBTData.put(livingEntity, REGEN_ABSORPTION_TAG, currentAbsorption);
+        setCurrentAbsorption(livingEntity, currentAbsorption);
     }
 
     @SubscribeEvent
@@ -118,35 +130,23 @@ public class RegeneratingAbsorption extends Feature {
         float toRemove = Math.min(currentAbsorption, event.getNewDamage());
         currentAbsorption -= toRemove;
         event.setNewDamage(event.getNewDamage() - toRemove);
-        ModNBTData.put(event.getEntity(), REGEN_ABSORPTION_TAG, currentAbsorption);
+        setCurrentAbsorption(event.getEntity(), currentAbsorption);
         if (soundOnAbsorptionHurt)
             event.getEntity().level().playSound(null, event.getEntity(), ABSORPTION_HIT.get(), event.getEntity() instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 1f, 2f);
-        if (event.getEntity() instanceof ServerPlayer player)
-            ClientboundRegenAbsorptionPacket.sync(player, currentAbsorption);
-    }
-
-    @SubscribeEvent
-    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        syncToClient(event.getEntity());
-    }
-
-    @SubscribeEvent
-    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        syncToClient(event.getEntity());
-    }
-
-    @SubscribeEvent
-    public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-        syncToClient(event.getEntity());
     }
 
     /**
-     * The absorption is synced only when it changes, so it has to be sent when the client player is (re)created
+     * Moves the regenerating absorption saved in ModNBTData by older versions to the attachment
      */
-    private void syncToClient(Player player) {
-        if (this.isEnabled()
-                && player instanceof ServerPlayer serverPlayer)
-            ClientboundRegenAbsorptionPacket.sync(serverPlayer, getCurrentAbsorption(serverPlayer));
+    @SubscribeEvent
+    public void migrateLegacyAbsorption(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide()
+                || !(event.getEntity() instanceof LivingEntity livingEntity)
+                || !ModNBTData.contains(livingEntity, LEGACY_REGEN_ABSORPTION_TAG))
+            return;
+
+        setCurrentAbsorption(livingEntity, ModNBTData.get(livingEntity, LEGACY_REGEN_ABSORPTION_TAG, Float.class));
+        ModNBTData.remove(livingEntity, LEGACY_REGEN_ABSORPTION_TAG);
     }
 
     public static boolean canDamageAbsorption(DamageSource source) {
@@ -156,7 +156,11 @@ public class RegeneratingAbsorption extends Feature {
     }
 
     public static float getCurrentAbsorption(LivingEntity entity) {
-        return ModNBTData.get(entity, REGEN_ABSORPTION_TAG, Float.class);
+        return entity.getExistingData(REGEN_ABSORPTION).orElse(0f);
+    }
+
+    public static void setCurrentAbsorption(LivingEntity entity, float absorption) {
+        entity.setData(REGEN_ABSORPTION, absorption);
     }
 
     public static float getMaxAbsorption(LivingEntity entity) {

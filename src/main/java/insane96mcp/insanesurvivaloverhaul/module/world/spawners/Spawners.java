@@ -39,6 +39,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -54,7 +55,6 @@ import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
@@ -340,18 +340,27 @@ public class Spawners extends JsonFeature {
 		syncSpawnerData(spawner);
 	}
 
+	/**
+	 * Sends the spawner's update tag to the clients that have the chunk loaded. It contains both the vanilla spawner data (delay, required player range, etc.) and the attachments (spawner data)
+	 */
 	private static void syncSpawnerData(SpawnerBlockEntity spawner) {
 		//noinspection ConstantConditions
         if (!spawner.hasLevel()
 				|| spawner.getLevel().isClientSide)
             return;
 
-		BaseSpawnerAccessor baseSpawner = (BaseSpawnerAccessor) spawner.getSpawner();
-		SpawnerStatusSync msg = new SpawnerStatusSync(spawner.getBlockPos(), spawner.getData(Spawners.SPAWNER_DATA.get()), baseSpawner.getSpawnDelay(), baseSpawner.getRequiredPlayerRange());
-		for (Player player : spawner.getLevel().players()) {
-			PacketDistributor.sendToPlayer((ServerPlayer) player, msg);
-		}
+		spawner.getLevel().sendBlockUpdated(spawner.getBlockPos(), spawner.getBlockState(), spawner.getBlockState(), Block.UPDATE_CLIENTS);
     }
+
+	/**
+	 * Returns true if the client should keep the synced spawn delay instead of resetting it to the min spawn delay when the spawner is delayed.
+	 * The block event that resets it reaches the client after the block update sent in {@link #onSpawnerDelaySet}, so it would override the synced delay
+	 */
+	public static boolean shouldKeepSyncedDelay(BaseSpawner spawner) {
+		return Feature.isEnabled(Spawners.class)
+				&& spawner.getOwner() != null
+				&& spawner.getOwner().left().orElse(null) instanceof SpawnerBlockEntity;
+	}
 
 	private static boolean isDisabled(SpawnerBlockEntity spawner) {
 		return spawner.getData(Spawners.SPAWNER_DATA.get()).isDisabled();

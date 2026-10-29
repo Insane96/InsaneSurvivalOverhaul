@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.module.farming.livestock;
 
 import com.google.gson.annotations.SerializedName;
+import com.mojang.serialization.Codec;
 import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
@@ -12,14 +13,15 @@ import insane96mcp.insanesurvivaloverhaul.data.modifier.Modifier;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.SheepAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -41,13 +43,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +65,20 @@ public class Livestock extends Feature {
 	public static final ResourceLocation OLD_AGE_MODIFIER = InsaneSO.id("livestock/old_age_modifier");
 	public static final String MILK_COOLDOWN_LANG = InsaneSO.lang("milk_cooldown");
 
+	/**
+	 * Ticks left until the entity can be milked (or stewed) again. Mutable so it can be ticked down on both sides without
+	 * syncing every time; it's synced only when set and when a player starts tracking the entity.
+	 */
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<MutableInt>> FLUID_COOLDOWN =
+			ISORegistries.ATTACHMENT_TYPES.register("fluid_cooldown", () -> AttachmentType.builder(() -> new MutableInt(0))
+					.serialize(Codec.INT.xmap(MutableInt::new, MutableInt::intValue), cooldown -> cooldown.intValue() > 0)
+					.sync(ByteBufCodecs.VAR_INT.map(MutableInt::new, MutableInt::intValue))
+					.build());
+
 	public static ResourceLocation AGE;
 	public static ResourceLocation MAX_AGE;
 	public static ResourceLocation STOP_AGING;
 	public static ResourceLocation LAST_FED;
-	public static ResourceLocation MILK_COOLDOWN;
 
 	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("old_age"));
 
@@ -113,7 +126,6 @@ public class Livestock extends Feature {
 		MAX_AGE = this.createDataKey("max_age");
 		STOP_AGING = this.createDataKey("stop_aging");
 		LAST_FED = this.createDataKey("last_fed");
-		MILK_COOLDOWN = this.createDataKey("milk_cooldown");
 	}
 
 	@SubscribeEvent
@@ -143,7 +155,7 @@ public class Livestock extends Feature {
 			if (hasBeenFedRecently(living) && living.getRandom().nextInt(200) == 0)
 				((ServerLevel) event.getEntity().level()).sendParticles(ParticleTypes.HAPPY_VILLAGER, living.getX(), living.getY() + living.getBbHeight() / 1.5f, living.getZ(), 5, 0.25, 0.25, 0.25, 0.2f);
 		}
-		cowMilkTick(event);
+		fluidCooldownTick(living);
 	}
 
 	public static double getRandomXWithin(LivingEntity entity, double delta) {
@@ -390,16 +402,24 @@ public class Livestock extends Feature {
 		setLastEat(living, lastFed);
 	}
 
-	public void cowMilkTick(EntityTickEvent.Pre event) {
-		if (event.getEntity().tickCount % 20 != 0
-				|| !event.getEntity().getType().is(MILKABLE)
-				|| !(event.getEntity() instanceof Animal animal))
+	/**
+	 * Ticks down the fluid cooldown on both sides. Mutated in place, so it's not synced every second.
+	 */
+	public static void fluidCooldownTick(LivingEntity living) {
+		if (living.tickCount % 20 != 0)
 			return;
+		MutableInt cooldown = living.getExistingDataOrNull(FLUID_COOLDOWN);
+		if (cooldown == null || cooldown.intValue() <= 0)
+			return;
+		cooldown.setValue(Math.max(0, cooldown.intValue() - 20));
+	}
 
-		int milkCooldown = ModNBTData.get(animal, MILK_COOLDOWN, Integer.class);
-		if (milkCooldown > 0)
-			milkCooldown -= 20;
-		ModNBTData.put(animal, MILK_COOLDOWN, milkCooldown);
+	/**
+	 * Returns the ticks left until the entity can be milked (or stewed) again
+	 */
+	public static int getFluidCooldown(LivingEntity living) {
+		MutableInt cooldown = living.getExistingDataOrNull(FLUID_COOLDOWN);
+		return cooldown == null ? 0 : cooldown.intValue();
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -418,8 +438,7 @@ public class Livestock extends Feature {
 		Optional<IFluidHandlerItem> fluidHandler = FluidUtil.getFluidHandler(equipped);
 		if ((fluidHandler.isEmpty() || !fluidHandler.get().getFluidInTank(0).isEmpty()) && (!(living instanceof MushroomCow) || item != Items.BOWL))
 			return;
-		int milkCooldown = ModNBTData.get(living, MILK_COOLDOWN, Integer.class);
-		if (milkCooldown > 0) {
+		if (getFluidCooldown(living) > 0) {
 			event.setCanceled(true);
 			if (!player.level().isClientSide) {
 				living.playSound(SoundEvents.COW_HURT, 0.4F, (event.getEntity().level().random.nextFloat() - event.getEntity().level().random.nextFloat()) * 0.2F + 1.2F);
@@ -439,25 +458,8 @@ public class Livestock extends Feature {
 			float cooldown = Modifier.applyModifiers(fluidCooldown, modifiersToApply, living.level(), living.blockPosition(), living);
 			if (cooldown <= 0)
 				return;
-			milkCooldown = (int) (cooldown * 20);
-			ModNBTData.put(living, MILK_COOLDOWN, milkCooldown);
-			ClientboundMilkCooldownPacket.sync(living, milkCooldown);
+			living.setData(FLUID_COOLDOWN, new MutableInt((int) (cooldown * 20)));
 		}
-	}
-
-	/**
-	 * Syncs the milk cooldown when the entity starts being tracked by a player, as the client has the entity only from then on
-	 */
-	@SubscribeEvent
-	public void onStartTracking(PlayerEvent.StartTracking event) {
-		if (!this.isEnabled()
-				|| !(event.getEntity() instanceof ServerPlayer player)
-				|| !(event.getTarget() instanceof LivingEntity livingEntity)
-				|| !livingEntity.getType().is(MILKABLE)
-				|| !ModNBTData.contains(livingEntity, MILK_COOLDOWN))
-			return;
-
-		ClientboundMilkCooldownPacket.syncToPlayer(player, livingEntity);
 	}
 
 	@SubscribeEvent

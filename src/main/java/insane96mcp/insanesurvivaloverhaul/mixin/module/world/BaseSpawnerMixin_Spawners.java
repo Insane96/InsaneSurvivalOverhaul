@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BaseSpawner.class)
 public abstract class BaseSpawnerMixin_Spawners {
@@ -37,5 +38,16 @@ public abstract class BaseSpawnerMixin_Spawners {
 	@Inject(method = "delay", at = @At("RETURN"))
 	private void onDelay(Level level, BlockPos pos, CallbackInfo ci) {
 		Spawners.onSpawnerDelaySet((BaseSpawner) (Object) this, level, pos);
+	}
+
+	/**
+	 * Prevents the client from resetting the spawn delay to the min spawn delay when the spawner is delayed, as Spawners syncs the actual delay
+	 */
+	@Inject(method = "onEventTriggered", at = @At("HEAD"), cancellable = true)
+	private void insanesurvivaloverhaul$keepSyncedDelay(Level level, int id, CallbackInfoReturnable<Boolean> cir) {
+		if (id == 1
+				&& level.isClientSide
+				&& Spawners.shouldKeepSyncedDelay((BaseSpawner) (Object) this))
+			cir.setReturnValue(true);
 	}
 }

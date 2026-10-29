@@ -1,6 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness;
 
+import com.mojang.serialization.Codec;
 import insane96mcp.insanelib.core.JsonFeature;
+import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
@@ -25,6 +27,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,7 +58,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.CanContinueSleepingEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
@@ -74,7 +79,19 @@ import java.util.stream.Collectors;
 
 @LoadFeature(module = ISOModules.SLEEP, description = "Prevents sleeping if the player is not tired. Tiredness is gained by gaining exhaustion. Allows you to sleep during daytime if too tired. Energy Boost Items are controlled via json in this feature's folder")
 public class Tiredness extends JsonFeature {
-	public static ResourceLocation NBT_TAG;
+	/**
+	 * Where tiredness was saved before being moved to {@link #TIREDNESS}. Used only to migrate old data.
+	 */
+	public static ResourceLocation LEGACY_NBT_TAG;
+
+	/**
+	 * Synced only to the player itself
+	 */
+	public static final DeferredHolder<AttachmentType<?>, AttachmentType<Float>> TIREDNESS =
+			ISORegistries.ATTACHMENT_TYPES.register("tiredness", () -> AttachmentType.builder(() -> 0f)
+					.serialize(Codec.FLOAT, tiredness -> tiredness > 0f)
+					.sync((holder, player) -> holder == player, ByteBufCodecs.FLOAT)
+					.build());
 
 	public static final DeferredHolder<MobEffect, MobEffect> TIRED = ISORegistries.MOB_EFFECTS.register("tired", () -> new TirednessEffect(MobEffectCategory.HARMFUL, 0x818894)
 			.addAttributeModifier(Attributes.MOVEMENT_SPEED, InsaneSO.id("tiredness/effect"), -0.02F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
@@ -143,7 +160,7 @@ public class Tiredness extends JsonFeature {
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
 		getJsonConfigs().add(new JsonConfig<>("energy_boost_items.json", energyBoostItems, ENERGY_BOOST_ITEMS_DEFAULT, EnergyBoostItem.LIST_TYPE));
-		NBT_TAG = this.createDataKey("tiredness");
+		LEGACY_NBT_TAG = this.createDataKey("tiredness");
 	}
 
 	@Override
@@ -311,9 +328,6 @@ public class Tiredness extends JsonFeature {
 		//noinspection ConstantConditions
 		int effectLevel = player.getEffect(ENERGY_BOOST).getAmplifier() + 1;
 		TirednessHandler.subtract(player, energyBoost$tirednessReduction.floatValue() * effectLevel);
-
-		if (player.tickCount % 20 == 0)
-			TirednessHandler.syncToClient(player);
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -328,7 +342,6 @@ public class Tiredness extends JsonFeature {
 
 		float tiredness = TirednessHandler.addAndGet(serverPlayer, event.getAmount() * tirednessGainMultiplier.floatValue());
 		tryApplyTired(tiredness, serverPlayer);
-		TirednessHandler.syncToClient(serverPlayer);
 	}
 
 	private static void tryApplyTired(float tiredness, ServerPlayer player) {
@@ -542,24 +555,17 @@ public class Tiredness extends JsonFeature {
 	}
 
 	/**
-	 * The client player is recreated on login, respawn and dimension change, losing the synced tiredness
+	 * Moves the tiredness saved in ModNBTData by older versions to the attachment
 	 */
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
-			TirednessHandler.syncToClient(player);
-	}
+	public void migrateLegacyTiredness(EntityJoinLevelEvent event) {
+		if (event.getLevel().isClientSide()
+				|| !(event.getEntity() instanceof Player player)
+				|| !ModNBTData.contains(player, LEGACY_NBT_TAG))
+			return;
 
-	@SubscribeEvent
-	public void onPlayerRespawned(PlayerEvent.PlayerRespawnEvent event) {
-		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
-			TirednessHandler.syncToClient(player);
-	}
-
-	@SubscribeEvent
-	public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-		if (this.isEnabled() && event.getEntity() instanceof ServerPlayer player)
-			TirednessHandler.syncToClient(player);
+		TirednessHandler.set(player, ModNBTData.get(player, LEGACY_NBT_TAG, Float.class));
+		ModNBTData.remove(player, LEGACY_NBT_TAG);
 	}
 
 	@OnlyIn(Dist.CLIENT)

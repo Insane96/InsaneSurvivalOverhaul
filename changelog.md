@@ -9,6 +9,10 @@ Requires InsaneLib 2.5.0.2-alpha or newer
 * The Client module has been removed, client features have been moved to their thematic modules (still in `client.toml`, old values must be set again)
   * Fog, Light and World Border are now in the World module
   * Sounds & Music and Misc are now in the Misc module
+* Tiredness, Regenerating Absorption and Livestock milk cooldown are now stored in NeoForge data attachments and synced automatically to clients (existing tiredness and regenerating absorption are migrated, milk cooldowns in progress are reset)
+* Spawners
+  * Spawner status is now synced only to players that have the spawner's chunk loaded
+  * Fixed the client resetting the spawn delay to the minimum one each time the spawner was delayed, making empowered spawners particles not match the actual delay
 
 # 5.13.2.0
 * Thrown tridents item based damage has been moved to InsaneLib (now always enabled and also takes into account multiplied attack damage modifiers), the `thrownTridentItemBasedDamage` config option has been removed
