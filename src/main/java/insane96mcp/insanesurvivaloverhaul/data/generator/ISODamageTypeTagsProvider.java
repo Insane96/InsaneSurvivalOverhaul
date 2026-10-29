@@ -1,8 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.animals.Aging;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.CollideWithWalls;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -25,14 +25,14 @@ public class ISODamageTypeTagsProvider extends DamageTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(DamageTypeTags.BYPASSES_ARMOR).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_COOLDOWN).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_SHIELD).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.NO_IMPACT).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(DamageTypes.WITHER).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_INVULNERABILITY).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_EFFECTS).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(Livestock.OLD_AGE);
-        tag(DamageTypeTags.BYPASSES_RESISTANCE).add(Livestock.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_ARMOR).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_COOLDOWN).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_SHIELD).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.NO_IMPACT).add(CollideWithWalls.COLLIDE_WITH_WALL).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(DamageTypes.WITHER).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_INVULNERABILITY).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_EFFECTS).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(Aging.OLD_AGE);
+        tag(DamageTypeTags.BYPASSES_RESISTANCE).add(Aging.OLD_AGE);
 
         tag(PiercingDamage.PIERCING_DAMAGE_TYPE).add(PiercingDamage.PIERCING_MOB_ATTACK, PiercingDamage.PIERCING_PLAYER_ATTACK);
         tag(PiercingDamage.DOESNT_TRIGGER_PIERCING).addTag(PiercingDamage.PIERCING_DAMAGE_TYPE);

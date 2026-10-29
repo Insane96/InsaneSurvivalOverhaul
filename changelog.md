@@ -9,6 +9,14 @@ Requires InsaneLib 2.5.0.2-alpha or newer
 * The Client module has been removed, client features have been moved to their thematic modules (still in `client.toml`, old values must be set again)
   * Fog, Light and World Border are now in the World module
   * Sounds & Music and Misc are now in the Misc module
+* Added the Animals module, Livestock (Farming module) has been split into its features (old config values must be set again)
+  * Breeding: prevent manual breeding, auto breeding, slower breeding, breeding fail chance and twins
+  * Well Fed: `duration`, `leftToFeedAgain` and `consumedOnBreed`
+  * Aging: animals aging, scale, old age death and poisonous potato. Disabling the feature replaces the old `aging$enable` config option
+  * Growth: slower growing of baby animals
+  * Animal Products: egg laying, wool regrowth, milking cooldown and chicken from egg chance
+  * The Livestock data pack toggle has been moved to Packs (Misc module)
+  * Removed starvation death
 * Tiredness, Regenerating Absorption and Livestock milk cooldown are now stored in NeoForge data attachments and synced automatically to clients (existing tiredness and regenerating absorption are migrated, milk cooldowns in progress are reset)
 * Recycling Data Pack
   * Added recycling for iron items without durability, giving back 75% of the iron used to craft them (rounded down): Iron Bars, Chain, Lantern, Soul Lantern, Bucket, Iron Door, Iron Trapdoor, Cauldron, Hopper, Minecarts (all variants), Heavy Weighted Pressure Plate, Tripwire Hook, Compass, Smithing Table, Blast Furnace, Stonecutter, Pistons, Lodestone, Anvils and Rails

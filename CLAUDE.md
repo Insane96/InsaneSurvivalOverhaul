@@ -37,7 +37,7 @@ There are no unit tests — testing is done by running the game.
 
 All gameplay changes are implemented as **Features** inside **Modules**. This is the core pattern:
 
-- **Modules** (`ISOModules.java`) — top-level groupings registered in TOML config: `combat`, `death`, `farming`, `hunger_health`, `items`, `mining`, `misc`, `mobs`, `movement`, `sleep`, `world`. There is no separate client module: client-only features live in their thematic module and are marked with `@ConfigType(ModConfig.Type.CLIENT)` (same for `SERVER`); features without `@ConfigType` use the module's type (COMMON).
+- **Modules** (`ISOModules.java`) — top-level groupings registered in TOML config: `animals`, `combat`, `death`, `farming`, `hunger_health`, `items`, `mining`, `misc`, `mobs`, `movement`, `sleep`, `world`. There is no separate client module: client-only features live in their thematic module and are marked with `@ConfigType(ModConfig.Type.CLIENT)` (same for `SERVER`); features without `@ConfigType` use the module's type (COMMON).
 - **Features** — classes annotated with `@LoadFeature(module = ISOModules.X)` that extend `Feature` or `JsonFeature`. Each feature auto-registers itself and its `@Config`-annotated fields into the config file. Features subscribe to NeoForge events via `@SubscribeEvent` methods on the class itself.
 - **JsonFeature** — features that load additional configuration from JSON files in the config folder (e.g., `WeightedArmor` loads `enchantments_weights.json`). These can sync data to clients.
 
@@ -47,9 +47,10 @@ Feature check pattern: `Feature.isEnabled(MyFeature.class)` or `this.isEnabled()
 
 ```
 module/
+  animals/      — breeding, well fed, aging, growth, animal products (shared livestock data)
   combat/       — armor, crits, knockback, piercing, shields, bows, etc.
   death/        — death-related tweaks
-  farming/      — crops, bone meal, livestock, etc.
+  farming/      — crops, bone meal, hoes, plants growth
   hungerhealth/ — exhaustion, food/drinks, health regen
   items/        — disabled items, stack sizes, copper equipment, etc.
   mining/       — block definitions, materials/ores, mining misc
@@ -96,7 +97,6 @@ Run `./gradlew runData` to regenerate files into `src/generated/resources/`. Dat
 
 Don't write code unless prompted or confirmed to do.
 The 1.20.1 version of the mod is in C:\Users\delvi\source\repos\Insane96\IguanaTweaksReborn\, whilest other mods, such as InsaneLib are in C:\Users\delvi\source\repos\Insane96\
-Don't worry about imports, the IDE will sort them out.
 
 ## Minecraft/NeoForge Sources
 

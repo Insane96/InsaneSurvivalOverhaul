@@ -1,7 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.AnimalProducts;
+import insane96mcp.insanesurvivaloverhaul.module.animals.Breeding;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobs;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -50,13 +51,13 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(PETS)
                 .add(EntityType.VILLAGER)
                 .addTag(EntityTypeTags.RAIDERS);
-        tag(Livestock.MILKABLE)
+        tag(AnimalProducts.MILKABLE)
                 .add(EntityType.COW)
                 .add(EntityType.MOOSHROOM)
                 .add(EntityType.GOAT)
                 .addOptional(ResourceLocation.fromNamespaceAndPath("buzzier_bees", "moobloom"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("environmental", "yak"));
-        tag(Livestock.PREVENT_BREEDING)
+        tag(Breeding.PREVENT_BREEDING)
                 .add(EntityType.COW)
                 .add(EntityType.MOOSHROOM)
                 .add(EntityType.PIG)

@@ -3,7 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.data.condition;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.Aging;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
@@ -15,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public record LivestockAgeCondition(LootContext.EntityTarget entityTarget, Livestock.Age age) implements LootItemCondition {
+public record LivestockAgeCondition(LootContext.EntityTarget entityTarget, Aging.Age age) implements LootItemCondition {
 
     public static final MapCodec<LivestockAgeCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             LootContext.EntityTarget.CODEC.fieldOf("entity").forGetter(LivestockAgeCondition::entityTarget),
-            Livestock.Age.CODEC.fieldOf("age").forGetter(LivestockAgeCondition::age)
+            Aging.Age.CODEC.fieldOf("age").forGetter(LivestockAgeCondition::age)
     ).apply(instance, LivestockAgeCondition::new));
 
     @Override
@@ -37,6 +37,6 @@ public record LivestockAgeCondition(LootContext.EntityTarget entityTarget, Lives
         Entity entity = context.getParamOrNull(this.entityTarget.getParam());
         if (!(entity instanceof AgeableMob mob))
             return false;
-        return Livestock.getAge(mob) == this.age;
+        return Aging.getAge(mob) == this.age;
     }
 }

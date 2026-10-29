@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.condition;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.WellFed;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +33,6 @@ public record FedCondition(LootContext.EntityTarget entityTarget) implements Loo
     @Override
     public boolean test(LootContext context) {
         Entity entity = context.getParamOrNull(this.entityTarget.getParam());
-        return entity instanceof LivingEntity living && Livestock.hasBeenFedRecently(living);
+        return entity instanceof LivingEntity living && WellFed.hasBeenFedRecently(living);
     }
 }

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.farming.livestock;
+package insane96mcp.insanesurvivaloverhaul.module.animals;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @JsonAdapter(LivestockData.Serializer.class)
 public class LivestockData {
@@ -48,6 +49,17 @@ public class LivestockData {
 
 	public boolean matches(Entity entity) {
 		return this.entity.matches(entity.getType());
+	}
+
+	/**
+	 * Collects the modifiers given by modifiersGetter from all the livestock data matching the entity
+	 */
+	public static List<Modifier> getModifiers(Entity entity, Function<LivestockData, List<Modifier>> modifiersGetter) {
+		List<Modifier> modifiers = new ArrayList<>();
+		LivestockDataReloadListener.LIVESTOCK_DATA.stream()
+				.filter(data -> data.matches(entity))
+				.forEach(data -> modifiers.addAll(modifiersGetter.apply(data)));
+		return modifiers;
 	}
 
 	public float getLivingDays(LivingEntity entity) {

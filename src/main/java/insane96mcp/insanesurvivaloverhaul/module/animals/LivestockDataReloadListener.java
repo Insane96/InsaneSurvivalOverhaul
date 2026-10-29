@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.farming.livestock;
+package insane96mcp.insanesurvivaloverhaul.module.animals;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

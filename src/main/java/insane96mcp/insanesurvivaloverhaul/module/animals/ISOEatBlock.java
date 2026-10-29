@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.farming.livestock;
+package insane96mcp.insanesurvivaloverhaul.module.animals;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
@@ -67,7 +67,7 @@ public class ISOEatBlock extends EatBlockGoal {
                     this.level.destroyBlock(blockpos, false);
                 }
 
-                if (Livestock.canSheepRegrowWool(this.mob))
+                if (AnimalProducts.canSheepRegrowWool(this.mob))
                     this.mob.ate();
             } else {
                 BlockPos posBelow = blockpos.below();
@@ -77,7 +77,7 @@ public class ISOEatBlock extends EatBlockGoal {
                         this.level.setBlock(posBelow, Blocks.DIRT.defaultBlockState(), 2);
                     }
 
-                    if (Livestock.canSheepRegrowWool(this.mob))
+                    if (AnimalProducts.canSheepRegrowWool(this.mob))
                         this.mob.ate();
                 }
             }

@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.modifier;
 
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.Aging;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.AgeableMob;
@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 @JsonAdapter(AgeModifier.Serializer.class)
 public class AgeModifier extends Modifier {
-    Livestock.Age age;
-    protected AgeModifier(float modifier, Operation operation, Livestock.Age age) {
+    Aging.Age age;
+    protected AgeModifier(float modifier, Operation operation, Aging.Age age) {
         super(modifier, operation);
         this.age = age;
     }
@@ -21,7 +21,7 @@ public class AgeModifier extends Modifier {
     @Override
     public boolean shouldApply(Level level, BlockPos pos, @Nullable LivingEntity entity) {
         return entity instanceof AgeableMob ageableMob
-                && Livestock.getAge(ageableMob) == this.age;
+                && Aging.getAge(ageableMob) == this.age;
     }
 
     public static class Serializer implements JsonDeserializer<AgeModifier> {
@@ -31,7 +31,7 @@ public class AgeModifier extends Modifier {
             return new AgeModifier(
                     GsonHelper.getAsFloat(jObject, "modifier"),
                     context.deserialize(jObject.get("operation"), Operation.class),
-                    context.deserialize(jObject.get("age"), Livestock.Age.class)
+                    context.deserialize(jObject.get("age"), Aging.Age.class)
             );
         }
     }

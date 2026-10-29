@@ -8,6 +8,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ISOModules {
+	public static final String ANIMALS = InsaneSO.MOD_ID + ":animals";
 	public static final String COMBAT = InsaneSO.MOD_ID + ":combat";
 	public static final String DEATH = InsaneSO.MOD_ID + ":death";
 	public static final String FARMING = InsaneSO.MOD_ID + ":farming";
@@ -22,6 +23,7 @@ public class ISOModules {
 	public static final String WORLD = InsaneSO.MOD_ID + ":world";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
+		create(ANIMALS, "Animals", eventBus, builder);
 		create(COMBAT, "Combat", eventBus, builder);
 		create(DEATH, "Death", eventBus, builder);
 		create(FARMING, "Farming", eventBus, builder);

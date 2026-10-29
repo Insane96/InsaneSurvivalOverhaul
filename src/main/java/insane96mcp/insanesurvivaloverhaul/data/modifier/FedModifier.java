@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.data.modifier;
 
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.Livestock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.WellFed;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.AgeableMob;
@@ -19,7 +19,7 @@ public class FedModifier extends Modifier {
     @Override
     public boolean shouldApply(Level level, BlockPos pos, @Nullable LivingEntity entity) {
         return entity instanceof AgeableMob ageableMob
-                && Livestock.hasBeenFedRecently(ageableMob);
+                && WellFed.hasBeenFedRecently(ageableMob);
     }
 
     public static class Serializer implements JsonDeserializer<FedModifier> {

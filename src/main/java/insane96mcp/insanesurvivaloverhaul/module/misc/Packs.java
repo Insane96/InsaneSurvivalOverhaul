@@ -60,6 +60,8 @@ public class Packs extends Feature {
     public static Boolean darkForestVegetation = true;
     @Config(description = "If true, a data pack will be enabled that makes End Cities more common.")
     public static Boolean increaseEndCities = true;
+    @Config(description = "If true, a data pack will be enabled that changes animal loot (reduced food drops) and adds livestock data that slows down growing, breeding, egg laying, etc.")
+    public static Boolean livestock = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -73,5 +75,6 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("craftable_saplings", "Insane's Survival Overhaul Sapling Drop Fix", () -> this.isEnabled() && !Packs.disableAllDataPacks && craftableSaplings);
         InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);
         InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !Packs.disableAllDataPacks && increaseEndCities);
+        InsaneSO.addServerPack("livestock", "Insane's Survival Overhaul Livestock", () -> this.isEnabled() && !Packs.disableAllDataPacks && livestock);
     }
 }

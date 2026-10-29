@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOBlockStatesPr
 import insane96mcp.insanesurvivaloverhaul.data.generator.client.ISOItemModelsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.modifier.Modifiers;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.animals.LivestockDataReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.combat.CriticalRework;
 import insane96mcp.insanesurvivaloverhaul.module.combat.ISORunes;
 import insane96mcp.insanesurvivaloverhaul.module.combat.PiercingDamage;
@@ -18,7 +19,6 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.R
 import insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption.RegeneratingAbsorptionClient;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShotClient;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
-import insane96mcp.insanesurvivaloverhaul.module.farming.livestock.LivestockDataReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthRegen;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
