@@ -1,7 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness;
 
 import insane96mcp.insanelib.core.JsonFeature;
-import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
@@ -17,13 +16,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ConfigType(ModConfig.Type.SERVER)
 @LoadFeature(module = ISOModules.MINING, description = "Change blocks hardness. Dimension Hardness and Depth Hardness are controlled via json in this feature's folder. Block hardness can be changed with Block Definitions via data packs")
 public class BlockHardness extends JsonFeature {
 	public static final TagKey<Block> HARDNESS_BLACKLIST = ISOBlockTagsProvider.create("hardness_blacklist");

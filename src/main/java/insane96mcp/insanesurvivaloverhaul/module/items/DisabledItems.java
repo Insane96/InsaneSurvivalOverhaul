@@ -2,12 +2,9 @@ package insane96mcp.insanesurvivaloverhaul.module.items;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,13 +14,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -39,9 +31,6 @@ public class DisabledItems extends Feature {
 
 	public static final TagKey<Item> DISABLED = ISOItemTagsProvider.create("disabled");
 	public static final String DISABLED_ITEM_LANG = InsaneSO.lang("disabled_item");
-
-	@Config(description = "If set to true items in the 'no_damage', 'no_efficiency', 'no_equip' and 'disabled' item tags will get a tooltip.")
-	public static Boolean addTooltip = true;
 
 	@SubscribeEvent
 	public void processAttacking(LivingIncomingDamageEvent event) {
@@ -72,23 +61,6 @@ public class DisabledItems extends Feature {
 	}
 
 	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public void processInput(InputEvent.InteractionKeyMappingTriggered event) {
-		if (!this.isEnabled())
-			return;
-
-		Player player = Minecraft.getInstance().player;
-		if (player == null)
-			return;
-		ItemStack stack = player.getItemInHand(event.getHand());
-		if (stack.is(DISABLED)) {
-			event.setCanceled(true);
-			event.setSwingHand(false);
-			Minecraft.getInstance().player.displayClientMessage(Component.translatable(DISABLED_ITEM_LANG), true);
-		}
-	}
-
-	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent.Post event) {
 		Player player = event.getEntity();
 		if (!this.isEnabled()
@@ -107,23 +79,5 @@ public class DisabledItems extends Feature {
 					player.drop(stack, true);
 			}
 		}
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent(priority = EventPriority.HIGH)
-	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !addTooltip)
-			return;
-
-		ItemStack stack = event.getItemStack();
-		if (stack.is(NO_DAMAGE))
-			event.getToolTip().add(Component.translatable(NO_DAMAGE_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
-		if (stack.is(NO_MINING))
-			event.getToolTip().add(Component.translatable(NO_MINING_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
-		if (stack.is(NO_EQUIP))
-			event.getToolTip().add(Component.translatable(NO_EQUIP_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
-		if (stack.is(DISABLED))
-			event.getToolTip().add(Component.translatable(DISABLED_ITEM_LANG).withStyle(ChatFormatting.DARK_GRAY));
 	}
 }

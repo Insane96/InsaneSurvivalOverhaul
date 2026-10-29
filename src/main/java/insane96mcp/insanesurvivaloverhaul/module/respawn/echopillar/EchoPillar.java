@@ -3,7 +3,6 @@ package insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar;
 import insane96mcp.insanelib.core.JsonFeature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
-import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.data.SerializableMobEffectInstance;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.criterion.ActivateEchoPillarTrigger;
@@ -11,7 +10,6 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.event.DeathPenaltyEvent;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.Ghostly;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
@@ -29,10 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.ArrayList;
@@ -50,9 +45,6 @@ public class EchoPillar extends JsonFeature {
 			ISORegistries.registerTrigger("activate_echo_pillar", ActivateEchoPillarTrigger::new);
 
 	public static final SimpleBlockWithItem ECHO_PILLAR = SimpleBlockWithItem.register("echo_pillar", () -> new EchoPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(50.0F, 1200.0F).lightLevel(EchoPillarBlock::lightLevel)));
-
-	@Config(description = "Data pack that makes Echo Pillars generate in the world")
-	public static Boolean echoPillars = true;
 
 	public static final List<SerializableMobEffectInstance> ECHO_PILLAR_EFFECTS_DEFAULT = List.of(
 			new SerializableMobEffectInstance.Builder(MobEffects.REGENERATION, 45 * 20)
@@ -78,9 +70,7 @@ public class EchoPillar extends JsonFeature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		getJsonConfigs().add(new JsonFeature.JsonConfig<>("echo_pillar_effects.json", echoPillarEffects, ECHO_PILLAR_EFFECTS_DEFAULT, SerializableMobEffectInstance.LIST_TYPE));
-		InsaneSO.addServerPack("echo_pillar", "Insane's Survival Overhaul Echo Pillar", () -> this.isEnabled() && !Packs.disableAllDataPacks && echoPillars);
-	}
+		getJsonConfigs().add(new JsonFeature.JsonConfig<>("echo_pillar_effects.json", echoPillarEffects, ECHO_PILLAR_EFFECTS_DEFAULT, SerializableMobEffectInstance.LIST_TYPE));	}
 
 	@Override
 	public String getModConfigFolder() {
@@ -126,15 +116,5 @@ public class EchoPillar extends JsonFeature {
 			return;
 		}
 		EchoPillarBlock.onPillarRespawn(player, player.level(), pos);
-	}
-
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !event.getItemStack().is(ECHO_PILLAR_CATALYST))
-			return;
-
-		event.getToolTip().add(ECHO_PILLAR_CATALYST_MESSAGE);
 	}
 }

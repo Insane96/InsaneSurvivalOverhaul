@@ -2,16 +2,11 @@ package insane96mcp.insanesurvivaloverhaul.module.items;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -23,34 +18,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Changes to Shulker Boxes.")
 public class ShulkerBoxes extends Feature {
 
-	@Config(description = "Enables a data pack that changes Shulker Boxes recipe to use cloth (or leather if the Cloth feature is disabled) and chests instead of shulker shells, and shulkers will drop Shulker Boxes directly instead of shells.")
-	public static Boolean earlyGameShulkerBoxes = true;
-
-	@Config(description = "Enables a resource pack that renames Shulker Boxes to Sack")
-	public static Boolean renameShulkerBoxToSack = true;
-
 	@Config(description = "When picking up an item, if a Shulker Box in the inventory already contains that item, the item is put in the Shulker Box instead of the inventory. Auto pickup must be enabled on each Shulker Box by pressing the toggle key (S by default) while hovering it in the inventory.")
 	public static Boolean autoPickupIntoShulkerBoxes = true;
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("early_shulker_boxes", "Insane's Survival Overhaul Early Shulker Box", () -> this.isEnabled() && !Packs.disableAllDataPacks && earlyGameShulkerBoxes);
-		InsaneSO.addClientPack("early_shulker_boxes_rp", "Insane's Survival Overhaul Sack", () -> this.isEnabled() && earlyGameShulkerBoxes && renameShulkerBoxToSack);
-	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onItemPickup(ItemEntityPickupEvent.Pre event) {
@@ -175,20 +154,5 @@ public class ShulkerBoxes extends Feature {
 		}
 		slot.setChanged();
 		menu.broadcastChanges();
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !autoPickupIntoShulkerBoxes
-				|| !event.getItemStack().is(Tags.Items.SHULKER_BOXES))
-			return;
-
-		if (hasAutoPickup(event.getItemStack()))
-			event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.enabled").withStyle(ChatFormatting.GREEN));
-		else
-			event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.disabled").withStyle(ChatFormatting.GRAY));
-		event.getToolTip().add(Component.translatable("insanesurvivaloverhaul.shulker_auto_pickup.toggle", ShulkerBoxesClient.TOGGLE_AUTO_PICKUP.get().getTranslatedKeyMessage()).withStyle(ChatFormatting.DARK_GRAY));
 	}
 }

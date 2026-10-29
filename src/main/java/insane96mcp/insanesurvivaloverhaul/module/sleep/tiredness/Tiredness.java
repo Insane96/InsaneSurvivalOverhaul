@@ -21,8 +21,6 @@ import insane96mcp.insanesurvivaloverhaul.mixin.accessor.ServerLevelAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.world.thunderstorms.Thunderstorms;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -53,13 +51,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.CanContinueSleepingEvent;
@@ -71,7 +66,6 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -566,19 +560,5 @@ public class Tiredness extends JsonFeature {
 
 		TirednessHandler.set(player, ModNBTData.get(player, LEGACY_NBT_TAG, Float.class));
 		ModNBTData.remove(player, LEGACY_NBT_TAG);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public void debugScreen(CustomizeGuiOverlayEvent.DebugText event) {
-		if (!this.isEnabled())
-			return;
-		Minecraft mc = Minecraft.getInstance();
-		LocalPlayer playerEntity = mc.player;
-		if (playerEntity == null)
-			return;
-		if (!mc.showOnlyReducedInfo()) {
-			event.getLeft().add(String.format("Tiredness: %s", new DecimalFormat("#.#").format(TirednessHandler.get(playerEntity))));
-		}
 	}
 }

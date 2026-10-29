@@ -3,28 +3,21 @@ package insane96mcp.insanesurvivaloverhaul.module.farming.crops;
 import com.google.common.collect.ImmutableSet;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.VillagerAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -32,13 +25,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -76,24 +64,8 @@ public class Crops extends Feature {
 	@Config(min = 1, description = "Radius where water hydrates farmland, vanilla is 4.")
 	public static Integer waterHydrationRadius = 2;
 
-	@Config(description = """
-		Makes potatoes and carrots not plantable and also enables a data pack that makes the following changes:
-		* Makes all vanilla crops drop only one seed (and makes carrots and potatoes drop the new seed item)
-		* Makes crops hard to break, requiring an hoe as correct tool
-		* Makes melon seeds and pumpkin seeds harder to obtain
-		* Removes carrots and potato drops from zombies
-		* Removes wheat seeds from tall grass
-		* Makes wild crops generate in the world""")
-	public static Boolean dataPack = true;
-
 	@Config(description = "If true, villagers will be able to pick up and (farmers) plant mod's seeds and rooted items. Also prevents villagers from trampling farmland")
 	public static Boolean fixVillagers = true;
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("crops", "Insane's Survival Overhaul Crops", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-	}
 
 	/** Default items a villager regardless of its profession can pick up. */
 	private static final Set<Item> VANILLA_WANTED_ITEMS = ImmutableSet.of(
@@ -194,7 +166,7 @@ public class Crops extends Feature {
 		if (!this.isEnabled())
 			return;
 		if (!(event.getLevel().getBlockState(event.getHitVec().getBlockPos()).getBlock() instanceof FarmBlock)
-				|| !dataPack)
+				|| !CropsCommon.dataPack())
 			return;
 
 		if (event.getItemStack().is(Items.POTATO) || event.getItemStack().is(Items.CARROT))
@@ -213,56 +185,12 @@ public class Crops extends Feature {
 	@SubscribeEvent
 	public void onTryToSeedChickens(PlayerInteractEvent.EntityInteract event) {
 		if (!this.isEnabled()
-				|| !dataPack
+				|| !CropsCommon.dataPack()
 				|| !(event.getTarget() instanceof Chicken chicken)
 				|| !chicken.isFood(event.getItemStack())
 				|| event.getItemStack().is(CHICKEN_FOOD_ITEMS))
 			return;
 
-		event.setCanceled(true);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public void onPickBlock(InputEvent.InteractionKeyMappingTriggered event) {
-		if (!this.isEnabled()
-				|| !event.getKeyMapping().same(Minecraft.getInstance().options.keyPickItem)
-				|| Minecraft.getInstance().player == null
-				|| Minecraft.getInstance().level == null
-				|| Minecraft.getInstance().gameMode == null
-				|| Minecraft.getInstance().hitResult == null
-				|| Minecraft.getInstance().hitResult.getType() != HitResult.Type.BLOCK)
-			return;
-		Minecraft mc = Minecraft.getInstance();
-		boolean isCreative = mc.player.getAbilities().instabuild;
-		HitResult hitResult = mc.hitResult;
-
-		BlockPos blockpos = ((BlockHitResult) hitResult).getBlockPos();
-		BlockState blockstate = mc.level.getBlockState(blockpos);
-		if (blockstate.isAir())
-			return;
-
-		Block block = blockstate.getBlock();
-		ItemStack stack = null;
-		if (block == Blocks.CARROTS)
-			stack = new ItemStack(CARROT_SEEDS.get());
-		else if (block == Blocks.POTATOES)
-			stack = new ItemStack(ROOTED_POTATO.get());
-		if (stack == null)
-			return;
-		Inventory inventory = mc.player.getInventory();
-
-		int i = inventory.findSlotMatchingItem(stack);
-		if (isCreative) {
-			inventory.setPickedItem(stack);
-			mc.gameMode.handleCreativeModeItemAdd(mc.player.getItemInHand(InteractionHand.MAIN_HAND), 36 + inventory.selected);
-		}
-		else if (i != -1) {
-			if (Inventory.isHotbarSlot(i))
-				inventory.selected = i;
-			else
-				mc.gameMode.handlePickItem(i);
-		}
 		event.setCanceled(true);
 	}
 

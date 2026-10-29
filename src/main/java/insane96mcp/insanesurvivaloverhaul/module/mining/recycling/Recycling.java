@@ -2,11 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.mining.recycling;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -21,10 +18,4 @@ public class Recycling extends Feature {
 
 	public static final DeferredHolder<RecipeSerializer<?>, SimpleCookingSerializer<RecyclingRecipe>> SERIALIZER =
 			ISORegistries.RECIPE_SERIALIZERS.register("recycling", () -> new SimpleCookingSerializer<>(RecyclingRecipe::new, 100));
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("recycling", "Insane's Survival Overhaul Recycling", () -> this.isEnabled() && !Packs.disableAllDataPacks);
-	}
 }

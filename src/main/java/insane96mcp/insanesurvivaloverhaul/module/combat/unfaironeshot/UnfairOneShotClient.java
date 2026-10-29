@@ -3,8 +3,11 @@ package insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
+import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -12,17 +15,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import static insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot.HALF_HEART_TEXTURE;
 
-public class UnfairOneShotClient {
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.COMBAT, canBeDisabled = false)
+public class UnfairOneShotClient extends Feature {
 	public static int activationTicks = 0;
-	@OnlyIn(Dist.CLIENT)
+
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
 		event.registerBelowAll(InsaneSO.id("unfair_oneshot_animation"), (guiGraphics, deltaTracker) -> {
             if (!Feature.isEnabled(UnfairOneShot.class)
@@ -57,7 +61,7 @@ public class UnfairOneShotClient {
 	}
 
 	@SubscribeEvent
-	public static void onRenderTick(LevelTickEvent.Post event) {
+	public void onRenderTick(LevelTickEvent.Post event) {
 		if (activationTicks > 0 && event.getLevel().isClientSide && event.getLevel().dimension() == Level.OVERWORLD)
 			activationTicks--;
 	}

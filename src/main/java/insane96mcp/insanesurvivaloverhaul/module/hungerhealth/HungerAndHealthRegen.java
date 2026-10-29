@@ -11,8 +11,6 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.FoodDataAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -26,20 +24,15 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.Nullable;
-
-import java.text.DecimalFormat;
 
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, description = "Makes natural regeneration and hunger work differently, similar to Combat Test snapshots. Can be customized. Also allows to add passive regen")
 public class HungerAndHealthRegen extends Feature {
@@ -266,21 +259,5 @@ public class HungerAndHealthRegen extends Feature {
 
 	public static void addHunger(FoodData foodStats, int hunger) {
 		foodStats.setFoodLevel(Mth.clamp(foodStats.getFoodLevel() + hunger, 0, 20));
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public void debugScreen(CustomizeGuiOverlayEvent.DebugText event) {
-		if (!this.isEnabled()
-			|| ModList.get().isLoaded("nohunger"))
-			return;
-		Minecraft mc = Minecraft.getInstance();
-		LocalPlayer playerEntity = mc.player;
-		if (playerEntity == null)
-			return;
-		if (mc.getDebugOverlay().showDebugScreen() && !mc.showOnlyReducedInfo()) {
-			FoodData foodStats = playerEntity.getFoodData();
-			event.getLeft().add(String.format("Hunger: %d, Saturation: %s, Exhaustion: %s", foodStats.getFoodLevel(), new DecimalFormat("#.#").format(foodStats.getSaturationLevel()), new DecimalFormat("0.00").format(foodStats.getExhaustionLevel())));
-		}
 	}
 }

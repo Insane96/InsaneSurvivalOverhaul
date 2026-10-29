@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
@@ -13,8 +14,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.fml.config.ModConfig;
 
 //TODO Move to noise generator (I have no idea how to) or change OreVenifier
+@ConfigType(ModConfig.Type.COMMON)
 @LoadFeature(module = ISOModules.MINING, description = "Enables a Data Pack that generates large ore veins underground. On the surface you can find ore rocks indicating a huge vein below.")
 public class BigOreVeins extends Feature {
     public static TagKey<Block> ORE_ROCKS = ISOBlockTagsProvider.create("ore_rocks");

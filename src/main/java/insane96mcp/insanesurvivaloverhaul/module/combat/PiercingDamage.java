@@ -10,7 +10,6 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.util.MCUtils;
 import net.minecraft.core.Holder;
@@ -58,9 +57,6 @@ public class PiercingDamage extends Feature {
 
 	public static ResourceLocation SHOULD_STOP_HURT;
 
-	@Config(description = "Enables a data pack that adds the Armor Piercer enchantment (max level V). Each level grants bonus Piercing Damage scaled by the weapon's Attack Damage (see armorPiercerDamagePerAttackDamage). It's incompatible with other damage enchantments (Sharpness, Smite, Bane of Arthropods, Impaling, Density, Breach, Critical).")
-	public static Boolean armorPiercerEnchantmentDataPack = true;
-
 	@Config(min = 0d, description = "Bonus Piercing Damage granted by the Armor Piercer enchantment, per level, per point of the weapon's Attack Damage. Default is 0.25 every 5 points of Attack Damage (0.05 per point), so weaker/faster weapons (e.g. hoes) get less bonus than a sword or axe.")
 	public static Double armorPiercerDamagePerAttackDamage = 0.05d;
 
@@ -72,9 +68,7 @@ public class PiercingDamage extends Feature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		SHOULD_STOP_HURT = this.createDataKey("should_stop_hurt");
-		InsaneSO.addServerPack("armor_piercer_enchantment", "Insane's Survival Overhaul Armor Piercer Enchantment", () -> this.isEnabled() && !Packs.disableAllDataPacks && armorPiercerEnchantmentDataPack);
-	}
+		SHOULD_STOP_HURT = this.createDataKey("should_stop_hurt");	}
 
 	public static void addAttribute(EntityAttributeModificationEvent event) {
 		for (EntityType<? extends LivingEntity> entityType : event.getTypes()) {

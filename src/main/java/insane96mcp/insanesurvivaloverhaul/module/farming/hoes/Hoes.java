@@ -8,10 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BlockStateBaseAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -20,12 +17,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 @LoadFeature(module = ISOModules.FARMING, description = "Hoes can now scythe grass and flowers. Also makes them break faster when tilling farmland")
@@ -92,16 +86,5 @@ public class Hoes extends Feature {
 		finally {
 			scything = false;
 		}
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled())
-			return;
-
-		Integer radius = event.getItemStack().get(ISORegistries.SCYTHE_RADIUS.get());
-		if (radius != null && radius > 0)
-			event.getToolTip().add(CommonComponents.space().append(Component.translatable(SCYTHE_RADIUS, radius).withStyle(ChatFormatting.DARK_GREEN)));
 	}
 }

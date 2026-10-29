@@ -2,10 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.module.misc;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanelib.util.IntegratedPack;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectInstanceAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
@@ -41,18 +38,10 @@ public class PotionsAndEffects extends Feature {
     public static Boolean preventFireWithResistance = false;
     @Config(description = "Splash potions will always be 2/3 effective compared to drinkable ones but will also apply the full effect duration when thrown regardless of the distance.")
     public static Boolean streamlineSplashPotions = true;
-    @Config(description = "Enables a data pack that increases potions stack sizes")
-    public static Boolean potionStackSize = true;
     @Config(min = 0, description = "Multiplier for the duration of potions. Doesn't affect instantaneous effects.")
     public static Double potionDurationMultiplier = 2d;
 
     public static float STREAMLINE_SPLASH_POTION_MULTIPLIER = 0.667f;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        IntegratedPack.addServerPack(InsaneSO.MOD_ID, "potion_stack_size", "InsaneLib's Potion Stack Size", () -> this.isEnabled() && potionStackSize);
-    }
 
     @Override
     public void readConfig(ModConfigEvent event) {

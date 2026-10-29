@@ -10,7 +10,6 @@ import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
@@ -95,16 +94,9 @@ public class FoodDrinks extends JsonFeature {
     @Config(description = "Adds a loot table when shearing pumpkins (insanesurvivaloverhaul:gameplay/pumpkin_shear). This also replaces seeds drop with Pumpkin Pulp")
     public static Boolean addPumpkinShearLootTable = true;
 
-	@Config(description = "Enables a data pack that makes food no longer smeltable in furnaces and changes smokers recipe to require soul sand.\nThis also enables a change to the smelt_item_function in loot tables to use smoker recipes instead of furnaces (otherwise, mobs wouldn't drop cooked food). Might have unintended side effects.")
-	public static Boolean noFurnaceFoodAndSmokerRecipe = true;
-	@Config(description = "Enables a data pack that rebalances some foods and makes raw foods poisonous. Also allows mushroom stews to be crafted with any mushroom and removes golden apples.")
-	public static Boolean foodChanges = true;
-
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("no_food_in_furnace", "Insane's Survival Overhaul No Food in Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && noFurnaceFoodAndSmokerRecipe);
-		InsaneSO.addServerPack("food_changes", "Insane's Survival Overhaul Food Changes", () -> this.isEnabled() && !Packs.disableAllDataPacks && foodChanges);
 		ItemComponentsReloadListener.PROGRAMMATIC_PROVIDERS.add((registryAccess, patches) -> {
 			if (!this.isEnabled()) return;
 			processFoodMultipliers(patches);

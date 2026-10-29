@@ -2,11 +2,9 @@ package insane96mcp.insanesurvivaloverhaul.module.movement.minecarts;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -38,9 +36,6 @@ public class Minecarts extends Feature {
 	@Config(description = "If true, minecarts with entities in them and chest minecarts will force load chunks, allowing them to travel in unloaded chunks. It's advised to not leave too many minecarts with entities and with chests lying around, as they will keep chunks loaded.")
 	public static Boolean entityAndChestMinecartsForceLoadChunks = true;
 
-	@Config(description = "If true, enables a data pack that makes rails cheaper and adds recipes for new rail. Also adds a global loot modifier that replaces vanilla rails with golden powered rails")
-	public static Boolean dataPack = true;
-
 	/**
 	 * Tickets are owned by the minecart's UUID, so they never interfere with vanilla's forced chunks (e.g. /forceload).
 	 * NeoForge saves them, but the tracking map below is in memory only, so all of them are removed when the level loads.
@@ -52,12 +47,6 @@ public class Minecarts extends Feature {
 	 * Tracks minecarts that are currently keeping a chunk force-loaded, and the chunk they're forcing.
 	 */
 	private static final Map<ResourceKey<Level>, Map<UUID, Long>> forcingMinecarts = new HashMap<>();
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("better_rails", "Insane's Survival Overhaul Better Rails", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-	}
 
 	public static void registerTicketControllers(RegisterTicketControllersEvent event) {
 		event.register(TICKET_CONTROLLER);

@@ -1,18 +1,26 @@
 package insane96mcp.insanesurvivaloverhaul.module.misc.glowblock;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
+import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-public class GlowBlockClient {
-    public static void onRenderLevelStage(RenderLevelStageEvent event) {
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.MISC, canBeDisabled = false)
+public class GlowBlockFeatureClient extends Feature {
+    @SubscribeEvent
+    public void onRenderLevelStage(RenderLevelStageEvent event) {
         // Fires once per frame, right before block entities (and thus GlowBlockEntityRenderer) render:
         // clear last frame's set so it only ever holds positions rendered (i.e. visible/loaded) this frame.
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES)

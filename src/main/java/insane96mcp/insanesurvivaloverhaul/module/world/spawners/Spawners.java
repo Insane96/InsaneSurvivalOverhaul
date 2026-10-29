@@ -12,7 +12,6 @@ import insane96mcp.insanesurvivaloverhaul.data.criterion.EmpoweredSpawnerDeactiv
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.BaseSpawnerAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.module.world.spawners.capability.SpawnerDataImpl;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
@@ -47,13 +46,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -97,8 +93,6 @@ public class Spawners extends JsonFeature {
 	@Config(min = 0d, description = "This multiplier increases the max mobs spawned.")
 	public static Double disableSpawners$spawnableMobsMultiplier = 1.0d;
 
-	@Config(description = "If true, spawners will generate in an empowered state. When empowered, will generate mobs really fast for a while and then will disable. This is not compatible with disable spawners.")
-	public static Boolean empowered$enabled = true;
 	@Config(min = 0, description = "When the spawner stops being empowered, it is disabled and will stop spawning mobs.")
 	public static Boolean empowered$disableOnEnd = true;
 	@Config(min = 0, name = "Empowered.Mobs amount", description = "How many mobs are spawned before empowered ends.")
@@ -125,9 +119,7 @@ public class Spawners extends JsonFeature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		getJsonConfigs().add(new JsonConfig<>("fixed_spawners_spawnable.json", fixedSpawnerSpawnable, FIXED_SPAWNER_SPAWNABLE_DEFAULT, ObjTagValue.LIST_TYPE).withRegistryFor(Registries.ENTITY_TYPE));
-		InsaneSO.addServerPack("empowered_spawners", "Insane's Survival Overhaul Empowered Spawners", () -> this.isEnabled() && !Packs.disableAllDataPacks && empowered$enabled);
-	}
+		getJsonConfigs().add(new JsonConfig<>("fixed_spawners_spawnable.json", fixedSpawnerSpawnable, FIXED_SPAWNER_SPAWNABLE_DEFAULT, ObjTagValue.LIST_TYPE).withRegistryFor(Registries.ENTITY_TYPE));	}
 
 	@Override
 	public String getModConfigFolder() {
@@ -175,7 +167,7 @@ public class Spawners extends JsonFeature {
 	}
 
 	private static void empoweredSpawner(SpawnerBlockEntity spawnerBlockEntity, Mob mob, ServerLevel level, BlockPos spawnerPos, SpawnerDataImpl spawnerCap) {
-		if (!empowered$enabled
+		if (!SpawnersCommon.empowered()
 				|| mob.getType().is(BLACKLISTED_SPAWNERS)
 				|| !spawnerCap.isEmpowered())
 			return;
@@ -367,21 +359,10 @@ public class Spawners extends JsonFeature {
 	}
 
 	private static boolean isEmpowered(SpawnerBlockEntity spawner) {
-		return empowered$enabled && spawner.getData(Spawners.SPAWNER_DATA.get()).isEmpowered();
+		return SpawnersCommon.empowered() && spawner.getData(Spawners.SPAWNER_DATA.get()).isEmpowered();
 	}
 
 	private static boolean hasBeenReactivated(SpawnerBlockEntity spawner) {
 		return spawner.getData(Spawners.SPAWNER_DATA.get()).hasBeenReactivated();
-	}
-
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public void onTooltip(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| !reEnableWithSpawnerReactivator
-				|| !event.getItemStack().is(SPAWNER_REACTIVATOR_TAG))
-			return;
-
-		event.getToolTip().add(SPAWNER_REACTIVATOR_MESSAGE);
 	}
 }

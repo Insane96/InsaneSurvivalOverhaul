@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.module.items;
 
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
@@ -13,12 +14,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.EnumMap;
 import java.util.List;
 
+@ConfigType(ModConfig.Type.COMMON)
 @LoadFeature(module = ISOModules.ITEMS, description = "Basically backports copper equipment from latest MC versions.")
 public class CopperEquipment extends Feature {
 	public static final SimpleTier ITEM_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 190, 5f, 1f, 13, () -> Ingredient.of(Items.COPPER_INGOT));

@@ -23,22 +23,22 @@ public class ISOModules {
 	public static final String WORLD = InsaneSO.MOD_ID + ":world";
 
 	public static void init(IEventBus eventBus, ModConfigSpec.Builder builder) {
-		create(ANIMALS, "Animals", eventBus, builder);
-		create(COMBAT, "Combat", eventBus, builder);
-		create(DEATH, "Death", eventBus, builder);
-		create(FARMING, "Farming", eventBus, builder);
-		create(HUNGER_HEALTH, "Hunger & Health", eventBus, builder);
-		create(ITEMS, "Items", eventBus, builder);
-		create(MINING, "Mining", eventBus, builder);
-		create(MISC, "Misc", eventBus, builder);
-		create(MOBS, "Mobs", eventBus, builder);
-		create(MOVEMENT, "Movement", eventBus, builder);
-		create(RESPAWN, "Respawn", eventBus, builder);
-		create(SLEEP, "Sleep", eventBus, builder);
-		create(WORLD, "World", eventBus, builder);
+		create(ANIMALS, "Animals", eventBus);
+		create(COMBAT, "Combat", eventBus);
+		create(DEATH, "Death", eventBus);
+		create(FARMING, "Farming", eventBus);
+		create(HUNGER_HEALTH, "Hunger & Health", eventBus);
+		create(ITEMS, "Items", eventBus);
+		create(MINING, "Mining", eventBus);
+		create(MISC, "Misc", eventBus);
+		create(MOBS, "Mobs", eventBus);
+		create(MOVEMENT, "Movement", eventBus);
+		create(RESPAWN, "Respawn", eventBus);
+		create(SLEEP, "Sleep", eventBus);
+		create(WORLD, "World", eventBus);
 	}
 
-	public static void create(String id, String name, IEventBus eventBus, ModConfigSpec.Builder builder) {
-		Module.Builder.create(ResourceLocation.parse(id), name, ModConfig.Type.COMMON, builder, eventBus).build();
+	public static void create(String id, String name, IEventBus eventBus) {
+		Module.Builder.create(ResourceLocation.parse(id), name, ModConfig.Type.SERVER, eventBus).build();
 	}
 }

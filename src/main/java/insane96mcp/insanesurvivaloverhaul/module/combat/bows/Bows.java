@@ -3,15 +3,12 @@ package insane96mcp.insanesurvivaloverhaul.module.combat.bows;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanelib.event.PlayerUseItemMovSpeedEvent;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -66,15 +63,4 @@ public class Bows extends Feature {
 			return;
 		event.setInvulnerabilityTicks(0);
 	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public void onPlayerUseItemSpeedModifier(PlayerUseItemMovSpeedEvent event) {
-		if (!this.isEnabled()
-				|| !event.getUseItem().is(SHORTBOW.get()))
-			return;
-
-		event.setSpeedModifier(0.75f);
-	}
-
 }

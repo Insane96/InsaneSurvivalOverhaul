@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.movement.BetterClimbable;
+import insane96mcp.insanesurvivaloverhaul.module.movement.BetterClimbableCommon;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +25,7 @@ public abstract class LivingEntityMixin_BetterClimbable extends Entity {
 
     @WrapOperation(method = "handleOnClimbable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;resetFallDistance()V"))
     public void insanesurvivaloverhaulonResetFallDamageOnClimbable(LivingEntity instance, Operation<Void> original) {
-        if (Feature.isEnabled(BetterClimbable.class) && BetterClimbable.fallDamageOnClimbable && instance.fallDistance > 0f)
+        if (Feature.isEnabled(BetterClimbable.class) && BetterClimbableCommon.fallDamageOnClimbable() && instance.fallDistance > 0f)
             instance.causeFallDamage(instance.fallDistance, 0.75f, instance.damageSources().fall());
         original.call(instance);
     }

@@ -25,8 +25,8 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaust
 import insane96mcp.insanesurvivaloverhaul.module.items.ShulkerBoxesClient;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
-import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockClient;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockEntityRenderer;
+import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeatureClient;
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
@@ -102,18 +102,15 @@ public class InsaneSO {
         if (FMLLoader.getDist().isClient()) {
             eventBus.addListener(RegeneratingAbsorptionClient::registerGuiOverlays);
             eventBus.addListener(UnfairOneShotClient::registerGuiLayers);
-            NeoForge.EVENT_BUS.addListener(UnfairOneShotClient::onRenderTick);
             eventBus.addListener(Client::onBuildCreativeModeTabContents);
             eventBus.addListener(Client::registerTooltips);
             eventBus.addListener(Client::registerMenuScreens);
             eventBus.addListener(Client::registerItemColors);
             eventBus.addListener(GlowBlockEntityRenderer::register);
             eventBus.addListener(ISOArrowRenderer::register);
-            eventBus.addListener(GlowBlockClient::registerGuiLayers);
-            NeoForge.EVENT_BUS.addListener(GlowBlockClient::onRenderLevelStage);
+            eventBus.addListener(GlowBlockFeatureClient::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
             eventBus.addListener(ShulkerBoxesClient::registerKeyMappings);
-            NeoForge.EVENT_BUS.addListener(ShulkerBoxesClient::onKeyPressed);
         }
 
         NeoForgeMod.enableMergedAttributeTooltips();

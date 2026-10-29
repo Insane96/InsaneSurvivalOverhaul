@@ -3,19 +3,10 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Items;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "This feature disables itself if Shields+ is installed")
 public class Shields extends Feature {
@@ -47,16 +38,4 @@ public class Shields extends Feature {
 
 		event.setBlockedDamage(shieldBlockDamage);
 	}
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void onItemTooltips(ItemTooltipEvent event) {
-		if (!this.isEnabled()
-				|| shieldBlockDamage == 0
-				|| !event.getItemStack().is(Items.SHIELD))
-			return;
-
-		event.getToolTip().add(CommonComponents.space().append(Component.translatable(InsaneSO.lang("shield_blocked_damage"), shieldBlockDamage).withStyle(ChatFormatting.DARK_GREEN)));
-	}
-
 }

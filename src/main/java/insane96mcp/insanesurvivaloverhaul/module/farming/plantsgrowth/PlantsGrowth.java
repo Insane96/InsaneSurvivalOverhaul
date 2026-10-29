@@ -2,11 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
@@ -23,16 +20,6 @@ public class PlantsGrowth extends Feature {
 	public static Boolean hugeMushroomsOnMyceliumOnly = true;
 	@Config(min = 0, description = "If != 1, cave vines will grow this slower above sea level or if they can see the sky light. This is multiplied to the plant_growth_modifiers multipliers")
 	public static Double caveVinesUnderground = 3d;
-
-	@Config(description = "If true, a data pack is enabled that changes the growth of plants based off various factors, such as sunlight and biome")
-	public static Boolean dataPack = true;
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		InsaneSO.addServerPack("plant_growth_modifiers", "Insane's Survival Overhaul Plant Growth modifiers", () -> super.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-	}
-
 	@SubscribeEvent
 	public void onCropGrowEvent(CropGrowEvent.Pre event) {
 		if (!this.isEnabled()

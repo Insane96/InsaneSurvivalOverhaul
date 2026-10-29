@@ -1,9 +1,12 @@
 package insane96mcp.insanesurvivaloverhaul.module.combat.regeneratingabsorption;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
+import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.util.ClientUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -11,10 +14,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-public class RegeneratingAbsorptionClient {
+@ConfigType(ModConfig.Type.CLIENT)
+@LoadFeature(module = ISOModules.COMBAT, canBeDisabled = false)
+public class RegeneratingAbsorptionClient extends Feature {
     public static final ResourceLocation GUI_ICONS = InsaneSO.id("textures/gui/sprites/hud/regenerating_absorption.png");
 
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {

@@ -2,10 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanelib.util.IntegratedPack;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.Snowball;
@@ -25,14 +22,6 @@ public class Snowballs extends Feature {
 	public static Boolean freezingStacks = true;
 	@Config(description = "Ticks between throwing snowball.")
 	public static Integer cooldown = 4;
-	@Config(description = "Enables a data pack that increases snowballs stack size to 64")
-	public static Boolean snowballStackSize = true;
-
-	@Override
-	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-		super.init(module, enabledByDefault, canBeDisabled);
-		IntegratedPack.addServerPack(InsaneSO.MOD_ID, "snowball_stack_size", "InsaneLib's Snowball Stack Size", () -> this.isEnabled() && snowballStackSize);
-	}
 
 	@SubscribeEvent
 	public void onSnowballThrow(PlayerInteractEvent.RightClickItem event) {

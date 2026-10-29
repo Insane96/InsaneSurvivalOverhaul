@@ -2,13 +2,11 @@ package insane96mcp.insanesurvivaloverhaul.module.world;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.PortalShapeAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -30,20 +28,12 @@ public class Nether extends Feature {
     public static final MutableComponent NO_NETHER_MESSAGE = Component.translatable(InsaneSO.lang("no_nether"));
     public static final TagKey<Block> PORTAL_CORNERS = ISOBlockTagsProvider.create("portal_corners");
 
-    @Config(name = "Disable Nether Roof and reduce block ratio", description = "Enables a data pack that makes the nether 128 blocks high instead of 256, effectively disabling the \"Nether Roof\" and reduces the 8 block ratio between nether and other dimensions to 2. This will break if another mod changes the nether dimension")
-    public static Boolean netherTweaks = true;
     @Config(description = "If true, lava pockets in the nether are removed. If quark is installed, this is disabled")
     public static Boolean removeLavaPockets = true;
     @Config(description = "If true you cannot lit nether portals")
     public static Boolean disableNether = false;
     @Config(description = "The portal requires Crying Obsidian in the corners to turn it on (in the overworld). The block tag 'insanesurvivaloverhaul:portal_corners' can be used to change the required blocks for the corners")
     public static Boolean portalRequiresCryingObsidian = true;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("nether_tweaks", "Insane's Survival Overhaul Nether Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && netherTweaks);
-    }
 
     public static boolean shouldDisableLavaPockets(SpringConfiguration configuration) {
         return isEnabled(Nether.class) && removeLavaPockets && !configuration.requiresBlockBelow && configuration.state.is(FluidTags.LAVA);

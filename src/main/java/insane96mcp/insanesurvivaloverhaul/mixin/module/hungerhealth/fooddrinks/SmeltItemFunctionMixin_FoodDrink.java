@@ -1,7 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.hungerhealth.fooddrinks;
 
 import com.mojang.logging.LogUtils;
-import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinksCommon;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -28,7 +28,7 @@ public class SmeltItemFunctionMixin_FoodDrink {
 
     @Inject(method = "run", at = @At("HEAD"), cancellable = true)
     private void onRecipeRun(ItemStack stack, LootContext lootContext, CallbackInfoReturnable<ItemStack> cir) {
-        if (!FoodDrinks.noFurnaceFoodAndSmokerRecipe)
+        if (!FoodDrinksCommon.noFurnaceFoodAndSmokerRecipe())
             return;
 
         if (stack.isEmpty()) {

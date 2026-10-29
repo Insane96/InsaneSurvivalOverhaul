@@ -7,10 +7,8 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.module.base.items.ItemComponentsFeature;
 import insane96mcp.insanelib.module.base.items.ItemComponentsReloadListener;
 import insane96mcp.insanelib.util.MCUtils;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
@@ -36,12 +34,8 @@ public class StackSizes extends Feature {
     @Config(min = 0.01d, description = "All the blocks max stack sizes will be multiplied by this value. Setting to 1 will disable this.")
     public static Double blockStackMultiplier = 2d;
 
-    @Config(description = "Enables a data pack that increases item stacks of Horse Armors, Minecarts and Saddles")
-    public static Boolean dataPack = true;
-
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("item_stacks", "Insane's Survival Overhaul Item Stacks", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
         ItemComponentsReloadListener.PROGRAMMATIC_PROVIDERS.add((registryAccess, patches) -> {
             if (!this.isEnabled()) return;
             processItemStackSizes(patches);

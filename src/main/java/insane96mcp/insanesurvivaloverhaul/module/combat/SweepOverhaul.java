@@ -2,11 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.combat;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -37,15 +34,6 @@ public class SweepOverhaul extends Feature {
     public static Boolean allowSweepWhenMovingFast = true;
     @Config(description = "If true, scales the sweep knockback strength proportionally to the attack's knockback level instead of using the hardcoded 0.4 constant (so knockback enchantment actually works). Vanilla = false")
     public static Boolean scaleKnockback = true;
-
-    @Config(description = "Enables a data pack that removes the Sweeping Edge enchantment and (if Rune Enchanting is installed) the Sweeping Edge rune")
-    public static Boolean dataPack = true;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("sweep_overhaul", "Insane's Survival Overhaul Sweep Overhaul", () -> this.isEnabled() && dataPack && !Packs.disableAllDataPacks);
-    }
 
     @Override
     public void readConfig(ModConfigEvent event) {

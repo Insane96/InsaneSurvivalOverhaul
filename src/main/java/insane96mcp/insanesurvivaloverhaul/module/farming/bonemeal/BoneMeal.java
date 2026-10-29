@@ -2,7 +2,6 @@ package insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.core.feature.config.MinMaxConfig;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
@@ -13,7 +12,6 @@ import insane96mcp.insanesurvivaloverhaul.mixin.accessor.SpreadingSnowyDirtBlock
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinition;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.BlockPos;
@@ -69,15 +67,6 @@ public class BoneMeal extends Feature {
 
     @Config(min = 0, description = "How many stages will cactus and sugar canes grow with one bone meal. Set to 0 to disable.")
     public static MinMaxConfig boneMealCanesAndCactus = new MinMaxConfig(1, 4);
-
-    @Config(description = "Makes Cave Vines, Saplings, Sweet Berry Bushes and Crops requiring more bone meal. Makes rotten flesh compostable. Makes crafting Bones yield less Bone Meal and Bone Blocks cheaper.")
-    public static Boolean dataPack = true;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("bone_meal", "Insane's Survival Overhaul Bone Meal", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-    }
 
     @SubscribeEvent
     public void onBoneMeal(BonemealEvent event) {

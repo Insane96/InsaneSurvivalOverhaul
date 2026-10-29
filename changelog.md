@@ -6,6 +6,9 @@ Requires InsaneLib 2.5.0.2-alpha or newer
   * `depth_multipliers.json` to make blocks harder the deeper they are (empty by default)
   * Blocks in `insanesurvivaloverhaul:hardness_blacklist` and `insanesurvivaloverhaul:depth_multiplier_blacklist` block tags are not affected (Ender Chests and Obsidians by default)
 * Added a server config (`config/insanesurvivaloverhaul/server.toml`), synced to clients and overridable per world in `<world>/serverconfig/insanesurvivaloverhaul/server.toml`
+  * Most features have been moved to the server config (old values must be set again)
+  * Data and resource pack toggles stay in `common.toml`, as packs are loaded before the server config. Features with both have been split in two, e.g. Crops (server) and Crops Common (common), and disabling one no longer disables the other
+  * Client side options (Disabled Items and Unvanishable Items tooltips, Mining Misc mining speed tooltip) have been moved to `client.toml`
 * The Client module has been removed, client features have been moved to their thematic modules (still in `client.toml`, old values must be set again)
   * Fog, Light and World Border are now in the World module
   * Sounds & Music and Misc are now in the Misc module

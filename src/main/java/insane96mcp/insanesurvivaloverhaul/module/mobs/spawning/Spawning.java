@@ -31,8 +31,6 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 
@@ -51,8 +49,6 @@ public class Spawning extends Feature {
     public static Boolean allowWorldSpawnSpawn = true;
     @Config(description = "Disables normal skeletons from spawning in Fortresses.")
     public static Boolean removeSkeletonsFromFortresses = true;
-    @Config(description = "Enables a data pack that makes Guardians spawn in deep oceans. These guardians have much less health compared to monument guardians and are smaller.")
-    public static Boolean guardiansInDeepOceans = true;
     @Config(description = "Guardians naturally spawned in deep oceans (from \"Guardians in deep oceans\") won't spawn above this Y level.")
     public static Integer maxGuardiansInDeepOceansSpawnY = 32;
     @Config(description = "Radius (in blocks) around an Echo Lantern in which monsters cannot spawn.", min = 1, max = 128)
@@ -60,9 +56,7 @@ public class Spawning extends Feature {
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
-        //InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() /*&& !Packs.disableAllDataPacks*/ && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
-        InsaneSO.addServerPack("ocean_guardians", "Insane's Survival Overhaul Ocean Guardians", () -> this.isEnabled() && /*!Packs.disableAllDataPacks &&*/ guardiansInDeepOceans);
-    }
+        //InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() /*&& !Packs.disableAllDataPacks*/ && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);    }
 
     @SubscribeEvent
     public void onPotentialSpawns(LevelEvent.PotentialSpawns event) {
@@ -122,7 +116,7 @@ public class Spawning extends Feature {
     @SubscribeEvent
     public void onGuardianSpawnPlacement(MobSpawnEvent.SpawnPlacementCheck event) {
         if (!this.isEnabled()
-                || !guardiansInDeepOceans
+                || !SpawningCommon.guardiansInDeepOceans()
                 || event.getEntityType() != EntityType.GUARDIAN
                 || event.getSpawnType() != MobSpawnType.NATURAL)
             return;
@@ -134,7 +128,7 @@ public class Spawning extends Feature {
     @SubscribeEvent
     public void onGuardianNaturalSpawn(FinalizeSpawnEvent event) {
         if (!this.isEnabled()
-                || !guardiansInDeepOceans
+                || !SpawningCommon.guardiansInDeepOceans()
                 || event.getEntity().getType() != EntityType.GUARDIAN
                 || event.getSpawnType() != MobSpawnType.NATURAL
                 || event.getEntity().isAddedToLevel())

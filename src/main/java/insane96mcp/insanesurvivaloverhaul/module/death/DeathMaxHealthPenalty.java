@@ -4,9 +4,7 @@ import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -43,9 +41,7 @@ public class DeathMaxHealthPenalty extends Feature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		DEATH_PENALTY_ID = this.createDataKey("death_penalty");
-		InsaneSO.addServerPack("max_health_death_penalty", "Insane's Survival Overhaul Max Health Death Penalty", () -> this.isEnabled() && !Packs.disableAllDataPacks);
-	}
+		DEATH_PENALTY_ID = this.createDataKey("death_penalty");	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onPlayerDeath(LivingDeathEvent event) {

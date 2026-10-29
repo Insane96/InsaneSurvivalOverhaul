@@ -2,13 +2,10 @@ package insane96mcp.insanesurvivaloverhaul.module.world.coalfire;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.event.BlockBurntEvent;
-import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GameRulesIntegerValueAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.BlockPos;
@@ -59,14 +56,6 @@ public class CoalFire extends Feature {
     @Config(min = 0d, max = 1d, description = "Chance for logs to yield burnt logs when burnt")
     public static Double burntLogsChance = 0.8d;
 
-    @Config(description = """
-			If enabled, a data pack will be enabled that:
-			* Removes the Charcoal recipe from smelting
-			* Makes Coal Ore require an Iron Pickaxe or better to mine
-			* Replaces Flint and Steel in the overworld with firestarter
-			* Changes flint and steel recipe to require blaze powder""")
-    public static Boolean noCharcoalSmeltingAndIronCoal = true;
-
     @Config(description = "If true, two flints (on per hand) can start a fire")
     public static Boolean twoFlintFireStarter$enabled = true;
     @Config(min = 0d, max = 1d, description = "Chance to ignite a block when using two flints")
@@ -79,12 +68,6 @@ public class CoalFire extends Feature {
 
     @Config(description = "If true, campfires will be extinguished when it starts to rain")
     public static Boolean campfireTurnOffUnderRain = true;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        InsaneSO.addServerPack("coal_fire", "Insane's Survival Overhaul No Charcoal Smelting and Iron Coal", () -> this.isEnabled() && !Packs.disableAllDataPacks && noCharcoalSmeltingAndIronCoal);
-    }
 
     public static boolean areCampfiresUnlit() {
         return Feature.isEnabled(CoalFire.class) && unlitCampfires;

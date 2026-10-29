@@ -2,10 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.items;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
-import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -20,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static insane96mcp.insanesurvivaloverhaul.InsaneSO.*;
+import static insane96mcp.insanesurvivaloverhaul.InsaneSO.LOGGER;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "If enabled, a data pack will be enabled that disables stone tools crafting and generation in chests will be replaced with copper ones. Also makes copper ore minable with wooden pickaxe")
 public class StoneToolsGone extends Feature {
@@ -28,16 +26,6 @@ public class StoneToolsGone extends Feature {
     @Config
     public static List<String> itemsToReplace = List.of("minecraft:stone_axe, insanesurvivaloverhaul:copper_axe", "minecraft:stone_pickaxe, insanesurvivaloverhaul:copper_pickaxe", "minecraft:stone_shovel, insanesurvivaloverhaul:copper_shovel", "minecraft:stone_hoe, insanesurvivaloverhaul:copper_hoe", "minecraft:stone_sword, insanesurvivaloverhaul:copper_sword", "insanesurvivaloverhaul:stone_dagger, insanesurvivaloverhaul:copper_dagger");
     private static final ArrayList<ToReplace> itemsToReplaceList = new ArrayList<>();
-
-    @Config
-    public static Boolean dataPack = true;
-
-    @Override
-    public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
-        super.init(module, enabledByDefault, canBeDisabled);
-        addServerPack("disable_stone_tools", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-        addClientPack("disable_stone_tools_rp", "Insane's Survival Overhaul Disable Stone Tools", () -> this.isEnabled() && !Packs.disableAllDataPacks && dataPack);
-    }
 
     @Override
     public void readConfig(ModConfigEvent event) {
