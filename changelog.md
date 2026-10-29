@@ -1,4 +1,4 @@
-# Upcoming
+# 5.14.0.0-beta
 Requires InsaneLib 2.5.0.2-alpha or newer
 * Ported Block Hardness (Mining module) from older versions
   * `hardnessMultiplier` config option to make all blocks harder (or easier) to break, e.g. 2.0 makes blocks take twice as long to break

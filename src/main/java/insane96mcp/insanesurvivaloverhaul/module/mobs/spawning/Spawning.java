@@ -31,6 +31,8 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 
@@ -56,7 +58,8 @@ public class Spawning extends Feature {
 
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
         super.init(module, enabledByDefault, canBeDisabled);
-        //InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() /*&& !Packs.disableAllDataPacks*/ && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);    }
+        //InsaneSO.addServerPack("yung_better_fortresses", "Insane's Survival Overhaul Yung Better Fortresses", () -> this.isEnabled() /*&& !Packs.disableAllDataPacks*/ && ModList.get().isLoaded("betterfortresses") && removeSkeletonsFromFortresses);
+    }
 
     @SubscribeEvent
     public void onPotentialSpawns(LevelEvent.PotentialSpawns event) {
