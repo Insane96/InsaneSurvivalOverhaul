@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blast_furnace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:blast_furnace"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/iron_blast_furnace"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blast_furnace",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/iron_blast_furnace"
+    ]
+  }
+}

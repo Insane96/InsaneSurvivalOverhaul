@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stonecutter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stonecutter"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/iron_stonecutter"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stonecutter",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/iron_stonecutter"
+    ]
+  }
+}

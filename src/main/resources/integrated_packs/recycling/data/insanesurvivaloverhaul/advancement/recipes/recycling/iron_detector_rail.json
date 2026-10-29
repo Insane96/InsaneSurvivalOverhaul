@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_detector_rail": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:detector_rail"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/iron_detector_rail"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_detector_rail",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/iron_detector_rail"
+    ]
+  }
+}

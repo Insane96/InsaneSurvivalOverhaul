@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chest_minecart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:chest_minecart"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "insanesurvivaloverhaul:recycling/iron_chest_minecart"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chest_minecart",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "insanesurvivaloverhaul:recycling/iron_chest_minecart"
+    ]
+  }
+}
