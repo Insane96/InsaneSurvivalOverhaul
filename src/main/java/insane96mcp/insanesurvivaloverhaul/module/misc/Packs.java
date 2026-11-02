@@ -7,11 +7,17 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @ConfigType(ModConfig.Type.COMMON)
 @LoadFeature(module = ISOModules.MISC, description = "Resource and data packs")
 public class Packs extends Feature {
+
+    public static final DeferredHolder<RecipeSerializer<?>, DamageToolShapelessRecipe.Serializer> DAMAGE_TOOL_SHAPELESS_SERIALIZER =
+            ISORegistries.RECIPE_SERIALIZERS.register("crafting_shapeless_damage_tool", DamageToolShapelessRecipe.Serializer::new);
 
     @Config(description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
@@ -57,7 +63,7 @@ public class Packs extends Feature {
 
     @Config(description = "Makes redstone components require redstone in their recipe (e.g. Levers, pressure plates, etc).")
     public static Boolean actualRedstoneComponents = true;
-    @Config(description = "Makes saplings no longer drop from trees. Instead, you can craft them from leaves")
+    @Config(description = "Makes saplings no longer drop from trees. Instead, you can craft them from leaves and shears")
     public static Boolean craftableSaplings = true;
     @Config(description = "Lowers the giant mushrooms generated in a Roofed forests forests as well as removes the non-dark oak trees")
     public static Boolean darkForestVegetation = true;

@@ -1,9 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "insanesurvivaloverhaul:crafting_shapeless_damage_tool",
     "category": "misc",
     "ingredients": [
         {
             "item": "minecraft:jungle_leaves"
+        },
+        {
+            "tag": "c:tools/shear"
         }
     ],
     "result": {
