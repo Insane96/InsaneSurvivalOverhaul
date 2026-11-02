@@ -1,3 +1,6 @@
+# Upcoming
+* Leaves from "Craftable saplings" data pack now check for the `c:tools/shear` item tag instead of just Shears, so modded shears work too
+
 # 5.14.0.0-beta
 Requires InsaneLib 2.5.0.2-alpha or newer
 * Ported Block Hardness (Mining module) from older versions
