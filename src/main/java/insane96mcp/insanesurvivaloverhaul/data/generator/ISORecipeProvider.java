@@ -29,6 +29,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import javax.annotation.Nullable;
@@ -165,12 +166,21 @@ public class ISORecipeProvider extends RecipeProvider {
         fletchingRecipe(fletchingOutput, "ice_arrow", Items.ARROW, 4, Items.BLUE_ICE,
                 new ItemStack(FletchingFeature.ICE_ARROW_ITEM.get(), 4));
 
-        // Additional (non-overriding) ways to make vanilla arrows and spectral arrows via the fletching table,
-        // on top of their normal crafting table recipes.
+        // Additional (non-overriding) way to make vanilla arrows via the fletching table, on top of their normal crafting table recipe.
         fletchingRecipe(fletchingOutput, "arrow_from_feather", Items.STICK, 1, Items.FEATHER, Items.FLINT,
                 new ItemStack(Items.ARROW, 6));
-        fletchingRecipe(fletchingOutput, "spectral_arrow", Items.ARROW, 1, Items.GLOWSTONE_DUST,
-                new ItemStack(Items.SPECTRAL_ARROW, 1));
+        // Spectral arrows are only made in the fletching table while the feature is enabled.
+        fletchingRecipe(fletchingOutput, "spectral_arrow", Items.ARROW, 2, Items.GLOWSTONE_DUST,
+                new ItemStack(Items.SPECTRAL_ARROW, 2));
+        // Overrides the vanilla recipe with an identical one that only loads when the feature is disabled.
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, Items.SPECTRAL_ARROW, 2)
+                .define('#', Items.GLOWSTONE_DUST)
+                .define('X', Items.ARROW)
+                .pattern(" # ")
+                .pattern("#X#")
+                .pattern(" # ")
+                .unlockedBy("has_glowstone_dust", has(Items.GLOWSTONE_DUST))
+                .save(recipeOutput.withConditions(new NotCondition(new FeatureEnabledCondition("Fletching"))));
 
         fletchingRecipe(fletchingOutput.withConditions(new FeatureEnabledCondition("Cloth")), "arrow_from_cloth", Items.STICK, 1, Cloth.ITEM.get(), Items.FLINT,
                 new ItemStack(Items.ARROW, 3));

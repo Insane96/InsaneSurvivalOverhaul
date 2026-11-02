@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-22T09:36:33.3874581	Recipes
+// 1.21.1	2026-11-02T15:02:31.9479544	Recipes
 a4aa37b336a115ebf9e918651c2f84361f73daac data/insanesurvivaloverhaul/advancement/recipes/building_blocks/echo_lantern.json
 7c770aa050181f5afd0dee567669ac1cc99785af data/insanesurvivaloverhaul/advancement/recipes/building_blocks/glow_block.json
 24a00a08edc05b27a28bc77a775e82c365bd8085 data/insanesurvivaloverhaul/advancement/recipes/combat/copper_dagger.json
@@ -51,6 +51,7 @@ ca3a79944ff012458b994fe896cc2339e6d2c93e data/insanesurvivaloverhaul/recipe/repa
 83cf227c59597f5f73d1179c8aa8f06a56c6220c data/insanesurvivaloverhaul/recipe/stone_dagger.json
 8025c1e5cba76f8f95dba8a0b123c200bf816d8f data/insanesurvivaloverhaul/recipe/wooden_dagger.json
 934129f1f28dbf5264fc8718259e2b71bf115e62 data/minecraft/advancement/recipes/combat/netherite_dagger_smithing.json
+17fe6b14e42700dd3b6e878a2eec0f7e215f8dad data/minecraft/advancement/recipes/combat/spectral_arrow.json
 dcbcc9dc8590528d3bce1df2d859ad8f8f89a031 data/minecraft/advancement/recipes/misc/cyan_dye.json
 a5a4a0c3c3f0b9afe8b3119218227bdc600e109e data/minecraft/advancement/recipes/misc/flint.json
 4e2cc1d4dc41263acd99547a939e52d7b76cd3fa data/minecraft/advancement/recipes/misc/purple_dye.json
@@ -58,3 +59,4 @@ a5a4a0c3c3f0b9afe8b3119218227bdc600e109e data/minecraft/advancement/recipes/misc
 d1d0bd04750d778b80b4e539b6c132018d8b8ea4 data/minecraft/recipe/flint.json
 4a941b3a9ba71519c33370b4619155a8da41277c data/minecraft/recipe/netherite_dagger_smithing.json
 4e9c0caf568f9567b58f00e89e8262452d869368 data/minecraft/recipe/purple_dye.json
+13512a50453f96303a66f607cfce05c0976edf7a data/minecraft/recipe/spectral_arrow.json

@@ -4,6 +4,8 @@
   * Saplings now require shears in the recipe. Shears are not consumed, they lose 1 durability instead
 * No Food in Furnace Data Pack
   * Fixed Eggs still being smeltable into Over Easy Eggs in the Furnace
+* Fletching
+  * Disabled the vanilla Spectral Arrow crafting recipe, Spectral Arrows are now made only in the Fletching Table
 
 # 5.14.0.0-beta
 Requires InsaneLib 2.5.0.2-alpha or newer

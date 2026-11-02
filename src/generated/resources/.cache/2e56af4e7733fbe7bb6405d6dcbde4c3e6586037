@@ -1,7 +1,9 @@
-// 1.21.1	2026-08-28T13:07:37.4208087	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-02T15:02:31.9529551	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
 6dfa83db3fbbf26eed43a02c76785ea559daca31 data/insanesurvivaloverhaul/tags/block/can_scythe.json
+f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/depth_multiplier_blacklist.json
 8487d7b397b851933e60859c4adbe8d15830e94f data/insanesurvivaloverhaul/tags/block/harder_crops.json
+f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/hardness_blacklist.json
 980fb382e4e43127ab4f203ad91112e667aa2582 data/insanesurvivaloverhaul/tags/block/infested.json
 858b4736f63a64046a40e9dbd025c709c79d7cb2 data/insanesurvivaloverhaul/tags/block/obsidians.json
 548833ed56d6bcdbb5ec3020a94bfba7c8d47310 data/insanesurvivaloverhaul/tags/block/ore_rocks.json
