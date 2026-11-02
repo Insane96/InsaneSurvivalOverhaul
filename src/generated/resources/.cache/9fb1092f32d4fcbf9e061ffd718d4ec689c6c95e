@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-02T15:02:31.9479544	Recipes
+// 1.21.1	2026-11-02T15:05:24.9646797	Recipes
 a4aa37b336a115ebf9e918651c2f84361f73daac data/insanesurvivaloverhaul/advancement/recipes/building_blocks/echo_lantern.json
 7c770aa050181f5afd0dee567669ac1cc99785af data/insanesurvivaloverhaul/advancement/recipes/building_blocks/glow_block.json
 24a00a08edc05b27a28bc77a775e82c365bd8085 data/insanesurvivaloverhaul/advancement/recipes/combat/copper_dagger.json
@@ -33,7 +33,7 @@ a4d070505c951f92d79e3569c41cea98b0000888 data/insanesurvivaloverhaul/recipe/flet
 5d90b9cfafe35aec540fbcc95a18bcf70485c970 data/insanesurvivaloverhaul/recipe/fletching/explosive_arrow.json
 1aeb638df4e47b6a4ecd067c3b251789f9132abb data/insanesurvivaloverhaul/recipe/fletching/ice_arrow.json
 c71f871aae15efa118453ccb4638f48affc96e78 data/insanesurvivaloverhaul/recipe/fletching/quartz_arrow.json
-94c3cd8d528c34b0a50b8a06ce33738ec501aed6 data/insanesurvivaloverhaul/recipe/fletching/spectral_arrow.json
+5a736719408ed521d3a0e6ddf85d4ea26ac4b7ea data/insanesurvivaloverhaul/recipe/fletching/spectral_arrow.json
 39b3ba673cf769f49ce99f765be96d04af197d53 data/insanesurvivaloverhaul/recipe/fletching/torch_arrow.json
 cf183d31a645fe3eacda67bc2a9080aba194e321 data/insanesurvivaloverhaul/recipe/glow_block.json
 ca6286ce444f458dd2a666cf3781dda409cb0637 data/insanesurvivaloverhaul/recipe/golden_dagger.json

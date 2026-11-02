@@ -11,11 +11,11 @@
     "item": "minecraft:glowstone_dust"
   },
   "ingredient": {
-    "count": 1,
+    "count": 2,
     "item": "minecraft:arrow"
   },
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "minecraft:spectral_arrow"
   }
 }

@@ -6,6 +6,7 @@
   * Fixed Eggs still being smeltable into Over Easy Eggs in the Furnace
 * Fletching
   * Disabled the vanilla Spectral Arrow crafting recipe, Spectral Arrows are now made only in the Fletching Table
+  * Spectral Arrow Fletching Table recipe now takes 2 Arrows and 1 Glowstone Dust and makes 2 Spectral Arrows
 
 # 5.14.0.0-beta
 Requires InsaneLib 2.5.0.2-alpha or newer
