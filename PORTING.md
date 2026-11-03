@@ -6,7 +6,6 @@ Features left to port IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 * Altimeter
 * Blinker
 * ExplosiveBarrel (ITE)
-* Recall (ITE)
 
 ## Mining
 * MiningCharge (ITE)

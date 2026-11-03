@@ -1,0 +1,47 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Recall Potion"
+    }
+  ],
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "recall_potion": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:potion",
+            "predicates": {
+              "minecraft:potion_contents": "insanesurvivaloverhaul:recall"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.recall_potion.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "insanesurvivaloverhaul:recall"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.recall_potion.title"
+    }
+  },
+  "requirements": [
+    [
+      "recall_potion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

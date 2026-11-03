@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -46,6 +47,7 @@ public class ISORegistries {
     public static final DeferredRegister<Attribute> ATTRIBUTES = createRegistry(BuiltInRegistries.ATTRIBUTE);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = createRegistry(BuiltInRegistries.SOUND_EVENT);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = createRegistry(BuiltInRegistries.MOB_EFFECT);
+    public static final DeferredRegister<Potion> POTIONS = createRegistry(BuiltInRegistries.POTION);
     @SuppressWarnings("rawtypes")
     private static final DeferredRegister CRITERION_TRIGGERS = createRegistry(BuiltInRegistries.TRIGGER_TYPES);
     public static final DeferredRegister<LootItemConditionType> LOOT_CONDITIONS = createRegistry(BuiltInRegistries.LOOT_CONDITION_TYPE);

@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.data.criterion.OverweightPouchCarryTri
 import insane96mcp.insanesurvivaloverhaul.data.criterion.UnfairOneShotTrigger;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
+import insane96mcp.insanesurvivaloverhaul.module.items.Recall;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
@@ -14,11 +15,9 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.advancements.critereon.EffectsChangedTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.MobEffectsPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -28,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.util.ArrayList;
@@ -37,6 +37,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ISOAdvancementProvider implements DataProvider {
     private static final AdvancementHolder ADVENTURE_ROOT = new AdvancementHolder(ResourceLocation.withDefaultNamespace("adventure/root"), null);
+    private static final AdvancementHolder BREW_POTION = new AdvancementHolder(ResourceLocation.withDefaultNamespace("nether/brew_potion"), null);
 
     private final PackOutput.PathProvider pathProvider;
     private final CompletableFuture<HolderLookup.Provider> registries;
@@ -174,6 +175,21 @@ public class ISOAdvancementProvider implements DataProvider {
                                         MinMaxBounds.Ints.atLeast(9), MinMaxBounds.Ints.ANY, Optional.empty(), Optional.empty()))))
                 .build(InsaneSO.id("adventure/tired_x"));
         save(output, registries, futures, tiredX, tirednessEnabled);
+
+        AdvancementHolder recallPotion = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        PotionContents.createItemStack(Items.POTION, Recall.RECALL),
+                        Component.translatable("advancements.insanesurvivaloverhaul.recall_potion.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.recall_potion.description"),
+                        Optional.empty(),
+                        AdvancementType.TASK,
+                        true, true, false))
+                .parent(BREW_POTION)
+                .addCriterion("recall_potion", InventoryChangeTrigger.TriggerInstance.hasItems(
+                        ItemPredicate.Builder.item().of(Items.POTION)
+                                .withSubPredicate(ItemSubPredicates.POTIONS, new ItemPotionsPredicate(HolderSet.direct(Recall.RECALL)))))
+                .build(InsaneSO.id("nether/recall_potion"));
+        save(output, registries, futures, recallPotion, new FeatureEnabledCondition("Recall Potion"));
     }
 
     private void arrowAdvancement(CachedOutput output, HolderLookup.Provider registries, List<CompletableFuture<?>> futures,

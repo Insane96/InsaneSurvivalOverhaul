@@ -6,6 +6,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectInstanceAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.module.items.Recall;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -56,7 +57,8 @@ public class PotionsAndEffects extends Feature {
         }
         for (Potion potion : BuiltInRegistries.POTION) {
             potion.getEffects().forEach(mobEffectInstance -> {
-                if (mobEffectInstance.getEffect().value().isInstantenous())
+                //The Recall Potion effect is a delay, not a buff
+                if (mobEffectInstance.getEffect().value().isInstantenous() || mobEffectInstance.getEffect().value() == Recall.BACK_TO_SPAWN.get())
                     return;
                 int originalDuration = ORIGINAL_POTION_DURATIONS.computeIfAbsent(mobEffectInstance, MobEffectInstance::getDuration);
                 int duration = this.isEnabled() ? (int) (originalDuration * potionDurationMultiplier) : originalDuration;
