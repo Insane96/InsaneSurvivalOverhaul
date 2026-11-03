@@ -33,7 +33,7 @@ public class Minecarts extends Feature {
 	public static final SimpleBlockWithItem GOLDEN_POWERED_RAIL = SimpleBlockWithItem.register("golden_powered_rail", () -> new ISOPoweredRail(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL), 1f, 0.18f));
 	public static final SimpleBlockWithItem COPPER_POWERED_RAIL = SimpleBlockWithItem.register("copper_powered_rail", () -> new ISOPoweredRail(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL).sound(SoundType.COPPER), 0.4f, 0.05f));
 
-	@Config(description = "If true, minecarts with entities in them and chest minecarts will force load chunks, allowing them to travel in unloaded chunks. It's advised to not leave too many minecarts with entities and with chests lying around, as they will keep chunks loaded.")
+	@Config(description = "If true, moving minecarts with entities in them and moving chest minecarts will force load chunks, allowing them to travel in unloaded chunks. Chunks are released as soon as the minecart stops, so a minecart stopped in an unloaded chunk won't move until that chunk is loaded again.")
 	public static Boolean entityAndChestMinecartsForceLoadChunks = true;
 
 	/**
@@ -55,6 +55,7 @@ public class Minecarts extends Feature {
 	private boolean qualifies(AbstractMinecart minecart) {
 		return this.isEnabled()
 				&& entityAndChestMinecartsForceLoadChunks
+				&& minecart.getDeltaMovement().lengthSqr() > 1.0E-4
 				&& (minecart.getFirstPassenger() != null || minecart instanceof AbstractMinecartContainer);
 	}
 

@@ -1,3 +1,8 @@
+# 5.14.2.1
+* Minecarts
+  * Fixed RAM usage growing while exploring: chest minecarts (e.g. the ones generated in Mineshafts) kept their chunk and the ones around it loaded even when not moving
+  * Minecarts with entities and chest minecarts now force load chunks only while moving, a minecart stopped in an unloaded chunk won't move until that chunk is loaded again
+
 # 5.14.2.0
 * Brought back the Potion of Recall
   * Brewed by adding a Wither Rose to a Potion of Regeneration II (Potion of Withering Regeneration), then an Echo Shard
