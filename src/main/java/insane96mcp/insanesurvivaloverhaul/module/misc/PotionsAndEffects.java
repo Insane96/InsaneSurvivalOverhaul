@@ -6,7 +6,6 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectInstanceAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.items.Recall;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,6 +18,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.neoforged.fml.event.config.ModConfigEvent;
 
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various changes to potions and effects")
@@ -41,6 +41,8 @@ public class PotionsAndEffects extends Feature {
     public static Boolean streamlineSplashPotions = true;
     @Config(min = 0, description = "Multiplier for the duration of potions. Doesn't affect instantaneous effects.")
     public static Double potionDurationMultiplier = 2d;
+    @Config(description = "Effects whose duration in potions isn't changed by 'Potion Duration Multiplier'.")
+    public static List<String> potionDurationMultiplierBlacklist = List.of("insanesurvivaloverhaul:back_to_spawn");
 
     public static float STREAMLINE_SPLASH_POTION_MULTIPLIER = 0.667f;
 
@@ -57,11 +59,11 @@ public class PotionsAndEffects extends Feature {
         }
         for (Potion potion : BuiltInRegistries.POTION) {
             potion.getEffects().forEach(mobEffectInstance -> {
-                //The Recall Potion effect is a delay, not a buff
-                if (mobEffectInstance.getEffect().value().isInstantenous() || mobEffectInstance.getEffect().value() == Recall.BACK_TO_SPAWN.get())
+                if (mobEffectInstance.getEffect().value().isInstantenous())
                     return;
                 int originalDuration = ORIGINAL_POTION_DURATIONS.computeIfAbsent(mobEffectInstance, MobEffectInstance::getDuration);
-                int duration = this.isEnabled() ? (int) (originalDuration * potionDurationMultiplier) : originalDuration;
+                boolean blacklisted = potionDurationMultiplierBlacklist.contains(BuiltInRegistries.MOB_EFFECT.getKey(mobEffectInstance.getEffect().value()).toString());
+                int duration = this.isEnabled() && !blacklisted ? (int) (originalDuration * potionDurationMultiplier) : originalDuration;
                 ((MobEffectInstanceAccessor) mobEffectInstance).setDuration(duration);
             });
         }
