@@ -1,4 +1,4 @@
-# Upcoming
+# 5.14.2.3
 * Shortbows can now have the same Runes as Bows and can be enchanted like them
 * Fixed Ominous Trial Vaults never dropping the Divine Fragment (now 80% chance)
 
