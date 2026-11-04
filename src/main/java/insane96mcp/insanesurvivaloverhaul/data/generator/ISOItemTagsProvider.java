@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 import insane96mcp.insanelib.module.base.items.ItemTooltips;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.combat.AttackSounds;
+import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -148,6 +149,19 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .addTag(REItemTagProvider.WEAPONS);
         tag(create("rune_applicable_to/armor_piercer"))
                 .addTag(REItemTagProvider.WEAPONS);
+        //The Shortbow must accept the same runes as the Bow: most use #runeenchanting:ranged_weapons, others
+        //#minecraft:enchantable/durability, while Luck and Telekinesis list the Bow explicitly.
+        tag(REItemTagProvider.RANGED_WEAPONS)
+                .add(Bows.SHORTBOW.get());
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("runeenchanting", "rune_applicable_to/luck")))
+                .add(Bows.SHORTBOW.get());
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("runeenchanting", "rune_applicable_to/telekinesis")))
+                .add(Bows.SHORTBOW.get());
+        //Also lets loot tables enchant the Shortbow like a Bow, which Rune Enchanting then converts to runes
+        tag(ItemTags.BOW_ENCHANTABLE)
+                .add(Bows.SHORTBOW.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE)
+                .add(Bows.SHORTBOW.get());
 
         //Experience Tweaks integration (only relevant if the mod is installed, harmless otherwise)
         //The Amethyst Repair pack's tag is an explicit list of metal equipment, so the metal daggers must be added here.

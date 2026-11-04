@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-04T08:33:24.5230496	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-04T17:48:50.4759323	Tags for minecraft:item mod id insanesurvivaloverhaul
 eafef6758f2e2535828471f2be608627913b243e data/experiencetweaks/tags/item/repairable_with_amethyst.json
 6c819db7033f1b53aba70574bfc5dd88d4076475 data/insanelib/tags/item/has_tooltip.json
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
@@ -26,7 +26,8 @@ e3f0d94595b03d87cb5163177773cd90552e4cab data/insanesurvivaloverhaul/tags/item/w
 92378dd4456942cf63f6914b781e08d5a5ad2952 data/minecraft/tags/item/arrows.json
 aa78a9c190fd626f2cb08a2f04dbb0ed3ba97155 data/minecraft/tags/item/axes.json
 c95919a27e2f4a9b5d363df28d15a2cdb0a8dc10 data/minecraft/tags/item/chest_armor.json
-f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/durability.json
+21ac80d4248a36f6f1e5a773780983d58464cf0d data/minecraft/tags/item/enchantable/bow.json
+2942868ab60fdbc429d21f3c11908149995a2ba8 data/minecraft/tags/item/enchantable/durability.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/fire_aspect.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/sharp_weapon.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/minecraft/tags/item/enchantable/sword.json
@@ -39,4 +40,7 @@ a13f9b819773737709da6158672b74d01bd060bb data/minecraft/tags/item/flowers.json
 2d827b69e1cbd8257b87bce6cbe48fbf417919f7 data/minecraft/tags/item/pickaxes.json
 e25a46b3b2eabaf5b7b3ffa959cd21f37f4b32c3 data/minecraft/tags/item/shovels.json
 bea30ba6bd0c7ca53e79f94febfeacd660cd8fc7 data/minecraft/tags/item/swords.json
+21ac80d4248a36f6f1e5a773780983d58464cf0d data/runeenchanting/tags/item/ranged_weapons.json
+21ac80d4248a36f6f1e5a773780983d58464cf0d data/runeenchanting/tags/item/rune_applicable_to/luck.json
+21ac80d4248a36f6f1e5a773780983d58464cf0d data/runeenchanting/tags/item/rune_applicable_to/telekinesis.json
 f8727141baa128e5f26d52777c3b703bac31ee24 data/runeenchanting/tags/item/weapons.json
