@@ -3,7 +3,11 @@
     "conditions": [
         {
             "condition": "neoforge:loot_table_id",
-            "loot_table_id": "minecraft:chests/trial_chambers/reward_ominous_rare"
+            "loot_table_id": "minecraft:chests/trial_chambers/reward_ominous"
+        },
+        {
+            "condition": "minecraft:random_chance",
+            "chance": 0.8
         }
     ],
     "table": "insanesurvivaloverhaul:inject/trial_vault_divine_fragment"

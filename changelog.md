@@ -1,5 +1,6 @@
 # Upcoming
 * Shortbows can now have the same Runes as Bows and can be enchanted like them
+* Fixed Ominous Trial Vaults never dropping the Divine Fragment (now 80% chance)
 
 # 5.14.2.2
 * Fixed Bows feature overriding damage from other mods (e.g. Rune Enchanting)
