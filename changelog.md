@@ -1,3 +1,6 @@
+# 5.14.2.2
+* Fixed Bows feature overriding damage from other mods (e.g. Rune Enchanting)
+
 # 5.14.2.1
 * Minecarts
   * Fixed RAM usage growing while exploring: chest minecarts (e.g. the ones generated in Mineshafts) kept their chunk and the ones around it loaded even when not moving
