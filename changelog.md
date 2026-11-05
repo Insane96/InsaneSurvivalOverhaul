@@ -1,3 +1,11 @@
+# 5.14.3.0
+* Armor Rework Data Pack
+  * Increased Diamond Armor durability (Helmet / Chestplate / Leggings / Boots): 209 / 304 / 285 / 247 -> 363 / 528 / 495 / 429
+  * Increased Netherite Armor durability: 204 / 296 / 278 / 241 -> 429 / 624 / 585 / 507. Netherite now outlasts Diamond, same as tools
+  * Decreased Golden Armor durability: 72 / 104 / 98 / 85 -> 44 / 64 / 60 / 52. Golden is now the least durable metal, same as tools
+* Tools and Weapons Rework Data Pack
+  * Increased Golden tools and weapons durability from 64 to 102 (Axe from 51 to 82)
+
 # 5.14.2.3
 * Shortbows can now have the same Runes as Bows and can be enchanted like them
 * Fixed Ominous Trial Vaults never dropping the Divine Fragment (now 80% chance)

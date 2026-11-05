@@ -1,7 +1,7 @@
 {
     "item": "minecraft:diamond_leggings",
     "components": {
-        "minecraft:max_damage": 285,
+        "minecraft:max_damage": 495,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

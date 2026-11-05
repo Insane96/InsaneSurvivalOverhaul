@@ -1,7 +1,7 @@
 {
     "item": "minecraft:diamond_boots",
     "components": {
-        "minecraft:max_damage": 247,
+        "minecraft:max_damage": 429,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

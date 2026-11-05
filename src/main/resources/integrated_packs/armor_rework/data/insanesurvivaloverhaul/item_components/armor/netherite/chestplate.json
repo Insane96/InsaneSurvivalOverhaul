@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_chestplate",
     "components": {
-        "minecraft:max_damage": 296,
+        "minecraft:max_damage": 624,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_leggings",
     "components": {
-        "minecraft:max_damage": 278,
+        "minecraft:max_damage": 585,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
