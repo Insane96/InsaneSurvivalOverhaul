@@ -88,7 +88,7 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(Tweaks.WORLD_IMMUNE)
                 .add(Items.NETHERITE_BLOCK, Items.NETHERITE_INGOT)
-                .addOptionalTag(InsaneSO.id("equipment/netherite"));
+                .addOptionalTag(ResourceLocation.parse("insanelib:equipment/netherite"));
 
         tag(WOODEN_HAND_EQUIPMENT)
                 .add(Items.WOODEN_AXE, Items.WOODEN_HOE, Items.WOODEN_PICKAXE, Items.WOODEN_SHOVEL, Items.WOODEN_SWORD);

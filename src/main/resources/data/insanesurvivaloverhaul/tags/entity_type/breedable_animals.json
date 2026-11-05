@@ -21,6 +21,9 @@
         "minecraft:strider",
         "minecraft:hoglin",
         "minecraft:frog",
+        "minecraft:camel",
+        "minecraft:sniffer",
+        "minecraft:armadillo",
         {
             "id": "quark:crab",
             "required": false

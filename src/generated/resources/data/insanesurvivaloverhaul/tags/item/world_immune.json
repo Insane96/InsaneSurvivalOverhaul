@@ -3,7 +3,7 @@
     "minecraft:netherite_block",
     "minecraft:netherite_ingot",
     {
-      "id": "#insanesurvivaloverhaul:equipment/netherite",
+      "id": "#insanelib:equipment/netherite",
       "required": false
     }
   ]

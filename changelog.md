@@ -1,3 +1,7 @@
+# 5.14.3.1
+* Camels, Sniffers and Armadillos can no longer be bred manually and follow the same breeding rules as other animals
+* Fixed Netherite equipment not being immune to fire, lava, explosions, etc. when dropped: Tweaks' `world_immune` tag used an old tag, now it uses InsaneLib's `insanelib:equipment/netherite`
+
 # 5.14.3.0
 * Armor Rework Data Pack
   * Increased Diamond Armor durability (Helmet / Chestplate / Leggings / Boots): 209 / 304 / 285 / 247 -> 363 / 528 / 495 / 429
