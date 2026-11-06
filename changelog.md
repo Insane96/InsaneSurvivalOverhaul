@@ -17,6 +17,12 @@
   * Cow, Mooshroom, Sheep, Chicken and Rabbit meat drop chance increased to 50% (adults drop 1 on average), +20% per Looting level (previously 30%, Rabbits 60%)
     * Rabbits also have a second meat roll at 0% +20% per Looting level above the first
   * Pigs now have a 50% chance (+20% per Looting level) to drop 1-3 porkchops (2 on average for adults, double the other animals). Previously 0-2, with Looting adding -1~1 per level, which could remove porkchops
+  * Chicken feathers drop reduced from 1-3 to 1-2
+  * Mooshrooms can now be stewed (or milked) every 60 minutes instead of 20
+  * Well Fed nerfs
+    * Chickens lay eggs every ~11 minutes on average instead of ~7.5
+    * Milking (and stewing) cooldown is reduced by 25% instead of 10 minutes (Cows 15 minutes instead of 10, Mooshrooms 45 minutes)
+    * Auto breeding chance reduced from +10% to +5% every 30 seconds
   * Cod, Salmon and Pufferfish: 25% +10% per Looting level
   * Rabbit Foot: 10% +3% per Looting level
 

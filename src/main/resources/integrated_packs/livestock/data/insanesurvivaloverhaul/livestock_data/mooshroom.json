@@ -1,0 +1,10 @@
+{
+    "entity": "minecraft:mooshroom",
+    "cow_fluid_cooldown_modifiers": [
+        {
+            "id": "insanesurvivaloverhaul:true",
+            "modifier": 2400,
+            "operation": "add"
+        }
+    ]
+}

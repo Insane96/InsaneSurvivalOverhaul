@@ -8,7 +8,7 @@
         },
         {
             "id": "insanesurvivaloverhaul:has_been_fed_recently",
-            "modifier": -1.5,
+            "modifier": -1.0,
             "operation": "add"
         },
         {
