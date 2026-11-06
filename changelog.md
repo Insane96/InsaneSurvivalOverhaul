@@ -11,6 +11,7 @@
     * Rotten Flesh: 2 / 0.56 / 0.8s
   * Fixed Honey Bottle nutrition not being lowered to 1 (the definition pointed to a non-existing item). Now 1 / 0.28 / 0.8s
 * Fixed Shortbows not usable as furnace fuel (smelt 1 item, like Wooden Daggers)
+* Fixed EMI showing Recycling recipes' output without Recycling's `outputMultiplier` applied. They now show the output of an undamaged item
 
 # 5.14.3.1
 * Camels, Sniffers and Armadillos can no longer be bred manually and follow the same breeding rules as other animals

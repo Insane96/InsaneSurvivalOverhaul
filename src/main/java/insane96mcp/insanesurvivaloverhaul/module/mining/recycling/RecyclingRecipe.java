@@ -25,9 +25,22 @@ public class RecyclingRecipe extends BlastingRecipe {
 			return this.result.copy();
 
 		float remainingDurability = (float) (in.getMaxDamage() - in.getDamageValue()) / in.getMaxDamage();
+		return this.result.copyWithCount(this.getOutputCount(remainingDurability));
+	}
+
+	/**
+	 * Returns the output of an undamaged item, with {@link Recycling#outputMultiplier} applied, so recipe viewers show the actual maximum output.
+	 */
+	@Override
+	public ItemStack getResultItem(HolderLookup.Provider registries) {
+		if (this.result.isEmpty())
+			return this.result;
+		return this.result.copyWithCount(this.getOutputCount(1f));
+	}
+
+	private int getOutputCount(float remainingDurability) {
 		int count = Mth.floor(this.result.getCount() * remainingDurability * Recycling.outputMultiplier);
-		count = Math.max(Recycling.minimumOutput, count);
-		return this.result.copyWithCount(count);
+		return Math.max(Recycling.minimumOutput, count);
 	}
 
 	@Override
