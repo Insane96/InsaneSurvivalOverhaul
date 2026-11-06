@@ -13,10 +13,12 @@
 * Fixed Shortbows not usable as furnace fuel (smelt 1 item, like Wooden Daggers)
 * Fixed EMI showing Recycling recipes' output without Recycling's `outputMultiplier` applied. They now show the output of an undamaged item
 * Livestock Data Pack
-  * Fixed Looting lowering the meat drop chance instead of increasing it (e.g. Cow beef went from 30% to 10% with Looting I). Restored the previous values:
-    * Cow, Mooshroom, Sheep and Chicken meat: 30% +20% per Looting level
-    * Cod, Salmon and Pufferfish: 25% +10% per Looting level
-    * Rabbit meat: 60% +30% per Looting level, plus a second roll at 0% +20% per Looting level above the first. Rabbit Foot: 10% +3% per Looting level
+  * Fixed Looting lowering the meat drop chance instead of increasing it (e.g. Cow beef went from 30% to 10% with Looting I)
+  * Cow, Mooshroom, Sheep, Chicken and Rabbit meat drop chance increased to 50% (adults drop 1 on average), +20% per Looting level (previously 30%, Rabbits 60%)
+    * Rabbits also have a second meat roll at 0% +20% per Looting level above the first
+  * Pigs now have a 50% chance (+20% per Looting level) to drop 1-3 porkchops (2 on average for adults, double the other animals). Previously 0-2, with Looting adding -1~1 per level, which could remove porkchops
+  * Cod, Salmon and Pufferfish: 25% +10% per Looting level
+  * Rabbit Foot: 10% +3% per Looting level
 
 # 5.14.3.1
 * Camels, Sniffers and Armadillos can no longer be bred manually and follow the same breeding rules as other animals

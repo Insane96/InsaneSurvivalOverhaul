@@ -88,10 +88,10 @@
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance_with_enchanted_bonus",
-                            "unenchanted_chance": 0.3,
+                            "unenchanted_chance": 0.5,
                             "enchanted_chance": {
                                 "type": "minecraft:linear",
-                                "base": 0.5,
+                                "base": 0.7,
                                 "per_level_above_first": 0.2
                             },
                             "enchantment": "minecraft:looting"
