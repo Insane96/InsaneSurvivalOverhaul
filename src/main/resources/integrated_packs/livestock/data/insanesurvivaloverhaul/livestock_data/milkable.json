@@ -3,9 +3,15 @@
     "cow_fluid_cooldown_modifiers": [
         {
             "id": "insanesurvivaloverhaul:age",
-            "modifier": 600,
+            "modifier": 0.5,
             "age": "elder",
-            "operation": "add"
+            "operation": "multiply"
+        },
+        {
+            "id": "insanesurvivaloverhaul:age",
+            "modifier": 0.5,
+            "age": "young",
+            "operation": "multiply"
         },
         {
             "id": "insanesurvivaloverhaul:has_been_fed_recently",

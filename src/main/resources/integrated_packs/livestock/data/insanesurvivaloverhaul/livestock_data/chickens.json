@@ -13,9 +13,15 @@
         },
         {
             "id": "insanesurvivaloverhaul:age",
-            "modifier": 0.5,
-            "operation": "add",
+            "modifier": 0.2,
+            "operation": "multiply",
             "age": "elder"
+        },
+        {
+            "id": "insanesurvivaloverhaul:age",
+            "modifier": 0.2,
+            "operation": "multiply",
+            "age": "young"
         }
     ],
     "auto_breed_chance_modifiers": [

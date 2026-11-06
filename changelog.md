@@ -24,6 +24,7 @@
   * Well Fed nerfs
     * Chickens lay eggs every ~11 minutes on average instead of ~7.5
     * Milking (and stewing) cooldown is reduced by 25% instead of 10 minutes (Cows 15 minutes instead of 10, Mooshrooms 45 minutes)
+  * Young animals now produce like Elders. The penalty is now a percentage instead of a flat value: +20% egg laying time (previously Elders +0.5 flat) and +50% milking cooldown (previously Elders +10 minutes, so Mooshrooms now take 90 minutes instead of 70)
   * Auto breeding chance every 30 seconds changed from 1.5% (+10% Well Fed, -2% Elders) to 0.4% (+0.2% Well Fed, -0.4% Elders), to compensate the partner now falling in love too. 2 animals take ~1 hour (~42 minutes Well Fed) on average to fall in love, 10 animals ~12.5 minutes (~8 minutes Well Fed)
   * Cod, Salmon and Pufferfish: 25% +10% per Looting level
   * Rabbit Foot: 10% +3% per Looting level
