@@ -2,7 +2,8 @@
 	"item": "minecraft:rotten_flesh",
 	"merge_components": {
 		"minecraft:food": {
-			"nutrition": 2
+			"nutrition": 2,
+			"saturation": 0.4
 		}
 	}
 }

@@ -2,7 +2,8 @@
 	"item": "minecraft:cookie",
 	"merge_components": {
 		"minecraft:food": {
-			"nutrition": 1
+			"nutrition": 1,
+			"saturation": 0.2
 		}
 	}
 }

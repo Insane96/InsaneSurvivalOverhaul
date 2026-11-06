@@ -1,3 +1,17 @@
+# Upcoming
+* Requires InsaneLib 2.5.2.0
+* Food formulas (`foodHungerFormula`, `foodSaturationFormula`, `foodEatSecondsFormula`) are now calculated from the food values after data packs (`item_components`) are applied, instead of the original ones. Previously data packs changing a food's nutrition overwrote the formulas' result, leaving saturation and eating time computed from the original values (e.g. Pumpkin Pie restored 7 hunger with the saturation and eating time of 10)
+  * Data packs changing `minecraft:food` now set the base values the formulas are applied to (e.g. with the default formulas `"nutrition": 10` becomes 12)
+  * `foodEatSecondsFormula` default changed to `MIN(MAX((1.6 * (nutrition + saturation)) * 0.125, MIN(eat_seconds, 0.8)), 5)`: foods with a base eating time lower than 0.8 seconds keep it, so Dried Kelp in the Food Changes data pack is still eaten in 0.4 seconds. Existing configs must be updated manually, otherwise Dried Kelp takes 0.8 seconds
+* Food Changes Data Pack
+  * Foods now have their saturation lowered along with nutrition. Final values (nutrition / saturation / eating time):
+    * Pumpkin Pie and Apple Pie: 7 / 5.04 / 1.92s (previously 7 / 6.72 / 2.56s)
+    * Cookie: 1 / 0.28 / 0.8s
+    * Spider Eye: 1 / 2.24 / 0.8s (previously 1 / 4.48)
+    * Rotten Flesh: 2 / 0.56 / 0.8s
+  * Fixed Honey Bottle nutrition not being lowered to 1 (the definition pointed to a non-existing item). Now 1 / 0.28 / 0.8s
+* Fixed Shortbows not usable as furnace fuel (smelt 1 item, like Wooden Daggers)
+
 # 5.14.3.1
 * Camels, Sniffers and Armadillos can no longer be bred manually and follow the same breeding rules as other animals
 * Fixed Netherite equipment not being immune to fire, lava, explosions, etc. when dropped: Tweaks' `world_immune` tag used an old tag, now it uses InsaneLib's `insanelib:equipment/netherite`

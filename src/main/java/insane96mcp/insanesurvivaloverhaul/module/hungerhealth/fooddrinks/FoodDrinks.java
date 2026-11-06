@@ -12,9 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -32,7 +30,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.Map;
 
 @LoadFeature(module = ISOModules.HUNGER_HEALTH, name = "Foods & Drinks", description = "Changes to food nourishment and the speed on how food is eaten or how items are consumed. Custom Food Properties are controlled via json in this feature's folder.")
 public class FoodDrinks extends JsonFeature {
@@ -72,12 +69,12 @@ public class FoodDrinks extends JsonFeature {
 	public static final TagKey<Item> RAW_FOODS = ISOItemTagsProvider.create("raw_foods");
 	public static final TagKey<Item> DRINKING_FOODS = ISOItemTagsProvider.create("drinking_foods");
 
-	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
+	@Config(description = "Food's hunger restored will be calculated from this formula. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the food properties after data packs (item_components) are applied, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
 	public static String foodHungerFormula = "ROUND(nutrition * 1.2, 0)";
-	@Config(description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
+	@Config(description = "Food's saturation multiplier will be calculated from this formula. This is not a flat value: https://minecraft.wiki/w/Hunger#Food_level_and_saturation_level_restoration. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. NOTE: this is calculated from the food properties after data packs (item_components) are applied, not the modified ones with the other formulas. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. Empty to disable. Can be re-applied with /reload")
 	public static String foodSaturationFormula = "saturation * 1.4";
-	@Config(description = "The formula to calculate the seconds required to eat a food. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. NOTE: this is calculated from the original food properties, not the modified ones with the other formulas. Empty to disable. Can be re-applied with /reload.")
-	public static String foodEatSecondsFormula = "MIN(MAX((1.6 * (nutrition + saturation)) * 0.125, 0.8), 5)";
+	@Config(description = "The formula to calculate the seconds required to eat a food. Variables as nutrition, saturation, eat_seconds as numbers and can_always_eat as boolean can be used. This is evaluated with EvalEx https://ezylang.github.io/EvalEx/concepts/parsing_evaluation.html. NOTE: this is calculated from the food properties after data packs (item_components) are applied, not the modified ones with the other formulas. Empty to disable. Can be re-applied with /reload.")
+	public static String foodEatSecondsFormula = "MIN(MAX((1.6 * (nutrition + saturation)) * 0.125, MIN(eat_seconds, 0.8)), 5)";
 
 	@Config(description = "Makes potions and milk faster to drink, 1 second instead of 1.6.")
 	public static Boolean fasterDrinkConsuming = true;
@@ -97,9 +94,10 @@ public class FoodDrinks extends JsonFeature {
 	@Override
 	public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
 		super.init(module, enabledByDefault, canBeDisabled);
-		ItemComponentsReloadListener.PROGRAMMATIC_PROVIDERS.add((registryAccess, patches) -> {
-			if (!this.isEnabled()) return;
-			processFoodMultipliers(patches);
+		// Applied after data packs, so item_components definitions set the base values the formulas are calculated from
+		ItemComponentsReloadListener.addPostProcessor(DataComponents.FOOD, (registryAccess, item, food) -> {
+			if (!this.isEnabled()) return food;
+			return processFoodMultipliers(food);
 		});
 	}
 
@@ -145,30 +143,23 @@ public class FoodDrinks extends JsonFeature {
 		player.stopUsingItem();
 	}
 
-	private static void processFoodMultipliers(Map<Item, DataComponentPatch> patches) {
+	private static FoodProperties processFoodMultipliers(FoodProperties food) {
 		if (foodHungerFormula.isBlank() && foodSaturationFormula.isBlank() && foodEatSecondsFormula.isBlank())
-			return;
+			return food;
 
-		for (Item item : BuiltInRegistries.ITEM) {
-			FoodProperties food = ItemComponentsReloadListener.getUnpatchedComponents(item).get(DataComponents.FOOD);
-			if (food == null)
-				continue;
+		int newNutrition = !foodHungerFormula.isBlank()
+				? (int) MCUtils.computeFoodFormula(food, foodHungerFormula)
+				: food.nutrition();
+		float newSaturation = !foodSaturationFormula.isBlank()
+				? MCUtils.computeFoodFormula(food, foodSaturationFormula)
+				: food.saturation();
+		float newEatSeconds = !foodEatSecondsFormula.isBlank()
+				? MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
+				: food.eatSeconds();
 
-			int newNutrition = !foodHungerFormula.isBlank()
-					? (int) MCUtils.computeFoodFormula(food, foodHungerFormula)
-					: food.nutrition();
-			float newSaturation = !foodSaturationFormula.isBlank()
-					? MCUtils.computeFoodFormula(food, foodSaturationFormula)
-					: food.saturation();
-			float newEatSeconds = !foodEatSecondsFormula.isBlank()
-					? MCUtils.computeFoodFormula(food, foodEatSecondsFormula)
-					: food.eatSeconds();
+		if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds())
+			return food;
 
-			if (newNutrition == food.nutrition() && newSaturation == food.saturation() && newEatSeconds == food.eatSeconds())
-				continue;
-
-			FoodProperties modified = new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), newEatSeconds, food.usingConvertsTo(), food.effects());
-			patches.put(item, DataComponentPatch.builder().set(DataComponents.FOOD, modified).build());
-		}
+		return new FoodProperties(newNutrition, newSaturation, food.canAlwaysEat(), newEatSeconds, food.usingConvertsTo(), food.effects());
 	}
 }

@@ -2,7 +2,8 @@
 	"item": "minecraft:pumpkin_pie",
 	"merge_components": {
 		"minecraft:food": {
-			"nutrition": 7
+			"nutrition": 6,
+			"saturation": 3.6
 		}
 	}
 }

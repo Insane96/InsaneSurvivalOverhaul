@@ -2,7 +2,8 @@
 	"item": "minecraft:honey_bottle",
 	"merge_components": {
 		"minecraft:food": {
-			"nutrition": 2
+			"nutrition": 1,
+			"saturation": 0.2
 		}
 	}
 }

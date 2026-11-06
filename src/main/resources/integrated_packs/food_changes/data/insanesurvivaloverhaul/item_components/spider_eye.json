@@ -2,7 +2,8 @@
 	"item": "minecraft:spider_eye",
 	"merge_components": {
 		"minecraft:food": {
-			"nutrition": 1
+			"nutrition": 1,
+			"saturation": 1.6
 		}
 	}
 }
