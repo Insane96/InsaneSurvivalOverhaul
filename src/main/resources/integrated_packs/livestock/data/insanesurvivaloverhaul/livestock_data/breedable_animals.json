@@ -37,18 +37,18 @@
     "auto_breed_chance_modifiers": [
         {
             "id": "insanesurvivaloverhaul:true",
-            "modifier": 0.015,
+            "modifier": 0.004,
             "operation": "add"
         },
         {
             "id": "insanesurvivaloverhaul:age",
-            "modifier": -0.02,
+            "modifier": -0.004,
             "age": "elder",
             "operation": "add"
         },
         {
             "id": "insanesurvivaloverhaul:has_been_fed_recently",
-            "modifier": 0.05,
+            "modifier": 0.002,
             "operation": "add"
         }
     ]

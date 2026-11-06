@@ -28,6 +28,7 @@
         "accessor.VillagerAccessor",
         "accessor.WorldGenRegionAccessor",
         "module.animals.AnimalMixin_Breeding",
+        "module.animals.AnimalMakeLoveMixin_Breeding",
         "module.animals.BreedGoalMixin_Breeding",
         "module.animals.SheepMixin_Aging",
         "module.animals.ThrownEggMixin_AnimalProducts",

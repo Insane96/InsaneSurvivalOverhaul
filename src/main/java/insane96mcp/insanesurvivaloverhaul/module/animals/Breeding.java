@@ -18,9 +18,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import javax.annotation.Nullable;
+
 @LoadFeature(module = ISOModules.ANIMALS, description = "Slower breeding, breeding can fail, twins, and animals that fall in love on their own. Configurable via livestock data.")
 public class Breeding extends Feature {
 	public static final TagKey<EntityType<?>> PREVENT_BREEDING = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("prevent_breeding"));
+	/** Same range used by vanilla BreedGoal to find a partner */
+	private static final double AUTO_BREED_PARTNER_RANGE = 8d;
 
 	@Config(description = "If true, animals will no longer be able to be bred manually. Only animals in insanesurvivaloverhaul:prevent_breeding will be affected by this.")
 	public static Boolean preventBreeding = true;
@@ -63,10 +67,39 @@ public class Breeding extends Feature {
 			return;
 		if (animal.level().getEntities(animal, animal.getBoundingBox().inflate(16d), entity -> entity.getType() == animal.getType()).size() > 16)
 			return;
-		float chance = Modifier.applyModifiers(0f, LivestockData.getModifiers(animal, data -> data.autoBreedChanceModifiers), animal.level(), animal.blockPosition(), animal);
+		float chance = getAutoBreedChance(animal);
 		if (chance <= 0d || animal.getRandom().nextFloat() >= chance)
 			return;
 		animal.setInLove(null);
+		Animal partner = findAutoBreedPartner(animal);
+		if (partner != null)
+			partner.setInLove(null);
+	}
+
+	public static float getAutoBreedChance(Animal animal) {
+		return Modifier.applyModifiers(0f, LivestockData.getModifiers(animal, data -> data.autoBreedChanceModifiers), animal.level(), animal.blockPosition(), animal);
+	}
+
+	/**
+	 * Returns the closest animal of the same type, within breeding range, that can fall in love and has a positive auto breed chance (e.g. not unfed elders), or null if there's none.
+	 * Without it two animals would have to fall in love on their own within the same 30 seconds, making auto breeding scale quadratically with the number of animals.
+	 */
+	@Nullable
+	public static Animal findAutoBreedPartner(Animal animal) {
+		Animal closest = null;
+		double closestDistance = Double.MAX_VALUE;
+		for (Animal partner : animal.level().getEntitiesOfClass(Animal.class, animal.getBoundingBox().inflate(AUTO_BREED_PARTNER_RANGE), entity -> entity != animal && entity.getType() == animal.getType())) {
+			double distance = animal.distanceToSqr(partner);
+			if (distance > AUTO_BREED_PARTNER_RANGE * AUTO_BREED_PARTNER_RANGE
+					|| distance >= closestDistance
+					|| !partner.canFallInLove()
+					|| partner.getAge() != 0
+					|| getAutoBreedChance(partner) <= 0f)
+				continue;
+			closest = partner;
+			closestDistance = distance;
+		}
+		return closest;
 	}
 
 	@SubscribeEvent

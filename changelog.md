@@ -1,5 +1,6 @@
 # Upcoming
 * Requires InsaneLib 2.5.2.0
+* Fixed `preventBreeding` not working on animals using the Brain AI (Hoglins, Goats, Axolotls, Frogs, Camels, Sniffers, Armadillos), which could still be bred manually
 * Food formulas (`foodHungerFormula`, `foodSaturationFormula`, `foodEatSecondsFormula`) are now calculated from the food values after data packs (`item_components`) are applied, instead of the original ones. Previously data packs changing a food's nutrition overwrote the formulas' result, leaving saturation and eating time computed from the original values (e.g. Pumpkin Pie restored 7 hunger with the saturation and eating time of 10)
   * Data packs changing `minecraft:food` now set the base values the formulas are applied to (e.g. with the default formulas `"nutrition": 10` becomes 12)
   * `foodEatSecondsFormula` default changed to `MIN(MAX((1.6 * (nutrition + saturation)) * 0.125, MIN(eat_seconds, 0.8)), 5)`: foods with a base eating time lower than 0.8 seconds keep it, so Dried Kelp in the Food Changes data pack is still eaten in 0.4 seconds. Existing configs must be updated manually, otherwise Dried Kelp takes 0.8 seconds
@@ -12,17 +13,18 @@
   * Fixed Honey Bottle nutrition not being lowered to 1 (the definition pointed to a non-existing item). Now 1 / 0.28 / 0.8s
 * Fixed Shortbows not usable as furnace fuel (smelt 1 item, like Wooden Daggers)
 * Fixed EMI showing Recycling recipes' output without Recycling's `outputMultiplier` applied. They now show the output of an undamaged item
+* When an animal falls in love on its own (auto breeding), the closest animal of the same type within 8 blocks that can breed also falls in love. Previously two animals had to fall in love on their own within the same 30 seconds, making auto breeding really rare with few animals and really fast with many
 * Livestock Data Pack
   * Fixed Looting lowering the meat drop chance instead of increasing it (e.g. Cow beef went from 30% to 10% with Looting I)
   * Cow, Mooshroom, Sheep, Chicken and Rabbit meat drop chance increased to 50% (adults drop 1 on average), +20% per Looting level (previously 30%, Rabbits 60%)
     * Rabbits also have a second meat roll at 0% +20% per Looting level above the first
-  * Pigs now have a 50% chance (+20% per Looting level) to drop 1-3 porkchops (2 on average for adults, double the other animals). Previously 0-2, with Looting adding -1~1 per level, which could remove porkchops
+  * Pigs and Hoglins now have a 50% chance (+20% per Looting level) to drop 1-3 porkchops (2 on average for adults, double the other animals). Previously 0-2 (Hoglins 0-1), with Looting adding -1~1 per level, which could remove porkchops
   * Chicken feathers drop reduced from 1-3 to 1-2
   * Mooshrooms can now be stewed (or milked) every 60 minutes instead of 20
   * Well Fed nerfs
     * Chickens lay eggs every ~11 minutes on average instead of ~7.5
     * Milking (and stewing) cooldown is reduced by 25% instead of 10 minutes (Cows 15 minutes instead of 10, Mooshrooms 45 minutes)
-    * Auto breeding chance reduced from +10% to +5% every 30 seconds
+  * Auto breeding chance every 30 seconds changed from 1.5% (+10% Well Fed, -2% Elders) to 0.4% (+0.2% Well Fed, -0.4% Elders), to compensate the partner now falling in love too. 2 animals take ~1 hour (~42 minutes Well Fed) on average to fall in love, 10 animals ~12.5 minutes (~8 minutes Well Fed)
   * Cod, Salmon and Pufferfish: 25% +10% per Looting level
   * Rabbit Foot: 10% +3% per Looting level
 
