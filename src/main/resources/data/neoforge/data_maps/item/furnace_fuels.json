@@ -2,6 +2,9 @@
   "values": {
     "insanesurvivaloverhaul:wooden_dagger": {
       "burn_time": 200
+    },
+    "insanesurvivaloverhaul:shortbow": {
+      "burn_time": 200
     }
   }
 }
