@@ -12,6 +12,11 @@
   * Fixed Honey Bottle nutrition not being lowered to 1 (the definition pointed to a non-existing item). Now 1 / 0.28 / 0.8s
 * Fixed Shortbows not usable as furnace fuel (smelt 1 item, like Wooden Daggers)
 * Fixed EMI showing Recycling recipes' output without Recycling's `outputMultiplier` applied. They now show the output of an undamaged item
+* Livestock Data Pack
+  * Fixed Looting lowering the meat drop chance instead of increasing it (e.g. Cow beef went from 30% to 10% with Looting I). Restored the previous values:
+    * Cow, Mooshroom, Sheep and Chicken meat: 30% +20% per Looting level
+    * Cod, Salmon and Pufferfish: 25% +10% per Looting level
+    * Rabbit meat: 60% +30% per Looting level, plus a second roll at 0% +20% per Looting level above the first. Rabbit Foot: 10% +3% per Looting level
 
 # 5.14.3.1
 * Camels, Sniffers and Armadillos can no longer be bred manually and follow the same breeding rules as other animals
