@@ -1,3 +1,7 @@
+# Upcoming
+* Food Changes Data Pack
+  * Golden Carrots can no longer be fed to Horses, Donkeys and Mules, and no longer attract them
+
 # 5.14.5.0
 * Auto breeding chance now decreases linearly when there are more than 10 animals of the same type within 16 blocks (itself included), down to stopping at 16. Previously it had full chance until suddenly stopping at 18
   * Added `autoBreedCrowdRange`, `autoBreedCrowdStart` and `autoBreedCrowdMax` config options
