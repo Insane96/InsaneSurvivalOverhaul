@@ -30,6 +30,12 @@ public class Breeding extends Feature {
 	public static Boolean preventBreeding = true;
 	@Config(description = "If true, mobs can randomly fall in love and possibly breed")
 	public static Boolean autoBreed = true;
+	@Config(min = 0, description = "Blocks around the animal in which animals of the same type are counted to reduce and stop auto breeding.")
+	public static Double autoBreedCrowdRange = 16d;
+	@Config(min = 1, description = "Number of animals of the same type in the area (itself included) above which the auto breed chance starts decreasing linearly.")
+	public static Integer autoBreedCrowdStart = 10;
+	@Config(min = 1, description = "Number of animals of the same type in the area (itself included) at which auto breeding stops. If not higher than the start value, auto breeding stops abruptly at this value, without decreasing first.")
+	public static Integer autoBreedCrowdMax = 16;
 
 	@SubscribeEvent
 	public void onLivingTick(EntityTickEvent.Pre event) {
@@ -65,9 +71,12 @@ public class Breeding extends Feature {
 
 		if ((animal.tickCount + animal.getId()) % 600 != 0)
 			return;
-		if (animal.level().getEntities(animal, animal.getBoundingBox().inflate(16d), entity -> entity.getType() == animal.getType()).size() > 16)
+		int crowd = animal.level().getEntities(animal, animal.getBoundingBox().inflate(autoBreedCrowdRange), entity -> entity.getType() == animal.getType()).size() + 1;
+		if (crowd >= autoBreedCrowdMax)
 			return;
 		float chance = getAutoBreedChance(animal);
+		if (crowd > autoBreedCrowdStart)
+			chance *= (float) (autoBreedCrowdMax - crowd) / (autoBreedCrowdMax - autoBreedCrowdStart);
 		if (chance <= 0d || animal.getRandom().nextFloat() >= chance)
 			return;
 		animal.setInLove(null);
