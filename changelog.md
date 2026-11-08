@@ -1,3 +1,7 @@
+# Upcoming
+* Fixed Air Affinity (Rune Enchanting) making mining off ground faster than on ground (x1.67). The off ground mining penalty now uses InsaneLib's `insanelib:off_ground_mining_speed` attribute
+* `offGroundSpeedDivider` can no longer be lower than 1
+
 # 5.14.4.0
 * Requires InsaneLib 2.5.2.0
 * Food formulas (`foodHungerFormula`, `foodSaturationFormula`, `foodEatSecondsFormula`) are now calculated from the food values after data packs (`item_components`) are applied, instead of the original ones. Previously data packs changing a food's nutrition overwrote the formulas' result, leaving saturation and eating time computed from the original values (e.g. Pumpkin Pie restored 7 hunger with the saturation and eating time of 10)
