@@ -1,6 +1,7 @@
 # Upcoming
 * Fixed Air Affinity (Rune Enchanting) making mining off ground faster than on ground (x1.67). The off ground mining penalty now uses InsaneLib's `insanelib:off_ground_mining_speed` attribute
 * `offGroundSpeedDivider` can no longer be lower than 1
+* Fixed Glow Blocks (and their alignment HUD) disappearing from some angles when behind walls, as they were culled along with their chunk section
 
 # 5.14.4.0
 * Requires InsaneLib 2.5.2.0

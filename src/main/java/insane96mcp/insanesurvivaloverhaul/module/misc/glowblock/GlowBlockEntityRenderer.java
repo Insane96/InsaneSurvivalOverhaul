@@ -21,7 +21,7 @@ public class GlowBlockEntityRenderer implements BlockEntityRenderer<GlowBlockEnt
     static final int BORDER_COLOR = FastColor.ARGB32.color(255, 255, 140, 0); // alpha, r, g, b
     private static final int COLOR = FastColor.ARGB32.color(160, 255, 80, 0); // alpha, r, g, b
 
-    // Positions rendered (i.e. in a visible, loaded chunk) during the current frame's block entity pass.
+    // Positions rendered (i.e. loaded and within view distance, regardless of occlusion) during the current frame's block entity pass.
     // Cleared each frame by GlowThroughWallsClient right before block entities render, then read by its
     // GUI layer afterward to tell whether the player is looking at one, even through walls.
     static final Set<BlockPos> VISIBLE_THIS_FRAME = new HashSet<>();
@@ -67,6 +67,11 @@ public class GlowBlockEntityRenderer implements BlockEntityRenderer<GlowBlockEnt
 
     public static void register(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(GlowBlockFeature.GLOW_BLOCK_ENTITY.get(), GlowBlockEntityRenderer::new);
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(GlowBlockEntity be) {
+        return true; // visible through walls: must not depend on its section passing occlusion culling
     }
 
     @Override
