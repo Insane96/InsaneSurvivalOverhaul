@@ -9,7 +9,7 @@ import insane96mcp.insanelib.util.ILRangedAttribute;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISODamageTypeTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import insane96mcp.insanesurvivaloverhaul.util.MCUtils;
 import net.minecraft.core.Holder;

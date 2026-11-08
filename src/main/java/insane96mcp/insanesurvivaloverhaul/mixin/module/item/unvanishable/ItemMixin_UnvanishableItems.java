@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.item.unvanishable;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

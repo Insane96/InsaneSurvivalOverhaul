@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.stacksizes;
 
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;

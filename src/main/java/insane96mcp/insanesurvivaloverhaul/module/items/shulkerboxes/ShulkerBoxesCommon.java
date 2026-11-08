@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes;
 
 import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;

@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import insane96mcp.insanelib.core.feature.ConfigType;

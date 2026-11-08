@@ -2,7 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.item;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import insane96mcp.insanesurvivaloverhaul.module.items.ShulkerBoxes;
+import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

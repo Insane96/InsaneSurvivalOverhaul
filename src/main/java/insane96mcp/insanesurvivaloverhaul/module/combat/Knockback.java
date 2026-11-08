@@ -8,7 +8,7 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.CurrentAttacker;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.LivingEntityAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;

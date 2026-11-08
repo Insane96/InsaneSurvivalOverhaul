@@ -8,7 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.event.ISOEventHook;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GameRulesIntegerValueAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.InventoryAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;

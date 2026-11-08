@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.disableditems;
 
 import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
@@ -16,7 +16,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-import static insane96mcp.insanesurvivaloverhaul.module.items.DisabledItems.*;
+import static insane96mcp.insanesurvivaloverhaul.module.items.disableditems.DisabledItems.*;
 
 @ConfigType(ModConfig.Type.CLIENT)
 @LoadFeature(module = ISOModules.ITEMS, canBeDisabled = false)

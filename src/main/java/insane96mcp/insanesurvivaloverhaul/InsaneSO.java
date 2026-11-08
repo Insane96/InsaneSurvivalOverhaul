@@ -22,7 +22,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrowthReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthRegen;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
-import insane96mcp.insanesurvivaloverhaul.module.items.ShulkerBoxesClient;
+import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxesClient;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockEntityRenderer;

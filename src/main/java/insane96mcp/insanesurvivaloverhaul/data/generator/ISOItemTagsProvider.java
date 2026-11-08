@@ -8,9 +8,9 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeatu
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.CopperEquipment;
-import insane96mcp.insanesurvivaloverhaul.module.items.StackSizes;
-import insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.stacksizes.StackSizes;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;

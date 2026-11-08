@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems;
 
 import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
@@ -14,7 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-import static insane96mcp.insanesurvivaloverhaul.module.items.UnvanishableItems.*;
+import static insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems.*;
 
 @ConfigType(ModConfig.Type.CLIENT)
 @LoadFeature(module = ISOModules.ITEMS, canBeDisabled = false)

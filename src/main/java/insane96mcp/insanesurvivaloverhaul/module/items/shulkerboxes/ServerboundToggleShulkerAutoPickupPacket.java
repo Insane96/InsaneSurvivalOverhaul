@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.items;
+package insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import io.netty.buffer.ByteBuf;
