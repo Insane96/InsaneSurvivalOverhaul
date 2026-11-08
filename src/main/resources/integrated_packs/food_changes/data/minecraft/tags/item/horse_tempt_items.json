@@ -2,5 +2,8 @@
     "remove": [
         "minecraft:golden_carrot"
     ],
-    "values": []
+    "values": [
+        "minecraft:apple",
+        "minecraft:carrot"
+    ]
 }
