@@ -116,7 +116,7 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
     }
 
     /**
-     * L'amplifier che il beacon sta applicando, che può essere inferiore a quello salvato se la piramide si è ridotta.
+     * The amplifier the beacon is applying, which can be lower than the saved one if the pyramid got smaller.
      */
     private int getEffectiveAmplifier(BeaconEffect beaconEffect) {
         return beaconEffect.clampAmplifier(this.amplifier, this.menu.getLayers());

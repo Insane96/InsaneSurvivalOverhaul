@@ -216,8 +216,8 @@ public class ISOBeaconBlockEntity extends BlockEntity implements MenuProvider, N
     }
 
     /**
-     * Applica l'effetto selezionato solo se la piramide attuale lo consente, senza modificare la selezione:
-     * ricostruendo la piramide l'effetto e il livello scelti tornano attivi.
+     * Applies the selected effect only if the current pyramid allows it, without changing the selection:
+     * rebuilding the pyramid makes the chosen effect and level active again.
      */
     private void applyEffects() {
         if (this.level == null || this.level.isClientSide || this.effect == null)

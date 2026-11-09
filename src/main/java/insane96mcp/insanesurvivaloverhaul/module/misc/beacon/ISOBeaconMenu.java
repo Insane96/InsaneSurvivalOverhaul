@@ -60,7 +60,7 @@ public class ISOBeaconMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Chiamato dal packet lato server: scarta le selezioni che la piramide attuale non consente.
+     * Called by the packet on the server: discards selections the current pyramid doesn't allow.
      */
     public void updateEffect(Holder<MobEffect> effect, int amplifier) {
         BeaconEffect beaconEffect = BeaconFeature.getBeaconEffect(effect);

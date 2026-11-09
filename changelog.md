@@ -1,4 +1,4 @@
-# Upcoming
+# 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
   * The vanilla recipe now gives a new Beacon (`better_beacon` data pack), with a single selectable effect and a level for it
   * 15 effects by default, controlled via `effects.json`, with the pyramid layers required by each effect level set via `layers_required` (e.g. Strength I and II require 3 layers, Strength III requires 4). Vigour is available if Stamina is installed

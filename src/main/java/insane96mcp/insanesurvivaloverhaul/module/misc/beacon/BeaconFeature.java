@@ -78,7 +78,7 @@ public class BeaconFeature extends JsonFeature {
     ));
     public static final SnapshotList<BeaconEffect> effects = new SnapshotList<>();
     /**
-     * I pulsanti che entrano nella GUI: due righe da 8.
+     * How many buttons fit in the GUI: two rows of 8.
      */
     public static final int MAX_EFFECTS = 16;
 
@@ -99,7 +99,7 @@ public class BeaconFeature extends JsonFeature {
     }
 
     /**
-     * Le voci i cui effetti non sono registrati (es. mod non installata) restano nel json ma non sono selezionabili.
+     * Entries whose effect isn't registered (e.g. the mod isn't installed) stay in the json but can't be selected.
      */
     public static List<BeaconEffect> getAvailableEffects() {
         return effects.stream().filter(beaconEffect -> beaconEffect.getEffect() != null).toList();
@@ -115,7 +115,7 @@ public class BeaconFeature extends JsonFeature {
     }
 
     /**
-     * Conta solo gli effetti registrati: le voci di mod non installate non occupano un pulsante nella GUI.
+     * Only counts registered effects, as entries of mods that aren't installed don't take a button in the GUI.
      */
     private static void validateEffects(List<BeaconEffect> list, boolean isClientSide) {
         long availableEffects = list.stream().filter(beaconEffect -> beaconEffect.getEffect() != null).count();

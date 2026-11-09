@@ -19,7 +19,7 @@ public class BeaconEffect {
 
     private final ResourceLocation location;
     /**
-     * I layer di piramide richiesti da ogni livello dell'effetto, indicizzati per amplifier.
+     * Pyramid layers required by each level of the effect, indexed by amplifier.
      */
     private final int[] layersRequired;
 
@@ -58,7 +58,7 @@ public class BeaconEffect {
     }
 
     /**
-     * Restituisce l'amplifier più alto, non superiore a quello richiesto, consentito dalla piramide attuale.
+     * Returns the highest amplifier, not above the requested one, allowed by the current pyramid.
      */
     public int clampAmplifier(int amplifier, int layers) {
         for (int i = Math.min(amplifier, this.getMaxAmplifier()); i > 0; i--) {
