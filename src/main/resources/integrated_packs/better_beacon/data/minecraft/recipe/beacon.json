@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+        "GGG",
+        "GSG",
+        "OOO"
+    ],
+    "key": {
+        "G": {
+            "item": "minecraft:glass"
+        },
+        "O": {
+            "item": "minecraft:obsidian"
+        },
+        "S": {
+            "item": "minecraft:nether_star"
+        }
+    },
+    "result": {
+        "count": 1,
+        "id": "insanesurvivaloverhaul:beacon"
+    }
+}

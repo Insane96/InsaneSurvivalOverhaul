@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness.BlockHardness;
+import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -45,7 +46,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Spawning.ECHO_LANTERN.block().get())
                 .add(BigOreVeins.COPPER_ORE_ROCK.block().get(), BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.GOLD_ORE_ROCK.block().get())
-                .add(GlowBlockFeature.GLOW_BLOCK.block().get());
+                .add(GlowBlockFeature.GLOW_BLOCK.block().get())
+                .add(BeaconFeature.BEACON.block().get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(BoneMeal.RICH_FARMLAND.block().get());
         tag(BlockTags.MINEABLE_WITH_HOE)

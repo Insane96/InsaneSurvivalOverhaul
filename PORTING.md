@@ -9,6 +9,3 @@ Features left to port IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to
 
 ## Mining
 * MiningCharge (ITE)
-
-## Misc
-* Beacon

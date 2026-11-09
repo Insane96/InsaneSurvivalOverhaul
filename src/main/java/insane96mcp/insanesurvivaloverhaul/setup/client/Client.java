@@ -18,6 +18,8 @@ import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
+import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.ISOBeaconScreen;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
@@ -60,6 +62,10 @@ public class Client {
             }
             if (Feature.isEnabled(EchoPillar.class)) {
                 addBefore(event, Items.RESPAWN_ANCHOR, EchoPillar.ECHO_PILLAR.item());
+            }
+            if (Feature.isEnabled(BeaconFeature.class)) {
+                addAfter(event, Items.BEACON, BeaconFeature.BEACON.item());
+                remove(event, Items.BEACON);
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
@@ -204,11 +210,11 @@ public class Client {
                     (stack, clientLevel, livingEntity, seed)
                             -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
         });
-        //MenuScreens.register(BeaconConduit.BEACON_MENU_TYPE, ISOBeaconScreen::new);
     }
 
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(FletchingFeature.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
+        event.register(BeaconFeature.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
     }
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {

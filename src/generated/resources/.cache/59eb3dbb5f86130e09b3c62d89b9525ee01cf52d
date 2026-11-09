@@ -1,4 +1,5 @@
-// 1.21.1	2026-08-28T13:07:37.4154209	Loot Tables
+// 1.21.1	2026-11-09T12:33:39.3437934	Loot Tables
+f663e6ad9677e71055f8f46bd3c9f42dcf049ecd data/insanesurvivaloverhaul/loot_table/blocks/beacon.json
 5b508089348599c194986bc2f9dbd4f48aafb8f9 data/insanesurvivaloverhaul/loot_table/blocks/burnt_log.json
 ddd9ff59ba3ff119c030cdd6aa98b3f4bced96e5 data/insanesurvivaloverhaul/loot_table/blocks/copper_ore_rock.json
 d77c3629ad737951fe4cee3d1c86371f1db2ca57 data/insanesurvivaloverhaul/loot_table/blocks/copper_powered_rail.json

@@ -8,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Clientb
 import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ServerboundToggleShulkerAutoPickupPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.ClientboundAnvilRecipeSyncPacket;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.ClientboundBlockDefinitionPacket;
+import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.ServerboundSetBeaconEffectPacket;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.ClientboundDiscreteNameTagsPacket;
 import insane96mcp.insanesurvivaloverhaul.module.movement.backwardsslowdown.ServerboundBackwardsSlowdownPacket;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,5 +29,6 @@ public class NetworkHandler {
         registrar.playToClient(ClientboundAnvilRecipeSyncPacket.TYPE, ClientboundAnvilRecipeSyncPacket.STREAM_CODEC, ClientboundAnvilRecipeSyncPacket::handle);
         registrar.playToServer(ServerboundBackwardsSlowdownPacket.TYPE, ServerboundBackwardsSlowdownPacket.STREAM_CODEC, ServerboundBackwardsSlowdownPacket::handle);
         registrar.playToServer(ServerboundToggleShulkerAutoPickupPacket.TYPE, ServerboundToggleShulkerAutoPickupPacket.STREAM_CODEC, ServerboundToggleShulkerAutoPickupPacket::handle);
+        registrar.playToServer(ServerboundSetBeaconEffectPacket.TYPE, ServerboundSetBeaconEffectPacket.STREAM_CODEC, ServerboundSetBeaconEffectPacket::handle);
     }
 }
