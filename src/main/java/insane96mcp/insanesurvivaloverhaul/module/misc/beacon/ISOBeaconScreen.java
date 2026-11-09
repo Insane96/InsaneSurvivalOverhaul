@@ -229,7 +229,7 @@ public class ISOBeaconScreen extends AbstractContainerScreen<ISOBeaconMenu> {
             this.visible = beaconEffect != null && this.amplifier <= beaconEffect.getMaxAmplifier();
             if (beaconEffect == null)
                 return;
-            this.active = this.amplifier < ISOBeaconScreen.this.menu.getLayers();
+            this.active = beaconEffect.isAmplifierAvailableAt(this.amplifier, ISOBeaconScreen.this.menu.getLayers());
             this.setSelected(this.amplifier == ISOBeaconScreen.this.getEffectiveAmplifier(beaconEffect));
             this.setTooltip(Tooltip.create(this.active ? createEffectDescription(ISOBeaconScreen.this.effect, this.amplifier) : REQUIRES_HIGHER_PYRAMID));
         }

@@ -60,22 +60,27 @@ public class BeaconFeature extends JsonFeature {
     public static final ArrayList<ObjTagValue<Block>> blocksRanges = new ArrayList<>();
 
     public static final ArrayList<BeaconEffect> EFFECTS_DEFAULT = new ArrayList<>(List.of(
-            new BeaconEffect(MobEffects.MOVEMENT_SPEED, 2, 1),
-            new BeaconEffect(MobEffects.JUMP, 2, 1),
-            new BeaconEffect("insanesurvivaloverhaul:block_reach", 2, 1),
-            new BeaconEffect(MobEffects.DIG_SPEED, 2, 2),
-            new BeaconEffect(MobEffects.FIRE_RESISTANCE, 0, 2),
-            new BeaconEffect("stamina:vigour", 1, 2),
-            new BeaconEffect(MobEffects.INVISIBILITY, 0, 2),
-            new BeaconEffect(MobEffects.DAMAGE_BOOST, 2, 3),
-            new BeaconEffect(MobEffects.DAMAGE_RESISTANCE, 2, 3),
-            new BeaconEffect(MobEffects.NIGHT_VISION, 0, 3),
-            new BeaconEffect(MobEffects.SLOW_FALLING, 0, 3),
-            new BeaconEffect(MobEffects.REGENERATION, 0, 4),
-            new BeaconEffect("insanesurvivaloverhaul:regenerating_absorption", 1, 4),
-            new BeaconEffect("insanesurvivaloverhaul:entity_reach", 2, 4)
+            new BeaconEffect(MobEffects.MOVEMENT_SPEED, 1, 2, 4),
+            new BeaconEffect(MobEffects.JUMP, 1, 2, 4),
+            new BeaconEffect("insanesurvivaloverhaul:block_reach", 1, 2, 4),
+            new BeaconEffect(MobEffects.DIG_SPEED, 2, 3, 4),
+            new BeaconEffect(MobEffects.FIRE_RESISTANCE, 2),
+            new BeaconEffect("stamina:vigour", 2, 3),
+            new BeaconEffect(MobEffects.INVISIBILITY, 2),
+            new BeaconEffect(MobEffects.DAMAGE_BOOST, 3, 3, 4),
+            new BeaconEffect(MobEffects.DAMAGE_RESISTANCE, 3, 3, 4),
+            new BeaconEffect(MobEffects.NIGHT_VISION, 3),
+            new BeaconEffect(MobEffects.SLOW_FALLING, 3),
+            new BeaconEffect(MobEffects.REGENERATION, 4),
+            new BeaconEffect("insanesurvivaloverhaul:regenerating_absorption", 4, 4),
+            new BeaconEffect("insanesurvivaloverhaul:entity_reach", 4, 4, 4),
+            new BeaconEffect("insanesurvivaloverhaul:ghostly", 4)
     ));
     public static final SnapshotList<BeaconEffect> effects = new SnapshotList<>();
+    /**
+     * I pulsanti che entrano nella GUI: due righe da 8.
+     */
+    public static final int MAX_EFFECTS = 16;
 
     @Config(min = 0, description = "Range of the beacon before adding the bonus from the blocks of the pyramid.")
     public static Integer baseRange = 16;
@@ -85,7 +90,7 @@ public class BeaconFeature extends JsonFeature {
         super.init(module, enabledByDefault, canBeDisabled);
         getJsonConfigs().add(new JsonConfig<>("blocks_ranges.json", blocksRanges, BLOCKS_RANGES_DEFAULT, ObjTagValue.LIST_TYPE).withRegistryFor(Registries.BLOCK));
         addSyncType(EFFECTS_SYNC_ID, new SyncType(json -> loadAndReadJson(json, effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE)));
-        getJsonConfigs().add(new JsonConfig<>("effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE).syncToClient(EFFECTS_SYNC_ID));
+        getJsonConfigs().add(new JsonConfig<>("effects.json", effects, EFFECTS_DEFAULT, BeaconEffect.LIST_TYPE).syncToClient(EFFECTS_SYNC_ID).onLoad(BeaconFeature::validateEffects));
     }
 
     @Override
@@ -107,5 +112,16 @@ public class BeaconFeature extends JsonFeature {
                 return beaconEffect;
         }
         return null;
+    }
+
+    /**
+     * Conta solo gli effetti registrati: le voci di mod non installate non occupano un pulsante nella GUI.
+     */
+    private static void validateEffects(List<BeaconEffect> list, boolean isClientSide) {
+        long availableEffects = list.stream().filter(beaconEffect -> beaconEffect.getEffect() != null).count();
+        if (availableEffects <= MAX_EFFECTS)
+            return;
+        InsaneSO.LOGGER.error("Beacon effects.json has {} available effects but the maximum is {}. The file has been ignored and the Beacon will have no effects", availableEffects, MAX_EFFECTS);
+        list.clear();
     }
 }

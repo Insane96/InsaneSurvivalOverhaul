@@ -1,18 +1,18 @@
 # Upcoming
-* Food Changes Data Pack
-  * Golden Carrots can no longer be fed to Horses, Donkeys and Mules, and no longer attract them
-  * Horses, Donkeys and Mules are now attracted by Apples and Carrots
-* Mob Loot Changes Data Pack
-  * Fixed Pillager Captains not dropping Ominous Bottles
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
   * The vanilla recipe now gives a new Beacon (`better_beacon` data pack), with a single selectable effect and a level for it
-  * 14 effects by default, controlled via `effects.json`, unlocked by pyramid height. Each effect level requires one more pyramid layer. Vigour is available if Stamina is installed
+  * 15 effects by default, controlled via `effects.json`, with the pyramid layers required by each effect level set via `layers_required` (e.g. Strength I and II require 3 layers, Strength III requires 4). Vigour is available if Stamina is installed
   * Added Block Reach and Entity Reach effects
   * Range is 16 blocks (`baseRange`) + a bonus based on the blocks of the pyramid (`blocks_ranges.json`), reduced by higher effect levels. Up to 181 blocks with a full Netherite pyramid
   * Affects players, villagers and tamed animals
   * If the pyramid gets smaller, the effect level is lowered and the effect is suspended if the pyramid is too short. The selection is kept and works again once the pyramid is rebuilt
   * No longer has payments, the Beacon just requires the pyramid
   * The pyramid is limited to 4 layers
+* Food Changes Data Pack
+  * Golden Carrots can no longer be fed to Horses, Donkeys and Mules, and no longer attract them
+  * Horses, Donkeys and Mules are now attracted by Apples and Carrots
+* Mob Loot Changes Data Pack
+  * Fixed Pillager Captains not dropping Ominous Bottles
 * Fixed Regenerating Absorption effect having no name and icon
 
 # 5.14.5.0
