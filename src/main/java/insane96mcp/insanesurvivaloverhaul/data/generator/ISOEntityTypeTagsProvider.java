@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.data.generator;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.animals.AnimalProducts;
 import insane96mcp.insanesurvivaloverhaul.module.animals.Breeding;
+import insane96mcp.insanesurvivaloverhaul.module.death.PlayerKillerBounty;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobs;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,6 +53,10 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(PETS)
                 .add(EntityType.VILLAGER)
                 .addTag(EntityTypeTags.RAIDERS);
+        tag(PlayerKillerBounty.KILLER_BLACKLIST)
+                .add(EntityType.WARDEN)
+                .add(EntityType.ELDER_GUARDIAN)
+                .addTag(Tags.EntityTypes.BOSSES);
         tag(AnimalProducts.MILKABLE)
                 .add(EntityType.COW)
                 .add(EntityType.MOOSHROOM)

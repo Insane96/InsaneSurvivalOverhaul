@@ -1,3 +1,6 @@
+# Upcoming
+* Wardens, Elder Guardians and bosses (`c:bosses` entity type tag) that kill a player no longer get the Player Killer bounty
+
 # 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
   * The vanilla recipe now gives a new Beacon (`better_beacon` data pack), with a single selectable effect and a level for it
