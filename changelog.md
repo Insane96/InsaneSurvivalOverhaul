@@ -1,4 +1,6 @@
 # Upcoming
+* Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
+  * Leashed mobs are now pulled towards the holder from 10 blocks instead of 6 (`elasticDistance`)
 * Netherite rebalanced to be closer to Diamond but much more durable
   * Tools and Weapons Rework Data Pack
     * Netherite tools and weapons durability increased: 2437 -> 3650 (Axe 1950 -> 2920), ~1.9x Diamond

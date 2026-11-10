@@ -65,9 +65,6 @@ public class Tweaks extends Feature {
     @Config(description = "If enabled, the Totem of Undying will give Resistance IV for 5.5 seconds")
     public static Boolean totemResistance = true;
 
-    @Config(min = 0, description = "Vanilla is 5")
-    public static Integer leashMaxDistance = 16;
-
     @Config(min = -1, max = 0, description = "The speed modifier when frozen. Vanilla is -0.05")
     public static Double frozenMovementSpeedModifier = -0.1d;
 
