@@ -1,13 +1,13 @@
 {
     "item": "minecraft:netherite_leggings",
     "components": {
-        "minecraft:max_damage": 585,
+        "minecraft:max_damage": 866,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.leggings",
-                    "amount": 6.0,
+                    "amount": 5.5,
                     "operation": "add_value",
                     "slot": "legs"
                 },
@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.leggings",
-                    "amount": -0.21,
+                    "amount": -0.18,
                     "operation": "add_value",
                     "slot": "legs"
                 }

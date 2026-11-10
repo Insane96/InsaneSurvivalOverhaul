@@ -1,13 +1,13 @@
 {
     "item": "minecraft:netherite_chestplate",
     "components": {
-        "minecraft:max_damage": 624,
+        "minecraft:max_damage": 924,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
                     "type": "minecraft:generic.armor",
                     "id": "minecraft:armor.chestplate",
-                    "amount": 7.0,
+                    "amount": 6.0,
                     "operation": "add_value",
                     "slot": "chest"
                 },
@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.chestplate",
-                    "amount": -0.25,
+                    "amount": -0.21,
                     "operation": "add_value",
                     "slot": "chest"
                 }

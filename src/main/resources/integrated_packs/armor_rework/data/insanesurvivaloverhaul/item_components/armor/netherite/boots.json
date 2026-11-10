@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_boots",
     "components": {
-        "minecraft:max_damage": 507,
+        "minecraft:max_damage": 751,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.boots",
-                    "amount": -0.1,
+                    "amount": -0.09,
                     "operation": "add_value",
                     "slot": "feet"
                 }

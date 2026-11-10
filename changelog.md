@@ -1,5 +1,13 @@
 # Upcoming
 * Wardens, Elder Guardians and bosses (`c:bosses` entity type tag) that kill a player no longer get the Player Killer bounty
+* Netherite rebalanced to be closer to Diamond but much more durable
+  * Tools and Weapons Rework Data Pack
+    * Netherite tools and weapons durability increased: 2437 -> 3650 (Axe 1950 -> 2920), ~1.9x Diamond
+    * Netherite attack speed penalty reduced from 12.5% to 5%. Netherite now has 2% to 9% more DPS than Diamond, instead of up to 6% less
+  * Armor Rework Data Pack
+    * Netherite Armor durability increased: 429 / 624 / 585 / 507 -> 635 / 924 / 866 / 751, ~1.75x Diamond
+    * Netherite Armor reduced: 4 / 7 / 6 / 3 -> 3.5 / 6 / 5.5 / 3 (20 -> 18 total). Netherite now takes 13% less damage than Diamond instead of 25%
+    * Netherite Armor sprint slowdown reduced: 70% -> 60%
 
 # 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)

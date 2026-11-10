@@ -1,7 +1,7 @@
 {
     "item": "minecraft:netherite_hoe",
     "components": {
-        "minecraft:max_damage": 2437,
+        "minecraft:max_damage": 3650,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -21,7 +21,7 @@
                 {
                     "type": "minecraft:generic.attack_speed",
                     "id": "insanesurvivaloverhaul:material_attack_speed",
-                    "amount": -0.125,
+                    "amount": -0.05,
                     "operation": "add_multiplied_base",
                     "slot": "mainhand"
                 },
