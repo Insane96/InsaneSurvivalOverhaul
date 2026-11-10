@@ -15,6 +15,8 @@ public class Recycling extends Feature {
 	public static Integer minimumOutput = 1;
 	@Config(description = "Multiplier applied to the durability-based output amount. Lower it below 1 to make recycling always lossy.")
 	public static Double outputMultiplier = 1.0;
+	@Config(description = "If true, enchanted items can be recycled. If false, only non-enchanted items can be recycled. If Rune Enchanting is installed, runed items count as enchanted.")
+	public static Boolean allowEnchantedItems = false;
 
 	public static final DeferredHolder<RecipeSerializer<?>, SimpleCookingSerializer<RecyclingRecipe>> SERIALIZER =
 			ISORegistries.RECIPE_SERIALIZERS.register("recycling", () -> new SimpleCookingSerializer<>(RecyclingRecipe::new, 100));

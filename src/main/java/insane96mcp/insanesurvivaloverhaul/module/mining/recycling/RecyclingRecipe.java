@@ -1,9 +1,13 @@
 package insane96mcp.insanesurvivaloverhaul.module.mining.recycling;
 
+import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.RuneEnchantingIntegration;
+import insane96mcp.insanesurvivaloverhaul.setup.ModIds;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
+import net.neoforged.fml.ModList;
 
 /**
  * Extends BlastingRecipe (rather than just AbstractCookingRecipe) so that recipe viewers like EMI,
@@ -12,6 +16,17 @@ import net.minecraft.world.item.crafting.*;
 public class RecyclingRecipe extends BlastingRecipe {
 	public RecyclingRecipe(String group, CookingBookCategory category, Ingredient ingredient, ItemStack result, float experience, int cookingTime) {
 		super(group, category, ingredient, result, experience, cookingTime);
+	}
+
+	/**
+	 * Enchanted items (and runed items, if Rune Enchanting is installed) can't be recycled unless {@link Recycling#allowEnchantedItems} is enabled.
+	 */
+	@Override
+	public boolean matches(SingleRecipeInput input, Level level) {
+		ItemStack in = input.item();
+		if (!Recycling.allowEnchantedItems && (in.isEnchanted() || (ModList.get().isLoaded(ModIds.RUNE_ENCHANTING) && RuneEnchantingIntegration.hasRunes(in))))
+			return false;
+		return super.matches(input, level);
 	}
 
 	/**

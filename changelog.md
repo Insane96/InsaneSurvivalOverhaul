@@ -16,6 +16,7 @@
   * The conversion applies to the final damage, so Power and the bows damage multiplier now affect the Piercing part too
   * With a fully charged bow: ~1.05 + 3 piercing damage -> ~3.15 + 2.1 piercing damage
   * Recipe is now more expensive: 1 Arrow + 1 Quartz -> 1 Quartz Arrow (was 2 Arrows + 1 Quartz -> 2)
+* Enchanted items (and runed items, if Rune Enchanting is installed) can no longer be recycled in the Blast Furnace (`allowEnchantedItems` in `Recycling`)
 
 # 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
