@@ -1,4 +1,4 @@
-# Upcoming
+# 5.15.1.0
 * Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
   * Leashed mobs are now pulled towards the holder from 10 blocks instead of 6 (`elasticDistance`)
 * Netherite rebalanced to be closer to Diamond but much more durable
