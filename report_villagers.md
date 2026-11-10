@@ -5,6 +5,7 @@ Source: the *Matcha Flavoured DP* 1.12.9 datapack for Minecraft 26.3 (`MFDP_1_12
 **Related reports:**
 - `report_villager_trades_system.md`: the trade system (data format aligned with 26.1, data pack merging, wandering trader pools, dump command, technical notes on 1.21.1). It is a prerequisite of this overhaul.
 - `report_villagers_modpack.md`: what the Survival Reimagined modpack must change when the overhaul is released.
+- `report_villagers_tasks.md`: the implementation split into tasks, one session each.
 - `report_villagers_enhanced_ai_prompt.md`: prompt for the Enhanced AI analysis (golem repair, villagers eating to heal).
 
 This document is analysis only: no code files were changed and nothing was tested in game. Technical claims were checked against the NeoForge 21.1.234 sources and the vanilla 1.21.1 data; the only estimate left is the number of villager slots per village (§4.1).
@@ -28,8 +29,8 @@ This document is analysis only: no code files were changed and nothing was teste
   - emeralds come mostly from outside villagers (ore, archaeology, illagers, advancements, fishing): villagers are where they are spent;
   - prices start at 1 emerald, **rise with demand and mistreatment and never drop below the base**;
   - uses per restock are low, and special items have 1 use.
-- **Trades:** each profession is a themed supplier with progression by level, 2 random trades per level as in vanilla. Nothing is enchanted except the librarian's books. Diamond equipment is always at level 5 and costs diamonds too, so it never generates diamonds through recycling.
-- **Vanilla trades are never live:** the overhaul is released all together, after the trade system.
+- **Trades:** each profession is a themed supplier with progression by level, 2 random trades per level as in vanilla. Nothing is enchanted except the librarian's books. Items that recycle into diamonds, iron, gold or copper cost 1 emerald + a random 50-75% of their material (recycling them can gain material, accepted); diamond equipment is always at level 5.
+- **Vanilla trades are never live:** the overhaul is released all together. The trade system it builds on is done (`MerchantTrades` feature).
 
 ## 2. Current state in ISO
 
@@ -51,7 +52,8 @@ This document is analysis only: no code files were changed and nothing was teste
 | Zombie siege | `module/mobs/ZombieSiege.java`: sieges happen near the player without a village | Stays: protecting villagers is up to the player (§3.5) |
 | Totem | `Tweaks.totemResistance` | Totems are part of ISO's design: relevant for mansions and raids |
 | Recycling | `Recycling` feature and `recycling` pack | Needs a fix before the overhaul (§5.4) |
-| Custom trades | None | Written from scratch on the new system (§6) |
+| Trade system | `MerchantTrades` (COMMON feature, Mobs module): trades and trade sets from data packs, `remove` `none`/`vanilla`/`all`, `set_random_item` and `set_random_potion` functions, wandering trader `buying`/`uncommon`/`common` pools, dump command | **Done** |
+| Custom trades | None | Written from scratch on the trade system (§6) |
 | Wandering trader | Vanilla spawn and trades | Redesigned (§6.15) |
 | Emeralds in the modpack | Survival Reimagined removes them with `datapacks/no_emeralds_datapack` | The modpack drops it (§5.2) |
 
@@ -79,16 +81,18 @@ It requires Weakness on the zombie and the cure item (`ZombieVillager.mobInterac
   - The check is `itemstack.is(Items.GOLDEN_APPLE)`. A mixin replaces it, preferably pointing to an item tag with the golden carrot as default, so it stays modifiable via datapack. The method runs on both sides, so the tag works fine.
   - The golden carrot costs 8 nuggets instead of the apple's 8 ingots, so a cure is about 9 times cheaper, and gold is renewable. This is a deliberate choice: the real gates are the rarity of zombie villagers and Weakness.
 - **Weakness:** in vanilla a fermented spider eye on water is enough, plus gunpowder for the splash potion. No changes in ISO. The real gate is the brewing stand, which requires a blaze rod, and therefore the Nether.
-- **Cure duration (decided: configurable).** Vanilla is 3600-6000 ticks, rolled in `mobInteract`, sped up by beds and iron bars (`getConversionProgress`). The change goes on the call in `mobInteract`, not in `startConverting`, which also runs on load from NBT with the remaining time. Making the speed-up configurable too is to be evaluated.
-- **Convalescence (decided, all parts configurable).** After the conversion, the villager is just back from being a zombie:
-  - **no trading** for a configurable time: the villager refuses the interaction with feedback, like vanilla's "no" head shake;
-  - **Slowness** for the same period (or its own);
+- **Cure duration (decided: configurable).** Vanilla is 3600-6000 ticks, rolled in `mobInteract`. The change goes on the call in `mobInteract`, not in `startConverting`, which also runs on load from NBT with the remaining time.
+- **Speed-up (decided: stays vanilla, not configurable).** Vanilla `ZombieVillager.getConversionProgress` (line 262): each tick, with a 1% chance, it scans the blocks within 4 of the zombie, and every iron bar or bed found has a 30% chance of adding 1 extra tick of progress (up to 14 blocks counted). It is a small, little-known speed-up.
+- **Convalescence (decided).** After the conversion, the villager is just back from being a zombie. For a configurable time:
+  - **no trading:** the villager refuses the interaction with feedback, like vanilla's "no" head shake;
+  - **no work and no restock** (decided);
+  - **Slowness for the whole convalescence** (decided: same duration);
   - no Weakness: on a villager it would only be cosmetic.
   - *Technical:*
     - it is applied in `LivingConversionEvent.Post`;
     - blocking trades needs a state saved on the villager, checked on interaction (`PlayerInteractEvent.EntityInteract` or a mixin on `Villager.mobInteract`);
-    - a custom "convalescence" `MobEffect` would show the player the remaining time and could carry the Slowness too;
-    - to decide during implementation: whether the villager can work and restock meanwhile.
+    - blocking work and restock: a mixin on `Villager.shouldRestock` (only called by `WorkAtPoi`) returning false, and on the work behaviour if the villager must not even go to its job site;
+    - a custom "convalescence" `MobEffect` shows the player the remaining time and carries the Slowness; its presence is the saved state.
 - **No cure discount (decided).** The cure gives the curer 125 reputation (`MAJOR_POSITIVE` 20×5 + `MINOR_POSITIVE` 25), and the discount is `reputation × priceMultiplier`. Since every villager is cured, a discount would become the norm. Positive reputation is ignored in price calculation (§5.3).
 
 ### 3.3 Disabling breeding
@@ -129,14 +133,13 @@ It requires Weakness on the zombie and the cure item (`ZombieVillager.mobInterac
 - **Abbey:** the custom `abbey_overgrown` structure has a 16-chunk exclusion zone from villages.
 
 **ISO's version.** ISO takes the idea, not the files: it keeps the vanilla structures with their biome variants and modifies them in the `villagers_overhaul` pack.
+- **Every village is a zombie village (decided).** Vanilla already has a ruined variant of every village: the zombie town centres (weight 1 against 50 for each normal one, about 2% of villages), which use the `zombie/*` pools and the `zombie_<biome>` processors (in plains: 80% of cobblestone becomes mossy, doors and torches are removed, cobwebs in place of 2-10% of cobblestone, planks, logs and stairs, 50% of glass panes become cobwebs). The `town_centers` pools of the 5 biomes keep only the zombie elements, so every village gets the ruined look with no new templates.
 - **Inhabitants:**
-  - the inhabitant pools are emptied, keeping a low weight for zombie villagers, using the templates of the vanilla zombie variants. Each villager slot of a village rolls the pool independently, so the weight is best chosen from the **expected zombie villagers per village**: with about 5-10 slots per village (estimate: 2-3 in the town centre plus 0.3-0.5 per house; the number of houses was not measured), a 5% weight gives about 0.25-0.5 per village (one village in 2-4 has one), 10% about 0.5-1. **Decided: 15%**, about 0.75-1.5 zombie villagers per village;
-  - iron golems and cats are removed; animals are to be evaluated;
-  - in plains, `village/plains/villagers` has nitwit 1, baby 1, unemployed 10, and `village/plains/zombie/villagers` has nitwit 1, unemployed 10. The zombie villager templates carry `PersistenceRequired:1b`, so they do not despawn;
-  - the vanilla zombie variants (about 2% of town centres) fill every slot of their houses from `zombie/villagers`, and contain beds, bells and job sites: their pools and processors are overridden too, or the zombie town centres are removed;
+  - the zombie variants fill every villager slot from `<biome>/zombie/villagers` (in plains: nitwit 1, unemployed 10, both zombie villager templates with `PersistenceRequired:1b`, so they do not despawn). That pool is overridden with an empty element taking most of the weight. Each slot rolls the pool independently, so the weight is chosen from the **expected zombie villagers per village**: with about 5-10 slots per village (estimate: 2-3 in the town centre plus 0.3-0.5 per house; the number of houses was not measured), a 5% weight gives about 0.25-0.5 per village, 10% about 0.5-1. **Decided: 15%**, about 0.75-1.5 zombie villagers per village. Zombie houses fill every slot, so the real count may be higher than the estimate: to be checked in game;
+  - iron golems, cats and **animals are removed (decided)**;
   - **these zombie villagers have infinite Fire Resistance (decided)**, so the sun does not kill them before the player finds them. It is applied when they are placed (`FinalizeSpawnEvent` with spawn type `STRUCTURE`, or `active_effects` written in custom templates);
   - **the effect does not carry over to the cured villager:** `Mob.convertTo` and `ZombieVillager.finishConversion` do not copy effects, so no removal is needed.
-- **No POIs:** processors remove beds, bells and job sites (or break them, e.g. bed → wool, bell → air). This reinforces the abandoned look. Vanilla raids and sieges need an occupied POI, so an uninhabited village does not count anyway; removing the POIs also stops a villager cured on the spot from claiming them. So there can be no raid farm in an abandoned village.
+- **No POIs:** the zombie variants still contain beds, bells and job sites, so rules added to the `zombie_<biome>` processor lists remove them (or break them, e.g. bed → wool, bell → air). This reinforces the abandoned look. Vanilla raids and sieges need an occupied POI, so an uninhabited village does not count anyway; removing the POIs also stops a villager cured on the spot from claiming them. So there can be no raid farm in an abandoned village.
 - **Rarer (decided):** spacing 80 / separation 50, as in Matcha.
 - **Food:**
   - drastically less food in `chests/village/*`;
@@ -234,7 +237,7 @@ How the 1.21.1 code behaves (`MerchantOffer`, `Villager`):
   - **`specialPriceDiff`:** `updateSpecialPrices` subtracts `floor(reputation × priceMultiplier)` when the player opens the trade screen. Positive reputation (cure, trading) lowers the price; negative reputation (hitting villagers is `MINOR_NEGATIVE`, killing them `MAJOR_NEGATIVE`) raises it. Hero of the Village subtracts a share of the cost.
 
 What ISO does:
-- **`reputation_discount` 0.2 on every ISO trade**, for both demand and mistreatment. A fully used 8-use trade costs 2 emeralds after one restock and about 4 after two; hitting a villager adds about 5 emeralds until the gossip fades (about 2 days). Vanilla's 0.05 would barely be felt on 1-emerald trades.
+- **`reputation_discount` 0.2 on every ISO trade (decided)**, for both demand and mistreatment. The `VillagerTrade` codec defaults it to 0, as the 26.1 format does, so every trade file writes 0.2 explicitly. A fully used 8-use trade costs 2 emeralds after one restock and about 4 after two; hitting a villager adds about 5 emeralds until the gossip fades (about 2 days). Vanilla's 0.05 would barely be felt on 1-emerald trades.
 - **Mixin on `Villager.updateSpecialPrices`:** only negative reputation applies; positive reputation (cure discount) and the Hero of the Village discount are ignored. `specialPriceDiff` is never negative. Only the negative gossip types are summed: `getPlayerReputation` adds them all, and a curer holds a permanent +100 (`MAJOR_POSITIVE` never decays) that would cancel any mistreatment.
 - **Slower decay of positive demand:** a mixin on the demand update (`MerchantOffer.updateDemand`) multiplies the decrease by **0.6** while demand is above 0. In vanilla an unused trade drops by `maxUses` per restock and is back to base after one restock; with 0.6 and 8 uses, a trade at demand 24 (price 5) needs about 5 restocks, 2-3 days. Increases, and the behaviour below 0, stay as in vanilla.
 - **Negative demand stays**, with ITR's `clampNegativeDemand` at `-maxUses`, so a trade can always get more expensive again.
@@ -250,38 +253,47 @@ What ISO does:
 | Logs | 24-48 | 4-6 |
 | Processed blocks | 24-48 | 4 |
 | Wool | 12-24 | 4 |
-| Redstone components | 2-4 | 2-4 |
+| Redstone components | 4-16 (by item) | 2-4 |
 | Arrows | 8-16 | 4 |
-| Seeds and crops | 2-4 | 4 |
-| Potions, special arrows | 1-2 | 1-2 |
+| Seeds and crops | 4-8 | 4 |
+| Potions | 1-2 | 1-2 |
+| Special arrows | 4-8 | 2-4 |
 | **Special items** | 1, sometimes at a higher cost | **1** |
 | *Local Flavours* (food → 1 emerald) | n/a | 1 |
-| Wandering trader buying | n/a | 1 |
+| Wandering trader buying | always 1 emerald | 1 |
 
 **Special items** have 1 use per restock: equipment (armour, tools, weapons, bows, crossbows, fishing rods, shields, horse armour, saddles), workstations (anvil, smithing table, grindstone, crafter), bells, lava buckets, maps, enchanted books and the Divine Fragment.
 
 The level acts as the lever: same price, better materials at high levels.
 
-### 5.4 Diamond equipment and recycling (decided)
+### 5.4 Items made of diamonds, iron, gold and copper (decided)
 
-ISO's recycling gives back the material in proportion to the remaining durability, times `Recycling.outputMultiplier`. A villager selling diamond equipment for emeralds only would turn emeralds into diamonds.
+**Rule: emerald + material = item.** Every sold item that has a recycling recipe into diamonds, iron, gold or copper costs **1 emerald + a random share between 50% and 75% of the material in its recipe** (its recycling output at full value), for the whole quantity sold. The share is rolled when the offer is created and stays fixed for that offer, like the random results (§6.1). So a villager can be a good deal (half the diamonds for a chestplate) or a poor one (almost what crafting costs): finding a good one means curing more villagers.
 
-**Rule:** diamond equipment is **always at level 5**, for any profession, and costs **1 emerald + 75% of the diamonds in the recipe, rounded down**. Recycling at 0.75 gives back exactly the same rounded-down amount, so buying and recycling never gains diamonds, and diamonds stay non-renewable. The saving is small but real.
+- **Recycling a bought item can gain material (accepted).** ISO's recycling gives back up to 75% (`Recycling.outputMultiplier` 0.75), so below 75% buying and recycling gains material, diamonds included: a chestplate bought for 4 diamonds recycles into 6. This turns emeralds into diamonds, and it is accepted: emeralds are scarce, a good offer is luck, villagers do not breed and each one has to be cured, so "infinite" diamonds are a long grind. Diamond equipment stays **at level 5**, for any profession.
+- **At least 1 of the material.** The share is never below 1 unit: the diamond shovel and `diamond_dagger` (1 diamond) cost 1 emerald + 1 diamond.
+- **Unit.** The share is computed in the recycling output's unit (nuggets for iron, gold and copper equipment, finer than ingots) and written in ingots when it is large (above a stack of nuggets); rounding no longer matters, since the gain from recycling is accepted.
+- **Several items per trade (decided):** quantity and cost are rolled independently. The cost ranges from 50% of the material of the minimum quantity to 75% of the material of the maximum quantity, e.g. 4-8 hoppers (5 ingots each, 20-40 ingots) cost 1 emerald + 10-30 iron ingots. An unlucky offer (4 hoppers for 30 ingots) costs more than crafting them: accepted, it is part of the gamble.
+- **Affected trades**, with the current recycling recipes: copper armour, tools, weapons and daggers; iron armour, tools, weapons and daggers, shield, crossbow, shears, iron horse armour, anvil, hopper, piston, smithing table, lantern, compass, clock (gold), brush and spyglass (copper). The bell has no recycling recipe and is unaffected.
+- **Filled buckets** cost **1 emerald + 1 empty bucket**, like maps (1 emerald + 1 empty map): lava bucket and fish buckets.
+- **Prices computed from the recycling recipes:** the trade provider (§6.17) reads the recycling recipe JSON files instead of hard-coding the amounts, so a changed recycling recipe updates the price at the next `runData`.
+- *Technical:* it works with the current trade system: the cost is a `uniform` `NumberProvider` in `TradeCost` and the quantity a `set_count` in `given_item_modifiers`, rolled independently.
+
+Diamond equipment:
 
 | Item | Diamonds in the recipe | Price | Recycled at 0.75 |
 |---|---|---|---|
-| Chestplate | 8 | 1 emerald + 6 | 6 |
-| Leggings | 7 | 1 + 5 | 5 |
-| Helmet | 5 | 1 + 3 | 3 |
-| Boots | 4 | 1 + 3 | 3 |
-| Pickaxe, axe | 3 | 1 + 2 | 2 |
+| Chestplate | 8 | 1 emerald + 4-6 | 6 |
+| Leggings | 7 | 1 + 3-5 | 5 |
+| Helmet | 5 | 1 + 2-3 | 3 |
+| Boots | 4 | 1 + 2-3 | 3 |
+| Pickaxe, axe | 3 | 1 + 1-2 | 2 |
 | Sword, hoe | 2 | 1 + 1 | 1 |
-| Shovel, `diamond_dagger` | 1 | 1 emerald only | — (no recipe) |
+| Shovel, `diamond_dagger` | 1 | 1 + 1 | 1 (minimum output) |
 
 **Prerequisite, to be done in ISO's recycling** (by the author):
-- `Recycling.outputMultiplier` default **0.75** (today 1.0; the modpack already uses 0.75). At 1.0 a chestplate would recycle into 8 diamonds against the 6 paid.
-- Recipes of items without durability back to their full value, so that the multiplier is the only knob. Today their ~75% is written in the recipes (iron door 13 nuggets out of 18, anvil 23 ingots out of 31...) and the multiplier is not applied; recipe viewers also show the multiplier on them by mistake (`getResultItem`).
-- **No recycling recipe for `diamond_shovel` and `diamond_dagger`:** 1 diamond at 0.75 rounds down to 0, and `Recycling.minimumOutput` (default 1) would turn it into 1, an emerald → diamond conversion. Removing the minimum would instead let the player smelt the item for nothing, so the recipe should not exist. The minimum stays for every other item.
+- `Recycling.outputMultiplier` default **0.75** (today 1.0; the modpack already uses 0.75).
+- Recipes of items without durability back to their full value, so that the multiplier is the only knob and the provider reads the real material. Today their ~75% is written in the recipes (iron door 13 nuggets out of 18, anvil 23 ingots out of 31...) and the multiplier is not applied; recipe viewers also show the multiplier on them by mistake (`getResultItem`).
 
 ## 6. Trades
 
@@ -290,7 +302,7 @@ ISO's recycling gives back the material in proportion to the remaining durabilit
 - **2 random trades per level**, as in vanilla (`Villager.updateTrades`). A level with 1 trade always offers it, with 2 always both; at least 3 are needed for randomness. Important trades go in small pools. Empty levels are fine (Matcha's "filler" trades are not needed).
 - **Only sells** (§5.1), with the quantities, uses and prices of §5.3.
 - **Nothing is enchanted, except the librarian's books.** Tools, bows, rods and armour are sold plain, so they are cheap and sit at low levels.
-- **Diamond equipment** follows §5.4.
+- **Items that recycle into diamonds, iron, gold or copper** follow §5.4: 1 emerald + a random 50-75% of the material.
 - **Random results** (flower, colours, potions, tipped arrows, pottery sherds) are picked when the offer is created and stay fixed for that offer, through ISO's random loot functions (`report_villager_trades_system.md` §4).
 - **Maps** cost 1 emerald + 1 empty map and use the `exploration_map` loot function. The trader sells surface structures, the cartographer underground ones and the ocean monument. **No map at all** for buried treasure (exclusive to shipwreck maps), ocean ruins, shipwrecks, ruined portals, mineshafts, outposts, strongholds (eyes of ender would become pointless) and biomes.
 - **Smiths:** the armorer, the toolsmith and the weaponsmith all sell the bell (level 2), the anvil and the lava bucket. Matcha's redstone components are split among them.
@@ -324,10 +336,10 @@ In parentheses, Matcha's pool size for levels 1-5, excluding levels with only fi
 | 1 | Copper armour (helmet, chestplate, leggings, boots) |
 | 2 | Iron armour (helmet, chestplate, leggings, boots), bell |
 | 3 | Anvil, lava bucket |
-| 4 | Pistons, hoppers, dispensers |
+| 4 | Pistons (8-16), hoppers (4-8), dispensers (8-16) |
 | 5 | Iron horse armour, diamond armour (helmet, chestplate, leggings, boots) |
 
-- Redstone components: 2-4 per emerald; ISO's `actual_redstone_components` makes redstone matter.
+- Pistons and hoppers also cost iron per §5.4, on the rolled quantity (e.g. 8 hoppers: 1 emerald + 20-30 iron ingots); dispensers have no iron and only cost emeralds. ISO's `actual_redstone_components` makes redstone matter.
 - The lava bucket recalls Matcha's "lava kit".
 - No chainmail armour (craftable with cloth in ISO).
 
@@ -341,7 +353,7 @@ Food is a challenge in ISO (`livestock` reduces meat), so the butcher sells litt
 | 2 | Raw chicken, raw mutton, raw rabbit: 2 per emerald |
 | 3 | Cooked chicken, cooked mutton, `over_easy_egg`: 1 per emerald |
 | 4 | Leather, cooked porkchop, cooked beef: 1 per emerald |
-| 5 | Rabbit's foot, cooked rabbit, `diamond_dagger` (1 emerald only, §5.4) |
+| 5 | Rabbit's foot, cooked rabbit, `diamond_dagger` (1 emerald + 1 diamond, §5.4) |
 
 ### 6.5 Cartographer
 
@@ -349,11 +361,11 @@ Each map sits in a level with only 2 trades, so it is always offered.
 
 | Level | Sells |
 |---|---|
-| 1 | Paper, empty map, compass |
+| 1 | Paper (8-16), empty map, compass (2-4) |
 | 2 | **Trial chambers map**, brush |
 | 3 | **Ocean monument map**, spyglass |
-| 4 | A random pottery sherd, a banner of a random colour, item frame |
-| 5 | **Ancient city map**, a random pottery sherd |
+| 4 | A random pottery sherd (2-4), a banner of a random colour (8-16), item frames (8-16) |
+| 5 | **Ancient city map**, a random pottery sherd (2-4) |
 
 - Selling pottery sherds makes them renewable, which is fine for decorative items.
 - Banners and item frames are also sold by the shepherd: accepted overlap.
@@ -364,15 +376,16 @@ A brewing supplier: ingredients first, then random potions. ISO's stack sizes ap
 
 | Level | Sells |
 |---|---|
-| 1 | Glass bottles, redstone dust, glowstone dust |
-| 2 | Nether wart, fermented spider eye, sugar, magma cream |
+| 1 | Glass bottles, redstone dust, glowstone dust (8-16 each) |
+| 2 | Nether wart (4-8), fermented spider eye (4-8), sugar (8-16), magma cream (4-8) |
 | 3 | A random level I potion, a random level I splash potion: **2 per emerald** |
 | 4 | A random level II potion, a random level II splash potion: **1 for 2 emeralds** |
-| 5 | A random lingering potion (**1 for 2 emeralds**); blaze powder, ghast tears, ender pearls (low counts) |
+| 5 | A random lingering potion (**1 for 2 emeralds**); blaze powder (2-4), ghast tears (2-4) |
 
 - Long variants are excluded.
 - No fixed Weakness potion: the cure still needs the player to brew it, at least the first time.
 - Nether wart lets the player brew without going back to the Nether; whoever has a villager has already been there.
+- No ender pearls: together with blaze powder they would make eyes of ender purchasable (the same reason strongholds have no map, §6.1).
 
 ### 6.7 Farmer
 
@@ -380,10 +393,10 @@ No spawn eggs: animals still have to be found and bred (`livestock`).
 
 | Level | Sells |
 |---|---|
-| 1 | Bone meal (about 16 per emerald, weighed against the `bone_meal` pack's nerf), a random flower |
-| 2 | Pumpkin seeds, melon seeds, cocoa beans, red and brown mushrooms, sugar cane |
-| 3 | Chicken eggs (`minecraft:egg`) |
-| 4 | Glow berries, honey bottles, honeycomb |
+| 1 | Bone meal (8-16, weighed against the `bone_meal` pack's nerf), a random flower (12-24) |
+| 2 | Pumpkin seeds, melon seeds, cocoa beans, red and brown mushrooms, sugar cane (4-8 each) |
+| 3 | Chicken eggs (`minecraft:egg`, 4-8) |
+| 4 | Glow berries, honey bottles, honeycomb (4-8 each) |
 | 5 | **Non-renewable seeds, 1 per emerald:** wheat seeds, beetroot seeds, `carrot_seeds`, `rooted_potato`, `sweet_berry_seeds` |
 
 - In ISO the level 5 seeds only come from wild crops (the `crops` pack removes seeds from grass and ferns): selling them only at the last level, one per emerald, keeps exploration meaningful.
@@ -396,14 +409,16 @@ ISO only has the 4 vanilla fish, so Matcha's rarity ladder cannot be copied: the
 
 | Level | Sells |
 |---|---|
-| 1 | Raw cod, raw salmon, dried kelp, fishing rod |
-| 2 | Cooked cod, cooked salmon, pufferfish |
-| 3 | `cod_chowder`, `pufferfish_chowder`, a bucket of fish |
-| 4 | Nautilus shell (1 per emerald), buckets of fish |
-| 5 | Decorative items that fishing also gives: lily pads, ink sacs, bamboo, tropical fish buckets |
+| 1 | Raw cod, raw salmon (2-4), dried kelp (4-8), fishing rod |
+| 2 | Cooked cod, cooked salmon, pufferfish (1-2) |
+| 3 | `cod_chowder`, bucket of cod |
+| 4 | Nautilus shell (1 per emerald), bucket of salmon, bucket of pufferfish |
+| 5 | Decorative items that fishing also gives: lily pads, ink sacs, bamboo (4-8 each), bucket of tropical fish (1) |
 
+- No `pufferfish_chowder`: *Local Flavours* buys it (§6.16), and like the butcher (§6.4) no villager sells a food that villagers buy. `cod_chowder` must stay out of the Local Flavours tag.
 - Selling nautilus shells makes conduits a little easier to reach: accepted.
-- Counts must respect the fish stack sizes of the `item_stacks` pack (to check).
+- Fish buckets cost 1 emerald + 1 empty bucket (§5.4).
+- Counts respect the food stack sizes of `StackSizes` (`64 / nutrition`: raw cod 32, cooked cod 13, cooked salmon 11).
 
 ### 6.9 Fletcher
 
@@ -411,11 +426,11 @@ ISO's special arrows are made at the fletching table: torch (1 torch + 1 arrow �
 
 | Level | Sells |
 |---|---|
-| 1 | Arrows (8-16), flint, feathers, `shortbow` |
-| 2 | Bow, crossbow, torch arrows |
-| 3 | Spectral arrows, quartz arrows, tipped arrows with a random level I effect |
-| 4 | Ice arrows, tipped arrows with a random level II effect |
-| 5 | Explosive arrows, diamond arrows (few, e.g. 2 per emerald) |
+| 1 | Arrows (8-16), `shortbow` |
+| 2 | Bow, crossbow, torch arrows (4-8), flint (4-8), feathers (4-8) |
+| 3 | Spectral arrows, quartz arrows, tipped arrows with a random level I effect (4-8 each) |
+| 4 | Ice arrows, tipped arrows with a random level II effect (4-8 each) |
+| 5 | Explosive arrows, diamond arrows (4-8 each) |
 
 - Tipped arrows: any effect; level 3 uses the base potions, level 4 the `strong_` ones; long variants excluded.
 - `recycling` only recycles the crossbow (into iron), not arrows: diamond arrows create no diamonds.
@@ -430,9 +445,10 @@ Logs at levels 1-3 (Matcha's lumberjack, without the sapling as second cost), le
 | 2 | Acacia, jungle, dark oak, cherry and mangrove logs (24-48) |
 | 3 | Crimson and warped stems, bamboo blocks, mushroom stems (24-48) |
 | 4 | Undyed leather armour: helmet, chestplate, leggings, boots |
-| 5 | Saddle, leather horse armour, lead |
+| 5 | Saddle, leather horse armour, leads (4-8) |
 
 - Plain leather is sold by the butcher, not here.
+- Mushroom stems give no planks: kept for building.
 - The saddle is craftable in ISO (leather and iron): selling it is a convenience.
 
 ### 6.11 Librarian
@@ -441,14 +457,14 @@ The only villager that sells enchanted items; it also sells lapis, since it acts
 
 | Level | Sells |
 |---|---|
-| 1 | Paper, books |
-| 2 | Lapis (8-16), bookshelves, lanterns, a random enchanted book |
-| 3 | Lapis (16-32), a random enchanted book, compass, clock |
+| 1 | Paper (8-16), books (4-8) |
+| 2 | Lapis (8-16), bookshelves, lanterns (8-16), a random enchanted book |
+| 3 | Lapis (16-32), a random enchanted book, compasses (2-4), clocks (2-4) |
 | 4 | A random enchanted book, book and quill |
 | 5 | Divine Fragment (heart of the sea) for 1 emerald + 1 echo shard |
 
 - **Enchanted books:** random, via `enchant_randomly` / `enchant_with_levels` in `given_item_modifiers`, limited to the `#tradeable` enchantments, stronger at higher levels. Cost 1 emerald + 1 book, 1 use per restock. They are a minor convenience: the enchanting table at level 30 gives better enchantments.
-- **Divine Fragment:** 1 use per restock. Echo shards only come from ancient city chests, so the Divine Fragment stays bounded by a finite resource, as Matcha does with its crystal heart. Echo shards are also ISO's `spawner_reactivator`, so the player chooses between the two uses.
+- **Divine Fragment:** 1 use per restock. Echo shards only come from ancient city chests, so the Divine Fragment stays bounded by a finite resource, as Matcha does with its crystal heart. (ISO's `spawner_reactivator` and echo pillar also use echo shards, but both are disabled.)
 - No name tag.
 - Matcha's prices for reference: 131 trades cost 1 emerald; only shears (3) and the toolsmith's jewellery (4-14) cost more. Valuable trades ask rare items, not many emeralds.
 - Modpack: enchanted books become random runes, with a different second cost.
@@ -471,10 +487,10 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 
 | Level | Sells |
 |---|---|
-| 1 | White wool (12-24), shears, string |
-| 2 | Wool of a random colour (12-24), a random dye, a carpet of a random colour |
-| 3 | Bed of a random colour, banner of a random colour, another random-colour wool trade |
-| 4 | Painting, item frame, glow item frame, another random-colour wool trade |
+| 1 | White wool (12-24), shears, string (8-16) |
+| 2 | Wool of a random colour (12-24), a random dye (8-16), carpets of a random colour (12-24) |
+| 3 | Bed of a random colour (1), banners of a random colour (8-16), another random-colour wool trade |
+| 4 | Paintings, item frames, glow item frames (8-16 each), another random-colour wool trade |
 | 5 | A random craftable banner pattern (flower, creeper, skull, bricks...) |
 
 ### 6.14 Toolsmith and weaponsmith
@@ -486,7 +502,7 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | 1 | Copper pickaxe, shovel and hoe |
 | 2 | Iron pickaxe, shovel and hoe; bell |
 | 3 | Anvil, lava bucket |
-| 4 | Crafter, smithing table, grindstone |
+| 4 | Crafters (4-8), smithing table, grindstone |
 | 5 | Diamond pickaxe, shovel, axe and hoe |
 
 **Weaponsmith**
@@ -496,7 +512,7 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | 1 | Copper sword, `copper_dagger`, copper axe |
 | 2 | Iron sword, `iron_dagger`, iron axe, shield; bell |
 | 3 | Anvil, lava bucket |
-| 4 | Repeaters, comparators, observers |
+| 4 | Repeaters, comparators, observers (8-16 each) |
 | 5 | Diamond sword, `diamond_dagger` |
 
 - Overlaps (daggers at the butcher, axes at the leatherworker) are accepted.
@@ -510,22 +526,24 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 
 | Pool | 1.21.1 | Trades rolled | Content |
 |---|---|---|---|
-| `common` | generic | 6 | Nature from other biomes: saplings of every species, a random flower, cactus, sugar cane, bamboo, vines, lily pads, glow lichen, moss, small dripleaf, pointed dripstone, rooted dirt, kelp, sea pickles, random coral blocks, red and brown mushrooms, podzol, mycelium, packed ice, blue ice; seeds as in ITR (wheat, beetroot, `carrot_seeds`, `rooted_potato`) |
+| `common` | generic | 6 | Nature from other biomes: saplings of every species, a random flower, cactus, sugar cane, bamboo, vines, lily pads, glow lichen, moss, small dripleaf, pointed dripstone, rooted dirt, kelp, sea pickles, random coral blocks, red and brown mushrooms, podzol, mycelium, packed ice, blue ice; seeds as in ITR (wheat, beetroot, `carrot_seeds`, `rooted_potato`), plus `sweet_berry_seeds` |
 | `uncommon` | rare | 2 | Maps of surface structures, 1 emerald + 1 empty map: desert pyramid, jungle pyramid, swamp hut, igloo, woodland mansion, abandoned villages, trail ruins |
-| `buying` | none, added by ISO | 2 | Buys music discs (fixed low price, 1-2 emeralds) and one item as in ITR, like vanilla's trade rebalance (baked potatoes, fermented spider eyes, hay bales, milk, potions, water); 1 use per restock |
+| `buying` | none, added by ISO | 2 | Buys music discs and one item as in ITR, like vanilla's trade rebalance (baked potatoes, fermented spider eyes, hay bales, milk, potions, water); **always 1 emerald** per purchase, 1 use per restock |
 
 - Quantities: 12-24 for common plants and blocks, 1-4 for the rarer ones (blue ice, coral, sea pickles).
+- **Purchases always pay 1 emerald (decided)**, never more (vanilla's rebalance pays 2 for water and milk buckets, 3 for a fermented spider eye). So buying an item from the cleric (fermented spider eye, potions) and selling it to the trader never gains emeralds: at best it gives the emerald back.
 - Seeds are sold as in ITR, although rare in ISO: the trader is a random, occasional source.
 - No villager eggs (Matcha's *Asylum Seekers*).
 - Vanilla 1.21.1 cartographer maps are ocean monument (level 2), woodland mansion and trial chambers (level 3): with the decided split, the mansion moves to the trader.
 
 ### 6.16 Local Flavours (decided)
 
-The only villager trade where the villager buys. Every employed villager with XP > 0 gets one extra trade, once: 1 random complex food → 1 emerald.
-- **Only complex foods:** vanilla rabbit stew; ISO `fungi_stew`, `pufferfish_chowder`. The list is an item tag, so the modpack can add its own dishes.
+The only villager trade where the villager buys. Every employed villager gets one extra trade, once: 1 random complex food → 1 emerald.
+- **Available from the start (decided)**, like a "level 0" trade: the villager has it as soon as it gets a profession, together with the level 1 trades. Matcha requires XP > 0 instead.
+- **Only complex foods:** vanilla rabbit stew; ISO `fungi_stew`, `pufferfish_chowder`. The list is an item tag, so the modpack can add its own dishes. No villager sells a food in this tag.
 - **1 use per restock**: at most 2 emeralds a day per villager.
 - All professions, fishermen included.
-- *Technical:* the trade is added outside the 2 random per level. It needs code (e.g. a check on level-up or on the first restock with XP > 0, plus a saved flag), and it must survive later levels.
+- *Technical:* the trade is added outside the 2 random per level, with a mixin at the end of `Villager.updateTrades` when the offers are first generated (level 1), so it is the first offer and it survives later levels. A villager with 0 XP that loses its job site loses its offers and gets a new Local Flavours food with the next profession: accepted, since it only rerolls the requested food.
 
 ### 6.17 Hero of the Village (decided)
 
@@ -534,9 +552,10 @@ Vanilla gives a discount (`0.3 + 0.0625 × amplifier` of the cost count, minimum
 - **Discount removed** (mixin on `Villager.updateSpecialPrices`, §5.3).
 - **Gifts scale with the effect level.** The level (I-V) equals the raid omen level of the won raid (the omens absorbed, capped at 5). Hero level N lets the villager gift the items its profession sells **up to level N**, in reduced amounts (1 piece, or about half the trade's quantity).
   - A **mixin** on `GiveGiftToHero.throwGift`, the only method there that receives the player, reads the Hero level and uses the matching loot table, e.g. `<profession>_gift_level_<n>`. It is needed because `getItemToThrow` and the gift's loot context do not include the player.
-  - The loot tables are generated from the trade files (a data provider in ISO's `runData`, or a script), so they stay in sync.
+  - **Generation with `runData`:** possible. ISO's providers write to `src/generated/resources/`, but a `DataProvider` can take its own `PackOutput` pointing at `src/main/resources/integrated_packs/villagers_overhaul/`. Two ways:
+    - **decided:** the trades are defined in Java in the provider, which writes both the trade JSON files and the gift loot tables from the same definitions (rejected: hand-written trade JSON files read back by the provider).
   - Random trades become loot table entries with the same random choice.
-  - **Excluded:** every trade with a second cost (enchanted books, Divine Fragment, diamond equipment except the 1-emerald shovel and dagger, maps).
+  - **Excluded:** every trade with a second cost (enchanted books, Divine Fragment, maps, and with §5.4 every diamond, iron, gold and copper item, pistons and hoppers included). This leaves the smiths' gifts mostly made of bells, dispensers, repeaters, comparators and observers.
   - Unemployed and nitwits keep the vanilla gift (wheat seeds), babies the poppy.
 
 ## 7. Matcha Flavoured: reference
@@ -569,13 +588,13 @@ To be carried out only after confirmation.
 
 **Features** in `module/mobs/villager/`:
 - `Villagers`, ported from ITR without `nitwitChance` (breeding only), `maxDiscount` and `preventCureDiscount` (no discounts).
-  - Options: `alwaysConvertZombie` (default true), `lockTrades` (on: trades can never be rerolled), `clampNegativeDemand` (at `-maxUses`), positive demand decay factor (0.6), cure duration, convalescence (duration, no trading, Slowness), nitwit exclusion, Fire Resistance for structure zombie villagers.
-  - To evaluate: `experienceToLevelUpMultiplier`.
+  - Options: `alwaysConvertZombie` (default true), `lockTrades` (on: trades can never be rerolled), `clampNegativeDemand` (at `-maxUses`), positive demand decay factor (0.6), cure duration, convalescence duration (no trading, no work or restock, Slowness), nitwit exclusion, Fire Resistance for structure zombie villagers, `experienceToLevelUpMultiplier` (ported from ITR, default 1).
   - Code: Local Flavours, advancement emeralds.
-- **`VillagersCommon`** with `@ConfigType(ModConfig.Type.COMMON)`: the toggle of the integrated pack, because integrated packs are found before the SERVER config is loaded. The pack is enabled only when `Villagers` is.
+- **`VillagersCommon`** with `@ConfigType(ModConfig.Type.COMMON)`: the toggle of the integrated pack, because integrated packs are found before the SERVER config is loaded. `Villagers` is a SERVER feature, whose config is loaded after the packs are registered, so the dependency goes the other way: the pack depends only on the `VillagersCommon` toggle, and `Villagers` does nothing when `VillagersCommon` is disabled. ISO's trades cannot be disabled separately from the rest of the overhaul: that combination would bring vanilla trades back with obtainable villagers (§5.1).
+- **`MerchantTrades` cannot be disabled** (`canBeDisabled = false`): it is only the system, and without trade sets it leaves every trade vanilla. Disabling it would only ignore the trades of ISO, of the modpack and of any data pack.
 - **Integrated `villagers_overhaul` pack** (`InsaneSO.addServerPack`):
-  - the trades of every profession and of the wandering trader, with `remove: "all"`;
-  - abandoned villages: template pool, processor and structure set overrides, archaeology and chest loot tables (§4.1);
+  - the trades of every profession and of the wandering trader, with `remove: "all"`, read by the existing `MerchantTrades` feature;
+  - abandoned villages: town centre pools with only the zombie variants, `zombie/villagers` pools, `zombie_<biome>` processors without POIs, structure set, archaeology and chest loot tables (§4.1);
   - outposts without respawn and their garrison (§4.2);
   - the emerald ore biome modifier (§4.4);
   - pillager loot (moved from `mob_loot_changes`) and the fishing loot modifier (§5.2);
@@ -592,14 +611,16 @@ To be carried out only after confirmation.
 | `ZombieVillager.mobInteract` (call to `startConverting`) | Configurable cure duration |
 | `Zombie.killedEntity` | Conversion to zombie villager on every difficulty |
 | `Villager.mobInteract` (or an event) | No trading during convalescence |
+| `Villager.shouldRestock` (and the work behaviour) | No work or restock during convalescence |
+| `Villager.updateTrades` | Local Flavours trade with the level 1 trades |
 | `Villager.updateSpecialPrices` | Only negative gossip types raise prices; no cure or Hero discount |
 | `MerchantOffer` (demand update) | Slower decay of positive demand, `clampNegativeDemand` |
 | `GiveGiftToHero.throwGift` | Gift loot table by Hero of the Village level |
 | `VillagerData` (accessor) | Level XP multiplier |
 
 **Phases:**
-1. **Trade system** (see its report). It can be released on its own and is tested by spawning villagers in creative with spawn eggs or commands, while villagers stay unobtainable in survival.
-2. **Recycling fixes** (§5.4), before the diamond trades go live.
+1. **Trade system** (see its report): **done**, `MerchantTrades` feature (commit `b098c726a`). It is tested by spawning villagers in creative with spawn eggs or commands, while villagers stay unobtainable in survival.
+2. **Recycling fixes** (§5.4), before the trades with diamonds, iron, gold or copper go live.
 3. **Overhaul, all together:** villagers obtainable (no zombie replacement, conversion always on, golden carrot, cure and convalescence, no breeding, no nitwits), abandoned villages, outposts, mansions, emerald ore, fishing, pillager loot, advancement emeralds, and the final trades of every profession and of the wandering trader. Vanilla trades are never live.
 4. Local Flavours and Hero of the Village gifts, in the same release or right after.
 
@@ -609,12 +630,13 @@ To be carried out only after confirmation.
 - Villagers only from curing; exceptions: igloos, rare zombie villagers in abandoned villages (§3.4, §4.1).
 - `replaceZombieVillagersWithNormalZombies` removed; breeding disabled; nitwits become unemployed after the cure (§3.1, §3.3).
 - Conversion to zombie villager always on; no despawn while converting (§3.1).
-- Cure with the golden carrot (item tag); configurable duration; convalescence with no trading and Slowness (§3.2).
+- Cure with the golden carrot (item tag); configurable duration; vanilla speed-up by beds and iron bars kept, not configurable; convalescence with no trading, no work or restock, and Slowness for its whole duration (§3.2).
 - Zombie sieges, raids and zombies left to the player (§3.5).
 
 **World generation**
-- One `villagers_overhaul` pack, replacing `disable_long_noses`, enabled only with the `Villagers` feature (§8).
-- Villages all abandoned: rarer, rare fire-resistant zombie villagers, no POIs, almost no food, reduced chests, loot mostly from archaeology, no haunted atmosphere (§4.1).
+- One `villagers_overhaul` pack, replacing `disable_long_noses`, enabled only with the `Villagers` feature, through the `VillagersCommon` toggle (§8).
+- `MerchantTrades` cannot be disabled (§8).
+- Villages all abandoned, all generated as the vanilla zombie variants: rarer, rare fire-resistant zombie villagers, no POIs, no animals, golems or cats, almost no food, reduced chests, loot mostly from archaeology, no haunted atmosphere (§4.1).
 - Outposts back without respawn, with a fixed garrison and captain (§4.2).
 - Mansions back (§4.3).
 - Emerald ore: an extra vein at 1/4 of the vanilla rate in every overworld biome, mountains included, on top of vanilla's mountain feature (§4.4).
@@ -630,26 +652,29 @@ To be carried out only after confirmation.
 - The modpack drops `no_emeralds_datapack` (§5.2).
 - Prices: base 1 emerald, `reputation_discount` 0.2, rise with demand and mistreatment, never drop below the base; positive demand decays at 0.6, also with time as in vanilla; negative demand kept (§5.3).
 - Low uses per restock; special items 1 use (§5.3).
-- Diamond equipment at level 5, 1 emerald + 75% of the recipe's diamonds rounded down; recycling fixes as prerequisite (§5.4).
+- Items that recycle into diamonds, iron, gold or copper cost 1 emerald + a random 50-75% of their material, rolled per offer; buying and recycling can gain material, accepted; diamond equipment at level 5; recycling fixes as prerequisite (§5.4).
+- `reputation_discount` 0.2 written in every trade file (§5.3).
 
 **Trades**
 - 2 random trades per level; `lockTrades` on; no Amnestic (§6.1, §7).
 - Nothing enchanted except the librarian's books (§6.1).
 - Random results fixed per offer; maps at 1 emerald + 1 empty map, split between trader and cartographer (§6.1).
 - Tables of all 13 professions (§6.3-§6.14).
-- Wandering trader: natural spawn, `common`/`uncommon`/`buying` pools with ITR's counts (§6.15).
-- *Local Flavours* with complex foods, 1 use per restock (§6.16).
+- Wandering trader: natural spawn, `common`/`uncommon`/`buying` pools with ITR's counts; every purchase pays 1 emerald (§6.15).
+- *Local Flavours* with complex foods, 1 use per restock, available from the start with the level 1 trades; no villager sells those foods (§6.8, §6.16).
 - Hero of the Village: no discount, gifts scaling with the effect level (§6.17).
+- Trades and gift loot tables generated with `runData` from trade definitions in Java (§6.17).
+- `experienceToLevelUpMultiplier` ported, default 1 (§8).
 
 **Tuning**
 - No economy target: the report's values are a starting point, tuned by playtesting (§5.1).
 
 **System**
-- The trade system is analysed in its own report, with a format aligned to 26.1.
+- The trade system is analysed in its own report, with a format aligned to 26.1, and is implemented (`MerchantTrades`).
 
 ## 10. Open decisions
 
-None at the analysis level. What is left is tuning by playtesting (quantities, uses, emerald amounts).
+None. What is left is tuning by playtesting (quantities, uses, emerald amounts, zombie villagers per village).
 
 ## 11. Limits of the analysis
 
