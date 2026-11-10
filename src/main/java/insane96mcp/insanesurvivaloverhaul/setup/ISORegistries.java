@@ -6,6 +6,8 @@ import insane96mcp.insanesurvivaloverhaul.data.condition.FedCondition;
 import insane96mcp.insanesurvivaloverhaul.data.condition.LivestockAgeCondition;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeinFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.OreWithRandomPatchConfiguration;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.SetRandomItemFunction;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.SetRandomPotionFunction;
 import insane96mcp.insanesurvivaloverhaul.world.level.levelgen.structure.templatesystem.RandomBlockTagMatchTest;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -56,6 +59,13 @@ public class ISORegistries {
             LOOT_CONDITIONS.register("has_been_fed_recently", () -> new LootItemConditionType(FedCondition.CODEC));
     public static final DeferredHolder<LootItemConditionType, LootItemConditionType> LIVESTOCK_AGE_CONDITION =
             LOOT_CONDITIONS.register("livestock_age", () -> new LootItemConditionType(LivestockAgeCondition.CODEC));
+
+    public static final DeferredRegister<LootItemFunctionType<?>> LOOT_FUNCTIONS = createRegistry(BuiltInRegistries.LOOT_FUNCTION_TYPE);
+
+    public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<SetRandomItemFunction>> SET_RANDOM_ITEM_FUNCTION =
+            LOOT_FUNCTIONS.register("set_random_item", () -> new LootItemFunctionType<>(SetRandomItemFunction.CODEC));
+    public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<SetRandomPotionFunction>> SET_RANDOM_POTION_FUNCTION =
+            LOOT_FUNCTIONS.register("set_random_potion", () -> new LootItemFunctionType<>(SetRandomPotionFunction.CODEC));
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = createRegistry(BuiltInRegistries.RECIPE_SERIALIZER);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = createRegistry(BuiltInRegistries.RECIPE_TYPE);

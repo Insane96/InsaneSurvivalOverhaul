@@ -1,3 +1,15 @@
+# Upcoming
+* Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can now be added, removed and replaced via data packs, with a format based on 26.1's
+  * Trades go in `data/<namespace>/insanesurvivaloverhaul/villager_trade/`, with `wants`, `additional_wants`, `gives`, `given_item_modifiers`, `max_uses`, `reputation_discount`, `xp`, `merchant_predicate` and `double_trade_price_enchantments`
+  * Trades can be grouped in tags (`data/<namespace>/tags/insanesurvivaloverhaul/villager_trade/`)
+  * Trade sets (`data/<namespace>/insanesurvivaloverhaul/trade_set/`) set the trades of each Villager level (e.g. `minecraft:armorer/level_1`, modded professions too) and Wandering Trader pool (`minecraft:wandering_trader/buying`, `uncommon` and `common`)
+    * `remove` can remove the vanilla trades (`vanilla`) or all of them, modded trades included (`all`) before adding the new ones
+    * Wandering Trader pools support `amount`, `allow_duplicates` and `random_sequence`. The new `buying` pool is empty by default
+  * Trades with items from mods that are not installed are skipped with a warning in the log. `neoforge:conditions` are supported
+  * Added the `set_random_item` and `set_random_potion` loot functions, to sell a random item or potion from a list
+  * Changes apply on `/reload`
+* Added `/insanesurvivaloverhaul villager_trades dump [<profession>|wandering_trader|all] [vanilla|modded|all]`, which writes every trade, modded ones included, as data pack files in `logs/insanesurvivaloverhaul/`
+
 # 5.15.1.0
 * Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
   * Leashed mobs are now pulled towards the holder from 10 blocks instead of 6 (`elasticDistance`)

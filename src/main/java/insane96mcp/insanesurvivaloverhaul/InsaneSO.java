@@ -28,6 +28,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDef
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.ISOBeaconRenderer;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockEntityRenderer;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeatureClient;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.MerchantTradesReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.movement.Sprinting;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
@@ -140,6 +141,7 @@ public class InsaneSO {
         event.addListener(LivestockDataReloadListener.INSTANCE);
         event.addListener(PlantsGrowthReloadListener.INSTANCE);
         event.addListener(AnvilRecipeReloadListener.INSTANCE);
+        event.addListener(MerchantTradesReloadListener.INSTANCE);
     }
 
     @SubscribeEvent
