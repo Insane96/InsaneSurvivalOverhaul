@@ -92,6 +92,7 @@
         "module.mobs.miscmobs.MobMixin_MiscMobs",
         "module.mobs.turtles.PlayerMixin_Turtles",
         "module.mobs.turtles.TurtleMixin_Turtles",
+        "module.mobs.villager.WanderingTraderMixin_MerchantTrades",
         "module.movement.BoatMixin_Boats",
         "module.movement.LivingEntityMixin_BetterClimbable",
         "module.movement.LivingEntityMixin_Sprinting",

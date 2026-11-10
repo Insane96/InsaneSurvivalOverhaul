@@ -3,13 +3,18 @@ package insane96mcp.insanesurvivaloverhaul.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.MerchantTradesDump;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.TirednessHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +29,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class ISOCommand {
     public static void register(RegisterCommandsEvent event) {
@@ -94,6 +100,10 @@ public class ISOCommand {
                                                             }
                                                             return set;
                                                         }))))))
+                .then(Commands.literal("villager_trades")
+                        .then(Commands.literal("dump")
+                                .executes(context -> MerchantTradesDump.dump(context.getSource(), MerchantTradesDump.ALL_TARGET, MerchantTradesDump.Origin.ALL))
+                                .then(villagerTradesDumpTarget())))
                 .then(Commands.literal("count_ores_in_chunk")
                         .executes(context -> {
                             if (!(context.getSource().getEntity() instanceof ServerPlayer player))
@@ -150,5 +160,20 @@ public class ISOCommand {
                             FallingBlockEntity.fall(context.getSource().getLevel(), BlockPos.containing(context.getSource().getPosition()), Blocks.DIRT.defaultBlockState());
                             return 1;
                         })));
+    }
+
+    /**
+     * {@code <profession>|wandering_trader|all [vanilla|modded|all]}
+     */
+    private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> villagerTradesDumpTarget() {
+        RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> target = Commands.argument("target", ResourceLocationArgument.id())
+                .suggests((context, builder) -> SharedSuggestionProvider.suggestResource(
+                        Stream.concat(Stream.of(MerchantTradesDump.ALL_TARGET, MerchantTradesDump.WANDERING_TRADER_TARGET), BuiltInRegistries.VILLAGER_PROFESSION.keySet().stream()), builder))
+                .executes(context -> MerchantTradesDump.dump(context.getSource(), ResourceLocationArgument.getId(context, "target"), MerchantTradesDump.Origin.ALL));
+        for (MerchantTradesDump.Origin origin : MerchantTradesDump.Origin.values()) {
+            target.then(Commands.literal(origin.name().toLowerCase(Locale.ROOT))
+                    .executes(context -> MerchantTradesDump.dump(context.getSource(), ResourceLocationArgument.getId(context, "target"), origin)));
+        }
+        return target;
     }
 }
