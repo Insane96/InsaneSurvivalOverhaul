@@ -1,3 +1,7 @@
+# Upcoming
+* Hardcore Torches Data Pack
+  * Redstone Torches are no longer changed and use the vanilla recipe
+
 # 5.15.1.0
 * Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
   * Leashed mobs are now pulled towards the holder from 10 blocks instead of 6 (`elasticDistance`)
