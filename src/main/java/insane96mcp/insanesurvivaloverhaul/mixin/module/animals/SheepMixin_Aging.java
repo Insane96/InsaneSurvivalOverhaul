@@ -20,7 +20,7 @@ public abstract class SheepMixin_Aging extends Animal {
 	}
 
 	/**
-	 * Doubles the wool dropped when shearing adult sheep
+	 * Doubles the wool dropped when shearing adult and elder sheep
 	 */
 	@Definition(id = "random", field = "Lnet/minecraft/world/entity/animal/Sheep;random:Lnet/minecraft/util/RandomSource;")
 	@Definition(id = "nextInt", method = "Lnet/minecraft/util/RandomSource;nextInt(I)I")
@@ -31,7 +31,7 @@ public abstract class SheepMixin_Aging extends Animal {
 			return amount;
 
 		Aging.Age age = Aging.getAge(this);
-		if (age == Aging.Age.ADULT)
+		if (age == Aging.Age.ADULT || age == Aging.Age.ELDER)
 			return MathHelper.getAmountWithDecimalChance(this.random, amount * 2f);
 		return amount;
 	}

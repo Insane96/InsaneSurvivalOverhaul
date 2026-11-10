@@ -27,7 +27,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-@LoadFeature(module = ISOModules.ANIMALS, description = "Animals age, changing size and possibly dying of old age. Configurable via livestock data. Adult sheep drop more wool and, with the Livestock data pack enabled, adults drop more goodies.")
+@LoadFeature(module = ISOModules.ANIMALS, description = "Animals age, changing size and possibly dying of old age. Configurable via livestock data. Adult and elder sheep drop more wool and, with the Livestock data pack enabled, adults and elders drop more goodies.")
 public class Aging extends Feature {
 	public static ResourceLocation OLD_AGE_MODIFIER;
 	public static ResourceLocation SCALE_MODIFIER_ID;
@@ -158,6 +158,9 @@ public class Aging extends Feature {
 	}
 
 	public static Age getAge(AgeableMob mob) {
+		//Babies and mobs without livestock data have no max age (0/0 would be NaN and fall through to ELDER)
+		if (mob.isBaby() || ModNBTData.get(mob, MAX_AGE, Integer.class) <= 0)
+			return Age.YOUNG;
 		float ratio = getAgeRatio(mob);
 		if (ratio < 0.30f)
 			return Age.YOUNG;

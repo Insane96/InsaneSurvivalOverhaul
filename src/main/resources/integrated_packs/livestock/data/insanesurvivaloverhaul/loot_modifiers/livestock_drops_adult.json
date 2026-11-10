@@ -2,9 +2,19 @@
     "type": "insanelib:drop_multiplier",
     "conditions": [
         {
-            "condition": "insanesurvivaloverhaul:livestock_age",
-            "entity": "this",
-            "age": "adult"
+            "condition": "minecraft:any_of",
+            "terms": [
+                {
+                    "condition": "insanesurvivaloverhaul:livestock_age",
+                    "entity": "this",
+                    "age": "adult"
+                },
+                {
+                    "condition": "insanesurvivaloverhaul:livestock_age",
+                    "entity": "this",
+                    "age": "elder"
+                }
+            ]
         }
     ],
     "multiplier": 2

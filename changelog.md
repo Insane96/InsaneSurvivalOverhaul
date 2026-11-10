@@ -1,22 +1,29 @@
 # Upcoming
-* Wardens, Elder Guardians and bosses (`c:bosses` entity type tag) that kill a player no longer get the Player Killer bounty
 * Netherite rebalanced to be closer to Diamond but much more durable
   * Tools and Weapons Rework Data Pack
     * Netherite tools and weapons durability increased: 2437 -> 3650 (Axe 1950 -> 2920), ~1.9x Diamond
-    * Netherite attack speed penalty reduced from 12.5% to 5%. Netherite now has 2% to 9% more DPS than Diamond, instead of up to 6% less
+    * Netherite attack speed penalty reduced: 12.5% -> 5%. Netherite now has 2% to 9% more DPS than Diamond, instead of up to 6% less
   * Armor Rework Data Pack
     * Netherite Armor durability increased: 429 / 624 / 585 / 507 -> 635 / 924 / 866 / 751, ~1.75x Diamond
-    * Netherite Armor reduced: 4 / 7 / 6 / 3 -> 3.5 / 6 / 5.5 / 3 (20 -> 18 total). Netherite now takes 13% less damage than Diamond instead of 25%
+    * Netherite Armor points reduced: 4 / 7 / 6 / 3 -> 3.5 / 6 / 5.5 / 3 (20 -> 18 total). Netherite now takes 13% less damage than Diamond instead of 25%
     * Netherite Armor sprint slowdown reduced: 70% -> 60%
-* Cloth drop reduced: Rotten Flesh is now converted to Cloth at 25% instead of 35% (e.g. ~25% chance per zombie instead of ~35%)
-* Hardcore Torches Data Pack
-  * Torches crafted with Cloth now give 4 instead of 3
 * Quartz Arrows reworked: they now deal more damage, but 40% of it is converted into Piercing Damage (`quartzArrowPiercingRatio`) instead of dealing low damage plus a bonus Piercing hit
-  * Base damage increased from 0.5 to 2.5 (Normal Arrows deal 2)
+  * Base damage increased: 0.5 -> 2.5 (Normal Arrows deal 2)
   * The conversion applies to the final damage, so Power and the bows damage multiplier now affect the Piercing part too
   * With a fully charged bow: ~1.05 + 3 piercing damage -> ~3.15 + 2.1 piercing damage
   * Recipe is now more expensive: 1 Arrow + 1 Quartz -> 1 Quartz Arrow (was 2 Arrows + 1 Quartz -> 2)
 * Enchanted items (and runed items, if Rune Enchanting is installed) can no longer be recycled in the Blast Furnace (`allowEnchantedItems` in `Recycling`)
+* Cloth drop reduced: Rotten Flesh is now converted to Cloth at 25% instead of 35%
+  * Hardcore Torches Data Pack
+    * Torches crafted with Cloth now give 4 instead of 3
+* Wardens, Elder Guardians and bosses (`c:bosses` entity type tag) that kill a player no longer get the Player Killer bounty
+* Elder animals now get the same bonuses as adults
+  * Elder Sheep drop double wool when sheared
+  * Livestock Data Pack
+    * Elder animals drop double loot
+* Livestock Data Pack
+  * Meat drop chance from Cows, Sheep, Mooshrooms, Pigs, Hoglins, Chickens and Rabbits reduced: 50% -> 40% (with Looting: 70% -> 60%, +20% per level above the first)
+* Fixed babies and animals without livestock data being considered elders (e.g. applying elder modifiers from livestock data to babies)
 
 # 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
