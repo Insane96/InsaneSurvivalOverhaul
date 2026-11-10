@@ -48,7 +48,7 @@
     "advancements.insanesurvivaloverhaul.explosive_arrow.title": "Arrow goes boom",
     "advancements.insanesurvivaloverhaul.explosive_arrow.description": "Explodes on impact",
     "advancements.insanesurvivaloverhaul.quartz_arrow.title": "Piercing insight",
-    "advancements.insanesurvivaloverhaul.quartz_arrow.description": "Deals bonus damage that pierces through armor",
+    "advancements.insanesurvivaloverhaul.quartz_arrow.description": "Craft an arrow whose damage partially pierces through armor",
     "advancements.insanesurvivaloverhaul.diamond_arrow.title": "Sharper than quartz",
     "advancements.insanesurvivaloverhaul.diamond_arrow.description": "Flies flatter and hits much harder",
     "advancements.insanesurvivaloverhaul.ice_arrow.title": "Cold shoulder",
@@ -317,7 +317,7 @@
 
     "item.minecraft.arrow.tooltip": "Basic arrow with average damage",
     "item.minecraft.spectral_arrow.tooltip": "Same as normal arrows but make your enemies glow",
-    "item.insanesurvivaloverhaul.quartz_arrow.tooltip": "Deals bonus piercing damage (ignores armor)",
+    "item.insanesurvivaloverhaul.quartz_arrow.tooltip": "Part of its damage is Piercing (ignores armor)",
     "item.insanesurvivaloverhaul.diamond_arrow.tooltip": "Deals more damage than flint arrows but it's heavier",
     "item.insanesurvivaloverhaul.explosive_arrow.tooltip": "Blows up on impact",
     "item.insanesurvivaloverhaul.torch_arrow.tooltip": "Places a torch or sets an entity on fire",

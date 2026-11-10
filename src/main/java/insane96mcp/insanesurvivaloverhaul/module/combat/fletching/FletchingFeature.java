@@ -7,6 +7,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.entity.*;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -15,6 +16,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.COMBAT, description = "Gives a use to the fletching table, letting you craft better arrows out of vanilla ones.")
@@ -34,7 +37,7 @@ public class FletchingFeature extends Feature {
 
     // Base damage values carried over from the 1.20.1 port (vanilla arrows deal 2.0).
     public static final DeferredHolder<Item, ISOArrowItem> QUARTZ_ARROW_ITEM =
-            ISORegistries.ITEMS.register("quartz_arrow", () -> new ISOArrowItem(QUARTZ_ARROW::get, 0.5f, new Item.Properties()));
+            ISORegistries.ITEMS.register("quartz_arrow", () -> new ISOArrowItem(QUARTZ_ARROW::get, 2.5f, new Item.Properties()));
     public static final DeferredHolder<Item, ISOArrowItem> DIAMOND_ARROW_ITEM =
             ISORegistries.ITEMS.register("diamond_arrow", () -> new ISOArrowItem(DIAMOND_ARROW::get, 3f, new Item.Properties()));
     public static final DeferredHolder<Item, ISOArrowItem> EXPLOSIVE_ARROW_ITEM =
@@ -44,8 +47,26 @@ public class FletchingFeature extends Feature {
     public static final DeferredHolder<Item, ISOArrowItem> ICE_ARROW_ITEM =
             ISORegistries.ITEMS.register("ice_arrow", () -> new ISOArrowItem(ICE_ARROW::get, 1f, new Item.Properties()));
 
+    @Config(min = 0d, max = 1d, description = "Fraction of the Quartz Arrow's damage that is converted into Piercing Damage (ignores armor). The conversion is applied to the final arrow damage, so it also takes into account Power, the bows damage multiplier, etc.")
+    public static Double quartzArrowPiercingRatio = 0.4d;
+
     @Config(description = "If disabled, torch arrows only set the target on fire instead of also placing a torch when they hit a block.")
     public static Boolean torchArrowsPlaceTorches = true;
+
+    /**
+     * Converts part of the Quartz Arrow's damage into piercing damage: the arrow hit deals only the non-converted part,
+     * while the converted part is stored on the arrow and dealt as piercing damage in {@link QuartzArrow#doPostHurtEffects}.
+     * Runs regardless of the feature being enabled, as the arrows themselves keep existing.
+     */
+    @SubscribeEvent
+    public void onIncomingDamage(LivingIncomingDamageEvent event) {
+        if (!(event.getSource().getDirectEntity() instanceof QuartzArrow quartzArrow)
+                || !event.getSource().is(DamageTypes.ARROW))
+            return;
+        float piercing = event.getAmount() * quartzArrowPiercingRatio.floatValue();
+        quartzArrow.setPendingPiercingDamage(piercing);
+        event.setAmount(event.getAmount() - piercing);
+    }
 
     private static <T extends Arrow> DeferredHolder<EntityType<?>, EntityType<T>> registerArrow(String name, EntityType.EntityFactory<T> factory) {
         return ISORegistries.ENTITY_TYPES.register(name, () -> EntityType.Builder.<T>of(factory, MobCategory.MISC)

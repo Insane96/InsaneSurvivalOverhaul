@@ -11,6 +11,10 @@
 * Cloth drop reduced: Rotten Flesh is now converted to Cloth at 25% instead of 35% (e.g. ~25% chance per zombie instead of ~35%)
 * Hardcore Torches Data Pack
   * Torches crafted with Cloth now give 4 instead of 3
+* Quartz Arrows reworked: they now deal more damage, but 40% of it is converted into Piercing Damage (`quartzArrowPiercingRatio`) instead of dealing low damage plus a bonus Piercing hit
+  * Base damage increased from 0.5 to 2.5 (Normal Arrows deal 2)
+  * The conversion applies to the final damage, so Power and the bows damage multiplier now affect the Piercing part too
+  * With a fully charged bow: ~1.05 + 3 piercing damage -> ~3.15 + 2.1 piercing damage
 
 # 5.15.0.0
 * Ported the Beacon overhaul from 1.20.1 (new `Beacon` feature)
