@@ -32,12 +32,15 @@ public class RecyclingRecipe extends BlastingRecipe {
 	/**
 	 * The recipe's "result" ItemStack holds the output amount at full durability.
 	 * The actual output is scaled down by how much of the item's durability has been consumed.
+	 * Non-damageable items count as undamaged, so {@link Recycling#outputMultiplier} still applies.
 	 */
 	@Override
 	public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider registries) {
 		ItemStack in = input.item();
-		if (this.result.isEmpty() || !in.isDamageableItem() || in.getMaxDamage() <= 0)
+		if (this.result.isEmpty())
 			return this.result.copy();
+		if (!in.isDamageableItem() || in.getMaxDamage() <= 0)
+			return this.result.copyWithCount(this.getOutputCount(1f));
 
 		float remainingDurability = (float) (in.getMaxDamage() - in.getDamageValue()) / in.getMaxDamage();
 		return this.result.copyWithCount(this.getOutputCount(remainingDurability));

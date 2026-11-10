@@ -13,8 +13,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class Recycling extends Feature {
 	@Config(description = "Minimum amount of material given back by a single recycled item, even if it's almost completely worn out.")
 	public static Integer minimumOutput = 1;
-	@Config(description = "Multiplier applied to the durability-based output amount. Lower it below 1 to make recycling always lossy.")
-	public static Double outputMultiplier = 1.0;
+	@Config(description = "Multiplier applied to the output amount of every recycling recipe (after the durability scaling for damageable items). Lower it below 1 to make recycling always lossy.")
+	public static Double outputMultiplier = 0.75;
 	@Config(description = "If true, enchanted items can be recycled. If false, only non-enchanted items can be recycled. If Rune Enchanting is installed, runed items count as enchanted.")
 	public static Boolean allowEnchantedItems = false;
 

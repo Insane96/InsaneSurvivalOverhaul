@@ -1,6 +1,10 @@
 # Upcoming
 * Hardcore Torches Data Pack
   * Redstone Torches are no longer changed and use the vanilla recipe
+* Recycling's `outputMultiplier` now also applies to items without durability (e.g. Hoppers, Minecarts, Rails), not only in recipe viewers
+  * Recycling Data Pack
+    * Items without durability now give back 100% of the material used to craft them (rounded down) instead of 75%, `outputMultiplier` takes care of making recycling lossy
+  * `outputMultiplier` reduced: 1 -> 0.75. Recycling now always gives back at most 75% of the material, also for damageable items
 
 # 5.15.1.0
 * Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
