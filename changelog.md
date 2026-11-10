@@ -23,6 +23,7 @@
     * Elder animals drop double loot
 * Livestock Data Pack
   * Meat drop chance from Cows, Sheep, Mooshrooms, Pigs, Hoglins, Chickens and Rabbits reduced: 50% -> 40% (with Looting: 70% -> 60%, +20% per level above the first)
+* Main Bed info message is no longer displayed if you already have a main bed set
 * Fixed babies and animals without livestock data being considered elders (e.g. applying elder modifiers from livestock data to babies)
 
 # 5.15.0.0

@@ -50,19 +50,18 @@ public class MainBed extends Feature {
 			return;
 
 		Player player = event.getEntity();
+		BlockPos pos = event.getPos();
+		BlockState state = event.getLevel().getBlockState(pos);
+		if (state.hasProperty(BedBlock.PART) && state.getValue(BedBlock.PART) == BedPart.FOOT)
+			pos = pos.relative(state.getValue(BedBlock.FACING));
+		Optional<BlockPos> mainBedPos = getMainBedPos(player);
 		if (player.isCrouching()) {
-			if (!event.getItemStack().isEmpty())
-				return;
-			BlockPos pos = event.getPos();
-			BlockState state = event.getLevel().getBlockState(pos);
-			if (state.hasProperty(BedBlock.PART) && state.getValue(BedBlock.PART) == BedPart.FOOT)
-				pos = pos.relative(state.getValue(BedBlock.FACING));
-			if (getMainBedPos(player).filter(pos::equals).isPresent())
+			if (!event.getItemStack().isEmpty() || mainBedPos.filter(pos::equals).isPresent())
 				return;
 			setMainBedPos(player, pos);
 			player.sendSystemMessage(Component.translatable(MAIN_BED_SET));
 		}
-		else if (!ModNBTData.get(player, SHOWED_INFO_MESSAGE, Boolean.class)) {
+		else if (mainBedPos.isEmpty() && !ModNBTData.get(player, SHOWED_INFO_MESSAGE, Boolean.class)) {
 			player.sendSystemMessage(Component.translatable(SET_MAIN_BED_WITH_CROUCH));
 			ModNBTData.put(player, SHOWED_INFO_MESSAGE, true);
 		}
