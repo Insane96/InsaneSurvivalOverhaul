@@ -155,8 +155,8 @@ public class ISORecipeProvider extends RecipeProvider {
         }
 
         RecipeOutput fletchingOutput = recipeOutput.withConditions(new FeatureEnabledCondition("Fletching"));
-        fletchingRecipe(fletchingOutput, "quartz_arrow", Items.ARROW, 2, Items.QUARTZ,
-                new ItemStack(FletchingFeature.QUARTZ_ARROW_ITEM.get(), 2));
+        fletchingRecipe(fletchingOutput, "quartz_arrow", Items.ARROW, 1, Items.QUARTZ,
+                new ItemStack(FletchingFeature.QUARTZ_ARROW_ITEM.get(), 1));
         fletchingRecipe(fletchingOutput, "diamond_arrow", Items.ARROW, 12, Items.DIAMOND,
                 new ItemStack(FletchingFeature.DIAMOND_ARROW_ITEM.get(), 12));
         fletchingRecipe(fletchingOutput, "explosive_arrow", Items.ARROW, 4, Items.TNT,
