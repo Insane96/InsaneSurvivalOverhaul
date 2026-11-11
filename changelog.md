@@ -1,4 +1,4 @@
-# Upcoming
+# 5.15.2.0
 * Hardcore Torches Data Pack
   * Redstone Torches are no longer changed and use the vanilla recipe
 * EMI
