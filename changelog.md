@@ -1,4 +1,6 @@
 # Upcoming
+* Disable Stone Tools Data Pack
+  * Shields+'s Stone Shield is now also removed from the creative inventory (its recipe was already disabled)
 * Hardcore Torches Data Pack
   * Redstone Torches are no longer changed and use the vanilla recipe
 * Recycling's `outputMultiplier` now also applies to items without durability (e.g. Hoppers, Minecarts, Rails), not only in recipe viewers

@@ -5,6 +5,10 @@
         "minecraft:stone_shovel",
         "minecraft:stone_sword",
         "minecraft:stone_hoe",
-        "insanesurvivaloverhaul:stone_dagger"
+        "insanesurvivaloverhaul:stone_dagger",
+        {
+            "id": "shieldsplus:stone_shield",
+            "required": false
+        }
     ]
 }
