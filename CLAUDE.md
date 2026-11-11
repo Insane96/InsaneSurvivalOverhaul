@@ -76,6 +76,10 @@ data/generator/ — Data gen providers (tags, recipes, block states, item models
 - Gameplay mixins in `mixin/module/` follow the naming convention `TargetClassMixin_FeatureName.java`.
 - Mixin methods must be prefixed with `insanesurvivaloverhaul$` and have a javadoc explaining what they do.
 
+### EMI Info
+
+`emi/ISOEmiPlugin.java` registers EMI info pages (and EMI-only recipes) for ISO's new blocks/items and changes to vanilla ones, each gated by the feature/config it describes. Whenever a feature is added or modified, evaluate whether an EMI info should be added or updated. Texts (`emi.info.insanesurvivaloverhaul.*` in `en_us.json`) must be generic (no values, no spoilers such as where things are found), and skip what's already explained by recipes, tooltips or advancements.
+
 ### Integrated Data Packs
 
 The `Packs` feature (`module/misc/Packs.java`) registers integrated resource/data packs from `src/main/resources/integrated_packs/`. These are optional packs bundled with the mod and conditionally enabled based on feature config (e.g., `disable_long_noses`, `crops`, `no_food_in_furnace`).

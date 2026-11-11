@@ -1,15 +1,18 @@
 # Upcoming
-* Disable Stone Tools Data Pack
-  * Shields+'s Stone Shield is now also removed from the creative inventory (its recipe was already disabled)
 * Hardcore Torches Data Pack
   * Redstone Torches are no longer changed and use the vanilla recipe
+* EMI
+  * Added info pages for new blocks and items and for changes to vanilla ones (only shown when the related feature is enabled): Echo Lantern, Daggers, Shortbow, Beacon, Rich Farmland, Beds, Hoes, Wooden equipment, Copper Ore, Conduit, Fishing Rod, Sweet Berries, Cake, Sponges, Campfires, Spawners, Bone Meal, blocks that break when falling onto them and Totem of Undying
+  * Repair Kit repairs are now shown as crafting recipes, with the Repair Kits needed to fully repair each item
+* Auto breeding
+  * The animal falling in love now picks as partner the closest animal it can actually mate with, instead of the closest one of the same type. Horses and Donkeys can now auto breed with each other (making Mules), and Horses, Donkeys and Llamas now need to be tamed (and at full health) to be picked as partner
+  * Animals of any type are now counted for `autoBreedCrowdStart` and `autoBreedCrowdMax`, instead of only the ones of the same type, to also prevent crowds of mixed animals
 * Recycling's `outputMultiplier` now also applies to items without durability (e.g. Hoppers, Minecarts, Rails), not only in recipe viewers
   * Recycling Data Pack
     * Items without durability now give back 100% of the material used to craft them (rounded down) instead of 75%, `outputMultiplier` takes care of making recycling lossy
   * `outputMultiplier` reduced: 1 -> 0.75. Recycling now always gives back at most 75% of the material, also for damageable items
-* Auto breeding
-  * The animal falling in love now picks as partner the closest animal it can actually mate with, instead of the closest one of the same type. Horses and Donkeys can now auto breed with each other (making Mules), and Horses, Donkeys and Llamas now need to be tamed (and at full health) to be picked as partner
-  * Animals of any type are now counted for `autoBreedCrowdStart` and `autoBreedCrowdMax`, instead of only the ones of the same type, to also prevent crowds of mixed animals
+* Disable Stone Tools Data Pack
+  * Shields+'s Stone Shield is now also removed from the creative inventory (its recipe was already disabled)
 
 # 5.15.1.0
 * Leash changes moved from `Tweaks` to the new `Leash` feature in the Mobs module (`leashMaxDistance` is now `maxDistance`)
