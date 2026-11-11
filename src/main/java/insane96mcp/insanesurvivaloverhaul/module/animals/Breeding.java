@@ -30,11 +30,11 @@ public class Breeding extends Feature {
 	public static Boolean preventBreeding = true;
 	@Config(description = "If true, mobs can randomly fall in love and possibly breed")
 	public static Boolean autoBreed = true;
-	@Config(min = 0, description = "Blocks around the animal in which animals of the same type are counted to reduce and stop auto breeding.")
+	@Config(min = 0, description = "Blocks around the animal in which animals of any type are counted to reduce and stop auto breeding.")
 	public static Double autoBreedCrowdRange = 16d;
-	@Config(min = 1, description = "Number of animals of the same type in the area (itself included) above which the auto breed chance starts decreasing linearly.")
+	@Config(min = 1, description = "Number of animals (of any type) in the area (itself included) above which the auto breed chance starts decreasing linearly.")
 	public static Integer autoBreedCrowdStart = 10;
-	@Config(min = 1, description = "Number of animals of the same type in the area (itself included) at which auto breeding stops. If not higher than the start value, auto breeding stops abruptly at this value, without decreasing first.")
+	@Config(min = 1, description = "Number of animals (of any type) in the area (itself included) at which auto breeding stops. If not higher than the start value, auto breeding stops abruptly at this value, without decreasing first.")
 	public static Integer autoBreedCrowdMax = 16;
 
 	@SubscribeEvent
@@ -71,7 +71,7 @@ public class Breeding extends Feature {
 
 		if ((animal.tickCount + animal.getId()) % 600 != 0)
 			return;
-		int crowd = animal.level().getEntities(animal, animal.getBoundingBox().inflate(autoBreedCrowdRange), entity -> entity.getType() == animal.getType()).size() + 1;
+		int crowd = animal.level().getEntities(animal, animal.getBoundingBox().inflate(autoBreedCrowdRange), entity -> entity instanceof Animal).size() + 1;
 		if (crowd >= autoBreedCrowdMax)
 			return;
 		float chance = getAutoBreedChance(animal);
@@ -90,25 +90,39 @@ public class Breeding extends Feature {
 	}
 
 	/**
-	 * Returns the closest animal of the same type, within breeding range, that can fall in love and has a positive auto breed chance (e.g. not unfed elders), or null if there's none.
+	 * Returns the closest animal, within breeding range, that the (already in love) animal can mate with, that can fall in love and has a positive auto breed chance (e.g. not unfed elders), or null if there's none.
 	 * Without it two animals would have to fall in love on their own within the same 30 seconds, making auto breeding scale quadratically with the number of animals.
+	 * Uses {@link Animal#canMate(Animal)} instead of checking the same type, so that cross-breeding (e.g. horse + donkey) and mate requirements (e.g. tamed horses) are respected.
 	 */
 	@Nullable
 	public static Animal findAutoBreedPartner(Animal animal) {
 		Animal closest = null;
 		double closestDistance = Double.MAX_VALUE;
-		for (Animal partner : animal.level().getEntitiesOfClass(Animal.class, animal.getBoundingBox().inflate(AUTO_BREED_PARTNER_RANGE), entity -> entity != animal && entity.getType() == animal.getType())) {
+		for (Animal partner : animal.level().getEntitiesOfClass(Animal.class, animal.getBoundingBox().inflate(AUTO_BREED_PARTNER_RANGE), entity -> entity != animal)) {
 			double distance = animal.distanceToSqr(partner);
 			if (distance > AUTO_BREED_PARTNER_RANGE * AUTO_BREED_PARTNER_RANGE
 					|| distance >= closestDistance
 					|| !partner.canFallInLove()
 					|| partner.getAge() != 0
+					|| !canMateIfInLove(animal, partner)
 					|| getAutoBreedChance(partner) <= 0f)
 				continue;
 			closest = partner;
 			closestDistance = distance;
 		}
 		return closest;
+	}
+
+	/**
+	 * Checks {@link Animal#canMate(Animal)} as if the partner was in love, since vanilla requires both animals to be in love.
+	 * The love time is set directly (instead of {@link Animal#setInLove}) to not broadcast the heart particles, and restored afterwards.
+	 */
+	private static boolean canMateIfInLove(Animal animal, Animal partner) {
+		int inLoveTime = partner.getInLoveTime();
+		partner.setInLoveTime(600);
+		boolean canMate = animal.canMate(partner);
+		partner.setInLoveTime(inLoveTime);
+		return canMate;
 	}
 
 	@SubscribeEvent
