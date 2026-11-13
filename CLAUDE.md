@@ -110,6 +110,7 @@ The decompiled Java sources for Minecraft/NeoForge (1.21.1, `net.neoforged.modde
 
 If missing or needing regeneration, the source jar is in the NeoForm cache at `~/.gradle/caches/neoformruntime/intermediate_results/mergeWithSources_*_output.jar` (pick the most recent by date) — extract it with `unzip` into the folder above, discarding the `.class` files.
 
-## Website
+## Website & Wiki
 
-The website source is in `D:\Programming\Web Creations\Website\insane96.eu` (git repository, remote `Insane96/Website`). This mod's page is in `projects\mods\insanesurvivaloverhaul\`, with one folder per Minecraft version.
+The website source (if any) is in `D:\Programming\Web Creations\Website\insane96.eu` (git repository, remote `Insane96/Website`). This mod's page is in `projects\mods\<modid>\`, with one folder per Minecraft version.  
+The wiki source (if any) is in this repo's parent folder under `<mod_name>.wiki`.
