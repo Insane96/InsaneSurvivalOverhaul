@@ -28,8 +28,8 @@ This document is analysis only: no code files were changed and nothing was teste
   - villagers only sell; the only exceptions are *Local Flavours* (a villager buys one complex food per restock) and the wandering trader, which buys very little;
   - emeralds come mostly from outside villagers (ore, archaeology, illagers, advancements, fishing): villagers are where they are spent;
   - prices start at 1 emerald, **rise with demand and mistreatment and never drop below the base**;
-  - uses per restock are low, and special items have 1 use.
-- **Trades:** each profession is a themed supplier with progression by level, 2 random trades per level as in vanilla. Nothing is enchanted except the librarian's books. Items that recycle into diamonds, iron, gold or copper cost 1 emerald + a random 50-75% of their material (recycling them can gain material, accepted); diamond equipment is always at level 5.
+  - quantities, prices and uses per restock are fixed, never rolled; uses are low, and special items have 1 use.
+- **Trades:** each profession is a themed supplier with progression by level, 2 random trades per level as in vanilla. Nothing is enchanted except the librarian's books. Items that recycle into diamonds, iron, gold or copper cost 1 emerald + 75% of their material, rounded down, at a fixed price (recycling them gives back no more than was paid); diamond equipment is always at level 5.
 - **Vanilla trades are never live:** the overhaul is released all together. The trade system it builds on is done (`MerchantTrades` feature).
 
 ## 2. Current state in ISO
@@ -51,7 +51,7 @@ This document is analysis only: no code files were changed and nothing was teste
 | Iron farms | `Nerfs.ironFromGolemsRequiresPlayer` (default true): golems drop iron only when killed directly by a player | Already nerfed |
 | Zombie siege | `module/mobs/ZombieSiege.java`: sieges happen near the player without a village | Stays: protecting villagers is up to the player (§3.5) |
 | Totem | `Tweaks.totemResistance` | Totems are part of ISO's design: relevant for mansions and raids |
-| Recycling | `Recycling` feature and `recycling` pack | Needs a fix before the overhaul (§5.4) |
+| Recycling | `Recycling` feature and `recycling` pack | Fixed in 5.15.2.0 (§5.4) |
 | Trade system | `MerchantTrades` (COMMON feature, Mobs module): trades and trade sets from data packs, `remove` `none`/`vanilla`/`all`, `set_random_item` and `set_random_potion` functions, wandering trader `buying`/`uncommon`/`common` pools, dump command | **Done** |
 | Custom trades | None | Written from scratch on the trade system (§6) |
 | Wandering trader | Vanilla spawn and trades | Redesigned (§6.15) |
@@ -217,7 +217,12 @@ In Matcha the emerald is a currency with a controlled supply: 86 emeralds from 3
 
 **Advancements (decided).** Every advancement that gives XP as a reward also gives emeralds. It is a finite, one-off source per player, like Matcha's. In the modpack, where experience is disabled, it becomes the only reward of those advancements.
 - **How:** no advancement overrides. ISO listens to the advancement being earned (NeoForge `AdvancementEvent.AdvancementEarnEvent`), reads its XP reward and gives the emeralds. It covers vanilla, ISO and mod advancements automatically.
-- Amount: proportional to the XP reward (e.g. 1 emerald per 25-50 XP), to be tuned.
+- **Amount (decided): 1 emerald per 25 XP of reward, rounded down** (option), 142 emeralds from the vanilla challenges.
+- **Vanilla 1.21.1 XP rewards** (from `net/minecraft/data/advancements/packs`): only the 23 challenges give XP, 3590 in total; ISO's advancements give none.
+  - 40: Blowback. 50: Sniper Duel, Bullseye, Over-Overkill, A Complete Catalogue, The Whole Pack, Return to Sender, Great View From Up Here. 65: Two Birds, One Arrow. 85: Arbalistic.
+  - 100: Hero of the Village, Monsters Hunted, A Balanced Diet, Serious Dedication, Two by Two, Subspace Bubble, Uneasy Alliance, A Furious Cocktail, Cover Me in Debris.
+  - 150: Smithing with Style. 500: Adventuring Time, Hot Tourist Destinations. 1000: How Did We Get Here?
+  - Per advancement at 1 per 25 XP: Blowback 1, the 50 XP ones 2, Two Birds 2, Arbalistic 3, the 100 XP ones 4, Smithing with Style 6, the 500 XP ones 20, How Did We Get Here? 40.
 
 **Fishing (decided).** In vanilla the treasure has no emeralds: 6 items of weight 1, and the treasure branch is about 5% of catches in open water without Luck of the Sea.
 - A global loot modifier on `gameplay/fishing/treasure` does nothing (verified by the author): NeoForge does not run loot modifiers on nested tables, and `gameplay/fishing` rolls `treasure` as a nested table. The modpack hit the same limit with vault loot.
@@ -245,19 +250,19 @@ What ISO does:
 - ITR's `maxDiscount` and `preventCureDiscount` are not needed: there are no discounts.
 - *Local Flavours* follows the same rules: its cost is the food, so demand and mistreatment raise the amount of food asked.
 
-**Quantities and uses** (starting values, to be tuned against the anchor):
+**Quantities and uses are fixed (decided):** no ranges, every trade always gives the same quantity for the same price, set at the top of the ranges first proposed. Starting values, to be tuned against the anchor:
 
 | Category | 1 emerald gives | Uses per restock |
 |---|---|---|
-| Simple blocks (stone, dirt) | 64 | 4-6 |
-| Logs | 24-48 | 4-6 |
-| Processed blocks | 24-48 | 4 |
-| Wool | 12-24 | 4 |
-| Redstone components | 4-16 (by item) | 2-4 |
-| Arrows | 8-16 | 4 |
-| Seeds and crops | 4-8 | 4 |
-| Potions | 1-2 | 1-2 |
-| Special arrows | 4-8 | 2-4 |
+| Simple blocks (stone, dirt) | 64 | 6 |
+| Logs | 48 | 6 |
+| Processed blocks | 48 | 4 |
+| Wool | 24 | 4 |
+| Redstone components | 4 to 16, fixed per item | 4 |
+| Arrows | 16 | 4 |
+| Seeds and crops | 8 | 4 |
+| Potions | 2 | 2 |
+| Special arrows | 8 | 4 |
 | **Special items** | 1, sometimes at a higher cost | **1** |
 | *Local Flavours* (food → 1 emerald) | n/a | 1 |
 | Wandering trader buying | always 1 emerald | 1 |
@@ -268,32 +273,32 @@ The level acts as the lever: same price, better materials at high levels.
 
 ### 5.4 Items made of diamonds, iron, gold and copper (decided)
 
-**Rule: emerald + material = item.** Every sold item that has a recycling recipe into diamonds, iron, gold or copper costs **1 emerald + a random share between 50% and 75% of the material in its recipe** (its recycling output at full value), for the whole quantity sold. The share is rolled when the offer is created and stays fixed for that offer, like the random results (§6.1). So a villager can be a good deal (half the diamonds for a chestplate) or a poor one (almost what crafting costs): finding a good one means curing more villagers.
+**Rule: emerald + material = item, at a fixed price.** Every sold item that has a recycling recipe into diamonds, iron, gold or copper costs **1 emerald + 75% of the material in its recipe (its recycling output at full value), rounded down**, for the whole quantity sold. Quantity and price are both fixed, nothing is rolled: e.g. 8 hoppers (5 ingots each, 40 ingots) always cost 1 emerald + 30 iron ingots.
 
-- **Recycling a bought item can gain material (accepted).** ISO's recycling gives back up to 75% (`Recycling.outputMultiplier` 0.75), so below 75% buying and recycling gains material, diamonds included: a chestplate bought for 4 diamonds recycles into 6. This turns emeralds into diamonds, and it is accepted: emeralds are scarce, a good offer is luck, villagers do not breed and each one has to be cured, so "infinite" diamonds are a long grind. Diamond equipment stays **at level 5**, for any profession.
-- **At least 1 of the material.** The share is never below 1 unit: the diamond shovel and `diamond_dagger` (1 diamond) cost 1 emerald + 1 diamond.
-- **Unit.** The share is computed in the recycling output's unit (nuggets for iron, gold and copper equipment, finer than ingots) and written in ingots when it is large (above a stack of nuggets); rounding no longer matters, since the gain from recycling is accepted.
-- **Several items per trade (decided):** quantity and cost are rolled independently. The cost ranges from 50% of the material of the minimum quantity to 75% of the material of the maximum quantity, e.g. 4-8 hoppers (5 ingots each, 20-40 ingots) cost 1 emerald + 10-30 iron ingots. An unlucky offer (4 hoppers for 30 ingots) costs more than crafting them: accepted, it is part of the gamble.
+- **Recycling a bought item never gains material.** The price is what recycling gives back (`Recycling.outputMultiplier` 0.75), and recycling rounds down per single item, so buying and recycling gives back at most the material paid: 8 hoppers recycle into 8 × 33 = 264 nuggets, less than the 270 paid. The emerald is the price of not crafting the item. Diamond equipment stays **at level 5**, for any profession.
+- **When 75% rounds down to 0, the item costs only 1 emerald:** the diamond shovel and `diamond_dagger` (1 diamond).
+  - Both recycle into 1 diamond (`Recycling.minimumOutput` 1), so buying and recycling turns 1 emerald into 1 diamond: **accepted (decided)**, their recycling recipes stay. Diamond equipment is at level 5 and has 1 use per restock, so it is a slow trickle.
+- **Unit.** The share is computed in the recycling output's unit (nuggets for iron, gold and copper equipment, finer than ingots) and written in ingots when it is above a stack of nuggets. The provider checks that the written cost is never below what recycling gives back for the whole quantity, and fails `runData` otherwise; quantities are picked so the cost is a whole number of ingots (8 hoppers: 270 nuggets = 30 ingots; 16 pistons: 108 nuggets = 12 ingots).
+  - Lanterns (8 nuggets each) are sold 12 at a time (decided): 72 nuggets = 8 ingots; 16 would be 96 nuggets, not a whole number of ingots.
+- **Several items per trade:** the quantity is fixed too, and the price is computed on it.
 - **Affected trades**, with the current recycling recipes: copper armour, tools, weapons and daggers; iron armour, tools, weapons and daggers, shield, crossbow, shears, iron horse armour, anvil, hopper, piston, smithing table, lantern, compass, clock (gold), brush and spyglass (copper). The bell has no recycling recipe and is unaffected.
-- **Filled buckets** cost **1 emerald + 1 empty bucket**, like maps (1 emerald + 1 empty map): lava bucket and fish buckets.
+- **Filled buckets** cost **1 emerald + 2 iron ingots** (75% of the bucket's 3 ingots, rounded down) instead of an empty bucket: lava bucket and fish buckets. The filled bucket has no recycling recipe, but once emptied the bucket recycles into 20 nuggets, 2 more than the 18 paid: accepted (decided), an exception to the provider's check above.
 - **Prices computed from the recycling recipes:** the trade provider (§6.17) reads the recycling recipe JSON files instead of hard-coding the amounts, so a changed recycling recipe updates the price at the next `runData`.
-- *Technical:* it works with the current trade system: the cost is a `uniform` `NumberProvider` in `TradeCost` and the quantity a `set_count` in `given_item_modifiers`, rolled independently.
+- *Technical:* the cost is a constant count in `TradeCost` and the quantity the count of `gives`; no `set_count` roll.
 
 Diamond equipment:
 
 | Item | Diamonds in the recipe | Price | Recycled at 0.75 |
 |---|---|---|---|
-| Chestplate | 8 | 1 emerald + 4-6 | 6 |
-| Leggings | 7 | 1 + 3-5 | 5 |
-| Helmet | 5 | 1 + 2-3 | 3 |
-| Boots | 4 | 1 + 2-3 | 3 |
-| Pickaxe, axe | 3 | 1 + 1-2 | 2 |
+| Chestplate | 8 | 1 emerald + 6 | 6 |
+| Leggings | 7 | 1 + 5 | 5 |
+| Helmet | 5 | 1 + 3 | 3 |
+| Boots | 4 | 1 + 3 | 3 |
+| Pickaxe, axe | 3 | 1 + 2 | 2 |
 | Sword, hoe | 2 | 1 + 1 | 1 |
-| Shovel, `diamond_dagger` | 1 | 1 + 1 | 1 (minimum output) |
+| Shovel, `diamond_dagger` | 1 | 1 emerald | 1 (minimum output, accepted) |
 
-**Prerequisite, to be done in ISO's recycling** (by the author):
-- `Recycling.outputMultiplier` default **0.75** (today 1.0; the modpack already uses 0.75).
-- Recipes of items without durability back to their full value, so that the multiplier is the only knob and the provider reads the real material. Today their ~75% is written in the recipes (iron door 13 nuggets out of 18, anvil 23 ingots out of 31...) and the multiplier is not applied; recipe viewers also show the multiplier on them by mistake (`getResultItem`).
+**Recycling prerequisite: done** in 5.15.2.0: `Recycling.outputMultiplier` defaults to 0.75, items without durability recycle at full value with the multiplier applied, and recipe viewers show the actual output.
 
 ## 6. Trades
 
@@ -302,8 +307,8 @@ Diamond equipment:
 - **2 random trades per level**, as in vanilla (`Villager.updateTrades`). A level with 1 trade always offers it, with 2 always both; at least 3 are needed for randomness. Important trades go in small pools. Empty levels are fine (Matcha's "filler" trades are not needed).
 - **Only sells** (§5.1), with the quantities, uses and prices of §5.3.
 - **Nothing is enchanted, except the librarian's books.** Tools, bows, rods and armour are sold plain, so they are cheap and sit at low levels.
-- **Items that recycle into diamonds, iron, gold or copper** follow §5.4: 1 emerald + a random 50-75% of the material.
-- **Random results** (flower, colours, potions, tipped arrows, pottery sherds) are picked when the offer is created and stay fixed for that offer, through ISO's random loot functions (`report_villager_trades_system.md` §4).
+- **Items that recycle into diamonds, iron, gold or copper** follow §5.4: 1 emerald + 75% of the material, rounded down, at a fixed price.
+- **Random results** (flower, colours, potions, tipped arrows, pottery sherds): only *which* item is random, never its quantity or price. The item is picked when the offer is created and stays fixed for that offer, through ISO's random loot functions (`report_villager_trades_system.md` §4).
 - **Maps** cost 1 emerald + 1 empty map and use the `exploration_map` loot function. The trader sells surface structures, the cartographer underground ones and the ocean monument. **No map at all** for buried treasure (exclusive to shipwreck maps), ocean ruins, shipwrecks, ruined portals, mineshafts, outposts, strongholds (eyes of ender would become pointless) and biomes.
 - **Smiths:** the armorer, the toolsmith and the weaponsmith all sell the bell (level 2), the anvil and the lava bucket. Matcha's redstone components are split among them.
 - **Modpack:** it adds its own mods' items (foods, eggs, stones, woods) to the matching trade tags, in ISO's format.
@@ -323,7 +328,7 @@ In parentheses, Matcha's pool size for levels 1-5, excluding levels with only fi
 | **Fletcher** (3/1/1) | 64 arrows, healing and poison tipped arrows, spectral arrows, a special bow | Arrows, bows, ISO's special arrows, random tipped arrows |
 | **Leatherworker** (3/6/4/1) | A lumberjack: logs ×64 (exotic species also cost a sapling), an iron axe | Logs at 1-3, leather goods at 4-5 |
 | **Librarian** (3/3/1/1/1) | Rare books → heart containers, sacred texts → enchanted "ofuda", crystal heart; ender pearls | Paper, lapis, random enchanted books, Divine Fragment |
-| **Mason** (5/6/4/3) | "Bulk" stones (items standing for whole stacks) | Real blocks, 64 simple, 24-48 processed |
+| **Mason** (5/6/4/3) | "Bulk" stones (items standing for whole stacks) | Real blocks, 64 simple, 48 processed |
 | **Shepherd** (16/4/1) | 16 wool colours ×64, sheep spawn eggs, shears | Wool and coloured items with random colours, furnishings |
 | **Toolsmith** (4/1/1/2/4) | Jewellery (head-slot items with +1 armour, made of the pack's gems), gems | Plain tools, smith goods, workstations, diamond tools |
 | **Weaponsmith** (4/49) | Buys diamonds and the pack's metals; 49 items of metals that do not exist in 1.21.1 | Plain weapons, shield, smith goods, part of the redstone, diamond weapons |
@@ -336,10 +341,10 @@ In parentheses, Matcha's pool size for levels 1-5, excluding levels with only fi
 | 1 | Copper armour (helmet, chestplate, leggings, boots) |
 | 2 | Iron armour (helmet, chestplate, leggings, boots), bell |
 | 3 | Anvil, lava bucket |
-| 4 | Pistons (8-16), hoppers (4-8), dispensers (8-16) |
+| 4 | Pistons (16), hoppers (8), dispensers (16) |
 | 5 | Iron horse armour, diamond armour (helmet, chestplate, leggings, boots) |
 
-- Pistons and hoppers also cost iron per §5.4, on the rolled quantity (e.g. 8 hoppers: 1 emerald + 20-30 iron ingots); dispensers have no iron and only cost emeralds. ISO's `actual_redstone_components` makes redstone matter.
+- Pistons and hoppers also cost iron per §5.4, at a fixed quantity (16 pistons: 1 emerald + 12 iron ingots; 8 hoppers: 1 emerald + 30 iron ingots); dispensers have no iron and only cost emeralds. ISO's `actual_redstone_components` makes redstone matter.
 - The lava bucket recalls Matcha's "lava kit".
 - No chainmail armour (craftable with cloth in ISO).
 
@@ -353,7 +358,7 @@ Food is a challenge in ISO (`livestock` reduces meat), so the butcher sells litt
 | 2 | Raw chicken, raw mutton, raw rabbit: 2 per emerald |
 | 3 | Cooked chicken, cooked mutton, `over_easy_egg`: 1 per emerald |
 | 4 | Leather, cooked porkchop, cooked beef: 1 per emerald |
-| 5 | Rabbit's foot, cooked rabbit, `diamond_dagger` (1 emerald + 1 diamond, §5.4) |
+| 5 | Rabbit's foot, cooked rabbit, `diamond_dagger` (1 emerald, §5.4) |
 
 ### 6.5 Cartographer
 
@@ -361,11 +366,11 @@ Each map sits in a level with only 2 trades, so it is always offered.
 
 | Level | Sells |
 |---|---|
-| 1 | Paper (8-16), empty map, compass (2-4) |
+| 1 | Paper (16), empty map, compasses (4, 1 emerald + 12 iron ingots) |
 | 2 | **Trial chambers map**, brush |
 | 3 | **Ocean monument map**, spyglass |
-| 4 | A random pottery sherd (2-4), a banner of a random colour (8-16), item frames (8-16) |
-| 5 | **Ancient city map**, a random pottery sherd (2-4) |
+| 4 | A random pottery sherd (4), a banner of a random colour (16), item frames (16) |
+| 5 | **Ancient city map**, a random pottery sherd (4) |
 
 - Selling pottery sherds makes them renewable, which is fine for decorative items.
 - Banners and item frames are also sold by the shepherd: accepted overlap.
@@ -376,11 +381,11 @@ A brewing supplier: ingredients first, then random potions. ISO's stack sizes ap
 
 | Level | Sells |
 |---|---|
-| 1 | Glass bottles, redstone dust, glowstone dust (8-16 each) |
-| 2 | Nether wart (4-8), fermented spider eye (4-8), sugar (8-16), magma cream (4-8) |
+| 1 | Glass bottles, redstone dust, glowstone dust (16 each) |
+| 2 | Nether wart (8), fermented spider eye (8), sugar (16), magma cream (8) |
 | 3 | A random level I potion, a random level I splash potion: **2 per emerald** |
 | 4 | A random level II potion, a random level II splash potion: **1 for 2 emeralds** |
-| 5 | A random lingering potion (**1 for 2 emeralds**); blaze powder (2-4), ghast tears (2-4) |
+| 5 | A random lingering potion (**1 for 2 emeralds**); blaze powder (4), ghast tears (4) |
 
 - Long variants are excluded.
 - No fixed Weakness potion: the cure still needs the player to brew it, at least the first time.
@@ -393,10 +398,10 @@ No spawn eggs: animals still have to be found and bred (`livestock`).
 
 | Level | Sells |
 |---|---|
-| 1 | Bone meal (8-16, weighed against the `bone_meal` pack's nerf), a random flower (12-24) |
-| 2 | Pumpkin seeds, melon seeds, cocoa beans, red and brown mushrooms, sugar cane (4-8 each) |
-| 3 | Chicken eggs (`minecraft:egg`, 4-8) |
-| 4 | Glow berries, honey bottles, honeycomb (4-8 each) |
+| 1 | Bone meal (16, weighed against the `bone_meal` pack's nerf), a random flower (24) |
+| 2 | Pumpkin seeds, melon seeds, cocoa beans, red and brown mushrooms, sugar cane (8 each) |
+| 3 | Chicken eggs (`minecraft:egg`, 8) |
+| 4 | Glow berries, honey bottles, honeycomb (8 each) |
 | 5 | **Non-renewable seeds, 1 per emerald:** wheat seeds, beetroot seeds, `carrot_seeds`, `rooted_potato`, `sweet_berry_seeds` |
 
 - In ISO the level 5 seeds only come from wild crops (the `crops` pack removes seeds from grass and ferns): selling them only at the last level, one per emerald, keeps exploration meaningful.
@@ -409,15 +414,15 @@ ISO only has the 4 vanilla fish, so Matcha's rarity ladder cannot be copied: the
 
 | Level | Sells |
 |---|---|
-| 1 | Raw cod, raw salmon (2-4), dried kelp (4-8), fishing rod |
-| 2 | Cooked cod, cooked salmon, pufferfish (1-2) |
+| 1 | Raw cod, raw salmon (4), dried kelp (8), fishing rod |
+| 2 | Cooked cod, cooked salmon, pufferfish (2) |
 | 3 | `cod_chowder`, bucket of cod |
 | 4 | Nautilus shell (1 per emerald), bucket of salmon, bucket of pufferfish |
-| 5 | Decorative items that fishing also gives: lily pads, ink sacs, bamboo (4-8 each), bucket of tropical fish (1) |
+| 5 | Decorative items that fishing also gives: lily pads, ink sacs, bamboo (8 each), bucket of tropical fish (1) |
 
 - No `pufferfish_chowder`: *Local Flavours* buys it (§6.16), and like the butcher (§6.4) no villager sells a food that villagers buy. `cod_chowder` must stay out of the Local Flavours tag.
 - Selling nautilus shells makes conduits a little easier to reach: accepted.
-- Fish buckets cost 1 emerald + 1 empty bucket (§5.4).
+- Fish buckets cost 1 emerald + 2 iron ingots (§5.4).
 - Counts respect the food stack sizes of `StackSizes` (`64 / nutrition`: raw cod 32, cooked cod 13, cooked salmon 11).
 
 ### 6.9 Fletcher
@@ -426,11 +431,11 @@ ISO's special arrows are made at the fletching table: torch (1 torch + 1 arrow �
 
 | Level | Sells |
 |---|---|
-| 1 | Arrows (8-16), `shortbow` |
-| 2 | Bow, crossbow, torch arrows (4-8), flint (4-8), feathers (4-8) |
-| 3 | Spectral arrows, quartz arrows, tipped arrows with a random level I effect (4-8 each) |
-| 4 | Ice arrows, tipped arrows with a random level II effect (4-8 each) |
-| 5 | Explosive arrows, diamond arrows (4-8 each) |
+| 1 | Arrows (16), `shortbow` |
+| 2 | Bow, crossbow, torch arrows (8), flint (8), feathers (8) |
+| 3 | Spectral arrows, quartz arrows, tipped arrows with a random level I effect (8 each) |
+| 4 | Ice arrows, tipped arrows with a random level II effect (8 each) |
+| 5 | Explosive arrows, diamond arrows (8 each) |
 
 - Tipped arrows: any effect; level 3 uses the base potions, level 4 the `strong_` ones; long variants excluded.
 - `recycling` only recycles the crossbow (into iron), not arrows: diamond arrows create no diamonds.
@@ -441,11 +446,11 @@ Logs at levels 1-3 (Matcha's lumberjack, without the sapling as second cost), le
 
 | Level | Sells |
 |---|---|
-| 1 | Oak, birch and spruce logs (24-48 per emerald); copper axe, iron axe |
-| 2 | Acacia, jungle, dark oak, cherry and mangrove logs (24-48) |
-| 3 | Crimson and warped stems, bamboo blocks, mushroom stems (24-48) |
+| 1 | Oak, birch and spruce logs (48 per emerald); copper axe, iron axe |
+| 2 | Acacia, jungle, dark oak, cherry and mangrove logs (48) |
+| 3 | Crimson and warped stems, bamboo blocks, mushroom stems (48) |
 | 4 | Undyed leather armour: helmet, chestplate, leggings, boots |
-| 5 | Saddle, leather horse armour, leads (4-8) |
+| 5 | Saddle, leather horse armour, leads (8) |
 
 - Plain leather is sold by the butcher, not here.
 - Mushroom stems give no planks: kept for building.
@@ -457,9 +462,9 @@ The only villager that sells enchanted items; it also sells lapis, since it acts
 
 | Level | Sells |
 |---|---|
-| 1 | Paper (8-16), books (4-8) |
-| 2 | Lapis (8-16), bookshelves, lanterns (8-16), a random enchanted book |
-| 3 | Lapis (16-32), a random enchanted book, compasses (2-4), clocks (2-4) |
+| 1 | Paper (16), books (8) |
+| 2 | Lapis (16), bookshelves, lanterns (12, 1 emerald + 8 iron ingots), a random enchanted book |
+| 3 | Lapis (32), a random enchanted book, compasses (4, 1 emerald + 12 iron ingots), clocks (4, 1 emerald + 12 gold ingots) |
 | 4 | A random enchanted book, book and quill |
 | 5 | Divine Fragment (heart of the sea) for 1 emerald + 1 echo shard |
 
@@ -471,7 +476,7 @@ The only villager that sells enchanted items; it also sells lapis, since it acts
 
 ### 6.12 Mason
 
-Bulk items do not exist in 1.21.1, so the mason sells real blocks: **simple blocks 64 per emerald** (stone, andesite, diorite, granite, dirt, deepslate, tuff, calcite, dripstone block, blackstone), **processed blocks 24-48** (glass, smooth sandstone, smooth red sandstone, smooth basalt, smooth quartz, terracotta, mud bricks, concrete, glazed terracotta).
+Bulk items do not exist in 1.21.1, so the mason sells real blocks: **simple blocks 64 per emerald** (stone, andesite, diorite, granite, dirt, deepslate, tuff, calcite, dripstone block, blackstone), **processed blocks 48** (glass, smooth sandstone, smooth red sandstone, smooth basalt, smooth quartz, terracotta, mud bricks, concrete, glazed terracotta).
 
 | Level | Sells |
 |---|---|
@@ -487,10 +492,10 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 
 | Level | Sells |
 |---|---|
-| 1 | White wool (12-24), shears, string (8-16) |
-| 2 | Wool of a random colour (12-24), a random dye (8-16), carpets of a random colour (12-24) |
-| 3 | Bed of a random colour (1), banners of a random colour (8-16), another random-colour wool trade |
-| 4 | Paintings, item frames, glow item frames (8-16 each), another random-colour wool trade |
+| 1 | White wool (24), shears, string (16) |
+| 2 | Wool of a random colour (24), a random dye (16), carpets of a random colour (24) |
+| 3 | Bed of a random colour (1), banners of a random colour (16), another random-colour wool trade |
+| 4 | Paintings, item frames, glow item frames (16 each), another random-colour wool trade |
 | 5 | A random craftable banner pattern (flower, creeper, skull, bricks...) |
 
 ### 6.14 Toolsmith and weaponsmith
@@ -502,7 +507,7 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | 1 | Copper pickaxe, shovel and hoe |
 | 2 | Iron pickaxe, shovel and hoe; bell |
 | 3 | Anvil, lava bucket |
-| 4 | Crafters (4-8), smithing table, grindstone |
+| 4 | Crafters (8), smithing table, grindstone |
 | 5 | Diamond pickaxe, shovel, axe and hoe |
 
 **Weaponsmith**
@@ -512,7 +517,7 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | 1 | Copper sword, `copper_dagger`, copper axe |
 | 2 | Iron sword, `iron_dagger`, iron axe, shield; bell |
 | 3 | Anvil, lava bucket |
-| 4 | Repeaters, comparators, observers (8-16 each) |
+| 4 | Repeaters, comparators, observers (16 each) |
 | 5 | Diamond sword, `diamond_dagger` |
 
 - Overlaps (daggers at the butcher, axes at the leatherworker) are accepted.
@@ -530,7 +535,7 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | `uncommon` | rare | 2 | Maps of surface structures, 1 emerald + 1 empty map: desert pyramid, jungle pyramid, swamp hut, igloo, woodland mansion, abandoned villages, trail ruins |
 | `buying` | none, added by ISO | 2 | Buys music discs and one item as in ITR, like vanilla's trade rebalance (baked potatoes, fermented spider eyes, hay bales, milk, potions, water); **always 1 emerald** per purchase, 1 use per restock |
 
-- Quantities: 12-24 for common plants and blocks, 1-4 for the rarer ones (blue ice, coral, sea pickles).
+- Quantities: 24 for common plants and blocks, 4 for the rarer ones (blue ice, coral, sea pickles).
 - **Purchases always pay 1 emerald (decided)**, never more (vanilla's rebalance pays 2 for water and milk buckets, 3 for a fermented spider eye). So buying an item from the cleric (fermented spider eye, potions) and selling it to the trader never gains emeralds: at best it gives the emerald back.
 - Seeds are sold as in ITR, although rare in ISO: the trader is a random, occasional source.
 - No villager eggs (Matcha's *Asylum Seekers*).
@@ -600,7 +605,7 @@ To be carried out only after confirmation.
   - pillager loot (moved from `mob_loot_changes`) and the fishing loot modifier (§5.2);
   - Hero of the Village gift loot tables (§6.17).
 - **Removed:** the `disable_long_noses` pack and `Packs.disableLongNosesStructures`; the `replaceZombieVillagersWithNormalZombies` option and its code.
-- **Other changes:** the cure item tag; the recycling fixes of §5.4 (prerequisite); update of `PORTING.md`.
+- **Other changes:** the cure item tag; the recycling fixes of §5.4 (prerequisite, done in 5.15.2.0); update of `PORTING.md`.
 
 **Mixins** (`mixin/module/mobs/villager/`):
 
@@ -620,7 +625,7 @@ To be carried out only after confirmation.
 
 **Phases:**
 1. **Trade system** (see its report): **done**, `MerchantTrades` feature (commit `b098c726a`). It is tested by spawning villagers in creative with spawn eggs or commands, while villagers stay unobtainable in survival.
-2. **Recycling fixes** (§5.4), before the trades with diamonds, iron, gold or copper go live.
+2. **Recycling fixes** (§5.4): **done** in 5.15.2.0.
 3. **Overhaul, all together:** villagers obtainable (no zombie replacement, conversion always on, golden carrot, cure and convalescence, no breeding, no nitwits), abandoned villages, outposts, mansions, emerald ore, fishing, pillager loot, advancement emeralds, and the final trades of every profession and of the wandering trader. Vanilla trades are never live.
 4. Local Flavours and Hero of the Village gifts, in the same release or right after.
 
@@ -647,18 +652,18 @@ To be carried out only after confirmation.
 - Villagers only sell; *Local Flavours* and the wandering trader's few purchases are the exceptions (§5.1).
 - Vanilla trades never live; single release (§5.1, §8).
 - Pillagers 0-1 emerald, looting at most +1 at 33% per level; patrols and raids kept (§5.2).
-- Emeralds from advancements with XP rewards, through the earn event (§5.2).
+- Emeralds from advancements with XP rewards, through the earn event, 1 emerald per 25 XP rounded down (§5.2).
 - Fishing emeralds through a loot modifier on `gameplay/fishing` (§5.2).
 - The modpack drops `no_emeralds_datapack` (§5.2).
 - Prices: base 1 emerald, `reputation_discount` 0.2, rise with demand and mistreatment, never drop below the base; positive demand decays at 0.6, also with time as in vanilla; negative demand kept (§5.3).
 - Low uses per restock; special items 1 use (§5.3).
-- Items that recycle into diamonds, iron, gold or copper cost 1 emerald + a random 50-75% of their material, rolled per offer; buying and recycling can gain material, accepted; diamond equipment at level 5; recycling fixes as prerequisite (§5.4).
+- Items that recycle into diamonds, iron, gold or copper cost 1 emerald + 75% of their material, rounded down, at a fixed quantity and price; buying and recycling never gains material (accepted exceptions: diamond shovel and dagger, 1 diamond; filled buckets, 2 nuggets); diamond equipment at level 5; recycling fixes done in 5.15.2.0 (§5.4).
 - `reputation_discount` 0.2 written in every trade file (§5.3).
 
 **Trades**
 - 2 random trades per level; `lockTrades` on; no Amnestic (§6.1, §7).
 - Nothing enchanted except the librarian's books (§6.1).
-- Random results fixed per offer; maps at 1 emerald + 1 empty map, split between trader and cartographer (§6.1).
+- Quantities, prices and uses fixed, never rolled (§5.3); random results only pick the item, fixed per offer; maps at 1 emerald + 1 empty map, split between trader and cartographer (§6.1).
 - Tables of all 13 professions (§6.3-§6.14).
 - Wandering trader: natural spawn, `common`/`uncommon`/`buying` pools with ITR's counts; every purchase pays 1 emerald (§6.15).
 - *Local Flavours* with complex foods, 1 use per restock, available from the start with the level 1 trades; no villager sells those foods (§6.8, §6.16).
