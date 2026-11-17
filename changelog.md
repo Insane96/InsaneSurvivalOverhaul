@@ -14,6 +14,8 @@
   * `experienceToLevelUpMultiplier` (default 1): multiplier to the experience villagers need to level up
   * Villages are abandoned: every village is a zombie village, about 5 times rarer (spacing 80, separation 50), with no iron golems, cats or animals, and zombie villagers in about 30% of the villager slots
     * No beds (turned into carpets), bells or job sites, so no POIs; crops become dead bushes or disappear, farmland becomes coarse dirt, hay bales, pumpkins and melons are removed
+    * Village chests have much less loot (1-2 or 1-3 rolls) and almost no food
+    * Most of the loot is buried in the houses: floors have suspicious gravel (suspicious sand in deserts) with loot themed on the house (armorer, butcher, cartographer, fisher, fletcher, library, mason, shepherd, tannery, temple, toolsmith, weaponsmith, or the biome's houses), with pottery sherds and rare emeralds
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
 * Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
 * Removed `Spawning.replaceZombieVillagersWithNormalZombies`
