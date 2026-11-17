@@ -9,6 +9,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.OreWithRand
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.SetRandomItemFunction;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.SetRandomPotionFunction;
 import insane96mcp.insanesurvivaloverhaul.world.level.levelgen.structure.templatesystem.RandomBlockTagMatchTest;
+import insane96mcp.insanesurvivaloverhaul.world.level.levelgen.structure.templatesystem.SuspiciousFloorProcessor;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -77,6 +79,9 @@ public class ISORegistries {
 
     public static final DeferredHolder<RuleTestType<?>, RuleTestType<RandomBlockTagMatchTest>> RANDOM_BLOCK_TAG_MATCH =
             RULE_TEST_TYPES.register("random_block_tag_match", RandomBlockTagMatchTest.Type::new);
+    public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSORS = createRegistry(BuiltInRegistries.STRUCTURE_PROCESSOR);
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<SuspiciousFloorProcessor>> SUSPICIOUS_FLOOR_PROCESSOR =
+            STRUCTURE_PROCESSORS.register("suspicious_floor", () -> () -> SuspiciousFloorProcessor.CODEC);
     public static final DeferredHolder<Feature<?>, BigOreVeinFeature> BIG_ORE_VEIN_FEATURE =
             FEATURES.register("ore_with_surface_feature", () -> new BigOreVeinFeature(OreWithRandomPatchConfiguration.CODEC));
 
