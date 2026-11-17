@@ -2,8 +2,9 @@
 * Added the `Villagers` feature in the Mobs module (work in progress, see `report_villagers_tasks.md`): villagers can only be obtained by curing zombie villagers
   * Villagers can no longer breed
   * Zombie villagers are cured with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag (Golden Carrot) instead of the Golden Apple
-  * `cureDurationMin` and `cureDurationMax` set how long the cure takes (vanilla 3600-6000 ticks)
+  * `cureDuration` (minimum and maximum) sets how long the cure takes (vanilla 3600-6000 ticks)
   * `alwaysConvertZombie`: villagers killed by zombies always turn into zombie villagers, whatever the difficulty
+  * Cured villagers get the new Convalescence effect for `convalescenceDuration` ticks (default 24000, 0 disables): they refuse to trade (shaking their head), don't work or restock, and have Slowness
   * `noNitwits`: cured nitwits become unemployed villagers that can take a job
   * `fireResistantStructureZombieVillagers`: zombie villagers placed by structures get infinite Fire Resistance
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
