@@ -94,6 +94,7 @@
         "module.mobs.turtles.TurtleMixin_Turtles",
         "module.mobs.villager.VillagerMixin_Villagers",
         "module.mobs.villager.WanderingTraderMixin_MerchantTrades",
+        "module.mobs.villager.WorkAtPoiMixin_Villagers",
         "module.mobs.villager.ZombieMixin_Villagers",
         "module.mobs.villager.ZombieVillagerMixin_Villagers",
         "module.movement.BoatMixin_Boats",

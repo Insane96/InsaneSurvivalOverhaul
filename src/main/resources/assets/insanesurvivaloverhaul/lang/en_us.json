@@ -232,6 +232,8 @@
 
     "effect.insanesurvivaloverhaul.tired": "Tired",
     "effect.insanesurvivaloverhaul.tired.description": "Obtained when haven't slept in a while. Slightly reduces movement, mining and attack speed.",
+    "effect.insanesurvivaloverhaul.convalescence": "Convalescence",
+    "effect.insanesurvivaloverhaul.convalescence.description": "Recovering after being cured from zombification. Doesn't trade nor work, and moves slower.",
     "effect.insanesurvivaloverhaul.energy_boost": "Energy Boost",
     "effect.insanesurvivaloverhaul.energy_boost.description": "Lowers tiredness",
     "effect.insanesurvivaloverhaul.regenerating_absorption": "Regen. Absorption",
