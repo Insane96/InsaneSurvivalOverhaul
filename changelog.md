@@ -12,6 +12,8 @@
   * `clampNegativeDemand`: a trade's demand can't go below -max uses, so it can always get more expensive again
   * `lockTrades`: villagers get 1 experience as soon as they take a job, so they keep it
   * `experienceToLevelUpMultiplier` (default 1): multiplier to the experience villagers need to level up
+  * Villages are abandoned: every village is a zombie village, about 5 times rarer (spacing 80, separation 50), with no iron golems, cats or animals, and zombie villagers in about 30% of the villager slots
+    * No beds (turned into carpets), bells or job sites, so no POIs; crops become dead bushes or disappear, farmland becomes coarse dirt, hay bales, pumpkins and melons are removed
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
 * Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
 * Removed `Spawning.replaceZombieVillagersWithNormalZombies`
