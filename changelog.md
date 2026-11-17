@@ -1,4 +1,14 @@
 # Upcoming
+* Added the `Villagers` feature in the Mobs module (work in progress, see `report_villagers_tasks.md`): villagers can only be obtained by curing zombie villagers
+  * Villagers can no longer breed
+  * Zombie villagers are cured with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag (Golden Carrot) instead of the Golden Apple
+  * `cureDurationMin` and `cureDurationMax` set how long the cure takes (vanilla 3600-6000 ticks)
+  * `alwaysConvertZombie`: villagers killed by zombies always turn into zombie villagers, whatever the difficulty
+  * `noNitwits`: cured nitwits become unemployed villagers that can take a job
+  * `fireResistantStructureZombieVillagers`: zombie villagers placed by structures get infinite Fire Resistance
+  * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
+* Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
+* Removed `Spawning.replaceZombieVillagersWithNormalZombies`
 * Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can now be added, removed and replaced via data packs, with a format based on 26.1's
   * Trades go in `data/<namespace>/insanesurvivaloverhaul/villager_trade/`, with `wants`, `additional_wants`, `gives`, `given_item_modifiers`, `max_uses`, `reputation_discount`, `xp`, `merchant_predicate` and `double_trade_price_enchantments`
   * Trades can be grouped in tags (`data/<namespace>/tags/insanesurvivaloverhaul/villager_trade/`)

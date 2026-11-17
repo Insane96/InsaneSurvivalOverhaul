@@ -22,8 +22,6 @@ public class Packs extends Feature {
     @Config(description = "If true, no integrated data pack will be loaded")
     public static Boolean disableAllDataPacks = false;
 
-    @Config(description = "If true a data pack will be enabled that disables villages, pillagers outpost and mansions generation.")
-    public static Boolean disableLongNosesStructures = true;
     @Config(description = "If true a data pack will be enabled that makes furnaces require copper. Copper ingots can be obtained from raw copper on campfires.")
     public static Boolean copperFurnace = true;
 
@@ -79,7 +77,6 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("misc_tweaks", "Insane's Survival Overhaul Misc Tweaks", () -> this.isEnabled() && !Packs.disableAllDataPacks && miscTweaks);
         InsaneSO.addServerPack("prismarine_rework", "Insane's Survival Overhaul Prismarine Rework", () -> this.isEnabled() && !Packs.disableAllDataPacks && prismarineRework);
         InsaneSO.addServerPack("actual_redstone_components", "Insane's Survival Overhaul Actual Redstone components", () -> this.isEnabled() && !Packs.disableAllDataPacks && actualRedstoneComponents);
-        InsaneSO.addServerPack("disable_long_noses", "Insane's Survival Overhaul Disable Long Noses", () -> this.isEnabled() && !Packs.disableAllDataPacks && disableLongNosesStructures);
         InsaneSO.addServerPack("copper_furnace", "Insane's Survival Overhaul Copper Furnace", () -> this.isEnabled() && !Packs.disableAllDataPacks && copperFurnace);
         InsaneSO.addServerPack("craftable_saplings", "Insane's Survival Overhaul Sapling Drop Fix", () -> this.isEnabled() && !Packs.disableAllDataPacks && craftableSaplings);
         InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);

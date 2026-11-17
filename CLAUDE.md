@@ -82,7 +82,7 @@ data/generator/ — Data gen providers (tags, recipes, block states, item models
 
 ### Integrated Data Packs
 
-The `Packs` feature (`module/misc/Packs.java`) registers integrated resource/data packs from `src/main/resources/integrated_packs/`. These are optional packs bundled with the mod and conditionally enabled based on feature config (e.g., `disable_long_noses`, `crops`, `no_food_in_furnace`).
+The `Packs` feature (`module/misc/Packs.java`) registers integrated resource/data packs from `src/main/resources/integrated_packs/`. These are optional packs bundled with the mod and conditionally enabled based on feature config (e.g., `villagers_overhaul`, `crops`, `no_food_in_furnace`).
 
 Packs are registered via `InsaneSO.addServerPack(...)` or `InsaneSO.addClientPack(...)`.
 
