@@ -6,32 +6,22 @@ import insane96mcp.insanelib.core.feature.Module;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.util.MCUtils;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
-import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
@@ -45,8 +35,6 @@ public class Spawning extends Feature {
 
     public static final SimpleBlockWithItem ECHO_LANTERN = SimpleBlockWithItem.register("echo_lantern", () -> new EchoLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN).lightLevel(state -> 7).explosionResistance(120)));
 
-    @Config
-    public static Boolean replaceZombieVillagersWithNormalZombies = true;
     @Config(description = "Allows mobs to spawn in the world spawn (in vanilla mobs can't spawn in a 24 blocks radius from world spawn)")
     public static Boolean allowWorldSpawnSpawn = true;
     @Config(description = "Disables normal skeletons from spawning in Fortresses.")
@@ -75,45 +63,6 @@ public class Spawning extends Feature {
         StructureStart structureStart = ((ServerLevel)event.getLevel()).structureManager().getStructureAt(event.getPos(), fortress);
         if (structureStart.isValid())
             event.getSpawnerDataList().stream().filter(data -> data.type == EntityType.SKELETON).findFirst().ifPresent(event::removeSpawnerData);
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onZombieVillagerJoin(EntityJoinLevelEvent event) {
-        if (!this.isEnabled()
-                || !replaceZombieVillagersWithNormalZombies
-                || event.getEntity().getType() != EntityType.ZOMBIE_VILLAGER
-                || !(event.getLevel() instanceof ServerLevel level))
-            return;
-
-        ZombieVillager zombieVillager = (ZombieVillager) event.getEntity();
-        event.setCanceled(true);
-        MinecraftServer server = level.getServer();
-        //The event can fire while the chunk is still loading, so the conversion is delayed to avoid deadlocks
-        server.tell(new TickTask(server.getTickCount(), () -> {
-            //The zombie is finalized before being added to the level, so equipment changes from finalizeSpawn go through EntityJoinLevelEvent
-            Zombie zombie = EntityType.ZOMBIE.create(level);
-            if (zombie == null)
-                return;
-            zombie.moveTo(zombieVillager.getX(), zombieVillager.getY(), zombieVillager.getZ(), zombieVillager.getYRot(), zombieVillager.getXRot());
-            if (zombieVillager.hasCustomName()) {
-                zombie.setCustomName(zombieVillager.getCustomName());
-                zombie.setCustomNameVisible(zombieVillager.isCustomNameVisible());
-            }
-            if (zombieVillager.isPersistenceRequired())
-                zombie.setPersistenceRequired();
-            EventHooks.finalizeMobSpawn(zombie, level, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, new Zombie.ZombieGroupData(zombieVillager.isBaby(), false));
-            //Keep the zombie villager's equipment (e.g. items picked up from players) over the newly generated one
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                ItemStack stack = zombieVillager.getItemBySlot(slot);
-                if (stack.isEmpty())
-                    continue;
-                zombie.setItemSlot(slot, stack.copy());
-                zombie.setDropChance(slot, ((MobAccessor) zombieVillager).invokeGetEquipmentDropChance(slot));
-            }
-            if (zombieVillager.canPickUpLoot())
-                zombie.setCanPickUpLoot(true);
-            level.addFreshEntityWithPassengers(zombie);
-        }));
     }
 
     @SubscribeEvent

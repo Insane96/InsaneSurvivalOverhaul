@@ -13,6 +13,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.stacksizes.StackSizes;
 import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
@@ -118,6 +119,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(Items.COOKIE)
                 .addOptional(ResourceLocation.parse("farmersdelight:chocolate_pie_slice")).addOptional(ResourceLocation.parse("create:bar_of_chocolate")).addOptional(ResourceLocation.parse("create:chocolate_glazed_berries"));
 
+        tag(Villagers.CURE_ITEMS)
+                .add(Items.GOLDEN_CARROT);
         tag(Spawners.SPAWNER_REACTIVATOR_TAG)
                 .add(Items.ECHO_SHARD);
         tag(EchoPillar.ECHO_PILLAR_CATALYST)
