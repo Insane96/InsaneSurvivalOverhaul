@@ -4,11 +4,13 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Villager.class)
@@ -46,5 +48,22 @@ public abstract class VillagerMixin_Villagers {
     private void insanesurvivaloverhaul$noRestockWhenConvalescent(CallbackInfoReturnable<Boolean> cir) {
         if (Villagers.isConvalescent((Villager) (Object) this))
             cir.setReturnValue(false);
+    }
+
+    /**
+     * When {@link Villagers} is active, replaces the special prices: only negative reputation raises them, no discounts (see {@link Villagers#updateSpecialPrices}).
+     */
+    @Inject(method = "updateSpecialPrices", at = @At("HEAD"), cancellable = true)
+    private void insanesurvivaloverhaul$onlyNegativeReputationPrices(Player player, CallbackInfo ci) {
+        if (Villagers.updateSpecialPrices((Villager) (Object) this, player))
+            ci.cancel();
+    }
+
+    /**
+     * Locks the trades of a villager taking a job by giving it 1 experience (see {@link Villagers#lockTrades}).
+     */
+    @Inject(method = "setVillagerData", at = @At("HEAD"))
+    private void insanesurvivaloverhaul$lockTrades(VillagerData data, CallbackInfo ci) {
+        Villagers.lockTrades((Villager) (Object) this, data);
     }
 }
