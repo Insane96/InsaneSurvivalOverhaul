@@ -7,6 +7,11 @@
   * Cured villagers get the new Convalescence effect for `convalescenceDuration` ticks (default 24000, 0 disables): they refuse to trade (shaking their head), don't work or restock, and have Slowness
   * `noNitwits`: cured nitwits become unemployed villagers that can take a job
   * `fireResistantStructureZombieVillagers`: zombie villagers placed by structures get infinite Fire Resistance
+  * Prices never drop below the base price: only negative reputation (hitting or killing villagers) changes them, no discounts from curing, trading or Hero of the Village
+  * `positiveDemandDecayMultiplier` (default 0.6): expensive trades go back to the base price more slowly
+  * `clampNegativeDemand`: a trade's demand can't go below -max uses, so it can always get more expensive again
+  * `lockTrades`: villagers get 1 experience as soon as they take a job, so they keep it
+  * `experienceToLevelUpMultiplier` (default 1): multiplier to the experience villagers need to level up
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
 * Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
 * Removed `Spawning.replaceZombieVillagersWithNormalZombies`
