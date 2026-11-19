@@ -32,6 +32,7 @@ import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.lowfish.LowFish;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.Berries;
@@ -179,6 +180,9 @@ public class ISOEmiPlugin implements EmiPlugin {
 			if (Tweaks.totemResistance)
 				addInfo(registry, emiIngredientOf(Items.TOTEM_OF_UNDYING), "totem_of_undying", "totem_of_undying");
 		}
+		if (Villagers.isActive())
+			addInfo(registry, EmiIngredient.of(Villagers.CURE_ITEMS), "zombie_villager_cure", "zombie_villager_cure",
+					Villagers.convalescenceDuration > 0 ? "zombie_villager_cure.convalescence" : null);
 	}
 
 	/**

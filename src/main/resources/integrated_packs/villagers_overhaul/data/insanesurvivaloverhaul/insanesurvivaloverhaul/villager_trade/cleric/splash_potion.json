@@ -1,0 +1,19 @@
+{
+  "given_item_modifiers": [
+    {
+      "function": "insanesurvivaloverhaul:set_random_potion",
+      "potions": "#insanesurvivaloverhaul:level_1_potions"
+    }
+  ],
+  "gives": {
+    "count": 2,
+    "id": "minecraft:splash_potion"
+  },
+  "max_uses": 2,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 10
+}

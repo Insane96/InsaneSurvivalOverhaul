@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bell"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:repeater"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:comparator"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:observer"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

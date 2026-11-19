@@ -9,6 +9,10 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -17,6 +21,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.ZombieVillager;
@@ -28,11 +33,18 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingConversionEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 @LoadFeature(module = ISOModules.MOBS, description = "Villagers can only be obtained by curing zombie villagers: no breeding, no nitwits, conversion to zombie villager on every difficulty, cure with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag, convalescence after the cure, prices that only rise (demand and mistreatment, no discounts), emeralds from advancements that give experience. Requires the villagers overhaul data pack (VillagersCommon).")
 public class Villagers extends Feature {
@@ -99,6 +111,38 @@ public class Villagers extends Feature {
                 offer.addToSpecialPriceDiff(Math.max(0, -Mth.floor(negativeReputation * offer.getPriceMultiplier())));
         }
         return true;
+    }
+
+    /**
+     * The Hero of the Village gift loot table of a profession for an effect level: {@code <profession namespace>:gameplay/hero_of_the_village/<profession>_gift_level_<level>}.
+     */
+    public static ResourceLocation heroGiftLootTable(ResourceLocation professionId, int level) {
+        return professionId.withPath(path -> "gameplay/hero_of_the_village/" + path + "_gift_level_" + level);
+    }
+
+    /**
+     * Hero of the Village gifts scaling with the effect level (I-V): rolls the profession's {@link #heroGiftLootTable} for the hero's level.
+     * Returns null, so the vanilla gift is thrown, when the feature isn't active, for babies, or when the loot table doesn't exist (e.g. unemployed and nitwits). An empty loot table gifts nothing.
+     */
+    @Nullable
+    public static List<ItemStack> getHeroGift(Villager villager, LivingEntity hero) {
+        if (!isActive()
+                || villager.isBaby()
+                || !(villager.level() instanceof ServerLevel level))
+            return null;
+        MobEffectInstance heroOfTheVillage = hero.getEffect(MobEffects.HERO_OF_THE_VILLAGE);
+        if (heroOfTheVillage == null)
+            return null;
+        int heroLevel = Mth.clamp(heroOfTheVillage.getAmplifier() + 1, 1, 5);
+        ResourceLocation professionId = BuiltInRegistries.VILLAGER_PROFESSION.getKey(villager.getVillagerData().getProfession());
+        LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, heroGiftLootTable(professionId, heroLevel)));
+        if (lootTable == LootTable.EMPTY)
+            return null;
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, villager.position())
+                .withParameter(LootContextParams.THIS_ENTITY, villager)
+                .create(LootContextParamSets.GIFT);
+        return lootTable.getRandomItems(params);
     }
 
     /**

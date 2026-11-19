@@ -1,0 +1,110 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:stone"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:andesite"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:diorite"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:granite"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:dirt"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:deepslate"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:glass"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:smooth_sandstone"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:smooth_red_sandstone"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:tuff"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

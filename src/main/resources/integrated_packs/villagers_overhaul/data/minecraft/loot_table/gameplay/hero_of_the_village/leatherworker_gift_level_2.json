@@ -1,0 +1,90 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:oak_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:birch_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:spruce_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:acacia_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:jungle_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:dark_oak_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:cherry_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:mangrove_log"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

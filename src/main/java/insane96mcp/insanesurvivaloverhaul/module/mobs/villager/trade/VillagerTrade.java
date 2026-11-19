@@ -69,12 +69,12 @@ public record VillagerTrade(TradeCost wants, Optional<TradeCost> additionalWants
         int wantsCount = this.wants.rollCount(context);
         if (this.doubleTradePriceEnchantments.isPresent() && hasAnyStoredEnchantment(result, this.doubleTradePriceEnchantments.get()))
             wantsCount *= 2;
-        ItemCost costA = this.wants.toItemCost(wantsCount);
+        ItemCost costA = this.wants.toItemCost(wantsCount, context.getRandom());
         if (costA == null)
             return null;
         Optional<ItemCost> costB = Optional.empty();
         if (this.additionalWants.isPresent()) {
-            ItemCost itemCost = this.additionalWants.get().toItemCost(this.additionalWants.get().rollCount(context));
+            ItemCost itemCost = this.additionalWants.get().toItemCost(this.additionalWants.get().rollCount(context), context.getRandom());
             if (itemCost == null)
                 return null;
             costB = Optional.of(itemCost);

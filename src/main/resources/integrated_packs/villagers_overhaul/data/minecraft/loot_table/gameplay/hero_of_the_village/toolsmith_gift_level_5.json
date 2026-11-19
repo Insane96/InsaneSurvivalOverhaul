@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bell"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:grindstone"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_shovel"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

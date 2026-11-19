@@ -1,0 +1,19 @@
+{
+  "given_item_modifiers": [
+    {
+      "function": "insanesurvivaloverhaul:set_random_item",
+      "items": "#insanesurvivaloverhaul:coral_blocks"
+    }
+  ],
+  "gives": {
+    "count": 4,
+    "id": "minecraft:tube_coral_block"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 1
+}

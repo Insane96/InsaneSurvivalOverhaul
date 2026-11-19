@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:bone_meal"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#insanesurvivaloverhaul:farmer_flowers"
+            }
+          ],
+          "name": "minecraft:dandelion"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

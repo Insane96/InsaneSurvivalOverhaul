@@ -1,0 +1,23 @@
+{
+  "values": [
+    "minecraft:night_vision",
+    "minecraft:invisibility",
+    "minecraft:leaping",
+    "minecraft:fire_resistance",
+    "minecraft:swiftness",
+    "minecraft:slowness",
+    "minecraft:turtle_master",
+    "minecraft:water_breathing",
+    "minecraft:healing",
+    "minecraft:harming",
+    "minecraft:poison",
+    "minecraft:regeneration",
+    "minecraft:strength",
+    "minecraft:weakness",
+    "minecraft:slow_falling",
+    "minecraft:wind_charged",
+    "minecraft:weaving",
+    "minecraft:oozing",
+    "minecraft:infested"
+  ]
+}

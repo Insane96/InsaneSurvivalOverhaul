@@ -1,0 +1,14 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:rabbit_stew",
+    "random_item": "#insanesurvivaloverhaul:complex_foods"
+  },
+  "xp": 1
+}

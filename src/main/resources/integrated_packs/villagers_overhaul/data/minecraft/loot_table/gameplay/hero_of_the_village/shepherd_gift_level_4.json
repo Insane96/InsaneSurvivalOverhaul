@@ -1,0 +1,154 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:white_wool"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:string"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:wool"
+            }
+          ],
+          "name": "minecraft:white_wool"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#c:dyes"
+            }
+          ],
+          "name": "minecraft:white_dye"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 32,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:wool_carpets"
+            }
+          ],
+          "name": "minecraft:white_carpet"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:beds"
+            }
+          ],
+          "name": "minecraft:white_bed"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:banners"
+            }
+          ],
+          "name": "minecraft:white_banner"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:wool"
+            }
+          ],
+          "name": "minecraft:white_wool"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:item_frame"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:glow_item_frame"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:wool"
+            }
+          ],
+          "name": "minecraft:white_wool"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

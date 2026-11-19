@@ -1,0 +1,14 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:music_disc_13",
+    "random_item": "#minecraft:creeper_drop_music_discs"
+  },
+  "xp": 1
+}

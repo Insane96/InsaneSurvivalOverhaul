@@ -1,5 +1,5 @@
 # Upcoming
-* Added the `Villagers` feature in the Mobs module (work in progress, see `report_villagers_tasks.md`): villagers can only be obtained by curing zombie villagers
+* Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers
   * Villagers can no longer breed
   * Zombie villagers are cured with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag (Golden Carrot) instead of the Golden Apple
   * `cureDuration` (minimum and maximum) sets how long the cure takes (vanilla 3600-6000 ticks)
@@ -21,10 +21,29 @@
   * Pillagers killed by a player drop 0-1 emerald, plus 1 more with a 33% chance per Looting level (the drop moved from the `Mob Loot Changes` data pack, which now only gives arrows)
   * Fishing in open water can rarely catch an emerald instead of the normal catch (0.7%, up to about 1.6% with Luck of the Sea III)
   * `advancementExperiencePerEmerald` (default 25, 0 disables): advancements that give experience also give 1 emerald every 25 experience
-  * New trades, all for 1 emerald, with fixed quantities and limited uses. They replace every trade of the profession, mods' too. Only the mason has them for now:
+  * New trades, all for 1 emerald, with fixed quantities and limited uses. They replace every trade of the profession, mods' too. Items made of diamonds, iron, gold or copper also cost 75% of the material they recycle into:
+    * Armorer: copper armour, then iron armour and bell, anvil and lava bucket, pistons, hoppers and dispensers, and at the last level iron horse armour and diamond armour
+    * Butcher: iron and copper daggers, then raw and cooked meat, over easy eggs, leather, rabbit's foot and at the last level a diamond dagger
+    * Cartographer: paper, empty maps and compasses, maps to trial chambers, ocean monuments and (at the last level) ancient cities, brush, spyglass, pottery sherds and banners of a random kind, item frames
+    * Cleric: brewing ingredients (glass bottles, redstone, glowstone, nether wart, fermented spider eyes, sugar, magma cream), then random potions and splash potions (level I, then level II), and at the last level random lingering potions, blaze powder and ghast tears. No long potions
+    * Farmer: bone meal and a random flower, pumpkin and melon seeds, cocoa beans, mushrooms and sugar cane, eggs, glow berries, honey bottles and honeycomb, and at the last level wheat, beetroot, carrot, potato and sweet berry seeds, 1 per emerald
+    * Fisherman: raw and cooked cod and salmon, pufferfish, dried kelp, fishing rod, cod chowder, nautilus shells, buckets of fish (they also cost iron), and at the last level lily pads, ink sacs and bamboo
+    * Fletcher: arrows and shortbow, bow, crossbow, flint, feathers and ISO's special arrows (torch, quartz, ice, explosive and diamond arrows) as levels rise, spectral arrows and tipped arrows with a random effect (level I, then level II)
+    * Leatherworker: logs and stems of every wood (48 per emerald), copper and iron axes, then undyed leather armour, and at the last level saddles, leather horse armour and leads
+    * Librarian: paper, books, lapis, bookshelves, lanterns, compasses and clocks, book and quill, random enchanted books (stronger at higher levels, they also cost a book), and at the last level a Divine Fragment for an echo shard
     * Mason: simple blocks (stone, andesite, diorite, granite, dirt, deepslate, tuff, calcite, dripstone, blackstone), 64 per emerald, 6 uses
     * Mason: processed blocks (glass, smooth sandstone, smooth red sandstone, mud bricks, smooth basalt, smooth quartz, and terracotta, concrete and glazed terracotta of a random colour), 48 per emerald, 4 uses
+    * Shepherd: white wool, shears and string, then wool, dyes, carpets, beds and banners of a random colour (24 wool or 64 carpets per emerald), paintings and item frames, and at the last level a random banner pattern (flower, creeper, skull or thing)
+    * Toolsmith: copper, then iron tools, bell, anvil, lava bucket, crafters, smithing table and grindstone, and at the last level diamond tools
+    * Weaponsmith: copper, then iron swords, daggers and axes, shield, bell, anvil, lava bucket, repeaters, comparators and observers, and at the last level diamond sword and dagger
+    * Wandering Trader: 6 trades of plants and natural blocks from other biomes (random saplings, flowers and coral blocks, mushrooms, podzol, mycelium, ice, seeds...), 2 maps to surface structures (desert and jungle pyramids, swamp huts, igloos, woodland mansions, abandoned villages, trail ruins; they also cost an empty map) and 2 purchases: a random music disc, baked potatoes, fermented spider eyes, hay bales, milk, water buckets and water bottles, always for 1 emerald
+    * Local Flavours: every villager also buys 1 random complex food (rabbit stew, fungi stew, pufferfish chowder; `insanesurvivaloverhaul:complex_foods` item tag) for 1 emerald, once per restock. It's the first trade and it's available from the first level
+  * Hero of the Village gifts scale with the effect level: a villager gifts 1 random item it sells up to the hero's level (1 piece, or half the trade's quantity). Items that also cost materials, enchanted books and maps are never gifted. Villagers with nothing to gift at that level (e.g. smiths at level I) gift nothing; unemployed villagers and nitwits keep the vanilla gift
+    * The gifts are the `<profession namespace>:gameplay/hero_of_the_village/<profession>_gift_level_<n>` loot tables
+  * EMI: added an info page on the zombie villager cure
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
+* Potion Stack Size Data Pack
+  * Lingering Potions now stack up to 4, like Splash Potions
 * Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
 * Removed `Spawning.replaceZombieVillagersWithNormalZombies`
 * Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can now be added, removed and replaced via data packs, with a format based on 26.1's
@@ -33,8 +52,10 @@
   * Trade sets (`data/<namespace>/insanesurvivaloverhaul/trade_set/`) set the trades of each Villager level (e.g. `minecraft:armorer/level_1`, modded professions too) and Wandering Trader pool (`minecraft:wandering_trader/buying`, `uncommon` and `common`)
     * `remove` can remove the vanilla trades (`vanilla`) or all of them, modded trades included (`all`) before adding the new ones
     * Wandering Trader pools support `amount`, `allow_duplicates` and `random_sequence`. The new `buying` pool is empty by default
+    * The `insanesurvivaloverhaul:local_flavours` trade set adds its trades to every villager before the level 1 ones (empty by default)
   * Trades with items from mods that are not installed are skipped with a warning in the log. `neoforge:conditions` are supported
   * Added the `set_random_item` and `set_random_potion` loot functions, to sell a random item or potion from a list
+  * `wants` and `additional_wants` accept `random_item` (an item tag or list), to ask for a random item from it, picked when the offer is created
   * Changes apply on `/reload`
 * Added `/insanesurvivaloverhaul villager_trades dump [<profession>|wandering_trader|all] [vanilla|modded|all]`, which writes every trade, modded ones included, as data pack files in `logs/insanesurvivaloverhaul/`
 
@@ -49,6 +70,7 @@
   * Animals of any type are now counted for `autoBreedCrowdStart` and `autoBreedCrowdMax`, instead of only the ones of the same type, to also prevent crowds of mixed animals
 * Recycling's `outputMultiplier` now also applies to items without durability (e.g. Hoppers, Minecarts, Rails), not only in recipe viewers
   * Recycling Data Pack
+    * Added recycling for the Crafter (5 iron ingots, with the 75% rule)
     * Items without durability now give back 100% of the material used to craft them (rounded down) instead of 75%, `outputMultiplier` takes care of making recycling lossy
   * `outputMultiplier` reduced: 1 -> 0.75. Recycling now always gives back at most 75% of the material, also for damageable items
 * Disable Stone Tools Data Pack

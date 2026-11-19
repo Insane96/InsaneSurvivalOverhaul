@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 12,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:white_wool"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:string"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:paper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:map"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 2,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:decorated_pot_sherds"
+            }
+          ],
+          "name": "minecraft:angler_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "insanesurvivaloverhaul:set_random_item",
+              "items": "#minecraft:banners"
+            }
+          ],
+          "name": "minecraft:white_banner"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:item_frame"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

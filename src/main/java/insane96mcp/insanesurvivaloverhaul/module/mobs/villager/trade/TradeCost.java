@@ -3,7 +3,11 @@ package insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.ItemCost;
@@ -13,15 +17,20 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * The price of a trade (the 26.1 {@code wants} / {@code additional_wants}): an item, a count provider and the exact components the item must have.
+ * <p>
+ * ISO extension: {@code random_item} (an item tag or list) replaces {@code id} with a random item from it, picked when the offer is created (e.g. a trade buying any music disc).
+ * {@code id} is still required, and used if {@code random_item} is empty.
  */
-public record TradeCost(Holder<Item> item, NumberProvider count, DataComponentPredicate components) {
+public record TradeCost(Holder<Item> item, NumberProvider count, DataComponentPredicate components, Optional<HolderSet<Item>> randomItem) {
     public static final Codec<TradeCost> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ItemStack.ITEM_NON_AIR_CODEC.fieldOf("id").forGetter(TradeCost::item),
             NumberProviders.CODEC.optionalFieldOf("count", ConstantValue.exactly(1)).forGetter(TradeCost::count),
-            DataComponentPredicate.CODEC.optionalFieldOf("components", DataComponentPredicate.EMPTY).forGetter(TradeCost::components)
+            DataComponentPredicate.CODEC.optionalFieldOf("components", DataComponentPredicate.EMPTY).forGetter(TradeCost::components),
+            RegistryCodecs.homogeneousList(Registries.ITEM).optionalFieldOf("random_item").forGetter(TradeCost::randomItem)
     ).apply(instance, TradeCost::new));
 
     public int rollCount(LootContext context) {
@@ -29,17 +38,18 @@ public record TradeCost(Holder<Item> item, NumberProvider count, DataComponentPr
     }
 
     /**
-     * Builds the {@link ItemCost} with the given count, capped at the item's max stack size.
+     * Builds the {@link ItemCost} with the given count, capped at the item's max stack size, picking the item from {@code random_item} if present.
      * Returns null if the count is below 1, meaning the trade must not be offered.
      */
     @Nullable
-    public ItemCost toItemCost(int count) {
+    public ItemCost toItemCost(int count, RandomSource random) {
         if (count < 1)
             return null;
-        ItemCost itemCost = new ItemCost(this.item, count, this.components);
+        Holder<Item> item = this.randomItem.flatMap(items -> items.getRandomElement(random)).orElse(this.item);
+        ItemCost itemCost = new ItemCost(item, count, this.components);
         int maxStackSize = itemCost.itemStack().getMaxStackSize();
         if (count > maxStackSize)
-            itemCost = new ItemCost(this.item, maxStackSize, this.components);
+            itemCost = new ItemCost(item, maxStackSize, this.components);
         return itemCost;
     }
 }

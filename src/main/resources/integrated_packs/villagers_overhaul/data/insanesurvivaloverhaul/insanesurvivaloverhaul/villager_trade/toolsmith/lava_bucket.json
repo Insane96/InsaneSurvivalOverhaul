@@ -1,0 +1,17 @@
+{
+  "additional_wants": {
+    "count": 2,
+    "id": "minecraft:iron_ingot"
+  },
+  "gives": {
+    "count": 1,
+    "id": "minecraft:lava_bucket"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 10
+}

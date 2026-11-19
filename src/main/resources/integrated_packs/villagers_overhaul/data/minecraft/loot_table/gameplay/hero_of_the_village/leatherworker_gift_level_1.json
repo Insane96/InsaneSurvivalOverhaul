@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:oak_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:birch_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:spruce_log"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}
