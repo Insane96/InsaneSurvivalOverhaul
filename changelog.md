@@ -49,7 +49,7 @@
 * Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can now be added, removed and replaced via data packs, with a format based on 26.1's
   * Trades go in `data/<namespace>/insanesurvivaloverhaul/villager_trade/`, with `wants`, `additional_wants`, `gives`, `given_item_modifiers`, `max_uses`, `reputation_discount`, `xp`, `merchant_predicate` and `double_trade_price_enchantments`
   * Trades can be grouped in tags (`data/<namespace>/tags/insanesurvivaloverhaul/villager_trade/`)
-  * Trade sets (`data/<namespace>/insanesurvivaloverhaul/trade_set/`) set the trades of each Villager level (e.g. `minecraft:armorer/level_1`, modded professions too) and Wandering Trader pool (`minecraft:wandering_trader/buying`, `uncommon` and `common`)
+  * Trade sets (`data/<namespace>/insanesurvivaloverhaul/trade_set/`) set the trades of each Villager level (e.g. `minecraft:armorer/level_1`, modded professions too) and Wandering Trader pool (`minecraft:wandering_trader/buying`, `common` and `uncommon`, offered in this order)
     * `remove` can remove the vanilla trades (`vanilla`) or all of them, modded trades included (`all`) before adding the new ones
     * Wandering Trader pools support `amount`, `allow_duplicates` and `random_sequence`. The new `buying` pool is empty by default
     * The `insanesurvivaloverhaul:local_flavours` trade set adds its trades to every villager before the level 1 ones (empty by default)
