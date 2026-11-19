@@ -1,71 +1,34 @@
 # Upcoming
-* Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers
-  * Villagers can no longer breed
-  * Zombie villagers are cured with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag (Golden Carrot) instead of the Golden Apple
-  * `cureDuration` (minimum and maximum) sets how long the cure takes (vanilla 3600-6000 ticks)
-  * `alwaysConvertZombie`: villagers killed by zombies always turn into zombie villagers, whatever the difficulty
-  * Cured villagers get the new Convalescence effect for `convalescenceDuration` ticks (default 24000, 0 disables): they refuse to trade (shaking their head), don't work or restock, and have Slowness
-  * `noNitwits`: cured nitwits become unemployed villagers that can take a job
-  * `fireResistantStructureZombieVillagers`: zombie villagers placed by structures get infinite Fire Resistance
-  * Prices never drop below the base price: only negative reputation (hitting or killing villagers) changes them, no discounts from curing, trading or Hero of the Village
-  * `positiveDemandDecayMultiplier` (default 0.6): expensive trades go back to the base price more slowly
-  * `clampNegativeDemand`: a trade's demand can't go below -max uses, so it can always get more expensive again
-  * `lockTrades`: villagers get 1 experience as soon as they take a job, so they keep it
-  * `experienceToLevelUpMultiplier` (default 1): multiplier to the experience villagers need to level up
-  * Villages are abandoned: every village is a zombie village, about 5 times rarer (spacing 80, separation 50), with no iron golems, cats or animals, and zombie villagers in about 30% of the villager slots
-    * No beds (turned into carpets), bells or job sites, so no POIs; crops become dead bushes or disappear, farmland becomes coarse dirt, hay bales, pumpkins and melons are removed
-    * Village chests have much less loot (1-2 or 1-3 rolls) and almost no food
-    * Most of the loot is buried in the houses: floors have suspicious gravel (suspicious sand in deserts) with loot themed on the house (armorer, butcher, cartographer, fisher, fletcher, library, mason, shepherd, tannery, temple, toolsmith, weaponsmith, or the biome's houses), with pottery sherds and rare emeralds
-  * Pillager outposts no longer spawn pillagers continuously: the watchtower has a one-time garrison of 6 pillagers (that don't despawn), one of them a captain
-  * Emerald ore now generates in every overworld biome at 1/4 of the mountains' rate (mountains keep the vanilla ore, plus this one)
-  * Pillagers killed by a player drop 0-1 emerald, plus 1 more with a 33% chance per Looting level (the drop moved from the `Mob Loot Changes` data pack, which now only gives arrows)
-  * Fishing in open water can rarely catch an emerald instead of the normal catch (0.7%, up to about 1.6% with Luck of the Sea III)
-  * `advancementExperiencePerEmerald` (default 25, 0 disables): advancements that give experience also give 1 emerald every 25 experience
-  * New trades, all for 1 emerald, with fixed quantities and limited uses. They replace every trade of the profession, mods' too. Items made of diamonds, iron, gold or copper also cost 75% of the material they recycle into:
-    * Armorer: copper armour, then iron armour and bell, anvil and lava bucket, pistons, hoppers and dispensers, and at the last level iron horse armour and diamond armour
-    * Butcher: iron and copper daggers, then raw and cooked meat, over easy eggs, leather, rabbit's foot and at the last level a diamond dagger
-    * Cartographer: paper, empty maps and compasses, maps to trial chambers, ocean monuments and (at the last level) ancient cities, brush, spyglass, pottery sherds and banners of a random kind, item frames
-    * Cleric: brewing ingredients (glass bottles, redstone, glowstone, nether wart, fermented spider eyes, sugar, magma cream), then random potions and splash potions (level I, then level II), and at the last level random lingering potions, blaze powder and ghast tears. No long potions
-    * Farmer: bone meal and a random flower, pumpkin and melon seeds, cocoa beans, mushrooms and sugar cane, eggs, glow berries, honey bottles and honeycomb, and at the last level wheat, beetroot, carrot, potato and sweet berry seeds, 1 per emerald
-    * Fisherman: raw and cooked cod and salmon, pufferfish, dried kelp, fishing rod, cod chowder, nautilus shells, buckets of fish (they also cost iron), and at the last level lily pads, ink sacs and bamboo
-    * Fletcher: arrows and shortbow, bow, crossbow, flint, feathers and ISO's special arrows (torch, quartz, ice, explosive and diamond arrows) as levels rise, spectral arrows and tipped arrows with a random effect (level I, then level II)
-    * Leatherworker: logs and stems of every wood (48 per emerald), copper and iron axes, then undyed leather armour, and at the last level saddles, leather horse armour and leads
-    * Librarian: paper, books, lapis, bookshelves, lanterns, compasses and clocks, book and quill, random enchanted books (stronger at higher levels, they also cost a book), and at the last level a Divine Fragment for an echo shard
-    * Mason: simple blocks (stone, andesite, diorite, granite, dirt, deepslate, tuff, calcite, dripstone, blackstone), 64 per emerald, 6 uses
-    * Mason: processed blocks (glass, smooth sandstone, smooth red sandstone, mud bricks, smooth basalt, smooth quartz, and terracotta, concrete and glazed terracotta of a random colour), 48 per emerald, 4 uses
-    * Shepherd: white wool, shears and string, then wool, dyes, carpets, beds and banners of a random colour (24 wool or 64 carpets per emerald), paintings and item frames, and at the last level a random banner pattern (flower, creeper, skull or thing)
-    * Toolsmith: copper, then iron tools, bell, anvil, lava bucket, crafters, smithing table and grindstone, and at the last level diamond tools
-    * Weaponsmith: copper, then iron swords, daggers and axes, shield, bell, anvil, lava bucket, repeaters, comparators and observers, and at the last level diamond sword and dagger
-    * Wandering Trader: 6 trades of plants and natural blocks from other biomes (random saplings, flowers and coral blocks, mushrooms, podzol, mycelium, ice, seeds...), 2 maps to surface structures (desert and jungle pyramids, swamp huts, igloos, woodland mansions, abandoned villages, trail ruins; they also cost an empty map) and 2 purchases: a random music disc, baked potatoes, fermented spider eyes, hay bales, milk, water buckets and water bottles, always for 1 emerald
-    * Local Flavours: every villager also buys 1 random complex food (rabbit stew, fungi stew, pufferfish chowder; `insanesurvivaloverhaul:complex_foods` item tag) for 1 emerald, once per restock. It's the first trade and it's available from the first level
-  * Hero of the Village gifts scale with the effect level: a villager gifts 1 random item it sells up to the hero's level (1 piece, or half the trade's quantity). Items that also cost materials, enchanted books and maps are never gifted. Villagers with nothing to gift at that level (e.g. smiths at level I) gift nothing; unemployed villagers and nitwits keep the vanilla gift
-    * The gifts are the `<profession namespace>:gameplay/hero_of_the_village/<profession>_gift_level_<n>` loot tables
+* Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers. Only works when the new `Villagers Overhaul` data pack is enabled
+  * Villagers can no longer breed. Zombie villagers are cured with a Golden Carrot (`insanesurvivaloverhaul:zombie_villager_cure_items` item tag) instead of a Golden Apple
+  * Villagers killed by zombies always become zombie villagers, whatever the difficulty; cured nitwits become unemployed villagers
+  * Cured villagers get the new Convalescence effect for a day: they don't trade, work or restock, and are slowed
+  * Prices never drop below the base price: no discounts from curing, trading or Hero of the Village, only hitting or killing villagers raises them. Expensive trades go back to the base price more slowly
+  * Villagers keep their job and trades once they take a job
+  * Villages are abandoned: all zombie villages, much rarer (spacing 80, separation 50), with a few fire-resistant zombie villagers and no golems, cats, animals, beds, bells, job sites or food. Chests are poor, most of the loot is in suspicious gravel and sand buried in the houses' floors
+  * Pillager outposts no longer spawn pillagers: they have a one-time garrison with a captain. Woodland mansions generate again
+  * Emeralds: emerald ore generates rarely in every overworld biome; pillagers killed by a player drop 0-1 emerald (more with Looting); fishing in open water can rarely catch one; advancements that give experience also give 1 emerald every 25 experience
+  * New trades replace every vanilla and mod trade: villagers only sell, everything costs 1 emerald with fixed quantities and few uses per restock, items made of metals or diamonds also cost 75% of the material they recycle into, diamond equipment is at the last level, the only enchanted items are the librarian's books. See the `Villagers Overhaul` data pack for the full list
+  * The Wandering Trader buys 2 items, then sells 6 plants and blocks from other biomes and 2 maps to surface structures
+  * Local Flavours: every villager also buys 1 random complex food (`insanesurvivaloverhaul:complex_foods` item tag) for 1 emerald, as its first trade
+  * Hero of the Village gifts scale with the effect level: villagers gift 1 random item they sell up to the hero's level (`gameplay/hero_of_the_village/<profession>_gift_level_<n>` loot tables)
   * EMI: added an info page on the zombie villager cure
-  * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
 * Potion Stack Size Data Pack
   * Lingering Potions now stack up to 4, like Splash Potions
-* Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
-* Removed `Spawning.replaceZombieVillagersWithNormalZombies`
-* Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can now be added, removed and replaced via data packs, with a format based on 26.1's
-  * Trades go in `data/<namespace>/insanesurvivaloverhaul/villager_trade/`, with `wants`, `additional_wants`, `gives`, `given_item_modifiers`, `max_uses`, `reputation_discount`, `xp`, `merchant_predicate` and `double_trade_price_enchantments`
-  * Trades can be grouped in tags (`data/<namespace>/tags/insanesurvivaloverhaul/villager_trade/`)
-  * Trade sets (`data/<namespace>/insanesurvivaloverhaul/trade_set/`) set the trades of each Villager level (e.g. `minecraft:armorer/level_1`, modded professions too) and Wandering Trader pool (`minecraft:wandering_trader/buying`, `common` and `uncommon`, offered in this order)
-    * `remove` can remove the vanilla trades (`vanilla`) or all of them, modded trades included (`all`) before adding the new ones
-    * Wandering Trader pools support `amount`, `allow_duplicates` and `random_sequence`. The new `buying` pool is empty by default
-    * The `insanesurvivaloverhaul:local_flavours` trade set adds its trades to every villager before the level 1 ones (empty by default)
-  * Trades with items from mods that are not installed are skipped with a warning in the log. `neoforge:conditions` are supported
-  * Added the `set_random_item` and `set_random_potion` loot functions, to sell a random item or potion from a list
-  * `wants` and `additional_wants` accept `random_item` (an item tag or list), to ask for a random item from it, picked when the offer is created
-  * Changes apply on `/reload`
+* Removed the `Disable Long Noses` data pack: villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
+* Zombie villagers are no longer replaced with normal zombies
+* Added back the `Merchant trades` feature in the Mobs module: Villager and Wandering Trader trades can be added, removed and replaced via data packs, with the 26.1 format ([wiki](https://github.com/Insane96/InsaneSurvivalOverhaul/wiki/%5B1.21.1%5D-Villager-Trades))
+  * Trade sets can remove the vanilla trades or every trade, mods' included, before adding theirs. The Wandering Trader has a new `buying` pool
+  * Added the `set_random_item` and `set_random_potion` loot functions and the `random_item` field in trade costs, to sell or ask for a random item
+* Added the `villager_trades dump` command, which writes every trade, mods' included, as data pack files in `logs/insanesurvivaloverhaul/`
 * Spider eyes no longer have reduced stack size
 * Mob Loot Changes Data Pack
+  * Piglins now barter 1~2 Ender Pearls instead of 2~4
   * Fixed Looting being able to lower mob drops: it added -1~1 per level, so drops could be lost and on average nothing was gained. Now Looting gives +1 drop with a 33.3% chance per level (Ender Pearls 20% per level)
     * Blaze Rods, String, Spider Eyes, Gunpowder (Creepers), Phantom Membranes, Arrows and Bones (Skeletons, Strays, Wither Skeletons), Coal, Slime Balls
-  * Piglins now barter 1~2 Ender Pearls instead of 2~4
 * Tools and Weapons Rework Data Pack
   * Decreased Golden tools and weapons damage, they no longer deal the same damage as Wooden ones. Golden now has about the DPS of Copper, lower than Iron, instead of more than Iron
     * Sword 2.3 -> 1.8, Axe 5.4 -> 4.4, Pickaxe 3.2 -> 2.6, Shovel 3.6 -> 2.95, Hoe 1.55 -> 1.2, Dagger 1.3 -> 0.925
-* Added `/insanesurvivaloverhaul villager_trades dump [<profession>|wandering_trader|all] [vanilla|modded|all]`, which writes every trade, modded ones included, as data pack files in `logs/insanesurvivaloverhaul/`
 
 # 5.15.2.0
 * Hardcore Torches Data Pack
