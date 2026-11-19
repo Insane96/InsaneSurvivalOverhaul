@@ -22,6 +22,15 @@
   * Added the `set_random_item` and `set_random_potion` loot functions and the `random_item` field in trade costs, to sell or ask for a random item
 * Added the `villager_trades dump` command, which writes every trade, mods' included, as data pack files in `logs/insanesurvivaloverhaul/`
 * Spider eyes no longer have reduced stack size
+* Death Inventory Penalty
+  * Enabled by default
+  * Added the `insanesurvivaloverhaul:death_keep_equipment` game rule (enabled by default): worn armor, the offhand and hotbar items with durability are kept on death, losing `death_durability_penalty`% durability, while everything else drops normally (works with grave mods, e.g. Gravestone). Items with Curse of Vanishing (enchantment or rune) are still destroyed
+  * `death_durability_penalty` now defaults to 15%
+  * No longer changes the vanilla `keepInventory` game rule: if it's manually enabled it takes precedence and the feature does nothing
+  * **Existing worlds**: game rules and config values already saved keep their old values. To get the new defaults:
+    * Set `"Enable Death inventory penalty" = true` in `config/insanesurvivaloverhaul/server.toml` (and in `<world>/serverconfig/insanesurvivaloverhaul/server.toml` if present), or delete the line to have it regenerated
+    * Run `/gamerule insanesurvivaloverhaul:death_durability_penalty 15`
+    * Run `/gamerule keepInventory false` if it was enabled by the previous version of the feature
 * Mob Loot Changes Data Pack
   * Piglins now barter 1~2 Ender Pearls instead of 2~4
   * Fixed Looting being able to lower mob drops: it added -1~1 per level, so drops could be lost and on average nothing was gained. Now Looting gives +1 drop with a 33.3% chance per level (Ender Pearls 20% per level)
