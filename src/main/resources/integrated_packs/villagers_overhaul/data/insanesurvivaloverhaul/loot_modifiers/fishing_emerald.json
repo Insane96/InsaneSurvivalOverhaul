@@ -1,0 +1,30 @@
+{
+  "type": "insanesurvivaloverhaul:replace_with_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/fishing"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type_specific": {
+          "type": "minecraft:fishing_hook",
+          "in_open_water": true
+        }
+      }
+    },
+    {
+      "condition": "minecraft:random_chance_with_enchanted_bonus",
+      "enchantment": "minecraft:luck_of_the_sea",
+      "unenchanted_chance": 0.007,
+      "enchanted_chance": {
+        "type": "minecraft:linear",
+        "base": 0.01,
+        "per_level_above_first": 0.003
+      }
+    }
+  ],
+  "table": "insanesurvivaloverhaul:gameplay/fishing_emerald"
+}

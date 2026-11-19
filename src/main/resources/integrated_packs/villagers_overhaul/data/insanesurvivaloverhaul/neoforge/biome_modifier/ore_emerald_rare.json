@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "insanesurvivaloverhaul:ore_emerald_rare",
+  "step": "underground_ores"
+}

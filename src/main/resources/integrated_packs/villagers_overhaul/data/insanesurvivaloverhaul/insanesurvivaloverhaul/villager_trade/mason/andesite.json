@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 64,
+    "id": "minecraft:andesite"
+  },
+  "max_uses": 6,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 1
+}

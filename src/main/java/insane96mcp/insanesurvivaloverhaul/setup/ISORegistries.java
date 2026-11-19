@@ -1,9 +1,11 @@
 package insane96mcp.insanesurvivaloverhaul.setup;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.condition.FedCondition;
 import insane96mcp.insanesurvivaloverhaul.data.condition.LivestockAgeCondition;
+import insane96mcp.insanesurvivaloverhaul.data.lootmodifier.ReplaceWithTableLootModifier;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeinFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.OreWithRandomPatchConfiguration;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.SetRandomItemFunction;
@@ -34,6 +36,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -68,6 +71,10 @@ public class ISORegistries {
             LOOT_FUNCTIONS.register("set_random_item", () -> new LootItemFunctionType<>(SetRandomItemFunction.CODEC));
     public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<SetRandomPotionFunction>> SET_RANDOM_POTION_FUNCTION =
             LOOT_FUNCTIONS.register("set_random_potion", () -> new LootItemFunctionType<>(SetRandomPotionFunction.CODEC));
+
+    public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = createRegistry(NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
+    public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<ReplaceWithTableLootModifier>> REPLACE_WITH_TABLE_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("replace_with_table", () -> ReplaceWithTableLootModifier.CODEC);
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = createRegistry(BuiltInRegistries.RECIPE_SERIALIZER);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = createRegistry(BuiltInRegistries.RECIPE_TYPE);

@@ -13,7 +13,7 @@ import net.neoforged.fml.config.ModConfig;
 @ConfigType(ModConfig.Type.COMMON)
 @LoadFeature(module = ISOModules.MOBS, description = "Data pack of the villagers overhaul. The Villagers feature does nothing when the data pack is disabled.")
 public class VillagersCommon extends Feature {
-    @Config(description = "Enables the villagers overhaul data pack: abandoned villages, outposts and mansions, villager and wandering trader trades. When disabled, the Villagers feature does nothing too.")
+    @Config(description = "Enables the villagers overhaul data pack: abandoned villages, outposts and mansions, emerald ore, emeralds from pillagers and fishing, villager and wandering trader trades. When disabled, the Villagers feature does nothing too.")
     public static Boolean villagersOverhaul = true;
 
     @Override

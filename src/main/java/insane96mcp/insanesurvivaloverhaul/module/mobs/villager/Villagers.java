@@ -25,12 +25,16 @@ import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingConversionEvent;
+import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.MOBS, description = "Villagers can only be obtained by curing zombie villagers: no breeding, no nitwits, conversion to zombie villager on every difficulty, cure with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag, convalescence after the cure, prices that only rise (demand and mistreatment, no discounts). Requires the villagers overhaul data pack (VillagersCommon).")
+@LoadFeature(module = ISOModules.MOBS, description = "Villagers can only be obtained by curing zombie villagers: no breeding, no nitwits, conversion to zombie villager on every difficulty, cure with the items in the `insanesurvivaloverhaul:zombie_villager_cure_items` item tag, convalescence after the cure, prices that only rise (demand and mistreatment, no discounts), emeralds from advancements that give experience. Requires the villagers overhaul data pack (VillagersCommon).")
 public class Villagers extends Feature {
     public static final TagKey<Item> CURE_ITEMS = ISOItemTagsProvider.create("zombie_villager_cure_items");
     /**
@@ -57,6 +61,8 @@ public class Villagers extends Feature {
     public static Boolean lockTrades = true;
     @Config(min = 0d, description = "Multiplier to the experience villagers need to level up.")
     public static Double experienceToLevelUpMultiplier = 1d;
+    @Config(min = 0, description = "Advancements that give experience as a reward also give 1 emerald every this much experience (rounded down). 0 disables it.")
+    public static Integer advancementExperiencePerEmerald = 25;
 
     /**
      * The feature does nothing when the villagers overhaul data pack is disabled.
@@ -170,5 +176,21 @@ public class Villagers extends Feature {
         villager.setVillagerData(villager.getVillagerData().setProfession(VillagerProfession.NONE));
         //The brain was built with the nitwit profile, which never looks for a job site
         villager.refreshBrain(level);
+    }
+
+    /**
+     * Gives emeralds for the experience reward of the earned advancement, so it works for vanilla, ISO and mod advancements alike.
+     */
+    @SubscribeEvent
+    public void onAdvancementEarned(AdvancementEvent.AdvancementEarnEvent event) {
+        if (!isActive()
+                || advancementExperiencePerEmerald <= 0
+                || event.getEntity().level().isClientSide())
+            return;
+
+        int emeralds = event.getAdvancement().value().rewards().experience() / advancementExperiencePerEmerald;
+        if (emeralds <= 0)
+            return;
+        ItemHandlerHelper.giveItemToPlayer(event.getEntity(), new ItemStack(Items.EMERALD, emeralds));
     }
 }
