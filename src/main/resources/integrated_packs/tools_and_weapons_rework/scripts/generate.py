@@ -64,7 +64,8 @@ def modifier(type_id, mod_id, amount, operation, slot="mainhand"):
     return {
         "type":      type_id,
         "id":        mod_id,
-        "amount":    amount,
+        # Rounded to strip float noise (e.g. 3.0999999999999996); "+ 0.0" turns -0.0 into 0.0
+        "amount":    round(amount, 4) + 0.0,
         "operation": operation,
         "slot":      slot,
     }

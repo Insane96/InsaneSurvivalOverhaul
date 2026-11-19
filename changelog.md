@@ -58,6 +58,9 @@
   * `wants` and `additional_wants` accept `random_item` (an item tag or list), to ask for a random item from it, picked when the offer is created
   * Changes apply on `/reload`
 * Spider eyes no longer have reduced stack size
+* Tools and Weapons Rework Data Pack
+  * Decreased Golden tools and weapons damage, they no longer deal the same damage as Wooden ones. Golden now has about the DPS of Copper, lower than Iron, instead of more than Iron
+    * Sword 2.3 -> 1.8, Axe 5.4 -> 4.4, Pickaxe 3.2 -> 2.6, Shovel 3.6 -> 2.95, Hoe 1.55 -> 1.2, Dagger 1.3 -> 0.925
 * Added `/insanesurvivaloverhaul villager_trades dump [<profession>|wandering_trader|all] [vanilla|modded|all]`, which writes every trade, modded ones included, as data pack files in `logs/insanesurvivaloverhaul/`
 
 # 5.15.2.0
