@@ -142,7 +142,8 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
                 .add(BigOreVeins.COPPER_ORE_ROCK.item().get(), BigOreVeins.IRON_ORE_ROCK.item().get(), BigOreVeins.GOLD_ORE_ROCK.item().get());
 
         tag(StackSizes.NO_FOOD_STACK_SIZE_CHANGES)
-                .add(Items.GOLDEN_CARROT);
+                .add(Items.GOLDEN_CARROT)
+                .add(Items.SPIDER_EYE);
 
         tag(AttackSounds.AXE_ATTACK_SOUND)
                 .addTag(ItemTags.AXES);

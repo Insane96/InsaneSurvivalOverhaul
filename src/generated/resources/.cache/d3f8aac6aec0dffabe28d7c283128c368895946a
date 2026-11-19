@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-19T17:57:34.0354383	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-19T22:17:46.24939	Tags for minecraft:item mod id insanesurvivaloverhaul
 eafef6758f2e2535828471f2be608627913b243e data/experiencetweaks/tags/item/repairable_with_amethyst.json
 6c819db7033f1b53aba70574bfc5dd88d4076475 data/insanelib/tags/item/has_tooltip.json
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
@@ -19,7 +19,7 @@ af378507c1fed70a416e3dd938fd3a95e9d9fe64 data/insanesurvivaloverhaul/tags/item/h
 56ef1cfeb0e39ed60991c36aa1fa78c763c703cd data/insanesurvivaloverhaul/tags/item/minecarts.json
 05920f06e35beb0fb6a48e28112d42f53d19511c data/insanesurvivaloverhaul/tags/item/mushrooms.json
 58f6b2b983fdc37fee51dcfcb9a3b6f15ad722ac data/insanesurvivaloverhaul/tags/item/not_unvanishable.json
-cd5800ed49fc5b0c8ea29ea2ef55dc7b98f3808b data/insanesurvivaloverhaul/tags/item/no_food_stack_size_changes.json
+c085d2e9dbf84436d84e2cb9aea77dd9cae9cfdf data/insanesurvivaloverhaul/tags/item/no_food_stack_size_changes.json
 548833ed56d6bcdbb5ec3020a94bfba7c8d47310 data/insanesurvivaloverhaul/tags/item/ore_rocks.json
 3c8bbaa5724395d3312a54ee02176c97b9a202f3 data/insanesurvivaloverhaul/tags/item/raw_foods.json
 1def892d994dc5571ca273887e393729f7f74f0a data/insanesurvivaloverhaul/tags/item/rune_applicable_to/armor_piercer.json

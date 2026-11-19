@@ -57,6 +57,7 @@
   * Added the `set_random_item` and `set_random_potion` loot functions, to sell a random item or potion from a list
   * `wants` and `additional_wants` accept `random_item` (an item tag or list), to ask for a random item from it, picked when the offer is created
   * Changes apply on `/reload`
+* Spider eyes no longer have reduced stack size
 * Added `/insanesurvivaloverhaul villager_trades dump [<profession>|wandering_trader|all] [vanilla|modded|all]`, which writes every trade, modded ones included, as data pack files in `logs/insanesurvivaloverhaul/`
 
 # 5.15.2.0
