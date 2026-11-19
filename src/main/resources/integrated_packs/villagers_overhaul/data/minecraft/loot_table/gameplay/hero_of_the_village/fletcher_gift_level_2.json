@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 8,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:arrow"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "insanesurvivaloverhaul:shortbow"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 4,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "insanesurvivaloverhaul:torch_arrow"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 4,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:flint"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 4,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:feather"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

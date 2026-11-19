@@ -124,6 +124,15 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(ISOVillagerTradesProvider.DYED_TERRACOTTA)
                 .add(Items.WHITE_TERRACOTTA, Items.ORANGE_TERRACOTTA, Items.MAGENTA_TERRACOTTA, Items.LIGHT_BLUE_TERRACOTTA, Items.YELLOW_TERRACOTTA, Items.LIME_TERRACOTTA, Items.PINK_TERRACOTTA, Items.GRAY_TERRACOTTA,
                         Items.LIGHT_GRAY_TERRACOTTA, Items.CYAN_TERRACOTTA, Items.PURPLE_TERRACOTTA, Items.BLUE_TERRACOTTA, Items.BROWN_TERRACOTTA, Items.GREEN_TERRACOTTA, Items.RED_TERRACOTTA, Items.BLACK_TERRACOTTA);
+        tag(ISOVillagerTradesProvider.FARMER_FLOWERS)
+                .add(Items.DANDELION, Items.POPPY, Items.BLUE_ORCHID, Items.ALLIUM, Items.AZURE_BLUET, Items.RED_TULIP, Items.ORANGE_TULIP, Items.WHITE_TULIP, Items.PINK_TULIP,
+                        Items.OXEYE_DAISY, Items.CORNFLOWER, Items.LILY_OF_THE_VALLEY);
+        tag(ISOVillagerTradesProvider.SHEPHERD_BANNER_PATTERNS)
+                .add(Items.FLOWER_BANNER_PATTERN, Items.CREEPER_BANNER_PATTERN, Items.SKULL_BANNER_PATTERN, Items.MOJANG_BANNER_PATTERN);
+        tag(ISOVillagerTradesProvider.COMPLEX_FOODS)
+                .add(Items.RABBIT_STEW, FoodDrinks.FUNGI_STEW.value(), FoodDrinks.PUFFERFISH_CHOWDER.value());
+        tag(ISOVillagerTradesProvider.CORAL_BLOCKS)
+                .add(Items.TUBE_CORAL_BLOCK, Items.BRAIN_CORAL_BLOCK, Items.BUBBLE_CORAL_BLOCK, Items.FIRE_CORAL_BLOCK, Items.HORN_CORAL_BLOCK);
         tag(Spawners.SPAWNER_REACTIVATOR_TAG)
                 .add(Items.ECHO_SHARD);
         tag(EchoPillar.ECHO_PILLAR_CATALYST)

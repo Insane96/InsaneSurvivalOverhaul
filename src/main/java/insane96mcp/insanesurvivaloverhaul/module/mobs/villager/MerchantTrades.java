@@ -3,6 +3,7 @@ package insane96mcp.insanesurvivaloverhaul.module.mobs.villager;
 import insane96mcp.insanelib.core.feature.ConfigType;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.MerchantTradesReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.TradeSet;
@@ -13,9 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.entity.npc.WanderingTrader;
+import net.minecraft.world.entity.npc.*;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.neoforged.bus.api.EventPriority;
@@ -33,6 +32,8 @@ public class MerchantTrades extends Feature {
     public static final ResourceLocation WANDERING_TRADER_BUYING = ResourceLocation.withDefaultNamespace("wandering_trader/buying");
     public static final ResourceLocation WANDERING_TRADER_UNCOMMON = ResourceLocation.withDefaultNamespace("wandering_trader/uncommon");
     public static final ResourceLocation WANDERING_TRADER_COMMON = ResourceLocation.withDefaultNamespace("wandering_trader/common");
+    /** Offers added to every villager before its level 1 offers, outside the level's trade set (see {@link #addLocalFlavoursOffer}) */
+    public static final ResourceLocation LOCAL_FLAVOURS = InsaneSO.id("local_flavours");
 
     /** Listings that were there before any mod changed them, by identity */
     private static final Set<VillagerTrades.ItemListing> VANILLA_LISTINGS = Collections.newSetFromMap(new IdentityHashMap<>());
@@ -125,12 +126,28 @@ public class MerchantTrades extends Feature {
         addPoolOffers(trader, offers, data.getTradeSet(WANDERING_TRADER_COMMON), getListings(1), 5);
     }
 
+    /**
+     * Local Flavours: when a villager generates its level 1 offers, rolls the {@link #LOCAL_FLAVOURS} trade set (1 offer if it has no `amount`) and puts its offers first.
+     * Since they're added with the level 1 offers, they stay when the villager levels up. Does nothing without the trade set.
+     */
+    public static void addLocalFlavoursOffer(Villager villager) {
+        if (!isEnabled(MerchantTrades.class)
+                || villager.getVillagerData().getLevel() != 1)
+            return;
+        MerchantTradesReloadListener.ResolvedTradeSet tradeSet = MerchantTradesReloadListener.getData().getTradeSet(LOCAL_FLAVOURS);
+        if (tradeSet == null)
+            return;
+        MerchantOffers localFlavours = new MerchantOffers();
+        addPoolOffers(villager, localFlavours, tradeSet, List.copyOf(tradeSet.trades()), 1);
+        villager.getOffers().addAll(0, localFlavours);
+    }
+
     private static List<VillagerTrades.ItemListing> getListings(int key) {
         VillagerTrades.ItemListing[] listings = VillagerTrades.WANDERING_TRADER_TRADES.get(key);
         return listings == null ? List.of() : Arrays.asList(listings);
     }
 
-    private static void addPoolOffers(WanderingTrader trader, MerchantOffers offers, @Nullable MerchantTradesReloadListener.ResolvedTradeSet resolvedTradeSet, List<VillagerTrades.ItemListing> listings, int defaultAmount) {
+    private static void addPoolOffers(AbstractVillager trader,MerchantOffers offers, @Nullable MerchantTradesReloadListener.ResolvedTradeSet resolvedTradeSet, List<VillagerTrades.ItemListing> listings, int defaultAmount) {
         if (listings.isEmpty())
             return;
         RandomSource random = trader.getRandom();

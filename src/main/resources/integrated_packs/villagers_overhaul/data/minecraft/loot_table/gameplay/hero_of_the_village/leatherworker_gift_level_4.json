@@ -1,0 +1,146 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:oak_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:birch_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:spruce_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:acacia_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:jungle_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:dark_oak_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:cherry_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:mangrove_log"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:crimson_stem"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:warped_stem"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:bamboo_block"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": 24,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:mushroom_stem"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

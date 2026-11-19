@@ -281,7 +281,7 @@ The level acts as the lever: same price, better materials at high levels.
 - **Unit.** The share is computed in the recycling output's unit (nuggets for iron, gold and copper equipment, finer than ingots) and written in ingots when it is above a stack of nuggets. The provider checks that the written cost is never below what recycling gives back for the whole quantity, and fails `runData` otherwise; quantities are picked so the cost is a whole number of ingots (8 hoppers: 270 nuggets = 30 ingots; 16 pistons: 108 nuggets = 12 ingots).
   - Lanterns (8 nuggets each) are sold 12 at a time (decided): 72 nuggets = 8 ingots; 16 would be 96 nuggets, not a whole number of ingots.
 - **Several items per trade:** the quantity is fixed too, and the price is computed on it.
-- **Affected trades**, with the current recycling recipes: copper armour, tools, weapons and daggers; iron armour, tools, weapons and daggers, shield, crossbow, shears, iron horse armour, anvil, hopper, piston, smithing table, lantern, compass, clock (gold), brush and spyglass (copper). The bell has no recycling recipe and is unaffected.
+- **Affected trades**, with the current recycling recipes: copper armour, tools, weapons and daggers; iron armour, tools, weapons and daggers, shield, crossbow, shears, iron horse armour, anvil, hopper, piston, smithing table, crafter (recycling added for this), lantern, compass, clock (gold), brush and spyglass (copper). The bell has no recycling recipe and is unaffected.
 - **Filled buckets** cost **1 emerald + 2 iron ingots** (75% of the bucket's 3 ingots, rounded down) instead of an empty bucket: lava bucket and fish buckets. The filled bucket has no recycling recipe, but once emptied the bucket recycles into 20 nuggets, 2 more than the 18 paid: accepted (decided), an exception to the provider's check above.
 - **Prices computed from the recycling recipes:** the trade provider (§6.17) reads the recycling recipe JSON files instead of hard-coding the amounts, so a changed recycling recipe updates the price at the next `runData`.
 - *Technical:* the cost is a constant count in `TradeCost` and the quantity the count of `gives`; no `set_count` roll.
@@ -377,15 +377,15 @@ Each map sits in a level with only 2 trades, so it is always offered.
 
 ### 6.6 Cleric
 
-A brewing supplier: ingredients first, then random potions. ISO's stack sizes apply (potions 16, splash potions 4).
+A brewing supplier: ingredients first, then random potions. ISO's stack sizes apply (potions 16, splash and lingering potions 4).
 
 | Level | Sells |
 |---|---|
 | 1 | Glass bottles, redstone dust, glowstone dust (16 each) |
 | 2 | Nether wart (8), fermented spider eye (8), sugar (16), magma cream (8) |
 | 3 | A random level I potion, a random level I splash potion: **2 per emerald** |
-| 4 | A random level II potion, a random level II splash potion: **1 for 2 emeralds** |
-| 5 | A random lingering potion (**1 for 2 emeralds**); blaze powder (4), ghast tears (4) |
+| 4 | A random level II potion, a random level II splash potion: **2 per emerald** |
+| 5 | A random lingering potion (**2 per emerald**); blaze powder (4), ghast tears (4) |
 
 - Long variants are excluded.
 - No fixed Weakness potion: the cure still needs the player to brew it, at least the first time.
@@ -468,7 +468,7 @@ The only villager that sells enchanted items; it also sells lapis, since it acts
 | 4 | A random enchanted book, book and quill |
 | 5 | Divine Fragment (heart of the sea) for 1 emerald + 1 echo shard |
 
-- **Enchanted books:** random, via `enchant_randomly` / `enchant_with_levels` in `given_item_modifiers`, limited to the `#tradeable` enchantments, stronger at higher levels. Cost 1 emerald + 1 book, 1 use per restock. They are a minor convenience: the enchanting table at level 30 gives better enchantments.
+- **Enchanted books:** random, via `enchant_with_levels` in `given_item_modifiers`, limited to the `#tradeable` enchantments, with 10, 20 and 30 levels at villager levels 2, 3 and 4 (decided). Cost 1 emerald + 1 book, 1 use per restock. At level 4 they match the enchanting table at level 30, but the enchantment is random and only one book is sold per restock.
 - **Divine Fragment:** 1 use per restock. Echo shards only come from ancient city chests, so the Divine Fragment stays bounded by a finite resource, as Matcha does with its crystal heart. (ISO's `spawner_reactivator` and echo pillar also use echo shards, but both are disabled.)
 - No name tag.
 - Matcha's prices for reference: 131 trades cost 1 emerald; only shears (3) and the toolsmith's jewellery (4-14) cost more. Valuable trades ask rare items, not many emeralds.
@@ -493,10 +493,10 @@ With 16 colours and 2 random trades, one trade per colour makes a given colour a
 | Level | Sells |
 |---|---|
 | 1 | White wool (24), shears, string (16) |
-| 2 | Wool of a random colour (24), a random dye (16), carpets of a random colour (24) |
+| 2 | Wool of a random colour (24), a random dye (16), carpets of a random colour (64) |
 | 3 | Bed of a random colour (1), banners of a random colour (16), another random-colour wool trade |
 | 4 | Paintings, item frames, glow item frames (16 each), another random-colour wool trade |
-| 5 | A random craftable banner pattern (flower, creeper, skull, bricks...) |
+| 5 | A random banner pattern: flower, creeper, skull and thing (decided: golden apples are disabled, so the thing pattern can't be crafted). Bricks and bordure indented have no pattern item in 1.21.1 |
 
 ### 6.14 Toolsmith and weaponsmith
 
@@ -645,7 +645,7 @@ To be carried out only after confirmation.
 - Outposts back without respawn, with a fixed garrison and captain (§4.2).
 - Mansions back (§4.3).
 - Emerald ore: an extra vein at 1/4 of the vanilla rate in every overworld biome, mountains included, on top of vanilla's mountain feature (§4.4).
-- Villages: spacing 80 / separation 50; 15% zombie villager weight per villager slot (§4.1).
+- Villages: spacing 80 / separation 50; 30% zombie villager weight per villager slot (§4.1).
 - Iron golem spawning kept: iron farms are already nerfed by `Nerfs.ironFromGolemsRequiresPlayer` (§3.5).
 
 **Economy**

@@ -1,0 +1,17 @@
+{
+  "additional_wants": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  },
+  "gives": {
+    "count": 1,
+    "id": "minecraft:diamond_sword"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

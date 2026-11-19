@@ -1,0 +1,34 @@
+{
+  "additional_wants": {
+    "count": 1,
+    "id": "minecraft:map"
+  },
+  "given_item_modifiers": [
+    {
+      "decoration": "swamp_hut",
+      "destination": "minecraft:on_swamp_explorer_maps",
+      "function": "minecraft:exploration_map",
+      "search_radius": 100,
+      "skip_existing_chunks": true,
+      "zoom": 2
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "translate": "filled_map.explorer_swamp"
+      },
+      "target": "item_name"
+    }
+  ],
+  "gives": {
+    "count": 1,
+    "id": "minecraft:map"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 1
+}

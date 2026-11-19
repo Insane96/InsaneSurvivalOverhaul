@@ -1,0 +1,17 @@
+{
+  "additional_wants": {
+    "count": 12,
+    "id": "minecraft:gold_ingot"
+  },
+  "gives": {
+    "count": 4,
+    "id": "minecraft:clock"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 10
+}

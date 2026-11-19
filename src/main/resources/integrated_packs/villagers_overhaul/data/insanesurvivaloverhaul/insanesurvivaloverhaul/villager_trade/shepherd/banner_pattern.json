@@ -1,0 +1,19 @@
+{
+  "given_item_modifiers": [
+    {
+      "function": "insanesurvivaloverhaul:set_random_item",
+      "items": "#insanesurvivaloverhaul:shepherd_banner_patterns"
+    }
+  ],
+  "gives": {
+    "count": 1,
+    "id": "minecraft:flower_banner_pattern"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

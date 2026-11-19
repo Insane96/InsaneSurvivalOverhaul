@@ -1,0 +1,17 @@
+{
+  "additional_wants": {
+    "count": 47,
+    "id": "insanesurvivaloverhaul:copper_nugget"
+  },
+  "gives": {
+    "count": 1,
+    "id": "insanesurvivaloverhaul:copper_leggings"
+  },
+  "max_uses": 1,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 1
+}

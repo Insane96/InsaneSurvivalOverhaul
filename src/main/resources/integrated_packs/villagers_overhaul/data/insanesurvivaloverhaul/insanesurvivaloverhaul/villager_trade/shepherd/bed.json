@@ -1,0 +1,19 @@
+{
+  "given_item_modifiers": [
+    {
+      "function": "insanesurvivaloverhaul:set_random_item",
+      "items": "#minecraft:beds"
+    }
+  ],
+  "gives": {
+    "count": 1,
+    "id": "minecraft:white_bed"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.2,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "xp": 10
+}

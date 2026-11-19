@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bell"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}
