@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.0.0-beta
 * Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers. Only works when the new `Villagers Overhaul` data pack is enabled
   * Villagers can no longer breed. Zombie villagers are cured with a Golden Carrot (`insanesurvivaloverhaul:zombie_villager_cure_items` item tag) instead of a Golden Apple
   * Villagers killed by zombies always become zombie villagers, whatever the difficulty; cured nitwits become unemployed villagers
