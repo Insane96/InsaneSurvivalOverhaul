@@ -116,14 +116,14 @@ public class MerchantTrades extends Feature {
     }
 
     /**
-     * Fills the wandering trader offers from the `buying`, `uncommon` and `common` pools, in this order as in 26.1.
-     * Each pool rolls the trade set's `amount`; without a trade set, or without `amount`, the 1.21.1 counts are used (0 buying, 1 uncommon, 5 common).
+     * Fills the wandering trader offers from the `buying`, `common` and `uncommon` pools, in this order.
+     * Each pool rolls the trade set's `amount`; without a trade set, or without `amount`, the 1.21.1 counts are used (0 buying, 5 common, 1 uncommon).
      */
     public static void updateWanderingTraderOffers(WanderingTrader trader, MerchantOffers offers) {
         MerchantTradesReloadListener.Data data = MerchantTradesReloadListener.getData();
         addPoolOffers(trader, offers, data.getTradeSet(WANDERING_TRADER_BUYING), wanderingTraderBuying, 0);
-        addPoolOffers(trader, offers, data.getTradeSet(WANDERING_TRADER_UNCOMMON), getListings(2), 1);
         addPoolOffers(trader, offers, data.getTradeSet(WANDERING_TRADER_COMMON), getListings(1), 5);
+        addPoolOffers(trader, offers, data.getTradeSet(WANDERING_TRADER_UNCOMMON), getListings(2), 1);
     }
 
     /**
