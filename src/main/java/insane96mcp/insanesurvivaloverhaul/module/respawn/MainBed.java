@@ -59,6 +59,7 @@ public class MainBed extends Feature {
 			if (!event.getItemStack().isEmpty() || mainBedPos.filter(pos::equals).isPresent())
 				return;
 			setMainBedPos(player, pos);
+			player.swing(event.getHand(), true);
 			player.sendSystemMessage(Component.translatable(MAIN_BED_SET));
 		}
 		else if (mainBedPos.isEmpty() && !ModNBTData.get(player, SHOWED_INFO_MESSAGE, Boolean.class)) {

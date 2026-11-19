@@ -29,6 +29,8 @@
 * Tools and Weapons Rework Data Pack
   * Decreased Golden tools and weapons damage, they no longer deal the same damage as Wooden ones. Golden now has about the DPS of Copper, lower than Iron, instead of more than Iron
     * Sword 2.3 -> 1.8, Axe 5.4 -> 4.4, Pickaxe 3.2 -> 2.6, Shovel 3.6 -> 2.95, Hoe 1.55 -> 1.2, Dagger 1.3 -> 0.925
+* Main Bed
+  * The player's arm now swings when setting the main bed
 
 # 5.15.2.0
 * Hardcore Torches Data Pack
