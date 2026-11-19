@@ -61,6 +61,7 @@
 * Mob Loot Changes Data Pack
   * Fixed Looting being able to lower mob drops: it added -1~1 per level, so drops could be lost and on average nothing was gained. Now Looting gives +1 drop with a 33.3% chance per level (Ender Pearls 20% per level)
     * Blaze Rods, String, Spider Eyes, Gunpowder (Creepers), Phantom Membranes, Arrows and Bones (Skeletons, Strays, Wither Skeletons), Coal, Slime Balls
+  * Piglins now barter 1~2 Ender Pearls instead of 2~4
 * Tools and Weapons Rework Data Pack
   * Decreased Golden tools and weapons damage, they no longer deal the same damage as Wooden ones. Golden now has about the DPS of Copper, lower than Iron, instead of more than Iron
     * Sword 2.3 -> 1.8, Axe 5.4 -> 4.4, Pickaxe 3.2 -> 2.6, Shovel 3.6 -> 2.95, Hoe 1.55 -> 1.2, Dagger 1.3 -> 0.925
