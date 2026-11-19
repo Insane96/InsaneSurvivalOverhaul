@@ -16,6 +16,14 @@
     * No beds (turned into carpets), bells or job sites, so no POIs; crops become dead bushes or disappear, farmland becomes coarse dirt, hay bales, pumpkins and melons are removed
     * Village chests have much less loot (1-2 or 1-3 rolls) and almost no food
     * Most of the loot is buried in the houses: floors have suspicious gravel (suspicious sand in deserts) with loot themed on the house (armorer, butcher, cartographer, fisher, fletcher, library, mason, shepherd, tannery, temple, toolsmith, weaponsmith, or the biome's houses), with pottery sherds and rare emeralds
+  * Pillager outposts no longer spawn pillagers continuously: the watchtower has a one-time garrison of 6 pillagers (that don't despawn), one of them a captain
+  * Emerald ore now generates in every overworld biome at 1/4 of the mountains' rate (mountains keep the vanilla ore, plus this one)
+  * Pillagers killed by a player drop 0-1 emerald, plus 1 more with a 33% chance per Looting level (the drop moved from the `Mob Loot Changes` data pack, which now only gives arrows)
+  * Fishing in open water can rarely catch an emerald instead of the normal catch (0.7%, up to about 1.6% with Luck of the Sea III)
+  * `advancementExperiencePerEmerald` (default 25, 0 disables): advancements that give experience also give 1 emerald every 25 experience
+  * New trades, all for 1 emerald, with fixed quantities and limited uses. They replace every trade of the profession, mods' too. Only the mason has them for now:
+    * Mason: simple blocks (stone, andesite, diorite, granite, dirt, deepslate, tuff, calcite, dripstone, blackstone), 64 per emerald, 6 uses
+    * Mason: processed blocks (glass, smooth sandstone, smooth red sandstone, mud bricks, smooth basalt, smooth quartz, and terracotta, concrete and glazed terracotta of a random colour), 48 per emerald, 4 uses
   * The feature only works when the new `Villagers Overhaul` data pack is enabled (`VillagersCommon.villagersOverhaul` in `common.toml`)
 * Removed the `Disable Long Noses` data pack (`Packs.disableLongNosesStructures`): villages, pillager outposts and woodland mansions generate again, changed by the `Villagers Overhaul` data pack
 * Removed `Spawning.replaceZombieVillagersWithNormalZombies`

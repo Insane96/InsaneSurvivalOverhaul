@@ -121,6 +121,9 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
 
         tag(Villagers.CURE_ITEMS)
                 .add(Items.GOLDEN_CARROT);
+        tag(ISOVillagerTradesProvider.DYED_TERRACOTTA)
+                .add(Items.WHITE_TERRACOTTA, Items.ORANGE_TERRACOTTA, Items.MAGENTA_TERRACOTTA, Items.LIGHT_BLUE_TERRACOTTA, Items.YELLOW_TERRACOTTA, Items.LIME_TERRACOTTA, Items.PINK_TERRACOTTA, Items.GRAY_TERRACOTTA,
+                        Items.LIGHT_GRAY_TERRACOTTA, Items.CYAN_TERRACOTTA, Items.PURPLE_TERRACOTTA, Items.BLUE_TERRACOTTA, Items.BROWN_TERRACOTTA, Items.GREEN_TERRACOTTA, Items.RED_TERRACOTTA, Items.BLACK_TERRACOTTA);
         tag(Spawners.SPAWNER_REACTIVATOR_TAG)
                 .add(Items.ECHO_SHARD);
         tag(EchoPillar.ECHO_PILLAR_CATALYST)

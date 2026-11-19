@@ -180,6 +180,10 @@ public class InsaneSO {
                 new ISOAdvancementProvider(output, lookupProvider)
         );
         event.getGenerator().addProvider(
+                event.includeServer(),
+                new ISOVillagerTradesProvider(output, lookupProvider)
+        );
+        event.getGenerator().addProvider(
                 event.includeClient(),
                 new ISOBlockStatesProvider(output, MOD_ID, existingFileHelper)
         );
