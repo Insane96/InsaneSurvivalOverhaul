@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.2.0-beta
 * Pouches are now enabled by default
   * Crafted with Cloth instead of Leather (Leather if Cloth is disabled)
   * Up to 3 can be carried without slowdown (was 2). The slowdown is now 1% with 1 extra Pouch, 4% with 2, 9% with 3, ... (was 3% per extra Pouch, squared)
