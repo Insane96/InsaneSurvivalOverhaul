@@ -1,0 +1,38 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:shulker_box"
+		},
+		"title": {
+			"translate": "advancements.insanesurvivaloverhaul.nether_pouch.title"
+		},
+		"description": {
+			"translate": "advancements.insanesurvivaloverhaul.nether_pouch.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "minecraft:nether/obtain_blaze_rod",
+	"criteria": {
+		"from_pouches": {
+			"trigger": "minecraft:recipe_crafted",
+			"conditions": {
+				"recipe_id": "minecraft:shulker_box"
+			}
+		},
+		"from_chests": {
+			"trigger": "minecraft:recipe_crafted",
+			"conditions": {
+				"recipe_id": "insanesurvivaloverhaul:shulker_box_from_chests"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"from_pouches",
+			"from_chests"
+		]
+	]
+}

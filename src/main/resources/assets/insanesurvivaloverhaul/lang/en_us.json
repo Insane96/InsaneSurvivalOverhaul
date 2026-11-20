@@ -222,6 +222,8 @@
     "advancements.insanesurvivaloverhaul.chainmail.description": "Obtain a Chainmail piece of armor",
     "advancements.insanesurvivaloverhaul.bundle.title": "That one item",
     "advancements.insanesurvivaloverhaul.bundle.description": "Make a bundle with Cloth",
+    "advancements.insanesurvivaloverhaul.nether_pouch.title": "Not a Shulker Box",
+    "advancements.insanesurvivaloverhaul.nether_pouch.description": "Craft a Shulker Box with Nether materials",
     "insanesurvivaloverhaul.shulker_auto_pickup.enabled": "Auto pickup: Enabled",
     "insanesurvivaloverhaul.shulker_auto_pickup.disabled": "Auto pickup: Disabled",
     "insanesurvivaloverhaul.shulker_auto_pickup.toggle": "Press [%s] in the inventory to toggle",
