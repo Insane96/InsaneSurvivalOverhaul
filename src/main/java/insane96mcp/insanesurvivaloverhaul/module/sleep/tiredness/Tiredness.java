@@ -394,9 +394,6 @@ public class Tiredness extends JsonFeature {
 
 		ServerPlayer player = event.getEntity();
 
-		if (player.getAbilities().instabuild)
-			return;
-
 		if (!player.hasEffect(TIRED) && !allowSleepingEvenWhenNotTired) {
 			event.setProblem(Player.BedSleepingProblem.OTHER_PROBLEM);
 			player.displayClientMessage(Component.translatable(NOT_TIRED), true);
@@ -475,7 +472,7 @@ public class Tiredness extends JsonFeature {
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean canSleepDuringDay(Player player) {
 		return isEnabled(Tiredness.class)
-				&& (player.hasEffect(TIRED) || allowSleepingEvenWhenNotTired || player.getAbilities().instabuild);
+				&& (player.hasEffect(TIRED) || allowSleepingEvenWhenNotTired);
 	}
 
 	@SubscribeEvent

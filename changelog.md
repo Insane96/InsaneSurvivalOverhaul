@@ -1,3 +1,14 @@
+# Upcoming
+* Pouches are now enabled by default
+  * Crafted with Cloth instead of Leather (Leather if Cloth is disabled)
+  * Up to 3 can be carried without slowdown (was 2). The slowdown is now 1% with 1 extra Pouch, 4% with 2, 9% with 3, ... (was 3% per extra Pouch, squared)
+* Early Shulker Boxes are now unlocked in the Nether instead of with Cloth
+  * Crafted with 2 Pouches, 6 Crimson or Warped Planks and a Blaze Rod. The contents of the Pouches end up in the Shulker Box. If Pouches are disabled, 2 Chests are used instead
+  * Renamed from Sack to Nether Pouch (resource pack, the `Rename shulker box to sack` config option is now `Rename shulker box to nether pouch`). Shulker Boxes now use the vanilla textures
+  * Removed the "Not a Shulker Box" advancement
+* Fixed Shulker Shells, Prismarine Shards and Prismarine Crystals not being removed from the creative tabs by the Early Shulker Boxes and Prismarine Rework data packs
+* Players in creative mode now need to be Tired to sleep, like in survival
+
 # 5.16.1.0-beta
 * Villagers
   * Villagers restock once per day (was 2), so the demand also changes once per day (`restocks_per_day` config option)
