@@ -16,17 +16,21 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Changes to Shulker Boxes.")
 public class ShulkerBoxes extends Feature {
+	public static final DeferredHolder<RecipeSerializer<?>, ShulkerBoxFromPouchesRecipe.Serializer> FROM_POUCHES_SERIALIZER =
+			ISORegistries.RECIPE_SERIALIZERS.register("shulker_box_from_pouches", ShulkerBoxFromPouchesRecipe.Serializer::new);
 
 	@Config(description = "When picking up an item, if a Shulker Box in the inventory already contains that item, the item is put in the Shulker Box instead of the inventory. Auto pickup must be enabled on each Shulker Box by pressing the toggle key (S by default) while hovering it in the inventory.")
 	public static Boolean autoPickupIntoShulkerBoxes = true;

@@ -2,23 +2,31 @@
   "neoforge:conditions": [
     {
       "type": "insanelib:feature_enabled",
-      "feature": "Cloth"
+      "feature": "Pouch"
     }
   ],
-  "type": "minecraft:crafting_shaped",
+  "type": "insanesurvivaloverhaul:shulker_box_from_pouches",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "insanesurvivaloverhaul:cloth"
+    "N": [
+      {
+        "item": "minecraft:crimson_planks"
+      },
+      {
+        "item": "minecraft:warped_planks"
+      }
+    ],
+    "P": {
+      "item": "insanesurvivaloverhaul:pouch"
     },
-    "X": {
-      "tag": "c:chests/wooden"
+    "B": {
+      "item": "minecraft:blaze_rod"
     }
   },
   "pattern": [
-    "###",
-    "#X#",
-    "###"
+    "NNN",
+    "PBP",
+    "NNN"
   ],
   "result": {
     "count": 1,

@@ -24,7 +24,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Supplier;
 
-@LoadFeature(module = ISOModules.ITEMS, description = "A new item that can let you carry more stuff around.", enabledByDefault = false)
+@LoadFeature(module = ISOModules.ITEMS, description = "A new item that can let you carry more stuff around.")
 public class Pouch extends Feature {
     public static final TagKey<Item> POUCH_LIKE_WEIGHT = ISOItemTagsProvider.create("pouch_like_weight");
 
@@ -35,10 +35,10 @@ public class Pouch extends Feature {
 			ISORegistries.registerTrigger("overweight_pouch_carry", OverweightPouchCarryTrigger::new);
 
 	@Config(min = 0)
-	public static Integer maxPouchWithoutSlowdown = 2;
+	public static Integer maxPouchWithoutSlowdown = 3;
 
 	@Config(min = 0d, max = 1d, description = "When you have > 'Max pouch without slowdown' this is the base value for the slowdown. The slowdown is calculated as (pouch above 'Max pouch' ^ 2 * this)")
-	public static Double baseSlownessPerPouchOverMax = 0.03d;
+	public static Double baseSlownessPerPouchOverMax = 0.01d;
 
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent.Post event) {

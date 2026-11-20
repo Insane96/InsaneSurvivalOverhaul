@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "insanelib:feature_enabled",
+        "feature": "Pouch"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": [
+      {
+        "item": "minecraft:crimson_planks"
+      },
+      {
+        "item": "minecraft:warped_planks"
+      }
+    ],
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "B": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "CBC",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:shulker_box"
+  }
+}

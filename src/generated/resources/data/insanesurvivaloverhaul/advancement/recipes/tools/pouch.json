@@ -3,25 +3,29 @@
     {
       "type": "insanelib:feature_enabled",
       "feature": "Pouch"
+    },
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Cloth"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_ingot": {
+    "has_cloth": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:iron_ingot"
+            "items": "insanesurvivaloverhaul:cloth"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_leather": {
+    "has_iron_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:leather"
+            "items": "minecraft:iron_ingot"
           }
         ]
       },
@@ -47,7 +51,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_leather",
+      "has_cloth",
       "has_string",
       "has_iron_ingot"
     ]

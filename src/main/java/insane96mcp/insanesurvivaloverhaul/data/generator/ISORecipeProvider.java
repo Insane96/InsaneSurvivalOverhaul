@@ -67,11 +67,23 @@ public class ISORecipeProvider extends RecipeProvider {
                 .pattern("LLL")
                 .define('S', Items.STRING)
                 .define('I', Items.IRON_INGOT)
+                .define('L', Cloth.ITEM.get())
+                .unlockedBy("has_cloth", has(Cloth.ITEM.get()))
+                .unlockedBy("has_string", has(Items.STRING))
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Pouch"), new FeatureEnabledCondition("Cloth")));
+        // Same recipe with Leather when Cloth is disabled
+        new ShapedRecipeBuilder(RecipeCategory.TOOLS, Pouch.ITEM.get(), 1)
+                .pattern("LSL")
+                .pattern("I I")
+                .pattern("LLL")
+                .define('S', Items.STRING)
+                .define('I', Items.IRON_INGOT)
                 .define('L', Items.LEATHER)
                 .unlockedBy("has_leather", has(Items.LEATHER))
                 .unlockedBy("has_string", has(Items.STRING))
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Pouch")));
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Pouch"), new NotCondition(new FeatureEnabledCondition("Cloth"))), InsaneSO.id("pouch_from_leather"));
 
         new ShapelessRecipeBuilder(RecipeCategory.MISC, Items.FLINT, 1)
                 .requires(Items.GRAVEL, 3)

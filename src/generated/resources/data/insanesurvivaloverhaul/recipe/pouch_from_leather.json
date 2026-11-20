@@ -1,6 +1,10 @@
 {
   "neoforge:conditions": [
     {
+      "type": "insanelib:feature_enabled",
+      "feature": "Pouch"
+    },
+    {
       "type": "neoforge:not",
       "value": {
         "type": "insanelib:feature_enabled",
@@ -9,22 +13,25 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
-    "#": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
       "item": "minecraft:leather"
     },
-    "X": {
-      "tag": "c:chests/wooden"
+    "S": {
+      "item": "minecraft:string"
     }
   },
   "pattern": [
-    "###",
-    "#X#",
-    "###"
+    "LSL",
+    "I I",
+    "LLL"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:shulker_box"
+    "id": "insanesurvivaloverhaul:pouch"
   }
 }

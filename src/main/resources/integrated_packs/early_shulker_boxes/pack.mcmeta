@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Changes the Shulker Box recipe to use Cloth and a Chest instead of Shulker Shells",
+        "description": "Shulker Boxes are crafted in the Nether with two Pouches (or Chests if Pouches are disabled), Nether planks and a Blaze Rod, keeping the Pouches' contents. Shulkers drop Shulker Boxes instead of Shulker Shells",
         "pack_format": 48
     }
 }

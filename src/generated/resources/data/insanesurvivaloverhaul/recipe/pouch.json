@@ -3,6 +3,10 @@
     {
       "type": "insanelib:feature_enabled",
       "feature": "Pouch"
+    },
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Cloth"
     }
   ],
   "type": "minecraft:crafting_shaped",
@@ -12,7 +16,7 @@
       "item": "minecraft:iron_ingot"
     },
     "L": {
-      "item": "minecraft:leather"
+      "item": "insanesurvivaloverhaul:cloth"
     },
     "S": {
       "item": "minecraft:string"

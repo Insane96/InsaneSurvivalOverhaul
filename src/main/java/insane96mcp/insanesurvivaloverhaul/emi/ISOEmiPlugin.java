@@ -21,8 +21,10 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.EcologicWood;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
+import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxesCommon;
 import insane96mcp.insanesurvivaloverhaul.module.items.stonetoolsgone.StoneToolsGoneCommon;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilCrafting;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
@@ -180,6 +182,8 @@ public class ISOEmiPlugin implements EmiPlugin {
 			if (Tweaks.totemResistance)
 				addInfo(registry, emiIngredientOf(Items.TOTEM_OF_UNDYING), "totem_of_undying", "totem_of_undying");
 		}
+		if (Feature.isEnabled(ShulkerBoxesCommon.class) && ShulkerBoxesCommon.earlyGameShulkerBoxes && !Packs.disableAllDataPacks && Feature.isEnabled(Pouch.class))
+			addInfo(registry, emiIngredientOf(Items.SHULKER_BOX), "shulker_box_from_pouches", "shulker_box_from_pouches");
 		if (Villagers.isActive())
 			addInfo(registry, EmiIngredient.of(Villagers.CURE_ITEMS), "zombie_villager_cure", "zombie_villager_cure",
 					Villagers.convalescenceDuration > 0 ? "zombie_villager_cure.convalescence" : null);

@@ -4,17 +4,17 @@
       "type": "neoforge:not",
       "value": {
         "type": "insanelib:feature_enabled",
-        "feature": "Cloth"
+        "feature": "Pouch"
       }
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_leather": {
+    "has_blaze_rod": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:leather"
+            "items": "minecraft:blaze_rod"
           }
         ]
       },
@@ -22,7 +22,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "insanesurvivaloverhaul:shulker_box_from_leather"
+        "recipe": "insanesurvivaloverhaul:shulker_box_from_chests"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -30,12 +30,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_leather"
+      "has_blaze_rod"
     ]
   ],
   "rewards": {
     "recipes": [
-      "insanesurvivaloverhaul:shulker_box_from_leather"
+      "insanesurvivaloverhaul:shulker_box_from_chests"
     ]
   }
 }
