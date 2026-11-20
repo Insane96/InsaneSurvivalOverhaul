@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.1.0-beta
 * Villagers
   * Villagers restock once per day (was 2), so the demand also changes once per day (`restocks_per_day` config option)
   * Trades used before a new day starts now count towards the demand: vanilla counted them as unused when the villager restocked less than twice that day, so their price went down instead of up (`catch_up_demand_counts_uses` config option)
