@@ -2,6 +2,7 @@ package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
@@ -21,7 +22,8 @@ public abstract class NaturalSpawnerMixin_Spawning {
      */
     @WrapOperation(method = "isRightDistanceToPlayerAndSpawnPoint", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/BlockPos;closerToCenterThan(Lnet/minecraft/core/Position;D)Z"))
     private static boolean insanesurvivaloverhaul$allowSpawnNearWorldSpawn(BlockPos instance, Position position, double v, Operation<Boolean> original, ServerLevel pLevel, ChunkAccess pChunk, BlockPos.MutableBlockPos pPos, double pDistance) {
-        if (Spawning.allowWorldSpawnSpawn)
+        if (Feature.isEnabled(Spawning.class)
+                && Spawning.allowWorldSpawnSpawn)
             return false;
         return original.call(instance, new Vec3((double) pPos.getX() + 0.5D, pPos.getY(), (double) pPos.getZ() + 0.5D), 24.0D);
     }

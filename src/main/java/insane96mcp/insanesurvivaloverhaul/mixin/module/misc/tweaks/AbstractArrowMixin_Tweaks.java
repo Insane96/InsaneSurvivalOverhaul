@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.tweaks;
 
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +27,8 @@ public abstract class AbstractArrowMixin_Tweaks extends Projectile {
      */
     @Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;doPostHurtEffects(Lnet/minecraft/world/entity/LivingEntity;)V", shift = At.Shift.AFTER))
     public void insanesurvivaloverhaul$onHitEntity(EntityHitResult pResult, CallbackInfo ci) {
+        if (!Feature.isEnabled(Tweaks.class))
+            return;
         if (!(pResult.getEntity() instanceof Player) && this.getOwner() instanceof ServerPlayer serverPlayer && serverPlayer.distanceToSqr(pResult.getEntity()) >= Tweaks.dingDistance * Tweaks.dingDistance)
             serverPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
     }

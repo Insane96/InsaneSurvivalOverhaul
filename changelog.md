@@ -4,6 +4,13 @@
   * Trades used before a new day starts now count towards the demand: vanilla counted them as unused when the villager restocked less than twice that day, so their price went down instead of up (`catch_up_demand_counts_uses` config option)
   * Demand no longer goes below 0 (was -max uses). Replaced the `clamp_negative_demand` config option with `negative_demand_limit`: the minimum demand as a multiple of the trade's max uses, -1 for no limit (vanilla)
   * The extra emerald ore in every overworld biome now generates between y -32 and 32, 2 veins per chunk (was 25 between y -16 and 480, so most of it ended up in the air outside mountains)
+* Sponges now dry in the sun and get wet in the rain again
+* Fixed some changes still being applied when their feature is disabled:
+  * Bows: arrow damage multiplier and decimal damage
+  * Fluids: water push force
+  * Tweaks: damage to break vehicles and long-range arrow hit sound
+  * Spawning: mobs spawning near the world spawn
+  * Hunger and Health Regen: no regeneration in peaceful difficulty
 
 # 5.16.0.0-beta
 * Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers. Only works when the new `Villagers Overhaul` data pack is enabled

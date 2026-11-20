@@ -1,5 +1,6 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.world.fluids;
 
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.world.Fluids;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -17,7 +18,8 @@ public class FluidTypeMixin_Fluid {
 	 */
 	@Inject(at = @At("RETURN"), method = "motionScale", cancellable = true, remap = false)
 	public void insanesurvivaloverhaul$onWaterMotionScale(Entity entity, CallbackInfoReturnable<Double> cir) {
-		if ((Object) this == NeoForgeMod.WATER_TYPE.value())
+		if (Feature.isEnabled(Fluids.class)
+				&& (Object) this == NeoForgeMod.WATER_TYPE.value())
 			cir.setReturnValue(Fluids.waterPushForce);
 	}
 }

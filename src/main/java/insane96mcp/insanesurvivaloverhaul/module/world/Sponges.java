@@ -47,7 +47,10 @@ public class Sponges extends Feature {
     }
 
     public static void onSpongeTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!Feature.isEnabled(Sponges.class))
+        if (!state.is(Blocks.SPONGE) && !state.is(Blocks.WET_SPONGE))
+            return;
+        if (!Feature.isEnabled(Sponges.class)
+                || !dryWetWeather)
             return;
 
         if (!level.canSeeSky(pos.above()))

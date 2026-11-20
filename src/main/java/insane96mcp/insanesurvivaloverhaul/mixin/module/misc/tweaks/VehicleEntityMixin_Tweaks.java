@@ -1,6 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.mixin.module.misc.tweaks;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,6 +14,8 @@ public class VehicleEntityMixin_Tweaks {
      */
     @ModifyExpressionValue(method = "hurt", at = @At(value = "CONSTANT", args = "floatValue=40.0"))
     public float insanesurvivaloverhaul$damageToBreak(float damageToBreak) {
+        if (!Feature.isEnabled(Tweaks.class))
+            return damageToBreak;
         return Tweaks.damageToBreakVehicles * 10f;
     }
 }

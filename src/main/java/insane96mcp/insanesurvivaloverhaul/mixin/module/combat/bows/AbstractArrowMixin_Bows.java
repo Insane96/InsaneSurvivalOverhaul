@@ -59,7 +59,8 @@ public abstract class AbstractArrowMixin_Bows extends Projectile {
      */
     @WrapOperation(method = "onHitEntity", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;baseDamage:D"))
     private double insanesurvivaloverhaul$applyArrowDamageMultiplier(AbstractArrow instance, Operation<Double> original) {
-        if (instance.getOwner() instanceof Mob)
+        if (!Feature.isEnabled(Bows.class)
+                || instance.getOwner() instanceof Mob)
             return original.call(instance);
         return original.call(instance) * Bows.damageMultiplier;
     }
@@ -72,7 +73,8 @@ public abstract class AbstractArrowMixin_Bows extends Projectile {
      */
     @ModifyArg(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     private float insanesurvivaloverhaul$decimalDamage(float damage, @Local(ordinal = 0) double arrowDamage) {
-        if (!Bows.decimalDamage)
+        if (!Feature.isEnabled(Bows.class)
+                || !Bows.decimalDamage)
             return damage;
         float newDamage = (float) Mth.clamp(this.getDeltaMovement().length() * arrowDamage, 0.0D, Integer.MAX_VALUE);
         if (this.isCritArrow() && !Bows.disableCritArrowsBonusDamage)

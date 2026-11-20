@@ -14,11 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockBehaviour.class)
 public class BlockBehaviourMixin_Sponges {
     /**
-     * Delegates block tick events to {@link Sponges#onSpongeTick} to handle weather-based
+     * Delegates block random ticks to {@link Sponges#onSpongeTick} to handle weather-based
      * sponge state changes: dry sponges become wet when rained on (with sky access), and
      * wet sponges dry out during daytime without rain.
+     * Since 1.20.2 {@code randomTick} no longer calls {@code tick}, so the random tick must be targeted directly.
      */
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(method = "randomTick", at = @At("HEAD"))
     public void insanesurvivaloverhaul$onBlockTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         Sponges.onSpongeTick(state, level, pos, random);
     }
