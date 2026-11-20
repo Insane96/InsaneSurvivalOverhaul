@@ -1,3 +1,9 @@
+# Upcoming
+* Villagers
+  * Villagers restock once per day (was 2), so the demand also changes once per day (`restocks_per_day` config option)
+  * Trades used before a new day starts now count towards the demand: vanilla counted them as unused when the villager restocked less than twice that day, so their price went down instead of up (`catch_up_demand_counts_uses` config option)
+  * Demand no longer goes below 0 (was -max uses). Replaced the `clamp_negative_demand` config option with `negative_demand_limit`: the minimum demand as a multiple of the trade's max uses, -1 for no limit (vanilla)
+
 # 5.16.0.0-beta
 * Added the `Villagers` feature in the Mobs module: villagers can only be obtained by curing zombie villagers. Only works when the new `Villagers Overhaul` data pack is enabled
   * Villagers can no longer breed. Zombie villagers are cured with a Golden Carrot (`insanesurvivaloverhaul:zombie_villager_cure_items` item tag) instead of a Golden Apple

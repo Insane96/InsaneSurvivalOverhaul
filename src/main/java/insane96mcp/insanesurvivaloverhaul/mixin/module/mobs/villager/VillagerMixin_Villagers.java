@@ -6,6 +6,7 @@ import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,8 +18,59 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class VillagerMixin_Villagers {
 
     @Shadow
+    private int numberOfRestocksToday;
+    @Shadow
+    private long lastRestockGameTime;
+
+    @Shadow
     private void setUnhappy() {
         throw new AssertionError();
+    }
+
+    @Shadow
+    private void updateDemand() {
+        throw new AssertionError();
+    }
+
+    @Shadow
+    private void resendOffersToTradingPlayer() {
+        throw new AssertionError();
+    }
+
+    /**
+     * When {@link Villagers} is active, villagers can restock {@link Villagers#restocksPerDay} times per day instead of 2, still waiting 2400 ticks between restocks.
+     */
+    @Inject(method = "allowedToRestock", at = @At("HEAD"), cancellable = true)
+    private void insanesurvivaloverhaul$restocksPerDay(CallbackInfoReturnable<Boolean> cir) {
+        if (!Villagers.isActive())
+            return;
+        cir.setReturnValue(this.numberOfRestocksToday == 0
+                || (this.numberOfRestocksToday < Villagers.restocksPerDay && ((Villager) (Object) this).level().getGameTime() > this.lastRestockGameTime + 2400L));
+    }
+
+    /**
+     * When {@link Villagers} is active, the demand is updated once for each of the {@link Villagers#restocksPerDay} restocks missed, instead of 2.
+     * Vanilla resets the uses of the offers before updating the demand, so the trades used since the last restock count as unused and their demand goes down.
+     * With {@link Villagers#catchUpDemandCountsUses} the first missed restock updates the demand with the actual uses, then the uses are reset and the other missed restocks count as unused.
+     */
+    @Inject(method = "catchUpDemand", at = @At("HEAD"), cancellable = true)
+    private void insanesurvivaloverhaul$catchUpDemand(CallbackInfo ci) {
+        if (!Villagers.isActive())
+            return;
+        int missedRestocks = Villagers.restocksPerDay - this.numberOfRestocksToday;
+        if (missedRestocks > 0) {
+            int unusedRestocks = missedRestocks;
+            if (Villagers.catchUpDemandCountsUses) {
+                this.updateDemand();
+                unusedRestocks--;
+            }
+            for (MerchantOffer offer : ((Villager) (Object) this).getOffers())
+                offer.resetUses();
+            for (int i = 0; i < unusedRestocks; i++)
+                this.updateDemand();
+        }
+        this.resendOffersToTradingPlayer();
+        ci.cancel();
     }
 
     /**

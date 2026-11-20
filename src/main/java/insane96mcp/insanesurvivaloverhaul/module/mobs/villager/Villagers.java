@@ -67,8 +67,12 @@ public class Villagers extends Feature {
     public static Boolean fireResistantStructureZombieVillagers = true;
     @Config(min = 0d, max = 1d, description = "When a trade's demand is above 0 and goes down at a restock, the decrease is multiplied by this value, so expensive trades go back to the base price more slowly. 1 is vanilla.")
     public static Double positiveDemandDecayMultiplier = 0.6d;
-    @Config(description = "If true, a trade's demand can't go below -max uses, so an unused trade can always get more expensive again.")
-    public static Boolean clampNegativeDemand = true;
+    @Config(min = -1d, description = "A trade's demand can't go below -(this value × max uses), so an unused trade doesn't need many restocks to get more expensive again. 0 keeps the demand at 0 or above, 1 lets it go down to -max uses. Negative values disable the limit (vanilla).")
+    public static Double negativeDemandLimit = 0d;
+    @Config(min = 1, description = "How many times per day villagers can restock. When a new day starts the demand is also updated once for each missed restock, so this is also how many times per day the demand changes. Vanilla is 2.")
+    public static Integer restocksPerDay = 1;
+    @Config(description = "If true, when a new day starts (or half a day passed since the last restock) and the villager restocked less than 'Restocks per day' times, the first missed restock counts the trades used since the last restock. Vanilla resets the uses first, so the used trades count as unused and their demand goes down instead of up.")
+    public static Boolean catchUpDemandCountsUses = true;
     @Config(description = "If true, villagers get 1 trading experience as soon as they take a job, so they keep it (and their trades) even if they lose their job site.")
     public static Boolean lockTrades = true;
     @Config(min = 0d, description = "Multiplier to the experience villagers need to level up.")
@@ -147,7 +151,7 @@ public class Villagers extends Feature {
 
     /**
      * Vanilla demand update ({@code demand + uses - (maxUses - uses)}), with the decrease multiplied by {@link #positiveDemandDecayMultiplier} while demand is above 0
-     * (stopping at 0 for this restock) and the negative demand clamped at {@code -maxUses}.
+     * (stopping at 0 for this restock) and the negative demand limited to {@code -negativeDemandLimit × maxUses} (rounded down).
      */
     public static int getUpdatedDemand(int demand, int uses, int maxUses) {
         int change = uses - (maxUses - uses);
@@ -156,8 +160,8 @@ public class Villagers extends Feature {
             newDemand = Math.max(0, demand - Mth.ceil(-change * positiveDemandDecayMultiplier));
         else
             newDemand = demand + change;
-        if (clampNegativeDemand)
-            newDemand = Math.max(newDemand, -maxUses);
+        if (negativeDemandLimit >= 0)
+            newDemand = Math.max(newDemand, -Mth.floor(negativeDemandLimit * maxUses));
         return newDemand;
     }
 
