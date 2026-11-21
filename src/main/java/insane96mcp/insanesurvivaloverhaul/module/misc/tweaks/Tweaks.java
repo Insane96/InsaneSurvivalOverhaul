@@ -92,6 +92,13 @@ public class Tweaks extends Feature {
     @Config(description = "Dragon Egg will no longer teleport on left-click")
     public static Boolean teleportDragonEggOnlyOnRightClick = true;
 
+    @Config(description = "Eyes of Ender will never break when thrown. Vanilla has a 20% chance to break")
+    public static Boolean unbreakableEyesOfEnder = true;
+
+    public static boolean areEyesOfEnderUnbreakable() {
+        return Feature.isEnabled(Tweaks.class) && unbreakableEyesOfEnder;
+    }
+
     public static boolean discreteNameTags = true;
 
     public static boolean doesBlindnessPreventSprint() {

@@ -1,3 +1,6 @@
+# Upcoming
+* Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
+
 # 5.16.2.0-beta
 * Pouches are now enabled by default
   * Crafted with Cloth instead of Leather (Leather if Cloth is disabled)

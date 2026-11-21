@@ -79,6 +79,7 @@
         "module.misc.potionandeffects.WitherMobEffectMixin_PotionsAndEffects",
         "module.misc.tweaks.AbstractArrowMixin_Tweaks",
         "module.misc.tweaks.DragonEggBlockMixin_Tweaks",
+        "module.misc.tweaks.EyeOfEnderMixin_Tweaks",
         "module.misc.tweaks.ItemEntityMixin_Tweaks",
         "module.misc.tweaks.LivingEntityMixin_Tweaks",
         "module.misc.tweaks.PlayerMixin_Tweaks",
