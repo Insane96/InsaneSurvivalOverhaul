@@ -2,6 +2,13 @@
 * Added the Cheaper Smithing Templates data pack (`Cheaper smithing templates` config option in Packs): duplicating Armor Trim and Netherite Upgrade Smithing Templates requires 1 Diamond instead of 7
 * Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
 * Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
+* Added the `Equine Attributes` feature in the Animals module: horses, donkeys, mules, llamas and undead horses no longer have random attributes or genetics, every animal of the same type has the same stats. Configurable in `equine_attributes.json` (health, movement speed, jump strength, step height), where values can also be random ranges
+  * Horses: 20 health, 0.3375 speed (the max for vanilla horses), 0.7 jump strength
+  * Donkeys and Mules: 20 health, 0.225 speed, 0.5 jump strength
+  * Skeleton Horses: 20 health, 0.4 speed, 0.7 jump strength
+  * Zombie Horses: 30 health, 0.3 speed, 0.5 jump strength
+  * Llamas and Trader Llamas: 20 health, vanilla speed and jump strength. Llamas spawn with 3 strength (9 chest slots); bred llamas get the strongest parent's strength, with a 50% chance of +1, up to 5 (`strength` and `extra_strength_chance`)
+  * Animals already in the world get the new stats when loaded
 
 # 5.16.2.0-beta
 * Pouches are now enabled by default
