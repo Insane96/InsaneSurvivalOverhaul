@@ -1,0 +1,7 @@
+{
+    "block": "minecraft:sculk_shrieker",
+    "states": [
+        "can_summon=true"
+    ],
+    "state_hardness": 24
+}

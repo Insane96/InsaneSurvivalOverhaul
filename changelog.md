@@ -1,6 +1,7 @@
 # Upcoming
 * Added the Cheaper Smithing Templates data pack (`Cheaper smithing templates` config option in Packs): duplicating Armor Trim and Netherite Upgrade Smithing Templates requires 1 Diamond instead of 7
 * Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
+* Sculk Shriekers that can summon the Warden now have 24 hardness (was 3).
 * Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
 * Added the `Equine Attributes` feature in the Animals module: horses, donkeys, mules, llamas and undead horses no longer have random attributes or genetics, every animal of the same type has the same stats. Configurable in `equine_attributes.json` (health, movement speed, jump strength, step height), where values can also be random ranges
   * Horses: 20 health, 0.3375 speed (the max for vanilla horses), 0.7 jump strength
