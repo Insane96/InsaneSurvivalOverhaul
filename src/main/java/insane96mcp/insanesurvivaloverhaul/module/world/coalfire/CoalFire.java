@@ -4,6 +4,7 @@ import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanelib.event.BlockBurntEvent;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.GameRulesIntegerValueAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
@@ -11,6 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -42,6 +44,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.WORLD, name = "Coal & Fire", description = "Control fire speed with insanesurvivaloverhaul:fire_speed_multiplier game rule. This feature also enables a recipe to get a flint from 3 gravel.")
 public class CoalFire extends Feature {
+    public static final DeferredHolder<SoundEvent, SoundEvent> FIRESTARTER_KINDLE = ISORegistries.SOUND_EVENTS.register("firestarter_kindle", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("firestarter_kindle")));
     public static final SimpleBlockWithItem BURNT_LOG = SimpleBlockWithItem.register("burnt_log", () -> new BurntLogBlock(BlockBehaviour.Properties.of()
             .mapColor((p_152624_)
                     -> MapColor.TERRACOTTA_BLACK)

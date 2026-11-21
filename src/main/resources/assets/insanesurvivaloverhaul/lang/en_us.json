@@ -370,5 +370,24 @@
     "emi.info.insanesurvivaloverhaul.zombie_villager_cure.convalescence": "Cured Villagers need time to recover before they trade or work again.",
     "tag.item.insanesurvivaloverhaul.firework_star_shape": "Firework Star Shapes",
     "tag.item.insanesurvivaloverhaul.firework_star_trail": "Firework Star Trails",
-    "tag.item.insanesurvivaloverhaul.firework_star_twinkle": "Firework Star Twinkles"
+    "tag.item.insanesurvivaloverhaul.firework_star_twinkle": "Firework Star Twinkles",
+
+    "insanesurvivaloverhaul.subtitle.unfair_one_shot": "Fatal hit prevented",
+    "insanesurvivaloverhaul.subtitle.absorption_hit": "Absorption absorbs damage",
+    "insanesurvivaloverhaul.subtitle.pickaxe_attack": "Pickaxe attack",
+    "insanesurvivaloverhaul.subtitle.shovel_attack": "Shovel attack",
+    "insanesurvivaloverhaul.subtitle.spawner_spawn": "Spawner spawns",
+    "insanesurvivaloverhaul.subtitle.empowered_spawner_end": "Empowered Spawner depletes",
+    "insanesurvivaloverhaul.subtitle.disabled_armor_unequip": "Disabled armor unequipped",
+    "insanesurvivaloverhaul.subtitle.broken_armor_unequip": "Broken armor unequipped",
+    "insanesurvivaloverhaul.subtitle.nausea_miss": "Attack misses",
+    "insanesurvivaloverhaul.subtitle.crystal_heart_use": "Crystal Heart used",
+    "insanesurvivaloverhaul.subtitle.fall_from_mount": "Rider knocked off",
+    "insanesurvivaloverhaul.subtitle.milking_cooldown": "Animal refuses milking",
+    "insanesurvivaloverhaul.subtitle.turtle_shed_scute": "Turtle sheds Scute",
+    "insanesurvivaloverhaul.subtitle.firestarter_kindle": "Firestarter kindles",
+    "insanesurvivaloverhaul.subtitle.echo_pillar_set_spawn": "Echo Pillar sets spawn",
+    "insanesurvivaloverhaul.subtitle.echo_pillar_enable": "Echo Pillar activates",
+    "insanesurvivaloverhaul.subtitle.echo_pillar_disable": "Echo Pillar deactivates",
+    "insanesurvivaloverhaul.subtitle.recall_teleport": "Player recalled"
 }

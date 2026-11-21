@@ -6,10 +6,11 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.world.effect.ILMobEffect;
 import insane96mcp.insanelib.world.scheduled.ScheduledTasks;
 import insane96mcp.insanelib.world.scheduled.ScheduledTickTask;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -34,6 +35,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 @ConfigType(ModConfig.Type.COMMON)
 @LoadFeature(module = ISOModules.ITEMS, name = "Recall Potion", description = "Adds the Potion of Recall: when its effect ends, players and their pets are sent back to the player's respawn point. Brewed by adding a Wither Rose to a Potion of Regeneration II, then an Echo Shard.")
 public class Recall extends Feature {
+    public static final DeferredHolder<SoundEvent, SoundEvent> RECALL_TELEPORT = ISORegistries.SOUND_EVENTS.register("recall_teleport", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("recall_teleport")));
     public static final DeferredHolder<MobEffect, ILMobEffect> BACK_TO_SPAWN = ISORegistries.MOB_EFFECTS.register("back_to_spawn", () -> new ILMobEffect(MobEffectCategory.BENEFICIAL, 0x6600ff));
     public static final DeferredHolder<Potion, Potion> REGEN_WITHER = ISORegistries.POTIONS.register("regen_wither", () -> new Potion("regen_wither", new MobEffectInstance(MobEffects.REGENERATION, 450), new MobEffectInstance(MobEffects.WITHER, 450)));
     public static final DeferredHolder<Potion, Potion> RECALL = ISORegistries.POTIONS.register("recall", () -> new Potion("recall", new MobEffectInstance(BACK_TO_SPAWN, 300)));
@@ -94,7 +96,7 @@ public class Recall extends Feature {
         ScheduledTasks.schedule(new ScheduledTickTask(2) {
             @Override
             public void run() {
-                teleported.level().playSound(null, teleported, SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 0.6f, 1f);
+                teleported.level().playSound(null, teleported, RECALL_TELEPORT.get(), SoundSource.PLAYERS, 0.6f, 1f);
             }
         });
     }

@@ -117,7 +117,7 @@ public class FirestarterItem extends FlintAndSteelItem {
             }
 
             if (tickCount == 45 || tickCount == 20) {
-                level.playSound(player, hitResult.getBlockPos(), SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS);
+                level.playSound(player, hitResult.getBlockPos(), CoalFire.FIRESTARTER_KINDLE.get(), SoundSource.BLOCKS);
             }
         }
     }

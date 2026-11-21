@@ -5,8 +5,9 @@ import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -18,9 +19,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Make items not able to mine / attack")
 public class DisabledItems extends Feature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> DISABLED_ARMOR_UNEQUIP = ISORegistries.SOUND_EVENTS.register("disabled_armor_unequip", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("disabled_armor_unequip")));
 
 	public static final TagKey<Item> NO_DAMAGE = ISOItemTagsProvider.create("no_damage");
 	public static final String NO_DAMAGE_ITEM_LANG = InsaneSO.lang("no_damage_item");
@@ -71,7 +74,7 @@ public class DisabledItems extends Feature {
 		for (ItemStack stack : player.getArmorSlots()) {
 			if (stack.isEmpty() || (!stack.is(NO_EQUIP) && !stack.is(DISABLED)))
 				continue;
-			player.level().playSound(null, player, SoundEvents.ALLAY_HURT, SoundSource.PLAYERS, 0.7f, 2f);
+			player.level().playSound(null, player, DISABLED_ARMOR_UNEQUIP.get(), SoundSource.PLAYERS, 0.7f, 2f);
 			EquipmentSlot equipmentSlot = player.getEquipmentSlotForItem(stack);
 			if (stack.getItem() instanceof Equipable) {
 				player.setItemSlot(equipmentSlot, ItemStack.EMPTY);

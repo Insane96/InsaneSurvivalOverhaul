@@ -4,12 +4,13 @@ import insane96mcp.insanelib.core.ModNBTData;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.Module;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -30,6 +31,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 @LoadFeature(module = ISOModules.DEATH,
 		description = "Makes players lose max health on death and adds a new item to gain them back.\nControlled via the insanesurvivaloverhaul:death_health_lost game rule.")
 public class DeathMaxHealthPenalty extends Feature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> CRYSTAL_HEART_USE = ISORegistries.SOUND_EVENTS.register("crystal_heart_use", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("crystal_heart_use")));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHHEALTHLOST = GameRules.register("insanesurvivaloverhaul:death_health_lost", GameRules.Category.PLAYER, GameRules.IntegerValue.create(2));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_MAXHEALTHFROMCRYSTAL = GameRules.register("insanesurvivaloverhaul:max_health_from_crystal", GameRules.Category.PLAYER, GameRules.IntegerValue.create(30));
 	public static final GameRules.Key<GameRules.IntegerValue> RULE_DEATHMINHEALTH = GameRules.register("insanesurvivaloverhaul:death_min_health", GameRules.Category.PLAYER, GameRules.IntegerValue.create(20));
@@ -108,7 +110,7 @@ public class DeathMaxHealthPenalty extends Feature {
 			}
 			instance.addOrReplacePermanentModifier(new AttributeModifier(DEATH_PENALTY_ID, modifierAmount + 2, AttributeModifier.Operation.ADD_VALUE));
 			stackInHand.shrink(1);
-			player.playSound(SoundEvents.CONDUIT_ACTIVATE, 1f, 0.5f);
+			player.playSound(CRYSTAL_HEART_USE.get(), 1f, 0.5f);
 			player.swing(usedHand);
 			player.displayClientMessage(Component.translatable("insanesurvivaloverhaul.crystal_heart.use"), true);
 			return InteractionResultHolder.consume(stackInHand);

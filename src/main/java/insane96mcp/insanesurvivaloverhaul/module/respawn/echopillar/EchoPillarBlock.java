@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -134,7 +133,7 @@ public class EchoPillarBlock extends Block {
         stack.shrink(1);
         if (player instanceof ServerPlayer serverPlayer && (serverPlayer.getRespawnDimension() != level.dimension() || !pos.equals(serverPlayer.getRespawnPosition()))) {
             serverPlayer.setRespawnPosition(level.dimension(), pos, 0.0F, false, true);
-            level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_SET_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, EchoPillar.ECHO_PILLAR_SET_SPAWN.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
             EchoPillar.ACTIVATE_ECHO_PILLAR.get().trigger(serverPlayer);
         }
         return ItemInteractionResult.SUCCESS;
@@ -166,7 +165,7 @@ public class EchoPillarBlock extends Block {
         if (upperState.is(state.getBlock()))
             level.setBlock(pos.above(), upperState.setValue(ENABLED, true), 3);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(entity, state));
-        level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, EchoPillar.ECHO_PILLAR_ENABLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         if (level instanceof ServerLevel serverLevel)
             serverLevel.setChunkForced(pos.getX() >> 4, pos.getZ() >> 4, true);
     }
@@ -176,7 +175,7 @@ public class EchoPillarBlock extends Block {
         BlockState upperState = level.getBlockState(pos.above());
         if (upperState.is(state.getBlock()))
             level.setBlock(pos.above(), upperState.setValue(ENABLED, false), 3);
-        level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), EchoPillar.ECHO_PILLAR_DISABLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         if (entity instanceof ServerPlayer serverPlayer) {
             if (showDisabledMessage)
                 serverPlayer.displayClientMessage(PILLAR_DISABLED_MESSAGE, false);

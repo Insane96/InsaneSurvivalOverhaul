@@ -13,7 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -42,6 +42,7 @@ import java.util.Optional;
 
 @LoadFeature(module = ISOModules.ANIMALS, description = "Slower egg laying and wool regrowth, cooldown on milking (and stewing) and changed chance for chickens from eggs. Configurable via livestock data.")
 public class AnimalProducts extends Feature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> MILKING_COOLDOWN = ISORegistries.SOUND_EVENTS.register("milking_cooldown", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("milking_cooldown")));
 	public static final TagKey<EntityType<?>> MILKABLE = TagKey.create(Registries.ENTITY_TYPE, InsaneSO.id("milkable"));
 
 	public static final String MILK_COOLDOWN_LANG = InsaneSO.lang("milk_cooldown");
@@ -145,7 +146,7 @@ public class AnimalProducts extends Feature {
 		if (getFluidCooldown(living) > 0) {
 			event.setCanceled(true);
 			if (!player.level().isClientSide) {
-				living.playSound(SoundEvents.COW_HURT, 0.4F, (event.getEntity().level().random.nextFloat() - event.getEntity().level().random.nextFloat()) * 0.2F + 1.2F);
+				living.playSound(MILKING_COOLDOWN.get(), 0.4F, (event.getEntity().level().random.nextFloat() - event.getEntity().level().random.nextFloat()) * 0.2F + 1.2F);
 				MutableComponent message = Component.translatable(MILK_COOLDOWN_LANG, living.getDisplayName());
 				player.displayClientMessage(message, true);
 			}

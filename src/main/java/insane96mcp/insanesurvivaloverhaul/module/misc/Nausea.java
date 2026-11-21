@@ -3,9 +3,11 @@ package insane96mcp.insanesurvivaloverhaul.module.misc;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,9 +15,11 @@ import net.minecraft.world.food.FoodProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.MISC, description = "Nausea makes eating give Hunger and attacking sometimes miss.")
 public class Nausea extends Feature {
+    public static final DeferredHolder<SoundEvent, SoundEvent> NAUSEA_MISS = ISORegistries.SOUND_EVENTS.register("nausea_miss", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("nausea_miss")));
 
     @Config(description = "Eating while nauseous will cause hunger effect")
     public static Boolean hungerWhenEatingAndNauseous = true;
@@ -46,7 +50,7 @@ public class Nausea extends Feature {
         int lvl = attacker.getEffect(MobEffects.CONFUSION).getAmplifier() + 1;
         if (attacker.getRandom().nextFloat() < chanceToFailToHit * lvl) {
             event.setCanceled(true);
-            attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ALLAY_AMBIENT_WITH_ITEM, attacker.getSoundSource(), 1f, 2f);
+            attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), NAUSEA_MISS.get(), attacker.getSoundSource(), 1f, 2f);
         }
     }
 }

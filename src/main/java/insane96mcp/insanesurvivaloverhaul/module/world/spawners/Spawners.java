@@ -17,7 +17,6 @@ import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,7 +24,7 @@ import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
@@ -61,6 +60,8 @@ import java.util.function.Supplier;
 
 @LoadFeature(module = ISOModules.WORLD, description = "Spawners are now a challenge. Monsters spawning from spawners ignore light.")
 public class Spawners extends JsonFeature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> SPAWNER_SPAWN = ISORegistries.SOUND_EVENTS.register("spawner_spawn", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("spawner_spawn")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> EMPOWERED_SPAWNER_END = ISORegistries.SOUND_EVENTS.register("empowered_spawner_end", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("empowered_spawner_end")));
 
 	public static final DeferredHolder<AttachmentType<?>, AttachmentType<SpawnerDataImpl>> SPAWNER_DATA =
 			ISORegistries.ATTACHMENT_TYPES.register("spawner_data", () -> AttachmentType.builder(SpawnerDataImpl::new)
@@ -162,7 +163,7 @@ public class Spawners extends JsonFeature {
 			Vec3 soundPos = distance > MAX_SPAWNING_SOUND_DISTANCE
 					? player.getEyePosition().add(toSpawner.scale(MAX_SPAWNING_SOUND_DISTANCE / distance))
 					: spawnerCenter;
-			player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.FIRECHARGE_USE), SoundSource.BLOCKS, soundPos.x, soundPos.y, soundPos.z, 1f, 1.5f, seed));
+			player.connection.send(new ClientboundSoundPacket(SPAWNER_SPAWN, SoundSource.BLOCKS, soundPos.x, soundPos.y, soundPos.z, 1f, 1.5f, seed));
 		}
 	}
 
@@ -218,7 +219,7 @@ public class Spawners extends JsonFeature {
 				}
 			}
 			if (empoweredSoundEffect)
-				level.playSound(null, spawnerPos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 3.0f, 1.5f);
+				level.playSound(null, spawnerPos, EMPOWERED_SPAWNER_END.get(), SoundSource.BLOCKS, 3.0f, 1.5f);
 		}
 	}
 

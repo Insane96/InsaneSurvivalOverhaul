@@ -15,8 +15,60 @@
         "subtitle": "insanesurvivaloverhaul.subtitle.shovel_attack",
         "sounds": [ "insanesurvivaloverhaul:shovel_attack" ]
     },
-    "axe_attack": {
-        "subtitle": "insanesurvivaloverhaul.subtitle.axe_attack",
-        "sounds": [ "insanesurvivaloverhaul:axe_attack" ]
+    "spawner_spawn": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.spawner_spawn",
+        "sounds": [ { "name": "minecraft:item.firecharge.use", "type": "event" } ]
+    },
+    "empowered_spawner_end": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.empowered_spawner_end",
+        "sounds": [ { "name": "minecraft:entity.player.levelup", "type": "event" } ]
+    },
+    "disabled_armor_unequip": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.disabled_armor_unequip",
+        "sounds": [ { "name": "minecraft:entity.allay.hurt", "type": "event" } ]
+    },
+    "broken_armor_unequip": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.broken_armor_unequip",
+        "sounds": [ { "name": "minecraft:entity.allay.hurt", "type": "event" } ]
+    },
+    "nausea_miss": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.nausea_miss",
+        "sounds": [ { "name": "minecraft:entity.allay.ambient_with_item", "type": "event" } ]
+    },
+    "crystal_heart_use": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.crystal_heart_use",
+        "sounds": [ { "name": "minecraft:block.conduit.activate", "type": "event" } ]
+    },
+    "fall_from_mount": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.fall_from_mount",
+        "sounds": [ { "name": "minecraft:item.armor.equip_generic", "type": "event" } ]
+    },
+    "milking_cooldown": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.milking_cooldown",
+        "sounds": [ { "name": "minecraft:entity.cow.hurt", "type": "event" } ]
+    },
+    "turtle_shed_scute": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.turtle_shed_scute",
+        "sounds": [ { "name": "minecraft:item.bone_meal.use", "type": "event" } ]
+    },
+    "firestarter_kindle": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.firestarter_kindle",
+        "sounds": [ { "name": "minecraft:block.fire.ambient", "type": "event" } ]
+    },
+    "echo_pillar_set_spawn": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.echo_pillar_set_spawn",
+        "sounds": [ { "name": "minecraft:block.respawn_anchor.set_spawn", "type": "event" } ]
+    },
+    "echo_pillar_enable": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.echo_pillar_enable",
+        "sounds": [ { "name": "minecraft:block.respawn_anchor.charge", "type": "event" } ]
+    },
+    "echo_pillar_disable": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.echo_pillar_disable",
+        "sounds": [ { "name": "minecraft:block.respawn_anchor.deplete", "type": "event" } ]
+    },
+    "recall_teleport": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.recall_teleport",
+        "sounds": [ { "name": "minecraft:item.totem.use", "type": "event" } ]
     }
 }

@@ -15,6 +15,10 @@
   * Zombie Horses: 30 health, 0.3 speed, 0.5 jump strength
   * Llamas and Trader Llamas: 20 health, vanilla speed and jump strength. Llamas spawn with 3 strength (9 chest slots); bred llamas get the strongest parent's strength, with a 50% chance of +1, up to 5 (`strength` and `extra_strength_chance`)
   * Animals already in the world get the new stats when loaded
+* Sounds that reused vanilla ones now have their own sound events and subtitles (e.g. Spawners no longer show "Fireball whooshes"). They still play the vanilla sounds, but can now be replaced with resource packs without affecting the vanilla ones
+  * Spawner spawning, Empowered Spawner depleting, disabled and broken armor unequipping, attacks missed with Nausea, Crystal Heart, falling from mount, milking cooldown, turtles shedding scutes, Firestarter, Echo Pillar and Recall
+* Added the missing subtitles for the Unfair One-Shot, Absorption hit, pickaxe and shovel attack sounds
+* Fixed Rich Farmland not showing growth particles
 
 # 5.16.2.0-beta
 * Pouches are now enabled by default

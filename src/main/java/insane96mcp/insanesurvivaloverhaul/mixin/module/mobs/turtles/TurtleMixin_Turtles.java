@@ -5,13 +5,13 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,7 +42,7 @@ public abstract class TurtleMixin_Turtles extends Animal {
                 return original.call(instance, itemLike, i);
             this.level().setBlock(this.blockPosition(), blockState.setValue(ScuteBlock.HEIGHT, height), 3);
         }
-        this.level().levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, this.blockPosition(), 0);
+        this.level().playSound(null, this.blockPosition(), Turtles.TURTLE_SHED_SCUTE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         return null;
     }
 }

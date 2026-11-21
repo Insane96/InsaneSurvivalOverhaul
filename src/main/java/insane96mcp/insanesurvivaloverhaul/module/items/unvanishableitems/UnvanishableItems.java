@@ -8,8 +8,9 @@ import insane96mcp.insanelib.event.HurtItemStackEvent;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,9 +24,11 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.ITEMS, description = "Items no longer break, will sit at one durability and can't be used. Items in the item tag `insanesurvivaloverhaul:not_unvanishable` are not affected and items in the item tag `insanesurvivaloverhaul:unvanishable` are always unvanishable.")
 public class UnvanishableItems extends Feature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> BROKEN_ARMOR_UNEQUIP = ISORegistries.SOUND_EVENTS.register("broken_armor_unequip", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("broken_armor_unequip")));
 
 	public static final String TOOL_DURABILITY_LANG = InsaneSO.lang("tool_durability");
 	public static final String BROKEN_DURABILITY_LANG = InsaneSO.lang("broken_durability");
@@ -81,7 +84,7 @@ public class UnvanishableItems extends Feature {
 		for (ItemStack stack : event.getEntity().getArmorSlots()) {
 			if (stack.isEmpty() || !isBroken(stack))
 				continue;
-			event.getEntity().level().playSound(null, event.getEntity(), SoundEvents.ALLAY_HURT, SoundSource.PLAYERS, 0.7f, 2f);
+			event.getEntity().level().playSound(null, event.getEntity(), BROKEN_ARMOR_UNEQUIP.get(), SoundSource.PLAYERS, 0.7f, 2f);
 			EquipmentSlot equipmentSlot = event.getEntity().getEquipmentSlotForItem(stack);
 			if (stack.getItem() instanceof Equipable) {
 				event.getEntity().setItemSlot(equipmentSlot, ItemStack.EMPTY);

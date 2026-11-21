@@ -3,8 +3,10 @@ package insane96mcp.insanesurvivaloverhaul.module.misc;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import net.minecraft.sounds.SoundEvents;
+import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -18,9 +20,11 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various Nerfs")
 public class Nerfs extends Feature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> FALL_FROM_MOUNT = ISORegistries.SOUND_EVENTS.register("fall_from_mount", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("fall_from_mount")));
 	@Config(description = "If true, Iron golems will only drop Iron when killed by the player.")
 	public static Boolean ironFromGolemsRequiresPlayer = true;
 	@Config(description = "If true, renderDebugInfo is enabled by default. Requires a world restart.")
@@ -76,7 +80,7 @@ public class Nerfs extends Feature {
 
 		if (event.getEntity().getRandom().nextFloat() < fallFromMountChance) {
 			event.getEntity().stopRiding();
-			event.getEntity().level().playSound(null, event.getEntity(), SoundEvents.ARMOR_EQUIP_GENERIC.value(), event.getEntity().getSoundSource(), 1f, 0.5f);
+			event.getEntity().level().playSound(null, event.getEntity(), FALL_FROM_MOUNT.get(), event.getEntity().getSoundSource(), 1f, 0.5f);
 		}
 	}
 

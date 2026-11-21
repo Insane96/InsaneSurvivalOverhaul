@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,9 @@ import java.util.function.Supplier;
 
 @LoadFeature(module = ISOModules.RESPAWN, description = "Adds Echo Pillars: ancient structures that act as spawn anchors and grant effects on respawn.", enabledByDefault = false)
 public class EchoPillar extends JsonFeature {
+	public static final DeferredHolder<SoundEvent, SoundEvent> ECHO_PILLAR_SET_SPAWN = ISORegistries.SOUND_EVENTS.register("echo_pillar_set_spawn", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("echo_pillar_set_spawn")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> ECHO_PILLAR_ENABLE = ISORegistries.SOUND_EVENTS.register("echo_pillar_enable", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("echo_pillar_enable")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> ECHO_PILLAR_DISABLE = ISORegistries.SOUND_EVENTS.register("echo_pillar_disable", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("echo_pillar_disable")));
 	public static final TagKey<Block> ECHO_PILLAR_BLOCKS_TO_ROT = ISOBlockTagsProvider.create("structures/echo_pillar/blocks_to_rot");
 	public static final TagKey<Item> ECHO_PILLAR_CATALYST = ISOItemTagsProvider.create("echo_pillar_catalyst");
 	public static final MutableComponent ECHO_PILLAR_CATALYST_MESSAGE = Component.translatable(InsaneSO.lang("echo_pillar_catalyst")).withStyle(ChatFormatting.DARK_PURPLE);

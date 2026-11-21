@@ -3,10 +3,12 @@ package insane96mcp.insanesurvivaloverhaul.module.mobs.turtles;
 import insane96mcp.insanelib.core.feature.Feature;
 import insane96mcp.insanelib.core.feature.LoadFeature;
 import insane96mcp.insanelib.core.feature.config.Config;
+import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +22,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @LoadFeature(module = ISOModules.MOBS, description = "Turtle helmet water breathing duration and stackable scute blocks.")
 public class Turtles extends Feature {
+    public static final DeferredHolder<SoundEvent, SoundEvent> TURTLE_SHED_SCUTE = ISORegistries.SOUND_EVENTS.register("turtle_shed_scute", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("turtle_shed_scute")));
 
     public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
 
