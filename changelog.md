@@ -1,4 +1,5 @@
 # Upcoming
+* Added the Cheaper Smithing Templates data pack (`Cheaper smithing templates` config option in Packs): duplicating Armor Trim and Netherite Upgrade Smithing Templates requires 1 Diamond instead of 7
 * Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
 * Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
 

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:diamond" },
+    { "item": "minecraft:end_stone" },
+    { "item": "minecraft:eye_armor_trim_smithing_template" }
+  ],
+  "result": {
+    "count": 2,
+    "id": "minecraft:eye_armor_trim_smithing_template"
+  }
+}

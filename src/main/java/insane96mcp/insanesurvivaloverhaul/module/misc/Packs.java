@@ -69,6 +69,8 @@ public class Packs extends Feature {
     public static Boolean increaseEndCities = true;
     @Config(description = "If true, a data pack will be enabled that changes animal loot (reduced food drops) and adds livestock data that slows down growing, breeding, egg laying, etc.")
     public static Boolean livestock = true;
+    @Config(description = "If true, a data pack will be enabled that makes Armor Trim and Netherite Upgrade Smithing Templates cheaper to duplicate (1 Diamond instead of 7).")
+    public static Boolean cheaperSmithingTemplates = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -82,5 +84,6 @@ public class Packs extends Feature {
         InsaneSO.addServerPack("dark_forest_vegetation", "Insane's Survival Overhaul Roofed Forest Vegetation", () -> this.isEnabled() && !Packs.disableAllDataPacks && darkForestVegetation);
         InsaneSO.addServerPack("increased_end_cities", "Insane's Survival Overhaul Increased End Cities", () -> this.isEnabled() && !Packs.disableAllDataPacks && increaseEndCities);
         InsaneSO.addServerPack("livestock", "Insane's Survival Overhaul Livestock", () -> this.isEnabled() && !Packs.disableAllDataPacks && livestock);
+        InsaneSO.addServerPack("cheaper_smithing_templates", "Insane's Survival Overhaul Cheaper Smithing Templates", () -> this.isEnabled() && !Packs.disableAllDataPacks && cheaperSmithingTemplates);
     }
 }
