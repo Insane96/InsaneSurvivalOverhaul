@@ -104,6 +104,8 @@
         "module.mobs.villager.WorkAtPoiMixin_Villagers",
         "module.mobs.villager.ZombieMixin_Villagers",
         "module.mobs.villager.ZombieVillagerMixin_Villagers",
+        "module.mobs.warden.SculkShriekerBlockEntityMixin_Warden",
+        "module.mobs.warden.WardenSpawnTrackerMixin_Warden",
         "module.movement.BoatMixin_Boats",
         "module.movement.LivingEntityMixin_BetterClimbable",
         "module.movement.LivingEntityMixin_Sprinting",
