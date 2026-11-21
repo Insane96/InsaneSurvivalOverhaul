@@ -7,6 +7,7 @@
   * Shrieks increase the warning level every 5 seconds (was 10, `Warning cooldown` config option)
   * The warning level decreases every 20 minutes (was 10, `Warning decrease interval` config option)
 * Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
+* Enhanced spawner sound volume
 * Added the `Equine Attributes` feature in the Animals module: horses, donkeys, mules, llamas and undead horses no longer have random attributes or genetics, every animal of the same type has the same stats. Configurable in `equine_attributes.json` (health, movement speed, jump strength, step height), where values can also be random ranges
   * Horses: 20 health, 0.3375 speed (the max for vanilla horses), 0.7 jump strength
   * Donkeys and Mules: 20 health, 0.225 speed, 0.5 jump strength

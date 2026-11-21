@@ -17,9 +17,11 @@ import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -137,12 +139,37 @@ public class Spawners extends JsonFeature {
 		BlockPos spawnerPos = mobSpawner.getBlockPos();
 		ServerLevel level = (ServerLevel) event.getLevel();
 		if (spawningSoundEffect)
-			level.playSound(null, spawnerPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2f, 1.5f);
+			playSpawningSound(mobSpawner, level, spawnerPos);
 		SpawnerDataImpl spawnerCap = mobSpawner.getData(Spawners.SPAWNER_DATA.get());
 		spawnerCap.addSpawnedMobs(1);
 		disabledSpawners(mobSpawner, event.getEntity(), level, spawnerPos, spawnerCap);
 		empoweredSpawner(mobSpawner, event.getEntity(), level, spawnerPos, spawnerCap);
 	}
+
+	/**
+	 * Sends the spawning sound only to the players in the spawner's required player range, with volume 1 (volumes above 1 can't be lowered with the sound sliders).
+	 * As volume 1 sounds are only audible up to 16 blocks, for farther players the sound is moved towards them, keeping the spawner's direction
+	 */
+	private static void playSpawningSound(SpawnerBlockEntity spawnerBlockEntity, ServerLevel level, BlockPos spawnerPos) {
+		int range = ((BaseSpawnerAccessor) spawnerBlockEntity.getSpawner()).getRequiredPlayerRange();
+		Vec3 spawnerCenter = Vec3.atCenterOf(spawnerPos);
+		long seed = level.getRandom().nextLong();
+		for (ServerPlayer player : level.players()) {
+			Vec3 toSpawner = spawnerCenter.subtract(player.getEyePosition());
+			double distance = toSpawner.length();
+			if (range >= 0 && distance > range)
+				continue;
+			Vec3 soundPos = distance > MAX_SPAWNING_SOUND_DISTANCE
+					? player.getEyePosition().add(toSpawner.scale(MAX_SPAWNING_SOUND_DISTANCE / distance))
+					: spawnerCenter;
+			player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.FIRECHARGE_USE), SoundSource.BLOCKS, soundPos.x, soundPos.y, soundPos.z, 1f, 1.5f, seed));
+		}
+	}
+
+	/**
+	 * Max distance from the player at which the spawning sound is played
+	 */
+	private static final double MAX_SPAWNING_SOUND_DISTANCE = 8d;
 
 	private void disabledSpawners(SpawnerBlockEntity spawnerBlockEntity, Mob mob, ServerLevel level, BlockPos spawnerPos, SpawnerDataImpl spawnerCap) {
         if (!disableSpawners$enabled
