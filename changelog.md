@@ -1,5 +1,6 @@
 # Upcoming
 * Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
+* Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
 
 # 5.16.2.0-beta
 * Pouches are now enabled by default

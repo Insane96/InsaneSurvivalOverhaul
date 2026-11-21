@@ -53,7 +53,7 @@ public class StackSizes extends Feature {
             int base = components.getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
             if (item instanceof BlockItem
                     || base == 1
-                    || components.has(DataComponents.FOOD)
+                    || (components.has(DataComponents.FOOD) && !item.builtInRegistryHolder().is(NO_FOOD_STACK_SIZE_CHANGES))
                     || item.builtInRegistryHolder().is(NO_ITEM_STACK_SIZE_CHANGES))
                 continue;
 
