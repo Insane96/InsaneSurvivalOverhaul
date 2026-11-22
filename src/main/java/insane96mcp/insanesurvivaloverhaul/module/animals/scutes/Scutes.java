@@ -20,25 +20,30 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.Nullable;
 
-@LoadFeature(module = ISOModules.ANIMALS, description = "Changes to scutes and scute-related items: turtle scutes drop as stackable blocks, the Turtle Helmet gives Oxygen Bonus instead of Water Breathing and Armadillo Scutes brew the Potion of Resistance.")
+@LoadFeature(module = ISOModules.ANIMALS, description = "Changes to scutes and scute-related items: turtle and armadillo scutes drop as stackable blocks, the Turtle Helmet gives Oxygen Bonus instead of Water Breathing and Armadillo Scutes brew the Potion of Resistance.")
 public class Scutes extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> TURTLE_SHED_SCUTE = ISORegistries.SOUND_EVENTS.register("turtle_shed_scute", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("turtle_shed_scute")));
 
-    public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
+    public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(() -> Items.TURTLE_SCUTE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
+    public static final DeferredHolder<Block, ScuteBlock> ARMADILLO_SCUTE = ISORegistries.BLOCKS.register("armadillo_scute", () -> new ScuteBlock(() -> Items.ARMADILLO_SCUTE, BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
 
     public static final DeferredHolder<Potion, Potion> RESISTANCE = ISORegistries.POTIONS.register("resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1800)));
     public static final DeferredHolder<Potion, Potion> LONG_RESISTANCE = ISORegistries.POTIONS.register("long_resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600)));
@@ -48,8 +53,10 @@ public class Scutes extends Feature {
 
     @Config(min = 0d, description = "Oxygen Bonus attribute given by the Turtle Helmet, replacing its vanilla Water Breathing effect. Works like Respiration levels (stacks with it). Set to 0 to keep the vanilla Water Breathing.")
     public static Double helmetOxygenBonus = 2d;
-    @Config(description = "If true, scute will drop as a block and not as item")
+    @Config(description = "If true, turtle and armadillo scutes are shed as a block and not as item. Scute blocks can also be placed and stacked by right-clicking with scutes.")
     public static Boolean scuteDropsAsBlock = true;
+    @Config(description = "If true, Armadillos can no longer be brushed (by players or dispensers) to get scutes, so they have to be collected when shed.")
+    public static Boolean disableArmadilloBrushing = true;
     @Config(description = "Adds the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion. (Requires a world reload)")
     public static Boolean resistancePotion = true;
 
@@ -73,6 +80,48 @@ public class Scutes extends Feature {
         return isEnabled(Scutes.class) && helmetOxygenBonus > 0d;
     }
 
+    /**
+     * If true, brushing Armadillos doesn't make them drop scutes
+     */
+    public static boolean isArmadilloBrushingDisabled() {
+        return isEnabled(Scutes.class) && disableArmadilloBrushing;
+    }
+
+    /**
+     * Returns the scute block made of the given item, or null if the item has no scute block
+     */
+    @Nullable
+    public static ScuteBlock getScuteBlock(Item item) {
+        if (item == Items.TURTLE_SCUTE)
+            return TURTLE_SCUTE.get();
+        if (item == Items.ARMADILLO_SCUTE)
+            return ARMADILLO_SCUTE.get();
+        return null;
+    }
+
+    /**
+     * Places a layer of the scute block at the given position, or adds a layer if the same scute block is already there.
+     * Returns false if the scute couldn't be placed (position occupied or stack full), so the item should be dropped instead.
+     */
+    public static boolean tryShedScuteAsBlock(Level level, BlockPos pos, ScuteBlock scuteBlock) {
+        BlockState blockState = level.getBlockState(pos);
+        if (blockState.is(scuteBlock)) {
+            int height = blockState.getValue(ScuteBlock.HEIGHT) + 1;
+            if (height > 15)
+                return false;
+            level.setBlock(pos, blockState.setValue(ScuteBlock.HEIGHT, height), Block.UPDATE_ALL);
+            return true;
+        }
+        if (!blockState.canBeReplaced())
+            return false;
+        BlockState newState = scuteBlock.defaultBlockState().setValue(ScuteBlock.HEIGHT, 0)
+                .setValue(ScuteBlock.WATERLOGGED, level.getFluidState(pos).is(Fluids.WATER) && level.getFluidState(pos).isSource());
+        if (!newState.canSurvive(level, pos))
+            return false;
+        level.setBlock(pos, newState, Block.UPDATE_ALL);
+        return true;
+    }
+
     @SubscribeEvent
     public void onRegisterBrewingRecipes(RegisterBrewingRecipesEvent event) {
         if (!this.isEnabled()
@@ -87,8 +136,10 @@ public class Scutes extends Feature {
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if (!this.isEnabled()
-                || !scuteDropsAsBlock
-                || !event.getItemStack().is(Items.TURTLE_SCUTE))
+                || !scuteDropsAsBlock)
+            return;
+        ScuteBlock scuteBlock = getScuteBlock(event.getItemStack().getItem());
+        if (scuteBlock == null)
             return;
 
         BlockPos clickedPos = event.getPos();
@@ -98,7 +149,7 @@ public class Scutes extends Feature {
         BlockState newState;
 
         // Stack on an existing scute block by clicking its top face
-        if (clickedState.is(TURTLE_SCUTE.get()) && event.getFace() == Direction.UP) {
+        if (clickedState.is(scuteBlock) && event.getFace() == Direction.UP) {
             int height = clickedState.getValue(ScuteBlock.HEIGHT);
             if (height >= 15)
                 return;
@@ -110,7 +161,8 @@ public class Scutes extends Feature {
                 return;
             if (!event.getLevel().getBlockState(placePos).canBeReplaced())
                 return;
-            newState = TURTLE_SCUTE.get().defaultBlockState().setValue(ScuteBlock.HEIGHT, 0);
+            newState = scuteBlock.defaultBlockState().setValue(ScuteBlock.HEIGHT, 0)
+                    .setValue(ScuteBlock.WATERLOGGED, event.getLevel().getFluidState(placePos).is(Fluids.WATER) && event.getLevel().getFluidState(placePos).isSource());
             if (!newState.canSurvive(event.getLevel(), placePos))
                 return;
         }

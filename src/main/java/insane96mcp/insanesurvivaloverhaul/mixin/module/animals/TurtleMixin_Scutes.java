@@ -12,7 +12,6 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -30,18 +29,10 @@ public abstract class TurtleMixin_Scutes extends Animal {
     @WrapOperation(method = "ageBoundaryReached", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Turtle;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;I)Lnet/minecraft/world/entity/item/ItemEntity;"))
     public ItemEntity insanesurvivaloverhaul$onSpawnScute(Turtle instance, ItemLike itemLike, int i, Operation<ItemEntity> original) {
         if (!Feature.isEnabled(Scutes.class)
-                || !Scutes.scuteDropsAsBlock)
+                || !Scutes.scuteDropsAsBlock
+                || !Scutes.tryShedScuteAsBlock(this.level(), this.blockPosition(), Scutes.TURTLE_SCUTE.get()))
             return original.call(instance, itemLike, i);
 
-        BlockState blockState = this.level().getBlockState(this.blockPosition());
-        if (blockState.canBeReplaced())
-            this.level().setBlock(this.blockPosition(), Scutes.TURTLE_SCUTE.get().defaultBlockState(), 3);
-        else if (blockState.getBlock() == Scutes.TURTLE_SCUTE.get()) {
-            int height = blockState.getValue(ScuteBlock.HEIGHT) + 1;
-            if (height > 15)
-                return original.call(instance, itemLike, i);
-            this.level().setBlock(this.blockPosition(), blockState.setValue(ScuteBlock.HEIGHT, height), 3);
-        }
         this.level().playSound(null, this.blockPosition(), Scutes.TURTLE_SHED_SCUTE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         return null;
     }

@@ -82,7 +82,8 @@ public class ISOLootTableProvider extends LootTableProvider {
             add(Minecarts.COPPER_POWERED_RAIL.block().get(), createSingleItemTable(Minecarts.COPPER_POWERED_RAIL.item().get()));
             add(Minecarts.GOLDEN_POWERED_RAIL.block().get(), createSingleItemTable(Minecarts.GOLDEN_POWERED_RAIL.item().get()));
 
-            turtleScute();
+            scuteBlock(Scutes.TURTLE_SCUTE.get());
+            scuteBlock(Scutes.ARMADILLO_SCUTE.get());
 
             add(BigOreVeins.IRON_ORE_ROCK.block().get(), createSelfDropDispatchTable(
                 BigOreVeins.IRON_ORE_ROCK.block().get(), hasSilkTouch(),
@@ -103,15 +104,15 @@ public class ISOLootTableProvider extends LootTableProvider {
             add(Crops.WILD_POTATOES.get(), wildCropTable(Crops.ROOTED_POTATO.get(), Items.POTATO, Crops.SOLANUM_NEOROSSII.item().get(), UniformGenerator.between(2, 3)));
         }
 
-        private void turtleScute() {
-            LootItem.Builder<?> entry = LootItem.lootTableItem(Items.TURTLE_SCUTE);
+        private void scuteBlock(ScuteBlock block) {
+            LootItem.Builder<?> entry = LootItem.lootTableItem(block.getScuteItem());
             for (int h = 0; h <= 15; h++) {
                 entry.apply(SetItemCountFunction.setCount(ConstantValue.exactly(h + 1))
-                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Scutes.TURTLE_SCUTE.get())
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                         .setProperties(StatePropertiesPredicate.Builder.properties()
                             .hasProperty(ScuteBlock.HEIGHT, h))));
             }
-            add(Scutes.TURTLE_SCUTE.get(), LootTable.lootTable()
+            add(block, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))
                     .add(entry)));
@@ -146,6 +147,7 @@ public class ISOLootTableProvider extends LootTableProvider {
                 Crops.SOLANUM_NEOROSSII.block().get(),
                 CyanFlower.FLOWER.block().get(),
                 Scutes.TURTLE_SCUTE.get(),
+                Scutes.ARMADILLO_SCUTE.get(),
                 Crops.WILD_WHEAT.get(),
                 Crops.WILD_BEETROOTS.get(),
                 Crops.WILD_CARROTS.get(),

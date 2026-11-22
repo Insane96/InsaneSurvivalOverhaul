@@ -2,8 +2,8 @@ package insane96mcp.insanesurvivaloverhaul.module.animals.scutes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -22,6 +22,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class ScuteBlock extends Block implements SimpleWaterloggedBlock {
     protected static final VoxelShape[] SHAPE_BY_STACK = new VoxelShape[]
@@ -46,14 +48,24 @@ public class ScuteBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final IntegerProperty HEIGHT = IntegerProperty.create("height", 0, 15);
 
-    public ScuteBlock(Properties properties) {
+    private final Supplier<Item> scuteItem;
+
+    public ScuteBlock(Supplier<Item> scuteItem, Properties properties) {
         super(properties);
+        this.scuteItem = scuteItem;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE).setValue(HEIGHT, 1));
     }
 
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-        return new ItemStack(Items.TURTLE_SCUTE);
+        return new ItemStack(this.scuteItem.get());
+    }
+
+    /**
+     * The scute item this block is made of (dropped when broken, one per layer)
+     */
+    public Item getScuteItem() {
+        return this.scuteItem.get();
     }
 
     @Override

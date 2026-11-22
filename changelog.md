@@ -6,6 +6,9 @@
 * Wolf Armor is now unvanishable (`Unvanishable Items` feature): it no longer breaks, sits at 1 durability and stays on the wolf, but no longer absorbs damage nor gives armor until repaired
 * The Turtle Helmet now gives +2 Oxygen Bonus instead of Water Breathing (`Helmet oxygen bonus` config option in Scutes, replaces `Helmet water breathing time`). Works like Respiration levels and stacks with it. Set to 0 to get back the vanilla Water Breathing
   * Water Breathing could be refreshed by surfacing for a moment, bypassing the slower air refill
+* Armadillos now shed their scutes as a stackable block, like turtles (`Scute drops as block` config option in Scutes)
+* Armadillos can no longer be brushed for scutes, by players or dispensers (`Disable armadillo brushing` config option in Scutes)
+* Fixed turtles shedding a 2-layer scute block (dropping 2 scutes when broken), replacing water without waterlogging it, and losing the scute when the block couldn't be placed
 * Turtles now have the breeding fail chance and consume Well Fed when breeding, like other animals (they lay eggs instead of spawning babies, so it was skipped)
 
 # 5.16.3.0-beta

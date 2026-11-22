@@ -14,6 +14,7 @@ import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillarBl
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
@@ -41,7 +42,8 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
 
         echoLantern();
         richFarmland();
-        turtleScute();
+        scuteBlock(Scutes.TURTLE_SCUTE.get());
+        scuteBlock(Scutes.ARMADILLO_SCUTE.get());
 
         logBlock((RotatedPillarBlock) CoalFire.BURNT_LOG.block().get());
 
@@ -86,11 +88,12 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         }
     }
 
-    private void turtleScute() {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(Scutes.TURTLE_SCUTE.get());
+    private void scuteBlock(ScuteBlock block) {
+        String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
         for (int layer = 1; layer <= 16; layer++) {
             Integer[] heights = IntStream.rangeClosed(layer - 1, 15).boxed().toArray(Integer[]::new);
-            ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/turtle_scute/stack_" + layer));
+            ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/" + name + "/stack_" + layer));
             for (int y : new int[]{0, 90, 180, 270}) {
                 builder.part().modelFile(model).rotationY(y).addModel()
                     .condition(ScuteBlock.HEIGHT, heights);
