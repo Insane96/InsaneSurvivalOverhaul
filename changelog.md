@@ -1,7 +1,6 @@
-# Upcoming
+# 5.16.3.0-beta
 * Added the Cheaper Smithing Templates data pack (`Cheaper smithing templates` config option in Packs): duplicating Armor Trim and Netherite Upgrade Smithing Templates requires 1 Diamond instead of 7
 * Eyes of Ender no longer break when thrown (`Unbreakable eyes of ender` config option in Tweaks)
-* Sculk Shriekers that can summon the Warden now have 24 hardness (was 3).
 * Added the `Warden` feature in the Mobs module: the Warden is easier to summon
   * Summoned at warning level 2 (was 4, `Summon warning level` config option)
   * Shrieks increase the warning level every 5 seconds (was 10, `Warning cooldown` config option)
@@ -9,8 +8,6 @@
 * Added the `Falling Blocks Damage` feature in the World module: all falling blocks (sand, gravel, concrete powder, etc.) hurt the entities they fall on, 1 damage per block fallen, up to 20 (`Damage per distance` and `Max damage` config options)
   * Damage can be changed per block or block tag in `falling_blocks_damage.json`
   * Anvils, Pointed Dripstone and Scaffolding are not changed (`insanesurvivaloverhaul:falling_block_damage_blacklist` block tag)
-* Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
-* Enhanced spawner sound volume
 * Added the `Equine Attributes` feature in the Animals module: horses, donkeys, mules, llamas and undead horses no longer have random attributes or genetics, every animal of the same type has the same stats. Configurable in `equine_attributes.json` (health, movement speed, jump strength, step height), where values can also be random ranges
   * Horses: 20 health, 0.3375 speed (the max for vanilla horses), 0.7 jump strength
   * Donkeys and Mules: 20 health, 0.225 speed, 0.5 jump strength
@@ -18,9 +15,12 @@
   * Zombie Horses: 30 health, 0.3 speed, 0.5 jump strength
   * Llamas and Trader Llamas: 20 health, vanilla speed and jump strength. Llamas spawn with 3 strength (9 chest slots); bred llamas get the strongest parent's strength, with a 50% chance of +1, up to 5 (`strength` and `extra_strength_chance`)
   * Animals already in the world get the new stats when loaded
+* Sculk Shriekers that can summon the Warden now have 24 hardness (was 3).
+* Enhanced spawner sound volume
 * Sounds that reused vanilla ones now have their own sound events and subtitles (e.g. Spawners no longer show "Fireball whooshes"). They still play the vanilla sounds, but can now be replaced with resource packs without affecting the vanilla ones
   * Spawner spawning, Empowered Spawner depleting, disabled and broken armor unequipping, attacks missed with Nausea, Crystal Heart, falling from mount, milking cooldown, turtles shedding scutes, Firestarter, Echo Pillar and Recall
 * Added the missing subtitles for the Unfair One-Shot, Absorption hit, pickaxe and shovel attack sounds
+* Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
 * Fixed Rich Farmland not showing growth particles
 
 # 5.16.2.0-beta
