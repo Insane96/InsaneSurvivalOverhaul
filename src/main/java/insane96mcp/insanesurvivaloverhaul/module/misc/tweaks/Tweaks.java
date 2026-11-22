@@ -8,6 +8,7 @@ import insane96mcp.insanesurvivaloverhaul.data.generator.ISOBlockTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.MinecraftServer;
@@ -29,7 +30,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,6 +49,7 @@ import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import org.jetbrains.annotations.Nullable;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various stuff that doesn't fit in any other Feature.")
 public class Tweaks extends Feature {
@@ -95,8 +99,40 @@ public class Tweaks extends Feature {
     @Config(description = "Eyes of Ender will never break when thrown. Vanilla has a 20% chance to break")
     public static Boolean unbreakableEyesOfEnder = true;
 
+    @Config(description = "Honeycombs from sheared Beehives and Bee Nests drop out of a free face (the clicked one if possible) instead of spawning inside the block")
+    public static Boolean honeycombsDropFromFace = true;
+
     public static boolean areEyesOfEnderUnbreakable() {
         return Feature.isEnabled(Tweaks.class) && unbreakableEyesOfEnder;
+    }
+
+    public static boolean doHoneycombsDropFromFace() {
+        return Feature.isEnabled(Tweaks.class) && honeycombsDropFromFace;
+    }
+
+    private static final Direction[] HONEYCOMB_FACES = {Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN};
+
+    /**
+     * Drops the honeycombs of a sheared beehive out of the preferred face if its neighbour isn't a full block, otherwise out of the first free face. Falls back to vanilla's drop inside the block if all the faces are obstructed
+     */
+    public static void dropHoneycombFromFace(Level level, BlockPos pos, @Nullable Direction preferredFace) {
+        ItemStack honeycombs = new ItemStack(Items.HONEYCOMB, 3);
+        if (preferredFace != null && isFaceFree(level, pos, preferredFace)) {
+            Block.popResourceFromFace(level, pos, preferredFace, honeycombs);
+            return;
+        }
+        for (Direction direction : HONEYCOMB_FACES) {
+            if (isFaceFree(level, pos, direction)) {
+                Block.popResourceFromFace(level, pos, direction, honeycombs);
+                return;
+            }
+        }
+        Block.popResource(level, pos, honeycombs);
+    }
+
+    private static boolean isFaceFree(Level level, BlockPos pos, Direction direction) {
+        BlockPos neighbour = pos.relative(direction);
+        return !level.getBlockState(neighbour).isCollisionShapeFullBlock(level, neighbour);
     }
 
     public static boolean discreteNameTags = true;

@@ -1,6 +1,8 @@
-# Upcoming
+# 5.16.5.0-beta
 * Broken (unvanishable) items' runes are now inactive until the item is repaired, curses still apply (Rune Enchanting integration, `Unvanishable Items` feature)
   * Requires Rune Enchanting 1.5.4.0-beta or newer
+* Honeycombs from sheared Beehives and Bee Nests now drop out of the clicked face instead of spawning inside the block and being pushed out in a random direction (`Honeycombs drop from face` config option in Tweaks)
+  * If that face is obstructed by a full block, or when sheared by a dispenser, they drop out of the first free face (up, sides, down), so a hopper below collects them only when the other faces are obstructed
 
 # 5.16.4.0-beta
 * The `Turtles` feature (Mobs module) is now the `Scutes` feature in the Animals module (config options must be set again)
