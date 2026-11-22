@@ -8,6 +8,7 @@
     "minecraft:strong_harming",
     "minecraft:strong_poison",
     "minecraft:strong_regeneration",
-    "minecraft:strong_strength"
+    "minecraft:strong_strength",
+    "insanesurvivaloverhaul:strong_resistance"
   ]
 }
