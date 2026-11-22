@@ -1,3 +1,7 @@
+# Upcoming
+* Broken (unvanishable) items' runes are now inactive until the item is repaired, curses still apply (Rune Enchanting integration, `Unvanishable Items` feature)
+  * Requires Rune Enchanting 1.5.4.0-beta or newer
+
 # 5.16.4.0-beta
 * The `Turtles` feature (Mobs module) is now the `Scutes` feature in the Animals module (config options must be set again)
 * Added the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion (`Resistance potion` config option in Scutes)

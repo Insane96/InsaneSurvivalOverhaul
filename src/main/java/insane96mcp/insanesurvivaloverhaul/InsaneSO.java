@@ -23,6 +23,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.plantsgrowth.PlantsGrow
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.HungerAndHealthRegen;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.exhaustion.Exhaustion;
 import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxesClient;
+import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItemsRuneEnchanting;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockdefinition.BlockDefinitionReloadListener;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.ISOBeaconRenderer;
@@ -99,6 +100,7 @@ public class InsaneSO {
 
         if (ModList.get().isLoaded(ModIds.RUNE_ENCHANTING)) {
             new ISORunes(eventBus);
+            UnvanishableItemsRuneEnchanting.init();
         }
 
         if (FMLLoader.getDist().isClient()) {

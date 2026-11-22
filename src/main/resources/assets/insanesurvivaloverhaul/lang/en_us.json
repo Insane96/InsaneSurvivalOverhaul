@@ -173,6 +173,7 @@
     "insanesurvivaloverhaul.no_equip_item": "This item doesn't fit you",
     "insanesurvivaloverhaul.disabled_item": "This item is disabled and cannot be used/equipped",
     "insanesurvivaloverhaul.broken_item": "This item is broken, must be repaired",
+    "insanesurvivaloverhaul.broken_item_runes": "Broken: runes are inactive until repaired.",
     "insanesurvivaloverhaul.tool_mining_speed": "%.1f Mining Speed",
     "insanesurvivaloverhaul.tool_durability": "Durability: %d/%d",
     "insanesurvivaloverhaul.broken_durability": "Broken",
