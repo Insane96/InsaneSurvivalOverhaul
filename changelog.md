@@ -1,5 +1,7 @@
 # Upcoming
 * Wolf Armor is now unvanishable (`Unvanishable Items` feature): it no longer breaks, sits at 1 durability and stays on the wolf, but no longer absorbs damage nor gives armor until repaired
+* The Turtle Helmet now gives +2 Oxygen Bonus instead of Water Breathing (`Helmet oxygen bonus` config option in Turtles, replaces `Helmet water breathing time`). Works like Respiration levels and stacks with it. Set to 0 to get back the vanilla Water Breathing
+  * Water Breathing could be refreshed by surfacing for a moment, bypassing the slower air refill
 
 # 5.16.3.0-beta
 * Added the Cheaper Smithing Templates data pack (`Cheaper smithing templates` config option in Packs): duplicating Armor Trim and Netherite Upgrade Smithing Templates requires 1 Diamond instead of 7
