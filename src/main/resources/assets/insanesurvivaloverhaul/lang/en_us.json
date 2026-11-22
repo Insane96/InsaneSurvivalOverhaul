@@ -364,6 +364,7 @@
     "emi.info.insanesurvivaloverhaul.bone_meal.canes_and_cactus": "Can make Sugar Cane and Cactus grow.",
     "emi.info.insanesurvivaloverhaul.rich_farmland": "Crops on Rich Farmland grow faster, but it can decay back to Farmland.",
     "emi.info.insanesurvivaloverhaul.break_on_fall": "May break when falling onto it.",
+    "emi.info.insanesurvivaloverhaul.falling_blocks_damage": "Hurts the entities it falls on.",
     "emi.info.insanesurvivaloverhaul.totem_of_undying": "Also grants Resistance when it saves you.",
     "emi.info.insanesurvivaloverhaul.zombie_villager_cure": "Cures a Zombie Villager weakened by Weakness. Villagers can't breed: curing them is the only way to get new ones.",
     "emi.info.insanesurvivaloverhaul.shulker_box_from_pouches": "The contents of the Pouches used to craft it end up inside.",

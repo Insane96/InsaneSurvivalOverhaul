@@ -41,6 +41,7 @@ import insane96mcp.insanesurvivaloverhaul.module.world.Berries;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.Sponges;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
+import insane96mcp.insanesurvivaloverhaul.module.world.fallingblocksdamage.FallingBlocksDamage;
 import insane96mcp.insanesurvivaloverhaul.module.world.spawners.Spawners;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.ChatFormatting;
@@ -55,6 +56,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Fallable;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -150,6 +152,15 @@ public class ISOEmiPlugin implements EmiPlugin {
 			addInfo(registry, emiIngredientOf(Items.CAKE), "cake", "cake");
 		if (Feature.isEnabled(Sponges.class))
 			addInfo(registry, emiIngredientOf(Items.SPONGE, Items.WET_SPONGE), "sponge", "sponge", Sponges.dryWetWeather ? "sponge.weather" : null);
+		if (Feature.isEnabled(FallingBlocksDamage.class)) {
+			List<EmiIngredient> fallingBlocks = new ArrayList<>();
+			BuiltInRegistries.BLOCK.forEach(block -> {
+				if (block instanceof Fallable && FallingBlocksDamage.hurtsEntities(block.defaultBlockState()) && block.asItem() != Items.AIR)
+					fallingBlocks.add(EmiStack.of(block.asItem()));
+			});
+			if (!fallingBlocks.isEmpty())
+				addInfo(registry, EmiIngredient.of(fallingBlocks), "falling_blocks_damage", "falling_blocks_damage");
+		}
 		if (Feature.isEnabled(CoalFire.class))
 			addInfo(registry, emiIngredientOf(Items.CAMPFIRE, Items.SOUL_CAMPFIRE), "campfire",
 					CoalFire.unlitCampfires ? "campfire.unlit" : null,

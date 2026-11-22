@@ -15,6 +15,7 @@ import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
+import insane96mcp.insanesurvivaloverhaul.module.world.fallingblocksdamage.FallingBlocksDamage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -74,6 +75,9 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
         tag(SKULLS)
                 .add(Blocks.SKELETON_SKULL, Blocks.SKELETON_WALL_SKULL, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL, Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD);
 
+        tag(FallingBlocksDamage.BLACKLIST)
+                .add(Blocks.SCAFFOLDING, Blocks.POINTED_DRIPSTONE)
+                .addTag(BlockTags.ANVIL);
         //noinspection unchecked
         tag(Tweaks.BREAK_ON_FALL)
                 .addTags(Tags.Blocks.GLASS_BLOCKS, BlockTags.LEAVES);

@@ -6,6 +6,9 @@
   * Summoned at warning level 2 (was 4, `Summon warning level` config option)
   * Shrieks increase the warning level every 5 seconds (was 10, `Warning cooldown` config option)
   * The warning level decreases every 20 minutes (was 10, `Warning decrease interval` config option)
+* Added the `Falling Blocks Damage` feature in the World module: all falling blocks (sand, gravel, concrete powder, etc.) hurt the entities they fall on, 1 damage per block fallen, up to 20 (`Damage per distance` and `Max damage` config options)
+  * Damage can be changed per block or block tag in `falling_blocks_damage.json`
+  * Anvils, Pointed Dripstone and Scaffolding are not changed (`insanesurvivaloverhaul:falling_block_damage_blacklist` block tag)
 * Fixed Spider Eyes and Golden Carrots not getting the item stack multiplier (stacked to 64 instead of 128)
 * Enhanced spawner sound volume
 * Added the `Equine Attributes` feature in the Animals module: horses, donkeys, mules, llamas and undead horses no longer have random attributes or genetics, every animal of the same type has the same stats. Configurable in `equine_attributes.json` (health, movement speed, jump strength, step height), where values can also be random ranges

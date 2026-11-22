@@ -1,7 +1,8 @@
-// 1.21.1	2026-11-09T12:33:39.3457925	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-22T08:03:33.5701234	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
 6dfa83db3fbbf26eed43a02c76785ea559daca31 data/insanesurvivaloverhaul/tags/block/can_scythe.json
 f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/depth_multiplier_blacklist.json
+21b53aac0489d05f95d4a4dbc4b5c596551448cd data/insanesurvivaloverhaul/tags/block/falling_block_damage_blacklist.json
 8487d7b397b851933e60859c4adbe8d15830e94f data/insanesurvivaloverhaul/tags/block/harder_crops.json
 f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/hardness_blacklist.json
 980fb382e4e43127ab4f203ad91112e667aa2582 data/insanesurvivaloverhaul/tags/block/infested.json

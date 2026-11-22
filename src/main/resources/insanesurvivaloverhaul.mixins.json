@@ -10,6 +10,7 @@
         "accessor.BlockStateBaseAccessor",
         "accessor.ChunkStepAccessor",
         "accessor.EntityAccessor",
+        "accessor.FallingBlockEntityAccessor",
         "accessor.FoodDataAccessor",
         "accessor.GameRulesIntegerValueAccessor",
         "accessor.InventoryAccessor",
