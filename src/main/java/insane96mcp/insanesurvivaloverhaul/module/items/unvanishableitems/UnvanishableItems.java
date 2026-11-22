@@ -11,15 +11,19 @@ import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -163,6 +167,40 @@ public class UnvanishableItems extends Feature {
 			event.setCanceled(true);
 			event.getEntity().displayClientMessage(Component.translatable(BROKEN_ITEM_LANG), true);
 		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void processWolfArmorDamaging(HurtItemStackEvent event) {
+		if (!this.isEnabled()
+				|| !(event.getLivingEntity() instanceof Wolf wolf))
+			return;
+
+		ItemStack stack = event.getStack();
+		if (stack != wolf.getBodyArmorItem()
+				|| !isUnvanishable(stack))
+			return;
+		if (isBroken(stack)) {
+			event.setAmount(0);
+			return;
+		}
+		if (event.getAmount() >= stack.getMaxDamage() - stack.getDamageValue() - 1) {
+			stack.setDamageValue(stack.getMaxDamage() - 1);
+			event.setAmount(0);
+			wolf.playSound(SoundEvents.WOLF_ARMOR_BREAK);
+		}
+	}
+
+	/**
+	 * Broken wolf armor stays on the wolf but no longer gives armor
+	 */
+	@SubscribeEvent
+	public void onWolfArmorAttributes(ItemAttributeModifierEvent event) {
+		if (!this.isEnabled()
+				|| !event.getItemStack().is(Items.WOLF_ARMOR)
+				|| !isBroken(event.getItemStack()))
+			return;
+
+		event.clearModifiers();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
