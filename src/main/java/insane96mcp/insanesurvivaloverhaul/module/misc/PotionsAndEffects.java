@@ -6,7 +6,6 @@ import insane96mcp.insanelib.core.feature.config.Config;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectAccessor;
 import insane96mcp.insanesurvivaloverhaul.mixin.accessor.MobEffectInstanceAccessor;
 import insane96mcp.insanesurvivaloverhaul.module.ISOModules;
-import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,13 +14,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.Potions;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -49,25 +43,8 @@ public class PotionsAndEffects extends Feature {
     public static Double potionDurationMultiplier = 2d;
     @Config(description = "Effects whose duration in potions isn't changed by 'Potion Duration Multiplier'.")
     public static List<String> potionDurationMultiplierBlacklist = List.of("insanesurvivaloverhaul:back_to_spawn");
-    @Config(description = "Adds the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion. (Requires a world reload)")
-    public static Boolean resistancePotion = true;
 
     public static float STREAMLINE_SPLASH_POTION_MULTIPLIER = 0.667f;
-
-    public static final DeferredHolder<Potion, Potion> RESISTANCE = ISORegistries.POTIONS.register("resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1800)));
-    public static final DeferredHolder<Potion, Potion> LONG_RESISTANCE = ISORegistries.POTIONS.register("long_resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600)));
-    public static final DeferredHolder<Potion, Potion> STRONG_RESISTANCE = ISORegistries.POTIONS.register("strong_resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 900, 1)));
-
-    @SubscribeEvent
-    public void onRegisterBrewingRecipes(RegisterBrewingRecipesEvent event) {
-        if (!this.isEnabled()
-                || !resistancePotion)
-            return;
-
-        event.getBuilder().addMix(Potions.AWKWARD, Items.ARMADILLO_SCUTE, RESISTANCE);
-        event.getBuilder().addMix(RESISTANCE, Items.REDSTONE, LONG_RESISTANCE);
-        event.getBuilder().addMix(RESISTANCE, Items.GLOWSTONE_DUST, STRONG_RESISTANCE);
-    }
 
     @Override
     public void readConfig(ModConfigEvent event) {

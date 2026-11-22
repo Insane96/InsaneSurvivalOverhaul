@@ -15,10 +15,14 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -26,14 +30,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.ANIMALS, description = "Changes to scutes and scute-related items: turtle scutes drop as stackable blocks and the Turtle Helmet gives Oxygen Bonus instead of Water Breathing.")
+@LoadFeature(module = ISOModules.ANIMALS, description = "Changes to scutes and scute-related items: turtle scutes drop as stackable blocks, the Turtle Helmet gives Oxygen Bonus instead of Water Breathing and Armadillo Scutes brew the Potion of Resistance.")
 public class Scutes extends Feature {
     public static final DeferredHolder<SoundEvent, SoundEvent> TURTLE_SHED_SCUTE = ISORegistries.SOUND_EVENTS.register("turtle_shed_scute", () -> SoundEvent.createVariableRangeEvent(InsaneSO.id("turtle_shed_scute")));
 
     public static final DeferredHolder<Block, ScuteBlock> TURTLE_SCUTE = ISORegistries.BLOCKS.register("turtle_scute", () -> new ScuteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.2F, 0.5F).offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.BONE_BLOCK)));
+
+    public static final DeferredHolder<Potion, Potion> RESISTANCE = ISORegistries.POTIONS.register("resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1800)));
+    public static final DeferredHolder<Potion, Potion> LONG_RESISTANCE = ISORegistries.POTIONS.register("long_resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600)));
+    public static final DeferredHolder<Potion, Potion> STRONG_RESISTANCE = ISORegistries.POTIONS.register("strong_resistance", () -> new Potion("resistance", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 900, 1)));
 
     public static final ResourceLocation HELMET_OXYGEN_BONUS_ID = InsaneSO.id("turtle_helmet_oxygen_bonus");
 
@@ -41,6 +50,8 @@ public class Scutes extends Feature {
     public static Double helmetOxygenBonus = 2d;
     @Config(description = "If true, scute will drop as a block and not as item")
     public static Boolean scuteDropsAsBlock = true;
+    @Config(description = "Adds the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion. (Requires a world reload)")
+    public static Boolean resistancePotion = true;
 
     @Override
     public void init(Module module, boolean enabledByDefault, boolean canBeDisabled) {
@@ -60,6 +71,17 @@ public class Scutes extends Feature {
      */
     public static boolean replacesHelmetWaterBreathing() {
         return isEnabled(Scutes.class) && helmetOxygenBonus > 0d;
+    }
+
+    @SubscribeEvent
+    public void onRegisterBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        if (!this.isEnabled()
+                || !resistancePotion)
+            return;
+
+        event.getBuilder().addMix(Potions.AWKWARD, Items.ARMADILLO_SCUTE, RESISTANCE);
+        event.getBuilder().addMix(RESISTANCE, Items.REDSTONE, LONG_RESISTANCE);
+        event.getBuilder().addMix(RESISTANCE, Items.GLOWSTONE_DUST, STRONG_RESISTANCE);
     }
 
     @SubscribeEvent

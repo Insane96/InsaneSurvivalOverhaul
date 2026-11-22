@@ -7,13 +7,13 @@ import com.google.gson.JsonParser;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
-import insane96mcp.insanesurvivaloverhaul.module.misc.PotionsAndEffects;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.MerchantTrades;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.MerchantTradesReloadListener;
@@ -164,9 +164,9 @@ public class ISOVillagerTradesProvider implements DataProvider {
         //Brewable potions, long variants excluded (report_villagers.md §6.6)
         this.levelOnePotions = potionTag("level_1_potions", Potions.NIGHT_VISION, Potions.INVISIBILITY, Potions.LEAPING, Potions.FIRE_RESISTANCE, Potions.SWIFTNESS, Potions.SLOWNESS,
                 Potions.TURTLE_MASTER, Potions.WATER_BREATHING, Potions.HEALING, Potions.HARMING, Potions.POISON, Potions.REGENERATION, Potions.STRENGTH, Potions.WEAKNESS, Potions.SLOW_FALLING,
-                Potions.WIND_CHARGED, Potions.WEAVING, Potions.OOZING, Potions.INFESTED, PotionsAndEffects.RESISTANCE);
+                Potions.WIND_CHARGED, Potions.WEAVING, Potions.OOZING, Potions.INFESTED, Scutes.RESISTANCE);
         this.levelTwoPotions = potionTag("level_2_potions", Potions.STRONG_LEAPING, Potions.STRONG_SWIFTNESS, Potions.STRONG_SLOWNESS, Potions.STRONG_TURTLE_MASTER,
-                Potions.STRONG_HEALING, Potions.STRONG_HARMING, Potions.STRONG_POISON, Potions.STRONG_REGENERATION, Potions.STRONG_STRENGTH, PotionsAndEffects.STRONG_RESISTANCE);
+                Potions.STRONG_HEALING, Potions.STRONG_HARMING, Potions.STRONG_POISON, Potions.STRONG_REGENERATION, Potions.STRONG_STRENGTH, Scutes.STRONG_RESISTANCE);
     }
 
     private void armorer() {
