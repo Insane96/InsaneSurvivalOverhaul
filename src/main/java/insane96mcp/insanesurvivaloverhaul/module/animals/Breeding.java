@@ -138,14 +138,20 @@ public class Breeding extends Feature {
 	}
 
 	private boolean failBreeding(BabyEntitySpawnEvent event, Animal parentA) {
+		if (!shouldBreedingFail(parentA))
+			return false;
+		event.setCanceled(true);
+		return true;
+	}
+
+	/**
+	 * Rolls the breeding fail chance (from the livestock data) of the animal. Also used for animals that don't fire {@link BabyEntitySpawnEvent} (e.g. Turtles)
+	 */
+	public static boolean shouldBreedingFail(Animal parentA) {
 		float failChance = Modifier.applyModifiers(0f, LivestockData.getModifiers(parentA, data -> data.breedingFailChanceModifiers), parentA.level(), parentA.blockPosition(), parentA);
 		if (failChance <= 0)
 			return false;
-		if (failChance >= 1f || parentA.getRandom().nextFloat() < failChance) {
-			event.setCanceled(true);
-			return true;
-		}
-		return false;
+		return failChance >= 1f || parentA.getRandom().nextFloat() < failChance;
 	}
 
 	private void twins(BabyEntitySpawnEvent event, Animal parentA) {
