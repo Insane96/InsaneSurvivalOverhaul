@@ -1,9 +1,10 @@
 # Upcoming
+* The `Turtles` feature (Mobs module) is now the `Scutes` feature in the Animals module (config options must be set again)
 * Added the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion (`Resistance potion` config option in Potions and Effects)
   * Resistance I for 3:00, extendable to 6:00 with Redstone, or Resistance II for 1:30 with Glowstone (with the default 2x potion duration multiplier)
   * Sold by Clerics
 * Wolf Armor is now unvanishable (`Unvanishable Items` feature): it no longer breaks, sits at 1 durability and stays on the wolf, but no longer absorbs damage nor gives armor until repaired
-* The Turtle Helmet now gives +2 Oxygen Bonus instead of Water Breathing (`Helmet oxygen bonus` config option in Turtles, replaces `Helmet water breathing time`). Works like Respiration levels and stacks with it. Set to 0 to get back the vanilla Water Breathing
+* The Turtle Helmet now gives +2 Oxygen Bonus instead of Water Breathing (`Helmet oxygen bonus` config option in Scutes, replaces `Helmet water breathing time`). Works like Respiration levels and stacks with it. Set to 0 to get back the vanilla Water Breathing
   * Water Breathing could be refreshed by surfacing for a moment, bypassing the slower air refill
 
 # 5.16.3.0-beta

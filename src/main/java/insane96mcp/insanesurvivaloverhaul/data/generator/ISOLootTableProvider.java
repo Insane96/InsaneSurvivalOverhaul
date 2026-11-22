@@ -1,6 +1,8 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator;
 
 import insane96mcp.insanesurvivaloverhaul.InsaneSO;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
@@ -8,8 +10,6 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
@@ -107,11 +107,11 @@ public class ISOLootTableProvider extends LootTableProvider {
             LootItem.Builder<?> entry = LootItem.lootTableItem(Items.TURTLE_SCUTE);
             for (int h = 0; h <= 15; h++) {
                 entry.apply(SetItemCountFunction.setCount(ConstantValue.exactly(h + 1))
-                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Turtles.TURTLE_SCUTE.get())
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Scutes.TURTLE_SCUTE.get())
                         .setProperties(StatePropertiesPredicate.Builder.properties()
                             .hasProperty(ScuteBlock.HEIGHT, h))));
             }
-            add(Turtles.TURTLE_SCUTE.get(), LootTable.lootTable()
+            add(Scutes.TURTLE_SCUTE.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))
                     .add(entry)));
@@ -145,7 +145,7 @@ public class ISOLootTableProvider extends LootTableProvider {
                 BoneMeal.RICH_FARMLAND.block().get(),
                 Crops.SOLANUM_NEOROSSII.block().get(),
                 CyanFlower.FLOWER.block().get(),
-                Turtles.TURTLE_SCUTE.get(),
+                Scutes.TURTLE_SCUTE.get(),
                 Crops.WILD_WHEAT.get(),
                 Crops.WILD_BEETROOTS.get(),
                 Crops.WILD_CARROTS.get(),

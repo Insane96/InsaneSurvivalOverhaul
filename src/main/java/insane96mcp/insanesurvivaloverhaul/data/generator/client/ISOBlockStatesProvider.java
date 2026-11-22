@@ -1,5 +1,7 @@
 package insane96mcp.insanesurvivaloverhaul.data.generator.client;
 
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
@@ -7,8 +9,6 @@ import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillarBlock;
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
@@ -87,7 +87,7 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
     }
 
     private void turtleScute() {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(Turtles.TURTLE_SCUTE.get());
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(Scutes.TURTLE_SCUTE.get());
         for (int layer = 1; layer <= 16; layer++) {
             Integer[] heights = IntStream.rangeClosed(layer - 1, 15).boxed().toArray(Integer[]::new);
             ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/turtle_scute/stack_" + layer));

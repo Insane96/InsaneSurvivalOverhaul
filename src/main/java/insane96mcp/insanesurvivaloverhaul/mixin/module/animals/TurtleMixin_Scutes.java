@@ -1,10 +1,10 @@
-package insane96mcp.insanesurvivaloverhaul.mixin.module.mobs.turtles;
+package insane96mcp.insanesurvivaloverhaul.mixin.module.animals;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import insane96mcp.insanelib.core.feature.Feature;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.ScuteBlock;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.turtles.Turtles;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.ScuteBlock;
+import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Turtle.class)
-public abstract class TurtleMixin_Turtles extends Animal {
-    protected TurtleMixin_Turtles(EntityType<? extends Animal> pEntityType, Level pLevel) {
+public abstract class TurtleMixin_Scutes extends Animal {
+    protected TurtleMixin_Scutes(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -29,20 +29,20 @@ public abstract class TurtleMixin_Turtles extends Animal {
      */
     @WrapOperation(method = "ageBoundaryReached", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Turtle;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;I)Lnet/minecraft/world/entity/item/ItemEntity;"))
     public ItemEntity insanesurvivaloverhaul$onSpawnScute(Turtle instance, ItemLike itemLike, int i, Operation<ItemEntity> original) {
-        if (!Feature.isEnabled(Turtles.class)
-                || !Turtles.scuteDropsAsBlock)
+        if (!Feature.isEnabled(Scutes.class)
+                || !Scutes.scuteDropsAsBlock)
             return original.call(instance, itemLike, i);
 
         BlockState blockState = this.level().getBlockState(this.blockPosition());
         if (blockState.canBeReplaced())
-            this.level().setBlock(this.blockPosition(), Turtles.TURTLE_SCUTE.get().defaultBlockState(), 3);
-        else if (blockState.getBlock() == Turtles.TURTLE_SCUTE.get()) {
+            this.level().setBlock(this.blockPosition(), Scutes.TURTLE_SCUTE.get().defaultBlockState(), 3);
+        else if (blockState.getBlock() == Scutes.TURTLE_SCUTE.get()) {
             int height = blockState.getValue(ScuteBlock.HEIGHT) + 1;
             if (height > 15)
                 return original.call(instance, itemLike, i);
             this.level().setBlock(this.blockPosition(), blockState.setValue(ScuteBlock.HEIGHT, height), 3);
         }
-        this.level().playSound(null, this.blockPosition(), Turtles.TURTLE_SHED_SCUTE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+        this.level().playSound(null, this.blockPosition(), Scutes.TURTLE_SHED_SCUTE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         return null;
     }
 }

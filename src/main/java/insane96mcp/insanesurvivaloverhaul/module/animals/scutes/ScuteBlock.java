@@ -1,4 +1,4 @@
-package insane96mcp.insanesurvivaloverhaul.module.mobs.turtles;
+package insane96mcp.insanesurvivaloverhaul.module.animals.scutes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
