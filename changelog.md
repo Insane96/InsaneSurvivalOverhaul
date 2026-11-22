@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.4.0-beta
 * The `Turtles` feature (Mobs module) is now the `Scutes` feature in the Animals module (config options must be set again)
 * Added the Potion of Resistance, brewed with an Armadillo Scute in an Awkward Potion (`Resistance potion` config option in Scutes)
   * Resistance I for 3:00, extendable to 6:00 with Redstone, or Resistance II for 1:30 with Glowstone (with the default 2x potion duration multiplier)
