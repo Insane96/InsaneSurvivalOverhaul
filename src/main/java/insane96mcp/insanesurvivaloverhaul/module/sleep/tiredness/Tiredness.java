@@ -25,6 +25,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -44,6 +45,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -443,6 +445,32 @@ public class Tiredness extends JsonFeature {
 
 	public static int getTimeSkipped(int amplifier) {
 		return timeSkippedOnSleep$base + timeSkippedOnSleep$perLevelPastOne * amplifier;
+	}
+
+	/**
+	 * Whether the sleep status message should be shown in singleplayer too, to show the hours skipped
+	 */
+	public static boolean shouldAnnounceSkippedHours() {
+		return isEnabled(Tiredness.class)
+				&& TirednessCommon.skippingHoursResourcePack;
+	}
+
+	/**
+	 * Adds the hours that will be skipped (based on the highest Tired level of the sleeping players, as in {@link #resetTirednessOnWakeUp}) as argument of the "sleep.skipping_night" message.
+	 * The vanilla translation ignores it, the Skipping Hours resource pack shows it.
+	 */
+	public static MutableComponent getSkippingNightMessage(ServerLevel level, MutableComponent original) {
+		if (!isEnabled(Tiredness.class))
+			return original;
+		//noinspection DataFlowIssue
+		int highestTired = level.players().stream()
+				.filter(LivingEntity::isSleeping)
+				.filter(player -> player.hasEffect(TIRED))
+				.mapToInt(player -> player.getEffect(TIRED).getAmplifier())
+				.max()
+				.orElse(0);
+		float hours = getTimeSkipped(highestTired) / 1000f;
+		return Component.translatable("sleep.skipping_night", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(hours));
 	}
 
 	public static boolean onSleepFinished(ServerLevel level, boolean original) {

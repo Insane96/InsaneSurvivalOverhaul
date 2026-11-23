@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -24,5 +25,21 @@ public abstract class ServerLevelMixin_Tiredness extends Level {
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;isRaining()Z"))
     private boolean insanesurvivaloverhaul$preventRainClear(boolean original) {
         return Tiredness.onSleepFinished((ServerLevel) (Object) this, original);
+    }
+
+    /**
+     * Shows the sleep status message in singleplayer too (vanilla shows it only in multiplayer or when opened to LAN), so the hours skipped are shown
+     */
+    @ModifyExpressionValue(method = "announceSleepStatus", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;isSingleplayer()Z"))
+    private boolean insanesurvivaloverhaul$announceInSingleplayer(boolean original) {
+        return original && !Tiredness.shouldAnnounceSkippedHours();
+    }
+
+    /**
+     * Adds the hours that will be skipped as an argument to the "sleep.skipping_night" message, used by the Skipping Hours resource pack
+     */
+    @ModifyExpressionValue(method = "announceSleepStatus", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;"))
+    private MutableComponent insanesurvivaloverhaul$addSkippedHours(MutableComponent original) {
+        return Tiredness.getSkippingNightMessage((ServerLevel) (Object) this, original);
     }
 }

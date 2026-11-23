@@ -7,6 +7,8 @@
   * Drops all the blocks it destroys and deals 10 damage to entities in the tunnel
   * Works underwater, but fizzles out if the block it's attached to is no longer there (e.g. air or water)
   * 2 Mining Charges are crafted with 1 TNT, 1 Slime Ball and 3 Iron Nuggets
+* Added the Skipping Hours resource pack: the "Sleeping through this night" message is now "Skipping x hours", showing the hours that will be skipped based on the highest Tired level of the sleeping players
+  * The message is now shown in singleplayer too
 
 # 5.16.5.0-beta
 * Broken (unvanishable) items' runes are now inactive until the item is repaired, curses still apply (Rune Enchanting integration, `Unvanishable Items` feature)

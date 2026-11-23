@@ -75,6 +75,7 @@ data/generator/ — Data gen providers (tags, recipes, block states, item models
 - Accessor mixins in `mixin/accessor/` expose private Minecraft internals.
 - Gameplay mixins in `mixin/module/` follow the naming convention `TargetClassMixin_FeatureName.java`.
 - Mixin methods must be prefixed with `insanesurvivaloverhaul$` and have a javadoc explaining what they do.
+- Use MixinExtras injectors (`@ModifyExpressionValue`, `@WrapOperation`, `@WrapWithCondition`, `@ModifyReturnValue`, `@Local`, ...) wherever possible instead of plain Mixin ones (`@Redirect`, `@ModifyVariable`, `@Inject` with `cancellable`, `@Overwrite`), as they're compatible with other mods' mixins on the same target.
 
 ### EMI Info
 

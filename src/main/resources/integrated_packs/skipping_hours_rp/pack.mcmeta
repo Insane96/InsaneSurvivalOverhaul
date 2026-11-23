@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Changes the 'Sleeping through this night' message to show the hours skipped",
+        "pack_format": 34
+    }
+}
