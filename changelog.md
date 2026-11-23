@@ -1,3 +1,6 @@
+# Upcoming
+* Fixed Turtle and Armadillo Scute blocks z-fighting: each layer was rendered 4 times, rotated and overlapping. Now each layer is rendered once, rotated based on its height
+
 # 5.16.6.0-beta
 * Added back the `Explosive Barrel` feature in the Items module (ported from IguanaTweaksExpanded): the Explosive Barrel explodes instantly, without a fuse, when powered by redstone, set on fire, hit by a burning projectile or caught in another explosion
   * Same power as TNT and drops all the blocks it destroys

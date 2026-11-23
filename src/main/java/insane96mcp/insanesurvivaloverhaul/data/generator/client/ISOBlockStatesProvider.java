@@ -140,10 +140,9 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         for (int layer = 1; layer <= 16; layer++) {
             Integer[] heights = IntStream.rangeClosed(layer - 1, 15).boxed().toArray(Integer[]::new);
             ModelFile model = new ModelFile.UncheckedModelFile(modLoc("block/" + name + "/stack_" + layer));
-            for (int y : new int[]{0, 90, 180, 270}) {
-                builder.part().modelFile(model).rotationY(y).addModel()
-                    .condition(ScuteBlock.HEIGHT, heights);
-            }
+            // One copy per layer, rotated by layer, so the pile looks messy without coplanar overlapping faces (z-fighting)
+            builder.part().modelFile(model).rotationY((layer * 90) % 360).addModel()
+                .condition(ScuteBlock.HEIGHT, heights);
         }
     }
 
