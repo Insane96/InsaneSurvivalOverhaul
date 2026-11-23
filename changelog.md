@@ -1,4 +1,10 @@
 # Upcoming
+* Added the `Reversible Stonecutting` feature in the Mining module: full blocks of the same family can be cut into each other in the Stonecutter. E.g. Stone Bricks and Chiseled Stone Bricks can be cut back into Stone, and into each other
+  * Families are built from every 1 to 1 stonecutting recipe between full blocks, including the ones from data packs and other mods. Slabs, stairs, walls and the like are not part of them
+  * Cracked and smooth blocks are excluded, so smelting can't be skipped (`insanesurvivaloverhaul:stonecutter_reverse_blacklist` item tag and `Blacklisted keywords` config option). Blocks removed by `insanelib:recipe_removal` are excluded too
+  * `Log only` config option: writes the families found to the log instead of adding the recipes
+  * `/insanesurvivaloverhaul stonecutter_families dump` writes every family to `logs/insanesurvivaloverhaul/`
+  * With other mods installed, check the families with the dump command or `Log only`: a single 1 to 1 stonecutting recipe from a mod can bridge two unrelated families (e.g. Cobblestone and Stone, letting players skip smelting). Add the offending blocks to the blacklist tag to split them
 * Fixed Turtle and Armadillo Scute blocks z-fighting: each layer was rendered 4 times, rotated and overlapping. Now each layer is rendered once, rotated based on its height
 
 # 5.16.6.0-beta

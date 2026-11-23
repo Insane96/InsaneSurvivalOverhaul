@@ -12,6 +12,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.stacksizes.StackSizes;
 import insane96mcp.insanesurvivaloverhaul.module.items.unvanishableitems.UnvanishableItems;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.reversiblestonecutting.ReversibleStonecutting;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
 import insane96mcp.insanesurvivaloverhaul.module.movement.TerrainSlowdown;
@@ -192,6 +193,13 @@ public class ISOItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.ARROWS)
                 .add(FletchingFeature.QUARTZ_ARROW_ITEM.get(), FletchingFeature.DIAMOND_ARROW_ITEM.get(),
                         FletchingFeature.EXPLOSIVE_ARROW_ITEM.get(), FletchingFeature.TORCH_ARROW_ITEM.get(), FletchingFeature.ICE_ARROW_ITEM.get());
+
+        //Blocks that must not join a Reversible Stonecutting family: cracked and smooth blocks are smelted, so cutting
+        //them back and forth would skip smelting. Modded ones are mostly caught by the feature's "Blacklisted keywords" config.
+        //Bridges between unrelated families added by mods (e.g. Cobblestone ↔ Stone) are found with the dump command.
+        tag(ReversibleStonecutting.BLACKLIST)
+                .add(Items.CRACKED_STONE_BRICKS, Items.CRACKED_DEEPSLATE_BRICKS, Items.CRACKED_DEEPSLATE_TILES, Items.CRACKED_NETHER_BRICKS, Items.CRACKED_POLISHED_BLACKSTONE_BRICKS)
+                .add(Items.SMOOTH_STONE, Items.SMOOTH_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, Items.SMOOTH_QUARTZ, Items.SMOOTH_BASALT);
     }
 
     public static TagKey<Item> create(String tagName) {

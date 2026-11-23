@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import insane96mcp.insanesurvivaloverhaul.module.mining.reversiblestonecutting.ReversibleStonecutting;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.trade.MerchantTradesDump;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.TirednessHandler;
 import net.minecraft.commands.CommandSourceStack;
@@ -104,6 +105,9 @@ public class ISOCommand {
                         .then(Commands.literal("dump")
                                 .executes(context -> MerchantTradesDump.dump(context.getSource(), MerchantTradesDump.ALL_TARGET, MerchantTradesDump.Origin.ALL))
                                 .then(villagerTradesDumpTarget())))
+                .then(Commands.literal("stonecutter_families")
+                        .then(Commands.literal("dump")
+                                .executes(context -> ReversibleStonecutting.dump(context.getSource()))))
                 .then(Commands.literal("count_ores_in_chunk")
                         .executes(context -> {
                             if (!(context.getSource().getEntity() instanceof ServerPlayer player))

@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-19T22:17:46.24939	Tags for minecraft:item mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-23T21:38:50.8826635	Tags for minecraft:item mod id insanesurvivaloverhaul
 eafef6758f2e2535828471f2be608627913b243e data/experiencetweaks/tags/item/repairable_with_amethyst.json
 6c819db7033f1b53aba70574bfc5dd88d4076475 data/insanelib/tags/item/has_tooltip.json
 a36b18e9a3641bc6b08f99ba1b4bf0f3cc554d45 data/insanesurvivaloverhaul/tags/item/chicken_food_items.json
@@ -27,6 +27,7 @@ c085d2e9dbf84436d84e2cb9aea77dd9cae9cfdf data/insanesurvivaloverhaul/tags/item/n
 94bff8e5e1da900e7d8010e8fc78e293ef0ccd47 data/insanesurvivaloverhaul/tags/item/shepherd_banner_patterns.json
 a9571c9fcea1548bb1be93a0b9ae2839848d9ad4 data/insanesurvivaloverhaul/tags/item/snow_slowdown_ignore.json
 3c136ad71b9cc1a962b06ab779e09369ea8e25a9 data/insanesurvivaloverhaul/tags/item/spawner_reactivator.json
+a3073b71c5d9eb0a78ba6f96b43719609acd9ec0 data/insanesurvivaloverhaul/tags/item/stonecutter_reverse_blacklist.json
 987f8109cd35fad4433a84cac08449090260f4ef data/insanesurvivaloverhaul/tags/item/world_immune.json
 cd5800ed49fc5b0c8ea29ea2ef55dc7b98f3808b data/insanesurvivaloverhaul/tags/item/zombie_villager_cure_items.json
 92378dd4456942cf63f6914b781e08d5a5ad2952 data/minecraft/tags/item/arrows.json
