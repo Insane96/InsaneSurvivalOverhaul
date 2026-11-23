@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.7.0-beta
 * Added the `Reversible Stonecutting` feature in the Mining module: full blocks of the same family can be cut into each other in the Stonecutter. E.g. Stone Bricks and Chiseled Stone Bricks can be cut back into Stone, and into each other
   * Families are built from every 1 to 1 stonecutting recipe between full blocks, including the ones from data packs and other mods. Slabs, stairs, walls and the like are not part of them
   * Cracked and smooth blocks are excluded, so smelting can't be skipped (`insanesurvivaloverhaul:stonecutter_reverse_blacklist` item tag and `Blacklisted keywords` config option). Blocks removed by `insanelib:recipe_removal` are excluded too
