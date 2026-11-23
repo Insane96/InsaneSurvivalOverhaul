@@ -21,6 +21,7 @@
         "accessor.MobEffectInstanceAccessor",
         "accessor.MusicsAccessor",
         "accessor.PortalShapeAccessor",
+        "accessor.PrimedTntAccessor",
         "accessor.ServerLevelAccessor",
         "accessor.ServerPlayerGameModeAccessor",
         "accessor.SheepAccessor",

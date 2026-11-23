@@ -21,6 +21,7 @@ import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDri
 import insane96mcp.insanesurvivaloverhaul.module.items.EcologicWood;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
@@ -28,6 +29,7 @@ import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxes
 import insane96mcp.insanesurvivaloverhaul.module.items.stonetoolsgone.StoneToolsGoneCommon;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilCrafting;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Conduit;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
@@ -134,6 +136,10 @@ public class ISOEmiPlugin implements EmiPlugin {
 			addInfo(registry, emiIngredientOf(Bows.SHORTBOW.get()), "shortbow", "shortbow");
 		if (Feature.isEnabled(BeaconFeature.class))
 			addInfo(registry, emiIngredientOf(BeaconFeature.BEACON.item().get()), "beacon", "beacon");
+		if (Feature.isEnabled(ExplosiveBarrel.class))
+			addInfo(registry, emiIngredientOf(ExplosiveBarrel.BLOCK.item().get()), "explosive_barrel", "explosive_barrel");
+		if (Feature.isEnabled(MiningCharge.class))
+			addInfo(registry, emiIngredientOf(MiningCharge.BLOCK.item().get()), "mining_charge", "mining_charge");
 		if (Feature.isEnabled(Tiredness.class) && !Tiredness.allowSleepingEvenWhenNotTired)
 			addInfo(registry, EmiIngredient.of(ItemTags.BEDS), "beds", "beds");
 		if (Feature.isEnabled(Hoes.class))

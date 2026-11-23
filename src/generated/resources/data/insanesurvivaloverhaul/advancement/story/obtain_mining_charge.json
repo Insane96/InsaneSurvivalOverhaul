@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Mining charge"
+    }
+  ],
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_mining_charge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "insanesurvivaloverhaul:mining_charge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_mining_charge.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:mining_charge"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_mining_charge.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_mining_charge"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

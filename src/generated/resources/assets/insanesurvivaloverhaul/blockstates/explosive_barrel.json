@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel"
+    },
+    "facing=west": {
+      "model": "insanesurvivaloverhaul:block/explosive_barrel",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

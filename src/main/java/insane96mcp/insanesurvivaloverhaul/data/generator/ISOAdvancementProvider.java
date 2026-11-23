@@ -7,8 +7,10 @@ import insane96mcp.insanesurvivaloverhaul.data.criterion.UnfairOneShotTrigger;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
 import insane96mcp.insanesurvivaloverhaul.module.combat.unfaironeshot.UnfairOneShot;
 import insane96mcp.insanesurvivaloverhaul.module.items.Recall;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import net.minecraft.advancements.Advancement;
@@ -100,6 +102,36 @@ public class ISOAdvancementProvider implements DataProvider {
                 .addCriterion("has_glow_block", InventoryChangeTrigger.TriggerInstance.hasItems(GlowBlockFeature.GLOW_BLOCK.item().get()))
                 .build(InsaneSO.id("story/obtain_glow_block"));
         save(output, registries, futures, obtainGlowBlock, glowBlockEnabled);
+
+        FeatureEnabledCondition explosiveBarrelEnabled = new FeatureEnabledCondition("Explosive barrel");
+
+        AdvancementHolder obtainExplosiveBarrel = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        new ItemStack(ExplosiveBarrel.BLOCK.item().get()),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_explosive_barrel.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_explosive_barrel.description"),
+                        Optional.empty(),
+                        AdvancementType.TASK,
+                        true, true, false))
+                .parent(ADVENTURE_ROOT)
+                .addCriterion("has_explosive_barrel", InventoryChangeTrigger.TriggerInstance.hasItems(ExplosiveBarrel.BLOCK.item().get()))
+                .build(InsaneSO.id("story/obtain_explosive_barrel"));
+        save(output, registries, futures, obtainExplosiveBarrel, explosiveBarrelEnabled);
+
+        FeatureEnabledCondition miningChargeEnabled = new FeatureEnabledCondition("Mining charge");
+
+        AdvancementHolder obtainMiningCharge = Advancement.Builder.advancement()
+                .display(new DisplayInfo(
+                        new ItemStack(MiningCharge.BLOCK.item().get()),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_mining_charge.title"),
+                        Component.translatable("advancements.insanesurvivaloverhaul.obtain_mining_charge.description"),
+                        Optional.empty(),
+                        AdvancementType.TASK,
+                        true, true, false))
+                .parent(ADVENTURE_ROOT)
+                .addCriterion("has_mining_charge", InventoryChangeTrigger.TriggerInstance.hasItems(MiningCharge.BLOCK.item().get()))
+                .build(InsaneSO.id("story/obtain_mining_charge"));
+        save(output, registries, futures, obtainMiningCharge, miningChargeEnabled);
 
         FeatureEnabledCondition fletchingEnabled = new FeatureEnabledCondition("Fletching");
 

@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-03T09:51:32.9335654	ISO Advancements
+// 1.21.1	2026-11-23T08:16:29.1955504	ISO Advancements
 5b539941da27fe7674abad220ff688774fa3ef61 data/insanesurvivaloverhaul/advancement/adventure/tired_x.json
 dd0081ef07b48feefbbd9fa7a22ab3d312877cf0 data/insanesurvivaloverhaul/advancement/adventure/unfair_oneshot.json
 b4cea70c25e6930499b8f372c88f7ce5b511687b data/insanesurvivaloverhaul/advancement/nether/recall_potion.json
@@ -6,7 +6,9 @@ fcff4bbc20d52f2bcdffc3699fdf8a94e5e921b0 data/insanesurvivaloverhaul/advancement
 75a6b8fb12b154ff71f07b68215e9dfa73c793e3 data/insanesurvivaloverhaul/advancement/story/explosive_arrow.json
 64b9fbe064ee8b5dd6b9aa5242e40dd484610903 data/insanesurvivaloverhaul/advancement/story/fletching_table.json
 25792022a7448acb3eb8fd50328ed30bed14e5a5 data/insanesurvivaloverhaul/advancement/story/ice_arrow.json
+df8c2b6e83efa0fc65f28f11daeef68c8e2e042c data/insanesurvivaloverhaul/advancement/story/obtain_explosive_barrel.json
 26bdf72086556b430ce070e12cf7942a0035e24d data/insanesurvivaloverhaul/advancement/story/obtain_glow_block.json
+50620b277894feb6de973ee95c7e83be272cb6b6 data/insanesurvivaloverhaul/advancement/story/obtain_mining_charge.json
 1bf1691d08d912c03df244fc2e5c6aaa6b785b09 data/insanesurvivaloverhaul/advancement/story/obtain_pouch.json
 cd2c7474df60c1da8c5199ea42f79fc1494f4ee8 data/insanesurvivaloverhaul/advancement/story/overweight_pouch.json
 5a7c03656f3a3312d054efb7732293d3a101153c data/insanesurvivaloverhaul/advancement/story/quartz_arrow.json

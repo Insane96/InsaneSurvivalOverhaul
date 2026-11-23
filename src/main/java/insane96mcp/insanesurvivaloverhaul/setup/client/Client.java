@@ -13,11 +13,13 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.ClientPouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.PouchTooltip;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.ISOBeaconScreen;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
@@ -29,6 +31,7 @@ import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.ISORegistries;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.TntRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -41,10 +44,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
-import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
@@ -147,6 +147,12 @@ public class Client {
             }
         }
         else if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            if (Feature.isEnabled(MiningCharge.class)) {
+                addAfter(event, Items.TNT, MiningCharge.BLOCK.item());
+            }
+            if (Feature.isEnabled(ExplosiveBarrel.class)) {
+                addAfter(event, Items.TNT, ExplosiveBarrel.BLOCK.item());
+            }
             if (Feature.isEnabled(Minecarts.class)) {
                 addAfter(event, Items.RAIL, Minecarts.GOLDEN_POWERED_RAIL.item());
                 addAfter(event, Items.RAIL, Minecarts.COPPER_POWERED_RAIL.item());
@@ -215,6 +221,11 @@ public class Client {
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(FletchingFeature.FLETCHING_MENU_TYPE.get(), FletchingScreen::new);
         event.register(BeaconFeature.BEACON_MENU_TYPE.get(), ISOBeaconScreen::new);
+    }
+
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        //The vanilla TNT renderer renders the primed entity's block state, which holds the Mining Charge facing
+        event.registerEntityRenderer(MiningCharge.PRIMED_MINING_CHARGE.get(), TntRenderer::new);
     }
 
     public static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {

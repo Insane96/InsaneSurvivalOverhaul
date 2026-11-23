@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Mining charge"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "pattern": [
+    " T ",
+    " S ",
+    "NNN"
+  ],
+  "result": {
+    "count": 2,
+    "id": "insanesurvivaloverhaul:mining_charge"
+  }
+}

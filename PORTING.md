@@ -1,11 +1,10 @@
 # ISO Porting Checklist
 
-Features left to port IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to ISO.
+Features left to port from IguanaTweaksReborn (ITR) and IguanaTweaksExpanded (ITE) to ISO.
+Any other ITR/ITE feature not listed here has either already been ported (possibly renamed or merged) or has been intentionally dropped.
 
 ## Items
-* Altimeter
-* Blinker
-* ExplosiveBarrel (ITE)
+* Altimeter (ITR)
+* Blinker (ITR)
+* Sextant (ITR)
 
-## Mining
-* MiningCharge (ITE)

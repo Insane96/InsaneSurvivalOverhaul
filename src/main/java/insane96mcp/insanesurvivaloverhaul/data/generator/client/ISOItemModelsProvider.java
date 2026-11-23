@@ -9,9 +9,11 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.CopperEquipment;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
@@ -102,6 +104,8 @@ public class ISOItemModelsProvider extends ItemModelProvider {
 
         basicItem(CoalFire.FIRESTARTER.get());
         blockItem(CoalFire.BURNT_LOG);
+        blockItem(ExplosiveBarrel.BLOCK);
+        blockItem(MiningCharge.BLOCK);
 
         basicItem(Berries.SWEET_BERRY_SEEDS.get());
         

@@ -1,3 +1,13 @@
+# Upcoming
+* Added back the `Explosive Barrel` feature in the Items module (ported from IguanaTweaksExpanded): the Explosive Barrel explodes instantly, without a fuse, when powered by redstone, set on fire, hit by a burning projectile or caught in another explosion
+  * Same power as TNT and drops all the blocks it destroys
+  * Crafted with 1 Barrel and 1 TNT
+* Added the `Mining Charge` feature in the Mining module (ported from IguanaTweaksExpanded): the Mining Charge is placed on the face of a block and ignited like TNT. After a 2.5 seconds fuse it digs a 3x3 tunnel, 8 blocks long, into the block it's attached to
+  * Only destroys blocks with an explosion resistance lower than 10, so Stone and Deepslate but not Obsidian
+  * Drops all the blocks it destroys and deals 10 damage to entities in the tunnel
+  * Works underwater, but fizzles out if the block it's attached to is no longer there (e.g. air or water)
+  * 2 Mining Charges are crafted with 1 TNT, 1 Slime Ball and 3 Iron Nuggets
+
 # 5.16.5.0-beta
 * Broken (unvanishable) items' runes are now inactive until the item is repaired, curses still apply (Rune Enchanting integration, `Unvanishable Items` feature)
   * Requires Rune Enchanting 1.5.4.0-beta or newer

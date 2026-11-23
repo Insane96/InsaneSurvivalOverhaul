@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-03T10:17:55.2913703	Item Models: insanesurvivaloverhaul
+// 1.21.1	2026-11-23T08:16:29.2160793	Item Models: insanesurvivaloverhaul
 4de87cd756d603f823dd5d0569307e01db018c9a assets/insanesurvivaloverhaul/models/item/apple_pie.json
 0b7b3934507ba3180fc1b13b5f466fec26172397 assets/insanesurvivaloverhaul/models/item/burnt_log.json
 92a1f1b3c5712f08d8ce52182c55d106f387a021 assets/insanesurvivaloverhaul/models/item/carrot_seeds.json
@@ -64,6 +64,7 @@ f25cdd5c56e8776122963dc1cbc9d07caeab35a9 assets/insanesurvivaloverhaul/models/it
 3c6f8d100638e5854d7295831161d96bbababb6e assets/insanesurvivaloverhaul/models/item/echo_lantern.json
 8e57e5eebb5df89b2ff85e7e3f3cb8091c4d7e58 assets/insanesurvivaloverhaul/models/item/echo_pillar.json
 fa53924661dc1835f7caf10c53b358bc25869a52 assets/insanesurvivaloverhaul/models/item/explosive_arrow.json
+44c780dd055437bcd5dbb7de709485fb7b19446d assets/insanesurvivaloverhaul/models/item/explosive_barrel.json
 97ae78e112bee2325081706d3ee9b7947fa8470b assets/insanesurvivaloverhaul/models/item/firestarter.json
 da13b18428ab3a29ebc71851f621cdb02efce03f assets/insanesurvivaloverhaul/models/item/fungi_stew.json
 a919d2105fffe82a4b32f3253e6a6d362d065a8a assets/insanesurvivaloverhaul/models/item/glow_block.json
@@ -74,6 +75,7 @@ bd2f94a47fe36a93f12a84e2d272683099ad077c assets/insanesurvivaloverhaul/models/it
 dab4f7696a803cf31d92987feec96be0f6e76075 assets/insanesurvivaloverhaul/models/item/ice_arrow.json
 70241db46b07395674fa657dc6b13cbac1c58818 assets/insanesurvivaloverhaul/models/item/iron_dagger.json
 02f08c184afee68bb46546363f5eb72bc884ef7a assets/insanesurvivaloverhaul/models/item/iron_ore_rock.json
+81477c492ebb5d9cdefedac959afba5dada40e90 assets/insanesurvivaloverhaul/models/item/mining_charge.json
 3787757d7bb60db028c461b0d67470ff402c1804 assets/insanesurvivaloverhaul/models/item/netherite_dagger.json
 65450061ca06d6898912eaaaa0065c882e063c98 assets/insanesurvivaloverhaul/models/item/over_easy_egg.json
 078c2003f2b8c9d53257a9afbf3459b4dd0e9e80 assets/insanesurvivaloverhaul/models/item/pouch.json

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "insanelib:feature_enabled",
+      "feature": "Explosive barrel"
+    }
+  ],
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_explosive_barrel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "insanesurvivaloverhaul:explosive_barrel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_explosive_barrel.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "insanesurvivaloverhaul:explosive_barrel"
+    },
+    "title": {
+      "translate": "advancements.insanesurvivaloverhaul.obtain_explosive_barrel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_explosive_barrel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

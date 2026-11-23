@@ -70,5 +70,13 @@
     "recall_teleport": {
         "subtitle": "insanesurvivaloverhaul.subtitle.recall_teleport",
         "sounds": [ { "name": "minecraft:item.totem.use", "type": "event" } ]
+    },
+    "mining_charge_primed": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.mining_charge_primed",
+        "sounds": [ { "name": "minecraft:entity.tnt.primed", "type": "event" } ]
+    },
+    "mining_charge_explode": {
+        "subtitle": "insanesurvivaloverhaul.subtitle.mining_charge_explode",
+        "sounds": [ { "name": "minecraft:entity.generic.explode", "type": "event" } ]
     }
 }

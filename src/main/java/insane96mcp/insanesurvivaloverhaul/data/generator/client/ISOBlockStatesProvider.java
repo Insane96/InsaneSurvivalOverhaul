@@ -5,8 +5,11 @@ import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.RichFarmlandBlock;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.GroundRockBlock;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningChargeBlock;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillar;
@@ -14,11 +17,13 @@ import insane96mcp.insanesurvivaloverhaul.module.respawn.echopillar.EchoPillarBl
 import insane96mcp.insanesurvivaloverhaul.module.world.CyanFlower;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
 import insane96mcp.insanesurvivaloverhaul.setup.SimpleBlockWithItem;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -56,6 +61,47 @@ public class ISOBlockStatesProvider extends BlockStateProvider {
         simpleBlock(GlowBlockFeature.GLOW_BLOCK.block().get(),
             models().cubeAll("glow_block", modLoc("block/glow_block"))
                 .renderType("translucent"));
+
+        directionalBlock(ExplosiveBarrel.BLOCK.block().get(),
+            models().cubeBottomTop("explosive_barrel", mcLoc("block/barrel_side"), mcLoc("block/barrel_bottom"), modLoc("block/explosive_barrel_top")));
+
+        miningCharge();
+    }
+
+    /**
+     * The model is attached to the bottom of the block (facing down); the other facings are rotations of it.
+     */
+    private void miningCharge() {
+        ModelFile model = models().withExistingParent("mining_charge", mcLoc("block/block"))
+            .texture("top", mcLoc("block/tnt_top"))
+            .texture("side", mcLoc("block/tnt_side"))
+            .texture("bottom", mcLoc("block/slime_block"))
+            .texture("particle", mcLoc("block/tnt_side"))
+            .element()
+                .from(2, 0, 2).to(14, 6, 14)
+                .face(Direction.NORTH).uvs(2, 10, 14, 16).texture("#side").end()
+                .face(Direction.SOUTH).uvs(2, 10, 14, 16).texture("#side").end()
+                .face(Direction.EAST).uvs(2, 10, 14, 16).texture("#side").end()
+                .face(Direction.WEST).uvs(2, 10, 14, 16).texture("#side").end()
+                .face(Direction.UP).uvs(2, 2, 14, 14).texture("#top").end()
+                .face(Direction.DOWN).uvs(2, 2, 14, 14).texture("#bottom").cullface(Direction.DOWN).end()
+            .end();
+        getVariantBuilder(MiningCharge.BLOCK.block().get()).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(MiningChargeBlock.FACING);
+            int x = switch (facing) {
+                case DOWN -> 0;
+                case UP -> 180;
+                default -> 90;
+            };
+            int y = switch (facing) {
+                case SOUTH -> 0;
+                case WEST -> 90;
+                case NORTH -> 180;
+                case EAST -> 270;
+                default -> 0;
+            };
+            return ConfiguredModel.builder().modelFile(model).rotationX(x).rotationY(y).build();
+        }, TntBlock.UNSTABLE);
     }
 
     private void echoLantern() {

@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-22T08:03:33.5701234	Tags for minecraft:block mod id insanesurvivaloverhaul
+// 1.21.1	2026-11-23T08:01:53.0791771	Tags for minecraft:block mod id insanesurvivaloverhaul
 04cebeb2d742fe55d77908d1bb3829e25f9a8549 data/insanesurvivaloverhaul/tags/block/break_on_fall.json
 6dfa83db3fbbf26eed43a02c76785ea559daca31 data/insanesurvivaloverhaul/tags/block/can_scythe.json
 f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/depth_multiplier_blacklist.json
@@ -13,7 +13,7 @@ f3081a90ede721a500009f0839d228a8667fd262 data/insanesurvivaloverhaul/tags/block/
 efb3ca1f32daa2cf5586ec3e635381b706ee9e0f data/insanesurvivaloverhaul/tags/block/sleeping_blocks.json
 c7f1f90f3bebe72de88b030a493b6a9b48885d99 data/insanesurvivaloverhaul/tags/block/structures/echo_pillar/blocks_to_rot.json
 aa3f45a2b63092c7414f468979a4e4080571be8b data/insanesurvivaloverhaul/tags/block/tall_grass.json
-bc546ac53680f4a08dcf2720072c6eb705032b7c data/minecraft/tags/block/mineable/axe.json
+4ad81a842a3cc78e8cf94502c28e588246330fc3 data/minecraft/tags/block/mineable/axe.json
 0b939d1998c8d563ad99cd72d7506cb91190ce81 data/minecraft/tags/block/mineable/hoe.json
 0b2c9b229150f976450a2006504faad9129ff1d6 data/minecraft/tags/block/mineable/pickaxe.json
 d4e205bd87ce5f15be64ab9f9d7d405b0676728f data/minecraft/tags/block/mineable/shovel.json

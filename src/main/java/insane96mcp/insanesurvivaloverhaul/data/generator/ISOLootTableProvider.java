@@ -6,7 +6,9 @@ import insane96mcp.insanesurvivaloverhaul.module.animals.scutes.Scutes;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
@@ -96,6 +98,8 @@ public class ISOLootTableProvider extends LootTableProvider {
                 applyExplosionDecay(BigOreVeins.COPPER_ORE_ROCK.block().get(), LootItem.lootTableItem(Items.RAW_COPPER))));
 
             add(GlowBlockFeature.GLOW_BLOCK.block().get(), createSingleItemTable(GlowBlockFeature.GLOW_BLOCK.item().get()));
+            add(ExplosiveBarrel.BLOCK.block().get(), createSingleItemTable(ExplosiveBarrel.BLOCK.item().get()));
+            add(MiningCharge.BLOCK.block().get(), createSingleItemTable(MiningCharge.BLOCK.item().get()));
             add(BeaconFeature.BEACON.block().get(), this::createNameableBlockEntityTable);
 
             add(Crops.WILD_WHEAT.get(), wildCropTable(Items.WHEAT_SEEDS, Items.WHEAT, null, null));
@@ -158,6 +162,8 @@ public class ISOLootTableProvider extends LootTableProvider {
                 BigOreVeins.GOLD_ORE_ROCK.block().get(),
                 BigOreVeins.COPPER_ORE_ROCK.block().get(),
                 GlowBlockFeature.GLOW_BLOCK.block().get(),
+                ExplosiveBarrel.BLOCK.block().get(),
+                MiningCharge.BLOCK.block().get(),
                 BeaconFeature.BEACON.block().get()
             );
         }

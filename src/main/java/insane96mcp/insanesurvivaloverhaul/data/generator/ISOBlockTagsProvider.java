@@ -4,6 +4,7 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.mining.beegoreveins.BigOreVeins;
 import insane96mcp.insanesurvivaloverhaul.module.mining.blockhardness.BlockHardness;
 import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
@@ -56,7 +57,8 @@ public class ISOBlockTagsProvider extends BlockTagsProvider {
                 .addTag(Crops.HARDER_CROPS_TAG);
         tag(BlockTags.MINEABLE_WITH_AXE)
                 .remove(Blocks.WHEAT, Blocks.CARROTS, Blocks.POTATOES, Blocks.BEETROOTS)
-                .add(CoalFire.BURNT_LOG.block().get());
+                .add(CoalFire.BURNT_LOG.block().get())
+                .add(ExplosiveBarrel.BLOCK.block().get());
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(BigOreVeins.IRON_ORE_ROCK.block().get(), BigOreVeins.COPPER_ORE_ROCK.block().get());
         tag(BlockTags.NEEDS_IRON_TOOL)

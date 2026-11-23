@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#bottom"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      },
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        6,
+        14
+      ]
+    }
+  ],
+  "textures": {
+    "bottom": "minecraft:block/slime_block",
+    "particle": "minecraft:block/tnt_side",
+    "side": "minecraft:block/tnt_side",
+    "top": "minecraft:block/tnt_top"
+  }
+}

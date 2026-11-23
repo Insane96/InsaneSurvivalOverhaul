@@ -8,9 +8,11 @@ import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeatu
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
 import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
+import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
+import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.glowblock.GlowBlockFeature;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.Cloth;
@@ -111,6 +113,22 @@ public class ISORecipeProvider extends RecipeProvider {
                 .unlockedBy("has_glow_berries", has(Items.GLOW_BERRIES))
                 .unlockedBy("has_copper_block", has(Items.COPPER_BLOCK))
                 .save(recipeOutput.withConditions(new FeatureEnabledCondition("Glow block")));
+
+        new ShapelessRecipeBuilder(RecipeCategory.REDSTONE, ExplosiveBarrel.BLOCK.item().get(), 1)
+                .requires(Items.BARREL)
+                .requires(Items.TNT)
+                .unlockedBy("has_tnt", has(Items.TNT))
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Explosive barrel")));
+
+        new ShapedRecipeBuilder(RecipeCategory.REDSTONE, MiningCharge.BLOCK.item().get(), 2)
+                .pattern(" T ")
+                .pattern(" S ")
+                .pattern("NNN")
+                .define('T', Items.TNT)
+                .define('S', Items.SLIME_BALL)
+                .define('N', Items.IRON_NUGGET)
+                .unlockedBy("has_tnt", has(Items.TNT))
+                .save(recipeOutput.withConditions(new FeatureEnabledCondition("Mining charge")));
 
         RecipeOutput daggerOutput = recipeOutput.withConditions(new FeatureEnabledCondition("Daggers"));
         new ShapedRecipeBuilder(RecipeCategory.COMBAT, DaggerEquipment.WOODEN_DAGGER.get(), 1)

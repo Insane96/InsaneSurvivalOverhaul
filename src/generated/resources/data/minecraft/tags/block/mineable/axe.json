@@ -6,6 +6,7 @@
     "minecraft:beetroots"
   ],
   "values": [
-    "insanesurvivaloverhaul:burnt_log"
+    "insanesurvivaloverhaul:burnt_log",
+    "insanesurvivaloverhaul:explosive_barrel"
   ]
 }

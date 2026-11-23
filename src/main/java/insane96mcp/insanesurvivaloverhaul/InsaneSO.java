@@ -113,6 +113,7 @@ public class InsaneSO {
             eventBus.addListener(GlowBlockEntityRenderer::register);
             eventBus.addListener(ISOBeaconRenderer::register);
             eventBus.addListener(ISOArrowRenderer::register);
+            eventBus.addListener(Client::registerEntityRenderers);
             eventBus.addListener(GlowBlockFeatureClient::registerGuiLayers);
             NeoForge.EVENT_BUS.addListener(Client::onGatherSkippedAttributeTooltips);
             eventBus.addListener(ShulkerBoxesClient::registerKeyMappings);
