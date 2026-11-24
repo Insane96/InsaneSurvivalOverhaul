@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "insanesurvivaloverhaul:copper_pickaxe"
+            "id": "insanesurvivaloverhaul:copper_pickaxe"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.copper_tools.title"

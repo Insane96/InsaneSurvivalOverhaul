@@ -16,14 +16,17 @@
 	},
 	"parent": "minecraft:story/mine_stone",
 	"criteria": {
-		"charcoal": {
+		"two_flints": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
 						"items": [
-							"minecraft:charcoal"
-						]
+							"minecraft:flint"
+						],
+						"count": {
+							"min": 2
+						}
 					}
 				]
 			}
@@ -31,7 +34,7 @@
 	},
 	"requirements": [
 		[
-			"charcoal"
+			"two_flints"
 		]
 	]
 }

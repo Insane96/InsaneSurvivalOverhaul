@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:iron_sword"
+            "id": "minecraft:iron_sword"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.weapon_sword.title"

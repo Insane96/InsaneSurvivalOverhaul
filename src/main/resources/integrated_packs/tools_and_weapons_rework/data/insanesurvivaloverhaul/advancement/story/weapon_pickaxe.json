@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:iron_pickaxe"
+            "id": "minecraft:iron_pickaxe"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.weapon_pickaxe.title"

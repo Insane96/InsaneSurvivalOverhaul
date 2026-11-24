@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:iron_hoe"
+            "id": "minecraft:iron_hoe"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.weapon_hoe.title"

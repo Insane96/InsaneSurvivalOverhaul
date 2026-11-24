@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "minecraft:iron_nugget"
+			"id": "minecraft:iron_nugget"
 		},
 		"title": {
 			"translate": "advancements.insanesurvivaloverhaul.iron_nugget.title"

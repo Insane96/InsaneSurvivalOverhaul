@@ -20,7 +20,7 @@
 		"frame": "task",
 		"hidden": false,
 		"icon": {
-			"item": "minecraft:wooden_hoe",
+			"id": "minecraft:wooden_hoe",
 			"nbt": "{Damage:0}"
 		},
 		"show_toast": true,

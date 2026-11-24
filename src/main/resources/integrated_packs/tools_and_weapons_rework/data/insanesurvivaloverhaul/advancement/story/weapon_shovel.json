@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:iron_shovel"
+            "id": "minecraft:iron_shovel"
         },
         "title": {
             "translate": "advancements.insanesurvivaloverhaul.weapon_shovel.title"
