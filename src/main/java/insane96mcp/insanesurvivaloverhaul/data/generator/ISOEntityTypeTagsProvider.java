@@ -41,7 +41,7 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addOptional(ResourceLocation.fromNamespaceAndPath("pet_cemetery", "zombie_cat"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("pet_cemetery", "skeleton_cat"));
         tag(PARROTS)
-                .add(EntityType.CAT)
+                .add(EntityType.PARROT)
                 .addOptional(ResourceLocation.fromNamespaceAndPath("pet_cemetery", "zombie_parrot"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("pet_cemetery", "skeleton_parrot"));
         tag(PETS)
@@ -85,6 +85,7 @@ public class ISOEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.CAMEL)
                 .add(EntityType.SNIFFER)
                 .add(EntityType.ARMADILLO)
+                .add(EntityType.PARROT)
                 .addOptional(ResourceLocation.fromNamespaceAndPath("quark", "crab"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("autumnity", "snail"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath("autumnity", "turkey"))

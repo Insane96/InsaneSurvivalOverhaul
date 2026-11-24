@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:cat",
+    "minecraft:parrot",
     {
       "id": "pet_cemetery:zombie_parrot",
       "required": false

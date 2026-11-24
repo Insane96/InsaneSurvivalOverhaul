@@ -24,6 +24,7 @@
         "minecraft:camel",
         "minecraft:sniffer",
         "minecraft:armadillo",
+        "minecraft:parrot",
         {
             "id": "quark:crab",
             "required": false

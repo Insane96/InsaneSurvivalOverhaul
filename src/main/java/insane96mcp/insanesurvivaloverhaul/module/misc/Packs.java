@@ -67,7 +67,7 @@ public class Packs extends Feature {
     public static Boolean darkForestVegetation = true;
     @Config(description = "If true, a data pack will be enabled that makes End Cities more common.")
     public static Boolean increaseEndCities = true;
-    @Config(description = "If true, a data pack will be enabled that changes animal loot (reduced food drops) and adds livestock data that slows down growing, breeding, egg laying, etc.")
+    @Config(description = "If true, a data pack will be enabled that changes animal loot (reduced food drops) and adds livestock data that slows down growing, breeding, egg laying, etc. Parrots are tamed only with Melon and Pumpkin Seeds.")
     public static Boolean livestock = true;
     @Config(description = "If true, a data pack will be enabled that makes Armor Trim and Netherite Upgrade Smithing Templates cheaper to duplicate (1 Diamond instead of 7).")
     public static Boolean cheaperSmithingTemplates = true;

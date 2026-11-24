@@ -1,0 +1,7 @@
+{
+    "replace": true,
+    "values": [
+        "minecraft:melon_seeds",
+        "minecraft:pumpkin_seeds"
+    ]
+}

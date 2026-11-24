@@ -4,6 +4,7 @@
         "minecraft:horse",
         "minecraft:llama",
         "minecraft:trader_llama",
+        "minecraft:parrot",
         {
             "required": false,
             "id": "quark:shiba"
