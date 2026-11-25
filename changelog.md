@@ -1,4 +1,4 @@
-# Upcoming
+# 5.16.8.0
 * Parrots now follow the Animals module rules, like other pets: they die of old age, and with mods that make them breedable (e.g. Vibrant Parrots) they can't be bred manually, but fall in love on their own, more often when fed
 * Livestock Data Pack
   * Parrots are tamed (and bred) only with Melon and Pumpkin Seeds, which are easy to renew
