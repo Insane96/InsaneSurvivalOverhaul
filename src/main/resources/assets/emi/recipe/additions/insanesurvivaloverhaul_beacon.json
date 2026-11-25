@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:beacon"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.beacon"
+    ]
+}

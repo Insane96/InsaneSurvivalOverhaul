@@ -2,6 +2,7 @@
 * Parrots now follow the Animals module rules, like other pets: they die of old age, and with mods that make them breedable (e.g. Vibrant Parrots) they can't be bred manually, but fall in love on their own, more often when fed
 * Livestock Data Pack
   * Parrots are tamed (and bred) only with Melon and Pumpkin Seeds, which are easy to renew
+* Added EMI info pages for a few features
 * Fixed tamed Parrots not getting passive regeneration like other pets (the `insanesurvivaloverhaul:parrots` tag contained Cats)
 * Fixed the "Spark of Genius" advancement unlocking together with Charcoal instead of when holding 2 Flints
 * Fixed several advancements (Charcoal, Copper Tools, Iron Nugget, weapon advancements, Upgrade Tools, Use Lodestone) missing from the advancements screen and not showing the toast and chat message when completed

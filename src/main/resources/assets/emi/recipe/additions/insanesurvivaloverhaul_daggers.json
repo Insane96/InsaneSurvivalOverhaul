@@ -1,0 +1,15 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:wooden_dagger",
+        "item:insanesurvivaloverhaul:stone_dagger",
+        "item:insanesurvivaloverhaul:copper_dagger",
+        "item:insanesurvivaloverhaul:iron_dagger",
+        "item:insanesurvivaloverhaul:golden_dagger",
+        "item:insanesurvivaloverhaul:diamond_dagger",
+        "item:insanesurvivaloverhaul:netherite_dagger"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.daggers"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:echo_lantern"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.echo_lantern"
+    ]
+}

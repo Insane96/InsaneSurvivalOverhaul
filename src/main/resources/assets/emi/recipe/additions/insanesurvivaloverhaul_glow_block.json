@@ -1,0 +1,10 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:glow_block"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.glow_block",
+        "emi.info.insanesurvivaloverhaul.glow_block.alignment"
+    ]
+}

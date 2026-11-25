@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:shortbow"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.shortbow"
+    ]
+}

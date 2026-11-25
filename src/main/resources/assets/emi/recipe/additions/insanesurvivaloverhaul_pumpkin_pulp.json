@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:pumpkin_pulp"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.pumpkin_pulp"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:solanum_neorossii"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.solanum_neorossii"
+    ]
+}

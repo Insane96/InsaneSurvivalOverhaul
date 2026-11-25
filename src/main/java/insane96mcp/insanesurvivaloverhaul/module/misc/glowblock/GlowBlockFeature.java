@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@LoadFeature(module = ISOModules.MISC, description = "A block that's visible through walls, for testing the see-through-walls render technique.")
+@LoadFeature(module = ISOModules.MISC, description = "Adds the Glow Block, visible through walls even from far away. Looking at it shows on which axes you are aligned with it.")
 public class GlowBlockFeature extends Feature {
     public static final SimpleBlockWithItem GLOW_BLOCK = SimpleBlockWithItem.register("glow_block",
             () -> new GlowBlock(BlockBehaviour.Properties.of().noOcclusion().strength(1f)));

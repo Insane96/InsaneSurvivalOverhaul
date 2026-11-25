@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:cloth"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.cloth"
+    ]
+}

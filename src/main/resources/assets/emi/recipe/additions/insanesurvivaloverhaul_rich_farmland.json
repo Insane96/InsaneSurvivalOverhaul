@@ -1,0 +1,10 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:rich_farmland"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.bone_meal.rich_farmland",
+        "emi.info.insanesurvivaloverhaul.rich_farmland"
+    ]
+}

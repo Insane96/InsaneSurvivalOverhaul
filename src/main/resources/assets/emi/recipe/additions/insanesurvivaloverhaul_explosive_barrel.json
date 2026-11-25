@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:explosive_barrel"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.explosive_barrel"
+    ]
+}

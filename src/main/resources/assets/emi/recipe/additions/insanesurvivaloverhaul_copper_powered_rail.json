@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:copper_powered_rail"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.copper_powered_rail"
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:copper_ore_rock",
+        "item:insanesurvivaloverhaul:iron_ore_rock",
+        "item:insanesurvivaloverhaul:gold_ore_rock"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.ore_rocks"
+    ]
+}

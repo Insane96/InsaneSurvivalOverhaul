@@ -79,7 +79,7 @@ data/generator/ — Data gen providers (tags, recipes, block states, item models
 
 ### EMI Info
 
-`emi/ISOEmiPlugin.java` registers EMI info pages (and EMI-only recipes) for ISO's new blocks/items and changes to vanilla ones, each gated by the feature/config it describes. Whenever a feature is added or modified, evaluate whether an EMI info should be added or updated. Texts (`emi.info.insanesurvivaloverhaul.*` in `en_us.json`) must be generic (no values, no spoilers such as where things are found), and skip what's already explained by recipes, tooltips or advancements.
+Static info pages about ISO's own blocks/items are JSON files in `src/main/resources/assets/emi/recipe/additions/insanesurvivaloverhaul_<name>.json` (`"type": "emi:info"`, `stacks`, `text` as lang keys), loaded by EMI without code. `emi/ISOEmiPlugin.java` registers the pages about changes to vanilla blocks/items and the ones whose lines depend on config or on stacks computed at runtime, each gated by the feature/config it describes (plus EMI-only recipes). Whenever a feature is added or modified, evaluate whether an EMI info should be added or updated. Texts (`emi.info.insanesurvivaloverhaul.*` in `en_us.json`) are short and simple English, without exact values unless needed to use the mechanic; always say where an item obtained from loot (chests, mob drops, fishing, trades) comes from, as EMI doesn't show it. Skip what's already explained by recipes, tooltips or advancements.
 
 ### Integrated Data Packs
 

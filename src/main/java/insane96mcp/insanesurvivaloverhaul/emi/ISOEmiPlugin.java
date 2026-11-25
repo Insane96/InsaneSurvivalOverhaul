@@ -14,14 +14,15 @@ import insane96mcp.insanesurvivaloverhaul.InsaneSO;
 import insane96mcp.insanesurvivaloverhaul.data.generator.ISOItemTagsProvider;
 import insane96mcp.insanesurvivaloverhaul.module.combat.bows.Bows;
 import insane96mcp.insanesurvivaloverhaul.module.combat.fletching.FletchingFeature;
+import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenalty;
+import insane96mcp.insanesurvivaloverhaul.module.death.DeathMaxHealthPenaltyCommon;
 import insane96mcp.insanesurvivaloverhaul.module.farming.bonemeal.BoneMeal;
 import insane96mcp.insanesurvivaloverhaul.module.farming.crops.Crops;
+import insane96mcp.insanesurvivaloverhaul.module.farming.crops.CropsCommon;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.EcologicWood;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
-import insane96mcp.insanesurvivaloverhaul.module.items.dagger.DaggerEquipment;
-import insane96mcp.insanesurvivaloverhaul.module.items.explosivebarrel.ExplosiveBarrel;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKits;
@@ -29,17 +30,19 @@ import insane96mcp.insanesurvivaloverhaul.module.items.shulkerboxes.ShulkerBoxes
 import insane96mcp.insanesurvivaloverhaul.module.items.stonetoolsgone.StoneToolsGoneCommon;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilCrafting;
 import insane96mcp.insanesurvivaloverhaul.module.mining.anvilcrafting.AnvilRecipeReloadListener;
-import insane96mcp.insanesurvivaloverhaul.module.mining.miningcharge.MiningCharge;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Conduit;
 import insane96mcp.insanesurvivaloverhaul.module.misc.Packs;
-import insane96mcp.insanesurvivaloverhaul.module.misc.beacon.BeaconFeature;
 import insane96mcp.insanesurvivaloverhaul.module.misc.lowfish.LowFish;
 import insane96mcp.insanesurvivaloverhaul.module.misc.tweaks.Tweaks;
-import insane96mcp.insanesurvivaloverhaul.module.mobs.spawning.Spawning;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.MiscMobsCommon;
 import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.Villagers;
+import insane96mcp.insanesurvivaloverhaul.module.mobs.villager.VillagersCommon;
+import insane96mcp.insanesurvivaloverhaul.module.movement.Elytra;
 import insane96mcp.insanesurvivaloverhaul.module.movement.minecarts.Minecarts;
+import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.EnergyBoostItem;
 import insane96mcp.insanesurvivaloverhaul.module.sleep.tiredness.Tiredness;
 import insane96mcp.insanesurvivaloverhaul.module.world.Berries;
+import insane96mcp.insanesurvivaloverhaul.module.world.BerriesCommon;
 import insane96mcp.insanesurvivaloverhaul.module.world.Nether;
 import insane96mcp.insanesurvivaloverhaul.module.world.Sponges;
 import insane96mcp.insanesurvivaloverhaul.module.world.coalfire.CoalFire;
@@ -59,6 +62,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Fallable;
+import net.neoforged.fml.ModList;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -85,14 +89,8 @@ public class ISOEmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(NameTags.class)) {
 			registry.addRecipe(createSimpleInfo(Items.NAME_TAG, "name_tag", Component.translatable("emi.info.insanesurvivaloverhaul.items.name_tags")));
 		}
-		if (Feature.isEnabled(Crops.class)) {
-			registry.addRecipe(createSimpleInfo(emiIngredientOf(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Crops.CARROT_SEEDS.get(), Crops.ROOTED_POTATO.get()), "crops", Component.translatable("emi.info.insanesurvivaloverhaul.crops.seeds")));
-		}
-		if (Feature.isEnabled(Minecarts.class)) {
-			registry.addRecipe(createSimpleInfo(Minecarts.COPPER_POWERED_RAIL.item().get(), "info_copper_powered_rail", Component.translatable("emi.info.insanesurvivaloverhaul.copper_powered_rail")));
-			registry.addRecipe(createSimpleInfo(Minecarts.GOLDEN_POWERED_RAIL.item().get(), "info_golden_powered_rail", Component.translatable("emi.info.insanesurvivaloverhaul.golden_powered_rail")));
+		if (Feature.isEnabled(Minecarts.class))
 			registry.removeEmiStacks(emiStack -> emiStack.getItemStack().is(Items.POWERED_RAIL));
-		}
 		if (Feature.isEnabled(CoalFire.class) && CoalFire.burntLogsChance > 0) {
 			Ingredient fire = Ingredient.of(Items.FLINT, CoalFire.FIRESTARTER.get(), Items.FLINT_AND_STEEL);
 			registry.addRecipe(EmiWorldInteractionRecipe.builder()
@@ -123,25 +121,48 @@ public class ISOEmiPlugin implements EmiPlugin {
 	}
 
 	/**
-	 * Registers info pages about ISO's new blocks/items and changes to vanilla ones. Each info is only added when the
-	 * feature (and config option) it describes is active. Texts are kept generic (no values) to not spoil discovery,
-	 * and things already explained by recipes, tooltips or advancements are left out.
+	 * Registers the info pages about changes to vanilla blocks/items, and the ones whose lines depend on config or
+	 * that list stacks computed at runtime. Each info is only added when the feature (and config option) it describes
+	 * is active. Static pages about ISO's own blocks/items are in {@code assets/emi/recipe/additions/}.
+	 * Things already explained by recipes, tooltips or advancements are left out.
 	 */
 	private void addInfos(EmiRegistry registry) {
-		if (Feature.isEnabled(Spawning.class))
-			addInfo(registry, emiIngredientOf(Spawning.ECHO_LANTERN.item().get()), "echo_lantern", "echo_lantern");
-		if (Feature.isEnabled(DaggerEquipment.class))
-			addInfo(registry, emiIngredientOf(DaggerEquipment.WOODEN_DAGGER.get(), DaggerEquipment.STONE_DAGGER.get(), DaggerEquipment.COPPER_DAGGER.get(), DaggerEquipment.IRON_DAGGER.get(), DaggerEquipment.GOLDEN_DAGGER.get(), DaggerEquipment.DIAMOND_DAGGER.get(), DaggerEquipment.NETHERITE_DAGGER.get()), "daggers", "daggers");
+		boolean mobLootChanges = Feature.isEnabled(MiscMobsCommon.class) && MiscMobsCommon.lootChanges && !Packs.disableAllDataPacks;
+		boolean earlyShulkerBoxes = Feature.isEnabled(ShulkerBoxesCommon.class) && ShulkerBoxesCommon.earlyGameShulkerBoxes && !Packs.disableAllDataPacks;
+		if (Feature.isEnabled(Crops.class))
+			addInfo(registry, emiIngredientOf(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Crops.CARROT_SEEDS.get(), Crops.ROOTED_POTATO.get()), "crops",
+					CropsCommon.dataPack() ? "crops.wild" : "crops.seeds");
+		if (Feature.isEnabled(Tiredness.class)) {
+			addInfo(registry, EmiIngredient.of(ItemTags.BEDS), "beds",
+					!Tiredness.allowSleepingEvenWhenNotTired ? "beds" : null,
+					Tiredness.tiredTiedPhantoms ? "beds.phantoms" : null);
+			List<EmiIngredient> energyBoostItems = new ArrayList<>();
+			for (EnergyBoostItem energyBoostItem : Tiredness.energyBoostItems) {
+				for (Item item : energyBoostItem.getEdible().getAllObjects())
+					energyBoostItems.add(EmiStack.of(item));
+			}
+			if (!energyBoostItems.isEmpty())
+				addInfo(registry, EmiIngredient.of(energyBoostItems), "energy_boost", "energy_boost");
+		}
+		if (Feature.isEnabled(DeathMaxHealthPenalty.class) && Feature.isEnabled(DeathMaxHealthPenaltyCommon.class) && !Packs.disableAllDataPacks)
+			addInfo(registry, emiIngredientOf(Items.HEART_OF_THE_SEA, DeathMaxHealthPenalty.CRYSTAL_HEART.get()), "max_health", "max_health", "max_health.sources",
+					mobLootChanges ? "max_health.piglin_brute" : null,
+					VillagersCommon.isOverhaulEnabled() ? "max_health.librarian" : null);
+		if (earlyShulkerBoxes)
+			addInfo(registry, emiIngredientOf(Items.SHULKER_SHELL), "shulker_shell", "shulker_shell",
+					ModList.get().isLoaded("runeenchanting") ? "shulker_shell.part_breaker" : null);
+		if (mobLootChanges)
+			addInfo(registry, emiIngredientOf(Items.NETHERITE_SCRAP), "netherite_scrap", "netherite_scrap");
+		if (Feature.isEnabled(Elytra.class))
+			addInfo(registry, emiIngredientOf(Items.ELYTRA), "elytra",
+					Elytra.airResistance < 0.99d ? "elytra.air_resistance" : null,
+					Elytra.fireworkBoostTargetSpeed < 1.5d || Elytra.fireworkBoostLerp < 0.5d ? "elytra.firework_boost" : null,
+					Elytra.fireworkBoostOffGround ? "elytra.off_ground" : null);
 		if (Feature.isEnabled(Bows.class))
-			addInfo(registry, emiIngredientOf(Bows.SHORTBOW.get()), "shortbow", "shortbow");
-		if (Feature.isEnabled(BeaconFeature.class))
-			addInfo(registry, emiIngredientOf(BeaconFeature.BEACON.item().get()), "beacon", "beacon");
-		if (Feature.isEnabled(ExplosiveBarrel.class))
-			addInfo(registry, emiIngredientOf(ExplosiveBarrel.BLOCK.item().get()), "explosive_barrel", "explosive_barrel");
-		if (Feature.isEnabled(MiningCharge.class))
-			addInfo(registry, emiIngredientOf(MiningCharge.BLOCK.item().get()), "mining_charge", "mining_charge");
-		if (Feature.isEnabled(Tiredness.class) && !Tiredness.allowSleepingEvenWhenNotTired)
-			addInfo(registry, EmiIngredient.of(ItemTags.BEDS), "beds", "beds");
+			addInfo(registry, emiIngredientOf(Items.CROSSBOW), "crossbow",
+					Bows.piercingCrossbow ? "crossbow.piercing" : null,
+					Bows.crossbowVelocity < 3.15d ? "crossbow.velocity" : null,
+					Bows.crossbowInaccuracy < 1d ? "crossbow.accuracy" : null);
 		if (Feature.isEnabled(Hoes.class))
 			addInfo(registry, EmiIngredient.of(ItemTags.HOES), "hoes", "hoes");
 		if (Feature.isEnabled(EcologicWood.class))
@@ -152,8 +173,11 @@ public class ISOEmiPlugin implements EmiPlugin {
 			addInfo(registry, emiIngredientOf(Items.CONDUIT), "conduit", "conduit", Conduit.removeHaste ? "conduit.no_haste" : null);
 		if (Feature.isEnabled(LowFish.class))
 			addInfo(registry, emiIngredientOf(Items.FISHING_ROD), "fishing_rod", "fishing_rod");
-		if (Feature.isEnabled(Berries.class) && Berries.noDamageIfDressed)
-			addInfo(registry, emiIngredientOf(Items.SWEET_BERRIES), "sweet_berry_bush", "sweet_berry_bush");
+		if (Feature.isEnabled(Berries.class))
+			addInfo(registry, emiIngredientOf(Items.SWEET_BERRIES, Berries.SWEET_BERRY_SEEDS.get()), "sweet_berry_bush",
+					Berries.noDamageIfDressed ? "sweet_berry_bush" : null,
+					BerriesCommon.dataPack() ? "sweet_berry_seeds" : null,
+					BerriesCommon.dataPack() && VillagersCommon.isOverhaulEnabled() ? "sweet_berry_seeds.trades" : null);
 		if (Feature.isEnabled(FoodDrinks.class) && FoodDrinks.buffCake)
 			addInfo(registry, emiIngredientOf(Items.CAKE), "cake", "cake");
 		if (Feature.isEnabled(Sponges.class))
@@ -182,8 +206,6 @@ public class ISOEmiPlugin implements EmiPlugin {
 					BoneMeal.richFarmland$enable && BoneMeal.richFarmland$disableBoneMeal ? "bone_meal.no_crops" : null,
 					BoneMeal.boneMealDirtToGrass ? "bone_meal.dirt_to_grass" : null,
 					BoneMeal.boneMealCanesAndCactus.max > 0 ? "bone_meal.canes_and_cactus" : null);
-			if (BoneMeal.richFarmland$enable)
-				addInfo(registry, emiIngredientOf(BoneMeal.RICH_FARMLAND.item().get()), "rich_farmland", "bone_meal.rich_farmland", "rich_farmland");
 		}
 		if (Feature.isEnabled(Tweaks.class)) {
 			if (Tweaks.fallingBreakingGlass) {
@@ -199,7 +221,7 @@ public class ISOEmiPlugin implements EmiPlugin {
 			if (Tweaks.totemResistance)
 				addInfo(registry, emiIngredientOf(Items.TOTEM_OF_UNDYING), "totem_of_undying", "totem_of_undying");
 		}
-		if (Feature.isEnabled(ShulkerBoxesCommon.class) && ShulkerBoxesCommon.earlyGameShulkerBoxes && !Packs.disableAllDataPacks && Feature.isEnabled(Pouch.class))
+		if (earlyShulkerBoxes && Feature.isEnabled(Pouch.class))
 			addInfo(registry, emiIngredientOf(Items.SHULKER_BOX), "shulker_box_from_pouches", "shulker_box_from_pouches");
 		if (Villagers.isActive())
 			addInfo(registry, EmiIngredient.of(Villagers.CURE_ITEMS), "zombie_villager_cure", "zombie_villager_cure",

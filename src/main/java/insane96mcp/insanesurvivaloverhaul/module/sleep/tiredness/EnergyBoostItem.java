@@ -27,6 +27,10 @@ public class EnergyBoostItem {
         this.amplifier = amplifier;
     }
 
+    public ObjTag<Item> getEdible() {
+        return this.edible;
+    }
+
     public void tryApply(Player player, ItemStack stack) {
         if (!this.edible.matches(stack.getItem()))
             return;

@@ -1,0 +1,9 @@
+{
+    "type": "emi:info",
+    "stacks": [
+        "item:insanesurvivaloverhaul:mining_charge"
+    ],
+    "text": [
+        "emi.info.insanesurvivaloverhaul.mining_charge"
+    ]
+}
