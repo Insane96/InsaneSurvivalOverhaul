@@ -1,7 +1,7 @@
 {
     "item": "minecraft:iron_leggings",
     "components": {
-        "minecraft:max_damage": 165,
+        "minecraft:max_damage": 195,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
@@ -21,7 +21,7 @@
                 {
                     "type": "insanesurvivaloverhaul:sprint_speed",
                     "id": "minecraft:armor.leggings",
-                    "amount": -0.07,
+                    "amount": -0.04,
                     "operation": "add_value",
                     "slot": "legs"
                 }

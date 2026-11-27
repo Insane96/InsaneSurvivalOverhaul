@@ -1,5 +1,10 @@
 # Upcoming
 * Increased shortbow sockets
+* Armor Rework Data Pack
+  * Iron Armor durability increased (Chestplate 176 -> 208), and reduces sprint speed by 15% instead of 25% with the full set
+  * Chainmail Armor durability increased (Chestplate 96 -> 128)
+  * Copper Armor increased from 9 to 10 total armor (Chestplate 3 -> 3.5, Leggings 2.5 -> 3)
+  * Netherite Armor increased from 18 to 20 total armor (+0.5 per piece)
 
 # 5.16.8.0
 * Parrots now follow the Animals module rules, like other pets: they die of old age, and with mods that make them breedable (e.g. Vibrant Parrots) they can't be bred manually, but fall in love on their own, more often when fed

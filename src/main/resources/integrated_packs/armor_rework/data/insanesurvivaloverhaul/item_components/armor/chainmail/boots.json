@@ -1,7 +1,7 @@
 {
     "item": "minecraft:chainmail_boots",
     "components": {
-        "minecraft:max_damage": 78,
+        "minecraft:max_damage": 104,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {

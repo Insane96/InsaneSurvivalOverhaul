@@ -1,7 +1,7 @@
 {
     "item": "minecraft:chainmail_helmet",
     "components": {
-        "minecraft:max_damage": 66,
+        "minecraft:max_damage": 88,
         "minecraft:attribute_modifiers": {
             "modifiers": [
                 {
