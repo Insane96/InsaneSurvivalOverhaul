@@ -37,13 +37,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@LoadFeature(module = ISOModules.MINING, description = "Makes the Stonecutter reversible between full blocks of the same family: if the Stonecutter turns A into B and A into C (1 to 1), B and C can be cut back into A and into each other. Recipes added by data packs and other mods count too. Blocks in the `insanesurvivaloverhaul:stonecutter_reverse_blacklist` and `insanelib:recipe_removal` item tags are ignored. Changes apply on the next /reload. `/insanesurvivaloverhaul stonecutter_families dump` writes every family found to `logs/insanesurvivaloverhaul/`.")
+@LoadFeature(module = ISOModules.MINING, description = "Makes the Stonecutter reversible between blocks of the same family (only full blocks by default): if the Stonecutter turns A into B and A into C (1 to 1), B and C can be cut back into A and into each other. Recipes added by data packs and other mods count too. Blocks in the `insanesurvivaloverhaul:stonecutter_reverse_blacklist` and `insanelib:recipe_removal` item tags are ignored. Changes apply on the next /reload. `/insanesurvivaloverhaul stonecutter_families dump` writes every family found to `logs/insanesurvivaloverhaul/`.")
 public class ReversibleStonecutting extends Feature {
 	public static final TagKey<Item> BLACKLIST = ISOItemTagsProvider.create("stonecutter_reverse_blacklist");
 	public static final String RECIPE_PREFIX = "stonecutting_reverse/";
 
 	@Config(name = "Log only", description = "If true, no recipe is added: every family found is written to the log with its blocks instead. Useful to check the families before actually adding the recipes.")
 	public static Boolean logOnly = false;
+	@Config(name = "Full blocks only", description = "If true, only full blocks are part of the families. If false, non-full blocks cut 1 to 1 (stairs, walls, ...) are part of them too, and can be cut back into the full blocks. Slabs are still excluded, as the Stonecutter makes 2 of them.")
+	public static Boolean fullBlocksOnly = true;
 	@Config(name = "Blacklisted keywords", description = "Blocks whose id path contains one of these words are ignored, like the ones in the `insanesurvivaloverhaul:stonecutter_reverse_blacklist` tag. Catches modded cracked and smooth blocks, that would let players skip smelting.")
 	public static List<String> blacklistedKeywords = List.of("cracked", "smooth");
 	@Config(min = 2, name = "Large family warning", description = "Families with more blocks than this are reported in the log as suspicious: a single 1 to 1 recipe from a mod can merge two unrelated families.")
@@ -112,7 +114,7 @@ public class ReversibleStonecutting extends Feature {
 	}
 
 	/**
-	 * Groups the full blocks connected by 1 to 1 stonecutting recipes (in either direction). Families and the blocks
+	 * Groups the blocks (only full ones if {@link #fullBlocksOnly}) connected by 1 to 1 stonecutting recipes (in either direction). Families and the blocks
 	 * in them are sorted by id. Only families of at least 2 blocks are returned.
 	 */
 	public static List<List<Item>> findFamilies(RecipeManager recipeManager, HolderLookup.Provider registries) {
@@ -147,7 +149,8 @@ public class ReversibleStonecutting extends Feature {
 	}
 
 	/**
-	 * Returns true if the item is a full block that's not blacklisted (tag, recipe removal or keyword)
+	 * Returns true if the item is a block (full, if {@link #fullBlocksOnly} is enabled) that's not blacklisted (tag,
+	 * recipe removal or keyword)
 	 */
 	private static boolean isValidNode(Item item) {
 		if (!(item instanceof BlockItem blockItem))
@@ -160,6 +163,8 @@ public class ReversibleStonecutting extends Feature {
 			if (!keyword.isBlank() && path.contains(keyword))
 				return false;
 		}
+		if (!fullBlocksOnly)
+			return true;
 		Block block = blockItem.getBlock();
 		try {
 			return Block.isShapeFullBlock(block.defaultBlockState().getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO));
