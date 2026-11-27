@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "id": "#runeenchanting:horse_armor",
+            "required": false
+        }
+    ]
+}

@@ -15,12 +15,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Equipable;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
@@ -169,14 +166,17 @@ public class UnvanishableItems extends Feature {
 		}
 	}
 
+	/**
+	 * Body armor (e.g. Wolf and Horse Armor) doesn't break but stays on the mob
+	 */
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void processWolfArmorDamaging(HurtItemStackEvent event) {
+	public void processBodyArmorDamaging(HurtItemStackEvent event) {
 		if (!this.isEnabled()
-				|| !(event.getLivingEntity() instanceof Wolf wolf))
+				|| !(event.getLivingEntity() instanceof Mob mob))
 			return;
 
 		ItemStack stack = event.getStack();
-		if (stack != wolf.getBodyArmorItem()
+		if (stack != mob.getBodyArmorItem()
 				|| !isUnvanishable(stack))
 			return;
 		if (isBroken(stack)) {
@@ -186,17 +186,18 @@ public class UnvanishableItems extends Feature {
 		if (event.getAmount() >= stack.getMaxDamage() - stack.getDamageValue() - 1) {
 			stack.setDamageValue(stack.getMaxDamage() - 1);
 			event.setAmount(0);
-			wolf.playSound(SoundEvents.WOLF_ARMOR_BREAK);
+			mob.playSound(stack.getItem() instanceof AnimalArmorItem animalArmorItem ? animalArmorItem.getBreakingSound() : SoundEvents.ITEM_BREAK);
 		}
 	}
 
 	/**
-	 * Broken wolf armor stays on the wolf but no longer gives armor
+	 * Broken body armor (e.g. Wolf and Horse Armor) stays on the mob but no longer gives armor
 	 */
 	@SubscribeEvent
-	public void onWolfArmorAttributes(ItemAttributeModifierEvent event) {
+	public void onBodyArmorAttributes(ItemAttributeModifierEvent event) {
 		if (!this.isEnabled()
-				|| !event.getItemStack().is(Items.WOLF_ARMOR)
+				|| !(event.getItemStack().getItem() instanceof ArmorItem armorItem)
+				|| armorItem.getEquipmentSlot() != EquipmentSlot.BODY
 				|| !isBroken(event.getItemStack()))
 			return;
 

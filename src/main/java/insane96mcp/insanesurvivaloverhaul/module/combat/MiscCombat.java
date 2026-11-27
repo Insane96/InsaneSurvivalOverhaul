@@ -11,8 +11,14 @@ public class MiscCombat extends Feature {
     public static Boolean oneDamageForToolAttacking = true;
     @Config(description = "In vanilla, if you attack as soon as you just attacked you already deal 20% of the full damage. This changes that to 0%.")
     public static Boolean noDamageWhenSpamming = true;
+    @Config(description = "If enabled, armor worn on the body by mobs (e.g. Horse Armor) loses durability when the mob is hurt, like the player's armor. In vanilla only Wolf Armor does. Only affects body armor that has durability, e.g. Horse Armor with the armor rework data pack.")
+    public static Boolean damageBodyArmor = true;
 
     public static boolean noDamageWhenSpamming() {
         return isEnabled(MiscCombat.class) && noDamageWhenSpamming;
+    }
+
+    public static boolean damageBodyArmor() {
+        return isEnabled(MiscCombat.class) && damageBodyArmor;
     }
 }

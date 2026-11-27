@@ -6,6 +6,17 @@
   * Chainmail Armor durability increased (Chestplate 96 -> 128)
   * Copper Armor increased from 9 to 10 total armor (Chestplate 3 -> 3.5, Leggings 2.5 -> 3)
   * Netherite Armor increased from 18 to 20 total armor (+0.5 per piece)
+  * Horse Armor now has the stats of a full player armor set of the same material, with a movement speed penalty instead of the sprint speed one
+    * Leather: 5 armor, 4 regenerating absorption
+    * Golden: 9 armor
+    * Iron: 12 armor, 2 regenerating absorption, -2% movement speed
+    * Diamond: 16 armor, 0.2 knockback resistance, -6% movement speed
+  * Horse Armor now has durability, the same as the Chestplate of the same material, and can be repaired with its material. It no longer stacks
+  * Enduring and Curse of Fragility can now be applied to Horse Armor (Rune Enchanting integration)
+* Armor worn on the body by mobs (e.g. Horse Armor) now loses durability when they're hurt, like the player's armor. In vanilla only Wolf Armor did
+* Horse Armor is now unvanishable, like Wolf Armor: it no longer breaks, sits at 1 durability and stays on the horse, but no longer gives armor until repaired
+* Weighted Armor no longer slows down animals wearing Horse or Wolf Armor
+* Requires Rune Enchanting 1.6.0.0-beta or newer
 
 # 5.16.8.0
 * Parrots now follow the Animals module rules, like other pets: they die of old age, and with mods that make them breedable (e.g. Vibrant Parrots) they can't be bred manually, but fall in love on their own, more often when fed

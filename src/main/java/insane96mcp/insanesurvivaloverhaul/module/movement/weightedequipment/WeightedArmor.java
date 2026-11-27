@@ -13,6 +13,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -56,7 +57,9 @@ public class WeightedArmor extends JsonFeature {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onItemAttributeModifier(ItemAttributeModifierEvent event) {
         if (!this.isEnabled()
-                || !(event.getItemStack().getItem() instanceof ArmorItem armorItem))
+                || !(event.getItemStack().getItem() instanceof ArmorItem armorItem)
+                //Animal armor (e.g. Horse and Wolf Armor) isn't affected
+                || armorItem.getEquipmentSlot().getType() != EquipmentSlot.Type.HUMANOID_ARMOR)
             return;
         double slowdown = getArmorSlowdown(event.getModifiers(), event.getItemStack());
         if (slowdown <= 0)
