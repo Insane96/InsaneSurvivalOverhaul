@@ -1,6 +1,7 @@
 {
     "item": "insanesurvivaloverhaul:shortbow",
     "components": {
-        "runeenchanting:sockets": 3
+        "runeenchanting:sockets": 4,
+        "runeenchanting:curse_sockets": 1
     }
 }
