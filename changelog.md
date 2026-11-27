@@ -2,6 +2,7 @@
 * Increased shortbow sockets
 * Armor Rework Data Pack
   * Iron Armor durability increased (Chestplate 176 -> 208), and reduces sprint speed by 15% instead of 25% with the full set
+  * Iron Armor increased from 11 to 12 total armor (Chestplate 4 -> 4.5, Boots 1.5 -> 2)
   * Chainmail Armor durability increased (Chestplate 96 -> 128)
   * Copper Armor increased from 9 to 10 total armor (Chestplate 3 -> 3.5, Leggings 2.5 -> 3)
   * Netherite Armor increased from 18 to 20 total armor (+0.5 per piece)
