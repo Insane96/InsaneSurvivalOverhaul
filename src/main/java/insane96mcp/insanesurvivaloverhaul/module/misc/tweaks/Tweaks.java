@@ -33,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,7 +50,6 @@ import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import org.jetbrains.annotations.Nullable;
 
 @LoadFeature(module = ISOModules.MISC, description = "Various stuff that doesn't fit in any other Feature.")
 public class Tweaks extends Feature {
@@ -99,7 +99,7 @@ public class Tweaks extends Feature {
     @Config(description = "Eyes of Ender will never break when thrown. Vanilla has a 20% chance to break")
     public static Boolean unbreakableEyesOfEnder = true;
 
-    @Config(description = "Honeycombs from sheared Beehives and Bee Nests drop out of a free face (the clicked one if possible) instead of spawning inside the block")
+    @Config(description = "Honeycombs from sheared Beehives and Bee Nests drop out of a free face (the front one if possible) instead of spawning inside the block")
     public static Boolean honeycombsDropFromFace = true;
 
     public static boolean areEyesOfEnderUnbreakable() {
@@ -113,13 +113,17 @@ public class Tweaks extends Feature {
     private static final Direction[] HONEYCOMB_FACES = {Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN};
 
     /**
-     * Drops the honeycombs of a sheared beehive out of the preferred face if its neighbour isn't a full block, otherwise out of the first free face. Falls back to vanilla's drop inside the block if all the faces are obstructed
+     * Drops the honeycombs of a sheared beehive out of its front face if its neighbour isn't a full block, otherwise out of the first free face. Falls back to vanilla's drop inside the block if all the faces are obstructed
      */
-    public static void dropHoneycombFromFace(Level level, BlockPos pos, @Nullable Direction preferredFace) {
+    public static void dropHoneycombFromFace(Level level, BlockPos pos) {
         ItemStack honeycombs = new ItemStack(Items.HONEYCOMB, 3);
-        if (preferredFace != null && isFaceFree(level, pos, preferredFace)) {
-            Block.popResourceFromFace(level, pos, preferredFace, honeycombs);
-            return;
+        BlockState state = level.getBlockState(pos);
+        if (state.hasProperty(BeehiveBlock.FACING)) {
+            Direction front = state.getValue(BeehiveBlock.FACING);
+            if (isFaceFree(level, pos, front)) {
+                Block.popResourceFromFace(level, pos, front, honeycombs);
+                return;
+            }
         }
         for (Direction direction : HONEYCOMB_FACES) {
             if (isFaceFree(level, pos, direction)) {

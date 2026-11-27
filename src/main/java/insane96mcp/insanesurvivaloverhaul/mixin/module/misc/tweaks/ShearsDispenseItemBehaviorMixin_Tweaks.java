@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ShearsDispenseItemBehavior.class)
 public abstract class ShearsDispenseItemBehaviorMixin_Tweaks {
 	/**
-	 * When a dispenser shears a beehive, drops the honeycombs out of a free face instead of inside the block. The dispenser's side is never free, so they don't end up inside the dispenser
+	 * When a dispenser shears a beehive, drops the honeycombs out of a free face (the front one if possible) instead of inside the block. The dispenser's side is never free, so they don't end up inside the dispenser
 	 */
 	@WrapOperation(method = "tryShearBeehive", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BeehiveBlock;dropHoneycomb(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
 	private static void insanesurvivaloverhaul$dropHoneycombFromFace(Level level, BlockPos pos, Operation<Void> original) {
 		if (Tweaks.doHoneycombsDropFromFace())
-			Tweaks.dropHoneycombFromFace(level, pos, null);
+			Tweaks.dropHoneycombFromFace(level, pos);
 		else
 			original.call(level, pos);
 	}
