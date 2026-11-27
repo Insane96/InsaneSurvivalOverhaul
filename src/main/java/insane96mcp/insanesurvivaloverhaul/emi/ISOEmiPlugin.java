@@ -106,6 +106,7 @@ public class ISOEmiPlugin implements EmiPlugin {
 		if (Feature.isEnabled(FletchingFeature.class)) {
 			registry.addCategory(EmiFletchingRecipe.CATEGORY);
 			registry.addWorkstation(EmiFletchingRecipe.CATEGORY, EmiStack.of(Items.FLETCHING_TABLE));
+			registry.addRecipeHandler(FletchingFeature.FLETCHING_MENU_TYPE.get(), new FletchingRecipeHandler());
 			for (var recipe : registry.getRecipeManager().getAllRecipesFor(FletchingFeature.FLETCHING_RECIPE_TYPE.get())) {
 				registry.addRecipe(new EmiFletchingRecipe(recipe.id(), recipe.value()));
 			}

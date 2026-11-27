@@ -20,6 +20,9 @@
 * The regenerating absorption of the ridden mount is now shown above its health
 * Honeycombs from sheared Beehives and Bee Nests now drop out of the front face instead of the clicked one, both when sheared by players and by dispensers. If the front face is obstructed, they drop out of the first free face
 * Reversible Stonecutting can now include non-full blocks (disabled by default)
+* EMI can now fill Fletching Table recipes from the inventory, and shows them among the craftables while the Fletching Table is open
+* Animals no longer die of old age: once they become elders they stay elders forever (can be re-enabled)
+* Fixed elder animals losing their slowness after reloading the world
 * Requires Rune Enchanting 1.6.0.0-beta or newer
 
 # 5.16.8.0
