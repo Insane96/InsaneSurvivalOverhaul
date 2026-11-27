@@ -22,6 +22,7 @@ import insane96mcp.insanesurvivaloverhaul.module.farming.crops.CropsCommon;
 import insane96mcp.insanesurvivaloverhaul.module.farming.hoes.Hoes;
 import insane96mcp.insanesurvivaloverhaul.module.hungerhealth.fooddrinks.FoodDrinks;
 import insane96mcp.insanesurvivaloverhaul.module.items.EcologicWood;
+import insane96mcp.insanesurvivaloverhaul.module.items.EnchantedItemsRestrictions;
 import insane96mcp.insanesurvivaloverhaul.module.items.NameTags;
 import insane96mcp.insanesurvivaloverhaul.module.items.pouch.Pouch;
 import insane96mcp.insanesurvivaloverhaul.module.items.repairkit.RepairKitRepairRecipe;
@@ -166,6 +167,11 @@ public class ISOEmiPlugin implements EmiPlugin {
 					Bows.crossbowInaccuracy < 1d ? "crossbow.accuracy" : null);
 		if (Feature.isEnabled(Hoes.class))
 			addInfo(registry, EmiIngredient.of(ItemTags.HOES), "hoes", "hoes");
+		if (Feature.isEnabled(EnchantedItemsRestrictions.class))
+			addInfo(registry, emiIngredientOf(Items.CRAFTING_TABLE, Items.CRAFTER, Items.FURNACE, Items.SMOKER, Items.BLAST_FURNACE), "enchanted_items_restrictions",
+					EnchantedItemsRestrictions.noCrafting ? "enchanted_items_restrictions.crafting" : null,
+					EnchantedItemsRestrictions.noSmelting ? "enchanted_items_restrictions.smelting" : null,
+					EnchantedItemsRestrictions.noFuel ? "enchanted_items_restrictions.fuel" : null);
 		if (Feature.isEnabled(EcologicWood.class))
 			addInfo(registry, EmiIngredient.of(List.of(EmiIngredient.of(ISOItemTagsProvider.WOODEN_HAND_EQUIPMENT), EmiIngredient.of(EcologicWood.WOODEN_SHIELD))), "wooden_equipment", "wooden_equipment");
 		if (Feature.isEnabled(StoneToolsGoneCommon.class) && StoneToolsGoneCommon.dataPack && !Packs.disableAllDataPacks)

@@ -23,6 +23,7 @@
 * EMI can now fill Fletching Table recipes from the inventory, and shows them among the craftables while the Fletching Table is open
 * Animals no longer die of old age: once they become elders they stay elders forever (can be re-enabled)
 * Fixed elder animals losing their slowness after reloading the world
+* Added the `Enchanted Items Restrictions` feature in the Items module: enchanted items, and items with runes, can no longer be used in crafting recipes (e.g. an enchanted bow to craft a Dispenser), smelted (e.g. an enchanted Golden Sword into nuggets) or used as fuel. Repairing is not affected
 * Requires Rune Enchanting 1.6.0.0-beta or newer
 
 # 5.16.8.0
