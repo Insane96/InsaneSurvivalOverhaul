@@ -17,6 +17,7 @@
 * Armor worn on the body by mobs (e.g. Horse Armor) now loses durability when they're hurt, like the player's armor. In vanilla only Wolf Armor did
 * Horse Armor is now unvanishable, like Wolf Armor: it no longer breaks, sits at 1 durability and stays on the horse, but no longer gives armor until repaired
 * Weighted Armor no longer slows down animals wearing Horse or Wolf Armor
+* The regenerating absorption of the ridden mount is now shown above its health
 * Honeycombs from sheared Beehives and Bee Nests now drop out of the front face instead of the clicked one, both when sheared by players and by dispensers. If the front face is obstructed, they drop out of the first free face
 * Reversible Stonecutting can now include non-full blocks (disabled by default)
 * Requires Rune Enchanting 1.6.0.0-beta or newer

@@ -13,7 +13,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -23,79 +23,103 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 public class RegeneratingAbsorptionClient extends Feature {
     public static final ResourceLocation GUI_ICONS = InsaneSO.id("textures/gui/sprites/hud/regenerating_absorption.png");
 
+    private static final BarState PLAYER_BAR = new BarState();
+    private static final BarState VEHICLE_BAR = new BarState();
+
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
-        ResourceLocation aboveOverlay = VanillaGuiLayers.PLAYER_HEALTH;
         Minecraft mc = Minecraft.getInstance();
-        Gui gui = mc.gui;
-        event.registerAbove(aboveOverlay, InsaneSO.id("regenerating_absorption"), (guiGraphics, partialTicks) -> {
-            if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.gameMode != null && mc.gameMode.canHurtPlayer() && !mc.options.hideGui)
-                renderAbsorption(gui, guiGraphics, guiGraphics.guiWidth(), guiGraphics.guiHeight());
+        event.registerAbove(VanillaGuiLayers.PLAYER_HEALTH, InsaneSO.id("regenerating_absorption"), (guiGraphics, partialTicks) -> {
+            if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.player != null && mc.gameMode != null && mc.gameMode.canHurtPlayer() && !mc.options.hideGui)
+                renderAbsorption(mc.gui, guiGraphics, mc.player, PLAYER_BAR, false);
+        });
+        // Like vanilla's vehicle health, shown regardless of the game mode
+        event.registerAbove(VanillaGuiLayers.VEHICLE_HEALTH, InsaneSO.id("vehicle_regenerating_absorption"), (guiGraphics, partialTicks) -> {
+            if (Feature.isEnabled(RegeneratingAbsorption.class) && mc.player != null && !mc.options.hideGui
+                    && mc.player.getVehicle() instanceof LivingEntity vehicle && vehicle.showVehicleHealth())
+                renderAbsorption(mc.gui, guiGraphics, vehicle, VEHICLE_BAR, true);
         });
     }
 
-    static int lastAbsorption = 0;
-    static long lastAbsorptionTime = 0;
-    static long absorptionBlinkTime = 0;
-    static int displayAbsorption = 0;
-
-    protected static void renderAbsorption(Gui gui, GuiGraphics guiGraphics, int width, int height) {
+    /**
+     * Renders the regenerating absorption bar of the entity above the bars already rendered on the same side of the hotbar.
+     *
+     * @param rightSide if true the bar is rendered on the right side of the hotbar and filled from right to left, like the vehicle health, otherwise on the left side like the player health.
+     */
+    protected static void renderAbsorption(Gui gui, GuiGraphics guiGraphics, LivingEntity entity, BarState state, boolean rightSide) {
         Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
-        if (player == null)
-            return;
         mc.getProfiler().push("regen_absorption");
 
         RenderSystem.enableBlend();
-        int left = width / 2 - 91;
-        int top = height - gui.leftHeight;
+        int width = guiGraphics.guiWidth();
+        int rowStart = rightSide ? width / 2 + 91 - 9 : width / 2 - 91;
+        int step = rightSide ? -8 : 8;
+        int x = rowStart;
+        int y = guiGraphics.guiHeight() - (rightSide ? gui.rightHeight : gui.leftHeight);
 
-        int absorption = Mth.ceil(RegeneratingAbsorption.getCurrentAbsorption(mc.player));
-        boolean highlight = absorptionBlinkTime > (long) gui.getGuiTicks() && (absorptionBlinkTime - (long) gui.getGuiTicks()) / 3L % 2L == 1L;
+        int absorption = Mth.ceil(RegeneratingAbsorption.getCurrentAbsorption(entity));
+        // Don't blink when the bar starts showing a different entity (e.g. switching mount)
+        if (state.entityId != entity.getId()) {
+            state.entityId = entity.getId();
+            state.lastAbsorption = absorption;
+            state.displayAbsorption = absorption;
+            state.blinkTime = 0;
+        }
+        boolean highlight = state.blinkTime > (long) gui.getGuiTicks() && (state.blinkTime - (long) gui.getGuiTicks()) / 3L % 2L == 1L;
         int v = highlight ? 9 : 0;
 
-        if (absorption < lastAbsorption && player.invulnerableTime > 0)
-        {
-            lastAbsorptionTime = Util.getMillis();
-            displayAbsorption = lastAbsorption;
-            absorptionBlinkTime = gui.getGuiTicks() + 20;
+        if (absorption < state.lastAbsorption && entity.invulnerableTime > 0) {
+            state.lastAbsorptionTime = Util.getMillis();
+            state.displayAbsorption = state.lastAbsorption;
+            state.blinkTime = gui.getGuiTicks() + 20;
         }
-        else if (absorption > lastAbsorption)
-        {
-            //lastAbsorptionTime = Util.getMillis();
-            displayAbsorption = absorption;
-            absorptionBlinkTime = gui.getGuiTicks() + 10;
+        else if (absorption > state.lastAbsorption) {
+            state.displayAbsorption = absorption;
+            state.blinkTime = gui.getGuiTicks() + 10;
         }
 
-        if (Util.getMillis() - lastAbsorptionTime > 1000L)
-        {
-            lastAbsorption = absorption;
-            displayAbsorption = absorption;
-            lastAbsorptionTime = Util.getMillis();
+        if (Util.getMillis() - state.lastAbsorptionTime > 1000L) {
+            state.lastAbsorption = absorption;
+            state.displayAbsorption = absorption;
+            state.lastAbsorptionTime = Util.getMillis();
         }
-        //player.displayClientMessage(Component.literal("Util.getMillis(): %s, lastAbsorption: %s, absorption: %s, absorptionBlinkTime: %s, displayAbsorption: %s".formatted(Util.getMillis() - lastAbsorptionTime, lastAbsorption, absorption, absorptionBlinkTime, displayAbsorption)), true);
 
-        lastAbsorption = absorption;
-        for (int i = 1; i <= displayAbsorption; i++)
-        {
+        state.lastAbsorption = absorption;
+        int addedHeight = 0;
+        for (int i = 1; i <= state.displayAbsorption; i++) {
             if (i > absorption)
                 ClientUtils.setRenderColor(1, 0, 0, 1f);
-            //ClientUtils.blitVericallyMirrored(GUI_ICONS, guiGraphics, left, top, 9, v, 9, 9, 18, 18);
+            // Each icon is made of two points, drawn with the two complementary halves of the texture
             int u = i % 2 == 0 ? 0 : 9;
-            guiGraphics.blit(GUI_ICONS, left, top, u, v, 9, 9, 18, 18);
-            if (i % 20 == 0 && i != displayAbsorption) {
-                left = width / 2 - 91;
-                top -= 10;
-                gui.leftHeight += 10;
+            guiGraphics.blit(GUI_ICONS, x, y, u, v, 9, 9, 18, 18);
+            if (i % 20 == 0 && i != state.displayAbsorption) {
+                x = rowStart;
+                y -= 10;
+                addedHeight += 10;
             }
             else if (i % 2 == 0)
-                left += 8;
+                x += step;
             if (i > absorption)
                 ClientUtils.resetRenderColor();
         }
-        if (displayAbsorption > 0)
-            gui.leftHeight += 10;
+        if (state.displayAbsorption > 0)
+            addedHeight += 10;
+        if (rightSide)
+            gui.rightHeight += addedHeight;
+        else
+            gui.leftHeight += addedHeight;
 
         RenderSystem.disableBlend();
         mc.getProfiler().pop();
+    }
+
+    /**
+     * Rendering state of an absorption bar, used to make it blink and show the lost absorption
+     */
+    protected static class BarState {
+        int entityId = -1;
+        int lastAbsorption = 0;
+        long lastAbsorptionTime = 0;
+        long blinkTime = 0;
+        int displayAbsorption = 0;
     }
 }

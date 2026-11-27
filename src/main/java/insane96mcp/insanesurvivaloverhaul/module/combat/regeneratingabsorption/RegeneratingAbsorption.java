@@ -44,12 +44,12 @@ public class RegeneratingAbsorption extends Feature {
     public static ResourceLocation NO_HURT_SOUND_TAG;
 
     /**
-     * Synced only to the player itself
+     * Synced only to the player itself and to the players riding the entity, to show it in the HUD
      */
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Float>> REGEN_ABSORPTION =
             ISORegistries.ATTACHMENT_TYPES.register("regen_absorption", () -> AttachmentType.builder(() -> 0f)
                     .serialize(Codec.FLOAT, absorption -> absorption > 0f)
-                    .sync((holder, player) -> holder == player, ByteBufCodecs.FLOAT)
+                    .sync((holder, player) -> holder == player || player.getVehicle() == holder, ByteBufCodecs.FLOAT)
                     .build());
 
     public static final DeferredHolder<Attribute, Attribute> ATTRIBUTE = ISORegistries.ATTRIBUTES.register("regenerating_absorption", () -> new RangedAttribute("attribute.name.regenerating_absorption", 0d, 0d, 1024d).setSyncable(true));
@@ -95,6 +95,12 @@ public class RegeneratingAbsorption extends Feature {
                 || !(event.getEntity() instanceof LivingEntity livingEntity)
                 || livingEntity.isDeadOrDying())
             return;
+
+        // Updates are synced to riders only while the absorption changes, so resync periodically to also update players that just mounted
+        if (livingEntity.tickCount % 20 == 0
+                && livingEntity.hasData(REGEN_ABSORPTION)
+                && livingEntity.hasPassenger(passenger -> passenger instanceof Player))
+            livingEntity.syncData(REGEN_ABSORPTION);
 
         float maxAbsorption = getCappedMaxAbsorption(livingEntity);
         float regenSpeed = getRegenSpeed(livingEntity) / 20f;
