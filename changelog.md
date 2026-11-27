@@ -1,4 +1,5 @@
 # Upcoming
+* Added Ledge Climbing in the Movement module: when players can step up higher than vanilla, ledges higher than 0.6 blocks are climbed slowly, like a ladder, instead of being stepped up instantly
 * Increased shortbow sockets
 * Armor Rework Data Pack
   * Iron Armor durability increased (Chestplate 176 -> 208), and reduces sprint speed by 15% instead of 25% with the full set
