@@ -12,8 +12,8 @@ public class LedgeClimbing extends Feature {
 
 	@Config(min = 0d, max = 10d, description = "Step ups higher than this are climbed instead of being instant. Vanilla step height is 0.6.")
 	public static Double maxInstantStepHeight = 0.6d;
-	@Config(min = 0d, max = 5d, description = "Upward speed applied while climbing a ledge, before gravity. Vanilla ladders use 0.2.")
-	public static Double climbSpeed = 0.2d;
+	@Config(min = 0d, max = 5d, description = "Upward speed applied while climbing a ledge, before gravity and air drag (0.32 climbs ~0.24 blocks per tick). Vanilla ladders use 0.2 (~0.12 blocks per tick).")
+	public static Double climbSpeed = 0.32d;
 
 	/**
 	 * If the entity should climb a ledge of the given height instead of stepping it up instantly
