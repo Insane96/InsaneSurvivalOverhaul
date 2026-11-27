@@ -27,7 +27,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-@LoadFeature(module = ISOModules.ANIMALS, description = "Animals age, changing size and possibly dying of old age. Configurable via livestock data. Adult and elder sheep drop more wool and, with the Livestock data pack enabled, adults and elders drop more goodies.")
+@LoadFeature(module = ISOModules.ANIMALS, description = "Animals age, changing size. Elders are slower and, if enabled, die of old age. Configurable via livestock data. Adult and elder sheep drop more wool and, with the Livestock data pack enabled, adults and elders drop more goodies.")
 public class Aging extends Feature {
 	public static ResourceLocation OLD_AGE_MODIFIER;
 	public static ResourceLocation SCALE_MODIFIER_ID;
@@ -51,7 +51,7 @@ public class Aging extends Feature {
 	public static ResourceKey<DamageType> OLD_AGE = ResourceKey.create(Registries.DAMAGE_TYPE, InsaneSO.id("old_age"));
 
 	@Config(description = "If true, animals die of old age.")
-	public static Boolean dieOfOldAge = true;
+	public static Boolean dieOfOldAge = false;
 
 	@Config(description = "If Die of old age is disabled you can still make animals grow up to this age")
 	public static Age stopAt = Age.ELDER;
@@ -116,9 +116,6 @@ public class Aging extends Feature {
 				|| ageableMob.isBaby())
 			return;
 
-		if (stopAgingWithPoisonousPotato && ModNBTData.get(ageableMob, STOP_AGING, Boolean.class))
-			return;
-
 		boolean forceUpdateScale = false;
 		int age = ModNBTData.get(ageableMob, AGE, Integer.class);
 		int maxAge = ModNBTData.get(ageableMob, MAX_AGE, Integer.class);
@@ -136,13 +133,15 @@ public class Aging extends Feature {
 			forceUpdateScale = true;
 		}
 		Age currAge = getAge(ageableMob);
-		if (currAge == stopAt && !dieOfOldAge)
+		//Applied before the stop aging checks so elders that stopped aging (or were saved with the old transient modifier) still get it
+		if (currAge == Age.ELDER)
+			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, OLD_AGE_MODIFIER, -0.35d, AttributeModifier.Operation.ADD_MULTIPLIED_BASE, true);
+		if ((stopAgingWithPoisonousPotato && ModNBTData.get(ageableMob, STOP_AGING, Boolean.class))
+				|| (currAge == stopAt && !dieOfOldAge))
 			return;
 		age++;
 		ModNBTData.put(ageableMob, AGE, age);
 		Age newAge = getAge(ageableMob);
-		if (newAge == Age.ELDER)
-			MCUtils.applyModifier(ageableMob, Attributes.MOVEMENT_SPEED, OLD_AGE_MODIFIER, -0.35d, AttributeModifier.Operation.ADD_MULTIPLIED_BASE, false);
 		if (age >= maxAge) {
 			if (dieOfOldAge)
 				ageableMob.hurt(ageableMob.damageSources().source(OLD_AGE, null), Float.MAX_VALUE);
